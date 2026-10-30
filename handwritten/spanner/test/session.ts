@@ -309,7 +309,7 @@ describe('Session', () => {
         assert.deepStrictEqual(
           config.headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: true},
+            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
             session.commonHeaders_,
           ),
         );
@@ -336,7 +336,7 @@ describe('Session', () => {
         assert.deepStrictEqual(
           config.headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: true},
+            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
             session.commonHeaders_,
           ),
         );
@@ -347,7 +347,36 @@ describe('Session', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should correctly call and return the request with Leader Aware Routing disabled.', () => {
+    it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true', done => {
+      const originalHeaders = {...session.commonHeaders_};
+      session.request = (config, callback) => {
+        callback(null, {});
+      };
+
+      session.getMetadata(err => {
+        assert.ifError(err);
+        assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+        assert.strictEqual(
+          session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+        done();
+      });
+    });
+
+    it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true (promise)', async () => {
+      const originalHeaders = {...session.commonHeaders_};
+      session.request = () => Promise.resolve({});
+
+      await session.getMetadata();
+      assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+      assert.strictEqual(
+        session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+        undefined,
+      );
+    });
+
+    it('should not include leader-aware routing header with Leader Aware Routing disabled.', () => {
       const requestReturnValue = {};
 
       function callback() {}

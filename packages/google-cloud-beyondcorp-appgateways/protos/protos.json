@@ -21,6 +21,7 @@
                       "nested": {
                         "AppGatewaysService": {
                           "options": {
+                            "deprecated": true,
                             "(google.api.default_host)": "beyondcorp.googleapis.com",
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                           },
@@ -29,10 +30,14 @@
                               "requestType": "ListAppGatewaysRequest",
                               "responseType": "ListAppGatewaysResponse",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/appGateways",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{parent=projects/*/locations/*}/appGateways"
@@ -47,10 +52,14 @@
                               "requestType": "GetAppGatewayRequest",
                               "responseType": "AppGateway",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/appGateways/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/appGateways/*}"
@@ -65,6 +74,7 @@
                               "requestType": "CreateAppGatewayRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/appGateways",
                                 "(google.api.http).body": "app_gateway",
                                 "(google.api.method_signature)": "parent,app_gateway,app_gateway_id",
@@ -72,6 +82,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppGatewayOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "post": "/v1/{parent=projects/*/locations/*}/appGateways",
@@ -93,12 +106,16 @@
                               "requestType": "DeleteAppGatewayRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/appGateways/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                                 "(google.longrunning.operation_info).metadata_type": "AppGatewayOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "delete": "/v1/{name=projects/*/locations/*/appGateways/*}"
@@ -258,6 +275,18 @@
                             "(google.api.resource).type": "beyondcorp.googleapis.com/AppGateway",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/appGateways/{app_gateway}"
                           },
+                          "oneofs": {
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
+                            }
+                          },
                           "fields": {
                             "name": {
                               "type": "string",
@@ -336,6 +365,22 @@
                               "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },

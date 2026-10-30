@@ -17,13 +17,14 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta from './v1beta';
 
 const BackupDRClient = v1.BackupDRClient;
 type BackupDRClient = v1.BackupDRClient;
 const BackupDrProtectionSummaryClient = v1.BackupDrProtectionSummaryClient;
 type BackupDrProtectionSummaryClient = v1.BackupDrProtectionSummaryClient;
 
-export {v1, BackupDRClient, BackupDrProtectionSummaryClient};
-export default {v1, BackupDRClient, BackupDrProtectionSummaryClient};
+export {v1, v1beta, BackupDRClient, BackupDrProtectionSummaryClient};
+export default {v1, v1beta, BackupDRClient, BackupDrProtectionSummaryClient};
 import * as protos from '../protos/protos';
 export {protos};

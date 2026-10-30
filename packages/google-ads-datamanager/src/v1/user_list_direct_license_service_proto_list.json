@@ -20,6 +20,7 @@
   "../../protos/google/ads/datamanager/v1/processing_errors.proto",
   "../../protos/google/ads/datamanager/v1/request_status_per_destination.proto",
   "../../protos/google/ads/datamanager/v1/terms_of_service.proto",
+  "../../protos/google/ads/datamanager/v1/user.proto",
   "../../protos/google/ads/datamanager/v1/user_data.proto",
   "../../protos/google/ads/datamanager/v1/user_list.proto",
   "../../protos/google/ads/datamanager/v1/user_list_direct_license.proto",

@@ -40,6 +40,10 @@ function main(instance, project, body) {
    *  Required. Rotate server certificate request body.
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

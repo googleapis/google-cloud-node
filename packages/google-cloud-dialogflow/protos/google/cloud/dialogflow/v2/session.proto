@@ -728,9 +728,10 @@ message StreamingRecognitionResult {
 //
 // Represents the natural language text to be processed.
 message TextInput {
-  // Required. The UTF-8 encoded natural language text to be processed.
+  // Optional. The UTF-8 encoded natural language text to be processed.
   // Text length must not exceed 256 characters for virtual agent interactions.
-  string text = 1 [(google.api.field_behavior) = REQUIRED];
+  // Only one of `text` and `companion_query` should be set - not both.
+  string text = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. The language of this conversational query. See [Language
   // Support](https://cloud.google.com/dialogflow/docs/reference/language)
@@ -800,6 +801,11 @@ message SentimentAnalysisRequestConfig {
 message SentimentAnalysisResult {
   // The sentiment analysis result for `query_text`.
   Sentiment query_text_sentiment = 1;
+
+  // Output only. The status of the sentiment analysis operation.
+  // If the operation failed, this field will contain the error details.
+  // For example, it might indicate a quota issue (RESOURCE_EXHAUSTED).
+  google.rpc.Status status = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The sentiment, such as positive/negative feeling or association, for a unit

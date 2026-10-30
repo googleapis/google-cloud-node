@@ -34,22 +34,22 @@
     "clean": "gts clean",
     "compile:esm": "tsc -p .",
     "compile:cjs": "tsc -p ./tsconfig.cjs.json && node -e \"require('fs').writeFileSync('build/cjs/package.json', JSON.stringify({type: 'commonjs'}))\"",
-    "compile": "pnpm run compile:esm && pnpm run compile:cjs",
+    "compile": "npm run compile:esm && npm run compile:cjs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
-    "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
-    "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
+    "test:esm": "node ../../bin/run-test.cjs build/esm/test/unit/**/*.js",
+    "test:cjs": "node ../../bin/run-test.cjs build/cjs/test/unit/**/*.js",
     "test": "pnpm run test:esm && pnpm run test:cjs",
-    "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
+    "system-test": "node ../../bin/run-test.cjs build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
-    "@google-cloud/spanner-api": "^0.3.0"
+    "@google-cloud/spanner-api": "^0.5.0"
   },
   "devDependencies": {
-    "@google-cloud/spanner": "^8.7.1",
+    "@google-cloud/spanner": "^9.1.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",

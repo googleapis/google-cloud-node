@@ -556,8 +556,25 @@ message HumanAgentAssistantConfig {
     bool use_unredacted_conversation_data = 8
         [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. If true, enable asynchronous execution of tools.
-    bool enable_async_tool_call = 9 [(google.api.field_behavior) = OPTIONAL];
+    // Optional. Deprecated: This field is not consulted for tool execution.
+    // Configure asynchronous execution per tool using
+    // [CesToolSpec.async_execution][google.cloud.dialogflow.v2.CesToolSpec.async_execution]
+    // or
+    // [ToolsetTool.async_execution][google.cloud.dialogflow.v2.ToolsetTool.async_execution]
+    // instead.
+    bool enable_async_tool_call = 9
+        [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The resource name of the companion agent to link.
+    // This is only supported for `human_agent_suggestion_config`.
+    // Format:
+    // `projects/{project}/locations/{location}/companionAgents/{companion_agent}`
+    string companion_agent = 11 [
+      (google.api.field_behavior) = OPTIONAL,
+      (google.api.resource_reference) = {
+        type: "dialogflow.googleapis.com/CompanionAgent"
+      }
+    ];
   }
 
   // Config for suggestion query.
@@ -672,9 +689,10 @@ message HumanAgentAssistantConfig {
         // Section name: "reason_for_cancellation".
         REASON_FOR_CANCELLATION = 4;
 
-        // "Unsatisfied" or "Satisfied" depending on the customer's feelings at
-        // the end of the conversation.
-        // Section name: "customer_satisfaction".
+        // Customer satisfaction derived from the text transcript only (not
+        // audio). Categorized based on customer statements by the end of the
+        // conversation. `D` for dissatisfied and `N` for neutral or satisfied
+        // (default). Section name: `customer_satisfaction`.
         CUSTOMER_SATISFACTION = 5;
 
         // Key entities extracted from the conversation, such as ticket number,

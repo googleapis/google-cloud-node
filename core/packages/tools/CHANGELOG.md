@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.2.0...gapic-tools-v2.2.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **gapic-tools:** Strip JS method bodies before pbts and parallelize minification ([#9737](https://github.com/googleapis/google-cloud-node/issues/9737)) ([c7884b8](https://github.com/googleapis/google-cloud-node/commit/c7884b87b2fca6662d41c46010b211d8339a48bf))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.1.0...gapic-tools-v2.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.0.1...gapic-tools-v2.1.0) (2026-09-15)
 
 

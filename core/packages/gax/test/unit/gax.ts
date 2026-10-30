@@ -23,7 +23,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import * as gax from '../../src/gax';
 
 const SERVICE_NAME = 'test.interface.v1.api';
@@ -99,6 +99,12 @@ function expectBackoffSettings(obj: gax.BackoffSettings) {
 }
 
 describe('gax construct settings', () => {
+  afterEach(() => {
+    delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
+    delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+  });
+
   it('creates settings', () => {
     const otherArgs = {key: 'value'};
     const defaults = gax.constructSettings(
@@ -115,7 +121,6 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [1, 2]);
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
 
     settings = defaults.pageStreamingMethod;
@@ -124,7 +129,6 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [3]);
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
@@ -205,14 +209,8 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [RETRY_DICT.code_c]);
   });
 
-  it('creates settings with enableTelemetryTracing and internalTelemetryInfo', () => {
+  it('creates settings with enableTelemetryTracing', () => {
     const otherArgs = {key: 'value'};
-    const telemetryInfo = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
     const defaults = gax.constructSettings(
       SERVICE_NAME,
       A_CONFIG,
@@ -220,52 +218,20 @@ describe('gax construct settings', () => {
       RETRY_DICT,
       otherArgs,
       true,
-      telemetryInfo,
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, true);
     assert.strictEqual(settings.otherArgs.key, 'value');
-    assert.deepStrictEqual(
-      settings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, false);
 
     const pageSettings = defaults.pageStreamingMethod;
     assert.strictEqual(pageSettings.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      pageSettings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(
       pageSettings.otherArgs.internalMethodName,
       'PageStreamingMethod',
     );
-  });
-
-  it('creates settings with internalTelemetryInfo when otherArgs is undefined', () => {
-    const telemetryInfo = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      true,
-      telemetryInfo,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      settings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
-    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
   });
 
   it('creates settings with enableTelemetryTracing set to false', () => {
@@ -279,42 +245,157 @@ describe('gax construct settings', () => {
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, false);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+  });
+
+  it('ignores client option when GOOGLE_SDK_NODE_ENABLE_TRACING=true', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      false,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, false);
+  });
+
+  it('disables tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=false even with client option', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      true,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+  });
+
+  it('creates settings with enableTelemetryLogging when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
+    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    const otherArgs = {key: 'value'};
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      otherArgs,
+      undefined,
+      undefined,
+      true,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryLogging, true);
+    assert.strictEqual(settings.otherArgs.key, 'value');
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+  });
+
+  it('disables logging when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if enableTelemetryLogging=true', () => {
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      {},
+      undefined,
+      undefined,
+      true,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryLogging, false);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+  });
+
+  it('ignores client option when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_LOGGING=true', () => {
+    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      undefined,
+      undefined,
+      false,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryLogging, true);
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+  });
+
+  it('disables logging when GOOGLE_SDK_NODE_LOGGING=false even with client option', () => {
+    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    process.env.GOOGLE_SDK_NODE_LOGGING = 'false';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      undefined,
+      undefined,
+      true,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryLogging, false);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
   describe('CallSettings telemetry fields', () => {
-    it('defaults enableTelemetryTracing to undefined', () => {
+    it('defaults enableTelemetryTracing and enableTelemetryLogging to undefined', () => {
       const settings = new gax.CallSettings();
       assert.strictEqual(settings.enableTelemetryTracing, undefined);
+      assert.strictEqual(settings.enableTelemetryLogging, undefined);
     });
 
-    it('initializes enableTelemetryTracing', () => {
+    it('initializes enableTelemetryTracing and enableTelemetryLogging', () => {
       const settings = new gax.CallSettings({
         enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
       });
       assert.strictEqual(settings.enableTelemetryTracing, true);
+      assert.strictEqual(settings.enableTelemetryLogging, true);
     });
 
-    it('merges enableTelemetryTracing', () => {
+    it('merges enableTelemetryTracing and enableTelemetryLogging', () => {
       const settings = new gax.CallSettings({
         enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
       });
       const merged = settings.merge({
         enableTelemetryTracing: false,
+        enableTelemetryLogging: false,
       });
       assert.strictEqual(merged.enableTelemetryTracing, false);
+      assert.strictEqual(merged.enableTelemetryLogging, false);
     });
 
-    it('copies enableTelemetryTracing when merging with null/empty options', () => {
+    it('copies enableTelemetryTracing and enableTelemetryLogging when merging with null/empty options', () => {
       const settings = new gax.CallSettings({
         enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
       });
       const mergedNull = settings.merge(null);
       assert.strictEqual(mergedNull.enableTelemetryTracing, true);
+      assert.strictEqual(mergedNull.enableTelemetryLogging, true);
 
       const mergedEmpty = settings.merge({});
       assert.strictEqual(mergedEmpty.enableTelemetryTracing, true);
+      assert.strictEqual(mergedEmpty.enableTelemetryLogging, true);
     });
   });
 });

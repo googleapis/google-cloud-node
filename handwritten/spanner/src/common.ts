@@ -101,6 +101,33 @@ export function addLeaderAwareRoutingHeader(headers: {[k: string]: string}) {
   headers[LEADER_AWARE_ROUTING_HEADER] = 'true';
 }
 
+let isAFEServerTimingEnabledCached: boolean | undefined;
+
+/**
+ * Returns whether AFE (Application Frontend Extension) server timing is enabled.
+ *
+ * This function checks the value of the environment variable
+ * `SPANNER_DISABLE_AFE_SERVER_TIMING`. If the variable is set to the
+ * string `'true'` (case-insensitive), then AFE server timing is considered disabled,
+ * and this function returns `false`. For all other values (including if the variable is unset),
+ * the function returns `true`.
+ *
+ * @returns {boolean} `true` if AFE server timing is enabled; otherwise, `false`.
+ */
+export function isAFEServerTimingEnabled(): boolean {
+  if (isAFEServerTimingEnabledCached === undefined) {
+    isAFEServerTimingEnabledCached =
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING']?.toLowerCase() !==
+      'true';
+  }
+  return isAFEServerTimingEnabledCached;
+}
+
+/** Resets the cached value (use in tests if env changes). */
+export function resetAFEServerTimingForTest(): void {
+  isAFEServerTimingEnabledCached = undefined;
+}
+
 /**
  * Returns common headers to add.
  * @param headers Common header list.
@@ -118,7 +145,7 @@ export function getCommonHeaders(
     headers[END_TO_END_TRACING_HEADER] = 'true';
   }
 
-  if (process.env.SPANNER_DISABLE_AFE_SERVER_TIMING?.toLowerCase() !== 'true') {
+  if (isAFEServerTimingEnabled()) {
     headers[AFE_SERVER_TIMING_HEADER] = 'true';
   }
 

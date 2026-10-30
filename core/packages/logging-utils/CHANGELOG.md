@@ -1,6 +1,21 @@
 # Changelog
 
 
+## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.1.0...google-logging-utils-v2.1.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **core:** Log request/response payloads at DEBUG severity ([#9754](https://github.com/googleapis/google-cloud-node/issues/9754)) ([bf46818](https://github.com/googleapis/google-cloud-node/commit/bf468181b2c85ffd17cc820d2459d6b42213f016))
+* **logging-utils:** Export LogSeverity as value and treat 'true' as '*' alias ([#9718](https://github.com/googleapis/google-cloud-node/issues/9718)) ([e8da4f0](https://github.com/googleapis/google-cloud-node/commit/e8da4f0fbb776ff6f52cf77414cb0e1284eaa6e4))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.0.1...google-logging-utils-v2.1.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.0.0...google-logging-utils-v2.0.1) (2026-08-10)
 
 

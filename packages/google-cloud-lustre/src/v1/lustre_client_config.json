@@ -40,11 +40,51 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RescheduleMaintenance": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ImportData": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ExportData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateMirror": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateMirror": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteMirror": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetMirror": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListMirrors": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDirectoryPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDirectoryPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDirectoryPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDirectoryPolicies": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

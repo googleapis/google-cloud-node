@@ -310,7 +310,7 @@
     "support_documentation": "https://cloud.google.com/batch/docs/getting-support"
   },
   {
-    "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
+    "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
     "api_id": "beyondcorp.googleapis.com",
     "api_shortname": "beyondcorp",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/appconnections/latest",
@@ -327,7 +327,7 @@
     "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
   },
   {
-    "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
+    "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
     "api_id": "beyondcorp.googleapis.com",
     "api_shortname": "beyondcorp",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/appconnectors/latest",
@@ -344,7 +344,7 @@
     "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
   },
   {
-    "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
+    "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
     "api_id": "beyondcorp.googleapis.com",
     "api_shortname": "beyondcorp",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/appgateways/latest",
@@ -2636,7 +2636,7 @@
     "support_documentation": "https://cloud.google.com/cluster-director/docs/getting-support"
   },
   {
-    "api_description": "Enables consumers to procure products served by Cloud Marketplace platform",
+    "api_description": "Enables consumers to procure products served by Cloud Marketplace platform.",
     "api_id": "cloudcommerceconsumerprocurement.googleapis.com",
     "api_shortname": "cloudcommerceconsumerprocurement",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/procurement/latest",
@@ -3523,24 +3523,6 @@
     "support_documentation": "https://cloud.google.com/memorystore/docs/getting-support"
   },
   {
-    "api_description": "Programmatically manage your Merchant Center Accounts.",
-    "api_id": "merchantapi.googleapis.com",
-    "api_shortname": "merchantapi",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
-    "default_version": "v1",
-    "distribution_name": "@google-shopping/loyaltycustomers",
-    "issue_tracker": "https://issuetracker.google.com/issues/new?component=171084&template=555201",
-    "language": "nodejs",
-    "library_type": "GAPIC_AUTO",
-    "name": "merchantapi",
-    "name_pretty": "Merchant",
-    "product_documentation": "https://developers.google.com/merchant/api",
-    "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-loyaltycustomers",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
-  },
-  {
     "api_description": "Model Armor helps you protect against risks like prompt injection, harmful\ncontent, and data leakage in generative AI applications by letting you\ndefine policies that filter user prompts and model responses.",
     "api_id": "modelarmor.googleapis.com",
     "api_shortname": "modelarmor",
@@ -3985,6 +3967,24 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-lfp",
+    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+  },
+  {
+    "api_description": "Programmatically manage your Merchant Center Accounts.",
+    "api_id": "merchantapi.googleapis.com",
+    "api_shortname": "merchantapi",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-shopping/loyaltycustomers",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=171084&template=555201",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "merchantapi",
+    "name_pretty": "Shopping Merchant Loyalty Customers",
+    "product_documentation": "https://developers.google.com/merchant/api",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-loyaltycustomers",
     "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
   },
   {

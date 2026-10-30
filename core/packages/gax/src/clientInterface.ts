@@ -25,6 +25,7 @@ import {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+import {ResumableUploadDescriptor} from './resumableUpload';
 import * as longrunning from './longRunningCalls/longrunning';
 import * as operationProtos from '../protos/operations';
 
@@ -42,8 +43,23 @@ export interface ClientOptions
   universe_domain?: string;
   /**
    * Whether to enable telemetry tracing for the client.
+   *
+   * Tracing is only enabled via the `GOOGLE_SDK_NODE_ENABLE_TRACING` environment
+   * variable or when a user passes `enableTelemetryTracing: true` in their client
+   * options. The `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable overrides
+   * this option whenever it is set.
    */
   enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
+   * or a user passes `enableTelemetryLogging: true` in their client options. The
+   * `GOOGLE_SDK_NODE_LOGGING` environment variable overrides this option
+   * whenever it is set.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface Descriptors {
@@ -51,6 +67,7 @@ export interface Descriptors {
   stream: {[name: string]: StreamDescriptor};
   longrunning: {[name: string]: LongrunningDescriptor};
   batching?: {[name: string]: BundleDescriptor};
+  resumableUpload?: {[name: string]: ResumableUploadDescriptor};
 }
 
 export interface Callback<

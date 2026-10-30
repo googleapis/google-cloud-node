@@ -419,6 +419,7 @@ export class ChatServiceClient {
       'positionSection',
       'listSectionItems',
       'moveSectionItem',
+      'replaceMessageCards',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -638,9 +639,24 @@ export class ChatServiceClient {
    *   reply to a message
    *   thread](https://developers.google.com/workspace/chat/create-messages#create-message-thread).
    * @param {string} [request.requestId]
-   *   Optional. A unique request ID for this message. Specifying an existing
-   *   request ID returns the message created with that ID instead of creating a
-   *   new message.
+   *   Optional. A unique ID for this request. A random UUID is recommended.
+   *   Specifying a request ID makes the request idempotent, which ensures that
+   *   multiple identical requests with the same request ID result in only a
+   *   single message being created. Subsequent requests with the same request
+   *   ID return the existing message and do not update the message, even if the
+   *   requested details differ from the current state.
+   *
+   *   To use this field effectively:
+   *
+   *   - Ensure that subsequent requests are identical and use the same
+   *   authentication credentials as the original request.
+   *   - If a message was already created with the provided request ID, the
+   *   request returns that message. Note that the returned message might not be
+   *   fully populated; the API echoes the message in your request with the
+   *   system-assigned resource names populated. To retrieve the latest metadata
+   *   for the message, call `GetMessage`.
+   *   - Reusing an existing request ID with a different authenticated user
+   *   results in an error.
    * @param {google.chat.v1.CreateMessageRequest.MessageReplyOption} [request.messageReplyOption]
    *   Optional. Specifies whether a message starts a thread or replies to one.
    *   Only supported in named spaces.
@@ -1954,12 +1970,24 @@ export class ChatServiceClient {
    *   The space `name` is assigned on the server so anything specified in this
    *   field will be ignored.
    * @param {string} [request.requestId]
-   *   Optional. A unique identifier for this request.
-   *   A random UUID is recommended.
-   *   Specifying an existing request ID returns the space created with that ID
-   *   instead of creating a new space.
-   *   Specifying an existing request ID from the same Chat app with a different
-   *   authenticated user returns an error.
+   *   Optional. A unique ID for this request. A random UUID is recommended.
+   *   Specifying a request ID makes the request idempotent, which ensures that
+   *   multiple identical requests with the same request ID result in only a
+   *   single space being created. Subsequent requests with the same request ID
+   *   return the existing space and do not update the space, even if the
+   *   requested details differ from the current state.
+   *
+   *   To use this field effectively:
+   *
+   *   - Ensure that subsequent requests are identical and use the same
+   *   authentication credentials as the original request.
+   *   - If a space was already created with the provided request ID, the request
+   *   returns that space. Note that the returned space might not be fully
+   *   populated; the API echoes the space in your request with the
+   *   system-assigned resource name populated. To retrieve the latest metadata
+   *   for the space, call `GetSpace`.
+   *   - Reusing an existing request ID with a different authenticated user
+   *   results in an error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2159,12 +2187,24 @@ export class ChatServiceClient {
    *   If a `DIRECT_MESSAGE` space already exists, that space is returned instead
    *   of creating a new space.
    * @param {string} [request.requestId]
-   *   Optional. A unique identifier for this request.
-   *   A random UUID is recommended.
-   *   Specifying an existing request ID returns the space created with that ID
-   *   instead of creating a new space.
-   *   Specifying an existing request ID from the same Chat app with a different
-   *   authenticated user returns an error.
+   *   Optional. A unique ID for this request. A random UUID is recommended.
+   *   Specifying a request ID makes the request idempotent, which ensures that
+   *   multiple identical requests with the same request ID result in only a
+   *   single space being created. Subsequent requests with the same request ID
+   *   return the existing space and do not update the space, even if the
+   *   requested details differ from the current state.
+   *
+   *   To use this field effectively:
+   *
+   *   - Ensure that subsequent requests are identical and use the same
+   *   authentication credentials as the original request.
+   *   - If a space was already created with the provided request ID, the request
+   *   returns that space. Note that the returned space might not be fully
+   *   populated; the API echoes the space in your request with the
+   *   system-assigned resource name populated. To retrieve the latest metadata
+   *   for the space, call `GetSpace`.
+   *   - Reusing an existing request ID with a different authenticated user
+   *   results in an error.
    * @param {number[]} [request.memberships]
    *   Optional. The Google Chat users or groups to invite to join the space. Omit
    *   the calling user, as they are added automatically.
@@ -2415,6 +2455,7 @@ export class ChatServiceClient {
    *
    *   - `access_settings.access_permission_settings.discoverSpaceSetting`
    *   - `access_settings.access_permission_settings.joinSpaceSetting`
+   *   - `access_settings.access_permission_settings.viewSpaceMembershipSetting`
    *
    *   `permission_settings`: Supports changing the
    *   [permission settings](https://support.google.com/chat/answer/13340792)
@@ -2431,6 +2472,7 @@ export class ChatServiceClient {
    *   - `permission_settings.manageApps`
    *   - `permission_settings.manageWebhooks`
    *   - `permission_settings.replyMessages`
+   *   - `permission_settings.viewSpaceMembership`
    * @param {boolean} [request.useAdminAccess]
    *   Optional. When `true`, the method runs using the user's Google Workspace
    *   administrator privileges.
@@ -6928,6 +6970,150 @@ export class ChatServiceClient {
         throw error;
       });
   }
+  /**
+   * Replaces the cards included in a message.
+   *
+   * A Chat app can only replace cards on a human-created message if the message
+   * already contains cards, and the cards were created by the app.
+   *
+   * If the app replaces the cards with an empty list, the cards are removed.
+   * After removing the cards, the app cannot add cards back to the message.
+   *
+   * Requires [app
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with the [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *   - `https://www.googleapis.com/auth/chat.bot`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the message.
+   *
+   *   Format: `spaces/{space}/messages/{message}`
+   * @param {number[]} [request.cardsV2]
+   *   Optional. An array of
+   *   [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
+   *   to be included in the message. These cards will replace the existing cards
+   *   of the message. If empty, the original cards included in the message will
+   *   be cleared.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.ReplaceMessageCardsResponse|ReplaceMessageCardsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.replace_message_cards.js</caption>
+   * region_tag:chat_v1_generated_ChatService_ReplaceMessageCards_async
+   */
+  replaceMessageCards(
+    request?: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  replaceMessageCards(
+    request: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  replaceMessageCards(
+    request: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    callback: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  replaceMessageCards(
+    request?: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('replaceMessageCards request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('replaceMessageCards response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .replaceMessageCards(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceMessageCards response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists messages in a space that the caller is a member of, including
@@ -7932,6 +8118,10 @@ export class ChatServiceClient {
    *     the top five space matches. For example, `space.display_name:Project`
    *     searches for messages in the top five spaces that contain the word
    *     "Project" in their display names.
+   *   - `space.space_type`: The type of the space. Only supports `=`. For
+   *     example, `space.space_type="DIRECT_MESSAGE"` returns only messages from
+   *     direct messages. The possible values are `DIRECT_MESSAGE`, `GROUP_CHAT`,
+   *     and `SPACE`.
    *   - `attachment`: Supports the operator `:*` (has any) to check for the
    *     presence of attachments. If `attachment:*` is specified, only messages
    *     that have at least one attachment are returned.
@@ -7951,8 +8141,8 @@ export class ChatServiceClient {
    *   - `is_unread()`: Filters out messages that have been read by the calling
    *     user.
    *
-   *   Using the `space.display_name` filter requires that the calling credentials
-   *   include one of the following [authorization
+   *   Using the `space.display_name` or the `space.space_type` filters requires
+   *   that the calling credentials include one of the following [authorization
    *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
    *
    *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
@@ -7990,6 +8180,8 @@ export class ChatServiceClient {
    *     `space.display_name:Project OR space.display_name:Tasks` returns messages
    *     that are in spaces with display names containing either `Project` or
    *     `Tasks` or both.
+   *   - `space.space_type` supports only the `OR` operator, for example:
+   *     `space.space_type = "DIRECT_MESSAGE" OR space.space_type = "GROUP_CHAT"`.
    *   - `annotations.user_mentions.user.name` supports the operators `AND` and
    *     `OR`, but not a mix of both. For example:
    *     `annotations.user_mentions.user.name:"users/1234567890" AND
@@ -8209,6 +8401,10 @@ export class ChatServiceClient {
    *     the top five space matches. For example, `space.display_name:Project`
    *     searches for messages in the top five spaces that contain the word
    *     "Project" in their display names.
+   *   - `space.space_type`: The type of the space. Only supports `=`. For
+   *     example, `space.space_type="DIRECT_MESSAGE"` returns only messages from
+   *     direct messages. The possible values are `DIRECT_MESSAGE`, `GROUP_CHAT`,
+   *     and `SPACE`.
    *   - `attachment`: Supports the operator `:*` (has any) to check for the
    *     presence of attachments. If `attachment:*` is specified, only messages
    *     that have at least one attachment are returned.
@@ -8228,8 +8424,8 @@ export class ChatServiceClient {
    *   - `is_unread()`: Filters out messages that have been read by the calling
    *     user.
    *
-   *   Using the `space.display_name` filter requires that the calling credentials
-   *   include one of the following [authorization
+   *   Using the `space.display_name` or the `space.space_type` filters requires
+   *   that the calling credentials include one of the following [authorization
    *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
    *
    *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
@@ -8267,6 +8463,8 @@ export class ChatServiceClient {
    *     `space.display_name:Project OR space.display_name:Tasks` returns messages
    *     that are in spaces with display names containing either `Project` or
    *     `Tasks` or both.
+   *   - `space.space_type` supports only the `OR` operator, for example:
+   *     `space.space_type = "DIRECT_MESSAGE" OR space.space_type = "GROUP_CHAT"`.
    *   - `annotations.user_mentions.user.name` supports the operators `AND` and
    *     `OR`, but not a mix of both. For example:
    *     `annotations.user_mentions.user.name:"users/1234567890" AND
@@ -8419,6 +8617,10 @@ export class ChatServiceClient {
    *     the top five space matches. For example, `space.display_name:Project`
    *     searches for messages in the top five spaces that contain the word
    *     "Project" in their display names.
+   *   - `space.space_type`: The type of the space. Only supports `=`. For
+   *     example, `space.space_type="DIRECT_MESSAGE"` returns only messages from
+   *     direct messages. The possible values are `DIRECT_MESSAGE`, `GROUP_CHAT`,
+   *     and `SPACE`.
    *   - `attachment`: Supports the operator `:*` (has any) to check for the
    *     presence of attachments. If `attachment:*` is specified, only messages
    *     that have at least one attachment are returned.
@@ -8438,8 +8640,8 @@ export class ChatServiceClient {
    *   - `is_unread()`: Filters out messages that have been read by the calling
    *     user.
    *
-   *   Using the `space.display_name` filter requires that the calling credentials
-   *   include one of the following [authorization
+   *   Using the `space.display_name` or the `space.space_type` filters requires
+   *   that the calling credentials include one of the following [authorization
    *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
    *
    *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
@@ -8477,6 +8679,8 @@ export class ChatServiceClient {
    *     `space.display_name:Project OR space.display_name:Tasks` returns messages
    *     that are in spaces with display names containing either `Project` or
    *     `Tasks` or both.
+   *   - `space.space_type` supports only the `OR` operator, for example:
+   *     `space.space_type = "DIRECT_MESSAGE" OR space.space_type = "GROUP_CHAT"`.
    *   - `annotations.user_mentions.user.name` supports the operators `AND` and
    *     `OR`, but not a mix of both. For example:
    *     `annotations.user_mentions.user.name:"users/1234567890" AND
@@ -8944,8 +9148,9 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1000. If you use a value more than 1000, it's
-   *   automatically changed to 1000.
+   *   The maximum value is 1000 when `useAdminAccess` is set to `true`.
+   *   Otherwise, the maximum value is 100. If you use a value more than the
+   *   maximum value, it's automatically changed to the maximum value.
    * @param {string} request.pageToken
    *   A token, received from the previous search spaces call. Provide this
    *   parameter to retrieve the subsequent page.
@@ -9048,6 +9253,11 @@ export class ChatServiceClient {
    *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
    *   "SPACE")
    *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *
@@ -9205,8 +9415,9 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1000. If you use a value more than 1000, it's
-   *   automatically changed to 1000.
+   *   The maximum value is 1000 when `useAdminAccess` is set to `true`.
+   *   Otherwise, the maximum value is 100. If you use a value more than the
+   *   maximum value, it's automatically changed to the maximum value.
    * @param {string} request.pageToken
    *   A token, received from the previous search spaces call. Provide this
    *   parameter to retrieve the subsequent page.
@@ -9309,6 +9520,11 @@ export class ChatServiceClient {
    *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
    *   "SPACE")
    *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *
@@ -9399,8 +9615,9 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1000. If you use a value more than 1000, it's
-   *   automatically changed to 1000.
+   *   The maximum value is 1000 when `useAdminAccess` is set to `true`.
+   *   Otherwise, the maximum value is 100. If you use a value more than the
+   *   maximum value, it's automatically changed to the maximum value.
    * @param {string} request.pageToken
    *   A token, received from the previous search spaces call. Provide this
    *   parameter to retrieve the subsequent page.
@@ -9503,6 +9720,11 @@ export class ChatServiceClient {
    *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
    *   "SPACE")
    *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *

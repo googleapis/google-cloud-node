@@ -36,6 +36,40 @@ describe('src/schema/api.ts', () => {
     ]);
   });
 
+  it('should expose resumable upload methods passed as options', () => {
+    const fd = {} as protos.google.protobuf.FileDescriptorProto;
+    fd.name = 'google/cloud/test/v1/test.proto';
+    fd.package = 'google.cloud.test.v1';
+    fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
+    fd.service[0].name = 'ZService';
+    fd.service[0].options = {
+      '.google.api.defaultHost': 'hostname.example.com:443',
+    };
+    const api = new API([fd], 'google.cloud.test.v1', {
+      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+      resumableUploadMethods: ['ZService.Upload', 'ZService.Resume'],
+    });
+    assert.deepStrictEqual(api.resumableUploadMethods, [
+      'ZService.Upload',
+      'ZService.Resume',
+    ]);
+  });
+
+  it('should default resumable upload methods to an empty array', () => {
+    const fd = {} as protos.google.protobuf.FileDescriptorProto;
+    fd.name = 'google/cloud/test/v1/test.proto';
+    fd.package = 'google.cloud.test.v1';
+    fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
+    fd.service[0].name = 'ZService';
+    fd.service[0].options = {
+      '.google.api.defaultHost': 'hostname.example.com:443',
+    };
+    const api = new API([fd], 'google.cloud.test.v1', {
+      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+    });
+    assert.deepStrictEqual(api.resumableUploadMethods, []);
+  });
+
   it('should correctly derive a valid logging name', () => {
     const fd = {} as protos.google.protobuf.FileDescriptorProto;
     fd.name = 'google/cloud/test/v1/test.proto';

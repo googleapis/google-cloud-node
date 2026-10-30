@@ -1,0 +1,11 @@
+{
+  "name": "test-utils",
+  "name_pretty": "Google Test Utilities",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "google-test-utils",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/test-utils/latest",
+  "library_type": "OTHER",
+  "codeowner_team": "jsteam-handwritten-libraries"
+}

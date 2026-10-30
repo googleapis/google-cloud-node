@@ -91,6 +91,7 @@ function main(space, updateMask) {
    *  The supported field masks include:
    *  - `access_settings.access_permission_settings.discoverSpaceSetting`
    *  - `access_settings.access_permission_settings.joinSpaceSetting`
+   *  - `access_settings.access_permission_settings.viewSpaceMembershipSetting`
    *  `permission_settings`: Supports changing the
    *  permission settings (https://support.google.com/chat/answer/13340792)
    *  of a space.
@@ -105,6 +106,7 @@ function main(space, updateMask) {
    *  - `permission_settings.manageApps`
    *  - `permission_settings.manageWebhooks`
    *  - `permission_settings.replyMessages`
+   *  - `permission_settings.viewSpaceMembership`
    */
   // const updateMask = {}
   /**

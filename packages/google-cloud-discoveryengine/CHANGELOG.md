@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v3.3.1...discoveryengine-v3.4.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v3.3.0...discoveryengine-v3.3.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v3.2.0...discoveryengine-v3.3.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v3.1.0...discoveryengine-v3.2.0) (2026-09-08)
 
 

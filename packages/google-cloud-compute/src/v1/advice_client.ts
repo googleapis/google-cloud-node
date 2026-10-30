@@ -39,6 +39,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The Advice API.
+ *
+ *  This client uses Advice version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -200,7 +202,10 @@ export class AdviceClient {
       'google.cloud.compute.v1.Advice',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation

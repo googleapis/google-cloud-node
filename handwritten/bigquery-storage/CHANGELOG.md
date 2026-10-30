@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v6.2.0...bigquery-storage-v6.3.0) (2026-10-14)
+
+
+### Features
+
+* **deps:** Bump bigquery-storage-api to ^0.5.0 ([#9595](https://github.com/googleapis/google-cloud-node/issues/9595)) ([fca6160](https://github.com/googleapis/google-cloud-node/commit/fca6160fce7932d5491fb9fcca9c42c3de2102c1))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v6.1.0...bigquery-storage-v6.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v6.0.1...bigquery-storage-v6.1.0) (2026-09-15)
 
 

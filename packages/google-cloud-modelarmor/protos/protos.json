@@ -284,6 +284,49 @@
                         "MODALITY_IMAGE": 2
                       }
                     },
+                    "FilterVersionAlias": {
+                      "values": {
+                        "FILTER_VERSION_ALIAS_UNSPECIFIED": 0,
+                        "FILTER_VERSION_ALIAS_STABLE": 1,
+                        "FILTER_VERSION_ALIAS_LATEST": 2,
+                        "FILTER_VERSION_ALIAS_LEGACY": 3,
+                        "FILTER_VERSION_ALIAS_RETIRED": 4
+                      }
+                    },
+                    "MatchingScope": {
+                      "values": {
+                        "MATCHING_SCOPE_UNSPECIFIED": 0,
+                        "MATCHING_SCOPE_FULL_MATCH": 1,
+                        "MATCHING_SCOPE_PARTIAL_MATCH": 2
+                      }
+                    },
+                    "RuleFilterType": {
+                      "values": {
+                        "RULE_FILTER_TYPE_UNSPECIFIED": 0,
+                        "PROMPT_INJECTION_AND_JAILBREAK": 1,
+                        "RESPONSIBLE_AI": 2
+                      }
+                    },
+                    "FilterVersionSelector": {
+                      "oneofs": {
+                        "versionSpec": {
+                          "oneof": [
+                            "version",
+                            "alias"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "alias": {
+                          "type": "FilterVersionAlias",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Template": {
                       "options": {
                         "(google.api.resource).type": "modelarmor.googleapis.com/Template",
@@ -338,6 +381,18 @@
                       },
                       "nested": {
                         "TemplateMetadata": {
+                          "oneofs": {
+                            "_filterVersionSelector": {
+                              "oneof": [
+                                "filterVersionSelector"
+                              ]
+                            },
+                            "_dataResidencyCompliant": {
+                              "oneof": [
+                                "dataResidencyCompliant"
+                              ]
+                            }
+                          },
                           "fields": {
                             "ignorePartialInvocationFailures": {
                               "type": "bool",
@@ -402,12 +457,28 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "filterVersionSelector": {
+                              "type": "FilterVersionSelector",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "modalities": {
                               "rule": "repeated",
                               "type": "Modality",
                               "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataResidencyCompliant": {
+                              "type": "bool",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -450,6 +521,11 @@
                         "_aiPlatformFloorSetting": {
                           "oneof": [
                             "aiPlatformFloorSetting"
+                          ]
+                        },
+                        "_googleMcpServerFloorSetting": {
+                          "oneof": [
+                            "googleMcpServerFloorSetting"
                           ]
                         }
                       },
@@ -512,6 +588,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "googleMcpServerFloorSetting": {
+                          "type": "McpServerFloorSetting",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -542,7 +626,41 @@
                         "IntegratedService": {
                           "values": {
                             "INTEGRATED_SERVICE_UNSPECIFIED": 0,
-                            "AI_PLATFORM": 1
+                            "AI_PLATFORM": 1,
+                            "GOOGLE_MCP_SERVER": 2
+                          }
+                        }
+                      }
+                    },
+                    "McpServerFloorSetting": {
+                      "oneofs": {
+                        "enforcementType": {
+                          "oneof": [
+                            "inspectOnly",
+                            "inspectAndBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inspectOnly": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectAndBlock": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableCloudLogging": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -786,6 +904,13 @@
                         "maliciousUriFilterSettings": {
                           "type": "MaliciousUriFilterSettings",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filterRuleSettings": {
+                          "type": "FilterRuleSettings",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1046,6 +1171,66 @@
                         }
                       }
                     },
+                    "FilterVersionConfig": {
+                      "oneofs": {
+                        "_filterVersionAlias": {
+                          "oneof": [
+                            "filterVersionAlias"
+                          ]
+                        },
+                        "_releaseDate": {
+                          "oneof": [
+                            "releaseDate"
+                          ]
+                        },
+                        "_projectedDeprecationDate": {
+                          "oneof": [
+                            "projectedDeprecationDate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filterVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filterVersionAlias": {
+                          "type": "FilterVersionAlias",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "releaseDate": {
+                          "type": "google.type.Date",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectedDeprecationDate": {
+                          "type": "google.type.Date",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "SanitizationResult": {
                       "fields": {
                         "filterMatchState": {
@@ -1096,6 +1281,13 @@
                             "streamChunkProcessed": {
                               "type": "DataItem",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "filterVersionConfig": {
+                              "type": "FilterVersionConfig",
+                              "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -1307,6 +1499,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "fileLabel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1488,6 +1687,124 @@
                         "extractedImageText": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "WordList": {
+                      "fields": {
+                        "words": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Dictionary": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "wordList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "wordList": {
+                          "type": "WordList",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Regex": {
+                      "fields": {
+                        "pattern": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExclusionRule": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "dictionary",
+                            "regex"
+                          ]
+                        },
+                        "_matchingScope": {
+                          "oneof": [
+                            "matchingScope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dictionary": {
+                          "type": "Dictionary",
+                          "id": 1
+                        },
+                        "regex": {
+                          "type": "Regex",
+                          "id": 2
+                        },
+                        "matchingScope": {
+                          "type": "MatchingScope",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FilterRule": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "exclusionRule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exclusionRule": {
+                          "type": "ExclusionRule",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FilterRuleSet": {
+                      "fields": {
+                        "filterTypes": {
+                          "rule": "repeated",
+                          "type": "RuleFilterType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "FilterRule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FilterRuleSettings": {
+                      "fields": {
+                        "ruleSets": {
+                          "rule": "repeated",
+                          "type": "FilterRuleSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

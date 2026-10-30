@@ -42,7 +42,7 @@ import * as gapicConfig from './ad_review_center_ad_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides methods for handling AdReviewCenterAd objects.
+ *  Provides methods for handling `AdReviewCenterAd` objects.
  * @class
  * @memberof v1
  */
@@ -230,6 +230,9 @@ export class AdReviewCenterAdServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -326,6 +329,12 @@ export class AdReviewCenterAdServiceClient {
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
+      ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
@@ -538,6 +547,8 @@ export class AdReviewCenterAdServiceClient {
       'searchAdReviewCenterAds',
       'batchAllowAdReviewCenterAds',
       'batchBlockAdReviewCenterAds',
+      'fetchAdReviewCenterCustomLabels',
+      'batchApplyAdReviewCenterCustomLabels',
     ];
     for (const methodName of adReviewCenterAdServiceStubMethods) {
       const callPromise = this.adReviewCenterAdServiceStub.then(
@@ -658,6 +669,340 @@ export class AdReviewCenterAdServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Fetches all custom labels for a publisher. Custom labels can help you
+   * filter and find creatives with the associated label. For more information,
+   * see https://support.google.com/admanager/answer/13812863.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of AdReviewCenterAds
+   *   custom labels. Format:
+   *   networks/{network_code}/webProperties/{web_property_code}
+   *
+   *   Since a network can only have a single web property of each
+   *   `ExchangeSyndicationProduct`, you can use the
+   *   `ExchangeSyndicationProduct` as an alias for the web property code:
+   *
+   *   `networks/{network_code}/webProperties/display`
+   *
+   *   `networks/{network_code}/webProperties/videoAndAudio`
+   *
+   *   `networks/{network_code}/webProperties/mobileApp`
+   *
+   *   `networks/{network_code}/webProperties/games`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsResponse|FetchAdReviewCenterCustomLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ad_review_center_ad_service.fetch_ad_review_center_custom_labels.js</caption>
+   * region_tag:admanager_v1_generated_AdReviewCenterAdService_FetchAdReviewCenterCustomLabels_async
+   */
+  fetchAdReviewCenterCustomLabels(
+    request?: protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+      (
+        | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  fetchAdReviewCenterCustomLabels(
+    request: protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchAdReviewCenterCustomLabels(
+    request: protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchAdReviewCenterCustomLabels(
+    request?: protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+          | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+      (
+        | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchAdReviewCenterCustomLabels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+          | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'fetchAdReviewCenterCustomLabels response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchAdReviewCenterCustomLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse,
+          (
+            | protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'fetchAdReviewCenterCustomLabels response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Performs batch apply on custom labels associated with Ad review center ads.
+   * Custom labels can help you filter and find creatives with the associated
+   * label. For more information, see
+   * https://support.google.com/admanager/answer/13812863.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of AdReviewCenterAds.
+   *   Format: networks/{network_code}/webProperties/{web_property_code}
+   *
+   *   Since a network can only have a single web property of each
+   *   `ExchangeSyndicationProduct`, you can use the
+   *   `ExchangeSyndicationProduct` as an alias for the web property code:
+   *
+   *   `networks/{network_code}/webProperties/display`
+   *
+   *   `networks/{network_code}/webProperties/videoAndAudio`
+   *
+   *   `networks/{network_code}/webProperties/mobileApp`
+   *
+   *   `networks/{network_code}/webProperties/games`
+   * @param {google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest.BatchLabelAction} [request.addLabels]
+   *   Optional. Labels to add to the specified ads.
+   * @param {google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest.BatchLabelAction} [request.removeLabels]
+   *   Optional. Labels to remove from the specified ads.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsResponse|BatchApplyAdReviewCenterCustomLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ad_review_center_ad_service.batch_apply_ad_review_center_custom_labels.js</caption>
+   * region_tag:admanager_v1_generated_AdReviewCenterAdService_BatchApplyAdReviewCenterCustomLabels_async
+   */
+  batchApplyAdReviewCenterCustomLabels(
+    request?: protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchApplyAdReviewCenterCustomLabels(
+    request: protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApplyAdReviewCenterCustomLabels(
+    request: protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchApplyAdReviewCenterCustomLabels(
+    request?: protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchApplyAdReviewCenterCustomLabels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchApplyAdReviewCenterCustomLabels response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchApplyAdReviewCenterCustomLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchApplyAdReviewCenterCustomLabels response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Batch allows AdReviewCenterAds.
@@ -1056,11 +1401,13 @@ export class AdReviewCenterAdServiceClient {
    *   The request object that will be sent.
    * @param {google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus} [request.status]
    *   Optional. Only return ads with the given status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is not
+   *   enabled.
    * @param {google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus} [request.manualReviewStatus]
-   *   Optional. Only return ads with the given manual review status. Only
-   *   available for networks with Manual Creative Review enabled. For more
-   *   information, see
-   *   https://support.google.com/admanager/answer/2586531#manual-creative-review.
+   *   Optional. Only return ads with the given manual review status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is enabled.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of AdReviewCenterAds.
    *   Format: networks/{network_code}/webProperties/{web_property_code}
@@ -1089,9 +1436,8 @@ export class AdReviewCenterAdServiceClient {
    *   no other filter can be set (other than page size and page token).
    * @param {google.type.Interval} [request.dateTimeRange]
    *   Optional. If provided, only return ads that served within the given date
-   *   range (inclusive). The  date range must be within the last 30 days. If not
-   *   provided, the date range will be the last 30 days. This filter does not
-   *   apply to the PENDING manual review status.
+   *   range (inclusive). The date range must be within the last 30 days. If not
+   *   provided, the date range will be the last 30 days.
    * @param {string[]} [request.searchText]
    *   Optional. If provided, restrict the search to AdReviewCenterAds associated
    *   with the text (including any text on the ad or in the destination URL). If
@@ -1102,6 +1448,35 @@ export class AdReviewCenterAdServiceClient {
    *   Optional. If provided, restrict the search to creatives belonging to one of
    *   the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
    *   buyer account IDs can be found using the `ProgrammaticBuyerService`.
+   * @param {string[]} [request.adResponseId]
+   *   Optional. If provided, only return ads with the given ad response IDs.
+   *   This filter is exclusive and cannot be combined with any other filters.
+   *   Maximum of 10 IDs can be specified.
+   * @param {string[]} [request.advertiserDisplayNames]
+   *   Optional. If provided, restrict the search to creatives with the given
+   *   advertiser names.
+   * @param {string[]} [request.languageCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given language codes.
+   * @param {string[]} [request.regionCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given region codes.
+   * @param {number[]} [request.adTypes]
+   *   Optional. If provided, restrict the search to creatives with the given ad
+   *   types.
+   * @param {string[]} [request.advertiserApps]
+   *   Optional. If provided, restrict the search to creatives promoting the given
+   *   app.
+   * @param {string[]} [request.publisherDomains]
+   *   Optional. If provided, restrict the search to creatives belonging to the
+   *   given publisher domain.
+   * @param {number} [request.newInLastDays]
+   *   Optional. If provided, restrict the search to creatives which appeared for
+   *   the first time within the past X days. Must be within the last 30 days (1
+   *   to 30, inclusive).
+   * @param {string[]} [request.labelIds]
+   *   Optional. If provided, restrict the search to creatives associated with the
+   *   given custom label IDs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1223,11 +1598,13 @@ export class AdReviewCenterAdServiceClient {
    *   The request object that will be sent.
    * @param {google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus} [request.status]
    *   Optional. Only return ads with the given status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is not
+   *   enabled.
    * @param {google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus} [request.manualReviewStatus]
-   *   Optional. Only return ads with the given manual review status. Only
-   *   available for networks with Manual Creative Review enabled. For more
-   *   information, see
-   *   https://support.google.com/admanager/answer/2586531#manual-creative-review.
+   *   Optional. Only return ads with the given manual review status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is enabled.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of AdReviewCenterAds.
    *   Format: networks/{network_code}/webProperties/{web_property_code}
@@ -1256,9 +1633,8 @@ export class AdReviewCenterAdServiceClient {
    *   no other filter can be set (other than page size and page token).
    * @param {google.type.Interval} [request.dateTimeRange]
    *   Optional. If provided, only return ads that served within the given date
-   *   range (inclusive). The  date range must be within the last 30 days. If not
-   *   provided, the date range will be the last 30 days. This filter does not
-   *   apply to the PENDING manual review status.
+   *   range (inclusive). The date range must be within the last 30 days. If not
+   *   provided, the date range will be the last 30 days.
    * @param {string[]} [request.searchText]
    *   Optional. If provided, restrict the search to AdReviewCenterAds associated
    *   with the text (including any text on the ad or in the destination URL). If
@@ -1269,6 +1645,35 @@ export class AdReviewCenterAdServiceClient {
    *   Optional. If provided, restrict the search to creatives belonging to one of
    *   the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
    *   buyer account IDs can be found using the `ProgrammaticBuyerService`.
+   * @param {string[]} [request.adResponseId]
+   *   Optional. If provided, only return ads with the given ad response IDs.
+   *   This filter is exclusive and cannot be combined with any other filters.
+   *   Maximum of 10 IDs can be specified.
+   * @param {string[]} [request.advertiserDisplayNames]
+   *   Optional. If provided, restrict the search to creatives with the given
+   *   advertiser names.
+   * @param {string[]} [request.languageCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given language codes.
+   * @param {string[]} [request.regionCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given region codes.
+   * @param {number[]} [request.adTypes]
+   *   Optional. If provided, restrict the search to creatives with the given ad
+   *   types.
+   * @param {string[]} [request.advertiserApps]
+   *   Optional. If provided, restrict the search to creatives promoting the given
+   *   app.
+   * @param {string[]} [request.publisherDomains]
+   *   Optional. If provided, restrict the search to creatives belonging to the
+   *   given publisher domain.
+   * @param {number} [request.newInLastDays]
+   *   Optional. If provided, restrict the search to creatives which appeared for
+   *   the first time within the past X days. Must be within the last 30 days (1
+   *   to 30, inclusive).
+   * @param {string[]} [request.labelIds]
+   *   Optional. If provided, restrict the search to creatives associated with the
+   *   given custom label IDs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1313,11 +1718,13 @@ export class AdReviewCenterAdServiceClient {
    *   The request object that will be sent.
    * @param {google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus} [request.status]
    *   Optional. Only return ads with the given status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is not
+   *   enabled.
    * @param {google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus} [request.manualReviewStatus]
-   *   Optional. Only return ads with the given manual review status. Only
-   *   available for networks with Manual Creative Review enabled. For more
-   *   information, see
-   *   https://support.google.com/admanager/answer/2586531#manual-creative-review.
+   *   Optional. Only return ads with the given manual review status.
+   *   Use this filter for web properties where [Manual Creative Review
+   *   (MCR)](https://support.google.com/admanager/answer/2913553) is enabled.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of AdReviewCenterAds.
    *   Format: networks/{network_code}/webProperties/{web_property_code}
@@ -1346,9 +1753,8 @@ export class AdReviewCenterAdServiceClient {
    *   no other filter can be set (other than page size and page token).
    * @param {google.type.Interval} [request.dateTimeRange]
    *   Optional. If provided, only return ads that served within the given date
-   *   range (inclusive). The  date range must be within the last 30 days. If not
-   *   provided, the date range will be the last 30 days. This filter does not
-   *   apply to the PENDING manual review status.
+   *   range (inclusive). The date range must be within the last 30 days. If not
+   *   provided, the date range will be the last 30 days.
    * @param {string[]} [request.searchText]
    *   Optional. If provided, restrict the search to AdReviewCenterAds associated
    *   with the text (including any text on the ad or in the destination URL). If
@@ -1359,6 +1765,35 @@ export class AdReviewCenterAdServiceClient {
    *   Optional. If provided, restrict the search to creatives belonging to one of
    *   the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
    *   buyer account IDs can be found using the `ProgrammaticBuyerService`.
+   * @param {string[]} [request.adResponseId]
+   *   Optional. If provided, only return ads with the given ad response IDs.
+   *   This filter is exclusive and cannot be combined with any other filters.
+   *   Maximum of 10 IDs can be specified.
+   * @param {string[]} [request.advertiserDisplayNames]
+   *   Optional. If provided, restrict the search to creatives with the given
+   *   advertiser names.
+   * @param {string[]} [request.languageCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given language codes.
+   * @param {string[]} [request.regionCodes]
+   *   Optional. If provided, restrict the search to creatives serving in the
+   *   given region codes.
+   * @param {number[]} [request.adTypes]
+   *   Optional. If provided, restrict the search to creatives with the given ad
+   *   types.
+   * @param {string[]} [request.advertiserApps]
+   *   Optional. If provided, restrict the search to creatives promoting the given
+   *   app.
+   * @param {string[]} [request.publisherDomains]
+   *   Optional. If provided, restrict the search to creatives belonging to the
+   *   given publisher domain.
+   * @param {number} [request.newInLastDays]
+   *   Optional. If provided, restrict the search to creatives which appeared for
+   *   the first time within the past X days. Must be within the last 30 days (1
+   *   to 30, inclusive).
+   * @param {string[]} [request.labelIds]
+   *   Optional. If provided, restrict the search to creatives associated with the
+   *   given custom label IDs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1875,6 +2310,42 @@ export class AdReviewCenterAdServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -3125,6 +3596,111 @@ export class AdReviewCenterAdServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**

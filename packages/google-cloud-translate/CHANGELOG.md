@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [10.3.0](https://github.com/googleapis/google-cloud-node/compare/translate-v10.2.0...translate-v10.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [10.2.0](https://github.com/googleapis/google-cloud-node/compare/translate-v10.1.1...translate-v10.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [10.1.1](https://github.com/googleapis/google-cloud-node/compare/translate-v10.1.0...translate-v10.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [10.1.0](https://github.com/googleapis/google-cloud-node/compare/translate-v10.0.1...translate-v10.1.0) (2026-09-08)
 
 

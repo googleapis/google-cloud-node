@@ -1236,6 +1236,187 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DynamicField. */
+                interface IDynamicField {
+
+                    /** DynamicField category */
+                    category?: (string|null);
+
+                    /** DynamicField name */
+                    name?: (string|null);
+
+                    /** DynamicField label */
+                    label?: (string|null);
+
+                    /** DynamicField basedOn */
+                    basedOn?: (string|null);
+
+                    /** DynamicField type */
+                    type?: (string|null);
+
+                    /** DynamicField description */
+                    description?: (string|null);
+
+                    /** DynamicField expression */
+                    expression?: (string|null);
+
+                    /** DynamicField filterExpression */
+                    filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat */
+                    valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName */
+                    valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType */
+                    calculationType?: (string|null);
+
+                    /** DynamicField args */
+                    args?: (string[]|null);
+
+                    /** DynamicField kindHint */
+                    kindHint?: (string|null);
+
+                    /** DynamicField typeHint */
+                    typeHint?: (string|null);
+
+                    /** DynamicField isDisabled */
+                    isDisabled?: (boolean|null);
+                }
+
+                /** Represents a DynamicField. */
+                class DynamicField implements IDynamicField {
+
+                    /**
+                     * Constructs a new DynamicField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.IDynamicField);
+
+                    /** DynamicField category. */
+                    public category?: (string|null);
+
+                    /** DynamicField name. */
+                    public name?: (string|null);
+
+                    /** DynamicField label. */
+                    public label?: (string|null);
+
+                    /** DynamicField basedOn. */
+                    public basedOn?: (string|null);
+
+                    /** DynamicField type. */
+                    public type?: (string|null);
+
+                    /** DynamicField description. */
+                    public description?: (string|null);
+
+                    /** DynamicField expression. */
+                    public expression?: (string|null);
+
+                    /** DynamicField filterExpression. */
+                    public filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat. */
+                    public valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName. */
+                    public valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType. */
+                    public calculationType?: (string|null);
+
+                    /** DynamicField args. */
+                    public args: string[];
+
+                    /** DynamicField kindHint. */
+                    public kindHint?: (string|null);
+
+                    /** DynamicField typeHint. */
+                    public typeHint?: (string|null);
+
+                    /** DynamicField isDisabled. */
+                    public isDisabled?: (boolean|null);
+
+                    /**
+                     * Creates a new DynamicField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DynamicField instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.IDynamicField): google.cloud.geminidataanalytics.v1.DynamicField;
+
+                    /**
+                     * Encodes the specified DynamicField message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DynamicField message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.DynamicField;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.DynamicField;
+
+                    /**
+                     * Verifies a DynamicField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DynamicField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DynamicField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.DynamicField;
+
+                    /**
+                     * Creates a plain object from a DynamicField message. Also converts values to other types if specified.
+                     * @param message DynamicField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.DynamicField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DynamicField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DynamicField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a LookerQuery. */
                 interface ILookerQuery {
 
@@ -1256,6 +1437,9 @@ export namespace google {
 
                     /** LookerQuery limit */
                     limit?: (string|null);
+
+                    /** LookerQuery dynamicFields */
+                    dynamicFields?: (google.cloud.geminidataanalytics.v1.IDynamicField[]|null);
 
                     /** LookerQuery queryId */
                     queryId?: (string|null);
@@ -1290,6 +1474,9 @@ export namespace google {
 
                     /** LookerQuery limit. */
                     public limit?: (string|null);
+
+                    /** LookerQuery dynamicFields. */
+                    public dynamicFields: google.cloud.geminidataanalytics.v1.IDynamicField[];
 
                     /** LookerQuery queryId. */
                     public queryId?: (string|null);
@@ -2573,6 +2760,9 @@ export namespace google {
 
                     /** BigQueryTableReferences propertyGraphReferences */
                     propertyGraphReferences?: (google.cloud.geminidataanalytics.v1.IBigQueryPropertyGraphReference[]|null);
+
+                    /** BigQueryTableReferences searchScope */
+                    searchScope?: (google.cloud.geminidataanalytics.v1.ISearchScope|null);
                 }
 
                 /** Represents a BigQueryTableReferences. */
@@ -2589,6 +2779,9 @@ export namespace google {
 
                     /** BigQueryTableReferences propertyGraphReferences. */
                     public propertyGraphReferences: google.cloud.geminidataanalytics.v1.IBigQueryPropertyGraphReference[];
+
+                    /** BigQueryTableReferences searchScope. */
+                    public searchScope?: (google.cloud.geminidataanalytics.v1.ISearchScope|null);
 
                     /**
                      * Creates a new BigQueryTableReferences instance using the specified properties.
@@ -2777,6 +2970,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryTableReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryDatasetReference. */
+                interface IBigQueryDatasetReference {
+
+                    /** BigQueryDatasetReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigQueryDatasetReference datasetId */
+                    datasetId?: (string|null);
+                }
+
+                /** Represents a BigQueryDatasetReference. */
+                class BigQueryDatasetReference implements IBigQueryDatasetReference {
+
+                    /**
+                     * Constructs a new BigQueryDatasetReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference);
+
+                    /** BigQueryDatasetReference projectId. */
+                    public projectId: string;
+
+                    /** BigQueryDatasetReference datasetId. */
+                    public datasetId: string;
+
+                    /**
+                     * Creates a new BigQueryDatasetReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryDatasetReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference): google.cloud.geminidataanalytics.v1.BigQueryDatasetReference;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.BigQueryDatasetReference;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.BigQueryDatasetReference;
+
+                    /**
+                     * Verifies a BigQueryDatasetReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryDatasetReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryDatasetReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.BigQueryDatasetReference;
+
+                    /**
+                     * Creates a plain object from a BigQueryDatasetReference message. Also converts values to other types if specified.
+                     * @param message BigQueryDatasetReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.BigQueryDatasetReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryDatasetReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryDatasetReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchScope. */
+                interface ISearchScope {
+
+                    /** SearchScope includeProjectIds */
+                    includeProjectIds?: (string[]|null);
+
+                    /** SearchScope includeDatasetReferences */
+                    includeDatasetReferences?: (google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference[]|null);
+                }
+
+                /** Represents a SearchScope. */
+                class SearchScope implements ISearchScope {
+
+                    /**
+                     * Constructs a new SearchScope.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.ISearchScope);
+
+                    /** SearchScope includeProjectIds. */
+                    public includeProjectIds: string[];
+
+                    /** SearchScope includeDatasetReferences. */
+                    public includeDatasetReferences: google.cloud.geminidataanalytics.v1.IBigQueryDatasetReference[];
+
+                    /**
+                     * Creates a new SearchScope instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchScope instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.ISearchScope): google.cloud.geminidataanalytics.v1.SearchScope;
+
+                    /**
+                     * Encodes the specified SearchScope message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchScope message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.SearchScope;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.SearchScope;
+
+                    /**
+                     * Verifies a SearchScope message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchScope message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchScope
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.SearchScope;
+
+                    /**
+                     * Creates a plain object from a SearchScope message. Also converts values to other types if specified.
+                     * @param message SearchScope
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.SearchScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchScope to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchScope
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3945,11 +4344,11 @@ export namespace google {
                     /** Conversation labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Conversation title */
+                    title?: (string|null);
+
                     /** Conversation kmsKey */
                     kmsKey?: (string|null);
-
-                    /** Conversation memoryPaused */
-                    memoryPaused?: (boolean|null);
                 }
 
                 /** Represents a Conversation. */
@@ -3976,11 +4375,11 @@ export namespace google {
                     /** Conversation labels. */
                     public labels: { [k: string]: string };
 
+                    /** Conversation title. */
+                    public title: string;
+
                     /** Conversation kmsKey. */
                     public kmsKey?: (string|null);
-
-                    /** Conversation memoryPaused. */
-                    public memoryPaused?: (boolean|null);
 
                     /**
                      * Creates a new Conversation instance using the specified properties.
@@ -4169,6 +4568,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversationRequest. */
+                interface IUpdateConversationRequest {
+
+                    /** UpdateConversationRequest conversation */
+                    conversation?: (google.cloud.geminidataanalytics.v1.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateConversationRequest. */
+                class UpdateConversationRequest implements IUpdateConversationRequest {
+
+                    /**
+                     * Constructs a new UpdateConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest);
+
+                    /** UpdateConversationRequest conversation. */
+                    public conversation?: (google.cloud.geminidataanalytics.v1.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest): google.cloud.geminidataanalytics.v1.UpdateConversationRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.UpdateConversationRequest;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.UpdateConversationRequest;
+
+                    /**
+                     * Verifies an UpdateConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.UpdateConversationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.UpdateConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5028,6 +5536,12 @@ export namespace google {
 
                     /** DataAgent kmsKey */
                     kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled */
+                    bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable */
+                    bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1.IBigQueryTableReference|null);
                 }
 
                 /** Represents a DataAgent. */
@@ -5068,6 +5582,12 @@ export namespace google {
 
                     /** DataAgent kmsKey. */
                     public kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled. */
+                    public bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable. */
+                    public bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1.IBigQueryTableReference|null);
 
                     /** DataAgent type. */
                     public type?: "dataAnalyticsAgent";
@@ -5432,6 +5952,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1.DataAgentService.SetAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveAgentOpsObservabilityResponse
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1.DataAgentService.RetrieveAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest): Promise<google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse>;
                 }
 
                 namespace DataAgentService {
@@ -5512,6 +6060,20 @@ export namespace google {
                      * @param [response] Policy
                      */
                     type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1.DataAgentService|setAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetAgentOpsObservabilityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1.DataAgentService|retrieveAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveAgentOpsObservabilityResponse
+                     */
+                    type RetrieveAgentOpsObservabilityCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse) => void;
                 }
 
                 /** Properties of a ListDataAgentsRequest. */
@@ -5534,6 +6096,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted */
                     showDeleted?: (boolean|null);
+
+                    /** ListDataAgentsRequest creatorFilter */
+                    creatorFilter?: (google.cloud.geminidataanalytics.v1.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1.ListAccessibleDataAgentsRequest.CreatorFilter|null);
                 }
 
                 /** Represents a ListDataAgentsRequest. */
@@ -5562,6 +6127,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted. */
                     public showDeleted: boolean;
+
+                    /** ListDataAgentsRequest creatorFilter. */
+                    public creatorFilter: (google.cloud.geminidataanalytics.v1.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1.ListAccessibleDataAgentsRequest.CreatorFilter);
 
                     /**
                      * Creates a new ListDataAgentsRequest instance using the specified properties.
@@ -6560,6 +7128,539 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SetAgentOpsObservabilityRequest. */
+                interface ISetAgentOpsObservabilityRequest {
+
+                    /** SetAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a SetAgentOpsObservabilityRequest. */
+                class SetAgentOpsObservabilityRequest implements ISetAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest);
+
+                    /** SetAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityResponse. */
+                interface ISetAgentOpsObservabilityResponse {
+                }
+
+                /** Represents a SetAgentOpsObservabilityResponse. */
+                class SetAgentOpsObservabilityResponse implements ISetAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityResponse);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityMetadata. */
+                interface ISetAgentOpsObservabilityMetadata {
+                }
+
+                /** Represents a SetAgentOpsObservabilityMetadata. */
+                class SetAgentOpsObservabilityMetadata implements ISetAgentOpsObservabilityMetadata {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityMetadata);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityMetadata instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityMetadata): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityMetadata message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.SetAgentOpsObservabilityMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityRequest. */
+                interface IRetrieveAgentOpsObservabilityRequest {
+
+                    /** RetrieveAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityRequest. */
+                class RetrieveAgentOpsObservabilityRequest implements IRetrieveAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest);
+
+                    /** RetrieveAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityResponse. */
+                interface IRetrieveAgentOpsObservabilityResponse {
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled */
+                    bigqueryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled */
+                    cloudTraceEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled */
+                    cloudMonitoringEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled */
+                    cloudLoggingEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityResponse. */
+                class RetrieveAgentOpsObservabilityResponse implements IRetrieveAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityResponse);
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled. */
+                    public bigqueryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled. */
+                    public cloudTraceEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled. */
+                    public cloudMonitoringEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled. */
+                    public cloudLoggingEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1.RetrieveAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DataChatService */
                 class DataChatService extends $protobuf.rpc.Service {
 
@@ -6621,6 +7722,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConversation(request: google.cloud.geminidataanalytics.v1.IDeleteConversationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest, callback: google.cloud.geminidataanalytics.v1.DataChatService.UpdateConversationCallback): void;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1.IUpdateConversationRequest): Promise<google.cloud.geminidataanalytics.v1.Conversation>;
 
                     /**
                      * Calls GetConversation.
@@ -6687,6 +7802,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteConversationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1.DataChatService|updateConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type UpdateConversationCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1.Conversation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1.DataChatService|getConversation}.
@@ -9987,6 +11109,9 @@ export namespace google {
 
                     /** Context schemaRelationships */
                     schemaRelationships?: (google.cloud.geminidataanalytics.v1alpha.Context.ISchemaRelationship[]|null);
+
+                    /** Context userFunctions */
+                    userFunctions?: (google.cloud.geminidataanalytics.v1alpha.IUserFunctions|null);
                 }
 
                 /** Represents a Context. */
@@ -10018,6 +11143,9 @@ export namespace google {
 
                     /** Context schemaRelationships. */
                     public schemaRelationships: google.cloud.geminidataanalytics.v1alpha.Context.ISchemaRelationship[];
+
+                    /** Context userFunctions. */
+                    public userFunctions?: (google.cloud.geminidataanalytics.v1alpha.IUserFunctions|null);
 
                     /**
                      * Creates a new Context instance using the specified properties.
@@ -10329,6 +11457,315 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a UserFunctions. */
+                interface IUserFunctions {
+
+                    /** UserFunctions bqRoutines */
+                    bqRoutines?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine[]|null);
+                }
+
+                /** Represents a UserFunctions. */
+                class UserFunctions implements IUserFunctions {
+
+                    /**
+                     * Constructs a new UserFunctions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IUserFunctions);
+
+                    /** UserFunctions bqRoutines. */
+                    public bqRoutines: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine[];
+
+                    /**
+                     * Creates a new UserFunctions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserFunctions instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IUserFunctions): google.cloud.geminidataanalytics.v1alpha.UserFunctions;
+
+                    /**
+                     * Encodes the specified UserFunctions message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.UserFunctions.verify|verify} messages.
+                     * @param message UserFunctions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IUserFunctions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserFunctions message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.UserFunctions.verify|verify} messages.
+                     * @param message UserFunctions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IUserFunctions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserFunctions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserFunctions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.UserFunctions;
+
+                    /**
+                     * Decodes a UserFunctions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserFunctions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.UserFunctions;
+
+                    /**
+                     * Verifies a UserFunctions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserFunctions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserFunctions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.UserFunctions;
+
+                    /**
+                     * Creates a plain object from a UserFunctions message. Also converts values to other types if specified.
+                     * @param message UserFunctions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.UserFunctions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserFunctions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserFunctions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryRoutine. */
+                interface IBigQueryRoutine {
+
+                    /** BigQueryRoutine routineReference */
+                    routineReference?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference|null);
+
+                    /** BigQueryRoutine description */
+                    description?: (string|null);
+                }
+
+                /** Represents a BigQueryRoutine. */
+                class BigQueryRoutine implements IBigQueryRoutine {
+
+                    /**
+                     * Constructs a new BigQueryRoutine.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine);
+
+                    /** BigQueryRoutine routineReference. */
+                    public routineReference?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference|null);
+
+                    /** BigQueryRoutine description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new BigQueryRoutine instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryRoutine instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine;
+
+                    /**
+                     * Encodes the specified BigQueryRoutine message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine.verify|verify} messages.
+                     * @param message BigQueryRoutine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryRoutine message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine.verify|verify} messages.
+                     * @param message BigQueryRoutine message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryRoutine message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryRoutine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine;
+
+                    /**
+                     * Decodes a BigQueryRoutine message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryRoutine
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine;
+
+                    /**
+                     * Verifies a BigQueryRoutine message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryRoutine message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryRoutine
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine;
+
+                    /**
+                     * Creates a plain object from a BigQueryRoutine message. Also converts values to other types if specified.
+                     * @param message BigQueryRoutine
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.BigQueryRoutine, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryRoutine to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryRoutine
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryRoutineReference. */
+                interface IBigQueryRoutineReference {
+
+                    /** BigQueryRoutineReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigQueryRoutineReference datasetId */
+                    datasetId?: (string|null);
+
+                    /** BigQueryRoutineReference routineId */
+                    routineId?: (string|null);
+                }
+
+                /** Represents a BigQueryRoutineReference. */
+                class BigQueryRoutineReference implements IBigQueryRoutineReference {
+
+                    /**
+                     * Constructs a new BigQueryRoutineReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference);
+
+                    /** BigQueryRoutineReference projectId. */
+                    public projectId: string;
+
+                    /** BigQueryRoutineReference datasetId. */
+                    public datasetId: string;
+
+                    /** BigQueryRoutineReference routineId. */
+                    public routineId: string;
+
+                    /**
+                     * Creates a new BigQueryRoutineReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryRoutineReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference;
+
+                    /**
+                     * Encodes the specified BigQueryRoutineReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference.verify|verify} messages.
+                     * @param message BigQueryRoutineReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryRoutineReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference.verify|verify} messages.
+                     * @param message BigQueryRoutineReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryRoutineReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryRoutineReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryRoutineReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference;
+
+                    /**
+                     * Decodes a BigQueryRoutineReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryRoutineReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference;
+
+                    /**
+                     * Verifies a BigQueryRoutineReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryRoutineReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryRoutineReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference;
+
+                    /**
+                     * Creates a plain object from a BigQueryRoutineReference message. Also converts values to other types if specified.
+                     * @param message BigQueryRoutineReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.BigQueryRoutineReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryRoutineReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryRoutineReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ExampleQuery. */
                 interface IExampleQuery {
 
@@ -10337,6 +11774,9 @@ export namespace google {
 
                     /** ExampleQuery naturalLanguageQuestion */
                     naturalLanguageQuestion?: (string|null);
+
+                    /** ExampleQuery parameters */
+                    parameters?: (google.cloud.geminidataanalytics.v1alpha.IQueryParameter[]|null);
                 }
 
                 /** Represents an ExampleQuery. */
@@ -10353,6 +11793,9 @@ export namespace google {
 
                     /** ExampleQuery naturalLanguageQuestion. */
                     public naturalLanguageQuestion: string;
+
+                    /** ExampleQuery parameters. */
+                    public parameters: google.cloud.geminidataanalytics.v1alpha.IQueryParameter[];
 
                     /** ExampleQuery query. */
                     public query?: "sqlQuery";
@@ -10429,6 +11872,321 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ExampleQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryParameter. */
+                interface IQueryParameter {
+
+                    /** QueryParameter name */
+                    name?: (string|null);
+
+                    /** QueryParameter description */
+                    description?: (string|null);
+
+                    /** QueryParameter dataType */
+                    dataType?: (string|null);
+                }
+
+                /** Represents a QueryParameter. */
+                class QueryParameter implements IQueryParameter {
+
+                    /**
+                     * Constructs a new QueryParameter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IQueryParameter);
+
+                    /** QueryParameter name. */
+                    public name: string;
+
+                    /** QueryParameter description. */
+                    public description: string;
+
+                    /** QueryParameter dataType. */
+                    public dataType: string;
+
+                    /**
+                     * Creates a new QueryParameter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryParameter instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IQueryParameter): google.cloud.geminidataanalytics.v1alpha.QueryParameter;
+
+                    /**
+                     * Encodes the specified QueryParameter message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryParameter.verify|verify} messages.
+                     * @param message QueryParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IQueryParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryParameter message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryParameter.verify|verify} messages.
+                     * @param message QueryParameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IQueryParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryParameter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.QueryParameter;
+
+                    /**
+                     * Decodes a QueryParameter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.QueryParameter;
+
+                    /**
+                     * Verifies a QueryParameter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryParameter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryParameter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.QueryParameter;
+
+                    /**
+                     * Creates a plain object from a QueryParameter message. Also converts values to other types if specified.
+                     * @param message QueryParameter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.QueryParameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryParameter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryParameter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MatchedQuery. */
+                interface IMatchedQuery {
+
+                    /** MatchedQuery exampleQuery */
+                    exampleQuery?: (google.cloud.geminidataanalytics.v1alpha.IExampleQuery|null);
+
+                    /** MatchedQuery queryParameterValues */
+                    queryParameterValues?: (google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues[]|null);
+                }
+
+                /** Represents a MatchedQuery. */
+                class MatchedQuery implements IMatchedQuery {
+
+                    /**
+                     * Constructs a new MatchedQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IMatchedQuery);
+
+                    /** MatchedQuery exampleQuery. */
+                    public exampleQuery?: (google.cloud.geminidataanalytics.v1alpha.IExampleQuery|null);
+
+                    /** MatchedQuery queryParameterValues. */
+                    public queryParameterValues: google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues[];
+
+                    /**
+                     * Creates a new MatchedQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MatchedQuery instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IMatchedQuery): google.cloud.geminidataanalytics.v1alpha.MatchedQuery;
+
+                    /**
+                     * Encodes the specified MatchedQuery message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.MatchedQuery.verify|verify} messages.
+                     * @param message MatchedQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IMatchedQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MatchedQuery message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.MatchedQuery.verify|verify} messages.
+                     * @param message MatchedQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IMatchedQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MatchedQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MatchedQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.MatchedQuery;
+
+                    /**
+                     * Decodes a MatchedQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MatchedQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.MatchedQuery;
+
+                    /**
+                     * Verifies a MatchedQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MatchedQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MatchedQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.MatchedQuery;
+
+                    /**
+                     * Creates a plain object from a MatchedQuery message. Also converts values to other types if specified.
+                     * @param message MatchedQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.MatchedQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MatchedQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MatchedQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryParameterValues. */
+                interface IQueryParameterValues {
+
+                    /** QueryParameterValues name */
+                    name?: (string|null);
+
+                    /** QueryParameterValues value */
+                    value?: (string|null);
+                }
+
+                /** Represents a QueryParameterValues. */
+                class QueryParameterValues implements IQueryParameterValues {
+
+                    /**
+                     * Constructs a new QueryParameterValues.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues);
+
+                    /** QueryParameterValues name. */
+                    public name: string;
+
+                    /** QueryParameterValues value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new QueryParameterValues instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryParameterValues instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues): google.cloud.geminidataanalytics.v1alpha.QueryParameterValues;
+
+                    /**
+                     * Encodes the specified QueryParameterValues message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryParameterValues.verify|verify} messages.
+                     * @param message QueryParameterValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryParameterValues message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.QueryParameterValues.verify|verify} messages.
+                     * @param message QueryParameterValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IQueryParameterValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryParameterValues message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryParameterValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.QueryParameterValues;
+
+                    /**
+                     * Decodes a QueryParameterValues message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryParameterValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.QueryParameterValues;
+
+                    /**
+                     * Verifies a QueryParameterValues message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryParameterValues message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryParameterValues
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.QueryParameterValues;
+
+                    /**
+                     * Creates a plain object from a QueryParameterValues message. Also converts values to other types if specified.
+                     * @param message QueryParameterValues
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.QueryParameterValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryParameterValues to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryParameterValues
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10538,6 +12296,187 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DynamicField. */
+                interface IDynamicField {
+
+                    /** DynamicField category */
+                    category?: (string|null);
+
+                    /** DynamicField name */
+                    name?: (string|null);
+
+                    /** DynamicField label */
+                    label?: (string|null);
+
+                    /** DynamicField basedOn */
+                    basedOn?: (string|null);
+
+                    /** DynamicField type */
+                    type?: (string|null);
+
+                    /** DynamicField description */
+                    description?: (string|null);
+
+                    /** DynamicField expression */
+                    expression?: (string|null);
+
+                    /** DynamicField filterExpression */
+                    filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat */
+                    valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName */
+                    valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType */
+                    calculationType?: (string|null);
+
+                    /** DynamicField args */
+                    args?: (string[]|null);
+
+                    /** DynamicField kindHint */
+                    kindHint?: (string|null);
+
+                    /** DynamicField typeHint */
+                    typeHint?: (string|null);
+
+                    /** DynamicField isDisabled */
+                    isDisabled?: (boolean|null);
+                }
+
+                /** Represents a DynamicField. */
+                class DynamicField implements IDynamicField {
+
+                    /**
+                     * Constructs a new DynamicField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IDynamicField);
+
+                    /** DynamicField category. */
+                    public category?: (string|null);
+
+                    /** DynamicField name. */
+                    public name?: (string|null);
+
+                    /** DynamicField label. */
+                    public label?: (string|null);
+
+                    /** DynamicField basedOn. */
+                    public basedOn?: (string|null);
+
+                    /** DynamicField type. */
+                    public type?: (string|null);
+
+                    /** DynamicField description. */
+                    public description?: (string|null);
+
+                    /** DynamicField expression. */
+                    public expression?: (string|null);
+
+                    /** DynamicField filterExpression. */
+                    public filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat. */
+                    public valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName. */
+                    public valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType. */
+                    public calculationType?: (string|null);
+
+                    /** DynamicField args. */
+                    public args: string[];
+
+                    /** DynamicField kindHint. */
+                    public kindHint?: (string|null);
+
+                    /** DynamicField typeHint. */
+                    public typeHint?: (string|null);
+
+                    /** DynamicField isDisabled. */
+                    public isDisabled?: (boolean|null);
+
+                    /**
+                     * Creates a new DynamicField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DynamicField instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IDynamicField): google.cloud.geminidataanalytics.v1alpha.DynamicField;
+
+                    /**
+                     * Encodes the specified DynamicField message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DynamicField message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.DynamicField;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.DynamicField;
+
+                    /**
+                     * Verifies a DynamicField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DynamicField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DynamicField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.DynamicField;
+
+                    /**
+                     * Creates a plain object from a DynamicField message. Also converts values to other types if specified.
+                     * @param message DynamicField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.DynamicField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DynamicField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DynamicField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a LookerQuery. */
                 interface ILookerQuery {
 
@@ -10558,6 +12497,15 @@ export namespace google {
 
                     /** LookerQuery limit */
                     limit?: (string|null);
+
+                    /** LookerQuery dynamicFields */
+                    dynamicFields?: (google.cloud.geminidataanalytics.v1alpha.IDynamicField[]|null);
+
+                    /** LookerQuery queryId */
+                    queryId?: (string|null);
+
+                    /** LookerQuery clientId */
+                    clientId?: (string|null);
                 }
 
                 /** Represents a LookerQuery. */
@@ -10586,6 +12534,15 @@ export namespace google {
 
                     /** LookerQuery limit. */
                     public limit?: (string|null);
+
+                    /** LookerQuery dynamicFields. */
+                    public dynamicFields: google.cloud.geminidataanalytics.v1alpha.IDynamicField[];
+
+                    /** LookerQuery queryId. */
+                    public queryId?: (string|null);
+
+                    /** LookerQuery clientId. */
+                    public clientId?: (string|null);
 
                     /**
                      * Creates a new LookerQuery instance using the specified properties.
@@ -10690,7 +12647,7 @@ export namespace google {
                         public field: string;
 
                         /** Filter value. */
-                        public value: string;
+                        public value?: (string|null);
 
                         /**
                          * Creates a new Filter instance using the specified properties.
@@ -10891,6 +12848,9 @@ export namespace google {
 
                     /** ConversationOptions datasource */
                     datasource?: (google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions|null);
+
+                    /** ConversationOptions model */
+                    model?: (google.cloud.geminidataanalytics.v1alpha.ConversationOptions.Model|keyof typeof google.cloud.geminidataanalytics.v1alpha.ConversationOptions.Model|null);
                 }
 
                 /** Represents a ConversationOptions. */
@@ -10910,6 +12870,9 @@ export namespace google {
 
                     /** ConversationOptions datasource. */
                     public datasource?: (google.cloud.geminidataanalytics.v1alpha.IDatasourceOptions|null);
+
+                    /** ConversationOptions model. */
+                    public model?: (google.cloud.geminidataanalytics.v1alpha.ConversationOptions.Model|keyof typeof google.cloud.geminidataanalytics.v1alpha.ConversationOptions.Model|null);
 
                     /**
                      * Creates a new ConversationOptions instance using the specified properties.
@@ -10987,6 +12950,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversationOptions {
+
+                    /** Model enum. */
+                    enum Model {
+                        MODEL_UNSPECIFIED = 0,
+                        LATEST_GA_MODEL = 1
+                    }
                 }
 
                 /** Properties of a DatasourceOptions. */
@@ -11674,6 +13646,451 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a Citation. */
+                interface ICitation {
+
+                    /** Citation sources */
+                    sources?: (google.cloud.geminidataanalytics.v1alpha.ICitationSource[]|null);
+
+                    /** Citation anchors */
+                    anchors?: (google.cloud.geminidataanalytics.v1alpha.ICitationAnchor[]|null);
+                }
+
+                /** Represents a Citation. */
+                class Citation implements ICitation {
+
+                    /**
+                     * Constructs a new Citation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ICitation);
+
+                    /** Citation sources. */
+                    public sources: google.cloud.geminidataanalytics.v1alpha.ICitationSource[];
+
+                    /** Citation anchors. */
+                    public anchors: google.cloud.geminidataanalytics.v1alpha.ICitationAnchor[];
+
+                    /**
+                     * Creates a new Citation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Citation instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ICitation): google.cloud.geminidataanalytics.v1alpha.Citation;
+
+                    /**
+                     * Encodes the specified Citation message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.Citation.verify|verify} messages.
+                     * @param message Citation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ICitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Citation message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.Citation.verify|verify} messages.
+                     * @param message Citation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ICitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Citation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Citation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.Citation;
+
+                    /**
+                     * Decodes a Citation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Citation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.Citation;
+
+                    /**
+                     * Verifies a Citation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Citation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Citation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.Citation;
+
+                    /**
+                     * Creates a plain object from a Citation message. Also converts values to other types if specified.
+                     * @param message Citation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.Citation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Citation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Citation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CitationSource. */
+                interface ICitationSource {
+
+                    /** CitationSource uri */
+                    uri?: (string|null);
+
+                    /** CitationSource exampleQuery */
+                    exampleQuery?: (google.cloud.geminidataanalytics.v1alpha.IExampleQuery|null);
+
+                    /** CitationSource glossaryTerm */
+                    glossaryTerm?: (google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm|null);
+
+                    /** CitationSource id */
+                    id?: (string|null);
+
+                    /** CitationSource title */
+                    title?: (string|null);
+                }
+
+                /** Represents a CitationSource. */
+                class CitationSource implements ICitationSource {
+
+                    /**
+                     * Constructs a new CitationSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ICitationSource);
+
+                    /** CitationSource uri. */
+                    public uri?: (string|null);
+
+                    /** CitationSource exampleQuery. */
+                    public exampleQuery?: (google.cloud.geminidataanalytics.v1alpha.IExampleQuery|null);
+
+                    /** CitationSource glossaryTerm. */
+                    public glossaryTerm?: (google.cloud.geminidataanalytics.v1alpha.IGlossaryTerm|null);
+
+                    /** CitationSource id. */
+                    public id: string;
+
+                    /** CitationSource title. */
+                    public title: string;
+
+                    /** CitationSource sourceType. */
+                    public sourceType?: ("uri"|"exampleQuery"|"glossaryTerm");
+
+                    /**
+                     * Creates a new CitationSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CitationSource instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ICitationSource): google.cloud.geminidataanalytics.v1alpha.CitationSource;
+
+                    /**
+                     * Encodes the specified CitationSource message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationSource.verify|verify} messages.
+                     * @param message CitationSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CitationSource message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationSource.verify|verify} messages.
+                     * @param message CitationSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CitationSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CitationSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.CitationSource;
+
+                    /**
+                     * Decodes a CitationSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CitationSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.CitationSource;
+
+                    /**
+                     * Verifies a CitationSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CitationSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CitationSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.CitationSource;
+
+                    /**
+                     * Creates a plain object from a CitationSource message. Also converts values to other types if specified.
+                     * @param message CitationSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.CitationSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CitationSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CitationSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CitationAnchor. */
+                interface ICitationAnchor {
+
+                    /** CitationAnchor textMessageAnchor */
+                    textMessageAnchor?: (google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor|null);
+                }
+
+                /** Represents a CitationAnchor. */
+                class CitationAnchor implements ICitationAnchor {
+
+                    /**
+                     * Constructs a new CitationAnchor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ICitationAnchor);
+
+                    /** CitationAnchor textMessageAnchor. */
+                    public textMessageAnchor?: (google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor|null);
+
+                    /** CitationAnchor anchorType. */
+                    public anchorType?: "textMessageAnchor";
+
+                    /**
+                     * Creates a new CitationAnchor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CitationAnchor instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ICitationAnchor): google.cloud.geminidataanalytics.v1alpha.CitationAnchor;
+
+                    /**
+                     * Encodes the specified CitationAnchor message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationAnchor.verify|verify} messages.
+                     * @param message CitationAnchor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ICitationAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CitationAnchor message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationAnchor.verify|verify} messages.
+                     * @param message CitationAnchor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ICitationAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CitationAnchor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CitationAnchor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.CitationAnchor;
+
+                    /**
+                     * Decodes a CitationAnchor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CitationAnchor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.CitationAnchor;
+
+                    /**
+                     * Verifies a CitationAnchor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CitationAnchor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CitationAnchor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.CitationAnchor;
+
+                    /**
+                     * Creates a plain object from a CitationAnchor message. Also converts values to other types if specified.
+                     * @param message CitationAnchor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.CitationAnchor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CitationAnchor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CitationAnchor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CitationAnchor {
+
+                    /** Properties of a TextMessageCitationAnchor. */
+                    interface ITextMessageCitationAnchor {
+
+                        /** TextMessageCitationAnchor partIndex */
+                        partIndex?: (number|null);
+
+                        /** TextMessageCitationAnchor startOffsetBytes */
+                        startOffsetBytes?: (number|null);
+
+                        /** TextMessageCitationAnchor endOffsetBytes */
+                        endOffsetBytes?: (number|null);
+
+                        /** TextMessageCitationAnchor sourceIds */
+                        sourceIds?: (string[]|null);
+                    }
+
+                    /** Represents a TextMessageCitationAnchor. */
+                    class TextMessageCitationAnchor implements ITextMessageCitationAnchor {
+
+                        /**
+                         * Constructs a new TextMessageCitationAnchor.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor);
+
+                        /** TextMessageCitationAnchor partIndex. */
+                        public partIndex: number;
+
+                        /** TextMessageCitationAnchor startOffsetBytes. */
+                        public startOffsetBytes: number;
+
+                        /** TextMessageCitationAnchor endOffsetBytes. */
+                        public endOffsetBytes: number;
+
+                        /** TextMessageCitationAnchor sourceIds. */
+                        public sourceIds: string[];
+
+                        /**
+                         * Creates a new TextMessageCitationAnchor instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextMessageCitationAnchor instance
+                         */
+                        public static create(properties?: google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor): google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor;
+
+                        /**
+                         * Encodes the specified TextMessageCitationAnchor message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor.verify|verify} messages.
+                         * @param message TextMessageCitationAnchor message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextMessageCitationAnchor message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor.verify|verify} messages.
+                         * @param message TextMessageCitationAnchor message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.CitationAnchor.ITextMessageCitationAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextMessageCitationAnchor message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextMessageCitationAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor;
+
+                        /**
+                         * Decodes a TextMessageCitationAnchor message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextMessageCitationAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor;
+
+                        /**
+                         * Verifies a TextMessageCitationAnchor message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextMessageCitationAnchor message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextMessageCitationAnchor
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor;
+
+                        /**
+                         * Creates a plain object from a TextMessageCitationAnchor message. Also converts values to other types if specified.
+                         * @param message TextMessageCitationAnchor
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.geminidataanalytics.v1alpha.CitationAnchor.TextMessageCitationAnchor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextMessageCitationAnchor to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextMessageCitationAnchor
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** DataFilterType enum. */
                 enum DataFilterType {
                     DATA_FILTER_TYPE_UNSPECIFIED = 0,
@@ -11828,6 +14245,12 @@ export namespace google {
                     /** BigQueryTableReferences tableReferences */
                     tableReferences?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReference[]|null);
 
+                    /** BigQueryTableReferences propertyGraphReferences */
+                    propertyGraphReferences?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference[]|null);
+
+                    /** BigQueryTableReferences searchScope */
+                    searchScope?: (google.cloud.geminidataanalytics.v1alpha.ISearchScope|null);
+
                     /** BigQueryTableReferences agentContextReference */
                     agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
                 }
@@ -11843,6 +14266,12 @@ export namespace google {
 
                     /** BigQueryTableReferences tableReferences. */
                     public tableReferences: google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReference[];
+
+                    /** BigQueryTableReferences propertyGraphReferences. */
+                    public propertyGraphReferences: google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference[];
+
+                    /** BigQueryTableReferences searchScope. */
+                    public searchScope?: (google.cloud.geminidataanalytics.v1alpha.ISearchScope|null);
 
                     /** BigQueryTableReferences agentContextReference. */
                     public agentContextReference?: (google.cloud.geminidataanalytics.v1alpha.IAgentContextReference|null);
@@ -12034,6 +14463,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryTableReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryDatasetReference. */
+                interface IBigQueryDatasetReference {
+
+                    /** BigQueryDatasetReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigQueryDatasetReference datasetId */
+                    datasetId?: (string|null);
+                }
+
+                /** Represents a BigQueryDatasetReference. */
+                class BigQueryDatasetReference implements IBigQueryDatasetReference {
+
+                    /**
+                     * Constructs a new BigQueryDatasetReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference);
+
+                    /** BigQueryDatasetReference projectId. */
+                    public projectId: string;
+
+                    /** BigQueryDatasetReference datasetId. */
+                    public datasetId: string;
+
+                    /**
+                     * Creates a new BigQueryDatasetReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryDatasetReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference): google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference;
+
+                    /**
+                     * Verifies a BigQueryDatasetReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryDatasetReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryDatasetReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference;
+
+                    /**
+                     * Creates a plain object from a BigQueryDatasetReference message. Also converts values to other types if specified.
+                     * @param message BigQueryDatasetReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.BigQueryDatasetReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryDatasetReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryDatasetReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchScope. */
+                interface ISearchScope {
+
+                    /** SearchScope includeProjectIds */
+                    includeProjectIds?: (string[]|null);
+
+                    /** SearchScope includeDatasetReferences */
+                    includeDatasetReferences?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference[]|null);
+                }
+
+                /** Represents a SearchScope. */
+                class SearchScope implements ISearchScope {
+
+                    /**
+                     * Constructs a new SearchScope.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISearchScope);
+
+                    /** SearchScope includeProjectIds. */
+                    public includeProjectIds: string[];
+
+                    /** SearchScope includeDatasetReferences. */
+                    public includeDatasetReferences: google.cloud.geminidataanalytics.v1alpha.IBigQueryDatasetReference[];
+
+                    /**
+                     * Creates a new SearchScope instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchScope instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISearchScope): google.cloud.geminidataanalytics.v1alpha.SearchScope;
+
+                    /**
+                     * Encodes the specified SearchScope message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchScope message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SearchScope;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SearchScope;
+
+                    /**
+                     * Verifies a SearchScope message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchScope message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchScope
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SearchScope;
+
+                    /**
+                     * Creates a plain object from a SearchScope message. Also converts values to other types if specified.
+                     * @param message SearchScope
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SearchScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchScope to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchScope
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13138,6 +15773,9 @@ export namespace google {
 
                     /** SpannerDatabaseReference requestTag */
                     requestTag?: (string|null);
+
+                    /** SpannerDatabaseReference graphIds */
+                    graphIds?: (string[]|null);
                 }
 
                 /** Represents a SpannerDatabaseReference. */
@@ -13172,6 +15810,9 @@ export namespace google {
 
                     /** SpannerDatabaseReference requestTag. */
                     public requestTag: string;
+
+                    /** SpannerDatabaseReference graphIds. */
+                    public graphIds: string[];
 
                     /**
                      * Creates a new SpannerDatabaseReference instance using the specified properties.
@@ -13734,6 +16375,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BigQueryPropertyGraphReference. */
+                interface IBigQueryPropertyGraphReference {
+
+                    /** BigQueryPropertyGraphReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigQueryPropertyGraphReference datasetId */
+                    datasetId?: (string|null);
+
+                    /** BigQueryPropertyGraphReference propertyGraphId */
+                    propertyGraphId?: (string|null);
+                }
+
+                /** Represents a BigQueryPropertyGraphReference. */
+                class BigQueryPropertyGraphReference implements IBigQueryPropertyGraphReference {
+
+                    /**
+                     * Constructs a new BigQueryPropertyGraphReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference);
+
+                    /** BigQueryPropertyGraphReference projectId. */
+                    public projectId: string;
+
+                    /** BigQueryPropertyGraphReference datasetId. */
+                    public datasetId: string;
+
+                    /** BigQueryPropertyGraphReference propertyGraphId. */
+                    public propertyGraphId: string;
+
+                    /**
+                     * Creates a new BigQueryPropertyGraphReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryPropertyGraphReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference): google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference;
+
+                    /**
+                     * Encodes the specified BigQueryPropertyGraphReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference.verify|verify} messages.
+                     * @param message BigQueryPropertyGraphReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryPropertyGraphReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference.verify|verify} messages.
+                     * @param message BigQueryPropertyGraphReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryPropertyGraphReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryPropertyGraphReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference;
+
+                    /**
+                     * Decodes a BigQueryPropertyGraphReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryPropertyGraphReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference;
+
+                    /**
+                     * Verifies a BigQueryPropertyGraphReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryPropertyGraphReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryPropertyGraphReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference;
+
+                    /**
+                     * Creates a plain object from a BigQueryPropertyGraphReference message. Also converts values to other types if specified.
+                     * @param message BigQueryPropertyGraphReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.BigQueryPropertyGraphReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryPropertyGraphReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryPropertyGraphReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PrivateLookerInstanceInfo. */
                 interface IPrivateLookerInstanceInfo {
 
@@ -13861,6 +16611,9 @@ export namespace google {
                     /** Datasource bigtableReference */
                     bigtableReference?: (google.cloud.geminidataanalytics.v1alpha.IBigtableReference|null);
 
+                    /** Datasource bigqueryPropertyGraphReference */
+                    bigqueryPropertyGraphReference?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference|null);
+
                     /** Datasource firestoreReference */
                     firestoreReference?: (google.cloud.geminidataanalytics.v1alpha.IFirestoreReference|null);
 
@@ -13901,6 +16654,9 @@ export namespace google {
                     /** Datasource bigtableReference. */
                     public bigtableReference?: (google.cloud.geminidataanalytics.v1alpha.IBigtableReference|null);
 
+                    /** Datasource bigqueryPropertyGraphReference. */
+                    public bigqueryPropertyGraphReference?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryPropertyGraphReference|null);
+
                     /** Datasource firestoreReference. */
                     public firestoreReference?: (google.cloud.geminidataanalytics.v1alpha.IFirestoreReference|null);
 
@@ -13911,7 +16667,7 @@ export namespace google {
                     public structSchema?: (google.protobuf.IStruct|null);
 
                     /** Datasource reference. */
-                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|"bigtableReference"|"firestoreReference");
+                    public reference?: ("bigqueryTableReference"|"studioDatasourceId"|"lookerExploreReference"|"alloyDbReference"|"spannerReference"|"cloudSqlReference"|"bigtableReference"|"bigqueryPropertyGraphReference"|"firestoreReference");
 
                     /**
                      * Creates a new Datasource instance using the specified properties.
@@ -14804,6 +17560,12 @@ export namespace google {
 
                     /** Conversation labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Conversation title */
+                    title?: (string|null);
+
+                    /** Conversation kmsKey */
+                    kmsKey?: (string|null);
                 }
 
                 /** Represents a Conversation. */
@@ -14829,6 +17591,12 @@ export namespace google {
 
                     /** Conversation labels. */
                     public labels: { [k: string]: string };
+
+                    /** Conversation title. */
+                    public title: string;
+
+                    /** Conversation kmsKey. */
+                    public kmsKey?: (string|null);
 
                     /**
                      * Creates a new Conversation instance using the specified properties.
@@ -15017,6 +17785,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversationRequest. */
+                interface IUpdateConversationRequest {
+
+                    /** UpdateConversationRequest conversation */
+                    conversation?: (google.cloud.geminidataanalytics.v1alpha.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateConversationRequest. */
+                class UpdateConversationRequest implements IUpdateConversationRequest {
+
+                    /**
+                     * Constructs a new UpdateConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest);
+
+                    /** UpdateConversationRequest conversation. */
+                    public conversation?: (google.cloud.geminidataanalytics.v1alpha.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest): google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest;
+
+                    /**
+                     * Verifies an UpdateConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.UpdateConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15464,6 +18341,15 @@ export namespace google {
 
                     /** DataAgent purgeTime */
                     purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataAgent kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled */
+                    bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable */
+                    bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReference|null);
                 }
 
                 /** Represents a DataAgent. */
@@ -15501,6 +18387,15 @@ export namespace google {
 
                     /** DataAgent purgeTime. */
                     public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataAgent kmsKey. */
+                    public kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled. */
+                    public bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable. */
+                    public bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryTableReference|null);
 
                     /** DataAgent type. */
                     public type?: "dataAnalyticsAgent";
@@ -15865,6 +18760,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataAgentService.SetAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveAgentOpsObservabilityResponse
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataAgentService.RetrieveAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest): Promise<google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse>;
                 }
 
                 namespace DataAgentService {
@@ -15945,6 +18868,20 @@ export namespace google {
                      * @param [response] Policy
                      */
                     type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|setAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetAgentOpsObservabilityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataAgentService|retrieveAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveAgentOpsObservabilityResponse
+                     */
+                    type RetrieveAgentOpsObservabilityCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse) => void;
                 }
 
                 /** Properties of a ListDataAgentsRequest. */
@@ -15967,6 +18904,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted */
                     showDeleted?: (boolean|null);
+
+                    /** ListDataAgentsRequest creatorFilter */
+                    creatorFilter?: (google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter|null);
                 }
 
                 /** Represents a ListDataAgentsRequest. */
@@ -15995,6 +18935,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted. */
                     public showDeleted: boolean;
+
+                    /** ListDataAgentsRequest creatorFilter. */
+                    public creatorFilter: (google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter);
 
                     /**
                      * Creates a new ListDataAgentsRequest instance using the specified properties.
@@ -16993,6 +19936,539 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SetAgentOpsObservabilityRequest. */
+                interface ISetAgentOpsObservabilityRequest {
+
+                    /** SetAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a SetAgentOpsObservabilityRequest. */
+                class SetAgentOpsObservabilityRequest implements ISetAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest);
+
+                    /** SetAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityResponse. */
+                interface ISetAgentOpsObservabilityResponse {
+                }
+
+                /** Represents a SetAgentOpsObservabilityResponse. */
+                class SetAgentOpsObservabilityResponse implements ISetAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityResponse);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityMetadata. */
+                interface ISetAgentOpsObservabilityMetadata {
+                }
+
+                /** Represents a SetAgentOpsObservabilityMetadata. */
+                class SetAgentOpsObservabilityMetadata implements ISetAgentOpsObservabilityMetadata {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityMetadata);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityMetadata instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityMetadata): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityMetadata message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.SetAgentOpsObservabilityMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityRequest. */
+                interface IRetrieveAgentOpsObservabilityRequest {
+
+                    /** RetrieveAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityRequest. */
+                class RetrieveAgentOpsObservabilityRequest implements IRetrieveAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest);
+
+                    /** RetrieveAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityResponse. */
+                interface IRetrieveAgentOpsObservabilityResponse {
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled */
+                    bigqueryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled */
+                    cloudTraceEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled */
+                    cloudMonitoringEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled */
+                    cloudLoggingEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityResponse. */
+                class RetrieveAgentOpsObservabilityResponse implements IRetrieveAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityResponse);
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled. */
+                    public bigqueryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled. */
+                    public cloudTraceEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled. */
+                    public cloudMonitoringEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled. */
+                    public cloudLoggingEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.RetrieveAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DataChatService */
                 class DataChatService extends $protobuf.rpc.Service {
 
@@ -17054,6 +20530,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConversation(request: google.cloud.geminidataanalytics.v1alpha.IDeleteConversationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest, callback: google.cloud.geminidataanalytics.v1alpha.DataChatService.UpdateConversationCallback): void;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest): Promise<google.cloud.geminidataanalytics.v1alpha.Conversation>;
 
                     /**
                      * Calls GetConversation.
@@ -17134,6 +20624,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteConversationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataChatService|updateConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type UpdateConversationCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1alpha.Conversation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1alpha.DataChatService|getConversation}.
@@ -17726,6 +21223,9 @@ export namespace google {
 
                     /** QueryDataResponse pipelineDebugInfo */
                     pipelineDebugInfo?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataResponse tokenUsage */
+                    tokenUsage?: (google.cloud.geminidataanalytics.v1alpha.ITokenUsage|null);
                 }
 
                 /** Represents a QueryDataResponse. */
@@ -17754,6 +21254,9 @@ export namespace google {
 
                     /** QueryDataResponse pipelineDebugInfo. */
                     public pipelineDebugInfo?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataResponse tokenUsage. */
+                    public tokenUsage?: (google.cloud.geminidataanalytics.v1alpha.ITokenUsage|null);
 
                     /**
                      * Creates a new QueryDataResponse instance using the specified properties.
@@ -18590,6 +22093,9 @@ export namespace google {
                     /** ChatRequest clientManagedResourceContext */
                     clientManagedResourceContext?: (google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext|null);
 
+                    /** ChatRequest lookerSettings */
+                    lookerSettings?: (google.cloud.geminidataanalytics.v1alpha.ILookerSettings|null);
+
                     /** ChatRequest project */
                     project?: (string|null);
 
@@ -18599,8 +22105,14 @@ export namespace google {
                     /** ChatRequest messages */
                     messages?: (google.cloud.geminidataanalytics.v1alpha.IMessage[]|null);
 
+                    /** ChatRequest credentials */
+                    credentials?: (google.cloud.geminidataanalytics.v1alpha.ICredentials|null);
+
                     /** ChatRequest thinkingMode */
                     thinkingMode?: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|null);
+
+                    /** ChatRequest model */
+                    model?: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.Model|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.Model|null);
                 }
 
                 /** Represents a ChatRequest. */
@@ -18624,6 +22136,9 @@ export namespace google {
                     /** ChatRequest clientManagedResourceContext. */
                     public clientManagedResourceContext?: (google.cloud.geminidataanalytics.v1alpha.IClientManagedResourceContext|null);
 
+                    /** ChatRequest lookerSettings. */
+                    public lookerSettings?: (google.cloud.geminidataanalytics.v1alpha.ILookerSettings|null);
+
                     /** ChatRequest project. */
                     public project: string;
 
@@ -18633,11 +22148,20 @@ export namespace google {
                     /** ChatRequest messages. */
                     public messages: google.cloud.geminidataanalytics.v1alpha.IMessage[];
 
+                    /** ChatRequest credentials. */
+                    public credentials?: (google.cloud.geminidataanalytics.v1alpha.ICredentials|null);
+
                     /** ChatRequest thinkingMode. */
                     public thinkingMode: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode);
 
+                    /** ChatRequest model. */
+                    public model: (google.cloud.geminidataanalytics.v1alpha.ChatRequest.Model|keyof typeof google.cloud.geminidataanalytics.v1alpha.ChatRequest.Model);
+
                     /** ChatRequest contextProvider. */
                     public contextProvider?: ("inlineContext"|"conversationReference"|"dataAgentContext"|"clientManagedResourceContext");
+
+                    /** ChatRequest datasourceSettings. */
+                    public datasourceSettings?: "lookerSettings";
 
                     /**
                      * Creates a new ChatRequest instance using the specified properties.
@@ -18724,6 +22248,12 @@ export namespace google {
                         THINKING_MODE_UNSPECIFIED = 0,
                         FAST = 1,
                         THINKING = 2
+                    }
+
+                    /** Model enum. */
+                    enum Model {
+                        MODEL_UNSPECIFIED = 0,
+                        LATEST_GA_MODEL = 1
                     }
                 }
 
@@ -19176,6 +22706,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a LookerSettings. */
+                interface ILookerSettings {
+
+                    /** LookerSettings enableDevMode */
+                    enableDevMode?: (boolean|null);
+                }
+
+                /** Represents a LookerSettings. */
+                class LookerSettings implements ILookerSettings {
+
+                    /**
+                     * Constructs a new LookerSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ILookerSettings);
+
+                    /** LookerSettings enableDevMode. */
+                    public enableDevMode: boolean;
+
+                    /**
+                     * Creates a new LookerSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookerSettings instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ILookerSettings): google.cloud.geminidataanalytics.v1alpha.LookerSettings;
+
+                    /**
+                     * Encodes the specified LookerSettings message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerSettings.verify|verify} messages.
+                     * @param message LookerSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ILookerSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookerSettings message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.LookerSettings.verify|verify} messages.
+                     * @param message LookerSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ILookerSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookerSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookerSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.LookerSettings;
+
+                    /**
+                     * Decodes a LookerSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookerSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.LookerSettings;
+
+                    /**
+                     * Verifies a LookerSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookerSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookerSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.LookerSettings;
+
+                    /**
+                     * Creates a plain object from a LookerSettings message. Also converts values to other types if specified.
+                     * @param message LookerSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.LookerSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookerSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LookerSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a UserMessage. */
                 interface IUserMessage {
 
@@ -19305,6 +22932,9 @@ export namespace google {
 
                     /** SystemMessage groupId */
                     groupId?: (number|null);
+
+                    /** SystemMessage citation */
+                    citation?: (google.cloud.geminidataanalytics.v1alpha.ICitation|null);
                 }
 
                 /** Represents a SystemMessage. */
@@ -19342,6 +22972,9 @@ export namespace google {
 
                     /** SystemMessage groupId. */
                     public groupId?: (number|null);
+
+                    /** SystemMessage citation. */
+                    public citation?: (google.cloud.geminidataanalytics.v1alpha.ICitation|null);
 
                     /** SystemMessage kind. */
                     public kind?: ("text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification");
@@ -19540,7 +23173,8 @@ export namespace google {
                         TEXT_TYPE_UNSPECIFIED = 0,
                         FINAL_RESPONSE = 1,
                         THOUGHT = 2,
-                        PROGRESS = 3
+                        PROGRESS = 3,
+                        FOLLOWUP_QUESTIONS = 4
                     }
                 }
 
@@ -19861,6 +23495,9 @@ export namespace google {
 
                     /** DataMessage bigQueryJob */
                     bigQueryJob?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryJob|null);
+
+                    /** DataMessage matchedQuery */
+                    matchedQuery?: (google.cloud.geminidataanalytics.v1alpha.IMatchedQuery|null);
                 }
 
                 /** Represents a DataMessage. */
@@ -19887,8 +23524,11 @@ export namespace google {
                     /** DataMessage bigQueryJob. */
                     public bigQueryJob?: (google.cloud.geminidataanalytics.v1alpha.IBigQueryJob|null);
 
+                    /** DataMessage matchedQuery. */
+                    public matchedQuery?: (google.cloud.geminidataanalytics.v1alpha.IMatchedQuery|null);
+
                     /** DataMessage kind. */
-                    public kind?: ("query"|"generatedSql"|"result"|"generatedLookerQuery"|"bigQueryJob");
+                    public kind?: ("query"|"generatedSql"|"result"|"generatedLookerQuery"|"bigQueryJob"|"matchedQuery");
 
                     /**
                      * Creates a new DataMessage instance using the specified properties.
@@ -21522,6 +25162,109 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a TokenUsage. */
+                interface ITokenUsage {
+
+                    /** TokenUsage inputTokenCount */
+                    inputTokenCount?: (number|null);
+
+                    /** TokenUsage outputTokenCount */
+                    outputTokenCount?: (number|null);
+                }
+
+                /** Represents a TokenUsage. */
+                class TokenUsage implements ITokenUsage {
+
+                    /**
+                     * Constructs a new TokenUsage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1alpha.ITokenUsage);
+
+                    /** TokenUsage inputTokenCount. */
+                    public inputTokenCount: number;
+
+                    /** TokenUsage outputTokenCount. */
+                    public outputTokenCount: number;
+
+                    /**
+                     * Creates a new TokenUsage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TokenUsage instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1alpha.ITokenUsage): google.cloud.geminidataanalytics.v1alpha.TokenUsage;
+
+                    /**
+                     * Encodes the specified TokenUsage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.TokenUsage.verify|verify} messages.
+                     * @param message TokenUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1alpha.ITokenUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TokenUsage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.TokenUsage.verify|verify} messages.
+                     * @param message TokenUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1alpha.ITokenUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TokenUsage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TokenUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1alpha.TokenUsage;
+
+                    /**
+                     * Decodes a TokenUsage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TokenUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1alpha.TokenUsage;
+
+                    /**
+                     * Verifies a TokenUsage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TokenUsage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TokenUsage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1alpha.TokenUsage;
+
+                    /**
+                     * Creates a plain object from a TokenUsage message. Also converts values to other types if specified.
+                     * @param message TokenUsage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1alpha.TokenUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TokenUsage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TokenUsage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
 
             /** Namespace v1beta. */
@@ -22834,6 +26577,187 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DynamicField. */
+                interface IDynamicField {
+
+                    /** DynamicField category */
+                    category?: (string|null);
+
+                    /** DynamicField name */
+                    name?: (string|null);
+
+                    /** DynamicField label */
+                    label?: (string|null);
+
+                    /** DynamicField basedOn */
+                    basedOn?: (string|null);
+
+                    /** DynamicField type */
+                    type?: (string|null);
+
+                    /** DynamicField description */
+                    description?: (string|null);
+
+                    /** DynamicField expression */
+                    expression?: (string|null);
+
+                    /** DynamicField filterExpression */
+                    filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat */
+                    valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName */
+                    valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType */
+                    calculationType?: (string|null);
+
+                    /** DynamicField args */
+                    args?: (string[]|null);
+
+                    /** DynamicField kindHint */
+                    kindHint?: (string|null);
+
+                    /** DynamicField typeHint */
+                    typeHint?: (string|null);
+
+                    /** DynamicField isDisabled */
+                    isDisabled?: (boolean|null);
+                }
+
+                /** Represents a DynamicField. */
+                class DynamicField implements IDynamicField {
+
+                    /**
+                     * Constructs a new DynamicField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IDynamicField);
+
+                    /** DynamicField category. */
+                    public category?: (string|null);
+
+                    /** DynamicField name. */
+                    public name?: (string|null);
+
+                    /** DynamicField label. */
+                    public label?: (string|null);
+
+                    /** DynamicField basedOn. */
+                    public basedOn?: (string|null);
+
+                    /** DynamicField type. */
+                    public type?: (string|null);
+
+                    /** DynamicField description. */
+                    public description?: (string|null);
+
+                    /** DynamicField expression. */
+                    public expression?: (string|null);
+
+                    /** DynamicField filterExpression. */
+                    public filterExpression?: (string|null);
+
+                    /** DynamicField valueFormat. */
+                    public valueFormat?: (string|null);
+
+                    /** DynamicField valueFormatName. */
+                    public valueFormatName?: (string|null);
+
+                    /** DynamicField calculationType. */
+                    public calculationType?: (string|null);
+
+                    /** DynamicField args. */
+                    public args: string[];
+
+                    /** DynamicField kindHint. */
+                    public kindHint?: (string|null);
+
+                    /** DynamicField typeHint. */
+                    public typeHint?: (string|null);
+
+                    /** DynamicField isDisabled. */
+                    public isDisabled?: (boolean|null);
+
+                    /**
+                     * Creates a new DynamicField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DynamicField instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IDynamicField): google.cloud.geminidataanalytics.v1beta.DynamicField;
+
+                    /**
+                     * Encodes the specified DynamicField message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DynamicField message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.DynamicField.verify|verify} messages.
+                     * @param message DynamicField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IDynamicField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.DynamicField;
+
+                    /**
+                     * Decodes a DynamicField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DynamicField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.DynamicField;
+
+                    /**
+                     * Verifies a DynamicField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DynamicField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DynamicField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.DynamicField;
+
+                    /**
+                     * Creates a plain object from a DynamicField message. Also converts values to other types if specified.
+                     * @param message DynamicField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.DynamicField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DynamicField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DynamicField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a LookerQuery. */
                 interface ILookerQuery {
 
@@ -22854,6 +26778,9 @@ export namespace google {
 
                     /** LookerQuery limit */
                     limit?: (string|null);
+
+                    /** LookerQuery dynamicFields */
+                    dynamicFields?: (google.cloud.geminidataanalytics.v1beta.IDynamicField[]|null);
 
                     /** LookerQuery queryId */
                     queryId?: (string|null);
@@ -22888,6 +26815,9 @@ export namespace google {
 
                     /** LookerQuery limit. */
                     public limit?: (string|null);
+
+                    /** LookerQuery dynamicFields. */
+                    public dynamicFields: google.cloud.geminidataanalytics.v1beta.IDynamicField[];
 
                     /** LookerQuery queryId. */
                     public queryId?: (string|null);
@@ -24599,6 +28529,9 @@ export namespace google {
                     /** BigQueryTableReferences propertyGraphReferences */
                     propertyGraphReferences?: (google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference[]|null);
 
+                    /** BigQueryTableReferences searchScope */
+                    searchScope?: (google.cloud.geminidataanalytics.v1beta.ISearchScope|null);
+
                     /** BigQueryTableReferences agentContextReference */
                     agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
                 }
@@ -24617,6 +28550,9 @@ export namespace google {
 
                     /** BigQueryTableReferences propertyGraphReferences. */
                     public propertyGraphReferences: google.cloud.geminidataanalytics.v1beta.IBigQueryPropertyGraphReference[];
+
+                    /** BigQueryTableReferences searchScope. */
+                    public searchScope?: (google.cloud.geminidataanalytics.v1beta.ISearchScope|null);
 
                     /** BigQueryTableReferences agentContextReference. */
                     public agentContextReference?: (google.cloud.geminidataanalytics.v1beta.IAgentContextReference|null);
@@ -24808,6 +28744,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryTableReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryDatasetReference. */
+                interface IBigQueryDatasetReference {
+
+                    /** BigQueryDatasetReference projectId */
+                    projectId?: (string|null);
+
+                    /** BigQueryDatasetReference datasetId */
+                    datasetId?: (string|null);
+                }
+
+                /** Represents a BigQueryDatasetReference. */
+                class BigQueryDatasetReference implements IBigQueryDatasetReference {
+
+                    /**
+                     * Constructs a new BigQueryDatasetReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference);
+
+                    /** BigQueryDatasetReference projectId. */
+                    public projectId: string;
+
+                    /** BigQueryDatasetReference datasetId. */
+                    public datasetId: string;
+
+                    /**
+                     * Creates a new BigQueryDatasetReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryDatasetReference instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference): google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryDatasetReference message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference.verify|verify} messages.
+                     * @param message BigQueryDatasetReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference;
+
+                    /**
+                     * Decodes a BigQueryDatasetReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryDatasetReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference;
+
+                    /**
+                     * Verifies a BigQueryDatasetReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryDatasetReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryDatasetReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference;
+
+                    /**
+                     * Creates a plain object from a BigQueryDatasetReference message. Also converts values to other types if specified.
+                     * @param message BigQueryDatasetReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.BigQueryDatasetReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryDatasetReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryDatasetReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchScope. */
+                interface ISearchScope {
+
+                    /** SearchScope includeProjectIds */
+                    includeProjectIds?: (string[]|null);
+
+                    /** SearchScope includeDatasetReferences */
+                    includeDatasetReferences?: (google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference[]|null);
+                }
+
+                /** Represents a SearchScope. */
+                class SearchScope implements ISearchScope {
+
+                    /**
+                     * Constructs a new SearchScope.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.ISearchScope);
+
+                    /** SearchScope includeProjectIds. */
+                    public includeProjectIds: string[];
+
+                    /** SearchScope includeDatasetReferences. */
+                    public includeDatasetReferences: google.cloud.geminidataanalytics.v1beta.IBigQueryDatasetReference[];
+
+                    /**
+                     * Creates a new SearchScope instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchScope instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.ISearchScope): google.cloud.geminidataanalytics.v1beta.SearchScope;
+
+                    /**
+                     * Encodes the specified SearchScope message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchScope message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SearchScope.verify|verify} messages.
+                     * @param message SearchScope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.ISearchScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.SearchScope;
+
+                    /**
+                     * Decodes a SearchScope message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchScope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.SearchScope;
+
+                    /**
+                     * Verifies a SearchScope message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchScope message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchScope
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.SearchScope;
+
+                    /**
+                     * Creates a plain object from a SearchScope message. Also converts values to other types if specified.
+                     * @param message SearchScope
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.SearchScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchScope to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchScope
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -25912,6 +30054,9 @@ export namespace google {
 
                     /** SpannerDatabaseReference requestTag */
                     requestTag?: (string|null);
+
+                    /** SpannerDatabaseReference graphIds */
+                    graphIds?: (string[]|null);
                 }
 
                 /** Represents a SpannerDatabaseReference. */
@@ -25946,6 +30091,9 @@ export namespace google {
 
                     /** SpannerDatabaseReference requestTag. */
                     public requestTag: string;
+
+                    /** SpannerDatabaseReference graphIds. */
+                    public graphIds: string[];
 
                     /**
                      * Creates a new SpannerDatabaseReference instance using the specified properties.
@@ -27694,11 +31842,11 @@ export namespace google {
                     /** Conversation labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Conversation title */
+                    title?: (string|null);
+
                     /** Conversation kmsKey */
                     kmsKey?: (string|null);
-
-                    /** Conversation memoryPaused */
-                    memoryPaused?: (boolean|null);
                 }
 
                 /** Represents a Conversation. */
@@ -27725,11 +31873,11 @@ export namespace google {
                     /** Conversation labels. */
                     public labels: { [k: string]: string };
 
+                    /** Conversation title. */
+                    public title: string;
+
                     /** Conversation kmsKey. */
                     public kmsKey?: (string|null);
-
-                    /** Conversation memoryPaused. */
-                    public memoryPaused?: (boolean|null);
 
                     /**
                      * Creates a new Conversation instance using the specified properties.
@@ -27918,6 +32066,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversationRequest. */
+                interface IUpdateConversationRequest {
+
+                    /** UpdateConversationRequest conversation */
+                    conversation?: (google.cloud.geminidataanalytics.v1beta.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateConversationRequest. */
+                class UpdateConversationRequest implements IUpdateConversationRequest {
+
+                    /**
+                     * Constructs a new UpdateConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest);
+
+                    /** UpdateConversationRequest conversation. */
+                    public conversation?: (google.cloud.geminidataanalytics.v1beta.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest): google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest;
+
+                    /**
+                     * Verifies an UpdateConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.UpdateConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -28368,6 +32625,12 @@ export namespace google {
 
                     /** DataAgent kmsKey */
                     kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled */
+                    bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable */
+                    bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1beta.IBigQueryTableReference|null);
                 }
 
                 /** Represents a DataAgent. */
@@ -28408,6 +32671,12 @@ export namespace google {
 
                     /** DataAgent kmsKey. */
                     public kmsKey?: (string|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsEnabled. */
+                    public bigqueryAgentAnalyticsEnabled?: (boolean|null);
+
+                    /** DataAgent bigqueryAgentAnalyticsTable. */
+                    public bigqueryAgentAnalyticsTable?: (google.cloud.geminidataanalytics.v1beta.IBigQueryTableReference|null);
 
                     /** DataAgent type. */
                     public type?: "dataAnalyticsAgent";
@@ -28772,6 +33041,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1beta.DataAgentService.SetAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls SetAgentOpsObservability.
+                     * @param request SetAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setAgentOpsObservability(request: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveAgentOpsObservabilityResponse
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest, callback: google.cloud.geminidataanalytics.v1beta.DataAgentService.RetrieveAgentOpsObservabilityCallback): void;
+
+                    /**
+                     * Calls RetrieveAgentOpsObservability.
+                     * @param request RetrieveAgentOpsObservabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveAgentOpsObservability(request: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest): Promise<google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse>;
                 }
 
                 namespace DataAgentService {
@@ -28852,6 +33149,20 @@ export namespace google {
                      * @param [response] Policy
                      */
                     type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|setAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetAgentOpsObservabilityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataAgentService|retrieveAgentOpsObservability}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveAgentOpsObservabilityResponse
+                     */
+                    type RetrieveAgentOpsObservabilityCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse) => void;
                 }
 
                 /** Properties of a ListDataAgentsRequest. */
@@ -28874,6 +33185,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted */
                     showDeleted?: (boolean|null);
+
+                    /** ListDataAgentsRequest creatorFilter */
+                    creatorFilter?: (google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter|null);
                 }
 
                 /** Represents a ListDataAgentsRequest. */
@@ -28902,6 +33216,9 @@ export namespace google {
 
                     /** ListDataAgentsRequest showDeleted. */
                     public showDeleted: boolean;
+
+                    /** ListDataAgentsRequest creatorFilter. */
+                    public creatorFilter: (google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter|keyof typeof google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter);
 
                     /**
                      * Creates a new ListDataAgentsRequest instance using the specified properties.
@@ -29900,6 +34217,539 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SetAgentOpsObservabilityRequest. */
+                interface ISetAgentOpsObservabilityRequest {
+
+                    /** SetAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+
+                    /** SetAgentOpsObservabilityRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a SetAgentOpsObservabilityRequest. */
+                class SetAgentOpsObservabilityRequest implements ISetAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest);
+
+                    /** SetAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** SetAgentOpsObservabilityRequest telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /** SetAgentOpsObservabilityRequest bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /** SetAgentOpsObservabilityRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityResponse. */
+                interface ISetAgentOpsObservabilityResponse {
+                }
+
+                /** Represents a SetAgentOpsObservabilityResponse. */
+                class SetAgentOpsObservabilityResponse implements ISetAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetAgentOpsObservabilityMetadata. */
+                interface ISetAgentOpsObservabilityMetadata {
+                }
+
+                /** Represents a SetAgentOpsObservabilityMetadata. */
+                class SetAgentOpsObservabilityMetadata implements ISetAgentOpsObservabilityMetadata {
+
+                    /**
+                     * Constructs a new SetAgentOpsObservabilityMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata);
+
+                    /**
+                     * Creates a new SetAgentOpsObservabilityMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetAgentOpsObservabilityMetadata instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetAgentOpsObservabilityMetadata message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata.verify|verify} messages.
+                     * @param message SetAgentOpsObservabilityMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Decodes a SetAgentOpsObservabilityMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetAgentOpsObservabilityMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Verifies a SetAgentOpsObservabilityMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetAgentOpsObservabilityMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetAgentOpsObservabilityMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata;
+
+                    /**
+                     * Creates a plain object from a SetAgentOpsObservabilityMetadata message. Also converts values to other types if specified.
+                     * @param message SetAgentOpsObservabilityMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetAgentOpsObservabilityMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetAgentOpsObservabilityMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityRequest. */
+                interface IRetrieveAgentOpsObservabilityRequest {
+
+                    /** RetrieveAgentOpsObservabilityRequest parent */
+                    parent?: (string|null);
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType */
+                    dataSourceType?: (string|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityRequest. */
+                class RetrieveAgentOpsObservabilityRequest implements IRetrieveAgentOpsObservabilityRequest {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest);
+
+                    /** RetrieveAgentOpsObservabilityRequest parent. */
+                    public parent: string;
+
+                    /** RetrieveAgentOpsObservabilityRequest dataSourceType. */
+                    public dataSourceType: string;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityRequest message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveAgentOpsObservabilityResponse. */
+                interface IRetrieveAgentOpsObservabilityResponse {
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled */
+                    telemetryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled */
+                    bigqueryEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled */
+                    cloudTraceEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled */
+                    cloudMonitoringEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled */
+                    cloudLoggingEnabled?: (boolean|null);
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled */
+                    bqaaEnabled?: (boolean|null);
+                }
+
+                /** Represents a RetrieveAgentOpsObservabilityResponse. */
+                class RetrieveAgentOpsObservabilityResponse implements IRetrieveAgentOpsObservabilityResponse {
+
+                    /**
+                     * Constructs a new RetrieveAgentOpsObservabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse);
+
+                    /** RetrieveAgentOpsObservabilityResponse telemetryEnabled. */
+                    public telemetryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bigqueryEnabled. */
+                    public bigqueryEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudTraceEnabled. */
+                    public cloudTraceEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudMonitoringEnabled. */
+                    public cloudMonitoringEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse cloudLoggingEnabled. */
+                    public cloudLoggingEnabled: boolean;
+
+                    /** RetrieveAgentOpsObservabilityResponse bqaaEnabled. */
+                    public bqaaEnabled: boolean;
+
+                    /**
+                     * Creates a new RetrieveAgentOpsObservabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAgentOpsObservabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAgentOpsObservabilityResponse message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse.verify|verify} messages.
+                     * @param message RetrieveAgentOpsObservabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Decodes a RetrieveAgentOpsObservabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Verifies a RetrieveAgentOpsObservabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAgentOpsObservabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAgentOpsObservabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveAgentOpsObservabilityResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveAgentOpsObservabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAgentOpsObservabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveAgentOpsObservabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DataChatService */
                 class DataChatService extends $protobuf.rpc.Service {
 
@@ -29961,6 +34811,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConversation(request: google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest, callback: google.cloud.geminidataanalytics.v1beta.DataChatService.UpdateConversationCallback): void;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversation(request: google.cloud.geminidataanalytics.v1beta.IUpdateConversationRequest): Promise<google.cloud.geminidataanalytics.v1beta.Conversation>;
 
                     /**
                      * Calls GetConversation.
@@ -30041,6 +34905,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteConversationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataChatService|updateConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type UpdateConversationCallback = (error: (Error|null), response?: google.cloud.geminidataanalytics.v1beta.Conversation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.geminidataanalytics.v1beta.DataChatService|getConversation}.
@@ -30633,6 +35504,9 @@ export namespace google {
 
                     /** QueryDataResponse pipelineDebugInfo */
                     pipelineDebugInfo?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataResponse tokenUsage */
+                    tokenUsage?: (google.cloud.geminidataanalytics.v1beta.ITokenUsage|null);
                 }
 
                 /** Represents a QueryDataResponse. */
@@ -30661,6 +35535,9 @@ export namespace google {
 
                     /** QueryDataResponse pipelineDebugInfo. */
                     public pipelineDebugInfo?: (google.protobuf.IStruct|null);
+
+                    /** QueryDataResponse tokenUsage. */
+                    public tokenUsage?: (google.cloud.geminidataanalytics.v1beta.ITokenUsage|null);
 
                     /**
                      * Creates a new QueryDataResponse instance using the specified properties.
@@ -34561,6 +39438,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Blob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TokenUsage. */
+                interface ITokenUsage {
+
+                    /** TokenUsage inputTokenCount */
+                    inputTokenCount?: (number|null);
+
+                    /** TokenUsage outputTokenCount */
+                    outputTokenCount?: (number|null);
+                }
+
+                /** Represents a TokenUsage. */
+                class TokenUsage implements ITokenUsage {
+
+                    /**
+                     * Constructs a new TokenUsage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.ITokenUsage);
+
+                    /** TokenUsage inputTokenCount. */
+                    public inputTokenCount: number;
+
+                    /** TokenUsage outputTokenCount. */
+                    public outputTokenCount: number;
+
+                    /**
+                     * Creates a new TokenUsage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TokenUsage instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.ITokenUsage): google.cloud.geminidataanalytics.v1beta.TokenUsage;
+
+                    /**
+                     * Encodes the specified TokenUsage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.TokenUsage.verify|verify} messages.
+                     * @param message TokenUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.ITokenUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TokenUsage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.TokenUsage.verify|verify} messages.
+                     * @param message TokenUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.ITokenUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TokenUsage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TokenUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.TokenUsage;
+
+                    /**
+                     * Decodes a TokenUsage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TokenUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.TokenUsage;
+
+                    /**
+                     * Verifies a TokenUsage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TokenUsage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TokenUsage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.TokenUsage;
+
+                    /**
+                     * Creates a plain object from a TokenUsage message. Also converts values to other types if specified.
+                     * @param message TokenUsage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.TokenUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TokenUsage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TokenUsage
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -43221,6 +48201,103 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -43421,103 +48498,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

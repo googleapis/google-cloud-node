@@ -27,6 +27,7 @@ import {OptionsUtil} from './options-util';
  */
 export type StructuredPipelineOptions = {
   indexMode?: 'recommended';
+  atomic?: boolean;
   explainOptions?: {
     mode?: 'execute' | 'explain' | 'analyze';
     outputFormat?: 'text';
@@ -40,9 +41,7 @@ export type StructuredPipelineOptions = {
  * StructuredPipeline encapsulates the Pipeline and PipelineOptions and supports
  * serialization of this data to a StructuredPipeline proto.
  */
-export class StructuredPipeline
-  implements ProtoSerializable<IStructuredPipeline>
-{
+export class StructuredPipeline implements ProtoSerializable<IStructuredPipeline> {
   /**
    * OptionsUtil which defines the known StructuredPipelineOptions.
    * This maps client side options to their server names and structure.
@@ -72,7 +71,7 @@ export class StructuredPipeline
    */
   constructor(
     private pipeline: ProtoSerializable<IPipeline>,
-    private options: StructuredPipelineOptions,
+    public options: StructuredPipelineOptions,
     private optionsOverride: Record<string, unknown>,
   ) {}
 

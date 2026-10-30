@@ -74,12 +74,33 @@ message DatasourceReferences {
 }
 
 // Message representing references to BigQuery tables and property graphs.
-// At least one of `table_references` or `property_graph_references` must be
-// populated.
+// At least one of `table_references`, `property_graph_references`, or
+// `search_scope` must be populated.
 message BigQueryTableReferences {
   // Optional. References to BigQuery tables.
   repeated BigQueryTableReference table_references = 1
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. References to BigQuery graphs.
+  //
+  // Note: "property graph" is the former name for BigQuery Graph. The field and
+  // message names retain the original term for backward compatibility; both
+  // refer to the same resource.
+  repeated BigQueryPropertyGraphReference property_graph_references = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Search over BigQuery resources to discover most relevant tables
+  // to the query.
+  //
+  // When set, at least one of `include_project_ids` or
+  // `include_dataset_references` must be populated with non-blank identifiers.
+  // Matches from the two fields are unioned (OR-ed).
+  //
+  // Note: `search_scope` is only supported for standalone conversations
+  // (`ChatRequest.inline_context` or
+  // `ClientManagedResourceContext.inline_context`) and is not supported in
+  // [DataAgent][google.cloud.geminidataanalytics.v1alpha.DataAgent].
+  SearchScope search_scope = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Parameters for retrieving data from Agent Context.
   AgentContextReference agent_context_reference = 4
@@ -101,10 +122,40 @@ message BigQueryTableReference {
   Schema schema = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Message representing a reference to a single BigQuery dataset.
+message BigQueryDatasetReference {
+  // Required. The project ID that the dataset belongs to.
+  string project_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The dataset ID.
+  string dataset_id = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Message representing filters to apply to search over BigQuery tables.
+//
+// At least one of `include_project_ids` or `include_dataset_references` must be
+// populated with non-blank identifiers. Tables matching either field are
+// included, so the two fields are unioned (OR-ed) rather than intersected.
+//
+// Note: `SearchScope` is only supported for standalone conversations
+// (`ChatRequest.inline_context` or
+// `ClientManagedResourceContext.inline_context`) and is not supported in
+// [DataAgent][google.cloud.geminidataanalytics.v1alpha.DataAgent].
+message SearchScope {
+  // Optional. The BigQuery project ids to search over.
+  repeated string include_project_ids = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The BigQuery dataset references to search over.
+  repeated BigQueryDatasetReference include_dataset_references = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
 // Message representing references to Looker Studio datasources.
 message StudioDatasourceReferences {
-  // The references to the studio datasources.
-  repeated StudioDatasourceReference studio_references = 2;
+  // Optional. The references to the studio datasources.
+  repeated StudioDatasourceReference studio_references = 2
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Message representing a reference to a single Looker Studio datasource.
@@ -305,6 +356,9 @@ message SpannerDatabaseReference {
   // Tag to be attached to all queries to Spanner. Allows to identify and
   // monitor queries sent to Spanner by the GDA service.
   string request_tag = 9;
+
+  // Optional. The graph IDs to query.
+  repeated string graph_ids = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Message representing reference to a CloudSQL database and agent context.
@@ -365,13 +419,15 @@ message LookerExploreReferences {
   repeated LookerExploreReference explore_references = 1
       [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. The credentials to use when calling the Looker API.
+  // Optional. Deprecated: Use credentials in ChatRequest.
+  // The credentials to use when calling the Looker API.
   //
   // Currently supports both OAuth token and API key-based credentials, as
   // described in
   // [Authentication with an
   // SDK](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
-  Credentials credentials = 2 [(google.api.field_behavior) = OPTIONAL];
+  Credentials credentials = 2
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 }
 
 // Message representing a reference to a single Looker explore.
@@ -399,6 +455,18 @@ message LookerExploreReference {
 
   // Optional. The schema of the datasource.
   Schema schema = 8 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Message representing a reference to a single BigQuery property graph.
+message BigQueryPropertyGraphReference {
+  // Required. The project that the property graph belongs to.
+  string project_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The dataset that the property graph belongs to.
+  string dataset_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The property graph id.
+  string property_graph_id = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Message representing a private Looker instance info required if the Looker
@@ -435,6 +503,9 @@ message Datasource {
 
     // A reference to a Bigtable instance.
     BigtableReference bigtable_reference = 15;
+
+    // A reference to a BigQuery property graph.
+    BigQueryPropertyGraphReference bigquery_property_graph_reference = 16;
 
     // A reference to a Firestore database.
     FirestoreReference firestore_reference = 17;
@@ -514,8 +585,6 @@ message Field {
   repeated Field subfields = 9 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Field category, not required, currently only useful for Looker.
-  // We are using a string to avoid depending on an external package and keep
-  // this package self-contained.
   string category = 10 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Looker only. Value format of the field.

@@ -27,7 +27,6 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
-import {StaticTraceContext} from './observability/TracerHelper';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
@@ -53,6 +52,25 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
   httpRules?: Array<google.api.IHttpRule>;
   numericEnums?: boolean;
   universeDomain?: string;
+  servicePath?: string;
+  apiEndpoint?: string;
+  port?: number | string;
+  /**
+   * Whether to enable telemetry tracing for the client.
+   *
+   * Tracing is only enabled via the `GOOGLE_SDK_NODE_ENABLE_TRACING` environment
+   * variable or when a user passes `enableTelemetryTracing: true` in their client
+   * options.
+   */
+  enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
+   * or a user passes `enableTelemetryLogging: true` in their client options.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface MetadataValue {
@@ -101,7 +119,7 @@ export type GrpcModule = typeof grpc;
 export interface ClientStubOptions {
   protocol?: string;
   servicePath?: string;
-  port?: number;
+  port?: number | string;
   sslCreds?: grpc.ChannelCredentials;
   [index: string]: string | number | undefined | {};
   // For mtls:
@@ -121,6 +139,10 @@ export class GrpcClient {
   fallback: boolean | 'rest' | 'proto';
   private static protoCache = new Map<string, grpc.GrpcObject>();
   httpRules?: Array<google.api.IHttpRule>;
+  private _servicePath?: string;
+  private _port?: number;
+  private _enableTelemetryTracing?: boolean;
+  private _enableTelemetryLogging?: boolean;
   /**
    * Base directory for resolving client certificates.
    *
@@ -174,6 +196,13 @@ export class GrpcClient {
   constructor(options: GrpcClientOptions = {}) {
     this.auth = options.auth || new GoogleAuth(options);
     this.fallback = false;
+    this._servicePath = options.servicePath || options.apiEndpoint;
+    this._port =
+      typeof options.port === 'string'
+        ? parseInt(options.port, 10)
+        : options.port;
+    this._enableTelemetryTracing = options.enableTelemetryTracing;
+    this._enableTelemetryLogging = options.enableTelemetryLogging;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);
@@ -377,7 +406,8 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
-   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
+   * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+   * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -386,16 +416,28 @@ export class GrpcClient {
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
     enableTelemetryTracing?: boolean,
-    internalTelemetryInfo?: StaticTraceContext,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _legacyTelemetryInfo?: unknown,
+    enableTelemetryLogging?: boolean,
   ) {
+    const otherArgs: Record<string, unknown> = {
+      metadataBuilder: this.metadataBuilder(headers),
+    };
+    if (this._servicePath) {
+      otherArgs.servicePath = this._servicePath;
+    }
+    if (this._port !== undefined) {
+      otherArgs.port = this._port;
+    }
     return gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       this.grpc.status,
-      {metadataBuilder: this.metadataBuilder(headers)},
-      enableTelemetryTracing,
-      internalTelemetryInfo,
+      otherArgs,
+      enableTelemetryTracing ?? this._enableTelemetryTracing,
+      _legacyTelemetryInfo,
+      enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
   }
 

@@ -1351,6 +1351,155 @@ describe('v1.InterconnectsClient', () => {
     });
   });
 
+  describe('setName', () => {
+    it('invokes setName without error', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetNameInterconnectRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['interconnect'],
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation(),
+      );
+      client.innerApiCalls.setName = stubSimpleCall(expectedResponse);
+      const [response] = await client.setName(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.setName as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setName as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setName without error using callback', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetNameInterconnectRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['interconnect'],
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation(),
+      );
+      client.innerApiCalls.setName =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setName(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.setName as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setName as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setName with error', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetNameInterconnectRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['interconnect'],
+      );
+      request.interconnect = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&interconnect=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setName = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.setName(request), expectedError);
+      const actualRequest = (client.innerApiCalls.setName as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setName as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setName with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetNameInterconnectRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetNameInterconnectRequest',
+        ['interconnect'],
+      );
+      request.interconnect = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.setName(request), expectedError);
+    });
+  });
+
   describe('list', () => {
     it('invokes list without error', async () => {
       const client = new interconnectsModule.v1.InterconnectsClient({

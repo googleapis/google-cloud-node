@@ -2070,6 +2070,9 @@ export namespace google {
                 /** Properties of an AddAssociationRegionNetworkFirewallPolicyRequest. */
                 interface IAddAssociationRegionNetworkFirewallPolicyRequest {
 
+                    /** AddAssociationRegionNetworkFirewallPolicyRequest associatedPolicyToBeReplaced */
+                    associatedPolicyToBeReplaced?: (string|null);
+
                     /** AddAssociationRegionNetworkFirewallPolicyRequest firewallPolicy */
                     firewallPolicy?: (string|null);
 
@@ -2097,6 +2100,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1.IAddAssociationRegionNetworkFirewallPolicyRequest);
+
+                    /** AddAssociationRegionNetworkFirewallPolicyRequest associatedPolicyToBeReplaced. */
+                    public associatedPolicyToBeReplaced?: (string|null);
 
                     /** AddAssociationRegionNetworkFirewallPolicyRequest firewallPolicy. */
                     public firewallPolicy: string;
@@ -5259,9 +5265,6 @@ export namespace google {
                     /** AggregatedListAcceleratorTypesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListAcceleratorTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListAcceleratorTypesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5292,9 +5295,6 @@ export namespace google {
 
                     /** AggregatedListAcceleratorTypesRequest project. */
                     public project: string;
-
-                    /** AggregatedListAcceleratorTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListAcceleratorTypesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -5398,9 +5398,6 @@ export namespace google {
                     /** AggregatedListAddressesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListAddressesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListAddressesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5431,9 +5428,6 @@ export namespace google {
 
                     /** AggregatedListAddressesRequest project. */
                     public project: string;
-
-                    /** AggregatedListAddressesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListAddressesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -5537,9 +5531,6 @@ export namespace google {
                     /** AggregatedListAutoscalersRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListAutoscalersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListAutoscalersRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5570,9 +5561,6 @@ export namespace google {
 
                     /** AggregatedListAutoscalersRequest project. */
                     public project: string;
-
-                    /** AggregatedListAutoscalersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListAutoscalersRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -5676,9 +5664,6 @@ export namespace google {
                     /** AggregatedListBackendBucketsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListBackendBucketsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListBackendBucketsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5709,9 +5694,6 @@ export namespace google {
 
                     /** AggregatedListBackendBucketsRequest project. */
                     public project: string;
-
-                    /** AggregatedListBackendBucketsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListBackendBucketsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -5815,9 +5797,6 @@ export namespace google {
                     /** AggregatedListBackendServicesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListBackendServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListBackendServicesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5848,9 +5827,6 @@ export namespace google {
 
                     /** AggregatedListBackendServicesRequest project. */
                     public project: string;
-
-                    /** AggregatedListBackendServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListBackendServicesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -5954,9 +5930,6 @@ export namespace google {
                     /** AggregatedListDiskTypesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListDiskTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListDiskTypesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -5987,9 +5960,6 @@ export namespace google {
 
                     /** AggregatedListDiskTypesRequest project. */
                     public project: string;
-
-                    /** AggregatedListDiskTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListDiskTypesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6093,9 +6063,6 @@ export namespace google {
                     /** AggregatedListDisksRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListDisksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListDisksRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6126,9 +6093,6 @@ export namespace google {
 
                     /** AggregatedListDisksRequest project. */
                     public project: string;
-
-                    /** AggregatedListDisksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListDisksRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6232,9 +6196,6 @@ export namespace google {
                     /** AggregatedListForwardingRulesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListForwardingRulesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListForwardingRulesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6265,9 +6226,6 @@ export namespace google {
 
                     /** AggregatedListForwardingRulesRequest project. */
                     public project: string;
-
-                    /** AggregatedListForwardingRulesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListForwardingRulesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6371,9 +6329,6 @@ export namespace google {
                     /** AggregatedListFutureReservationsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListFutureReservationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListFutureReservationsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6404,9 +6359,6 @@ export namespace google {
 
                     /** AggregatedListFutureReservationsRequest project. */
                     public project: string;
-
-                    /** AggregatedListFutureReservationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListFutureReservationsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6510,9 +6462,6 @@ export namespace google {
                     /** AggregatedListGlobalOperationsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListGlobalOperationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListGlobalOperationsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6543,9 +6492,6 @@ export namespace google {
 
                     /** AggregatedListGlobalOperationsRequest project. */
                     public project: string;
-
-                    /** AggregatedListGlobalOperationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListGlobalOperationsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6649,9 +6595,6 @@ export namespace google {
                     /** AggregatedListGlobalVmExtensionPoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListGlobalVmExtensionPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListGlobalVmExtensionPoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6682,9 +6625,6 @@ export namespace google {
 
                     /** AggregatedListGlobalVmExtensionPoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListGlobalVmExtensionPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListGlobalVmExtensionPoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6788,9 +6728,6 @@ export namespace google {
                     /** AggregatedListHealthChecksRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListHealthChecksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListHealthChecksRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6821,9 +6758,6 @@ export namespace google {
 
                     /** AggregatedListHealthChecksRequest project. */
                     public project: string;
-
-                    /** AggregatedListHealthChecksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListHealthChecksRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -6927,9 +6861,6 @@ export namespace google {
                     /** AggregatedListInstanceGroupManagersRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInstanceGroupManagersRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -6960,9 +6891,6 @@ export namespace google {
 
                     /** AggregatedListInstanceGroupManagersRequest project. */
                     public project: string;
-
-                    /** AggregatedListInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInstanceGroupManagersRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7066,9 +6994,6 @@ export namespace google {
                     /** AggregatedListInstanceGroupsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInstanceGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInstanceGroupsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7099,9 +7024,6 @@ export namespace google {
 
                     /** AggregatedListInstanceGroupsRequest project. */
                     public project: string;
-
-                    /** AggregatedListInstanceGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInstanceGroupsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7205,9 +7127,6 @@ export namespace google {
                     /** AggregatedListInstanceTemplatesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInstanceTemplatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInstanceTemplatesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7238,9 +7157,6 @@ export namespace google {
 
                     /** AggregatedListInstanceTemplatesRequest project. */
                     public project: string;
-
-                    /** AggregatedListInstanceTemplatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInstanceTemplatesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7344,9 +7260,6 @@ export namespace google {
                     /** AggregatedListInstancesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInstancesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInstancesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7377,9 +7290,6 @@ export namespace google {
 
                     /** AggregatedListInstancesRequest project. */
                     public project: string;
-
-                    /** AggregatedListInstancesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInstancesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7483,9 +7393,6 @@ export namespace google {
                     /** AggregatedListInstantSnapshotsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInstantSnapshotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInstantSnapshotsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7516,9 +7423,6 @@ export namespace google {
 
                     /** AggregatedListInstantSnapshotsRequest project. */
                     public project: string;
-
-                    /** AggregatedListInstantSnapshotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInstantSnapshotsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7622,9 +7526,6 @@ export namespace google {
                     /** AggregatedListInterconnectAttachmentsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListInterconnectAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListInterconnectAttachmentsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7655,9 +7556,6 @@ export namespace google {
 
                     /** AggregatedListInterconnectAttachmentsRequest project. */
                     public project: string;
-
-                    /** AggregatedListInterconnectAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListInterconnectAttachmentsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7761,9 +7659,6 @@ export namespace google {
                     /** AggregatedListMachineTypesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListMachineTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListMachineTypesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7794,9 +7689,6 @@ export namespace google {
 
                     /** AggregatedListMachineTypesRequest project. */
                     public project: string;
-
-                    /** AggregatedListMachineTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListMachineTypesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -7900,9 +7792,6 @@ export namespace google {
                     /** AggregatedListNetworkAttachmentsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNetworkAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNetworkAttachmentsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -7933,9 +7822,6 @@ export namespace google {
 
                     /** AggregatedListNetworkAttachmentsRequest project. */
                     public project: string;
-
-                    /** AggregatedListNetworkAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNetworkAttachmentsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8039,9 +7925,6 @@ export namespace google {
                     /** AggregatedListNetworkEdgeSecurityServicesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNetworkEdgeSecurityServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNetworkEdgeSecurityServicesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8072,9 +7955,6 @@ export namespace google {
 
                     /** AggregatedListNetworkEdgeSecurityServicesRequest project. */
                     public project: string;
-
-                    /** AggregatedListNetworkEdgeSecurityServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNetworkEdgeSecurityServicesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8178,9 +8058,6 @@ export namespace google {
                     /** AggregatedListNetworkEndpointGroupsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNetworkEndpointGroupsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8211,9 +8088,6 @@ export namespace google {
 
                     /** AggregatedListNetworkEndpointGroupsRequest project. */
                     public project: string;
-
-                    /** AggregatedListNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNetworkEndpointGroupsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8317,9 +8191,6 @@ export namespace google {
                     /** AggregatedListNetworkFirewallPoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNetworkFirewallPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNetworkFirewallPoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8350,9 +8221,6 @@ export namespace google {
 
                     /** AggregatedListNetworkFirewallPoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListNetworkFirewallPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNetworkFirewallPoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8456,9 +8324,6 @@ export namespace google {
                     /** AggregatedListNodeGroupsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNodeGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNodeGroupsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8489,9 +8354,6 @@ export namespace google {
 
                     /** AggregatedListNodeGroupsRequest project. */
                     public project: string;
-
-                    /** AggregatedListNodeGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNodeGroupsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8595,9 +8457,6 @@ export namespace google {
                     /** AggregatedListNodeTemplatesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNodeTemplatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNodeTemplatesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8628,9 +8487,6 @@ export namespace google {
 
                     /** AggregatedListNodeTemplatesRequest project. */
                     public project: string;
-
-                    /** AggregatedListNodeTemplatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNodeTemplatesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8734,9 +8590,6 @@ export namespace google {
                     /** AggregatedListNodeTypesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListNodeTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListNodeTypesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8767,9 +8620,6 @@ export namespace google {
 
                     /** AggregatedListNodeTypesRequest project. */
                     public project: string;
-
-                    /** AggregatedListNodeTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListNodeTypesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -8873,9 +8723,6 @@ export namespace google {
                     /** AggregatedListPacketMirroringsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListPacketMirroringsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListPacketMirroringsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -8906,9 +8753,6 @@ export namespace google {
 
                     /** AggregatedListPacketMirroringsRequest project. */
                     public project: string;
-
-                    /** AggregatedListPacketMirroringsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListPacketMirroringsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9012,9 +8856,6 @@ export namespace google {
                     /** AggregatedListPublicDelegatedPrefixesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListPublicDelegatedPrefixesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListPublicDelegatedPrefixesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9045,9 +8886,6 @@ export namespace google {
 
                     /** AggregatedListPublicDelegatedPrefixesRequest project. */
                     public project: string;
-
-                    /** AggregatedListPublicDelegatedPrefixesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListPublicDelegatedPrefixesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9151,9 +8989,6 @@ export namespace google {
                     /** AggregatedListRegionCommitmentsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionCommitmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionCommitmentsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9184,9 +9019,6 @@ export namespace google {
 
                     /** AggregatedListRegionCommitmentsRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionCommitmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionCommitmentsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9290,9 +9122,6 @@ export namespace google {
                     /** AggregatedListRegionCompositeHealthChecksRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionCompositeHealthChecksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionCompositeHealthChecksRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9323,9 +9152,6 @@ export namespace google {
 
                     /** AggregatedListRegionCompositeHealthChecksRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionCompositeHealthChecksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionCompositeHealthChecksRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9429,9 +9255,6 @@ export namespace google {
                     /** AggregatedListRegionHealthAggregationPoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionHealthAggregationPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionHealthAggregationPoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9462,9 +9285,6 @@ export namespace google {
 
                     /** AggregatedListRegionHealthAggregationPoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionHealthAggregationPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionHealthAggregationPoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9568,9 +9388,6 @@ export namespace google {
                     /** AggregatedListRegionHealthCheckServicesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionHealthCheckServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionHealthCheckServicesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9601,9 +9418,6 @@ export namespace google {
 
                     /** AggregatedListRegionHealthCheckServicesRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionHealthCheckServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionHealthCheckServicesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9707,9 +9521,6 @@ export namespace google {
                     /** AggregatedListRegionHealthSourcesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionHealthSourcesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionHealthSourcesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9740,9 +9551,6 @@ export namespace google {
 
                     /** AggregatedListRegionHealthSourcesRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionHealthSourcesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionHealthSourcesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9846,9 +9654,6 @@ export namespace google {
                     /** AggregatedListRegionNotificationEndpointsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRegionNotificationEndpointsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRegionNotificationEndpointsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -9879,9 +9684,6 @@ export namespace google {
 
                     /** AggregatedListRegionNotificationEndpointsRequest project. */
                     public project: string;
-
-                    /** AggregatedListRegionNotificationEndpointsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRegionNotificationEndpointsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -9985,9 +9787,6 @@ export namespace google {
                     /** AggregatedListReservationsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListReservationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListReservationsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10018,9 +9817,6 @@ export namespace google {
 
                     /** AggregatedListReservationsRequest project. */
                     public project: string;
-
-                    /** AggregatedListReservationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListReservationsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10124,9 +9920,6 @@ export namespace google {
                     /** AggregatedListResourcePoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListResourcePoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListResourcePoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10157,9 +9950,6 @@ export namespace google {
 
                     /** AggregatedListResourcePoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListResourcePoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListResourcePoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10263,9 +10053,6 @@ export namespace google {
                     /** AggregatedListRoutersRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListRoutersRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10296,9 +10083,6 @@ export namespace google {
 
                     /** AggregatedListRoutersRequest project. */
                     public project: string;
-
-                    /** AggregatedListRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListRoutersRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10402,9 +10186,6 @@ export namespace google {
                     /** AggregatedListSecurityPoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListSecurityPoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10435,9 +10216,6 @@ export namespace google {
 
                     /** AggregatedListSecurityPoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListSecurityPoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10541,9 +10319,6 @@ export namespace google {
                     /** AggregatedListServiceAttachmentsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListServiceAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListServiceAttachmentsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10574,9 +10349,6 @@ export namespace google {
 
                     /** AggregatedListServiceAttachmentsRequest project. */
                     public project: string;
-
-                    /** AggregatedListServiceAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListServiceAttachmentsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10680,9 +10452,6 @@ export namespace google {
                     /** AggregatedListSslCertificatesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListSslCertificatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListSslCertificatesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10713,9 +10482,6 @@ export namespace google {
 
                     /** AggregatedListSslCertificatesRequest project. */
                     public project: string;
-
-                    /** AggregatedListSslCertificatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListSslCertificatesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10819,9 +10585,6 @@ export namespace google {
                     /** AggregatedListSslPoliciesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListSslPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListSslPoliciesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10852,9 +10615,6 @@ export namespace google {
 
                     /** AggregatedListSslPoliciesRequest project. */
                     public project: string;
-
-                    /** AggregatedListSslPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListSslPoliciesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -10958,9 +10718,6 @@ export namespace google {
                     /** AggregatedListStoragePoolTypesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListStoragePoolTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListStoragePoolTypesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -10991,9 +10748,6 @@ export namespace google {
 
                     /** AggregatedListStoragePoolTypesRequest project. */
                     public project: string;
-
-                    /** AggregatedListStoragePoolTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListStoragePoolTypesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11097,9 +10851,6 @@ export namespace google {
                     /** AggregatedListStoragePoolsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListStoragePoolsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListStoragePoolsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11130,9 +10881,6 @@ export namespace google {
 
                     /** AggregatedListStoragePoolsRequest project. */
                     public project: string;
-
-                    /** AggregatedListStoragePoolsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListStoragePoolsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11236,9 +10984,6 @@ export namespace google {
                     /** AggregatedListSubnetworksRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListSubnetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListSubnetworksRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
 
@@ -11272,9 +11017,6 @@ export namespace google {
 
                     /** AggregatedListSubnetworksRequest project. */
                     public project: string;
-
-                    /** AggregatedListSubnetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListSubnetworksRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11391,9 +11133,6 @@ export namespace google {
                     /** AggregatedListTargetHttpProxiesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetHttpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetHttpProxiesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11424,9 +11163,6 @@ export namespace google {
 
                     /** AggregatedListTargetHttpProxiesRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetHttpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetHttpProxiesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11530,9 +11266,6 @@ export namespace google {
                     /** AggregatedListTargetHttpsProxiesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetHttpsProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetHttpsProxiesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11563,9 +11296,6 @@ export namespace google {
 
                     /** AggregatedListTargetHttpsProxiesRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetHttpsProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetHttpsProxiesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11669,9 +11399,6 @@ export namespace google {
                     /** AggregatedListTargetInstancesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetInstancesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetInstancesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11702,9 +11429,6 @@ export namespace google {
 
                     /** AggregatedListTargetInstancesRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetInstancesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetInstancesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11808,9 +11532,6 @@ export namespace google {
                     /** AggregatedListTargetPoolsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetPoolsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetPoolsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11841,9 +11562,6 @@ export namespace google {
 
                     /** AggregatedListTargetPoolsRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetPoolsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetPoolsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -11947,9 +11665,6 @@ export namespace google {
                     /** AggregatedListTargetTcpProxiesRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetTcpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetTcpProxiesRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -11980,9 +11695,6 @@ export namespace google {
 
                     /** AggregatedListTargetTcpProxiesRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetTcpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetTcpProxiesRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -12086,9 +11798,6 @@ export namespace google {
                     /** AggregatedListTargetVpnGatewaysRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListTargetVpnGatewaysRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListTargetVpnGatewaysRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -12119,9 +11828,6 @@ export namespace google {
 
                     /** AggregatedListTargetVpnGatewaysRequest project. */
                     public project: string;
-
-                    /** AggregatedListTargetVpnGatewaysRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListTargetVpnGatewaysRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -12225,9 +11931,6 @@ export namespace google {
                     /** AggregatedListUrlMapsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListUrlMapsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListUrlMapsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -12258,9 +11961,6 @@ export namespace google {
 
                     /** AggregatedListUrlMapsRequest project. */
                     public project: string;
-
-                    /** AggregatedListUrlMapsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListUrlMapsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -12364,9 +12064,6 @@ export namespace google {
                     /** AggregatedListVpnGatewaysRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListVpnGatewaysRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListVpnGatewaysRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -12397,9 +12094,6 @@ export namespace google {
 
                     /** AggregatedListVpnGatewaysRequest project. */
                     public project: string;
-
-                    /** AggregatedListVpnGatewaysRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListVpnGatewaysRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -12503,9 +12197,6 @@ export namespace google {
                     /** AggregatedListVpnTunnelsRequest project */
                     project?: (string|null);
 
-                    /** AggregatedListVpnTunnelsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** AggregatedListVpnTunnelsRequest serviceProjectNumber */
                     serviceProjectNumber?: (number|Long|string|null);
                 }
@@ -12536,9 +12227,6 @@ export namespace google {
 
                     /** AggregatedListVpnTunnelsRequest project. */
                     public project: string;
-
-                    /** AggregatedListVpnTunnelsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** AggregatedListVpnTunnelsRequest serviceProjectNumber. */
                     public serviceProjectNumber?: (number|Long|string|null);
@@ -15373,9 +15061,6 @@ export namespace google {
                     /** AuditConfig auditLogConfigs */
                     auditLogConfigs?: (google.cloud.compute.v1.IAuditLogConfig[]|null);
 
-                    /** AuditConfig exemptedMembers */
-                    exemptedMembers?: (string[]|null);
-
                     /** AuditConfig service */
                     service?: (string|null);
                 }
@@ -15391,9 +15076,6 @@ export namespace google {
 
                     /** AuditConfig auditLogConfigs. */
                     public auditLogConfigs: google.cloud.compute.v1.IAuditLogConfig[];
-
-                    /** AuditConfig exemptedMembers. */
-                    public exemptedMembers: string[];
 
                     /** AuditConfig service. */
                     public service?: (string|null);
@@ -15482,9 +15164,6 @@ export namespace google {
                     /** AuditLogConfig exemptedMembers */
                     exemptedMembers?: (string[]|null);
 
-                    /** AuditLogConfig ignoreChildExemptions */
-                    ignoreChildExemptions?: (boolean|null);
-
                     /** AuditLogConfig logType */
                     logType?: (string|null);
                 }
@@ -15500,9 +15179,6 @@ export namespace google {
 
                     /** AuditLogConfig exemptedMembers. */
                     public exemptedMembers: string[];
-
-                    /** AuditLogConfig ignoreChildExemptions. */
-                    public ignoreChildExemptions?: (boolean|null);
 
                     /** AuditLogConfig logType. */
                     public logType?: (string|null);
@@ -23401,9 +23077,6 @@ export namespace google {
                 /** Properties of a Binding. */
                 interface IBinding {
 
-                    /** Binding bindingId */
-                    bindingId?: (string|null);
-
                     /** Binding condition */
                     condition?: (google.cloud.compute.v1.IExpr|null);
 
@@ -23422,9 +23095,6 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1.IBinding);
-
-                    /** Binding bindingId. */
-                    public bindingId?: (string|null);
 
                     /** Binding condition. */
                     public condition?: (google.cloud.compute.v1.IExpr|null);
@@ -26943,6 +26613,9 @@ export namespace google {
 
                     /** CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection machineTypes */
                     machineTypes?: (string[]|null);
+
+                    /** CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection rank */
+                    rank?: (number|Long|string|null);
                 }
 
                 /** Represents a CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection. */
@@ -26962,6 +26635,9 @@ export namespace google {
 
                     /** CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection machineTypes. */
                     public machineTypes: string[];
+
+                    /** CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection rank. */
+                    public rank?: (number|Long|string|null);
 
                     /**
                      * Creates a new CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection instance using the specified properties.
@@ -28125,6 +27801,12 @@ export namespace google {
                 /** Properties of a CapacityHistoryRequestInstanceProperties. */
                 interface ICapacityHistoryRequestInstanceProperties {
 
+                    /** CapacityHistoryRequestInstanceProperties disks */
+                    disks?: (google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk[]|null);
+
+                    /** CapacityHistoryRequestInstanceProperties guestAccelerators */
+                    guestAccelerators?: (google.cloud.compute.v1.IAcceleratorConfig[]|null);
+
                     /** CapacityHistoryRequestInstanceProperties machineType */
                     machineType?: (string|null);
 
@@ -28140,6 +27822,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1.ICapacityHistoryRequestInstanceProperties);
+
+                    /** CapacityHistoryRequestInstanceProperties disks. */
+                    public disks: google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk[];
+
+                    /** CapacityHistoryRequestInstanceProperties guestAccelerators. */
+                    public guestAccelerators: google.cloud.compute.v1.IAcceleratorConfig[];
 
                     /** CapacityHistoryRequestInstanceProperties machineType. */
                     public machineType?: (string|null);
@@ -28223,6 +27911,113 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CapacityHistoryRequestInstancePropertiesAttachedDisk. */
+                interface ICapacityHistoryRequestInstancePropertiesAttachedDisk {
+
+                    /** CapacityHistoryRequestInstancePropertiesAttachedDisk type */
+                    type?: (string|null);
+                }
+
+                /** Represents a CapacityHistoryRequestInstancePropertiesAttachedDisk. */
+                class CapacityHistoryRequestInstancePropertiesAttachedDisk implements ICapacityHistoryRequestInstancePropertiesAttachedDisk {
+
+                    /**
+                     * Constructs a new CapacityHistoryRequestInstancePropertiesAttachedDisk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk);
+
+                    /** CapacityHistoryRequestInstancePropertiesAttachedDisk type. */
+                    public type?: (string|null);
+
+                    /**
+                     * Creates a new CapacityHistoryRequestInstancePropertiesAttachedDisk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CapacityHistoryRequestInstancePropertiesAttachedDisk instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk): google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk;
+
+                    /**
+                     * Encodes the specified CapacityHistoryRequestInstancePropertiesAttachedDisk message. Does not implicitly {@link google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk.verify|verify} messages.
+                     * @param message CapacityHistoryRequestInstancePropertiesAttachedDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CapacityHistoryRequestInstancePropertiesAttachedDisk message, length delimited. Does not implicitly {@link google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk.verify|verify} messages.
+                     * @param message CapacityHistoryRequestInstancePropertiesAttachedDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.ICapacityHistoryRequestInstancePropertiesAttachedDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CapacityHistoryRequestInstancePropertiesAttachedDisk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CapacityHistoryRequestInstancePropertiesAttachedDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk;
+
+                    /**
+                     * Decodes a CapacityHistoryRequestInstancePropertiesAttachedDisk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CapacityHistoryRequestInstancePropertiesAttachedDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk;
+
+                    /**
+                     * Verifies a CapacityHistoryRequestInstancePropertiesAttachedDisk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CapacityHistoryRequestInstancePropertiesAttachedDisk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CapacityHistoryRequestInstancePropertiesAttachedDisk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk;
+
+                    /**
+                     * Creates a plain object from a CapacityHistoryRequestInstancePropertiesAttachedDisk message. Also converts values to other types if specified.
+                     * @param message CapacityHistoryRequestInstancePropertiesAttachedDisk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.CapacityHistoryRequestInstancePropertiesAttachedDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CapacityHistoryRequestInstancePropertiesAttachedDisk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CapacityHistoryRequestInstancePropertiesAttachedDisk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CapacityHistoryRequestInstancePropertiesAttachedDisk {
+
+                    /** Type enum. */
+                    enum Type {
+                        UNDEFINED_TYPE = 0,
+                        DISK_TYPE_UNSPECIFIED = 333621236,
+                        SCRATCH = 496778970
+                    }
                 }
 
                 /** Properties of a CapacityHistoryRequestInstancePropertiesScheduling. */
@@ -29495,6 +29290,7 @@ export namespace google {
                         COMPUTE_OPTIMIZED_C3D = 383246484,
                         COMPUTE_OPTIMIZED_H3 = 428004939,
                         COMPUTE_OPTIMIZED_H4D = 383251320,
+                        COMPUTE_OPTIMIZED_H4D_3TB = 443379866,
                         GENERAL_PURPOSE = 299793543,
                         GENERAL_PURPOSE_C4 = 301911817,
                         GENERAL_PURPOSE_C4A = 232460888,
@@ -29530,6 +29326,7 @@ export namespace google {
                         STORAGE_OPTIMIZED_Z4D4T = 18503022,
                         STORAGE_OPTIMIZED_Z4DH = 35233722,
                         STORAGE_OPTIMIZED_Z4DS = 35233733,
+                        STORAGE_OPTIMIZED_Z4M = 157002327,
                         TYPE_UNSPECIFIED = 437714322
                     }
                 }
@@ -52641,6 +52438,9 @@ export namespace google {
                     /** FirewallPolicyAssociation name */
                     name?: (string|null);
 
+                    /** FirewallPolicyAssociation priority */
+                    priority?: (number|null);
+
                     /** FirewallPolicyAssociation shortName */
                     shortName?: (string|null);
                 }
@@ -52665,6 +52465,9 @@ export namespace google {
 
                     /** FirewallPolicyAssociation name. */
                     public name?: (string|null);
+
+                    /** FirewallPolicyAssociation priority. */
+                    public priority?: (number|null);
 
                     /** FirewallPolicyAssociation shortName. */
                     public shortName?: (string|null);
@@ -54802,6 +54605,9 @@ export namespace google {
                     /** FutureReservation autoDeleteAutoCreatedReservations */
                     autoDeleteAutoCreatedReservations?: (boolean|null);
 
+                    /** FutureReservation colocationResource */
+                    colocationResource?: (string|null);
+
                     /** FutureReservation commitmentInfo */
                     commitmentInfo?: (google.cloud.compute.v1.IFutureReservationCommitmentInfo|null);
 
@@ -54901,6 +54707,9 @@ export namespace google {
 
                     /** FutureReservation autoDeleteAutoCreatedReservations. */
                     public autoDeleteAutoCreatedReservations?: (boolean|null);
+
+                    /** FutureReservation colocationResource. */
+                    public colocationResource?: (string|null);
 
                     /** FutureReservation commitmentInfo. */
                     public commitmentInfo?: (google.cloud.compute.v1.IFutureReservationCommitmentInfo|null);
@@ -60836,6 +60645,103 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GetGlobalFrontendSettingRequest. */
+                interface IGetGlobalFrontendSettingRequest {
+
+                    /** GetGlobalFrontendSettingRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a GetGlobalFrontendSettingRequest. */
+                class GetGlobalFrontendSettingRequest implements IGetGlobalFrontendSettingRequest {
+
+                    /**
+                     * Constructs a new GetGlobalFrontendSettingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest);
+
+                    /** GetGlobalFrontendSettingRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new GetGlobalFrontendSettingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGlobalFrontendSettingRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest): google.cloud.compute.v1.GetGlobalFrontendSettingRequest;
+
+                    /**
+                     * Encodes the specified GetGlobalFrontendSettingRequest message. Does not implicitly {@link google.cloud.compute.v1.GetGlobalFrontendSettingRequest.verify|verify} messages.
+                     * @param message GetGlobalFrontendSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGlobalFrontendSettingRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.GetGlobalFrontendSettingRequest.verify|verify} messages.
+                     * @param message GetGlobalFrontendSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGlobalFrontendSettingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGlobalFrontendSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.GetGlobalFrontendSettingRequest;
+
+                    /**
+                     * Decodes a GetGlobalFrontendSettingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGlobalFrontendSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.GetGlobalFrontendSettingRequest;
+
+                    /**
+                     * Verifies a GetGlobalFrontendSettingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGlobalFrontendSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGlobalFrontendSettingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.GetGlobalFrontendSettingRequest;
+
+                    /**
+                     * Creates a plain object from a GetGlobalFrontendSettingRequest message. Also converts values to other types if specified.
+                     * @param message GetGlobalFrontendSettingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.GetGlobalFrontendSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGlobalFrontendSettingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGlobalFrontendSettingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetGlobalNetworkEndpointGroupRequest. */
                 interface IGetGlobalNetworkEndpointGroupRequest {
 
@@ -66566,6 +66472,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetImageViewRequest. */
+                interface IGetImageViewRequest {
+
+                    /** GetImageViewRequest project */
+                    project?: (string|null);
+
+                    /** GetImageViewRequest region */
+                    region?: (string|null);
+
+                    /** GetImageViewRequest resourceId */
+                    resourceId?: (string|null);
+                }
+
+                /** Represents a GetImageViewRequest. */
+                class GetImageViewRequest implements IGetImageViewRequest {
+
+                    /**
+                     * Constructs a new GetImageViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IGetImageViewRequest);
+
+                    /** GetImageViewRequest project. */
+                    public project: string;
+
+                    /** GetImageViewRequest region. */
+                    public region: string;
+
+                    /** GetImageViewRequest resourceId. */
+                    public resourceId: string;
+
+                    /**
+                     * Creates a new GetImageViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetImageViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IGetImageViewRequest): google.cloud.compute.v1.GetImageViewRequest;
+
+                    /**
+                     * Encodes the specified GetImageViewRequest message. Does not implicitly {@link google.cloud.compute.v1.GetImageViewRequest.verify|verify} messages.
+                     * @param message GetImageViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IGetImageViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetImageViewRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.GetImageViewRequest.verify|verify} messages.
+                     * @param message GetImageViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IGetImageViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetImageViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetImageViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.GetImageViewRequest;
+
+                    /**
+                     * Decodes a GetImageViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetImageViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.GetImageViewRequest;
+
+                    /**
+                     * Verifies a GetImageViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetImageViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetImageViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.GetImageViewRequest;
+
+                    /**
+                     * Creates a plain object from a GetImageViewRequest message. Also converts values to other types if specified.
+                     * @param message GetImageViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.GetImageViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetImageViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetImageViewRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetInstanceGroupManagerRequest. */
                 interface IGetInstanceGroupManagerRequest {
 
@@ -68577,6 +68592,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetManagedRulesetRequest. */
+                interface IGetManagedRulesetRequest {
+
+                    /** GetManagedRulesetRequest managedRuleset */
+                    managedRuleset?: (string|null);
+
+                    /** GetManagedRulesetRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a GetManagedRulesetRequest. */
+                class GetManagedRulesetRequest implements IGetManagedRulesetRequest {
+
+                    /**
+                     * Constructs a new GetManagedRulesetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IGetManagedRulesetRequest);
+
+                    /** GetManagedRulesetRequest managedRuleset. */
+                    public managedRuleset: string;
+
+                    /** GetManagedRulesetRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new GetManagedRulesetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetManagedRulesetRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IGetManagedRulesetRequest): google.cloud.compute.v1.GetManagedRulesetRequest;
+
+                    /**
+                     * Encodes the specified GetManagedRulesetRequest message. Does not implicitly {@link google.cloud.compute.v1.GetManagedRulesetRequest.verify|verify} messages.
+                     * @param message GetManagedRulesetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IGetManagedRulesetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetManagedRulesetRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.GetManagedRulesetRequest.verify|verify} messages.
+                     * @param message GetManagedRulesetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IGetManagedRulesetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetManagedRulesetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetManagedRulesetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.GetManagedRulesetRequest;
+
+                    /**
+                     * Decodes a GetManagedRulesetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetManagedRulesetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.GetManagedRulesetRequest;
+
+                    /**
+                     * Verifies a GetManagedRulesetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetManagedRulesetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetManagedRulesetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.GetManagedRulesetRequest;
+
+                    /**
+                     * Creates a plain object from a GetManagedRulesetRequest message. Also converts values to other types if specified.
+                     * @param message GetManagedRulesetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.GetManagedRulesetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetManagedRulesetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetManagedRulesetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetNamedSetRouterRequest. */
                 interface IGetNamedSetRouterRequest {
 
@@ -68831,9 +68949,6 @@ export namespace google {
                     /** GetNatMappingInfoRoutersRequest region */
                     region?: (string|null);
 
-                    /** GetNatMappingInfoRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** GetNatMappingInfoRoutersRequest router */
                     router?: (string|null);
                 }
@@ -68867,9 +68982,6 @@ export namespace google {
 
                     /** GetNatMappingInfoRoutersRequest region. */
                     public region: string;
-
-                    /** GetNatMappingInfoRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** GetNatMappingInfoRoutersRequest router. */
                     public router: string;
@@ -79702,9 +79814,6 @@ export namespace google {
 
                     /** GetXpnResourcesProjectsRequest project */
                     project?: (string|null);
-
-                    /** GetXpnResourcesProjectsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a GetXpnResourcesProjectsRequest. */
@@ -79730,9 +79839,6 @@ export namespace google {
 
                     /** GetXpnResourcesProjectsRequest project. */
                     public project: string;
-
-                    /** GetXpnResourcesProjectsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new GetXpnResourcesProjectsRequest instance using the specified properties.
@@ -80230,6 +80336,247 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GlobalAddressesMoveRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GlobalFrontendSettings. */
+                interface IGlobalFrontendSettings {
+
+                    /** GlobalFrontendSettings bundleType */
+                    bundleType?: (string|null);
+
+                    /** GlobalFrontendSettings creationTimestamp */
+                    creationTimestamp?: (string|null);
+
+                    /** GlobalFrontendSettings description */
+                    description?: (string|null);
+
+                    /** GlobalFrontendSettings etag */
+                    etag?: (string|null);
+
+                    /** GlobalFrontendSettings id */
+                    id?: (number|Long|string|null);
+
+                    /** GlobalFrontendSettings name */
+                    name?: (string|null);
+
+                    /** GlobalFrontendSettings selfLink */
+                    selfLink?: (string|null);
+                }
+
+                /** Represents a GlobalFrontendSettings. */
+                class GlobalFrontendSettings implements IGlobalFrontendSettings {
+
+                    /**
+                     * Constructs a new GlobalFrontendSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IGlobalFrontendSettings);
+
+                    /** GlobalFrontendSettings bundleType. */
+                    public bundleType?: (string|null);
+
+                    /** GlobalFrontendSettings creationTimestamp. */
+                    public creationTimestamp?: (string|null);
+
+                    /** GlobalFrontendSettings description. */
+                    public description?: (string|null);
+
+                    /** GlobalFrontendSettings etag. */
+                    public etag?: (string|null);
+
+                    /** GlobalFrontendSettings id. */
+                    public id?: (number|Long|string|null);
+
+                    /** GlobalFrontendSettings name. */
+                    public name?: (string|null);
+
+                    /** GlobalFrontendSettings selfLink. */
+                    public selfLink?: (string|null);
+
+                    /**
+                     * Creates a new GlobalFrontendSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GlobalFrontendSettings instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IGlobalFrontendSettings): google.cloud.compute.v1.GlobalFrontendSettings;
+
+                    /**
+                     * Encodes the specified GlobalFrontendSettings message. Does not implicitly {@link google.cloud.compute.v1.GlobalFrontendSettings.verify|verify} messages.
+                     * @param message GlobalFrontendSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IGlobalFrontendSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GlobalFrontendSettings message, length delimited. Does not implicitly {@link google.cloud.compute.v1.GlobalFrontendSettings.verify|verify} messages.
+                     * @param message GlobalFrontendSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IGlobalFrontendSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GlobalFrontendSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GlobalFrontendSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.GlobalFrontendSettings;
+
+                    /**
+                     * Decodes a GlobalFrontendSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GlobalFrontendSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.GlobalFrontendSettings;
+
+                    /**
+                     * Verifies a GlobalFrontendSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GlobalFrontendSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GlobalFrontendSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.GlobalFrontendSettings;
+
+                    /**
+                     * Creates a plain object from a GlobalFrontendSettings message. Also converts values to other types if specified.
+                     * @param message GlobalFrontendSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.GlobalFrontendSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GlobalFrontendSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GlobalFrontendSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GlobalFrontendSettings {
+
+                    /** BundleType enum. */
+                    enum BundleType {
+                        UNDEFINED_BUNDLE_TYPE = 0,
+                        BUNDLE_TYPE_UNSPECIFIED = 466587567,
+                        GLOBAL_FRONT_END = 182122473,
+                        INDIVIDUAL = 438800025
+                    }
+                }
+
+                /** Properties of a GlobalFrontendSettingsPatchResponse. */
+                interface IGlobalFrontendSettingsPatchResponse {
+
+                    /** GlobalFrontendSettingsPatchResponse operation */
+                    operation?: (google.cloud.compute.v1.IOperation|null);
+                }
+
+                /** Represents a GlobalFrontendSettingsPatchResponse. */
+                class GlobalFrontendSettingsPatchResponse implements IGlobalFrontendSettingsPatchResponse {
+
+                    /**
+                     * Constructs a new GlobalFrontendSettingsPatchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IGlobalFrontendSettingsPatchResponse);
+
+                    /** GlobalFrontendSettingsPatchResponse operation. */
+                    public operation?: (google.cloud.compute.v1.IOperation|null);
+
+                    /**
+                     * Creates a new GlobalFrontendSettingsPatchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GlobalFrontendSettingsPatchResponse instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IGlobalFrontendSettingsPatchResponse): google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse;
+
+                    /**
+                     * Encodes the specified GlobalFrontendSettingsPatchResponse message. Does not implicitly {@link google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse.verify|verify} messages.
+                     * @param message GlobalFrontendSettingsPatchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IGlobalFrontendSettingsPatchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GlobalFrontendSettingsPatchResponse message, length delimited. Does not implicitly {@link google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse.verify|verify} messages.
+                     * @param message GlobalFrontendSettingsPatchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IGlobalFrontendSettingsPatchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GlobalFrontendSettingsPatchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GlobalFrontendSettingsPatchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse;
+
+                    /**
+                     * Decodes a GlobalFrontendSettingsPatchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GlobalFrontendSettingsPatchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse;
+
+                    /**
+                     * Verifies a GlobalFrontendSettingsPatchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GlobalFrontendSettingsPatchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GlobalFrontendSettingsPatchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse;
+
+                    /**
+                     * Creates a plain object from a GlobalFrontendSettingsPatchResponse message. Also converts values to other types if specified.
+                     * @param message GlobalFrontendSettingsPatchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GlobalFrontendSettingsPatchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GlobalFrontendSettingsPatchResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -89205,6 +89552,242 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImageView. */
+                interface IImageView {
+
+                    /** ImageView image */
+                    image?: (google.cloud.compute.v1.IImage|null);
+                }
+
+                /** Represents an ImageView. */
+                class ImageView implements IImageView {
+
+                    /**
+                     * Constructs a new ImageView.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IImageView);
+
+                    /** ImageView image. */
+                    public image?: (google.cloud.compute.v1.IImage|null);
+
+                    /**
+                     * Creates a new ImageView instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageView instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IImageView): google.cloud.compute.v1.ImageView;
+
+                    /**
+                     * Encodes the specified ImageView message. Does not implicitly {@link google.cloud.compute.v1.ImageView.verify|verify} messages.
+                     * @param message ImageView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IImageView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageView message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ImageView.verify|verify} messages.
+                     * @param message ImageView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IImageView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageView message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ImageView;
+
+                    /**
+                     * Decodes an ImageView message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ImageView;
+
+                    /**
+                     * Verifies an ImageView message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageView message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageView
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ImageView;
+
+                    /**
+                     * Creates a plain object from an ImageView message. Also converts values to other types if specified.
+                     * @param message ImageView
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ImageView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageView to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageView
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageViewsListResponse. */
+                interface IImageViewsListResponse {
+
+                    /** ImageViewsListResponse etag */
+                    etag?: (string|null);
+
+                    /** ImageViewsListResponse id */
+                    id?: (string|null);
+
+                    /** ImageViewsListResponse items */
+                    items?: (google.cloud.compute.v1.IImageView[]|null);
+
+                    /** ImageViewsListResponse kind */
+                    kind?: (string|null);
+
+                    /** ImageViewsListResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ImageViewsListResponse selfLink */
+                    selfLink?: (string|null);
+
+                    /** ImageViewsListResponse unreachables */
+                    unreachables?: (string[]|null);
+
+                    /** ImageViewsListResponse warning */
+                    warning?: (google.cloud.compute.v1.IWarning|null);
+                }
+
+                /** Represents an ImageViewsListResponse. */
+                class ImageViewsListResponse implements IImageViewsListResponse {
+
+                    /**
+                     * Constructs a new ImageViewsListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IImageViewsListResponse);
+
+                    /** ImageViewsListResponse etag. */
+                    public etag?: (string|null);
+
+                    /** ImageViewsListResponse id. */
+                    public id?: (string|null);
+
+                    /** ImageViewsListResponse items. */
+                    public items: google.cloud.compute.v1.IImageView[];
+
+                    /** ImageViewsListResponse kind. */
+                    public kind?: (string|null);
+
+                    /** ImageViewsListResponse nextPageToken. */
+                    public nextPageToken?: (string|null);
+
+                    /** ImageViewsListResponse selfLink. */
+                    public selfLink?: (string|null);
+
+                    /** ImageViewsListResponse unreachables. */
+                    public unreachables: string[];
+
+                    /** ImageViewsListResponse warning. */
+                    public warning?: (google.cloud.compute.v1.IWarning|null);
+
+                    /**
+                     * Creates a new ImageViewsListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageViewsListResponse instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IImageViewsListResponse): google.cloud.compute.v1.ImageViewsListResponse;
+
+                    /**
+                     * Encodes the specified ImageViewsListResponse message. Does not implicitly {@link google.cloud.compute.v1.ImageViewsListResponse.verify|verify} messages.
+                     * @param message ImageViewsListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IImageViewsListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageViewsListResponse message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ImageViewsListResponse.verify|verify} messages.
+                     * @param message ImageViewsListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IImageViewsListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageViewsListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageViewsListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ImageViewsListResponse;
+
+                    /**
+                     * Decodes an ImageViewsListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageViewsListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ImageViewsListResponse;
+
+                    /**
+                     * Verifies an ImageViewsListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageViewsListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageViewsListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ImageViewsListResponse;
+
+                    /**
+                     * Creates a plain object from an ImageViewsListResponse message. Also converts values to other types if specified.
+                     * @param message ImageViewsListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ImageViewsListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageViewsListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageViewsListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InitialStateConfig. */
                 interface IInitialStateConfig {
 
@@ -90139,7 +90722,7 @@ export namespace google {
                     public firewallPolicyResource?: (google.cloud.compute.v1.IFirewallPolicy|null);
 
                     /** InsertFirewallPolicyRequest parentId. */
-                    public parentId: string;
+                    public parentId?: (string|null);
 
                     /** InsertFirewallPolicyRequest requestId. */
                     public requestId?: (string|null);
@@ -102223,8 +102806,14 @@ export namespace google {
                 /** Properties of an InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection. */
                 interface IInstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection {
 
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection disks */
+                    disks?: (google.cloud.compute.v1.IAttachedDisk[]|null);
+
                     /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection machineTypes */
                     machineTypes?: (string[]|null);
+
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection minCpuPlatform */
+                    minCpuPlatform?: (string|null);
 
                     /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection rank */
                     rank?: (number|null);
@@ -102239,8 +102828,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.compute.v1.IInstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection);
 
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection disks. */
+                    public disks: google.cloud.compute.v1.IAttachedDisk[];
+
                     /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection machineTypes. */
                     public machineTypes: string[];
+
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection minCpuPlatform. */
+                    public minCpuPlatform?: (string|null);
 
                     /** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection rank. */
                     public rank?: (number|null);
@@ -122079,6 +122674,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InterconnectsSetNameRequest. */
+                interface IInterconnectsSetNameRequest {
+
+                    /** InterconnectsSetNameRequest currentName */
+                    currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an InterconnectsSetNameRequest. */
+                class InterconnectsSetNameRequest implements IInterconnectsSetNameRequest {
+
+                    /**
+                     * Constructs a new InterconnectsSetNameRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IInterconnectsSetNameRequest);
+
+                    /** InterconnectsSetNameRequest currentName. */
+                    public currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name. */
+                    public name?: (string|null);
+
+                    /**
+                     * Creates a new InterconnectsSetNameRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectsSetNameRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IInterconnectsSetNameRequest): google.cloud.compute.v1.InterconnectsSetNameRequest;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message. Does not implicitly {@link google.cloud.compute.v1.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.InterconnectsSetNameRequest;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.InterconnectsSetNameRequest;
+
+                    /**
+                     * Verifies an InterconnectsSetNameRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectsSetNameRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectsSetNameRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.InterconnectsSetNameRequest;
+
+                    /**
+                     * Creates a plain object from an InterconnectsSetNameRequest message. Also converts values to other types if specified.
+                     * @param message InterconnectsSetNameRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.InterconnectsSetNameRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectsSetNameRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectsSetNameRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Interval. */
                 interface IInterval {
 
@@ -123392,9 +124090,6 @@ export namespace google {
                     /** ListAcceleratorTypesRequest project */
                     project?: (string|null);
 
-                    /** ListAcceleratorTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListAcceleratorTypesRequest zone */
                     zone?: (string|null);
                 }
@@ -123422,9 +124117,6 @@ export namespace google {
 
                     /** ListAcceleratorTypesRequest project. */
                     public project: string;
-
-                    /** ListAcceleratorTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListAcceleratorTypesRequest zone. */
                     public zone: string;
@@ -123527,9 +124219,6 @@ export namespace google {
 
                     /** ListAddressesRequest region */
                     region?: (string|null);
-
-                    /** ListAddressesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListAddressesRequest. */
@@ -123558,9 +124247,6 @@ export namespace google {
 
                     /** ListAddressesRequest region. */
                     public region: string;
-
-                    /** ListAddressesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListAddressesRequest instance using the specified properties.
@@ -123858,9 +124544,6 @@ export namespace google {
                     /** ListAutoscalersRequest project */
                     project?: (string|null);
 
-                    /** ListAutoscalersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListAutoscalersRequest zone */
                     zone?: (string|null);
                 }
@@ -123888,9 +124571,6 @@ export namespace google {
 
                     /** ListAutoscalersRequest project. */
                     public project: string;
-
-                    /** ListAutoscalersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListAutoscalersRequest zone. */
                     public zone: string;
@@ -123993,9 +124673,6 @@ export namespace google {
 
                     /** ListAvailableFeaturesRegionSslPoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListAvailableFeaturesRegionSslPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListAvailableFeaturesRegionSslPoliciesRequest. */
@@ -124024,9 +124701,6 @@ export namespace google {
 
                     /** ListAvailableFeaturesRegionSslPoliciesRequest region. */
                     public region: string;
-
-                    /** ListAvailableFeaturesRegionSslPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListAvailableFeaturesRegionSslPoliciesRequest instance using the specified properties.
@@ -124123,9 +124797,6 @@ export namespace google {
 
                     /** ListAvailableFeaturesSslPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListAvailableFeaturesSslPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListAvailableFeaturesSslPoliciesRequest. */
@@ -124151,9 +124822,6 @@ export namespace google {
 
                     /** ListAvailableFeaturesSslPoliciesRequest project. */
                     public project: string;
-
-                    /** ListAvailableFeaturesSslPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListAvailableFeaturesSslPoliciesRequest instance using the specified properties.
@@ -124250,9 +124918,6 @@ export namespace google {
 
                     /** ListBackendBucketsRequest project */
                     project?: (string|null);
-
-                    /** ListBackendBucketsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListBackendBucketsRequest. */
@@ -124278,9 +124943,6 @@ export namespace google {
 
                     /** ListBackendBucketsRequest project. */
                     public project: string;
-
-                    /** ListBackendBucketsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListBackendBucketsRequest instance using the specified properties.
@@ -124377,9 +125039,6 @@ export namespace google {
 
                     /** ListBackendServicesRequest project */
                     project?: (string|null);
-
-                    /** ListBackendServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListBackendServicesRequest. */
@@ -124405,9 +125064,6 @@ export namespace google {
 
                     /** ListBackendServicesRequest project. */
                     public project: string;
-
-                    /** ListBackendServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListBackendServicesRequest instance using the specified properties.
@@ -124520,9 +125176,6 @@ export namespace google {
                     /** ListBgpRoutesRoutersRequest region */
                     region?: (string|null);
 
-                    /** ListBgpRoutesRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListBgpRoutesRoutersRequest routeType */
                     routeType?: (string|null);
 
@@ -124568,9 +125221,6 @@ export namespace google {
 
                     /** ListBgpRoutesRoutersRequest region. */
                     public region: string;
-
-                    /** ListBgpRoutesRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListBgpRoutesRoutersRequest routeType. */
                     public routeType?: (string|null);
@@ -124692,9 +125342,6 @@ export namespace google {
 
                     /** ListCrossSiteNetworksRequest project */
                     project?: (string|null);
-
-                    /** ListCrossSiteNetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListCrossSiteNetworksRequest. */
@@ -124720,9 +125367,6 @@ export namespace google {
 
                     /** ListCrossSiteNetworksRequest project. */
                     public project: string;
-
-                    /** ListCrossSiteNetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListCrossSiteNetworksRequest instance using the specified properties.
@@ -124820,9 +125464,6 @@ export namespace google {
                     /** ListDiskTypesRequest project */
                     project?: (string|null);
 
-                    /** ListDiskTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListDiskTypesRequest zone */
                     zone?: (string|null);
                 }
@@ -124850,9 +125491,6 @@ export namespace google {
 
                     /** ListDiskTypesRequest project. */
                     public project: string;
-
-                    /** ListDiskTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListDiskTypesRequest zone. */
                     public zone: string;
@@ -124953,9 +125591,6 @@ export namespace google {
                     /** ListDisksRequest project */
                     project?: (string|null);
 
-                    /** ListDisksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListDisksRequest zone */
                     zone?: (string|null);
                 }
@@ -124983,9 +125618,6 @@ export namespace google {
 
                     /** ListDisksRequest project. */
                     public project: string;
-
-                    /** ListDisksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListDisksRequest zone. */
                     public zone: string;
@@ -125086,9 +125718,6 @@ export namespace google {
                     /** ListDisksStoragePoolsRequest project */
                     project?: (string|null);
 
-                    /** ListDisksStoragePoolsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListDisksStoragePoolsRequest storagePool */
                     storagePool?: (string|null);
 
@@ -125119,9 +125748,6 @@ export namespace google {
 
                     /** ListDisksStoragePoolsRequest project. */
                     public project: string;
-
-                    /** ListDisksStoragePoolsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListDisksStoragePoolsRequest storagePool. */
                     public storagePool: string;
@@ -125228,9 +125854,6 @@ export namespace google {
                     /** ListErrorsInstanceGroupManagersRequest project */
                     project?: (string|null);
 
-                    /** ListErrorsInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListErrorsInstanceGroupManagersRequest zone */
                     zone?: (string|null);
                 }
@@ -125261,9 +125884,6 @@ export namespace google {
 
                     /** ListErrorsInstanceGroupManagersRequest project. */
                     public project: string;
-
-                    /** ListErrorsInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListErrorsInstanceGroupManagersRequest zone. */
                     public zone: string;
@@ -125369,9 +125989,6 @@ export namespace google {
 
                     /** ListErrorsRegionInstanceGroupManagersRequest region */
                     region?: (string|null);
-
-                    /** ListErrorsRegionInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListErrorsRegionInstanceGroupManagersRequest. */
@@ -125403,9 +126020,6 @@ export namespace google {
 
                     /** ListErrorsRegionInstanceGroupManagersRequest region. */
                     public region: string;
-
-                    /** ListErrorsRegionInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListErrorsRegionInstanceGroupManagersRequest instance using the specified properties.
@@ -125502,9 +126116,6 @@ export namespace google {
 
                     /** ListExternalVpnGatewaysRequest project */
                     project?: (string|null);
-
-                    /** ListExternalVpnGatewaysRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListExternalVpnGatewaysRequest. */
@@ -125530,9 +126141,6 @@ export namespace google {
 
                     /** ListExternalVpnGatewaysRequest project. */
                     public project: string;
-
-                    /** ListExternalVpnGatewaysRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListExternalVpnGatewaysRequest instance using the specified properties.
@@ -125629,9 +126237,6 @@ export namespace google {
 
                     /** ListFirewallPoliciesRequest parentId */
                     parentId?: (string|null);
-
-                    /** ListFirewallPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListFirewallPoliciesRequest. */
@@ -125657,9 +126262,6 @@ export namespace google {
 
                     /** ListFirewallPoliciesRequest parentId. */
                     public parentId?: (string|null);
-
-                    /** ListFirewallPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListFirewallPoliciesRequest instance using the specified properties.
@@ -125756,9 +126358,6 @@ export namespace google {
 
                     /** ListFirewallsRequest project */
                     project?: (string|null);
-
-                    /** ListFirewallsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListFirewallsRequest. */
@@ -125784,9 +126383,6 @@ export namespace google {
 
                     /** ListFirewallsRequest project. */
                     public project: string;
-
-                    /** ListFirewallsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListFirewallsRequest instance using the specified properties.
@@ -125886,9 +126482,6 @@ export namespace google {
 
                     /** ListForwardingRulesRequest region */
                     region?: (string|null);
-
-                    /** ListForwardingRulesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListForwardingRulesRequest. */
@@ -125917,9 +126510,6 @@ export namespace google {
 
                     /** ListForwardingRulesRequest region. */
                     public region: string;
-
-                    /** ListForwardingRulesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListForwardingRulesRequest instance using the specified properties.
@@ -126017,9 +126607,6 @@ export namespace google {
                     /** ListFutureReservationsRequest project */
                     project?: (string|null);
 
-                    /** ListFutureReservationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListFutureReservationsRequest zone */
                     zone?: (string|null);
                 }
@@ -126047,9 +126634,6 @@ export namespace google {
 
                     /** ListFutureReservationsRequest project. */
                     public project: string;
-
-                    /** ListFutureReservationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListFutureReservationsRequest zone. */
                     public zone: string;
@@ -126149,9 +126733,6 @@ export namespace google {
 
                     /** ListGlobalAddressesRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalAddressesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalAddressesRequest. */
@@ -126177,9 +126758,6 @@ export namespace google {
 
                     /** ListGlobalAddressesRequest project. */
                     public project: string;
-
-                    /** ListGlobalAddressesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalAddressesRequest instance using the specified properties.
@@ -126276,9 +126854,6 @@ export namespace google {
 
                     /** ListGlobalForwardingRulesRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalForwardingRulesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalForwardingRulesRequest. */
@@ -126304,9 +126879,6 @@ export namespace google {
 
                     /** ListGlobalForwardingRulesRequest project. */
                     public project: string;
-
-                    /** ListGlobalForwardingRulesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalForwardingRulesRequest instance using the specified properties.
@@ -126403,9 +126975,6 @@ export namespace google {
 
                     /** ListGlobalNetworkEndpointGroupsRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalNetworkEndpointGroupsRequest. */
@@ -126431,9 +127000,6 @@ export namespace google {
 
                     /** ListGlobalNetworkEndpointGroupsRequest project. */
                     public project: string;
-
-                    /** ListGlobalNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalNetworkEndpointGroupsRequest instance using the specified properties.
@@ -126530,9 +127096,6 @@ export namespace google {
 
                     /** ListGlobalOperationsRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalOperationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalOperationsRequest. */
@@ -126558,9 +127121,6 @@ export namespace google {
 
                     /** ListGlobalOperationsRequest project. */
                     public project: string;
-
-                    /** ListGlobalOperationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalOperationsRequest instance using the specified properties.
@@ -126657,9 +127217,6 @@ export namespace google {
 
                     /** ListGlobalOrganizationOperationsRequest parentId */
                     parentId?: (string|null);
-
-                    /** ListGlobalOrganizationOperationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalOrganizationOperationsRequest. */
@@ -126685,9 +127242,6 @@ export namespace google {
 
                     /** ListGlobalOrganizationOperationsRequest parentId. */
                     public parentId?: (string|null);
-
-                    /** ListGlobalOrganizationOperationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalOrganizationOperationsRequest instance using the specified properties.
@@ -126784,9 +127338,6 @@ export namespace google {
 
                     /** ListGlobalPublicDelegatedPrefixesRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalPublicDelegatedPrefixesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalPublicDelegatedPrefixesRequest. */
@@ -126812,9 +127363,6 @@ export namespace google {
 
                     /** ListGlobalPublicDelegatedPrefixesRequest project. */
                     public project: string;
-
-                    /** ListGlobalPublicDelegatedPrefixesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalPublicDelegatedPrefixesRequest instance using the specified properties.
@@ -126911,9 +127459,6 @@ export namespace google {
 
                     /** ListGlobalVmExtensionPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListGlobalVmExtensionPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGlobalVmExtensionPoliciesRequest. */
@@ -126939,9 +127484,6 @@ export namespace google {
 
                     /** ListGlobalVmExtensionPoliciesRequest project. */
                     public project: string;
-
-                    /** ListGlobalVmExtensionPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListGlobalVmExtensionPoliciesRequest instance using the specified properties.
@@ -127038,9 +127580,6 @@ export namespace google {
 
                     /** ListHealthChecksRequest project */
                     project?: (string|null);
-
-                    /** ListHealthChecksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListHealthChecksRequest. */
@@ -127066,9 +127605,6 @@ export namespace google {
 
                     /** ListHealthChecksRequest project. */
                     public project: string;
-
-                    /** ListHealthChecksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListHealthChecksRequest instance using the specified properties.
@@ -127169,9 +127705,6 @@ export namespace google {
                     /** ListHostsRequest project */
                     project?: (string|null);
 
-                    /** ListHostsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListHostsRequest zone */
                     zone?: (string|null);
                 }
@@ -127202,9 +127735,6 @@ export namespace google {
 
                     /** ListHostsRequest project. */
                     public project: string;
-
-                    /** ListHostsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListHostsRequest zone. */
                     public zone: string;
@@ -127287,6 +127817,133 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListImageViewsRequest. */
+                interface IListImageViewsRequest {
+
+                    /** ListImageViewsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListImageViewsRequest maxResults */
+                    maxResults?: (number|null);
+
+                    /** ListImageViewsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListImageViewsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListImageViewsRequest project */
+                    project?: (string|null);
+
+                    /** ListImageViewsRequest region */
+                    region?: (string|null);
+                }
+
+                /** Represents a ListImageViewsRequest. */
+                class ListImageViewsRequest implements IListImageViewsRequest {
+
+                    /**
+                     * Constructs a new ListImageViewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IListImageViewsRequest);
+
+                    /** ListImageViewsRequest filter. */
+                    public filter?: (string|null);
+
+                    /** ListImageViewsRequest maxResults. */
+                    public maxResults?: (number|null);
+
+                    /** ListImageViewsRequest orderBy. */
+                    public orderBy?: (string|null);
+
+                    /** ListImageViewsRequest pageToken. */
+                    public pageToken?: (string|null);
+
+                    /** ListImageViewsRequest project. */
+                    public project: string;
+
+                    /** ListImageViewsRequest region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new ListImageViewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageViewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IListImageViewsRequest): google.cloud.compute.v1.ListImageViewsRequest;
+
+                    /**
+                     * Encodes the specified ListImageViewsRequest message. Does not implicitly {@link google.cloud.compute.v1.ListImageViewsRequest.verify|verify} messages.
+                     * @param message ListImageViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IListImageViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageViewsRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ListImageViewsRequest.verify|verify} messages.
+                     * @param message ListImageViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IListImageViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageViewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ListImageViewsRequest;
+
+                    /**
+                     * Decodes a ListImageViewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ListImageViewsRequest;
+
+                    /**
+                     * Verifies a ListImageViewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageViewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageViewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ListImageViewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListImageViewsRequest message. Also converts values to other types if specified.
+                     * @param message ListImageViewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ListImageViewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageViewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageViewsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListImagesRequest. */
                 interface IListImagesRequest {
 
@@ -127304,9 +127961,6 @@ export namespace google {
 
                     /** ListImagesRequest project */
                     project?: (string|null);
-
-                    /** ListImagesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListImagesRequest. */
@@ -127332,9 +127986,6 @@ export namespace google {
 
                     /** ListImagesRequest project. */
                     public project: string;
-
-                    /** ListImagesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListImagesRequest instance using the specified properties.
@@ -127435,9 +128086,6 @@ export namespace google {
                     /** ListInstanceGroupManagerResizeRequestsRequest project */
                     project?: (string|null);
 
-                    /** ListInstanceGroupManagerResizeRequestsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstanceGroupManagerResizeRequestsRequest zone */
                     zone?: (string|null);
                 }
@@ -127468,9 +128116,6 @@ export namespace google {
 
                     /** ListInstanceGroupManagerResizeRequestsRequest project. */
                     public project: string;
-
-                    /** ListInstanceGroupManagerResizeRequestsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstanceGroupManagerResizeRequestsRequest zone. */
                     public zone: string;
@@ -127571,9 +128216,6 @@ export namespace google {
                     /** ListInstanceGroupManagersRequest project */
                     project?: (string|null);
 
-                    /** ListInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstanceGroupManagersRequest zone */
                     zone?: (string|null);
                 }
@@ -127601,9 +128243,6 @@ export namespace google {
 
                     /** ListInstanceGroupManagersRequest project. */
                     public project: string;
-
-                    /** ListInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstanceGroupManagersRequest zone. */
                     public zone: string;
@@ -127704,9 +128343,6 @@ export namespace google {
                     /** ListInstanceGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListInstanceGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstanceGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -127734,9 +128370,6 @@ export namespace google {
 
                     /** ListInstanceGroupsRequest project. */
                     public project: string;
-
-                    /** ListInstanceGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstanceGroupsRequest zone. */
                     public zone: string;
@@ -127836,9 +128469,6 @@ export namespace google {
 
                     /** ListInstanceTemplatesRequest project */
                     project?: (string|null);
-
-                    /** ListInstanceTemplatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInstanceTemplatesRequest. */
@@ -127864,9 +128494,6 @@ export namespace google {
 
                     /** ListInstanceTemplatesRequest project. */
                     public project: string;
-
-                    /** ListInstanceTemplatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInstanceTemplatesRequest instance using the specified properties.
@@ -127970,9 +128597,6 @@ export namespace google {
                     /** ListInstancesInstanceGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListInstancesInstanceGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstancesInstanceGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -128006,9 +128630,6 @@ export namespace google {
 
                     /** ListInstancesInstanceGroupsRequest project. */
                     public project: string;
-
-                    /** ListInstancesInstanceGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstancesInstanceGroupsRequest zone. */
                     public zone: string;
@@ -128117,9 +128738,6 @@ export namespace google {
 
                     /** ListInstancesRegionInstanceGroupsRequest regionInstanceGroupsListInstancesRequestResource */
                     regionInstanceGroupsListInstancesRequestResource?: (google.cloud.compute.v1.IRegionInstanceGroupsListInstancesRequest|null);
-
-                    /** ListInstancesRegionInstanceGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInstancesRegionInstanceGroupsRequest. */
@@ -128154,9 +128772,6 @@ export namespace google {
 
                     /** ListInstancesRegionInstanceGroupsRequest regionInstanceGroupsListInstancesRequestResource. */
                     public regionInstanceGroupsListInstancesRequestResource?: (google.cloud.compute.v1.IRegionInstanceGroupsListInstancesRequest|null);
-
-                    /** ListInstancesRegionInstanceGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInstancesRegionInstanceGroupsRequest instance using the specified properties.
@@ -128254,9 +128869,6 @@ export namespace google {
                     /** ListInstancesRequest project */
                     project?: (string|null);
 
-                    /** ListInstancesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstancesRequest zone */
                     zone?: (string|null);
                 }
@@ -128284,9 +128896,6 @@ export namespace google {
 
                     /** ListInstancesRequest project. */
                     public project: string;
-
-                    /** ListInstancesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstancesRequest zone. */
                     public zone: string;
@@ -128526,9 +129135,6 @@ export namespace google {
                     /** ListInstantSnapshotGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListInstantSnapshotGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstantSnapshotGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -128556,9 +129162,6 @@ export namespace google {
 
                     /** ListInstantSnapshotGroupsRequest project. */
                     public project: string;
-
-                    /** ListInstantSnapshotGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstantSnapshotGroupsRequest zone. */
                     public zone: string;
@@ -128659,9 +129262,6 @@ export namespace google {
                     /** ListInstantSnapshotsRequest project */
                     project?: (string|null);
 
-                    /** ListInstantSnapshotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListInstantSnapshotsRequest zone */
                     zone?: (string|null);
                 }
@@ -128689,9 +129289,6 @@ export namespace google {
 
                     /** ListInstantSnapshotsRequest project. */
                     public project: string;
-
-                    /** ListInstantSnapshotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListInstantSnapshotsRequest zone. */
                     public zone: string;
@@ -128791,9 +129388,6 @@ export namespace google {
 
                     /** ListInterconnectAttachmentGroupsRequest project */
                     project?: (string|null);
-
-                    /** ListInterconnectAttachmentGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectAttachmentGroupsRequest. */
@@ -128819,9 +129413,6 @@ export namespace google {
 
                     /** ListInterconnectAttachmentGroupsRequest project. */
                     public project: string;
-
-                    /** ListInterconnectAttachmentGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectAttachmentGroupsRequest instance using the specified properties.
@@ -128921,9 +129512,6 @@ export namespace google {
 
                     /** ListInterconnectAttachmentsRequest region */
                     region?: (string|null);
-
-                    /** ListInterconnectAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectAttachmentsRequest. */
@@ -128952,9 +129540,6 @@ export namespace google {
 
                     /** ListInterconnectAttachmentsRequest region. */
                     public region: string;
-
-                    /** ListInterconnectAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectAttachmentsRequest instance using the specified properties.
@@ -129051,9 +129636,6 @@ export namespace google {
 
                     /** ListInterconnectGroupsRequest project */
                     project?: (string|null);
-
-                    /** ListInterconnectGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectGroupsRequest. */
@@ -129079,9 +129661,6 @@ export namespace google {
 
                     /** ListInterconnectGroupsRequest project. */
                     public project: string;
-
-                    /** ListInterconnectGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectGroupsRequest instance using the specified properties.
@@ -129178,9 +129757,6 @@ export namespace google {
 
                     /** ListInterconnectLocationsRequest project */
                     project?: (string|null);
-
-                    /** ListInterconnectLocationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectLocationsRequest. */
@@ -129206,9 +129782,6 @@ export namespace google {
 
                     /** ListInterconnectLocationsRequest project. */
                     public project: string;
-
-                    /** ListInterconnectLocationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectLocationsRequest instance using the specified properties.
@@ -129305,9 +129878,6 @@ export namespace google {
 
                     /** ListInterconnectRemoteLocationsRequest project */
                     project?: (string|null);
-
-                    /** ListInterconnectRemoteLocationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectRemoteLocationsRequest. */
@@ -129333,9 +129903,6 @@ export namespace google {
 
                     /** ListInterconnectRemoteLocationsRequest project. */
                     public project: string;
-
-                    /** ListInterconnectRemoteLocationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectRemoteLocationsRequest instance using the specified properties.
@@ -129432,9 +129999,6 @@ export namespace google {
 
                     /** ListInterconnectsRequest project */
                     project?: (string|null);
-
-                    /** ListInterconnectsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListInterconnectsRequest. */
@@ -129460,9 +130024,6 @@ export namespace google {
 
                     /** ListInterconnectsRequest project. */
                     public project: string;
-
-                    /** ListInterconnectsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListInterconnectsRequest instance using the specified properties.
@@ -129559,9 +130120,6 @@ export namespace google {
 
                     /** ListLicensesRequest project */
                     project?: (string|null);
-
-                    /** ListLicensesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListLicensesRequest. */
@@ -129587,9 +130145,6 @@ export namespace google {
 
                     /** ListLicensesRequest project. */
                     public project: string;
-
-                    /** ListLicensesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListLicensesRequest instance using the specified properties.
@@ -129686,9 +130241,6 @@ export namespace google {
 
                     /** ListMachineImagesRequest project */
                     project?: (string|null);
-
-                    /** ListMachineImagesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListMachineImagesRequest. */
@@ -129714,9 +130266,6 @@ export namespace google {
 
                     /** ListMachineImagesRequest project. */
                     public project: string;
-
-                    /** ListMachineImagesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListMachineImagesRequest instance using the specified properties.
@@ -129814,9 +130363,6 @@ export namespace google {
                     /** ListMachineTypesRequest project */
                     project?: (string|null);
 
-                    /** ListMachineTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListMachineTypesRequest zone */
                     zone?: (string|null);
                 }
@@ -129844,9 +130390,6 @@ export namespace google {
 
                     /** ListMachineTypesRequest project. */
                     public project: string;
-
-                    /** ListMachineTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListMachineTypesRequest zone. */
                     public zone: string;
@@ -129950,9 +130493,6 @@ export namespace google {
                     /** ListManagedInstancesInstanceGroupManagersRequest project */
                     project?: (string|null);
 
-                    /** ListManagedInstancesInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListManagedInstancesInstanceGroupManagersRequest zone */
                     zone?: (string|null);
                 }
@@ -129983,9 +130523,6 @@ export namespace google {
 
                     /** ListManagedInstancesInstanceGroupManagersRequest project. */
                     public project: string;
-
-                    /** ListManagedInstancesInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListManagedInstancesInstanceGroupManagersRequest zone. */
                     public zone: string;
@@ -130091,9 +130628,6 @@ export namespace google {
 
                     /** ListManagedInstancesRegionInstanceGroupManagersRequest region */
                     region?: (string|null);
-
-                    /** ListManagedInstancesRegionInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListManagedInstancesRegionInstanceGroupManagersRequest. */
@@ -130125,9 +130659,6 @@ export namespace google {
 
                     /** ListManagedInstancesRegionInstanceGroupManagersRequest region. */
                     public region: string;
-
-                    /** ListManagedInstancesRegionInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListManagedInstancesRegionInstanceGroupManagersRequest instance using the specified properties.
@@ -130207,6 +130738,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListManagedRulesetsRequest. */
+                interface IListManagedRulesetsRequest {
+
+                    /** ListManagedRulesetsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListManagedRulesetsRequest maxResults */
+                    maxResults?: (number|null);
+
+                    /** ListManagedRulesetsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListManagedRulesetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListManagedRulesetsRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a ListManagedRulesetsRequest. */
+                class ListManagedRulesetsRequest implements IListManagedRulesetsRequest {
+
+                    /**
+                     * Constructs a new ListManagedRulesetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IListManagedRulesetsRequest);
+
+                    /** ListManagedRulesetsRequest filter. */
+                    public filter?: (string|null);
+
+                    /** ListManagedRulesetsRequest maxResults. */
+                    public maxResults?: (number|null);
+
+                    /** ListManagedRulesetsRequest orderBy. */
+                    public orderBy?: (string|null);
+
+                    /** ListManagedRulesetsRequest pageToken. */
+                    public pageToken?: (string|null);
+
+                    /** ListManagedRulesetsRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new ListManagedRulesetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListManagedRulesetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IListManagedRulesetsRequest): google.cloud.compute.v1.ListManagedRulesetsRequest;
+
+                    /**
+                     * Encodes the specified ListManagedRulesetsRequest message. Does not implicitly {@link google.cloud.compute.v1.ListManagedRulesetsRequest.verify|verify} messages.
+                     * @param message ListManagedRulesetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IListManagedRulesetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListManagedRulesetsRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ListManagedRulesetsRequest.verify|verify} messages.
+                     * @param message ListManagedRulesetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IListManagedRulesetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListManagedRulesetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListManagedRulesetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ListManagedRulesetsRequest;
+
+                    /**
+                     * Decodes a ListManagedRulesetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListManagedRulesetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ListManagedRulesetsRequest;
+
+                    /**
+                     * Verifies a ListManagedRulesetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListManagedRulesetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListManagedRulesetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ListManagedRulesetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListManagedRulesetsRequest message. Also converts values to other types if specified.
+                     * @param message ListManagedRulesetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ListManagedRulesetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListManagedRulesetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListManagedRulesetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListNamedSetsRoutersRequest. */
                 interface IListNamedSetsRoutersRequest {
 
@@ -130227,9 +130879,6 @@ export namespace google {
 
                     /** ListNamedSetsRoutersRequest region */
                     region?: (string|null);
-
-                    /** ListNamedSetsRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
 
                     /** ListNamedSetsRoutersRequest router */
                     router?: (string|null);
@@ -130261,9 +130910,6 @@ export namespace google {
 
                     /** ListNamedSetsRoutersRequest region. */
                     public region: string;
-
-                    /** ListNamedSetsRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNamedSetsRoutersRequest router. */
                     public router: string;
@@ -130366,9 +131012,6 @@ export namespace google {
 
                     /** ListNetworkAttachmentsRequest region */
                     region?: (string|null);
-
-                    /** ListNetworkAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworkAttachmentsRequest. */
@@ -130397,9 +131040,6 @@ export namespace google {
 
                     /** ListNetworkAttachmentsRequest region. */
                     public region: string;
-
-                    /** ListNetworkAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworkAttachmentsRequest instance using the specified properties.
@@ -130497,9 +131137,6 @@ export namespace google {
                     /** ListNetworkEndpointGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListNetworkEndpointGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -130527,9 +131164,6 @@ export namespace google {
 
                     /** ListNetworkEndpointGroupsRequest project. */
                     public project: string;
-
-                    /** ListNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNetworkEndpointGroupsRequest zone. */
                     public zone: string;
@@ -130632,9 +131266,6 @@ export namespace google {
 
                     /** ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest project */
                     project?: (string|null);
-
-                    /** ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest. */
@@ -130663,9 +131294,6 @@ export namespace google {
 
                     /** ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest project. */
                     public project: string;
-
-                    /** ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest instance using the specified properties.
@@ -130769,9 +131397,6 @@ export namespace google {
                     /** ListNetworkEndpointsNetworkEndpointGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListNetworkEndpointsNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListNetworkEndpointsNetworkEndpointGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -130805,9 +131430,6 @@ export namespace google {
 
                     /** ListNetworkEndpointsNetworkEndpointGroupsRequest project. */
                     public project: string;
-
-                    /** ListNetworkEndpointsNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNetworkEndpointsNetworkEndpointGroupsRequest zone. */
                     public zone: string;
@@ -130913,9 +131535,6 @@ export namespace google {
 
                     /** ListNetworkEndpointsRegionNetworkEndpointGroupsRequest region */
                     region?: (string|null);
-
-                    /** ListNetworkEndpointsRegionNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworkEndpointsRegionNetworkEndpointGroupsRequest. */
@@ -130947,9 +131566,6 @@ export namespace google {
 
                     /** ListNetworkEndpointsRegionNetworkEndpointGroupsRequest region. */
                     public region: string;
-
-                    /** ListNetworkEndpointsRegionNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworkEndpointsRegionNetworkEndpointGroupsRequest instance using the specified properties.
@@ -131046,9 +131662,6 @@ export namespace google {
 
                     /** ListNetworkFirewallPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListNetworkFirewallPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworkFirewallPoliciesRequest. */
@@ -131074,9 +131687,6 @@ export namespace google {
 
                     /** ListNetworkFirewallPoliciesRequest project. */
                     public project: string;
-
-                    /** ListNetworkFirewallPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworkFirewallPoliciesRequest instance using the specified properties.
@@ -131173,9 +131783,6 @@ export namespace google {
 
                     /** ListNetworkProfilesRequest project */
                     project?: (string|null);
-
-                    /** ListNetworkProfilesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworkProfilesRequest. */
@@ -131201,9 +131808,6 @@ export namespace google {
 
                     /** ListNetworkProfilesRequest project. */
                     public project: string;
-
-                    /** ListNetworkProfilesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworkProfilesRequest instance using the specified properties.
@@ -131300,9 +131904,6 @@ export namespace google {
 
                     /** ListNetworksRequest project */
                     project?: (string|null);
-
-                    /** ListNetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNetworksRequest. */
@@ -131328,9 +131929,6 @@ export namespace google {
 
                     /** ListNetworksRequest project. */
                     public project: string;
-
-                    /** ListNetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNetworksRequest instance using the specified properties.
@@ -131428,9 +132026,6 @@ export namespace google {
                     /** ListNodeGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListNodeGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListNodeGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -131458,9 +132053,6 @@ export namespace google {
 
                     /** ListNodeGroupsRequest project. */
                     public project: string;
-
-                    /** ListNodeGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNodeGroupsRequest zone. */
                     public zone: string;
@@ -131563,9 +132155,6 @@ export namespace google {
 
                     /** ListNodeTemplatesRequest region */
                     region?: (string|null);
-
-                    /** ListNodeTemplatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListNodeTemplatesRequest. */
@@ -131594,9 +132183,6 @@ export namespace google {
 
                     /** ListNodeTemplatesRequest region. */
                     public region: string;
-
-                    /** ListNodeTemplatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListNodeTemplatesRequest instance using the specified properties.
@@ -131694,9 +132280,6 @@ export namespace google {
                     /** ListNodeTypesRequest project */
                     project?: (string|null);
 
-                    /** ListNodeTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListNodeTypesRequest zone */
                     zone?: (string|null);
                 }
@@ -131724,9 +132307,6 @@ export namespace google {
 
                     /** ListNodeTypesRequest project. */
                     public project: string;
-
-                    /** ListNodeTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNodeTypesRequest zone. */
                     public zone: string;
@@ -131830,9 +132410,6 @@ export namespace google {
                     /** ListNodesNodeGroupsRequest project */
                     project?: (string|null);
 
-                    /** ListNodesNodeGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListNodesNodeGroupsRequest zone */
                     zone?: (string|null);
                 }
@@ -131863,9 +132440,6 @@ export namespace google {
 
                     /** ListNodesNodeGroupsRequest project. */
                     public project: string;
-
-                    /** ListNodesNodeGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListNodesNodeGroupsRequest zone. */
                     public zone: string;
@@ -131965,9 +132539,6 @@ export namespace google {
 
                     /** ListOrganizationSecurityPoliciesRequest parentId */
                     parentId?: (string|null);
-
-                    /** ListOrganizationSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListOrganizationSecurityPoliciesRequest. */
@@ -131993,9 +132564,6 @@ export namespace google {
 
                     /** ListOrganizationSecurityPoliciesRequest parentId. */
                     public parentId?: (string|null);
-
-                    /** ListOrganizationSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListOrganizationSecurityPoliciesRequest instance using the specified properties.
@@ -132095,9 +132663,6 @@ export namespace google {
 
                     /** ListPacketMirroringsRequest region */
                     region?: (string|null);
-
-                    /** ListPacketMirroringsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPacketMirroringsRequest. */
@@ -132126,9 +132691,6 @@ export namespace google {
 
                     /** ListPacketMirroringsRequest region. */
                     public region: string;
-
-                    /** ListPacketMirroringsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPacketMirroringsRequest instance using the specified properties.
@@ -132237,9 +132799,6 @@ export namespace google {
 
                     /** ListPeeringRoutesNetworksRequest region */
                     region?: (string|null);
-
-                    /** ListPeeringRoutesNetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPeeringRoutesNetworksRequest. */
@@ -132277,9 +132836,6 @@ export namespace google {
 
                     /** ListPeeringRoutesNetworksRequest region. */
                     public region?: (string|null);
-
-                    /** ListPeeringRoutesNetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPeeringRoutesNetworksRequest instance using the specified properties.
@@ -132390,9 +132946,6 @@ export namespace google {
                     /** ListPerInstanceConfigsInstanceGroupManagersRequest project */
                     project?: (string|null);
 
-                    /** ListPerInstanceConfigsInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListPerInstanceConfigsInstanceGroupManagersRequest zone */
                     zone?: (string|null);
                 }
@@ -132423,9 +132976,6 @@ export namespace google {
 
                     /** ListPerInstanceConfigsInstanceGroupManagersRequest project. */
                     public project: string;
-
-                    /** ListPerInstanceConfigsInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListPerInstanceConfigsInstanceGroupManagersRequest zone. */
                     public zone: string;
@@ -132531,9 +133081,6 @@ export namespace google {
 
                     /** ListPerInstanceConfigsRegionInstanceGroupManagersRequest region */
                     region?: (string|null);
-
-                    /** ListPerInstanceConfigsRegionInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPerInstanceConfigsRegionInstanceGroupManagersRequest. */
@@ -132565,9 +133112,6 @@ export namespace google {
 
                     /** ListPerInstanceConfigsRegionInstanceGroupManagersRequest region. */
                     public region: string;
-
-                    /** ListPerInstanceConfigsRegionInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPerInstanceConfigsRegionInstanceGroupManagersRequest instance using the specified properties.
@@ -132664,9 +133208,6 @@ export namespace google {
 
                     /** ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest parentId */
                     parentId?: (string|null);
-
-                    /** ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest. */
@@ -132692,9 +133233,6 @@ export namespace google {
 
                     /** ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest parentId. */
                     public parentId?: (string|null);
-
-                    /** ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest instance using the specified properties.
@@ -132791,9 +133329,6 @@ export namespace google {
 
                     /** ListPreconfiguredExpressionSetsSecurityPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListPreconfiguredExpressionSetsSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPreconfiguredExpressionSetsSecurityPoliciesRequest. */
@@ -132819,9 +133354,6 @@ export namespace google {
 
                     /** ListPreconfiguredExpressionSetsSecurityPoliciesRequest project. */
                     public project: string;
-
-                    /** ListPreconfiguredExpressionSetsSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPreconfiguredExpressionSetsSecurityPoliciesRequest instance using the specified properties.
@@ -132918,9 +133450,6 @@ export namespace google {
 
                     /** ListPreviewFeaturesRequest project */
                     project?: (string|null);
-
-                    /** ListPreviewFeaturesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPreviewFeaturesRequest. */
@@ -132946,9 +133475,6 @@ export namespace google {
 
                     /** ListPreviewFeaturesRequest project. */
                     public project: string;
-
-                    /** ListPreviewFeaturesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPreviewFeaturesRequest instance using the specified properties.
@@ -133045,9 +133571,6 @@ export namespace google {
 
                     /** ListPublicAdvertisedPrefixesRequest project */
                     project?: (string|null);
-
-                    /** ListPublicAdvertisedPrefixesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPublicAdvertisedPrefixesRequest. */
@@ -133073,9 +133596,6 @@ export namespace google {
 
                     /** ListPublicAdvertisedPrefixesRequest project. */
                     public project: string;
-
-                    /** ListPublicAdvertisedPrefixesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPublicAdvertisedPrefixesRequest instance using the specified properties.
@@ -133175,9 +133695,6 @@ export namespace google {
 
                     /** ListPublicDelegatedPrefixesRequest region */
                     region?: (string|null);
-
-                    /** ListPublicDelegatedPrefixesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListPublicDelegatedPrefixesRequest. */
@@ -133206,9 +133723,6 @@ export namespace google {
 
                     /** ListPublicDelegatedPrefixesRequest region. */
                     public region: string;
-
-                    /** ListPublicDelegatedPrefixesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListPublicDelegatedPrefixesRequest instance using the specified properties.
@@ -133309,9 +133823,6 @@ export namespace google {
                     /** ListReferrersInstancesRequest project */
                     project?: (string|null);
 
-                    /** ListReferrersInstancesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListReferrersInstancesRequest zone */
                     zone?: (string|null);
                 }
@@ -133342,9 +133853,6 @@ export namespace google {
 
                     /** ListReferrersInstancesRequest project. */
                     public project: string;
-
-                    /** ListReferrersInstancesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListReferrersInstancesRequest zone. */
                     public zone: string;
@@ -133447,9 +133955,6 @@ export namespace google {
 
                     /** ListRegionAutoscalersRequest region */
                     region?: (string|null);
-
-                    /** ListRegionAutoscalersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionAutoscalersRequest. */
@@ -133478,9 +133983,6 @@ export namespace google {
 
                     /** ListRegionAutoscalersRequest region. */
                     public region: string;
-
-                    /** ListRegionAutoscalersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionAutoscalersRequest instance using the specified properties.
@@ -133580,9 +134082,6 @@ export namespace google {
 
                     /** ListRegionBackendBucketsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionBackendBucketsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionBackendBucketsRequest. */
@@ -133611,9 +134110,6 @@ export namespace google {
 
                     /** ListRegionBackendBucketsRequest region. */
                     public region: string;
-
-                    /** ListRegionBackendBucketsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionBackendBucketsRequest instance using the specified properties.
@@ -133713,9 +134209,6 @@ export namespace google {
 
                     /** ListRegionBackendServicesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionBackendServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionBackendServicesRequest. */
@@ -133744,9 +134237,6 @@ export namespace google {
 
                     /** ListRegionBackendServicesRequest region. */
                     public region: string;
-
-                    /** ListRegionBackendServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionBackendServicesRequest instance using the specified properties.
@@ -133846,9 +134336,6 @@ export namespace google {
 
                     /** ListRegionCommitmentsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionCommitmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionCommitmentsRequest. */
@@ -133877,9 +134364,6 @@ export namespace google {
 
                     /** ListRegionCommitmentsRequest region. */
                     public region: string;
-
-                    /** ListRegionCommitmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionCommitmentsRequest instance using the specified properties.
@@ -133979,9 +134463,6 @@ export namespace google {
 
                     /** ListRegionCompositeHealthChecksRequest region */
                     region?: (string|null);
-
-                    /** ListRegionCompositeHealthChecksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionCompositeHealthChecksRequest. */
@@ -134010,9 +134491,6 @@ export namespace google {
 
                     /** ListRegionCompositeHealthChecksRequest region. */
                     public region: string;
-
-                    /** ListRegionCompositeHealthChecksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionCompositeHealthChecksRequest instance using the specified properties.
@@ -134112,9 +134590,6 @@ export namespace google {
 
                     /** ListRegionDiskTypesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionDiskTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionDiskTypesRequest. */
@@ -134143,9 +134618,6 @@ export namespace google {
 
                     /** ListRegionDiskTypesRequest region. */
                     public region: string;
-
-                    /** ListRegionDiskTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionDiskTypesRequest instance using the specified properties.
@@ -134245,9 +134717,6 @@ export namespace google {
 
                     /** ListRegionDisksRequest region */
                     region?: (string|null);
-
-                    /** ListRegionDisksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionDisksRequest. */
@@ -134276,9 +134745,6 @@ export namespace google {
 
                     /** ListRegionDisksRequest region. */
                     public region: string;
-
-                    /** ListRegionDisksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionDisksRequest instance using the specified properties.
@@ -134378,9 +134844,6 @@ export namespace google {
 
                     /** ListRegionHealthAggregationPoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionHealthAggregationPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionHealthAggregationPoliciesRequest. */
@@ -134409,9 +134872,6 @@ export namespace google {
 
                     /** ListRegionHealthAggregationPoliciesRequest region. */
                     public region: string;
-
-                    /** ListRegionHealthAggregationPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionHealthAggregationPoliciesRequest instance using the specified properties.
@@ -134511,9 +134971,6 @@ export namespace google {
 
                     /** ListRegionHealthCheckServicesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionHealthCheckServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionHealthCheckServicesRequest. */
@@ -134542,9 +134999,6 @@ export namespace google {
 
                     /** ListRegionHealthCheckServicesRequest region. */
                     public region: string;
-
-                    /** ListRegionHealthCheckServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionHealthCheckServicesRequest instance using the specified properties.
@@ -134644,9 +135098,6 @@ export namespace google {
 
                     /** ListRegionHealthChecksRequest region */
                     region?: (string|null);
-
-                    /** ListRegionHealthChecksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionHealthChecksRequest. */
@@ -134675,9 +135126,6 @@ export namespace google {
 
                     /** ListRegionHealthChecksRequest region. */
                     public region: string;
-
-                    /** ListRegionHealthChecksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionHealthChecksRequest instance using the specified properties.
@@ -134777,9 +135225,6 @@ export namespace google {
 
                     /** ListRegionHealthSourcesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionHealthSourcesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionHealthSourcesRequest. */
@@ -134808,9 +135253,6 @@ export namespace google {
 
                     /** ListRegionHealthSourcesRequest region. */
                     public region: string;
-
-                    /** ListRegionHealthSourcesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionHealthSourcesRequest instance using the specified properties.
@@ -134913,9 +135355,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupManagerResizeRequestsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstanceGroupManagerResizeRequestsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstanceGroupManagerResizeRequestsRequest. */
@@ -134947,9 +135386,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupManagerResizeRequestsRequest region. */
                     public region: string;
-
-                    /** ListRegionInstanceGroupManagerResizeRequestsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstanceGroupManagerResizeRequestsRequest instance using the specified properties.
@@ -135049,9 +135485,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupManagersRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstanceGroupManagersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstanceGroupManagersRequest. */
@@ -135080,9 +135513,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupManagersRequest region. */
                     public region: string;
-
-                    /** ListRegionInstanceGroupManagersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstanceGroupManagersRequest instance using the specified properties.
@@ -135182,9 +135612,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstanceGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstanceGroupsRequest. */
@@ -135213,9 +135640,6 @@ export namespace google {
 
                     /** ListRegionInstanceGroupsRequest region. */
                     public region: string;
-
-                    /** ListRegionInstanceGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstanceGroupsRequest instance using the specified properties.
@@ -135315,9 +135739,6 @@ export namespace google {
 
                     /** ListRegionInstanceTemplatesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstanceTemplatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstanceTemplatesRequest. */
@@ -135346,9 +135767,6 @@ export namespace google {
 
                     /** ListRegionInstanceTemplatesRequest region. */
                     public region: string;
-
-                    /** ListRegionInstanceTemplatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstanceTemplatesRequest instance using the specified properties.
@@ -135448,9 +135866,6 @@ export namespace google {
 
                     /** ListRegionInstantSnapshotGroupsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstantSnapshotGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstantSnapshotGroupsRequest. */
@@ -135479,9 +135894,6 @@ export namespace google {
 
                     /** ListRegionInstantSnapshotGroupsRequest region. */
                     public region: string;
-
-                    /** ListRegionInstantSnapshotGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstantSnapshotGroupsRequest instance using the specified properties.
@@ -135581,9 +135993,6 @@ export namespace google {
 
                     /** ListRegionInstantSnapshotsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionInstantSnapshotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionInstantSnapshotsRequest. */
@@ -135612,9 +136021,6 @@ export namespace google {
 
                     /** ListRegionInstantSnapshotsRequest region. */
                     public region: string;
-
-                    /** ListRegionInstantSnapshotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionInstantSnapshotsRequest instance using the specified properties.
@@ -135714,9 +136120,6 @@ export namespace google {
 
                     /** ListRegionNetworkEndpointGroupsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionNetworkEndpointGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionNetworkEndpointGroupsRequest. */
@@ -135745,9 +136148,6 @@ export namespace google {
 
                     /** ListRegionNetworkEndpointGroupsRequest region. */
                     public region: string;
-
-                    /** ListRegionNetworkEndpointGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionNetworkEndpointGroupsRequest instance using the specified properties.
@@ -135847,9 +136247,6 @@ export namespace google {
 
                     /** ListRegionNetworkFirewallPoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionNetworkFirewallPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionNetworkFirewallPoliciesRequest. */
@@ -135878,9 +136275,6 @@ export namespace google {
 
                     /** ListRegionNetworkFirewallPoliciesRequest region. */
                     public region: string;
-
-                    /** ListRegionNetworkFirewallPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionNetworkFirewallPoliciesRequest instance using the specified properties.
@@ -135980,9 +136374,6 @@ export namespace google {
 
                     /** ListRegionNotificationEndpointsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionNotificationEndpointsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionNotificationEndpointsRequest. */
@@ -136011,9 +136402,6 @@ export namespace google {
 
                     /** ListRegionNotificationEndpointsRequest region. */
                     public region: string;
-
-                    /** ListRegionNotificationEndpointsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionNotificationEndpointsRequest instance using the specified properties.
@@ -136113,9 +136501,6 @@ export namespace google {
 
                     /** ListRegionOperationsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionOperationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionOperationsRequest. */
@@ -136144,9 +136529,6 @@ export namespace google {
 
                     /** ListRegionOperationsRequest region. */
                     public region: string;
-
-                    /** ListRegionOperationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionOperationsRequest instance using the specified properties.
@@ -136246,9 +136628,6 @@ export namespace google {
 
                     /** ListRegionSecurityPoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionSecurityPoliciesRequest. */
@@ -136277,9 +136656,6 @@ export namespace google {
 
                     /** ListRegionSecurityPoliciesRequest region. */
                     public region: string;
-
-                    /** ListRegionSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionSecurityPoliciesRequest instance using the specified properties.
@@ -136379,9 +136755,6 @@ export namespace google {
 
                     /** ListRegionSnapshotsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionSnapshotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionSnapshotsRequest. */
@@ -136410,9 +136783,6 @@ export namespace google {
 
                     /** ListRegionSnapshotsRequest region. */
                     public region: string;
-
-                    /** ListRegionSnapshotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionSnapshotsRequest instance using the specified properties.
@@ -136512,9 +136882,6 @@ export namespace google {
 
                     /** ListRegionSslCertificatesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionSslCertificatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionSslCertificatesRequest. */
@@ -136543,9 +136910,6 @@ export namespace google {
 
                     /** ListRegionSslCertificatesRequest region. */
                     public region: string;
-
-                    /** ListRegionSslCertificatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionSslCertificatesRequest instance using the specified properties.
@@ -136645,9 +137009,6 @@ export namespace google {
 
                     /** ListRegionSslPoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionSslPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionSslPoliciesRequest. */
@@ -136676,9 +137037,6 @@ export namespace google {
 
                     /** ListRegionSslPoliciesRequest region. */
                     public region: string;
-
-                    /** ListRegionSslPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionSslPoliciesRequest instance using the specified properties.
@@ -136778,9 +137136,6 @@ export namespace google {
 
                     /** ListRegionTargetHttpProxiesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionTargetHttpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionTargetHttpProxiesRequest. */
@@ -136809,9 +137164,6 @@ export namespace google {
 
                     /** ListRegionTargetHttpProxiesRequest region. */
                     public region: string;
-
-                    /** ListRegionTargetHttpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionTargetHttpProxiesRequest instance using the specified properties.
@@ -136911,9 +137263,6 @@ export namespace google {
 
                     /** ListRegionTargetHttpsProxiesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionTargetHttpsProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionTargetHttpsProxiesRequest. */
@@ -136942,9 +137291,6 @@ export namespace google {
 
                     /** ListRegionTargetHttpsProxiesRequest region. */
                     public region: string;
-
-                    /** ListRegionTargetHttpsProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionTargetHttpsProxiesRequest instance using the specified properties.
@@ -137044,9 +137390,6 @@ export namespace google {
 
                     /** ListRegionTargetTcpProxiesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionTargetTcpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionTargetTcpProxiesRequest. */
@@ -137075,9 +137418,6 @@ export namespace google {
 
                     /** ListRegionTargetTcpProxiesRequest region. */
                     public region: string;
-
-                    /** ListRegionTargetTcpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionTargetTcpProxiesRequest instance using the specified properties.
@@ -137177,9 +137517,6 @@ export namespace google {
 
                     /** ListRegionUrlMapsRequest region */
                     region?: (string|null);
-
-                    /** ListRegionUrlMapsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionUrlMapsRequest. */
@@ -137208,9 +137545,6 @@ export namespace google {
 
                     /** ListRegionUrlMapsRequest region. */
                     public region: string;
-
-                    /** ListRegionUrlMapsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionUrlMapsRequest instance using the specified properties.
@@ -137310,9 +137644,6 @@ export namespace google {
 
                     /** ListRegionZonesRequest region */
                     region?: (string|null);
-
-                    /** ListRegionZonesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionZonesRequest. */
@@ -137341,9 +137672,6 @@ export namespace google {
 
                     /** ListRegionZonesRequest region. */
                     public region: string;
-
-                    /** ListRegionZonesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionZonesRequest instance using the specified properties.
@@ -137440,9 +137768,6 @@ export namespace google {
 
                     /** ListRegionsRequest project */
                     project?: (string|null);
-
-                    /** ListRegionsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRegionsRequest. */
@@ -137468,9 +137793,6 @@ export namespace google {
 
                     /** ListRegionsRequest project. */
                     public project: string;
-
-                    /** ListRegionsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRegionsRequest instance using the specified properties.
@@ -137567,9 +137889,6 @@ export namespace google {
 
                     /** ListReliabilityRisksRequest project */
                     project?: (string|null);
-
-                    /** ListReliabilityRisksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListReliabilityRisksRequest. */
@@ -137595,9 +137914,6 @@ export namespace google {
 
                     /** ListReliabilityRisksRequest project. */
                     public project: string;
-
-                    /** ListReliabilityRisksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListReliabilityRisksRequest instance using the specified properties.
@@ -137698,9 +138014,6 @@ export namespace google {
                     /** ListReservationBlocksRequest reservation */
                     reservation?: (string|null);
 
-                    /** ListReservationBlocksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListReservationBlocksRequest zone */
                     zone?: (string|null);
                 }
@@ -137731,9 +138044,6 @@ export namespace google {
 
                     /** ListReservationBlocksRequest reservation. */
                     public reservation: string;
-
-                    /** ListReservationBlocksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListReservationBlocksRequest zone. */
                     public zone: string;
@@ -137837,9 +138147,6 @@ export namespace google {
                     /** ListReservationSlotsRequest project */
                     project?: (string|null);
 
-                    /** ListReservationSlotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListReservationSlotsRequest zone */
                     zone?: (string|null);
                 }
@@ -137870,9 +138177,6 @@ export namespace google {
 
                     /** ListReservationSlotsRequest project. */
                     public project: string;
-
-                    /** ListReservationSlotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListReservationSlotsRequest zone. */
                     public zone: string;
@@ -137976,9 +138280,6 @@ export namespace google {
                     /** ListReservationSubBlocksRequest project */
                     project?: (string|null);
 
-                    /** ListReservationSubBlocksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListReservationSubBlocksRequest zone */
                     zone?: (string|null);
                 }
@@ -138009,9 +138310,6 @@ export namespace google {
 
                     /** ListReservationSubBlocksRequest project. */
                     public project: string;
-
-                    /** ListReservationSubBlocksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListReservationSubBlocksRequest zone. */
                     public zone: string;
@@ -138112,9 +138410,6 @@ export namespace google {
                     /** ListReservationsRequest project */
                     project?: (string|null);
 
-                    /** ListReservationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListReservationsRequest zone */
                     zone?: (string|null);
                 }
@@ -138142,9 +138437,6 @@ export namespace google {
 
                     /** ListReservationsRequest project. */
                     public project: string;
-
-                    /** ListReservationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListReservationsRequest zone. */
                     public zone: string;
@@ -138247,9 +138539,6 @@ export namespace google {
 
                     /** ListResourcePoliciesRequest region */
                     region?: (string|null);
-
-                    /** ListResourcePoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListResourcePoliciesRequest. */
@@ -138278,9 +138567,6 @@ export namespace google {
 
                     /** ListResourcePoliciesRequest region. */
                     public region: string;
-
-                    /** ListResourcePoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListResourcePoliciesRequest instance using the specified properties.
@@ -138377,9 +138663,6 @@ export namespace google {
 
                     /** ListRolloutPlansRequest project */
                     project?: (string|null);
-
-                    /** ListRolloutPlansRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRolloutPlansRequest. */
@@ -138405,9 +138688,6 @@ export namespace google {
 
                     /** ListRolloutPlansRequest project. */
                     public project: string;
-
-                    /** ListRolloutPlansRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRolloutPlansRequest instance using the specified properties.
@@ -138504,9 +138784,6 @@ export namespace google {
 
                     /** ListRolloutsRequest project */
                     project?: (string|null);
-
-                    /** ListRolloutsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRolloutsRequest. */
@@ -138532,9 +138809,6 @@ export namespace google {
 
                     /** ListRolloutsRequest project. */
                     public project: string;
-
-                    /** ListRolloutsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRolloutsRequest instance using the specified properties.
@@ -138635,9 +138909,6 @@ export namespace google {
                     /** ListRoutePoliciesRoutersRequest region */
                     region?: (string|null);
 
-                    /** ListRoutePoliciesRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListRoutePoliciesRoutersRequest router */
                     router?: (string|null);
                 }
@@ -138668,9 +138939,6 @@ export namespace google {
 
                     /** ListRoutePoliciesRoutersRequest region. */
                     public region: string;
-
-                    /** ListRoutePoliciesRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListRoutePoliciesRoutersRequest router. */
                     public router: string;
@@ -138773,9 +139041,6 @@ export namespace google {
 
                     /** ListRoutersRequest region */
                     region?: (string|null);
-
-                    /** ListRoutersRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRoutersRequest. */
@@ -138804,9 +139069,6 @@ export namespace google {
 
                     /** ListRoutersRequest region. */
                     public region: string;
-
-                    /** ListRoutersRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRoutersRequest instance using the specified properties.
@@ -138903,9 +139165,6 @@ export namespace google {
 
                     /** ListRoutesRequest project */
                     project?: (string|null);
-
-                    /** ListRoutesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListRoutesRequest. */
@@ -138931,9 +139190,6 @@ export namespace google {
 
                     /** ListRoutesRequest project. */
                     public project: string;
-
-                    /** ListRoutesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListRoutesRequest instance using the specified properties.
@@ -139030,9 +139286,6 @@ export namespace google {
 
                     /** ListSecurityPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListSecurityPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSecurityPoliciesRequest. */
@@ -139058,9 +139311,6 @@ export namespace google {
 
                     /** ListSecurityPoliciesRequest project. */
                     public project: string;
-
-                    /** ListSecurityPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListSecurityPoliciesRequest instance using the specified properties.
@@ -139160,9 +139410,6 @@ export namespace google {
 
                     /** ListServiceAttachmentsRequest region */
                     region?: (string|null);
-
-                    /** ListServiceAttachmentsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListServiceAttachmentsRequest. */
@@ -139191,9 +139438,6 @@ export namespace google {
 
                     /** ListServiceAttachmentsRequest region. */
                     public region: string;
-
-                    /** ListServiceAttachmentsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListServiceAttachmentsRequest instance using the specified properties.
@@ -139290,9 +139534,6 @@ export namespace google {
 
                     /** ListSnapshotsRequest project */
                     project?: (string|null);
-
-                    /** ListSnapshotsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSnapshotsRequest. */
@@ -139318,9 +139559,6 @@ export namespace google {
 
                     /** ListSnapshotsRequest project. */
                     public project: string;
-
-                    /** ListSnapshotsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListSnapshotsRequest instance using the specified properties.
@@ -139417,9 +139655,6 @@ export namespace google {
 
                     /** ListSslCertificatesRequest project */
                     project?: (string|null);
-
-                    /** ListSslCertificatesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSslCertificatesRequest. */
@@ -139445,9 +139680,6 @@ export namespace google {
 
                     /** ListSslCertificatesRequest project. */
                     public project: string;
-
-                    /** ListSslCertificatesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListSslCertificatesRequest instance using the specified properties.
@@ -139544,9 +139776,6 @@ export namespace google {
 
                     /** ListSslPoliciesRequest project */
                     project?: (string|null);
-
-                    /** ListSslPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSslPoliciesRequest. */
@@ -139572,9 +139801,6 @@ export namespace google {
 
                     /** ListSslPoliciesRequest project. */
                     public project: string;
-
-                    /** ListSslPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListSslPoliciesRequest instance using the specified properties.
@@ -139672,9 +139898,6 @@ export namespace google {
                     /** ListStoragePoolTypesRequest project */
                     project?: (string|null);
 
-                    /** ListStoragePoolTypesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListStoragePoolTypesRequest zone */
                     zone?: (string|null);
                 }
@@ -139702,9 +139925,6 @@ export namespace google {
 
                     /** ListStoragePoolTypesRequest project. */
                     public project: string;
-
-                    /** ListStoragePoolTypesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListStoragePoolTypesRequest zone. */
                     public zone: string;
@@ -139805,9 +140025,6 @@ export namespace google {
                     /** ListStoragePoolsRequest project */
                     project?: (string|null);
 
-                    /** ListStoragePoolsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListStoragePoolsRequest zone */
                     zone?: (string|null);
                 }
@@ -139835,9 +140052,6 @@ export namespace google {
 
                     /** ListStoragePoolsRequest project. */
                     public project: string;
-
-                    /** ListStoragePoolsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListStoragePoolsRequest zone. */
                     public zone: string;
@@ -139941,9 +140155,6 @@ export namespace google {
                     /** ListSubnetworksRequest region */
                     region?: (string|null);
 
-                    /** ListSubnetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListSubnetworksRequest views */
                     views?: (string|null);
                 }
@@ -139974,9 +140185,6 @@ export namespace google {
 
                     /** ListSubnetworksRequest region. */
                     public region: string;
-
-                    /** ListSubnetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListSubnetworksRequest views. */
                     public views?: (string|null);
@@ -140086,9 +140294,6 @@ export namespace google {
 
                     /** ListTargetGrpcProxiesRequest project */
                     project?: (string|null);
-
-                    /** ListTargetGrpcProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetGrpcProxiesRequest. */
@@ -140114,9 +140319,6 @@ export namespace google {
 
                     /** ListTargetGrpcProxiesRequest project. */
                     public project: string;
-
-                    /** ListTargetGrpcProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetGrpcProxiesRequest instance using the specified properties.
@@ -140213,9 +140415,6 @@ export namespace google {
 
                     /** ListTargetHttpProxiesRequest project */
                     project?: (string|null);
-
-                    /** ListTargetHttpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetHttpProxiesRequest. */
@@ -140241,9 +140440,6 @@ export namespace google {
 
                     /** ListTargetHttpProxiesRequest project. */
                     public project: string;
-
-                    /** ListTargetHttpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetHttpProxiesRequest instance using the specified properties.
@@ -140340,9 +140536,6 @@ export namespace google {
 
                     /** ListTargetHttpsProxiesRequest project */
                     project?: (string|null);
-
-                    /** ListTargetHttpsProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetHttpsProxiesRequest. */
@@ -140368,9 +140561,6 @@ export namespace google {
 
                     /** ListTargetHttpsProxiesRequest project. */
                     public project: string;
-
-                    /** ListTargetHttpsProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetHttpsProxiesRequest instance using the specified properties.
@@ -140468,9 +140658,6 @@ export namespace google {
                     /** ListTargetInstancesRequest project */
                     project?: (string|null);
 
-                    /** ListTargetInstancesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListTargetInstancesRequest zone */
                     zone?: (string|null);
                 }
@@ -140498,9 +140685,6 @@ export namespace google {
 
                     /** ListTargetInstancesRequest project. */
                     public project: string;
-
-                    /** ListTargetInstancesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListTargetInstancesRequest zone. */
                     public zone: string;
@@ -140603,9 +140787,6 @@ export namespace google {
 
                     /** ListTargetPoolsRequest region */
                     region?: (string|null);
-
-                    /** ListTargetPoolsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetPoolsRequest. */
@@ -140634,9 +140815,6 @@ export namespace google {
 
                     /** ListTargetPoolsRequest region. */
                     public region: string;
-
-                    /** ListTargetPoolsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetPoolsRequest instance using the specified properties.
@@ -140733,9 +140911,6 @@ export namespace google {
 
                     /** ListTargetSslProxiesRequest project */
                     project?: (string|null);
-
-                    /** ListTargetSslProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetSslProxiesRequest. */
@@ -140761,9 +140936,6 @@ export namespace google {
 
                     /** ListTargetSslProxiesRequest project. */
                     public project: string;
-
-                    /** ListTargetSslProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetSslProxiesRequest instance using the specified properties.
@@ -140860,9 +141032,6 @@ export namespace google {
 
                     /** ListTargetTcpProxiesRequest project */
                     project?: (string|null);
-
-                    /** ListTargetTcpProxiesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetTcpProxiesRequest. */
@@ -140888,9 +141057,6 @@ export namespace google {
 
                     /** ListTargetTcpProxiesRequest project. */
                     public project: string;
-
-                    /** ListTargetTcpProxiesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetTcpProxiesRequest instance using the specified properties.
@@ -140990,9 +141156,6 @@ export namespace google {
 
                     /** ListTargetVpnGatewaysRequest region */
                     region?: (string|null);
-
-                    /** ListTargetVpnGatewaysRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTargetVpnGatewaysRequest. */
@@ -141021,9 +141184,6 @@ export namespace google {
 
                     /** ListTargetVpnGatewaysRequest region. */
                     public region: string;
-
-                    /** ListTargetVpnGatewaysRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListTargetVpnGatewaysRequest instance using the specified properties.
@@ -141120,9 +141280,6 @@ export namespace google {
 
                     /** ListUrlMapsRequest project */
                     project?: (string|null);
-
-                    /** ListUrlMapsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListUrlMapsRequest. */
@@ -141148,9 +141305,6 @@ export namespace google {
 
                     /** ListUrlMapsRequest project. */
                     public project: string;
-
-                    /** ListUrlMapsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListUrlMapsRequest instance using the specified properties.
@@ -141247,9 +141401,6 @@ export namespace google {
 
                     /** ListUsableBackendBucketsRequest project */
                     project?: (string|null);
-
-                    /** ListUsableBackendBucketsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListUsableBackendBucketsRequest. */
@@ -141275,9 +141426,6 @@ export namespace google {
 
                     /** ListUsableBackendBucketsRequest project. */
                     public project: string;
-
-                    /** ListUsableBackendBucketsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListUsableBackendBucketsRequest instance using the specified properties.
@@ -141374,9 +141522,6 @@ export namespace google {
 
                     /** ListUsableBackendServicesRequest project */
                     project?: (string|null);
-
-                    /** ListUsableBackendServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListUsableBackendServicesRequest. */
@@ -141402,9 +141547,6 @@ export namespace google {
 
                     /** ListUsableBackendServicesRequest project. */
                     public project: string;
-
-                    /** ListUsableBackendServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListUsableBackendServicesRequest instance using the specified properties.
@@ -141504,9 +141646,6 @@ export namespace google {
 
                     /** ListUsableRegionBackendBucketsRequest region */
                     region?: (string|null);
-
-                    /** ListUsableRegionBackendBucketsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListUsableRegionBackendBucketsRequest. */
@@ -141535,9 +141674,6 @@ export namespace google {
 
                     /** ListUsableRegionBackendBucketsRequest region. */
                     public region: string;
-
-                    /** ListUsableRegionBackendBucketsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListUsableRegionBackendBucketsRequest instance using the specified properties.
@@ -141637,9 +141773,6 @@ export namespace google {
 
                     /** ListUsableRegionBackendServicesRequest region */
                     region?: (string|null);
-
-                    /** ListUsableRegionBackendServicesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListUsableRegionBackendServicesRequest. */
@@ -141668,9 +141801,6 @@ export namespace google {
 
                     /** ListUsableRegionBackendServicesRequest region. */
                     public region: string;
-
-                    /** ListUsableRegionBackendServicesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListUsableRegionBackendServicesRequest instance using the specified properties.
@@ -141768,9 +141898,6 @@ export namespace google {
                     /** ListUsableSubnetworksRequest project */
                     project?: (string|null);
 
-                    /** ListUsableSubnetworksRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListUsableSubnetworksRequest serviceProject */
                     serviceProject?: (string|null);
                 }
@@ -141798,9 +141925,6 @@ export namespace google {
 
                     /** ListUsableSubnetworksRequest project. */
                     public project: string;
-
-                    /** ListUsableSubnetworksRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListUsableSubnetworksRequest serviceProject. */
                     public serviceProject?: (string|null);
@@ -141903,9 +142027,6 @@ export namespace google {
 
                     /** ListVpnGatewaysRequest region */
                     region?: (string|null);
-
-                    /** ListVpnGatewaysRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListVpnGatewaysRequest. */
@@ -141934,9 +142055,6 @@ export namespace google {
 
                     /** ListVpnGatewaysRequest region. */
                     public region: string;
-
-                    /** ListVpnGatewaysRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListVpnGatewaysRequest instance using the specified properties.
@@ -142036,9 +142154,6 @@ export namespace google {
 
                     /** ListVpnTunnelsRequest region */
                     region?: (string|null);
-
-                    /** ListVpnTunnelsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListVpnTunnelsRequest. */
@@ -142067,9 +142182,6 @@ export namespace google {
 
                     /** ListVpnTunnelsRequest region. */
                     public region: string;
-
-                    /** ListVpnTunnelsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListVpnTunnelsRequest instance using the specified properties.
@@ -142169,9 +142281,6 @@ export namespace google {
 
                     /** ListWireGroupsRequest project */
                     project?: (string|null);
-
-                    /** ListWireGroupsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListWireGroupsRequest. */
@@ -142200,9 +142309,6 @@ export namespace google {
 
                     /** ListWireGroupsRequest project. */
                     public project: string;
-
-                    /** ListWireGroupsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListWireGroupsRequest instance using the specified properties.
@@ -142302,9 +142408,6 @@ export namespace google {
 
                     /** ListXpnHostsProjectsRequest projectsListXpnHostsRequestResource */
                     projectsListXpnHostsRequestResource?: (google.cloud.compute.v1.IProjectsListXpnHostsRequest|null);
-
-                    /** ListXpnHostsProjectsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListXpnHostsProjectsRequest. */
@@ -142333,9 +142436,6 @@ export namespace google {
 
                     /** ListXpnHostsProjectsRequest projectsListXpnHostsRequestResource. */
                     public projectsListXpnHostsRequestResource?: (google.cloud.compute.v1.IProjectsListXpnHostsRequest|null);
-
-                    /** ListXpnHostsProjectsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListXpnHostsProjectsRequest instance using the specified properties.
@@ -142433,9 +142533,6 @@ export namespace google {
                     /** ListZoneOperationsRequest project */
                     project?: (string|null);
 
-                    /** ListZoneOperationsRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListZoneOperationsRequest zone */
                     zone?: (string|null);
                 }
@@ -142463,9 +142560,6 @@ export namespace google {
 
                     /** ListZoneOperationsRequest project. */
                     public project: string;
-
-                    /** ListZoneOperationsRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListZoneOperationsRequest zone. */
                     public zone: string;
@@ -142566,9 +142660,6 @@ export namespace google {
                     /** ListZoneVmExtensionPoliciesRequest project */
                     project?: (string|null);
 
-                    /** ListZoneVmExtensionPoliciesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
-
                     /** ListZoneVmExtensionPoliciesRequest zone */
                     zone?: (string|null);
                 }
@@ -142596,9 +142687,6 @@ export namespace google {
 
                     /** ListZoneVmExtensionPoliciesRequest project. */
                     public project: string;
-
-                    /** ListZoneVmExtensionPoliciesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /** ListZoneVmExtensionPoliciesRequest zone. */
                     public zone: string;
@@ -142698,9 +142786,6 @@ export namespace google {
 
                     /** ListZonesRequest project */
                     project?: (string|null);
-
-                    /** ListZonesRequest returnPartialSuccess */
-                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListZonesRequest. */
@@ -142726,9 +142811,6 @@ export namespace google {
 
                     /** ListZonesRequest project. */
                     public project: string;
-
-                    /** ListZonesRequest returnPartialSuccess. */
-                    public returnPartialSuccess?: (boolean|null);
 
                     /**
                      * Creates a new ListZonesRequest instance using the specified properties.
@@ -145001,8 +145083,14 @@ export namespace google {
                 /** Properties of a ManagedInstancePropertiesFromFlexibilityPolicy. */
                 interface IManagedInstancePropertiesFromFlexibilityPolicy {
 
+                    /** ManagedInstancePropertiesFromFlexibilityPolicy disks */
+                    disks?: (google.cloud.compute.v1.IAttachedDisk[]|null);
+
                     /** ManagedInstancePropertiesFromFlexibilityPolicy machineType */
                     machineType?: (string|null);
+
+                    /** ManagedInstancePropertiesFromFlexibilityPolicy minCpuPlatform */
+                    minCpuPlatform?: (string|null);
                 }
 
                 /** Represents a ManagedInstancePropertiesFromFlexibilityPolicy. */
@@ -145014,8 +145102,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.compute.v1.IManagedInstancePropertiesFromFlexibilityPolicy);
 
+                    /** ManagedInstancePropertiesFromFlexibilityPolicy disks. */
+                    public disks: google.cloud.compute.v1.IAttachedDisk[];
+
                     /** ManagedInstancePropertiesFromFlexibilityPolicy machineType. */
                     public machineType?: (string|null);
+
+                    /** ManagedInstancePropertiesFromFlexibilityPolicy minCpuPlatform. */
+                    public minCpuPlatform?: (string|null);
 
                     /**
                      * Creates a new ManagedInstancePropertiesFromFlexibilityPolicy instance using the specified properties.
@@ -145398,6 +145492,260 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ManagedInstanceVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ManagedRuleset. */
+                interface IManagedRuleset {
+
+                    /** ManagedRuleset changeLog */
+                    changeLog?: (string|null);
+
+                    /** ManagedRuleset creationTimestamp */
+                    creationTimestamp?: (string|null);
+
+                    /** ManagedRuleset description */
+                    description?: (string|null);
+
+                    /** ManagedRuleset id */
+                    id?: (number|Long|string|null);
+
+                    /** ManagedRuleset name */
+                    name?: (string|null);
+
+                    /** ManagedRuleset ruleIds */
+                    ruleIds?: (string[]|null);
+
+                    /** ManagedRuleset rulesetId */
+                    rulesetId?: (string|null);
+
+                    /** ManagedRuleset selfLink */
+                    selfLink?: (string|null);
+                }
+
+                /** Represents a ManagedRuleset. */
+                class ManagedRuleset implements IManagedRuleset {
+
+                    /**
+                     * Constructs a new ManagedRuleset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IManagedRuleset);
+
+                    /** ManagedRuleset changeLog. */
+                    public changeLog?: (string|null);
+
+                    /** ManagedRuleset creationTimestamp. */
+                    public creationTimestamp?: (string|null);
+
+                    /** ManagedRuleset description. */
+                    public description?: (string|null);
+
+                    /** ManagedRuleset id. */
+                    public id?: (number|Long|string|null);
+
+                    /** ManagedRuleset name. */
+                    public name?: (string|null);
+
+                    /** ManagedRuleset ruleIds. */
+                    public ruleIds: string[];
+
+                    /** ManagedRuleset rulesetId. */
+                    public rulesetId?: (string|null);
+
+                    /** ManagedRuleset selfLink. */
+                    public selfLink?: (string|null);
+
+                    /**
+                     * Creates a new ManagedRuleset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManagedRuleset instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IManagedRuleset): google.cloud.compute.v1.ManagedRuleset;
+
+                    /**
+                     * Encodes the specified ManagedRuleset message. Does not implicitly {@link google.cloud.compute.v1.ManagedRuleset.verify|verify} messages.
+                     * @param message ManagedRuleset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IManagedRuleset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManagedRuleset message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ManagedRuleset.verify|verify} messages.
+                     * @param message ManagedRuleset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IManagedRuleset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManagedRuleset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManagedRuleset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ManagedRuleset;
+
+                    /**
+                     * Decodes a ManagedRuleset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManagedRuleset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ManagedRuleset;
+
+                    /**
+                     * Verifies a ManagedRuleset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManagedRuleset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManagedRuleset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ManagedRuleset;
+
+                    /**
+                     * Creates a plain object from a ManagedRuleset message. Also converts values to other types if specified.
+                     * @param message ManagedRuleset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ManagedRuleset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManagedRuleset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagedRuleset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ManagedRulesetList. */
+                interface IManagedRulesetList {
+
+                    /** ManagedRulesetList id */
+                    id?: (string|null);
+
+                    /** ManagedRulesetList items */
+                    items?: (google.cloud.compute.v1.IManagedRuleset[]|null);
+
+                    /** ManagedRulesetList nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ManagedRulesetList warning */
+                    warning?: (google.cloud.compute.v1.IWarning|null);
+                }
+
+                /** Represents a ManagedRulesetList. */
+                class ManagedRulesetList implements IManagedRulesetList {
+
+                    /**
+                     * Constructs a new ManagedRulesetList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IManagedRulesetList);
+
+                    /** ManagedRulesetList id. */
+                    public id?: (string|null);
+
+                    /** ManagedRulesetList items. */
+                    public items: google.cloud.compute.v1.IManagedRuleset[];
+
+                    /** ManagedRulesetList nextPageToken. */
+                    public nextPageToken?: (string|null);
+
+                    /** ManagedRulesetList warning. */
+                    public warning?: (google.cloud.compute.v1.IWarning|null);
+
+                    /**
+                     * Creates a new ManagedRulesetList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManagedRulesetList instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IManagedRulesetList): google.cloud.compute.v1.ManagedRulesetList;
+
+                    /**
+                     * Encodes the specified ManagedRulesetList message. Does not implicitly {@link google.cloud.compute.v1.ManagedRulesetList.verify|verify} messages.
+                     * @param message ManagedRulesetList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IManagedRulesetList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManagedRulesetList message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ManagedRulesetList.verify|verify} messages.
+                     * @param message ManagedRulesetList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IManagedRulesetList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManagedRulesetList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManagedRulesetList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ManagedRulesetList;
+
+                    /**
+                     * Decodes a ManagedRulesetList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManagedRulesetList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ManagedRulesetList;
+
+                    /**
+                     * Verifies a ManagedRulesetList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManagedRulesetList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManagedRulesetList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ManagedRulesetList;
+
+                    /**
+                     * Creates a plain object from a ManagedRulesetList message. Also converts values to other types if specified.
+                     * @param message ManagedRulesetList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ManagedRulesetList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManagedRulesetList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagedRulesetList
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -146095,7 +146443,7 @@ export namespace google {
                     public firewallPolicy: string;
 
                     /** MoveFirewallPolicyRequest parentId. */
-                    public parentId: string;
+                    public parentId?: (string|null);
 
                     /** MoveFirewallPolicyRequest requestId. */
                     public requestId?: (string|null);
@@ -150449,8 +150797,7 @@ export namespace google {
                     enum Ipv6AccessType {
                         UNDEFINED_IPV6_ACCESS_TYPE = 0,
                         EXTERNAL = 35607499,
-                        INTERNAL = 279295677,
-                        UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
+                        INTERNAL = 279295677
                     }
 
                     /** NicType enum. */
@@ -150469,8 +150816,7 @@ export namespace google {
                         UNDEFINED_STACK_TYPE = 0,
                         IPV4_IPV6 = 22197249,
                         IPV4_ONLY = 22373798,
-                        IPV6_ONLY = 79632100,
-                        UNSPECIFIED_STACK_TYPE = 298084569
+                        IPV6_ONLY = 79632100
                     }
                 }
 
@@ -151414,9 +151760,6 @@ export namespace google {
 
                     /** NetworkProfile selfLinkWithId */
                     selfLinkWithId?: (string|null);
-
-                    /** NetworkProfile zone */
-                    zone?: (string|null);
                 }
 
                 /** Represents a NetworkProfile. */
@@ -151457,9 +151800,6 @@ export namespace google {
 
                     /** NetworkProfile selfLinkWithId. */
                     public selfLinkWithId?: (string|null);
-
-                    /** NetworkProfile zone. */
-                    public zone?: (string|null);
 
                     /**
                      * Creates a new NetworkProfile instance using the specified properties.
@@ -159220,6 +159560,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PatchAssociationRegionNetworkFirewallPolicyRequest. */
+                interface IPatchAssociationRegionNetworkFirewallPolicyRequest {
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest firewallPolicy */
+                    firewallPolicy?: (string|null);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest firewallPolicyAssociationResource */
+                    firewallPolicyAssociationResource?: (google.cloud.compute.v1.IFirewallPolicyAssociation|null);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest project */
+                    project?: (string|null);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest region */
+                    region?: (string|null);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a PatchAssociationRegionNetworkFirewallPolicyRequest. */
+                class PatchAssociationRegionNetworkFirewallPolicyRequest implements IPatchAssociationRegionNetworkFirewallPolicyRequest {
+
+                    /**
+                     * Constructs a new PatchAssociationRegionNetworkFirewallPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest firewallPolicy. */
+                    public firewallPolicy: string;
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest firewallPolicyAssociationResource. */
+                    public firewallPolicyAssociationResource?: (google.cloud.compute.v1.IFirewallPolicyAssociation|null);
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest project. */
+                    public project: string;
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest region. */
+                    public region: string;
+
+                    /** PatchAssociationRegionNetworkFirewallPolicyRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /**
+                     * Creates a new PatchAssociationRegionNetworkFirewallPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PatchAssociationRegionNetworkFirewallPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest): google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest;
+
+                    /**
+                     * Encodes the specified PatchAssociationRegionNetworkFirewallPolicyRequest message. Does not implicitly {@link google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest.verify|verify} messages.
+                     * @param message PatchAssociationRegionNetworkFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PatchAssociationRegionNetworkFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest.verify|verify} messages.
+                     * @param message PatchAssociationRegionNetworkFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PatchAssociationRegionNetworkFirewallPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PatchAssociationRegionNetworkFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest;
+
+                    /**
+                     * Decodes a PatchAssociationRegionNetworkFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PatchAssociationRegionNetworkFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest;
+
+                    /**
+                     * Verifies a PatchAssociationRegionNetworkFirewallPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PatchAssociationRegionNetworkFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PatchAssociationRegionNetworkFirewallPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a PatchAssociationRegionNetworkFirewallPolicyRequest message. Also converts values to other types if specified.
+                     * @param message PatchAssociationRegionNetworkFirewallPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.PatchAssociationRegionNetworkFirewallPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PatchAssociationRegionNetworkFirewallPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PatchAssociationRegionNetworkFirewallPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PatchAutoscalerRequest. */
                 interface IPatchAutoscalerRequest {
 
@@ -160152,6 +160613,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PatchGlobalForwardingRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PatchGlobalFrontendSettingRequest. */
+                interface IPatchGlobalFrontendSettingRequest {
+
+                    /** PatchGlobalFrontendSettingRequest globalFrontendSettingsResource */
+                    globalFrontendSettingsResource?: (google.cloud.compute.v1.IGlobalFrontendSettings|null);
+
+                    /** PatchGlobalFrontendSettingRequest project */
+                    project?: (string|null);
+
+                    /** PatchGlobalFrontendSettingRequest requestId */
+                    requestId?: (string|null);
+
+                    /** PatchGlobalFrontendSettingRequest updateMask */
+                    updateMask?: (string|null);
+                }
+
+                /** Represents a PatchGlobalFrontendSettingRequest. */
+                class PatchGlobalFrontendSettingRequest implements IPatchGlobalFrontendSettingRequest {
+
+                    /**
+                     * Constructs a new PatchGlobalFrontendSettingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest);
+
+                    /** PatchGlobalFrontendSettingRequest globalFrontendSettingsResource. */
+                    public globalFrontendSettingsResource?: (google.cloud.compute.v1.IGlobalFrontendSettings|null);
+
+                    /** PatchGlobalFrontendSettingRequest project. */
+                    public project: string;
+
+                    /** PatchGlobalFrontendSettingRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /** PatchGlobalFrontendSettingRequest updateMask. */
+                    public updateMask?: (string|null);
+
+                    /**
+                     * Creates a new PatchGlobalFrontendSettingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PatchGlobalFrontendSettingRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest): google.cloud.compute.v1.PatchGlobalFrontendSettingRequest;
+
+                    /**
+                     * Encodes the specified PatchGlobalFrontendSettingRequest message. Does not implicitly {@link google.cloud.compute.v1.PatchGlobalFrontendSettingRequest.verify|verify} messages.
+                     * @param message PatchGlobalFrontendSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PatchGlobalFrontendSettingRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.PatchGlobalFrontendSettingRequest.verify|verify} messages.
+                     * @param message PatchGlobalFrontendSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PatchGlobalFrontendSettingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PatchGlobalFrontendSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.PatchGlobalFrontendSettingRequest;
+
+                    /**
+                     * Decodes a PatchGlobalFrontendSettingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PatchGlobalFrontendSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.PatchGlobalFrontendSettingRequest;
+
+                    /**
+                     * Verifies a PatchGlobalFrontendSettingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PatchGlobalFrontendSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PatchGlobalFrontendSettingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.PatchGlobalFrontendSettingRequest;
+
+                    /**
+                     * Creates a plain object from a PatchGlobalFrontendSettingRequest message. Also converts values to other types if specified.
+                     * @param message PatchGlobalFrontendSettingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.PatchGlobalFrontendSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PatchGlobalFrontendSettingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PatchGlobalFrontendSettingRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -168166,9 +168742,6 @@ export namespace google {
                     /** Policy etag */
                     etag?: (string|null);
 
-                    /** Policy iamOwned */
-                    iamOwned?: (boolean|null);
-
                     /** Policy version */
                     version?: (number|null);
                 }
@@ -168190,9 +168763,6 @@ export namespace google {
 
                     /** Policy etag. */
                     public etag?: (string|null);
-
-                    /** Policy iamOwned. */
-                    public iamOwned?: (boolean|null);
 
                     /** Policy version. */
                     public version?: (number|null);
@@ -183885,6 +184455,9 @@ export namespace google {
                         UNDEFINED_BEHAVIOR = 0,
                         FAULT_BEHAVIOR_UNSPECIFIED = 447660743,
                         GPU_ERROR = 198817909,
+                        NVSWITCH_FAULT_CONTROLLER_ERROR = 250941637,
+                        NVSWITCH_FAULT_DEGRADED_BANDWIDTH = 202741248,
+                        NVSWITCH_FAULT_SWITCH_ERROR = 287636061,
                         PERFORMANCE = 135701520,
                         SILENT_DATA_CORRUPTION = 111360678,
                         SWITCH_FAILURE = 254909279
@@ -200458,6 +201031,9 @@ export namespace google {
                 /** Properties of a SecurityPolicyRulePreconfiguredWafConfigExclusion. */
                 interface ISecurityPolicyRulePreconfiguredWafConfigExclusion {
 
+                    /** SecurityPolicyRulePreconfiguredWafConfigExclusion requestBodiesToExclude */
+                    requestBodiesToExclude?: (google.cloud.compute.v1.ISecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams[]|null);
+
                     /** SecurityPolicyRulePreconfiguredWafConfigExclusion requestCookiesToExclude */
                     requestCookiesToExclude?: (google.cloud.compute.v1.ISecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams[]|null);
 
@@ -200485,6 +201061,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1.ISecurityPolicyRulePreconfiguredWafConfigExclusion);
+
+                    /** SecurityPolicyRulePreconfiguredWafConfigExclusion requestBodiesToExclude. */
+                    public requestBodiesToExclude: google.cloud.compute.v1.ISecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams[];
 
                     /** SecurityPolicyRulePreconfiguredWafConfigExclusion requestCookiesToExclude. */
                     public requestCookiesToExclude: google.cloud.compute.v1.ISecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams[];
@@ -211462,6 +212041,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SetNameInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetNameInterconnectRequest. */
+                interface ISetNameInterconnectRequest {
+
+                    /** SetNameInterconnectRequest interconnect */
+                    interconnect?: (string|null);
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource */
+                    interconnectsSetNameRequestResource?: (google.cloud.compute.v1.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project */
+                    project?: (string|null);
+
+                    /** SetNameInterconnectRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a SetNameInterconnectRequest. */
+                class SetNameInterconnectRequest implements ISetNameInterconnectRequest {
+
+                    /**
+                     * Constructs a new SetNameInterconnectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.ISetNameInterconnectRequest);
+
+                    /** SetNameInterconnectRequest interconnect. */
+                    public interconnect: string;
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource. */
+                    public interconnectsSetNameRequestResource?: (google.cloud.compute.v1.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project. */
+                    public project: string;
+
+                    /** SetNameInterconnectRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /**
+                     * Creates a new SetNameInterconnectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetNameInterconnectRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.ISetNameInterconnectRequest): google.cloud.compute.v1.SetNameInterconnectRequest;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message. Does not implicitly {@link google.cloud.compute.v1.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.SetNameInterconnectRequest;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.SetNameInterconnectRequest;
+
+                    /**
+                     * Verifies a SetNameInterconnectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetNameInterconnectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetNameInterconnectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.SetNameInterconnectRequest;
+
+                    /**
+                     * Creates a plain object from a SetNameInterconnectRequest message. Also converts values to other types if specified.
+                     * @param message SetNameInterconnectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.SetNameInterconnectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetNameInterconnectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetNameInterconnectRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -223724,8 +224418,7 @@ export namespace google {
                     enum Ipv6AccessType {
                         UNDEFINED_IPV6_ACCESS_TYPE = 0,
                         EXTERNAL = 35607499,
-                        INTERNAL = 279295677,
-                        UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
+                        INTERNAL = 279295677
                     }
 
                     /** Ipv6GceEndpoint enum. */
@@ -223777,8 +224470,7 @@ export namespace google {
                         UNDEFINED_STACK_TYPE = 0,
                         IPV4_IPV6 = 22197249,
                         IPV4_ONLY = 22373798,
-                        IPV6_ONLY = 79632100,
-                        UNSPECIFIED_STACK_TYPE = 298084569
+                        IPV6_ONLY = 79632100
                     }
 
                     /** State enum. */
@@ -255383,6 +256075,72 @@ export namespace google {
                     type SetTargetCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
                 }
 
+                /** Represents a GlobalFrontendSettingsService */
+                class GlobalFrontendSettingsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new GlobalFrontendSettingsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new GlobalFrontendSettingsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GlobalFrontendSettingsService;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetGlobalFrontendSettingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GlobalFrontendSettings
+                     */
+                    public get(request: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest, callback: google.cloud.compute.v1.GlobalFrontendSettingsService.GetCallback): void;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetGlobalFrontendSettingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public get(request: google.cloud.compute.v1.IGetGlobalFrontendSettingRequest): Promise<google.cloud.compute.v1.GlobalFrontendSettings>;
+
+                    /**
+                     * Calls Patch.
+                     * @param request PatchGlobalFrontendSettingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GlobalFrontendSettingsPatchResponse
+                     */
+                    public patch(request: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest, callback: google.cloud.compute.v1.GlobalFrontendSettingsService.PatchCallback): void;
+
+                    /**
+                     * Calls Patch.
+                     * @param request PatchGlobalFrontendSettingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public patch(request: google.cloud.compute.v1.IPatchGlobalFrontendSettingRequest): Promise<google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse>;
+                }
+
+                namespace GlobalFrontendSettingsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.GlobalFrontendSettingsService|get}.
+                     * @param error Error, if any
+                     * @param [response] GlobalFrontendSettings
+                     */
+                    type GetCallback = (error: (Error|null), response?: google.cloud.compute.v1.GlobalFrontendSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.GlobalFrontendSettingsService|patch}.
+                     * @param error Error, if any
+                     * @param [response] GlobalFrontendSettingsPatchResponse
+                     */
+                    type PatchCallback = (error: (Error|null), response?: google.cloud.compute.v1.GlobalFrontendSettingsPatchResponse) => void;
+                }
+
                 /** Represents a GlobalNetworkEndpointGroups */
                 class GlobalNetworkEndpointGroups extends $protobuf.rpc.Service {
 
@@ -256371,6 +257129,72 @@ export namespace google {
                      * @param [response] ImageFamilyView
                      */
                     type GetCallback = (error: (Error|null), response?: google.cloud.compute.v1.ImageFamilyView) => void;
+                }
+
+                /** Represents an ImageViews */
+                class ImageViews extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ImageViews service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ImageViews service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ImageViews;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetImageViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImageView
+                     */
+                    public get(request: google.cloud.compute.v1.IGetImageViewRequest, callback: google.cloud.compute.v1.ImageViews.GetCallback): void;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetImageViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public get(request: google.cloud.compute.v1.IGetImageViewRequest): Promise<google.cloud.compute.v1.ImageView>;
+
+                    /**
+                     * Calls List.
+                     * @param request ListImageViewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImageViewsListResponse
+                     */
+                    public list(request: google.cloud.compute.v1.IListImageViewsRequest, callback: google.cloud.compute.v1.ImageViews.ListCallback): void;
+
+                    /**
+                     * Calls List.
+                     * @param request ListImageViewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public list(request: google.cloud.compute.v1.IListImageViewsRequest): Promise<google.cloud.compute.v1.ImageViewsListResponse>;
+                }
+
+                namespace ImageViews {
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.ImageViews|get}.
+                     * @param error Error, if any
+                     * @param [response] ImageView
+                     */
+                    type GetCallback = (error: (Error|null), response?: google.cloud.compute.v1.ImageView) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.ImageViews|list}.
+                     * @param error Error, if any
+                     * @param [response] ImageViewsListResponse
+                     */
+                    type ListCallback = (error: (Error|null), response?: google.cloud.compute.v1.ImageViewsListResponse) => void;
                 }
 
                 /** Represents an Images */
@@ -260137,6 +260961,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public setLabels(request: google.cloud.compute.v1.ISetLabelsInterconnectRequest): Promise<google.cloud.compute.v1.Operation>;
+
+                    /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setName(request: google.cloud.compute.v1.ISetNameInterconnectRequest, callback: google.cloud.compute.v1.Interconnects.SetNameCallback): void;
+
+                    /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setName(request: google.cloud.compute.v1.ISetNameInterconnectRequest): Promise<google.cloud.compute.v1.Operation>;
                 }
 
                 namespace Interconnects {
@@ -260196,6 +261034,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SetLabelsCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.Interconnects|setName}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetNameCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
                 }
 
                 /** Represents a LicenseCodes */
@@ -260775,6 +261620,72 @@ export namespace google {
                      * @param [response] MachineTypeList
                      */
                     type ListCallback = (error: (Error|null), response?: google.cloud.compute.v1.MachineTypeList) => void;
+                }
+
+                /** Represents a ManagedRulesets */
+                class ManagedRulesets extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ManagedRulesets service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ManagedRulesets service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ManagedRulesets;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetManagedRulesetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ManagedRuleset
+                     */
+                    public get(request: google.cloud.compute.v1.IGetManagedRulesetRequest, callback: google.cloud.compute.v1.ManagedRulesets.GetCallback): void;
+
+                    /**
+                     * Calls Get.
+                     * @param request GetManagedRulesetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public get(request: google.cloud.compute.v1.IGetManagedRulesetRequest): Promise<google.cloud.compute.v1.ManagedRuleset>;
+
+                    /**
+                     * Calls List.
+                     * @param request ListManagedRulesetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ManagedRulesetList
+                     */
+                    public list(request: google.cloud.compute.v1.IListManagedRulesetsRequest, callback: google.cloud.compute.v1.ManagedRulesets.ListCallback): void;
+
+                    /**
+                     * Calls List.
+                     * @param request ListManagedRulesetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public list(request: google.cloud.compute.v1.IListManagedRulesetsRequest): Promise<google.cloud.compute.v1.ManagedRulesetList>;
+                }
+
+                namespace ManagedRulesets {
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.ManagedRulesets|get}.
+                     * @param error Error, if any
+                     * @param [response] ManagedRuleset
+                     */
+                    type GetCallback = (error: (Error|null), response?: google.cloud.compute.v1.ManagedRuleset) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.ManagedRulesets|list}.
+                     * @param error Error, if any
+                     * @param [response] ManagedRulesetList
+                     */
+                    type ListCallback = (error: (Error|null), response?: google.cloud.compute.v1.ManagedRulesetList) => void;
                 }
 
                 /** Represents a NetworkAttachments */
@@ -267917,6 +268828,20 @@ export namespace google {
                     public patch(request: google.cloud.compute.v1.IPatchRegionNetworkFirewallPolicyRequest): Promise<google.cloud.compute.v1.Operation>;
 
                     /**
+                     * Calls PatchAssociation.
+                     * @param request PatchAssociationRegionNetworkFirewallPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public patchAssociation(request: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest, callback: google.cloud.compute.v1.RegionNetworkFirewallPolicies.PatchAssociationCallback): void;
+
+                    /**
+                     * Calls PatchAssociation.
+                     * @param request PatchAssociationRegionNetworkFirewallPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public patchAssociation(request: google.cloud.compute.v1.IPatchAssociationRegionNetworkFirewallPolicyRequest): Promise<google.cloud.compute.v1.Operation>;
+
+                    /**
                      * Calls PatchRule.
                      * @param request PatchRuleRegionNetworkFirewallPolicyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -268072,6 +268997,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type PatchCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.RegionNetworkFirewallPolicies|patchAssociation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PatchAssociationCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.compute.v1.RegionNetworkFirewallPolicies|patchRule}.
@@ -302345,11 +303277,20 @@ export namespace google {
                 /** Properties of a CacheInvalidationRule. */
                 interface ICacheInvalidationRule {
 
+                    /** CacheInvalidationRule backendService */
+                    backendService?: (string|null);
+
                     /** CacheInvalidationRule cacheTags */
                     cacheTags?: (string[]|null);
 
+                    /** CacheInvalidationRule contentType */
+                    contentType?: (string|null);
+
                     /** CacheInvalidationRule host */
                     host?: (string|null);
+
+                    /** CacheInvalidationRule httpStatus */
+                    httpStatus?: (number|null);
 
                     /** CacheInvalidationRule path */
                     path?: (string|null);
@@ -302364,11 +303305,20 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.compute.v1beta.ICacheInvalidationRule);
 
+                    /** CacheInvalidationRule backendService. */
+                    public backendService?: (string|null);
+
                     /** CacheInvalidationRule cacheTags. */
                     public cacheTags: string[];
 
+                    /** CacheInvalidationRule contentType. */
+                    public contentType?: (string|null);
+
                     /** CacheInvalidationRule host. */
                     public host?: (string|null);
+
+                    /** CacheInvalidationRule httpStatus. */
+                    public httpStatus?: (number|null);
 
                     /** CacheInvalidationRule path. */
                     public path?: (string|null);
@@ -307554,6 +308504,7 @@ export namespace google {
                         STORAGE_OPTIMIZED_Z4D4T = 18503022,
                         STORAGE_OPTIMIZED_Z4DH = 35233722,
                         STORAGE_OPTIMIZED_Z4DS = 35233733,
+                        STORAGE_OPTIMIZED_Z4M = 157002327,
                         TYPE_UNSPECIFIED = 437714322
                     }
                 }
@@ -321840,6 +322791,9 @@ export namespace google {
                 /** Properties of a DeleteRouterRequest. */
                 interface IDeleteRouterRequest {
 
+                    /** DeleteRouterRequest etag */
+                    etag?: (string|null);
+
                     /** DeleteRouterRequest project */
                     project?: (string|null);
 
@@ -321861,6 +322815,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1beta.IDeleteRouterRequest);
+
+                    /** DeleteRouterRequest etag. */
+                    public etag?: (string|null);
 
                     /** DeleteRouterRequest project. */
                     public project: string;
@@ -329476,6 +330433,9 @@ export namespace google {
                 /** Properties of a DistributionPolicyZoneConfiguration. */
                 interface IDistributionPolicyZoneConfiguration {
 
+                    /** DistributionPolicyZoneConfiguration maxSize */
+                    maxSize?: (google.cloud.compute.v1beta.IFixedOrPercent|null);
+
                     /** DistributionPolicyZoneConfiguration zone */
                     zone?: (string|null);
                 }
@@ -329488,6 +330448,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1beta.IDistributionPolicyZoneConfiguration);
+
+                    /** DistributionPolicyZoneConfiguration maxSize. */
+                    public maxSize?: (google.cloud.compute.v1beta.IFixedOrPercent|null);
 
                     /** DistributionPolicyZoneConfiguration zone. */
                     public zone?: (string|null);
@@ -334790,6 +335753,9 @@ export namespace google {
                     /** FutureReservation autoDeleteAutoCreatedReservations */
                     autoDeleteAutoCreatedReservations?: (boolean|null);
 
+                    /** FutureReservation colocationResource */
+                    colocationResource?: (string|null);
+
                     /** FutureReservation commitmentInfo */
                     commitmentInfo?: (google.cloud.compute.v1beta.IFutureReservationCommitmentInfo|null);
 
@@ -334892,6 +335858,9 @@ export namespace google {
 
                     /** FutureReservation autoDeleteAutoCreatedReservations. */
                     public autoDeleteAutoCreatedReservations?: (boolean|null);
+
+                    /** FutureReservation colocationResource. */
+                    public colocationResource?: (string|null);
 
                     /** FutureReservation commitmentInfo. */
                     public commitmentInfo?: (google.cloud.compute.v1beta.IFutureReservationCommitmentInfo|null);
@@ -372663,6 +373632,145 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImageViewsListResponse. */
+                interface IImageViewsListResponse {
+
+                    /** ImageViewsListResponse etag */
+                    etag?: (string|null);
+
+                    /** ImageViewsListResponse id */
+                    id?: (string|null);
+
+                    /** ImageViewsListResponse items */
+                    items?: (google.cloud.compute.v1beta.IImageView[]|null);
+
+                    /** ImageViewsListResponse kind */
+                    kind?: (string|null);
+
+                    /** ImageViewsListResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ImageViewsListResponse selfLink */
+                    selfLink?: (string|null);
+
+                    /** ImageViewsListResponse unreachables */
+                    unreachables?: (string[]|null);
+
+                    /** ImageViewsListResponse warning */
+                    warning?: (google.cloud.compute.v1beta.IWarning|null);
+                }
+
+                /** Represents an ImageViewsListResponse. */
+                class ImageViewsListResponse implements IImageViewsListResponse {
+
+                    /**
+                     * Constructs a new ImageViewsListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IImageViewsListResponse);
+
+                    /** ImageViewsListResponse etag. */
+                    public etag?: (string|null);
+
+                    /** ImageViewsListResponse id. */
+                    public id?: (string|null);
+
+                    /** ImageViewsListResponse items. */
+                    public items: google.cloud.compute.v1beta.IImageView[];
+
+                    /** ImageViewsListResponse kind. */
+                    public kind?: (string|null);
+
+                    /** ImageViewsListResponse nextPageToken. */
+                    public nextPageToken?: (string|null);
+
+                    /** ImageViewsListResponse selfLink. */
+                    public selfLink?: (string|null);
+
+                    /** ImageViewsListResponse unreachables. */
+                    public unreachables: string[];
+
+                    /** ImageViewsListResponse warning. */
+                    public warning?: (google.cloud.compute.v1beta.IWarning|null);
+
+                    /**
+                     * Creates a new ImageViewsListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageViewsListResponse instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IImageViewsListResponse): google.cloud.compute.v1beta.ImageViewsListResponse;
+
+                    /**
+                     * Encodes the specified ImageViewsListResponse message. Does not implicitly {@link google.cloud.compute.v1beta.ImageViewsListResponse.verify|verify} messages.
+                     * @param message ImageViewsListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IImageViewsListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageViewsListResponse message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ImageViewsListResponse.verify|verify} messages.
+                     * @param message ImageViewsListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IImageViewsListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageViewsListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageViewsListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ImageViewsListResponse;
+
+                    /**
+                     * Decodes an ImageViewsListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageViewsListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ImageViewsListResponse;
+
+                    /**
+                     * Verifies an ImageViewsListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageViewsListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageViewsListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ImageViewsListResponse;
+
+                    /**
+                     * Creates a plain object from an ImageViewsListResponse message. Also converts values to other types if specified.
+                     * @param message ImageViewsListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ImageViewsListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageViewsListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageViewsListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InitialStateConfig. */
                 interface IInitialStateConfig {
 
@@ -384350,6 +385458,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
@@ -386228,6 +387337,9 @@ export namespace google {
                 /** Properties of an InstanceGroupManagerInstanceFlexibilityPolicy. */
                 interface IInstanceGroupManagerInstanceFlexibilityPolicy {
 
+                    /** InstanceGroupManagerInstanceFlexibilityPolicy constraints */
+                    constraints?: (google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints|null);
+
                     /** InstanceGroupManagerInstanceFlexibilityPolicy instanceSelections */
                     instanceSelections?: ({ [k: string]: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection }|null);
 
@@ -386243,6 +387355,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicy);
+
+                    /** InstanceGroupManagerInstanceFlexibilityPolicy constraints. */
+                    public constraints?: (google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints|null);
 
                     /** InstanceGroupManagerInstanceFlexibilityPolicy instanceSelections. */
                     public instanceSelections: { [k: string]: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection };
@@ -386322,6 +387437,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for InstanceGroupManagerInstanceFlexibilityPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstanceGroupManagerInstanceFlexibilityPolicyConstraints. */
+                interface IInstanceGroupManagerInstanceFlexibilityPolicyConstraints {
+
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyConstraints singleMachineType */
+                    singleMachineType?: (boolean|null);
+                }
+
+                /** Represents an InstanceGroupManagerInstanceFlexibilityPolicyConstraints. */
+                class InstanceGroupManagerInstanceFlexibilityPolicyConstraints implements IInstanceGroupManagerInstanceFlexibilityPolicyConstraints {
+
+                    /**
+                     * Constructs a new InstanceGroupManagerInstanceFlexibilityPolicyConstraints.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints);
+
+                    /** InstanceGroupManagerInstanceFlexibilityPolicyConstraints singleMachineType. */
+                    public singleMachineType?: (boolean|null);
+
+                    /**
+                     * Creates a new InstanceGroupManagerInstanceFlexibilityPolicyConstraints instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceGroupManagerInstanceFlexibilityPolicyConstraints instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints): google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints;
+
+                    /**
+                     * Encodes the specified InstanceGroupManagerInstanceFlexibilityPolicyConstraints message. Does not implicitly {@link google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints.verify|verify} messages.
+                     * @param message InstanceGroupManagerInstanceFlexibilityPolicyConstraints message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceGroupManagerInstanceFlexibilityPolicyConstraints message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints.verify|verify} messages.
+                     * @param message InstanceGroupManagerInstanceFlexibilityPolicyConstraints message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IInstanceGroupManagerInstanceFlexibilityPolicyConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceGroupManagerInstanceFlexibilityPolicyConstraints message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceGroupManagerInstanceFlexibilityPolicyConstraints
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints;
+
+                    /**
+                     * Decodes an InstanceGroupManagerInstanceFlexibilityPolicyConstraints message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceGroupManagerInstanceFlexibilityPolicyConstraints
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints;
+
+                    /**
+                     * Verifies an InstanceGroupManagerInstanceFlexibilityPolicyConstraints message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceGroupManagerInstanceFlexibilityPolicyConstraints message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceGroupManagerInstanceFlexibilityPolicyConstraints
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints;
+
+                    /**
+                     * Creates a plain object from an InstanceGroupManagerInstanceFlexibilityPolicyConstraints message. Also converts values to other types if specified.
+                     * @param message InstanceGroupManagerInstanceFlexibilityPolicyConstraints
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.InstanceGroupManagerInstanceFlexibilityPolicyConstraints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceGroupManagerInstanceFlexibilityPolicyConstraints to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceGroupManagerInstanceFlexibilityPolicyConstraints
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -393629,6 +394841,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
@@ -407483,6 +408696,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InterconnectsSetNameRequest. */
+                interface IInterconnectsSetNameRequest {
+
+                    /** InterconnectsSetNameRequest currentName */
+                    currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an InterconnectsSetNameRequest. */
+                class InterconnectsSetNameRequest implements IInterconnectsSetNameRequest {
+
+                    /**
+                     * Constructs a new InterconnectsSetNameRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IInterconnectsSetNameRequest);
+
+                    /** InterconnectsSetNameRequest currentName. */
+                    public currentName?: (string|null);
+
+                    /** InterconnectsSetNameRequest name. */
+                    public name?: (string|null);
+
+                    /**
+                     * Creates a new InterconnectsSetNameRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectsSetNameRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IInterconnectsSetNameRequest): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message. Does not implicitly {@link google.cloud.compute.v1beta.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectsSetNameRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.InterconnectsSetNameRequest.verify|verify} messages.
+                     * @param message InterconnectsSetNameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IInterconnectsSetNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Decodes an InterconnectsSetNameRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectsSetNameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Verifies an InterconnectsSetNameRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectsSetNameRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectsSetNameRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.InterconnectsSetNameRequest;
+
+                    /**
+                     * Creates a plain object from an InterconnectsSetNameRequest message. Also converts values to other types if specified.
+                     * @param message InterconnectsSetNameRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.InterconnectsSetNameRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectsSetNameRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectsSetNameRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Interval. */
                 interface IInterval {
 
@@ -412939,6 +414255,139 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListHostsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListImageViewsRequest. */
+                interface IListImageViewsRequest {
+
+                    /** ListImageViewsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListImageViewsRequest maxResults */
+                    maxResults?: (number|null);
+
+                    /** ListImageViewsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListImageViewsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListImageViewsRequest project */
+                    project?: (string|null);
+
+                    /** ListImageViewsRequest region */
+                    region?: (string|null);
+
+                    /** ListImageViewsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
+                }
+
+                /** Represents a ListImageViewsRequest. */
+                class ListImageViewsRequest implements IListImageViewsRequest {
+
+                    /**
+                     * Constructs a new ListImageViewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IListImageViewsRequest);
+
+                    /** ListImageViewsRequest filter. */
+                    public filter?: (string|null);
+
+                    /** ListImageViewsRequest maxResults. */
+                    public maxResults?: (number|null);
+
+                    /** ListImageViewsRequest orderBy. */
+                    public orderBy?: (string|null);
+
+                    /** ListImageViewsRequest pageToken. */
+                    public pageToken?: (string|null);
+
+                    /** ListImageViewsRequest project. */
+                    public project: string;
+
+                    /** ListImageViewsRequest region. */
+                    public region: string;
+
+                    /** ListImageViewsRequest returnPartialSuccess. */
+                    public returnPartialSuccess?: (boolean|null);
+
+                    /**
+                     * Creates a new ListImageViewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListImageViewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IListImageViewsRequest): google.cloud.compute.v1beta.ListImageViewsRequest;
+
+                    /**
+                     * Encodes the specified ListImageViewsRequest message. Does not implicitly {@link google.cloud.compute.v1beta.ListImageViewsRequest.verify|verify} messages.
+                     * @param message ListImageViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IListImageViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListImageViewsRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ListImageViewsRequest.verify|verify} messages.
+                     * @param message ListImageViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IListImageViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListImageViewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListImageViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ListImageViewsRequest;
+
+                    /**
+                     * Decodes a ListImageViewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListImageViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ListImageViewsRequest;
+
+                    /**
+                     * Verifies a ListImageViewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListImageViewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListImageViewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ListImageViewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListImageViewsRequest message. Also converts values to other types if specified.
+                     * @param message ListImageViewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ListImageViewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListImageViewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListImageViewsRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -477756,6 +479205,9 @@ export namespace google {
                         UNDEFINED_BEHAVIOR = 0,
                         FAULT_BEHAVIOR_UNSPECIFIED = 447660743,
                         GPU_ERROR = 198817909,
+                        NVSWITCH_FAULT_CONTROLLER_ERROR = 250941637,
+                        NVSWITCH_FAULT_DEGRADED_BANDWIDTH = 202741248,
+                        NVSWITCH_FAULT_SWITCH_ERROR = 287636061,
                         PERFORMANCE = 135701520,
                         SILENT_DATA_CORRUPTION = 111360678,
                         SWITCH_FAILURE = 254909279
@@ -486475,6 +487927,9 @@ export namespace google {
                     /** Router encryptedInterconnectRouter */
                     encryptedInterconnectRouter?: (boolean|null);
 
+                    /** Router etag */
+                    etag?: (string|null);
+
                     /** Router id */
                     id?: (number|Long|string|null);
 
@@ -486532,6 +487987,9 @@ export namespace google {
 
                     /** Router encryptedInterconnectRouter. */
                     public encryptedInterconnectRouter?: (boolean|null);
+
+                    /** Router etag. */
+                    public etag?: (string|null);
 
                     /** Router id. */
                     public id?: (number|Long|string|null);
@@ -488309,6 +489767,9 @@ export namespace google {
 
                     /** RouterNatRule ruleNumber */
                     ruleNumber?: (number|null);
+
+                    /** RouterNatRule sourceWorkloadIdentities */
+                    sourceWorkloadIdentities?: (string[]|null);
                 }
 
                 /** Represents a RouterNatRule. */
@@ -488331,6 +489792,9 @@ export namespace google {
 
                     /** RouterNatRule ruleNumber. */
                     public ruleNumber?: (number|null);
+
+                    /** RouterNatRule sourceWorkloadIdentities. */
+                    public sourceWorkloadIdentities: string[];
 
                     /**
                      * Creates a new RouterNatRule instance using the specified properties.
@@ -506995,6 +508459,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SetNameInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SetNameInterconnectRequest. */
+                interface ISetNameInterconnectRequest {
+
+                    /** SetNameInterconnectRequest interconnect */
+                    interconnect?: (string|null);
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource */
+                    interconnectsSetNameRequestResource?: (google.cloud.compute.v1beta.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project */
+                    project?: (string|null);
+
+                    /** SetNameInterconnectRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a SetNameInterconnectRequest. */
+                class SetNameInterconnectRequest implements ISetNameInterconnectRequest {
+
+                    /**
+                     * Constructs a new SetNameInterconnectRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.ISetNameInterconnectRequest);
+
+                    /** SetNameInterconnectRequest interconnect. */
+                    public interconnect: string;
+
+                    /** SetNameInterconnectRequest interconnectsSetNameRequestResource. */
+                    public interconnectsSetNameRequestResource?: (google.cloud.compute.v1beta.IInterconnectsSetNameRequest|null);
+
+                    /** SetNameInterconnectRequest project. */
+                    public project: string;
+
+                    /** SetNameInterconnectRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /**
+                     * Creates a new SetNameInterconnectRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetNameInterconnectRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.ISetNameInterconnectRequest): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message. Does not implicitly {@link google.cloud.compute.v1beta.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetNameInterconnectRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.SetNameInterconnectRequest.verify|verify} messages.
+                     * @param message SetNameInterconnectRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.ISetNameInterconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Decodes a SetNameInterconnectRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetNameInterconnectRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Verifies a SetNameInterconnectRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetNameInterconnectRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetNameInterconnectRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.SetNameInterconnectRequest;
+
+                    /**
+                     * Creates a plain object from a SetNameInterconnectRequest message. Also converts values to other types if specified.
+                     * @param message SetNameInterconnectRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.SetNameInterconnectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetNameInterconnectRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SetNameInterconnectRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -558097,6 +559676,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public get(request: google.cloud.compute.v1beta.IGetImageViewRequest): Promise<google.cloud.compute.v1beta.ImageView>;
+
+                    /**
+                     * Calls List.
+                     * @param request ListImageViewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImageViewsListResponse
+                     */
+                    public list(request: google.cloud.compute.v1beta.IListImageViewsRequest, callback: google.cloud.compute.v1beta.ImageViews.ListCallback): void;
+
+                    /**
+                     * Calls List.
+                     * @param request ListImageViewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public list(request: google.cloud.compute.v1beta.IListImageViewsRequest): Promise<google.cloud.compute.v1beta.ImageViewsListResponse>;
                 }
 
                 namespace ImageViews {
@@ -558107,6 +559700,13 @@ export namespace google {
                      * @param [response] ImageView
                      */
                     type GetCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.ImageView) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1beta.ImageViews|list}.
+                     * @param error Error, if any
+                     * @param [response] ImageViewsListResponse
+                     */
+                    type ListCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.ImageViewsListResponse) => void;
                 }
 
                 /** Represents an Images */
@@ -562169,6 +563769,20 @@ export namespace google {
                     public setLabels(request: google.cloud.compute.v1beta.ISetLabelsInterconnectRequest): Promise<google.cloud.compute.v1beta.Operation>;
 
                     /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setName(request: google.cloud.compute.v1beta.ISetNameInterconnectRequest, callback: google.cloud.compute.v1beta.Interconnects.SetNameCallback): void;
+
+                    /**
+                     * Calls SetName.
+                     * @param request SetNameInterconnectRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setName(request: google.cloud.compute.v1beta.ISetNameInterconnectRequest): Promise<google.cloud.compute.v1beta.Operation>;
+
+                    /**
                      * Calls TestIamPermissions.
                      * @param request TestIamPermissionsInterconnectRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and TestPermissionsResponse
@@ -562240,6 +563854,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SetLabelsCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1beta.Interconnects|setName}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetNameCallback = (error: (Error|null), response?: google.cloud.compute.v1beta.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.compute.v1beta.Interconnects|testIamPermissions}.

@@ -14,26 +14,11 @@
  * limitations under the License.
  */
 
-import {CallSettings} from './gax';
-
 const PROTO_TYPE_PREFIX = 'type.googleapis.com/';
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
 
 const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
-
-/**
- * Checks if telemetry tracing is enabled
- * @param settings
- * @returns true if telemetry tracing is enabled, false otherwise
- */
-export function checkTelemetryEnabled(settings?: CallSettings): boolean {
-  const tracingEnabled =
-    Boolean(settings?.enableTelemetryTracing) &&
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED === 'true' &&
-    settings?.otherArgs?.internalTelemetryInfo !== undefined;
-  return Boolean(tracingEnabled);
-}
 
 function words(str: string, normalize = false) {
   if (normalize) {
@@ -176,3 +161,19 @@ export const decodeAnyProtosInArray = (
   }
   return protoListDecoded;
 };
+
+/**
+ * Standard or infrastructure tokens in the x-goog-api-client header that should
+ * be ignored when resolving the client artifact/package name.
+ */
+export const ignoredClientHeaderTokens = [
+  'gl-node',
+  'gl-web',
+  'grpc',
+  'grpc-web',
+  'rest',
+  'gax',
+  'auth',
+  'gapic',
+  'gccl',
+];

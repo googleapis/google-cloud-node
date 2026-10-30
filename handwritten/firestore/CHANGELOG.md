@@ -5,6 +5,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.1...firestore-v9.4.0) (2026-10-22)
+
+
+### Features
+
+* **firestore:** Add DML stages (insert, upsert, delete, update), literals source, and atomic execution option to Node SDK pipelines ([2639650](https://github.com/googleapis/google-cloud-node/commit/263965060a675d2819a6987d96d4e1b75c30adeb))
+
+
+### Bug Fixes
+
+* **firestore,pubsub:** Align types and proto re-exports with -api packages ([#9621](https://github.com/googleapis/google-cloud-node/issues/9621)) ([25d945b](https://github.com/googleapis/google-cloud-node/commit/25d945b34979849ea1c6df699212854f8d390d79))
+* **firestore:** Resolve api-extractor from cloud-rad in api-report.mjs ([#9505](https://github.com/googleapis/google-cloud-node/issues/9505)) ([dc83ed8](https://github.com/googleapis/google-cloud-node/commit/dc83ed8c08bf896489d29af6036b3ef72a8e7365))
+
+## [9.3.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.0...firestore-v9.3.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* **ci:** Deduplicate pnpm install in run_single_test and refine turbo compile inputs ([#9439](https://github.com/googleapis/google-cloud-node/issues/9439)) ([102b3f6](https://github.com/googleapis/google-cloud-node/commit/102b3f6d0eb80b3b8814d71d53e50b5240556340))
+* **firestore:** Unblock Cloud RAD docs generation ([#9474](https://github.com/googleapis/google-cloud-node/issues/9474)) ([5f580f0](https://github.com/googleapis/google-cloud-node/commit/5f580f0f6a457c32c613dfbeffe3dbd151b4e8fd))
+
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.2.0...firestore-v9.3.0) (2026-09-29)
+
+
+### Features
+
+* **firestore:** Support extended types in Node SDK ([#8357](https://github.com/googleapis/google-cloud-node/issues/8357)) ([0c78d29](https://github.com/googleapis/google-cloud-node/commit/0c78d2994b77482a76f53d2fec7d1461715e5288))
+
 ## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.1.0...firestore-v9.2.0) (2026-09-16)
 
 

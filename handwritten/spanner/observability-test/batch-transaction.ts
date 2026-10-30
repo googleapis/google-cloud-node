@@ -19,7 +19,7 @@
 import {util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
-import {before, beforeEach, afterEach, describe, it} from 'mocha';
+import {before, after, beforeEach, afterEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
@@ -32,6 +32,11 @@ const {
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 import {Session, Spanner} from '../src';
 import * as bt from '../src/batch-transaction';
+const {
+  AsyncLocalStorageContextManager,
+  AsyncHooksContextManager,
+} = require('@opentelemetry/context-async-hooks');
+const {setGlobalContextManager, disableContextAndManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
@@ -118,6 +123,17 @@ describe('BatchTransaction', () => {
     exporter: traceExporter,
     spanProcessors: [new SimpleSpanProcessor(traceExporter)],
   });
+  provider.register();
+
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
+  setGlobalContextManager(contextManager);
+
+  after(async () => {
+    await provider.shutdown();
+    disableContextAndManager(contextManager);
+  });
 
   afterEach(() => {
     traceExporter.reset();
@@ -160,9 +176,11 @@ describe('BatchTransaction', () => {
       assert.strictEqual(spans.length, 2, 'Exactly 2 spans expected');
 
       // Sort the spans by duration.
-      spans.sort((spanA, spanB) => {
-        spanA.duration < spanB.duration;
-      });
+      spans.sort(
+        (spanA, spanB) =>
+          spanA.duration[0] - spanB.duration[0] ||
+          spanA.duration[1] - spanB.duration[1],
+      );
 
       const actualSpanNames: string[] = [];
       spans.forEach(span => {
@@ -224,9 +242,11 @@ describe('BatchTransaction', () => {
       assert.strictEqual(spans.length, 2, 'Exactly 2 spans expected');
 
       // Sort the spans by duration.
-      spans.sort((spanA, spanB) => {
-        spanA.duration < spanB.duration;
-      });
+      spans.sort(
+        (spanA, spanB) =>
+          spanA.duration[0] - spanB.duration[0] ||
+          spanA.duration[1] - spanB.duration[1],
+      );
 
       const actualSpanNames: string[] = [];
       spans.forEach(span => {

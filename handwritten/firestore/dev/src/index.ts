@@ -114,7 +114,18 @@ export {BulkWriter} from './bulk-writer';
 export type {BulkWriterError} from './bulk-writer';
 export type {BundleBuilder} from './bundle';
 export {DocumentSnapshot, QueryDocumentSnapshot} from './document';
-export {FieldValue, VectorValue} from './field-value';
+export {
+  FieldValue,
+  VectorValue,
+  MinKey,
+  MaxKey,
+  BsonObjectId,
+  BsonTimestamp,
+  Bytes,
+  Decimal128Value,
+  RegexValue,
+  Int32Value,
+} from './field-value';
 export {Filter} from './filter';
 export {WriteBatch, WriteResult} from './write-batch';
 export {Transaction} from './transaction';
@@ -419,9 +430,9 @@ const MAX_CONCURRENT_REQUESTS_PER_CLIENT = 100;
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:firestore_quickstart
- * Full quickstart example:
+ * @example Full quickstart example:
+ * Placeholder: the quickstart sample (samples/quickstart.js, region tag
+ * firestore_quickstart) is not currently available.
  */
 export class Firestore implements firestore.Firestore {
   /**
@@ -2006,9 +2017,9 @@ export class Firestore implements firestore.Firestore {
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:firestore_quickstart
- * Full quickstart example:
+ * @example Full quickstart example:
+ * Placeholder: the quickstart sample (samples/quickstart.js, region tag
+ * firestore_quickstart) is not currently available.
  */
 // tslint:disable-next-line:no-default-export
 export default Firestore;

@@ -210,6 +210,9 @@ export class SqlUsersServiceClient {
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/backups/{backup}',
       ),
+      blueGreenDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/blueGreenDeployments/{blue_green_deployment}',
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -397,6 +400,8 @@ export class SqlUsersServiceClient {
    *   Name of the user in the instance.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -528,6 +533,8 @@ export class SqlUsersServiceClient {
    *   Project ID of the project that contains the instance.
    * @param {string} request.host
    *   Host of a user of the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -657,6 +664,8 @@ export class SqlUsersServiceClient {
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
    * @param {google.cloud.sql.v1.User} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -784,6 +793,8 @@ export class SqlUsersServiceClient {
    *   Database instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -931,6 +942,8 @@ export class SqlUsersServiceClient {
    *   in the `server_roles` field. If `false` or unset, the server roles
    *   specified in `server_roles` are added to the user's existing server roles.
    * @param {google.cloud.sql.v1.User} request.body
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1165,6 +1178,67 @@ export class SqlUsersServiceClient {
    */
   matchBackupFromBackupName(backupName: string) {
     return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified blueGreenDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} blue_green_deployment
+   * @returns {string} Resource name string.
+   */
+  blueGreenDeploymentPath(
+    project: string,
+    location: string,
+    blueGreenDeployment: string,
+  ) {
+    return this.pathTemplates.blueGreenDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      blue_green_deployment: blueGreenDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from BlueGreenDeployment resource.
+   *
+   * @param {string} blueGreenDeploymentName
+   *   A fully-qualified path representing BlueGreenDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBlueGreenDeploymentName(blueGreenDeploymentName: string) {
+    return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
+      blueGreenDeploymentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from BlueGreenDeployment resource.
+   *
+   * @param {string} blueGreenDeploymentName
+   *   A fully-qualified path representing BlueGreenDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBlueGreenDeploymentName(blueGreenDeploymentName: string) {
+    return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
+      blueGreenDeploymentName,
+    ).location;
+  }
+
+  /**
+   * Parse the blue_green_deployment from BlueGreenDeployment resource.
+   *
+   * @param {string} blueGreenDeploymentName
+   *   A fully-qualified path representing BlueGreenDeployment resource.
+   * @returns {string} A string representing the blue_green_deployment.
+   */
+  matchBlueGreenDeploymentFromBlueGreenDeploymentName(
+    blueGreenDeploymentName: string,
+  ) {
+    return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
+      blueGreenDeploymentName,
+    ).blue_green_deployment;
   }
 
   /**

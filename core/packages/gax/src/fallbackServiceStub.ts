@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' with {'resolution-mode': 'import'};
+import type {Response as NodeFetchResponse} from 'node-fetch' with {
+  'resolution-mode': 'import',
+};
 
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
@@ -23,6 +25,7 @@ import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
 import {GoogleError} from './googleError';
+import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
@@ -35,8 +38,7 @@ import type {Agent as HttpsAgent} from 'https';
 // - https://github.com/node-fetch/node-fetch#custom-agent
 // - https://github.com/googleapis/gax-nodejs/pull/1534
 let agentOption:
-  | ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent)
-  | null = null;
+  ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent) | null = null;
 if (isNodeJS()) {
   const http = require('http');
   const https = require('https');
@@ -67,6 +69,7 @@ export interface FetchParameters {
   body: Buffer | Uint8Array | string;
   method: FetchParametersMethod;
   url: string;
+  urlTemplate?: string;
 }
 
 // helper function used to properly format empty responses
@@ -118,7 +121,9 @@ interface CallOutcome {
  * HTTP status number, so it never matches a retry code and is silently treated
  * as a permanent failure.
  *
- * An error carrying an HTTP status maps through `rpcCodeFromHttpStatusCode`.
+ * An error carrying an HTTP status maps through `rpcCodeFromHttpStatusCode`,
+ * decoding a structured Google HTTP error payload when present so `ErrorInfo`
+ * and `statusDetails` are promoted for rejected 401 and 403 responses.
  * Otherwise the call failed before producing a response, which is reported as
  * UNAVAILABLE, except for an explicit cancellation (CANCELLED) or an elapsed
  * deadline (DEADLINE_EXCEEDED).
@@ -128,6 +133,107 @@ interface CallOutcome {
  * @returns A GoogleError with a numeric `code`, or the original value if it is
  *   not an Error.
  */
+function _isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return false;
+  }
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
+
+function _isGoogleErrorStatusObject(value: unknown, wrapped: boolean): boolean {
+  if (!_isPlainObject(value)) {
+    return false;
+  }
+  const hasProtoDetails =
+    Array.isArray(value.details) &&
+    value.details.some(
+      detail => _isPlainObject(detail) && typeof detail['@type'] === 'string',
+    );
+  if (hasProtoDetails) {
+    return true;
+  }
+  if (typeof value.message === 'string') {
+    return (
+      wrapped ||
+      value.code === undefined ||
+      (typeof value.code === 'number' && value.code >= 100 && value.code < 600)
+    );
+  }
+  return (
+    wrapped &&
+    (typeof value.status === 'string' ||
+      typeof value.code === 'number' ||
+      Array.isArray(value.details))
+  );
+}
+
+/**
+ * Checks whether a decoded JSON value has the structure of a Google HTTP error
+ * payload accepted by {@link GoogleError.parseHttpError} (standard
+ * `{error: {...}}`, streaming `[{error: {...}}]`, or an unwrapped status
+ * object). Guarding before `parseHttpError` prevents non-Google JSON payloads
+ * (such as `{}` or OAuth `{"error": "invalid_token"}`) from discarding the
+ * fallback error message or HTTP status mapping.
+ */
+function _isHttpErrorPayload(json: unknown): boolean {
+  if (Array.isArray(json)) {
+    const entry = json.find(item => _isPlainObject(item) && 'error' in item);
+    return entry !== undefined && _isGoogleErrorStatusObject(entry.error, true);
+  }
+  if (!_isPlainObject(json)) {
+    return false;
+  }
+  if ('error' in json) {
+    return _isGoogleErrorStatusObject(json.error, true);
+  }
+  return _isGoogleErrorStatusObject(json, false);
+}
+
+/**
+ * Attempts to decode a structured Google HTTP error (`ErrorInfo`,
+ * `statusDetails`, message, and canonical status) from a rejected fetch error.
+ *
+ * With `responseType: 'stream'`, gaxios drains rejected 401/403 bodies as UTF-8
+ * text into `err.message`, while `response.data` may be `undefined`, redacted,
+ * or pre-parsed depending on the fetch implementation or adapter.
+ */
+function _parseHttpErrorFromRejection(
+  err: Error,
+  responseData: unknown,
+): GoogleError | undefined {
+  for (const candidate of [responseData, err.message]) {
+    let json: unknown;
+    if (typeof candidate === 'string') {
+      try {
+        json = JSON.parse(candidate);
+      } catch {
+        continue;
+      }
+    } else if (_isHttpErrorPayload(candidate)) {
+      try {
+        // `GoogleError.parseHttpError` mutates its input in place.
+        json = JSON.parse(JSON.stringify(candidate));
+      } catch {
+        continue;
+      }
+    } else {
+      continue;
+    }
+
+    if (!_isHttpErrorPayload(json)) {
+      continue;
+    }
+
+    try {
+      return GoogleError.parseHttpError(json);
+    } catch {
+      // Fall through to the next candidate or raw status mapping.
+    }
+  }
+  return undefined;
+}
+
 function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
   if (err instanceof GoogleError) {
     return err;
@@ -143,20 +249,29 @@ function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
   // error instance originating from any particular copy of gaxios.
   const fetchError = err as Partial<{
     status: number;
-    response: {status?: number};
+    response: {status?: number; data?: unknown};
     code: string | number;
   }>;
 
-  // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
-  // table. Checked first: a response arrived, so it outranks the abort
-  // bookkeeping below.
+  // Errors that carry an HTTP status arrive here when `validateStatus` rejects
+  // them (401 and 403; see below), bypassing `decodeResponse`. Checked first: a
+  // response arrived, so it outranks the abort bookkeeping below. Decode a JSON
+  // Google error payload when present so `ErrorInfo` and `statusDetails` are
+  // promoted onto the `GoogleError`, and always preserve the received status
+  // because the HTTP-to-gRPC table is lossy — it collapses whole ranges.
   const httpStatus =
     typeof fetchError.status === 'number'
       ? fetchError.status
       : fetchError.response?.status;
   if (typeof httpStatus === 'number') {
-    error.code = rpcCodeFromHttpStatusCode(httpStatus);
-    return error;
+    const parsedError =
+      _parseHttpErrorFromRejection(err, fetchError.response?.data) ?? error;
+    parsedError.cause = err;
+    if (typeof parsedError.code !== 'number') {
+      parsedError.code = rpcCodeFromHttpStatusCode(httpStatus);
+    }
+    parsedError.httpStatusCode = httpStatus;
+    return parsedError;
   }
 
   // An explicit cancellation and an elapsed deadline are distinct conditions in
@@ -221,6 +336,7 @@ export function generateServiceStub(
     rpc: protobuf.Method,
     ok: boolean,
     response: Buffer | ArrayBuffer,
+    httpStatusCode?: number,
   ) => {},
   numericEnums: boolean,
   minifyJson: boolean,
@@ -296,6 +412,8 @@ export function generateServiceStub(
         };
       }
 
+      setAttemptHttpMethod(fetchParameters.method, fetchParameters.urlTemplate);
+
       const cancelController = new AbortController();
       const cancelSignal = cancelController.signal as AbortSignal;
       let cancelRequested = false;
@@ -309,14 +427,26 @@ export function generateServiceStub(
       // difference is bookkeeping: both a deadline expiry and a `cancel()`
       // abort the same request and surface the same error, so unless we record
       // which one fired, the handlers below cannot tell them apart.
+      //
+      // The request is always made with `cancelSignal`; every other signal is
+      // forwarded onto `cancelController` by hand. `AbortSignal.any` would
+      // express this more directly, but it is a recent addition to browsers
+      // (Chrome 116, Safari 17.4) and this module is also the browser entry
+      // point, so the composition is done by hand instead.
       let timedOut = false;
-      const requestSignals: AbortSignal[] = [cancelSignal];
       if (timeoutMs !== undefined) {
         const timeoutSignal = AbortSignal.timeout(timeoutMs);
-        timeoutSignal.addEventListener('abort', () => (timedOut = true), {
-          once: true,
-        });
-        requestSignals.push(timeoutSignal);
+        timeoutSignal.addEventListener(
+          'abort',
+          () => {
+            // Set before aborting: the abort synchronously unwinds into the
+            // handlers below, which read this flag to tell a deadline expiry
+            // apart from a `cancel()`.
+            timedOut = true;
+            cancelController.abort();
+          },
+          {once: true},
+        );
       }
 
       // A server-streaming call is handed the parser itself rather than a
@@ -325,22 +455,19 @@ export function generateServiceStub(
       // nothing ever listened to it — the request was made with `cancelSignal`
       // above — so a cancel ended the local stream and left the request in
       // flight, and the pipeline then reported the resulting teardown as a
-      // spurious 'Premature close' error. Compose the two signals, and record
-      // the cancel the way the unary canceller does so that the handlers below
-      // recognise it as one.
+      // spurious 'Premature close' error. Forward that cancel onto the request,
+      // and record it the way the unary canceller does so that the handlers
+      // below recognise it as one.
       if (rpc.responseStream) {
         streamArrayParser.cancelSignal.addEventListener(
           'abort',
-          () => (cancelRequested = true),
+          () => {
+            cancelRequested = true;
+            cancelController.abort();
+          },
           {once: true},
         );
-        requestSignals.push(streamArrayParser.cancelSignal);
       }
-
-      const requestSignal =
-        requestSignals.length === 1
-          ? cancelSignal
-          : AbortSignal.any(requestSignals);
 
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
@@ -369,16 +496,13 @@ export function generateServiceStub(
             ? fetchParameters.body
             : Buffer.from(fetchParameters.body),
         method: fetchParameters.method,
-        signal: requestSignal,
+        signal: cancelSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
         // Error responses must resolve so that they are decoded below into a
         // GoogleError carrying a gRPC status code. 401 and 403 keep rejecting
-        // so that the auth client can refresh credentials and retry.
-        //
-        // Those two therefore never reach the decoder: they are mapped from the
-        // HTTP status alone, so an ErrorInfo or statusDetails payload in a 401
-        // or 403 body is not promoted onto the error the way it is for every
-        // other failing status.
+        // so that the auth client can refresh credentials and retry; if they
+        // still fail, `_toGoogleError` decodes their error payload off the
+        // rejection.
         validateStatus: (status: number) => status !== 401 && status !== 403,
         agent: agentOption || undefined,
       };
@@ -426,12 +550,20 @@ export function generateServiceStub(
             );
             return;
           } else {
+            // Captured here because the decoded value below is also named
+            // `response` and shadows the fetch response.
+            const httpStatusCode = response.status;
             return Promise.all([
               Promise.resolve(response.ok),
               response.arrayBuffer(),
             ])
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
-                const response = responseDecoder(rpc, ok, buffer);
+                const response = responseDecoder(
+                  rpc,
+                  ok,
+                  buffer,
+                  httpStatusCode,
+                );
                 callback!(null, response);
                 return;
               })

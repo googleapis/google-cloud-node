@@ -5,6 +5,36 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.3.2](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.1...google-auth-library-v11.3.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **core:** Log request/response payloads at DEBUG severity ([#9754](https://github.com/googleapis/google-cloud-node/issues/9754)) ([bf46818](https://github.com/googleapis/google-cloud-node/commit/bf468181b2c85ffd17cc820d2459d6b42213f016))
+* **google-auth-library:** Add credential deprecation and validation warnings ([#9720](https://github.com/googleapis/google-cloud-node/issues/9720)) ([569678a](https://github.com/googleapis/google-cloud-node/commit/569678ac3f0917a6ac991548b83ae12819bf2715))
+
+## [11.3.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.0...google-auth-library-v11.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+
+## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.2.0...google-auth-library-v11.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [11.2.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.1.0...google-auth-library-v11.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [11.1.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.0.2...google-auth-library-v11.1.0) (2026-09-15)
 
 

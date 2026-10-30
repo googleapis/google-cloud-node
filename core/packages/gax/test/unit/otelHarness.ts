@@ -15,8 +15,14 @@
  */
 
 import * as assert from 'assert';
-import {EventEmitter} from 'events';
-import {trace, context, HrTime, SpanStatusCode} from '@opentelemetry/api';
+import {AsyncLocalStorage} from 'async_hooks';
+import {
+  trace,
+  context,
+  Context,
+  ContextManager,
+  ROOT_CONTEXT,
+} from '@opentelemetry/api';
 import {
   BasicTracerProvider,
   InMemorySpanExporter,
@@ -25,18 +31,53 @@ import {
 } from '@opentelemetry/sdk-trace-base';
 
 /**
- * Converts an OpenTelemetry `HrTime` tuple to milliseconds.
- *
- * @param {HrTime} time - `[seconds, nanoseconds]` tuple.
- * @returns {number} The equivalent value in milliseconds.
+ * In-memory OpenTelemetry `ContextManager` backed by Node's `AsyncLocalStorage`
+ * for propagating active span contexts across asynchronous operations in tests.
  */
-export function hrTimeToMs(time: HrTime): number {
-  return time[0] * 1000 + time[1] / 1e6;
+class AsyncLocalStorageContextManager implements ContextManager {
+  private _storage = new AsyncLocalStorage<Context>();
+
+  active(): Context {
+    return this._storage.getStore() ?? ROOT_CONTEXT;
+  }
+
+  with<A extends unknown[], F extends (...args: A) => ReturnType<F>>(
+    context: Context,
+    fn: F,
+    thisArg?: ThisParameterType<F>,
+    ...args: A
+  ): ReturnType<F> {
+    return this._storage.run(context, () => fn.apply(thisArg, args));
+  }
+
+  bind<T>(_context: Context, target: T): T {
+    return target;
+  }
+
+  enable(): this {
+    return this;
+  }
+
+  disable(): this {
+    this._storage.disable();
+    return this;
+  }
 }
 
+/** The resend count attribute on a gRPC span. */
+const GRPC_RESEND_COUNT = 'gcp.grpc.resend_count';
+
+/** The resend count attribute on a fallback span. */
+const HTTP_RESEND_COUNT = 'http.request.resend_count';
+
+/**
+ * Test harness for configuring an in-memory OpenTelemetry tracer provider
+ * and asserting exported span attributes, status, events, and lifetimes.
+ */
 export class OtelHarness {
   readonly exporter: InMemorySpanExporter;
   readonly provider: BasicTracerProvider;
+  private contextManager?: AsyncLocalStorageContextManager;
 
   constructor() {
     this.exporter = new InMemorySpanExporter();
@@ -45,20 +86,39 @@ export class OtelHarness {
     });
   }
 
+  /**
+   * Registers the in-memory tracer provider and `AsyncLocalStorage` context manager globally.
+   */
   setup(): void {
+    this.contextManager = new AsyncLocalStorageContextManager();
+    this.contextManager.enable();
+    context.setGlobalContextManager(this.contextManager);
     trace.setGlobalTracerProvider(this.provider);
   }
 
+  /**
+   * Disables the global tracer provider and context manager and clears exported spans.
+   */
   teardown(): void {
     trace.disable();
+    this.contextManager?.disable();
     context.disable();
     this.reset();
   }
 
+  /**
+   * Clears all finished spans from the in-memory exporter.
+   */
   reset(): void {
     this.exporter.reset();
   }
 
+  /**
+   * Returns all finished spans, optionally filtered by instrumentation scope name prefix.
+   *
+   * @param {string} [tracerName] - Optional instrumentation scope name prefix (e.g. 'google-gax').
+   * @returns {ReadableSpan[]} The matching finished spans.
+   */
   getSpans(tracerName?: string): ReadableSpan[] {
     const spans = this.exporter.getFinishedSpans();
     if (tracerName) {
@@ -67,11 +127,6 @@ export class OtelHarness {
       );
     }
     return spans;
-  }
-
-  getLastSpan(tracerName?: string): ReadableSpan | undefined {
-    const spans = this.getSpans(tracerName);
-    return spans[spans.length - 1];
   }
 
   /**
@@ -123,140 +178,222 @@ export class OtelHarness {
   }
 
   /**
-   * Duration of an exported span, in milliseconds.
+   * Reads the response status attributes (`rpc.response.status_code`,
+   * `http.response.status_code`, and legacy `grpc.response.status_code`) from a span.
    *
-   * @param {ReadableSpan} span - The span to measure.
-   * @returns {number} The span duration in milliseconds.
+   * @param {ReadableSpan} span - The span to read.
+   * @returns {ResponseStatusAttributes} The attributes, each undefined if absent.
    */
-  durationMs(span: ReadableSpan): number {
-    return hrTimeToMs(span.duration);
+  responseStatus(span: ReadableSpan): ResponseStatusAttributes {
+    return {
+      rpc: span.attributes['rpc.response.status_code'] as string | undefined,
+      grpc: span.attributes['grpc.response.status_code'] as string | undefined,
+      http: span.attributes['http.response.status_code'] as number | undefined,
+    };
   }
 
   /**
-   * Asserts that a span's duration covers at least `minMs`.
+   * Asserts the response status attributes of a traced call or attempt.
    *
-   * This is how a prematurely-ended span is caught. A span that is closed
-   * before the RPC completes — the callback-style failure mode, where the span
-   * is ended synchronously at call time rather than when the callback fires —
-   * reports a duration of roughly zero. Have the call under test delay its
-   * completion signal by a known amount, then assert the span covers it.
+   * The transport-specific attribute is not named by the caller. It is derived
+   * from the span's own `rpc.system.name`, so a test cannot assert a
+   * combination the tracer is not supposed to produce — such as an HTTP status
+   * on a gRPC span. Both the presence of the attribute that applies and the
+   * absence of the one that does not are checked, because the second half is
+   * what catches an attribute leaking onto the wrong transport.
    *
-   * Note: assert against a bound comfortably below the delay you introduced.
-   * Timer granularity makes an exact comparison flaky, and asserting merely
-   * `> 0` is useless for operations that complete synchronously.
+   * `httpStatus` is only meaningful on a fallback span. Omitting it there
+   * asserts that no HTTP status was reported, which is the expected result for
+   * a failure that never received a response, such as an expired deadline.
    *
-   * @param {number} minMs - Lower bound, in milliseconds.
-   * @param {string} [tracerName] - Restrict the lookup to one instrumentation scope.
-   * @param {ReadableSpan} [span] - Span to check; defaults to the only exported span.
-   */
-  assertMinDurationMs(
-    minMs: number,
-    tracerName?: string,
-    span?: ReadableSpan,
-  ): void {
-    const target = span ?? this.requireSingleSpan(tracerName);
-    const actual = this.durationMs(target);
-    assert.ok(
-      actual >= minMs,
-      `expected span '${target.name}' to cover at least ${minMs}ms, got ` +
-        `${actual.toFixed(3)}ms. A near-zero duration means the span was ` +
-        'ended before the operation it is supposed to measure completed.',
-    );
-  }
-
-  /**
-   * Asserts a span's status code, and optionally that its status message
-   * contains a given substring.
-   *
-   * @param {SpanStatusCode} code - Expected status code.
-   * @param {object} [options] - Additional assertions.
-   * @param {string} [options.messageIncludes] - Substring expected in the status message.
+   * @param {object} expected - Expected status values.
+   * @param {string} [expected.rpcStatus] - gRPC status name, e.g. 'OK' or 'NOT_FOUND'. Undefined if no response arrived.
+   * @param {number} [expected.httpStatus] - HTTP status expected on a fallback span.
+   * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
    * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
    */
-  assertStatus(
-    code: SpanStatusCode,
-    options: {
-      messageIncludes?: string;
-      tracerName?: string;
-      span?: ReadableSpan;
-    } = {},
+  assertResponseStatus(
+    expected: {
+      rpcStatus?: string;
+      httpStatus?: number;
+    },
+    options: {tracerName?: string; span?: ReadableSpan} = {},
   ): void {
     const target = options.span ?? this.requireSingleSpan(options.tracerName);
-    assert.strictEqual(
-      target.status.code,
-      code,
-      `expected span '${target.name}' to have status ${SpanStatusCode[code]}, ` +
-        `got ${SpanStatusCode[target.status.code]} ` +
-        `(message: ${JSON.stringify(target.status.message)})`,
+    const actual = this.responseStatus(target);
+    const transport = target.attributes['rpc.system.name'];
+    const where = `span '${target.name}'`;
+
+    assert.ok(
+      transport === 'grpc' || transport === 'http',
+      `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
+        'transport-specific status attribute cannot be checked without it. ' +
+        'Was this span produced by traceCall or traceAttempt?',
     );
-    if (options.messageIncludes !== undefined) {
-      assert.ok(
-        target.status.message?.includes(options.messageIncludes),
-        `expected status message to include ${JSON.stringify(
-          options.messageIncludes,
-        )}, got ${JSON.stringify(target.status.message)}`,
+
+    assert.strictEqual(
+      actual.grpc,
+      undefined,
+      `${where} reported grpc.response.status_code ${JSON.stringify(actual.grpc)}; ` +
+        'only rpc.response.status_code or http.response.status_code should be set.',
+    );
+
+    if (transport === 'grpc') {
+      assert.strictEqual(
+        actual.rpc,
+        expected.rpcStatus,
+        expected.rpcStatus === undefined
+          ? `expected ${where} to report no rpc.response.status_code, got ` +
+              `${JSON.stringify(actual.rpc)}. Response status is omitted when there is no server response.`
+          : `expected ${where} to report rpc.response.status_code ` +
+              `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}.`,
       );
+      assert.strictEqual(
+        actual.http,
+        undefined,
+        `${where} is a gRPC span but reported http.response.status_code ` +
+          `${JSON.stringify(actual.http)}. A gRPC call has no HTTP status, ` +
+          'not even a synthesized one.',
+      );
+      assert.strictEqual(
+        expected.httpStatus,
+        undefined,
+        'assertResponseStatus was given an expected httpStatus for a gRPC ' +
+          'span, which can never hold one. Drop it, or assert against a ' +
+          'fallback span.',
+      );
+      return;
     }
-  }
-}
 
-/**
- * A record of how many listeners an emitter had per event, captured before a
- * traced operation runs.
- */
-export interface ListenerSnapshot {
-  emitter: EventEmitter;
-  counts: Map<string | symbol, number>;
-}
-
-/**
- * Captures the current per-event listener counts of an emitter.
- *
- * @param {EventEmitter} emitter - The emitter to snapshot.
- * @returns {ListenerSnapshot} The baseline to compare against later.
- */
-export function snapshotListeners(emitter: EventEmitter): ListenerSnapshot {
-  const counts = new Map<string | symbol, number>();
-  for (const name of emitter.eventNames()) {
-    counts.set(name, emitter.listenerCount(name));
-  }
-  return {emitter, counts};
-}
-
-/**
- * Asserts that every event's listener count has returned to its baseline.
- *
- * Checks both directions, which matters because the two failure modes are
- * opposites: a count above baseline means the tracer leaked listeners onto a
- * stream it no longer tracks, and a count below baseline means cleanup was too
- * aggressive and tore off a listener belonging to someone else, such as a
- * retry handler.
- *
- * @param {ListenerSnapshot} snapshot - Baseline from {@link snapshotListeners}.
- * @param {string} [context] - Optional label for the failure output.
- */
-export function assertListenersRestored(
-  snapshot: ListenerSnapshot,
-  context?: string,
-): void {
-  const {emitter, counts} = snapshot;
-  const events = new Set<string | symbol>([
-    ...counts.keys(),
-    ...emitter.eventNames(),
-  ]);
-  const label = context ? `${context}: ` : '';
-  for (const name of events) {
-    const before = counts.get(name) ?? 0;
-    const after = emitter.listenerCount(name);
     assert.strictEqual(
-      after,
-      before,
-      `${label}listener count for '${String(name)}' did not return to ` +
-        `baseline: expected ${before}, got ${after}. ` +
-        (after > before
-          ? 'Listeners were leaked.'
-          : 'Cleanup removed a listener it did not own.'),
+      actual.rpc,
+      undefined,
+      `${where} is a fallback span but reported rpc.response.status_code ` +
+        `${JSON.stringify(actual.rpc)}. HTTP spans only report http.response.status_code.`,
+    );
+    assert.strictEqual(
+      expected.rpcStatus,
+      undefined,
+      'assertResponseStatus was given an expected rpcStatus for an HTTP ' +
+        'span, which can never hold one. Use httpStatus instead.',
+    );
+    assert.strictEqual(
+      actual.http,
+      expected.httpStatus,
+      expected.httpStatus === undefined
+        ? `expected ${where} to report no http.response.status_code, got ` +
+            `${JSON.stringify(actual.http)}. It is only reported when a ` +
+            'response was actually received.'
+        : `expected ${where} to report http.response.status_code ` +
+            `${expected.httpStatus}, got ${JSON.stringify(actual.http)}. ` +
+            'This is the status the transport received, which is not ' +
+            'recoverable from the gRPC status it was mapped to.',
     );
   }
+
+  /**
+   * Asserts the `server.address` and `server.port` attributes on a span.
+   *
+   * Per OpenTelemetry semantic conventions, `server.address` and `server.port`
+   * may be absent if it's a client side failure that occurred before DNS resolution
+   * or connection establishment, but are present if it's a server side error.
+   *
+   * @param {object} expected - Expected server address and port.
+   * @param {string} [expected.address] - Expected server.address; undefined if asserted absent.
+   * @param {number} [expected.port] - Expected server.port; undefined if asserted absent.
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertServerAddressAndPort(
+    expected: {address?: string; port?: number},
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const where = `span '${target.name}'`;
+
+    assert.strictEqual(
+      target.attributes['server.address'],
+      expected.address,
+      expected.address === undefined
+        ? `expected ${where} to omit server.address, got ${JSON.stringify(target.attributes['server.address'])}.`
+        : `expected ${where} to report server.address ${JSON.stringify(expected.address)}, got ${JSON.stringify(target.attributes['server.address'])}.`,
+    );
+
+    assert.strictEqual(
+      target.attributes['server.port'],
+      expected.port,
+      expected.port === undefined
+        ? `expected ${where} to omit server.port, got ${JSON.stringify(target.attributes['server.port'])}.`
+        : `expected ${where} to report server.port ${JSON.stringify(expected.port)}, got ${JSON.stringify(target.attributes['server.port'])}.`,
+    );
+  }
+
+  /**
+   * Asserts the resend count reported on a span, under the attribute name its
+   * transport should be using.
+   *
+   * The count is recorded on low level network attempt spans when `resendCount > 0` and named
+   * per transport: `gcp.grpc.resend_count` on a gRPC span and
+   * `http.request.resend_count` on a fallback span. When expected is 0 (such as
+   * on initial attempts or client request spans), the attribute is asserted
+   * to be absent. The name that does not apply is asserted absent as well, so a
+   * span that reports the count under the wrong one fails here instead of
+   * passing quietly.
+   *
+   * @param {number} expected - Expected number of resends; 0 if never retried or on a client request span (attribute omitted).
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertResendCount(
+    expected: number,
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const transport = target.attributes['rpc.system.name'];
+    const where = `span '${target.name}'`;
+
+    assert.ok(
+      transport === 'grpc' || transport === 'http',
+      `${where} has rpc.system.name ${JSON.stringify(transport)}; the ` +
+        'transport-specific resend count cannot be checked without it. ' +
+        'Was this span produced by traceCall or traceAttempt?',
+    );
+
+    const isGrpc = transport === 'grpc';
+    const expectedKey = isGrpc ? GRPC_RESEND_COUNT : HTTP_RESEND_COUNT;
+    const otherKey = isGrpc ? HTTP_RESEND_COUNT : GRPC_RESEND_COUNT;
+
+    const expectedValue = expected === 0 ? undefined : expected;
+    assert.strictEqual(
+      target.attributes[expectedKey],
+      expectedValue,
+      expected === 0
+        ? `expected ${where} to omit ${expectedKey} when resend count is 0, got ` +
+            `${JSON.stringify(target.attributes[expectedKey])}.`
+        : `expected ${where} to report ${expectedKey} ${expected}, got ` +
+            `${JSON.stringify(target.attributes[expectedKey])}.`,
+    );
+    assert.strictEqual(
+      target.attributes[otherKey],
+      undefined,
+      `${where} is a ${transport} span but reported ${otherKey} ` +
+        `${JSON.stringify(target.attributes[otherKey])}. The resend count ` +
+        `belongs under ${expectedKey} there.`,
+    );
+  }
+}
+
+/**
+ * The response status attributes read off a traced span.
+ */
+export interface ResponseStatusAttributes {
+  /** `rpc.response.status_code`: gRPC status name, reported on gRPC spans. */
+  rpc: string | undefined;
+  /** `grpc.response.status_code`: legacy attribute asserted absent on all spans. */
+  grpc: string | undefined;
+  /** `http.response.status_code`: HTTP status code, reported on fallback spans that received a response. */
+  http: number | undefined;
 }

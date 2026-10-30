@@ -615,6 +615,176 @@ describe('v1.IngestionServiceClient', () => {
     });
   });
 
+  describe('ingestUsers', () => {
+    it('invokes ingestUsers without error', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersResponse(),
+      );
+      client.innerApiCalls.ingestUsers = stubSimpleCall(expectedResponse);
+      const [response] = await client.ingestUsers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes ingestUsers without error using callback', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersResponse(),
+      );
+      client.innerApiCalls.ingestUsers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.ingestUsers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.datamanager.v1.IIngestUsersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes ingestUsers with error', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.ingestUsers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.ingestUsers(request), expectedError);
+    });
+
+    it('invokes ingestUsers with closed client', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.IngestUsersRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.ingestUsers(request), expectedError);
+    });
+  });
+
+  describe('removeUsers', () => {
+    it('invokes removeUsers without error', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersResponse(),
+      );
+      client.innerApiCalls.removeUsers = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeUsers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes removeUsers without error using callback', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersResponse(),
+      );
+      client.innerApiCalls.removeUsers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeUsers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.datamanager.v1.IRemoveUsersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes removeUsers with error', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeUsers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.removeUsers(request), expectedError);
+    });
+
+    it('invokes removeUsers with closed client', async () => {
+      const client = new ingestionserviceModule.v1.IngestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.datamanager.v1.RemoveUsersRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.removeUsers(request), expectedError);
+    });
+  });
+
   describe('ingestAdEvents', () => {
     it('invokes ingestAdEvents without error', async () => {
       const client = new ingestionserviceModule.v1.IngestionServiceClient({

@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
+          fetch-depth: 2
           persist-credentials: false
       - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: changes
@@ -34,6 +35,7 @@ jobs:
             librarian:
               - 'librarian.yaml'
               - '.github/workflows/generation_check.yaml'
+              - 'packages/**'
       # Version of librarian is pulled from librarian.yaml,
       # action is pinned to commit SHA to satisfy blanket security policy.
       - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
@@ -43,22 +45,293 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 22
-      - name: Setup pnpm 7
+      - name: Setup pnpm 10
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-        run: npm install -g pnpm@7
+        run: npm install -g pnpm@10
       - name: Install tools
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: librarian install
       - name: Regenerate
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        env:
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          librarian generate --all
+          # ------------------------------------------------------------------------------
+          # Execution Strategy:
+          #   1. Post-submit (`push` to `main`) & manual (`workflow_dispatch`):
+          #      Run `librarian generate --all` to regenerate every library in the
+          #      monorepo and guarantee 100% coverage.
+          #   2. Presubmit (`pull_request`):
+          #      Full monorepo generation takes ~1h15m. To keep presubmit checks under
+          #      ~5 minutes, identify the libraries affected by the PR, rank them in a
+          #      MinPriorityQueue by on-disk package size + API surface weight, and
+          #      generate up to the 3 fastest libraries.
+          # ------------------------------------------------------------------------------
+          if [ "$EVENT_NAME" != "pull_request" ]; then
+            echo "Running full monorepo generation (event: $EVENT_NAME)..."
+            librarian generate --all
+          else
+            PACKAGES_TO_GENERATE=$(node -e '
+              const { execSync } = require("child_process");
+              const fs = require("fs");
+              const path = require("path");
+
+              const MAX_PACKAGES_TO_GENERATE = 3;
+              const BYTES_PER_API_WEIGHT = 500000;
+
+              // Min-heap priority queue ordered by `item.score` (lowest score popped first).
+              class MinPriorityQueue {
+                constructor() {
+                  this.heap = [];
+                }
+                push(item) {
+                  this.heap.push(item);
+                  this._bubbleUp(this.heap.length - 1);
+                }
+                pop() {
+                  if (this.heap.length === 0) return undefined;
+                  const top = this.heap[0];
+                  const bottom = this.heap.pop();
+                  if (this.heap.length > 0) {
+                    this.heap[0] = bottom;
+                    this._sinkDown(0);
+                  }
+                  return top;
+                }
+                get size() {
+                  return this.heap.length;
+                }
+                _bubbleUp(index) {
+                  while (index > 0) {
+                    const parentIdx = (index - 1) >> 1;
+                    if (this.heap[index].score >= this.heap[parentIdx].score) break;
+                    [this.heap[index], this.heap[parentIdx]] = [this.heap[parentIdx], this.heap[index]];
+                    index = parentIdx;
+                  }
+                }
+                _sinkDown(index) {
+                  const length = this.heap.length;
+                  while (true) {
+                    const left = (index << 1) + 1;
+                    const right = left + 1;
+                    let smallest = index;
+                    if (left < length && this.heap[left].score < this.heap[smallest].score) smallest = left;
+                    if (right < length && this.heap[right].score < this.heap[smallest].score) smallest = right;
+                    if (smallest === index) break;
+                    [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+                    index = smallest;
+                  }
+                }
+              }
+
+              // Run `git diff` against the base parent commit (with fallback for single-parent history).
+              // Note: `filePath` must be placed AFTER `HEAD^1 HEAD --` so Git does not treat
+              // the commit revisions as file pathspecs against the working tree.
+              function gitDiff(flags = "", filePath = "") {
+                const pathSpec = filePath ? ` -- ${filePath}` : "";
+                try {
+                  return execSync(`git diff ${flags} HEAD^1 HEAD${pathSpec}`, { encoding: "utf8" });
+                } catch {
+                  return execSync(`git diff ${flags} HEAD~1 HEAD${pathSpec}`, { encoding: "utf8" });
+                }
+              }
+
+              // Recursively sum file sizes in `dirPath`, excluding build artifacts and dependencies.
+              function getDirSize(dirPath) {
+                if (!fs.existsSync(dirPath)) return 0;
+                let size = 0;
+                for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+                  if (entry.name === "node_modules" || entry.name === "build") continue;
+                  const fullPath = path.join(dirPath, entry.name);
+                  if (entry.isDirectory()) {
+                    size += getDirSize(fullPath);
+                  } else if (entry.isFile()) {
+                    size += fs.statSync(fullPath).size;
+                  }
+                }
+                return size;
+              }
+
+              // Parse the `libraries:` section of `librarian.yaml` into a Map of
+              // library name -> { name, startLine, endLine, skip, apiCount }.
+              function parseLibrarianYaml(filePath) {
+                const lines = fs.readFileSync(filePath, "utf8").split("\n");
+                const libs = new Map();
+                let inLibraries = false;
+                let current = null;
+
+                for (let i = 0; i < lines.length; i++) {
+                  const line = lines[i];
+                  if (/^[a-zA-Z0-9_-]+:/.test(line)) {
+                    if (current) {
+                      current.endLine = i;
+                      libs.set(current.name, current);
+                      current = null;
+                    }
+                    inLibraries = /^libraries:\s*$/.test(line);
+                    continue;
+                  }
+                  if (!inLibraries) continue;
+
+                  const nameMatch = line.match(/^  - name:\s+(\S+)/);
+                  if (nameMatch) {
+                    if (current) {
+                      current.endLine = i;
+                      libs.set(current.name, current);
+                    }
+                    current = {
+                      name: nameMatch[1],
+                      startLine: i + 1,
+                      endLine: lines.length,
+                      skip: false,
+                      apiCount: 0,
+                    };
+                  } else if (current) {
+                    if (/^\s+skip_generate:\s*true/.test(line)) current.skip = true;
+                    if (/^\s+-\s+path:/.test(line)) current.apiCount++;
+                  }
+                }
+                if (current) libs.set(current.name, current);
+                return libs;
+              }
+
+              // 1. Load library definitions from librarian.yaml.
+              const libs = parseLibrarianYaml("librarian.yaml");
+              const libList = Array.from(libs.values());
+              const firstLibStartLine = libList.length > 0 ? libList[0].startLine : Infinity;
+
+              // 2. Classify changed files in the pull request.
+              const changedFiles = gitDiff("--name-only").split("\n").map(s => s.trim()).filter(Boolean);
+              const touchedPackages = new Set();
+              const topLevelPackagesFiles = [];
+              let globalConfigChanged = false;
+
+              for (const file of changedFiles) {
+                const pkgMatch = file.match(/^packages\/([^/]+)\//);
+                if (pkgMatch) {
+                  touchedPackages.add(pkgMatch[1]);
+                } else if (file.startsWith("packages/")) {
+                  topLevelPackagesFiles.push(file);
+                } else if (file === ".github/workflows/generation_check.yaml") {
+                  globalConfigChanged = true;
+                }
+              }
+
+              // 3. Validate `packages/` structure against `librarian.yaml`.
+              if (topLevelPackagesFiles.length > 0) {
+                console.error(
+                  `Error: Found modified file(s) directly under packages/ not belonging to any library in librarian.yaml: ${topLevelPackagesFiles.join(", ")}`
+                );
+                process.exit(1);
+              }
+
+              const allPackageDirs = fs.existsSync("packages")
+                ? fs.readdirSync("packages", { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name)
+                : [];
+              const unknownPackages = Array.from(
+                new Set([
+                  ...Array.from(touchedPackages).filter(pkg => !libs.has(pkg) && fs.existsSync(path.join("packages", pkg))),
+                  ...allPackageDirs.filter(pkg => !libs.has(pkg)),
+                ])
+              );
+              if (unknownPackages.length > 0) {
+                console.error(
+                  `Error: Package directory(s) under packages/ not configured in librarian.yaml: ${unknownPackages.join(", ")}`
+                );
+                process.exit(1);
+              }
+
+              // Include any configured library whose `packages/<name>` directory is missing on disk.
+              for (const lib of libList) {
+                if (!lib.skip && !fs.existsSync(path.join("packages", lib.name))) {
+                  touchedPackages.add(lib.name);
+                }
+              }
+
+              // 4. If `librarian.yaml` changed, map modified diff hunks to their corresponding library blocks
+              //    (or mark `globalConfigChanged = true` if top-level settings outside `libraries:` were modified).
+              if (changedFiles.includes("librarian.yaml")) {
+                try {
+                  const yamlDiff = gitDiff("-U0", "librarian.yaml");
+                  const hunkRegex = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/gm;
+                  let match;
+                  let foundHunk = false;
+                  while ((match = hunkRegex.exec(yamlDiff)) !== null) {
+                    foundHunk = true;
+                    const start = parseInt(match[1], 10);
+                    const count = match[2] !== undefined ? parseInt(match[2], 10) : 1;
+                    const hunkStart = start === 0 ? 1 : start;
+                    const hunkEnd = count === 0 ? start + 1 : start + count - 1;
+                    if (hunkStart < firstLibStartLine) {
+                      globalConfigChanged = true;
+                    }
+                    let matchedLib = false;
+                    for (const lib of libList) {
+                      if (hunkEnd >= lib.startLine && hunkStart <= lib.endLine) {
+                        touchedPackages.add(lib.name);
+                        matchedLib = true;
+                      }
+                    }
+                    if (!matchedLib) {
+                      globalConfigChanged = true;
+                    }
+                  }
+                  if (!foundHunk) {
+                    globalConfigChanged = true;
+                  }
+                } catch {
+                  globalConfigChanged = true;
+                }
+              }
+
+              // 5. Filter to generatable candidate libraries (`skip_generate != true`).
+              //    If no specific generatable library was touched but global config changed
+              //    (e.g., workflow file or top-level librarian.yaml), fall back to all
+              //    generatable libraries so the fastest 3 in the repo are tested.
+              let candidates = Array.from(touchedPackages).filter(pkg => {
+                const meta = libs.get(pkg);
+                return Boolean(meta && !meta.skip);
+              });
+              if (candidates.length === 0 && globalConfigChanged) {
+                candidates = libList.filter(lib => !lib.skip).map(lib => lib.name);
+              }
+
+              // 6. Rank candidates in a MinPriorityQueue by estimated generation cost and select the fastest 3.
+              const pq = new MinPriorityQueue();
+              for (const pkg of candidates) {
+                const meta = libs.get(pkg);
+                const totalBytes = getDirSize(path.join("packages", pkg));
+                const apiCount = Math.max(1, meta.apiCount);
+                const score = totalBytes + apiCount * BYTES_PER_API_WEIGHT;
+                pq.push({ pkg, totalBytes, apiCount, score });
+              }
+
+              const selected = [];
+              while (selected.length < MAX_PACKAGES_TO_GENERATE && pq.size > 0) {
+                const next = pq.pop();
+                console.error(
+                  `Selected #${selected.length + 1}: ${next.pkg} (size=${next.totalBytes}B, apis=${next.apiCount}, score=${next.score})`
+                );
+                selected.push(next.pkg);
+              }
+              process.stdout.write(selected.join(" "));
+            ')
+            if [ -z "$PACKAGES_TO_GENERATE" ]; then
+              echo "No generatable packages found for this pull request; skipping librarian generate."
+            else
+              for pkg in $PACKAGES_TO_GENERATE; do
+                echo "Running: librarian generate $pkg"
+                librarian generate "$pkg"
+              done
+            fi
+          fi
+
           if [ -n "$(git status --porcelain)" ]; then
             git status
             echo "==================== GIT DIFF ===================="
             git diff
             echo "=================================================="
-            echo "Regeneration failed. Please run 'librarian generate --all' to update the generated files."
+            echo "Regeneration failed. Please run 'librarian generate <package>' (or 'librarian generate --all') to update the generated files, or revert unauthorized edits under packages/."
             exit 1
           fi
       - name: Create issue if previous step fails

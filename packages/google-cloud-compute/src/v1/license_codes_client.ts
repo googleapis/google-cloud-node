@@ -39,6 +39,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The LicenseCodes API.
+ *
+ *  This client uses LicenseCodes version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -200,7 +202,10 @@ export class LicenseCodesClient {
       'google.cloud.compute.v1.LicenseCodes',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation

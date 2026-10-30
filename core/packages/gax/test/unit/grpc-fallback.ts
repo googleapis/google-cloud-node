@@ -270,7 +270,7 @@ describe('grpc-fallback', () => {
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, undefined);
   });
 
-  it('constructSettings should accept enableTelemetryTracing and internalTelemetryInfo', () => {
+  it('constructSettings should enable tracing when enableTelemetryTracing: true is passed in client options', () => {
     const gapicConfig = {
       interfaces: {
         'google.showcase.v1beta1.Echo': {
@@ -284,26 +284,80 @@ describe('grpc-fallback', () => {
         },
       },
     };
-    const telemetryInfo = {
-      gcpClientService: 'fake',
-      gcpVersion: 'v1',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: '@google-cloud/fake',
-    };
-    const settings = gaxGrpc.constructSettings(
+    const clientWithTracing = new GrpcClient({
+      ...opts,
+      enableTelemetryTracing: true,
+    });
+    const settings = clientWithTracing.constructSettings(
       'google.showcase.v1beta1.Echo',
       gapicConfig,
       {},
       {},
-      true,
-      telemetryInfo,
     );
     assert.strictEqual(settings.echo.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      settings.echo.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+  });
+
+  it('constructSettings should enable tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=true environment variable is set', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+    try {
+      const gapicConfig = {
+        interfaces: {
+          'google.showcase.v1beta1.Echo': {
+            retry_codes: {},
+            retry_params: {},
+            methods: {
+              Echo: {
+                timeout_millis: 60000,
+              },
+            },
+          },
+        },
+      };
+      const settings = gaxGrpc.constructSettings(
+        'google.showcase.v1beta1.Echo',
+        gapicConfig,
+        {},
+        {},
+      );
+      assert.strictEqual(settings.echo.enableTelemetryTracing, true);
+      assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+    } finally {
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    }
+  });
+
+  it('constructSettings should enable logging when enableTelemetryLogging: true is passed in client options and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
+    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    try {
+      const gapicConfig = {
+        interfaces: {
+          'google.showcase.v1beta1.Echo': {
+            retry_codes: {},
+            retry_params: {},
+            methods: {
+              Echo: {
+                timeout_millis: 60000,
+              },
+            },
+          },
+        },
+      };
+      const clientWithLogging = new GrpcClient({
+        ...opts,
+        enableTelemetryLogging: true,
+      });
+      const settings = clientWithLogging.constructSettings(
+        'google.showcase.v1beta1.Echo',
+        gapicConfig,
+        {},
+        {},
+      );
+      assert.strictEqual(settings.echo.enableTelemetryLogging, true);
+      assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+    } finally {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+    }
   });
 
   it('should make a request', async () => {
@@ -450,6 +504,35 @@ describe('grpc-fallback', () => {
       echoStub.echo(requestObject, {}, {}, (err?: Error) => {
         try {
           assert.strictEqual(err?.message, 'fetch error');
+          resolve();
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+  });
+
+  it('should record the received http status on the error', async () => {
+    const requestObject = {content: 'test-content'};
+
+    // The body reports 400 while the response itself is a 503. `code` is
+    // derived from the body, so a status read back off the error can only be
+    // the received one if the two differ.
+    setMockFallbackHttpResponse(
+      gaxGrpc,
+      new Response(
+        JSON.stringify({error: {code: 400, message: 'mismatched status'}}),
+        {status: 503},
+      ),
+    );
+
+    const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+    await new Promise<void>((resolve, reject) => {
+      echoStub.echo(requestObject, {}, {}, (err?: Error) => {
+        try {
+          assert(err instanceof GoogleError);
+          assert.strictEqual(err.code, Status.INVALID_ARGUMENT);
+          assert.strictEqual(err.httpStatusCode, 503);
           resolve();
         } catch (e) {
           reject(e);
@@ -1356,6 +1439,314 @@ describe('grpc-fallback', () => {
       assert(err instanceof GoogleError);
       assert.strictEqual(err.code, Status.UNAVAILABLE);
       assert.notStrictEqual(err.code as number, 503);
+    });
+
+    it('should decode a resolved error response and record its http status', async () => {
+      // 500 now passes `validateStatus`, so it resolves and is decoded, which
+      // is what lets the received HTTP status be recorded alongside the
+      // gRPC code the body maps to.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {code: 500, message: 'server blew up', status: 'INTERNAL'},
+          }),
+          {status: 500, headers: {'Content-Type': 'application/json'}},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 500);
+    });
+
+    it('should record the http status of a rejected 401', async () => {
+      // 401 and 403 are rejected on purpose so the auth client can refresh
+      // credentials, so they never reach `decodeResponse`. Both the HTTP status
+      // and the decoded Google error payload have to be extracted off the
+      // rejection instead.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {code: 401, message: 'Invalid authentication credentials'},
+          }),
+          {status: 401},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAUTHENTICATED);
+      assert.strictEqual(err.httpStatusCode, 401);
+      assert.strictEqual(err.message, 'Invalid authentication credentials');
+    });
+
+    it('should record the http status of a rejected 403', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({error: {code: 403, message: 'Permission denied'}}),
+          {status: 403},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(err.message, 'Permission denied');
+    });
+
+    it('should promote ErrorInfo and statusDetails on a rejected 403', async () => {
+      const errorInfo = {
+        '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+        reason: 'SERVICE_DISABLED',
+        domain: 'googleapis.com',
+        metadata: {
+          service: 'translate.googleapis.com',
+          consumer: 'projects/123',
+        },
+      };
+      const help = {
+        '@type': 'type.googleapis.com/google.rpc.Help',
+        links: [
+          {
+            description: 'Google developers console API activation',
+            url: 'https://console.developers.google.com/apis/api/translate.googleapis.com/overview?project=123',
+          },
+        ],
+      };
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 403,
+              message: 'Cloud Translation API is disabled for project 123.',
+              status: 'PERMISSION_DENIED',
+              details: [help, errorInfo],
+            },
+          }),
+          {status: 403},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(
+        err.message,
+        'Cloud Translation API is disabled for project 123.',
+      );
+      assert.strictEqual(err.reason, errorInfo.reason);
+      assert.strictEqual(err.domain, errorInfo.domain);
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        errorInfo.metadata,
+      );
+      assert.strictEqual(err.statusDetails?.length, 2);
+      assert(err.cause instanceof Error);
+    });
+
+    it('should promote ErrorInfo on a rejected 401', async () => {
+      const errorInfo = {
+        '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+        reason: 'ACCESS_TOKEN_EXPIRED',
+        domain: 'googleapis.com',
+        metadata: {
+          service: 'translate.googleapis.com',
+        },
+      };
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 401,
+              message: 'Request had invalid authentication credentials.',
+              status: 'UNAUTHENTICATED',
+              details: [errorInfo],
+            },
+          }),
+          {status: 401},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAUTHENTICATED);
+      assert.strictEqual(err.httpStatusCode, 401);
+      assert.strictEqual(
+        err.message,
+        'Request had invalid authentication credentials.',
+      );
+      assert.strictEqual(err.reason, 'ACCESS_TOKEN_EXPIRED');
+      assert.strictEqual(err.domain, 'googleapis.com');
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        errorInfo.metadata,
+      );
+    });
+
+    it('should promote ErrorInfo from pre-parsed response.data on a rejected 403 without mutating response.data', async () => {
+      const responseData = {
+        error: {
+          code: 403,
+          message: 'IAM permission denied.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              reason: 'IAM_PERMISSION_DENIED',
+              domain: 'iam.googleapis.com',
+              metadata: {permission: 'resourcemanager.projects.get'},
+            },
+          ],
+        },
+      };
+      const snapshot = JSON.parse(JSON.stringify(responseData));
+      const fetchError = Object.assign(new Error('IAM permission denied.'), {
+        status: 403,
+        response: {status: 403, data: responseData},
+      });
+      setMockFallbackError(gaxGrpc, fetchError);
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(err.message, 'IAM permission denied.');
+      assert.strictEqual(err.reason, 'IAM_PERMISSION_DENIED');
+      assert.strictEqual(err.domain, 'iam.googleapis.com');
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        {permission: 'resourcemanager.projects.get'},
+      );
+      assert.strictEqual(err.cause, fetchError);
+      assert.deepStrictEqual(responseData, snapshot);
+    });
+
+    it('should preserve message and status mapping when a rejected 401 or 403 body is not a Google JSON error', async () => {
+      for (const {status, expectedCode, body} of [
+        {
+          status: 401,
+          expectedCode: Status.UNAUTHENTICATED,
+          body: JSON.stringify({
+            error: 'invalid_token',
+            error_description: 'The access token expired',
+          }),
+        },
+        {
+          status: 403,
+          expectedCode: Status.PERMISSION_DENIED,
+          body: '{}',
+        },
+        {
+          status: 403,
+          expectedCode: Status.PERMISSION_DENIED,
+          body: '<html><title>403 Forbidden</title></html>',
+        },
+      ]) {
+        setMockFallbackHttpResponse(gaxGrpc, new Response(body, {status}));
+
+        const err = await callEcho();
+
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, expectedCode);
+        assert.strictEqual(err.httpStatusCode, status);
+        assert.strictEqual(err.message, body);
+        assert.strictEqual(err.reason, undefined);
+        assert.strictEqual(err.domain, undefined);
+      }
+    });
+
+    it('should classify an HTML error response by its http status', async () => {
+      // A 404 from a GFE or a proxy, rather than from the API, comes back as an
+      // HTML page. Parsing it threw a SyntaxError before any status was
+      // recorded, so the error reported no HTTP status and was classified as an
+      // UNAVAILABLE transport failure instead of NOT_FOUND.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          '<!DOCTYPE html><html><title>Error 404 (Not Found)</title></html>',
+          {status: 404, headers: {'Content-Type': 'text/html'}},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.NOT_FOUND);
+      assert.strictEqual(err.httpStatusCode, 404);
+      assert.notStrictEqual(err.code, Status.UNAVAILABLE);
+      // The body identifies who answered, so it is kept for diagnosis.
+      assert.match(err.message, /Error 404 \(Not Found\)/);
+      assert(err.cause instanceof SyntaxError);
+    });
+
+    it('should classify an HTML 502 as INTERNAL rather than a transport failure', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response('<html><title>502 Bad Gateway</title></html>', {
+          status: 502,
+          headers: {'Content-Type': 'text/html'},
+        }),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 502);
+    });
+
+    it('should truncate a long undecodable error body', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(`<html>${'x'.repeat(5000)}</html>`, {status: 502}),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.httpStatusCode, 502);
+      assert.match(err.message, /truncated/);
+      // The page must not be pasted into the message in full.
+      assert(
+        err.message.length < 2000,
+        `message was ${err.message.length} characters long`,
+      );
+    });
+
+    it('should record the http status of an empty error response', async () => {
+      setMockFallbackHttpResponse(gaxGrpc, new Response(null, {status: 502}));
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 502);
+    });
+
+    it('should record the http status when the error body is not a JSON object', async () => {
+      // `null` parses, so it gets past JSON.parse and fails where the body is
+      // indexed instead. The status must survive that too.
+      setMockFallbackHttpResponse(gaxGrpc, new Response('null', {status: 500}));
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 500);
     });
   });
 });

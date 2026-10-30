@@ -15,7 +15,7 @@
 import {Message, PubSub, PublishOptions} from '../src';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
-import {TestResources} from './testResources';
+import {TestResources} from 'google-test-utils';
 import {waitForMessages} from './common';
 
 describe('Batch and Flow Control Samples System Tests', () => {

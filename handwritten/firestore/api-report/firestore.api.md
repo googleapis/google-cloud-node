@@ -782,7 +782,7 @@ function documentId(documentPath: string | firestore.DocumentReference): Functio
 // @public
 function documentId(documentPathExpr: Expression): FunctionExpression;
 
-// @beta
+// @public
 function documentMatches(rquery: string | Expression): BooleanExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -1317,7 +1317,6 @@ class Field extends Expression implements firestore.Pipelines.Selectable {
     readonly expressionType: firestore.Pipelines.ExpressionType;
     // (undocumented)
     get fieldName(): string;
-    // @beta
     geoDistance(location: GeoPoint | Expression): Expression;
     // (undocumented)
     selectable: true;
@@ -1636,7 +1635,7 @@ class FunctionExpression extends Expression {
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
-// @beta
+// @public
 function geoDistance(fieldName: string | Field, location: GeoPoint | Expression): Expression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
@@ -2035,8 +2034,6 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     sample(options: firestore.Pipelines.SampleStageOptions): Pipeline;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
-    //
-    // @beta
     search(options: firestore.Pipelines.SearchStageOptions): Pipeline;
     select(selection: firestore.Pipelines.Selectable | string, ...additionalSelections: Array<firestore.Pipelines.Selectable | string>): Pipeline;
     select(options: firestore.Pipelines.SelectStageOptions): Pipeline;
@@ -2691,7 +2688,7 @@ function rtrim(fieldName: string, valueToTrim?: string | Expression | Uint8Array
 // @public
 function rtrim(expression: Expression, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
-// @beta
+// @public
 function score(): Expression;
 
 // @public

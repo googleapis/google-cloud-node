@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/bigtable-api-v0.11.0...bigtable-api-v0.11.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-api-v0.10.0...bigtable-api-v0.11.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-api-v0.9.0...bigtable-api-v0.10.0) (2026-10-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigtable-api-v0.8.0...google-cloud-bigtable-api-v0.9.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigtable-api-v0.7.0...google-cloud-bigtable-api-v0.8.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigtable-api-v0.6.0...google-cloud-bigtable-api-v0.7.0) (2026-09-15)
 
 

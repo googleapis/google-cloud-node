@@ -47,6 +47,12 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, any sub-resources from this instance will also be
+   *  deleted. Otherwise, the request will only work if the instance has no
+   *  sub-resources.
+   */
+  // const force = true
 
   // Imports the Lustre library
   const {LustreClient} = require('@google-cloud/lustre').v1;

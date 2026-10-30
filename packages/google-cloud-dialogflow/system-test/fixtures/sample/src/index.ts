@@ -19,6 +19,7 @@
 import {
   AgentsClient,
   AnswerRecordsClient,
+  CompanionAgentsClient,
   ContextsClient,
   ConversationDatasetsClient,
   ConversationModelsClient,
@@ -46,6 +47,9 @@ function doStuffWithAgentsClient(client: AgentsClient) {
   client.close();
 }
 function doStuffWithAnswerRecordsClient(client: AnswerRecordsClient) {
+  client.close();
+}
+function doStuffWithCompanionAgentsClient(client: CompanionAgentsClient) {
   client.close();
 }
 function doStuffWithContextsClient(client: ContextsClient) {
@@ -124,6 +128,9 @@ function main() {
   // check that the client instance can be created
   const answerRecordsClient = new AnswerRecordsClient();
   doStuffWithAnswerRecordsClient(answerRecordsClient);
+  // check that the client instance can be created
+  const companionAgentsClient = new CompanionAgentsClient();
+  doStuffWithCompanionAgentsClient(companionAgentsClient);
   // check that the client instance can be created
   const contextsClient = new ContextsClient();
   doStuffWithContextsClient(contextsClient);

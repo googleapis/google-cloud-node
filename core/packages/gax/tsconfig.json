@@ -18,6 +18,7 @@
     "tools/src/prepublish.ts",
     "src/*/*.ts",
     "test/system-test/*.ts",
+    "test/showcase-resumable-upload/*.ts",
     "test/unit/*.ts",
     "protos/**/*.json",
     "src/*.json",

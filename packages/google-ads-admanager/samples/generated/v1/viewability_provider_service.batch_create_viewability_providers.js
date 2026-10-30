@@ -30,7 +30,7 @@ function main(parent, requests) {
    */
   /**
    *  Required. The parent resource where
-   *  ViewabilityProvider google.ads.admanager.v1.ViewabilityProvider s will be
+   *  ViewabilityProviders google.ads.admanager.v1.ViewabilityProvider  will be
    *  created. Format: `networks/{network_code}` The parent field in the
    *  CreateViewabilityProviderRequest must match this field.
    */

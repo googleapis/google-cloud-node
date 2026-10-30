@@ -61,7 +61,7 @@ export interface ServiceConfig {
   /**
    * Reuse an existing `AuthClient` or `GoogleAuth` client instead of creating a new one.
    */
-  authClient?: AuthClient | GoogleAuth;
+  authClient?: AuthClient | GoogleAuth<AuthClient>;
 
   /**
    * Set to true if the endpoint is a custom URL
@@ -75,7 +75,7 @@ export interface ServiceConfig {
 }
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
-  authClient?: AuthClient | GoogleAuth;
+  authClient?: AuthClient | GoogleAuth<AuthClient>;
   interceptors_?: Interceptor[];
   email?: string;
   token?: string;

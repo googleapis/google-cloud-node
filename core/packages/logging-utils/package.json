@@ -1,6 +1,6 @@
 {
   "name": "google-logging-utils",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "A debug logger package for other Google libraries",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "pretest": "npm run prepare",
-    "test": "c8 mocha build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "lint": "gts check test src samples",
     "clean": "gts clean",
     "compile": "tsc -p .",

@@ -16,6 +16,9 @@ const config = {
   "throw-deprecation": true,
   "timeout": 10000,
   "recursive": true,
+  // Force Mocha to exit after tests complete so open gRPC handles in the
+  // conformance suite do not keep the event loop alive indefinitely.
+  "exit": true,
   // Number of times to retry a failed test.
   "retries": Number(process.env.TEST_RETRIES) || 0,
   // Logs retried tests.

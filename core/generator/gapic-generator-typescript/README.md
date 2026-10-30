@@ -83,37 +83,20 @@ If you came here to make changes to the generated TypeScript libraries (e.g. `@g
 you are in the right place! Chances are high you don't need to edit any code, just the
 [Nunjucks](https://mozilla.github.io/nunjucks/) templates located in the `templates` folder.
 
-This project is written in TypeScript, but we use [Bazel](https://bazel.build/) for managing dependencies
-(for unrelated reasons), which makes the build process a little bit unusual.
-
-Good news is that you don't really need to learn Bazel to make a quick fix. All bazel commands are
-hidden under the hood, so just use regular `npm` commands and just don't be surprised to see a lot of extra
-output.
-
-To compile the code, if you have [Bazel](https://bazel.build/)
-
-```sh
-bazel build //...
-```
-
-If you don't have Bazel:
+This project is written in TypeScript and builds with [pnpm](https://pnpm.io/). It is not a member of
+the repository's pnpm workspace, so install it with `--ignore-workspace`:
 
 ```sh
 # in gapic-generator-typescript folder
-$ npm install --global yarn # install yarn if you haven't already
-$ yarn install      # install dependencies
-$ npm run compile  # build project with Bazel
+$ pnpm install --ignore-workspace --frozen-lockfile
+$ pnpm run compile
 ```
 
 To run the generator:
 
 ```sh
-bazel run //:gapic_generator_typescript -- --help
+$ node build/typescript/src/gapic-generator-typescript.js --help
 ```
-
-**Note:** this section will be updated soon. After updating Bazel rules in `googleapis`,
-the generator will be actually called by running `bazel build` on a specific target
-in `googleapis` repository. Until this is ready, the following will work:
 
 Checkout `googleapis`, which has a lot of protobuf definitions of real Google Cloud APIs:
 
@@ -127,7 +110,7 @@ Pick some API, how about `translate` `v3`?
 ```sh
 $ mkdir -p /tmp/translate-v3-typescript  # where to put the result
 # from gapic-generator-typescript folder:
-$ bazel run //:gapic_generator_typescript -- \
+$ node build/typescript/src/gapic-generator-typescript.js \
     --output-dir /tmp/translate-v3-typescript \
     -I "$GOOGLEAPIS" \
     --grpc-service-config "$GOOGLEAPIS/google/cloud/translate/v3/translate_grpc_service_config.json" \
