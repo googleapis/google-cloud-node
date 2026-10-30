@@ -1919,6 +1919,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2645,6 +2648,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2742,6 +2748,9 @@ importers:
       express:
         specifier: ^4.16.3
         version: 4.22.2
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2809,6 +2818,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2952,8 +2964,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -3181,8 +3193,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3399,6 +3411,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -20544,8 +20559,8 @@ packages:
     resolution: {integrity: sha512-UD8I3vdspFSKFu8yi48sgeXDXcET0CAPYbSK7G2oRh7G1Y+BEG8VKDY3r+0GXF8KmHhQWhygRLVxY0lgTGeySA==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.3.1:
-    resolution: {integrity: sha512-lyoeWglF387Kfdd7zw8tuKS0GWlF/lNknoUmK08TdncVeOyHtTV9HKzgScVt1JrQsvx5qT7tihmXJSYVwbLZaA==}
+  google-test-utils@0.4.0:
+    resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
     engines: {node: '>=22'}
 
   google-test-utils@0.4.0:
@@ -31103,7 +31118,7 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
-  google-test-utils@0.3.1: {}
+  google-test-utils@0.4.0: {}
 
   google-test-utils@0.4.0: {}
 

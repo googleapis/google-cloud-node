@@ -40,7 +40,7 @@
     "presystem-test": "pnpm run compile",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
     "pretest": "pnpm run compile",
-    "test": "cross-env NODE_OPTIONS='--no-deprecation' node ../../bin/run-test.cjs --proxyquire-shim build/test",
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' node ../../bin/run-test.cjs build/test",
     "precompile": "gts clean",
     "postpublish": "./.kokoro/publish-min.sh"
   },
@@ -86,6 +86,7 @@
     "codecov": "^3.6.5",
     "cross-env": "^7.0.3",
     "gapic-tools": "^2.2.0",
+    "google-test-utils": "^0.4.0",
     "gts": "^5.0.0",
     "http2spy": "^2.0.0",
     "jsdoc": "^4.0.0",
