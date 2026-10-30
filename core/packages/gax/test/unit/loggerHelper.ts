@@ -223,7 +223,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
@@ -255,7 +254,6 @@ describe('LoggerHelper', () => {
       );
 
       assert.deepStrictEqual(attributes, {
-        'gcp.client.language': 'node',
         'rpc.system.name': 'http',
         'rpc.response.status_code': 'NOT_FOUND',
         'http.response.status_code': 404,
@@ -524,7 +522,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
@@ -940,7 +937,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',

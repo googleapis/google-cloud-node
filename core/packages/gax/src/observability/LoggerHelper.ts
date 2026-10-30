@@ -52,7 +52,6 @@ export interface LogPayload {
   'gcp.client.repo'?: string;
   'gcp.client.artifact'?: string;
   'gcp.client.version'?: string;
-  'gcp.client.language'?: 'node';
   'gcp.client.service'?: string;
   'url.domain'?: string;
   'server.address'?: string;
@@ -254,7 +253,6 @@ export function buildLogAttributes(
       (attributes as Record<string, unknown>)[key] = value;
     }
   }
-  attributes['gcp.client.language'] = 'node';
   if (rawAddress !== undefined && !isPreConnectionFailure(err)) {
     attributes['server.address'] = rawAddress;
   }
