@@ -22,7 +22,6 @@
   "devDependencies": {
     "@google-cloud/storage": "^7.0.0",
     "chai": "^4.2.0",
-    "mocha": "^8.0.0",
-    "proxyquire": "^2.0.1"
+    "mocha": "^8.0.0"
   }
 }
