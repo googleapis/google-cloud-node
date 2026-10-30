@@ -4,6 +4,49 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "64c3a2bafc62273f7cdc3b9612756d631afc3f97",
+          "message": "Use npm in prepare/compile lifecycle scripts",
+          "issues": [
+            "9587"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4c4bbdc3a19f6af664f7804cff6f717945a975f3",
+          "message": "Integrate native spannerlib-node wrapper and implement type system",
+          "issues": [
+            "9141"
+          ],
+          "scope": "spanner-driver"
+        },
+        {
+          "type": "feat",
+          "sha": "87d33388daca34f57b061f01a563629952872e46",
+          "message": "Implement full connection pooling in Pool class",
+          "issues": [
+            "9106"
+          ],
+          "scope": "spanner-driver"
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-driver",
+      "id": "909a27ad-aba6-422d-8cad-e8ff25d490a1",
+      "createTime": "2026-10-30T03:00:35.578Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "5e53e2e78a9103005899350313b2777d86967e73",
           "message": "Onboard a new library",
@@ -106874,5 +106917,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-28T20:45:53.018Z"
+  "updateTime": "2026-10-30T03:00:35.578Z"
 }
