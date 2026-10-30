@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import {GCPEnv} from 'google-auth-library';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 // types-only import. Actual require is done through proxyquire below.
 import {MiddlewareOptions} from '../../src/middleware/express';

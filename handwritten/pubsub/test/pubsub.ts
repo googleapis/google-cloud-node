@@ -17,7 +17,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as gax from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import defer = require('p-defer');
 

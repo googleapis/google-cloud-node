@@ -2669,6 +2669,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2766,6 +2769,9 @@ importers:
       express:
         specifier: ^4.16.3
         version: 4.22.2
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2833,6 +2839,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2976,8 +2985,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
