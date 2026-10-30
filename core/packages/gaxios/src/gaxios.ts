@@ -728,6 +728,8 @@ export class Gaxios implements FetchCompliance {
             proxy?: string;
             cert?: string;
             key?: string;
+            size?: number;
+            maxContentLength?: number;
             tls?: {cert?: string; key?: string};
           })
         : undefined;
@@ -807,6 +809,7 @@ export class Gaxios implements FetchCompliance {
         }
         throw err;
       }
+      const maxSize = rawInit?.size ?? rawInit?.maxContentLength ?? 0;
       if (
         res?.body &&
         typeof Readable.fromWeb === 'function' &&
@@ -820,11 +823,23 @@ export class Gaxios implements FetchCompliance {
         const origArrayBuffer = res.arrayBuffer.bind(res);
         const origBlob = res.blob.bind(res);
         const readBuffer = async () => {
+          nodeStream ||= Readable.fromWeb(rawBody);
           const chunks: Buffer[] = [];
-          for await (const chunk of nodeStream!) {
-            chunks.push(
-              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
-            );
+          let totalBytes = 0;
+          for await (const chunk of nodeStream) {
+            const buf = Buffer.isBuffer(chunk)
+              ? chunk
+              : Buffer.from(chunk as Uint8Array);
+            totalBytes += buf.byteLength;
+            if (maxSize > 0 && totalBytes > maxSize) {
+              throw Object.assign(
+                new Error(
+                  `content size at ${String((input as {url?: unknown})?.url ?? input)} over limit: ${maxSize}`,
+                ),
+                {type: 'max-size'},
+              );
+            }
+            chunks.push(buf);
           }
           return Buffer.concat(chunks);
         };
@@ -837,15 +852,15 @@ export class Gaxios implements FetchCompliance {
           enumerable: true,
         });
         res.text = async () => {
-          if (!nodeStream) return origText();
+          if (!nodeStream && maxSize <= 0) return origText();
           return (await readBuffer()).toString('utf8');
         };
         res.json = async () => {
-          if (!nodeStream) return origJson();
+          if (!nodeStream && maxSize <= 0) return origJson();
           return JSON.parse(await res.text());
         };
         res.arrayBuffer = async () => {
-          if (!nodeStream) return origArrayBuffer();
+          if (!nodeStream && maxSize <= 0) return origArrayBuffer();
           const buf = await readBuffer();
           return buf.buffer.slice(
             buf.byteOffset,
@@ -853,7 +868,7 @@ export class Gaxios implements FetchCompliance {
           );
         };
         res.blob = async () => {
-          if (!nodeStream) return origBlob();
+          if (!nodeStream && maxSize <= 0) return origBlob();
           const buf = await readBuffer();
           const contentType = res.headers?.get?.('content-type') ?? '';
           return new Blob([buf], contentType ? {type: contentType} : undefined);
