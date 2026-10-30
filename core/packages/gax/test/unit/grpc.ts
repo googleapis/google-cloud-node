@@ -144,7 +144,6 @@ describe('grpc', () => {
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
       delete process.env.GOOGLE_SDK_NODE_LOGGING;
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
     });
 
     it('constructs settings without telemetry options', () => {
@@ -197,8 +196,7 @@ describe('grpc', () => {
       );
     });
 
-    it('constructs settings when enableTelemetryLogging: true is passed in client options and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    it('constructs settings when enableTelemetryLogging: true is passed in client options', () => {
       const clientWithLogging = gaxGrpc({
         enableTelemetryLogging: true,
       });

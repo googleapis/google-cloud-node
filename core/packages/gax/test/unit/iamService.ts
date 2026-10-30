@@ -435,14 +435,12 @@ describe('IAM service', () => {
       loggingUtils.setBackend(sink);
       harness = new OtelHarness();
       harness.setup();
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
     });
 
     afterEach(() => {
       clearMetadataCache();
       loggingUtils.setBackend(undefined);
       harness.teardown();
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     });

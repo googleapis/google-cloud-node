@@ -102,7 +102,6 @@ describe('gax construct settings', () => {
   afterEach(() => {
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     delete process.env.GOOGLE_SDK_NODE_LOGGING;
-    delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
   });
 
   it('creates settings', () => {
@@ -280,8 +279,7 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
-  it('creates settings with enableTelemetryLogging when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+  it('creates settings with enableTelemetryLogging', () => {
     const otherArgs = {key: 'value'};
     const defaults = gax.constructSettings(
       SERVICE_NAME,
@@ -301,7 +299,7 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
   });
 
-  it('disables logging when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if enableTelemetryLogging=true', () => {
+  it('creates settings with enableTelemetryLogging set to false', () => {
     const defaults = gax.constructSettings(
       SERVICE_NAME,
       A_CONFIG,
@@ -310,7 +308,7 @@ describe('gax construct settings', () => {
       {},
       undefined,
       undefined,
-      true,
+      false,
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryLogging, false);
@@ -318,7 +316,6 @@ describe('gax construct settings', () => {
   });
 
   it('enables logging when enableTelemetryLogging is unset and GOOGLE_SDK_NODE_LOGGING matches the service namespace or wildcard', () => {
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
     for (const envValue of ['true', '*', 'all', 'auth,interface']) {
       process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
       const defaults = gax.constructSettings(
@@ -360,7 +357,6 @@ describe('gax construct settings', () => {
   });
 
   it('preserves enableTelemetryLogging=true when GOOGLE_SDK_NODE_LOGGING targets another namespace or is false', () => {
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
     for (const envValue of ['auth,storage', 'false']) {
       process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
       const enabledDefaults = gax.constructSettings(

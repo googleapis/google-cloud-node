@@ -29,6 +29,7 @@ const cwd = path.join(__dirname, '..');
 describe('Observability', () => {
   it('should run observability sample', async () => {
     const stdout = execSync('node observability.js', {cwd});
+    assert(/Logging initialized successfully/.test(stdout));
     assert(/Tracing initialized successfully/.test(stdout));
   });
 });

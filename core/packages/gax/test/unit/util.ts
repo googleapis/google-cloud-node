@@ -312,7 +312,6 @@ describe('util.ts', () => {
   describe('checkLoggingEnabled', () => {
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_LOGGING;
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
       delete process.env.GCP_CLIENT_SERVICE;
       delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
@@ -327,24 +326,11 @@ describe('util.ts', () => {
       apiName: 'google.cloud.storage.v1.Storage',
     });
 
-    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if logging is enabled', () => {
-      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
-      assert.strictEqual(checkLoggingEnabled(mockSettings), false);
-    });
-
-    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is false', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'false';
-      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
-      assert.strictEqual(checkLoggingEnabled(mockSettings), false);
-    });
-
-    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and settings have enableTelemetryLogging', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    it('returns true when settings have enableTelemetryLogging', () => {
       assert.strictEqual(checkLoggingEnabled(mockSettings), true);
     });
 
-    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=1 and settings.otherArgs have enableTelemetryLogging', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = '1';
+    it('returns true when settings.otherArgs have enableTelemetryLogging', () => {
       const otherArgsSettings = new CallSettings({
         otherArgs: {enableTelemetryLogging: true},
       });
@@ -352,7 +338,6 @@ describe('util.ts', () => {
     });
 
     it('returns false when enableTelemetryLogging is false or not set on settings and env var is not set', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
       const disabledSettings = new CallSettings({
         enableTelemetryLogging: false,
       });
@@ -362,7 +347,6 @@ describe('util.ts', () => {
     });
 
     it('returns true when GOOGLE_SDK_NODE_LOGGING is exact true, all, or *', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'TRUE';
       for (const value of ['true', 'all', '*']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
         assert.strictEqual(checkLoggingEnabled(storageSettings), true);
@@ -372,7 +356,6 @@ describe('util.ts', () => {
     });
 
     it('matches comma-separated and wildcard namespace filters identically to NodeBackend.setFilters()', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
       const secretManagerSettings = new CallSettings({
         apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
       });
@@ -418,7 +401,6 @@ describe('util.ts', () => {
     });
 
     it('gives explicit enableTelemetryLogging precedence over GOOGLE_SDK_NODE_LOGGING', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
       const disabledStorageSettings = new CallSettings({
         apiName: 'google.cloud.storage.v1.Storage',
         enableTelemetryLogging: false,
@@ -447,18 +429,21 @@ describe('util.ts', () => {
     it('does not throw when process is undefined, as in a browser', () => {
       const globals = globalThis as {process?: NodeJS.Process};
       const originalProcess = globals.process;
-      let result: boolean | undefined;
+      let enabledResult: boolean | undefined;
+      let unsetResult: boolean | undefined;
       let thrown: unknown;
       delete globals.process;
       try {
-        result = checkLoggingEnabled(mockSettings);
+        enabledResult = checkLoggingEnabled(mockSettings);
+        unsetResult = checkLoggingEnabled(storageSettings);
       } catch (e) {
         thrown = e;
       } finally {
         globals.process = originalProcess;
       }
       assert.strictEqual(thrown, undefined);
-      assert.strictEqual(result, false);
+      assert.strictEqual(enabledResult, true);
+      assert.strictEqual(unsetResult, false);
     });
   });
 
