@@ -27,6 +27,7 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
+import {setSettingsDefaultDomain} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
@@ -67,8 +68,10 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
    * Whether to enable telemetry logging for the client.
    *
    * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
-   * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
-   * or a user passes `enableTelemetryLogging: true` in their client options.
+   * AND either `enableTelemetryLogging: true` is passed here or, when unset, the
+   * `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+   * namespace. Explicitly setting `enableTelemetryLogging: false` disables logging
+   * for this client even when `GOOGLE_SDK_NODE_LOGGING` matches.
    */
   enableTelemetryLogging?: boolean;
 }
@@ -429,7 +432,7 @@ export class GrpcClient {
     if (this._port !== undefined) {
       otherArgs.port = this._port;
     }
-    return gax.constructSettings(
+    const defaults = gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
@@ -439,6 +442,17 @@ export class GrpcClient {
       _legacyTelemetryInfo,
       enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
+    const defaultServicePath = (this.auth as {defaultServicePath?: unknown})
+      ?.defaultServicePath;
+    if (
+      typeof defaultServicePath === 'string' &&
+      defaultServicePath.includes('.')
+    ) {
+      for (const methodName of Object.keys(defaults)) {
+        setSettingsDefaultDomain(defaults[methodName], defaultServicePath);
+      }
+    }
+    return defaults;
   }
 
   /**

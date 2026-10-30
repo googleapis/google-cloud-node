@@ -25,6 +25,10 @@ import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
 import {checkTracingEnabled, checkLoggingEnabled} from './observability/util';
+import {
+  getSettingsDefaultDomain,
+  setSettingsDefaultDomain,
+} from './observability/contextUtil';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -253,7 +257,12 @@ export class CallSettings {
    */
   merge(options?: CallOptions | null) {
     if (!options) {
-      return new CallSettings(this);
+      const merged = new CallSettings(this);
+      const defaultDomain = getSettingsDefaultDomain(this);
+      if (defaultDomain) {
+        setSettingsDefaultDomain(merged, defaultDomain);
+      }
+      return merged;
     }
     let timeout = this.timeout;
     let retry = this.retry;
@@ -364,7 +373,7 @@ export class CallSettings {
       signal = options.signal;
     }
 
-    return new CallSettings({
+    const merged = new CallSettings({
       timeout,
       retry,
       bundleOptions: this.bundleOptions,
@@ -380,6 +389,17 @@ export class CallSettings {
       resumableUpload,
       signal,
     });
+    const defaultDomain =
+      (options instanceof CallSettings
+        ? getSettingsDefaultDomain(options)
+        : undefined) ??
+      (!('apiName' in options) || options.apiName === this.apiName
+        ? getSettingsDefaultDomain(this)
+        : undefined);
+    if (defaultDomain) {
+      setSettingsDefaultDomain(merged, defaultDomain);
+    }
+    return merged;
   }
 }
 
@@ -869,8 +889,8 @@ export interface ClientConfig {
  * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
  *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
  * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
- * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging
- *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_LOGGING`).
+ * @param {boolean} [enableTelemetryLogging] - Flag to enable or disable telemetry
+ *   logging for this client, taking precedence over `GOOGLE_SDK_NODE_LOGGING` when set.
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -905,15 +925,21 @@ export function constructSettings(
     env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
   const isExperimentalLoggingEnabled =
     experimentalLogging === 'true' || experimentalLogging === '1';
-  const envLogging = env.GOOGLE_SDK_NODE_LOGGING?.trim();
-  const isLoggingEnvSet = envLogging !== undefined && envLogging !== '';
-  const isLoggingEnvEnabled = checkLoggingEnabled();
-
+  const isLoggingEnvEnabled =
+    isExperimentalLoggingEnabled && enableTelemetryLogging === undefined
+      ? checkLoggingEnabled(new CallSettings({apiName: serviceName}))
+      : false;
+  const resolvedLogging =
+    enableTelemetryLogging !== undefined
+      ? enableTelemetryLogging
+      : isLoggingEnvEnabled
+        ? true
+        : undefined;
   const loggingRequested =
-    isExperimentalLoggingEnabled &&
-    (isLoggingEnvSet ? isLoggingEnvEnabled : Boolean(enableTelemetryLogging));
+    isExperimentalLoggingEnabled && Boolean(resolvedLogging);
 
   otherArgs = otherArgs || {};
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -982,10 +1008,8 @@ export function constructSettings(
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
       enableTelemetryLogging: isExperimentalLoggingEnabled
-        ? isLoggingEnvSet
-          ? isLoggingEnvEnabled
-          : enableTelemetryLogging
-        : enableTelemetryLogging !== undefined || isLoggingEnvSet
+        ? resolvedLogging
+        : enableTelemetryLogging !== undefined
           ? false
           : undefined,
     });
