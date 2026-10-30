@@ -51,6 +51,7 @@ import {
   resolveExceptionMessage,
   resolveExceptionStacktrace,
   resolveResponseStatusCode,
+  resolveResponsePayload,
   resolveServerExceptionDetails,
   recordExceptionEvent,
   isPreConnectionFailure,
@@ -1120,6 +1121,109 @@ describe('errorUtil', () => {
         },
       };
       assert.strictEqual(safeJsonStringify(badObj), undefined);
+    });
+
+    it('serializes binary data as base64 instead of one entry per byte', () => {
+      // Buffers reach the replacer already converted by Buffer#toJSON, unlike other
+      // binary data such as Uint8Arrays, so both are covered.
+      assert.strictEqual(
+        safeJsonStringify({
+          buffer: Buffer.from('hello'),
+          list: [new Uint8Array([1, 2, 3])],
+        }),
+        '{"buffer":"aGVsbG8=","list":["AQID"]}',
+      );
+      // Objects that only look like a serialized Buffer are left as-is.
+      assert.strictEqual(
+        safeJsonStringify({type: 'Buffer', data: [1, 2]}),
+        '{"type":"Buffer","data":[1,2]}',
+      );
+    });
+  });
+
+  describe('resolveResponsePayload', () => {
+    it('serializes the full response as JSON and returns string payloads as-is', () => {
+      assert.strictEqual(
+        resolveResponsePayload({
+          name: 'projects/p/secrets/s',
+          labels: {env: 'prod'},
+          versions: [1, 2],
+        }),
+        '{"name":"projects/p/secrets/s","labels":{"env":"prod"},"versions":[1,2]}',
+      );
+      assert.strictEqual(resolveResponsePayload('raw body'), 'raw body');
+      // Empty responses (e.g. google.protobuf.Empty) still have a payload.
+      assert.strictEqual(resolveResponsePayload({}), '{}');
+    });
+
+    it('prefers the raw response provided for paginated and long-running calls', () => {
+      const resources = [{name: 'a'}, {name: 'b'}];
+      const rawResponse = {items: resources, nextPageToken: 'token'};
+      assert.strictEqual(
+        resolveResponsePayload(resources, rawResponse),
+        '{"items":[{"name":"a"},{"name":"b"}],"nextPageToken":"token"}',
+      );
+      // A null raw response falls back to the response.
+      assert.strictEqual(
+        resolveResponsePayload({name: 'a'}, null),
+        '{"name":"a"}',
+      );
+    });
+
+    it('returns undefined when there is no response', () => {
+      assert.strictEqual(resolveResponsePayload(undefined), undefined);
+      assert.strictEqual(resolveResponsePayload(null), undefined);
+    });
+
+    it('serializes protobuf messages through their JSON representation', () => {
+      const message = new GoogleErrorDecoder().root
+        .lookupType('google.rpc.ErrorInfo')
+        .fromObject(SERVICE_DISABLED_ERROR_INFO);
+      assert.strictEqual(
+        resolveResponsePayload(message),
+        '{"reason":"SERVICE_DISABLED","domain":"googleapis.com",' +
+          '"metadata":{"service":"translate.googleapis.com","consumer":"projects/123"}}',
+      );
+    });
+
+    it('encodes binary payloads as base64', () => {
+      assert.strictEqual(
+        resolveResponsePayload(Buffer.from('hello')),
+        'aGVsbG8=',
+      );
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([1, 2, 3]).buffer),
+        'AQID',
+      );
+      // Only the viewed bytes are encoded, not the rest of the underlying ArrayBuffer.
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4)),
+        'AQID',
+      );
+      // Typed arrays from another realm are recognized too.
+      assert.strictEqual(
+        resolveResponsePayload(vm.runInNewContext('new Uint8Array([1, 2, 3])')),
+        'AQID',
+      );
+    });
+
+    it('encodes binary payloads as base64 when Buffer is not defined', () => {
+      const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
+      try {
+        delete (globalThis as Record<string, unknown>).Buffer;
+        assert.strictEqual(
+          resolveResponsePayload(
+            new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4),
+          ),
+          'AQID',
+        );
+        assert.strictEqual(
+          resolveResponsePayload(new Uint8Array([255])),
+          '/w==',
+        );
+      } finally {
+        (globalThis as Record<string, unknown>).Buffer = originalBuffer;
+      }
     });
   });
 
