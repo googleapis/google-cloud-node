@@ -43,10 +43,8 @@ introduction: |-
           streamId: managedwriter.DefaultStream,
           destinationTable,
         });
-        const streamId = connection.getStreamId();
 
         const writer = new JSONWriter({
-          streamId,
           connection,
           protoDescriptor,
         });
