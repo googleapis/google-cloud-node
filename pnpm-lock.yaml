@@ -3311,15 +3311,9 @@ importers:
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
-      '@google-cloud/projectify':
-        specifier: ^6.2.0
-        version: 6.2.1
       '@google-cloud/promisify':
         specifier: ^6.2.0
         version: 6.2.1
-      abort-controller:
-        specifier: ^3.0.0
-        version: 3.0.0
       async-retry:
         specifier: ^1.3.3
         version: 1.3.3
@@ -3335,66 +3329,51 @@ importers:
       google-auth-library:
         specifier: ^11.3.1
         version: 11.3.1
-      html-entities:
-        specifier: ^2.5.2
-        version: 2.6.0
       mime:
         specifier: ^3.0.0
         version: 3.0.0
       p-limit:
         specifier: ^3.0.1
         version: 3.1.0
-      retry-request:
-        specifier: ^9.1.0
-        version: 9.1.0
-      teeny-request:
-        specifier: ^11.1.1
-        version: 11.1.1
     devDependencies:
       '@babel/cli':
-        specifier: ^7.22.10
+        specifier: ^7.27.0
         version: 7.29.7(@babel/core@7.27.7)
       '@babel/core':
-        specifier: ^7.22.11
+        specifier: ^7.26.10
         version: 7.27.7
       '@google-cloud/pubsub':
         specifier: ^6.0.0
         version: 6.0.1
-      '@grpc/grpc-js':
-        specifier: ^1.0.3
-        version: 1.14.5
-      '@grpc/proto-loader':
-        specifier: ^0.8.0
-        version: 0.8.1
       '@types/async-retry':
-        specifier: ^1.4.3
+        specifier: ^1.4.9
         version: 1.4.9
       '@types/duplexify':
         specifier: ^3.6.4
         version: 3.6.5
       '@types/mime':
-        specifier: ^3.0.0
-        version: 3.0.4
+        specifier: 3.0.0
+        version: 3.0.0
       '@types/mocha':
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^10.0.10
+        version: 10.0.10
       '@types/mockery':
-        specifier: ^1.4.29
+        specifier: ^1.4.33
         version: 1.4.33
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.3
       '@types/proxyquire':
-        specifier: ^1.3.28
+        specifier: ^1.3.31
         version: 1.3.31
-      '@types/request':
-        specifier: ^2.48.12
-        version: 2.48.13
+      '@types/retry':
+        specifier: ^0.12.5
+        version: 0.12.5
       '@types/sinon':
-        specifier: ^17.0.0
+        specifier: ^17.0.4
         version: 17.0.4
       '@types/tmp':
-        specifier: 0.2.6
+        specifier: ^0.2.6
         version: 0.2.6
       '@types/yargs':
         specifier: ^17.0.35
@@ -3402,18 +3381,12 @@ importers:
       c8:
         specifier: ^10.1.3
         version: 10.1.3
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
-      form-data:
-        specifier: ^4.0.4
-        version: 4.0.6
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
       gts:
-        specifier: ^5.0.0
-        version: 5.3.1(typescript@5.9.3)
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
       jsdoc:
         specifier: ^4.0.4
         version: 4.0.5
@@ -3432,18 +3405,12 @@ importers:
       mockery:
         specifier: ^2.1.0
         version: 2.1.0
-      nise:
-        specifier: 6.0.0
-        version: 6.0.0
       nock:
         specifier: ^14.0.5
         version: 14.0.16
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      path-to-regexp:
-        specifier: 6.3.0
-        version: 6.3.0
       proxyquire:
         specifier: ^2.1.3
         version: 2.1.3
@@ -3451,10 +3418,10 @@ importers:
         specifier: ^18.0.0
         version: 18.0.1
       tmp:
-        specifier: ^0.2.0
+        specifier: ^0.2.3
         version: 0.2.7
       typescript:
-        specifier: ^5.1.6
+        specifier: ^5.8.3
         version: 5.9.3
       yargs:
         specifier: ^17.7.2
@@ -17551,9 +17518,6 @@ packages:
   '@sinonjs/fake-timers@11.2.2':
     resolution: {integrity: sha512-G2piCSxQ7oWOxwGSAyFHfPIsyeJGXYtc6mFbnFA+kRXkiEnTl8c/8jul2S329iFBnDI9HGoeWWAZvuvOkZccgw==}
 
-  '@sinonjs/fake-timers@11.3.1':
-    resolution: {integrity: sha512-EVJO7nW5M/F5Tur0Rf2z/QoMo+1Ia963RiMtapiQrEWvY0iBUvADo8Beegwjpnle5BHkyHuoxSTW3jF43H1XRA==}
-
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
 
@@ -17565,12 +17529,6 @@ packages:
 
   '@sinonjs/samsam@9.0.3':
     resolution: {integrity: sha512-ZgYY7Dc2RW+OUdnZ1DEHg00lhRt+9BjymPKHog4PRFzr1U3MbK57+djmscWyKxzO1qfunHqs4N45WWyKIFKpiQ==}
-
-  '@sinonjs/text-encoding@0.7.3':
-    resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
-    deprecated: |-
-      Deprecated: no longer maintained and no longer used by Sinon packages. See
-        https://github.com/sinonjs/nise/issues/243 for replacement details.
 
   '@so-ric/colorspace@1.1.6':
     resolution: {integrity: sha512-/KiKkpHNOBgkFJwu9sh48LkHSMYGyuTcSFK/qMBdnOAlrRJzRSXAOFB5qwzaVQuDl8wAvHVMkaASQDReTahxuw==}
@@ -17840,8 +17798,8 @@ packages:
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
-  '@types/mime@3.0.4':
-    resolution: {integrity: sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==}
+  '@types/mime@3.0.0':
+    resolution: {integrity: sha512-fccbsHKqFDXClBZTDLA43zl0+TbxyIwyzIzwwhvoJvhNjOErCdeX2xJbURimv2EbSVUGav001PaCJg4mZxMl4w==}
 
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
@@ -20502,6 +20460,10 @@ packages:
     resolution: {integrity: sha512-7ABviyMOlX5hIVD60YOfHw4/CxOfBhyduaYB+wbFWCWoni4N7SLcV46hrVRktuBbZjFC9ONyqamZITN7q3n32w==}
     engines: {node: '>=18'}
 
+  google-auth-library@11.3.0:
+    resolution: {integrity: sha512-gZCyszARHj47WNcKrAcQtimDwtTZpydRZ3HSeb66hObfQU9uaG50ejsZ8LzGISIVAjpsZEouGVs65Q/XRau0Qg==}
+    engines: {node: '>=22'}
+
   google-auth-library@11.3.1:
     resolution: {integrity: sha512-mQS0R2Ev/DKkzuWSYtDeq15uhDeaWuT2qzLYqJ41LmooxVKHmn5ut3pc6dlHY6wfHW/D7FBmOYjAtkjaD1A7qA==}
     engines: {node: '>=22'}
@@ -22188,9 +22150,6 @@ packages:
 
   next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
-
-  nise@6.0.0:
-    resolution: {integrity: sha512-K8ePqo9BFvN31HXwEtTNGzgrPpmvgciDsFz8aztFjt4LqKO/JeFD8tBOeuDiCMXrIl/m1YvfH8auSpxfaD09wg==}
 
   nise@6.1.5:
     resolution: {integrity: sha512-SnRDPDBjxZZoU2n0+gzzLtSvo1OZo7j6jnbXsoh3AFxEGhaFU7ZF0TmefuKERq79wxR2U+MPn7ArW+Tl+clC3A==}
@@ -27072,10 +27031,6 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@sinonjs/fake-timers@11.3.1':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-
   '@sinonjs/fake-timers@13.0.5':
     dependencies:
       '@sinonjs/commons': 3.0.1
@@ -27093,8 +27048,6 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
       type-detect: 4.1.0
-
-  '@sinonjs/text-encoding@0.7.3': {}
 
   '@so-ric/colorspace@1.1.6':
     dependencies:
@@ -27383,7 +27336,7 @@ snapshots:
 
   '@types/mime@1.3.5': {}
 
-  '@types/mime@3.0.4': {}
+  '@types/mime@3.0.0': {}
 
   '@types/minimist@1.2.5': {}
 
@@ -28039,7 +27992,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28049,7 +28002,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28059,7 +28012,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -30987,6 +30940,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  google-auth-library@11.3.0:
+    dependencies:
+      base64-js: 1.5.1
+      ecdsa-sig-formatter: 1.0.11
+      gaxios: 8.3.0
+      gcp-metadata: 9.0.3
+      google-logging-utils: 2.0.1
+      jws: 4.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   google-auth-library@11.3.1:
     dependencies:
       base64-js: 1.5.1
@@ -33182,14 +33146,6 @@ snapshots:
 
   next-tick@1.1.0: {}
 
-  nise@6.0.0:
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 11.3.1
-      '@sinonjs/text-encoding': 0.7.3
-      just-extend: 6.2.0
-      path-to-regexp: 6.3.0
-
   nise@6.1.5:
     dependencies:
       '@sinonjs/commons': 3.0.1
@@ -33354,7 +33310,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -35275,7 +35231,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -35707,7 +35663,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
