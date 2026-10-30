@@ -562,7 +562,8 @@ describe('Arrow Query Results', () => {
 
   it('should raise the same error as query() when a jobs.insert query fails during execution', async () => {
     const failingQuery = {
-      query: 'SELECT 1 / 0',
+      query:
+        'DECLARE n INT64 DEFAULT 50; SELECT 1 / (x - 50) FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;',
       jobTimeoutMs: 60000,
       useQueryCache: false,
     };
