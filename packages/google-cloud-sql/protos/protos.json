@@ -7656,7 +7656,7 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance"
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
                           }
                         },
                         "switchoverTargetInstance": {
@@ -7664,7 +7664,7 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance"
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
                           }
                         },
                         "errorDetail": {
@@ -7811,7 +7811,7 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                    "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance"
+                                    "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
                                   }
                                 },
                                 "connection": {
@@ -9517,7 +9517,8 @@
                             "CLOUD_IAM_GROUP_USER": 4,
                             "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
                             "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
-                            "ENTRAID_USER": 7
+                            "ENTRAID_USER": 7,
+                            "ACTIVE_DIRECTORY_USER": 8
                           }
                         },
                         "DualPasswordType": {
@@ -9825,7 +9826,7 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance"
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
                           }
                         },
                         "workloadCaptureState": {
@@ -9854,7 +9855,7 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
                             "proto3_optional": true
                           }
                         },
@@ -19627,7 +19628,8 @@
                             "CLOUD_IAM_GROUP_USER": 4,
                             "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
                             "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
-                            "ENTRAID_USER": 7
+                            "ENTRAID_USER": 7,
+                            "ACTIVE_DIRECTORY_USER": 8
                           }
                         },
                         "DualPasswordType": {
@@ -19687,7 +19689,7 @@
                       },
                       "methods": {
                         "Start": {
-                          "requestType": "SqlWorkloadCapturesStartRequest",
+                          "requestType": "WorkloadCapturesStartRequest",
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/workloadCaptures:start",
@@ -19703,7 +19705,7 @@
                           ]
                         },
                         "Stop": {
-                          "requestType": "SqlWorkloadCapturesStopRequest",
+                          "requestType": "WorkloadCapturesStopRequest",
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/workloadCaptures:stop",
@@ -19719,7 +19721,7 @@
                           ]
                         },
                         "StartReplay": {
-                          "requestType": "SqlWorkloadCapturesStartReplayRequest",
+                          "requestType": "WorkloadCapturesStartReplayRequest",
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/workloadCaptures/{workload_id}:startReplay",
@@ -19735,7 +19737,7 @@
                           ]
                         },
                         "StopReplay": {
-                          "requestType": "SqlWorkloadCapturesStopReplayRequest",
+                          "requestType": "WorkloadCapturesStopReplayRequest",
                           "responseType": "Operation",
                           "options": {
                             "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/workloadCaptures:stopReplay",
@@ -19766,7 +19768,7 @@
                         }
                       }
                     },
-                    "SqlWorkloadCapturesStartRequest": {
+                    "WorkloadCapturesStartRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -19791,7 +19793,7 @@
                         }
                       }
                     },
-                    "SqlWorkloadCapturesStopRequest": {
+                    "WorkloadCapturesStopRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -19816,7 +19818,7 @@
                         }
                       }
                     },
-                    "SqlWorkloadCapturesStartReplayRequest": {
+                    "WorkloadCapturesStartReplayRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -19848,7 +19850,7 @@
                         }
                       }
                     },
-                    "SqlWorkloadCapturesStopReplayRequest": {
+                    "WorkloadCapturesStopReplayRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -19935,7 +19937,7 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance"
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance"
                           }
                         },
                         "workloadCaptureState": {
@@ -19964,7 +19966,7 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "sqladmin.googleapis.com/Instance",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
                             "proto3_optional": true
                           }
                         },

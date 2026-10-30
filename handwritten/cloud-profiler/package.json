@@ -28,7 +28,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "@google-cloud/logging-min": "^11.0.0",
     "@google-cloud/promisify": "^6.2.0",
     "@types/console-log-level": "^1.4.0",

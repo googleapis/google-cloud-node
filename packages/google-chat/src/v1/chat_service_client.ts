@@ -419,6 +419,7 @@ export class ChatServiceClient {
       'positionSection',
       'listSectionItems',
       'moveSectionItem',
+      'replaceMessageCards',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -6949,6 +6950,150 @@ export class ChatServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('moveSectionItem response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Replaces the cards included in a message.
+   *
+   * A Chat app can only replace cards on a human-created message if the message
+   * already contains cards, and the cards were created by the app.
+   *
+   * If the app replaces the cards with an empty list, the cards are removed.
+   * After removing the cards, the app cannot add cards back to the message.
+   *
+   * Requires [app
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+   * with the [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *   - `https://www.googleapis.com/auth/chat.bot`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the message.
+   *
+   *   Format: `spaces/{space}/messages/{message}`
+   * @param {number[]} [request.cardsV2]
+   *   Optional. An array of
+   *   [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
+   *   to be included in the message. These cards will replace the existing cards
+   *   of the message. If empty, the original cards included in the message will
+   *   be cleared.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.ReplaceMessageCardsResponse|ReplaceMessageCardsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.replace_message_cards.js</caption>
+   * region_tag:chat_v1_generated_ChatService_ReplaceMessageCards_async
+   */
+  replaceMessageCards(
+    request?: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  replaceMessageCards(
+    request: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  replaceMessageCards(
+    request: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    callback: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  replaceMessageCards(
+    request?: protos.google.chat.v1.IReplaceMessageCardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IReplaceMessageCardsResponse,
+      protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('replaceMessageCards request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('replaceMessageCards response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .replaceMessageCards(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IReplaceMessageCardsResponse,
+          protos.google.chat.v1.IReplaceMessageCardsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceMessageCards response %j', response);
           return [response, options, rawResponse];
         },
       )
