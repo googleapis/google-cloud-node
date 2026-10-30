@@ -827,6 +827,9 @@ export class Gaxios implements FetchCompliance {
           // Readable stream and wraps it in a byte-counting Transform when
           // maxSize is set so both res.body and buffered body readers enforce
           // maxContentLength.
+          if (!rawBody) {
+            return null;
+          }
           if (!nodeStream) {
             const webReadable = Readable.fromWeb(rawBody);
             if (maxSize > 0) {
@@ -835,7 +838,6 @@ export class Gaxios implements FetchCompliance {
                 transform(chunk: Buffer | Uint8Array, _encoding, callback) {
                   totalBytes += chunk.byteLength;
                   if (totalBytes > maxSize) {
-                    webReadable.destroy();
                     callback(
                       Object.assign(
                         new Error(
@@ -849,11 +851,7 @@ export class Gaxios implements FetchCompliance {
                   callback(null, chunk);
                 },
               });
-              webReadable.on('error', err => limiter.destroy(err));
-              limiter.once('close', () => {
-                if (!webReadable.destroyed) webReadable.destroy();
-              });
-              nodeStream = webReadable.pipe(limiter);
+              nodeStream = pipeline(webReadable, limiter, () => {});
             } else {
               nodeStream = webReadable;
             }
@@ -862,10 +860,15 @@ export class Gaxios implements FetchCompliance {
         };
         const readBuffer = async () => {
           const chunks: Buffer[] = [];
-          for await (const chunk of getNodeStream()) {
-            chunks.push(
-              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
-            );
+          const stream = getNodeStream();
+          if (stream) {
+            for await (const chunk of stream) {
+              chunks.push(
+                Buffer.isBuffer(chunk)
+                  ? chunk
+                  : Buffer.from(chunk as Uint8Array),
+              );
+            }
           }
           return Buffer.concat(chunks);
         };
