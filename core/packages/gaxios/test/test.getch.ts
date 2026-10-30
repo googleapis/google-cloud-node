@@ -351,10 +351,15 @@ describe('🥁 configuration options', () => {
       'arraybuffer',
       'blob',
     ] as const) {
+      // nock's .reply(200, body) omits Content-Length unless .replyContentLength()
+      // or an explicit 'content-length' header is specified, so this exercises
+      // the stream byte-counting limit ('over limit: 5') rather than the upfront
+      // Content-Length header check ("Response's `Content-Length` is over the limit.").
       const scope = nock(url).get('/').reply(200, body);
       await assert.rejects(
         request({url, maxContentLength: 5, responseType}),
-        (err: Error) => err instanceof GaxiosError && /limit/.test(err.message),
+        (err: Error) =>
+          err instanceof GaxiosError && /over limit: 5/.test(err.message),
       );
       scope.done();
     }
