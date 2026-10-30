@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.35.0...chat-v0.36.0) (2026-10-30)
+
+
+### Features
+
+* Update API sources and regenerate ([#9769](https://github.com/googleapis/google-cloud-node/issues/9769)) ([5437a0b](https://github.com/googleapis/google-cloud-node/commit/5437a0be98cb47e56f549f3e7212014572f2cf2e))
+
 ## [0.35.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.34.0...chat-v0.35.0) (2026-10-08)
 
 

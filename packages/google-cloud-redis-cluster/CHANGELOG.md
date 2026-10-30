@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.18.0...redis-cluster-v0.19.0) (2026-10-30)
+
+
+### Features
+
+* Update API sources and regenerate ([#9769](https://github.com/googleapis/google-cloud-node/issues/9769)) ([5437a0b](https://github.com/googleapis/google-cloud-node/commit/5437a0be98cb47e56f549f3e7212014572f2cf2e))
+
 ## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.17.0...redis-cluster-v0.18.0) (2026-10-21)
 
 

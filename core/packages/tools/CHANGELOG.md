@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.2.1...gapic-tools-v2.2.2) (2026-10-30)
+
+
+### Bug Fixes
+
+* **tools:** Remove duplicate compileProtos invocation in ESM mode ([#9764](https://github.com/googleapis/google-cloud-node/issues/9764)) ([6f475fb](https://github.com/googleapis/google-cloud-node/commit/6f475fbce4c949941c095d1281110ed8ed358b9d))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.2.0...gapic-tools-v2.2.1) (2026-10-28)
 
 
