@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [9.1.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.1.0...spanner-v9.1.1) (2026-10-30)
+
+
+### Bug Fixes
+
+* **Spanner:** ExcludeTxnFromChangeStreams field and request headers i… ([#9618](https://github.com/googleapis/google-cloud-node/issues/9618)) ([7a5db11](https://github.com/googleapis/google-cloud-node/commit/7a5db1185a0c21a6f554f8c6bf640144178d5b9c))
+* **spanner:** Prefer AsyncLocalStorageContextManager in OpenTelemetry instrumentation ([#9610](https://github.com/googleapis/google-cloud-node/issues/9610)) ([2405101](https://github.com/googleapis/google-cloud-node/commit/2405101edaec264681f17d1038a6f65d126c7ea4))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.0.0...spanner-v9.1.0) (2026-10-13)
 
 
