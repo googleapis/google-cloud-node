@@ -111,9 +111,6 @@ importers:
       '@types/node':
         specifier: ^22.13.5
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -156,9 +153,6 @@ importers:
       nock:
         specifier: ^14.0.1
         version: 14.0.16
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^19.0.2
         version: 19.0.5
@@ -1644,9 +1638,6 @@ importers:
       '@types/node':
         specifier: ^22.14.0
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^17.0.4
         version: 17.0.4
@@ -1692,9 +1683,6 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.9.6
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -2164,9 +2152,6 @@ importers:
       '@types/node':
         specifier: ^22.15.3
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^17.0.4
         version: 17.0.4
@@ -2212,9 +2197,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^20.0.0
         version: 20.0.0
@@ -2509,9 +2491,6 @@ importers:
       '@types/node':
         specifier: ^22.13.9
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -2545,9 +2524,6 @@ importers:
       mocha:
         specifier: ^11.1.0
         version: 11.7.6
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       tmp:
         specifier: ^0.2.3
         version: 0.2.7
@@ -20587,10 +20563,6 @@ packages:
     resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.4.0:
-    resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
-    engines: {node: '>=22'}
-
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -31141,8 +31113,6 @@ snapshots:
     dependencies:
       protobufjs: 7.5.9
       walkdir: 0.4.1
-
-  google-test-utils@0.4.0: {}
 
   google-test-utils@0.4.0: {}
 
