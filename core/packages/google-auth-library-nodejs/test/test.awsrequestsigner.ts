@@ -589,6 +589,38 @@ describe('AwsRequestSigner', () => {
         },
       },
       {
+        description: 'signed POST request with FIPS STS endpoint',
+        referenceDate: new Date('2020-08-11T06:55:22.345Z'),
+        instance: new AwsRequestSigner(getCredentials, 'us-east-2'),
+        originalRequest: {
+          url:
+            'https://sts-fips.us-east-2.amazonaws.com' +
+            '?Action=GetCallerIdentity&Version=2011-06-15',
+          method: 'POST',
+        },
+        getSignedRequest: () => {
+          const amzDate = '20200811T065522Z';
+          const dateStamp = '20200811';
+          const signature =
+            'dc64d2d5b33786e97de10de5a82428f1e79cbc69d6ec3d450780f29b20eaa43f';
+          return {
+            url:
+              'https://sts-fips.us-east-2.amazonaws.com' +
+              '?Action=GetCallerIdentity&Version=2011-06-15',
+            method: 'POST',
+            headers: new Headers({
+              'x-amz-date': amzDate,
+              authorization:
+                `AWS4-HMAC-SHA256 Credential=${accessKeyId}/` +
+                `${dateStamp}/us-east-2/sts/aws4_request, SignedHeaders=host;` +
+                `x-amz-date;x-amz-security-token, Signature=${signature}`,
+              host: 'sts-fips.us-east-2.amazonaws.com',
+              'x-amz-security-token': token,
+            }),
+          };
+        },
+      },
+      {
         description: 'signed request when AWS credentials have no token',
         referenceDate: new Date('2020-08-11T06:55:22.345Z'),
         instance: new AwsRequestSigner(getCredentialsWithoutToken, 'us-east-2'),
