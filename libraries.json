@@ -780,6 +780,24 @@
     "support_documentation": "https://cloud.google.com/data-catalog/docs/getting-support"
   },
   {
+    "api_description": "A unified ingestion API for data partners, agencies and advertisers to\nconnect first-party data across Google advertising products.",
+    "api_id": "datamanager.googleapis.com",
+    "api_shortname": "datamanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datamanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-ads/datamanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1812065",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "datamanager",
+    "name_pretty": "Data Manager",
+    "product_documentation": "https://developers.google.com/data-manager",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ads-datamanager",
+    "support_documentation": "https://developers.google.com/data-manager/docs/getting-support"
+  },
+  {
     "api_description": "Manage Cloud Database Migration Service resources on Google Cloud Platform.",
     "api_id": "datamigration.googleapis.com",
     "api_shortname": "datamigration",
@@ -2109,7 +2127,7 @@
     "support_documentation": "https://cloud.google.com/tpu/docs/getting-support"
   },
   {
-    "api_description": "This API converts video files into formats suitable for consumer\ndistribution. For more information, see the <a\nhref=\"https://cloud.google.com/transcoder/docs/concepts/overview\">Transcoder\nAPI overview</a>.",
+    "api_description": "This API converts video files into formats suitable for consumer\ndistribution.",
     "api_id": "transcoder.googleapis.com",
     "api_shortname": "transcoder",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-transcoder/latest",
@@ -2791,24 +2809,6 @@
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog-lineage-configmanagement",
     "support_documentation": "https://cloud.google.com/dataplex/docs/getting-support"
-  },
-  {
-    "api_description": "A unified ingestion API for data partners, agencies and advertisers to\nconnect first-party data across Google advertising products.",
-    "api_id": "datamanager.googleapis.com",
-    "api_shortname": "datamanager",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datamanager/latest",
-    "default_version": "v1",
-    "distribution_name": "@google-ads/datamanager",
-    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1812065",
-    "language": "nodejs",
-    "library_type": "GAPIC_AUTO",
-    "name": "datamanager",
-    "name_pretty": "Data Manager",
-    "product_documentation": "https://developers.google.com/data-manager",
-    "release_level": "preview",
-    "repo": "googleapis/google-cloud-node",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ads-datamanager",
-    "support_documentation": "https://developers.google.com/data-manager/docs/getting-support"
   },
   {
     "api_description": "Data QnA is a natural language question and answer service for BigQuery\ndata.",
@@ -3592,6 +3592,24 @@
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-networkservices",
     "support_documentation": "https://cloud.google.com/products/networking/docs/getting-support"
+  },
+  {
+    "api_description": "Provides functionality for configuring the observability scope, which\ncontrols the log, metric, and trace data that you can view.",
+    "api_id": "observability.googleapis.com",
+    "api_shortname": "observability",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/observability/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/observability",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1519295",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "observability",
+    "name_pretty": "Observability",
+    "product_documentation": "https://cloud.google.com/stackdriver/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-observability",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "api_description": "The Oracle Database@Google Cloud API provides a set of APIs to manage\nOracle database services, such as Exadata and Autonomous Databases.",
