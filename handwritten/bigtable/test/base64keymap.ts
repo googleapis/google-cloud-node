@@ -15,7 +15,6 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import Long = require('long');
-import * as proxyquire from 'proxyquire';
 import * as sn from 'sinon';
 
 import {RowStateEnum} from '../src/chunktransformer.js';
