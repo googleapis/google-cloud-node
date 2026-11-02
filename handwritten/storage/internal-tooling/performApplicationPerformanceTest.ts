@@ -56,7 +56,7 @@ async function main() {
 
   ({bucket} = await performanceTestSetup(
     argv.project! as string,
-    argv.bucket! as string
+    argv.bucket! as string,
   ));
 
   switch (argv.test_type) {
@@ -78,7 +78,7 @@ async function main() {
 async function uploadInParallel(
   bucket: Bucket,
   paths: string[],
-  options: UploadOptions
+  options: UploadOptions,
 ) {
   const promises: Promise<UploadResponse>[] = [];
   for (const index in paths) {
@@ -115,7 +115,7 @@ async function performWriteTest(): Promise<TestResult> {
     argv.num_objects as number,
     TEST_NAME_STRING,
     fileSizeRange.low,
-    fileSizeRange.high
+    fileSizeRange.high,
   );
 
   const start = performance.now();
@@ -157,7 +157,7 @@ async function performReadTest(): Promise<TestResult> {
     argv.num_objects as number,
     TEST_NAME_STRING,
     fileSizeRange.low,
-    fileSizeRange.high
+    fileSizeRange.high,
   );
   await uploadInParallel(bucket, creationInfo.paths, {validation: checkType});
 
