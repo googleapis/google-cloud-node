@@ -565,6 +565,9 @@ export function generateServiceStub(
             });
             streamArrayParser.once('finish', tearDownBody);
             streamArrayParser.once('close', tearDownBody);
+            if (streamArrayParser.destroyed) {
+              tearDownBody();
+            }
             pipeline(
               response.body as PipelineSource<unknown>,
               bodyPassThrough,
