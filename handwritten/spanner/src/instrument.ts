@@ -115,7 +115,7 @@ function getQueryTraceConfig(query?: string | QueryWithRequestOptions | null): {
   return {};
 }
 
-const SPAN_NAMESPACE_PREFIX = 'CloudSpanner'; // TODO: discuss & standardize this prefix.
+const SPAN_NAMESPACE_PREFIX = 'CloudSpanner'; // TODO(https://github.com/googleapis/google-cloud-node/issues/9610): discuss & standardize this prefix.
 export {
   SPAN_NAMESPACE_PREFIX,
   traceConfig,
@@ -169,6 +169,7 @@ const CACHE_TTL_MS = 10000; // 10 seconds TTL
  */
 function isGlobalTracingEnabled(): boolean {
   if (globalTracingEnabled === true) {
+    ensureInitialContextManagerSet();
     return true;
   }
   const now = Date.now();
