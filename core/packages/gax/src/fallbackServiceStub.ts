@@ -554,7 +554,9 @@ export function generateServiceStub(
                   if (callback) {
                     callback(callErr);
                   }
-                  streamArrayParser.emit('error', callErr);
+                  if (!streamArrayParser.errored) {
+                    streamArrayParser.emit('error', callErr);
+                  }
                 }
               },
             );
