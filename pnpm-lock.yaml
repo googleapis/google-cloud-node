@@ -2283,8 +2283,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
       joi:
-        specifier: ^17.13.8
-        version: 17.13.8
+        specifier: ^17.13.9
+        version: 17.13.9
       js-green-licenses:
         specifier: ^4.0.0
         version: 4.0.0(encoding@0.1.13)
@@ -20487,10 +20487,6 @@ packages:
     resolution: {integrity: sha512-7ABviyMOlX5hIVD60YOfHw4/CxOfBhyduaYB+wbFWCWoni4N7SLcV46hrVRktuBbZjFC9ONyqamZITN7q3n32w==}
     engines: {node: '>=18'}
 
-  google-auth-library@11.3.0:
-    resolution: {integrity: sha512-gZCyszARHj47WNcKrAcQtimDwtTZpydRZ3HSeb66hObfQU9uaG50ejsZ8LzGISIVAjpsZEouGVs65Q/XRau0Qg==}
-    engines: {node: '>=22'}
-
   google-auth-library@11.3.1:
     resolution: {integrity: sha512-mQS0R2Ev/DKkzuWSYtDeq15uhDeaWuT2qzLYqJ41LmooxVKHmn5ut3pc6dlHY6wfHW/D7FBmOYjAtkjaD1A7qA==}
     engines: {node: '>=22'}
@@ -21364,8 +21360,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  joi@17.13.8:
-    resolution: {integrity: sha512-iPKOGmiRw1jxf/JOPwxmCcUQAOdF359mdzYiP2DJ+TMX0YK2zjK3D+zYOaGjpumWxOFF/l2xVWjRVK5bGSLdEw==}
+  joi@17.13.9:
+    resolution: {integrity: sha512-llFCT2rVtfwgBCaIqxtjim+iHqrgss4ONiGSYiiGH9jnjWq90ppSRffqmqKvwpa8W+YfILyQV6XyGcegXX2T4g==}
 
   js-green-licenses@4.0.0:
     resolution: {integrity: sha512-kcgTOaZmpDpINcRAOKKhjHtBN6zibMVTC8qfPUOpowQtI/6fUgdmwJLJ0ycCb0pUO3ZYKn++56sy8IlG60p5mg==}
@@ -28019,7 +28015,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28029,7 +28025,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28039,7 +28035,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -30967,17 +30963,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  google-auth-library@11.3.0:
-    dependencies:
-      base64-js: 1.5.1
-      ecdsa-sig-formatter: 1.0.11
-      gaxios: 8.3.0
-      gcp-metadata: 9.0.3
-      google-logging-utils: 2.0.1
-      jws: 4.0.1
-    transitivePeerDependencies:
-      - supports-color
-
   google-auth-library@11.3.1:
     dependencies:
       base64-js: 1.5.1
@@ -32259,7 +32244,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  joi@17.13.8:
+  joi@17.13.9:
     dependencies:
       '@hapi/hoek': 9.3.0
       '@hapi/topo': 5.1.0
@@ -33337,7 +33322,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -35258,7 +35243,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -35690,7 +35675,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
