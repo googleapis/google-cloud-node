@@ -5,7 +5,12 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/pubsub}"
+    cd ../.. && corepack enable pnpm &&
+    pnpm install --filter "...{./handwritten/pubsub}" --filter "...{./core/packages/gax}" &&
+    pnpm --dir core/packages/gax run compile &&
+    for d in handwritten/pubsub/node_modules/google-gax node_modules/.pnpm/google-gax@*/node_modules/google-gax; do
+      rm -rf "$$d" && ln -s "$$PWD/core/packages/gax" "$$d"
+    done
   dir: 'handwritten/pubsub'
   id: 'install-dependencies'
 
