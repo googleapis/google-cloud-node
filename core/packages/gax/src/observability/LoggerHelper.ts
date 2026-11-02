@@ -31,6 +31,7 @@ import {
   isPreConnectionFailure,
   resolveErrorInfoDomain,
   resolveErrorInfoMetadataAttributes,
+  resolveErrorResponsePayload,
   resolveErrorType,
   resolveExceptionMessage,
   resolveExceptionStacktrace,
@@ -180,6 +181,18 @@ function emitGaxLog(
 }
 
 /**
+ * Resolves a `LogSeverity` enum value. Until a `google-logging-utils` release
+ * containing #9718 is published to npm (this repo uses `link-workspace-packages=false`),
+ * the published package exports `LogSeverity` as a type only while each enum member's
+ * runtime value equals its uppercase level string.
+ */
+function resolveLogSeverity(
+  level: 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR',
+): loggingUtils.LogSeverity {
+  return level as loggingUtils.LogSeverity;
+}
+
+/**
  * Returns the `google-logging-utils` logger for the given GCP client service,
  * defaulting to the `'google-gax'` namespace when no service name is provided.
  *
@@ -216,12 +229,15 @@ export function getGaxLogger(
  * @param {unknown} err - The error thrown or reported for the call.
  * @param {AttemptTraceContext} dynamicArgs - Dynamic context for the RPC call or attempt.
  * @param {StaticTraceContext} [staticArgs={}] - Static context for the client library.
+ * @param {boolean} [includeExceptionAttributes=true] - Whether to populate `exception.*`
+ *   attributes (set on L3 client call logs, omitted on L4 transport attempt logs).
  * @returns {LogPayload} The populated log payload attributes with undefined fields omitted.
  */
 export function buildLogAttributes(
   err: unknown,
   dynamicArgs: AttemptTraceContext,
   staticArgs: StaticTraceContext = {},
+  includeExceptionAttributes = true,
 ): LogPayload {
   const {rawAddress, urlDomain} = resolveEndpointAndDomain(
     dynamicArgs,
@@ -275,14 +291,16 @@ export function buildLogAttributes(
   }
   Object.assign(attributes, resolveErrorInfoMetadataAttributes(err));
 
-  attributes['exception.type'] = resolveExceptionType(err);
-  attributes['exception.message'] = resolveExceptionMessage(
-    err,
-    dynamicArgs.rpcType,
-  );
-  const stacktrace = resolveExceptionStacktrace(err);
-  if (stacktrace !== undefined) {
-    attributes['exception.stacktrace'] = stacktrace;
+  if (includeExceptionAttributes) {
+    attributes['exception.type'] = resolveExceptionType(err);
+    attributes['exception.message'] = resolveExceptionMessage(
+      err,
+      dynamicArgs.rpcType,
+    );
+    const stacktrace = resolveExceptionStacktrace(err);
+    if (stacktrace !== undefined) {
+      attributes['exception.stacktrace'] = stacktrace;
+    }
   }
 
   return attributes;
@@ -391,17 +409,10 @@ export function logCall<T = GaxCallResult>(
     // Build structured log attributes with exception details.
     const attributes = buildLogAttributes(err, dynamicArgs, staticArgs);
 
-    const warningSeverity =
-      (
-        loggingUtils as {
-          LogSeverity?: {WARNING: loggingUtils.LogSeverity};
-        }
-      ).LogSeverity?.WARNING ?? ('WARNING' as loggingUtils.LogSeverity);
-
     // Emit structured WARNING log.
     logger(
       {
-        severity: warningSeverity,
+        severity: resolveLogSeverity('WARNING'),
         ...(traceId ? {telemetryTraceId: traceId} : {}),
         ...(spanId ? {telemetrySpanId: spanId} : {}),
         other: attributes,
@@ -412,4 +423,78 @@ export function logCall<T = GaxCallResult>(
   };
 
   return executeLoggedOperation(fn, emitL3WarnLog, isStreamCall, userCallback);
+}
+
+/**
+ * Executes an individual RPC transport attempt and emits a `DEBUG` log entry
+ * if the attempt fails across promise, callback, stream, or synchronous execution boundaries.
+ *
+ * @template T
+ * @param {AttemptTraceContext} attemptDynamicArgs - Dynamic context for the RPC attempt.
+ * @param {StaticTraceContext} staticArgs - Static context for the client library.
+ * @param {function} fn - The transport attempt operation to execute. Receives the wrapped
+ *   callback when `userCallback` is supplied, otherwise `undefined`.
+ * @param {boolean} [isStreamCall=false] - Whether the operation returns a stream (`EventEmitter`).
+ * @param {APICallback} [userCallback] - Optional attempt callback.
+ * @returns {T} The return value of `fn`.
+ */
+export function logNetworkAttempt<T = GaxCallResult>(
+  attemptDynamicArgs: AttemptTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: (loggedCallback?: APICallback) => T,
+  isStreamCall = false,
+  userCallback?: APICallback,
+): T {
+  // Snapshot attempt context in case async rejection loses active context.
+  let initialContext: ReturnType<typeof context.active> | undefined;
+  try {
+    initialContext = context.active();
+  } catch {
+    // Fail open if active context retrieval throws.
+  }
+
+  const emitL4DebugLog = (err: unknown) => {
+    // Resolve logger and active T4 attempt span (or outer OpenTelemetry span when GAX tracing is disabled).
+    const logger = getGaxLogger(staticArgs?.gcpClientService);
+    const activeTrace = getActiveTraceContext();
+    const initialTrace = initialContext
+      ? getActiveTraceContext(initialContext)
+      : undefined;
+    const attemptSpan =
+      activeTrace?.attemptSpan ??
+      initialTrace?.attemptSpan ??
+      activeTrace?.span ??
+      initialTrace?.span;
+    const spanContext = attemptSpan?.spanContext();
+    const traceId = spanContext?.traceId;
+    const spanId = spanContext?.spanId;
+
+    // Build structured log attributes without exception details and attach raw attempt response payload when present.
+    const attributes = buildLogAttributes(
+      err,
+      attemptDynamicArgs,
+      staticArgs,
+      false,
+    );
+    const responsePayload = resolveErrorResponsePayload(err);
+    if (responsePayload !== undefined) {
+      attributes['response.payload'] = responsePayload;
+    }
+
+    // Emit structured DEBUG log for the failed attempt.
+    const message = resolveExceptionMessage(err, attemptDynamicArgs.rpcType);
+    logger(
+      {
+        severity: resolveLogSeverity('DEBUG'),
+        ...(traceId ? {telemetryTraceId: traceId} : {}),
+        ...(spanId ? {telemetrySpanId: spanId} : {}),
+        other: attributes,
+      },
+      'RPC attempt failed: %s',
+      message || err,
+    );
+  };
+
+  // Intercept and dispatch execution boundaries for the attempt.
+  return executeLoggedOperation(fn, emitL4DebugLog, isStreamCall, userCallback);
 }
