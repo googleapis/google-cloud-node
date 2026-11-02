@@ -31,12 +31,24 @@ import {setSettingsDefaultDomain} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 import tls from 'tls';
 
-const PQC_ECDH_CURVE_CANDIDATES = [
+/**
+ * Ordered TLS ECDH/KEM group list candidates that enable Phase 2 Post-Quantum
+ * Cryptography (`MLKEM1024`, IANA `0x0202`) alongside `X25519MLKEM768` (`0x11ec`):
+ * - `'DEFAULT:MLKEM1024'` for Node.js >= 22.20 (OpenSSL 3.5+).
+ * - `'X25519MLKEM768:MLKEM1024:X25519:P-256:P-384'` for BoringSSL-based runtimes (e.g. Bun).
+ */
+const PQC_ECDH_CURVE_CANDIDATES: readonly string[] = [
   'DEFAULT:MLKEM1024',
   'X25519MLKEM768:MLKEM1024:X25519:P-256:P-384',
 ];
 
-export function ensurePqcCurvesConfigured() {
+/**
+ * Configures `tls.DEFAULT_ECDH_CURVE` to advertise `MLKEM1024` (`0x0202`) in
+ * addition to the runtime's default TLS groups when `tls.DEFAULT_ECDH_CURVE`
+ * is still set to `'auto'`. Custom caller-configured curves are preserved, and
+ * runtimes without `MLKEM1024` support safely fall back to `'auto'`.
+ */
+export function ensurePqcCurvesConfigured(): void {
   if (
     !tls ||
     typeof tls.createSecureContext !== 'function' ||
