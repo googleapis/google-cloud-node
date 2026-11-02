@@ -569,23 +569,35 @@ export function resolveErrorType(
  * constructor names over generic `Error`, falling back to `e.name` when
  * the constructor is generic or `DOMException`.
  *
- * @param {Error} e - The Error instance.
+ * @param {unknown} e - The error or other value thrown or reported.
  * @returns {string} The resolved `exception.type` string.
  */
-export function resolveExceptionType(e: Error): string {
-  if (e.name && (e.name === 'AbortError' || e.name === 'TimeoutError')) {
-    return e.name;
+export function resolveExceptionType(e: unknown): string {
+  if (!e || typeof e !== 'object') {
+    return 'Error';
   }
-  const className = e.constructor?.name;
+  const errObj = e as {
+    name?: unknown;
+    constructor?: {name?: unknown};
+  };
+  const name =
+    typeof errObj.name === 'string' && errObj.name.length > 0
+      ? errObj.name
+      : undefined;
+  if (name === 'AbortError' || name === 'TimeoutError') {
+    return name;
+  }
+  const className = errObj.constructor?.name;
   if (
-    className &&
+    typeof className === 'string' &&
+    className.length > 0 &&
     className !== 'Error' &&
     className !== 'Object' &&
     className !== 'DOMException'
   ) {
     return className;
   }
-  return e.name || 'Error';
+  return name ?? 'Error';
 }
 
 /**
