@@ -852,7 +852,7 @@ describe('Transfer Manager', () => {
       const expectedErr = new MultiPartUploadError(
         'Hello World',
         fakeId,
-        fakePartsMap
+        fakePartsMap,
       );
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
@@ -875,7 +875,7 @@ describe('Transfer Manager', () => {
 
       await assert.rejects(
         transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
-        expectedErr
+        expectedErr,
       );
       assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
     });
@@ -886,7 +886,7 @@ describe('Transfer Manager', () => {
       const expectedErr = new MultiPartUploadError(
         'Hello World',
         fakeId,
-        fakePartsMap
+        fakePartsMap,
       );
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
@@ -908,9 +908,9 @@ describe('Transfer Manager', () => {
         transferManager.uploadFileInChunks(
           filePath,
           {autoAbortFailure: false},
-          mockGeneratorFunction
+          mockGeneratorFunction,
         ),
-        expectedErr
+        expectedErr,
       );
       assert.strictEqual(fakeHelper.abortUpload.notCalled, true);
     });
@@ -923,7 +923,7 @@ describe('Transfer Manager', () => {
       const expectedErr = new MultiPartUploadError(
         `${uploadErr.message}\n${abortErr.message}`,
         fakeId,
-        fakePartsMap
+        fakePartsMap,
       );
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
@@ -946,7 +946,7 @@ describe('Transfer Manager', () => {
 
       await assert.rejects(
         transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
-        expectedErr
+        expectedErr,
       );
       assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
     });
