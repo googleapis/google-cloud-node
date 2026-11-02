@@ -48,7 +48,6 @@
   ],
   "scripts": {
     "all-test": "pnpm test && pnpm run system-test",
-    "benchwrapper": "node bin/benchwrapper.js",
     "check": "gts check",
     "clean": "rm -rf build/",
     "compile:cjs": "tsc -p ./tsconfig.cjs.json",
