@@ -1221,12 +1221,15 @@ describe('grpc-fallback', () => {
       parser.on('error', err =>
         reported.push(`error:${(err as Error).message}`),
       );
+      const streamClosed = new Promise<void>(resolve => {
+        parser.once('close', () => setImmediate(resolve));
+      });
       parser.on('end', () => {
         parser.destroy();
       });
 
       body.push(']');
-      await new Promise<void>(resolve => setTimeout(resolve, 100));
+      await streamClosed;
 
       assert.deepStrictEqual(received, [{content: 'one'}]);
       assert.deepStrictEqual(
