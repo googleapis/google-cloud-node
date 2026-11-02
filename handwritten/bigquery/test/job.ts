@@ -16,7 +16,7 @@ import {DecorateRequestOptions, util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach, before} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 
 import {BigQuery} from '../src/bigquery';
