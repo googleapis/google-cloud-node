@@ -19,8 +19,12 @@ import * as vm from 'vm';
 import {describe, it} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
 import {Span} from '@opentelemetry/api';
-import {GoogleError} from '../../src/googleError';
+import {GoogleAuth, PassThroughClient} from 'google-auth-library';
+import {GrpcClient as FallbackGrpcClient} from '../../src/fallback';
+import {GoogleError, GoogleErrorDecoder} from '../../src/googleError';
 import {Status} from '../../src/status';
+import echoProtoJson = require('../fixtures/echo.json');
+import {setMockFallbackHttpResponse} from './utils';
 import {
   connectionCodes,
   requestCodes,
@@ -30,7 +34,10 @@ import {
   genericClasses,
   preConnectionCodes,
   DEPTH_TO_CHECK,
+  resolveErrorInfo,
   resolveErrorInfoReason,
+  resolveErrorInfoDomain,
+  resolveErrorInfoMetadataAttributes,
   resolveServerErrorCode,
   isServerSideError,
   resolveClientNetworkOrOperationalError,
@@ -42,12 +49,99 @@ import {
   resolveHttpStatusCode,
   resolveErrorMessage,
   resolveExceptionMessage,
+  resolveExceptionStacktrace,
   resolveResponseStatusCode,
+  resolveResponsePayload,
   resolveServerExceptionDetails,
   recordExceptionEvent,
   isPreConnectionFailure,
   safeJsonStringify,
 } from '../../src/observability/errorUtil';
+
+const SERVICE_DISABLED_ERROR_INFO = {
+  reason: 'SERVICE_DISABLED',
+  domain: 'googleapis.com',
+  metadata: {
+    service: 'translate.googleapis.com',
+    consumer: 'projects/123',
+  },
+};
+
+/**
+ * Builds the GoogleError produced by a `fallback: 'rest'` call that fails with
+ * HTTP 403 (rejected by `validateStatus` and translated by `_toGoogleError`)
+ * carrying SERVICE_DISABLED_ERROR_INFO in its details.
+ */
+async function httpErrorWithErrorInfo(): Promise<GoogleError> {
+  const gaxGrpc = new FallbackGrpcClient({
+    auth: new GoogleAuth({authClient: new PassThroughClient()}),
+    fallback: 'rest',
+  });
+  const protos = gaxGrpc.loadProto(echoProtoJson);
+  const echoService = protos.lookupService('Echo');
+  setMockFallbackHttpResponse(
+    gaxGrpc,
+    new Response(
+      JSON.stringify({
+        error: {
+          code: 403,
+          message: 'Cloud Translation API is disabled for project 123.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              ...SERVICE_DISABLED_ERROR_INFO,
+            },
+          ],
+        },
+      }),
+      {status: 403},
+    ),
+  );
+  const echoStub = await gaxGrpc.createStub(echoService, {
+    servicePath: 'foo.example.com',
+    port: 443,
+  });
+  return new Promise<GoogleError>((resolve, reject) => {
+    echoStub.echo({content: 'test'}, {}, {}, (err?: Error) => {
+      if (err instanceof GoogleError) {
+        resolve(err);
+      } else {
+        reject(new Error(`Expected GoogleError, got ${err}`));
+      }
+    });
+  });
+}
+
+/**
+ * Builds a gRPC GoogleError whose SERVICE_DISABLED_ERROR_INFO is still encoded in the
+ * `grpc-status-details-bin` response metadata, as received from the server.
+ */
+function grpcErrorWithEncodedErrorInfo(): GoogleError {
+  const decoder = new GoogleErrorDecoder();
+  const errorInfo = decoder.root
+    .lookupType('google.rpc.ErrorInfo')
+    .encode(SERVICE_DISABLED_ERROR_INFO)
+    .finish();
+  const status = decoder.statusType
+    .encode({
+      code: Status.PERMISSION_DENIED,
+      message: 'Cloud Translation API is disabled for project 123.',
+      details: [
+        {
+          type_url: 'type.googleapis.com/google.rpc.ErrorInfo',
+          value: errorInfo,
+        },
+      ],
+    })
+    .finish();
+  const metadata = new grpc.Metadata();
+  metadata.set('grpc-status-details-bin', Buffer.from(status));
+  return Object.assign(new GoogleError('API disabled'), {
+    code: Status.PERMISSION_DENIED,
+    metadata,
+  });
+}
 
 describe('errorUtil', () => {
   describe('error code and class constants', () => {
@@ -99,10 +193,14 @@ describe('errorUtil', () => {
   });
 
   describe('error classification and resolution helpers', () => {
-    it('resolveErrorInfoReason handles direct reason, statusDetails, and cause', () => {
+    it('resolveErrorInfoReason handles direct reason, errorInfo, statusDetails, and cause', () => {
       assert.strictEqual(
         resolveErrorInfoReason({reason: 'RATE_LIMIT_EXCEEDED'}),
         'RATE_LIMIT_EXCEEDED',
+      );
+      assert.strictEqual(
+        resolveErrorInfoReason({errorInfo: {reason: 'API_KEY_INVALID'}}),
+        'API_KEY_INVALID',
       );
       assert.strictEqual(
         resolveErrorInfoReason({
@@ -138,6 +236,254 @@ describe('errorUtil', () => {
         'ACCESS_TOKEN_EXPIRED',
       );
       assert.strictEqual(resolveErrorInfoReason(new Error('none')), undefined);
+    });
+
+    // resolveErrorInfoDomain and resolveErrorInfoMetadataAttributes share the ErrorInfo
+    // lookup (errorInfo, statusDetails, and cause chain) tested for resolveErrorInfoReason.
+    it('resolveErrorInfoDomain reads the domain from the error and its ErrorInfo details', () => {
+      assert.strictEqual(
+        resolveErrorInfoDomain({domain: 'googleapis.com'}),
+        'googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          statusDetails: [{domain: 'pubsub.googleapis.com'}],
+        }),
+        'pubsub.googleapis.com',
+      );
+    });
+
+    it('resolveErrorInfoDomain ignores non-string domain values', () => {
+      // Errors thrown inside a legacy Node.js `domain` carry the Domain object on `err.domain`.
+      const domainObjectErr = Object.assign(new Error('thrown in a domain'), {
+        domain: {members: []},
+      });
+      assert.strictEqual(resolveErrorInfoDomain(domainObjectErr), undefined);
+
+      const domainObjectErrWithCause = Object.assign(
+        new Error('thrown in a domain'),
+        {domain: {members: []}, cause: {domain: 'googleapis.com'}},
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain(domainObjectErrWithCause),
+        'googleapis.com',
+      );
+    });
+
+    it('resolveErrorInfoDomain reads the domain promoted from HTTP and gRPC ErrorInfo details', async () => {
+      const httpErr = await httpErrorWithErrorInfo();
+      assert.strictEqual(resolveErrorInfoReason(httpErr), 'SERVICE_DISABLED');
+      assert.strictEqual(resolveErrorInfoDomain(httpErr), 'googleapis.com');
+      assert.strictEqual(resolveErrorType(httpErr, 'http'), 'SERVICE_DISABLED');
+      assert.strictEqual(resolveHttpStatusCode(httpErr), 403);
+      assert.strictEqual(
+        resolveExceptionMessage(httpErr, 'http'),
+        'Cloud Translation API is disabled for project 123.',
+      );
+
+      // ErrorInfo still encoded in grpc-status-details-bin is decoded on demand.
+      const grpcErr = grpcErrorWithEncodedErrorInfo();
+      assert.strictEqual(grpcErr.domain, undefined);
+      assert.strictEqual(resolveErrorInfoDomain(grpcErr), 'googleapis.com');
+    });
+
+    it('resolveErrorInfoMetadataAttributes flattens ErrorInfo metadata into gcp.errors.metadata.<key> attributes', () => {
+      const metadata = {
+        service: 'translate.googleapis.com',
+        consumer: 'projects/123',
+      };
+      const expected = {
+        'gcp.errors.metadata.service': 'translate.googleapis.com',
+        'gcp.errors.metadata.consumer': 'projects/123',
+      };
+      // GoogleError stores ErrorInfo.metadata as `errorInfoMetadata`, while ErrorInfo
+      // details keep it as `metadata`.
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({errorInfoMetadata: metadata}),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({statusDetails: [{metadata}]}),
+        expected,
+      );
+    });
+
+    it('resolveErrorInfoMetadataAttributes stops at the first ErrorInfo metadata, even when it has no usable entries', () => {
+      const causeMetadata = {service: 'translate.googleapis.com'};
+      // An ErrorInfo without metadata does not pick up metadata from a deeper cause.
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          reason: 'SERVICE_DISABLED',
+          domain: 'googleapis.com',
+          errorInfoMetadata: {},
+          cause: {errorInfoMetadata: causeMetadata},
+        }),
+        {},
+      );
+      // Values that are not metadata objects are skipped, so the search continues.
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          errorInfoMetadata: ['value'],
+          cause: {errorInfoMetadata: causeMetadata},
+        }),
+        {'gcp.errors.metadata.service': 'translate.googleapis.com'},
+      );
+    });
+
+    it('resolveErrorInfoMetadataAttributes skips unusable entries and ignores gRPC response metadata', () => {
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          errorInfoMetadata: {
+            service: 'translate.googleapis.com',
+            '': 'empty key',
+            count: 5,
+            nested: {key: 'value'},
+          },
+        }),
+        {'gcp.errors.metadata.service': 'translate.googleapis.com'},
+      );
+
+      // `metadata` on the error itself is the gRPC response metadata, not ErrorInfo.metadata.
+      const responseMetadata = new grpc.Metadata();
+      responseMetadata.set('x-goog-request-id', 'req-123');
+      const grpcErr = Object.assign(new GoogleError('no ErrorInfo'), {
+        code: Status.UNAVAILABLE,
+        metadata: responseMetadata,
+      });
+      assert.deepStrictEqual(resolveErrorInfoMetadataAttributes(grpcErr), {});
+    });
+
+    it('resolveErrorInfoMetadataAttributes reads the metadata promoted from HTTP and gRPC ErrorInfo details', async () => {
+      const expected = {
+        'gcp.errors.metadata.service': 'translate.googleapis.com',
+        'gcp.errors.metadata.consumer': 'projects/123',
+      };
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(await httpErrorWithErrorInfo()),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(grpcErrorWithEncodedErrorInfo()),
+        expected,
+      );
+    });
+
+    it('resolveErrorInfo decodes binary grpc-status-details-bin on wrapped cause errors', () => {
+      const innerGrpcErr = grpcErrorWithEncodedErrorInfo();
+      assert.strictEqual(innerGrpcErr.reason, undefined);
+      assert.strictEqual(innerGrpcErr.domain, undefined);
+      assert.strictEqual(innerGrpcErr.errorInfoMetadata, undefined);
+
+      const wrappedErr = new Error('outer wrapper', {cause: innerGrpcErr});
+      assert.deepStrictEqual(resolveErrorInfo(wrappedErr), {
+        reason: 'SERVICE_DISABLED',
+        domain: 'googleapis.com',
+        metadataAttributes: {
+          'gcp.errors.metadata.service': 'translate.googleapis.com',
+          'gcp.errors.metadata.consumer': 'projects/123',
+        },
+      });
+    });
+
+    it('ensureGrpcStatusDetailsParsed skips binary decoding when domain or errorInfoMetadata is already populated', () => {
+      const errWithDomain = grpcErrorWithEncodedErrorInfo();
+      errWithDomain.domain = 'custom.googleapis.com';
+      assert.deepStrictEqual(resolveErrorInfo(errWithDomain), {
+        reason: undefined,
+        domain: 'custom.googleapis.com',
+        metadataAttributes: {},
+      });
+      assert.strictEqual(errWithDomain.statusDetails, undefined);
+
+      const errWithMetadata = grpcErrorWithEncodedErrorInfo();
+      errWithMetadata.errorInfoMetadata = {service: 'custom.googleapis.com'};
+      assert.deepStrictEqual(resolveErrorInfo(errWithMetadata), {
+        reason: undefined,
+        domain: undefined,
+        metadataAttributes: {
+          'gcp.errors.metadata.service': 'custom.googleapis.com',
+        },
+      });
+      assert.strictEqual(errWithMetadata.statusDetails, undefined);
+    });
+
+    it('resolveErrorInfo does not mix optional ErrorInfo fields across causes or details and walks cause once', () => {
+      const outerPartialReason = {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        cause: {
+          reason: 'SERVICE_DISABLED',
+          domain: 'googleapis.com',
+          errorInfoMetadata: {service: 'translate.googleapis.com'},
+        },
+      };
+      assert.deepStrictEqual(resolveErrorInfo(outerPartialReason), {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        domain: undefined,
+        metadataAttributes: {},
+      });
+      assert.strictEqual(
+        resolveErrorInfoReason(outerPartialReason),
+        'RATE_LIMIT_EXCEEDED',
+      );
+      assert.strictEqual(resolveErrorInfoDomain(outerPartialReason), undefined);
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(outerPartialReason),
+        {},
+      );
+
+      const outerPartialDomain = {
+        domain: 'pubsub.googleapis.com',
+        cause: {
+          reason: 'SERVICE_DISABLED',
+          errorInfoMetadata: {service: 'translate.googleapis.com'},
+        },
+      };
+      assert.strictEqual(resolveErrorInfoReason(outerPartialDomain), undefined);
+      assert.strictEqual(
+        resolveErrorInfoDomain(outerPartialDomain),
+        'pubsub.googleapis.com',
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(outerPartialDomain),
+        {},
+      );
+
+      const multiDetailErr = {
+        statusDetails: [
+          {reason: 'RATE_LIMIT_EXCEEDED'},
+          {domain: 'googleapis.com', metadata: {service: 'foo.googleapis.com'}},
+        ],
+      };
+      assert.deepStrictEqual(resolveErrorInfo(multiDetailErr), {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        domain: undefined,
+        metadataAttributes: {},
+      });
+
+      let causeReads = 0;
+      const leaf = {
+        code: Status.PERMISSION_DENIED,
+        reason: 'IAM_PERMISSION_DENIED',
+        domain: 'iam.googleapis.com',
+        errorInfoMetadata: {permission: 'resourcemanager.projects.get'},
+      };
+      const trackedErr = {};
+      Object.defineProperty(trackedErr, 'cause', {
+        get() {
+          causeReads++;
+          return leaf;
+        },
+      });
+      const info = resolveErrorInfo(trackedErr);
+      assert.strictEqual(
+        resolveErrorType(trackedErr, 'grpc', info),
+        'IAM_PERMISSION_DENIED',
+      );
+      assert.strictEqual(info.domain, 'iam.googleapis.com');
+      assert.deepStrictEqual(info.metadataAttributes, {
+        'gcp.errors.metadata.permission': 'resourcemanager.projects.get',
+      });
+      assert.strictEqual(causeReads, 1);
     });
 
     it('resolveServerErrorCode handles http and grpc', () => {
@@ -598,6 +944,75 @@ describe('errorUtil', () => {
       );
     });
 
+    it('resolveExceptionStacktrace returns the JavaScript call stack for server-side and client-side errors', async () => {
+      const metadata = new grpc.Metadata();
+      metadata.set('x-goog-request-id', 'req-123');
+      const grpcErr = Object.assign(new GoogleError('NOT_FOUND: missing'), {
+        code: Status.NOT_FOUND,
+        statusDetails: [{detail: 'secret not found'}],
+        metadata,
+      });
+      assert.ok(grpcErr.stack);
+      assert.strictEqual(resolveExceptionStacktrace(grpcErr), grpcErr.stack);
+
+      // Server-side errors without statusDetails or metadata still report e.stack.
+      const noDetailsGrpcErr = Object.assign(new GoogleError('No details'), {
+        code: Status.UNAVAILABLE,
+      });
+      assert.ok(noDetailsGrpcErr.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(noDetailsGrpcErr),
+        noDetailsGrpcErr.stack,
+      );
+
+      const rest403Err = await httpErrorWithErrorInfo();
+      assert.ok(rest403Err.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(rest403Err),
+        rest403Err.stack,
+      );
+
+      const httpNoDetailsErr = Object.assign(new GoogleError('Forbidden'), {
+        httpStatusCode: 403,
+      });
+      assert.ok(httpNoDetailsErr.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(httpNoDetailsErr),
+        httpNoDetailsErr.stack,
+      );
+
+      const clientErr = new TypeError('bad type');
+      assert.ok(clientErr.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(clientErr),
+        clientErr.stack,
+      );
+
+      const emptyStackErr = new TypeError('empty stack');
+      emptyStackErr.stack = '';
+      assert.strictEqual(resolveExceptionStacktrace(emptyStackErr), undefined);
+
+      // Falls back through .cause when an outer wrapper lacks a non-empty stack.
+      assert.strictEqual(
+        resolveExceptionStacktrace({message: 'wrapper', cause: clientErr}),
+        clientErr.stack,
+      );
+    });
+
+    it('resolveExceptionStacktrace uses the stack of non-Error throws when they have one', () => {
+      assert.strictEqual(resolveExceptionStacktrace('raw failure'), undefined);
+      assert.strictEqual(resolveExceptionStacktrace(null), undefined);
+      assert.strictEqual(resolveExceptionStacktrace(undefined), undefined);
+      const crossRealm = vm.runInNewContext(
+        "new Error('cross realm boom')",
+      ) as Error;
+      assert.ok(crossRealm.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(crossRealm),
+        crossRealm.stack,
+      );
+    });
+
     it('recordExceptionEvent records exception.type and optionally exception.message', () => {
       const events: Array<{
         name: string;
@@ -707,6 +1122,109 @@ describe('errorUtil', () => {
       };
       assert.strictEqual(safeJsonStringify(badObj), undefined);
     });
+
+    it('serializes binary data as base64 instead of one entry per byte', () => {
+      // Buffers reach the replacer already converted by Buffer#toJSON, unlike other
+      // binary data such as Uint8Arrays, so both are covered.
+      assert.strictEqual(
+        safeJsonStringify({
+          buffer: Buffer.from('hello'),
+          list: [new Uint8Array([1, 2, 3])],
+        }),
+        '{"buffer":"aGVsbG8=","list":["AQID"]}',
+      );
+      // Objects that only look like a serialized Buffer are left as-is.
+      assert.strictEqual(
+        safeJsonStringify({type: 'Buffer', data: [1, 2]}),
+        '{"type":"Buffer","data":[1,2]}',
+      );
+    });
+  });
+
+  describe('resolveResponsePayload', () => {
+    it('serializes the full response as JSON and returns string payloads as-is', () => {
+      assert.strictEqual(
+        resolveResponsePayload({
+          name: 'projects/p/secrets/s',
+          labels: {env: 'prod'},
+          versions: [1, 2],
+        }),
+        '{"name":"projects/p/secrets/s","labels":{"env":"prod"},"versions":[1,2]}',
+      );
+      assert.strictEqual(resolveResponsePayload('raw body'), 'raw body');
+      // Empty responses (e.g. google.protobuf.Empty) still have a payload.
+      assert.strictEqual(resolveResponsePayload({}), '{}');
+    });
+
+    it('prefers the raw response provided for paginated and long-running calls', () => {
+      const resources = [{name: 'a'}, {name: 'b'}];
+      const rawResponse = {items: resources, nextPageToken: 'token'};
+      assert.strictEqual(
+        resolveResponsePayload(resources, rawResponse),
+        '{"items":[{"name":"a"},{"name":"b"}],"nextPageToken":"token"}',
+      );
+      // A null raw response falls back to the response.
+      assert.strictEqual(
+        resolveResponsePayload({name: 'a'}, null),
+        '{"name":"a"}',
+      );
+    });
+
+    it('returns undefined when there is no response', () => {
+      assert.strictEqual(resolveResponsePayload(undefined), undefined);
+      assert.strictEqual(resolveResponsePayload(null), undefined);
+    });
+
+    it('serializes protobuf messages through their JSON representation', () => {
+      const message = new GoogleErrorDecoder().root
+        .lookupType('google.rpc.ErrorInfo')
+        .fromObject(SERVICE_DISABLED_ERROR_INFO);
+      assert.strictEqual(
+        resolveResponsePayload(message),
+        '{"reason":"SERVICE_DISABLED","domain":"googleapis.com",' +
+          '"metadata":{"service":"translate.googleapis.com","consumer":"projects/123"}}',
+      );
+    });
+
+    it('encodes binary payloads as base64', () => {
+      assert.strictEqual(
+        resolveResponsePayload(Buffer.from('hello')),
+        'aGVsbG8=',
+      );
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([1, 2, 3]).buffer),
+        'AQID',
+      );
+      // Only the viewed bytes are encoded, not the rest of the underlying ArrayBuffer.
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4)),
+        'AQID',
+      );
+      // Typed arrays from another realm are recognized too.
+      assert.strictEqual(
+        resolveResponsePayload(vm.runInNewContext('new Uint8Array([1, 2, 3])')),
+        'AQID',
+      );
+    });
+
+    it('encodes binary payloads as base64 when Buffer is not defined', () => {
+      const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
+      try {
+        delete (globalThis as Record<string, unknown>).Buffer;
+        assert.strictEqual(
+          resolveResponsePayload(
+            new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4),
+          ),
+          'AQID',
+        );
+        assert.strictEqual(
+          resolveResponsePayload(new Uint8Array([255])),
+          '/w==',
+        );
+      } finally {
+        (globalThis as Record<string, unknown>).Buffer = originalBuffer;
+      }
+    });
   });
 
   describe('isPreConnectionFailure', () => {
@@ -800,147 +1318,85 @@ describe('errorUtil', () => {
   });
 
   describe('resolveServerExceptionDetails', () => {
-    it('formats status details and metadata in resolveServerExceptionDetails for gRPC server errors', () => {
+    it('resolves server details message for gRPC server errors without serializing statusDetails or metadata', () => {
+      let metadataGetMapCalled = false;
       const metadata = new grpc.Metadata();
       metadata.set('x-goog-request-id', 'req-123');
+      const origGetMap = metadata.getMap.bind(metadata);
+      metadata.getMap = () => {
+        metadataGetMapCalled = true;
+        return origGetMap();
+      };
       const error = Object.assign(new GoogleError('Detailed server failure'), {
         code: Status.INVALID_ARGUMENT,
         details: 'Field name is invalid',
-        statusDetails: [{field: 'name', description: 'must be non-empty'}],
         metadata,
         reason: 'INVALID_FIELD',
         domain: 'googleapis.com',
         errorInfoMetadata: {consumer: 'projects/123'},
       });
-
-      const details = resolveServerExceptionDetails(error);
-      assert.strictEqual(details.message, 'Field name is invalid');
-      assert.strictEqual(
-        details.stacktrace,
-        'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
-          'metadata: {"x-goog-request-id":"req-123"}',
-      );
-    });
-
-    it('formats status details and metadata in resolveServerExceptionDetails for HTTP fallback server errors', () => {
-      const error = Object.assign(new GoogleError('HTTP server error'), {
-        httpStatusCode: 400,
-        details: 'Bad HTTP Request',
-        statusDetails: 'Quota exceeded',
-        metadata: {'content-type': 'application/json'},
+      Object.defineProperty(error, 'statusDetails', {
+        get() {
+          throw new Error('statusDetails should not be read');
+        },
       });
 
       const details = resolveServerExceptionDetails(error);
-      assert.strictEqual(details.message, 'Bad HTTP Request');
-      assert.strictEqual(
-        details.stacktrace,
-        'status_details: Quota exceeded\n' +
-          'metadata: {"content-type":"application/json"}',
-      );
+      assert.deepStrictEqual(details, {message: 'Field name is invalid'});
+      assert.strictEqual(metadataGetMapCalled, false);
     });
 
-    it('encodes Buffer and Array of Buffers in metadata as base64', () => {
-      const error = Object.assign(new GoogleError('Buffer error'), {
-        metadata: {
-          'bin-key': Buffer.from('hello'),
-          'bin-array': [Buffer.from('foo'), 'bar', Buffer.from('baz')],
-          'regular-key': 'value',
-        },
-      });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"bin-key":"aGVsbG8=","bin-array":["Zm9v","bar","YmF6"],"regular-key":"value"}',
-      );
-    });
-
-    it('formats metadata safely without ReferenceError when Buffer is not defined', () => {
-      const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
-      try {
-        delete (globalThis as Record<string, unknown>).Buffer;
-        const error = Object.assign(new GoogleError('Browser error'), {
-          metadata: {
-            'content-type': 'application/json',
-            headers: ['x-goog-request-id', 'req-456'],
-          },
-        });
-        const {stacktrace} = resolveServerExceptionDetails(error);
-        assert.strictEqual(
-          stacktrace,
-          'metadata: {"content-type":"application/json","headers":["x-goog-request-id","req-456"]}',
-        );
-      } finally {
-        (globalThis as Record<string, unknown>).Buffer = originalBuffer;
-      }
-    });
-
-    it('safely formats statusDetails containing circular references', () => {
-      const detail: Record<string, unknown> = {
-        reason: 'RATE_LIMIT_EXCEEDED',
-      };
-      detail.self = detail;
-      const error = Object.assign(
-        new GoogleError('Circular statusDetails error'),
+    it('resolves server details message and falls back to e.message for HTTP fallback server errors', () => {
+      const errorWithDetails = Object.assign(
+        new GoogleError('HTTP server error'),
         {
-          statusDetails: [detail],
+          httpStatusCode: 400,
+          details: 'Bad HTTP Request',
+          statusDetails: 'Quota exceeded',
+          metadata: {'content-type': 'application/json'},
         },
       );
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'status_details: [{"reason":"RATE_LIMIT_EXCEEDED","self":"[Circular]"}]',
-      );
-    });
+      assert.deepStrictEqual(resolveServerExceptionDetails(errorWithDetails), {
+        message: 'Bad HTTP Request',
+      });
 
-    it('safely formats statusDetails containing BigInt values', () => {
-      const error = Object.assign(
-        new GoogleError('BigInt statusDetails error'),
+      const errorWithoutDetails = Object.assign(
+        new GoogleError('Fallback HTTP message'),
         {
-          statusDetails: [{retryDelayNanos: 5000000000n}],
+          httpStatusCode: 503,
+          details: '',
         },
       );
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'status_details: [{"retryDelayNanos":"5000000000"}]',
+      assert.deepStrictEqual(
+        resolveServerExceptionDetails(errorWithoutDetails),
+        {message: 'Fallback HTTP message'},
       );
     });
 
-    it('safely formats metadata containing circular references', () => {
-      const meta: Record<string, unknown> = {'x-request-id': 'req-123'};
-      meta.self = meta;
-      const error = Object.assign(new GoogleError('Circular metadata error'), {
-        metadata: meta,
+    it('resolves details across deep cause chains', () => {
+      const innerGrpcErr = Object.assign(grpcErrorWithEncodedErrorInfo(), {
+        details: 'Translation service is disabled',
       });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"x-request-id":"req-123","self":{"x-request-id":"req-123","self":"[Circular]"}}',
-      );
-    });
+      assert.strictEqual(innerGrpcErr.statusDetails, undefined);
 
-    it('safely formats metadata containing BigInt values', () => {
-      const error = Object.assign(new GoogleError('BigInt metadata error'), {
-        metadata: {'quota-consumed': 1000000000000n},
+      const deeplyWrapped = new Error('outer wrapper', {
+        cause: new Error('middle wrapper', {cause: innerGrpcErr}),
       });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"quota-consumed":"1000000000000"}',
-      );
-    });
 
-    it('safely handles non-serializable throwing properties in metadata without throwing', () => {
-      const badMeta = {
-        get bad() {
-          throw new Error('boom');
-        },
-      };
-      const error = Object.assign(new GoogleError('Throwing metadata error'), {
-        metadata: badMeta,
+      const resolved = resolveServerExceptionDetails(deeplyWrapped);
+      assert.deepStrictEqual(resolved, {
+        message: 'Translation service is disabled',
       });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(stacktrace, 'metadata: [object Object]');
+      assert.strictEqual(
+        resolveExceptionMessage(deeplyWrapped, 'grpc'),
+        'Translation service is disabled',
+      );
+      // resolveServerExceptionDetails must not eagerly decode grpc-status-details-bin either.
+      assert.strictEqual(innerGrpcErr.statusDetails, undefined);
+      assert.strictEqual(
+        resolveExceptionStacktrace(deeplyWrapped),
+        deeplyWrapped.stack,
+      );
     });
   });
 
@@ -949,6 +1405,19 @@ describe('errorUtil', () => {
       const err: Record<string, unknown> = {message: 'test'};
       err.cause = err;
       assert.strictEqual(resolveErrorInfoReason(err), undefined);
+    });
+
+    it('resolveExceptionStacktrace and resolveServerExceptionDetails terminate cleanly with circular cause', () => {
+      const noStackObj: Record<string, unknown> = {message: 'test'};
+      noStackObj.cause = noStackObj;
+      assert.strictEqual(resolveExceptionStacktrace(noStackObj), undefined);
+
+      const err = new GoogleError('circular');
+      err.cause = err;
+      assert.strictEqual(
+        resolveServerExceptionDetails(err).message,
+        'circular',
+      );
     });
 
     it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {

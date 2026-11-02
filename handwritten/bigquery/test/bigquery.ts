@@ -24,7 +24,7 @@ import * as assert from 'assert';
 import {describe, it, after, afterEach, before, beforeEach} from 'mocha';
 import * as Big from 'big.js';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as crypto from 'crypto';
 

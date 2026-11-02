@@ -23,6 +23,7 @@ import {Queue, OrderedQueue, logs} from './message-queues';
 import {Topic} from '../topic';
 import {RequestCallback, EmptyCallback} from '../pubsub';
 import {defaultOptions} from '../default-options';
+import {Duration} from '../temporal';
 import * as tracing from '../telemetry-tracing';
 
 import {FlowControl, FlowControlOptions} from './flow-control';
@@ -159,12 +160,10 @@ export class Publisher {
     allPublishes
       .then(() => allDrains)
       .then(() => {
-        this.hedgingScheduler?.clear();
         definedCallback(null);
         return undefined;
       })
       .catch(err => {
-        this.hedgingScheduler?.clear();
         definedCallback(err);
       });
   }
@@ -243,10 +242,6 @@ export class Publisher {
       }
     }
 
-    // Ensure that there's a parent span for subsequent publishes
-    // to hang off of.
-    this.getParentSpan(message, 'Publisher.publishMessage');
-
     if (
       this.hedgingOptions &&
       (this.settings.messageOrdering || message.orderingKey)
@@ -258,6 +253,10 @@ export class Publisher {
       );
       return;
     }
+
+    // Ensure that there's a parent span for subsequent publishes
+    // to hang off of.
+    this.getParentSpan(message, 'Publisher.publishMessage');
 
     if (!message.orderingKey) {
       this.queue.add(message, callback!);
@@ -343,21 +342,34 @@ export class Publisher {
       messageOrdering,
       gaxOpts,
     );
-    this.hedgingScheduler?.clear();
+    const hedgingUnchanged =
+      resolvedHedging !== undefined &&
+      this.hedgingOptions !== undefined &&
+      Duration.compare(
+        resolvedHedging.hedgeDelay,
+        this.hedgingOptions.hedgeDelay,
+      ) === 0 &&
+      resolvedHedging.maxTokens === this.hedgingOptions.maxTokens &&
+      resolvedHedging.refillRatio === this.hedgingOptions.refillRatio;
+
     this.hedgingOptions = resolvedHedging;
     if (resolvedHedging) {
-      const tokenBucket = new HedgingTokenBucket(resolvedHedging);
-      this.tokenBucket_ = tokenBucket;
-      this.hedgingScheduler = new HedgingScheduler(
-        resolvedHedging,
-        tokenBucket,
-        () => {
-          logs.publishHedged.debug(
-            'Hedging rate limited due to lack of tokens.',
-          );
-        },
-      );
+      if (!hedgingUnchanged || !this.tokenBucket_ || !this.hedgingScheduler) {
+        this.hedgingScheduler?.clear();
+        const tokenBucket = new HedgingTokenBucket(resolvedHedging);
+        this.tokenBucket_ = tokenBucket;
+        this.hedgingScheduler = new HedgingScheduler(
+          resolvedHedging,
+          tokenBucket,
+          () => {
+            logs.publishHedged.debug(
+              'Hedging rate limited due to lack of tokens.',
+            );
+          },
+        );
+      }
     } else {
+      this.hedgingScheduler?.clear();
       this.tokenBucket_ = undefined;
       this.hedgingScheduler = undefined;
     }
