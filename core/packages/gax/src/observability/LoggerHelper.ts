@@ -52,6 +52,7 @@ export interface LogPayload {
   'gcp.client.repo'?: string;
   'gcp.client.artifact'?: string;
   'gcp.client.version'?: string;
+  'gcp.client.language'?: 'node';
   'gcp.client.service'?: string;
   'url.domain'?: string;
   'server.address'?: string;

@@ -548,6 +548,7 @@ export class LocationsClient {
   close(): Promise<void> {
     this.initialize().catch(console.error);
     if (!this._terminated) {
+      // eslint-disable-next-line promise/always-return
       return this.locationsStub!.then(stub => {
         this._terminated = true;
         stub.close();
