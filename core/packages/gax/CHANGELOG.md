@@ -5,6 +5,17 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.14.0...google-gax-v6.15.0) (2026-11-02)
+
+
+### Features
+
+* **gax:** Add error attributes for error logging ([#9743](https://github.com/googleapis/google-cloud-node/issues/9743)) ([9ad830f](https://github.com/googleapis/google-cloud-node/commit/9ad830ff456b135e33e85de8a8754c10c0b19985))
+* **gax:** Add error logging for client requests ([#9756](https://github.com/googleapis/google-cloud-node/issues/9756)) ([b0f3dad](https://github.com/googleapis/google-cloud-node/commit/b0f3dad084c8f8316659b8c95cd16f03622d95b0))
+* **gax:** Add resolveExceptionStacktrace helper for exception.stacktrace ([#9744](https://github.com/googleapis/google-cloud-node/issues/9744)) ([baed8c4](https://github.com/googleapis/google-cloud-node/commit/baed8c419d05f9f7554690b9435fd143d3b3ff3f))
+* **gax:** Add resolveResponsePayload helper for response.payload ([#9745](https://github.com/googleapis/google-cloud-node/issues/9745)) ([f4da96e](https://github.com/googleapis/google-cloud-node/commit/f4da96e90e84d77adeed85ed9c11c119ab98c1b5))
+* **gax:** Support cancelling API calls via CallOptions.signal ([#9462](https://github.com/googleapis/google-cloud-node/issues/9462)) ([4e1f88f](https://github.com/googleapis/google-cloud-node/commit/4e1f88f1265595f1da1283f7310148dabcf3f8ee))
+
 ## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.13.0...google-gax-v6.14.0) (2026-10-28)
 
 

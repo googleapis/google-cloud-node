@@ -503,6 +503,7 @@ describe('createApiCall', () => {
         enableTelemetryTracing: true,
         otherArgs: {
           internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
           headers: {
             'x-goog-api-client': 'gapic/1.2.3',
           },
@@ -586,6 +587,64 @@ describe('createApiCall', () => {
       harness.assertResponseStatus({rpcStatus: 'OK'}, {span});
     });
 
+    it('uses servicePath for cloud*.googleapis.com APIs and omits url.domain and server.address when servicePath is unset', async () => {
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const kmsWithPath = gaxCreateApiCall(
+        func,
+        new gax.CallSettings({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalMethodName: 'GetKeyRing',
+            servicePath: 'cloudkms.googleapis.com',
+          },
+        }),
+      );
+      await kmsWithPath({}, undefined);
+      let spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(
+        spans[0].attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      assert.strictEqual(
+        spans[1].attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      harness.assertServerAddressAndPort(
+        {address: 'cloudkms.googleapis.com', port: 443},
+        {span: spans[0]},
+      );
+      assert.strictEqual(spans[1].attributes['gcp.client.service'], 'kms');
+
+      harness.reset();
+      const kmsWithoutPath = gaxCreateApiCall(
+        func,
+        new gax.CallSettings({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          enableTelemetryTracing: true,
+          otherArgs: {internalMethodName: 'GetKeyRing'},
+        }),
+      );
+      await kmsWithoutPath({}, undefined);
+      spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['url.domain'], undefined);
+      assert.strictEqual(spans[0].attributes['server.address'], undefined);
+      assert.strictEqual(spans[0].attributes['server.port'], undefined);
+      assert.strictEqual(spans[1].attributes['url.domain'], undefined);
+      assert.strictEqual(spans[1].attributes['server.address'], undefined);
+    });
+
     it('enables tracing purely through GOOGLE_SDK_NODE_ENABLE_TRACING and resolves static metadata dynamically at runtime', async () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       const settings = new gax.CallSettings({
@@ -645,6 +704,7 @@ describe('createApiCall', () => {
         enableTelemetryTracing: true,
         otherArgs: {
           internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
         },
       });
 
