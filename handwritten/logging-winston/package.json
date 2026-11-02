@@ -62,7 +62,6 @@
     "@types/lodash.mapvalues": "^4.6.9",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
-    "@types/proxyquire": "^1.3.31",
     "@types/triple-beam": "^1.3.5",
     "c8": "^10.1.3",
     "codecov": "^3.8.3",
@@ -75,7 +74,6 @@
     "mocha": "^11.7.5",
     "pack-n-play": "^5.3.0",
     "post-install-check": "^0.0.1",
-    "proxyquire": "^2.1.3",
     "typescript": "^5.9.3",
     "winston": "^3.18.3"
   },

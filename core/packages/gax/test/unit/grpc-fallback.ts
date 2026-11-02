@@ -360,6 +360,55 @@ describe('grpc-fallback', () => {
     }
   });
 
+  it('constructSettings should preserve GAPIC auth.defaultServicePath as canonical url.domain over emulator servicePath', () => {
+    const {
+      resolveEndpointAndDomain,
+      resolveStaticTraceContext,
+    } = require('../../src/observability/contextUtil');
+    const gapicConfig = {
+      interfaces: {
+        'google.cloud.kms.v1.KeyManagementService': {
+          retry_codes: {},
+          retry_params: {},
+          methods: {
+            GetKeyRing: {
+              timeout_millis: 60000,
+            },
+          },
+        },
+      },
+    };
+    const emulatorClient = new GrpcClient({
+      ...opts,
+      servicePath: '127.0.0.1',
+      port: 8080,
+    });
+    (emulatorClient.auth as {defaultServicePath?: string}).defaultServicePath =
+      'cloudkms.googleapis.com';
+    const settings = emulatorClient.constructSettings(
+      'google.cloud.kms.v1.KeyManagementService',
+      gapicConfig,
+      {},
+      {},
+    );
+    assert.deepStrictEqual(
+      resolveEndpointAndDomain(
+        {
+          clientName: 'KeyManagementServiceClient',
+          methodName: 'GetKeyRing',
+          rpcType: 'http',
+        },
+        resolveStaticTraceContext(settings.getKeyRing.merge()),
+        443,
+      ),
+      {
+        rawAddress: '127.0.0.1',
+        rawPort: 8080,
+        urlDomain: 'cloudkms.googleapis.com',
+      },
+    );
+  });
+
   it('should make a request', async () => {
     const requestObject = {content: 'test-content'};
     const responseType = protos.lookupType('EchoResponse');
