@@ -529,7 +529,15 @@ export function generateServiceStub(
           }
           if (response.ok && rpc.responseStream) {
             const bodyPassThrough = new PassThrough();
+            const resumeBody = () => {
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.resume();
+              }
+            };
             const tearDownBody = () => {
+              streamArrayParser.off('drain', resumeBody);
+              streamArrayParser.off('finish', tearDownBody);
+              streamArrayParser.off('close', tearDownBody);
               if (!bodyPassThrough.destroyed) {
                 bodyPassThrough.destroy();
               }
@@ -541,11 +549,13 @@ export function generateServiceStub(
                   !streamArrayParser.writableEnded &&
                   !streamArrayParser.destroyed
                 ) {
-                  if (!streamArrayParser.write(chunk)) {
+                  if (
+                    !streamArrayParser.write(chunk) &&
+                    !bodyPassThrough.destroyed
+                  ) {
                     bodyPassThrough.pause();
-                    streamArrayParser.once('drain', () =>
-                      bodyPassThrough.resume(),
-                    );
+                    streamArrayParser.off('drain', resumeBody);
+                    streamArrayParser.once('drain', resumeBody);
                   }
                 }
               },
@@ -575,6 +585,7 @@ export function generateServiceStub(
                 if (
                   err &&
                   !streamArrayParser.readableEnded &&
+                  !streamArrayParser.destroyed &&
                   (timedOut || !cancelRequested)
                 ) {
                   const callErr = _toGoogleError(err, {
@@ -589,6 +600,10 @@ export function generateServiceStub(
                   if (!streamArrayParser.errored) {
                     streamArrayParser.emit('error', callErr);
                   }
+                  streamArrayParser.destroy();
+                }
+                if (err) {
+                  tearDownBody();
                 }
               },
             );
