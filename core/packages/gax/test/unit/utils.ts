@@ -198,11 +198,18 @@ export function setMockFallbackHttpResponse(
         ((status: number) => status >= 200 && status < 300);
 
       if (!validateStatus(response.status)) {
+        // With `responseType: 'stream'`, gaxios drains the response stream into
+        // a UTF-8 string and uses it as the rejection message; on node-fetch,
+        // `GaxiosError` clears `response.data` to `undefined` because
+        // `response.bodyUsed` remains false.
+        const body = await response.text();
         throw Object.assign(
-          new Error(`Request failed with status code ${response.status}`),
+          new Error(
+            body || `Request failed with status code ${response.status}`,
+          ),
           {
             status: response.status,
-            response: {status: response.status},
+            response: {status: response.status, data: undefined},
           },
         );
       }
