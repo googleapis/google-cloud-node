@@ -37,13 +37,17 @@ const PQC_ECDH_CURVE_CANDIDATES = [
 ];
 
 export function ensurePqcCurvesConfigured() {
-  if (tls.DEFAULT_ECDH_CURVE !== 'auto') {
+  if (
+    !tls ||
+    typeof tls.createSecureContext !== 'function' ||
+    tls.DEFAULT_ECDH_CURVE !== 'auto'
+  ) {
     return;
   }
   for (const candidate of PQC_ECDH_CURVE_CANDIDATES) {
     try {
-      tls.DEFAULT_ECDH_CURVE = candidate;
       tls.createSecureContext({ecdhCurve: candidate});
+      tls.DEFAULT_ECDH_CURVE = candidate;
       return;
     } catch {
       tls.DEFAULT_ECDH_CURVE = 'auto';
