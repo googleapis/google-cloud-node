@@ -27,7 +27,10 @@ import fs, {mkdirSync, writeFileSync} from 'fs';
 import * as fsp from 'fs/promises';
 import {afterEach, describe, it, beforeEach} from 'mocha';
 
-import {protobuf} from '../../src/index';
+import {
+  ensurePqcCurvesConfigured as indexEnsurePqcCurvesConfigured,
+  protobuf,
+} from '../../src/index';
 import {
   ensurePqcCurvesConfigured,
   GoogleProtoFilesRoot,
@@ -1056,7 +1059,14 @@ dvorak
       );
     });
 
-    it('creates a valid TLS secure context supporting both X25519MLKEM768 (0x11ec) and MLKEM1024 (0x0202)', () => {
+    it('creates a valid TLS secure context supporting both X25519MLKEM768 (0x11ec) and MLKEM1024 (0x0202)', function () {
+      assert.strictEqual(
+        indexEnsurePqcCurvesConfigured,
+        ensurePqcCurvesConfigured,
+      );
+      if (!runtimeSupportsMlkem1024) {
+        this.skip();
+      }
       tls.DEFAULT_ECDH_CURVE = 'auto';
       ensurePqcCurvesConfigured();
       const defaultCtx = tls.createSecureContext({
