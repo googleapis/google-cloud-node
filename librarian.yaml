@@ -209,7 +209,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.35.0
+    version: 0.36.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -560,7 +560,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -815,7 +815,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-designcenter
-    version: 0.0.0
+    version: 0.1.0
     apis:
       - path: google/cloud/designcenter/v1
     copyright_year: "2026"
@@ -867,7 +867,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-documentai
-    version: 10.2.0
+    version: 10.3.0
     apis:
       - path: google/cloud/documentai/v1
       - path: google/cloud/documentai/v1beta3
@@ -978,7 +978,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1182,7 +1182,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1207,7 +1207,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1240,7 +1240,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
   - name: google-cloud-networkmanagement
-    version: 6.2.0
+    version: 6.3.0
     apis:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
@@ -1276,12 +1276,12 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-observability
-    version: 0.1.0
+    version: 0.1.1
     apis:
       - path: google/cloud/observability/v1
     copyright_year: "2026"
   - name: google-cloud-oracledatabase
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/oracledatabase/v1
     copyright_year: "2026"
@@ -1432,7 +1432,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.18.0
+    version: 0.19.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1610,7 +1610,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.30.0
+    version: 0.31.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1730,7 +1730,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
   - name: google-cloud-video-transcoder
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/video/transcoder/v1
     copyright_year: "2026"
@@ -2238,7 +2238,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Promotions
   - name: google-shopping-merchant-quota
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/quota/v1
       - path: google/shopping/merchant/quota/v1beta
