@@ -29,6 +29,29 @@ import objectHash from 'object-hash';
 import * as gax from './gax';
 import {setSettingsDefaultDomain} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
+import tls from 'tls';
+
+const PQC_ECDH_CURVE_CANDIDATES = [
+  'DEFAULT:MLKEM1024',
+  'X25519MLKEM768:MLKEM1024:X25519:P-256:P-384',
+];
+
+export function ensurePqcCurvesConfigured() {
+  if (tls.DEFAULT_ECDH_CURVE !== 'auto') {
+    return;
+  }
+  for (const candidate of PQC_ECDH_CURVE_CANDIDATES) {
+    try {
+      tls.DEFAULT_ECDH_CURVE = candidate;
+      tls.createSecureContext({ecdhCurve: candidate});
+      return;
+    } catch {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+    }
+  }
+}
+
+ensurePqcCurvesConfigured();
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
 

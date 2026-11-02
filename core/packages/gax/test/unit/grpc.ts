@@ -19,14 +19,17 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import assert from 'assert';
+import * as net from 'net';
 import * as path from 'path';
 import * as sinon from 'sinon';
+import tls from 'tls';
 import fs, {mkdirSync, writeFileSync} from 'fs';
 import * as fsp from 'fs/promises';
 import {afterEach, describe, it, beforeEach} from 'mocha';
 
 import {protobuf} from '../../src/index';
 import {
+  ensurePqcCurvesConfigured,
   GoogleProtoFilesRoot,
   GrpcClient,
   GrpcClientOptions,
@@ -864,6 +867,87 @@ dvorak
         /mTLS is not supported outside of googleapis.com universe domain/,
       );
       await fsp.rm(tmpFolder, {recursive: true, force: true}); // Cleanup.
+    });
+  });
+
+  describe('ensurePqcCurvesConfigured', () => {
+    const initialDefaultCurve = tls.DEFAULT_ECDH_CURVE;
+
+    afterEach(() => {
+      sinon.restore();
+      tls.DEFAULT_ECDH_CURVE = initialDefaultCurve;
+    });
+
+    it('configures tls.DEFAULT_ECDH_CURVE to include MLKEM1024 when set to auto', () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      ensurePqcCurvesConfigured();
+      assert.ok(
+        tls.DEFAULT_ECDH_CURVE.includes('MLKEM1024'),
+        `Expected tls.DEFAULT_ECDH_CURVE (${tls.DEFAULT_ECDH_CURVE}) to include MLKEM1024`,
+      );
+    });
+
+    it('preserves custom tls.DEFAULT_ECDH_CURVE values without overwriting', () => {
+      tls.DEFAULT_ECDH_CURVE = 'X25519:P-256';
+      ensurePqcCurvesConfigured();
+      assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'X25519:P-256');
+    });
+
+    it('falls back to auto when tls.createSecureContext rejects PQC curve candidates', () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      sinon.stub(tls, 'createSecureContext').throws(new Error('unsupported'));
+      ensurePqcCurvesConfigured();
+      assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'auto');
+    });
+
+    it('advertises 0x0202 (MLKEM1024) in TLS ClientHello supported_groups', async () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      ensurePqcCurvesConfigured();
+
+      const supportedGroups = await new Promise<number[]>((resolve, reject) => {
+        const server = net.createServer(socket => {
+          socket.once('data', buf => {
+            socket.destroy();
+            server.close();
+            let pos = 5 + 4 + 2 + 32;
+            pos += 1 + buf[pos];
+            pos += 2 + buf.readUInt16BE(pos);
+            pos += 1 + buf[pos];
+            const extTotalLen = buf.readUInt16BE(pos);
+            pos += 2;
+            const end = pos + extTotalLen;
+            const groups: number[] = [];
+            while (pos < end) {
+              const extType = buf.readUInt16BE(pos);
+              const extLen = buf.readUInt16BE(pos + 2);
+              pos += 4;
+              if (extType === 0x000a) {
+                const listLen = buf.readUInt16BE(pos);
+                for (let i = 0; i < listLen; i += 2) {
+                  groups.push(buf.readUInt16BE(pos + 2 + i));
+                }
+              }
+              pos += extLen;
+            }
+            resolve(groups);
+          });
+        });
+        server.on('error', reject);
+        server.listen(0, '127.0.0.1', () => {
+          const addr = server.address() as net.AddressInfo;
+          const client = tls.connect({
+            port: addr.port,
+            host: '127.0.0.1',
+            servername: 'localhost',
+          });
+          client.on('error', () => {});
+        });
+      });
+
+      assert.ok(
+        supportedGroups.includes(0x0202),
+        `Expected ClientHello supported_groups (${supportedGroups.map(g => '0x' + g.toString(16)).join(', ')}) to include 0x0202 (MLKEM1024)`,
+      );
     });
   });
 });
