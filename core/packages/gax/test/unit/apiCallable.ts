@@ -503,6 +503,7 @@ describe('createApiCall', () => {
         enableTelemetryTracing: true,
         otherArgs: {
           internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
           headers: {
             'x-goog-api-client': 'gapic/1.2.3',
           },
@@ -586,6 +587,64 @@ describe('createApiCall', () => {
       harness.assertResponseStatus({rpcStatus: 'OK'}, {span});
     });
 
+    it('uses servicePath for cloud*.googleapis.com APIs and omits url.domain and server.address when servicePath is unset', async () => {
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const kmsWithPath = gaxCreateApiCall(
+        func,
+        new gax.CallSettings({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalMethodName: 'GetKeyRing',
+            servicePath: 'cloudkms.googleapis.com',
+          },
+        }),
+      );
+      await kmsWithPath({}, undefined);
+      let spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(
+        spans[0].attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      assert.strictEqual(
+        spans[1].attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      harness.assertServerAddressAndPort(
+        {address: 'cloudkms.googleapis.com', port: 443},
+        {span: spans[0]},
+      );
+      assert.strictEqual(spans[1].attributes['gcp.client.service'], 'kms');
+
+      harness.reset();
+      const kmsWithoutPath = gaxCreateApiCall(
+        func,
+        new gax.CallSettings({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          enableTelemetryTracing: true,
+          otherArgs: {internalMethodName: 'GetKeyRing'},
+        }),
+      );
+      await kmsWithoutPath({}, undefined);
+      spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].attributes['url.domain'], undefined);
+      assert.strictEqual(spans[0].attributes['server.address'], undefined);
+      assert.strictEqual(spans[0].attributes['server.port'], undefined);
+      assert.strictEqual(spans[1].attributes['url.domain'], undefined);
+      assert.strictEqual(spans[1].attributes['server.address'], undefined);
+    });
+
     it('enables tracing purely through GOOGLE_SDK_NODE_ENABLE_TRACING and resolves static metadata dynamically at runtime', async () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       const settings = new gax.CallSettings({
@@ -645,6 +704,7 @@ describe('createApiCall', () => {
         enableTelemetryTracing: true,
         otherArgs: {
           internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
         },
       });
 
@@ -2193,6 +2253,126 @@ describe('retryable', () => {
         done(err);
       }
     });
+  });
+
+  it('runs attempt #1 once with a 0ms deadline and T4 span then stops when totalTimeoutMillis is 0', async () => {
+    const harness = new OtelHarness();
+    harness.setup();
+    const deadlines: number[] = [];
+    function func(
+      argument: {},
+      metadata: {},
+      options: {deadline?: Date},
+      callback: (err: GoogleError | null) => void,
+    ) {
+      deadlines.push(options.deadline!.getTime());
+      const error = new GoogleError('Deadline Exceeded');
+      error.code = status.DEADLINE_EXCEEDED;
+      callback(error);
+      return {cancel: () => {}};
+    }
+    try {
+      const baseSettings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        timeout: 30000,
+        retry: gax.createRetryOptions(
+          [status.DEADLINE_EXCEEDED],
+          gax.createBackoffSettings(100, 1.3, 60000, 2000, 1.5, 30000, 45000),
+        ),
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const apiCall = gaxCreateApiCall(func, baseSettings);
+      const before = Date.now();
+      await assert.rejects(
+        async () => {
+          await apiCall({}, {timeout: 0});
+        },
+        (err: GoogleError) => {
+          assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
+          assert.match(
+            err.message,
+            /Total timeout of API google\.example\.v1\.Echo exceeded 0 milliseconds/,
+          );
+          return true;
+        },
+      );
+      const after = Date.now();
+
+      // Attempt #1 ran exactly once with a 0ms per-attempt deadline (not infinite loop, not 30s).
+      assert.strictEqual(deadlines.length, 1);
+      assert(deadlines[0] >= before && deadlines[0] <= after);
+
+      const spans = harness.getSpans('google-gax');
+      const attemptSpans = spans.filter(
+        s => s.name === 'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(attemptSpans.length, 1);
+      assert.strictEqual(attemptSpans[0].status.code, SpanStatusCode.ERROR);
+    } finally {
+      harness.teardown();
+    }
+  });
+
+  it('defaults { timeout: 0, retry: null } to 30000ms deadline and does not corrupt subsequent calls', async () => {
+    const observedDeadlines: number[] = [];
+    let failZeroDeadline = true;
+    function func(
+      argument: {},
+      metadata: {},
+      options: {deadline?: Date},
+      callback: (err: GoogleError | null, resp?: unknown) => void,
+    ) {
+      const remainingMs = options.deadline!.getTime() - Date.now();
+      observedDeadlines.push(remainingMs);
+      if (failZeroDeadline && remainingMs <= 0) {
+        const err = new GoogleError('Deadline Exceeded');
+        err.code = status.DEADLINE_EXCEEDED;
+        callback(err);
+      } else {
+        callback(null, {ok: true});
+      }
+      return {cancel: () => {}};
+    }
+
+    const baseSettings = new gax.CallSettings({
+      timeout: 30000,
+      retry: gax.createRetryOptions(
+        [status.DEADLINE_EXCEEDED],
+        gax.createBackoffSettings(100, 1.3, 60000, 5000, 1.5, 30000, 45000),
+      ),
+    });
+    const apiCall = gaxCreateApiCall(func, baseSettings);
+
+    // 1. { timeout: 0, retry: null } falls back to default 30000ms deadline (e.g. proto3 default 0).
+    const [firstResp] = (await apiCall(
+      {},
+      {timeout: 0, retry: null},
+    )) as ResultTuple;
+    assert.deepStrictEqual(firstResp, {ok: true});
+    assert(observedDeadlines[0] > 29000 && observedDeadlines[0] <= 30000);
+
+    // 2. { timeout: 0 } on retrying call must not permanently overwrite baseSettings.retry.backoffSettings.
+    await assert.rejects(async () => {
+      await apiCall({}, {timeout: 0});
+    });
+
+    // 3. Subsequent default call on the same callable still gets its normal non-zero deadline and succeeds.
+    failZeroDeadline = true;
+    const [resp] = (await apiCall({}, undefined)) as ResultTuple;
+    assert.deepStrictEqual(resp, {ok: true});
+    assert(observedDeadlines[2] > 4000 && observedDeadlines[2] <= 5000);
+    assert.strictEqual(
+      baseSettings.retry!.backoffSettings.initialRpcTimeoutMillis,
+      5000,
+    );
+    assert.strictEqual(
+      baseSettings.retry!.backoffSettings.totalTimeoutMillis,
+      45000,
+    );
   });
 
   // maxRetries is unsupported, and intended for internal use only or

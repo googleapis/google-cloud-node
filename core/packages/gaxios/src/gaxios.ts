@@ -859,18 +859,17 @@ export class Gaxios implements FetchCompliance {
           return nodeStream;
         };
         const readBuffer = async () => {
-          const chunks: Buffer[] = [];
+          const chunks: Uint8Array[] = [];
+          let totalBytes = 0;
           const stream = getNodeStream();
           if (stream) {
             for await (const chunk of stream) {
-              chunks.push(
-                Buffer.isBuffer(chunk)
-                  ? chunk
-                  : Buffer.from(chunk as Uint8Array),
-              );
+              const bytes = chunk as Uint8Array;
+              totalBytes += bytes.byteLength;
+              chunks.push(bytes);
             }
           }
-          return Buffer.concat(chunks);
+          return Buffer.concat(chunks, totalBytes);
         };
         Object.defineProperty(res, 'body', {
           get() {

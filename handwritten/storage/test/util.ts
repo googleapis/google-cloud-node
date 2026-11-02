@@ -82,7 +82,7 @@ describe('util lazy imports', () => {
         assert.strictEqual(mime.getType('archive.zip'), 'application/zip');
         assert.strictEqual(
           mime.getType('unknown.nonexistentextension123'),
-          null
+          null,
         );
       });
     });
@@ -94,7 +94,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'mime' && shouldFail) {
             throw new Error('Simulated mime import failure');
@@ -108,7 +108,7 @@ describe('util lazy imports', () => {
           },
           {
             message: 'Simulated mime import failure',
-          }
+          },
         );
 
         // Verify recovery: after error is resolved, next call creates a new promise and succeeds
@@ -120,7 +120,7 @@ describe('util lazy imports', () => {
         assert.strictEqual(typeof mimeRecovered.getType, 'function');
         assert.strictEqual(
           mimeRecovered.getType('test.json'),
-          'application/json'
+          'application/json',
         );
 
         // Subsequent call should now cache and return the recovered promise
@@ -193,7 +193,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'p-limit' && shouldFail) {
             throw new Error('Simulated p-limit import failure');
@@ -207,7 +207,7 @@ describe('util lazy imports', () => {
           },
           {
             message: 'Simulated p-limit import failure',
-          }
+          },
         );
 
         // Verify recovery: after error is resolved, next call creates a new promise and succeeds

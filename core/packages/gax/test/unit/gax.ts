@@ -317,42 +317,86 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
-  it('ignores client option when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_LOGGING=true', () => {
+  it('enables logging when enableTelemetryLogging is unset and GOOGLE_SDK_NODE_LOGGING matches the service namespace or wildcard', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      undefined,
-      undefined,
-      false,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryLogging, true);
-    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
-    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
-    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+    for (const envValue of ['true', '*', 'all', 'auth,interface']) {
+      process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+      );
+      const settings = defaults.bundlingMethod;
+      assert.strictEqual(settings.enableTelemetryLogging, true);
+      assert.strictEqual(
+        settings.otherArgs.internalMethodName,
+        'BundlingMethod',
+      );
+      assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+      assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+
+      const suppressedDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        false,
+      );
+      const suppressedSettings = suppressedDefaults.bundlingMethod;
+      assert.strictEqual(suppressedSettings.enableTelemetryLogging, false);
+      assert.strictEqual(
+        suppressedSettings.otherArgs.internalMethodName,
+        undefined,
+      );
+    }
   });
 
-  it('disables logging when GOOGLE_SDK_NODE_LOGGING=false even with client option', () => {
+  it('preserves enableTelemetryLogging=true when GOOGLE_SDK_NODE_LOGGING targets another namespace or is false', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_LOGGING = 'false';
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      undefined,
-      undefined,
-      true,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryLogging, false);
-    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+    for (const envValue of ['auth,storage', 'false']) {
+      process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+      const enabledDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        true,
+      );
+      const enabledSettings = enabledDefaults.bundlingMethod;
+      assert.strictEqual(enabledSettings.enableTelemetryLogging, true);
+      assert.strictEqual(
+        enabledSettings.otherArgs.internalMethodName,
+        'BundlingMethod',
+      );
+      assert.strictEqual(
+        enabledSettings.otherArgs.enableTelemetryLogging,
+        true,
+      );
+
+      const unsetDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+      );
+      const unsetSettings = unsetDefaults.bundlingMethod;
+      assert.strictEqual(unsetSettings.enableTelemetryLogging, undefined);
+      assert.strictEqual(unsetSettings.otherArgs.internalMethodName, undefined);
+    }
   });
 
   describe('CallSettings telemetry fields', () => {
@@ -396,6 +440,107 @@ describe('gax construct settings', () => {
       const mergedEmpty = settings.merge({});
       assert.strictEqual(mergedEmpty.enableTelemetryTracing, true);
       assert.strictEqual(mergedEmpty.enableTelemetryLogging, true);
+    });
+  });
+
+  describe('CallSettings timeout and backoffSettings isolation', () => {
+    it('defaults timeout: 0 and undefined to 30000ms', () => {
+      assert.strictEqual(new gax.CallSettings({timeout: 0}).timeout, 30000);
+      assert.strictEqual(new gax.CallSettings().timeout, 30000);
+      assert.strictEqual(
+        new gax.CallSettings({timeout: undefined}).timeout,
+        30000,
+      );
+    });
+
+    it('defaults timeout to 30000ms when merging { timeout: 0, retry: null }', () => {
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+      );
+      const merged = defaults.bundlingMethod.merge({timeout: 0, retry: null});
+      assert.strictEqual(merged.timeout, 30000);
+      assert.strictEqual(merged.retry, null);
+    });
+
+    it('shares retry references on no-op merge and clones copy-on-write on mutation', () => {
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+      );
+      const baseSettings: gax.CallSettings = defaults.bundlingMethod;
+      const originalBackoffSnapshot = {...baseSettings.retry!.backoffSettings};
+
+      // Copy-on-write: merging undefined/null options must not allocate a clone.
+      const mergedUndefined = baseSettings.merge(undefined);
+      assert.strictEqual(mergedUndefined.retry, baseSettings.retry);
+      const mergedNull = baseSettings.merge(null);
+      assert.strictEqual(mergedNull.retry, baseSettings.retry);
+
+      // Merging non-timeout options when backoff timeouts already match timeout also skips cloning.
+      const syncedSettings = baseSettings.merge({});
+      const mergedOtherArgs = syncedSettings.merge({otherArgs: {foo: 'bar'}});
+      assert.strictEqual(mergedOtherArgs.retry, syncedSettings.retry);
+
+      // Per-call timeout override clones copy-on-write without mutating baseSettings.
+      const mergedZeroTimeout = baseSettings.merge({timeout: 0});
+      assert.strictEqual(mergedZeroTimeout.timeout, 30000);
+      assert.notStrictEqual(mergedZeroTimeout.retry, baseSettings.retry);
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.initialRpcTimeoutMillis,
+        0,
+      );
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.maxRpcTimeoutMillis,
+        0,
+      );
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.totalTimeoutMillis,
+        0,
+      );
+
+      // Mutating via per-call maxRetries also clones copy-on-write and leaves defaults untouched.
+      const mergedMaxRetries = baseSettings.merge({maxRetries: 3});
+      assert.notStrictEqual(mergedMaxRetries.retry, baseSettings.retry);
+      assert.strictEqual(mergedMaxRetries.retry!.backoffSettings.maxRetries, 3);
+      assert.strictEqual(
+        mergedMaxRetries.retry!.backoffSettings.totalTimeoutMillis,
+        undefined,
+      );
+
+      // Passing caller-owned backoffSettings alongside maxRetries does not mutate caller object either.
+      const callerBackoff = gax.createBackoffSettings(
+        50,
+        1.5,
+        5000,
+        500,
+        1.5,
+        5000,
+        20000,
+      );
+      const callerBackoffSnapshot = {...callerBackoff};
+      const mergedCallerRetry = baseSettings.merge({
+        retry: {backoffSettings: callerBackoff},
+        maxRetries: 4,
+      });
+      assert.strictEqual(
+        mergedCallerRetry.retry!.backoffSettings.maxRetries,
+        4,
+      );
+      assert.strictEqual(
+        mergedCallerRetry.retry!.backoffSettings.totalTimeoutMillis,
+        undefined,
+      );
+      assert.deepStrictEqual(callerBackoff, callerBackoffSnapshot);
+
+      assert.deepStrictEqual(
+        baseSettings.retry!.backoffSettings,
+        originalBackoffSnapshot,
+      );
     });
   });
 });

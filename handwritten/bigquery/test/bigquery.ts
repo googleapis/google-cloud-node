@@ -24,7 +24,7 @@ import * as assert from 'assert';
 import {describe, it, after, afterEach, before, beforeEach} from 'mocha';
 import * as Big from 'big.js';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as crypto from 'crypto';
 
@@ -1601,6 +1601,44 @@ describe('BigQuery', () => {
           },
         ],
       });
+    });
+
+    it('should return correct type for TIMESTAMP(12) by default', () => {
+      const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      try {
+        const type =
+          BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
+
+        assert.deepStrictEqual(type, {
+          type: 'TIMESTAMP',
+          timestampPrecision: '12',
+        });
+      } finally {
+        if (originalValue === undefined) {
+          delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+        } else {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
+        }
+      }
+    });
+
+    it('should throw for TIMESTAMP(12) when BIGQUERY_PICOSECOND_SUPPORT is false', () => {
+      const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      try {
+        for (const val of ['false', 'FALSE', 'False']) {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = val;
+          assert.throws(() => {
+            BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
+          }, /Invalid type provided: "TIMESTAMP\(12\)"/);
+        }
+      } finally {
+        if (originalValue === undefined) {
+          delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+        } else {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
+        }
+      }
     });
 
     it('should throw for invalid provided type', () => {
@@ -3503,7 +3541,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }
@@ -3577,7 +3615,9 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
-          if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+          if (
+            process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false'
+          ) {
             return;
           }
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
@@ -3616,7 +3656,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }
