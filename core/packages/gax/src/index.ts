@@ -66,6 +66,7 @@ export {GoogleError} from './googleError';
 export {
   ClientStub,
   ClientStubOptions,
+  ensurePqcCurvesConfigured,
   GoogleProtoFilesRoot,
   GrpcClient,
   GrpcClientOptions,
