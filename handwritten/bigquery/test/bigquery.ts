@@ -1615,7 +1615,9 @@ describe('BigQuery', () => {
           timestampPrecision: '12',
         });
       } finally {
-        if (originalValue !== undefined) {
+        if (originalValue === undefined) {
+          delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+        } else {
           process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
         }
       }
@@ -1623,11 +1625,13 @@ describe('BigQuery', () => {
 
     it('should throw for TIMESTAMP(12) when BIGQUERY_PICOSECOND_SUPPORT is false', () => {
       const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
-      process.env.BIGQUERY_PICOSECOND_SUPPORT = 'false';
       try {
-        assert.throws(() => {
-          BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
-        }, /Invalid type provided: "TIMESTAMP\(12\)"/);
+        for (const val of ['false', 'FALSE', 'False']) {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = val;
+          assert.throws(() => {
+            BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
+          }, /Invalid type provided: "TIMESTAMP\(12\)"/);
+        }
       } finally {
         if (originalValue === undefined) {
           delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
@@ -3537,7 +3541,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }
@@ -3611,7 +3615,9 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
-          if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'false') {
+          if (
+            process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false'
+          ) {
             return;
           }
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
@@ -3650,7 +3656,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }

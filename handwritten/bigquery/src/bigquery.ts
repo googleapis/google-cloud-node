@@ -1176,7 +1176,7 @@ export class BigQuery extends Service {
         }),
       };
     } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
-      if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false') {
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false') {
         return {
           type: 'TIMESTAMP',
           timestampPrecision: '12',
@@ -2448,7 +2448,7 @@ export class BigQuery extends Service {
       : {
           useInt64Timestamp: true,
         };
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false') {
       defaultOpts = hasAnyFormatOpts
         ? {}
         : {
