@@ -26,7 +26,7 @@ import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import mime from 'mime';
 import pLimit from 'p-limit';
 import * as path from 'path';
-import proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 import * as stream from 'stream';
 import {Bucket, Channel, Notification, CRC32C} from '../src/index.js';
