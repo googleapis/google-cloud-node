@@ -1238,6 +1238,48 @@ describe('grpc-fallback', () => {
         `a completed stream reported: ${reported.join(', ')}`,
       );
     });
+
+    it('should translate pipeline callback errors into GoogleError without duplicate stream error emission', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const received: {}[] = [];
+      const callbackErrors: Error[] = [];
+      const streamErrors: Error[] = [];
+      const parser = echoStub.expand(
+        {content: 'test'},
+        {},
+        {},
+        (err?: Error) => {
+          if (err) {
+            callbackErrors.push(err);
+          }
+        },
+      ) as StreamArrayParser;
+      const firstChunk = new Promise<void>(resolve => {
+        parser.once('data', () => resolve());
+      });
+      const streamClosed = new Promise<void>(resolve => {
+        parser.once('close', () => setImmediate(resolve));
+      });
+      parser.on('data', d => received.push(d));
+      parser.on('error', err => streamErrors.push(err as Error));
+
+      await firstChunk;
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+      body.destroy(
+        Object.assign(new Error('socket hang up'), {code: 'ECONNRESET'}),
+      );
+      await streamClosed;
+
+      assert.strictEqual(callbackErrors.length, 1);
+      assert(callbackErrors[0] instanceof GoogleError);
+      assert.strictEqual(
+        (callbackErrors[0] as GoogleError).code,
+        Status.UNAVAILABLE,
+      );
+      assert.strictEqual(streamErrors.length, 1);
+    });
   });
 
   describe('transport error translation', () => {
