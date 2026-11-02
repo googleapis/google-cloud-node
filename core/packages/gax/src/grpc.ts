@@ -224,6 +224,7 @@ export class GrpcClient {
    * @constructor
    */
   constructor(options: GrpcClientOptions = {}) {
+    ensurePqcCurvesConfigured();
     this.auth = options.auth || new GoogleAuth(options);
     this.fallback = false;
     this._servicePath = options.servicePath || options.apiEndpoint;

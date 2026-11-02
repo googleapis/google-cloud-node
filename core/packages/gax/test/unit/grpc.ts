@@ -929,6 +929,16 @@ dvorak
       assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'auto');
     });
 
+    it('re-applies PQC curves when instantiating GrpcClient if reset to auto', () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      const client = gaxGrpc();
+      assert.ok(client);
+      assert.ok(
+        tls.DEFAULT_ECDH_CURVE.includes('MLKEM1024'),
+        `Expected GrpcClient constructor to configure MLKEM1024, got ${tls.DEFAULT_ECDH_CURVE}`,
+      );
+    });
+
     it('advertises 0x0202 (MLKEM1024) in TLS ClientHello supported_groups', async function () {
       if (!runtimeSupportsMlkem1024) {
         this.skip();
