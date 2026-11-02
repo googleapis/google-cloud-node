@@ -27,7 +27,7 @@ import {defaultToObjectOptions} from './fallback';
 import {GoogleError} from './googleError';
 import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
-import {pipeline, PipelineSource} from 'stream';
+import {PassThrough, pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
 
@@ -528,9 +528,41 @@ export function generateServiceStub(
             response204Ok = true;
           }
           if (response.ok && rpc.responseStream) {
+            const bodyPassThrough = new PassThrough();
+            const tearDownBody = () => {
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.destroy();
+              }
+            };
+            bodyPassThrough.on(
+              'data',
+              (chunk: Buffer | Uint8Array | string) => {
+                if (
+                  !streamArrayParser.writableEnded &&
+                  !streamArrayParser.destroyed
+                ) {
+                  if (!streamArrayParser.write(chunk)) {
+                    bodyPassThrough.pause();
+                    streamArrayParser.once('drain', () =>
+                      bodyPassThrough.resume(),
+                    );
+                  }
+                }
+              },
+            );
+            bodyPassThrough.on('end', () => {
+              if (
+                !streamArrayParser.writableEnded &&
+                !streamArrayParser.destroyed
+              ) {
+                streamArrayParser.end();
+              }
+            });
+            streamArrayParser.once('finish', tearDownBody);
+            streamArrayParser.once('close', tearDownBody);
             pipeline(
               response.body as PipelineSource<unknown>,
-              streamArrayParser,
+              bodyPassThrough,
               (err: unknown) => {
                 // A caller that cancelled has already torn this stream down
                 // and is not waiting to be told about the consequences. The
