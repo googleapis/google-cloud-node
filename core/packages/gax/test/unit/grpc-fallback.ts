@@ -1239,6 +1239,49 @@ describe('grpc-fallback', () => {
       );
     });
 
+    it('should translate pipeline callback errors into GoogleError without duplicate stream error emission', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const received: {}[] = [];
+      const callbackErrors: Error[] = [];
+      const streamErrors: Error[] = [];
+      const parser = echoStub.expand(
+        {content: 'test'},
+        {},
+        {},
+        (err?: Error) => {
+          if (err) {
+            callbackErrors.push(err);
+          }
+        },
+      ) as StreamArrayParser;
+      const firstChunk = new Promise<void>(resolve => {
+        parser.once('data', () => resolve());
+      });
+      const streamClosed = new Promise<void>(resolve => {
+        parser.once('close', () => setImmediate(resolve));
+      });
+      parser.on('data', d => received.push(d));
+      parser.on('error', err => streamErrors.push(err as Error));
+
+      await firstChunk;
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+      body.destroy(
+        Object.assign(new Error('socket hang up'), {code: 'ECONNRESET'}),
+      );
+      await streamClosed;
+
+      assert.strictEqual(callbackErrors.length, 1);
+      assert(callbackErrors[0] instanceof GoogleError);
+      assert.strictEqual(
+        (callbackErrors[0] as GoogleError).code,
+        Status.UNAVAILABLE,
+      );
+      assert.strictEqual(streamErrors.length, 1);
+      assert.strictEqual(streamErrors[0], callbackErrors[0]);
+    });
+
     it('should tear down the response body without a secondary error when the parser errors mid-stream', async () => {
       const body = openNodeStream();
       const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
@@ -1248,16 +1291,22 @@ describe('grpc-fallback', () => {
       const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
         reported.push(`callback:${err?.message}`),
       ) as StreamArrayParser;
+      const firstChunk = new Promise<void>(resolve => {
+        parser.once('data', () => resolve());
+      });
+      const bodyClosed = new Promise<void>(resolve => {
+        body.once('close', () => setImmediate(resolve));
+      });
       parser.on('data', d => received.push(d));
       parser.on('error', err =>
         reported.push(`error:${(err as Error).message}`),
       );
 
-      await new Promise<void>(resolve => setTimeout(resolve, 50));
+      await firstChunk;
       assert.deepStrictEqual(received, [{content: 'one'}]);
 
       body.push(',{invalid}');
-      await new Promise<void>(resolve => setTimeout(resolve, 100));
+      await bodyClosed;
 
       assert.strictEqual(body.destroyed, true);
       assert.strictEqual(
@@ -1437,15 +1486,14 @@ describe('grpc-fallback', () => {
       const prevLowerNoProxy = process.env.no_proxy;
       process.env.NO_PROXY = '127.0.0.1,localhost';
       process.env.no_proxy = '127.0.0.1,localhost';
+      let activeResponse: import('http').ServerResponse | undefined;
       const server = http.createServer((_req, res) => {
+        activeResponse = res;
         res.writeHead(200, {
           'Content-Type': 'application/json',
           'Transfer-Encoding': 'chunked',
         });
         res.write('[{"content":"one"},');
-        setTimeout(() => {
-          res.socket?.destroy();
-        }, 20);
       });
       await new Promise<void>(resolve =>
         server.listen(0, '127.0.0.1', resolve),
@@ -1474,13 +1522,17 @@ describe('grpc-fallback', () => {
             }
           },
         ) as StreamArrayParser;
-        parser.on('data', (chunk: {content?: string}) => received.push(chunk));
-        await new Promise<void>(resolve => {
-          parser.on('error', (err: GoogleError) => {
-            streamErrors.push(err);
-            setTimeout(resolve, 30);
-          });
+        const streamClosed = new Promise<void>(resolve => {
+          parser.once('close', () => setImmediate(resolve));
         });
+        parser.on('data', (chunk: {content?: string}) => {
+          received.push(chunk);
+          activeResponse?.socket?.destroy();
+        });
+        parser.on('error', (err: GoogleError) => {
+          streamErrors.push(err);
+        });
+        await streamClosed;
 
         assert.deepStrictEqual(received, [{content: 'one'}]);
         assert.strictEqual(streamErrors.length, 1);

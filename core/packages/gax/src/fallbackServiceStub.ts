@@ -533,7 +533,20 @@ export function generateServiceStub(
             // runtime-specific error before _toGoogleError translates it.
             const bodyPassThrough = new PassThrough();
             let parserErrored = false;
+            const resumeBody = () => {
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.resume();
+              }
+            };
+            const onParserError = () => {
+              parserErrored = true;
+              tearDownBody();
+            };
             const tearDownBody = () => {
+              streamArrayParser.off('drain', resumeBody);
+              streamArrayParser.off('error', onParserError);
+              streamArrayParser.off('finish', tearDownBody);
+              streamArrayParser.off('close', tearDownBody);
               if (!bodyPassThrough.destroyed) {
                 bodyPassThrough.destroy();
               }
@@ -542,30 +555,32 @@ export function generateServiceStub(
               'data',
               (chunk: Buffer | Uint8Array | string) => {
                 if (
+                  !parserErrored &&
                   !streamArrayParser.writableEnded &&
                   !streamArrayParser.destroyed
                 ) {
-                  if (!streamArrayParser.write(chunk)) {
+                  if (
+                    !streamArrayParser.write(chunk) &&
+                    !parserErrored &&
+                    !bodyPassThrough.destroyed
+                  ) {
                     bodyPassThrough.pause();
-                    streamArrayParser.once('drain', () =>
-                      bodyPassThrough.resume(),
-                    );
+                    streamArrayParser.off('drain', resumeBody);
+                    streamArrayParser.once('drain', resumeBody);
                   }
                 }
               },
             );
             bodyPassThrough.on('end', () => {
               if (
+                !parserErrored &&
                 !streamArrayParser.writableEnded &&
                 !streamArrayParser.destroyed
               ) {
                 streamArrayParser.end();
               }
             });
-            streamArrayParser.once('error', () => {
-              parserErrored = true;
-              tearDownBody();
-            });
+            streamArrayParser.once('error', onParserError);
             streamArrayParser.once('finish', tearDownBody);
             streamArrayParser.once('close', tearDownBody);
             if (streamArrayParser.destroyed) {
@@ -587,6 +602,7 @@ export function generateServiceStub(
                   err &&
                   !parserErrored &&
                   !streamArrayParser.readableEnded &&
+                  !streamArrayParser.destroyed &&
                   (timedOut || !cancelRequested)
                 ) {
                   const callErr = _toGoogleError(err, {
@@ -598,7 +614,13 @@ export function generateServiceStub(
                   if (callback) {
                     callback(callErr);
                   }
-                  streamArrayParser.emit('error', callErr);
+                  if (!streamArrayParser.errored) {
+                    streamArrayParser.emit('error', callErr);
+                  }
+                  streamArrayParser.destroy();
+                }
+                if (err) {
+                  tearDownBody();
                 }
               },
             );
