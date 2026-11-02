@@ -1393,9 +1393,9 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = sinon.spy(gunzipStream, 'destroy');
-          const pipelineSpy = sinon.spy();
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
+          const pipelineSpy = spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1426,8 +1426,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is closed', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
-          const pipelineSpy = sinon.spy();
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const pipelineSpy = spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1458,8 +1458,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is already writableEnded', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
-          const pipelineSpy = sinon.spy();
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const pipelineSpy = spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1495,8 +1495,8 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = sinon.spy(gunzipStream, 'destroy');
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
 
           pipelineOverride = (...args: unknown[]) => {
             const onComplete = args[args.length - 1] as (
