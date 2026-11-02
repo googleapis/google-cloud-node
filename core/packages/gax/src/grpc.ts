@@ -47,6 +47,8 @@ const PQC_ECDH_CURVE_CANDIDATES: readonly string[] = [
  * addition to the runtime's default TLS groups when `tls.DEFAULT_ECDH_CURVE`
  * is still set to `'auto'`. Custom caller-configured curves are preserved, and
  * runtimes without `MLKEM1024` support safely fall back to `'auto'`.
+ *
+ * @internal
  */
 export function ensurePqcCurvesConfigured(): void {
   if (
