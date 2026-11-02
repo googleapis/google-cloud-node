@@ -5,6 +5,60 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "7dfae1d22e48b3b7d525c765f22d99b6fad0a4e8",
+          "message": "Enable picosecond support feature flag by default",
+          "issues": [
+            "9789"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "f56eba6f-203d-40ca-8327-3237fbaceb36",
+      "createTime": "2026-11-02T19:39:11.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "080f79057ce82351618c2032e73f2f722b0d3564",
+          "message": "Strip -fips suffix from AWS service name in SigV4 signing",
+          "issues": [
+            "9779"
+          ],
+          "scope": "google-auth-library"
+        }
+      ],
+      "version": "11.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "a1e75537-5ac3-440c-9cdc-1e62bea18f8d",
+      "createTime": "2026-11-02T19:39:11.241Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "13335708924947c4532b05c7a4a5928a3c143223",
+          "message": "Add error logging for low level network attempts",
+          "issues": [
+            "9757"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "935522d2-fa72-4637-b9e9-d148bdbe1cbc",
+      "createTime": "2026-11-02T19:39:11.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -107266,5 +107320,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-02T16:07:57.254Z"
+  "updateTime": "2026-11-02T19:39:11.278Z"
 }
