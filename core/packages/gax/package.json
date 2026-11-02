@@ -1,6 +1,6 @@
 {
   "name": "google-gax",
-  "version": "6.14.0",
+  "version": "6.15.0",
   "description": "Google API Extensions",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -30,7 +30,6 @@
     "@types/ncp": "^2.0.8",
     "@types/node": "^24.0.0",
     "@types/object-hash": "^3.0.6",
-    "@types/proxyquire": "^1.3.31",
     "@types/pumpify": "^1.4.4",
     "@types/sinon": "^21.0.0",
     "@types/uglify-js": "^3.17.5",
@@ -50,7 +49,6 @@
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
     "null-loader": "^4.0.1",
-    "proxyquire": "^2.1.3",
     "pumpify": "^2.0.1",
     "sinon": "21.0.3",
     "stream-events": "^1.0.5",
