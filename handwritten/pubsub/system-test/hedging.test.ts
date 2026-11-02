@@ -16,6 +16,7 @@ import * as assert from 'assert';
 import {describe, it, before, after} from 'mocha';
 import {TestResources} from 'google-test-utils';
 import * as gax from 'google-gax';
+import {trace} from '@opentelemetry/api';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {
   SimpleSpanProcessor,
@@ -29,13 +30,29 @@ import {
   Subscription,
   Topic,
 } from '../src';
-import {RequestCallback, RequestConfig} from '../src/pubsub';
+import {google} from '../protos/protos';
 import * as tracing from '../src/telemetry-tracing';
 import {waitForMessages} from './common';
 
 interface TopicWithSubscription {
   readonly topic: Topic;
   readonly subscription: Subscription;
+}
+
+type GrpcPublishCallback = (
+  err: gax.grpc.ServiceError | null,
+  response?: google.pubsub.v1.IPublishResponse,
+) => void;
+
+type GrpcPublishFn = (
+  argument: google.pubsub.v1.IPublishRequest,
+  metadata: gax.grpc.Metadata,
+  options: gax.CallOptions,
+  callback: GrpcPublishCallback,
+) => {cancel: () => void};
+
+interface PublisherGrpcStub {
+  publish: GrpcPublishFn;
 }
 
 function createCancelledError(): gax.grpc.ServiceError {
@@ -46,6 +63,55 @@ function createCancelledError(): gax.grpc.ServiceError {
   };
   const err = new Error(statusObject.details);
   return Object.assign(err, statusObject) as gax.grpc.ServiceError;
+}
+
+async function getPublisherStub(
+  targetPubSub: PubSub,
+): Promise<PublisherGrpcStub> {
+  const client = await targetPubSub.getClientAsync_({
+    client: 'PublisherClient',
+  });
+  return (
+    client as unknown as {initialize(): Promise<PublisherGrpcStub>}
+  ).initialize();
+}
+
+function decodeTelemetryMetadata(
+  metadata: gax.grpc.Metadata,
+): google.pubsub.v1.PubsubClientTelemetry | undefined {
+  const values = metadata.get('x-goog-pubsub-client-telemetry');
+  const b64 = values[0];
+  if (typeof b64 !== 'string' || !b64) {
+    return undefined;
+  }
+  return google.pubsub.v1.PubsubClientTelemetry.decode(
+    Buffer.from(b64, 'base64'),
+  );
+}
+
+async function warmUpTokenBucket(
+  topic: Topic,
+  count = 5,
+  prefix = 'warmup',
+): Promise<void> {
+  for (let i = 0; i < count; i++) {
+    await topic.publishMessage({data: Buffer.from(`${prefix}-${i}`)});
+  }
+}
+
+async function waitForCondition(
+  predicate: () => boolean,
+  timeoutMs = 5000,
+  intervalMs = 25,
+): Promise<boolean> {
+  const start = Date.now();
+  while (!predicate()) {
+    if (Date.now() - start > timeoutMs) {
+      return false;
+    }
+    await new Promise(resolve => setTimeout(resolve, intervalMs));
+  }
+  return true;
 }
 
 describe('Publish Hedging System Tests', () => {
@@ -178,6 +244,14 @@ describe('Publish Hedging System Tests', () => {
 
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 1.0);
 
+    topic.setPublishOptions({
+      batching: {maxMessages: 1},
+      hedging: {
+        enabled: false,
+      },
+    });
+    assert.strictEqual(topic.publisher.tokenBucket, undefined);
+
     const received = await waitForMessages(subscription, {
       count: 6,
       timeoutMs: 20000,
@@ -202,39 +276,45 @@ describe('Publish Hedging System Tests', () => {
     );
 
     // Warm up token bucket to 1.0 token using real live Pub/Sub calls
-    for (let i = 0; i < 5; i++) {
-      await topic.publishMessage({data: Buffer.from(`warmup-${i}`)});
-    }
+    await warmUpTokenBucket(topic, 5, 'warmup');
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 1.0);
 
-    const originalRequest = topic.request.bind(topic);
-    let primarySignal: AbortSignal | undefined;
+    const stub = await getPublisherStub(pubsub);
+    const originalPublish = stub.publish.bind(stub);
+    let primaryCancelledByGax = false;
     let hedgedAttemptSent = false;
+    let hedgedTelemetry: google.pubsub.v1.PubsubClientTelemetry | undefined;
     let stalledPrimaryIntercepted = false;
+    let stallTimer: NodeJS.Timeout | undefined;
 
-    topic.request = <T, R = void>(
-      config: RequestConfig,
-      callback: RequestCallback<T, R>,
-    ) => {
-      if (config.method === 'publish' && !stalledPrimaryIntercepted) {
+    stub.publish = (argument, metadata, options, callback) => {
+      const telemetry = decodeTelemetryMetadata(metadata);
+      const attemptCount =
+        telemetry?.publishOperation?.hedgedAttemptCount ?? 0;
+
+      if (attemptCount === 0 && !stalledPrimaryIntercepted) {
         stalledPrimaryIntercepted = true;
-        primarySignal = config.gaxOpts?.signal;
-        const abortHandler = () => {
-          clearTimeout(stallTimer);
-          callback(createCancelledError());
+        stallTimer = setTimeout(() => {
+          stallTimer = undefined;
+          originalPublish(argument, metadata, options, callback);
+        }, 20000);
+        return {
+          cancel: () => {
+            primaryCancelledByGax = true;
+            if (stallTimer) {
+              clearTimeout(stallTimer);
+              stallTimer = undefined;
+            }
+            callback(createCancelledError());
+          },
         };
-        const stallTimer = setTimeout(() => {
-          primarySignal?.removeEventListener('abort', abortHandler);
-          originalRequest(config, callback);
-        }, 2500);
-        primarySignal?.addEventListener('abort', abortHandler, {once: true});
-        return;
       }
 
-      if (config.method === 'publish' && config.gaxOpts?.retry === null) {
+      if (attemptCount > 0) {
         hedgedAttemptSent = true;
+        hedgedTelemetry = telemetry;
       }
-      originalRequest(config, callback);
+      return originalPublish(argument, metadata, options, callback);
     };
 
     try {
@@ -244,7 +324,20 @@ describe('Publish Hedging System Tests', () => {
       });
       assert.ok(messageId);
       assert.strictEqual(hedgedAttemptSent, true);
-      assert.strictEqual(primarySignal?.aborted, true);
+      assert.strictEqual(
+        await waitForCondition(() => primaryCancelledByGax),
+        true,
+        'Expected stalled primary attempt to be cancelled by GAX',
+      );
+      assert.strictEqual(
+        hedgedTelemetry?.publishOperation?.hedgedAttemptCount,
+        1,
+      );
+      assert.ok(
+        Number(
+          hedgedTelemetry?.publishOperation?.publishStartTime?.seconds ?? 0,
+        ) > 0,
+      );
       // 1.0 token consumed (-1.0) and refilled (+0.2) on completion => 0.2
       assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0.2);
 
@@ -257,7 +350,10 @@ describe('Publish Hedging System Tests', () => {
       const payloads = received.map(m => m.data.toString());
       assert.ok(payloads.includes(hedgedPayload));
     } finally {
-      topic.request = originalRequest;
+      if (stallTimer) {
+        clearTimeout(stallTimer);
+      }
+      stub.publish = originalPublish;
     }
   });
 
@@ -274,43 +370,60 @@ describe('Publish Hedging System Tests', () => {
       },
     );
 
-    for (let i = 0; i < 5; i++) {
-      await topic.publishMessage({data: Buffer.from(`warmup-primary-${i}`)});
-    }
+    await warmUpTokenBucket(topic, 5, 'warmup-primary');
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 1.0);
 
-    const originalRequest = topic.request.bind(topic);
-    let hedgedSignal: AbortSignal | undefined;
+    const stub = await getPublisherStub(pubsub);
+    const originalPublish = stub.publish.bind(stub);
+    let hedgedCancelledByGax = false;
     let delayedPrimaryIntercepted = false;
+    let primaryDelayTimer: NodeJS.Timeout | undefined;
+    let hedgedTimer: NodeJS.Timeout | undefined;
 
-    topic.request = <T, R = void>(
-      config: RequestConfig,
-      callback: RequestCallback<T, R>,
-    ) => {
-      if (config.method === 'publish' && !delayedPrimaryIntercepted) {
+    stub.publish = (argument, metadata, options, callback) => {
+      const telemetry = decodeTelemetryMetadata(metadata);
+      const attemptCount =
+        telemetry?.publishOperation?.hedgedAttemptCount ?? 0;
+
+      if (attemptCount === 0 && !delayedPrimaryIntercepted) {
         delayedPrimaryIntercepted = true;
+        let innerCall: {cancel: () => void} | undefined;
         // Delay primary by 250ms (> 150ms hedgeDelay) before forwarding to live Pub/Sub
-        setTimeout(() => {
-          originalRequest(config, callback);
+        primaryDelayTimer = setTimeout(() => {
+          primaryDelayTimer = undefined;
+          innerCall = originalPublish(argument, metadata, options, callback);
         }, 250);
-        return;
-      }
-
-      if (config.method === 'publish' && config.gaxOpts?.retry === null) {
-        hedgedSignal = config.gaxOpts?.signal;
-        const abortHandler = () => {
-          clearTimeout(hedgedTimer);
-          callback(createCancelledError());
+        return {
+          cancel: () => {
+            if (primaryDelayTimer) {
+              clearTimeout(primaryDelayTimer);
+              primaryDelayTimer = undefined;
+              callback(createCancelledError());
+            } else {
+              innerCall?.cancel();
+            }
+          },
         };
-        const hedgedTimer = setTimeout(() => {
-          hedgedSignal?.removeEventListener('abort', abortHandler);
-          originalRequest(config, callback);
-        }, 2500);
-        hedgedSignal?.addEventListener('abort', abortHandler, {once: true});
-        return;
       }
 
-      originalRequest(config, callback);
+      if (attemptCount > 0) {
+        hedgedTimer = setTimeout(() => {
+          hedgedTimer = undefined;
+          originalPublish(argument, metadata, options, callback);
+        }, 20000);
+        return {
+          cancel: () => {
+            hedgedCancelledByGax = true;
+            if (hedgedTimer) {
+              clearTimeout(hedgedTimer);
+              hedgedTimer = undefined;
+            }
+            callback(createCancelledError());
+          },
+        };
+      }
+
+      return originalPublish(argument, metadata, options, callback);
     };
 
     try {
@@ -319,7 +432,11 @@ describe('Publish Hedging System Tests', () => {
         data: Buffer.from(payload),
       });
       assert.ok(messageId);
-      assert.strictEqual(hedgedSignal?.aborted, true);
+      assert.strictEqual(
+        await waitForCondition(() => hedgedCancelledByGax),
+        true,
+        'Expected in-flight hedged attempt to be cancelled by GAX',
+      );
       assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0.2);
 
       const received = await waitForMessages(subscription, {
@@ -331,7 +448,13 @@ describe('Publish Hedging System Tests', () => {
       const payloads = received.map(m => m.data.toString());
       assert.ok(payloads.includes(payload));
     } finally {
-      topic.request = originalRequest;
+      if (primaryDelayTimer) {
+        clearTimeout(primaryDelayTimer);
+      }
+      if (hedgedTimer) {
+        clearTimeout(hedgedTimer);
+      }
+      stub.publish = originalPublish;
     }
   });
 
@@ -349,29 +472,43 @@ describe('Publish Hedging System Tests', () => {
     );
 
     // Publish 2 messages => 0.4 tokens (< 1.0 required for hedging)
-    await topic.publishMessage({data: Buffer.from('partial-warmup-1')});
-    await topic.publishMessage({data: Buffer.from('partial-warmup-2')});
+    await warmUpTokenBucket(topic, 2, 'partial-warmup');
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0.4);
 
-    const originalRequest = topic.request.bind(topic);
+    const stub = await getPublisherStub(pubsub);
+    const originalPublish = stub.publish.bind(stub);
     let hedgedAttemptSent = false;
     let delayedPrimaryIntercepted = false;
+    let primaryDelayTimer: NodeJS.Timeout | undefined;
 
-    topic.request = <T, R = void>(
-      config: RequestConfig,
-      callback: RequestCallback<T, R>,
-    ) => {
-      if (config.method === 'publish' && config.gaxOpts?.retry === null) {
+    stub.publish = (argument, metadata, options, callback) => {
+      const telemetry = decodeTelemetryMetadata(metadata);
+      const attemptCount =
+        telemetry?.publishOperation?.hedgedAttemptCount ?? 0;
+
+      if (attemptCount > 0) {
         hedgedAttemptSent = true;
       }
-      if (config.method === 'publish' && !delayedPrimaryIntercepted) {
+      if (attemptCount === 0 && !delayedPrimaryIntercepted) {
         delayedPrimaryIntercepted = true;
-        setTimeout(() => {
-          originalRequest(config, callback);
+        let innerCall: {cancel: () => void} | undefined;
+        primaryDelayTimer = setTimeout(() => {
+          primaryDelayTimer = undefined;
+          innerCall = originalPublish(argument, metadata, options, callback);
         }, 300);
-        return;
+        return {
+          cancel: () => {
+            if (primaryDelayTimer) {
+              clearTimeout(primaryDelayTimer);
+              primaryDelayTimer = undefined;
+              callback(createCancelledError());
+            } else {
+              innerCall?.cancel();
+            }
+          },
+        };
       }
-      originalRequest(config, callback);
+      return originalPublish(argument, metadata, options, callback);
     };
 
     try {
@@ -390,7 +527,10 @@ describe('Publish Hedging System Tests', () => {
       });
       assert.strictEqual(received.length, 3);
     } finally {
-      topic.request = originalRequest;
+      if (primaryDelayTimer) {
+        clearTimeout(primaryDelayTimer);
+      }
+      stub.publish = originalPublish;
     }
   });
 
@@ -418,34 +558,37 @@ describe('Publish Hedging System Tests', () => {
         },
       });
 
-      for (let i = 0; i < 5; i++) {
-        await topic.publishMessage({data: Buffer.from(`otel-warmup-${i}`)});
-      }
+      await warmUpTokenBucket(topic, 5, 'otel-warmup');
       await processor.forceFlush();
       exporter.reset();
 
-      const originalRequest = topic.request.bind(topic);
+      const stub = await getPublisherStub(otelPubSub);
+      const originalPublish = stub.publish.bind(stub);
       let stalledPrimaryIntercepted = false;
+      let stallTimer: NodeJS.Timeout | undefined;
 
-      topic.request = <T, R = void>(
-        config: RequestConfig,
-        callback: RequestCallback<T, R>,
-      ) => {
-        if (config.method === 'publish' && !stalledPrimaryIntercepted) {
+      stub.publish = (argument, metadata, options, callback) => {
+        const telemetry = decodeTelemetryMetadata(metadata);
+        const attemptCount =
+          telemetry?.publishOperation?.hedgedAttemptCount ?? 0;
+
+        if (attemptCount === 0 && !stalledPrimaryIntercepted) {
           stalledPrimaryIntercepted = true;
-          const signal = config.gaxOpts?.signal;
-          const abortHandler = () => {
-            clearTimeout(stallTimer);
-            callback(createCancelledError());
+          stallTimer = setTimeout(() => {
+            stallTimer = undefined;
+            originalPublish(argument, metadata, options, callback);
+          }, 20000);
+          return {
+            cancel: () => {
+              if (stallTimer) {
+                clearTimeout(stallTimer);
+                stallTimer = undefined;
+              }
+              callback(createCancelledError());
+            },
           };
-          const stallTimer = setTimeout(() => {
-            signal?.removeEventListener('abort', abortHandler);
-            originalRequest(config, callback);
-          }, 2500);
-          signal?.addEventListener('abort', abortHandler, {once: true});
-          return;
         }
-        originalRequest(config, callback);
+        return originalPublish(argument, metadata, options, callback);
       };
 
       try {
@@ -454,7 +597,10 @@ describe('Publish Hedging System Tests', () => {
         });
         assert.ok(messageId);
       } finally {
-        topic.request = originalRequest;
+        if (stallTimer) {
+          clearTimeout(stallTimer);
+        }
+        stub.publish = originalPublish;
       }
 
       const received = await waitForMessages(subscription, {
@@ -479,6 +625,7 @@ describe('Publish Hedging System Tests', () => {
     } finally {
       tracing.setGloballyEnabled(false);
       await provider.shutdown();
+      trace.disable();
       await otelPubSub.close();
     }
   });

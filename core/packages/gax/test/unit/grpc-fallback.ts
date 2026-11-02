@@ -1464,9 +1464,9 @@ describe('grpc-fallback', () => {
 
     it('should record the http status of a rejected 401', async () => {
       // 401 and 403 are rejected on purpose so the auth client can refresh
-      // credentials, so they never reach the decoder. The status has to be
-      // recorded off the rejection instead, or telemetry reports none at all
-      // for precisely the two statuses an auth problem produces.
+      // credentials, so they never reach `decodeResponse`. Both the HTTP status
+      // and the decoded Google error payload have to be extracted off the
+      // rejection instead.
       setMockFallbackHttpResponse(
         gaxGrpc,
         new Response(
@@ -1482,6 +1482,7 @@ describe('grpc-fallback', () => {
       assert(err instanceof GoogleError);
       assert.strictEqual(err.code, Status.UNAUTHENTICATED);
       assert.strictEqual(err.httpStatusCode, 401);
+      assert.strictEqual(err.message, 'Invalid authentication credentials');
     });
 
     it('should record the http status of a rejected 403', async () => {
@@ -1498,6 +1499,174 @@ describe('grpc-fallback', () => {
       assert(err instanceof GoogleError);
       assert.strictEqual(err.code, Status.PERMISSION_DENIED);
       assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(err.message, 'Permission denied');
+    });
+
+    it('should promote ErrorInfo and statusDetails on a rejected 403', async () => {
+      const errorInfo = {
+        '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+        reason: 'SERVICE_DISABLED',
+        domain: 'googleapis.com',
+        metadata: {
+          service: 'translate.googleapis.com',
+          consumer: 'projects/123',
+        },
+      };
+      const help = {
+        '@type': 'type.googleapis.com/google.rpc.Help',
+        links: [
+          {
+            description: 'Google developers console API activation',
+            url: 'https://console.developers.google.com/apis/api/translate.googleapis.com/overview?project=123',
+          },
+        ],
+      };
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 403,
+              message: 'Cloud Translation API is disabled for project 123.',
+              status: 'PERMISSION_DENIED',
+              details: [help, errorInfo],
+            },
+          }),
+          {status: 403},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(
+        err.message,
+        'Cloud Translation API is disabled for project 123.',
+      );
+      assert.strictEqual(err.reason, errorInfo.reason);
+      assert.strictEqual(err.domain, errorInfo.domain);
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        errorInfo.metadata,
+      );
+      assert.strictEqual(err.statusDetails?.length, 2);
+      assert(err.cause instanceof Error);
+    });
+
+    it('should promote ErrorInfo on a rejected 401', async () => {
+      const errorInfo = {
+        '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+        reason: 'ACCESS_TOKEN_EXPIRED',
+        domain: 'googleapis.com',
+        metadata: {
+          service: 'translate.googleapis.com',
+        },
+      };
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {
+              code: 401,
+              message: 'Request had invalid authentication credentials.',
+              status: 'UNAUTHENTICATED',
+              details: [errorInfo],
+            },
+          }),
+          {status: 401},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAUTHENTICATED);
+      assert.strictEqual(err.httpStatusCode, 401);
+      assert.strictEqual(
+        err.message,
+        'Request had invalid authentication credentials.',
+      );
+      assert.strictEqual(err.reason, 'ACCESS_TOKEN_EXPIRED');
+      assert.strictEqual(err.domain, 'googleapis.com');
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        errorInfo.metadata,
+      );
+    });
+
+    it('should promote ErrorInfo from pre-parsed response.data on a rejected 403 without mutating response.data', async () => {
+      const responseData = {
+        error: {
+          code: 403,
+          message: 'IAM permission denied.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              reason: 'IAM_PERMISSION_DENIED',
+              domain: 'iam.googleapis.com',
+              metadata: {permission: 'resourcemanager.projects.get'},
+            },
+          ],
+        },
+      };
+      const snapshot = JSON.parse(JSON.stringify(responseData));
+      const fetchError = Object.assign(new Error('IAM permission denied.'), {
+        status: 403,
+        response: {status: 403, data: responseData},
+      });
+      setMockFallbackError(gaxGrpc, fetchError);
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+      assert.strictEqual(err.message, 'IAM permission denied.');
+      assert.strictEqual(err.reason, 'IAM_PERMISSION_DENIED');
+      assert.strictEqual(err.domain, 'iam.googleapis.com');
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(err.errorInfoMetadata)),
+        {permission: 'resourcemanager.projects.get'},
+      );
+      assert.strictEqual(err.cause, fetchError);
+      assert.deepStrictEqual(responseData, snapshot);
+    });
+
+    it('should preserve message and status mapping when a rejected 401 or 403 body is not a Google JSON error', async () => {
+      for (const {status, expectedCode, body} of [
+        {
+          status: 401,
+          expectedCode: Status.UNAUTHENTICATED,
+          body: JSON.stringify({
+            error: 'invalid_token',
+            error_description: 'The access token expired',
+          }),
+        },
+        {
+          status: 403,
+          expectedCode: Status.PERMISSION_DENIED,
+          body: '{}',
+        },
+        {
+          status: 403,
+          expectedCode: Status.PERMISSION_DENIED,
+          body: '<html><title>403 Forbidden</title></html>',
+        },
+      ]) {
+        setMockFallbackHttpResponse(gaxGrpc, new Response(body, {status}));
+
+        const err = await callEcho();
+
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, expectedCode);
+        assert.strictEqual(err.httpStatusCode, status);
+        assert.strictEqual(err.message, body);
+        assert.strictEqual(err.reason, undefined);
+        assert.strictEqual(err.domain, undefined);
+      }
     });
 
     it('should classify an HTML error response by its http status', async () => {
