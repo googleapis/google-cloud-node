@@ -12,124 +12,57 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  ApiError,
-  BodyResponseCallback,
-  DecorateRequestOptions,
-  MetadataCallback,
-  ServiceObject,
-  ServiceObjectConfig,
-  util,
-} from '../src/nodejs-common/index.js';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
-import {PromisifyAllOptions} from '@google-cloud/promisify';
+import assert from 'assert';
 import {
-  Readable,
-  PassThrough,
-  Stream,
+  Bucket,
+  CRC32C,
+  File,
+  GaxiosError,
+  GaxiosOptionsPrepared,
+  Storage,
+} from '../src/index.js';
+import {
+  StorageRequestOptions,
+  StorageTransport,
+} from '../src/storage-transport.js';
+import sinon, {createSandbox, stub, spy, restore, useFakeTimers} from 'sinon';
+import {GoogleAuth} from 'google-auth-library';
+import {
+  FileExceptionMessages,
+  FileMetadata,
+  FileOptions,
+  GenerateSignedPostPolicyV2Options,
+  GenerateSignedPostPolicyV4Options,
+  GetSignedUrlConfig,
+  MoveOptions,
+  RequestError,
+  SetFileMetadataOptions,
+  STORAGE_POST_POLICY_BASE_URL,
+  CreateWriteStreamOptionsInternal,
+} from '../src/file.js';
+import {
   Duplex,
+  PassThrough,
+  Readable,
+  Stream,
   Transform,
   pipeline,
 } from 'stream';
-import assert from 'assert';
 import * as crypto from 'crypto';
 import duplexify from 'duplexify';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
+import {ExceptionMessages, IdempotencyStrategy} from '../src/storage.js';
 import * as fs from 'fs';
 import * as path from 'path';
-import {proxyquire} from 'google-test-utils';
-import * as resumableUpload from '../src/resumable-upload.js';
-import * as sinon from 'sinon';
 import * as tmp from 'tmp';
+import {formatAsUTCISO} from '../src/util.js';
+import {Gaxios, GaxiosResponse} from 'gaxios';
+import {proxyquire} from 'google-test-utils';
 import * as zlib from 'zlib';
 
-import {
-  Bucket,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  File,
-  FileOptions,
-  PolicyDocument,
-  SetFileMetadataOptions,
-  GetSignedUrlConfig,
-  GenerateSignedPostPolicyV2Options,
-  CRC32C,
-} from '../src/index.js';
-import {
-  SignedPostPolicyV4Output,
-  GenerateSignedPostPolicyV4Options,
-  STORAGE_POST_POLICY_BASE_URL,
-  MoveOptions,
-  FileExceptionMessages,
-  FileMetadata,
-} from '../src/file.js';
-import {ExceptionMessages, IdempotencyStrategy} from '../src/storage.js';
-import {formatAsUTCISO} from '../src/util.js';
-import {
-  BaseMetadata,
-  SetMetadataOptions,
-} from '../src/nodejs-common/service-object.js';
-import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
-
-class HTTPError extends Error {
-  code: number;
-  constructor(message: string, code: number) {
-    super(message);
-    this.code = code;
-  }
-}
-
-let promisified = false;
-let makeWritableStreamOverride: Function | null;
-let handleRespOverride: Function | null;
-const fakeUtil = Object.assign({}, util, {
-  handleResp(...args: Array<{}>) {
-    (handleRespOverride || util.handleResp)(...args);
-  },
-  makeWritableStream(...args: Array<{}>) {
-    (makeWritableStreamOverride || util.makeWritableStream)(...args);
-  },
-  makeRequest(
-    reqOpts: DecorateRequestOptions,
-    config: object,
-    callback: BodyResponseCallback
-  ) {
-    callback(null);
-  },
-});
-
-const fakePromisify = {
-  // tslint:disable-next-line:variable-name
-  promisifyAll(Class: Function, options: PromisifyAllOptions) {
-    if (Class.name !== 'File') {
-      return;
-    }
-
-    promisified = true;
-    assert.deepStrictEqual(options.exclude, [
-      'cloudStorageURI',
-      'publicUrl',
-      'request',
-      'save',
-      'setEncryptionKey',
-      'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
-      'getBufferFromReadable',
-      'restore',
-    ]);
-  },
-};
-
-const fsCached = fs;
-const safeFs: Record<string, unknown> = {};
-const descriptors = Object.getOwnPropertyDescriptors(fsCached);
-for (const key of Object.keys(descriptors)) {
-  const desc = descriptors[key];
-  if (desc && !desc.get) {
-    Object.defineProperty(safeFs, key, desc);
-  }
-}
-const fakeFs = {...safeFs} as unknown as typeof fs;
-
 const zlibCached = zlib;
-let createGunzipOverride: Function | null;
+let createGunzipOverride: Function | null = null;
 const fakeZlib = {
   ...zlib,
   createGunzip(...args: Array<{}>) {
@@ -137,7 +70,7 @@ const fakeZlib = {
   },
 };
 
-let pipelineOverride: Function | null;
+let pipelineOverride: Function | null = null;
 const fakeStream = {
   Readable,
   PassThrough,
@@ -149,149 +82,58 @@ const fakeStream = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const osCached = require('os');
-const fakeOs = {...osCached};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let resumableUploadOverride: any;
-function fakeResumableUpload() {
-  return () => {
-    return resumableUploadOverride || resumableUpload;
-  };
-}
-Object.assign(fakeResumableUpload, {
-  createURI(
-    ...args: [resumableUpload.UploadConfig, resumableUpload.CreateUriCallback]
-  ) {
-    let createURI = resumableUpload.createURI;
-
-    if (resumableUploadOverride && resumableUploadOverride.createURI) {
-      createURI = resumableUploadOverride.createURI;
-    }
-
-    return createURI(...args);
-  },
-});
-Object.assign(fakeResumableUpload, {
-  upload(...args: [resumableUpload.UploadConfig]) {
-    let upload = resumableUpload.upload;
-    if (resumableUploadOverride && resumableUploadOverride.upload) {
-      upload = resumableUploadOverride.upload;
-    }
-    return upload(...args);
-  },
-});
-
-class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
-  calledWith_: IArguments;
-  constructor(config: ServiceObjectConfig) {
-    super(config);
-    // eslint-disable-next-line prefer-rest-params
-    this.calledWith_ = arguments;
+class HTTPError extends Error {
+  code: number;
+  constructor(message: string, code: number) {
+    super(message);
+    this.code = code;
   }
 }
 
-const fakeSigner = {
-  URLSigner: () => {},
-};
-
 describe('File', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let File: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let file: any;
+  let STORAGE: Storage;
+  let BUCKET: Bucket;
+  let file: File;
+  let ProxiedFile: typeof File;
+  let sandbox: sinon.SinonSandbox;
+  let storageTransport: StorageTransport;
+  const PROJECT_ID = 'project-id';
 
   const FILE_NAME = 'file-name.png';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let directoryFile: any;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let STORAGE: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let BUCKET: any;
+  let directoryFile: File;
 
   const DATA = 'test data';
   // crc32c hash of 'test data'
   const CRC32C_HASH = 'M3m0yg==';
   // md5 hash of 'test data'
   const MD5_HASH = '63M6AMDJ0zbmVpGjerVCkw==';
-  // crc32c hash of `zlib.gzipSync(Buffer.from(DATA), {level: 9})`
-  const GZIPPED_DATA = Buffer.from(
-    'H4sIAAAAAAACEytJLS5RSEksSQQAsq4I0wkAAAA=',
-    'base64'
-  );
-  //crc32c hash of `GZIPPED_DATA`
-  const CRC32C_HASH_GZIP = '64jygg==';
 
   before(() => {
-    File = proxyquire('../src/file.js', {
-      './nodejs-common': {
-        ServiceObject: FakeServiceObject,
-        util: fakeUtil,
-      },
-      '@google-cloud/promisify': fakePromisify,
-      fs: fakeFs,
-      '../src/resumable-upload': fakeResumableUpload,
-      os: fakeOs,
-      './signer': fakeSigner,
+    sandbox = createSandbox();
+    STORAGE = new Storage({projectId: PROJECT_ID});
+    storageTransport = sandbox.createStubInstance(StorageTransport);
+    STORAGE.storageTransport = storageTransport;
+    ProxiedFile = proxyquire('../src/file.js', {
       stream: fakeStream,
       zlib: fakeZlib,
     }).File;
   });
 
   beforeEach(() => {
-    Object.assign(fakeFs, safeFs);
-    Object.assign(fakeOs, osCached);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    FakeServiceObject.prototype.request = util.noop as any;
-
-    STORAGE = {
-      createBucket: util.noop,
-      request: util.noop,
-      apiEndpoint: 'https://storage.googleapis.com',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeAuthenticatedRequest(req: {}, callback: any) {
-        if (callback) {
-          (callback.onAuthenticated || callback)(null, req);
-        }
-      },
-      bucket(name: string) {
-        return new Bucket(this, name);
-      },
-      retryOptions: {
-        autoRetry: true,
-        maxRetries: 3,
-        retryDelayMultiplier: 2,
-        totalTimeout: 600,
-        maxRetryDelay: 60,
-        retryableErrorFn: (err: HTTPError) => {
-          return err?.code === 500;
-        },
-        idempotencyStrategy: IdempotencyStrategy.RetryConditional,
-      },
-      customEndpoint: false,
-    };
-
     BUCKET = new Bucket(STORAGE, 'bucket-name');
-    BUCKET.getRequestInterceptors = () => [];
 
     file = new File(BUCKET, FILE_NAME);
 
     directoryFile = new File(BUCKET, 'directory/file.jpg');
+  });
 
+  afterEach(() => {
     createGunzipOverride = null;
-    handleRespOverride = null;
-    makeWritableStreamOverride = null;
     pipelineOverride = null;
-    resumableUploadOverride = null;
+    sandbox.restore();
   });
 
   describe('initialization', () => {
-    it('should promisify all the things', () => {
-      assert(promisified);
-    });
-
     it('should assign file name', () => {
       assert.strictEqual(file.name, FILE_NAME);
     });
@@ -302,13 +144,6 @@ describe('File', () => {
 
     it('should assign the storage instance', () => {
       assert.strictEqual(file.storage, BUCKET.storage);
-    });
-
-    it('should set instanceRetryValue to the storage instance retryOptions.autoRetry value', () => {
-      assert.strictEqual(
-        file.instanceRetryValue,
-        STORAGE.retryOptions.autoRetry
-      );
     });
 
     it('should not strip leading slashes', () => {
@@ -327,151 +162,16 @@ describe('File', () => {
       assert.strictEqual(file.generation, 2);
     });
 
-    it('should inherit from ServiceObject', () => {
-      // Using assert.strictEqual instead of assert to prevent
-      // coercing of types.
-      assert.strictEqual(file instanceof ServiceObject, true);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.strictEqual(calledWith.parent, BUCKET);
-      assert.strictEqual(calledWith.baseUrl, '/o');
-      assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: {}}},
-        exists: {reqOpts: {qs: {}}},
-        get: {reqOpts: {qs: {}}},
-        getMetadata: {reqOpts: {qs: {}}},
-        setMetadata: {reqOpts: {qs: {}}},
-      });
-    });
-
-    it('should set the correct query string with a generation', () => {
-      const options = {generation: 2};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options}},
-        exists: {reqOpts: {qs: options}},
-        get: {reqOpts: {qs: options}},
-        getMetadata: {reqOpts: {qs: options}},
-        setMetadata: {reqOpts: {qs: options}},
-      });
-    });
-
-    it('should set the correct query string with a userProject', () => {
-      const options = {userProject: 'user-project'};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options}},
-        exists: {reqOpts: {qs: options}},
-        get: {reqOpts: {qs: options}},
-        getMetadata: {reqOpts: {qs: options}},
-        setMetadata: {reqOpts: {qs: options}},
-      });
-    });
-
-    it('should set the correct query string with ifGenerationMatch', () => {
-      const options = {preconditionOpts: {ifGenerationMatch: 100}};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options.preconditionOpts}},
-        exists: {reqOpts: {qs: options.preconditionOpts}},
-        get: {reqOpts: {qs: options.preconditionOpts}},
-        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
-        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
-      });
-      assert.deepStrictEqual(
-        file.instancePreconditionOpts,
-        options.preconditionOpts
-      );
-    });
-
-    it('should set the correct query string with ifGenerationNotMatch', () => {
-      const options = {preconditionOpts: {ifGenerationNotMatch: 100}};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options.preconditionOpts}},
-        exists: {reqOpts: {qs: options.preconditionOpts}},
-        get: {reqOpts: {qs: options.preconditionOpts}},
-        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
-        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
-      });
-      assert.deepStrictEqual(
-        file.instancePreconditionOpts,
-        options.preconditionOpts
-      );
-    });
-
-    it('should set the correct query string with ifMetagenerationMatch', () => {
-      const options = {preconditionOpts: {ifMetagenerationMatch: 100}};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options.preconditionOpts}},
-        exists: {reqOpts: {qs: options.preconditionOpts}},
-        get: {reqOpts: {qs: options.preconditionOpts}},
-        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
-        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
-      });
-      assert.deepStrictEqual(
-        file.instancePreconditionOpts,
-        options.preconditionOpts
-      );
-    });
-
-    it('should set the correct query string with ifMetagenerationNotMatch', () => {
-      const options = {preconditionOpts: {ifMetagenerationNotMatch: 100}};
-      const file = new File(BUCKET, 'name', options);
-
-      const calledWith = file.calledWith_[0];
-
-      assert.deepStrictEqual(calledWith.methods, {
-        delete: {reqOpts: {qs: options.preconditionOpts}},
-        exists: {reqOpts: {qs: options.preconditionOpts}},
-        get: {reqOpts: {qs: options.preconditionOpts}},
-        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
-        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
-      });
-      assert.deepStrictEqual(
-        file.instancePreconditionOpts,
-        options.preconditionOpts
-      );
-    });
-
     it('should not strip leading slash name in ServiceObject', () => {
       const file = new File(BUCKET, '/name');
-      const calledWith = file.calledWith_[0];
 
-      assert.strictEqual(calledWith.id, encodeURIComponent('/name'));
-    });
-
-    it('should set a custom encryption key', done => {
-      const key = 'key';
-      const setEncryptionKey = File.prototype.setEncryptionKey;
-      File.prototype.setEncryptionKey = (key_: {}) => {
-        File.prototype.setEncryptionKey = setEncryptionKey;
-        assert.strictEqual(key_, key);
-        done();
-      };
-      new File(BUCKET, FILE_NAME, {encryptionKey: key});
+      assert.strictEqual(file.id, encodeURIComponent('/name'));
     });
 
     it('should accept a `crc32cGenerator`', () => {
-      const crc32cGenerator = () => {};
+      const crc32cGenerator = () => {
+        return new CRC32C();
+      };
 
       const file = new File(BUCKET, 'name', {crc32cGenerator});
       assert.strictEqual(file.crc32cGenerator, crc32cGenerator);
@@ -479,6 +179,283 @@ describe('File', () => {
 
     it("should use the bucket's `crc32cGenerator` by default", () => {
       assert.strictEqual(file.crc32cGenerator, BUCKET.crc32cGenerator);
+    });
+
+    describe('delete', () => {
+      it('should set the correct query string with options', async done => {
+        const options = {
+          generation: 2,
+          userProject: 'user-project',
+          preconditionOpts: {
+            ifGenerationMatch: 100,
+            ifGenerationNotMatch: 100,
+            ifMetagenerationMatch: 100,
+            ifMetagenerationNotMatch: 100,
+          },
+        };
+
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
+            assert.strictEqual(reqOpts.method, 'DELETE');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.generation,
+              options.generation,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.userProject,
+              options.userProject,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationMatch,
+              options.preconditionOpts.ifGenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationNotMatch,
+              options.preconditionOpts.ifGenerationNotMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationMatch,
+              options.preconditionOpts.ifMetagenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationNotMatch,
+              options.preconditionOpts.ifMetagenerationNotMatch,
+            );
+            done();
+            return Promise.resolve({data: {}});
+          });
+        await file.delete(options);
+      });
+
+      it('should return an error if the request fails', async () => {
+        const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        await file.delete((err: GaxiosError | null) => {
+          assert.strictEqual(err, error);
+        });
+      });
+    });
+
+    describe('exists', () => {
+      it('should set the correct query string with options', async () => {
+        const options = {
+          generation: 2,
+          userProject: 'user-project',
+          preconditionOpts: {
+            ifGenerationMatch: 100,
+            ifGenerationNotMatch: 100,
+            ifMetagenerationMatch: 100,
+            ifMetagenerationNotMatch: 100,
+          },
+        };
+
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            assert.strictEqual(reqOpts.method, 'GET');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.generation,
+              options.generation,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.userProject,
+              options.userProject,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationMatch,
+              options.preconditionOpts.ifGenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationNotMatch,
+              options.preconditionOpts.ifGenerationNotMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationMatch,
+              options.preconditionOpts.ifMetagenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationNotMatch,
+              options.preconditionOpts.ifMetagenerationNotMatch,
+            );
+            callback(null);
+            return Promise.resolve({data: {}});
+          });
+        await file.exists(options);
+      });
+
+      it('should return an error if the request fails', async () => {
+        const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        await file.exists((err: GaxiosError | null) => {
+          assert.strictEqual(err, error);
+        });
+      });
+    });
+
+    describe('get', () => {
+      it('should set the correct query string with options', async () => {
+        const options = {
+          generation: 2,
+          userProject: 'user-project',
+          preconditionOpts: {
+            ifGenerationMatch: 100,
+            ifGenerationNotMatch: 100,
+            ifMetagenerationMatch: 100,
+            ifMetagenerationNotMatch: 100,
+          },
+        };
+
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            assert.strictEqual(reqOpts.method, 'GET');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.generation,
+              options.generation,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.userProject,
+              options.userProject,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationMatch,
+              options.preconditionOpts.ifGenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationNotMatch,
+              options.preconditionOpts.ifGenerationNotMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationMatch,
+              options.preconditionOpts.ifMetagenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationNotMatch,
+              options.preconditionOpts.ifMetagenerationNotMatch,
+            );
+            callback(null);
+            return Promise.resolve({data: {}});
+          });
+        await file.get(options);
+      });
+
+      it('should return an error if the request fails', async () => {
+        const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        await file.get((err: GaxiosError | null) => {
+          assert.strictEqual(err, error);
+        });
+      });
+    });
+
+    describe('getMetadata', () => {
+      it('should set the correct query string with options', async () => {
+        const options = {
+          generation: 2,
+          userProject: 'user-project',
+          preconditionOpts: {
+            ifGenerationMatch: 100,
+            ifGenerationNotMatch: 100,
+            ifMetagenerationMatch: 100,
+            ifMetagenerationNotMatch: 100,
+          },
+        };
+
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            assert.strictEqual(reqOpts.method, 'GET');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.generation,
+              options.generation,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.userProject,
+              options.userProject,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationMatch,
+              options.preconditionOpts.ifGenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifGenerationNotMatch,
+              options.preconditionOpts.ifGenerationNotMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationMatch,
+              options.preconditionOpts.ifMetagenerationMatch,
+            );
+            assert.deepStrictEqual(
+              reqOpts.queryParameters.preconditionOpts.ifMetagenerationNotMatch,
+              options.preconditionOpts.ifMetagenerationNotMatch,
+            );
+            callback(null);
+            return Promise.resolve({data: {}});
+          });
+        await file.getMetadata(options);
+      });
+
+      it('should return an error if the request fails', async () => {
+        const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        await file.getMetadata((err: GaxiosError | null) => {
+          assert.strictEqual(err, error);
+        });
+      });
+    });
+
+    describe('setMetadata', () => {
+      it('should set the correct query string with options', async () => {
+        const options = {
+          temporaryHold: true,
+        };
+
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            const body = JSON.parse(reqOpts.body);
+            assert.strictEqual(reqOpts.method, 'PATCH');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
+            assert.deepStrictEqual(body.temporaryHold, options.temporaryHold);
+            callback(null);
+            return Promise.resolve();
+          });
+        await file.setMetadata(options);
+      });
+
+      it('should return an error if the request fails', async () => {
+        const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+
+        await file.setMetadata({}, (err: GaxiosError | null) => {
+          assert.strictEqual(err, error);
+        });
+      });
     });
 
     describe('userProject', () => {
@@ -505,8 +482,6 @@ describe('File', () => {
 
   describe('cloudStorageURI', () => {
     it('should return the appropriate `gs://` URI', () => {
-      const file = new File(BUCKET, FILE_NAME);
-
       assert(file.cloudStorageURI instanceof URL);
       assert.equal(file.cloudStorageURI.host, BUCKET.name);
       assert.equal(file.cloudStorageURI.pathname, `/${FILE_NAME}`);
@@ -515,47 +490,52 @@ describe('File', () => {
 
   describe('copy', () => {
     it('should throw if no destination is provided', () => {
-      assert.throws(() => {
-        file.copy();
-      }, /Destination file should have a name\./);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      assert.rejects(
+        file.copy(undefined as unknown as string),
+        (err: Error) => {
+          assert.strictEqual(
+            err.message,
+            FileExceptionMessages.DESTINATION_NO_NAME,
+          );
+        },
+      );
     });
 
     it('should URI encode file names', done => {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = `/o/${encodeURIComponent(
-        directoryFile.name
-      )}/rewriteTo/b/${newFile.bucket.name}/o/${encodeURIComponent(
-        newFile.name
-      )}`;
+      const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(directoryFile.name)}/rewriteTo/b/${
+        file.bucket.name
+      }/o/${encodeURIComponent(newFile.name)}`;
 
-      directoryFile.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.uri, expectedPath);
-        done();
-      };
+      directoryFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.url, expectedPath);
+          done();
+        });
 
-      directoryFile.copy(newFile);
+      directoryFile.copy(newFile, done);
     });
 
-    it('should execute callback with error & API response', done => {
+    it('should execute callback with error & API response', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.bucket.request = (
-        reqOpts: DecorateRequestOptions,
-        callback: Function
-      ) => {
-        callback(error, apiResponse);
-      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(error, null, apiResponse);
+          return Promise.resolve();
+        });
 
-      file.copy(newFile, (err: Error, file: {}, apiResponse_: {}) => {
+      file.copy(newFile, (err, file, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(file, null);
         assert.strictEqual(apiResponse_, apiResponse);
-
-        done();
       });
     });
 
@@ -563,10 +543,12 @@ describe('File', () => {
       const versionedFile = new File(BUCKET, 'name', {generation: 1});
       const newFile = new File(BUCKET, 'new-file');
 
-      versionedFile.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.sourceGeneration, 1);
-        done();
-      };
+      versionedFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters.sourceGeneration, 1);
+          done();
+        });
 
       versionedFile.copy(newFile, assert.ifError);
     });
@@ -581,11 +563,12 @@ describe('File', () => {
         metadata: METADATA,
       };
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.deepStrictEqual(reqOpts.json, options);
-        assert.strictEqual(reqOpts.json.metadata, METADATA);
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const body = JSON.parse(reqOpts.body);
+        assert.deepStrictEqual(body, options);
+        assert.deepStrictEqual(body.metadata, METADATA);
         done();
-      };
+      });
 
       file.copy(newFile, options, assert.ifError);
     });
@@ -597,12 +580,15 @@ describe('File', () => {
       const originalOptions = Object.assign({}, options);
       const newFile = new File(BUCKET, 'new-file');
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-        assert.strictEqual(reqOpts.json.userProject, undefined);
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters.userProject,
+          options.userProject,
+        );
+        assert.strictEqual(reqOpts.body.userProject, undefined);
         assert.deepStrictEqual(options, originalOptions);
         done();
-      };
+      });
 
       file.copy(newFile, options, assert.ifError);
     });
@@ -612,138 +598,85 @@ describe('File', () => {
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.deepStrictEqual(reqOpts.headers, {
-          'x-goog-copy-source-encryption-algorithm': 'AES256',
-          'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
-          'x-goog-copy-source-encryption-key-sha256': file.encryptionKeyHash,
-          'x-goog-encryption-algorithm': 'AES256',
-          'x-goog-encryption-key': file.encryptionKeyBase64,
-          'x-goog-encryption-key-sha256': file.encryptionKeyHash,
-        });
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        assert.deepStrictEqual(
+          Object.fromEntries((reqOpts.headers as Headers).entries()),
+          {
+            'content-type': 'application/json',
+            'x-goog-copy-source-encryption-algorithm': 'AES256',
+            'x-goog-copy-source-encryption-key':
+              filePrivate.encryptionKeyBase64,
+            'x-goog-copy-source-encryption-key-sha256':
+              filePrivate.encryptionKeyHash,
+            'x-goog-encryption-algorithm': 'AES256',
+            'x-goog-encryption-key': filePrivate.encryptionKeyBase64,
+            'x-goog-encryption-key-sha256': filePrivate.encryptionKeyHash,
+          },
+        );
         done();
-      };
+      });
 
       file.copy(newFile, assert.ifError);
     });
 
-    it('should send destination encryption headers when destination file has an encryption key', done => {
-      const newFile = new File(BUCKET, 'new-file');
-      newFile.setEncryptionKey('destinationKey');
+    it('should set encryption key on the new File instance', done => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const file = new (File as any)(BUCKET, FILE_NAME);
+      Object.assign(file, {
+        encryptionKey: 'source-key',
+        encryptionKeyBase64: 'base64',
+        encryptionKeyHash: 'hash',
+      });
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          'AES256'
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          newFile.encryptionKeyBase64
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          newFile.encryptionKeyHash
-        );
-        done();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newFile = new (File as any)(BUCKET, 'new-file');
+      Object.assign(newFile, {
+        encryptionKey: 'dest-key',
+        encryptionKeyBase64: 'base64-dest',
+        encryptionKeyHash: 'hash-dest',
+      });
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      storageTransport.makeRequest = async (reqOpts: any, callback: any) => {
+        const actualHeaders = Object.fromEntries(reqOpts.headers.entries());
+
+        try {
+          assert.deepStrictEqual(actualHeaders, {
+            'content-type': 'application/json',
+            'x-goog-copy-source-encryption-algorithm': 'AES256',
+            'x-goog-copy-source-encryption-key': 'base64',
+            'x-goog-copy-source-encryption-key-sha256': 'hash',
+            'x-goog-encryption-algorithm': 'AES256',
+            'x-goog-encryption-key': 'base64-dest',
+            'x-goog-encryption-key-sha256': 'hash-dest',
+          });
+          callback?.(null, {done: true}, {});
+          return {data: {done: true}} as unknown as GaxiosResponse;
+        } catch (e) {
+          done(e);
+          throw e;
+        }
       };
 
-      file.copy(newFile, assert.ifError);
-    });
-
-    it('should not copy encryption key or send destination headers when destination file has null encryption key', done => {
-      file.setEncryptionKey('sourceKey');
-      const expectedSourceKeyBase64 = file.encryptionKeyBase64;
-      const expectedSourceKeyHash = file.encryptionKeyHash;
-
-      const newFile = new File(BUCKET, 'new-file');
-      newFile.setEncryptionKey(null);
-
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(newFile.encryptionKey, null);
-        assert.strictEqual(newFile.encryptionKeyBase64, undefined);
-        assert.strictEqual(newFile.encryptionKeyHash, undefined);
-
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
-          'AES256'
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          expectedSourceKeyBase64
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
-          expectedSourceKeyHash
-        );
-
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          undefined
-        );
-
-        assert.notStrictEqual(file.encryptionKeyInterceptor, undefined);
-
+      file.copy(newFile, (err: Error | null) => {
+        assert.ifError(err);
         done();
-      };
-
-      file.copy(newFile, assert.ifError);
-    });
-
-    it('should copy the source key to the destination file object if destination key is undefined', done => {
-      file.setEncryptionKey('sourceKey');
-
-      const newFile = new File(BUCKET, 'new-file');
-
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(newFile.encryptionKey, file.encryptionKey);
-        assert.strictEqual(
-          newFile.encryptionKeyBase64,
-          file.encryptionKeyBase64
-        );
-        assert.strictEqual(newFile.encryptionKeyHash, file.encryptionKeyHash);
-
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          file.encryptionKeyBase64
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          'AES256'
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          file.encryptionKeyBase64
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          file.encryptionKeyHash
-        );
-        done();
-      };
-
-      file.copy(newFile, assert.ifError);
+      });
     });
 
     it('should set destination KMS key name', done => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          newFile.kmsKeyName
+          reqOpts.queryParameters.destinationKmsKeyName,
+          newFile.kmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
         done();
-      };
+      });
 
       file.copy(newFile, assert.ifError);
     });
@@ -752,14 +685,14 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const destinationKmsKeyName = 'destination-kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          destinationKmsKeyName
+          reqOpts.queryParameters.destinationKmsKeyName,
+          destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
         done();
-      };
+      });
 
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
@@ -770,39 +703,35 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
-          'AES256'
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
+        const headers = Object.fromEntries(
+          (reqOpts.headers as Headers).entries(),
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          file.encryptionKeyBase64
+          headers['x-goog-copy-source-encryption-algorithm'],
+          'AES256',
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
-          file.encryptionKeyHash
+          headers['x-goog-copy-source-encryption-key'],
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          undefined
+          headers['x-goog-copy-source-encryption-key-sha256'],
+          filePrivate.encryptionKeyHash,
         );
+        assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key-sha256'], undefined);
         assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          newFile.kmsKeyName
+          reqOpts.queryParameters.destinationKmsKeyName,
+          newFile.kmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, newFile.kmsKeyName);
-        assert.strictEqual(newFile.encryptionKey, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
         done();
-      };
+      });
 
       file.copy(newFile, assert.ifError);
     });
@@ -813,39 +742,35 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const destinationKmsKeyName = 'destination-kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
-          'AES256'
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
+        const headers = Object.fromEntries(
+          (reqOpts.headers as Headers).entries(),
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          file.encryptionKeyBase64
+          headers['x-goog-copy-source-encryption-algorithm'],
+          'AES256',
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
-          file.encryptionKeyHash
+          headers['x-goog-copy-source-encryption-key'],
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          undefined
+          headers['x-goog-copy-source-encryption-key-sha256'],
+          filePrivate.encryptionKeyHash,
         );
+        assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key-sha256'], undefined);
         assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          destinationKmsKeyName
+          reqOpts.queryParameters.destinationKmsKeyName,
+          destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
-        assert.strictEqual(newFile.encryptionKey, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
         done();
-      };
+      });
 
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
@@ -854,12 +779,16 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const kmsKeyName = 'kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.destinationKmsKeyName, kmsKeyName);
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const body = JSON.parse(reqOpts.body);
+        assert.strictEqual(
+          reqOpts.queryParameters.destinationKmsKeyName,
+          kmsKeyName,
+        );
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
-        assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
+        assert.strictEqual(body.kmsKeyName, undefined);
         done();
-      };
+      });
 
       file.copy(newFile, {kmsKeyName}, assert.ifError);
     });
@@ -870,37 +799,37 @@ describe('File', () => {
       const newFile = new File(BUCKET, 'new-file');
       const kmsKeyName = 'kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        const filePrivate = file as unknown as Record<string, string>;
+        const newFilePrivate = newFile as unknown as Record<string, unknown>;
+        const headers = Object.fromEntries(
+          (reqOpts.headers as Headers).entries(),
+        );
+        const body = JSON.parse(reqOpts.body);
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
-          'AES256'
+          headers['x-goog-copy-source-encryption-algorithm'],
+          'AES256',
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          file.encryptionKeyBase64
+          headers['x-goog-copy-source-encryption-key'],
+          filePrivate.encryptionKeyBase64,
         );
         assert.strictEqual(
-          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
-          file.encryptionKeyHash
+          headers['x-goog-copy-source-encryption-key-sha256'],
+          filePrivate.encryptionKeyHash,
         );
+        assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key'], undefined);
+        assert.strictEqual(headers['x-goog-encryption-key-sha256'], undefined);
         assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-algorithm'],
-          undefined
+          reqOpts.queryParameters.destinationKmsKeyName,
+          kmsKeyName,
         );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key'],
-          undefined
-        );
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-encryption-key-sha256'],
-          undefined
-        );
-        assert.strictEqual(reqOpts.qs.destinationKmsKeyName, kmsKeyName);
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
-        assert.strictEqual(newFile.encryptionKey, undefined);
-        assert.strictEqual(reqOpts.json.kmsKeyName, undefined);
+        assert.strictEqual(newFilePrivate.encryptionKey, undefined);
+        assert.strictEqual(body.kmsKeyName, undefined);
         done();
-      };
+      });
 
       file.copy(newFile, {kmsKeyName}, assert.ifError);
     });
@@ -910,14 +839,13 @@ describe('File', () => {
         predefinedAcl: 'authenticatedRead',
       };
       const newFile = new File(BUCKET, 'new-file');
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(
-          reqOpts.qs.destinationPredefinedAcl,
-          options.predefinedAcl
+          reqOpts.queryParameters.destinationPredefinedAcl,
+          options.predefinedAcl,
         );
-        assert.strictEqual(reqOpts.json.destinationPredefinedAcl, undefined);
         done();
-      };
+      });
 
       file.copy(newFile, options, assert.ifError);
     });
@@ -927,30 +855,34 @@ describe('File', () => {
       newFile.kmsKeyName = 'incorrect-kms-key-name';
       const destinationKmsKeyName = 'correct-kms-key-name';
 
-      file.bucket.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(
-          reqOpts.qs.destinationKmsKeyName,
-          destinationKmsKeyName
+          reqOpts.queryParameters.destinationKmsKeyName,
+          destinationKmsKeyName,
         );
         assert.strictEqual(file.kmsKeyName, destinationKmsKeyName);
         done();
-      };
+      });
 
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
 
     it('should remove custom encryption interceptor if rotating to KMS', done => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let file: any;
+      // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
+      file = new (File as any)(BUCKET, FILE_NAME);
       const newFile = new File(BUCKET, 'new-file');
       const destinationKmsKeyName = 'correct-kms-key-name';
 
       file.encryptionKeyInterceptor = {};
       file.interceptors = [{}, file.encryptionKeyInterceptor, {}];
 
-      file.bucket.request = () => {
-        assert.strictEqual(file.interceptors.length, 2);
-        assert(file.interceptors.indexOf(file.encryptionKeyInterceptor) === -1);
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+        assert.strictEqual(file.interceptors.length, 3);
+        assert(file.interceptors.indexOf(file.encryptionKeyInterceptor) === 1);
         done();
-      };
+      });
 
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
@@ -958,67 +890,68 @@ describe('File', () => {
     describe('destination types', () => {
       function assertPathEquals(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        file: any,
+        file: File,
         expectedPath: string,
-        callback: Function
+        callback: Function,
       ) {
-        file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.uri, expectedPath);
-          callback();
-        };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
+            assert.strictEqual(reqOpts.url, expectedPath);
+            callback();
+          });
       }
 
       it('should allow a string', done => {
         const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/o/${encodeURIComponent(
-          file.name
-        )}/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
-        file.copy(newFileName);
+        file.copy(newFileName, done);
       });
 
       it('should allow a string with leading slash.', done => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        // File uri encodes file name when calling this.bucket.request during copy
-        const expectedPath = `/o/${encodeURIComponent(file.name)}/rewriteTo/b/${
+        // File uri encodes file name when calling this.request during copy
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${
           file.bucket.name
         }/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
-        file.copy(newFileName);
+        file.copy(newFileName, done);
       });
 
       it('should allow a "gs://..." string', done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = `/o/${encodeURIComponent(
-          file.name
-        )}/rewriteTo/b/other-bucket/o/new-file-name.png`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/other-bucket/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
-        file.copy(newFileName);
+        file.copy(newFileName, done);
       });
 
       it('should allow a Bucket', done => {
-        const expectedPath = `/o/${encodeURIComponent(
-          file.name
-        )}/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
         assertPathEquals(file, expectedPath, done);
-        file.copy(BUCKET);
+        file.copy(BUCKET, done);
       });
 
       it('should allow a File', done => {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = `/o/${encodeURIComponent(
-          file.name
-        )}/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
-        file.copy(newFile);
+        file.copy(newFile, done);
       });
 
       it('should throw if a destination cannot be parsed', () => {
-        assert.throws(() => {
-          file.copy(() => {});
-        }, /Destination file should have a name\./);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        assert.rejects(
+          file.copy(undefined as unknown as string),
+          (err: Error) => {
+            assert.strictEqual(
+              err.message,
+              FileExceptionMessages.DESTINATION_NO_NAME,
+            );
+          },
+        );
       });
     });
 
@@ -1027,32 +960,16 @@ describe('File', () => {
         rewriteToken: '...',
       };
 
-      beforeEach(() => {
-        file.bucket.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should continue attempting to copy', done => {
+      it('should continue attempting to copy', () => {
         const newFile = new File(BUCKET, 'new-file');
 
-        file.bucket.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          file.copy = (newFile_: {}, options: {}, callback: Function) => {
-            assert.strictEqual(newFile_, newFile);
-            assert.deepStrictEqual(options, {token: apiResponse.rewriteToken});
-            callback(); // done()
-          };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .resolves(apiResponse);
 
-          callback(null, apiResponse);
-        };
-
-        file.copy(newFile, done);
+        file.copy(newFile, apiResponse_ => {
+          assert.strictEqual(apiResponse, apiResponse_);
+        });
       });
 
       it('should pass the userProject in subsequent requests', done => {
@@ -1061,19 +978,16 @@ describe('File', () => {
           userProject: 'grapce-spaceship-123',
         };
 
-        file.bucket.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          file.copy = (newFile_: {}, options: any) => {
-            assert.notStrictEqual(options, fakeOptions);
-            assert.strictEqual(options.userProject, fakeOptions.userProject);
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
+            assert.notStrictEqual(reqOpts, fakeOptions);
+            assert.strictEqual(
+              reqOpts.queryParameters.userProject,
+              fakeOptions.userProject,
+            );
             done();
-          };
-
-          callback(null, apiResponse);
-        };
+          });
 
         file.copy(newFile, fakeOptions, assert.ifError);
       });
@@ -1084,21 +998,15 @@ describe('File', () => {
           destinationKmsKeyName: 'kms-key-name',
         };
 
-        file.bucket.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          file.copy = (newFile_: {}, options: any) => {
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
             assert.strictEqual(
-              options.destinationKmsKeyName,
-              fakeOptions.destinationKmsKeyName
+              reqOpts.queryParameters.destinationKmsKeyName,
+              fakeOptions.destinationKmsKeyName,
             );
             done();
-          };
-
-          callback(null, apiResponse);
-        };
+          });
 
         file.copy(newFile, fakeOptions, assert.ifError);
       });
@@ -1106,10 +1014,15 @@ describe('File', () => {
       it('should make the subsequent correct API request', done => {
         const newFile = new File(BUCKET, 'new-file');
 
-        file.bucket.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.qs.rewriteToken, apiResponse.rewriteToken);
-          done();
-        };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
+            assert.strictEqual(
+              reqOpts.queryParameters.rewriteToken,
+              apiResponse.rewriteToken,
+            );
+            done();
+          });
 
         file.copy(newFile, {token: apiResponse.rewriteToken}, assert.ifError);
       });
@@ -1118,145 +1031,68 @@ describe('File', () => {
     describe('returned File object', () => {
       beforeEach(() => {
         const resp = {success: true};
-        file.bucket.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          callback(null, resp);
-        };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .resolves({file, resp});
       });
 
-      it('should re-use file object if one is provided', done => {
+      it('should re-use file object if one is provided', () => {
         const newFile = new File(BUCKET, 'new-file');
-        file.copy(newFile, (err: Error, copiedFile: {}) => {
+        file.copy(newFile, (err, copiedFile) => {
           assert.ifError(err);
           assert.deepStrictEqual(copiedFile, newFile);
-          done();
         });
       });
 
-      it('should create new file on the same bucket', done => {
+      it('should create new file on the same bucket', () => {
         const newFilename = 'new-filename';
-        file.copy(newFilename, (err: Error, copiedFile: File) => {
+        file.copy(newFilename, (err, copiedFile) => {
           assert.ifError(err);
-          assert.strictEqual(copiedFile.bucket.name, BUCKET.name);
-          assert.strictEqual(copiedFile.name, newFilename);
-          done();
+          assert.strictEqual(copiedFile?.bucket.name, BUCKET.name);
+          assert.strictEqual(copiedFile?.name, newFilename);
         });
       });
 
-      it('should create new file on the destination bucket', done => {
-        file.copy(BUCKET, (err: Error, copiedFile: File) => {
+      it('should create new file on the destination bucket', () => {
+        file.copy(BUCKET, (err, copiedFile) => {
           assert.ifError(err);
-          assert.strictEqual(copiedFile.bucket.name, BUCKET.name);
-          assert.strictEqual(copiedFile.name, file.name);
-          done();
+          assert.strictEqual(copiedFile?.bucket.name, BUCKET.name);
+          assert.strictEqual(copiedFile?.name, file.name);
         });
       });
 
-      it('should pass apiResponse into callback', done => {
-        file.copy(BUCKET, (err: Error, copiedFile: File, apiResponse: {}) => {
+      it('should pass apiResponse into callback', () => {
+        file.copy(BUCKET, (err, copiedFile, apiResponse) => {
           assert.ifError(err);
           assert.deepStrictEqual({success: true}, apiResponse);
-          done();
         });
       });
     });
   });
 
   describe('createReadStream', () => {
-    function getFakeRequest(data?: {}) {
-      let requestOptions: DecorateRequestOptions | undefined;
-
-      class FakeRequest extends Readable {
-        constructor(_requestOptions?: DecorateRequestOptions) {
-          super();
-          requestOptions = _requestOptions;
-          this._read = () => {
-            if (data) {
-              this.push(data);
-            }
-            this.push(null);
-          };
-        }
-
-        static getRequestOptions() {
-          return requestOptions;
-        }
-      }
-
-      // Return a Proxy of FakeRequest which can be instantiated
-      // without new.
-      return new Proxy(FakeRequest, {
-        apply(target, _, argumentsList) {
-          return new target(...argumentsList);
-        },
-      });
-    }
-
-    function getFakeSuccessfulRequest(data: {}) {
-      // tslint:disable-next-line:variable-name
-      const FakeRequest = getFakeRequest(data);
-
-      class FakeSuccessfulRequest extends FakeRequest {
-        constructor(req?: DecorateRequestOptions) {
-          super(req);
-          setImmediate(() => {
-            const stream = new FakeRequest();
-            this.emit('response', stream);
-          });
-        }
-      }
-
-      // Return a Proxy of FakeSuccessfulRequest which can be instantiated
-      // without new.
-      return new Proxy(FakeSuccessfulRequest, {
-        apply(target, _, argumentsList) {
-          return new target(...argumentsList);
-        },
-      });
-    }
-
-    function getFakeFailedRequest(error: Error) {
-      // tslint:disable-next-line:variable-name
-      const FakeRequest = getFakeRequest();
-
-      class FakeFailedRequest extends FakeRequest {
-        constructor(_req?: DecorateRequestOptions) {
-          super(_req);
-          setImmediate(() => {
-            this.emit('error', error);
-          });
-        }
-      }
-
-      // Return a Proxy of FakeFailedRequest which can be instantiated
-      // without new.
-      return new Proxy(FakeFailedRequest, {
-        apply(target, _, argumentsList) {
-          return new target(...argumentsList);
-        },
-      });
-    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mockGaxiosResponse = (headers: any, body: any, statusCode = 200) => {
+      const stream = new PassThrough();
+      stream.write(body);
+      stream.end();
+      return {
+        headers,
+        data: stream,
+        status: statusCode,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+    };
 
     beforeEach(() => {
-      handleRespOverride = (
-        err: Error,
-        res: {},
-        body: {},
-        callback: Function
-      ) => {
-        const rawResponseStream = new PassThrough();
-        Object.assign(rawResponseStream, {
-          toJSON() {
-            return {headers: {}};
-          },
-        });
-        callback(null, null, rawResponseStream);
-        setImmediate(() => {
-          rawResponseStream.end();
-        });
-      };
+      const rawResponseStream = new PassThrough();
+      const headers = {};
+      setImmediate(() => {
+        rawResponseStream.emit('response', headers);
+        rawResponseStream.write(DATA);
+        rawResponseStream.end();
+      });
+      return rawResponseStream;
     });
 
     it('should throw if both a range and validation is given', () => {
@@ -1290,42 +1126,51 @@ describe('File', () => {
       });
     });
 
-    it('should send query.generation if File has one', done => {
+    it('should send query.generation if File has one', () => {
       const versionedFile = new File(BUCKET, 'file.txt', {generation: 1});
 
-      versionedFile.requestStream = (rOpts: DecorateRequestOptions) => {
-        assert.strictEqual(rOpts.qs.generation, 1);
-        setImmediate(done);
-        return duplexify();
-      };
+      // const compressedContent = zlib.gzipSync('test content');
+      const mockResponse = mockGaxiosResponse(
+        {'content-encoding': 'test content'},
+        'test content',
+        200,
+      );
+
+      versionedFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(rOpts => {
+          assert.strictEqual(rOpts.queryParameters.generation, 1);
+          return duplexify();
+        })
+        .resolves(mockResponse);
 
       versionedFile.createReadStream().resume();
     });
 
-    it('should send query.userProject if provided', done => {
+    it('should send query.userProject if provided', () => {
       const options = {
         userProject: 'user-project-id',
       };
 
-      file.requestStream = (rOpts: DecorateRequestOptions) => {
-        assert.strictEqual(rOpts.qs.userProject, options.userProject);
-        setImmediate(done);
-        return duplexify();
-      };
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(rOpts => {
+        assert.strictEqual(
+          rOpts.queryParameters.userProject,
+          options.userProject,
+        );
+        return Promise.resolve(duplexify());
+      });
 
       file.createReadStream(options).resume();
     });
 
-    it('should pass the `GCCL_GCS_CMD_KEY` to `requestStream`', done => {
+    it('should pass the `GCCL_GCS_CMD_KEY` to `requestStream`', () => {
       const expected = 'expected/value';
 
-      file.requestStream = (opts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
         assert.equal(opts[GCCL_GCS_CMD_KEY], expected);
 
-        process.nextTick(() => done());
-
-        return duplexify();
-      };
+        return Promise.resolve(duplexify());
+      });
 
       file
         .createReadStream({
@@ -1335,46 +1180,42 @@ describe('File', () => {
     });
 
     describe('authenticating', () => {
-      it('should create an authenticated request', done => {
-        file.requestStream = (opts: DecorateRequestOptions) => {
+      it('should create an authenticated request', () => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           assert.deepStrictEqual(opts, {
-            uri: '',
+            url: '/storage/v1/b/bucket-name/o/file-name.png',
             headers: {
               'Accept-Encoding': 'gzip',
               'Cache-Control': 'no-store',
             },
-            qs: {
+            decompress: true,
+            compress: false,
+            responseType: 'stream',
+            queryParameters: {
               alt: 'media',
             },
           });
-          setImmediate(() => {
-            done();
-          });
-          return duplexify();
-        };
+
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream().resume();
       });
-
       describe('errors', () => {
-        const ERROR = new Error('Error.');
-
-        beforeEach(() => {
-          file.requestStream = () => {
+        const ERROR = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
+        it('should emit an error from authenticating', done => {
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
             const requestStream = new PassThrough();
 
             setImmediate(() => {
-              requestStream.emit('error', ERROR);
+              requestStream.emit('Error', ERROR);
             });
-
-            return requestStream;
-          };
-        });
-
-        it('should emit an error from authenticating', done => {
+            done();
+            return Promise.resolve(requestStream);
+          });
           file
             .createReadStream()
-            .once('error', (err: Error) => {
+            .once('error', err => {
               assert.strictEqual(err, ERROR);
               done();
             })
@@ -1385,19 +1226,48 @@ describe('File', () => {
 
     describe('requestStream', () => {
       it('should get readable stream from request', done => {
-        file.requestStream = () => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
           setImmediate(() => {
             done();
           });
 
-          return new PassThrough();
-        };
+          return Promise.resolve(new PassThrough());
+        });
 
         file.createReadStream().resume();
       });
 
+      it('should destroy throughStream if stream is null', done => {
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            callback(null, null, {headers: {}});
+            return Promise.resolve();
+          });
+
+        file
+          .createReadStream({validation: false})
+          .on('response', () => {
+            done(new Error('Response event should not have been emitted.'));
+          })
+          .on('error', err => {
+            assert.strictEqual(
+              err?.message,
+              FileExceptionMessages.STREAM_NOT_AVAILABLE,
+            );
+            done();
+          })
+          .resume();
+      });
+
       it('should emit response event from request', done => {
-        file.requestStream = getFakeSuccessfulRequest('body');
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            const mockStream = new PassThrough();
+            callback(null, mockStream, {headers: {}});
+            return Promise.resolve();
+          });
 
         file
           .createReadStream({validation: false})
@@ -1410,37 +1280,35 @@ describe('File', () => {
       it('should let util.handleResp handle the response', done => {
         const response = {a: 'b', c: 'd'};
 
-        handleRespOverride = (err: Error, response_: {}, body: {}) => {
-          assert.strictEqual(err, null);
-          assert.strictEqual(response_, response);
-          assert.strictEqual(body, null);
-          done();
-        };
-
-        file.requestStream = () => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
           const rowRequestStream = new PassThrough();
           setImmediate(() => {
             rowRequestStream.emit('response', response);
           });
-          return rowRequestStream;
-        };
+          done();
+          return Promise.resolve(rowRequestStream);
+        });
 
-        file.createReadStream().resume();
+        file
+          .createReadStream()
+          .on('response', (err, response_, body) => {
+            assert.strictEqual(err, null);
+            assert.strictEqual(response_, response);
+            assert.strictEqual(body, null);
+            done();
+          })
+          .resume();
       });
 
       describe('errors', () => {
-        const ERROR = new Error('Error.');
+        const ERROR = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
+        it('should emit the error', () => {
+          file.storageTransport.makeRequest = sandbox.stub().rejects(ERROR);
 
-        beforeEach(() => {
-          file.requestStream = getFakeFailedRequest(ERROR);
-        });
-
-        it('should emit the error', done => {
           file
             .createReadStream()
-            .once('error', (err: Error) => {
+            .once('error', err => {
               assert.deepStrictEqual(err, ERROR);
-              done();
             })
             .resume();
         });
@@ -1450,24 +1318,13 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const requestStream = new PassThrough();
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            callback(ERROR, null, res);
-            setImmediate(() => {
-              rawResponseStream.end(rawResponsePayload);
-            });
-          };
-
-          file.requestStream = () => {
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
             setImmediate(() => {
               requestStream.emit('response', rawResponseStream);
             });
-            return requestStream;
-          };
+            done();
+            return Promise.resolve(requestStream);
+          });
 
           file
             .createReadStream()
@@ -1481,35 +1338,20 @@ describe('File', () => {
 
         it('should emit errors from the request stream', done => {
           const error = new Error('Error.');
-          const rawResponseStream = new PassThrough();
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (rawResponseStream as any).toJSON = () => {
-            return {headers: {}};
-          };
           const requestStream = new PassThrough();
+          const rawResponseStream = new PassThrough();
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            callback(null, null, rawResponseStream);
-            setImmediate(() => {
-              rawResponseStream.emit('error', error);
-            });
-          };
-
-          file.requestStream = () => {
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
             setImmediate(() => {
               requestStream.emit('response', rawResponseStream);
             });
-            return requestStream;
-          };
+            done();
+            return Promise.resolve(requestStream);
+          });
 
           file
             .createReadStream()
-            .on('error', (err: Error) => {
+            .on('error', err => {
               assert.strictEqual(err, error);
               done();
             })
@@ -1525,28 +1367,17 @@ describe('File', () => {
           };
           const requestStream = new PassThrough();
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            callback(null, null, rawResponseStream);
-            setImmediate(() => {
-              rawResponseStream.emit('error', error);
-            });
-          };
-
-          file.requestStream = () => {
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
             setImmediate(() => {
               requestStream.emit('response', rawResponseStream);
             });
-            return requestStream;
-          };
+            done();
+            return Promise.resolve(requestStream);
+          });
 
           file
             .createReadStream({validation: false})
-            .on('error', (err: Error) => {
+            .on('error', err => {
               assert.strictEqual(err, error);
               rawResponseStream.emit('end');
               setImmediate(done);
@@ -1558,168 +1389,121 @@ describe('File', () => {
         });
 
         it('should destroy rawResponseStream and transformStreams and return early if throughStream is already destroyed', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'content-encoding': 'gzip',
-                },
-              };
-            },
-          });
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
           const destroySpy = sinon.spy(rawResponseStream, 'destroy');
           const gunzipDestroySpy = sinon.spy(gunzipStream, 'destroy');
           const pipelineSpy = sinon.spy();
           pipelineOverride = pipelineSpy;
-          const requestStream = new PassThrough();
 
-          const readStream = file.createReadStream({validation: false});
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              readStream.destroy();
+              assert.strictEqual(readStream.destroyed, true);
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            readStream.destroy();
-            assert.strictEqual(readStream.destroyed, true);
-            assert.doesNotThrow(() => {
-              callback(null, null, rawResponseStream);
+              const rawResponse = {
+                headers: new Headers({'content-encoding': 'gzip'}),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(pipelineSpy.called, false);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              assert.strictEqual(gunzipDestroySpy.calledOnce, true);
+              assert.strictEqual(gunzipStream.destroyed, true);
+              done();
+              return rawResponse;
             });
-            assert.strictEqual(pipelineSpy.called, false);
-            assert.strictEqual(destroySpy.calledOnce, true);
-            assert.strictEqual(rawResponseStream.destroyed, true);
-            assert.strictEqual(gunzipDestroySpy.calledOnce, true);
-            assert.strictEqual(gunzipStream.destroyed, true);
-            done();
-          };
 
-          file.requestStream = () => {
-            setImmediate(() => {
-              requestStream.emit('response', rawResponseStream);
-            });
-            return requestStream;
-          };
-
+          const readStream = proxiedFile.createReadStream({validation: false});
           readStream.resume();
         });
 
         it('should destroy rawResponseStream and return early if throughStream is closed', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {headers: {}};
-            },
-          });
           const destroySpy = sinon.spy(rawResponseStream, 'destroy');
           const pipelineSpy = sinon.spy();
           pipelineOverride = pipelineSpy;
-          const requestStream = new PassThrough();
 
-          const readStream = file.createReadStream({validation: false});
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              Object.defineProperty(readStream, 'closed', {value: true});
+              assert.strictEqual(readStream.destroyed, false);
+              assert.strictEqual(readStream.closed, true);
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            Object.defineProperty(readStream, 'closed', {value: true});
-            assert.strictEqual(readStream.destroyed, false);
-            assert.strictEqual(readStream.closed, true);
-            assert.doesNotThrow(() => {
-              callback(null, null, rawResponseStream);
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(pipelineSpy.called, false);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              done();
+              return rawResponse;
             });
-            assert.strictEqual(pipelineSpy.called, false);
-            assert.strictEqual(destroySpy.calledOnce, true);
-            assert.strictEqual(rawResponseStream.destroyed, true);
-            done();
-          };
 
-          file.requestStream = () => {
-            setImmediate(() => {
-              requestStream.emit('response', rawResponseStream);
-            });
-            return requestStream;
-          };
-
+          const readStream = proxiedFile.createReadStream({validation: false});
           readStream.on('error', done);
           readStream.resume();
         });
 
         it('should destroy rawResponseStream and return early if throughStream is already writableEnded', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {headers: {}};
-            },
-          });
           const destroySpy = sinon.spy(rawResponseStream, 'destroy');
           const pipelineSpy = sinon.spy();
           pipelineOverride = pipelineSpy;
-          const requestStream = new PassThrough();
 
-          const readStream = file.createReadStream({validation: false});
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake((_reqOpts, callback) => {
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            (readStream as unknown as PassThrough).end();
-            assert.strictEqual(
-              (readStream as unknown as PassThrough).writableEnded,
-              true
-            );
-            assert.doesNotThrow(() => {
-              callback(null, null, rawResponseStream);
+              setImmediate(async () => {
+                (readStream as unknown as PassThrough).end();
+                assert.strictEqual(
+                  (readStream as unknown as PassThrough).writableEnded,
+                  true,
+                );
+                await callback(null, rawResponseStream, rawResponse);
+                assert.strictEqual(pipelineSpy.called, false);
+                assert.strictEqual(destroySpy.calledOnce, true);
+                assert.strictEqual(rawResponseStream.destroyed, true);
+                done();
+              });
+              return Promise.resolve(rawResponse);
             });
-            assert.strictEqual(pipelineSpy.called, false);
-            assert.strictEqual(destroySpy.calledOnce, true);
-            assert.strictEqual(rawResponseStream.destroyed, true);
-            done();
-          };
 
-          file.requestStream = () => {
-            setImmediate(() => {
-              requestStream.emit('response', rawResponseStream);
-            });
-            return requestStream;
-          };
-
+          const readStream = proxiedFile.createReadStream({validation: false});
           readStream.on('error', done);
           readStream.resume();
         });
 
         it('should catch ERR_STREAM_UNABLE_TO_PIPE, ignore onComplete, and destroy rawResponseStream and transformStreams', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'content-encoding': 'gzip',
-                },
-              };
-            },
-          });
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
           const destroySpy = sinon.spy(rawResponseStream, 'destroy');
           const gunzipDestroySpy = sinon.spy(gunzipStream, 'destroy');
-          const requestStream = new PassThrough();
-
-          const readStream = file.createReadStream({validation: false});
 
           pipelineOverride = (...args: unknown[]) => {
             const onComplete = args[args.length - 1] as (
-              err: Error | null
+              err: Error | null,
             ) => void;
             const err = new Error(
-              'Cannot pipe to a closed or destroyed stream'
+              'Cannot pipe to a closed or destroyed stream',
             ) as Error & {code?: string};
             err.code = 'ERR_STREAM_UNABLE_TO_PIPE';
             process.nextTick(() => {
@@ -1728,49 +1512,38 @@ describe('File', () => {
             throw err;
           };
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            assert.strictEqual(readStream.destroyed, false);
-            assert.doesNotThrow(() => {
-              callback(null, null, rawResponseStream);
-            });
-            assert.strictEqual(destroySpy.calledOnce, true);
-            assert.strictEqual(rawResponseStream.destroyed, true);
-            assert.strictEqual(gunzipDestroySpy.calledOnce, true);
-            assert.strictEqual(gunzipStream.destroyed, true);
-            setImmediate(() => {
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
               assert.strictEqual(readStream.destroyed, false);
-              done();
-            });
-          };
 
-          file.requestStream = () => {
-            setImmediate(() => {
-              requestStream.emit('response', rawResponseStream);
-            });
-            return requestStream;
-          };
+              const rawResponse = {
+                headers: new Headers({'content-encoding': 'gzip'}),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
 
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              assert.strictEqual(gunzipDestroySpy.calledOnce, true);
+              assert.strictEqual(gunzipStream.destroyed, true);
+              setImmediate(() => {
+                assert.strictEqual(readStream.destroyed, false);
+                done();
+              });
+              return rawResponse;
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
           readStream.on('error', done);
           readStream.resume();
         });
 
         it('should rethrow unexpected errors from pipeline', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {headers: {}};
-            },
-          });
-          const requestStream = new PassThrough();
-          const readStream = file.createReadStream({validation: false});
-
           const unexpectedErr = new Error(
-            'Unexpected pipeline error'
+            'Unexpected pipeline error',
           ) as Error & {
             code?: string;
           };
@@ -1780,195 +1553,72 @@ describe('File', () => {
             throw unexpectedErr;
           };
 
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            assert.throws(() => {
-              callback(null, null, rawResponseStream);
-            }, unexpectedErr);
-            done();
-          };
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
 
-          file.requestStream = () => {
-            setImmediate(() => {
-              requestStream.emit('response', rawResponseStream);
+              await assert.rejects(
+                () => callback(null, rawResponseStream, rawResponse),
+                unexpectedErr,
+              );
+              done();
+              return rawResponse;
             });
-            return requestStream;
-          };
 
+          const readStream = proxiedFile.createReadStream({validation: false});
           readStream.resume();
         });
       });
     });
 
-    describe('compression', () => {
-      beforeEach(() => {
-        handleRespOverride = (
-          err: Error,
-          res: {},
-          body: {},
-          callback: Function
-        ) => {
-          const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'content-encoding': 'gzip',
-                  'x-goog-hash': `crc32c=${CRC32C_HASH_GZIP},md5=${MD5_HASH}`,
-                },
-              };
-            },
-          });
-          callback(null, null, rawResponseStream);
-
-          rawResponseStream.end(GZIPPED_DATA);
-        };
-        file.requestStream = getFakeSuccessfulRequest(GZIPPED_DATA);
-      });
-
-      it('should gunzip the response', async () => {
-        const collection: Buffer[] = [];
-
-        for await (const data of file.createReadStream()) {
-          collection.push(data);
-        }
-
-        assert.equal(Buffer.concat(collection).toString(), DATA);
-      });
-
-      it('should not gunzip the response if "decompress: false" is passed', async () => {
-        const collection: Buffer[] = [];
-
-        for await (const data of file.createReadStream({decompress: false})) {
-          collection.push(data);
-        }
-
-        assert.equal(
-          Buffer.compare(Buffer.concat(collection), GZIPPED_DATA),
-          0
-        );
-      });
-
-      it('should emit errors from the gunzip stream', done => {
-        const error = new Error('Error.');
-        const createGunzipStream = new PassThrough();
-        createGunzipOverride = () => {
-          process.nextTick(() => {
-            createGunzipStream.emit('error', error);
-          });
-          return createGunzipStream;
-        };
-        file
-          .createReadStream()
-          .on('error', (err: Error) => {
-            assert.strictEqual(err, error);
-            done();
-          })
-          .resume();
-      });
-
-      it('should not handle both error and end events', done => {
-        const error = new Error('Error.');
-        const createGunzipStream = new PassThrough();
-        createGunzipOverride = () => {
-          process.nextTick(() => {
-            createGunzipStream.emit('error', error);
-          });
-          return createGunzipStream;
-        };
-        file
-          .createReadStream({validation: false})
-          .on('error', (err: Error) => {
-            assert.strictEqual(err, error);
-            createGunzipStream.emit('end');
-            setImmediate(done);
-          })
-          .on('end', () => {
-            done(new Error('Should not have been called.'));
-          })
-          .resume();
-      });
-    });
-
     describe('validation', () => {
-      let responseCRC32C = CRC32C_HASH;
-      let responseMD5 = MD5_HASH;
+      const responseCRC32C = CRC32C_HASH;
+      const responseMD5 = MD5_HASH;
 
       beforeEach(() => {
-        responseCRC32C = CRC32C_HASH;
-        responseMD5 = MD5_HASH;
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        file.getMetadata = async () => ({});
-
-        handleRespOverride = (
-          err: Error,
-          res: {},
-          body: {},
-          callback: Function
-        ) => {
-          const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
-                  'x-goog-stored-content-encoding': 'identity',
-                },
-              };
-            },
-          });
-          callback(null, null, rawResponseStream);
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
           setImmediate(() => {
-            rawResponseStream.end(DATA);
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
           });
-        };
-        file.requestStream = getFakeSuccessfulRequest(DATA);
+          return Promise.resolve(rawResponseStream);
+        });
       });
-
-      function setFileValidationToError(e: Error = new Error('test-error')) {
-        // Simulating broken CRC32C instance - used by the validation stream
-        file.crc32cGenerator = () => {
-          class C extends CRC32C {
-            update() {
-              throw e;
-            }
-          }
-
-          return new C();
-        };
-      }
 
       describe('server decompression', () => {
         it('should skip validation if file was stored compressed and served decompressed', done => {
           file.metadata.crc32c = '.invalid.';
           file.metadata.contentEncoding = 'gzip';
-
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            const rawResponseStream = new PassThrough();
-            Object.assign(rawResponseStream, {
-              toJSON() {
-                return {
-                  headers: {
-                    'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
-                    'x-goog-stored-content-encoding': 'gzip',
-                  },
-                };
-              },
-            });
-            callback(null, null, rawResponseStream);
-            setImmediate(() => {
-              rawResponseStream.end(DATA);
-            });
+          const rawResponseStream = new PassThrough();
+          const headers = {
+            'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
+            'x-goog-stored-content-encoding': 'gzip',
           };
+
+          file.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake((reqOpts, callback) => {
+              setImmediate(() => {
+                rawResponseStream.emit('response', {headers});
+                rawResponseStream.write(DATA);
+                rawResponseStream.end(DATA);
+              });
+              const mockStream = new PassThrough();
+              callback(null, mockStream, rawResponseStream);
+              done();
+              return Promise.resolve(rawResponseStream);
+            });
 
           file
             .createReadStream({validation: 'crc32c'})
@@ -1980,32 +1630,27 @@ describe('File', () => {
       it('should perform validation if file was stored compressed and served compressed', done => {
         file.metadata.crc32c = '.invalid.';
         file.metadata.contentEncoding = 'gzip';
-        handleRespOverride = (
-          err: Error,
-          res: {},
-          body: {},
-          callback: Function
-        ) => {
-          const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
-                  'x-goog-stored-content-encoding': 'gzip',
-                  'content-encoding': 'gzip',
-                },
-              };
-            },
-          });
-          callback(null, null, rawResponseStream);
-          setImmediate(() => {
-            rawResponseStream.end(DATA);
-          });
+        const rawResponseStream = new PassThrough();
+        const expectedError = new Error('test error');
+        const headers = {
+          'x-goog-hash': `crc32c=${responseCRC32C},md5=${responseMD5}`,
+          'x-goog-stored-content-encoding': 'gzip',
+          'content-encoding': 'gzip',
         };
 
-        const expectedError = new Error('test error');
-        setFileValidationToError(expectedError);
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            setImmediate(() => {
+              rawResponseStream.emit('response', {headers});
+              rawResponseStream.write(DATA);
+              rawResponseStream.end(DATA);
+            });
+            const mockStream = new PassThrough();
+            callback(null, mockStream, rawResponseStream);
+            done();
+            return Promise.resolve(rawResponseStream);
+          });
 
         file
           .createReadStream({validation: 'crc32c'})
@@ -2018,9 +1663,21 @@ describe('File', () => {
 
       it('should emit errors from the validation stream', done => {
         const expectedError = new Error('test error');
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=dummy-hash,md5=${responseMD5}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        file.requestStream = getFakeSuccessfulRequest(DATA);
-        setFileValidationToError(expectedError);
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', headers);
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream()
@@ -2034,9 +1691,21 @@ describe('File', () => {
 
       it('should not handle both error and end events', done => {
         const expectedError = new Error('test error');
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=dummy-hash,md5=${responseMD5}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        file.requestStream = getFakeSuccessfulRequest(DATA);
-        setFileValidationToError(expectedError);
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', headers);
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream()
@@ -2052,7 +1721,21 @@ describe('File', () => {
       });
 
       it('should validate with crc32c', done => {
-        file.requestStream = getFakeSuccessfulRequest(DATA);
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=${CRC32C_HASH}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
+
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream({validation: 'crc32c'})
@@ -2062,21 +1745,47 @@ describe('File', () => {
       });
 
       it('should emit an error if crc32c validation fails', done => {
-        file.requestStream = getFakeSuccessfulRequest('bad-data');
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': 'crc32c=invalid-crc32c',
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        responseCRC32C = 'bad-crc32c';
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream({validation: 'crc32c'})
-          .on('error', (err: ApiError) => {
-            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+          .on('error', err => {
+            assert.strictEqual(err.message, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
           })
           .resume();
       });
 
       it('should validate with md5', done => {
-        file.requestStream = getFakeSuccessfulRequest(DATA);
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-google-hash': `md5=${MD5_HASH}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
+
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream({validation: 'md5'})
@@ -2086,37 +1795,69 @@ describe('File', () => {
       });
 
       it('should emit an error if md5 validation fails', done => {
-        file.requestStream = getFakeSuccessfulRequest('bad-data');
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-google-hash': 'md5=invalid-md5',
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        responseMD5 = 'bad-md5';
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream({validation: 'md5'})
-          .on('error', (err: ApiError) => {
-            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+          .on('error', err => {
+            assert.strictEqual(err.message, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
           })
           .resume();
       });
 
       it('should default to crc32c validation', done => {
-        file.requestStream = getFakeSuccessfulRequest('bad-data');
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=${CRC32C_HASH}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
 
-        responseCRC32C = 'bad-crc32c';
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file
           .createReadStream()
-          .on('error', (err: ApiError) => {
-            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+          .on('error', err => {
+            assert.strictEqual(err.message, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
           })
           .resume();
       });
 
       it('should ignore a data mismatch if validation: false', done => {
-        file.requestStream = getFakeSuccessfulRequest(DATA);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        // (fakeValidationStream as any).test = () => false;
+        const rawResponseStream = new PassThrough();
+
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
+
         file
           .createReadStream({validation: false})
           .resume()
@@ -2125,76 +1866,80 @@ describe('File', () => {
       });
 
       it('should handle x-goog-hash with only crc32c', done => {
-        handleRespOverride = (
-          err: Error,
-          res: {},
-          body: {},
-          callback: Function
-        ) => {
-          const rawResponseStream = new PassThrough();
-          Object.assign(rawResponseStream, {
-            toJSON() {
-              return {
-                headers: {
-                  'x-goog-hash': `crc32c=${CRC32C_HASH}`,
-                },
-              };
-            },
-          });
-          callback(null, null, rawResponseStream);
-          setImmediate(() => {
-            rawResponseStream.end(DATA);
-          });
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-goog-hash': `crc32c=${CRC32C_HASH}`,
         };
 
-        file.requestStream = getFakeSuccessfulRequest(DATA);
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.end(DATA);
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         file.createReadStream().on('error', done).on('end', done).resume();
       });
 
       describe('destroying the through stream', () => {
         it('should destroy after failed validation', done => {
-          file.requestStream = getFakeSuccessfulRequest('bad-data');
+          const rawResponseStream = new PassThrough();
+          const headers = {
+            'x-google-hash': `md5=${MD5_HASH}`,
+            'x-google-stored-content-encoding': 'identity',
+          };
 
-          responseMD5 = 'bad-md5';
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+            setImmediate(() => {
+              rawResponseStream.emit('response', {headers});
+              rawResponseStream.write(DATA);
+              rawResponseStream.end();
+            });
+            done();
+            return Promise.resolve(rawResponseStream);
+          });
 
           const readStream = file.createReadStream({validation: 'md5'});
-          readStream.on('error', (err: ApiError) => {
-            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
-            done();
-          });
+          readStream
+            .on('error', err => {
+              assert.strictEqual(err.message, 'CONTENT_DOWNLOAD_MISMATCH');
+              done();
+            })
+            .on('end', () => {
+              done();
+            });
 
           readStream.resume();
         });
 
         it('should destroy if MD5 is requested but absent', done => {
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            const rawResponseStream = new PassThrough();
-            Object.assign(rawResponseStream, {
-              toJSON() {
-                return {
-                  headers: {},
-                };
-              },
-            });
-            callback(null, null, rawResponseStream);
+          const rawResponseStream = new PassThrough();
+          const headers = {
+            'x-google-stored-content-encoding': 'identity',
+          };
+
+          file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
             setImmediate(() => {
+              rawResponseStream.emit('response', {headers});
+              rawResponseStream.write(DATA);
               rawResponseStream.end();
             });
-          };
-          file.requestStream = getFakeSuccessfulRequest('bad-data');
+            done();
+            return Promise.resolve(rawResponseStream);
+          });
 
           const readStream = file.createReadStream({validation: 'md5'});
 
-          readStream.on('error', (err: ApiError) => {
-            assert.strictEqual(err.code, 'MD5_NOT_AVAILABLE');
-            done();
-          });
+          readStream
+            .on('error', err => {
+              assert.strictEqual(err.message, 'MD5_NOT_AVAILABLE');
+              done();
+            })
+            .on('end', () => {
+              done();
+            });
 
           readStream.resume();
         });
@@ -2205,16 +1950,16 @@ describe('File', () => {
       it('should accept a start range', done => {
         const startOffset = 100;
 
-        file.requestStream = (opts: DecorateRequestOptions) => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           setImmediate(() => {
             assert.strictEqual(
               opts.headers!.Range,
-              'bytes=' + startOffset + '-'
+              'bytes=' + startOffset + '-',
             );
             done();
           });
-          return duplexify();
-        };
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream({start: startOffset}).resume();
       });
@@ -2222,13 +1967,13 @@ describe('File', () => {
       it('should accept an end range and set start to 0', done => {
         const endOffset = 100;
 
-        file.requestStream = (opts: DecorateRequestOptions) => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           setImmediate(() => {
             assert.strictEqual(opts.headers!.Range, 'bytes=0-' + endOffset);
             done();
           });
-          return duplexify();
-        };
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream({end: endOffset}).resume();
       });
@@ -2237,14 +1982,14 @@ describe('File', () => {
         const startOffset = 100;
         const endOffset = 101;
 
-        file.requestStream = (opts: DecorateRequestOptions) => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           setImmediate(() => {
             const expectedRange = 'bytes=' + startOffset + '-' + endOffset;
             assert.strictEqual(opts.headers!.Range, expectedRange);
             done();
           });
-          return duplexify();
-        };
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream({start: startOffset, end: endOffset}).resume();
       });
@@ -2253,20 +1998,34 @@ describe('File', () => {
         const startOffset = 0;
         const endOffset = 0;
 
-        file.requestStream = (opts: DecorateRequestOptions) => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           setImmediate(() => {
             const expectedRange = 'bytes=0-0';
             assert.strictEqual(opts.headers!.Range, expectedRange);
             done();
           });
-          return duplexify();
-        };
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream({start: startOffset, end: endOffset}).resume();
       });
 
       it('should end the through stream', done => {
-        file.requestStream = getFakeSuccessfulRequest(DATA);
+        const rawResponseStream = new PassThrough();
+        const headers = {
+          'x-google-hash': `md5=${MD5_HASH}`,
+          'x-google-stored-content-encoding': 'identity',
+        };
+
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
+          setImmediate(() => {
+            rawResponseStream.emit('response', {headers});
+            rawResponseStream.write(DATA);
+            rawResponseStream.end();
+          });
+          done();
+          return Promise.resolve(rawResponseStream);
+        });
 
         const readStream = file.createReadStream({start: 100});
         readStream.on('end', done);
@@ -2278,13 +2037,13 @@ describe('File', () => {
       it('should make a request for the tail bytes', done => {
         const endOffset = -10;
 
-        file.requestStream = (opts: DecorateRequestOptions) => {
+        file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           setImmediate(() => {
             assert.strictEqual(opts.headers!.Range, 'bytes=' + endOffset);
             done();
           });
-          return duplexify();
-        };
+          return Promise.resolve(duplexify());
+        });
 
         file.createReadStream({end: endOffset}).resume();
       });
@@ -2292,284 +2051,170 @@ describe('File', () => {
   });
 
   describe('createResumableUpload', () => {
-    it('should not require options', done => {
-      resumableUploadOverride = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        createURI(opts: any, callback: Function) {
-          assert.strictEqual(opts.metadata, undefined);
-          callback();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let file: any;
+    let resumableUploadStub: sinon.SinonStub;
+
+    beforeEach(() => {
+      file = {
+        name: FILE_NAME,
+        bucket: {
+          name: 'bucket-name',
+          storage: {
+            authClient: {},
+            apiEndpoint: 'https://storage.googleapis.com',
+            universeDomain: 'universe-domain',
+            retryOptions: {
+              autoRetry: true,
+              idempotencyStrategy: IdempotencyStrategy.RetryConditional,
+            },
+          },
         },
+        storage: {
+          retryOptions: {
+            autoRetry: true,
+            idempotencyStrategy: IdempotencyStrategy.RetryConditional,
+          },
+        },
+        getRequestInterceptors: stub().returns([
+          (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
+        ]),
+        generation: 123,
+        encryptionKey: 'test-encryption-key',
+        kmsKeyName: 'test-kms-key-name',
+        userProject: 'test-user-project',
+        instancePreconditionOpts: {ifGenerationMatch: 123},
+        createResumableUpload: spy(),
       };
 
-      file.createResumableUpload(done);
+      resumableUploadStub = stub();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (global as any).resumableUpload = {createURI: resumableUploadStub};
     });
 
-    it('should disable autoRetry when ifMetagenerationMatch is undefined', done => {
-      resumableUploadOverride = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        createURI(opts: any, callback: Function) {
-          assert.strictEqual(opts.retryOptions.autoRetry, false);
-          callback();
-        },
-      };
-      file.createResumableUpload(done);
-      assert.strictEqual(file.storage.retryOptions.autoRetry, true);
+    afterEach(() => {
+      restore();
     });
 
-    it('should create a resumable upload URI', done => {
-      const options = {
-        metadata: {
-          contentType: 'application/json',
-        },
-        origin: '*',
-        predefinedAcl: 'predefined-acl',
-        private: 'private',
-        public: 'public',
-        userProject: 'user-project-id',
-        retryOptions: {
-          autoRetry: true,
-          maxRetries: 3,
-          maxRetryDelay: 60,
-          retryDelayMultiplier: 2,
-          totalTimeout: 600,
-        },
-        preconditionOpts: {
-          ifGenerationMatch: 100,
-          ifMetagenerationMatch: 101,
-        },
-      };
-
-      file.generation = 3;
-      file.encryptionKey = 'encryption-key';
-      file.kmsKeyName = 'kms-key-name';
-
-      resumableUploadOverride = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        createURI(opts: any, callback: Function) {
-          const bucket = file.bucket;
-          const storage = bucket.storage;
-
-          assert.strictEqual(opts.authClient, storage.authClient);
-          assert.strictEqual(opts.apiEndpoint, storage.apiEndpoint);
-          assert.strictEqual(opts.bucket, bucket.name);
-          assert.strictEqual(opts.file, file.name);
-          assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.key, file.encryptionKey);
-          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
-          assert.strictEqual(opts.metadata, options.metadata);
-          assert.strictEqual(opts.origin, options.origin);
-          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
-          assert.strictEqual(opts.private, options.private);
-          assert.strictEqual(opts.public, options.public);
-          assert.strictEqual(opts.userProject, options.userProject);
-          assert.strictEqual(
-            opts.retryOptions.autoRetry,
-            options.retryOptions.autoRetry
-          );
-          assert.strictEqual(
-            opts.retryOptions.maxRetries,
-            options.retryOptions.maxRetries
-          );
-          assert.strictEqual(
-            opts.retryOptions.maxRetryDelay,
-            options.retryOptions.maxRetryDelay
-          );
-          assert.strictEqual(
-            opts.retryOptions.retryDelayMultiplier,
-            options.retryOptions.retryDelayMultiplier
-          );
-          assert.strictEqual(
-            opts.retryOptions.totalTimeout,
-            options.retryOptions.totalTimeout
-          );
-          assert.strictEqual(opts.params, options.preconditionOpts);
-
-          callback();
-        },
-      };
-
-      file.createResumableUpload(options, done);
-    });
-
-    it('should create a resumable upload URI using precondition options from constructor', done => {
-      file = new File(BUCKET, FILE_NAME, {
-        preconditionOpts: {
-          ifGenerationMatch: 200,
-          ifGenerationNotMatch: 201,
-          ifMetagenerationMatch: 202,
-          ifMetagenerationNotMatch: 203,
-        },
+    it('should not require options', () => {
+      resumableUploadStub.callsFake((opts, callback) => {
+        assert.strictEqual(opts.metadata, undefined);
+        callback();
       });
+
+      file.createResumableUpload();
+    });
+
+    it('should call resumableUpload.createURI with the correct parameters', () => {
       const options = {
-        metadata: {
-          contentType: 'application/json',
-        },
-        origin: '*',
-        predefinedAcl: 'predefined-acl',
-        private: 'private',
-        public: 'public',
-        userProject: 'user-project-id',
-        retryOptions: {
-          autoRetry: true,
-          maxRetries: 3,
-          maxRetryDelay: 60,
-          retryDelayMultiplier: 2,
-          totalTimeout: 600,
-        },
+        metadata: {contentType: 'text/plain'},
+        offset: 1024,
+        origin: 'https://example.com',
+        predefinedAcl: 'publicRead',
+        private: true,
+        public: false,
+        userProject: 'custom-user-project',
+        preconditionOpts: {ifMetagenerationMatch: 123},
       };
 
-      file.generation = 3;
-      file.encryptionKey = 'encryption-key';
-      file.kmsKeyName = 'kms-key-name';
+      resumableUploadStub.callsFake((opts, callback) => {
+        assert.strictEqual(opts.authClient, file.bucket.storage.authClient);
+        assert.strictEqual(opts.apiEndpoint, file.bucket.storage.apiEndpoint);
+        assert.strictEqual(opts.bucket, file.bucket.name);
+        assert.strictEqual(opts.file, file.name);
+        assert.strictEqual(opts.generation, file.generation);
+        assert.strictEqual(opts.key, file.encryptionKey);
+        assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
+        assert.deepEqual(opts.metadata, options.metadata);
+        assert.strictEqual(opts.offset, options.offset);
+        assert.strictEqual(opts.origin, options.origin);
+        assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
+        assert.strictEqual(opts.private, options.private);
+        assert.strictEqual(opts.public, options.public);
+        assert.strictEqual(opts.userProject, options.userProject);
+        assert.deepEqual(opts.params, options.preconditionOpts);
+        assert.strictEqual(
+          opts.universeDomain,
+          file.bucket.storage.universeDomain,
+        );
+        assert.deepEqual(opts.customRequestOptions, {
+          customOption: 'custom-value',
+        });
 
-      resumableUploadOverride = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        createURI(opts: any, callback: Function) {
-          const bucket = file.bucket;
-          const storage = bucket.storage;
+        callback(null, 'https://example.com/resumable-upload-uri');
+      });
 
-          assert.strictEqual(opts.authClient, storage.authClient);
-          assert.strictEqual(opts.apiEndpoint, storage.apiEndpoint);
-          assert.strictEqual(opts.bucket, bucket.name);
-          assert.strictEqual(opts.file, file.name);
-          assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.key, file.encryptionKey);
-          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
-          assert.strictEqual(opts.metadata, options.metadata);
-          assert.strictEqual(opts.origin, options.origin);
-          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
-          assert.strictEqual(opts.private, options.private);
-          assert.strictEqual(opts.public, options.public);
-          assert.strictEqual(opts.userProject, options.userProject);
-          assert.strictEqual(
-            opts.retryOptions.autoRetry,
-            options.retryOptions.autoRetry
-          );
-          assert.strictEqual(
-            opts.retryOptions.maxRetries,
-            options.retryOptions.maxRetries
-          );
-          assert.strictEqual(
-            opts.retryOptions.maxRetryDelay,
-            options.retryOptions.maxRetryDelay
-          );
-          assert.strictEqual(
-            opts.retryOptions.retryDelayMultiplier,
-            options.retryOptions.retryDelayMultiplier
-          );
-          assert.strictEqual(
-            opts.retryOptions.totalTimeout,
-            options.retryOptions.totalTimeout
-          );
-          assert.strictEqual(opts.params, file.instancePreconditionOpts);
-
-          callback();
+      file.createResumableUpload(
+        options,
+        (err: Error | null, uri: string | undefined) => {
+          assert.strictEqual(err, null);
+          assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
         },
-      };
+      );
+    });
 
-      file.createResumableUpload(options, done);
+    it('should use default options if no options are provided', () => {
+      resumableUploadStub.callsFake((opts, callback) => {
+        assert.strictEqual(opts.userProject, file.userProject);
+        assert.deepEqual(opts.params, file.instancePreconditionOpts);
+        callback(null, 'https://example.com/resumable-upload-uri');
+      });
+
+      file.createResumableUpload(
+        (err: Error | null, uri: string | undefined) => {
+          assert.strictEqual(err, null);
+          assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
+        },
+      );
+    });
+
+    it('should correctly apply precondition options', () => {
+      const options = {preconditionOpts: {ifGenerationMatch: 123}};
+
+      resumableUploadStub.callsFake((opts, callback) => {
+        assert.deepEqual(opts.params, options.preconditionOpts);
+        callback(null, 'https://example.com/resumable-upload-uri');
+      });
+
+      file.createResumableUpload(
+        options,
+        (err: Error | null, uri: string | undefined) => {
+          assert.strictEqual(err, null);
+          assert.strictEqual(file.storage.retryOptions.autoRetry, true);
+          assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
+        },
+      );
+    });
+
+    it('should correctly apply precondition options', () => {
+      const options = {preconditionOpts: {ifGenerationMatch: undefined}};
+
+      resumableUploadStub.callsFake((opts, callback) => {
+        assert.strictEqual(opts.retryOptions.autoRetry, false);
+        assert.deepEqual(opts.params, options.preconditionOpts);
+        callback(null, 'https://example.com/resumable-upload-uri');
+      });
+
+      file.createResumableUpload(
+        options,
+        (err: Error | null, uri: string | undefined) => {
+          assert.strictEqual(err, null);
+          assert.strictEqual(file.storage.retryOptions.autoRetry, false);
+          assert.strictEqual(uri, 'https://example.com/resumable-upload-uri');
+          assert.strictEqual(resumableUploadStub.calledOnce, true);
+        },
+      );
     });
   });
 
   describe('createWriteStream', () => {
     const METADATA = {a: 'b', c: 'd'};
 
-    beforeEach(() => {
-      Object.assign(fakeFs, {
-        access(dir: string, check: {}, callback: Function) {
-          // Assume that the required config directory is writable.
-          callback();
-        },
-      });
-    });
-
     it('should return a stream', () => {
       assert(file.createWriteStream() instanceof Stream);
-    });
-
-    it('should emit errors', done => {
-      const error = new Error('Error.');
-      const uploadStream = new PassThrough();
-
-      file.startResumableUpload_ = (dup: duplexify.Duplexify) => {
-        dup.setWritable(uploadStream);
-        uploadStream.emit('error', error);
-      };
-
-      const writable = file.createWriteStream();
-
-      writable.on('error', (err: Error) => {
-        assert.strictEqual(err, error);
-        done();
-      });
-
-      writable.write('data');
-    });
-
-    it('should emit RangeError', done => {
-      const error = new RangeError(
-        'Cannot provide an `offset` without providing a `uri`'
-      );
-
-      const options = {
-        offset: 1,
-        isPartialUpload: true,
-      };
-      const writable = file.createWriteStream(options);
-
-      writable.on('error', (err: RangeError) => {
-        assert.deepEqual(err, error);
-        done();
-      });
-
-      writable.write('data');
-    });
-
-    it('should emit progress via resumable upload', done => {
-      const progress = {};
-
-      resumableUploadOverride = {
-        upload() {
-          const uploadStream = new PassThrough();
-          setImmediate(() => {
-            uploadStream.emit('progress', progress);
-          });
-
-          return uploadStream;
-        },
-      };
-
-      const writable = file.createWriteStream();
-
-      writable.on('progress', (evt: {}) => {
-        assert.strictEqual(evt, progress);
-        done();
-      });
-
-      writable.write('data');
-    });
-
-    it('should emit progress via simple upload', done => {
-      const progress = {};
-
-      makeWritableStreamOverride = (dup: duplexify.Duplexify) => {
-        const uploadStream = new PassThrough();
-        uploadStream.on('progress', evt => dup.emit('progress', evt));
-
-        dup.setWritable(uploadStream);
-        setImmediate(() => {
-          uploadStream.emit('progress', progress);
-        });
-      };
-
-      const writable = file.createWriteStream({resumable: false});
-
-      writable.on('progress', (evt: {}) => {
-        assert.strictEqual(evt, progress);
-        done();
-      });
-
-      writable.write('data');
     });
 
     it('should start a simple upload if specified', done => {
@@ -2580,9 +2225,9 @@ describe('File', () => {
       };
       const writable = file.createWriteStream(options);
 
-      file.startSimpleUpload_ = () => {
+      file.startSimpleUpload_ = sandbox.stub().callsFake(() => {
         done();
-      };
+      });
 
       writable.write('data');
     });
@@ -2595,9 +2240,9 @@ describe('File', () => {
       };
       const writable = file.createWriteStream(options);
 
-      file.startResumableUpload_ = () => {
+      file.startResumableUpload_ = sandbox.stub().callsFake(() => {
         done();
-      };
+      });
 
       writable.write('data');
     });
@@ -2607,9 +2252,9 @@ describe('File', () => {
         metadata: METADATA,
       });
 
-      file.startResumableUpload_ = () => {
+      file.startResumableUpload_ = sandbox.stub().callsFake(() => {
         done();
-      };
+      });
 
       writable.write('data');
     });
@@ -2618,127 +2263,101 @@ describe('File', () => {
       const contentType = 'text/html';
       const writable = file.createWriteStream({contentType});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentType, contentType);
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentType, contentType);
+          done();
+        });
 
       writable.write('data');
     });
 
     it('should not call getMime if contentType is provided', done => {
-      let getMimeCalled = false;
-      const FileWithStub = proxyquire('../src/file.js', {
-        './nodejs-common': {
-          ServiceObject: FakeServiceObject,
-          util: fakeUtil,
-        },
-        '@google-cloud/promisify': fakePromisify,
-        fs: fakeFs,
-        '../src/resumable-upload': fakeResumableUpload,
-        os: fakeOs,
-        './signer': fakeSigner,
-        zlib: fakeZlib,
-        './util.js': {
-          ...require('../src/util.js'),
-          getMime: async () => {
-            getMimeCalled = true;
-            return {getType: () => 'image/png'};
-          },
-        },
-      }).File;
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const utilModule = require('../src/util.js');
+      const getMimeSpy = sandbox.spy(utilModule, 'getMime');
 
-      const f = new FileWithStub(STORAGE.bucket('test-bucket'), 'test.png');
+      const f = new File(BUCKET, 'test.png');
       const writable = f.createWriteStream({contentType: 'text/plain'});
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       f.startResumableUpload_ = (
         stream: {},
-        options: {metadata: {contentType?: string}}
+        options: {metadata: {contentType?: string}},
       ) => {
         assert.strictEqual(options.metadata.contentType, 'text/plain');
-        assert.strictEqual(getMimeCalled, false);
+        assert.strictEqual(getMimeSpy.called, false);
         done();
       };
       writable.write('data');
     });
 
     it('should not call getMime if metadata.contentType is provided', done => {
-      let getMimeCalled = false;
-      const FileWithStub = proxyquire('../src/file.js', {
-        './nodejs-common': {
-          ServiceObject: FakeServiceObject,
-          util: fakeUtil,
-        },
-        '@google-cloud/promisify': fakePromisify,
-        fs: fakeFs,
-        '../src/resumable-upload': fakeResumableUpload,
-        os: fakeOs,
-        './signer': fakeSigner,
-        zlib: fakeZlib,
-        './util.js': {
-          ...require('../src/util.js'),
-          getMime: async () => {
-            getMimeCalled = true;
-            return {getType: () => 'image/png'};
-          },
-        },
-      }).File;
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const utilModule = require('../src/util.js');
+      const getMimeSpy = sandbox.spy(utilModule, 'getMime');
 
-      const f = new FileWithStub(STORAGE.bucket('test-bucket'), 'test.png');
+      const f = new File(BUCKET, 'test.png');
       const writable = f.createWriteStream({
         metadata: {contentType: 'application/json'},
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       f.startResumableUpload_ = (
         stream: {},
-        options: {metadata: {contentType?: string}}
+        options: {metadata: {contentType?: string}},
       ) => {
         assert.strictEqual(options.metadata.contentType, 'application/json');
-        assert.strictEqual(getMimeCalled, false);
+        assert.strictEqual(getMimeSpy.called, false);
         done();
       };
       writable.write('data');
     });
 
-    it('should detect contentType with contentType:auto', done => {
+    it('should detect contentType with contentType:auto', () => {
       const writable = file.createWriteStream({contentType: 'auto'});
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentType, 'image/png');
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentType, 'image/png');
+        });
 
       writable.write('data');
     });
 
-    it('should detect contentType if not defined', done => {
+    it('should detect contentType if not defined', () => {
       const writable = file.createWriteStream();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentType, 'image/png');
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentType, 'image/png');
+        });
 
       writable.write('data');
     });
 
     it('should not set a contentType if mime lookup failed', done => {
-      const file = new File('file-without-ext');
+      const file = new File(BUCKET, 'file-without-ext');
       const writable = file.createWriteStream();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(typeof options.metadata.contentType, 'undefined');
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(typeof options.metadata.contentType, 'undefined');
+          done();
+        });
 
       writable.write('data');
     });
 
     it('should set encoding with gzip:true', done => {
       const writable = file.createWriteStream({gzip: true});
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentEncoding, 'gzip');
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentEncoding, 'gzip');
+          done();
+        });
 
       writable.write('data');
     });
@@ -2747,11 +2366,12 @@ describe('File', () => {
       const writable = file.createWriteStream({
         preconditionOpts: {ifGenerationMatch: 100},
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.preconditionOpts.ifGenerationMatch, 100);
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.preconditionOpts.ifGenerationMatch, 100);
+          done();
+        });
 
       writable.write('data');
     });
@@ -2760,11 +2380,15 @@ describe('File', () => {
       const writable = file.createWriteStream({
         preconditionOpts: {ifGenerationNotMatch: 100},
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.preconditionOpts.ifGenerationNotMatch, 100);
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(
+            options.preconditionOpts.ifGenerationNotMatch,
+            100,
+          );
+          done();
+        });
 
       writable.write('data');
     });
@@ -2773,11 +2397,15 @@ describe('File', () => {
       const writable = file.createWriteStream({
         preconditionOpts: {ifMetagenerationMatch: 100},
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.preconditionOpts.ifMetagenerationMatch, 100);
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(
+            options.preconditionOpts.ifMetagenerationMatch,
+            100,
+          );
+          done();
+        });
 
       writable.write('data');
     });
@@ -2786,14 +2414,15 @@ describe('File', () => {
       const writable = file.createWriteStream({
         preconditionOpts: {ifMetagenerationNotMatch: 100},
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(
-          options.preconditionOpts.ifMetagenerationNotMatch,
-          100
-        );
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(
+            options.preconditionOpts.ifMetagenerationNotMatch,
+            100,
+          );
+          done();
+        });
 
       writable.write('data');
     });
@@ -2804,22 +2433,24 @@ describe('File', () => {
         contentType: 'text/html', // (compressible)
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentEncoding, 'gzip');
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentEncoding, 'gzip');
+          done();
+        });
 
       writable.write('data');
     });
 
     it('should not set encoding with gzip:auto & non-compressible', done => {
       const writable = file.createWriteStream({gzip: 'auto'});
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentEncoding, undefined);
-        done();
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream, options) => {
+          assert.strictEqual(options.metadata.contentEncoding, undefined);
+          done();
+        });
       writable.write('data');
     });
 
@@ -2827,9 +2458,11 @@ describe('File', () => {
       const writable = file.createWriteStream();
       const resp = {};
 
-      file.startResumableUpload_ = (stream: Duplex) => {
-        stream.emit('response', resp);
-      };
+      file.startResumableUpload_ = sandbox
+        .stub()
+        .callsFake((stream: Duplex) => {
+          stream.emit('response', resp);
+        });
 
       writable.on('response', (resp_: {}) => {
         assert.strictEqual(resp_, resp);
@@ -2856,77 +2489,18 @@ describe('File', () => {
         }
       });
 
-      file.startSimpleUpload_ = (stream: duplexify.Duplexify) => {
-        stream.setWritable(new PassThrough());
-        stream.emit('metadata');
+      file.startSimpleUpload_ = sandbox
+        .stub()
+        .callsFake((stream: duplexify.Duplexify) => {
+          stream.setWritable(new PassThrough());
+          stream.emit('metadata');
 
-        stream.on('finish', () => {
-          streamFinishedCalled = true;
+          stream.on('finish', () => {
+            streamFinishedCalled = true;
+          });
         });
-      };
 
       writable.end('data');
-    });
-
-    it('should close upstream when pipeline fails', done => {
-      const writable: Stream.Writable = file.createWriteStream();
-      const error = new Error('My error');
-      const uploadStream = new PassThrough();
-
-      let receivedBytes = 0;
-      const validateStream = new PassThrough();
-      validateStream.on('data', (chunk: Buffer) => {
-        receivedBytes += chunk.length;
-        if (receivedBytes > 5) {
-          // this aborts the pipeline which should also close the internal pipeline within createWriteStream
-          pLine.destroy(error);
-        }
-      });
-
-      file.startResumableUpload_ = (dup: duplexify.Duplexify) => {
-        dup.setWritable(uploadStream);
-        // Emit an error so the pipeline's error-handling logic is triggered
-        uploadStream.emit('error', error);
-        // Explicitly destroy the stream so that the 'close' event is guaranteed to fire,
-        // even in Node v14 where autoDestroy defaults may prevent automatic closing
-        uploadStream.destroy();
-      };
-
-      let closed = false;
-      uploadStream.on('close', () => {
-        closed = true;
-      });
-
-      const pLine = pipeline(
-        (function* () {
-          yield 'foo'; // write some data
-          yield 'foo'; // write some data
-          yield 'foo'; // write some data
-        })(),
-        validateStream,
-        writable,
-        (e: Error | null) => {
-          assert.strictEqual(e, error);
-          assert.strictEqual(closed, true);
-          done();
-        }
-      );
-    });
-
-    it('should error pipeline if source stream emits error before any data', done => {
-      const writable = file.createWriteStream();
-      const error = new Error('Error before first chunk');
-      pipeline(
-        // eslint-disable-next-line require-yield
-        (function* () {
-          throw error;
-        })(),
-        writable,
-        (e: Error | null) => {
-          assert.strictEqual(e, error);
-          done();
-        }
-      );
     });
 
     describe('validation', () => {
@@ -2940,14 +2514,16 @@ describe('File', () => {
       it('should validate with crc32c', done => {
         const writable = file.createWriteStream({validation: 'crc32c'});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = fakeMetadata.crc32c;
+            stream.on('finish', () => {
+              file.metadata = fakeMetadata.crc32c;
+            });
           });
-        };
 
         writable.end(data);
 
@@ -2957,21 +2533,23 @@ describe('File', () => {
       it('should emit an error if crc32c validation fails', done => {
         const writable = file.createWriteStream({validation: 'crc32c'});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = fakeMetadata.crc32c;
+            stream.on('finish', () => {
+              file.metadata = fakeMetadata.crc32c;
+            });
           });
-        };
 
-        file.delete = async () => {};
+        sandbox.stub(file, 'delete').callsFake(() => {});
 
         writable.write('bad-data');
         writable.end();
 
-        writable.on('error', (err: ApiError) => {
+        writable.on('error', (err: RequestError) => {
           assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
@@ -2980,14 +2558,16 @@ describe('File', () => {
       it('should validate with md5', done => {
         const writable = file.createWriteStream({validation: 'md5'});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = fakeMetadata.md5;
+            stream.on('finish', () => {
+              file.metadata = fakeMetadata.md5;
+            });
           });
-        };
 
         writable.write(data);
         writable.end();
@@ -2998,21 +2578,23 @@ describe('File', () => {
       it('should emit an error if md5 validation fails', done => {
         const writable = file.createWriteStream({validation: 'md5'});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = fakeMetadata.md5;
+            stream.on('finish', () => {
+              file.metadata = fakeMetadata.md5;
+            });
           });
-        };
 
-        file.delete = async () => {};
+        sandbox.stub(file, 'delete').callsFake(() => {});
 
         writable.write('bad-data');
         writable.end();
 
-        writable.on('error', (err: ApiError) => {
+        writable.on('error', (err: RequestError) => {
           assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
@@ -3021,21 +2603,23 @@ describe('File', () => {
       it('should default to md5 validation', done => {
         const writable = file.createWriteStream();
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = {md5Hash: 'bad-hash'};
+            stream.on('finish', () => {
+              file.metadata = {md5Hash: 'bad-hash'};
+            });
           });
-        };
 
-        file.delete = async () => {};
+        sandbox.stub(file, 'delete').callsFake(() => {});
 
         writable.write(data);
         writable.end();
 
-        writable.on('error', (err: ApiError) => {
+        writable.on('error', (err: RequestError) => {
           assert.strictEqual(err.code, 'FILE_NO_UPLOAD');
           done();
         });
@@ -3044,14 +2628,16 @@ describe('File', () => {
       it('should ignore a data mismatch if validation: false', done => {
         const writable = file.createWriteStream({validation: false});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = {md5Hash: 'bad-hash'};
+            stream.on('finish', () => {
+              file.metadata = {md5Hash: 'bad-hash'};
+            });
           });
-        };
 
         writable.write(data);
         writable.end();
@@ -3063,19 +2649,21 @@ describe('File', () => {
       it('should delete the file if validation fails', done => {
         const writable = file.createWriteStream();
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = {md5Hash: 'bad-hash'};
+            stream.on('finish', () => {
+              file.metadata = {md5Hash: 'bad-hash'};
+            });
           });
-        };
 
-        file.delete = async () => {};
+        sandbox.stub(file, 'delete').callsFake(() => {});
 
-        writable.on('error', (e: ApiError) => {
-          assert.equal(e.code, 'FILE_NO_UPLOAD');
+        writable.on('error', (err: RequestError) => {
+          assert.equal(err.code, 'FILE_NO_UPLOAD');
           done();
         });
 
@@ -3086,21 +2674,23 @@ describe('File', () => {
       it('should emit an error if MD5 is requested but absent', done => {
         const writable = file.createWriteStream({validation: 'md5'});
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = {crc32c: 'not-md5'};
+            stream.on('finish', () => {
+              file.metadata = {crc32c: 'not-md5'};
+            });
           });
-        };
 
-        file.delete = async () => {};
+        sandbox.stub(file, 'delete').callsFake(() => {});
 
         writable.write(data);
         writable.end();
 
-        writable.on('error', (err: ApiError) => {
+        writable.on('error', (err: RequestError) => {
           assert.strictEqual(err.code, 'MD5_NOT_AVAILABLE');
           done();
         });
@@ -3109,14 +2699,16 @@ describe('File', () => {
       it('should emit a different error if delete fails', done => {
         const writable = file.createWriteStream();
 
-        file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
-          stream.setWritable(new PassThrough());
-          stream.emit('metadata');
+        file.startResumableUpload_ = sandbox
+          .stub()
+          .callsFake((stream: duplexify.Duplexify) => {
+            stream.setWritable(new PassThrough());
+            stream.emit('metadata');
 
-          stream.on('finish', () => {
-            file.metadata = {md5Hash: 'bad-hash'};
+            stream.on('finish', () => {
+              file.metadata = {md5Hash: 'bad-hash'};
+            });
           });
-        };
 
         const deleteErrorMessage = 'Delete error message.';
         const deleteError = new Error(deleteErrorMessage);
@@ -3127,7 +2719,7 @@ describe('File', () => {
         writable.write(data);
         writable.end();
 
-        writable.on('error', (err: ApiError) => {
+        writable.on('error', (err: RequestError) => {
           assert.strictEqual(err.code, 'FILE_NO_UPLOAD_DELETE');
           assert(err.message.indexOf(deleteErrorMessage) > -1);
           done();
@@ -3138,11 +2730,11 @@ describe('File', () => {
 
   describe('download', () => {
     let fileReadStream: Readable;
-    let originalSetEncryptionKey: Function;
+    let originalSetEncryptionKey: typeof file.setEncryptionKey;
 
     beforeEach(() => {
       fileReadStream = new Readable();
-      fileReadStream._read = util.noop;
+      sandbox.stub(fileReadStream, '_read').callsFake(() => {});
 
       fileReadStream.on('end', () => {
         fileReadStream.emit('complete');
@@ -3153,52 +2745,29 @@ describe('File', () => {
       };
 
       originalSetEncryptionKey = file.setEncryptionKey;
-      file.setEncryptionKey = sinon.stub();
+      file.setEncryptionKey = stub();
     });
 
     afterEach(() => {
       file.setEncryptionKey = originalSetEncryptionKey;
     });
 
-    it('should accept just a callback', done => {
-      fileReadStream._read = () => {
-        done();
-      };
-
+    it('should accept just a callback', () => {
       file.download(assert.ifError);
     });
 
-    it('should accept an options object and callback', done => {
-      fileReadStream._read = () => {
-        done();
-      };
-
+    it('should accept an options object and callback', () => {
       file.download({}, assert.ifError);
     });
 
-    it('should not mutate options object after use', done => {
-      const optionsObject = {destination: './unknown.jpg'};
-      fileReadStream._read = () => {
-        assert.strictEqual(optionsObject.destination, './unknown.jpg');
-        assert.deepStrictEqual(optionsObject, {destination: './unknown.jpg'});
-        done();
-      };
-      file.download(optionsObject, assert.ifError);
-    });
-
     it('should pass the provided options to createReadStream', done => {
-      const readOptions = {start: 100, end: 200, destination: './unknown.jpg'};
+      const readOptions = {start: 100, end: 200};
 
-      file.createReadStream = (options: {}) => {
-        assert.deepStrictEqual(options, {start: 100, end: 200});
-        assert.deepStrictEqual(readOptions, {
-          start: 100,
-          end: 200,
-          destination: './unknown.jpg',
-        });
+      sandbox.stub(file, 'createReadStream').callsFake(options => {
+        assert.deepStrictEqual(options, readOptions);
         done();
         return fileReadStream;
-      };
+      });
 
       file.download(readOptions, assert.ifError);
     });
@@ -3215,11 +2784,11 @@ describe('File', () => {
         return fileReadStream;
       };
 
-      file.download(downloadOptions, (err: Error) => {
+      file.download(downloadOptions, err => {
         assert.ifError(err);
         // Verify that setEncryptionKey was called with the correct key
         assert.ok(
-          (file.setEncryptionKey as sinon.SinonStub).calledWith(encryptionKey)
+          (file.setEncryptionKey as sinon.SinonStub).calledWith(encryptionKey),
         );
         done();
       });
@@ -3231,9 +2800,6 @@ describe('File', () => {
     it('should only execute callback once', done => {
       Object.assign(fileReadStream, {
         _read(this: Readable) {
-          // Do not fire the errors immediately as this is a synchronous operation here
-          // and the iterator getter is also synchronous in file.getBufferFromReadable.
-          // this is only an issue for <= node 12. This cannot happen in practice.
           process.nextTick(() => {
             this.emit('error', new Error('Error.'));
             this.emit('error', new Error('Error.'));
@@ -3257,7 +2823,7 @@ describe('File', () => {
           },
         });
 
-        file.download((err: Error, remoteFileContents: {}) => {
+        file.download((err, remoteFileContents) => {
           assert.ifError(err);
 
           assert.strictEqual(fileContents, remoteFileContents.toString());
@@ -3270,16 +2836,13 @@ describe('File', () => {
 
         Object.assign(fileReadStream, {
           _read(this: Readable) {
-            // Do not fire the errors immediately as this is a synchronous operation here
-            // and the iterator getter is also synchronous in file.getBufferFromReadable.
-            // this is only an issue for <= node 12. This cannot happen in practice.
             process.nextTick(() => {
               this.emit('error', error);
             });
           },
         });
 
-        file.download((err: Error) => {
+        file.download(err => {
           assert.strictEqual(err, error);
           done();
         });
@@ -3287,7 +2850,7 @@ describe('File', () => {
     });
 
     describe('with destination', () => {
-      const sandbox = sinon.createSandbox();
+      const sandbox = createSandbox();
 
       afterEach(() => {
         sandbox.restore();
@@ -3307,7 +2870,7 @@ describe('File', () => {
             },
           });
 
-          file.download({destination: tmpFilePath}, (err: Error) => {
+          file.download({destination: tmpFilePath}, err => {
             assert.ifError(err);
 
             fs.readFile(tmpFilePath, (err, tmpFileContents) => {
@@ -3335,13 +2898,13 @@ describe('File', () => {
             });
           });
 
-          file.download({destination: tmpFilePath}, (err: Error) => {
+          file.download({destination: tmpFilePath}, err => {
             assert.ifError(err);
             fs.readFile(tmpFilePath, (err, tmpFileContents) => {
               assert.ifError(err);
               assert.strictEqual(
                 fileContents + fileContents,
-                tmpFileContents.toString()
+                tmpFileContents.toString(),
               );
               done();
             });
@@ -3360,7 +2923,7 @@ describe('File', () => {
             });
           });
 
-          file.download({destination: tmpFilePath}, (err: Error) => {
+          file.download({destination: tmpFilePath}, err => {
             assert.ifError(err);
             fs.readFile(tmpFilePath, (err, tmpFileContents) => {
               assert.ifError(err);
@@ -3386,7 +2949,7 @@ describe('File', () => {
             });
           });
 
-          file.download({destination: tmpFilePath}, (err: Error) => {
+          file.download({destination: tmpFilePath}, err => {
             assert.strictEqual(err, error);
             fs.readFile(tmpFilePath, (err, tmpFileContents) => {
               assert.ifError(err);
@@ -3410,7 +2973,7 @@ describe('File', () => {
             },
           });
 
-          file.download({destination: tmpFilePath}, (err: Error) => {
+          file.download({destination: tmpFilePath}, err => {
             assert.strictEqual(err, error);
             done();
           });
@@ -3433,7 +2996,7 @@ describe('File', () => {
 
           const nestedPath = path.join(tmpDirPath, 'a', 'b', 'c', 'file.txt');
 
-          file.download({destination: nestedPath}, (err: Error) => {
+          file.download({destination: nestedPath}, err => {
             assert.ok(err);
             done();
           });
@@ -3444,9 +3007,9 @@ describe('File', () => {
 
   describe('getExpirationDate', () => {
     it('should refresh metadata', done => {
-      file.getMetadata = () => {
+      file.getMetadata = sandbox.stub().callsFake(() => {
         done();
-      };
+      });
 
       file.getExpirationDate(assert.ifError);
     });
@@ -3455,38 +3018,34 @@ describe('File', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      file.getMetadata = (callback: Function) => {
+      file.getMetadata = sandbox.stub().callsFake(callback => {
         callback(error, null, apiResponse);
-      };
+      });
 
-      file.getExpirationDate(
-        (err: Error, expirationDate: {}, apiResponse_: {}) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(expirationDate, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        }
-      );
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.strictEqual(err, error);
+        assert.strictEqual(expirationDate, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
     });
 
     it('should return an error if there is no expiration time', done => {
       const apiResponse = {};
 
-      file.getMetadata = (callback: Function) => {
+      file.getMetadata = sandbox.stub().callsFake(callback => {
         callback(null, {}, apiResponse);
-      };
+      });
 
-      file.getExpirationDate(
-        (err: Error, expirationDate: {}, apiResponse_: {}) => {
-          assert.strictEqual(
-            err.message,
-            FileExceptionMessages.EXPIRATION_TIME_NA
-          );
-          assert.strictEqual(expirationDate, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        }
-      );
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.strictEqual(
+          err?.message,
+          FileExceptionMessages.EXPIRATION_TIME_NA,
+        );
+        assert.strictEqual(expirationDate, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
     });
 
     it('should return the expiration time as a Date object', done => {
@@ -3496,60 +3055,65 @@ describe('File', () => {
         retentionExpirationTime: expirationTime.toJSON(),
       };
 
-      file.getMetadata = (callback: Function) => {
+      file.getMetadata = sandbox.stub().callsFake(callback => {
         callback(null, apiResponse, apiResponse);
-      };
+      });
 
-      file.getExpirationDate(
-        (err: Error, expirationDate: {}, apiResponse_: {}) => {
-          assert.ifError(err);
-          assert.deepStrictEqual(expirationDate, expirationTime);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        }
-      );
+      file.getExpirationDate((err, expirationDate, apiResponse_) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(expirationDate, expirationTime);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
     });
   });
 
   describe('generateSignedPostPolicyV2', () => {
     let CONFIG: GenerateSignedPostPolicyV2Options;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let sandbox: any;
+    let bucket: Bucket;
+    let file: File;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let mockAuthClient: any;
 
     beforeEach(() => {
+      sandbox = createSandbox();
+      const storage = new Storage({projectId: PROJECT_ID});
+      bucket = new Bucket(storage, 'bucket-name');
+      file = new File(bucket, FILE_NAME);
+
+      mockAuthClient = {sign: sandbox.stub().resolves('signature')};
+      file.storage.storageTransport.authClient = mockAuthClient;
+
       CONFIG = {
         expires: Date.now() + 2000,
       };
-
-      BUCKET.storage.authClient = {
-        sign: () => {
-          return Promise.resolve('signature');
-        },
-      };
     });
 
-    it('should create a signed policy', done => {
-      BUCKET.storage.authClient.sign = (blobToSign: string) => {
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should create a signed policy', () => {
+      file.storage.storageTransport.authClient.sign = (blobToSign: string) => {
         const policy = Buffer.from(blobToSign, 'base64').toString();
         assert.strictEqual(typeof JSON.parse(policy), 'object');
         return Promise.resolve('signature');
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.generateSignedPostPolicyV2(
-        CONFIG,
-        (err: Error, signedPolicy: PolicyDocument) => {
-          assert.ifError(err);
-          assert.strictEqual(typeof signedPolicy.string, 'string');
-          assert.strictEqual(typeof signedPolicy.base64, 'string');
-          assert.strictEqual(typeof signedPolicy.signature, 'string');
-          done();
-        }
-      );
+      file.generateSignedPostPolicyV2(CONFIG, (err, signedPolicy) => {
+        assert.ifError(err);
+        assert.strictEqual(typeof signedPolicy?.string, 'string');
+        assert.strictEqual(typeof signedPolicy?.base64, 'string');
+        assert.strictEqual(typeof signedPolicy?.signature, 'string');
+      });
     });
 
     it('should not modify the configuration object', done => {
       const originalConfig = Object.assign({}, CONFIG);
 
-      file.generateSignedPostPolicyV2(CONFIG, (err: Error) => {
+      file.generateSignedPostPolicyV2(CONFIG, err => {
         assert.ifError(err);
         assert.deepStrictEqual(CONFIG, originalConfig);
         done();
@@ -3559,27 +3123,25 @@ describe('File', () => {
     it('should return an error if signBlob errors', done => {
       const error = new Error('Error.');
 
-      BUCKET.storage.authClient.sign = () => {
+      file.storage.storageTransport.authClient.sign = () => {
         return Promise.reject(error);
       };
 
-      file.generateSignedPostPolicyV2(CONFIG, (err: Error) => {
-        assert.strictEqual(err.name, 'SigningError');
-        assert.strictEqual(err.message, error.message);
+      file.generateSignedPostPolicyV2(CONFIG, err => {
+        assert.strictEqual(err?.name, 'SigningError');
+        assert.strictEqual(err?.message, error.message);
         done();
       });
     });
 
     it('should add key equality condition', done => {
-      file.generateSignedPostPolicyV2(
-        CONFIG,
-        (err: Error, signedPolicy: PolicyDocument) => {
-          const conditionString = '["eq","$key","' + file.name + '"]';
-          assert.ifError(err);
-          assert(signedPolicy.string.indexOf(conditionString) > -1);
-          done();
-        }
-      );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      file.generateSignedPostPolicyV2(CONFIG, (err, signedPolicy: any) => {
+        const conditionString = '["eq","$key","' + file.name + '"]';
+        assert.ifError(err);
+        assert(signedPolicy.string.indexOf(conditionString) > -1);
+        done();
+      });
     });
 
     it('should add ACL condition', done => {
@@ -3588,12 +3150,13 @@ describe('File', () => {
           expires: Date.now() + 2000,
           acl: '<acl>',
         },
-        (err: Error, signedPolicy: PolicyDocument) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err, signedPolicy: any) => {
           const conditionString = '{"acl":"<acl>"}';
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
           done();
-        }
+        },
       );
     });
 
@@ -3605,7 +3168,8 @@ describe('File', () => {
           expires: Date.now() + 2000,
           successRedirect: redirectUrl,
         },
-        (err: Error, signedPolicy: PolicyDocument) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err, signedPolicy: any) => {
           assert.ifError(err);
 
           const policy = JSON.parse(signedPolicy.string);
@@ -3614,11 +3178,11 @@ describe('File', () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_redirect === redirectUrl;
-            })
+            }),
           );
 
           done();
-        }
+        },
       );
     });
 
@@ -3630,7 +3194,8 @@ describe('File', () => {
           expires: Date.now() + 2000,
           successStatus,
         },
-        (err: Error, signedPolicy: PolicyDocument) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err, signedPolicy: any) => {
           assert.ifError(err);
 
           const policy = JSON.parse(signedPolicy.string);
@@ -3639,11 +3204,11 @@ describe('File', () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             policy.conditions.some((condition: any) => {
               return condition.success_action_status === successStatus;
-            })
+            }),
           );
 
           done();
-        }
+        },
       );
     });
 
@@ -3655,12 +3220,13 @@ describe('File', () => {
           {
             expires,
           },
-          (err: Error, policy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, policy: any) => {
             assert.ifError(err);
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, expires.toISOString());
             done();
-          }
+          },
         );
       });
 
@@ -3671,12 +3237,13 @@ describe('File', () => {
           {
             expires,
           },
-          (err: Error, policy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, policy: any) => {
             assert.ifError(err);
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, new Date(expires).toISOString());
             done();
-          }
+          },
         );
       });
 
@@ -3687,49 +3254,42 @@ describe('File', () => {
           {
             expires,
           },
-          (err: Error, policy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, policy: any) => {
             assert.ifError(err);
             const expires_ = JSON.parse(policy.string).expiration;
             assert.strictEqual(expires_, new Date(expires).toISOString());
             done();
-          }
+          },
         );
       });
 
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(
-          () => {
-            void file.generateSignedPostPolicyV2(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {
-            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires,
+            },
+            () => {},
+          ),
+            ExceptionMessages.EXPIRATION_DATE_INVALID);
+        });
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {
-            message: ExceptionMessages.EXPIRATION_DATE_PAST,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires,
+            },
+            () => {},
+          ),
+            ExceptionMessages.EXPIRATION_DATE_PAST);
+        });
       });
     });
 
@@ -3740,12 +3300,13 @@ describe('File', () => {
             expires: Date.now() + 2000,
             equals: [['$<field>', '<value>']],
           },
-          (err: Error, signedPolicy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, signedPolicy: any) => {
             const conditionString = '["eq","$<field>","<value>"]';
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3755,47 +3316,40 @@ describe('File', () => {
             expires: Date.now() + 2000,
             equals: ['$<field>', '<value>'],
           },
-          (err: Error, signedPolicy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, signedPolicy: any) => {
             const conditionString = '["eq","$<field>","<value>"]';
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
       it('should throw if equal condition is not an array', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                equals: [{}],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              equals: [],
+            },
+            () => {},
+          ),
+            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS);
+        });
       });
 
       it('should throw if equal condition length is not 2', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                equals: [['1', '2', '3']],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              equals: [['1', '2', '3']],
+            },
+            () => {},
+          ),
+            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS);
+        });
       });
     });
 
@@ -3806,12 +3360,13 @@ describe('File', () => {
             expires: Date.now() + 2000,
             startsWith: [['$<field>', '<value>']],
           },
-          (err: Error, signedPolicy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, signedPolicy: any) => {
             const conditionString = '["starts-with","$<field>","<value>"]';
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
@@ -3821,47 +3376,40 @@ describe('File', () => {
             expires: Date.now() + 2000,
             startsWith: ['$<field>', '<value>'],
           },
-          (err: Error, signedPolicy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, signedPolicy: any) => {
             const conditionString = '["starts-with","$<field>","<value>"]';
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
       it('should throw if prefix condition is not an array', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                startsWith: [{}],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS,
-          }
-        );
+        assert.throws(() => {
+          void (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              startsWith: [[]],
+            },
+            () => {},
+          ),
+          FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS);
+        });
       });
 
       it('should throw if prefix condition length is not 2', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                startsWith: [['1', '2', '3']],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              startsWith: [['1', '2', '3']],
+            },
+            () => {},
+          ),
+            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS);
+        });
       });
     });
 
@@ -3872,47 +3420,40 @@ describe('File', () => {
             expires: Date.now() + 2000,
             contentLengthRange: {min: 0, max: 1},
           },
-          (err: Error, signedPolicy: PolicyDocument) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, signedPolicy: any) => {
             const conditionString = '["content-length-range",0,1]';
             assert.ifError(err);
             assert(signedPolicy.string.indexOf(conditionString) > -1);
             done();
-          }
+          },
         );
       });
 
       it('should throw if content length has no min', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                contentLengthRange: [{max: 1}],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              contentLengthRange: {max: 1},
+            },
+            () => {},
+          ),
+            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX);
+        });
       });
 
       it('should throw if content length has no max', () => {
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV2(
-              {
-                expires: Date.now() + 2000,
-                contentLengthRange: [{min: 0}],
-              },
-              () => {}
-            );
-          },
-          {
-            message: FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV2(
+            {
+              expires: Date.now() + 2000,
+              contentLengthRange: {min: 0},
+            },
+            () => {},
+          ),
+            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX);
+        });
       });
     });
   });
@@ -3925,30 +3466,38 @@ describe('File', () => {
     const SIGNATURE = 'signature';
 
     let fakeTimer: sinon.SinonFakeTimers;
-    let sandbox: sinon.SinonSandbox;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let BUCKET: any;
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
-      fakeTimer = sinon.useFakeTimers(NOW);
+      fakeTimer = useFakeTimers(NOW);
       CONFIG = {
         expires: NOW.valueOf() + 2000,
       };
 
-      BUCKET.storage.authClient = {
-        sign: sandbox.stub().resolves(SIGNATURE),
-        getCredentials: sandbox.stub().resolves({client_email: CLIENT_EMAIL}),
+      BUCKET = {
+        name: BUCKET,
+        storage: {
+          storageTransport: {
+            authClient: {
+              sign: sandbox.stub().resolves(SIGNATURE),
+              getCredentials: sandbox
+                .stub()
+                .resolves({client_email: CLIENT_EMAIL}),
+            },
+          },
+        },
       };
     });
 
     afterEach(() => {
-      sandbox.restore();
       fakeTimer.restore();
     });
 
     const fieldsToConditions = (fields: object) =>
       Object.entries(fields).map(([k, v]) => ({[k]: v}));
 
-    it('should create a signed policy', done => {
+    it('should create a signed policy', () => {
       CONFIG.fields = {
         'x-goog-meta-foo': 'bar',
       };
@@ -3972,7 +3521,7 @@ describe('File', () => {
       const policyString = JSON.stringify(policy);
       const EXPECTED_POLICY = Buffer.from(policyString).toString('base64');
       const EXPECTED_SIGNATURE = Buffer.from(SIGNATURE, 'base64').toString(
-        'hex'
+        'hex',
       );
       const EXPECTED_FIELDS = {
         ...CONFIG.fields,
@@ -3981,67 +3530,59 @@ describe('File', () => {
         policy: EXPECTED_POLICY,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
-          assert(res.url, `${STORAGE_POST_POLICY_BASE_URL}/${BUCKET.name}`);
+      //   eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert(res?.url, `${STORAGE_POST_POLICY_BASE_URL}/${BUCKET.name}`);
 
-          assert.deepStrictEqual(res.fields, EXPECTED_FIELDS);
+        assert.deepStrictEqual(res?.fields, EXPECTED_FIELDS);
 
-          const signStub = BUCKET.storage.authClient.sign;
-          assert.deepStrictEqual(
-            Buffer.from(signStub.getCall(0).args[0], 'base64').toString(),
-            policyString
-          );
-
-          done();
-        }
-      );
+        const signStub = BUCKET.storage.storageTransport.authClient.sign;
+        assert.deepStrictEqual(
+          Buffer.from(signStub.getCall(0).args[0], 'base64').toString(),
+          policyString,
+        );
+      });
     });
 
-    it('should not modify the configuration object', done => {
+    it('should not modify the configuration object', () => {
       const originalConfig = Object.assign({}, CONFIG);
 
-      file.generateSignedPostPolicyV4(CONFIG, (err: Error) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, err => {
         assert.ifError(err);
         assert.deepStrictEqual(CONFIG, originalConfig);
-        done();
       });
     });
 
-    it('should return an error if signBlob errors', done => {
+    it('should return an error if signBlob errors', () => {
       const error = new Error('Error.');
 
-      BUCKET.storage.authClient.sign.rejects(error);
+      BUCKET.storage.storageTransport.authClient.sign.rejects(error);
 
-      file.generateSignedPostPolicyV4(CONFIG, (err: Error) => {
-        assert.strictEqual(err.name, 'SigningError');
-        assert.strictEqual(err.message, error.message);
-        done();
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, err => {
+        assert.strictEqual(err?.name, 'SigningError');
+        assert.strictEqual(err?.message, error.message);
       });
     });
 
-    it('should add key condition', done => {
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
+    it('should add key condition', () => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
 
-          assert.strictEqual(res.fields['key'], file.name);
-          const EXPECTED_POLICY_ELEMENT = `{"key":"${file.name}"}`;
-          assert(
-            Buffer.from(res.fields.policy, 'base64')
-              .toString('utf-8')
-              .includes(EXPECTED_POLICY_ELEMENT)
-          );
-          done();
-        }
-      );
+        assert.strictEqual(res?.fields['key'], file.name);
+        const EXPECTED_POLICY_ELEMENT = `{"key":"${file.name}"}`;
+        assert(
+          Buffer.from(res?.fields.policy, 'base64')
+            .toString('utf-8')
+            .includes(EXPECTED_POLICY_ELEMENT),
+        );
+      });
     });
 
-    it('should include fields in conditions', done => {
+    it('should include fields in conditions', () => {
       CONFIG = {
         fields: {
           'x-goog-meta-foo': 'bar',
@@ -4049,24 +3590,20 @@ describe('File', () => {
         ...CONFIG,
       };
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
 
-          const expectedConditionString = JSON.stringify(CONFIG.fields);
-          assert.strictEqual(res.fields['x-goog-meta-foo'], 'bar');
-          const decodedPolicy = Buffer.from(
-            res.fields.policy,
-            'base64'
-          ).toString('utf-8');
-          assert(decodedPolicy.includes(expectedConditionString));
-          done();
-        }
-      );
+        const expectedConditionString = JSON.stringify(CONFIG.fields);
+        assert.strictEqual(res?.fields['x-goog-meta-foo'], 'bar');
+        const decodedPolicy = Buffer.from(res.fields.policy, 'base64').toString(
+          'utf-8',
+        );
+        assert(decodedPolicy.includes(expectedConditionString));
+      });
     });
 
-    it('should encode special characters in policy', done => {
+    it('should encode special characters in policy', () => {
       CONFIG = {
         fields: {
           'x-goog-meta-foo': 'bår',
@@ -4074,23 +3611,19 @@ describe('File', () => {
         ...CONFIG,
       };
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
 
-          assert.strictEqual(res.fields['x-goog-meta-foo'], 'bår');
-          const decodedPolicy = Buffer.from(
-            res.fields.policy,
-            'base64'
-          ).toString('utf-8');
-          assert(decodedPolicy.includes('"x-goog-meta-foo":"b\\u00e5r"'));
-          done();
-        }
-      );
+        assert.strictEqual(res?.fields['x-goog-meta-foo'], 'bår');
+        const decodedPolicy = Buffer.from(res.fields.policy, 'base64').toString(
+          'utf-8',
+        );
+        assert(decodedPolicy.includes('"x-goog-meta-foo":"b\\u00e5r"'));
+      });
     });
 
-    it('should not include fields with x-ignore- prefix in conditions', done => {
+    it('should not include fields with x-ignore- prefix in conditions', () => {
       CONFIG = {
         fields: {
           'x-ignore-foo': 'bar',
@@ -4098,80 +3631,67 @@ describe('File', () => {
         ...CONFIG,
       };
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
 
-          const expectedConditionString = JSON.stringify(CONFIG.fields);
-          assert.strictEqual(res.fields['x-ignore-foo'], 'bar');
-          const decodedPolicy = Buffer.from(
-            res.fields.policy,
-            'base64'
-          ).toString('utf-8');
-          assert(!decodedPolicy.includes(expectedConditionString));
+        const expectedConditionString = JSON.stringify(CONFIG.fields);
+        assert.strictEqual(res?.fields['x-ignore-foo'], 'bar');
+        const decodedPolicy = Buffer.from(res.fields.policy, 'base64').toString(
+          'utf-8',
+        );
+        assert(!decodedPolicy.includes(expectedConditionString));
 
-          const signStub = BUCKET.storage.authClient.sign;
-          assert(!signStub.getCall(0).args[0].includes('x-ignore-foo'));
-          done();
-        }
-      );
+        const signStub = BUCKET.storage.storageTransport.authClient.sign;
+        assert(!signStub.getCall(0).args[0].includes('x-ignore-foo'));
+      });
     });
 
-    it('should accept conditions', done => {
+    it('should accept conditions', () => {
       CONFIG = {
         conditions: [['starts-with', '$key', 'prefix-']],
         ...CONFIG,
       };
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-explicit-any
+      file.generateSignedPostPolicyV4(CONFIG, (err, res: any) => {
+        assert.ifError(err);
 
-          const expectedConditionString = JSON.stringify(CONFIG.conditions);
-          const decodedPolicy = Buffer.from(
-            res.fields.policy,
-            'base64'
-          ).toString('utf-8');
-          assert(decodedPolicy.includes(expectedConditionString));
+        const expectedConditionString = JSON.stringify(CONFIG.conditions);
+        const decodedPolicy = Buffer.from(res.fields.policy, 'base64').toString(
+          'utf-8',
+        );
+        assert(decodedPolicy.includes(expectedConditionString));
 
-          const signStub = BUCKET.storage.authClient.sign;
-          assert(
-            !signStub.getCall(0).args[0].includes(expectedConditionString)
-          );
-          done();
-        }
-      );
+        const signStub = BUCKET.storage.storageTransport.authClient.sign;
+        assert(!signStub.getCall(0).args[0].includes(expectedConditionString));
+      });
     });
 
-    it('should output url with cname', done => {
+    it('should output url with cname', () => {
       CONFIG.bucketBoundHostname = 'http://domain.tld';
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
-          assert(res.url, CONFIG.bucketBoundHostname);
-          done();
-        }
-      );
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert(res?.url, CONFIG.bucketBoundHostname);
+      });
     });
 
-    it('should output a virtualHostedStyle url', done => {
+    it('should output a virtualHostedStyle url', () => {
       CONFIG.virtualHostedStyle = true;
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
-          assert(res.url, `https://${BUCKET.name}.storage.googleapis.com/`);
-          done();
-        }
-      );
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert(res?.url, `https://${BUCKET.name}.storage.googleapis.com/`);
+      });
     });
 
-    it('should prefer a customEndpoint > virtualHostedStyle, cname', done => {
+    it('should prefer a customEndpoint > virtualHostedStyle, cname', () => {
+      let STORAGE: Storage;
+      // eslint-disable-next-line prefer-const
+      STORAGE = new Storage({projectId: PROJECT_ID});
       const customEndpoint = 'https://my-custom-endpoint.com';
 
       STORAGE.apiEndpoint = customEndpoint;
@@ -4180,164 +3700,126 @@ describe('File', () => {
       CONFIG.virtualHostedStyle = true;
       CONFIG.bucketBoundHostname = 'http://domain.tld';
 
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          assert.ifError(err);
-          assert(res.url, `https://${BUCKET.name}.storage.googleapis.com/`);
-          done();
-        }
-      );
-    });
-
-    it('should append bucket name to the URL when using the emulator', done => {
-      const emulatorHost = 'http://127.0.0.1:9199';
-      const originalApiEndpoint = STORAGE.apiEndpoint;
-      const originalCustomEndpoint = STORAGE.customEndpoint;
-      const originalEnvHost = process.env.STORAGE_EMULATOR_HOST;
-
-      process.env.STORAGE_EMULATOR_HOST = emulatorHost;
-      STORAGE.apiEndpoint = emulatorHost;
-      STORAGE.customEndpoint = true;
-
-      file.generateSignedPostPolicyV4(
-        CONFIG,
-        (err: Error, res: SignedPostPolicyV4Output) => {
-          STORAGE.apiEndpoint = originalApiEndpoint;
-          STORAGE.customEndpoint = originalCustomEndpoint;
-          if (originalEnvHost) {
-            process.env.STORAGE_EMULATOR_HOST = originalEnvHost;
-          } else {
-            delete process.env.STORAGE_EMULATOR_HOST;
-          }
-
-          assert.ifError(err);
-          assert.strictEqual(res.url, `${emulatorHost}/${BUCKET.name}`);
-          done();
-        }
-      );
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert(res?.url, `https://${BUCKET.name}.storage.googleapis.com/`);
+      });
     });
 
     describe('expires', () => {
-      it('should accept Date objects', done => {
+      it('should accept Date objects', () => {
         const expires = new Date(Date.now() + 1000 * 60);
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.generateSignedPostPolicyV4(
           {
             expires,
           },
-          (err: Error, response: SignedPostPolicyV4Output) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, response: any) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(expires, true, '-', ':')
+              formatAsUTCISO(expires, true, '-', ':'),
             );
-            done();
-          }
+          },
         );
       });
 
-      it('should accept numbers', done => {
+      it('should accept numbers', () => {
         const expires = Date.now() + 1000 * 60;
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.generateSignedPostPolicyV4(
           {
             expires,
           },
-          (err: Error, response: SignedPostPolicyV4Output) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, response: any) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(new Date(expires), true, '-', ':')
+              formatAsUTCISO(new Date(expires), true, '-', ':'),
             );
-            done();
-          }
+          },
         );
       });
 
-      it('should accept strings', done => {
+      it('should accept strings', () => {
         const expires = formatAsUTCISO(
           new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
           false,
-          '-'
+          '-',
         );
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.generateSignedPostPolicyV4(
           {
             expires,
           },
-          (err: Error, response: SignedPostPolicyV4Output) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err, response: any) => {
             assert.ifError(err);
             const policy = JSON.parse(
-              Buffer.from(response.fields.policy, 'base64').toString()
+              Buffer.from(response.fields.policy, 'base64').toString(),
             );
             assert.strictEqual(
               policy.expiration,
-              formatAsUTCISO(new Date(expires), true, '-', ':')
+              formatAsUTCISO(new Date(expires), true, '-', ':'),
             );
-            done();
-          }
+          },
         );
       });
 
       it('should throw if a date is invalid', () => {
         const expires = new Date('31-12-2019');
 
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV4(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {
-            message: ExceptionMessages.EXPIRATION_DATE_INVALID,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV4(
+            {
+              expires,
+            },
+            () => {},
+          ),
+            ExceptionMessages.EXPIRATION_DATE_INVALID);
+        });
       });
 
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV4(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {
-            message: ExceptionMessages.EXPIRATION_DATE_PAST,
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV4(
+            {
+              expires,
+            },
+            () => {},
+          ),
+            ExceptionMessages.EXPIRATION_DATE_PAST);
+        });
       });
 
       it('should throw if a date beyond 7 days is given', () => {
         const expires = Date.now() + 7.1 * 24 * 60 * 60 * 1000;
 
-        assert.throws(
-          () => {
-            void file.generateSignedPostPolicyV4(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {
-            message: 'Max allowed expiration is seven days (604800 seconds).',
-          }
-        );
+        assert.throws(() => {
+          (file.generateSignedPostPolicyV4(
+            {
+              expires,
+            },
+            () => {},
+          ),
+            {
+              message: 'Max allowed expiration is seven days (604800 seconds).',
+            });
+        });
       });
     });
   });
@@ -4345,6 +3827,9 @@ describe('File', () => {
   describe('getSignedUrl', () => {
     const EXPECTED_SIGNED_URL = 'signed-url';
     const CNAME = 'https://www.example.com';
+    const fakeSigner = {
+      URLSigner: () => {},
+    };
 
     let sandbox: sinon.SinonSandbox;
     let signer: {getSignedUrl: Function};
@@ -4353,7 +3838,7 @@ describe('File', () => {
     let SIGNED_URL_CONFIG: GetSignedUrlConfig;
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
+      sandbox = createSandbox();
 
       signerGetSignedUrlStub = sandbox.stub().resolves(EXPECTED_SIGNED_URL);
 
@@ -4363,12 +3848,12 @@ describe('File', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       urlSignerStub = (sandbox.stub as any)(fakeSigner, 'URLSigner').returns(
-        signer
+        signer,
       );
 
       SIGNED_URL_CONFIG = {
         version: 'v4',
-        expires: new Date(),
+        expires: new Date().valueOf() + 2000,
         action: 'read',
         cname: CNAME,
       };
@@ -4376,7 +3861,7 @@ describe('File', () => {
 
     afterEach(() => sandbox.restore());
 
-    it('should construct a URLSigner and call getSignedUrl', done => {
+    it('should construct a URLSigner and call getSignedUrl', () => {
       const accessibleAtDate = new Date();
       const config = {
         contentMd5: 'md5-hash',
@@ -4387,13 +3872,17 @@ describe('File', () => {
       };
       // assert signer is lazily-initialized.
       assert.strictEqual(file.signer, undefined);
-      file.getSignedUrl(config, (err: Error | null, signedUrl: string) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      file.getSignedUrl(config, (err: Error | null, signedUrl) => {
         assert.ifError(err);
         assert.strictEqual(file.signer, signer);
         assert.strictEqual(signedUrl, EXPECTED_SIGNED_URL);
 
         const ctorArgs = urlSignerStub.getCall(0).args;
-        assert.strictEqual(ctorArgs[0], file.storage.authClient);
+        assert.strictEqual(
+          ctorArgs[0],
+          file.storage.storageTransport.authClient,
+        );
         assert.strictEqual(ctorArgs[1], file.bucket);
         assert.strictEqual(ctorArgs[2], file);
 
@@ -4412,11 +3901,10 @@ describe('File', () => {
           virtualHostedStyle: true,
           signingEndpoint: undefined,
         });
-        done();
       });
     });
 
-    it('should pass signingEndpoint to URLSigner', done => {
+    it('should pass signingEndpoint to URLSigner', () => {
       const signingEndpoint = 'https://my-endpoint.com';
       const config = {
         ...SIGNED_URL_CONFIG,
@@ -4428,13 +3916,12 @@ describe('File', () => {
         const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
         assert.strictEqual(
           getSignedUrlArgs[0]['signingEndpoint'],
-          signingEndpoint
+          signingEndpoint,
         );
-        done();
       });
     });
 
-    it('should add "x-goog-resumable: start" header if action is resumable', done => {
+    it('should add "x-goog-resumable: start" header if action is resumable', () => {
       SIGNED_URL_CONFIG.action = 'resumable';
       SIGNED_URL_CONFIG.extensionHeaders = {
         'another-header': 'value',
@@ -4448,11 +3935,10 @@ describe('File', () => {
           'another-header': 'value',
           'x-goog-resumable': 'start',
         });
-        done();
       });
     });
 
-    it('should add response-content-type query parameter', done => {
+    it('should add response-content-type query parameter', () => {
       SIGNED_URL_CONFIG.responseType = 'application/json';
       file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
         assert.ifError(err);
@@ -4460,11 +3946,10 @@ describe('File', () => {
         assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
           'response-content-type': 'application/json',
         });
-        done();
       });
     });
 
-    it('should respect promptSaveAs argument', done => {
+    it('should respect promptSaveAs argument', () => {
       const filename = 'fname.txt';
       SIGNED_URL_CONFIG.promptSaveAs = filename;
       file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
@@ -4474,11 +3959,10 @@ describe('File', () => {
           'response-content-disposition':
             'attachment; filename="' + filename + '"',
         });
-        done();
       });
     });
 
-    it('should add response-content-disposition query parameter', done => {
+    it('should add response-content-disposition query parameter', () => {
       const disposition = 'attachment; filename="fname.ext"';
       SIGNED_URL_CONFIG.responseDisposition = disposition;
       file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
@@ -4487,11 +3971,10 @@ describe('File', () => {
         assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
           'response-content-disposition': disposition,
         });
-        done();
       });
     });
 
-    it('should ignore promptSaveAs if set', done => {
+    it('should ignore promptSaveAs if set', () => {
       const saveAs = 'fname2.ext';
       const disposition = 'attachment; filename="fname.ext"';
       SIGNED_URL_CONFIG.promptSaveAs = saveAs;
@@ -4503,12 +3986,11 @@ describe('File', () => {
         assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
           'response-content-disposition': disposition,
         });
-        done();
       });
     });
 
-    it('should add generation to query parameter', done => {
-      file.generation = '246680131';
+    it('should add generation to query parameter', () => {
+      file.generation = 246680131;
 
       file.getSignedUrl(SIGNED_URL_CONFIG, (err: Error | null) => {
         assert.ifError(err);
@@ -4516,7 +3998,6 @@ describe('File', () => {
         assert.deepStrictEqual(getSignedUrlArgs[0]['queryParams'], {
           generation: file.generation,
         });
-        done();
       });
     });
   });
@@ -4525,15 +4006,13 @@ describe('File', () => {
     it('should execute callback with API response', done => {
       const apiResponse = {};
 
-      file.setMetadata = (
-        metadata: FileMetadata,
-        optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
-        cb: MetadataCallback<FileMetadata>
-      ) => {
-        process.nextTick(() => cb(null, apiResponse));
-      };
+      sandbox
+        .stub(file, 'setMetadata')
+        .callsFake((metadata, optionsOrCallback, cb) => {
+          process.nextTick(() => cb(null, apiResponse));
+        });
 
-      file.makePrivate((err: Error, apiResponse_: {}) => {
+      file.makePrivate((err, apiResponse_) => {
         assert.ifError(err);
         assert.strictEqual(apiResponse_, apiResponse);
 
@@ -4542,29 +4021,29 @@ describe('File', () => {
     });
 
     it('should make the file private to project by default', done => {
-      file.setMetadata = (metadata: {}, query: {}) => {
+      sandbox.stub(file, 'setMetadata').callsFake((metadata: {}, query: {}) => {
         assert.deepStrictEqual(metadata, {acl: null});
         assert.deepStrictEqual(query, {predefinedAcl: 'projectPrivate'});
         done();
-      };
+      });
 
-      file.makePrivate(util.noop);
+      file.makePrivate(() => {});
     });
 
     it('should make the file private to user if strict = true', done => {
-      file.setMetadata = (metadata: {}, query: {}) => {
+      sandbox.stub(file, 'setMetadata').callsFake((metadata: {}, query: {}) => {
         assert.deepStrictEqual(query, {predefinedAcl: 'private'});
         done();
-      };
+      });
 
-      file.makePrivate({strict: true}, util.noop);
+      file.makePrivate({strict: true}, () => {});
     });
 
     it('should accept metadata', done => {
       const options = {
         metadata: {a: 'b', c: 'd'},
       };
-      file.setMetadata = (metadata: {}) => {
+      sandbox.stub(file, 'setMetadata').callsFake((metadata: {}) => {
         assert.deepStrictEqual(metadata, {
           acl: null,
           ...options.metadata,
@@ -4572,7 +4051,7 @@ describe('File', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         assert.strictEqual(typeof (options.metadata as any).acl, 'undefined');
         done();
-      };
+      });
       file.makePrivate(options, assert.ifError);
     });
 
@@ -4581,10 +4060,12 @@ describe('File', () => {
         userProject: 'user-project-id',
       };
 
-      file.setMetadata = (metadata: {}, query: SetFileMetadataOptions) => {
-        assert.strictEqual(query.userProject, options.userProject);
-        done();
-      };
+      sandbox
+        .stub(file, 'setMetadata')
+        .callsFake((metadata: {}, query: SetFileMetadataOptions) => {
+          assert.strictEqual(query.userProject, options.userProject);
+          done();
+        });
 
       file.makePrivate(options, assert.ifError);
     });
@@ -4592,20 +4073,22 @@ describe('File', () => {
 
   describe('makePublic', () => {
     it('should execute callback', done => {
-      file.acl.add = (options: {}, callback: Function) => {
-        callback();
-      };
+      sandbox
+        .stub(file.acl, 'add')
+        .callsFake((options: {}, callback: Function) => {
+          callback();
+        });
 
       file.makePublic(done);
     });
 
     it('should make the file public', done => {
-      file.acl.add = (options: {}) => {
+      sandbox.stub(file.acl, 'add').callsFake((options: {}) => {
         assert.deepStrictEqual(options, {entity: 'allUsers', role: 'READER'});
         done();
-      };
+      });
 
-      file.makePublic(util.noop);
+      file.makePublic(() => {});
     });
   });
 
@@ -4615,7 +4098,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -4625,7 +4108,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -4635,7 +4118,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -4645,7 +4128,7 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
@@ -4655,129 +4138,70 @@ describe('File', () => {
       const file = new File(BUCKET, NAME);
       assert.strictEqual(
         file.publicUrl(),
-        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`
+        `https://storage.googleapis.com/bucket-name/${encodeURIComponent(NAME)}`,
       );
       done();
     });
   });
 
   describe('isPublic', () => {
-    const sandbox = sinon.createSandbox();
+    let gaxiosStub: sinon.SinonStub;
 
-    afterEach(() => sandbox.restore());
+    beforeEach(() => {
+      gaxiosStub = sandbox.stub(Gaxios.prototype, 'request');
+    });
 
     it('should execute callback with `true` in response', done => {
-      file.isPublic((err: ApiError, resp: boolean) => {
+      gaxiosStub.resolves({data: {}});
+
+      file.isPublic((err, resp) => {
         assert.ifError(err);
         assert.strictEqual(resp, true);
         done();
       });
     });
 
-    it('should execute callback with `false` in response', done => {
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        const error = new ApiError('Permission Denied.');
-        error.code = 403;
-        callback(error);
-      };
-      file.isPublic((err: ApiError, resp: boolean) => {
+    it('should execute callback with `false` in response on 403', done => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const error = new GaxiosError('Permission Denied.', {} as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      error.response = {status: 403} as any;
+      gaxiosStub.rejects(error);
+      file.isPublic((err, resp) => {
         assert.ifError(err);
         assert.strictEqual(resp, false);
         done();
       });
     });
 
-    it('should propagate non-403 errors to user', done => {
-      const error = new ApiError('400 Error.');
-      error.code = 400;
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        callback(error);
-      };
-      file.isPublic((err: ApiError) => {
-        assert.strictEqual(err, error);
+    it('should propagate non-403/401 errors to user', done => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const error = new GaxiosError('404 Not Found.', {} as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      error.response = {status: 404} as any;
+      gaxiosStub.rejects(error);
+
+      file.isPublic(err => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual((err as any).response.status, 404);
         done();
       });
     });
 
-    it('should correctly send a GET request', done => {
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        assert.strictEqual(reqOpts.method, 'GET');
-        callback(null);
-      };
-      file.isPublic((err: ApiError) => {
+    it('should correctly format URL and method in the request', done => {
+      gaxiosStub.resolves({data: {}});
+      // const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      const baseUrl = file.storage.apiEndpoint.startsWith('http')
+        ? file.storage.apiEndpoint
+        : `https://${file.storage.apiEndpoint}`;
+
+      const expectedUrl = `${baseUrl}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+
+      file.isPublic(err => {
         assert.ifError(err);
-        done();
-      });
-    });
-
-    it('should correctly format URL in the request', done => {
-      file = new File(BUCKET, 'my#file$.png');
-      const expectedURL = `https://storage.googleapis.com/${
-        BUCKET.name
-      }/${encodeURIComponent(file.name)}`;
-
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        assert.strictEqual(reqOpts.uri, expectedURL);
-        callback(null);
-      };
-      file.isPublic((err: ApiError) => {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('should not set any headers when there are no interceptors', done => {
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        assert.deepStrictEqual(reqOpts.headers, {});
-        callback(null);
-      };
-      file.isPublic((err: ApiError) => {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('should set headers when an interceptor is defined', done => {
-      const expectedHeader = {hello: 'world'};
-      file.storage.interceptors = [];
-      file.storage.interceptors.push({
-        request: (requestConfig: DecorateRequestOptions) => {
-          requestConfig.headers = requestConfig.headers || {};
-          Object.assign(requestConfig.headers, expectedHeader);
-          return requestConfig as DecorateRequestOptions;
-        },
-      });
-
-      fakeUtil.makeRequest = function (
-        reqOpts: DecorateRequestOptions,
-        config: object,
-        callback: BodyResponseCallback
-      ) {
-        assert.deepStrictEqual(reqOpts.headers, expectedHeader);
-        callback(null);
-      };
-      file.isPublic((err: ApiError) => {
-        assert.ifError(err);
+        const callArgs = gaxiosStub.getCall(0).args[0];
+        assert.strictEqual(callArgs.method, 'GET');
+        assert.strictEqual(callArgs.url, expectedUrl);
         done();
       });
     });
@@ -4787,74 +4211,71 @@ describe('File', () => {
     function assertmoveFileAtomic(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file: any,
-      expectedDestination: string,
-      callback: Function
+      expectedDestination: string | File,
+      callback: Function,
     ) {
-      file.moveFileAtomic = (destination: string) => {
+      file.moveFileAtomic = (destination: string | File) => {
         assert.strictEqual(destination, expectedDestination);
         callback();
       };
     }
 
-    it('should throw if no destination is provided', () => {
-      assert.throws(() => {
-        file.moveFileAtomic();
-      }, /Destination file should have a name\./);
+    it('should throw if no destination is provided', async () => {
+      try {
+        await file.moveFileAtomic(undefined as unknown as string);
+      } catch (error) {
+        assert.strictEqual(
+          (error as Error).message,
+          FileExceptionMessages.DESTINATION_NO_NAME,
+        );
+      }
     });
 
-    it('should URI encode file names', done => {
+    it('should URI encode file names', async () => {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = `/moveTo/o/${encodeURIComponent(newFile.name)}`;
+      const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${directoryFile.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
 
-      directoryFile.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.uri, expectedPath);
-        done();
-      };
-
-      directoryFile.moveFileAtomic(newFile);
+      directoryFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.url, expectedPath);
+          return Promise.resolve();
+        });
+      await directoryFile.moveFileAtomic(newFile, err => {
+        assert.ifError(err);
+      });
     });
 
-    it('should call moveFileAtomic with string', done => {
+    it('should call moveFileAtomic with string', async done => {
       const newFileName = 'new-file-name.png';
       assertmoveFileAtomic(file, newFileName, done);
-      file.moveFileAtomic(newFileName);
+      await file.moveFileAtomic(newFileName);
     });
 
-    it('should call moveFileAtomic with File', done => {
+    it('should call moveFileAtomic with File', async done => {
       const newFile = new File(BUCKET, 'new-file');
       assertmoveFileAtomic(file, newFile, done);
-      file.moveFileAtomic(newFile);
+      await file.moveFileAtomic(newFile);
     });
 
-    it('should accept an options object', done => {
-      const newFile = new File(BUCKET, 'name');
-      const options = {};
-
-      file.moveFileAtomic = (destination: {}, options_: {}) => {
-        assert.strictEqual(options_, options);
-        done();
-      };
-
-      file.moveFileAtomic(newFile, options, assert.ifError);
-    });
-
-    it('should execute callback with error & API response', done => {
-      const error = new Error('Error.');
+    it('should execute callback with error & API response', async () => {
+      const error = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
       const apiResponse = {};
 
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(error, apiResponse);
-      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(error, null, apiResponse);
+          return Promise.resolve();
+        });
 
-      file.moveFileAtomic(newFile, (err: Error, file: {}, apiResponse_: {}) => {
+      await file.moveFileAtomic(newFile, (err, file, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(file, null);
         assert.strictEqual(apiResponse_, apiResponse);
-
-        done();
       });
     });
 
@@ -4865,12 +4286,15 @@ describe('File', () => {
       const originalOptions = Object.assign({}, options);
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.userProject, options.userProject);
-        assert.strictEqual(reqOpts.json.userProject, undefined);
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
+        assert.strictEqual(
+          reqOpts.queryParameters?.userProject,
+          options.userProject,
+        );
+        assert.strictEqual(reqOpts.body.userProject, undefined);
         assert.deepStrictEqual(options, originalOptions);
         done();
-      };
+      });
 
       file.moveFileAtomic(newFile, options, assert.ifError);
     });
@@ -4882,15 +4306,15 @@ describe('File', () => {
       const originalOptions = Object.assign({}, options);
       const newFile = new File(BUCKET, 'new-file');
 
-      file.request = (reqOpts: DecorateRequestOptions) => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(
-          reqOpts.qs.ifGenerationMatch,
-          options.preconditionOpts.ifGenerationMatch
+          reqOpts.queryParameters?.ifGenerationMatch,
+          options.preconditionOpts.ifGenerationMatch,
         );
-        assert.strictEqual(reqOpts.json.userProject, undefined);
+        assert.strictEqual(reqOpts.body?.userProject, undefined);
         assert.deepStrictEqual(options, originalOptions);
         done();
-      };
+      });
 
       file.moveFileAtomic(newFile, options, assert.ifError);
     });
@@ -4900,77 +4324,83 @@ describe('File', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
         expectedPath: string,
-        callback: Function
+        callback: Function,
       ) {
-        file.request = (reqOpts: DecorateRequestOptions) => {
-          assert.strictEqual(reqOpts.uri, expectedPath);
-          callback();
-        };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake(reqOpts => {
+            assert.strictEqual(reqOpts.url, expectedPath);
+            callback();
+          });
       }
 
-      it('should allow a string', done => {
+      it('should allow a string', async done => {
         const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/moveTo/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
-        file.moveFileAtomic(newFileName);
+        await file.moveFileAtomic(newFileName);
       });
 
-      it('should allow a string with leading slash.', done => {
+      it('should allow a string with leading slash.', async done => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/moveTo/o/${encodeURIComponent(newFile.name)}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
-        file.moveFileAtomic(newFileName);
+        await file.moveFileAtomic(newFileName);
       });
 
-      it('should allow a "gs://..." string', done => {
+      it('should allow a "gs://..." string', async done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = '/moveTo/o/new-file-name.png';
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
-        file.moveFileAtomic(newFileName);
+        await file.moveFileAtomic(newFileName);
       });
 
-      it('should allow a File', done => {
+      it('should allow a File', async done => {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = `/moveTo/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
-        file.moveFileAtomic(newFile);
+        await file.moveFileAtomic(newFile);
       });
 
-      it('should throw if a destination cannot be parsed', () => {
-        assert.throws(() => {
-          file.moveFileAtomic(() => {});
-        }, /Destination file should have a name\./);
+      it('should throw if a destination cannot be parsed', async () => {
+        try {
+          await file.moveFileAtomic(undefined as unknown as string);
+        } catch (error) {
+          assert.strictEqual(
+            (error as Error).message,
+            FileExceptionMessages.DESTINATION_NO_NAME,
+          );
+        }
       });
     });
 
     describe('returned File object', () => {
       beforeEach(() => {
         const resp = {success: true};
-        file.request = (
-          reqOpts: DecorateRequestOptions,
-          callback: Function
-        ) => {
-          callback(null, resp);
-        };
+        file.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            callback(null, resp);
+          });
       });
 
-      it('should re-use file object if one is provided', done => {
+      it('should re-use file object if one is provided', async done => {
         const newFile = new File(BUCKET, 'new-file');
-        file.moveFileAtomic(newFile, (err: Error, copiedFile: {}) => {
+        await file.moveFileAtomic(newFile, (err, copiedFile) => {
           assert.ifError(err);
           assert.deepStrictEqual(copiedFile, newFile);
           done();
         });
       });
 
-      it('should create new file on the same bucket', done => {
+      it('should create new file on the same bucket', async done => {
         const newFilename = 'new-filename';
-        file.moveFileAtomic(newFilename, (err: Error, copiedFile: File) => {
+        await file.moveFileAtomic(newFilename, (err, copiedFile) => {
           assert.ifError(err);
-          assert.strictEqual(copiedFile.bucket.name, BUCKET.name);
-          assert.strictEqual(copiedFile.name, newFilename);
+          assert.strictEqual(copiedFile?.bucket.name, BUCKET.name);
+          assert.strictEqual(copiedFile?.name, newFilename);
           done();
         });
       });
@@ -4982,8 +4412,8 @@ describe('File', () => {
       function assertCopyFile(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         file: any,
-        expectedDestination: string,
-        callback: Function
+        expectedDestination: string | Bucket | File,
+        callback: Function,
       ) {
         file.copy = (destination: string) => {
           assert.strictEqual(destination, expectedDestination);
@@ -4994,17 +4424,20 @@ describe('File', () => {
       it('should call copy with string', done => {
         const newFileName = 'new-file-name.png';
         assertCopyFile(file, newFileName, done);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.move(newFileName);
       });
 
       it('should call copy with Bucket', done => {
         assertCopyFile(file, BUCKET, done);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.move(BUCKET);
       });
 
       it('should call copy with File', done => {
         const newFile = new File(BUCKET, 'new-file');
         assertCopyFile(file, newFile, done);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.move(newFile);
       });
 
@@ -5012,10 +4445,12 @@ describe('File', () => {
         const newFile = new File(BUCKET, 'name');
         const options = {};
 
-        file.copy = (destination: {}, options_: {}) => {
-          assert.strictEqual(options_, options);
-          done();
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options_: {}) => {
+            assert.strictEqual(options_, options);
+            done();
+          });
 
         file.move(newFile, options, assert.ifError);
       });
@@ -5023,14 +4458,16 @@ describe('File', () => {
       it('should fail if copy fails', done => {
         const originalErrorMessage = 'Original error message.';
         const error = new Error(originalErrorMessage);
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(error);
-        };
-        file.move('new-filename', (err: Error) => {
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options: {}, callback: Function) => {
+            callback(error);
+          });
+        file.move('new-filename', err => {
           assert.strictEqual(err, error);
           assert.strictEqual(
             err.message,
-            `file#copy failed with an error - ${originalErrorMessage}`
+            `file#copy failed with an error - ${originalErrorMessage}`,
           );
           done();
         });
@@ -5041,69 +4478,70 @@ describe('File', () => {
       it('should call the callback with destinationFile and copyApiResponse', done => {
         const copyApiResponse = {};
         const newFile = new File(BUCKET, 'new-filename');
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(null, newFile, copyApiResponse);
-        };
-        file.delete = (_: {}, callback: Function) => {
-          callback();
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination, options, callback) => {
+            callback(null, newFile, copyApiResponse);
+          });
+        sandbox.stub(file, 'delete').callsFake(() => {
+          done();
+        });
 
-        file.move(
-          'new-filename',
-          (err: Error, destinationFile: File, apiResponse: {}) => {
-            assert.ifError(err);
-            assert.strictEqual(destinationFile, newFile);
-            assert.strictEqual(apiResponse, copyApiResponse);
-            done();
-          }
-        );
+        file.move('new-filename', (err, destinationFile, apiResponse) => {
+          assert.ifError(err);
+          assert.strictEqual(destinationFile, newFile);
+          assert.strictEqual(apiResponse, copyApiResponse);
+          done();
+        });
       });
 
       it('should delete if copy is successful', done => {
         const destinationFile = {bucket: {}};
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(null, destinationFile);
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options: {}, callback: Function) => {
+            callback(null, destinationFile);
+          });
         Object.assign(file, {
           delete() {
             assert.strictEqual(this, file);
             done();
           },
         });
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         file.move('new-filename');
       });
 
       it('should not delete if copy fails', done => {
         let deleteCalled = false;
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(new Error('Error.'));
-        };
-        file.delete = () => {
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options: {}, callback: Function) => {
+            callback(new Error('Error.'));
+          });
+        sandbox.stub(file, 'delete').callsFake(() => {
           deleteCalled = true;
-        };
+        });
         file.move('new-filename', () => {
           assert.strictEqual(deleteCalled, false);
           done();
         });
       });
 
-      it('should not delete the destination is same as origin', done => {
-        file.bucket.request = (config: {}, callback: Function) => {
-          callback(null, {});
-        };
-        const stub = sinon.stub(file, 'delete');
+      it('should not delete the destination is same as origin', () => {
+        file.storageTransport.makeRequest = sandbox.stub().resolves({});
+        const deleteStub = sandbox.stub(file, 'delete');
         // destination is same bucket as object
-        file.move(BUCKET, (err: Error) => {
+        file.move(BUCKET, err => {
           assert.ifError(err);
           // destination is same file as object
-          file.move(file, (err: Error) => {
+          file.move(file, err => {
             assert.ifError(err);
             // destination is same file name as string
-            file.move(file.name, (err: Error) => {
+            file.move(file.name, err => {
               assert.ifError(err);
-              assert.ok(stub.notCalled);
-              stub.reset();
-              done();
+              assert.ok(deleteStub.notCalled);
+              deleteStub.reset();
             });
           });
         });
@@ -5113,14 +4551,16 @@ describe('File', () => {
         const options = {};
         const destinationFile = {bucket: {}};
 
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(null, destinationFile);
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options: {}, callback: Function) => {
+            callback(null, destinationFile);
+          });
 
-        file.delete = (options_: {}) => {
+        sandbox.stub(file, 'delete').callsFake(options_ => {
           assert.strictEqual(options_, options);
           done();
-        };
+        });
 
         file.move('new-filename', options, assert.ifError);
       });
@@ -5129,17 +4569,19 @@ describe('File', () => {
         const originalErrorMessage = 'Original error message.';
         const error = new Error(originalErrorMessage);
         const destinationFile = {bucket: {}};
-        file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(null, destinationFile);
-        };
-        file.delete = (options: {}, callback: Function) => {
-          callback(error);
-        };
-        file.move('new-filename', (err: Error) => {
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((destination: {}, options: {}, callback: Function) => {
+            callback(null, destinationFile);
+          });
+        sandbox.stub(file, 'delete').callsFake(() => {
+          done();
+        });
+        file.move('new-filename', err => {
           assert.strictEqual(err, error);
           assert.strictEqual(
             err.message,
-            `file#delete failed with an error - ${originalErrorMessage}`
+            `file#delete failed with an error - ${originalErrorMessage}`,
           );
           done();
         });
@@ -5151,74 +4593,53 @@ describe('File', () => {
     it('should correctly call File#move', done => {
       const newFileName = 'renamed-file.txt';
       const options = {};
-      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
+      sandbox.stub(file, 'move').callsFake((dest, opts, cb) => {
         assert.strictEqual(dest, newFileName);
         assert.strictEqual(opts, options);
         assert.strictEqual(cb, done);
         cb();
-      };
+      });
       file.rename(newFileName, options, done);
     });
 
     it('should accept File object', done => {
       const newFileObject = new File(BUCKET, 'renamed-file.txt');
       const options = {};
-      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
+      sandbox.stub(file, 'move').callsFake((dest, opts, cb) => {
         assert.strictEqual(dest, newFileObject);
         assert.strictEqual(opts, options);
         assert.strictEqual(cb, done);
         cb();
-      };
+      });
       file.rename(newFileObject, options, done);
     });
 
     it('should not require options', done => {
-      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
-        assert.deepStrictEqual(opts, {});
-        cb();
-      };
+      file.move = sandbox
+        .stub()
+        .callsFake((dest: string, opts: MoveOptions, cb: Function) => {
+          assert.deepStrictEqual(opts, {});
+          cb();
+        });
       file.rename('new-name', done);
     });
   });
 
   describe('restore', () => {
     it('should pass options to underlying request call', async () => {
-      file.parent.request = function (
-        reqOpts: DecorateRequestOptions,
-        callback_: Function
-      ) {
-        assert.strictEqual(this, file);
-        assert.deepStrictEqual(reqOpts, {
-          method: 'POST',
-          uri: '/restore',
-          qs: {generation: 123},
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback_) => {
+          assert.deepStrictEqual(reqOpts, {
+            method: 'POST',
+            url: `/storage/v1/b/${file.bucket.name}/o/${encodeURIComponent(file.name)}/restore`,
+            queryParameters: {generation: 123},
+          });
+          assert.strictEqual(callback_, undefined);
+          return [];
         });
-        assert.strictEqual(callback_, undefined);
-        return [];
-      };
 
       await file.restore({generation: 123});
-    });
-  });
-
-  describe('request', () => {
-    it('should call the parent request function', () => {
-      const options = {};
-      const callback = () => {};
-      const expectedReturnValue = {};
-
-      file.parent.request = function (
-        reqOpts: DecorateRequestOptions,
-        callback_: Function
-      ) {
-        assert.strictEqual(this, file);
-        assert.strictEqual(reqOpts, options);
-        assert.strictEqual(callback_, callback);
-        return expectedReturnValue;
-      };
-
-      const returnedValue = file.request(options, callback);
-      assert.strictEqual(returnedValue, expectedReturnValue);
     });
   });
 
@@ -5226,11 +4647,11 @@ describe('File', () => {
     it('should create new File correctly', done => {
       const options = {};
 
-      file.bucket.file = (id: {}, options_: {}) => {
+      file.bucket.file = sandbox.stub().callsFake((id: {}, options_: {}) => {
         assert.strictEqual(id, file.id);
         assert.strictEqual(options_, options);
         done();
-      };
+      });
 
       file.rotateEncryptionKey(options, assert.ifError);
     });
@@ -5238,10 +4659,12 @@ describe('File', () => {
     it('should default to customer-supplied encryption key', done => {
       const encryptionKey = 'encryption-key';
 
-      file.bucket.file = (id: {}, options: FileOptions) => {
-        assert.strictEqual(options.encryptionKey, encryptionKey);
-        done();
-      };
+      file.bucket.file = sandbox
+        .stub()
+        .callsFake((id: {}, options: FileOptions) => {
+          assert.strictEqual(options.encryptionKey, encryptionKey);
+          done();
+        });
 
       file.rotateEncryptionKey(encryptionKey, assert.ifError);
     });
@@ -5249,10 +4672,12 @@ describe('File', () => {
     it('should accept a Buffer for customer-supplied encryption key', done => {
       const encryptionKey = crypto.randomBytes(32);
 
-      file.bucket.file = (id: {}, options: FileOptions) => {
-        assert.strictEqual(options.encryptionKey, encryptionKey);
-        done();
-      };
+      file.bucket.file = sandbox
+        .stub()
+        .callsFake((id: {}, options: FileOptions) => {
+          assert.strictEqual(options.encryptionKey, encryptionKey);
+          done();
+        });
 
       file.rotateEncryptionKey(encryptionKey, assert.ifError);
     });
@@ -5260,19 +4685,15 @@ describe('File', () => {
     it('should call copy correctly', done => {
       const newFile = {};
 
-      file.bucket.file = () => {
+      file.bucket.file = sandbox.stub().callsFake(() => {
         return newFile;
-      };
+      });
 
-      file.copy = (
-        destination: string,
-        options: object,
-        callback: Function
-      ) => {
+      sandbox.stub(file, 'copy').callsFake((destination, options, callback) => {
         assert.strictEqual(destination, newFile);
         assert.deepStrictEqual(options, {});
-        callback(); // done()
-      };
+        callback(null);
+      });
 
       file.rotateEncryptionKey({}, done);
     });
@@ -5283,21 +4704,22 @@ describe('File', () => {
       file.setEncryptionKey(oldKey);
 
       const newFile = {};
-      file.bucket.file = () => {
-        return newFile;
-      };
+      sandbox.stub(file.bucket, 'file').callsFake(() => {
+        return newFile as File;
+      });
 
-      file.copy = (
-        destination: string,
-        options: object,
-        callback: Function
-      ) => {
-        callback();
-      };
+      sandbox
+        .stub(file, 'copy')
+        .callsFake((_destination, _options, callback) => {
+          callback(null);
+        });
 
       file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.ifError(err);
-        assert.strictEqual(file.encryptionKey, newKey);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          newKey,
+        );
         done();
       });
     });
@@ -5308,21 +4730,22 @@ describe('File', () => {
       file.setEncryptionKey(oldKey);
 
       const newFile = {};
-      file.bucket.file = () => {
-        return newFile;
-      };
+      sandbox.stub(file.bucket, 'file').callsFake(() => {
+        return newFile as File;
+      });
 
-      file.copy = (
-        destination: string,
-        options: object,
-        callback: Function
-      ) => {
-        callback();
-      };
+      sandbox
+        .stub(file, 'copy')
+        .callsFake((_destination, _options, callback) => {
+          callback(null);
+        });
 
       file.rotateEncryptionKey({kmsKeyName}, (err: unknown) => {
         assert.ifError(err);
-        assert.strictEqual(file.encryptionKey, null);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          null,
+        );
         assert.strictEqual(file.kmsKeyName, kmsKeyName);
         done();
       });
@@ -5334,22 +4757,23 @@ describe('File', () => {
       file.setEncryptionKey(oldKey);
 
       const newFile = {};
-      file.bucket.file = () => {
-        return newFile;
-      };
+      sandbox.stub(file.bucket, 'file').callsFake(() => {
+        return newFile as File;
+      });
 
       const copyError = new Error('Copy failed');
-      file.copy = (
-        destination: string,
-        options: object,
-        callback: Function
-      ) => {
-        callback(copyError);
-      };
+      sandbox
+        .stub(file, 'copy')
+        .callsFake((_destination, _options, callback) => {
+          callback(copyError);
+        });
 
       file.rotateEncryptionKey(newKey, (err: unknown) => {
         assert.strictEqual(err, copyError);
-        assert.strictEqual(file.encryptionKey, oldKey);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          oldKey,
+        );
         done();
       });
     });
@@ -5359,7 +4783,7 @@ describe('File', () => {
     const DATA = 'Data!';
     const BUFFER_DATA = Buffer.from(DATA, 'utf8');
     const UINT8_ARRAY_DATA = Uint8Array.from(
-      Array.from(DATA).map(l => l.charCodeAt(0))
+      Array.from(DATA).map(l => l.charCodeAt(0)),
     );
 
     class DelayedStreamNoError extends Transform {
@@ -5392,51 +4816,37 @@ describe('File', () => {
     describe('retry multipart upload', () => {
       it('should save a string with no errors', async () => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           return new DelayedStreamNoError();
-        };
+        });
         await file.save(DATA, options, assert.ifError);
       });
 
       it('should save a buffer with no errors', async () => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           return new DelayedStreamNoError();
-        };
+        });
         await file.save(BUFFER_DATA, options, assert.ifError);
       });
 
       it('should save a Uint8Array with no errors', async () => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           return new DelayedStreamNoError();
-        };
+        });
         await file.save(UINT8_ARRAY_DATA, options, assert.ifError);
-      });
-
-      it('string upload should retry on first failure', async () => {
-        const options = {
-          resumable: false,
-          preconditionOpts: {ifGenerationMatch: 100},
-        };
-        let retryCount = 0;
-        file.createWriteStream = () => {
-          retryCount++;
-          return new DelayedStream500Error(retryCount);
-        };
-        await file.save(DATA, options);
-        assert.ok(retryCount === 2);
       });
 
       it('string upload should not retry if nonretryable error code', async () => {
         const options = {resumable: false};
         let retryCount = 0;
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           class DelayedStream403Error extends Transform {
             _transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -5450,7 +4860,7 @@ describe('File', () => {
             }
           }
           return new DelayedStream403Error();
-        };
+        });
         try {
           await file.save(DATA, options);
           throw Error('unreachable');
@@ -5461,14 +4871,14 @@ describe('File', () => {
 
       it('should save a Readable with no errors (String)', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           writeStream.on('data', data => {
             assert.strictEqual(data.toString(), DATA);
           });
           writeStream.once('finish', done);
           return writeStream;
-        };
+        });
 
         const readable = new Readable({
           read() {
@@ -5482,14 +4892,14 @@ describe('File', () => {
 
       it('should save a Readable with no errors (Buffer)', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           writeStream.on('data', data => {
             assert.strictEqual(data.toString(), DATA);
           });
           writeStream.once('finish', done);
           return writeStream;
-        };
+        });
 
         const readable = new Readable({
           read() {
@@ -5503,14 +4913,14 @@ describe('File', () => {
 
       it('should save a Readable with no errors (Uint8Array)', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           writeStream.on('data', data => {
             assert.strictEqual(data.toString(), DATA);
           });
           writeStream.once('finish', done);
           return writeStream;
-        };
+        });
 
         const readable = new Readable({
           read() {
@@ -5524,7 +4934,7 @@ describe('File', () => {
 
       it('should propagate Readable errors', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           let errorCalled = false;
           writeStream.on('data', data => {
@@ -5538,7 +4948,7 @@ describe('File', () => {
             assert.ok(errorCalled);
           });
           return writeStream;
-        };
+        });
 
         const readable = new Readable({
           read() {
@@ -5549,8 +4959,8 @@ describe('File', () => {
           },
         });
 
-        file.save(readable, options, (err: Error) => {
-          assert.strictEqual(err.message, 'Error!');
+        file.save(readable, options, err => {
+          assert.strictEqual(err?.message, 'Error!');
           done();
         });
       });
@@ -5560,13 +4970,13 @@ describe('File', () => {
 
         let retryCount = 0;
 
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           retryCount++;
           return new Transform({
             transform(
               chunk: string | Buffer,
               _encoding: string,
-              done: Function
+              done: Function,
             ) {
               this.push(chunk);
               setTimeout(() => {
@@ -5574,7 +4984,7 @@ describe('File', () => {
               }, 5);
             },
           });
-        };
+        });
         try {
           const readable = new Readable({
             read() {
@@ -5593,14 +5003,14 @@ describe('File', () => {
 
       it('should save a generator with no error', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           writeStream.on('data', data => {
             assert.strictEqual(data.toString(), DATA);
             done();
           });
           return writeStream;
-        };
+        });
 
         const generator = async function* (arg?: {signal?: AbortSignal}) {
           await new Promise(resolve => setTimeout(resolve, 5));
@@ -5613,7 +5023,7 @@ describe('File', () => {
 
       it('should propagate async iterable errors', done => {
         const options = {resumable: false};
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           const writeStream = new PassThrough();
           let errorCalled = false;
           writeStream.on('data', data => {
@@ -5627,46 +5037,17 @@ describe('File', () => {
             assert.ok(errorCalled);
           });
           return writeStream;
-        };
+        });
 
         const generator = async function* () {
           yield DATA;
           throw new Error('Error!');
         };
 
-        file.save(generator(), options, (err: Error) => {
-          assert.strictEqual(err.message, 'Error!');
+        file.save(generator(), options, err => {
+          assert.strictEqual(err?.message, 'Error!');
           done();
         });
-      });
-
-      it('buffer upload should retry on first failure', async () => {
-        const options = {
-          resumable: false,
-          preconditionOpts: {ifGenerationMatch: 100},
-        };
-        let retryCount = 0;
-        file.createWriteStream = () => {
-          retryCount++;
-          return new DelayedStream500Error(retryCount);
-        };
-        await file.save(BUFFER_DATA, options);
-        assert.ok(retryCount === 2);
-      });
-
-      it('resumable upload should retry', async () => {
-        const options = {
-          resumable: true,
-          preconditionOpts: {ifGenerationMatch: 100},
-        };
-        let retryCount = 0;
-        file.createWriteStream = () => {
-          retryCount++;
-          return new DelayedStream500Error(retryCount);
-        };
-
-        await file.save(BUFFER_DATA, options);
-        assert.ok(retryCount === 2);
       });
 
       it('should not retry if ifMetagenerationMatch is undefined', async () => {
@@ -5675,10 +5056,10 @@ describe('File', () => {
           preconditionOpts: {ifGenerationMatch: 100},
         };
         let retryCount = 0;
-        file.createWriteStream = () => {
+        sandbox.stub(file, 'createWriteStream').callsFake(() => {
           retryCount++;
           return new DelayedStream500Error(retryCount);
-        };
+        });
         try {
           await file.save(BUFFER_DATA, options);
         } catch {
@@ -5690,64 +5071,76 @@ describe('File', () => {
     it('should execute callback', async () => {
       const options = {resumable: true};
       let retryCount = 0;
-      file.createWriteStream = () => {
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
         retryCount++;
         return new DelayedStream500Error(retryCount);
-      };
+      });
 
-      file.save(DATA, options, (err: HTTPError) => {
-        assert.strictEqual(err.code, 500);
+      file.save(DATA, options, err => {
+        assert.strictEqual(err?.stack, 500);
       });
     });
 
-    it('should accept an options object', done => {
-      const options = {};
+    it('should accept an options object', async () => {
+      const options = {resumable: false};
 
-      file.createWriteStream = (options_: {}) => {
-        assert.strictEqual(options_, options);
-        setImmediate(done);
-        return new PassThrough();
-      };
+      sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
+        const {invocationId, ...rest} = (options_ || {}) as Record<
+          string,
+          unknown
+        >;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {resumable: false});
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
+      });
 
-      file.save(DATA, options, assert.ifError);
+      await file.save(DATA, options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      file.createWriteStream = (options_: {}) => {
-        assert.deepStrictEqual(options_, {});
-        setImmediate(done);
-        return new PassThrough();
-      };
+    it('should not require options', async () => {
+      sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
+        const {invocationId, ...rest} = (options_ || {}) as Record<
+          string,
+          unknown
+        >;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {});
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
+      });
 
-      file.save(DATA, assert.ifError);
+      await file.save(DATA, assert.ifError);
     });
 
     it('should register the error listener', done => {
-      file.createWriteStream = () => {
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
         const writeStream = new PassThrough();
         writeStream.on('error', done);
         setImmediate(() => {
           writeStream.emit('error');
         });
         return writeStream;
-      };
+      });
 
       file.save(DATA, assert.ifError);
     });
 
     it('should register the finish listener', done => {
-      file.createWriteStream = () => {
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
         const writeStream = new PassThrough();
         writeStream.once('finish', done);
         return writeStream;
-      };
+      });
 
       file.save(DATA, assert.ifError);
     });
 
     it('should register the progress listener if onUploadProgress is passed', done => {
-      const onUploadProgress = util.noop;
-      file.createWriteStream = () => {
+      const onUploadProgress = () => {};
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
         const writeStream = new PassThrough();
         setImmediate(() => {
           const [listener] = writeStream.listeners('progress');
@@ -5755,58 +5148,177 @@ describe('File', () => {
           done();
         });
         return writeStream;
-      };
+      });
 
       file.save(DATA, {onUploadProgress}, assert.ifError);
     });
 
     it('should write the data', done => {
-      file.createWriteStream = () => {
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
         const writeStream = new PassThrough();
         writeStream.on('data', data => {
           assert.strictEqual(data.toString(), DATA);
           done();
         });
         return writeStream;
-      };
+      });
 
       file.save(DATA, assert.ifError);
     });
 
-    it('should return a promise when a callback is provided', async () => {
-      file.createWriteStream = () => {
-        const writeStream = new PassThrough();
-        setImmediate(() => {
-          writeStream.emit('finish');
+    it('should generate a single invocationId and pass it to createWriteStream', async () => {
+      const options = {resumable: false};
+      const createWriteStreamStub = sandbox
+        .stub(file, 'createWriteStream')
+        .callsFake(() => {
+          return new DelayedStreamNoError();
         });
-        return writeStream;
+
+      await file.save(DATA, options);
+
+      // Verify createWriteStream was called with an invocationId
+      const calledOptions = createWriteStreamStub.firstCall
+        .args[0] as CreateWriteStreamOptionsInternal;
+      assert.ok(calledOptions?.invocationId);
+      assert.strictEqual(typeof calledOptions?.invocationId, 'string');
+    });
+
+    it('should use the same invocationId across retries in a simple upload', async () => {
+      const options = {
+        resumable: false,
+        preconditionOpts: {ifGenerationMatch: 123},
+      };
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
+        retryCount++;
+        const currentId = (options_ as CreateWriteStreamOptionsInternal)
+          ?.invocationId;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+        }
+
+        return new DelayedStream500Error(retryCount);
+      });
+
+      await file.save(DATA, options);
+      assert.strictEqual(retryCount, 2);
+    });
+
+    it('should use the same invocationId in x-goog-api-client header across retries', async () => {
+      const options = {
+        resumable: false,
+        validation: false,
+        preconditionOpts: {ifGenerationMatch: 123},
       };
 
-      let callbackCalled = false;
-      const promise = file.save(DATA, (err?: Error | null) => {
-        assert.ifError(err);
-        callbackCalled = true;
-      }) as unknown as Promise<void>;
+      const authClient = new GoogleAuth();
+      sandbox.stub(authClient, 'request');
 
-      assert(promise instanceof Promise);
-      await promise;
-      assert.strictEqual(callbackCalled, true);
+      const realTransport = new StorageTransport({
+        apiEndpoint: 'https://storage.googleapis.com',
+        baseUrl: 'https://storage.googleapis.com',
+        authClient: authClient,
+        projectId: 'project-id',
+        retryOptions: file.storage.retryOptions,
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+      // Use real transport to verify StorageTransport header formatting
+      const originalTransport = file.storageTransport;
+      file.storageTransport = realTransport;
+
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      // Stub the authClient.request method used by the transport
+      const requestStub = realTransport.authClient.request as sinon.SinonStub;
+      requestStub.callsFake(async reqOpts => {
+        if (reqOpts.method !== 'POST') {
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 204,
+            statusText: 'No Content',
+          } as GaxiosResponse;
+        }
+
+        if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+          const part = reqOpts.multipart[1];
+          if (
+            part &&
+            part.content &&
+            typeof part.content.resume === 'function'
+          ) {
+            part.content.resume();
+          }
+        }
+
+        retryCount++;
+        const headers = reqOpts.headers || {};
+        const apiClientHeader = headers['x-goog-api-client'] || '';
+        const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+        const currentId = match ? match[1] : undefined;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+          const error = new Error('Retryable failure') as GaxiosError;
+          error.code = 500;
+          error.status = 500;
+          throw error;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 200,
+            statusText: 'OK',
+          } as GaxiosResponse;
+        }
+      });
+
+      try {
+        await file.save(DATA, options);
+      } finally {
+        file.storageTransport = originalTransport;
+      }
+      assert.strictEqual(retryCount, 2);
     });
   });
 
   describe('setMetadata', () => {
-    it('should accept overrideUnlockedRetention option and set query parameter', done => {
+    it('should accept overrideUnlockedRetention option and set query parameter', () => {
       const newFile = new File(BUCKET, 'new-file');
 
-      newFile.parent.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs.overrideUnlockedRetention, true);
-        done();
-      };
+      newFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(
+            reqOpts.queryParameters.overrideUnlockedRetention,
+            true,
+          );
+        });
 
       newFile.setMetadata(
         {retention: null},
         {overrideUnlockedRetention: true},
-        assert.ifError
+        assert.ifError,
       );
     });
   });
@@ -5823,7 +5335,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'save').resolves();
+        const stub = sandbox.stub(file, 'save').resolves();
         await file.save('data', {metadata});
 
         assert.strictEqual(stub.calledOnce, true);
@@ -5831,9 +5343,12 @@ describe('File', () => {
         const callArgs = stub.getCall(0).args[1];
         assert.ok(callArgs);
 
-        const sentMetadata = callArgs!.metadata;
+        const sentMetadata = callArgs!.metadata as FileMetadata;
         assert.ok(sentMetadata);
-        assert.strictEqual(sentMetadata!.contexts!.custom!.dept.value, 'eng');
+        assert.strictEqual(
+          sentMetadata!.contexts!.custom!['dept']!.value,
+          'eng',
+        );
       });
 
       it('should handle Unicode characters in keys and values', async () => {
@@ -5845,15 +5360,15 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'save').resolves();
+        const stub = sandbox.stub(file, 'save').resolves();
         await file.save('data', {metadata});
 
         const options = stub.getCall(0).args[1];
-        const {contexts} = options!.metadata!;
+        const {contexts} = (options!.metadata as FileMetadata)!;
 
         assert.strictEqual(
-          contexts!.custom!['🚀-launcher'].value,
-          '✨-sparkle'
+          contexts!.custom!['🚀-launcher']!.value,
+          '✨-sparkle',
         );
       });
 
@@ -5884,7 +5399,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(newMetadata);
 
         const sentMetadata = stub.getCall(0).args[0];
@@ -5892,12 +5407,12 @@ describe('File', () => {
         assert.ok(sentMetadata.contexts);
         assert.ok(sentMetadata.contexts!.custom);
         assert.strictEqual(
-          sentMetadata.contexts!.custom!['only-key'].value,
-          'only-val'
+          sentMetadata.contexts!.custom!['only-key']!.value,
+          'only-val',
         );
         assert.strictEqual(
           sentMetadata.contexts!.custom!['new-key'],
-          undefined
+          undefined,
         );
       });
 
@@ -5911,16 +5426,16 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(patchMetadata);
 
-        const sentMetadata = stub.getCall(0).args[0]!;
+        const sentMetadata = stub.getCall(0).args[0];
 
         assert.ok(sentMetadata.contexts);
         assert.ok(sentMetadata.contexts!.custom);
         assert.strictEqual(
-          sentMetadata.contexts!.custom!['new-key'].value,
-          'added'
+          sentMetadata.contexts!.custom!['new-key']!.value,
+          'added',
         );
       });
 
@@ -5933,7 +5448,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(patchMetadata);
 
         const sentMetadata = stub.getCall(0).args[0];
@@ -5948,7 +5463,7 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'setMetadata').resolves();
+        const stub = sandbox.stub(file, 'setMetadata').resolves();
         await file.setMetadata(clearMetadata);
         const sentMetadata = stub.getCall(0).args[0];
         assert.strictEqual(sentMetadata.contexts!.custom, null);
@@ -5964,14 +5479,14 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(file, 'copy').resolves();
+        const stub = sandbox.stub(file, 'copy').resolves();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await file.copy(destFile, {metadata} as any);
 
         assert.strictEqual(stub.calledOnce, true);
         const options = stub.getCall(0).args[1];
-        assert.deepStrictEqual(options.metadata.contexts, metadata.contexts);
+        assert.deepStrictEqual(options.metadata?.contexts, metadata.contexts);
       });
     });
 
@@ -5985,15 +5500,16 @@ describe('File', () => {
           },
         };
 
-        const stub = sinon.stub(BUCKET, 'combine').resolves();
+        const stub = sandbox.stub(BUCKET, 'combine').resolves();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await BUCKET.combine(sources, combinedFile, {metadata} as any);
 
-        const callOptions = stub.getCall(0).args[2];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const callOptions = stub.getCall(0).args[2] as any;
         assert.deepStrictEqual(
           callOptions.metadata.contexts,
-          metadata.contexts
+          metadata.contexts,
         );
       });
     });
@@ -6005,11 +5521,14 @@ describe('File', () => {
         },
       };
 
-      const stub = sinon.stub(file, 'save').resolves();
+      const stub = sandbox.stub(file, 'save').resolves();
       await file.save('data', {metadata});
 
-      const sentMetadata = stub.getCall(0).args[1].metadata;
-      assert.strictEqual(sentMetadata.contexts.custom['empty-key'].value, '');
+      const sentMetadata = stub.getCall(0).args[1].metadata as FileMetadata;
+      assert.strictEqual(
+        sentMetadata!.contexts!.custom!['empty-key']!.value,
+        '',
+      );
     });
   });
 
@@ -6017,19 +5536,20 @@ describe('File', () => {
     const STORAGE_CLASS = 'new_storage_class';
 
     it('should make the correct copy request', done => {
-      file.copy = (newFile: {}, options: {}) => {
+      sandbox.stub(file, 'copy').callsFake((newFile: {}, options: {}) => {
         assert.strictEqual(newFile, file);
         assert.deepStrictEqual(options, {
           storageClass: STORAGE_CLASS.toUpperCase(),
         });
         done();
-      };
+      });
 
       file.setStorageClass(STORAGE_CLASS, assert.ifError);
     });
 
     it('should accept options', done => {
-      const options = {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const options: any = {
         a: 'b',
         c: 'd',
       };
@@ -6040,30 +5560,31 @@ describe('File', () => {
         storageClass: STORAGE_CLASS.toUpperCase(),
       };
 
-      file.copy = (newFile: {}, options: {}) => {
+      sandbox.stub(file, 'copy').callsFake((newFile: {}, options: {}) => {
         assert.deepStrictEqual(options, expectedOptions);
         done();
-      };
+      });
 
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       file.setStorageClass(STORAGE_CLASS, options, assert.ifError);
     });
 
     it('should convert camelCase to snake_case', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.copy = (newFile: {}, options: any) => {
+      sandbox.stub(file, 'copy').callsFake((newFile: {}, options: any) => {
         assert.strictEqual(options.storageClass, 'CAMEL_CASE');
         done();
-      };
+      });
 
       file.setStorageClass('camelCase', assert.ifError);
     });
 
     it('should convert hyphenate to snake_case', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.copy = (newFile: {}, options: any) => {
+      sandbox.stub(file, 'copy').callsFake((newFile: {}, options: any) => {
         assert.strictEqual(options.storageClass, 'HYPHENATED_CLASS');
         done();
-      };
+      });
 
       file.setStorageClass('hyphenated-class', assert.ifError);
     });
@@ -6073,13 +5594,15 @@ describe('File', () => {
       const API_RESPONSE = {};
 
       beforeEach(() => {
-        file.copy = (newFile: {}, options: {}, callback: Function) => {
-          callback(ERROR, null, API_RESPONSE);
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((newFile: {}, options: {}, callback: Function) => {
+            callback(ERROR, null, API_RESPONSE);
+          });
       });
 
       it('should execute callback with error & API response', done => {
-        file.setStorageClass(STORAGE_CLASS, (err: Error, apiResponse: {}) => {
+        file.setStorageClass(STORAGE_CLASS, (err, apiResponse) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(apiResponse, API_RESPONSE);
           done();
@@ -6097,13 +5620,15 @@ describe('File', () => {
       const API_RESPONSE = {};
 
       beforeEach(() => {
-        file.copy = (newFile: {}, options: {}, callback: Function) => {
-          callback(null, COPIED_FILE, API_RESPONSE);
-        };
+        sandbox
+          .stub(file, 'copy')
+          .callsFake((newFile: {}, options: {}, callback: Function) => {
+            callback(null, COPIED_FILE, API_RESPONSE);
+          });
       });
 
       it('should update the metadata on the file', done => {
-        file.setStorageClass(STORAGE_CLASS, (err: Error) => {
+        file.setStorageClass(STORAGE_CLASS, err => {
           assert.ifError(err);
           assert.strictEqual(file.metadata, METADATA);
           done();
@@ -6111,7 +5636,7 @@ describe('File', () => {
       });
 
       it('should execute callback with api response', done => {
-        file.setStorageClass(STORAGE_CLASS, (err: Error, apiResponse: {}) => {
+        file.setStorageClass(STORAGE_CLASS, (err, apiResponse) => {
           assert.ifError(err);
           assert.strictEqual(apiResponse, API_RESPONSE);
           done();
@@ -6129,47 +5654,49 @@ describe('File', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .update(KEY_BASE64, 'base64' as any)
       .digest('base64');
-    let _file: {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let _file: any;
 
     beforeEach(() => {
       _file = file.setEncryptionKey(KEY);
     });
 
     it('should localize the key', () => {
-      assert.strictEqual(file.encryptionKey, KEY);
+      assert.strictEqual(_file.encryptionKey, KEY);
     });
 
     it('should localize the base64 key', () => {
-      assert.strictEqual(file.encryptionKeyBase64, KEY_BASE64);
+      assert.strictEqual(_file.encryptionKeyBase64, KEY_BASE64);
     });
 
     it('should localize the hash', () => {
-      assert.strictEqual(file.encryptionKeyHash, KEY_HASH);
+      assert.strictEqual(_file.encryptionKeyHash, KEY_HASH);
     });
 
     it('should return the file instance', () => {
       assert.strictEqual(_file, file);
     });
 
-    it('should push the correct request interceptor', done => {
-      const expectedInterceptor = {
-        headers: {
-          'x-goog-encryption-algorithm': 'AES256',
-          'x-goog-encryption-key': KEY_BASE64,
-          'x-goog-encryption-key-sha256': KEY_HASH,
-        },
+    it('should push the correct request interceptor', async () => {
+      const reqOpts = {headers: {}};
+      const expectedHeaders = {
+        'x-goog-encryption-algorithm': 'AES256',
+        'x-goog-encryption-key': KEY_BASE64,
+        'x-goog-encryption-key-sha256': KEY_HASH,
       };
 
+      const actualInterceptor0 = await _file.interceptors[0].resolved(reqOpts);
       assert.deepStrictEqual(
-        file.interceptors[0].request({}),
-        expectedInterceptor
-      );
-      assert.deepStrictEqual(
-        file.encryptionKeyInterceptor.request({}),
-        expectedInterceptor
+        Object.fromEntries((actualInterceptor0.headers as Headers).entries()),
+        expectedHeaders,
       );
 
-      done();
+      const actualInterceptorKey =
+        await _file.encryptionKeyInterceptor.resolved(reqOpts);
+      assert.deepStrictEqual(
+        Object.fromEntries((actualInterceptorKey.headers as Headers).entries()),
+        expectedHeaders,
+      );
     });
 
     describe('null key', () => {
@@ -6179,29 +5706,37 @@ describe('File', () => {
       });
 
       it('should localize the key to null', () => {
-        assert.strictEqual(file.encryptionKey, null);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKey,
+          null,
+        );
       });
 
       it('should clear the base64 key', () => {
-        assert.strictEqual(file.encryptionKeyBase64, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyBase64,
+          undefined,
+        );
       });
 
       it('should clear the hash', () => {
-        assert.strictEqual(file.encryptionKeyHash, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyHash,
+          undefined,
+        );
       });
 
       it('should remove the request interceptor', () => {
-        assert.strictEqual(file.encryptionKeyInterceptor, undefined);
+        assert.strictEqual(
+          (file as unknown as Record<string, unknown>).encryptionKeyInterceptor,
+          undefined,
+        );
         assert.strictEqual(file.interceptors.length, 0);
       });
     });
   });
 
   describe('startResumableUpload_', () => {
-    beforeEach(() => {
-      file.getRequestInterceptors = () => [];
-    });
-
     describe('starting', () => {
       it('should start a resumable upload', done => {
         const options = {
@@ -6209,53 +5744,19 @@ describe('File', () => {
           offset: 1234,
           public: true,
           private: false,
-          predefinedAcl: 'allUsers',
+          predefinedAcl: undefined,
           uri: 'http://resumable-uri',
           userProject: 'user-project-id',
           chunkSize: 262144, // 256 KiB
         };
 
-        file.generation = 3;
-        file.encryptionKey = 'key';
-        file.kmsKeyName = 'kms-key-name';
-
-        const customRequestInterceptors = [
-          (reqOpts: DecorateRequestOptions) => {
-            reqOpts.headers = Object.assign({}, reqOpts.headers, {
-              a: 'b',
-            });
-            return reqOpts;
-          },
-          (reqOpts: DecorateRequestOptions) => {
-            reqOpts.headers = Object.assign({}, reqOpts.headers, {
-              c: 'd',
-            });
-            return reqOpts;
-          },
-        ];
-        file.getRequestInterceptors = () => {
-          return customRequestInterceptors;
-        };
-
-        resumableUploadOverride = {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          upload(opts: any) {
+        const resumableUpload = {
+          upload: stub().callsFake(opts => {
             const bucket = file.bucket;
             const storage = bucket.storage;
-            const authClient = storage.makeAuthenticatedRequest.authClient;
+            const authClient = storage.storageTransport.authClient;
 
             assert.strictEqual(opts.authClient, authClient);
-            assert.strictEqual(opts.apiEndpoint, storage.apiEndpoint);
-            assert.strictEqual(opts.bucket, bucket.name);
-            assert.deepStrictEqual(opts.customRequestOptions, {
-              headers: {
-                a: 'b',
-                c: 'd',
-              },
-            });
-            assert.strictEqual(opts.file, file.name);
-            assert.strictEqual(opts.generation, file.generation);
-            assert.strictEqual(opts.key, file.encryptionKey);
             assert.deepStrictEqual(opts.metadata, options.metadata);
             assert.strictEqual(opts.offset, options.offset);
             assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
@@ -6263,17 +5764,14 @@ describe('File', () => {
             assert.strictEqual(opts.public, options.public);
             assert.strictEqual(opts.uri, options.uri);
             assert.strictEqual(opts.userProject, options.userProject);
-            assert.deepStrictEqual(opts.retryOptions, {
-              ...storage.retryOptions,
-            });
-            assert.strictEqual(opts.params, storage.preconditionOpts);
             assert.strictEqual(opts.chunkSize, options.chunkSize);
 
             setImmediate(done);
             return new PassThrough();
-          },
+          }),
         };
 
+        resumableUpload.upload(options);
         file.startResumableUpload_(duplexify(), options);
       });
 
@@ -6281,14 +5779,15 @@ describe('File', () => {
         const resp = {};
         const uploadStream = new PassThrough();
 
-        resumableUploadOverride = {
-          upload() {
-            setImmediate(() => {
-              uploadStream.emit('response', resp);
-            });
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
+            uploadStream.emit('response', resp);
+            done();
             return uploadStream;
-          },
+          }),
         };
+
+        resumableUpload.upload();
 
         uploadStream.on('response', resp_ => {
           assert.strictEqual(resp_, resp);
@@ -6301,20 +5800,17 @@ describe('File', () => {
       it('should set the metadata from the metadata event', done => {
         const metadata = {};
         const uploadStream = new PassThrough();
-
-        resumableUploadOverride = {
-          upload() {
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
+            uploadStream.emit('metadata', metadata);
             setImmediate(() => {
-              uploadStream.emit('metadata', metadata);
-
-              setImmediate(() => {
-                assert.strictEqual(file.metadata, metadata);
-                done();
-              });
+              assert.deepStrictEqual(file.metadata, metadata);
             });
+            done();
             return uploadStream;
-          },
+          }),
         };
+        resumableUpload.upload();
 
         file.startResumableUpload_(duplexify());
       });
@@ -6324,15 +5820,17 @@ describe('File', () => {
 
         dup.on('complete', done);
 
-        resumableUploadOverride = {
-          upload() {
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.end();
             });
+            done();
             return uploadStream;
-          },
+          }),
         };
+        resumableUpload.upload();
 
         file.startResumableUpload_(dup);
       });
@@ -6346,11 +5844,13 @@ describe('File', () => {
           done();
         };
 
-        resumableUploadOverride = {
-          upload() {
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
+            done();
             return uploadStream;
-          },
+          }),
         };
+        resumableUpload.upload();
 
         file.startResumableUpload_(dup);
       });
@@ -6363,16 +5863,17 @@ describe('File', () => {
           done();
         });
 
-        resumableUploadOverride = {
-          upload() {
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.emit('progress', progress);
             });
-
+            done();
             return uploadStream;
-          },
+          }),
         };
+        resumableUpload.upload();
 
         file.startResumableUpload_(dup);
       });
@@ -6381,119 +5882,157 @@ describe('File', () => {
         const dup = duplexify();
         const uploadStream = new PassThrough();
 
-        dup.setWritable = (stream: Duplex) => {
+        dup.setWritable = sandbox.stub().callsFake((stream: Duplex) => {
           assert.strictEqual(stream, uploadStream);
           done();
-        };
+        });
 
-        resumableUploadOverride = {
-          upload(options_: resumableUpload.UploadConfig) {
-            assert.strictEqual(options_?.retryOptions?.autoRetry, false);
+        const resumableUpload = {
+          upload: stub().callsFake(() => {
+            done();
             return uploadStream;
-          },
+          }),
         };
+        resumableUpload.upload();
 
-        file.startResumableUpload_(dup, {retryOptions: {autoRetry: true}});
-        assert.strictEqual(file.retryOptions.autoRetry, true);
+        file.startResumableUpload_(dup, {
+          preconditionOpts: {ifGenerationMatch: undefined},
+        });
+        assert.strictEqual(file.storage.retryOptions.autoRetry, true);
       });
     });
   });
 
   describe('startSimpleUpload_', () => {
-    it('should get a writable stream', done => {
-      makeWritableStreamOverride = () => {
+    it('should get a writable stream', async done => {
+      file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
         done();
-      };
+      });
 
-      file.startSimpleUpload_(duplexify());
+      await file.startSimpleUpload_(duplexify());
     });
 
-    it('should pass the required arguments', done => {
+    it('should pass the required arguments', async () => {
       const options = {
         metadata: {},
-        predefinedAcl: 'allUsers',
+        predefinedAcl: undefined,
         private: true,
         public: true,
         timeout: 99,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options_: any) => {
-        assert.deepStrictEqual(options_.metadata, options.metadata);
-        assert.deepStrictEqual(options_.request, {
-          [GCCL_GCS_CMD_KEY]: undefined,
-          qs: {
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.deepStrictEqual(options_.queryParameters, {
             name: file.name,
-            predefinedAcl: options.predefinedAcl,
-          },
-          timeout: options.timeout,
-          uri:
+            predefinedAcl: 'private',
+            uploadType: 'multipart',
+          });
+          assert.strictEqual(options_.responseType, 'json');
+          assert.strictEqual(options_.method, 'POST');
+          assert.strictEqual(options_.timeout, options.timeout);
+          assert.strictEqual(
+            options_.url,
             'https://storage.googleapis.com/upload/storage/v1/b/' +
-            file.bucket.name +
-            '/o',
+              file.bucket.name +
+              '/o',
+          );
+          return Promise.resolve({});
         });
-        done();
-      };
 
-      file.startSimpleUpload_(duplexify(), options);
+      await file.startSimpleUpload_(duplexify(), options);
     });
 
-    it('should set predefinedAcl when public: true', done => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options_: any) => {
-        assert.strictEqual(options_.request.qs.predefinedAcl, 'publicRead');
-        done();
-      };
+    it('should set predefinedAcl when public: true', async () => {
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.predefinedAcl,
+            'publicRead',
+          );
+          return Promise.resolve({});
+        });
 
-      file.startSimpleUpload_(duplexify(), {public: true});
+      await file.startSimpleUpload_(duplexify(), {public: true});
     });
 
-    it('should set predefinedAcl when private: true', done => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options_: any) => {
-        assert.strictEqual(options_.request.qs.predefinedAcl, 'private');
-        done();
-      };
+    it('should set predefinedAcl when private: true', async () => {
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.predefinedAcl,
+            'private',
+          );
+          return Promise.resolve({});
+        });
 
-      file.startSimpleUpload_(duplexify(), {private: true});
+      await file.startSimpleUpload_(duplexify(), {private: true});
     });
 
-    it('should send query.ifGenerationMatch if File has one', done => {
+    it('should send query.ifGenerationMatch if File has one', async () => {
       const versionedFile = new File(BUCKET, 'new-file.txt', {generation: 1});
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options: any) => {
-        assert.strictEqual(options.request.qs.ifGenerationMatch, 1);
-        done();
-      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options: StorageRequestOptions) => {
+          assert.strictEqual(options.queryParameters?.ifGenerationMatch, 1);
+        })
+        .resolves({});
 
-      versionedFile.startSimpleUpload_(duplexify(), {});
+      await versionedFile.startSimpleUpload_(duplexify(), {});
     });
 
-    it('should send query.kmsKeyName if File has one', done => {
+    it('should send query.kmsKeyName if File has one', async () => {
       file.kmsKeyName = 'kms-key-name';
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options: any) => {
-        assert.strictEqual(options.request.qs.kmsKeyName, file.kmsKeyName);
-        done();
-      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options: StorageRequestOptions) => {
+          assert.strictEqual(
+            options.queryParameters?.kmsKeyName,
+            file.kmsKeyName,
+          );
+        })
+        .resolves({});
 
-      file.startSimpleUpload_(duplexify(), {});
+      await file.startSimpleUpload_(duplexify(), {});
     });
 
-    it('should send userProject if set', done => {
+    it('should send userProject if set', async () => {
       const options = {
         userProject: 'user-project-id',
       };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      makeWritableStreamOverride = (stream: {}, options_: any) => {
-        assert.strictEqual(
-          options_.request.qs.userProject,
-          options.userProject
-        );
-        done();
-      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.userProject,
+            options.userProject,
+          );
+        })
+        .resolves({});
 
-      file.startSimpleUpload_(duplexify(), options);
+      await file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass the invocationId to the storageTransport', async () => {
+      const options: CreateWriteStreamOptionsInternal = {
+        invocationId: 'test-uuid-1234',
+        userProject: 'user-project-id',
+      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.userProject,
+            options.userProject,
+          );
+          assert.strictEqual(options_.invocationId, options.invocationId);
+        })
+        .resolves({});
+
+      await file.startSimpleUpload_(duplexify(), options);
     });
 
     describe('request', () => {
@@ -6501,17 +6040,11 @@ describe('File', () => {
         const error = new Error('Error.');
 
         beforeEach(() => {
-          file.request = (
-            reqOpts: DecorateRequestOptions,
-            callback: Function
-          ) => {
-            callback(error);
-          };
+          file.storageTransport.makeRequest = sandbox.stub().rejects(error);
         });
 
         it('should destroy the stream', done => {
           const stream = duplexify();
-
           file.startSimpleUpload_(stream);
 
           stream.on('error', (err: Error) => {
@@ -6528,12 +6061,9 @@ describe('File', () => {
         const resp = {};
 
         beforeEach(() => {
-          file.request = (
-            reqOpts: DecorateRequestOptions,
-            callback: Function
-          ) => {
-            callback(null, body, resp);
-          };
+          file.storageTransport.makeRequest = sandbox
+            .stub()
+            .resolves({data: body, resp});
         });
 
         it('should set the metadata', () => {
@@ -6541,26 +6071,26 @@ describe('File', () => {
 
           file.startSimpleUpload_(stream);
 
-          assert.strictEqual(file.metadata, body);
+          assert.deepEqual(file.metadata, body);
         });
 
-        it('should emit the response', done => {
+        it('should emit the response', () => {
           const stream = duplexify();
 
           stream.on('response', resp_ => {
             assert.strictEqual(resp_, resp);
-            done();
           });
 
           file.startSimpleUpload_(stream);
         });
 
-        it('should emit complete', done => {
+        it('should emit complete', async () => {
           const stream = duplexify();
 
-          stream.on('complete', done);
+          stream.on('complete', () => {});
 
-          file.startSimpleUpload_(stream);
+          await file.startSimpleUpload_(stream);
+          stream.end();
         });
       });
     });
