@@ -575,7 +575,6 @@ export function generateServiceStub(
                 if (
                   err &&
                   !streamArrayParser.readableEnded &&
-                  !streamArrayParser.destroyed &&
                   (timedOut || !cancelRequested)
                 ) {
                   const callErr = _toGoogleError(err, {
