@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-const path = require('path');
 const config = {
   "enable-source-maps": true,
   "throw-deprecation": true,
@@ -23,10 +22,6 @@ if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
 }
 if (process.env.MOCHA_PARALLEL === 'false' || typeof Bun !== 'undefined') {
   config.parallel = false;
-}
-if (typeof Bun !== 'undefined') {
-  // Preload Bun compatibility shim for proxyquire and nock when running under Bun
-  config.require = [path.resolve(__dirname, '../../../bin/proxyquire-bun-shim.cjs')];
 }
 if (process.env.MOCHA_REPORTER) {
   config.reporter = process.env.MOCHA_REPORTER;
