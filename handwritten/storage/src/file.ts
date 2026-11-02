@@ -1996,30 +1996,41 @@ class File extends ServiceObject<File, FileMetadata> {
       retryOptions.autoRetry = false;
     }
 
-    resumableUpload.createURI(
-      {
-        authClient: this.storage.storageTransport.authClient,
-        apiEndpoint: this.storage['apiEndpoint'],
-        bucket: this.bucket.name,
-        file: this.name,
-        generation: this.generation,
-        key: this.encryptionKey === null ? undefined : this.encryptionKey,
-        kmsKeyName: this.kmsKeyName,
-        metadata: options.metadata,
-        offset: options.offset,
-        origin: options.origin,
-        predefinedAcl: options.predefinedAcl,
-        private: options.private,
-        public: options.public,
-        userProject: options.userProject || this.userProject,
-        retryOptions: retryOptions,
-        params: options?.preconditionOpts || this.instancePreconditionOpts,
-        universeDomain: this.bucket.storage.universeDomain,
-        [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
-      },
-      callback!,
-    );
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+    void (async () => {
+      try {
+        const apiEndpoint =
+          (typeof this.storage.getEndpoint === 'function'
+            ? await this.storage.getEndpoint()
+            : undefined) || this.storage['apiEndpoint'];
+        resumableUpload.createURI(
+          {
+            authClient: this.storage.storageTransport.authClient,
+            apiEndpoint,
+            bucket: this.bucket.name,
+            file: this.name,
+            generation: this.generation,
+            key: this.encryptionKey === null ? undefined : this.encryptionKey,
+            kmsKeyName: this.kmsKeyName,
+            metadata: options.metadata,
+            offset: options.offset,
+            origin: options.origin,
+            predefinedAcl: options.predefinedAcl,
+            private: options.private,
+            public: options.public,
+            userProject: options.userProject || this.userProject,
+            retryOptions: {...retryOptions},
+            params: options?.preconditionOpts || this.instancePreconditionOpts,
+            universeDomain: this.bucket.storage.universeDomain,
+            [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
+          },
+          callback!,
+        );
+      } catch (err) {
+        callback!(err as Error);
+      } finally {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+      }
+    })();
   }
 
   /**
@@ -2405,7 +2416,7 @@ class File extends ServiceObject<File, FileMetadata> {
         );
 
         if (options.resumable === false) {
-          this.startSimpleUpload_(
+          void this.startSimpleUpload_(
             fileWriteStream,
             options as CreateWriteStreamOptionsInternal,
           );
@@ -3240,7 +3251,6 @@ class File extends ServiceObject<File, FileMetadata> {
           options.signingEndpoint,
         );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
-        const universe = this.parent.storage.universeDomain;
         fields['policy'] = policyBase64;
         fields['x-goog-signature'] = signatureHex;
 
@@ -3248,12 +3258,14 @@ class File extends ServiceObject<File, FileMetadata> {
 
         const EMULATOR_HOST = process.env.STORAGE_EMULATOR_HOST;
         const endpoint =
-          typeof this.storage.getEndpoint === 'function'
+          (typeof this.storage.getEndpoint === 'function'
             ? await this.storage.getEndpoint()
-            : this.storage['apiEndpoint'];
-        const defaultEndpoint = `https://storage.${
-          universe || 'googleapis.com'
-        }`;
+            : undefined) || this.storage['apiEndpoint'];
+        const universe =
+          this.parent.storage.universeDomain ||
+          this.storage.universeDomain ||
+          'googleapis.com';
+        const defaultEndpoint = `https://storage.${universe}`;
 
         if (endpoint !== defaultEndpoint && typeof EMULATOR_HOST === 'string') {
           url = `${endpoint}/${this.bucket.name}`;
@@ -3589,11 +3601,6 @@ class File extends ServiceObject<File, FileMetadata> {
       undefined,
       callback,
     );
-    const baseUrl = this.storage['apiEndpoint'].startsWith('http')
-      ? this.storage['apiEndpoint']
-      : `https://${this.storage['apiEndpoint']}`;
-
-    const url = `${baseUrl}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
 
     const gaxios = new Gaxios();
     const storageInterceptors = this.storage?.interceptors || [];
@@ -3606,6 +3613,16 @@ class File extends ServiceObject<File, FileMetadata> {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     (async () => {
       try {
+        const endpoint =
+          (typeof this.storage.getEndpoint === 'function'
+            ? await this.storage.getEndpoint()
+            : undefined) || this.storage['apiEndpoint'];
+        const baseUrl = endpoint.startsWith('http')
+          ? endpoint
+          : `https://${endpoint}`;
+
+        const url = `${baseUrl}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
+
         await gaxios.request({
           method: 'GET',
           url,
@@ -4734,58 +4751,64 @@ class File extends ServiceObject<File, FileMetadata> {
     ) {
       retryOptions.autoRetry = false;
     }
-    const cfg = {
-      authClient: this.storage.storageTransport.authClient,
-      apiEndpoint: this.storage['apiEndpoint'],
-      bucket: this.bucket.name,
-      file: this.name,
-      generation: this.generation,
-      isPartialUpload: options.isPartialUpload,
-      key: this.encryptionKey === null ? undefined : this.encryptionKey,
-      kmsKeyName: this.kmsKeyName,
-      metadata: options.metadata,
-      offset: options.offset,
-      predefinedAcl: options.predefinedAcl,
-      private: options.private,
-      public: options.public,
-      uri: options.uri,
-      userProject: options.userProject || this.userProject,
-      retryOptions: {...retryOptions},
-      params: options?.preconditionOpts || this.instancePreconditionOpts,
-      chunkSize: options?.chunkSize,
-      highWaterMark: options?.highWaterMark,
-      universeDomain: this.bucket.storage.universeDomain,
-      [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
-    };
-
-    let uploadStream: resumableUpload.Upload;
-
-    try {
-      uploadStream = resumableUpload.upload(cfg);
-    } catch (error) {
-      dup.destroy(error as Error);
-      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      return;
-    }
-
-    uploadStream
-      .on('response', resp => {
-        dup.emit('response', resp);
-      })
-      .on('uri', uri => {
-        dup.emit('uri', uri);
-      })
-      .on('metadata', metadata => {
-        this.metadata = metadata;
-        dup.emit('metadata');
-      })
-      .on('finish', () => {
-        dup.emit('complete');
-      })
-      .on('progress', evt => dup.emit('progress', evt));
-
-    dup.setWritable(uploadStream);
+    const uploadRetryOptions = {...retryOptions};
     this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+
+    void (async () => {
+      let uploadStream: resumableUpload.Upload;
+
+      try {
+        const apiEndpoint =
+          (typeof this.storage.getEndpoint === 'function'
+            ? await this.storage.getEndpoint()
+            : undefined) || this.storage['apiEndpoint'];
+        const cfg = {
+          authClient: this.storage.storageTransport.authClient,
+          apiEndpoint,
+          bucket: this.bucket.name,
+          file: this.name,
+          generation: this.generation,
+          isPartialUpload: options.isPartialUpload,
+          key: this.encryptionKey === null ? undefined : this.encryptionKey,
+          kmsKeyName: this.kmsKeyName,
+          metadata: options.metadata,
+          offset: options.offset,
+          predefinedAcl: options.predefinedAcl,
+          private: options.private,
+          public: options.public,
+          uri: options.uri,
+          userProject: options.userProject || this.userProject,
+          retryOptions: uploadRetryOptions,
+          params: options?.preconditionOpts || this.instancePreconditionOpts,
+          chunkSize: options?.chunkSize,
+          highWaterMark: options?.highWaterMark,
+          universeDomain: this.bucket.storage.universeDomain,
+          [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
+        };
+        uploadStream = resumableUpload.upload(cfg);
+      } catch (error) {
+        dup.destroy(error as Error);
+        return;
+      }
+
+      uploadStream
+        .on('response', resp => {
+          dup.emit('response', resp);
+        })
+        .on('uri', uri => {
+          dup.emit('uri', uri);
+        })
+        .on('metadata', metadata => {
+          this.metadata = metadata;
+          dup.emit('metadata');
+        })
+        .on('finish', () => {
+          dup.emit('complete');
+        })
+        .on('progress', evt => dup.emit('progress', evt));
+
+      dup.setWritable(uploadStream);
+    })();
   }
 
   /**
@@ -4798,13 +4821,26 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * @private
    */
-  startSimpleUpload_(
+  async startSimpleUpload_(
     dup: Duplexify,
     options: CreateWriteStreamOptionsInternal = {},
-  ): void {
+  ): Promise<void> {
     options.metadata ??= {};
 
-    const apiEndpoint = this.storage['apiEndpoint'];
+    const writeStream = new ProgressStream();
+    writeStream.on('progress', evt => dup.emit('progress', evt));
+    dup.setWritable(writeStream);
+
+    let apiEndpoint: string;
+    try {
+      apiEndpoint =
+        (typeof this.storage.getEndpoint === 'function'
+          ? await this.storage.getEndpoint()
+          : undefined) || this.storage['apiEndpoint'];
+    } catch (err) {
+      dup.destroy(err as Error);
+      return;
+    }
     const bucketName = this.bucket.name;
     const url = `${apiEndpoint}/upload/storage/v1/b/${bucketName}/o`;
 
@@ -4851,10 +4887,6 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts,
     );
 
-    const writeStream = new ProgressStream();
-    writeStream.on('progress', evt => dup.emit('progress', evt));
-    dup.setWritable(writeStream);
-
     reqOpts.multipart = [
       {
         headers: new Headers({'Content-Type': 'application/json'}),
@@ -4892,7 +4924,7 @@ class File extends ServiceObject<File, FileMetadata> {
         dup.emit('response', resp);
         dup.emit('complete');
       })
-      .catch(err => dup.destroy(err));
+      ?.catch(err => dup.destroy(err));
   }
 
   disableAutoRetryConditionallyIdempotent_(

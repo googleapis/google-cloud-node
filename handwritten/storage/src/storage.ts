@@ -965,6 +965,7 @@ export class Storage {
         'function'
           ? await this.storageTransport.authClient.getUniverseDomain()
           : this.universeDomain;
+      this.universeDomain = universe;
       this.apiEndpoint = Storage.sanitizeEndpoint(`storage.${universe}`);
     }
     return this.apiEndpoint;

@@ -208,12 +208,13 @@ export class URLSigner {
       query = Object.assign(query, cfg.queryParams);
 
       const endpoint =
-        typeof this.storage.getEndpoint === 'function'
+        config.host?.toString() ||
+        config.cname ||
+        (typeof this.storage.getEndpoint === 'function'
           ? await this.storage.getEndpoint()
-          : this.storage['apiEndpoint'];
-      const signedUrl = new url.URL(
-        cfg.host?.toString() || config.cname || endpoint,
-      );
+          : undefined) ||
+        this.storage['apiEndpoint'];
+      const signedUrl = new url.URL(endpoint);
 
       signedUrl.pathname = this.getResourcePath(
         !!config.cname,
@@ -304,13 +305,13 @@ export class URLSigner {
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
-      const endpoint =
-        typeof this.storage.getEndpoint === 'function'
-          ? await this.storage.getEndpoint()
-          : this.storage['apiEndpoint'];
-      const fqdn = new url.URL(
-        config.host?.toString() || config.cname || endpoint,
-      );
+      if (!config.host && !config.cname) {
+        config.host =
+          (typeof this.storage.getEndpoint === 'function'
+            ? await this.storage.getEndpoint()
+            : undefined) || this.storage['apiEndpoint'];
+      }
+      const fqdn = new url.URL(config.host?.toString() || config.cname!);
       extensionHeaders.host = fqdn.hostname;
       if (config.contentMd5) {
         extensionHeaders['content-md5'] = config.contentMd5;

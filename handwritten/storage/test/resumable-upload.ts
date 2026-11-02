@@ -2708,7 +2708,7 @@ describe('resumable-upload', () => {
       assert.deepStrictEqual(headersObj, {});
     });
 
-    it('should bypass authentication if emulator context detected', async () => {
+    it('should use authentication with custom endpoint', async () => {
       up = upload({
         bucket: BUCKET,
         file: FILE,
@@ -2724,7 +2724,11 @@ describe('resumable-upload', () => {
         retryOptions: RETRY_OPTIONS,
       });
       const scopes = [
-        nock(REQ_OPTS.url!).get(queryPath).reply(200, undefined, {}),
+        mockAuthorizeRequest(),
+        nock(REQ_OPTS.url!)
+          .matchHeader('authorization', /Bearer .+/)
+          .get(queryPath)
+          .reply(200, undefined, {}),
       ];
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
@@ -2732,7 +2736,7 @@ describe('resumable-upload', () => {
         res.config.url!.toString(),
         REQ_OPTS.url + queryPath.slice(1),
       );
-      assert.ok(res.headers);
+      assert.ok(getHeader(res.config.headers, 'Authorization'));
     });
 
     it('should combine customRequestOptions', done => {
