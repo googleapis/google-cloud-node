@@ -382,6 +382,55 @@ describe('AuthClient', () => {
         });
       });
 
+      it('redacts credentials in logged response and error bodies', async () => {
+        const options: GaxiosOptionsPrepared = {
+          headers: new Headers(),
+          url: new URL('https://oauth2.googleapis.com/token'),
+        };
+        const data = {
+          access_token: 'secret-access',
+          id_token: 'secret-id',
+          refresh_token: 'secret-refresh',
+          token_type: 'Bearer',
+          expires_in: 3600,
+        };
+        const response = {
+          config: options,
+          data,
+        } as unknown as GaxiosResponse<typeof data>;
+        const error = {
+          config: options,
+          response: {data: {accessToken: 'secret-iam', token: 'secret-jwt'}},
+        } as unknown as GaxiosError;
+
+        const returned =
+          await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.resolved?.(response);
+        await assert.rejects(async () => {
+          await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.rejected?.(error);
+        });
+
+        assert.strictEqual(testLogSink.logs.length, 2);
+        const [responseLog, errorLog] = testLogSink.logs;
+        assert.deepStrictEqual(responseLog.args[2], {
+          access_token: '***REDACTED***',
+          id_token: '***REDACTED***',
+          refresh_token: '***REDACTED***',
+          token_type: 'Bearer',
+          expires_in: 3600,
+        });
+        assert.deepStrictEqual(errorLog.args[2], {
+          accessToken: '***REDACTED***',
+          token: '***REDACTED***',
+        });
+        // The caller still gets the tokens.
+        assert.strictEqual(returned, response);
+        assert.strictEqual(response.data.access_token, 'secret-access');
+        assert.strictEqual(
+          (error.response?.data as {token: string}).token,
+          'secret-jwt',
+        );
+      });
+
       it('logs payloads without a method name at DEBUG severity', async () => {
         const options: GaxiosOptionsPrepared = {
           headers: new Headers(),
