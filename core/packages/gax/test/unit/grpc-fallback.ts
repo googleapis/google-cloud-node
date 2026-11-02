@@ -1238,6 +1238,35 @@ describe('grpc-fallback', () => {
         `a completed stream reported: ${reported.join(', ')}`,
       );
     });
+
+    it('should tear down the response body without a secondary error when the parser errors mid-stream', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const reported: string[] = [];
+      const received: {}[] = [];
+      const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
+        reported.push(`callback:${err?.message}`),
+      ) as StreamArrayParser;
+      parser.on('data', d => received.push(d));
+      parser.on('error', err =>
+        reported.push(`error:${(err as Error).message}`),
+      );
+
+      await new Promise<void>(resolve => setTimeout(resolve, 50));
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+
+      body.push(',{invalid}');
+      await new Promise<void>(resolve => setTimeout(resolve, 100));
+
+      assert.strictEqual(body.destroyed, true);
+      assert.strictEqual(
+        reported.length,
+        1,
+        `expected a single parser error, got: ${reported.join(', ')}`,
+      );
+      assert(reported[0].startsWith('error:'));
+    });
   });
 
   describe('transport error translation', () => {

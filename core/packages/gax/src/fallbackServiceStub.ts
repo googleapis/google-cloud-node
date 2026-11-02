@@ -529,6 +529,7 @@ export function generateServiceStub(
           }
           if (response.ok && rpc.responseStream) {
             const bodyPassThrough = new PassThrough();
+            let parserErrored = false;
             const tearDownBody = () => {
               if (!bodyPassThrough.destroyed) {
                 bodyPassThrough.destroy();
@@ -558,6 +559,10 @@ export function generateServiceStub(
                 streamArrayParser.end();
               }
             });
+            streamArrayParser.once('error', () => {
+              parserErrored = true;
+              tearDownBody();
+            });
             streamArrayParser.once('finish', tearDownBody);
             streamArrayParser.once('close', tearDownBody);
             pipeline(
@@ -574,6 +579,7 @@ export function generateServiceStub(
                 // state, as the handlers below do.
                 if (
                   err &&
+                  !parserErrored &&
                   !streamArrayParser.readableEnded &&
                   (timedOut || !cancelRequested)
                 ) {
