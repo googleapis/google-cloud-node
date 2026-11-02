@@ -929,7 +929,10 @@ dvorak
       assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'auto');
     });
 
-    it('re-applies PQC curves when instantiating GrpcClient if reset to auto', () => {
+    it('re-applies PQC curves when instantiating GrpcClient if reset to auto', function () {
+      if (!runtimeSupportsMlkem1024) {
+        this.skip();
+      }
       tls.DEFAULT_ECDH_CURVE = 'auto';
       const client = gaxGrpc();
       assert.ok(client);
