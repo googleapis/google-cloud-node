@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as sinon from 'sinon';
-import proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {util, ServiceObject} from '../src/nodejs-common/index.js';

@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as winston from 'winston';
 import * as loggingWinstonLibTypes from '../src/index';
 

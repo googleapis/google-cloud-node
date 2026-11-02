@@ -17,7 +17,7 @@ import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as gax from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sn from 'sinon';
 
 import {Cluster} from '../src/cluster.js';
@@ -1216,6 +1216,7 @@ describe('Bigtable', () => {
   });
   describe('close', () => {
     it('should have failed request after close is called', done => {
+      // eslint-disable-next-line promise/catch-or-return, promise/always-return
       bigtable.close().then(() => {
         bigtable.getInstances((err: Error) => {
           if (err) {

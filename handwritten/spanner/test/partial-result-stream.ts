@@ -19,7 +19,6 @@ import {before, beforeEach, afterEach, describe, it} from 'mocha';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const concat = require('concat-stream');
-import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Transform, finished} from 'stream';
 import * as through from 'through2';
@@ -28,7 +27,7 @@ import {codec} from '../src/codec';
 import {PreciseDate} from '@google-cloud/precise-date';
 import * as prs from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
-import {assertArraySubclassStrictEqual} from 'google-test-utils';
+import {assertArraySubclassStrictEqual, proxyquire} from 'google-test-utils';
 import {Row} from '../src/partial-result-stream';
 
 function toRawValue(value: any): any {
