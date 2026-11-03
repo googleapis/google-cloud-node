@@ -186,11 +186,8 @@ describe('instrument', () => {
         }),
       };
 
-      const origGetTracerProvider = trace.getTracerProvider;
-      const origGetTracer = trace.getTracer;
       _resetTracingEnabledForTest();
-      trace.getTracerProvider = (() => fakeTracerProvider) as any;
-      trace.getTracer = (() => fakeTracerProvider.getTracer()) as any;
+      trace.setGlobalTracerProvider(fakeTracerProvider as any);
       try {
         // First trace primes globalTracingEnabled = true
         await startTrace('Test.primedSpan', undefined, async span => {
