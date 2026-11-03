@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.3.3](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.2...google-auth-library-v11.3.3) (2026-11-02)
+
+
+### Bug Fixes
+
+* **google-auth-library:** Strip -fips suffix from AWS service name in SigV4 signing ([#9779](https://github.com/googleapis/google-cloud-node/issues/9779)) ([080f790](https://github.com/googleapis/google-cloud-node/commit/080f79057ce82351618c2032e73f2f722b0d3564))
+
 ## [11.3.2](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.1...google-auth-library-v11.3.2) (2026-10-28)
 
 

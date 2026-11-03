@@ -1369,6 +1369,7 @@ class Table extends ServiceObject {
     const callback =
       typeof metadataOrCallback === 'function' ? metadataOrCallback : cb;
 
+    // eslint-disable-next-line promise/catch-or-return
     this._createLoadJob(source, metadata).then(
       ([resp]) => callback!(null, resp, resp.metadata),
       err => callback!(err),
@@ -1902,7 +1903,7 @@ class Table extends ServiceObject {
       : {
           'formatOptions.useInt64Timestamp': true,
         };
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false') {
       defaultOpts = hasAnyFormatOpts
         ? {}
         : {
@@ -2121,6 +2122,7 @@ class Table extends ServiceObject {
 
     const promise = this._insertAndCreateTable(rows, options);
     if (callback) {
+      // eslint-disable-next-line promise/catch-or-return
       promise.then(
         resp => callback(null, resp),
         err => callback(err, null),

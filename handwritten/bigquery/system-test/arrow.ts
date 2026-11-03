@@ -459,7 +459,7 @@ describe('Arrow Query Results', () => {
     // result has a picosecond TIMESTAMP(12) column. Picosecond timestamps are
     // only enabled in some projects, so this runs only when
     // BIGQUERY_PICOSECOND_SUPPORT is set.
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false') {
       this.skip();
     }
     const origRequest = bigquery.request.bind(bigquery);
@@ -727,7 +727,7 @@ describe('Arrow Query Results', () => {
     // When picosecond TIMESTAMP(12) support is enabled on the test project,
     // also verify the default precision truncates to microseconds and
     // TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false') {
       return;
     }
     const picosQuery =
@@ -799,7 +799,7 @@ describe('Arrow Query Results', () => {
     // When picosecond TIMESTAMP(12) support is enabled on the test project,
     // also verify the default precision truncates to microseconds on every
     // batch and TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false') {
       return;
     }
     const defaultBatches: arrow.RecordBatch[] = await bigquery
