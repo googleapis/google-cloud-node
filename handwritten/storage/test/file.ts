@@ -43,7 +43,14 @@ import {
   STORAGE_POST_POLICY_BASE_URL,
   CreateWriteStreamOptionsInternal,
 } from '../src/file.js';
-import {Duplex, PassThrough, Readable, Stream, Transform} from 'stream';
+import {
+  Duplex,
+  PassThrough,
+  Readable,
+  Stream,
+  Transform,
+  pipeline,
+} from 'stream';
 import * as crypto from 'crypto';
 import duplexify from 'duplexify';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -53,6 +60,30 @@ import * as path from 'path';
 import * as tmp from 'tmp';
 import {formatAsUTCISO} from '../src/util.js';
 import {Gaxios, GaxiosResponse} from 'gaxios';
+import {proxyquire} from 'google-test-utils';
+import * as zlib from 'zlib';
+
+const zlibCached = zlib;
+let createGunzipOverride: Function | null = null;
+const fakeZlib = {
+  ...zlib,
+  createGunzip(...args: Array<{}>) {
+    return (createGunzipOverride || zlibCached.createGunzip)(...args);
+  },
+};
+
+let pipelineOverride: Function | null = null;
+const fakeStream = {
+  Readable,
+  PassThrough,
+  Stream,
+  Duplex,
+  Transform,
+  pipeline(...args: Array<{}>) {
+    return (pipelineOverride || (pipeline as Function))(...args);
+  },
+};
+
 class HTTPError extends Error {
   code: number;
   constructor(message: string, code: number) {
@@ -65,6 +96,7 @@ describe('File', () => {
   let STORAGE: Storage;
   let BUCKET: Bucket;
   let file: File;
+  let ProxiedFile: typeof File;
   let sandbox: sinon.SinonSandbox;
   let storageTransport: StorageTransport;
   const PROJECT_ID = 'project-id';
@@ -83,6 +115,10 @@ describe('File', () => {
     STORAGE = new Storage({projectId: PROJECT_ID});
     storageTransport = sandbox.createStubInstance(StorageTransport);
     STORAGE.storageTransport = storageTransport;
+    ProxiedFile = proxyquire('../src/file.js', {
+      stream: fakeStream,
+      zlib: fakeZlib,
+    }).File;
   });
 
   beforeEach(() => {
@@ -94,6 +130,8 @@ describe('File', () => {
   });
 
   afterEach(() => {
+    createGunzipOverride = null;
+    pipelineOverride = null;
     sandbox.restore();
   });
 
@@ -1356,6 +1394,191 @@ describe('File', () => {
               done(new Error('Should not have been called.'));
             })
             .resume();
+        });
+
+        it('should destroy rawResponseStream and transformStreams and return early if throughStream is already destroyed', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
+          const rawResponseStream = new PassThrough();
+          const gunzipStream = new PassThrough();
+          createGunzipOverride = () => gunzipStream;
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
+          const pipelineSpy = spy();
+          pipelineOverride = pipelineSpy;
+
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              readStream.destroy();
+              assert.strictEqual(readStream.destroyed, true);
+
+              const rawResponse = {
+                headers: new Headers({'content-encoding': 'gzip'}),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(pipelineSpy.called, false);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              assert.strictEqual(gunzipDestroySpy.calledOnce, true);
+              assert.strictEqual(gunzipStream.destroyed, true);
+              done();
+              return rawResponse;
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
+          readStream.resume();
+        });
+
+        it('should destroy rawResponseStream and return early if throughStream is closed', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
+          const rawResponseStream = new PassThrough();
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const pipelineSpy = spy();
+          pipelineOverride = pipelineSpy;
+
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              Object.defineProperty(readStream, 'closed', {value: true});
+              assert.strictEqual(readStream.destroyed, false);
+              assert.strictEqual(readStream.closed, true);
+
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(pipelineSpy.called, false);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              done();
+              return rawResponse;
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
+          readStream.on('error', done);
+          readStream.resume();
+        });
+
+        it('should destroy rawResponseStream and return early if throughStream is already writableEnded', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
+          const rawResponseStream = new PassThrough();
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const pipelineSpy = spy();
+          pipelineOverride = pipelineSpy;
+
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake((_reqOpts, callback) => {
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              setImmediate(async () => {
+                (readStream as unknown as PassThrough).end();
+                assert.strictEqual(
+                  (readStream as unknown as PassThrough).writableEnded,
+                  true,
+                );
+                await callback(null, rawResponseStream, rawResponse);
+                assert.strictEqual(pipelineSpy.called, false);
+                assert.strictEqual(destroySpy.calledOnce, true);
+                assert.strictEqual(rawResponseStream.destroyed, true);
+                done();
+              });
+              return Promise.resolve(rawResponse);
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
+          readStream.on('error', done);
+          readStream.resume();
+        });
+
+        it('should catch ERR_STREAM_UNABLE_TO_PIPE, ignore onComplete, and destroy rawResponseStream and transformStreams', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
+          const rawResponseStream = new PassThrough();
+          const gunzipStream = new PassThrough();
+          createGunzipOverride = () => gunzipStream;
+          const destroySpy = spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
+
+          pipelineOverride = (...args: unknown[]) => {
+            const onComplete = args[args.length - 1] as (
+              err: Error | null,
+            ) => void;
+            const err = new Error(
+              'Cannot pipe to a closed or destroyed stream',
+            ) as Error & {code?: string};
+            err.code = 'ERR_STREAM_UNABLE_TO_PIPE';
+            process.nextTick(() => {
+              onComplete(err);
+            });
+            throw err;
+          };
+
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              assert.strictEqual(readStream.destroyed, false);
+
+              const rawResponse = {
+                headers: new Headers({'content-encoding': 'gzip'}),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await callback(null, rawResponseStream, rawResponse);
+              assert.strictEqual(destroySpy.calledOnce, true);
+              assert.strictEqual(rawResponseStream.destroyed, true);
+              assert.strictEqual(gunzipDestroySpy.calledOnce, true);
+              assert.strictEqual(gunzipStream.destroyed, true);
+              setImmediate(() => {
+                assert.strictEqual(readStream.destroyed, false);
+                done();
+              });
+              return rawResponse;
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
+          readStream.on('error', done);
+          readStream.resume();
+        });
+
+        it('should rethrow unexpected errors from pipeline', done => {
+          const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
+          const rawResponseStream = new PassThrough();
+          const unexpectedErr = new Error(
+            'Unexpected pipeline error',
+          ) as Error & {
+            code?: string;
+          };
+          unexpectedErr.code = 'ERR_INVALID_ARG_TYPE';
+
+          pipelineOverride = () => {
+            throw unexpectedErr;
+          };
+
+          proxiedFile.storageTransport.makeRequest = sandbox
+            .stub()
+            .callsFake(async (_reqOpts, callback) => {
+              const rawResponse = {
+                headers: new Headers(),
+                data: rawResponseStream,
+              } as unknown as GaxiosResponse;
+
+              await assert.rejects(
+                () => callback(null, rawResponseStream, rawResponse),
+                unexpectedErr,
+              );
+              done();
+              return rawResponse;
+            });
+
+          const readStream = proxiedFile.createReadStream({validation: false});
+          readStream.resume();
         });
       });
     });
