@@ -31,7 +31,7 @@ import Any = google.protobuf.Any;
 import QueryMode = google.spanner.v1.ExecuteSqlRequest.QueryMode;
 import NullValue = google.protobuf.NullValue;
 import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
-import {getProtoPath, getRetryInfo} from '../../src/protos';
+import {getProtoPath, getRetryInfo, RETRY_INFO_BIN} from '../../src/protos';
 
 const RetryInfo = getRetryInfo();
 
@@ -57,7 +57,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const spannerProtoDescriptor = protoDescriptor['google']['spanner']['v1'];
-const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 
 /**

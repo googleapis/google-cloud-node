@@ -67,12 +67,12 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
 } from './request_id_header';
+import {RETRY_INFO_BIN} from './protos';
 
 export type Rows = Array<Row | Json>;
 type ResultStats = ResultSetStats | IResultSetStats;
 type ResultMetadata = ResultSetMetadata | IResultSetMetadata;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
-const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 
 let nextAffinityId = 0;
 

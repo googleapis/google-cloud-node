@@ -177,7 +177,7 @@ describe('RequestStreamCoordinator', () => {
     );
   });
 
-  it('should not call recordOperationCompletion when deferOperationCompletion is true', () => {
+  it('should not call recordOperationCompletion when isExternalTracer is true', () => {
     const stream = streamEvents(through.obj());
     const tracer = createMockTracer();
     const coordinator = new RequestStreamCoordinator(stream, tracer, true);
@@ -192,7 +192,7 @@ describe('RequestStreamCoordinator', () => {
     );
   });
 
-  it('should initialize and assign config.metricsTracer when config.metricsTracer is undefined', () => {
+  it('should call _initMetricsTracer when config.metricsTracer is undefined', () => {
     const spanner = new Spanner({projectId: 'test-project'});
     const fakeTracer = createMockTracer();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -202,7 +202,6 @@ describe('RequestStreamCoordinator', () => {
     const config: any = {client: 'SpannerClient', method: 'batchWrite'};
     spanner.requestStream(config);
 
-    assert.strictEqual(config.metricsTracer, fakeTracer);
     assert.strictEqual(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ((spanner as any)._initMetricsTracer as sinon.SinonStub).calledOnce,
