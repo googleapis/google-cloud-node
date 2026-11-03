@@ -15,8 +15,9 @@
  */
 
 import * as assert from 'assert';
-import {context} from '@opentelemetry/api';
+import {Span, TracerProvider, context, trace} from '@opentelemetry/api';
 import {describe, it} from 'mocha';
+import * as sinon from 'sinon';
 import {
   _resetTracingEnabledForTest,
   ensureInitialContextManagerSet,
@@ -116,29 +117,30 @@ describe('instrument', () => {
               setAttribute: () => fakeSpan,
               setAttributes: () => fakeSpan,
               addEvent: () => fakeSpan,
+              addLink: () => fakeSpan,
+              addLinks: () => fakeSpan,
               setStatus: () => fakeSpan,
               updateName: () => fakeSpan,
               end: () => {},
               isRecording: () => true,
               recordException: () => {},
             };
-            return context.with(traceSetSpan(context.active(), fakeSpan), () =>
+            return context.with(trace.setSpan(context.active(), fakeSpan), () =>
               fn(fakeSpan),
             );
           },
         }),
       };
 
-      const {trace} = require('@opentelemetry/api');
-      function traceSetSpan(ctx: unknown, span: unknown) {
-        return trace.setSpan(ctx, span);
-      }
-
       try {
-        let activeSpanAfterAwait: unknown;
+        let activeSpanAfterAwait: Span | undefined;
         await startTrace(
           'Test.asyncSpan',
-          {opts: {tracerProvider: fakeTracerProvider as any}},
+          {
+            opts: {
+              tracerProvider: fakeTracerProvider as unknown as TracerProvider,
+            },
+          },
           async span => {
             await Promise.resolve();
             activeSpanAfterAwait = getActiveOrNoopSpan();
@@ -147,7 +149,7 @@ describe('instrument', () => {
         );
 
         assert.strictEqual(
-          (activeSpanAfterAwait as any)?.spanContext?.().spanId,
+          activeSpanAfterAwait?.spanContext().spanId,
           '2'.repeat(16),
         );
       } finally {
@@ -156,7 +158,6 @@ describe('instrument', () => {
     });
 
     it('should re-enable context manager on cached global tracing check after context.disable()', async () => {
-      const {trace} = require('@opentelemetry/api');
       const fakeTracerProvider = {
         getTracer: () => ({
           startActiveSpan: (
@@ -173,6 +174,8 @@ describe('instrument', () => {
               setAttribute: () => fakeSpan,
               setAttributes: () => fakeSpan,
               addEvent: () => fakeSpan,
+              addLink: () => fakeSpan,
+              addLinks: () => fakeSpan,
               setStatus: () => fakeSpan,
               updateName: () => fakeSpan,
               end: () => {},
@@ -187,7 +190,9 @@ describe('instrument', () => {
       };
 
       _resetTracingEnabledForTest();
-      trace.setGlobalTracerProvider(fakeTracerProvider as any);
+      const getTracerProviderStub = sinon
+        .stub(trace, 'getTracerProvider')
+        .returns(fakeTracerProvider as unknown as TracerProvider);
       try {
         // First trace primes globalTracingEnabled = true
         await startTrace('Test.primedSpan', undefined, async span => {
@@ -196,7 +201,7 @@ describe('instrument', () => {
         // Disable context manager while globalTracingEnabled remains cached as true
         context.disable();
 
-        let activeSpanAfterAwait: unknown;
+        let activeSpanAfterAwait: Span | undefined;
         await startTrace('Test.cachedGlobalSpan', undefined, async span => {
           await Promise.resolve();
           activeSpanAfterAwait = getActiveOrNoopSpan();
@@ -204,11 +209,11 @@ describe('instrument', () => {
         });
 
         assert.strictEqual(
-          (activeSpanAfterAwait as any)?.spanContext?.().spanId,
+          activeSpanAfterAwait?.spanContext().spanId,
           '4'.repeat(16),
         );
       } finally {
-        trace.disable();
+        getTracerProviderStub.restore();
         _resetTracingEnabledForTest();
         ensureInitialContextManagerSet();
       }
