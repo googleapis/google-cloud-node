@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.6.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.5.0...bigquery-v9.6.0) (2026-11-02)
+
+
+### Features
+
+* **bigquery:** Enable picosecond support feature flag by default ([#9789](https://github.com/googleapis/google-cloud-node/issues/9789)) ([7dfae1d](https://github.com/googleapis/google-cloud-node/commit/7dfae1d22e48b3b7d525c765f22d99b6fad0a4e8))
+
 ## [9.5.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.4.0...bigquery-v9.5.0) (2026-10-23)
 
 

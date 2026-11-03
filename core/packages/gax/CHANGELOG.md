@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.16.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.15.0...google-gax-v6.16.0) (2026-11-02)
+
+
+### Features
+
+* **gax:** Add error logging for low level network attempts ([#9757](https://github.com/googleapis/google-cloud-node/issues/9757)) ([1333570](https://github.com/googleapis/google-cloud-node/commit/13335708924947c4532b05c7a4a5928a3c143223))
+
 ## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.14.0...google-gax-v6.15.0) (2026-11-02)
 
 
