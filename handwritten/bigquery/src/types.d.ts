@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260922
+ * Discovery Revision: 20261009
  */
 
 /**
@@ -2721,6 +2721,10 @@ declare namespace bigquery {
      * Optional. Whether to print out a header row in the results. Default is true. Not applicable when extracting models.
      */
     printHeader?: boolean;
+    /**
+     * Optional. A set of key-value pairs representing the secure context. This can be used to pass sensitive or context-specific information. They can be retrieved via the SECURE_CONTEXT() function and used to modify the run-time behavior of an extract job on tables with row access policies.
+     */
+    secureContext?: ISecureContext;
     /**
      * A reference to the model being exported.
      */
