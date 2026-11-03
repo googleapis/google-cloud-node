@@ -204,7 +204,6 @@ export interface RequestConfig {
   gaxOpts?: CallOptions;
   headers: {[k: string]: string};
   metricsTracer?: MetricsTracer | null;
-  deferOperationCompletion?: boolean;
 }
 export interface CreateInstanceRequest {
   config?: string;
@@ -2136,18 +2135,15 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
-    const metricsTracer =
-      config.metricsTracer !== undefined
-        ? config.metricsTracer
-        : this._initMetricsTracer(config);
-    if (config.metricsTracer === undefined && metricsTracer) {
-      config.metricsTracer = metricsTracer;
-    }
+    const isExternalTracer = config.metricsTracer !== undefined;
+    const metricsTracer = isExternalTracer
+      ? config.metricsTracer
+      : this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
     const coordinator = new RequestStreamCoordinator(
       stream,
       metricsTracer,
-      config.deferOperationCompletion,
+      isExternalTracer,
     );
     coordinator.setup();
 

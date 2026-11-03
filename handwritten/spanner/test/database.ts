@@ -276,6 +276,7 @@ describe('Database', () => {
   const SPANNER = {
     routeToLeaderEnabled: true,
     options: {},
+    _initMetricsTracer: util.noop,
   } as {} as Spanner;
 
   const INSTANCE = {
@@ -850,13 +851,14 @@ describe('Database', () => {
     });
 
     it('should return data when passing a valid list of mutationGroups', done => {
+      const fakeResponse = {indexes: [0, 1]};
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
         .on('data', data => {
-          assert.strictEqual(data, 'test');
+          assert.deepStrictEqual(data, fakeResponse);
           done();
         });
-      fakeDataStream.emit('data', 'test');
+      fakeDataStream.emit('data', fakeResponse);
     });
 
     it('should emit correct event based on valid/invalid list of mutationGroups', done => {
@@ -893,18 +895,19 @@ describe('Database', () => {
         SingerId: 3,
         AlbumTitle: 'Go, Go, Go',
       });
+      const fakeResponse = {indexes: [0]};
       database
         .batchWriteAtLeastOnce(
           [FakeMutationGroup1, FakeMutationGroup2],
           options,
         )
         .on('data', data => {
-          assert.strictEqual(data, 'testData');
+          assert.deepStrictEqual(data, fakeResponse);
         })
         .on('error', err => {
           assert.strictEqual(err, fakeError);
         });
-      fakeDataStream.emit('data', 'testData');
+      fakeDataStream.emit('data', fakeResponse);
       fakeDataStream.emit('error', fakeError);
       done();
     });
@@ -997,19 +1000,17 @@ describe('Database', () => {
       }, 15);
     });
 
-    it('should propagate and reuse metricsTracer across retry attempts in batchWriteAtLeastOnce', done => {
+    it('should initialize and pass metricsTracer across all retry attempts in batchWriteAtLeastOnce', done => {
       const stream1 = through.obj();
       const stream2 = through.obj();
       const fakeTracer = {
         recordOperationCompletion: sandbox.spy(),
       };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let firstAttemptPassedTracer: any;
-      requestStreamStub.onCall(0).callsFake(config => {
-        firstAttemptPassedTracer = config.metricsTracer;
-        config.metricsTracer = fakeTracer;
-        return stream1;
-      });
+      const spanner = (database as any)._getSpanner();
+      sandbox.stub(spanner, '_initMetricsTracer').returns(fakeTracer);
+
+      requestStreamStub.onCall(0).returns(stream1);
       requestStreamStub.onCall(1).returns(stream2);
 
       const retryOptions: BatchWriteOptions = {
@@ -1031,9 +1032,10 @@ describe('Database', () => {
         .on('error', done)
         .on('end', () => {
           assert.strictEqual(requestStreamStub.callCount, 2);
+          const firstCallArgs = requestStreamStub.getCall(0).args[0];
           const secondCallArgs = requestStreamStub.getCall(1).args[0];
 
-          assert.strictEqual(firstAttemptPassedTracer, undefined);
+          assert.strictEqual(firstCallArgs.metricsTracer, fakeTracer);
           assert.strictEqual(secondCallArgs.metricsTracer, fakeTracer);
           assert.strictEqual(
             fakeTracer.recordOperationCompletion.calledOnce,

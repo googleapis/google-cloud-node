@@ -19,10 +19,9 @@ import {Readable, Transform} from 'stream';
 import * as through from 'through2';
 import {protos} from '@google-cloud/spanner-api';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
-import {getRetryInfo} from './protos';
+import {getNextRetryDelayMs} from './common';
 
-const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
-const RetryInfo = getRetryInfo();
+export {getNextRetryDelayMs};
 
 type IMutationGroup = protos.google.spanner.v1.BatchWriteRequest.IMutationGroup;
 type IBatchWriteResponse = protos.google.spanner.v1.IBatchWriteResponse;
@@ -32,63 +31,70 @@ export interface BatchWriteStreamOptions {
   onTerminate?: (finalStatus: grpc.status) => void;
 }
 
-// Default BatchWrite retry/backoff parameters from spanner_client_config.json
-const DEFAULT_INITIAL_RETRY_DELAY_MS = 100;
-const DEFAULT_MAX_RETRY_DELAY_MS = 60000;
-const DEFAULT_RETRY_DELAY_MULTIPLIER = 1.3;
 const DEFAULT_TOTAL_TIMEOUT_MS = 3600000; // 1 hour
 
 /**
- * Extracts server-supplied retry delay (in ms) from `google.rpc.retryinfo-bin`
- * trailing metadata if present, otherwise computes jittered exponential backoff.
+ * Checks whether an error is eligible for retry.
  */
-export function getNextRetryDelayMs(
+function isRetryableError(
   err: grpc.ServiceError,
-  retryAttempt: number,
-  backoffSettings?: Partial<
-    NonNullable<NonNullable<CallOptions['retry']>['backoffSettings']>
-  >,
-): number {
-  const retryInfoValues = err?.metadata && err.metadata.get(RETRY_INFO_BIN);
-  if (retryInfoValues && retryInfoValues.length > 0) {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const {retryDelay} = (RetryInfo as any).decode(retryInfoValues[0]);
-      if (retryDelay) {
-        let {seconds} = retryDelay;
-        if (
-          seconds &&
-          typeof seconds !== 'number' &&
-          typeof seconds.toNumber === 'function'
-        ) {
-          seconds = seconds.toNumber();
-        }
-        const secondsInMs = Math.floor(Number(seconds || 0)) * 1000;
-        const nanosInMs = Math.floor(Number(retryDelay.nanos || 0)) / 1e6;
-        const delayMs = secondsInMs + nanosInMs;
-        if (delayMs >= 0) {
-          return delayMs;
-        }
-      }
-    } catch {
-      // Fall back to exponential backoff if RetryInfo decoding fails.
+  retryableCodes: grpc.status[],
+): boolean {
+  if (!err || typeof err.code !== 'number') {
+    return false;
+  }
+  const allowsNetworkRetries = retryableCodes.includes(grpc.status.UNAVAILABLE);
+  return (
+    retryableCodes.includes(err.code) ||
+    (allowsNetworkRetries && isRetryableInternalError(err))
+  );
+}
+
+/**
+ * Validates response indexes against current request bounds, translates
+ * retry-local indexes back to original caller positions in-place, and marks
+ * acknowledged mutation groups as resolved.
+ */
+function processResponseIndexes(
+  response: IBatchWriteResponse,
+  streamIndexes: number[],
+  pending: Array<IMutationGroup | null>,
+): {error?: grpc.ServiceError; acknowledgedCount: number} {
+  const respIndexes = response.indexes;
+  if (!Array.isArray(respIndexes)) {
+    return {acknowledgedCount: 0};
+  }
+
+  // Validate all response indexes before mutating state.
+  for (let i = 0; i < respIndexes.length; i++) {
+    const idx = Number(respIndexes[i]);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= streamIndexes.length) {
+      const msg = `BatchWrite index ${idx} out of bounds for current request size ${streamIndexes.length}`;
+      return {
+        error: Object.assign(new Error(msg), {
+          code: grpc.status.INTERNAL,
+          details: msg,
+          metadata: new grpc.Metadata(),
+        } as grpc.ServiceError),
+        acknowledgedCount: 0,
+      };
     }
   }
 
-  const initialDelay =
-    backoffSettings?.initialRetryDelayMillis ?? DEFAULT_INITIAL_RETRY_DELAY_MS;
-  const maxDelay =
-    backoffSettings?.maxRetryDelayMillis ?? DEFAULT_MAX_RETRY_DELAY_MS;
-  const multiplier =
-    backoffSettings?.retryDelayMultiplier ?? DEFAULT_RETRY_DELAY_MULTIPLIER;
+  // Translate retry-local indexes back to original caller indexes in-place
+  // and mark each acknowledged group as resolved (nulling reference for GC).
+  let acknowledgedCount = 0;
+  for (let i = 0; i < respIndexes.length; i++) {
+    const retryIdx = Number(respIndexes[i]);
+    const origIdx = streamIndexes[retryIdx];
+    respIndexes[i] = origIdx;
+    if (pending[origIdx] !== null) {
+      pending[origIdx] = null;
+      acknowledgedCount++;
+    }
+  }
 
-  const unclampedDelay =
-    initialDelay * Math.pow(multiplier, Math.max(0, retryAttempt - 1));
-  const cappedDelay = Math.min(maxDelay, unclampedDelay);
-
-  // Jitter in [0.8 * cappedDelay, 1.2 * cappedDelay]
-  const jitterFactor = 0.8 + Math.random() * 0.4;
-  return Math.floor(cappedDelay * jitterFactor);
+  return {acknowledgedCount};
 }
 
 /**
@@ -122,9 +128,6 @@ export function batchWriteStream(
     ? [...mutationGroups]
     : [];
   let remaining = totalGroups;
-  let sawNonObjectChunk = false;
-
-  // Maps current RPC request index -> original caller index.
   let streamIndexes: number[] = [];
 
   let activeRequestStream: Readable | null = null;
@@ -139,7 +142,7 @@ export function batchWriteStream(
     },
   );
 
-  const finalize = (status: grpc.status) => {
+  function finalize(status: grpc.status): void {
     if (terminated) {
       return;
     }
@@ -149,9 +152,9 @@ export function batchWriteStream(
       retryTimer = null;
     }
     options.onTerminate?.(status);
-  };
+  }
 
-  const cleanupActiveRequestStream = () => {
+  function cleanupActiveStream(): void {
     if (!activeRequestStream) {
       return;
     }
@@ -164,23 +167,22 @@ export function batchWriteStream(
     if (!streamToClean.destroyed) {
       streamToClean.destroy();
     }
-  };
+  }
 
-  // Intercept stream destruction and close so early cancellation by the caller
-  // immediately clears any pending retry timer and aborts the active RPC stream.
+  // Hook caller cancellation and cleanup
   const originalDestroy = userStream._destroy;
-  userStream._destroy = function (
+  userStream._destroy = (
     error: Error | null,
     callback: (error?: Error | null) => void,
-  ) {
+  ) => {
     if (!terminated) {
-      cleanupActiveRequestStream();
+      cleanupActiveStream();
       finalize(
         (error as grpc.ServiceError | null)?.code ?? grpc.status.CANCELLED,
       );
     }
     if (typeof originalDestroy === 'function') {
-      originalDestroy.call(this, error, callback);
+      originalDestroy.call(userStream, error, callback);
     } else {
       callback(error);
     }
@@ -188,24 +190,25 @@ export function batchWriteStream(
 
   userStream.once('close', () => {
     if (!terminated) {
-      cleanupActiveRequestStream();
+      cleanupActiveStream();
       finalize(grpc.status.CANCELLED);
     }
   });
 
-  const isRetryableError = (err: grpc.ServiceError): boolean => {
-    if (!err || typeof err.code !== 'number') {
-      return false;
-    }
-    return (
-      retryableCodes.includes(err.code) ||
-      (retryableCodes.includes(grpc.status.UNAVAILABLE) &&
-        isRetryableInternalError(err))
-    );
-  };
+  userStream.on('drain', () => {
+    activeRequestStream?.resume();
+  });
 
-  const handleRetryOrFail = (err: grpc.ServiceError) => {
-    cleanupActiveRequestStream();
+  if (totalGroups === 0) {
+    finalize(grpc.status.OK);
+    setImmediate(() => {
+      userStream.end();
+    });
+    return userStream;
+  }
+
+  function handleRetryOrFail(err: grpc.ServiceError): void {
+    cleanupActiveStream();
     if (terminated || userStream.destroyed) {
       return;
     }
@@ -215,7 +218,7 @@ export function batchWriteStream(
       remaining > 0 &&
       retryCount < maxRetries &&
       elapsed < timeout &&
-      isRetryableError(err)
+      isRetryableError(err, retryableCodes)
     ) {
       retryCount++;
       const delayMs = getNextRetryDelayMs(err, retryCount, backoffSettings);
@@ -235,14 +238,14 @@ export function batchWriteStream(
     }
 
     const finalError =
-      elapsed >= timeout && isRetryableError(err)
+      elapsed >= timeout && isRetryableError(err, retryableCodes)
         ? new DeadlineError(err)
         : err;
     finalize(finalError.code ?? grpc.status.UNKNOWN);
     userStream.destroy(finalError);
-  };
+  }
 
-  const startAttempt = () => {
+  function startAttempt(): void {
     if (terminated || userStream.destroyed) {
       return;
     }
@@ -253,7 +256,7 @@ export function batchWriteStream(
       return;
     }
 
-    // Build the subset of unacknowledged MutationGroups and their index map.
+    // Filter unacknowledged mutation groups and record index mapping
     const currentGroups: IMutationGroup[] = [];
     streamIndexes = [];
     for (let origIdx = 0; origIdx < totalGroups; origIdx++) {
@@ -268,82 +271,50 @@ export function batchWriteStream(
     const remainingTimeoutMs = Number.isFinite(timeout)
       ? Math.max(0, timeout - elapsed)
       : timeout;
+
     const currentStream = makeRequest(currentGroups, remainingTimeoutMs);
     activeRequestStream = currentStream;
 
-    const onData = (response: IBatchWriteResponse) => {
+    currentStream.on('data', (response: IBatchWriteResponse) => {
       if (terminated || userStream.destroyed) {
         return;
       }
 
-      if (typeof response !== 'object' || response === null) {
-        sawNonObjectChunk = true;
-        if (!userStream.write(response)) {
-          currentStream.pause();
-        }
+      const {error, acknowledgedCount} = processResponseIndexes(
+        response,
+        streamIndexes,
+        pending,
+      );
+
+      if (error) {
+        cleanupActiveStream();
+        finalize(grpc.status.INTERNAL);
+        userStream.destroy(error);
         return;
       }
 
-      const respIndexes = response.indexes;
-      if (Array.isArray(respIndexes)) {
-        // Validate all response indexes before mutating state.
-        for (let i = 0; i < respIndexes.length; i++) {
-          const idx = Number(respIndexes[i]);
-          if (
-            !Number.isInteger(idx) ||
-            idx < 0 ||
-            idx >= streamIndexes.length
-          ) {
-            cleanupActiveRequestStream();
-            const msg = `BatchWrite index ${idx} out of bounds for current request size ${streamIndexes.length}`;
-            const internalErr = Object.assign(new Error(msg), {
-              code: grpc.status.INTERNAL,
-              details: msg,
-              metadata: new grpc.Metadata(),
-            } as grpc.ServiceError);
-            finalize(grpc.status.INTERNAL);
-            userStream.destroy(internalErr);
-            return;
-          }
-        }
+      remaining -= acknowledgedCount;
 
-        // Translate retry-local indexes back to original caller indexes in-place
-        // and mark each acknowledged group as resolved (nulling reference for GC).
-        for (let i = 0; i < respIndexes.length; i++) {
-          const retryIdx = Number(respIndexes[i]);
-          const origIdx = streamIndexes[retryIdx];
-          respIndexes[i] = origIdx;
-          if (pending[origIdx] !== null) {
-            pending[origIdx] = null;
-            remaining--;
-          }
-        }
-      }
-
-      // Forward the response with translated indexes and respect downstream backpressure.
+      // Forward response and handle downstream backpressure
       if (!userStream.write(response)) {
         currentStream.pause();
       }
-    };
+    });
 
-    const onError = (err: grpc.ServiceError) => {
-      currentStream.removeListener('data', onData);
-      currentStream.removeListener('end', onEnd);
+    currentStream.once('error', (err: grpc.ServiceError) => {
       if (terminated || userStream.destroyed) {
         return;
       }
-      if (totalGroups > 0 && remaining === 0 && !sawNonObjectChunk) {
-        cleanupActiveRequestStream();
+      if (totalGroups > 0 && remaining === 0) {
+        cleanupActiveStream();
         finalize(grpc.status.OK);
         userStream.end();
         return;
       }
       handleRetryOrFail(err);
-    };
+    });
 
-    const onEnd = () => {
-      currentStream.removeListener('data', onData);
-      currentStream.removeListener('error', onError);
+    currentStream.once('end', () => {
       activeRequestStream = null;
       if (terminated || userStream.destroyed) {
         return;
@@ -351,7 +322,7 @@ export function batchWriteStream(
 
       // Premature stream end (EOF while remaining > 0) is treated as a
       // retryable UNAVAILABLE error so remaining groups are retried.
-      if (remaining > 0 && !sawNonObjectChunk) {
+      if (remaining > 0) {
         const msg = `BatchWrite stream ended prematurely with ${remaining} unacknowledged mutation group(s)`;
         const prematureEofErr = Object.assign(new Error(msg), {
           code: grpc.status.UNAVAILABLE,
@@ -364,27 +335,9 @@ export function batchWriteStream(
 
       finalize(grpc.status.OK);
       userStream.end();
-    };
-
-    currentStream.on('data', onData);
-    currentStream.once('error', onError);
-    currentStream.once('end', onEnd);
-  };
-
-  // Propagate downstream drain to resume the active gRPC stream.
-  userStream.on('drain', () => {
-    activeRequestStream?.resume();
-  });
-
-  if (totalGroups === 0) {
-    finalize(grpc.status.OK);
-    setImmediate(() => {
-      userStream.end();
     });
-    return userStream;
   }
 
   startAttempt();
-
   return userStream;
 }
