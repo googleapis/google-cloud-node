@@ -1715,8 +1715,9 @@ class File extends ServiceObject<File, FileMetadata> {
       md5 = false;
     }
 
+    let shouldIgnoreComplete = false;
     const onComplete = (err: Error | null) => {
-      if (err) {
+      if (err && !shouldIgnoreComplete) {
         // There is an issue with node-fetch 2.x that if the stream errors the underlying socket connection is not closed.
         // This causes a memory leak, so cleanup the sockets manually here by destroying the agent.
         throughStream.destroy(err);
@@ -1808,12 +1809,42 @@ class File extends ServiceObject<File, FileMetadata> {
         transformStreams.push(zlib.createGunzip());
       }
 
-      pipeline(
-        rawResponseStream as Readable,
-        ...(transformStreams as [Transform]),
-        throughStream,
-        onComplete,
-      );
+      const responseStream = rawResponseStream as Readable;
+      const cleanupSourceStream = () => {
+        if (typeof responseStream?.destroy === 'function') {
+          responseStream.destroy();
+        } else if (typeof responseStream?.resume === 'function') {
+          responseStream.resume();
+        }
+        for (const stream of transformStreams) {
+          stream.destroy();
+        }
+      };
+
+      if (
+        throughStream.destroyed ||
+        throughStream.closed ||
+        throughStream.writableEnded
+      ) {
+        cleanupSourceStream();
+        return;
+      }
+
+      try {
+        pipeline(
+          responseStream,
+          ...(transformStreams as [Transform]),
+          throughStream,
+          onComplete,
+        );
+      } catch (err) {
+        if ((err as {code?: string})?.code === 'ERR_STREAM_UNABLE_TO_PIPE') {
+          shouldIgnoreComplete = true;
+          cleanupSourceStream();
+          return;
+        }
+        throw err;
+      }
     };
 
     // Authenticate the request, then pipe the remote API request to the stream
