@@ -208,8 +208,7 @@ describe('instrument', () => {
           '4'.repeat(16),
         );
       } finally {
-        trace.getTracerProvider = origGetTracerProvider;
-        trace.getTracer = origGetTracer;
+        trace.disable();
         _resetTracingEnabledForTest();
         ensureInitialContextManagerSet();
       }
