@@ -21,8 +21,10 @@ import * as through from 'through2';
 import {Transform} from 'stream';
 import {grpc} from 'google-gax';
 import {protos} from '@google-cloud/spanner-api';
-import {batchWriteStream, getNextRetryDelayMs} from '../src/batch-write-stream';
-import {getRetryInfo} from '../src/protos';
+import {batchWriteStream} from '../src/batch-write-stream';
+import {getNextRetryDelayMs} from '../src/common';
+import {getRetryInfo, RETRY_INFO_BIN} from '../src/protos';
+import {DeadlineError} from '../src/transaction-runner';
 
 type IMutationGroup = protos.google.spanner.v1.BatchWriteRequest.IMutationGroup;
 type IBatchWriteResponse = protos.google.spanner.v1.IBatchWriteResponse;
@@ -352,7 +354,107 @@ describe('batchWriteStream', () => {
       });
   });
 
-  it('should fail withINTERNAL error and not retry when server returns an out-of-bounds index', done => {
+  it('should detach error listener on premature stream end so late errors do not trigger duplicate retries', done => {
+    const attemptStreams: Transform[] = [through.obj(), through.obj()];
+    const receivedRequests: IMutationGroup[][] = [];
+    let attemptIndex = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1],
+      groups => {
+        receivedRequests.push(groups);
+        const current = attemptStreams[attemptIndex++];
+        setImmediate(() => {
+          if (attemptIndex === 1) {
+            // Acknowledge group0, end prematurely, then emit late errors on the closed stream
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.end();
+            setImmediate(() => {
+              current.emit(
+                'error',
+                makeServiceError(grpc.status.UNAVAILABLE, 'Late disconnect'),
+              );
+              current.emit(
+                'error',
+                makeServiceError(grpc.status.CANCELLED, 'Trailing cancel'),
+              );
+            });
+          } else {
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.end();
+          }
+        });
+        return current;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', done)
+      .on('end', () => {
+        assert.strictEqual(receivedRequests.length, 2);
+        assert.deepStrictEqual(receivedRequests[1], [group1]);
+        assert.strictEqual(responses.length, 2);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.deepStrictEqual(responses[1].indexes, [1]);
+        assert.strictEqual(finalStatus, grpc.status.OK);
+        done();
+      });
+  });
+
+  it('should finalize with OK and end stream when trailing gRPC error occurs after all mutation groups are acknowledged', done => {
+    const attemptStream = through.obj();
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1],
+      () => {
+        requestCount++;
+        setImmediate(() => {
+          attemptStream.write({indexes: [0], status: {code: grpc.status.OK}});
+          attemptStream.write({indexes: [1], status: {code: grpc.status.OK}});
+          attemptStream.emit(
+            'error',
+            makeServiceError(
+              grpc.status.UNAVAILABLE,
+              'Connection reset by peer',
+            ),
+          );
+        });
+        return attemptStream;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', done)
+      .on('end', () => {
+        assert.strictEqual(requestCount, 1);
+        assert.strictEqual(responses.length, 2);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.deepStrictEqual(responses[1].indexes, [1]);
+        assert.strictEqual(finalStatus, grpc.status.OK);
+        done();
+      });
+  });
+
+  it('should fail with INTERNAL error and not retry when server returns an out-of-bounds index', done => {
     const attemptStream = through.obj();
     let requestCount = 0;
     let finalStatus: grpc.status | undefined;
@@ -380,6 +482,154 @@ describe('batchWriteStream', () => {
     });
 
     attemptStream.write({indexes: [2], status: {code: grpc.status.OK}});
+  });
+
+  it('should fail with INTERNAL error and not retry when server returns an out-of-bounds index on a resumed stream', done => {
+    const attemptStreams: Transform[] = [through.obj(), through.obj()];
+    const receivedRequests: IMutationGroup[][] = [];
+    let attemptIndex = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1, group2],
+      groups => {
+        receivedRequests.push(groups);
+        const current = attemptStreams[attemptIndex++];
+        setImmediate(() => {
+          if (attemptIndex === 1) {
+            // Acknowledge group0, then fail with UNAVAILABLE
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.emit(
+              'error',
+              makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+            );
+          } else {
+            // Resumed stream only sent 2 groups ([group1, group2]), so index 2 is out of bounds
+            current.write({indexes: [2], status: {code: grpc.status.OK}});
+          }
+        });
+        return current;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', (err: grpc.ServiceError) => {
+        assert.strictEqual(receivedRequests.length, 2);
+        assert.deepStrictEqual(receivedRequests[0], [group0, group1, group2]);
+        assert.deepStrictEqual(receivedRequests[1], [group1, group2]);
+        assert.strictEqual(responses.length, 1);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.strictEqual(err.code, grpc.status.INTERNAL);
+        assert.match(err.message, /out of bounds/);
+        assert.strictEqual(finalStatus, grpc.status.INTERNAL);
+        done();
+      });
+  });
+
+  for (const invalidIndex of [-1, 1.5, null as unknown as number]) {
+    it(`should fail with INTERNAL error and not retry on invalid index (${String(invalidIndex)})`, done => {
+      const attemptStream = through.obj();
+      let requestCount = 0;
+      let finalStatus: grpc.status | undefined;
+
+      const stream = batchWriteStream(
+        [group0, group1],
+        () => {
+          requestCount++;
+          return attemptStream;
+        },
+        {
+          gaxOptions: fastGaxOptions,
+          onTerminate: status => {
+            finalStatus = status;
+          },
+        },
+      );
+
+      stream.on('error', (err: grpc.ServiceError) => {
+        assert.strictEqual(requestCount, 1);
+        assert.strictEqual(err.code, grpc.status.INTERNAL);
+        assert.match(err.message, /out of bounds/);
+        assert.strictEqual(finalStatus, grpc.status.INTERNAL);
+        done();
+      });
+
+      attemptStream.write({
+        indexes: [invalidIndex],
+        status: {code: grpc.status.OK},
+      });
+    });
+  }
+
+  it('should translate duplicate indexes in-place and decrement remaining only once per unique group', done => {
+    const attemptStreams: Transform[] = [
+      through.obj(),
+      through.obj(),
+      through.obj(),
+    ];
+    const receivedRequests: IMutationGroup[][] = [];
+    let attemptIndex = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1, group2],
+      groups => {
+        receivedRequests.push(groups);
+        const current = attemptStreams[attemptIndex++];
+        setImmediate(() => {
+          if (attemptIndex === 1) {
+            // Acknowledge group0, then fail with UNAVAILABLE
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.emit(
+              'error',
+              makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+            );
+          } else if (attemptIndex === 2) {
+            // Resumed stream has [group1, group2] (2 groups).
+            // Server sends duplicate index [0, 0] for group1 and ends prematurely.
+            // Must NOT decrement remaining to 0 (group2 is still unacknowledged).
+            current.write({indexes: [0, 0], status: {code: grpc.status.OK}});
+            current.end();
+          } else {
+            // Attempt 3 must resume with only [group2]
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.end();
+          }
+        });
+        return current;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', done)
+      .on('end', () => {
+        assert.strictEqual(receivedRequests.length, 3);
+        assert.deepStrictEqual(receivedRequests[0], [group0, group1, group2]);
+        assert.deepStrictEqual(receivedRequests[1], [group1, group2]);
+        assert.deepStrictEqual(receivedRequests[2], [group2]);
+        assert.strictEqual(responses.length, 3);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.deepStrictEqual(responses[1].indexes, [1, 1]);
+        assert.deepStrictEqual(responses[2].indexes, [2]);
+        assert.strictEqual(finalStatus, grpc.status.OK);
+        done();
+      });
   });
 
   it('should fail immediately without retrying on non-retryable RPC errors', done => {
@@ -414,6 +664,60 @@ describe('batchWriteStream', () => {
     });
 
     attemptStream.emit('error', permDeniedErr);
+  });
+
+  it('should emit non-retryable error and stop retrying after partial retry progress', done => {
+    const attemptStreams: Transform[] = [through.obj(), through.obj()];
+    const receivedRequests: IMutationGroup[][] = [];
+    let attemptIndex = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const permDeniedErr = makeServiceError(
+      grpc.status.PERMISSION_DENIED,
+      'Caller lacks permission on table T1',
+    );
+
+    const stream = batchWriteStream(
+      [group0, group1],
+      groups => {
+        receivedRequests.push(groups);
+        const current = attemptStreams[attemptIndex++];
+        setImmediate(() => {
+          if (attemptIndex === 1) {
+            // Attempt 1 acknowledges group0, then fails with UNAVAILABLE
+            current.write({indexes: [0], status: {code: grpc.status.OK}});
+            current.emit(
+              'error',
+              makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+            );
+          } else {
+            // Attempt 2 receives only [group1] and fails with non-retryable PERMISSION_DENIED
+            current.emit('error', permDeniedErr);
+          }
+        });
+        return current;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', (err: grpc.ServiceError) => {
+        assert.strictEqual(receivedRequests.length, 2);
+        assert.deepStrictEqual(receivedRequests[0], [group0, group1]);
+        assert.deepStrictEqual(receivedRequests[1], [group1]);
+        assert.strictEqual(responses.length, 1);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.strictEqual(err, permDeniedErr);
+        assert.strictEqual(finalStatus, grpc.status.PERMISSION_DENIED);
+        done();
+      });
   });
 
   it('should not retry retryable INTERNAL errors when retryCodes is explicitly empty', done => {
@@ -500,6 +804,159 @@ describe('batchWriteStream', () => {
     }, 80);
   });
 
+  it('should emit DeadlineError and finalize with DEADLINE_EXCEEDED when retry delay exceeds total timeout', done => {
+    const attemptStream = through.obj();
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0],
+      () => {
+        requestCount++;
+        setImmediate(() => {
+          attemptStream.emit(
+            'error',
+            makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+          );
+        });
+        return attemptStream;
+      },
+      {
+        gaxOptions: {
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 1000,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 2000,
+              totalTimeoutMillis: 50,
+            },
+          },
+        },
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    stream.on('error', (err: grpc.ServiceError) => {
+      assert.strictEqual(requestCount, 1);
+      assert.ok(err instanceof DeadlineError);
+      assert.strictEqual(err.code, grpc.status.DEADLINE_EXCEEDED);
+      assert.strictEqual(finalStatus, grpc.status.DEADLINE_EXCEEDED);
+      assert.strictEqual((err as DeadlineError).errors.length, 1);
+      assert.strictEqual(
+        (err as DeadlineError).errors[0].code,
+        grpc.status.UNAVAILABLE,
+      );
+      done();
+    });
+  });
+
+  it('should emit DeadlineError and finalize with DEADLINE_EXCEEDED when total timeout has already elapsed prior to failure', done => {
+    const attemptStream = through.obj();
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    let currentTime = 1000;
+    sandbox.stub(Date, 'now').callsFake(() => currentTime);
+
+    const stream = batchWriteStream(
+      [group0],
+      () => {
+        requestCount++;
+        setImmediate(() => {
+          // Advance time past the 500ms timeout
+          currentTime += 600;
+          attemptStream.emit(
+            'error',
+            makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+          );
+        });
+        return attemptStream;
+      },
+      {
+        gaxOptions: {
+          timeout: 500,
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 10,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 50,
+              totalTimeoutMillis: 500,
+            },
+          },
+        },
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    stream.on('error', (err: grpc.ServiceError) => {
+      assert.strictEqual(requestCount, 1);
+      assert.ok(err instanceof DeadlineError);
+      assert.strictEqual(err.code, grpc.status.DEADLINE_EXCEEDED);
+      assert.strictEqual(finalStatus, grpc.status.DEADLINE_EXCEEDED);
+      assert.strictEqual((err as DeadlineError).errors.length, 1);
+      assert.strictEqual(
+        (err as DeadlineError).errors[0].code,
+        grpc.status.UNAVAILABLE,
+      );
+      done();
+    });
+  });
+
+  it('should cease retrying and emit final error when maxRetries is exhausted', done => {
+    const attemptStreams: Transform[] = [
+      through.obj(),
+      through.obj(),
+      through.obj(),
+    ];
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const unavailableErr = makeServiceError(
+      grpc.status.UNAVAILABLE,
+      'Service currently unavailable',
+    );
+
+    const stream = batchWriteStream(
+      [group0],
+      () => {
+        const current = attemptStreams[requestCount++];
+        setImmediate(() => {
+          current.emit('error', unavailableErr);
+        });
+        return current;
+      },
+      {
+        gaxOptions: {
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 1,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 5,
+              totalTimeoutMillis: 5000,
+              maxRetries: 2,
+            },
+          },
+        },
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    stream.on('error', (err: grpc.ServiceError) => {
+      // 1 initial attempt + 2 retries = 3 attempts total
+      assert.strictEqual(requestCount, 3);
+      assert.strictEqual(err, unavailableErr);
+      assert.strictEqual(err.code, grpc.status.UNAVAILABLE);
+      assert.strictEqual(finalStatus, grpc.status.UNAVAILABLE);
+      done();
+    });
+  });
+
   describe('getNextRetryDelayMs', () => {
     it('should extract delay from google.rpc.retryinfo-bin metadata when present', () => {
       const RetryInfo = getRetryInfo();
@@ -507,7 +964,7 @@ describe('batchWriteStream', () => {
         retryDelay: {seconds: 2, nanos: 250000000},
       }).finish();
       const metadata = new grpc.Metadata();
-      metadata.set('google.rpc.retryinfo-bin', Buffer.from(encoded));
+      metadata.set(RETRY_INFO_BIN, Buffer.from(encoded));
 
       const err = makeServiceError(
         grpc.status.UNAVAILABLE,
@@ -520,6 +977,26 @@ describe('batchWriteStream', () => {
 
     it('should fall back to jittered exponential backoff when RetryInfo is absent', () => {
       const err = makeServiceError(grpc.status.UNAVAILABLE, 'Unavailable');
+      const delayMs = getNextRetryDelayMs(err, 1, {
+        initialRetryDelayMillis: 100,
+        retryDelayMultiplier: 1.3,
+        maxRetryDelayMillis: 32000,
+      });
+      assert.ok(
+        delayMs >= 80 && delayMs <= 120,
+        `Expected delay in [80, 120], got ${delayMs}`,
+      );
+    });
+
+    it('should fall back to jittered exponential backoff when RetryInfo metadata is corrupted', () => {
+      const metadata = new grpc.Metadata();
+      metadata.set(RETRY_INFO_BIN, Buffer.from('invalid-non-proto-bytes'));
+
+      const err = makeServiceError(
+        grpc.status.UNAVAILABLE,
+        'Unavailable',
+        metadata,
+      );
       const delayMs = getNextRetryDelayMs(err, 1, {
         initialRetryDelayMillis: 100,
         retryDelayMultiplier: 1.3,

@@ -26,7 +26,7 @@ import {MetricsTracer} from './metrics/metrics-tracer';
 export class RequestStreamCoordinator {
   private readonly stream: Transform;
   private readonly metricsTracer: MetricsTracer | null;
-  private readonly deferOperationCompletion: boolean;
+  private readonly isExternalTracer: boolean;
   private callStream: CancellableStream | null = null;
   private statusReceived = false;
   private callStreamErrored = false;
@@ -38,11 +38,11 @@ export class RequestStreamCoordinator {
   constructor(
     stream: Transform,
     metricsTracer: MetricsTracer | null,
-    deferOperationCompletion = false,
+    isExternalTracer = false,
   ) {
     this.stream = stream;
     this.metricsTracer = metricsTracer;
-    this.deferOperationCompletion = deferOperationCompletion;
+    this.isExternalTracer = isExternalTracer;
   }
 
   /**
@@ -236,7 +236,7 @@ export class RequestStreamCoordinator {
    * Completes the OpenTelemetry operation metric. Idempotent.
    */
   completeOperation(): void {
-    if (this.operationCompleted || this.deferOperationCompletion) {
+    if (this.operationCompleted || this.isExternalTracer) {
       return;
     }
     this.operationCompleted = true;

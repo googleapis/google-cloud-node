@@ -204,6 +204,7 @@ describe('Database', () => {
 
   const SPANNER = {
     routeToLeaderEnabled: true,
+    _initMetricsTracer: util.noop,
   } as {} as Spanner;
 
   const INSTANCE = {
@@ -1282,8 +1283,8 @@ describe('Database', () => {
           done();
         });
 
-      fakeDataStream.emit('data', 'response');
-      fakeDataStream.end('end');
+      fakeDataStream.emit('data', {indexes: [0, 1]});
+      fakeDataStream.end();
     });
 
     it('ends span and does not start RPC when stream is destroyed before getSession resolves', done => {

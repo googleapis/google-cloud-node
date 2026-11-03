@@ -16,6 +16,10 @@
 
 import {grpc, CallOptions, Operation as GaxOperation} from 'google-gax';
 import {protos} from '@google-cloud/spanner-api';
+import {getRetryInfo, RETRY_INFO_BIN} from './protos';
+
+export {RETRY_INFO_BIN};
+const RetryInfo = getRetryInfo();
 import instanceAdmin = protos.google;
 import databaseAdmin = protos.google;
 
@@ -152,4 +156,62 @@ export function getCommonHeaders(
   headers[CLOUD_RESOURCE_HEADER] = resourceName;
 
   return headers;
+}
+
+// Default retry/backoff parameters from spanner_client_config.json
+const DEFAULT_INITIAL_RETRY_DELAY_MS = 100;
+const DEFAULT_MAX_RETRY_DELAY_MS = 60000;
+const DEFAULT_RETRY_DELAY_MULTIPLIER = 1.3;
+
+/**
+ * Extracts server-supplied retry delay (in ms) from `google.rpc.retryinfo-bin`
+ * trailing metadata if present, otherwise computes jittered exponential backoff.
+ */
+export function getNextRetryDelayMs(
+  err: grpc.ServiceError,
+  retryAttempt: number,
+  backoffSettings?: Partial<
+    NonNullable<NonNullable<CallOptions['retry']>['backoffSettings']>
+  >,
+): number {
+  const retryInfoValues = err?.metadata && err.metadata.get(RETRY_INFO_BIN);
+  if (retryInfoValues && retryInfoValues.length > 0) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const {retryDelay} = (RetryInfo as any).decode(retryInfoValues[0]);
+      if (retryDelay) {
+        let {seconds} = retryDelay;
+        if (
+          seconds &&
+          typeof seconds !== 'number' &&
+          typeof seconds.toNumber === 'function'
+        ) {
+          seconds = seconds.toNumber();
+        }
+        const secondsInMs = Math.floor(Number(seconds || 0)) * 1000;
+        const nanosInMs = Math.floor(Number(retryDelay.nanos || 0)) / 1e6;
+        const delayMs = secondsInMs + nanosInMs;
+        if (delayMs >= 0) {
+          return delayMs;
+        }
+      }
+    } catch {
+      // Fall back to exponential backoff if RetryInfo decoding fails.
+    }
+  }
+
+  const initialDelay =
+    backoffSettings?.initialRetryDelayMillis ?? DEFAULT_INITIAL_RETRY_DELAY_MS;
+  const maxDelay =
+    backoffSettings?.maxRetryDelayMillis ?? DEFAULT_MAX_RETRY_DELAY_MS;
+  const multiplier =
+    backoffSettings?.retryDelayMultiplier ?? DEFAULT_RETRY_DELAY_MULTIPLIER;
+
+  const unclampedDelay =
+    initialDelay * Math.pow(multiplier, Math.max(0, retryAttempt - 1));
+  const cappedDelay = Math.min(maxDelay, unclampedDelay);
+
+  // Jitter in [0.8 * cappedDelay, 1.2 * cappedDelay]
+  const jitterFactor = 0.8 + Math.random() * 0.4;
+  return Math.floor(cappedDelay * jitterFactor);
 }
