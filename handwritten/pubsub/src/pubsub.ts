@@ -282,9 +282,6 @@ interface GetClientCallback {
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:pubsub_quickstart_create_topic
- * Full quickstart example:
  */
 export class PubSub {
   options: ClientConfig;

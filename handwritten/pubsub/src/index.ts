@@ -54,9 +54,6 @@
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:pubsub_quickstart_create_topic
- * Full quickstart example:
  */
 
 /**
@@ -189,5 +186,4 @@ if (process.env.DEBUG_GRPC) {
   grpc.setLogger(console);
   grpc.setLogVerbosity(grpc.logVerbosity.DEBUG);
 }
-import * as protos from '../protos/protos';
-export {protos};
+export {protos} from '@google-cloud/pubsub-api';

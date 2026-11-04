@@ -20,12 +20,24 @@ import * as protos from '../../protos/operations';
 import assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import {OperationsClientBuilder} from '../../src/operationsClient';
 import * as protobuf from 'protobufjs';
 import {GrpcClient} from '../../src/grpc';
 import {PassThrough} from 'stream';
 import {ResultTuple} from '../../src/apitypes';
+import {
+  clearMetadataCache,
+  fallback,
+  GoogleAuth,
+  loggingUtils,
+  lro,
+} from '../../src';
+import {PassThroughClient} from 'google-auth-library';
+import {OtelHarness} from './otelHarness';
+import {setMockFallbackResponse} from './utils';
+import type {LogPayload} from '../../src/observability/LoggerHelper';
+import operationProtoJson = require('../../protos/operations.json');
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -761,6 +773,203 @@ describe('operation client', () => {
           .getCall(0)
           .calledWith(request),
       );
+    });
+  });
+
+  describe('telemetry propagation', () => {
+    class TestLogSink implements loggingUtils.DebugLogBackend {
+      logs: Array<{namespace: string; fields: loggingUtils.LogFields}> = [];
+      filters: string[] = [];
+      log(namespace: string, fields: loggingUtils.LogFields): void {
+        this.logs.push({namespace, fields});
+      }
+      setFilters(filters: string[]): void {
+        this.filters = filters;
+      }
+    }
+
+    let harness: OtelHarness;
+    let sink: TestLogSink;
+
+    beforeEach(() => {
+      clearMetadataCache();
+      sink = new TestLogSink();
+      loggingUtils.setBackend(sink);
+      harness = new OtelHarness();
+      harness.setup();
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    });
+
+    afterEach(() => {
+      clearMetadataCache();
+      loggingUtils.setBackend(undefined);
+      harness.teardown();
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
+    it('propagates tracing, logging, servicePath, port, and REST fallback from GAPIC operationsClient(opts) when lroOptions strips them', async () => {
+      const errorJson = {
+        error: {code: 404, message: 'operation not found', status: 'NOT_FOUND'},
+      };
+      const fallbackHelper = new fallback.GrpcClient({fallback: 'rest'});
+      setMockFallbackResponse(
+        fallbackHelper,
+        new Response(Buffer.from(JSON.stringify(errorJson)), {status: 404}),
+      );
+      const auth = fallbackHelper.auth as GoogleAuth;
+      (auth as unknown as {defaultServicePath: string}).defaultServicePath =
+        'cloudkms.googleapis.com';
+      const protoJson = protobuf.Root.fromJSON(operationProtoJson);
+
+      // Simulate generated GAPIC LRO initialization where lroOptions drops
+      // enableTelemetryTracing, enableTelemetryLogging, servicePath, and port.
+      const client = fallback
+        .lro({
+          auth,
+          protoJson,
+          httpRules: [
+            {
+              selector: 'google.longrunning.Operations.GetOperation',
+              get: '/v1/{name=projects/*/operations/*}',
+            },
+          ],
+        })
+        .operationsClient({
+          servicePath: '127.0.0.1',
+          port: 8080,
+          fallback: 'rest',
+          enableTelemetryTracing: true,
+          enableTelemetryLogging: true,
+          libName: 'gccl',
+          libVersion: '1.2.3',
+        });
+
+      await assert.rejects(
+        client.getOperation({
+          name: 'projects/p/operations/op-1',
+        } as protos.google.longrunning.GetOperationRequest),
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name=projects/*/operations/*}',
+      )!;
+      const clientSpan = spans.find(
+        s => s.name === 'OperationsClient.GetOperation',
+      )!;
+      assert.ok(attemptSpan);
+      assert.ok(clientSpan);
+      assert.strictEqual(
+        clientSpan.attributes['rpc.method'],
+        'google.longrunning.Operations/GetOperation',
+      );
+      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(clientSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(attemptSpan.attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        attemptSpan.attributes['url.template'],
+        '/v1/{name=projects/*/operations/*}',
+      );
+      assert.strictEqual(
+        attemptSpan.attributes['http.response.status_code'],
+        404,
+      );
+      assert.strictEqual(attemptSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(attemptSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        attemptSpan.attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      assert.strictEqual(clientSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(clientSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        clientSpan.attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+
+      assert.strictEqual(sink.logs.length, 2);
+      const [attemptLog, callLog] = sink.logs;
+      const attemptOther = attemptLog.fields.other as LogPayload;
+      const callOther = callLog.fields.other as LogPayload;
+      assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+      assert.strictEqual(callOther['rpc.system.name'], 'http');
+      assert.strictEqual(
+        attemptOther['rpc.method'],
+        'google.longrunning.Operations/GetOperation',
+      );
+      assert.strictEqual(
+        callOther['rpc.method'],
+        'google.longrunning.Operations/GetOperation',
+      );
+      assert.strictEqual(attemptOther['http.response.status_code'], 404);
+      assert.strictEqual(callOther['http.response.status_code'], 404);
+      assert.strictEqual(attemptOther['error.type'], '404');
+      assert.strictEqual(callOther['error.type'], '404');
+      assert.strictEqual(attemptOther['server.address'], '127.0.0.1');
+      assert.strictEqual(attemptOther['url.domain'], 'cloudkms.googleapis.com');
+      assert.strictEqual(callOther['server.address'], '127.0.0.1');
+      assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
+    });
+
+    it('propagates telemetry flags, apiEndpoint, and port from lroOptions and honors enableTelemetryLogging: false override', async () => {
+      process.env.GOOGLE_SDK_NODE_LOGGING = '*';
+      const auth = new GoogleAuth({authClient: new PassThroughClient()});
+      const createStub = sinon
+        .stub(GrpcClient.prototype, 'createStub')
+        .resolves({
+          getOperation: (
+            _req: {},
+            _meta: {},
+            _opts: {},
+            cb: (err: Error | null) => void,
+          ) => {
+            cb(Object.assign(new Error('not found'), {code: 5}));
+            return {cancel: () => {}};
+          },
+          listOperations: sinon.stub(),
+          cancelOperation: sinon.stub(),
+          deleteOperation: sinon.stub(),
+        } as unknown as Awaited<ReturnType<GrpcClient['createStub']>>);
+
+      try {
+        const grpcOpsClient = lro({
+          auth,
+          apiEndpoint: 'custom.kms.googleapis.com',
+          port: 8443,
+          enableTelemetryTracing: true,
+          enableTelemetryLogging: false,
+        }).operationsClient({});
+
+        await assert.rejects(
+          grpcOpsClient.getOperation({
+            name: 'operations/1',
+          } as protos.google.longrunning.GetOperationRequest),
+        );
+
+        // enableTelemetryLogging: false must suppress GOOGLE_SDK_NODE_LOGGING=*
+        assert.strictEqual(sink.logs.length, 0);
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 2);
+        const clientSpan = spans.find(
+          s => s.name === 'OperationsClient.GetOperation',
+        )!;
+        assert.strictEqual(clientSpan.attributes['rpc.system.name'], 'grpc');
+        assert.strictEqual(
+          clientSpan.attributes['server.address'],
+          'custom.kms.googleapis.com',
+        );
+        assert.strictEqual(clientSpan.attributes['server.port'], 8443);
+        assert.strictEqual(
+          createStub.firstCall.args[1].servicePath,
+          'custom.kms.googleapis.com',
+        );
+        assert.strictEqual(createStub.firstCall.args[1].port, 8443);
+      } finally {
+        createStub.restore();
+      }
     });
   });
 });

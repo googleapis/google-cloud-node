@@ -4,6 +4,63 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "bda12dab723a139faed9b326354f2a3175d192bb",
+          "message": "Re-throw upload error after aborting in uploadFileInChunks",
+          "issues": [
+            "9566",
+            "9193"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "2e7c9847f4b60858daded5b62782aec537424411",
+          "message": "Handle early stream destruction in createReadStream",
+          "issues": [
+            "9586",
+            "7603"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "36caaba8499e2d4493b5693c96f0d7a9c3966236",
+          "message": "Migrate HTTP transport layer from teeny-request to gaxios",
+          "issues": [
+            "9443"
+          ],
+          "scope": "storage",
+          "breakingChangeNote": "Migrates response headers to standard Web Headers objects and replaces ApiError with GaxiosError.\n    - apiResponse.headers is now a WHATWG Headers instance (use\n    .get('header-name')).\n    - ApiError is no longer exported from root; callers should use\n    GaxiosError or base Error.\n    - Minimum runtime environment aligned to Node.js >= 22.\n    - Low-level request options migrate from uri/qs/json to url/params/data.\n    See MIGRATION.md for complete details."
+        },
+        {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "2025a833-064a-42d3-9281-3b2d09feab9c",
+      "createTime": "2026-11-03T06:14:32.627Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "7dfae1d22e48b3b7d525c765f22d99b6fad0a4e8",
           "message": "Enable picosecond support feature flag by default",
@@ -107320,5 +107377,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-02T19:39:11.278Z"
+  "updateTime": "2026-11-03T06:14:32.627Z"
 }
