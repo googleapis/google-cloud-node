@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.reviews.v1",
+  "libraryPackage": "@google-shopping/reviews",
+  "services": {
+    "ProductReviewsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProductReviewsServiceClient",
+          "rpcs": {
+            "GetProductReview": {
+              "methods": [
+                "getProductReview"
+              ]
+            },
+            "InsertProductReview": {
+              "methods": [
+                "insertProductReview"
+              ]
+            },
+            "DeleteProductReview": {
+              "methods": [
+                "deleteProductReview"
+              ]
+            },
+            "ListProductReviews": {
+              "methods": [
+                "listProductReviews",
+                "listProductReviewsStream",
+                "listProductReviewsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProductReviewsServiceClient",
+          "rpcs": {
+            "GetProductReview": {
+              "methods": [
+                "getProductReview"
+              ]
+            },
+            "InsertProductReview": {
+              "methods": [
+                "insertProductReview"
+              ]
+            },
+            "DeleteProductReview": {
+              "methods": [
+                "deleteProductReview"
+              ]
+            },
+            "ListProductReviews": {
+              "methods": [
+                "listProductReviews",
+                "listProductReviewsStream",
+                "listProductReviewsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -483,7 +483,7 @@ export class TestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fastFibonacci request %j', request);
+    this._log.debug('fastFibonacci request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -492,7 +492,7 @@ export class TestServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fastFibonacci response %j', response);
+          this._log.debug('fastFibonacci response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -504,7 +504,7 @@ export class TestServiceClient {
           protos.google.routingtest.v1.IFibonacciRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('fastFibonacci response %j', response);
+          this._log.debug('fastFibonacci response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -634,7 +634,7 @@ export class TestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('randomFibonacci request %j', request);
+    this._log.debug('randomFibonacci request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -643,7 +643,7 @@ export class TestServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('randomFibonacci response %j', response);
+          this._log.debug('randomFibonacci response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -655,7 +655,7 @@ export class TestServiceClient {
           protos.google.routingtest.v1.IFibonacciRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('randomFibonacci response %j', response);
+          this._log.debug('randomFibonacci response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -803,7 +803,7 @@ export class TestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('slowFibonacci request %j', request);
+    this._log.debug('slowFibonacci request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -812,7 +812,7 @@ export class TestServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('slowFibonacci response %j', response);
+          this._log.debug('slowFibonacci response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -824,7 +824,7 @@ export class TestServiceClient {
           protos.google.routingtest.v1.IFibonacciRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('slowFibonacci response %j', response);
+          this._log.debug('slowFibonacci response %j', response);
           return [response, options, rawResponse];
         },
       )

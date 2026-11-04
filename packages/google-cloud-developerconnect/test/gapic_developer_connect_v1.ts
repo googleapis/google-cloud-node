@@ -887,6 +887,145 @@ describe('v1.DeveloperConnectClient', () => {
     });
   });
 
+  describe('openGitRepositoryLinkPullRequest', () => {
+    it('invokes openGitRepositoryLinkPullRequest without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.openGitRepositoryLinkPullRequest =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.openGitRepositoryLinkPullRequest(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes openGitRepositoryLinkPullRequest without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.openGitRepositoryLinkPullRequest =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.openGitRepositoryLinkPullRequest(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IPullRequest | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes openGitRepositoryLinkPullRequest with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.openGitRepositoryLinkPullRequest = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.openGitRepositoryLinkPullRequest(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.openGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes openGitRepositoryLinkPullRequest with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.openGitRepositoryLinkPullRequest(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('fetchGitHubInstallations', () => {
     it('invokes fetchGitHubInstallations without error', async () => {
       const client = new developerconnectModule.v1.DeveloperConnectClient({
@@ -1021,6 +1160,985 @@ describe('v1.DeveloperConnectClient', () => {
       });
       await assert.rejects(
         client.fetchGitHubInstallations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('diffGitRepositoryLinkCommit', () => {
+    it('invokes diffGitRepositoryLinkCommit without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse(),
+      );
+      client.innerApiCalls.diffGitRepositoryLinkCommit =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.diffGitRepositoryLinkCommit(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes diffGitRepositoryLinkCommit without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse(),
+      );
+      client.innerApiCalls.diffGitRepositoryLinkCommit =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.diffGitRepositoryLinkCommit(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes diffGitRepositoryLinkCommit with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.diffGitRepositoryLinkCommit = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.diffGitRepositoryLinkCommit(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.diffGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes diffGitRepositoryLinkCommit with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.diffGitRepositoryLinkCommit(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('fetchGitRepositoryLinkCommit', () => {
+    it('invokes fetchGitRepositoryLinkCommit without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkCommit =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchGitRepositoryLinkCommit(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommit without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkCommit =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRepositoryLinkCommit(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommit with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRepositoryLinkCommit = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchGitRepositoryLinkCommit(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommit with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchGitRepositoryLinkCommit(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('fetchGitRepositoryLinkFileBlame', () => {
+    it('invokes fetchGitRepositoryLinkFileBlame without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkFileBlame =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchGitRepositoryLinkFileBlame(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkFileBlame without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkFileBlame =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRepositoryLinkFileBlame(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkFileBlame with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRepositoryLinkFileBlame = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchGitRepositoryLinkFileBlame(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkFileBlame as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkFileBlame with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchGitRepositoryLinkFileBlame(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('fetchGitRepositoryLinkPullRequest', () => {
+    it('invokes fetchGitRepositoryLinkPullRequest without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequest =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.fetchGitRepositoryLinkPullRequest(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequest without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequest =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRepositoryLinkPullRequest(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IPullRequest | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequest with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequest = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchGitRepositoryLinkPullRequest(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequest with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchGitRepositoryLinkPullRequest(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('addGitRepositoryLinkPullRequestComment', () => {
+    it('invokes addGitRepositoryLinkPullRequestComment without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequestComment(),
+      );
+      client.innerApiCalls.addGitRepositoryLinkPullRequestComment =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.addGitRepositoryLinkPullRequestComment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestComment without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequestComment(),
+      );
+      client.innerApiCalls.addGitRepositoryLinkPullRequestComment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addGitRepositoryLinkPullRequestComment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IPullRequestComment | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestComment with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addGitRepositoryLinkPullRequestComment =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.addGitRepositoryLinkPullRequestComment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addGitRepositoryLinkPullRequestComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestComment with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.addGitRepositoryLinkPullRequestComment(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('addGitRepositoryLinkPullRequestReviewComment', () => {
+    it('invokes addGitRepositoryLinkPullRequestReviewComment without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequestReviewComment(),
+      );
+      client.innerApiCalls.addGitRepositoryLinkPullRequestReviewComment =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.addGitRepositoryLinkPullRequestReviewComment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestReviewComment without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequestReviewComment(),
+      );
+      client.innerApiCalls.addGitRepositoryLinkPullRequestReviewComment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addGitRepositoryLinkPullRequestReviewComment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IPullRequestReviewComment | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestReviewComment with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addGitRepositoryLinkPullRequestReviewComment =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.addGitRepositoryLinkPullRequestReviewComment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .addGitRepositoryLinkPullRequestReviewComment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addGitRepositoryLinkPullRequestReviewComment with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.addGitRepositoryLinkPullRequestReviewComment(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('modifyGitRepositoryLinkPullRequest', () => {
+    it('invokes modifyGitRepositoryLinkPullRequest without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.modifyGitRepositoryLinkPullRequest =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.modifyGitRepositoryLinkPullRequest(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyGitRepositoryLinkPullRequest without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.PullRequest(),
+      );
+      client.innerApiCalls.modifyGitRepositoryLinkPullRequest =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.modifyGitRepositoryLinkPullRequest(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.developerconnect.v1.IPullRequest | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyGitRepositoryLinkPullRequest with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.modifyGitRepositoryLinkPullRequest = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.modifyGitRepositoryLinkPullRequest(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyGitRepositoryLinkPullRequest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyGitRepositoryLinkPullRequest with closed client', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.modifyGitRepositoryLinkPullRequest(request),
         expectedError,
       );
     });
@@ -4965,6 +6083,729 @@ describe('v1.DeveloperConnectClient', () => {
       );
       assert(
         (client.descriptors.page.fetchGitRefs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('fetchGitRepositoryLinkCommitList', () => {
+    it('invokes fetchGitRepositoryLinkCommitList without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+      ];
+      client.innerApiCalls.fetchGitRepositoryLinkCommitList =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchGitRepositoryLinkCommitList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommitList without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+      ];
+      client.innerApiCalls.fetchGitRepositoryLinkCommitList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRepositoryLinkCommitList(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.developerconnect.v1.ISCMCommit[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommitList with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRepositoryLinkCommitList = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchGitRepositoryLinkCommitList(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkCommitList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkCommitListStream without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+      ];
+      client.descriptors.page.fetchGitRepositoryLinkCommitList.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchGitRepositoryLinkCommitListStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.developerconnect.v1.SCMCommit[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.developerconnect.v1.SCMCommit) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchGitRepositoryLinkCommitList,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes fetchGitRepositoryLinkCommitListStream with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchGitRepositoryLinkCommitList.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.fetchGitRepositoryLinkCommitListStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.developerconnect.v1.SCMCommit[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.developerconnect.v1.SCMCommit) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchGitRepositoryLinkCommitList,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchGitRepositoryLinkCommitList without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.SCMCommit(),
+        ),
+      ];
+      client.descriptors.page.fetchGitRepositoryLinkCommitList.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.developerconnect.v1.ISCMCommit[] =
+        [];
+      const iterable = client.fetchGitRepositoryLinkCommitListAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchGitRepositoryLinkCommitList with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchGitRepositoryLinkCommitList.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.fetchGitRepositoryLinkCommitListAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.developerconnect.v1.ISCMCommit[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkCommitList
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('fetchGitRepositoryLinkPullRequestList', () => {
+    it('invokes fetchGitRepositoryLinkPullRequestList without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+      ];
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequestList =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.fetchGitRepositoryLinkPullRequestList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequestList without error using callback', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+      ];
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequestList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRepositoryLinkPullRequestList(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.developerconnect.v1.IPullRequest[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequestList with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRepositoryLinkPullRequestList =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.fetchGitRepositoryLinkPullRequestList(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRepositoryLinkPullRequestList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequestListStream without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+      ];
+      client.descriptors.page.fetchGitRepositoryLinkPullRequestList.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.fetchGitRepositoryLinkPullRequestListStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.developerconnect.v1.PullRequest[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.developerconnect.v1.PullRequest) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchGitRepositoryLinkPullRequestList,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes fetchGitRepositoryLinkPullRequestListStream with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchGitRepositoryLinkPullRequestList.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.fetchGitRepositoryLinkPullRequestListStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.developerconnect.v1.PullRequest[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.developerconnect.v1.PullRequest) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchGitRepositoryLinkPullRequestList,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchGitRepositoryLinkPullRequestList without error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.developerconnect.v1.PullRequest(),
+        ),
+      ];
+      client.descriptors.page.fetchGitRepositoryLinkPullRequestList.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.developerconnect.v1.IPullRequest[] =
+        [];
+      const iterable =
+        client.fetchGitRepositoryLinkPullRequestListAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchGitRepositoryLinkPullRequestList with error', async () => {
+      const client = new developerconnectModule.v1.DeveloperConnectClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchGitRepositoryLinkPullRequestList.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.fetchGitRepositoryLinkPullRequestListAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.developerconnect.v1.IPullRequest[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchGitRepositoryLinkPullRequestList
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,

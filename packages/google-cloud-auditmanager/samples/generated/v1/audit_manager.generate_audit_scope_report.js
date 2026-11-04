@@ -60,6 +60,13 @@ function main(scope, reportFormat, complianceFramework) {
    *    safely without consuming resource quotas.
    */
   // const validateOnly = true
+  /**
+   *  Optional. Maps dynamic parameter overrides by Cloud Control resource name
+   *  at execution time. For example,
+   *  `{"organizations/123/locations/global/cloudControls/control-1":
+   *  {parameters: ... }}`
+   */
+  // const parameterOverrides = [1,2,3,4]
 
   // Imports the Auditmanager library
   const {AuditManagerClient} = require('@google-cloud/auditmanager').v1;

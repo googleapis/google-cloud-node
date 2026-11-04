@@ -29290,6 +29290,7 @@ export namespace google {
                         COMPUTE_OPTIMIZED_C3D = 383246484,
                         COMPUTE_OPTIMIZED_H3 = 428004939,
                         COMPUTE_OPTIMIZED_H4D = 383251320,
+                        COMPUTE_OPTIMIZED_H4D_3TB = 443379866,
                         GENERAL_PURPOSE = 299793543,
                         GENERAL_PURPOSE_C4 = 301911817,
                         GENERAL_PURPOSE_C4A = 232460888,
@@ -29307,6 +29308,8 @@ export namespace google {
                         MEMORY_OPTIMIZED = 281753417,
                         MEMORY_OPTIMIZED_M3 = 276301372,
                         MEMORY_OPTIMIZED_M4 = 276301373,
+                        MEMORY_OPTIMIZED_M4N = 512278961,
+                        MEMORY_OPTIMIZED_M4N_6TB = 69895574,
                         MEMORY_OPTIMIZED_M4_6TB = 210543650,
                         MEMORY_OPTIMIZED_X4_1440_24T = 206669823,
                         MEMORY_OPTIMIZED_X4_16TB = 183089120,
@@ -308468,6 +308471,7 @@ export namespace google {
                         COMPUTE_OPTIMIZED_C3D = 383246484,
                         COMPUTE_OPTIMIZED_H3 = 428004939,
                         COMPUTE_OPTIMIZED_H4D = 383251320,
+                        COMPUTE_OPTIMIZED_H4D_3TB = 443379866,
                         GENERAL_PURPOSE = 299793543,
                         GENERAL_PURPOSE_C4 = 301911817,
                         GENERAL_PURPOSE_C4A = 232460888,
@@ -308503,6 +308507,7 @@ export namespace google {
                         STORAGE_OPTIMIZED_Z4D4T = 18503022,
                         STORAGE_OPTIMIZED_Z4DH = 35233722,
                         STORAGE_OPTIMIZED_Z4DS = 35233733,
+                        STORAGE_OPTIMIZED_Z4M = 157002327,
                         TYPE_UNSPECIFIED = 437714322
                     }
                 }
@@ -385456,6 +385461,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
@@ -394838,6 +394844,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
@@ -488528,6 +488535,9 @@ export namespace google {
                     /** RouterBgpPeer ipv6NexthopAddress */
                     ipv6NexthopAddress?: (string|null);
 
+                    /** RouterBgpPeer linkedCustomHardware */
+                    linkedCustomHardware?: (string|null);
+
                     /** RouterBgpPeer managementType */
                     managementType?: (string|null);
 
@@ -488609,6 +488619,9 @@ export namespace google {
 
                     /** RouterBgpPeer ipv6NexthopAddress. */
                     public ipv6NexthopAddress?: (string|null);
+
+                    /** RouterBgpPeer linkedCustomHardware. */
+                    public linkedCustomHardware?: (string|null);
 
                     /** RouterBgpPeer managementType. */
                     public managementType?: (string|null);
@@ -490453,6 +490466,9 @@ export namespace google {
                     /** RouterStatusBgpPeerStatus ipv6NexthopAddress */
                     ipv6NexthopAddress?: (string|null);
 
+                    /** RouterStatusBgpPeerStatus linkedCustomHardware */
+                    linkedCustomHardware?: (string|null);
+
                     /** RouterStatusBgpPeerStatus linkedVpnTunnel */
                     linkedVpnTunnel?: (string|null);
 
@@ -490525,6 +490541,9 @@ export namespace google {
 
                     /** RouterStatusBgpPeerStatus ipv6NexthopAddress. */
                     public ipv6NexthopAddress?: (string|null);
+
+                    /** RouterStatusBgpPeerStatus linkedCustomHardware. */
+                    public linkedCustomHardware?: (string|null);
 
                     /** RouterStatusBgpPeerStatus linkedVpnTunnel. */
                     public linkedVpnTunnel?: (string|null);
@@ -553822,6 +553841,9 @@ export namespace google {
 
                     /** WorkloadIdentityConfig identityCertificateEnabled */
                     identityCertificateEnabled?: (boolean|null);
+
+                    /** WorkloadIdentityConfig identityType */
+                    identityType?: (string|null);
                 }
 
                 /** Represents a WorkloadIdentityConfig. */
@@ -553838,6 +553860,9 @@ export namespace google {
 
                     /** WorkloadIdentityConfig identityCertificateEnabled. */
                     public identityCertificateEnabled?: (boolean|null);
+
+                    /** WorkloadIdentityConfig identityType. */
+                    public identityType?: (string|null);
 
                     /**
                      * Creates a new WorkloadIdentityConfig instance using the specified properties.
@@ -553915,6 +553940,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WorkloadIdentityConfig {
+
+                    /** IdentityType enum. */
+                    enum IdentityType {
+                        UNDEFINED_IDENTITY_TYPE = 0,
+                        AGENT_IDENTITY = 71547096,
+                        IDENTITY_TYPE_UNSPECIFIED = 157537011,
+                        SERVICE_ACCOUNT = 178301539
+                    }
                 }
 
                 /** Properties of a XpnHostList. */

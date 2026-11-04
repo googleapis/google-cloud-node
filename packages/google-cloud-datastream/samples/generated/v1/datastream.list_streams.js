@@ -33,24 +33,24 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of streams to return.
+   *  Optional. Maximum number of streams to return.
    *  If unspecified, at most 50 streams will  be returned. The maximum
    *  value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Page token received from a previous `ListStreams` call.
+   *  Optional. Page token received from a previous `ListStreams` call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListStreams`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter request.
+   *  Optional. Filter request.
    */
   // const filter = 'abc123'
   /**
-   *  Order by fields for the result.
+   *  Optional. Order by fields for the result.
    */
   // const orderBy = 'abc123'
 

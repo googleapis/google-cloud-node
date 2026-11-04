@@ -231,6 +231,43 @@ describe('reader.ReaderClient', () => {
         client.close();
       }
     });
+
+    it('should read a default job stream with arrowSerializationOptions', async () => {
+      const [job] = await bigquery.createQueryJob({
+        query: 'SELECT TIMESTAMP("2024-04-05T15:45:58.981123Z") AS ts',
+      });
+      // Wait for the query job to finish writing its result table without
+      // fetching row data over the REST API.
+      await job.getQueryResults({maxResults: 0});
+
+      // Read the job's sessionless _default stream directly via ReadRows.
+      const readStream = `projects/${projectId}/locations/${job.location}/jobs/${job.id}/streams/_default`;
+      const rowStream = bqReadClient.readRows({
+        readStream,
+        arrowSerializationOptions: {
+          picosTimestampPrecision:
+            protos.google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+              .PicosTimestampPrecision.TIMESTAMP_PRECISION_PICOS,
+        },
+      });
+
+      const chunks: Uint8Array[] = [];
+      for await (const resp of rowStream) {
+        if (resp.arrowSchema?.serializedSchema) {
+          chunks.push(Buffer.from(resp.arrowSchema.serializedSchema));
+        }
+        if (resp.arrowRecordBatch?.serializedRecordBatch) {
+          chunks.push(Buffer.from(resp.arrowRecordBatch.serializedRecordBatch));
+        }
+      }
+
+      // Verify the Arrow schema and RecordBatch chunks from the _default stream
+      // decode into a 1-row Arrow Table with the expected timestamp (in ms,
+      // with fractional microseconds).
+      const table = tableFromIPC(Buffer.concat(chunks));
+      assert.strictEqual(table.numRows, 1);
+      assert.strictEqual(table.getChild('ts')?.get(0), 1712331958981.123);
+    });
   });
 
   describe('AvroReader', () => {

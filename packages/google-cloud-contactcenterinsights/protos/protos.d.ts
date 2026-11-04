@@ -17437,11 +17437,35 @@ export namespace google {
                             /** AgentInfo team */
                             team?: (string|null);
 
+                            /** AgentInfo teams */
+                            teams?: (string[]|null);
+
                             /** AgentInfo dispositionCode */
                             dispositionCode?: (string|null);
 
                             /** AgentInfo agentType */
                             agentType?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
+
+                            /** AgentInfo location */
+                            location?: (string|null);
+
+                            /** AgentInfo deploymentId */
+                            deploymentId?: (string|null);
+
+                            /** AgentInfo deploymentDisplayName */
+                            deploymentDisplayName?: (string|null);
+
+                            /** AgentInfo versionId */
+                            versionId?: (string|null);
+
+                            /** AgentInfo versionDisplayName */
+                            versionDisplayName?: (string|null);
+
+                            /** AgentInfo entrySubagentDisplayName */
+                            entrySubagentDisplayName?: (string|null);
+
+                            /** AgentInfo entrySubagentId */
+                            entrySubagentId?: (string|null);
                         }
 
                         /** Represents an AgentInfo. */
@@ -17462,11 +17486,35 @@ export namespace google {
                             /** AgentInfo team. */
                             public team: string;
 
+                            /** AgentInfo teams. */
+                            public teams: string[];
+
                             /** AgentInfo dispositionCode. */
                             public dispositionCode: string;
 
                             /** AgentInfo agentType. */
                             public agentType: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
+
+                            /** AgentInfo location. */
+                            public location: string;
+
+                            /** AgentInfo deploymentId. */
+                            public deploymentId: string;
+
+                            /** AgentInfo deploymentDisplayName. */
+                            public deploymentDisplayName: string;
+
+                            /** AgentInfo versionId. */
+                            public versionId: string;
+
+                            /** AgentInfo versionDisplayName. */
+                            public versionDisplayName: string;
+
+                            /** AgentInfo entrySubagentDisplayName. */
+                            public entrySubagentDisplayName: string;
+
+                            /** AgentInfo entrySubagentId. */
+                            public entrySubagentId: string;
 
                             /**
                              * Creates a new AgentInfo instance using the specified properties.

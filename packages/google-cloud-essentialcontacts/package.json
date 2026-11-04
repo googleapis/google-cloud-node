@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/essential-contacts",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "Essential contacts client for Node.js",
   "repository": {
     "type": "git",

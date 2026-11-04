@@ -37,6 +37,7 @@ steps:
     id: 'Build Test Image'
     args: [
       'build',
+      '--pull',
       '-t', 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
       '--cache-from', 'gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}',
       '-f', 'ci/Dockerfile',

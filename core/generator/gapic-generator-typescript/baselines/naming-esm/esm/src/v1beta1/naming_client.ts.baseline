@@ -526,7 +526,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('paginatedMethodStream request %j', request);
+    this._log.debug('paginatedMethodStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -535,7 +535,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('paginatedMethodStream response %j', response);
+          this._log.debug('paginatedMethodStream response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -547,7 +547,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('paginatedMethodStream response %j', response);
+          this._log.debug('paginatedMethodStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -643,7 +643,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('paginatedMethodAsync request %j', request);
+    this._log.debug('paginatedMethodAsync request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -652,7 +652,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('paginatedMethodAsync response %j', response);
+          this._log.debug('paginatedMethodAsync response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -664,7 +664,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('paginatedMethodAsync response %j', response);
+          this._log.debug('paginatedMethodAsync response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -760,7 +760,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('checkLongRunningProgress request %j', request);
+    this._log.debug('checkLongRunningProgress request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -769,7 +769,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('checkLongRunningProgress response %j', response);
+          this._log.debug('checkLongRunningProgress response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -781,7 +781,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('checkLongRunningProgress response %j', response);
+          this._log.debug('checkLongRunningProgress response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,7 +878,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('initialize request %j', request);
+    this._log.debug('initialize request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -887,7 +887,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('initialize response %j', response);
+          this._log.debug('initialize response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -899,7 +899,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('initialize response %j', response);
+          this._log.debug('initialize response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -995,7 +995,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('servicePath request %j', request);
+    this._log.debug('servicePath request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1004,7 +1004,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('servicePath response %j', response);
+          this._log.debug('servicePath response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1016,7 +1016,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('servicePath response %j', response);
+          this._log.debug('servicePath response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1112,7 +1112,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('apiEndpoint request %j', request);
+    this._log.debug('apiEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1121,7 +1121,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('apiEndpoint response %j', response);
+          this._log.debug('apiEndpoint response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1133,7 +1133,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('apiEndpoint response %j', response);
+          this._log.debug('apiEndpoint response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1229,7 +1229,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('port request %j', request);
+    this._log.debug('port request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1238,7 +1238,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('port response %j', response);
+          this._log.debug('port response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1250,7 +1250,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('port response %j', response);
+          this._log.debug('port response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1346,7 +1346,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('scopes request %j', request);
+    this._log.debug('scopes request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1355,7 +1355,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('scopes response %j', response);
+          this._log.debug('scopes response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1367,7 +1367,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('scopes response %j', response);
+          this._log.debug('scopes response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1463,7 +1463,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('getProjectId request %j', request);
+    this._log.debug('getProjectId request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1472,7 +1472,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProjectId response %j', response);
+          this._log.debug('getProjectId response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1484,7 +1484,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getProjectId response %j', response);
+          this._log.debug('getProjectId response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1583,7 +1583,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('getReservedWord request %j', request);
+    this._log.debug('getReservedWord request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.naming.v1beta1.IReservedWord,
@@ -1594,7 +1594,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getReservedWord response %j', response);
+          this._log.debug('getReservedWord response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1606,7 +1606,7 @@ export class NamingClient {
           protos.google.naming.v1beta1.IGetReservedWordRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getReservedWord response %j', response);
+          this._log.debug('getReservedWord response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1702,7 +1702,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('createABCDESomething request %j', request);
+    this._log.debug('createABCDESomething request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1711,7 +1711,7 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createABCDESomething response %j', response);
+          this._log.debug('createABCDESomething response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1723,7 +1723,7 @@ export class NamingClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createABCDESomething response %j', response);
+          this._log.debug('createABCDESomething response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1837,11 +1837,11 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('longRunning response %j', rawResponse);
+          this._log.debug('longRunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified `callback` above.
         }
       : undefined;
-    this._log.info('longRunning request %j', request);
+    this._log.debug('longRunning request %j', request);
     return this.innerApiCalls
       .longRunning(request, options, wrappedCallback)
       ?.then(
@@ -1853,7 +1853,7 @@ export class NamingClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('longRunning response %j', rawResponse);
+          this._log.debug('longRunning response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1985,11 +1985,11 @@ export class NamingClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('paginatedMethod values %j', values);
+          this._log.debug('paginatedMethod values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('paginatedMethod request %j', request);
+    this._log.debug('paginatedMethod request %j', request);
     return this.innerApiCalls
       .paginatedMethod(request, options, wrappedCallback)
       ?.then(
@@ -1998,7 +1998,7 @@ export class NamingClient {
           protos.google.naming.v1beta1.IPaginatedMethodRequest | null,
           protos.google.naming.v1beta1.IPaginatedMethodResponse,
         ]) => {
-          this._log.info('paginatedMethod values %j', response);
+          this._log.debug('paginatedMethod values %j', response);
           return [response, input, output];
         },
       );
@@ -2035,7 +2035,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('paginatedMethod stream %j', request);
+    this._log.debug('paginatedMethod stream %j', request);
     return this.descriptors.page.paginatedMethod.createStream(
       this.innerApiCalls.paginatedMethod as GaxCall,
       request,
@@ -2077,7 +2077,7 @@ export class NamingClient {
     this.initialize1().catch(err => {
       throw err;
     });
-    this._log.info('paginatedMethod iterate %j', request);
+    this._log.debug('paginatedMethod iterate %j', request);
     return this.descriptors.page.paginatedMethod.asyncIterate(
       this.innerApiCalls['paginatedMethod'] as GaxCall,
       request as {},

@@ -4752,7 +4752,15 @@
                                 },
                                 "team": {
                                   "type": "string",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "deprecated": true
+                                  }
+                                },
+                                "teams": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 6
                                 },
                                 "dispositionCode": {
                                   "type": "string",
@@ -4761,6 +4769,34 @@
                                 "agentType": {
                                   "type": "ConversationParticipant.Role",
                                   "id": 5
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "id": 7
+                                },
+                                "deploymentId": {
+                                  "type": "string",
+                                  "id": 8
+                                },
+                                "deploymentDisplayName": {
+                                  "type": "string",
+                                  "id": 9
+                                },
+                                "versionId": {
+                                  "type": "string",
+                                  "id": 10
+                                },
+                                "versionDisplayName": {
+                                  "type": "string",
+                                  "id": 11
+                                },
+                                "entrySubagentDisplayName": {
+                                  "type": "string",
+                                  "id": 12
+                                },
+                                "entrySubagentId": {
+                                  "type": "string",
+                                  "id": 13
                                 }
                               }
                             }
@@ -8762,8 +8798,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

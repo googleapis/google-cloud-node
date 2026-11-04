@@ -15,57 +15,57 @@ import {promisify} from 'util';
 import * as fs from 'fs';
 import * as got from 'got';
 import * as path from 'path';
+import {pipeline} from 'stream';
+import * as tar from 'tar';
 
 const protoFolders = ['google', 'grafeas', 'gapic'];
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const DecompressZip = require('decompress-zip');
-
-const extract = (input, opts, callback) => {
-  const output = Math.random() + '.zip';
-
-  (got as unknown as got.Got)
-    .stream(input)
-    .on('error', callback)
-    .pipe(fs.createWriteStream(output))
-    .on('error', callback)
-    .on('finish', () => {
-      const unzipper = new DecompressZip(output);
-
-      unzipper
-        .on('error', callback)
-        .extract({
-          strip: opts.strip,
-          filter: file => {
-            if (opts.filter && !opts.filter(file)) return;
-            return path.extname(file.filename) === '.proto';
-          },
-        })
-        .on('extract', () => {
-          fs.unlink(output, callback);
-        });
-    });
-};
-
-const extractAsync = promisify(extract);
+const pipelineAsync = promisify(pipeline);
 const execAsync = promisify(require('child_process').exec);
+
+const extractAsync = async (input, opts) => {
+  const output = Math.random() + '.tar.gz';
+
+  try {
+    await pipelineAsync(
+      (got as unknown as got.Got).stream(input),
+      fs.createWriteStream(output),
+    );
+
+    await tar.extract({
+      file: output,
+      strip: opts.strip,
+      filter: (filePath: string) => {
+        const file = {
+          parent: path.dirname(filePath),
+          filename: path.basename(filePath),
+        };
+        if (opts.filter && !opts.filter(file)) return false;
+        return path.extname(file.filename) === '.proto';
+      },
+    });
+  } finally {
+    await fs.promises.unlink(output).catch(err => {
+      if (err.code !== 'ENOENT') throw err;
+    });
+  }
+};
 
 async function main() {
   await execAsync(`rm -rf ${protoFolders.join(' ')}`);
 
   await extractAsync(
-    'https://github.com/googleapis/googleapis/archive/master.zip',
+    'https://github.com/googleapis/googleapis/archive/master.tar.gz',
     {
       strip: 1,
     },
   );
 
-  await extractAsync('https://github.com/google/protobuf/archive/main.zip', {
+  await extractAsync('https://github.com/google/protobuf/archive/main.tar.gz', {
     strip: 2,
     filter: file => {
       return (
-        file.parent.indexOf('protobuf-main') === 0 &&
-        file.parent.indexOf('protobuf-main/src/') === 0 &&
+        file.parent.startsWith('protobuf-main/src/') &&
         file.parent.indexOf('/internal') === -1 &&
         file.filename.indexOf('unittest') === -1 &&
         file.filename.indexOf('test') === -1

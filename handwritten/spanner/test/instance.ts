@@ -20,7 +20,7 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {ApiError} from '@google-cloud/common';
 import {grpc} from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as pfy from '@google-cloud/promisify';
 import * as sinon from 'sinon';
 import snakeCase = require('lodash.snakecase');
@@ -510,6 +510,32 @@ describe('Instance', () => {
         databaseWithOptionsInOtherOrder,
         fakeDatabaseWithSessionPoolOptions,
       );
+    });
+
+    it('should create and cache different objects when called with different databaseRole values', () => {
+      const dbRole1 = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role1',
+      ) as {} as FakeDatabase;
+      const dbRole2 = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role2',
+      ) as {} as FakeDatabase;
+      const dbRole1Again = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role1',
+      ) as {} as FakeDatabase;
+
+      assert.notStrictEqual(dbRole1, dbRole2);
+      assert.strictEqual(dbRole1, dbRole1Again);
+      assert.strictEqual(dbRole1.calledWith_[4], 'role1');
+      assert.strictEqual(dbRole2.calledWith_[4], 'role2');
     });
   });
 

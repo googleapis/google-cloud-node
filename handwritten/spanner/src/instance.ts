@@ -87,7 +87,15 @@ export type GetDatabaseOperationsResponse = PagedResponse<
 
 export interface CreateDatabaseOptions
   extends databaseAdmin.spanner.admin.database.v1.ICreateDatabaseRequest {
+  /**
+   * @deprecated Session pool options are deprecated and will be removed in a future release.
+   * Multiplexed sessions are now used for all operations by default.
+   */
   poolOptions?: SessionPoolOptions;
+  /**
+   * @deprecated Custom session pool constructors are deprecated and will be removed in a future release.
+   * Multiplexed sessions are now used for all operations by default.
+   */
   poolCtor?: SessionPool;
   schema?: string | string[];
   gaxOptions?: CallOptions;
@@ -775,8 +783,8 @@ class Instance extends common.GrpcServiceObject {
    * Config for the new database.
    *
    * @typedef {object} CreateDatabaseRequest
-   * @property {SessionPoolOptions} [poolOptions]
-   * @property {SessionPoolCtor} [poolCtor]
+   * @property {SessionPoolOptions} [poolOptions] **Deprecated**. Session pool options are deprecated and will be removed in a future release.
+   * @property {SessionPoolCtor} [poolCtor] **Deprecated**. Custom session pool constructors are deprecated and will be removed in a future release.
    */
   /**
    * @typedef {array} CreateDatabaseResponse
@@ -935,10 +943,15 @@ class Instance extends common.GrpcServiceObject {
    * @param {string} name The name of the instance.
    * @param {SessionPoolOptions|SessionPoolCtor} [poolOptions] Session pool
    *     configuration options.
+   *     **Deprecated**. Session pool options is deprecated and will be removed in a future release.
+   *     Multiplexed sessions are now used for all operations by default, eliminating
+   *     the need for session pooling.
    * @param {spannerClient.spanner.v1.ExecuteSqlRequest.IQueryOptions} [queryOptions]
    *     Default query options to use with the database. These options will be
    *     overridden by any query options set in environment variables or that
    *     are specified on a per-query basis.
+   * @param {string} [databaseRole] The database role to use for sessions on
+   *     the database.
    * @return {Database} A Database object.
    *
    * @example
@@ -959,8 +972,8 @@ class Instance extends common.GrpcServiceObject {
     if (!name) {
       throw new GoogleError('A name is required to access a Database object.');
     }
-    // Only add an additional key for SessionPoolOptions and QueryOptions if an
-    // options object with at least one value was passed in.
+    // Only add an additional key for SessionPoolOptions, QueryOptions, and databaseRole
+    // if provided.
     let optionsKey =
       poolOptions && Object.keys(poolOptions).length > 0
         ? '/' + JSON.stringify(Object.entries(poolOptions).sort())
@@ -968,6 +981,9 @@ class Instance extends common.GrpcServiceObject {
     if (queryOptions && Object.keys(queryOptions).length > 0) {
       optionsKey =
         optionsKey + '/' + JSON.stringify(Object.entries(queryOptions!).sort());
+    }
+    if (databaseRole) {
+      optionsKey = optionsKey + '/' + databaseRole;
     }
     const key = name.split('/').pop() + optionsKey;
     if (!this.databases_.has(key!)) {
@@ -1072,6 +1088,7 @@ class Instance extends common.GrpcServiceObject {
             callback!(err, resp!);
           },
         );
+        return null;
       });
   }
 

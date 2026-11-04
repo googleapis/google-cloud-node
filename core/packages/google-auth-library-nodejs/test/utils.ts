@@ -12,7 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import * as crypto from 'crypto';
 import {SinonSandbox, SinonFakeTimers} from 'sinon';
+
+export function keypair(bits = 512): {public: string; private: string} {
+  const {publicKey, privateKey} = crypto.generateKeyPairSync('rsa', {
+    modulusLength: bits,
+    publicKeyEncoding: {type: 'pkcs1', format: 'pem'},
+    privateKeyEncoding: {type: 'pkcs1', format: 'pem'},
+  });
+  return {public: publicKey, private: privateKey};
+}
 
 type FakeTimersParam = Parameters<SinonSandbox['useFakeTimers']>[0];
 interface FakeTimerConfig {

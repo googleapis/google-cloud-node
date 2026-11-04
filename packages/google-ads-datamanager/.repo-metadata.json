@@ -11,6 +11,6 @@
     "name": "datamanager",
     "name_pretty": "Data Manager",
     "product_documentation": "https://developers.google.com/data-manager",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-node"
 }

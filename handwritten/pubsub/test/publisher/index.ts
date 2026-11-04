@@ -18,7 +18,7 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as opentelemetry from '@opentelemetry/api';
 import {Topic} from '../../src';
@@ -28,6 +28,7 @@ import {PublishError} from '../../src/publisher/publish-error';
 import * as util from '../../src/util';
 
 import {defaultOptions} from '../../src/default-options';
+import {Duration} from '../../src/temporal';
 import * as tracing from '../../src/telemetry-tracing';
 import {exporter} from '../tracing';
 import {SpanKind} from '@opentelemetry/api';
@@ -383,6 +384,30 @@ describe('Publisher', () => {
           done();
         });
       });
+
+      it('should reject ordered messages when hedging is enabled without leaking OpenTelemetry spans', async () => {
+        tracing.setGloballyEnabled(true);
+        exporter.reset();
+        publisher.setOptions({hedging: {}});
+
+        const messageWithOrdering: p.PubsubMessage = {data, orderingKey};
+        await assert.rejects(
+          publisher.publishMessage(messageWithOrdering),
+          /Publish hedging and message ordering cannot be enabled at the same time\./,
+        );
+        assert.strictEqual(messageWithOrdering.parentSpan, undefined);
+        assert.strictEqual(exporter.getFinishedSpans().length, 0);
+      });
+
+      it('should reject publishing when hedging and messageOrdering are both enabled', async () => {
+        publisher.setOptions({hedging: {}});
+        publisher.settings.messageOrdering = true;
+
+        await assert.rejects(
+          publisher.publishMessage({data}),
+          /Publish hedging and message ordering cannot be enabled at the same time\./,
+        );
+      });
     });
   });
 
@@ -485,6 +510,91 @@ describe('Publisher', () => {
 
       stubs.forEach(s => assert.ok(s.calledOnce));
     });
+
+    it('should configure hedging options and token bucket when hedging is enabled', () => {
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 300}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+
+      assert.ok(publisher.hedgingOptions);
+      assert.strictEqual(publisher.hedgingOptions.hedgeDelay.milliseconds, 300);
+      assert.strictEqual(publisher.hedgingOptions.maxTokens, 20);
+      assert.strictEqual(publisher.hedgingOptions.refillRatio, 0.2);
+      assert.ok(publisher.tokenBucket);
+      assert.strictEqual(publisher.tokenBucket.getTokenBalance(), 0);
+
+      for (let i = 0; i < 5; i++) {
+        publisher.tokenBucket.refillTokenBucket();
+      }
+      assert.strictEqual(publisher.tokenBucket.getTokenBalance(), 1.0);
+      assert.strictEqual(publisher.tokenBucket.tryAcquireHedgeToken(), true);
+      assert.strictEqual(publisher.tokenBucket.getTokenBalance(), 0);
+    });
+
+    it('should preserve hedging options, tokenBucket balance, and hedgingScheduler when setOptions is called with unrelated options', () => {
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 300}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+      const initialBucket = publisher.tokenBucket;
+      const initialScheduler = publisher.hedgingScheduler;
+      assert.ok(initialBucket);
+      assert.ok(initialScheduler);
+
+      for (let i = 0; i < 5; i++) {
+        initialBucket.refillTokenBucket();
+      }
+      assert.strictEqual(initialBucket.getTokenBalance(), 1.0);
+
+      publisher.setOptions({
+        batching: {maxMessages: 50},
+      });
+      assert.ok(publisher.hedgingOptions);
+      assert.strictEqual(publisher.hedgingOptions.hedgeDelay.milliseconds, 300);
+      assert.strictEqual(publisher.hedgingOptions.maxTokens, 20);
+      assert.strictEqual(publisher.hedgingOptions.refillRatio, 0.2);
+      assert.strictEqual(publisher.tokenBucket, initialBucket);
+      assert.strictEqual(publisher.tokenBucket?.getTokenBalance(), 1.0);
+      assert.strictEqual(publisher.hedgingScheduler, initialScheduler);
+
+      // Updating hedging options explicitly should recreate tokenBucket and hedgingScheduler
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 400}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+      assert.notStrictEqual(publisher.tokenBucket, initialBucket);
+      assert.strictEqual(publisher.tokenBucket?.getTokenBalance(), 0);
+      assert.notStrictEqual(publisher.hedgingScheduler, initialScheduler);
+
+      // Disabling hedging via enabled: false should clear hedgingOptions, tokenBucket, and hedgingScheduler
+      publisher.setOptions({
+        hedging: {enabled: false},
+      });
+      assert.strictEqual(publisher.hedgingOptions, undefined);
+      assert.strictEqual(publisher.tokenBucket, undefined);
+      assert.strictEqual(publisher.hedgingScheduler, undefined);
+    });
+
+    it('should throw when hedging and messageOrdering are both enabled', () => {
+      assert.throws(
+        () =>
+          publisher.setOptions({
+            messageOrdering: true,
+            hedging: {},
+          }),
+        /Publish hedging and message ordering cannot be enabled at the same time\./,
+      );
+    });
   });
 
   describe('flush', () => {
@@ -504,6 +614,24 @@ describe('Publisher', () => {
           !publisher.queue.batch || publisher.queue.batch.messages.length === 0,
           true,
         );
+        done();
+      });
+    });
+
+    it('should not clear hedgingScheduler for already-in-flight batches when flush is called', done => {
+      publisher.setOptions({hedging: {}});
+      assert.ok(publisher.hedgingScheduler);
+      const clearSpy = sandbox.spy(publisher.hedgingScheduler, 'clear');
+
+      sandbox.stub(publisher.queue, '_publish').callsFake(async () => {
+        process.nextTick(() => {
+          publisher.queue.emit('drain');
+        });
+      });
+
+      publisher.flush(err => {
+        assert.strictEqual(err, null);
+        assert.strictEqual(clearSpy.called, false);
         done();
       });
     });

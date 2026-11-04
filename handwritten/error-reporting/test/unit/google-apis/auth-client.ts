@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as proxyquire from 'proxyquire';
+import {util} from '@google-cloud/common';
 import {describe, beforeEach, afterEach, it} from 'mocha';
 
 import {
@@ -20,7 +20,16 @@ import {
   ConfigurationOptions,
   Logger,
 } from '../../../src/configuration';
+import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {deepStrictEqual} from '../../util';
+
+const origMakeAuthFactory = util.makeAuthenticatedRequestFactory;
+const origRequest = RequestHandler.prototype.request;
+
+function restoreStubs() {
+  util.makeAuthenticatedRequestFactory = origMakeAuthFactory;
+  RequestHandler.prototype.request = origRequest;
+}
 
 function verifyReportedMessage(
   config1: ConfigurationOptions,
@@ -28,28 +37,6 @@ function verifyReportedMessage(
   expectedLogs: {error?: string; info?: string; warn?: string},
   done: () => void,
 ) {
-  class ServiceStub {
-    authClient: {};
-    request: {};
-    constructor() {
-      this.authClient = {
-        async getAccessToken() {
-          if (errToReturn) {
-            throw errToReturn;
-          }
-          return 'some-token';
-        },
-      };
-      this.request = () => {};
-    }
-  }
-
-  const RequestHandler = proxyquire('../../../src/google-apis/auth-client', {
-    '@google-cloud/common': {
-      Service: ServiceStub,
-    },
-  }).RequestHandler;
-
   const logs: {error?: string; info?: string; warn?: string} = {};
   const logger = {
     error(text: string) {
@@ -72,9 +59,27 @@ function verifyReportedMessage(
     },
   } as {} as Logger;
   const config2 = new Configuration(config1, logger);
-  // tslint:disable-next-line:no-unused-expression
-  new RequestHandler(config2, logger);
+  util.makeAuthenticatedRequestFactory = (() => ({
+    authClient: {
+      async getAccessToken() {
+        if (errToReturn) {
+          throw errToReturn;
+        }
+        return 'some-token';
+      },
+    },
+    getCredentials: {},
+  })) as unknown as typeof util.makeAuthenticatedRequestFactory;
+  RequestHandler.prototype.request = (() => {}) as typeof origRequest;
+  try {
+    // tslint:disable-next-line:no-unused-expression
+    new RequestHandler(config2, logger);
+  } catch (err) {
+    restoreStubs();
+    throw err;
+  }
   setImmediate(() => {
+    restoreStubs();
     deepStrictEqual(logs, expectedLogs);
     done();
   });
@@ -86,6 +91,7 @@ describe('RequestHandler', () => {
   });
 
   afterEach(() => {
+    restoreStubs();
     if (nodeEnv === undefined) {
       delete process.env.NODE_ENV;
     } else {

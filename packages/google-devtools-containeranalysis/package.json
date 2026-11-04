@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/containeranalysis",
-  "version": "7.0.2",
+  "version": "7.1.0",
   "description": "Containeranalysis client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/grafeas": "^7.0.0",
+    "@google-cloud/grafeas": "^7.1.0",
     "google-gax": "^6.0.0"
   },
   "devDependencies": {

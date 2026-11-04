@@ -5,6 +5,38 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.2...pubsub-v6.4.0) (2026-11-02)
+
+
+### Features
+
+* **pubsub:** Add CancellationSharer and HedgingScheduler ([#9464](https://github.com/googleapis/google-cloud-node/issues/9464)) ([43ef4dd](https://github.com/googleapis/google-cloud-node/commit/43ef4dd20590f314bf8e4333140e3a514a6bca79))
+* **pubsub:** Add enabled option to HedgingOptions (post-merge adjustments) ([#9654](https://github.com/googleapis/google-cloud-node/issues/9654)) ([cdb23f5](https://github.com/googleapis/google-cloud-node/commit/cdb23f50bec6859ac8387e127dbfb25ef26b5ec7))
+* **pubsub:** Add HedgingOptions validation and token bucket ([#9463](https://github.com/googleapis/google-cloud-node/issues/9463)) ([764347a](https://github.com/googleapis/google-cloud-node/commit/764347a763f9d0a20ed750e9c1a3073b68c15439))
+* **pubsub:** Add OpenTelemetry events and logging for hedged publish ([#9465](https://github.com/googleapis/google-cloud-node/issues/9465)) ([8636dba](https://github.com/googleapis/google-cloud-node/commit/8636dbae72652ddaa9b1818aa9d30fa0d9f0595b))
+* **pubsub:** Integrate publish hedging into MessageQueue ([#9466](https://github.com/googleapis/google-cloud-node/issues/9466)) ([89fd786](https://github.com/googleapis/google-cloud-node/commit/89fd786ca068856ea28e8a38f0f21fe314457e91))
+
+## [6.3.2](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.1...pubsub-v6.3.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **pubsub:** Reuse GoogleAuth instance and deprecate credential options ([#9721](https://github.com/googleapis/google-cloud-node/issues/9721)) ([4c4ba34](https://github.com/googleapis/google-cloud-node/commit/4c4ba3451bf2c87f9e36971765d19f6070973ae4))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.0...pubsub-v6.3.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **firestore,pubsub:** Align types and proto re-exports with -api packages ([#9621](https://github.com/googleapis/google-cloud-node/issues/9621)) ([25d945b](https://github.com/googleapis/google-cloud-node/commit/25d945b34979849ea1c6df699212854f8d390d79))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.2.0...pubsub-v6.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.1.1...pubsub-v6.2.0) (2026-10-07)
 
 

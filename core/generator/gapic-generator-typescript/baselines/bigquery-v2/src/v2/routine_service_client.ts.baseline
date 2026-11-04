@@ -470,7 +470,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRoutine request %j', request);
+    this._log.debug('getRoutine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.IRoutine,
@@ -479,7 +479,7 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRoutine response %j', response);
+          this._log.debug('getRoutine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -491,7 +491,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IGetRoutineRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRoutine response %j', response);
+          this._log.debug('getRoutine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -601,7 +601,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertRoutine request %j', request);
+    this._log.debug('insertRoutine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.IRoutine,
@@ -612,7 +612,7 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertRoutine response %j', response);
+          this._log.debug('insertRoutine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -624,7 +624,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IInsertRoutineRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('insertRoutine response %j', response);
+          this._log.debug('insertRoutine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -738,7 +738,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRoutine request %j', request);
+    this._log.debug('updateRoutine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.IRoutine,
@@ -749,7 +749,7 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateRoutine response %j', response);
+          this._log.debug('updateRoutine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -761,7 +761,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IUpdateRoutineRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRoutine response %j', response);
+          this._log.debug('updateRoutine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -874,7 +874,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patchRoutine request %j', request);
+    this._log.debug('patchRoutine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.IRoutine,
@@ -885,7 +885,7 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('patchRoutine response %j', response);
+          this._log.debug('patchRoutine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -897,7 +897,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IPatchRoutineRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('patchRoutine response %j', response);
+          this._log.debug('patchRoutine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1008,7 +1008,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRoutine request %j', request);
+    this._log.debug('deleteRoutine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1019,7 +1019,7 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteRoutine response %j', response);
+          this._log.debug('deleteRoutine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1031,7 +1031,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IDeleteRoutineRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRoutine response %j', response);
+          this._log.debug('deleteRoutine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1169,11 +1169,11 @@ export class RoutineServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRoutines values %j', values);
+          this._log.debug('listRoutines values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRoutines request %j', request);
+    this._log.debug('listRoutines request %j', request);
     return this.innerApiCalls
       .listRoutines(request, options, wrappedCallback)
       ?.then(
@@ -1182,7 +1182,7 @@ export class RoutineServiceClient {
           protos.google.cloud.bigquery.v2.IListRoutinesRequest | null,
           protos.google.cloud.bigquery.v2.IListRoutinesResponse,
         ]) => {
-          this._log.info('listRoutines values %j', response);
+          this._log.debug('listRoutines values %j', response);
           return [response, input, output];
         },
       );
@@ -1235,7 +1235,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutines stream %j', request);
+    this._log.debug('listRoutines stream %j', request);
     return this.descriptors.page.listRoutines.createStream(
       this.innerApiCalls.listRoutines as GaxCall,
       request,
@@ -1293,7 +1293,7 @@ export class RoutineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutines iterate %j', request);
+    this._log.debug('listRoutines iterate %j', request);
     return this.descriptors.page.listRoutines.asyncIterate(
       this.innerApiCalls['listRoutines'] as GaxCall,
       request as {},

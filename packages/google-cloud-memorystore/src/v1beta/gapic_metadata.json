@@ -10,9 +10,24 @@
         "grpc": {
           "libraryClient": "MemorystoreClient",
           "rpcs": {
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
             "GetInstance": {
               "methods": [
                 "getInstance"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
               ]
             },
             "GetCertificateAuthority": {
@@ -50,9 +65,19 @@
                 "createInstance"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "UpdateInstance": {
               "methods": [
                 "updateInstance"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "DeleteInstance": {
@@ -110,11 +135,25 @@
                 "deleteAuthToken"
               ]
             },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {
@@ -150,9 +189,24 @@
         "grpc-fallback": {
           "libraryClient": "MemorystoreClient",
           "rpcs": {
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
             "GetInstance": {
               "methods": [
                 "getInstance"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
               ]
             },
             "GetCertificateAuthority": {
@@ -190,9 +244,19 @@
                 "createInstance"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "UpdateInstance": {
               "methods": [
                 "updateInstance"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "DeleteInstance": {
@@ -250,11 +314,25 @@
                 "deleteAuthToken"
               ]
             },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {

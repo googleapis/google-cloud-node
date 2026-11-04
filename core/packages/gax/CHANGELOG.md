@@ -5,6 +5,51 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.16.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.15.0...google-gax-v6.16.0) (2026-11-02)
+
+
+### Features
+
+* **gax:** Add error logging for low level network attempts ([#9757](https://github.com/googleapis/google-cloud-node/issues/9757)) ([1333570](https://github.com/googleapis/google-cloud-node/commit/13335708924947c4532b05c7a4a5928a3c143223))
+
+## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.14.0...google-gax-v6.15.0) (2026-11-02)
+
+
+### Features
+
+* **gax:** Add error attributes for error logging ([#9743](https://github.com/googleapis/google-cloud-node/issues/9743)) ([9ad830f](https://github.com/googleapis/google-cloud-node/commit/9ad830ff456b135e33e85de8a8754c10c0b19985))
+* **gax:** Add error logging for client requests ([#9756](https://github.com/googleapis/google-cloud-node/issues/9756)) ([b0f3dad](https://github.com/googleapis/google-cloud-node/commit/b0f3dad084c8f8316659b8c95cd16f03622d95b0))
+* **gax:** Add resolveExceptionStacktrace helper for exception.stacktrace ([#9744](https://github.com/googleapis/google-cloud-node/issues/9744)) ([baed8c4](https://github.com/googleapis/google-cloud-node/commit/baed8c419d05f9f7554690b9435fd143d3b3ff3f))
+* **gax:** Add resolveResponsePayload helper for response.payload ([#9745](https://github.com/googleapis/google-cloud-node/issues/9745)) ([f4da96e](https://github.com/googleapis/google-cloud-node/commit/f4da96e90e84d77adeed85ed9c11c119ab98c1b5))
+* **gax:** Support cancelling API calls via CallOptions.signal ([#9462](https://github.com/googleapis/google-cloud-node/issues/9462)) ([4e1f88f](https://github.com/googleapis/google-cloud-node/commit/4e1f88f1265595f1da1283f7310148dabcf3f8ee))
+
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.13.0...google-gax-v6.14.0) (2026-10-28)
+
+
+### Features
+
+* **gax:** Add observability logging flag ([#9656](https://github.com/googleapis/google-cloud-node/issues/9656)) ([c0ab589](https://github.com/googleapis/google-cloud-node/commit/c0ab589ef64398cf139779619a147761029e3c03))
+
+
+### Bug Fixes
+
+* **gax:** Suppress cancel destroy error in StreamArrayParser and add Bun certification matrix ([#9652](https://github.com/googleapis/google-cloud-node/issues/9652)) ([a802909](https://github.com/googleapis/google-cloud-node/commit/a802909df71f384c44c16e3564127151ef74f445))
+
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.1...google-gax-v6.13.0) (2026-10-19)
+
+
+### Features
+
+* **gax:** Add LoggerHelper with context helper ([#9631](https://github.com/googleapis/google-cloud-node/issues/9631)) ([c410f90](https://github.com/googleapis/google-cloud-node/commit/c410f90278445e8d63a537f8faa888824597b067))
+* **gax:** Remove references to static telemetry information ([#9630](https://github.com/googleapis/google-cloud-node/issues/9630)) ([8954cff](https://github.com/googleapis/google-cloud-node/commit/8954cff885fbb9d2d526a908f11f9b7f3114fa85))
+
+## [6.12.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.0...google-gax-v6.12.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **gax:** Resolve low level network attributes ([#9564](https://github.com/googleapis/google-cloud-node/issues/9564)) ([4bab312](https://github.com/googleapis/google-cloud-node/commit/4bab3123317218621cf627a31235cecb9e4ab1dc))
+
 ## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
 
 

@@ -34008,7 +34008,8 @@
                             "source": {
                               "oneof": [
                                 "inlineSource",
-                                "developerConnectSource"
+                                "developerConnectSource",
+                                "gitSource"
                               ]
                             },
                             "languageSpec": {
@@ -34026,6 +34027,10 @@
                             "developerConnectSource": {
                               "type": "DeveloperConnectSource",
                               "id": 3
+                            },
+                            "gitSource": {
+                              "type": "GitSource",
+                              "id": 6
                             },
                             "pythonSpec": {
                               "type": "PythonSpec",
@@ -34094,6 +34099,31 @@
                                 "config": {
                                   "type": "DeveloperConnectConfig",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GitSource": {
+                              "fields": {
+                                "url": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "dir": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "revision": {
+                                  "type": "string",
+                                  "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
@@ -85350,7 +85380,8 @@
                             "source": {
                               "oneof": [
                                 "inlineSource",
-                                "developerConnectSource"
+                                "developerConnectSource",
+                                "gitSource"
                               ]
                             },
                             "languageSpec": {
@@ -85368,6 +85399,10 @@
                             "developerConnectSource": {
                               "type": "DeveloperConnectSource",
                               "id": 3
+                            },
+                            "gitSource": {
+                              "type": "GitSource",
+                              "id": 6
                             },
                             "pythonSpec": {
                               "type": "PythonSpec",
@@ -85436,6 +85471,31 @@
                                 "config": {
                                   "type": "DeveloperConnectConfig",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GitSource": {
+                              "fields": {
+                                "url": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "dir": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "revision": {
+                                  "type": "string",
+                                  "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
@@ -86059,7 +86119,7 @@
                           "values": {
                             "STATE_UNSPECIFIED": 0,
                             "ACTIVE": 1,
-                            "DEPRECATED": 2
+                            "ARCHIVED": 3
                           }
                         }
                       }
@@ -95916,8 +95976,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

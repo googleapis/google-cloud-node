@@ -26,10 +26,30 @@ jobs:
         with:
           filters: |
             check:
-              - '**/*.ts'
+              - 'core/**/*.ts'
+              - 'core/**/*.mts'
+              - 'core/**/*.cts'
+              - 'core/**/package.json'
+              - 'core/**/tsconfig.json'
+              - 'handwritten/**/*.ts'
+              - 'handwritten/**/*.mts'
+              - 'handwritten/**/*.cts'
+              - 'handwritten/**/package.json'
+              - 'handwritten/**/tsconfig.json'
               - 'bin/breaking-change-check.mjs'
               - 'bin/test/breaking-change-check.test.mjs'
               - '.github/workflows/breaking-change-check.yaml'
+            packages_changed:
+              - 'core/**/*.ts'
+              - 'core/**/*.mts'
+              - 'core/**/*.cts'
+              - 'core/**/package.json'
+              - 'core/**/tsconfig.json'
+              - 'handwritten/**/*.ts'
+              - 'handwritten/**/*.mts'
+              - 'handwritten/**/*.cts'
+              - 'handwritten/**/package.json'
+              - 'handwritten/**/tsconfig.json'
             checker_self:
               - 'bin/breaking-change-check.mjs'
               - 'bin/test/breaking-change-check.test.mjs'
@@ -41,11 +61,18 @@ jobs:
           node-version: 24
       - uses: ./.github/actions/pnpm-lockfile-check
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        with:
+          link-workspace-packages: ${{ steps.changes.outputs.packages_changed == 'true' || github.event_name == 'workflow_dispatch' }}
+      - name: Compile workspace dependencies of affected packages
+        if: steps.changes.outputs.packages_changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GIT_DIFF_ARG: "HEAD^1...HEAD -- :!packages"
+        run: node ./bin/breaking-change-check.mjs --strict --compile-deps-only
       - name: Run breaking change checker unit tests
         if: steps.changes.outputs.checker_self == 'true' || github.event_name == 'workflow_dispatch'
         run: node --test ./bin/test/breaking-change-check.test.mjs
       - name: Run breaking change check
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         env:
-          GIT_DIFF_ARG: "HEAD^1...HEAD"
+          GIT_DIFF_ARG: "HEAD^1...HEAD -- :!packages"
         run: node ./bin/breaking-change-check.mjs --strict

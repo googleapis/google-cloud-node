@@ -32,11 +32,10 @@ import {
   PluggableAuthClient,
   PluggableAuthClientOptions,
 } from './pluggable-auth-client';
+import {isAdcWarningSuppressed} from '../util';
 
 export type ExternalAccountClientOptions =
-  | IdentityPoolClientOptions
-  | AwsClientOptions
-  | PluggableAuthClientOptions;
+  IdentityPoolClientOptions | AwsClientOptions | PluggableAuthClientOptions;
 
 /**
  * Dummy class with no constructor. Developers are expected to use fromJSON.
@@ -73,6 +72,11 @@ export class ExternalAccountClient {
   static fromJSON(
     options: ExternalAccountClientOptions,
   ): BaseExternalAccountClient | null {
+    if (!isAdcWarningSuppressed()) {
+      console.warn(
+        'The `fromJSON` method does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
     if (options && options.type === EXTERNAL_ACCOUNT_TYPE) {
       if ((options as AwsClientOptions).credential_source?.environment_id) {
         return new AwsClient(options as AwsClientOptions);

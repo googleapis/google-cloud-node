@@ -34,7 +34,7 @@
     "clean": "gts clean",
     "compile:esm": "tsc -p .",
     "compile:cjs": "tsc -p ./tsconfig.cjs.json && node -e \"require('fs').writeFileSync('build/cjs/package.json', JSON.stringify({type: 'commonjs'}))\"",
-    "compile": "pnpm run compile:esm && pnpm run compile:cjs",
+    "compile": "npm run compile:esm && npm run compile:cjs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
@@ -46,10 +46,10 @@
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
-    "@google-cloud/spanner-api": "^0.3.0"
+    "@google-cloud/spanner-api": "^0.5.0"
   },
   "devDependencies": {
-    "@google-cloud/spanner": "^8.7.1",
+    "@google-cloud/spanner": "^9.1.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",

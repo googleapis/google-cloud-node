@@ -34,11 +34,11 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Maximum number of Ips to return, will likely not be specified.
+   *  Optional. Maximum number of Ips to return, will likely not be specified.
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListStaticIps` call.
+   *  Optional. A page token, received from a previous `ListStaticIps` call.
    *  will likely not be specified.
    */
   // const pageToken = 'abc123'

@@ -453,7 +453,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServiceAccount request %j', request);
+    this._log.debug('getServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.IGetServiceAccountResponse,
@@ -464,7 +464,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceAccount response %j', response);
+          this._log.debug('getServiceAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -476,7 +476,7 @@ export class ProjectServiceClient {
           protos.google.cloud.bigquery.v2.IGetServiceAccountRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getServiceAccount response %j', response);
+          this._log.debug('getServiceAccount response %j', response);
           return [response, options, rawResponse];
         },
       )

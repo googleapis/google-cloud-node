@@ -81,17 +81,21 @@ async function apiReport(opts) {
     JSON.stringify(apiExtractorConfig, null, 2),
   );
 
-  // Run API Extractor
-  const apiExtractorCmd = join(
-    process.cwd(),
-    'node_modules',
-    '.bin',
-    'api-extractor',
+  // Run API Extractor.
+  // Under pnpm's isolated node_modules, @microsoft/api-extractor is a
+  // dependency of @google-cloud/cloud-rad rather than a direct dependency of
+  // @google-cloud/firestore, and .bin shims are shell wrappers unsuitable for
+  // execaNode. Resolve the Node entry point relative to cloud-rad.
+  const cloudRadRequire = createRequire(opts.cloudRadApiExtractorConfigPath);
+  const apiExtractorCmd = cloudRadRequire.resolve(
+    '@microsoft/api-extractor/bin/api-extractor',
   );
-  await withLogs(execaNode)(apiExtractorCmd, ['run', '--local']);
-
-  // Cleanup
-  await fs.remove(apiExtractorConfigPath);
+  try {
+    await withLogs(execaNode)(apiExtractorCmd, ['run', '--local']);
+  } finally {
+    // Cleanup
+    await fs.remove(apiExtractorConfigPath);
+  }
 
   return outputDir;
 }
@@ -119,4 +123,5 @@ apiReport({
   })
   .catch(err => {
     console.log(`FAILED: ${err}`);
+    process.exitCode = 1;
   });

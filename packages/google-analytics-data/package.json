@@ -1,6 +1,6 @@
 {
   "name": "@google-analytics/data",
-  "version": "7.2.1",
+  "version": "7.3.0",
   "description": "Data client for Node.js",
   "repository": {
     "type": "git",

@@ -15,8 +15,14 @@
  */
 
 import * as assert from 'assert';
+import {context} from '@opentelemetry/api';
 import {describe, it} from 'mocha';
-import {getQueryTraceConfig} from '../src/instrument';
+import {
+  ensureInitialContextManagerSet,
+  getActiveOrNoopSpan,
+  getQueryTraceConfig,
+  startTrace,
+} from '../src/instrument';
 
 describe('instrument', () => {
   describe('getQueryTraceConfig', () => {
@@ -85,6 +91,64 @@ describe('instrument', () => {
         sql: undefined,
         requestTag: undefined,
       });
+    });
+  });
+
+  describe('ensureInitialContextManagerSet', () => {
+    it('should propagate active span context across async/await boundaries', async () => {
+      context.disable();
+      ensureInitialContextManagerSet();
+
+      const fakeTracerProvider = {
+        getTracer: () => ({
+          startActiveSpan: (
+            _name: string,
+            _opts: unknown,
+            fn: (span: unknown) => unknown,
+          ) => {
+            const fakeSpan = {
+              spanContext: () => ({
+                traceId: '1'.repeat(32),
+                spanId: '2'.repeat(16),
+                traceFlags: 1,
+              }),
+              setAttribute: () => fakeSpan,
+              setAttributes: () => fakeSpan,
+              addEvent: () => fakeSpan,
+              setStatus: () => fakeSpan,
+              updateName: () => fakeSpan,
+              end: () => {},
+              isRecording: () => true,
+              recordException: () => {},
+            };
+            return context.with(traceSetSpan(context.active(), fakeSpan), () =>
+              fn(fakeSpan),
+            );
+          },
+        }),
+      };
+
+      const {trace} = require('@opentelemetry/api');
+      function traceSetSpan(ctx: unknown, span: unknown) {
+        return trace.setSpan(ctx, span);
+      }
+
+      let activeSpanAfterAwait: unknown;
+      await startTrace(
+        'Test.asyncSpan',
+        {opts: {tracerProvider: fakeTracerProvider as any}},
+        async span => {
+          await Promise.resolve();
+          activeSpanAfterAwait = getActiveOrNoopSpan();
+          span.end();
+        },
+      );
+
+      assert.strictEqual(
+        (activeSpanAfterAwait as any)?.spanContext?.().spanId,
+        '2'.repeat(16),
+      );
+      context.disable();
     });
   });
 });

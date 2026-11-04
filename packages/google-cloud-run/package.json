@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/run",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "Cloud Run Admin API",
   "repository": {
     "type": "git",

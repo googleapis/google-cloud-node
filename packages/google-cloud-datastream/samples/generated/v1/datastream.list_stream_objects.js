@@ -33,13 +33,13 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of objects to return. Default is 50.
+   *  Optional. Maximum number of objects to return. Default is 50.
    *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Page token received from a previous `ListStreamObjectsRequest` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. Page token received from a previous `ListStreamObjectsRequest`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
    *  `ListStreamObjectsRequest` must match the call that provided the page
    *  token.

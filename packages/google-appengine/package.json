@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/appengine-admin",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "Appengine client for Node.js",
   "repository": {
     "type": "git",

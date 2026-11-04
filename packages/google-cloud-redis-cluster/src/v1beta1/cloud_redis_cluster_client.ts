@@ -232,6 +232,9 @@ export class CloudRedisClusterClient {
       aclPolicyRevisionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/aclPolicies/{acl_policy}/revisions/{revision}',
       ),
+      authTokenPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}',
+      ),
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupCollections/{backup_collection}/backups/{backup}',
       ),
@@ -272,6 +275,9 @@ export class CloudRedisClusterClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/sharedRegionalCertificateAuthority',
         ),
+      tokenAuthUserPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -302,6 +308,16 @@ export class CloudRedisClusterClient {
         'pageToken',
         'nextPageToken',
         'backups',
+      ),
+      listTokenAuthUsers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tokenAuthUsers',
+      ),
+      listAuthTokens: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'authTokens',
       ),
     };
 
@@ -399,6 +415,30 @@ export class CloudRedisClusterClient {
     const backupClusterMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Any',
     ) as gax.protobuf.Type;
+    const addTokenAuthUserResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.Cluster',
+    ) as gax.protobuf.Type;
+    const addTokenAuthUserMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteTokenAuthUserResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteTokenAuthUserMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const addAuthTokenResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.TokenAuthUser',
+    ) as gax.protobuf.Type;
+    const addAuthTokenMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteAuthTokenResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteAuthTokenMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateCluster: new this._gaxModule.LongrunningDescriptor(
@@ -449,6 +489,26 @@ export class CloudRedisClusterClient {
         this.operationsClient,
         backupClusterResponse.decode.bind(backupClusterResponse),
         backupClusterMetadata.decode.bind(backupClusterMetadata),
+      ),
+      addTokenAuthUser: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        addTokenAuthUserResponse.decode.bind(addTokenAuthUserResponse),
+        addTokenAuthUserMetadata.decode.bind(addTokenAuthUserMetadata),
+      ),
+      deleteTokenAuthUser: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteTokenAuthUserResponse.decode.bind(deleteTokenAuthUserResponse),
+        deleteTokenAuthUserMetadata.decode.bind(deleteTokenAuthUserMetadata),
+      ),
+      addAuthToken: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        addAuthTokenResponse.decode.bind(addAuthTokenResponse),
+        addAuthTokenMetadata.decode.bind(addAuthTokenMetadata),
+      ),
+      deleteAuthToken: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAuthTokenResponse.decode.bind(deleteAuthTokenResponse),
+        deleteAuthTokenMetadata.decode.bind(deleteAuthTokenMetadata),
       ),
     };
 
@@ -525,6 +585,14 @@ export class CloudRedisClusterClient {
       'deleteBackup',
       'exportBackup',
       'backupCluster',
+      'listTokenAuthUsers',
+      'getTokenAuthUser',
+      'listAuthTokens',
+      'getAuthToken',
+      'addTokenAuthUser',
+      'deleteTokenAuthUser',
+      'addAuthToken',
+      'deleteAuthToken',
     ];
     for (const methodName of cloudRedisClusterStubMethods) {
       const callPromise = this.cloudRedisClusterStub.then(
@@ -1798,6 +1866,296 @@ export class CloudRedisClusterClient {
           {} | undefined,
         ]) => {
           this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets a specific token auth user for a basic auth enabled cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of token auth user for a token based auth enabled
+   *   cluster. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser|TokenAuthUser}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.get_token_auth_user.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_GetTokenAuthUser_async
+   */
+  getTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTokenAuthUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTokenAuthUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTokenAuthUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+          (
+            | protos.google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTokenAuthUser response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets a specific auth token for a specific token auth user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of auth token for a token based auth enabled cluster.
+   *   Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AuthToken|AuthToken}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.get_auth_token.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_GetAuthToken_async
+   */
+  getAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAuthToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAuthToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken,
+          (
+            | protos.google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAuthToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3412,6 +3770,711 @@ export class CloudRedisClusterClient {
     >;
   }
   /**
+   * Adds a token auth user for a token based auth enabled cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.cluster
+   *   Required. The cluster resource that this token auth user will be added for.
+   *   Format: projects/{project}/locations/{location}/clusters/{cluster}
+   * @param {string} request.tokenAuthUser
+   *   Required. The id of the token auth user to add.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.add_token_auth_user.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_AddTokenAuthUser_async
+   */
+  addTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ICluster,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  addTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ICluster,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ICluster,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ICluster,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ICluster,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ICluster,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        cluster: request.cluster ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ICluster,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addTokenAuthUser response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addTokenAuthUser request %j', request);
+    return this.innerApiCalls
+      .addTokenAuthUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ICluster,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addTokenAuthUser response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `addTokenAuthUser()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.add_token_auth_user.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_AddTokenAuthUser_async
+   */
+  async checkAddTokenAuthUserProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.Cluster,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('addTokenAuthUser long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.addTokenAuthUser,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.Cluster,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a token auth user for a token based auth enabled cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the token auth user to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child auth tokens of this user will also be
+   *   deleted. Otherwise, the request will only work if the user has no auth
+   *   tokens.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_token_auth_user.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteTokenAuthUser_async
+   */
+  deleteTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTokenAuthUser(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTokenAuthUser(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTokenAuthUser response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTokenAuthUser request %j', request);
+    return this.innerApiCalls
+      .deleteTokenAuthUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTokenAuthUser response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteTokenAuthUser()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_token_auth_user.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteTokenAuthUser_async
+   */
+  async checkDeleteTokenAuthUserProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteTokenAuthUser long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteTokenAuthUser,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Adds a auth token for a user of a token based auth enabled cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tokenAuthUser
+   *   Required. The name of the token auth user resource that this auth token
+   *   will be added for. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {google.cloud.redis.cluster.v1beta1.AuthToken} request.authToken
+   *   Required. The auth token to add.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.add_auth_token.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_AddAuthToken_async
+   */
+  addAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  addAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        token_auth_user: request.tokenAuthUser ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addAuthToken response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addAuthToken request %j', request);
+    return this.innerApiCalls
+      .addAuthToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addAuthToken response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `addAuthToken()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.add_auth_token.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_AddAuthToken_async
+   */
+  async checkAddAuthTokenProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('addAuthToken long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.addAuthToken,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Removes a auth token for a user of a token based auth enabled instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the token auth user resource that this auth token
+   *   will be deleted from. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_auth_token.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteAuthToken_async
+   */
+  deleteAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAuthToken(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAuthToken(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAuthToken response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAuthToken request %j', request);
+    return this.innerApiCalls
+      .deleteAuthToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAuthToken response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteAuthToken()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_auth_token.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteAuthToken_async
+   */
+  async checkDeleteAuthTokenProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteAuthToken long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAuthToken,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >;
+  }
+  /**
    * Lists all Redis clusters owned by a project in either the specified
    * location (region) or all locations.
    *
@@ -4654,6 +5717,527 @@ export class CloudRedisClusterClient {
       callSettings,
     ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IBackup>;
   }
+  /**
+   * Lists all the token auth users for a token based auth enabled cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this token based auth user will be
+   *   listed for. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser|TokenAuthUser}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTokenAuthUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTokenAuthUsers(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser[],
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse,
+    ]
+  >;
+  listTokenAuthUsers(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser
+    >,
+  ): void;
+  listTokenAuthUsers(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser
+    >,
+  ): void;
+  listTokenAuthUsers(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser[],
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTokenAuthUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTokenAuthUsers request %j', request);
+    return this.innerApiCalls
+      .listTokenAuthUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser[],
+          protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest | null,
+          protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse,
+        ]) => {
+          this._log.info('listTokenAuthUsers values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listTokenAuthUsers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this token based auth user will be
+   *   listed for. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser|TokenAuthUser} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTokenAuthUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTokenAuthUsersStream(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTokenAuthUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTokenAuthUsers stream %j', request);
+    return this.descriptors.page.listTokenAuthUsers.createStream(
+      this.innerApiCalls.listTokenAuthUsers as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listTokenAuthUsers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this token based auth user will be
+   *   listed for. Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.TokenAuthUser|TokenAuthUser}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.list_token_auth_users.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_ListTokenAuthUsers_async
+   */
+  listTokenAuthUsersAsync(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTokenAuthUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTokenAuthUsers iterate %j', request);
+    return this.descriptors.page.listTokenAuthUsers.asyncIterate(
+      this.innerApiCalls['listTokenAuthUsers'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.ITokenAuthUser>;
+  }
+  /**
+   * Lists all the auth tokens for a specific token auth user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this auth token will be listed for.
+   *   Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000. If not specified, a default
+   *   value of 1000 will be used by the service. Regardless of the page_size
+   *   value, the response may include a partial list and a caller should only
+   *   rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1beta1.AuthToken|AuthToken}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAuthTokensAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAuthTokens(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse,
+    ]
+  >;
+  listAuthTokens(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken
+    >,
+  ): void;
+  listAuthTokens(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken
+    >,
+  ): void;
+  listAuthTokens(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAuthToken[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthTokens values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthTokens request %j', request);
+    return this.innerApiCalls
+      .listAuthTokens(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAuthToken[],
+          protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest | null,
+          protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse,
+        ]) => {
+          this._log.info('listAuthTokens values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAuthTokens`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this auth token will be listed for.
+   *   Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000. If not specified, a default
+   *   value of 1000 will be used by the service. Regardless of the page_size
+   *   value, the response may include a partial list and a caller should only
+   *   rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AuthToken|AuthToken} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAuthTokensAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAuthTokensStream(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAuthTokens'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAuthTokens stream %j', request);
+    return this.descriptors.page.listAuthTokens.createStream(
+      this.innerApiCalls.listAuthTokens as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAuthTokens`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that this auth token will be listed for.
+   *   Format:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000. If not specified, a default
+   *   value of 1000 will be used by the service. Regardless of the page_size
+   *   value, the response may include a partial list and a caller should only
+   *   rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListTokenAuthUsers] request, if any.
+   * @param {string} [request.filter]
+   *   Optional. Expression for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results by a defined order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.AuthToken|AuthToken}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.list_auth_tokens.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_ListAuthTokens_async
+   */
+  listAuthTokensAsync(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAuthToken> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAuthTokens'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAuthTokens iterate %j', request);
+    return this.descriptors.page.listAuthTokens.asyncIterate(
+      this.innerApiCalls['listAuthTokens'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAuthToken>;
+  }
 
   /**
    * Gets information about a location.
@@ -5084,6 +6668,92 @@ export class CloudRedisClusterClient {
     return this.pathTemplates.aclPolicyRevisionPathTemplate.match(
       aclPolicyRevisionName,
     ).revision;
+  }
+
+  /**
+   * Return a fully-qualified authToken resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} token_auth_user
+   * @param {string} auth_token
+   * @returns {string} Resource name string.
+   */
+  authTokenPath(
+    project: string,
+    location: string,
+    cluster: string,
+    tokenAuthUser: string,
+    authToken: string,
+  ) {
+    return this.pathTemplates.authTokenPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      token_auth_user: tokenAuthUser,
+      auth_token: authToken,
+    });
+  }
+
+  /**
+   * Parse the project from AuthToken resource.
+   *
+   * @param {string} authTokenName
+   *   A fully-qualified path representing AuthToken resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthTokenName(authTokenName: string) {
+    return this.pathTemplates.authTokenPathTemplate.match(authTokenName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AuthToken resource.
+   *
+   * @param {string} authTokenName
+   *   A fully-qualified path representing AuthToken resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthTokenName(authTokenName: string) {
+    return this.pathTemplates.authTokenPathTemplate.match(authTokenName)
+      .location;
+  }
+
+  /**
+   * Parse the cluster from AuthToken resource.
+   *
+   * @param {string} authTokenName
+   *   A fully-qualified path representing AuthToken resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromAuthTokenName(authTokenName: string) {
+    return this.pathTemplates.authTokenPathTemplate.match(authTokenName)
+      .cluster;
+  }
+
+  /**
+   * Parse the token_auth_user from AuthToken resource.
+   *
+   * @param {string} authTokenName
+   *   A fully-qualified path representing AuthToken resource.
+   * @returns {string} A string representing the token_auth_user.
+   */
+  matchTokenAuthUserFromAuthTokenName(authTokenName: string) {
+    return this.pathTemplates.authTokenPathTemplate.match(authTokenName)
+      .token_auth_user;
+  }
+
+  /**
+   * Parse the auth_token from AuthToken resource.
+   *
+   * @param {string} authTokenName
+   *   A fully-qualified path representing AuthToken resource.
+   * @returns {string} A string representing the auth_token.
+   */
+  matchAuthTokenFromAuthTokenName(authTokenName: string) {
+    return this.pathTemplates.authTokenPathTemplate.match(authTokenName)
+      .auth_token;
   }
 
   /**
@@ -5783,6 +7453,77 @@ export class CloudRedisClusterClient {
     return this.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match(
       sharedRegionalCertificateAuthorityName,
     ).location;
+  }
+
+  /**
+   * Return a fully-qualified tokenAuthUser resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} token_auth_user
+   * @returns {string} Resource name string.
+   */
+  tokenAuthUserPath(
+    project: string,
+    location: string,
+    cluster: string,
+    tokenAuthUser: string,
+  ) {
+    return this.pathTemplates.tokenAuthUserPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      token_auth_user: tokenAuthUser,
+    });
+  }
+
+  /**
+   * Parse the project from TokenAuthUser resource.
+   *
+   * @param {string} tokenAuthUserName
+   *   A fully-qualified path representing TokenAuthUser resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTokenAuthUserName(tokenAuthUserName: string) {
+    return this.pathTemplates.tokenAuthUserPathTemplate.match(tokenAuthUserName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TokenAuthUser resource.
+   *
+   * @param {string} tokenAuthUserName
+   *   A fully-qualified path representing TokenAuthUser resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTokenAuthUserName(tokenAuthUserName: string) {
+    return this.pathTemplates.tokenAuthUserPathTemplate.match(tokenAuthUserName)
+      .location;
+  }
+
+  /**
+   * Parse the cluster from TokenAuthUser resource.
+   *
+   * @param {string} tokenAuthUserName
+   *   A fully-qualified path representing TokenAuthUser resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromTokenAuthUserName(tokenAuthUserName: string) {
+    return this.pathTemplates.tokenAuthUserPathTemplate.match(tokenAuthUserName)
+      .cluster;
+  }
+
+  /**
+   * Parse the token_auth_user from TokenAuthUser resource.
+   *
+   * @param {string} tokenAuthUserName
+   *   A fully-qualified path representing TokenAuthUser resource.
+   * @returns {string} A string representing the token_auth_user.
+   */
+  matchTokenAuthUserFromTokenAuthUserName(tokenAuthUserName: string) {
+    return this.pathTemplates.tokenAuthUserPathTemplate.match(tokenAuthUserName)
+      .token_auth_user;
   }
 
   /**

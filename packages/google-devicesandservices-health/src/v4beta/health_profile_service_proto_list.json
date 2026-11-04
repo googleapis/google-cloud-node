@@ -1,0 +1,10 @@
+[
+  "../../protos/google/devicesandservices/health/v4beta/data_coordinates.proto",
+  "../../protos/google/devicesandservices/health/v4beta/data_model.proto",
+  "../../protos/google/devicesandservices/health/v4beta/data_points.proto",
+  "../../protos/google/devicesandservices/health/v4beta/data_source.proto",
+  "../../protos/google/devicesandservices/health/v4beta/data_subscription_service.proto",
+  "../../protos/google/devicesandservices/health/v4beta/health_profile.proto",
+  "../../protos/google/devicesandservices/health/v4beta/medical_device_info.proto",
+  "../../protos/google/devicesandservices/health/v4beta/webhook_notification_cloud_log.proto"
+]

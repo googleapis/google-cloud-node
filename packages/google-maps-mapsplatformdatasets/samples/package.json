@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@googlemaps/maps-platform-datasets": "^4.0.1"
+    "@googlemaps/maps-platform-datasets": "^4.1.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

@@ -216,6 +216,9 @@ export class SessionServiceClient {
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
+      assistantSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}',
+      ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
@@ -279,6 +282,11 @@ export class SessionServiceClient {
         !!opts.fallback,
         !!opts.gaxServerStreamingRetries,
       ),
+      streamChatAiAssistant: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -334,6 +342,9 @@ export class SessionServiceClient {
       'runSession',
       'streamRunSession',
       'bidiRunSession',
+      'streamChatAiAssistant',
+      'cancelAssistantTurn',
+      'generateOnboardingSuggestions',
     ];
     for (const methodName of sessionServiceStubMethods) {
       const callPromise = this.sessionServiceStub.then(
@@ -589,6 +600,300 @@ export class SessionServiceClient {
         throw error;
       });
   }
+  /**
+   * Cancels the assistant session's in-flight turn, if any: the explicit user
+   * stop for a turn running detached from any stream. A cancel landing on a
+   * task that does not host the turn preempts it through the session turn
+   * epoch instead, ending it within one lease renewal.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The assistant session whose in-flight turn to cancel.
+   * @param {string} [request.turnId]
+   *   Optional. The turn to cancel; empty cancels whichever turn is running. A
+   *   cancel naming a turn that is no longer the running one is a no-op.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.CancelAssistantTurnResponse|CancelAssistantTurnResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/session_service.cancel_assistant_turn.js</caption>
+   * region_tag:ces_v1beta_generated_SessionService_CancelAssistantTurn_async
+   */
+  cancelAssistantTurn(
+    request?: protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  cancelAssistantTurn(
+    request: protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+      | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  cancelAssistantTurn(
+    request: protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+      | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  cancelAssistantTurn(
+    request?: protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+          | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+      | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+      protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('cancelAssistantTurn request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+          | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelAssistantTurn response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelAssistantTurn(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
+          (
+            | protos.google.cloud.ces.v1beta.ICancelAssistantTurnRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelAssistantTurn response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Generates personalized onboarding suggestions for the Arc
+   * zero state: classifies the requesting user (new / exploring / returning)
+   * from their assistant-session history in the app and returns suggestion
+   * chips (resume a session, continue work, or start something new) to render
+   * before any message is sent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The app whose zero state is being rendered.
+   *   Format: `projects/{project}/locations/{location}/apps/{app}`
+   * @param {number} [request.maxSuggestions]
+   *   Optional. Maximum number of suggestions to return. Defaults to 4 when
+   *   unset.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsResponse|GenerateOnboardingSuggestionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/session_service.generate_onboarding_suggestions.js</caption>
+   * region_tag:ces_v1beta_generated_SessionService_GenerateOnboardingSuggestions_async
+   */
+  generateOnboardingSuggestions(
+    request?: protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+      (
+        | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateOnboardingSuggestions(
+    request: protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+      | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  generateOnboardingSuggestions(
+    request: protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+      | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  generateOnboardingSuggestions(
+    request?: protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+          | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+      | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+      (
+        | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateOnboardingSuggestions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+          | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateOnboardingSuggestions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateOnboardingSuggestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
+          (
+            | protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateOnboardingSuggestions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Initiates a single-turn interaction with the CES agent. Uses server-side
@@ -718,6 +1023,76 @@ export class SessionServiceClient {
     });
     this._log.info('bidiRunSession stream %j', options);
     return this.innerApiCalls.bidiRunSession(null, options);
+  }
+
+  /**
+   * Runs Arc, the AI assistant, for the specified assistant session in a
+   * streaming fashion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The assistant session to be used to run the assistant.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
+   * @param {string} [request.message]
+   *   Optional. The message to send to the assistant agent. May be empty when
+   *   `confirmation_response` is set (answering a pending confirmation without
+   *   adding a new message); at least one of the two must be provided.
+   * @param {string[]} [request.attachedGcsUris]
+   *   Optional. Cloud Storage URIs for files uploaded by the user during this
+   *   turn. Example: "gs://cxas-transient-uploads/uuid/prd.pdf"
+   * @param {string} [request.contextToken]
+   *   Optional. Opaque onboarding context token returned by
+   *   {@link protos.google.cloud.ces.v1beta.SessionService.GenerateOnboardingSuggestions|SessionService.GenerateOnboardingSuggestions}.
+   *   When set and still fresh, the server reuses the onboarding snapshot
+   *   computed for the zero state instead of recomputing it for the first
+   *   conversation turn.
+   * @param {google.cloud.ces.v1beta.AssistantConfirmationResponse} [request.confirmationResponse]
+   *   Optional. The user's answer to a pending
+   *   {@link protos.google.cloud.ces.v1beta.AssistantConfirmationRequest|AssistantConfirmationRequest}.
+   *   When set, the server resumes the paused agent with this answer instead of
+   *   (or in addition to) starting a new prompt turn.
+   * @param {number[]} [request.clientCapabilities]
+   *   Optional. Response features this client can render. The server only emits
+   *   events that need a capability (e.g. `confirmation_request`) when the
+   *   capability is declared, so older clients never receive events they would
+   *   silently drop.
+   * @param {google.cloud.ces.v1beta.OperationCompletedEvent} [request.operationCompletedEvent]
+   *   Optional. Resumes an assistant session paused waiting for a client-managed
+   *   long-running operation to complete.
+   * @param {number} [request.resumeFromSequenceNumber]
+   *   Optional. Optional cursor to resume and replay events from an in-flight or
+   *   completed turn.
+   * @param {boolean} [request.attachOnly]
+   *   Optional. Optional flag to attach to an existing in-flight turn without
+   *   submitting a new message.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse|StreamChatAiAssistantResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/session_service.stream_chat_ai_assistant.js</caption>
+   * region_tag:ces_v1beta_generated_SessionService_StreamChatAiAssistant_async
+   */
+  streamChatAiAssistant(
+    request?: protos.google.cloud.ces.v1beta.IStreamChatAiAssistantRequest,
+    options?: CallOptions,
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('streamChatAiAssistant stream %j', options);
+    return this.innerApiCalls.streamChatAiAssistant(request, options);
   }
 
   /**
@@ -980,6 +1355,81 @@ export class SessionServiceClient {
   matchVersionFromAppVersionName(appVersionName: string) {
     return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
       .version;
+  }
+
+  /**
+   * Return a fully-qualified assistantSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} app
+   * @param {string} assistant_session
+   * @returns {string} Resource name string.
+   */
+  assistantSessionPath(
+    project: string,
+    location: string,
+    app: string,
+    assistantSession: string,
+  ) {
+    return this.pathTemplates.assistantSessionPathTemplate.render({
+      project: project,
+      location: location,
+      app: app,
+      assistant_session: assistantSession,
+    });
+  }
+
+  /**
+   * Parse the project from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).location;
+  }
+
+  /**
+   * Parse the app from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the app.
+   */
+  matchAppFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).app;
+  }
+
+  /**
+   * Parse the assistant_session from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the assistant_session.
+   */
+  matchAssistantSessionFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).assistant_session;
   }
 
   /**

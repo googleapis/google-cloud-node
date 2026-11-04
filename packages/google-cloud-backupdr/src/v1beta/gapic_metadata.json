@@ -15,6 +15,26 @@
                 "getManagementServer"
               ]
             },
+            "GetRestoreTemplate": {
+              "methods": [
+                "getRestoreTemplate"
+              ]
+            },
+            "GetRestoreTemplateExecution": {
+              "methods": [
+                "getRestoreTemplateExecution"
+              ]
+            },
+            "GetRestoreVerificationPlanAssociation": {
+              "methods": [
+                "getRestoreVerificationPlanAssociation"
+              ]
+            },
+            "GetRestoreVerificationPlan": {
+              "methods": [
+                "getRestoreVerificationPlan"
+              ]
+            },
             "GetBackupVault": {
               "methods": [
                 "getBackupVault"
@@ -73,6 +93,56 @@
             "DeleteManagementServer": {
               "methods": [
                 "deleteManagementServer"
+              ]
+            },
+            "CreateRestoreTemplate": {
+              "methods": [
+                "createRestoreTemplate"
+              ]
+            },
+            "UpdateRestoreTemplate": {
+              "methods": [
+                "updateRestoreTemplate"
+              ]
+            },
+            "DeleteRestoreTemplate": {
+              "methods": [
+                "deleteRestoreTemplate"
+              ]
+            },
+            "RunRestoreTemplate": {
+              "methods": [
+                "runRestoreTemplate"
+              ]
+            },
+            "TriggerRestoreCleanup": {
+              "methods": [
+                "triggerRestoreCleanup"
+              ]
+            },
+            "CreateRestoreVerificationPlan": {
+              "methods": [
+                "createRestoreVerificationPlan"
+              ]
+            },
+            "CreateRestoreVerificationPlanAssociation": {
+              "methods": [
+                "createRestoreVerificationPlanAssociation"
+              ]
+            },
+            "DeleteRestoreVerificationPlanAssociation": {
+              "methods": [
+                "deleteRestoreVerificationPlanAssociation"
+              ]
+            },
+            "TriggerRestoreVerification": {
+              "methods": [
+                "triggerRestoreVerification"
+              ]
+            },
+            "DeleteRestoreVerificationPlan": {
+              "methods": [
+                "deleteRestoreVerificationPlan"
               ]
             },
             "CreateBackupVault": {
@@ -180,6 +250,34 @@
                 "listManagementServers",
                 "listManagementServersStream",
                 "listManagementServersAsync"
+              ]
+            },
+            "ListRestoreTemplates": {
+              "methods": [
+                "listRestoreTemplates",
+                "listRestoreTemplatesStream",
+                "listRestoreTemplatesAsync"
+              ]
+            },
+            "ListRestoreTemplateExecutions": {
+              "methods": [
+                "listRestoreTemplateExecutions",
+                "listRestoreTemplateExecutionsStream",
+                "listRestoreTemplateExecutionsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlanAssociations": {
+              "methods": [
+                "listRestoreVerificationPlanAssociations",
+                "listRestoreVerificationPlanAssociationsStream",
+                "listRestoreVerificationPlanAssociationsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlans": {
+              "methods": [
+                "listRestoreVerificationPlans",
+                "listRestoreVerificationPlansStream",
+                "listRestoreVerificationPlansAsync"
               ]
             },
             "ListBackupVaults": {
@@ -297,6 +395,26 @@
                 "getManagementServer"
               ]
             },
+            "GetRestoreTemplate": {
+              "methods": [
+                "getRestoreTemplate"
+              ]
+            },
+            "GetRestoreTemplateExecution": {
+              "methods": [
+                "getRestoreTemplateExecution"
+              ]
+            },
+            "GetRestoreVerificationPlanAssociation": {
+              "methods": [
+                "getRestoreVerificationPlanAssociation"
+              ]
+            },
+            "GetRestoreVerificationPlan": {
+              "methods": [
+                "getRestoreVerificationPlan"
+              ]
+            },
             "GetBackupVault": {
               "methods": [
                 "getBackupVault"
@@ -355,6 +473,56 @@
             "DeleteManagementServer": {
               "methods": [
                 "deleteManagementServer"
+              ]
+            },
+            "CreateRestoreTemplate": {
+              "methods": [
+                "createRestoreTemplate"
+              ]
+            },
+            "UpdateRestoreTemplate": {
+              "methods": [
+                "updateRestoreTemplate"
+              ]
+            },
+            "DeleteRestoreTemplate": {
+              "methods": [
+                "deleteRestoreTemplate"
+              ]
+            },
+            "RunRestoreTemplate": {
+              "methods": [
+                "runRestoreTemplate"
+              ]
+            },
+            "TriggerRestoreCleanup": {
+              "methods": [
+                "triggerRestoreCleanup"
+              ]
+            },
+            "CreateRestoreVerificationPlan": {
+              "methods": [
+                "createRestoreVerificationPlan"
+              ]
+            },
+            "CreateRestoreVerificationPlanAssociation": {
+              "methods": [
+                "createRestoreVerificationPlanAssociation"
+              ]
+            },
+            "DeleteRestoreVerificationPlanAssociation": {
+              "methods": [
+                "deleteRestoreVerificationPlanAssociation"
+              ]
+            },
+            "TriggerRestoreVerification": {
+              "methods": [
+                "triggerRestoreVerification"
+              ]
+            },
+            "DeleteRestoreVerificationPlan": {
+              "methods": [
+                "deleteRestoreVerificationPlan"
               ]
             },
             "CreateBackupVault": {
@@ -462,6 +630,34 @@
                 "listManagementServers",
                 "listManagementServersStream",
                 "listManagementServersAsync"
+              ]
+            },
+            "ListRestoreTemplates": {
+              "methods": [
+                "listRestoreTemplates",
+                "listRestoreTemplatesStream",
+                "listRestoreTemplatesAsync"
+              ]
+            },
+            "ListRestoreTemplateExecutions": {
+              "methods": [
+                "listRestoreTemplateExecutions",
+                "listRestoreTemplateExecutionsStream",
+                "listRestoreTemplateExecutionsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlanAssociations": {
+              "methods": [
+                "listRestoreVerificationPlanAssociations",
+                "listRestoreVerificationPlanAssociationsStream",
+                "listRestoreVerificationPlanAssociationsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlans": {
+              "methods": [
+                "listRestoreVerificationPlans",
+                "listRestoreVerificationPlansStream",
+                "listRestoreVerificationPlansAsync"
               ]
             },
             "ListBackupVaults": {

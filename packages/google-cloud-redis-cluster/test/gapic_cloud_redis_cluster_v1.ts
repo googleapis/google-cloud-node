@@ -487,6 +487,403 @@ describe('v1.CloudRedisClusterClient', () => {
     });
   });
 
+  describe('getAclPolicy', () => {
+    it('invokes getAclPolicy without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+      );
+      client.innerApiCalls.getAclPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAclPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicy without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+      );
+      client.innerApiCalls.getAclPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAclPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAclPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicy with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAclPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAclPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicy with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAclPolicy(request), expectedError);
+    });
+  });
+
+  describe('getAclPolicyRevision', () => {
+    it('invokes getAclPolicyRevision without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+      );
+      client.innerApiCalls.getAclPolicyRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAclPolicyRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicyRevision without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+      );
+      client.innerApiCalls.getAclPolicyRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAclPolicyRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAclPolicyRevision | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicyRevision with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAclPolicyRevision = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAclPolicyRevision(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAclPolicyRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAclPolicyRevision with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAclPolicyRevision(request), expectedError);
+    });
+  });
+
+  describe('createAclPolicy', () => {
+    it('invokes createAclPolicy without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CreateAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.CreateAclPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+      );
+      client.innerApiCalls.createAclPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.createAclPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAclPolicy without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CreateAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.CreateAclPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+      );
+      client.innerApiCalls.createAclPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAclPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAclPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAclPolicy with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CreateAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.CreateAclPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAclPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createAclPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAclPolicy with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CreateAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.CreateAclPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createAclPolicy(request), expectedError);
+    });
+  });
+
   describe('getClusterCertificateAuthority', () => {
     it('invokes getClusterCertificateAuthority without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -1026,6 +1423,270 @@ describe('v1.CloudRedisClusterClient', () => {
     });
   });
 
+  describe('getTokenAuthUser', () => {
+    it('invokes getTokenAuthUser without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+      );
+      client.innerApiCalls.getTokenAuthUser = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTokenAuthUser(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+      );
+      client.innerApiCalls.getTokenAuthUser =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.ITokenAuthUser | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTokenAuthUser = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getTokenAuthUser(request), expectedError);
+    });
+  });
+
+  describe('getAuthToken', () => {
+    it('invokes getAuthToken without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AuthToken(),
+      );
+      client.innerApiCalls.getAuthToken = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAuthToken(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AuthToken(),
+      );
+      client.innerApiCalls.getAuthToken =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAuthToken | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAuthToken = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAuthToken(request), expectedError);
+    });
+  });
+
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -1224,6 +1885,204 @@ describe('v1.CloudRedisClusterClient', () => {
     });
   });
 
+  describe('updateAclPolicy', () => {
+    it('invokes updateAclPolicy without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest(),
+      );
+      request.aclPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest',
+        ['aclPolicy', 'name'],
+      );
+      request.aclPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAclPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAclPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAclPolicy without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest(),
+      );
+      request.aclPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest',
+        ['aclPolicy', 'name'],
+      );
+      request.aclPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAclPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAclPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.redis.cluster.v1.IAclPolicy,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.redis.cluster.v1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAclPolicy with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest(),
+      );
+      request.aclPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest',
+        ['aclPolicy', 'name'],
+      );
+      request.aclPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl_policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAclPolicy = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAclPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAclPolicy with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest(),
+      );
+      request.aclPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.UpdateAclPolicyRequest',
+        ['aclPolicy', 'name'],
+      );
+      request.aclPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `acl_policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAclPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateAclPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAclPolicyProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateAclPolicyProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAclPolicyProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateAclPolicyProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -1412,6 +2271,200 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       await assert.rejects(
         client.checkDeleteClusterProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAclPolicy', () => {
+    it('invokes deleteAclPolicy without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAclPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAclPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAclPolicy without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAclPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAclPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAclPolicy with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAclPolicy = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAclPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAclPolicy with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAclPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAclPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAclPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAclPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAclPolicyProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAclPolicyProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAclPolicyProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAclPolicyProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2384,6 +3437,778 @@ describe('v1.CloudRedisClusterClient', () => {
     });
   });
 
+  describe('addTokenAuthUser', () => {
+    it('invokes addTokenAuthUser without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest',
+        ['cluster'],
+      );
+      request.cluster = defaultValue1;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addTokenAuthUser =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addTokenAuthUser(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest',
+        ['cluster'],
+      );
+      request.cluster = defaultValue1;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addTokenAuthUser =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.redis.cluster.v1.ICluster,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest',
+        ['cluster'],
+      );
+      request.cluster = defaultValue1;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addTokenAuthUser = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.addTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddTokenAuthUserRequest',
+        ['cluster'],
+      );
+      request.cluster = defaultValue1;
+      const expectedHeaderRequestParams = `cluster=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addTokenAuthUser = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.addTokenAuthUser(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAddTokenAuthUserProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddTokenAuthUserProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddTokenAuthUserProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkAddTokenAuthUserProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTokenAuthUser', () => {
+    it('invokes deleteTokenAuthUser without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteTokenAuthUser =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTokenAuthUser(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteTokenAuthUser =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTokenAuthUser = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTokenAuthUser = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteTokenAuthUser(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTokenAuthUserProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteTokenAuthUserProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTokenAuthUserProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteTokenAuthUserProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('addAuthToken', () => {
+    it('invokes addAuthToken without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addAuthToken(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAuthToken =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.redis.cluster.v1.ITokenAuthUser,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.redis.cluster.v1.ITokenAuthUser,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.addAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.addAuthToken(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAddAuthTokenProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddAuthTokenProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddAuthTokenProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.checkAddAuthTokenProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAuthToken', () => {
+    it('invokes deleteAuthToken without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAuthToken =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAuthToken(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAuthToken =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.redis.cluster.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken with call error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAuthToken = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken with LRO error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAuthToken = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAuthToken(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAuthTokenProgress without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAuthTokenProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAuthTokenProgress with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAuthTokenProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -2703,6 +4528,689 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAclPolicies', () => {
+    it('invokes listAclPolicies without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAclPolicies = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAclPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPolicies without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAclPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAclPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAclPolicy[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPolicies with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAclPolicies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAclPolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPoliciesStream without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAclPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAclPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AclPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.AclPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAclPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAclPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listAclPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAclPoliciesStream with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAclPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAclPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AclPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.AclPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAclPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAclPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listAclPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAclPolicies without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAclPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.redis.cluster.v1.IAclPolicy[] = [];
+      const iterable = client.listAclPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAclPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAclPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAclPolicies with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAclPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAclPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.redis.cluster.v1.IAclPolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAclPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAclPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAclPolicyRevisions', () => {
+    it('invokes listAclPolicyRevisions without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+      ];
+      client.innerApiCalls.listAclPolicyRevisions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAclPolicyRevisions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPolicyRevisions without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+      ];
+      client.innerApiCalls.listAclPolicyRevisions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAclPolicyRevisions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.redis.cluster.v1.IAclPolicyRevision[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPolicyRevisions with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAclPolicyRevisions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAclPolicyRevisions(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAclPolicyRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAclPolicyRevisionsStream without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+      ];
+      client.descriptors.page.listAclPolicyRevisions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAclPolicyRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AclPolicyRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.redis.cluster.v1.AclPolicyRevision,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAclPolicyRevisions, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAclPolicyRevisionsStream with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAclPolicyRevisions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAclPolicyRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AclPolicyRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.redis.cluster.v1.AclPolicyRevision,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAclPolicyRevisions, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAclPolicyRevisions without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AclPolicyRevision(),
+        ),
+      ];
+      client.descriptors.page.listAclPolicyRevisions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.redis.cluster.v1.IAclPolicyRevision[] =
+        [];
+      const iterable = client.listAclPolicyRevisionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAclPolicyRevisions with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAclPolicyRevisions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAclPolicyRevisionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.redis.cluster.v1.IAclPolicyRevision[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAclPolicyRevisions
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,
@@ -3393,6 +5901,662 @@ describe('v1.CloudRedisClusterClient', () => {
       );
     });
   });
+
+  describe('listTokenAuthUsers', () => {
+    it('invokes listTokenAuthUsers without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+      ];
+      client.innerApiCalls.listTokenAuthUsers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTokenAuthUsers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsers without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+      ];
+      client.innerApiCalls.listTokenAuthUsers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTokenAuthUsers(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.redis.cluster.v1.ITokenAuthUser[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsers with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTokenAuthUsers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listTokenAuthUsers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsersStream without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+      ];
+      client.descriptors.page.listTokenAuthUsers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTokenAuthUsersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.TokenAuthUser[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.TokenAuthUser) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTokenAuthUsers, request),
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listTokenAuthUsersStream with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTokenAuthUsers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTokenAuthUsersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.TokenAuthUser[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.TokenAuthUser) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTokenAuthUsers, request),
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTokenAuthUsers without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.TokenAuthUser(),
+        ),
+      ];
+      client.descriptors.page.listTokenAuthUsers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.redis.cluster.v1.ITokenAuthUser[] =
+        [];
+      const iterable = client.listTokenAuthUsersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listTokenAuthUsers with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTokenAuthUsers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTokenAuthUsersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.redis.cluster.v1.ITokenAuthUser[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAuthTokens', () => {
+    it('invokes listAuthTokens without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+      ];
+      client.innerApiCalls.listAuthTokens = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAuthTokens(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokens without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+      ];
+      client.innerApiCalls.listAuthTokens =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAuthTokens(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.IAuthToken[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokens with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAuthTokens = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAuthTokens(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokensStream without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+      ];
+      client.descriptors.page.listAuthTokens.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAuthTokensStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AuthToken[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.AuthToken) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuthTokens, request),
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAuthTokensStream with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuthTokens.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAuthTokensStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.redis.cluster.v1.AuthToken[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.redis.cluster.v1.AuthToken) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuthTokens, request),
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAuthTokens without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.redis.cluster.v1.AuthToken(),
+        ),
+      ];
+      client.descriptors.page.listAuthTokens.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.redis.cluster.v1.IAuthToken[] = [];
+      const iterable = client.listAuthTokensAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuthTokens.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAuthTokens with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuthTokens.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAuthTokensAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.redis.cluster.v1.IAuthToken[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuthTokens.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -3908,6 +7072,249 @@ describe('v1.CloudRedisClusterClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aclPolicy', async () => {
+      const fakePath = '/rendered/path/aclPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        acl_policy: 'aclPolicyValue',
+      };
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.aclPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclPolicyPath', () => {
+        const result = client.aclPolicyPath(
+          'projectValue',
+          'locationValue',
+          'aclPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAclPolicyName', () => {
+        const result = client.matchProjectFromAclPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAclPolicyName', () => {
+        const result = client.matchLocationFromAclPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAclPolicyFromAclPolicyName', () => {
+        const result = client.matchAclPolicyFromAclPolicyName(fakePath);
+        assert.strictEqual(result, 'aclPolicyValue');
+        assert(
+          (client.pathTemplates.aclPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('aclPolicyRevision', async () => {
+      const fakePath = '/rendered/path/aclPolicyRevision';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        acl_policy: 'aclPolicyValue',
+        revision: 'revisionValue',
+      };
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.aclPolicyRevisionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclPolicyRevisionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclPolicyRevisionPath', () => {
+        const result = client.aclPolicyRevisionPath(
+          'projectValue',
+          'locationValue',
+          'aclPolicyValue',
+          'revisionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.aclPolicyRevisionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAclPolicyRevisionName', () => {
+        const result = client.matchProjectFromAclPolicyRevisionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.aclPolicyRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAclPolicyRevisionName', () => {
+        const result = client.matchLocationFromAclPolicyRevisionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.aclPolicyRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAclPolicyFromAclPolicyRevisionName', () => {
+        const result = client.matchAclPolicyFromAclPolicyRevisionName(fakePath);
+        assert.strictEqual(result, 'aclPolicyValue');
+        assert(
+          (
+            client.pathTemplates.aclPolicyRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRevisionFromAclPolicyRevisionName', () => {
+        const result = client.matchRevisionFromAclPolicyRevisionName(fakePath);
+        assert.strictEqual(result, 'revisionValue');
+        assert(
+          (
+            client.pathTemplates.aclPolicyRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('authToken', async () => {
+      const fakePath = '/rendered/path/authToken';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        token_auth_user: 'tokenAuthUserValue',
+        auth_token: 'authTokenValue',
+      };
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.authTokenPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.authTokenPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('authTokenPath', () => {
+        const result = client.authTokenPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'tokenAuthUserValue',
+          'authTokenValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAuthTokenName', () => {
+        const result = client.matchProjectFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAuthTokenName', () => {
+        const result = client.matchLocationFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromAuthTokenName', () => {
+        const result = client.matchClusterFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTokenAuthUserFromAuthTokenName', () => {
+        const result = client.matchTokenAuthUserFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'tokenAuthUserValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuthTokenFromAuthTokenName', () => {
+        const result = client.matchAuthTokenFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'authTokenValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
@@ -4764,6 +8171,82 @@ describe('v1.CloudRedisClusterClient', () => {
             client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('tokenAuthUser', async () => {
+      const fakePath = '/rendered/path/tokenAuthUser';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        token_auth_user: 'tokenAuthUserValue',
+      };
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tokenAuthUserPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tokenAuthUserPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tokenAuthUserPath', () => {
+        const result = client.tokenAuthUserPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'tokenAuthUserValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromTokenAuthUserName', () => {
+        const result = client.matchProjectFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromTokenAuthUserName', () => {
+        const result = client.matchLocationFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromTokenAuthUserName', () => {
+        const result = client.matchClusterFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTokenAuthUserFromTokenAuthUserName', () => {
+        const result = client.matchTokenAuthUserFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'tokenAuthUserValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

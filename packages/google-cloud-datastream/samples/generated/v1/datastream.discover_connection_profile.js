@@ -34,46 +34,59 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  An ad-hoc connection profile configuration.
+   *  Optional. An ad-hoc connection profile configuration.
    */
   // const connectionProfile = {}
   /**
-   *  A reference to an existing connection profile.
+   *  Optional. A reference to an existing connection profile.
    */
   // const connectionProfileName = 'abc123'
   /**
-   *  Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-   *  current level (FALSE).
+   *  Optional. Whether to retrieve the full hierarchy of data objects (TRUE)
+   *  or only the current level (FALSE).
    */
   // const fullHierarchy = true
   /**
-   *  The number of hierarchy levels below the current level to be retrieved.
+   *  Optional. The number of hierarchy levels below the current level to be
+   *  retrieved.
    */
   // const hierarchyDepth = 1234
   /**
-   *  Oracle RDBMS to enrich with child data objects and metadata.
+   *  Optional. Oracle RDBMS to enrich with child data objects and metadata.
    */
   // const oracleRdbms = {}
   /**
-   *  MySQL RDBMS to enrich with child data objects and metadata.
+   *  Optional. MySQL RDBMS to enrich with child data objects and metadata.
    */
   // const mysqlRdbms = {}
   /**
-   *  PostgreSQL RDBMS to enrich with child data objects and metadata.
+   *  Optional. PostgreSQL RDBMS to enrich with child data objects and
+   *  metadata.
    */
   // const postgresqlRdbms = {}
   /**
-   *  SQLServer RDBMS to enrich with child data objects and metadata.
+   *  Optional. SQLServer RDBMS to enrich with child data objects and metadata.
    */
   // const sqlServerRdbms = {}
   /**
-   *  Salesforce organization to enrich with child data objects and metadata.
+   *  Optional. Salesforce organization to enrich with child data objects and
+   *  metadata.
    */
   // const salesforceOrg = {}
   /**
-   *  MongoDB cluster to enrich with child data objects and metadata.
+   *  Optional. MongoDB cluster to enrich with child data objects and metadata.
    */
   // const mongodbCluster = {}
+  /**
+   *  Optional. Spanner database to enrich with child data objects and
+   *  metadata.
+   */
+  // const spannerDatabase = {}
+  /**
+   *  Optional. Source catalog to enrich with child data objects and metadata.
+   *  This is mainly used to represent SaaS sources databases.
+   */
+  // const sourceCatalog = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

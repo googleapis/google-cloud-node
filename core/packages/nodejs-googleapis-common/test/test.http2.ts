@@ -14,14 +14,13 @@
 
 import * as assert from 'assert';
 import * as coreHttp2 from 'http2';
-import {describe, it, before, beforeEach} from 'mocha';
+import {describe, it, before, beforeEach, after} from 'mocha';
 import {gzipSync} from 'zlib';
-import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, Readable} from 'stream';
 import {EventEmitter} from 'events';
 import {GaxiosResponse} from 'gaxios';
-import * as http2Types from '../src/http2';
+import * as http2 from '../src/http2';
 
 import {GoogleAuth} from '../src';
 
@@ -59,13 +58,15 @@ describe('http2', () => {
     return (connectStub || (() => {}))(host);
   }
   let connectStub: Function;
-  let http2: typeof http2Types;
+  let connectSinonStub: sinon.SinonStub;
   before(() => {
-    http2 = proxyquire('../src/http2', {
-      http2: {
-        connect: fakeConnect,
-      },
-    });
+    connectSinonStub = sinon
+      .stub(coreHttp2, 'connect')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .callsFake(fakeConnect as any);
+  });
+  after(() => {
+    connectSinonStub.restore();
   });
 
   let requestStream: Duplex;
@@ -153,7 +154,7 @@ describe('http2', () => {
     requestStream.push(Buffer.from('{}'));
     requestStream.push(null);
     await resPromise;
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(resolve => setTimeout(resolve, 500));
     assert.strictEqual(Object.keys(http2.sessions).length, 0);
   });
 

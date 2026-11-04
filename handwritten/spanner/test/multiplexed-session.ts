@@ -21,7 +21,7 @@ import * as sinon from 'sinon';
 import {Database} from '../src/database';
 import {Session} from '../src/session';
 import {MultiplexedSession} from '../src/multiplexed-session';
-import {FakeTransaction} from './session-pool';
+import {FakeTransaction} from './session-factory';
 import {grpc} from 'google-gax';
 
 describe('MultiplexedSession', () => {
@@ -147,6 +147,40 @@ describe('MultiplexedSession', () => {
     });
   });
 
+  describe('close', () => {
+    let clock;
+    let createSessionStub;
+
+    beforeEach(() => {
+      createSessionStub = sandbox
+        .stub(multiplexedSession, '_createSession')
+        .resolves();
+      clock = sandbox.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should stop the refresh interval when closed', () => {
+      const expectedInterval =
+        multiplexedSession.refreshRate! * 24 * 60 * 60000;
+
+      multiplexedSession._maintain();
+      multiplexedSession.close();
+      clock.tick(expectedInterval);
+      assert.strictEqual(createSessionStub.callCount, 0);
+    });
+
+    it('should not start maintenance if closed before initial createSession resolves', async () => {
+      const maintainSpy = sandbox.spy(multiplexedSession, '_maintain');
+      multiplexedSession.close();
+      multiplexedSession.createSession();
+      await Promise.resolve();
+      assert.strictEqual(maintainSpy.callCount, 0);
+    });
+  });
+
   describe('_createSession', () => {
     it('should create the mux sessions with multiplexed option', async () => {
       await multiplexedSession._createSession();
@@ -179,6 +213,12 @@ describe('MultiplexedSession', () => {
       multiplexedSession._multiplexedSession = fakeMuxSession;
       assert.strictEqual(multiplexedSession.getSessionSync(), fakeMuxSession);
     });
+
+    it('should return null when closed even if a session is cached', () => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      multiplexedSession.close();
+      assert.strictEqual(multiplexedSession.getSessionSync(), null);
+    });
   });
 
   describe('getSession', () => {
@@ -189,6 +229,22 @@ describe('MultiplexedSession', () => {
         restoreProcessListeners();
         restoreProcessListeners = null;
       }
+    });
+
+    it('should return an error asynchronously when closed', done => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      multiplexedSession.close();
+      let callbackInvoked = false;
+
+      multiplexedSession.getSession((err, session) => {
+        callbackInvoked = true;
+        assert(err instanceof Error);
+        assert.strictEqual(err.message, 'Database is closed.');
+        assert.strictEqual(session, undefined);
+        done();
+      });
+
+      assert.strictEqual(callbackInvoked, false);
     });
 
     it('should acquire a session', done => {
@@ -361,6 +417,14 @@ describe('MultiplexedSession', () => {
       }
       // ensure _createSession was called
       sinon.assert.calledOnce(createSessionStub);
+    });
+
+    it('should reject if closed before or during _getSession', async () => {
+      multiplexedSession.close();
+      await assert.rejects(
+        () => multiplexedSession._getSession(),
+        /Database is closed\./,
+      );
     });
   });
 });

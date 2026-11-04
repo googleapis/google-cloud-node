@@ -493,7 +493,7 @@ export class DuplicateMethodsTestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -502,7 +502,7 @@ export class DuplicateMethodsTestServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -514,7 +514,7 @@ export class DuplicateMethodsTestServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -614,7 +614,7 @@ export class DuplicateMethodsTestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('echo request %j', request);
+    this._log.debug('echo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.duplicate_methods_test.v1.IEchoResponse,
@@ -625,7 +625,7 @@ export class DuplicateMethodsTestServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('echo response %j', response);
+          this._log.debug('echo response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -637,7 +637,7 @@ export class DuplicateMethodsTestServiceClient {
           protos.google.duplicate_methods_test.v1.IEchoRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('echo response %j', response);
+          this._log.debug('echo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -762,11 +762,11 @@ export class DuplicateMethodsTestServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLocations values %j', values);
+          this._log.debug('listLocations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('listLocations request %j', request);
+    this._log.debug('listLocations request %j', request);
     return this.innerApiCalls
       .listLocations(request, options, wrappedCallback)
       ?.then(
@@ -775,7 +775,7 @@ export class DuplicateMethodsTestServiceClient {
           protos.google.cloud.location.IListLocationsRequest | null,
           protos.google.cloud.location.IListLocationsResponse,
         ]) => {
-          this._log.info('listLocations values %j', response);
+          this._log.debug('listLocations values %j', response);
           return [response, input, output];
         },
       );
@@ -821,7 +821,7 @@ export class DuplicateMethodsTestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLocations stream %j', request);
+    this._log.debug('listLocations stream %j', request);
     return this.descriptors.page.listLocations.createStream(
       this.innerApiCalls.listLocations as GaxCall,
       request,
@@ -872,7 +872,7 @@ export class DuplicateMethodsTestServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLocations iterate %j', request);
+    this._log.debug('listLocations iterate %j', request);
     return this.descriptors.page.listLocations.asyncIterate(
       this.innerApiCalls['listLocations'] as GaxCall,
       request as {},

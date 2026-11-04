@@ -47,6 +47,8 @@ describe('oauth2', () => {
     __dirname,
     '../../test/fixtures/oauthcertspem.json',
   );
+  // Encoded with the standard RFC 5480 prime256v1 named-curve OID so both
+  // OpenSSL (Node.js) and BoringSSL (Bun) parse the keypair natively.
   const publicKeyEcdsa = fs.readFileSync(
     './test/fixtures/fake-ecdsa-public.pem',
     'utf-8',
@@ -792,22 +794,21 @@ describe('oauth2', () => {
       const maxLifetimeSecs = 86400;
       const now = new Date().getTime() / 1000;
       const expiry = now + maxLifetimeSecs / 2;
-      const idToken =
-        '{' +
-        '"iss":"testissuer",' +
-        '"aud":"testaudience",' +
-        '"azp":"testauthorisedparty",' +
-        '"email_verified":"true",' +
-        '"id":"123456789",' +
-        '"sub":"123456789",' +
-        '"email":"test@test.com",' +
-        '"iat":' +
-        now +
-        ',' +
-        '"exp":' +
-        expiry +
-        '}';
-      const envelope = '{' + '"kid":"keyid",' + '"alg":"ES256"' + '}';
+      // Construct the payload with JSON.stringify instead of manual string
+      // concatenation, and floor `iat`/`exp` so RFC 7519 NumericDate claims
+      // are serialized as integers rather than floating-point seconds.
+      const idToken = JSON.stringify({
+        iss: 'testissuer',
+        aud: 'testaudience',
+        azp: 'testauthorisedparty',
+        email_verified: 'true',
+        id: '123456789',
+        sub: '123456789',
+        email: 'test@test.com',
+        iat: Math.floor(now),
+        exp: Math.floor(expiry),
+      });
+      const envelope = JSON.stringify({kid: 'keyid', alg: 'ES256'});
       let data =
         Buffer.from(envelope).toString('base64') +
         '.' +
@@ -819,12 +820,13 @@ describe('oauth2', () => {
         'ES256',
       );
       data += '.' + signature;
-      await client.verifySignedJwtWithCertsAsync(
+      const login = await client.verifySignedJwtWithCertsAsync(
         data,
         {keyid: publicKeyEcdsa},
         'testaudience',
         ['testissuer'],
       );
+      assert.strictEqual(login.getUserId(), '123456789');
     });
 
     it('should be able to retrieve a list of Google certificates', done => {

@@ -19,7 +19,7 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {EventEmitter} from 'events';
 import {common as p} from 'protobufjs';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 
 import {codec} from '../src/codec';
@@ -4164,7 +4164,9 @@ describe('Transaction', () => {
                 REQUEST_STREAM.secondCall.args[0].reqOpts;
               assert.deepStrictEqual(firstCallReqOpts.transaction, {
                 begin: {
-                  readWrite: {},
+                  readWrite: {
+                    multiplexedSessionPreviousTransactionId: undefined,
+                  },
                   isolationLevel: IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED,
                 },
               });

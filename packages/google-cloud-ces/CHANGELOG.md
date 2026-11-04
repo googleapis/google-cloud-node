@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.10.0...ces-v0.11.0) (2026-11-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9769](https://github.com/googleapis/google-cloud-node/issues/9769)) ([5437a0b](https://github.com/googleapis/google-cloud-node/commit/5437a0be98cb47e56f549f3e7212014572f2cf2e))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.9.1...ces-v0.10.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/ces-v0.9.0...ces-v0.9.1) (2026-09-28)
 
 

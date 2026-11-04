@@ -13,23 +13,17 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
-import * as proxyquire from 'proxyquire';
-import * as AuthPlus from '../src/authplus';
+import {afterEach, describe, it} from 'mocha';
+import * as sinon from 'sinon';
+import {AuthPlus} from '../src/authplus';
 
 describe(__filename, () => {
-  const AuthyPlus: typeof AuthPlus = proxyquire('../src/authplus', {
-    'google-auth-library': {
-      GoogleAuth: class {
-        async getClient() {
-          return {};
-        }
-      },
-    },
+  afterEach(() => {
+    sinon.restore();
   });
 
   it('should expose auth classes', () => {
-    const auth = new AuthyPlus.AuthPlus();
+    const auth = new AuthPlus();
     assert.ok(auth.JWT);
     assert.ok(auth.Compute);
     assert.ok(auth.OAuth2);
@@ -40,8 +34,13 @@ describe(__filename, () => {
   });
 
   it('should get a new client', async () => {
-    const auth = new AuthyPlus.AuthPlus();
+    const auth = new AuthPlus();
+    const getClientStub = sinon
+      .stub(auth.GoogleAuth.prototype, 'getClient')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .resolves({} as any);
     const client = await auth.getClient();
     assert.deepStrictEqual(client, {});
+    assert.strictEqual(getClientStub.calledOnce, true);
   });
 });

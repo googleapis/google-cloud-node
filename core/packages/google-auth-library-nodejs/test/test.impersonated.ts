@@ -17,6 +17,7 @@
 import * as assert from 'assert';
 import * as nock from 'nock';
 import {describe, it, afterEach} from 'mocha';
+import * as sinon from 'sinon';
 import {Impersonated, JWT, UserRefreshClient} from '../src';
 import {CredentialRequest} from '../src/auth/credentials';
 
@@ -588,5 +589,23 @@ describe('impersonated', () => {
     assert.equal(resp.keyId, expectedKeyID);
     assert.equal(resp.signedBlob, expectedSignedBlob);
     scopes.forEach(s => s.done());
+  });
+
+  it('should log a warning when instantiated directly', () => {
+    const sourceClient = createSampleJWTClient();
+    const warnSpy = sinon.stub(console, 'warn');
+    try {
+      new Impersonated({
+        sourceClient,
+        targetPrincipal: 'target@project.iam.gserviceaccount.com',
+      });
+      assert(
+        warnSpy.calledOnceWithExactly(
+          'The `Impersonated` constructor does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+        ),
+      );
+    } finally {
+      warnSpy.restore();
+    }
   });
 });

@@ -44,10 +44,22 @@ export interface ClientOptions
   /**
    * Whether to enable telemetry tracing for the client.
    *
-   * The `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable overrides this
-   * option whenever it is set.
+   * Tracing is only enabled via the `GOOGLE_SDK_NODE_ENABLE_TRACING` environment
+   * variable or when a user passes `enableTelemetryTracing: true` in their client
+   * options. The `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable overrides
+   * this option whenever it is set.
    */
   enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either `enableTelemetryLogging: true` is passed here or, when unset, the
+   * `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+   * namespace. Explicitly setting `enableTelemetryLogging: false` disables logging
+   * for this client even when `GOOGLE_SDK_NODE_LOGGING` matches.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface Descriptors {

@@ -2442,6 +2442,10 @@
                           "type": "GitRepoSource",
                           "id": 26
                         },
+                        "approvalConfig": {
+                          "type": "ApprovalConfig",
+                          "id": 28
+                        },
                         "serviceAccount": {
                           "type": "string",
                           "id": 33,
@@ -2888,13 +2892,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "workerRelease": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resolvedWorkerRelease": {
+                          "type": "string",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
                         "VerifyOption": {
                           "values": {
                             "NOT_VERIFIED": 0,
-                            "VERIFIED": 1
+                            "VERIFIED": 1,
+                            "BEST_EFFORT": 3
                           }
                         },
                         "MachineType": {
@@ -2937,6 +2956,20 @@
                               "options": {
                                 "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
                               }
+                            },
+                            "workerRelease": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "resolvedWorkerRelease": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -2956,6 +2989,11 @@
                           }
                         },
                         "DefaultLogsBucketBehavior": {
+                          "valuesOptions": {
+                            "LEGACY_BUCKET": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED": 0,
                             "REGIONAL_USER_OWNED_BUCKET": 1,
@@ -3192,6 +3230,7 @@
                           "type": "PrivateServiceConnect",
                           "id": 5,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
@@ -3223,6 +3262,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            },
+                            "workerRelease": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -3260,6 +3306,9 @@
                           }
                         },
                         "PrivateServiceConnect": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "networkAttachment": {
                               "type": "string",
@@ -6621,8 +6670,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

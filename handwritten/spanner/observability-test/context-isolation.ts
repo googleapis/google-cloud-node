@@ -21,7 +21,6 @@ import {context, trace} from '@opentelemetry/api';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {AlwaysOnSampler} from '@opentelemetry/sdk-trace-base';
 import {Database} from '../src/database';
-import {SessionPool} from '../src/session-pool';
 import {MultiplexedSession} from '../src/multiplexed-session';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import {
@@ -56,56 +55,6 @@ describe('OpenTelemetry Context Isolation Tests', () => {
 
   afterEach(() => {
     sandbox.restore();
-  });
-
-  describe('SessionPool background housekeeping timers', () => {
-    let sessionPool: SessionPool;
-
-    beforeEach(() => {
-      sessionPool = new SessionPool(MOCK_DATABASE, {
-        min: 0,
-        max: 10,
-        idlesAfter: 10,
-        keepAlive: 30,
-      });
-    });
-
-    afterEach(() => {
-      sessionPool._stopHouseKeeping();
-    });
-
-    it('should schedule evict and keep-alive setInterval calls in ROOT_CONTEXT', () => {
-      const tracer = trace.getTracer('test');
-
-      const setIntervalStub = sandbox
-        .stub(global, 'setInterval')
-        .callsFake(() => {
-          const activeSpan = trace.getSpan(context.active());
-
-          // Assert that the active context is ROOT_CONTEXT (i.e., no active span)
-          assert.strictEqual(
-            activeSpan,
-            undefined,
-            'setInterval scheduling must be isolated within ROOT_CONTEXT and not carry any active request span',
-          );
-          return {
-            unref: () => {},
-          } as unknown as NodeJS.Timeout;
-        });
-
-      // Start an active request context
-      tracer.startActiveSpan('request-span', span => {
-        try {
-          // Start housekeeping under the request context
-          sessionPool._startHouseKeeping();
-        } finally {
-          span.end();
-        }
-      });
-
-      // Verify that both evict and ping intervals were scheduled
-      assert.strictEqual(setIntervalStub.callCount, 2);
-    });
   });
 
   describe('MultiplexedSession background maintenance timer', () => {

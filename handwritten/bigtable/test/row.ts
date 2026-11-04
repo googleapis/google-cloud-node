@@ -15,9 +15,10 @@
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {afterEach, beforeEach, describe, it} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {Mutation} from '../src/mutation.js';
+import '../src/table';
 import * as rw from '../src/row';
 import {
   Table,

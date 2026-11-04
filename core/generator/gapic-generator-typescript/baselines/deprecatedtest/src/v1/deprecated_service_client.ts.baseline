@@ -445,7 +445,7 @@ export class DeprecatedServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fastFibonacci request %j', request);
+    this._log.debug('fastFibonacci request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -454,7 +454,7 @@ export class DeprecatedServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fastFibonacci response %j', response);
+          this._log.debug('fastFibonacci response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -466,7 +466,7 @@ export class DeprecatedServiceClient {
           protos.google.deprecatedtest.v1.IFibonacciRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('fastFibonacci response %j', response);
+          this._log.debug('fastFibonacci response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -571,7 +571,7 @@ export class DeprecatedServiceClient {
       'SlowFibonacci is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('slowFibonacci request %j', request);
+    this._log.debug('slowFibonacci request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -580,7 +580,7 @@ export class DeprecatedServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('slowFibonacci response %j', response);
+          this._log.debug('slowFibonacci response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -592,7 +592,7 @@ export class DeprecatedServiceClient {
           protos.google.deprecatedtest.v1.IFibonacciRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('slowFibonacci response %j', response);
+          this._log.debug('slowFibonacci response %j', response);
           return [response, options, rawResponse];
         },
       )

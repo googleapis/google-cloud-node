@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vectorsearch",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "description": "Vector Search API client for Node.js",
   "repository": {
     "type": "git",

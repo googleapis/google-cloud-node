@@ -24,18 +24,12 @@ import {
   getProtoNameFromFullName,
   decodeProtobufAny,
   decodeAnyProtosInArray,
-  checkTelemetryEnabled,
-  connectionCodes,
-  requestCodes,
-  requestBodyCodes,
-  decodeCodes,
-  redirectCodes,
-  genericClasses,
-  preConnectionCodes,
   ignoredClientHeaderTokens,
-  DEPTH_TO_CHECK,
 } from '../../src/util';
-import {StaticTraceContext} from '../../src/observability/TracerHelper';
+import {
+  checkTracingEnabled,
+  checkLoggingEnabled,
+} from '../../src/observability/util';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';
@@ -209,110 +203,58 @@ describe('util.ts', () => {
     );
   });
 
-  describe('checkTelemetryEnabled', () => {
+  describe('checkTracingEnabled', () => {
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
-
-    const mockTelemetryInfo: StaticTraceContext = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
 
     const mockSettings = new CallSettings({
       enableTelemetryTracing: true,
-      otherArgs: {
-        internalTelemetryInfo: mockTelemetryInfo,
-      },
     });
 
     it('returns true when settings are configured with enableTelemetryTracing', () => {
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
-    });
-
-    it('ignores GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED even when set to false', () => {
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+      assert.strictEqual(checkTracingEnabled(mockSettings), true);
     });
 
     it('returns false when enableTelemetryTracing is false on settings', () => {
       const disabledSettings = new CallSettings({
         enableTelemetryTracing: false,
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
       });
-      assert.strictEqual(checkTelemetryEnabled(disabledSettings), false);
+      assert.strictEqual(checkTracingEnabled(disabledSettings), false);
     });
 
     it('returns false when enableTelemetryTracing is not set on settings', () => {
-      const noTracingSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: {
-            gcpClientService: 'test.googleapis.com',
-          },
-        },
-      });
-      assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
-    });
-
-    it('returns false when internalTelemetryInfo is not set on settings', () => {
-      const noInfoSettings = new CallSettings({
-        enableTelemetryTracing: true,
-      });
-      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
+      const noTracingSettings = new CallSettings({});
+      assert.strictEqual(checkTracingEnabled(noTracingSettings), false);
     });
 
     it('returns false when settings is undefined', () => {
-      assert.strictEqual(checkTelemetryEnabled(undefined), false);
+      assert.strictEqual(checkTracingEnabled(undefined), false);
     });
 
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true and the client option is not set', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const noOptInSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
-      });
-      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
-    });
-
-    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true even if internalTelemetryInfo is not set', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      assert.strictEqual(checkTelemetryEnabled(new CallSettings({})), true);
+      assert.strictEqual(checkTracingEnabled(new CallSettings({})), true);
     });
 
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true even if settings is undefined', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      assert.strictEqual(checkTelemetryEnabled(undefined), true);
-    });
-
-    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true without passing any arguments', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      assert.strictEqual(checkTelemetryEnabled(), true);
+      assert.strictEqual(checkTracingEnabled(), true);
     });
 
     it('accepts GOOGLE_SDK_NODE_ENABLE_TRACING case-insensitively', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'TRUE';
-      const noOptInSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
-      });
-      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+      assert.strictEqual(checkTracingEnabled(new CallSettings({})), true);
     });
 
     it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=false overrides the client option', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+      assert.strictEqual(checkTracingEnabled(mockSettings), false);
     });
 
     it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=0 overrides the client option', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '0';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+      assert.strictEqual(checkTracingEnabled(mockSettings), false);
     });
 
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true overrides enableTelemetryTracing=false on client settings', () => {
@@ -320,7 +262,7 @@ describe('util.ts', () => {
       const disabledSettings = new CallSettings({
         enableTelemetryTracing: false,
       });
-      assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
+      assert.strictEqual(checkTracingEnabled(disabledSettings), true);
     });
 
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=1 overrides enableTelemetryTracing=false on client settings', () => {
@@ -328,23 +270,23 @@ describe('util.ts', () => {
       const disabledSettings = new CallSettings({
         enableTelemetryTracing: false,
       });
-      assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
+      assert.strictEqual(checkTracingEnabled(disabledSettings), true);
     });
 
     it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_TRACING is empty or whitespace', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+      assert.strictEqual(checkTracingEnabled(mockSettings), true);
 
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '   ';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+      assert.strictEqual(checkTracingEnabled(mockSettings), true);
     });
 
     it('treats an unrecognized GOOGLE_SDK_NODE_ENABLE_TRACING value as disabled', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'yes';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+      assert.strictEqual(checkTracingEnabled(mockSettings), false);
 
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'foo';
-      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+      assert.strictEqual(checkTracingEnabled(mockSettings), false);
     });
 
     it('does not throw when process is undefined, as in a browser', () => {
@@ -356,7 +298,7 @@ describe('util.ts', () => {
       let thrown: unknown;
       delete globals.process;
       try {
-        result = checkTelemetryEnabled(mockSettings);
+        result = checkTracingEnabled(mockSettings);
       } catch (e) {
         thrown = e;
       } finally {
@@ -367,58 +309,165 @@ describe('util.ts', () => {
     });
   });
 
-  describe('error code and class constants', () => {
-    it('defines connectionCodes containing common network errors', () => {
-      assert(Array.isArray(connectionCodes));
-      assert(connectionCodes.includes('ECONNREFUSED'));
-      assert(connectionCodes.includes('ENOTFOUND'));
+  describe('checkLoggingEnabled', () => {
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
+      delete process.env.GCP_CLIENT_SERVICE;
+      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
+      delete process.env.GCP_ARTIFACT;
     });
 
-    it('defines requestCodes containing request error codes', () => {
-      assert(Array.isArray(requestCodes));
-      assert(requestCodes.includes('ERR_INVALID_ARG_TYPE'));
-      assert(requestCodes.includes('ERR_INVALID_URL'));
+    const mockSettings = new CallSettings({
+      enableTelemetryLogging: true,
     });
 
-    it('defines requestBodyCodes containing stream error codes', () => {
-      assert(Array.isArray(requestBodyCodes));
-      assert(requestBodyCodes.includes('ERR_STREAM_WRITE_AFTER_END'));
+    const storageSettings = new CallSettings({
+      apiName: 'google.cloud.storage.v1.Storage',
     });
 
-    it('defines decodeCodes containing buffer error codes', () => {
-      assert(Array.isArray(decodeCodes));
-      assert(decodeCodes.includes('ERR_BUFFER_OUT_OF_BOUNDS'));
+    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if logging is enabled', () => {
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
+      assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 
-    it('defines redirectCodes containing redirect error codes', () => {
-      assert(Array.isArray(redirectCodes));
-      assert(redirectCodes.includes('ERR_TOO_MANY_REDIRECTS'));
+    it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is false', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'false';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
+      assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 
-    it('defines genericClasses containing standard base error types', () => {
-      assert(Array.isArray(genericClasses));
-      assert(genericClasses.includes('Error'));
-      assert(genericClasses.includes('GoogleError'));
-      assert(genericClasses.includes('Object'));
-      assert(genericClasses.includes('DOMException'));
+    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and settings have enableTelemetryLogging', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      assert.strictEqual(checkLoggingEnabled(mockSettings), true);
     });
 
-    it('defines preConnectionCodes containing pre-connection error codes', () => {
-      assert(Array.isArray(preConnectionCodes));
-      assert(preConnectionCodes.includes('ECONNREFUSED'));
-      assert(preConnectionCodes.includes('ENOTFOUND'));
-      assert(preConnectionCodes.includes('ERR_INVALID_URL'));
+    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=1 and settings.otherArgs have enableTelemetryLogging', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = '1';
+      const otherArgsSettings = new CallSettings({
+        otherArgs: {enableTelemetryLogging: true},
+      });
+      assert.strictEqual(checkLoggingEnabled(otherArgsSettings), true);
     });
 
+    it('returns false when enableTelemetryLogging is false or not set on settings and env var is not set', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      const disabledSettings = new CallSettings({
+        enableTelemetryLogging: false,
+      });
+      assert.strictEqual(checkLoggingEnabled(disabledSettings), false);
+      assert.strictEqual(checkLoggingEnabled(new CallSettings({})), false);
+      assert.strictEqual(checkLoggingEnabled(undefined), false);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_LOGGING is exact true, all, or *', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'TRUE';
+      for (const value of ['true', 'all', '*']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = value;
+        assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+        assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
+        assert.strictEqual(checkLoggingEnabled(), true);
+      }
+    });
+
+    it('matches comma-separated and wildcard namespace filters identically to NodeBackend.setFilters()', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      const secretManagerSettings = new CallSettings({
+        apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+      });
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'storage';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      assert.strictEqual(checkLoggingEnabled(new CallSettings({})), false);
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,STORAGE,bigquery';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,stor*';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,bigquery';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), false);
+
+      // Rejects values that DebugLogBackendBase / NodeBackend.setFilters() drops.
+      for (const dropped of ['1', 'TRUE', 'ALL', ' true ', 'foo,true']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = dropped;
+        assert.strictEqual(
+          checkLoggingEnabled(storageSettings),
+          false,
+          `expected ${JSON.stringify(dropped)} to return false`,
+        );
+      }
+
+      // Does not trim whitespace around comma-separated tokens, matching NodeBackend.setFilters().
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'storage, secretmanager';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      assert.strictEqual(checkLoggingEnabled(secretManagerSettings), false);
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'google-gax';
+      assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
+      assert.strictEqual(checkLoggingEnabled(), true);
+      assert.strictEqual(checkLoggingEnabled(storageSettings), false);
+
+      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'custom.svc';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'custom.svc';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'customXsvc';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), false);
+    });
+
+    it('gives explicit enableTelemetryLogging precedence over GOOGLE_SDK_NODE_LOGGING', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      const disabledStorageSettings = new CallSettings({
+        apiName: 'google.cloud.storage.v1.Storage',
+        enableTelemetryLogging: false,
+      });
+
+      // Explicit enableTelemetryLogging: false suppresses matching GOOGLE_SDK_NODE_LOGGING filters.
+      for (const value of ['true', 'all', '*', 'auth,storage']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = value;
+        assert.strictEqual(checkLoggingEnabled(disabledStorageSettings), false);
+      }
+
+      // Explicit enableTelemetryLogging: true stays enabled even when GOOGLE_SDK_NODE_LOGGING targets another namespace or is false/unset.
+      for (const value of ['spanner', 'auth', 'false', '0', '', '   ']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = value;
+        assert.strictEqual(checkLoggingEnabled(mockSettings), true);
+      }
+
+      // false, 0, and non-matching filters remain disabled when client option is unset or false.
+      for (const value of ['false', '0', 'yes']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = value;
+        assert.strictEqual(checkLoggingEnabled(disabledStorageSettings), false);
+        assert.strictEqual(checkLoggingEnabled(storageSettings), false);
+      }
+    });
+
+    it('does not throw when process is undefined, as in a browser', () => {
+      const globals = globalThis as {process?: NodeJS.Process};
+      const originalProcess = globals.process;
+      let result: boolean | undefined;
+      let thrown: unknown;
+      delete globals.process;
+      try {
+        result = checkLoggingEnabled(mockSettings);
+      } catch (e) {
+        thrown = e;
+      } finally {
+        globals.process = originalProcess;
+      }
+      assert.strictEqual(thrown, undefined);
+      assert.strictEqual(result, false);
+    });
+  });
+
+  describe('ignoredClientHeaderTokens', () => {
     it('defines ignoredClientHeaderTokens containing ignored client header tokens', () => {
       assert(Array.isArray(ignoredClientHeaderTokens));
       assert(ignoredClientHeaderTokens.includes('gl-node'));
       assert(ignoredClientHeaderTokens.includes('gax'));
       assert(ignoredClientHeaderTokens.includes('gapic'));
-    });
-
-    it('defines DEPTH_TO_CHECK constant as 10', () => {
-      assert.strictEqual(DEPTH_TO_CHECK, 10);
     });
   });
 });

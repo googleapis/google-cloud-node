@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import * as EventEmitter from 'events';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 const FAKE_PROJECT_ID = 'project-🦄';
 
@@ -45,7 +45,7 @@ describe('middleware/express/make-middleware', () => {
       '../../../src/middleware/express/make-middleware',
       {
         '../../../src/utils/context': FAKE_CONTEXT,
-      },
+      }
     );
 
     it('should return a function accepting 3 arguments', () => {
@@ -133,7 +133,7 @@ describe('middleware/express/make-middleware', () => {
         const middleware = makeMiddleware(
           FAKE_PROJECT_ID,
           () => {},
-          emitRequestLog,
+          emitRequestLog
         );
         middleware(fakeRequest, fakeResponse, () => {});
 

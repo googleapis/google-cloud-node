@@ -1,5 +1,5 @@
 createTime: '2025-09-18T18:59:42.228485468Z'
-description: Presubmit build with node 18
+description: Presubmit build with node 22
 filename: ci/cloudbuild_with_gapic_showcase.yaml
 github:
   name: google-cloud-node

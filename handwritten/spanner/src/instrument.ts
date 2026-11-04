@@ -20,6 +20,7 @@ import {
 } from '@opentelemetry/semantic-conventions';
 
 import {
+  ContextManager,
   Span,
   SpanStatusCode,
   context,
@@ -123,29 +124,34 @@ export {
 };
 
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
-let contextManagerInstallAttempted = false;
+let defaultContextManager: ContextManager | undefined;
 
 /*
- * If no global ContextManager is registered, install an AsyncHooksContextManager
- * so that async/await trace context propagation works for apps that haven't
- * configured OpenTelemetry themselves. If the host app has already installed a
- * ContextManager, leave it alone — tearing down a working manager breaks the
- * host's baggage and span parentage on the next gRPC call.
+ * If no global ContextManager is registered, install an AsyncLocalStorageContextManager
+ * (or AsyncHooksContextManager fallback) so that async/await trace context
+ * propagation works for apps that haven't configured OpenTelemetry themselves.
+ * If the host app has already installed a ContextManager, leave it alone —
+ * tearing down a working manager breaks the host's baggage and span parentage
+ * on the next gRPC call.
  *
  * setGlobalContextManager() returns false when a manager is already registered,
- * which is the documented signal that we shouldn't replace it. The
- * `contextManagerInstallAttempted` latch makes the call idempotent so we don't
- * allocate a new AsyncHooksContextManager on each Spanner client construction.
+ * which is the documented signal that we shouldn't replace it. Reusing the
+ * singleton `defaultContextManager` avoids allocating a new instance on each
+ * Spanner client construction while allowing re-registration if `context.disable()`
+ * was called.
  */
 function ensureInitialContextManagerSet() {
-  if (contextManagerInstallAttempted) return;
-  contextManagerInstallAttempted = true;
-  const contextManager = new AsyncHooksContextManager();
-  if (context.setGlobalContextManager(contextManager)) {
-    contextManager.enable();
+  if (!defaultContextManager) {
+    const ContextManagerClass =
+      AsyncLocalStorageContextManager || AsyncHooksContextManager;
+    defaultContextManager = new ContextManagerClass();
+  }
+  if (context.setGlobalContextManager(defaultContextManager!)) {
+    defaultContextManager!.enable();
   }
 }
 
@@ -203,6 +209,7 @@ function isGlobalTracingEnabled(): boolean {
  */
 export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
   if (opts?.tracerProvider) {
+    ensureInitialContextManagerSet();
     return true;
   }
 

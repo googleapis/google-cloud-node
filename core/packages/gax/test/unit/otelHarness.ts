@@ -206,11 +206,9 @@ export class OtelHarness {
    * asserts that no HTTP status was reported, which is the expected result for
    * a failure that never received a response, such as an expired deadline.
    *
-   * @param {object} expected - Expected status and optional server endpoint values.
+   * @param {object} expected - Expected status values.
    * @param {string} [expected.rpcStatus] - gRPC status name, e.g. 'OK' or 'NOT_FOUND'. Undefined if no response arrived.
    * @param {number} [expected.httpStatus] - HTTP status expected on a fallback span.
-   * @param {string} [expected.serverAddress] - Optional expected server.address (delegates to assertServerAddressAndPort).
-   * @param {number} [expected.serverPort] - Optional expected server.port (delegates to assertServerAddressAndPort).
    * @param {object} [options] - Span selection.
    * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
    * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
@@ -219,8 +217,6 @@ export class OtelHarness {
     expected: {
       rpcStatus?: string;
       httpStatus?: number;
-      serverAddress?: string;
-      serverPort?: number;
     },
     options: {tracerName?: string; span?: ReadableSpan} = {},
   ): void {
@@ -228,13 +224,6 @@ export class OtelHarness {
     const actual = this.responseStatus(target);
     const transport = target.attributes['rpc.system.name'];
     const where = `span '${target.name}'`;
-
-    if ('serverAddress' in expected || 'serverPort' in expected) {
-      this.assertServerAddressAndPort(
-        {address: expected.serverAddress, port: expected.serverPort},
-        options,
-      );
-    }
 
     assert.ok(
       transport === 'grpc' || transport === 'http',

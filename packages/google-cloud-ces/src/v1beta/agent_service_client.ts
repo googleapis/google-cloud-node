@@ -222,6 +222,9 @@ export class AgentServiceClient {
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
+      assistantSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}',
+      ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
@@ -553,6 +556,7 @@ export class AgentServiceClient {
       'listAppVersions',
       'getAppVersion',
       'createAppVersion',
+      'updateAppVersion',
       'deleteAppVersion',
       'restoreAppVersion',
       'generateAppResource',
@@ -4914,6 +4918,143 @@ export class AgentServiceClient {
       });
   }
   /**
+   * Updates the specified app version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.AppVersion} request.appVersion
+   *   Required. The app version to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   If empty, fields `display_name` and `description` will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.AppVersion|AppVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/agent_service.update_app_version.js</caption>
+   * region_tag:ces_v1beta_generated_AgentService_UpdateAppVersion_async
+   */
+  updateAppVersion(
+    request?: protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IAppVersion,
+      protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAppVersion(
+    request: protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IAppVersion,
+      | protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAppVersion(
+    request: protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IAppVersion,
+      | protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAppVersion(
+    request?: protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.ces.v1beta.IAppVersion,
+          | protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IAppVersion,
+      | protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IAppVersion,
+      protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'app_version.name': request.appVersion!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAppVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IAppVersion,
+          | protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAppVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAppVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IAppVersion,
+          protos.google.cloud.ces.v1beta.IUpdateAppVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAppVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
    * Deletes the specified app version.
    *
    * @param {Object} request
@@ -5722,6 +5863,11 @@ export class AgentServiceClient {
    * @param {Buffer} request.appContent
    *   Raw bytes representing the compressed zip file with the app folder
    *   structure.
+   * @param {string} [request.jsonPatchContent]
+   *   Optional. Patch content as a JSON string.
+   * @param {string} [request.jsonPatchGcsUri]
+   *   Optional. A Cloud Storage URI pointing to a JSON file containing the
+   *   patches.
    * @param {string} request.parent
    *   Required. The parent resource name with the location of the app to import.
    * @param {string} [request.displayName]
@@ -9462,6 +9608,81 @@ export class AgentServiceClient {
   matchVersionFromAppVersionName(appVersionName: string) {
     return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
       .version;
+  }
+
+  /**
+   * Return a fully-qualified assistantSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} app
+   * @param {string} assistant_session
+   * @returns {string} Resource name string.
+   */
+  assistantSessionPath(
+    project: string,
+    location: string,
+    app: string,
+    assistantSession: string,
+  ) {
+    return this.pathTemplates.assistantSessionPathTemplate.render({
+      project: project,
+      location: location,
+      app: app,
+      assistant_session: assistantSession,
+    });
+  }
+
+  /**
+   * Parse the project from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).location;
+  }
+
+  /**
+   * Parse the app from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the app.
+   */
+  matchAppFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).app;
+  }
+
+  /**
+   * Parse the assistant_session from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the assistant_session.
+   */
+  matchAssistantSessionFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).assistant_session;
   }
 
   /**

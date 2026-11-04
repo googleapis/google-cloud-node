@@ -1938,6 +1938,8 @@ export class DocumentProcessorServiceClient {
    *   Optional. The processor version to use as a base for training. This
    *   processor version must be a child of `parent`. Format:
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
+   * @param {google.cloud.documentai.v1beta3.ProcessorVersionOverrides} [request.processorVersionOverrides]
+   *   Optional. Options to override structures in the base processor version.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

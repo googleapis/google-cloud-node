@@ -188,6 +188,7 @@ describe('EndToEnd', async () => {
   const database = instance.database('database');
 
   beforeEach(async () => {
+    setGlobalContextManager(contextManager);
     // To deflake expectations of session creation, let's
     // issue out a warm-up request request that'll ensure
     // that the MultiplexedSession is created deterministically.
@@ -227,6 +228,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
@@ -319,6 +321,7 @@ describe('EndToEnd', async () => {
           'Starting Commit',
           'Commit Done',
           ...cacheSessionEvents,
+          'Using Session',
         ];
 
         await verifySpansAndEvents(

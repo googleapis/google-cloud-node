@@ -45,6 +45,11 @@
                 "getOdbSubnet"
               ]
             },
+            "GetOdbDnsZone": {
+              "methods": [
+                "getOdbDnsZone"
+              ]
+            },
             "GetExadbVmCluster": {
               "methods": [
                 "getExadbVmCluster"
@@ -183,6 +188,16 @@
             "DeleteOdbSubnet": {
               "methods": [
                 "deleteOdbSubnet"
+              ]
+            },
+            "CreateOdbDnsZone": {
+              "methods": [
+                "createOdbDnsZone"
+              ]
+            },
+            "DeleteOdbDnsZone": {
+              "methods": [
+                "deleteOdbDnsZone"
               ]
             },
             "CreateExadbVmCluster": {
@@ -361,6 +376,13 @@
                 "listOdbSubnets",
                 "listOdbSubnetsStream",
                 "listOdbSubnetsAsync"
+              ]
+            },
+            "ListOdbDnsZones": {
+              "methods": [
+                "listOdbDnsZones",
+                "listOdbDnsZonesStream",
+                "listOdbDnsZonesAsync"
               ]
             },
             "ListExadbVmClusters": {
@@ -508,6 +530,11 @@
                 "getOdbSubnet"
               ]
             },
+            "GetOdbDnsZone": {
+              "methods": [
+                "getOdbDnsZone"
+              ]
+            },
             "GetExadbVmCluster": {
               "methods": [
                 "getExadbVmCluster"
@@ -646,6 +673,16 @@
             "DeleteOdbSubnet": {
               "methods": [
                 "deleteOdbSubnet"
+              ]
+            },
+            "CreateOdbDnsZone": {
+              "methods": [
+                "createOdbDnsZone"
+              ]
+            },
+            "DeleteOdbDnsZone": {
+              "methods": [
+                "deleteOdbDnsZone"
               ]
             },
             "CreateExadbVmCluster": {
@@ -824,6 +861,13 @@
                 "listOdbSubnets",
                 "listOdbSubnetsStream",
                 "listOdbSubnetsAsync"
+              ]
+            },
+            "ListOdbDnsZones": {
+              "methods": [
+                "listOdbDnsZones",
+                "listOdbDnsZonesStream",
+                "listOdbDnsZonesAsync"
               ]
             },
             "ListExadbVmClusters": {

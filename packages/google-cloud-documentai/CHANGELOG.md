@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v10.2.0...documentai-v10.3.0) (2026-11-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9769](https://github.com/googleapis/google-cloud-node/issues/9769)) ([5437a0b](https://github.com/googleapis/google-cloud-node/commit/5437a0be98cb47e56f549f3e7212014572f2cf2e))
+
+## [10.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v10.1.1...documentai-v10.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [10.1.1](https://github.com/googleapis/google-cloud-node/compare/documentai-v10.1.0...documentai-v10.1.1) (2026-09-28)
 
 
