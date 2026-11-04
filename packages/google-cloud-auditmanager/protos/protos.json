@@ -11,7 +11,7 @@
                     "csharp_namespace": "Google.Cloud.AuditManager.V1",
                     "go_package": "cloud.google.com/go/auditmanager/apiv1/auditmanagerpb;auditmanagerpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "V1mainProto",
+                    "java_outer_classname": "ParametersProto",
                     "java_package": "com.google.cloud.auditmanager.v1",
                     "php_namespace": "Google\\Cloud\\AuditManager\\V1",
                     "ruby_package": "Google::Cloud::AuditManager::V1",
@@ -493,6 +493,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "parameterOverrides": {
+                          "keyType": "string",
+                          "type": "ParameterOverrides",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -544,6 +552,14 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameterOverrides": {
+                          "keyType": "string",
+                          "type": "ParameterOverrides",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -1012,6 +1028,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cloudControlParameterStates": {
+                          "keyType": "string",
+                          "type": "CloudControlParameterStates",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1400,6 +1424,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "parameterOverrides": {
+                          "keyType": "string",
+                          "type": "ParameterOverrides",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1451,6 +1483,125 @@
                             "MONTHLY": 3,
                             "QUARTERLY": 4,
                             "ANNUALLY": 5
+                          }
+                        }
+                      }
+                    },
+                    "Parameter": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameterValue": {
+                          "type": "ParamValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StringList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ParamValue": {
+                      "oneofs": {
+                        "kind": {
+                          "oneof": [
+                            "stringValue",
+                            "boolValue",
+                            "stringListValue",
+                            "numberValue",
+                            "oneofValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringValue": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "stringListValue": {
+                          "type": "StringList",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "numberValue": {
+                          "type": "double",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oneofValue": {
+                          "type": "Parameter",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterOverrides": {
+                      "fields": {
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Parameter",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ParameterState": {
+                      "fields": {
+                        "parameter": {
+                          "type": "Parameter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "isOverridden": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CloudControlParameterStates": {
+                      "fields": {
+                        "parameterStates": {
+                          "rule": "repeated",
+                          "type": "ParameterState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

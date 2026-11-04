@@ -278,6 +278,16 @@ export class DeveloperConnectClient {
         'nextPageToken',
         'refNames',
       ),
+      fetchGitRepositoryLinkCommitList: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'commits',
+      ),
+      fetchGitRepositoryLinkPullRequestList: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pullRequests',
+      ),
       listAccountConnectors: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -527,9 +537,19 @@ export class DeveloperConnectClient {
       'getGitRepositoryLink',
       'fetchReadWriteToken',
       'fetchReadToken',
+      'openGitRepositoryLinkPullRequest',
       'fetchLinkableGitRepositories',
       'fetchGitHubInstallations',
       'fetchGitRefs',
+      'diffGitRepositoryLinkCommit',
+      'fetchGitRepositoryLinkCommit',
+      'fetchGitRepositoryLinkCommitList',
+      'fetchGitRepositoryLinkFileBlame',
+      'fetchGitRepositoryLinkPullRequest',
+      'addGitRepositoryLinkPullRequestComment',
+      'addGitRepositoryLinkPullRequestReviewComment',
+      'modifyGitRepositoryLinkPullRequest',
+      'fetchGitRepositoryLinkPullRequestList',
       'listAccountConnectors',
       'getAccountConnector',
       'createAccountConnector',
@@ -1228,6 +1248,160 @@ export class DeveloperConnectClient {
       });
   }
   /**
+   * Opens a Pull Request in the remote SCM repository associated with a
+   * GitRepositoryLink.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The GitRepositoryLink resource name in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {google.cloud.developerconnect.v1.PullRequest} request.pullRequest
+   *   Required. The Pull Request details to open.
+   *   Input fields used: title, body, head_ref, base_ref.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.open_git_repository_link_pull_request.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_OpenGitRepositoryLinkPullRequest_async
+   */
+  openGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  openGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  openGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  openGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('openGitRepositoryLinkPullRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'openGitRepositoryLinkPullRequest response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .openGitRepositoryLinkPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          (
+            | protos.google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'openGitRepositoryLinkPullRequest response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
    * FetchGitHubInstallations returns the list of GitHub Installations that
    * are available to be added to a Connection.
    * For github.com, only installations accessible to the authorizer token
@@ -1354,6 +1528,1113 @@ export class DeveloperConnectClient {
           {} | undefined,
         ]) => {
           this._log.info('fetchGitHubInstallations response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Diff commits for a GitRepositoryLink.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink.
+   * @param {string} request.baseSha
+   *   Required. The base commit SHA or ref.
+   * @param {string} request.headSha
+   *   Required. The head commit SHA or ref.
+   * @param {string[]} [request.pathFilters]
+   *   Optional. Path patterns or exact paths to filter returned files.
+   *   When `path_filters` is specified, `FileDiff.patch` is populated for all
+   *   matching files (use `["**"]` to include patches for all changed files).
+   *   When `path_filters` is omitted or empty, the full list of `FileDiff` is
+   *   returned without patch diffs (`FileDiff.patch` is empty).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse|DiffGitRepositoryLinkCommitResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.diff_git_repository_link_commit.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_DiffGitRepositoryLinkCommit_async
+   */
+  diffGitRepositoryLinkCommit(
+    request?: protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  diffGitRepositoryLinkCommit(
+    request: protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  diffGitRepositoryLinkCommit(
+    request: protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  diffGitRepositoryLinkCommit(
+    request?: protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+          | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('diffGitRepositoryLinkCommit request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+          | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('diffGitRepositoryLinkCommit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .diffGitRepositoryLinkCommit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('diffGitRepositoryLinkCommit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Fetch Commit details from a Git repository link.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.commitSha
+   *   Required. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+   *   Git reference).
+   * @param {google.cloud.developerconnect.v1.CommitView} [request.view]
+   *   Optional. The level of commit details to return in the response.
+   *   Defaults to `FULL` if unspecified. In `FULL` view, `files` metadata (paths
+   *   and statuses) are returned; `path_filters` must also be specified to
+   *   populate line patch hunks.
+   * @param {string[]} [request.pathFilters]
+   *   Optional. Path patterns or exact paths to filter returned files (only
+   *   applicable in `FULL` view).
+   *   When `path_filters` is specified, `FileDiff.patch` is populated for all
+   *   matching files (use `["**"]` to include patches for all changed files).
+   *   When `path_filters` is omitted or empty, the full list of `FileDiff` is
+   *   returned without patch diffs (`FileDiff.patch` is empty).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse|FetchGitRepositoryLinkCommitResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_repository_link_commit.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRepositoryLinkCommit_async
+   */
+  fetchGitRepositoryLinkCommit(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  fetchGitRepositoryLinkCommit(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkCommit(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkCommit(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkCommit request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchGitRepositoryLinkCommit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitRepositoryLinkCommit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchGitRepositoryLinkCommit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Fetches blame information for a file or line range in a file.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.ref
+   *   Required. The SCM commit SHA, or symbolic revision (e.g., branch name, tag)
+   *   from which to fetch the blame.
+   * @param {string} request.path
+   *   Required. The file path within the repository.
+   * @param {number} [request.firstLine]
+   *   Optional. The 1-indexed starting line number of the range to blame
+   *   (inclusive). If not specified, blame begins at line 1.
+   * @param {number} [request.lastLine]
+   *   Optional. The 1-indexed ending line number of the range to blame
+   *   (inclusive). If not specified, blame extends to the end of the file.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse|FetchGitRepositoryLinkFileBlameResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_repository_link_file_blame.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRepositoryLinkFileBlame_async
+   */
+  fetchGitRepositoryLinkFileBlame(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  fetchGitRepositoryLinkFileBlame(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkFileBlame(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkFileBlame(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkFileBlame request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'fetchGitRepositoryLinkFileBlame response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitRepositoryLinkFileBlame(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'fetchGitRepositoryLinkFileBlame response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Fetch Pull Request details from a Git repository link.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.pullRequestId
+   *   Required. The ID of the Pull Request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_repository_link_pull_request.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRepositoryLinkPullRequest_async
+   */
+  fetchGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  fetchGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkPullRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'fetchGitRepositoryLinkPullRequest response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitRepositoryLinkPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'fetchGitRepositoryLinkPullRequest response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Add a comment to a Pull Request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.pullRequestId
+   *   Required. The ID of the Pull Request.
+   * @param {google.cloud.developerconnect.v1.PullRequestComment} request.comment
+   *   Required. The comment to add.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.PullRequestComment|PullRequestComment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.add_git_repository_link_pull_request_comment.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_AddGitRepositoryLinkPullRequestComment_async
+   */
+  addGitRepositoryLinkPullRequestComment(
+    request?: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequestComment,
+      (
+        | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  addGitRepositoryLinkPullRequestComment(
+    request: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addGitRepositoryLinkPullRequestComment(
+    request: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addGitRepositoryLinkPullRequestComment(
+    request?: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequestComment,
+          | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequestComment,
+      (
+        | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'addGitRepositoryLinkPullRequestComment request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequestComment,
+          | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'addGitRepositoryLinkPullRequestComment response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addGitRepositoryLinkPullRequestComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IPullRequestComment,
+          (
+            | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'addGitRepositoryLinkPullRequestComment response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Add a review comment (inline on diff) to a Pull Request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.pullRequestId
+   *   Required. The ID of the Pull Request.
+   * @param {google.cloud.developerconnect.v1.PullRequestReviewComment} request.comment
+   *   Required. The review comment to add.
+   * @param {string} [request.commitId]
+   *   Optional. The commit SHA to comment on. If not specified, defaults to the
+   *   HEAD commit of the Pull Request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.PullRequestReviewComment|PullRequestReviewComment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.add_git_repository_link_pull_request_review_comment.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_AddGitRepositoryLinkPullRequestReviewComment_async
+   */
+  addGitRepositoryLinkPullRequestReviewComment(
+    request?: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+      (
+        | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  addGitRepositoryLinkPullRequestReviewComment(
+    request: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addGitRepositoryLinkPullRequestReviewComment(
+    request: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  addGitRepositoryLinkPullRequestReviewComment(
+    request?: protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+          | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+      | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+      (
+        | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'addGitRepositoryLinkPullRequestReviewComment request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+          | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'addGitRepositoryLinkPullRequestReviewComment response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addGitRepositoryLinkPullRequestReviewComment(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IPullRequestReviewComment,
+          (
+            | protos.google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'addGitRepositoryLinkPullRequestReviewComment response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Modifies a Pull Request in the remote SCM repository associated with a
+   * GitRepositoryLink.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The GitRepositoryLink resource name in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} request.pullRequestId
+   *   Required. The SCM-specific Pull Request identifier (e.g., "45").
+   * @param {string} [request.title]
+   *   Optional. The title of the Pull Request.
+   * @param {string} [request.body]
+   *   Optional. The body description of the Pull Request.
+   * @param {string} [request.baseRef]
+   *   Optional. The target branch to merge into.
+   * @param {google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.State} [request.state]
+   *   Optional. The state of the Pull Request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.modify_git_repository_link_pull_request.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_ModifyGitRepositoryLinkPullRequest_async
+   */
+  modifyGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  modifyGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  modifyGitRepositoryLinkPullRequest(
+    request: protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  modifyGitRepositoryLinkPullRequest(
+    request?: protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest,
+      (
+        | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('modifyGitRepositoryLinkPullRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'modifyGitRepositoryLinkPullRequest response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .modifyGitRepositoryLinkPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IPullRequest,
+          (
+            | protos.google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'modifyGitRepositoryLinkPullRequest response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -4897,6 +6178,546 @@ export class DeveloperConnectClient {
       request as {},
       callSettings,
     ) as AsyncIterable<string>;
+  }
+  /**
+   * Fetch a list of Commits from a Git repository link.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.ref]
+   *   Optional. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+   *   Git reference) from which to start listing commits.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 50. Max is
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkCommitList` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchGitRepositoryLinkCommitList` must match the call that provided the
+   *   page token.
+   * @param {google.cloud.developerconnect.v1.CommitView} [request.view]
+   *   Optional. The level of commit details to return in the response.
+   *   Only `BASIC` is supported; `FULL` returns `INVALID_ARGUMENT`. Defaults to
+   *   `BASIC` if unspecified. Use `FetchGitRepositoryLinkCommit` to get file
+   *   diffs for a single commit.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.SCMCommit|SCMCommit}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchGitRepositoryLinkCommitListAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchGitRepositoryLinkCommitList(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.ISCMCommit[],
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest | null,
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse,
+    ]
+  >;
+  fetchGitRepositoryLinkCommitList(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.ISCMCommit
+    >,
+  ): void;
+  fetchGitRepositoryLinkCommitList(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.ISCMCommit
+    >,
+  ): void;
+  fetchGitRepositoryLinkCommitList(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.ISCMCommit
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.ISCMCommit
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.ISCMCommit[],
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest | null,
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.ISCMCommit
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchGitRepositoryLinkCommitList values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchGitRepositoryLinkCommitList request %j', request);
+    return this.innerApiCalls
+      .fetchGitRepositoryLinkCommitList(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.ISCMCommit[],
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest | null,
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse,
+        ]) => {
+          this._log.info(
+            'fetchGitRepositoryLinkCommitList values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchGitRepositoryLinkCommitList`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.ref]
+   *   Optional. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+   *   Git reference) from which to start listing commits.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 50. Max is
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkCommitList` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchGitRepositoryLinkCommitList` must match the call that provided the
+   *   page token.
+   * @param {google.cloud.developerconnect.v1.CommitView} [request.view]
+   *   Optional. The level of commit details to return in the response.
+   *   Only `BASIC` is supported; `FULL` returns `INVALID_ARGUMENT`. Defaults to
+   *   `BASIC` if unspecified. Use `FetchGitRepositoryLinkCommit` to get file
+   *   diffs for a single commit.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.SCMCommit|SCMCommit} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchGitRepositoryLinkCommitListAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchGitRepositoryLinkCommitListStream(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchGitRepositoryLinkCommitList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkCommitList stream %j', request);
+    return this.descriptors.page.fetchGitRepositoryLinkCommitList.createStream(
+      this.innerApiCalls.fetchGitRepositoryLinkCommitList as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchGitRepositoryLinkCommitList`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the GitRepositoryLink in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.ref]
+   *   Optional. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+   *   Git reference) from which to start listing commits.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 50. Max is
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkCommitList` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchGitRepositoryLinkCommitList` must match the call that provided the
+   *   page token.
+   * @param {google.cloud.developerconnect.v1.CommitView} [request.view]
+   *   Optional. The level of commit details to return in the response.
+   *   Only `BASIC` is supported; `FULL` returns `INVALID_ARGUMENT`. Defaults to
+   *   `BASIC` if unspecified. Use `FetchGitRepositoryLinkCommit` to get file
+   *   diffs for a single commit.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.developerconnect.v1.SCMCommit|SCMCommit}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_repository_link_commit_list.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRepositoryLinkCommitList_async
+   */
+  fetchGitRepositoryLinkCommitListAsync(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.developerconnect.v1.ISCMCommit> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchGitRepositoryLinkCommitList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkCommitList iterate %j', request);
+    return this.descriptors.page.fetchGitRepositoryLinkCommitList.asyncIterate(
+      this.innerApiCalls['fetchGitRepositoryLinkCommitList'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.developerconnect.v1.ISCMCommit>;
+  }
+  /**
+   * Fetches a list of Pull Requests from the remote repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The GitRepositoryLink resource name in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters the pull requests returned in
+   *   the response. Only a single equality comparison on `state` is supported,
+   *   for example `state = "OPEN"`. Supported values are `OPEN`, `CLOSED`, and
+   *   `MERGED`. `DECLINED` is only supported for SCM providers that support
+   *   declining pull requests, and returns `INVALID_ARGUMENT` for GitHub, GitHub
+   *   Enterprise, GitLab, and GitLab Enterprise. Other values or expressions
+   *   return `INVALID_ARGUMENT`. Defaults to `state = "OPEN"` if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 20. Max is
+   *   100. A page may contain fewer than `page_size` results even when more
+   *   results are available; use `next_page_token` to check for more pages.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkPullRequestList` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchGitRepositoryLinkPullRequestListAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchGitRepositoryLinkPullRequestList(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest[],
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest | null,
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse,
+    ]
+  >;
+  fetchGitRepositoryLinkPullRequestList(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IPullRequest
+    >,
+  ): void;
+  fetchGitRepositoryLinkPullRequestList(
+    request: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IPullRequest
+    >,
+  ): void;
+  fetchGitRepositoryLinkPullRequestList(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IPullRequest
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+      | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IPullRequest
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IPullRequest[],
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest | null,
+      protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IPullRequest
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'fetchGitRepositoryLinkPullRequestList values %j',
+            values,
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchGitRepositoryLinkPullRequestList request %j', request);
+    return this.innerApiCalls
+      .fetchGitRepositoryLinkPullRequestList(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.IPullRequest[],
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest | null,
+          protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse,
+        ]) => {
+          this._log.info(
+            'fetchGitRepositoryLinkPullRequestList values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchGitRepositoryLinkPullRequestList`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The GitRepositoryLink resource name in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters the pull requests returned in
+   *   the response. Only a single equality comparison on `state` is supported,
+   *   for example `state = "OPEN"`. Supported values are `OPEN`, `CLOSED`, and
+   *   `MERGED`. `DECLINED` is only supported for SCM providers that support
+   *   declining pull requests, and returns `INVALID_ARGUMENT` for GitHub, GitHub
+   *   Enterprise, GitLab, and GitLab Enterprise. Other values or expressions
+   *   return `INVALID_ARGUMENT`. Defaults to `state = "OPEN"` if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 20. Max is
+   *   100. A page may contain fewer than `page_size` results even when more
+   *   results are available; use `next_page_token` to check for more pages.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkPullRequestList` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchGitRepositoryLinkPullRequestListAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchGitRepositoryLinkPullRequestListStream(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchGitRepositoryLinkPullRequestList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkPullRequestList stream %j', request);
+    return this.descriptors.page.fetchGitRepositoryLinkPullRequestList.createStream(
+      this.innerApiCalls.fetchGitRepositoryLinkPullRequestList as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchGitRepositoryLinkPullRequestList`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The GitRepositoryLink resource name in the format
+   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters the pull requests returned in
+   *   the response. Only a single equality comparison on `state` is supported,
+   *   for example `state = "OPEN"`. Supported values are `OPEN`, `CLOSED`, and
+   *   `MERGED`. `DECLINED` is only supported for SCM providers that support
+   *   declining pull requests, and returns `INVALID_ARGUMENT` for GitHub, GitHub
+   *   Enterprise, GitLab, and GitLab Enterprise. Other values or expressions
+   *   return `INVALID_ARGUMENT`. Defaults to `state = "OPEN"` if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results to return in the list. Default is 20. Max is
+   *   100. A page may contain fewer than `page_size` results even when more
+   *   results are available; use `next_page_token` to check for more pages.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `FetchGitRepositoryLinkPullRequestList` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.developerconnect.v1.PullRequest|PullRequest}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_repository_link_pull_request_list.js</caption>
+   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRepositoryLinkPullRequestList_async
+   */
+  fetchGitRepositoryLinkPullRequestListAsync(
+    request?: protos.google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.developerconnect.v1.IPullRequest> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchGitRepositoryLinkPullRequestList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRepositoryLinkPullRequestList iterate %j', request);
+    return this.descriptors.page.fetchGitRepositoryLinkPullRequestList.asyncIterate(
+      this.innerApiCalls['fetchGitRepositoryLinkPullRequestList'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IPullRequest>;
   }
   /**
    * Lists AccountConnectors in a given project and location.

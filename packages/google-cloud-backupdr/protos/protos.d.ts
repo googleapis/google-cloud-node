@@ -26,6 +26,2628 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of an AppliedAutoProtectionPolicy. */
+                interface IAppliedAutoProtectionPolicy {
+
+                    /** AppliedAutoProtectionPolicy name */
+                    name?: (string|null);
+
+                    /** AppliedAutoProtectionPolicy sourceBinding */
+                    sourceBinding?: (string|null);
+
+                    /** AppliedAutoProtectionPolicy criteria */
+                    criteria?: (google.cloud.backupdr.v1.ICriteria|null);
+
+                    /** AppliedAutoProtectionPolicy backupPlanDetails */
+                    backupPlanDetails?: (google.cloud.backupdr.v1.IBackupPlanDetail[]|null);
+
+                    /** AppliedAutoProtectionPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AppliedAutoProtectionPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AppliedAutoProtectionPolicy bindingEvaluationSummary */
+                    bindingEvaluationSummary?: (google.cloud.backupdr.v1.IBindingEvaluationSummary|null);
+
+                    /** AppliedAutoProtectionPolicy status */
+                    status?: (google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.State|keyof typeof google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.State|null);
+                }
+
+                /** Represents an AppliedAutoProtectionPolicy. */
+                class AppliedAutoProtectionPolicy implements IAppliedAutoProtectionPolicy {
+
+                    /**
+                     * Constructs a new AppliedAutoProtectionPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy);
+
+                    /** AppliedAutoProtectionPolicy name. */
+                    public name: string;
+
+                    /** AppliedAutoProtectionPolicy sourceBinding. */
+                    public sourceBinding: string;
+
+                    /** AppliedAutoProtectionPolicy criteria. */
+                    public criteria?: (google.cloud.backupdr.v1.ICriteria|null);
+
+                    /** AppliedAutoProtectionPolicy backupPlanDetails. */
+                    public backupPlanDetails: google.cloud.backupdr.v1.IBackupPlanDetail[];
+
+                    /** AppliedAutoProtectionPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AppliedAutoProtectionPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AppliedAutoProtectionPolicy bindingEvaluationSummary. */
+                    public bindingEvaluationSummary?: (google.cloud.backupdr.v1.IBindingEvaluationSummary|null);
+
+                    /** AppliedAutoProtectionPolicy status. */
+                    public status: (google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.State|keyof typeof google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.State);
+
+                    /**
+                     * Creates a new AppliedAutoProtectionPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AppliedAutoProtectionPolicy instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy): google.cloud.backupdr.v1.AppliedAutoProtectionPolicy;
+
+                    /**
+                     * Encodes the specified AppliedAutoProtectionPolicy message. Does not implicitly {@link google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.verify|verify} messages.
+                     * @param message AppliedAutoProtectionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AppliedAutoProtectionPolicy message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AppliedAutoProtectionPolicy.verify|verify} messages.
+                     * @param message AppliedAutoProtectionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AppliedAutoProtectionPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AppliedAutoProtectionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AppliedAutoProtectionPolicy;
+
+                    /**
+                     * Decodes an AppliedAutoProtectionPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AppliedAutoProtectionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AppliedAutoProtectionPolicy;
+
+                    /**
+                     * Verifies an AppliedAutoProtectionPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AppliedAutoProtectionPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AppliedAutoProtectionPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AppliedAutoProtectionPolicy;
+
+                    /**
+                     * Creates a plain object from an AppliedAutoProtectionPolicy message. Also converts values to other types if specified.
+                     * @param message AppliedAutoProtectionPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AppliedAutoProtectionPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AppliedAutoProtectionPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AppliedAutoProtectionPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AppliedAutoProtectionPolicy {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETION_INITIATED = 3
+                    }
+                }
+
+                /** Properties of a ListAppliedAutoProtectionPoliciesRequest. */
+                interface IListAppliedAutoProtectionPoliciesRequest {
+
+                    /** ListAppliedAutoProtectionPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAppliedAutoProtectionPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAppliedAutoProtectionPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAppliedAutoProtectionPoliciesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAppliedAutoProtectionPoliciesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAppliedAutoProtectionPoliciesRequest. */
+                class ListAppliedAutoProtectionPoliciesRequest implements IListAppliedAutoProtectionPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListAppliedAutoProtectionPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest);
+
+                    /** ListAppliedAutoProtectionPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListAppliedAutoProtectionPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAppliedAutoProtectionPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAppliedAutoProtectionPoliciesRequest filter. */
+                    public filter: string;
+
+                    /** ListAppliedAutoProtectionPoliciesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAppliedAutoProtectionPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAppliedAutoProtectionPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListAppliedAutoProtectionPoliciesRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest.verify|verify} messages.
+                     * @param message ListAppliedAutoProtectionPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAppliedAutoProtectionPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest.verify|verify} messages.
+                     * @param message ListAppliedAutoProtectionPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAppliedAutoProtectionPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAppliedAutoProtectionPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Decodes a ListAppliedAutoProtectionPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAppliedAutoProtectionPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Verifies a ListAppliedAutoProtectionPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAppliedAutoProtectionPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAppliedAutoProtectionPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAppliedAutoProtectionPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListAppliedAutoProtectionPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAppliedAutoProtectionPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAppliedAutoProtectionPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAppliedAutoProtectionPoliciesResponse. */
+                interface IListAppliedAutoProtectionPoliciesResponse {
+
+                    /** ListAppliedAutoProtectionPoliciesResponse appliedAutoProtectionPolicies */
+                    appliedAutoProtectionPolicies?: (google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[]|null);
+
+                    /** ListAppliedAutoProtectionPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAppliedAutoProtectionPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAppliedAutoProtectionPoliciesResponse. */
+                class ListAppliedAutoProtectionPoliciesResponse implements IListAppliedAutoProtectionPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListAppliedAutoProtectionPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse);
+
+                    /** ListAppliedAutoProtectionPoliciesResponse appliedAutoProtectionPolicies. */
+                    public appliedAutoProtectionPolicies: google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[];
+
+                    /** ListAppliedAutoProtectionPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAppliedAutoProtectionPoliciesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAppliedAutoProtectionPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAppliedAutoProtectionPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListAppliedAutoProtectionPoliciesResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse.verify|verify} messages.
+                     * @param message ListAppliedAutoProtectionPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAppliedAutoProtectionPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse.verify|verify} messages.
+                     * @param message ListAppliedAutoProtectionPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAppliedAutoProtectionPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAppliedAutoProtectionPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Decodes a ListAppliedAutoProtectionPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAppliedAutoProtectionPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Verifies a ListAppliedAutoProtectionPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAppliedAutoProtectionPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAppliedAutoProtectionPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAppliedAutoProtectionPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListAppliedAutoProtectionPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAppliedAutoProtectionPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAppliedAutoProtectionPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoProtectionPolicy. */
+                interface IAutoProtectionPolicy {
+
+                    /** AutoProtectionPolicy name */
+                    name?: (string|null);
+
+                    /** AutoProtectionPolicy description */
+                    description?: (string|null);
+
+                    /** AutoProtectionPolicy backupPlanDetails */
+                    backupPlanDetails?: (google.cloud.backupdr.v1.IBackupPlanDetail[]|null);
+
+                    /** AutoProtectionPolicy criteria */
+                    criteria?: (google.cloud.backupdr.v1.ICriteria|null);
+
+                    /** AutoProtectionPolicy state */
+                    state?: (google.cloud.backupdr.v1.AutoProtectionPolicy.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionPolicy.State|null);
+
+                    /** AutoProtectionPolicy etag */
+                    etag?: (string|null);
+
+                    /** AutoProtectionPolicy bindingSummary */
+                    bindingSummary?: (google.cloud.backupdr.v1.IBindingSummary|null);
+
+                    /** AutoProtectionPolicy policyEvaluationSummary */
+                    policyEvaluationSummary?: (google.cloud.backupdr.v1.IPolicyEvaluationSummary|null);
+
+                    /** AutoProtectionPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AutoProtectionPolicy. */
+                class AutoProtectionPolicy implements IAutoProtectionPolicy {
+
+                    /**
+                     * Constructs a new AutoProtectionPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAutoProtectionPolicy);
+
+                    /** AutoProtectionPolicy name. */
+                    public name: string;
+
+                    /** AutoProtectionPolicy description. */
+                    public description: string;
+
+                    /** AutoProtectionPolicy backupPlanDetails. */
+                    public backupPlanDetails: google.cloud.backupdr.v1.IBackupPlanDetail[];
+
+                    /** AutoProtectionPolicy criteria. */
+                    public criteria?: (google.cloud.backupdr.v1.ICriteria|null);
+
+                    /** AutoProtectionPolicy state. */
+                    public state: (google.cloud.backupdr.v1.AutoProtectionPolicy.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionPolicy.State);
+
+                    /** AutoProtectionPolicy etag. */
+                    public etag: string;
+
+                    /** AutoProtectionPolicy bindingSummary. */
+                    public bindingSummary?: (google.cloud.backupdr.v1.IBindingSummary|null);
+
+                    /** AutoProtectionPolicy policyEvaluationSummary. */
+                    public policyEvaluationSummary?: (google.cloud.backupdr.v1.IPolicyEvaluationSummary|null);
+
+                    /** AutoProtectionPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AutoProtectionPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoProtectionPolicy instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAutoProtectionPolicy): google.cloud.backupdr.v1.AutoProtectionPolicy;
+
+                    /**
+                     * Encodes the specified AutoProtectionPolicy message. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionPolicy.verify|verify} messages.
+                     * @param message AutoProtectionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAutoProtectionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoProtectionPolicy message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionPolicy.verify|verify} messages.
+                     * @param message AutoProtectionPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAutoProtectionPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoProtectionPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoProtectionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AutoProtectionPolicy;
+
+                    /**
+                     * Decodes an AutoProtectionPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoProtectionPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AutoProtectionPolicy;
+
+                    /**
+                     * Verifies an AutoProtectionPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoProtectionPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoProtectionPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AutoProtectionPolicy;
+
+                    /**
+                     * Creates a plain object from an AutoProtectionPolicy message. Also converts values to other types if specified.
+                     * @param message AutoProtectionPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AutoProtectionPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoProtectionPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoProtectionPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutoProtectionPolicy {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of a BackupPlanDetail. */
+                interface IBackupPlanDetail {
+
+                    /** BackupPlanDetail resourceType */
+                    resourceType?: (string|null);
+
+                    /** BackupPlanDetail backupPlan */
+                    backupPlan?: (string|null);
+                }
+
+                /** Represents a BackupPlanDetail. */
+                class BackupPlanDetail implements IBackupPlanDetail {
+
+                    /**
+                     * Constructs a new BackupPlanDetail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBackupPlanDetail);
+
+                    /** BackupPlanDetail resourceType. */
+                    public resourceType: string;
+
+                    /** BackupPlanDetail backupPlan. */
+                    public backupPlan: string;
+
+                    /**
+                     * Creates a new BackupPlanDetail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupPlanDetail instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBackupPlanDetail): google.cloud.backupdr.v1.BackupPlanDetail;
+
+                    /**
+                     * Encodes the specified BackupPlanDetail message. Does not implicitly {@link google.cloud.backupdr.v1.BackupPlanDetail.verify|verify} messages.
+                     * @param message BackupPlanDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBackupPlanDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupPlanDetail message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupPlanDetail.verify|verify} messages.
+                     * @param message BackupPlanDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBackupPlanDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupPlanDetail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupPlanDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BackupPlanDetail;
+
+                    /**
+                     * Decodes a BackupPlanDetail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupPlanDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BackupPlanDetail;
+
+                    /**
+                     * Verifies a BackupPlanDetail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupPlanDetail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupPlanDetail
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BackupPlanDetail;
+
+                    /**
+                     * Creates a plain object from a BackupPlanDetail message. Also converts values to other types if specified.
+                     * @param message BackupPlanDetail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BackupPlanDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupPlanDetail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupPlanDetail
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Criteria. */
+                interface ICriteria {
+
+                    /** Criteria matchingConditions */
+                    matchingConditions?: (google.cloud.backupdr.v1.IMatchingCondition[]|null);
+                }
+
+                /** Represents a Criteria. */
+                class Criteria implements ICriteria {
+
+                    /**
+                     * Constructs a new Criteria.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICriteria);
+
+                    /** Criteria matchingConditions. */
+                    public matchingConditions: google.cloud.backupdr.v1.IMatchingCondition[];
+
+                    /**
+                     * Creates a new Criteria instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Criteria instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICriteria): google.cloud.backupdr.v1.Criteria;
+
+                    /**
+                     * Encodes the specified Criteria message. Does not implicitly {@link google.cloud.backupdr.v1.Criteria.verify|verify} messages.
+                     * @param message Criteria message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Criteria message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.Criteria.verify|verify} messages.
+                     * @param message Criteria message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Criteria message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Criteria
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.Criteria;
+
+                    /**
+                     * Decodes a Criteria message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Criteria
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.Criteria;
+
+                    /**
+                     * Verifies a Criteria message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Criteria message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Criteria
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.Criteria;
+
+                    /**
+                     * Creates a plain object from a Criteria message. Also converts values to other types if specified.
+                     * @param message Criteria
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.Criteria, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Criteria to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Criteria
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MatchingCondition. */
+                interface IMatchingCondition {
+
+                    /** MatchingCondition labelCondition */
+                    labelCondition?: (google.cloud.backupdr.v1.IKeyValuePair|null);
+                }
+
+                /** Represents a MatchingCondition. */
+                class MatchingCondition implements IMatchingCondition {
+
+                    /**
+                     * Constructs a new MatchingCondition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IMatchingCondition);
+
+                    /** MatchingCondition labelCondition. */
+                    public labelCondition?: (google.cloud.backupdr.v1.IKeyValuePair|null);
+
+                    /** MatchingCondition condition. */
+                    public condition?: "labelCondition";
+
+                    /**
+                     * Creates a new MatchingCondition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MatchingCondition instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IMatchingCondition): google.cloud.backupdr.v1.MatchingCondition;
+
+                    /**
+                     * Encodes the specified MatchingCondition message. Does not implicitly {@link google.cloud.backupdr.v1.MatchingCondition.verify|verify} messages.
+                     * @param message MatchingCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IMatchingCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MatchingCondition message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.MatchingCondition.verify|verify} messages.
+                     * @param message MatchingCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IMatchingCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MatchingCondition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MatchingCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.MatchingCondition;
+
+                    /**
+                     * Decodes a MatchingCondition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MatchingCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.MatchingCondition;
+
+                    /**
+                     * Verifies a MatchingCondition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MatchingCondition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MatchingCondition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.MatchingCondition;
+
+                    /**
+                     * Creates a plain object from a MatchingCondition message. Also converts values to other types if specified.
+                     * @param message MatchingCondition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.MatchingCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MatchingCondition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MatchingCondition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolicyEvaluationSummary. */
+                interface IPolicyEvaluationSummary {
+
+                    /** PolicyEvaluationSummary matchingResourceCount */
+                    matchingResourceCount?: (number|Long|string|null);
+
+                    /** PolicyEvaluationSummary protectedResourceCount */
+                    protectedResourceCount?: (number|Long|string|null);
+
+                    /** PolicyEvaluationSummary failedResourceCount */
+                    failedResourceCount?: (number|Long|string|null);
+                }
+
+                /** Represents a PolicyEvaluationSummary. */
+                class PolicyEvaluationSummary implements IPolicyEvaluationSummary {
+
+                    /**
+                     * Constructs a new PolicyEvaluationSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPolicyEvaluationSummary);
+
+                    /** PolicyEvaluationSummary matchingResourceCount. */
+                    public matchingResourceCount: (number|Long|string);
+
+                    /** PolicyEvaluationSummary protectedResourceCount. */
+                    public protectedResourceCount: (number|Long|string);
+
+                    /** PolicyEvaluationSummary failedResourceCount. */
+                    public failedResourceCount: (number|Long|string);
+
+                    /**
+                     * Creates a new PolicyEvaluationSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyEvaluationSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPolicyEvaluationSummary): google.cloud.backupdr.v1.PolicyEvaluationSummary;
+
+                    /**
+                     * Encodes the specified PolicyEvaluationSummary message. Does not implicitly {@link google.cloud.backupdr.v1.PolicyEvaluationSummary.verify|verify} messages.
+                     * @param message PolicyEvaluationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPolicyEvaluationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyEvaluationSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PolicyEvaluationSummary.verify|verify} messages.
+                     * @param message PolicyEvaluationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPolicyEvaluationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyEvaluationSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyEvaluationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PolicyEvaluationSummary;
+
+                    /**
+                     * Decodes a PolicyEvaluationSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyEvaluationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PolicyEvaluationSummary;
+
+                    /**
+                     * Verifies a PolicyEvaluationSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyEvaluationSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyEvaluationSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PolicyEvaluationSummary;
+
+                    /**
+                     * Creates a plain object from a PolicyEvaluationSummary message. Also converts values to other types if specified.
+                     * @param message PolicyEvaluationSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PolicyEvaluationSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyEvaluationSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyEvaluationSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BindingSummary. */
+                interface IBindingSummary {
+
+                    /** BindingSummary projectCount */
+                    projectCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BindingSummary. */
+                class BindingSummary implements IBindingSummary {
+
+                    /**
+                     * Constructs a new BindingSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBindingSummary);
+
+                    /** BindingSummary projectCount. */
+                    public projectCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BindingSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BindingSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBindingSummary): google.cloud.backupdr.v1.BindingSummary;
+
+                    /**
+                     * Encodes the specified BindingSummary message. Does not implicitly {@link google.cloud.backupdr.v1.BindingSummary.verify|verify} messages.
+                     * @param message BindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BindingSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BindingSummary.verify|verify} messages.
+                     * @param message BindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BindingSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BindingSummary;
+
+                    /**
+                     * Decodes a BindingSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BindingSummary;
+
+                    /**
+                     * Verifies a BindingSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BindingSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BindingSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BindingSummary;
+
+                    /**
+                     * Creates a plain object from a BindingSummary message. Also converts values to other types if specified.
+                     * @param message BindingSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BindingSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BindingSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BindingSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a KeyValuePair. */
+                interface IKeyValuePair {
+
+                    /** KeyValuePair key */
+                    key?: (string|null);
+
+                    /** KeyValuePair values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a KeyValuePair. */
+                class KeyValuePair implements IKeyValuePair {
+
+                    /**
+                     * Constructs a new KeyValuePair.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IKeyValuePair);
+
+                    /** KeyValuePair key. */
+                    public key: string;
+
+                    /** KeyValuePair values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new KeyValuePair instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KeyValuePair instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IKeyValuePair): google.cloud.backupdr.v1.KeyValuePair;
+
+                    /**
+                     * Encodes the specified KeyValuePair message. Does not implicitly {@link google.cloud.backupdr.v1.KeyValuePair.verify|verify} messages.
+                     * @param message KeyValuePair message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IKeyValuePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KeyValuePair message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.KeyValuePair.verify|verify} messages.
+                     * @param message KeyValuePair message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IKeyValuePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KeyValuePair message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KeyValuePair
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.KeyValuePair;
+
+                    /**
+                     * Decodes a KeyValuePair message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KeyValuePair
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.KeyValuePair;
+
+                    /**
+                     * Verifies a KeyValuePair message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KeyValuePair message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KeyValuePair
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.KeyValuePair;
+
+                    /**
+                     * Creates a plain object from a KeyValuePair message. Also converts values to other types if specified.
+                     * @param message KeyValuePair
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.KeyValuePair, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KeyValuePair to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KeyValuePair
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAutoProtectionPolicyRequest. */
+                interface ICreateAutoProtectionPolicyRequest {
+
+                    /** CreateAutoProtectionPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAutoProtectionPolicyRequest autoProtectionPolicyId */
+                    autoProtectionPolicyId?: (string|null);
+
+                    /** CreateAutoProtectionPolicyRequest autoProtectionPolicy */
+                    autoProtectionPolicy?: (google.cloud.backupdr.v1.IAutoProtectionPolicy|null);
+
+                    /** CreateAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAutoProtectionPolicyRequest. */
+                class CreateAutoProtectionPolicyRequest implements ICreateAutoProtectionPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateAutoProtectionPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest);
+
+                    /** CreateAutoProtectionPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateAutoProtectionPolicyRequest autoProtectionPolicyId. */
+                    public autoProtectionPolicyId: string;
+
+                    /** CreateAutoProtectionPolicyRequest autoProtectionPolicy. */
+                    public autoProtectionPolicy?: (google.cloud.backupdr.v1.IAutoProtectionPolicy|null);
+
+                    /** CreateAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAutoProtectionPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAutoProtectionPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest): google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateAutoProtectionPolicyRequest message. Does not implicitly {@link google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message CreateAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAutoProtectionPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message CreateAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAutoProtectionPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Decodes a CreateAutoProtectionPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Verifies a CreateAutoProtectionPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAutoProtectionPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAutoProtectionPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAutoProtectionPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateAutoProtectionPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAutoProtectionPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAutoProtectionPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAutoProtectionPolicyRequest. */
+                interface IGetAutoProtectionPolicyRequest {
+
+                    /** GetAutoProtectionPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutoProtectionPolicyRequest. */
+                class GetAutoProtectionPolicyRequest implements IGetAutoProtectionPolicyRequest {
+
+                    /**
+                     * Constructs a new GetAutoProtectionPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest);
+
+                    /** GetAutoProtectionPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutoProtectionPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutoProtectionPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest): google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetAutoProtectionPolicyRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message GetAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutoProtectionPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message GetAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutoProtectionPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest;
+
+                    /**
+                     * Decodes a GetAutoProtectionPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest;
+
+                    /**
+                     * Verifies a GetAutoProtectionPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutoProtectionPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutoProtectionPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutoProtectionPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetAutoProtectionPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutoProtectionPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutoProtectionPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAutoProtectionPolicyRequest. */
+                interface IUpdateAutoProtectionPolicyRequest {
+
+                    /** UpdateAutoProtectionPolicyRequest autoProtectionPolicy */
+                    autoProtectionPolicy?: (google.cloud.backupdr.v1.IAutoProtectionPolicy|null);
+
+                    /** UpdateAutoProtectionPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAutoProtectionPolicyRequest. */
+                class UpdateAutoProtectionPolicyRequest implements IUpdateAutoProtectionPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateAutoProtectionPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest);
+
+                    /** UpdateAutoProtectionPolicyRequest autoProtectionPolicy. */
+                    public autoProtectionPolicy?: (google.cloud.backupdr.v1.IAutoProtectionPolicy|null);
+
+                    /** UpdateAutoProtectionPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAutoProtectionPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAutoProtectionPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest): google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateAutoProtectionPolicyRequest message. Does not implicitly {@link google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAutoProtectionPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAutoProtectionPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateAutoProtectionPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateAutoProtectionPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAutoProtectionPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAutoProtectionPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAutoProtectionPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAutoProtectionPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAutoProtectionPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAutoProtectionPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAutoProtectionPolicyRequest. */
+                interface IDeleteAutoProtectionPolicyRequest {
+
+                    /** DeleteAutoProtectionPolicyRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAutoProtectionPolicyRequest etag */
+                    etag?: (string|null);
+
+                    /** DeleteAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteAutoProtectionPolicyRequest. */
+                class DeleteAutoProtectionPolicyRequest implements IDeleteAutoProtectionPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteAutoProtectionPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest);
+
+                    /** DeleteAutoProtectionPolicyRequest name. */
+                    public name: string;
+
+                    /** DeleteAutoProtectionPolicyRequest etag. */
+                    public etag: string;
+
+                    /** DeleteAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteAutoProtectionPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAutoProtectionPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest): google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteAutoProtectionPolicyRequest message. Does not implicitly {@link google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAutoProtectionPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAutoProtectionPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAutoProtectionPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteAutoProtectionPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAutoProtectionPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteAutoProtectionPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAutoProtectionPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAutoProtectionPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAutoProtectionPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAutoProtectionPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAutoProtectionPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAutoProtectionPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAutoProtectionPoliciesRequest. */
+                interface IListAutoProtectionPoliciesRequest {
+
+                    /** ListAutoProtectionPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAutoProtectionPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAutoProtectionPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAutoProtectionPoliciesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAutoProtectionPoliciesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAutoProtectionPoliciesRequest. */
+                class ListAutoProtectionPoliciesRequest implements IListAutoProtectionPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListAutoProtectionPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest);
+
+                    /** ListAutoProtectionPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListAutoProtectionPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAutoProtectionPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAutoProtectionPoliciesRequest filter. */
+                    public filter: string;
+
+                    /** ListAutoProtectionPoliciesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAutoProtectionPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAutoProtectionPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest): google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPoliciesRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest.verify|verify} messages.
+                     * @param message ListAutoProtectionPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest.verify|verify} messages.
+                     * @param message ListAutoProtectionPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAutoProtectionPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAutoProtectionPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Decodes a ListAutoProtectionPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAutoProtectionPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Verifies a ListAutoProtectionPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAutoProtectionPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAutoProtectionPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAutoProtectionPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListAutoProtectionPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAutoProtectionPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAutoProtectionPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAutoProtectionPoliciesResponse. */
+                interface IListAutoProtectionPoliciesResponse {
+
+                    /** ListAutoProtectionPoliciesResponse autoProtectionPolicies */
+                    autoProtectionPolicies?: (google.cloud.backupdr.v1.IAutoProtectionPolicy[]|null);
+
+                    /** ListAutoProtectionPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAutoProtectionPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAutoProtectionPoliciesResponse. */
+                class ListAutoProtectionPoliciesResponse implements IListAutoProtectionPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListAutoProtectionPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse);
+
+                    /** ListAutoProtectionPoliciesResponse autoProtectionPolicies. */
+                    public autoProtectionPolicies: google.cloud.backupdr.v1.IAutoProtectionPolicy[];
+
+                    /** ListAutoProtectionPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAutoProtectionPoliciesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAutoProtectionPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAutoProtectionPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse): google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPoliciesResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse.verify|verify} messages.
+                     * @param message ListAutoProtectionPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse.verify|verify} messages.
+                     * @param message ListAutoProtectionPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAutoProtectionPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAutoProtectionPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Decodes a ListAutoProtectionPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAutoProtectionPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Verifies a ListAutoProtectionPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAutoProtectionPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAutoProtectionPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAutoProtectionPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListAutoProtectionPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAutoProtectionPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAutoProtectionPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoProtectionPolicyBinding. */
+                interface IAutoProtectionPolicyBinding {
+
+                    /** AutoProtectionPolicyBinding name */
+                    name?: (string|null);
+
+                    /** AutoProtectionPolicyBinding description */
+                    description?: (string|null);
+
+                    /** AutoProtectionPolicyBinding state */
+                    state?: (google.cloud.backupdr.v1.AutoProtectionPolicyBinding.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionPolicyBinding.State|null);
+
+                    /** AutoProtectionPolicyBinding scope */
+                    scope?: (string|null);
+
+                    /** AutoProtectionPolicyBinding bindingEvaluationSummary */
+                    bindingEvaluationSummary?: (google.cloud.backupdr.v1.IBindingEvaluationSummary|null);
+
+                    /** AutoProtectionPolicyBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicyBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicyBinding etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an AutoProtectionPolicyBinding. */
+                class AutoProtectionPolicyBinding implements IAutoProtectionPolicyBinding {
+
+                    /**
+                     * Constructs a new AutoProtectionPolicyBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAutoProtectionPolicyBinding);
+
+                    /** AutoProtectionPolicyBinding name. */
+                    public name: string;
+
+                    /** AutoProtectionPolicyBinding description. */
+                    public description: string;
+
+                    /** AutoProtectionPolicyBinding state. */
+                    public state: (google.cloud.backupdr.v1.AutoProtectionPolicyBinding.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionPolicyBinding.State);
+
+                    /** AutoProtectionPolicyBinding scope. */
+                    public scope: string;
+
+                    /** AutoProtectionPolicyBinding bindingEvaluationSummary. */
+                    public bindingEvaluationSummary?: (google.cloud.backupdr.v1.IBindingEvaluationSummary|null);
+
+                    /** AutoProtectionPolicyBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicyBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoProtectionPolicyBinding etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new AutoProtectionPolicyBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoProtectionPolicyBinding instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAutoProtectionPolicyBinding): google.cloud.backupdr.v1.AutoProtectionPolicyBinding;
+
+                    /**
+                     * Encodes the specified AutoProtectionPolicyBinding message. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionPolicyBinding.verify|verify} messages.
+                     * @param message AutoProtectionPolicyBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAutoProtectionPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoProtectionPolicyBinding message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionPolicyBinding.verify|verify} messages.
+                     * @param message AutoProtectionPolicyBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAutoProtectionPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoProtectionPolicyBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoProtectionPolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AutoProtectionPolicyBinding;
+
+                    /**
+                     * Decodes an AutoProtectionPolicyBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoProtectionPolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AutoProtectionPolicyBinding;
+
+                    /**
+                     * Verifies an AutoProtectionPolicyBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoProtectionPolicyBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoProtectionPolicyBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AutoProtectionPolicyBinding;
+
+                    /**
+                     * Creates a plain object from an AutoProtectionPolicyBinding message. Also converts values to other types if specified.
+                     * @param message AutoProtectionPolicyBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AutoProtectionPolicyBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoProtectionPolicyBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoProtectionPolicyBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutoProtectionPolicyBinding {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETION_INITIATED = 3
+                    }
+                }
+
+                /** Properties of a BindingEvaluationSummary. */
+                interface IBindingEvaluationSummary {
+
+                    /** BindingEvaluationSummary matchingResourceCount */
+                    matchingResourceCount?: (number|Long|string|null);
+
+                    /** BindingEvaluationSummary protectedResourceCount */
+                    protectedResourceCount?: (number|Long|string|null);
+
+                    /** BindingEvaluationSummary failedResourceCount */
+                    failedResourceCount?: (number|Long|string|null);
+                }
+
+                /** Represents a BindingEvaluationSummary. */
+                class BindingEvaluationSummary implements IBindingEvaluationSummary {
+
+                    /**
+                     * Constructs a new BindingEvaluationSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBindingEvaluationSummary);
+
+                    /** BindingEvaluationSummary matchingResourceCount. */
+                    public matchingResourceCount: (number|Long|string);
+
+                    /** BindingEvaluationSummary protectedResourceCount. */
+                    public protectedResourceCount: (number|Long|string);
+
+                    /** BindingEvaluationSummary failedResourceCount. */
+                    public failedResourceCount: (number|Long|string);
+
+                    /**
+                     * Creates a new BindingEvaluationSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BindingEvaluationSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBindingEvaluationSummary): google.cloud.backupdr.v1.BindingEvaluationSummary;
+
+                    /**
+                     * Encodes the specified BindingEvaluationSummary message. Does not implicitly {@link google.cloud.backupdr.v1.BindingEvaluationSummary.verify|verify} messages.
+                     * @param message BindingEvaluationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBindingEvaluationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BindingEvaluationSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BindingEvaluationSummary.verify|verify} messages.
+                     * @param message BindingEvaluationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBindingEvaluationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BindingEvaluationSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BindingEvaluationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BindingEvaluationSummary;
+
+                    /**
+                     * Decodes a BindingEvaluationSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BindingEvaluationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BindingEvaluationSummary;
+
+                    /**
+                     * Verifies a BindingEvaluationSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BindingEvaluationSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BindingEvaluationSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BindingEvaluationSummary;
+
+                    /**
+                     * Creates a plain object from a BindingEvaluationSummary message. Also converts values to other types if specified.
+                     * @param message BindingEvaluationSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BindingEvaluationSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BindingEvaluationSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BindingEvaluationSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAutoProtectionPolicyBindingRequest. */
+                interface ICreateAutoProtectionPolicyBindingRequest {
+
+                    /** CreateAutoProtectionPolicyBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBindingId */
+                    autoProtectionPolicyBindingId?: (string|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBinding */
+                    autoProtectionPolicyBinding?: (google.cloud.backupdr.v1.IAutoProtectionPolicyBinding|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAutoProtectionPolicyBindingRequest. */
+                class CreateAutoProtectionPolicyBindingRequest implements ICreateAutoProtectionPolicyBindingRequest {
+
+                    /**
+                     * Constructs a new CreateAutoProtectionPolicyBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest);
+
+                    /** CreateAutoProtectionPolicyBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBindingId. */
+                    public autoProtectionPolicyBindingId: string;
+
+                    /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBinding. */
+                    public autoProtectionPolicyBinding?: (google.cloud.backupdr.v1.IAutoProtectionPolicyBinding|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAutoProtectionPolicyBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAutoProtectionPolicyBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest): google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateAutoProtectionPolicyBindingRequest message. Does not implicitly {@link google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message CreateAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAutoProtectionPolicyBindingRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message CreateAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAutoProtectionPolicyBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Decodes a CreateAutoProtectionPolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Verifies a CreateAutoProtectionPolicyBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAutoProtectionPolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAutoProtectionPolicyBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAutoProtectionPolicyBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateAutoProtectionPolicyBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAutoProtectionPolicyBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAutoProtectionPolicyBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAutoProtectionPolicyBindingRequest. */
+                interface IGetAutoProtectionPolicyBindingRequest {
+
+                    /** GetAutoProtectionPolicyBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutoProtectionPolicyBindingRequest. */
+                class GetAutoProtectionPolicyBindingRequest implements IGetAutoProtectionPolicyBindingRequest {
+
+                    /**
+                     * Constructs a new GetAutoProtectionPolicyBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest);
+
+                    /** GetAutoProtectionPolicyBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutoProtectionPolicyBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutoProtectionPolicyBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest): google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Encodes the specified GetAutoProtectionPolicyBindingRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message GetAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutoProtectionPolicyBindingRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message GetAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutoProtectionPolicyBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Decodes a GetAutoProtectionPolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Verifies a GetAutoProtectionPolicyBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutoProtectionPolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutoProtectionPolicyBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutoProtectionPolicyBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetAutoProtectionPolicyBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutoProtectionPolicyBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutoProtectionPolicyBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAutoProtectionPolicyBindingsRequest. */
+                interface IListAutoProtectionPolicyBindingsRequest {
+
+                    /** ListAutoProtectionPolicyBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAutoProtectionPolicyBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAutoProtectionPolicyBindingsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAutoProtectionPolicyBindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAutoProtectionPolicyBindingsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAutoProtectionPolicyBindingsRequest. */
+                class ListAutoProtectionPolicyBindingsRequest implements IListAutoProtectionPolicyBindingsRequest {
+
+                    /**
+                     * Constructs a new ListAutoProtectionPolicyBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest);
+
+                    /** ListAutoProtectionPolicyBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListAutoProtectionPolicyBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAutoProtectionPolicyBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAutoProtectionPolicyBindingsRequest filter. */
+                    public filter: string;
+
+                    /** ListAutoProtectionPolicyBindingsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAutoProtectionPolicyBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAutoProtectionPolicyBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPolicyBindingsRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest.verify|verify} messages.
+                     * @param message ListAutoProtectionPolicyBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest.verify|verify} messages.
+                     * @param message ListAutoProtectionPolicyBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAutoProtectionPolicyBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAutoProtectionPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest;
+
+                    /**
+                     * Decodes a ListAutoProtectionPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAutoProtectionPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest;
+
+                    /**
+                     * Verifies a ListAutoProtectionPolicyBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAutoProtectionPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAutoProtectionPolicyBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAutoProtectionPolicyBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListAutoProtectionPolicyBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAutoProtectionPolicyBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAutoProtectionPolicyBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAutoProtectionPolicyBindingsResponse. */
+                interface IListAutoProtectionPolicyBindingsResponse {
+
+                    /** ListAutoProtectionPolicyBindingsResponse autoProtectionPolicyBindings */
+                    autoProtectionPolicyBindings?: (google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[]|null);
+
+                    /** ListAutoProtectionPolicyBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAutoProtectionPolicyBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAutoProtectionPolicyBindingsResponse. */
+                class ListAutoProtectionPolicyBindingsResponse implements IListAutoProtectionPolicyBindingsResponse {
+
+                    /**
+                     * Constructs a new ListAutoProtectionPolicyBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse);
+
+                    /** ListAutoProtectionPolicyBindingsResponse autoProtectionPolicyBindings. */
+                    public autoProtectionPolicyBindings: google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[];
+
+                    /** ListAutoProtectionPolicyBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAutoProtectionPolicyBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAutoProtectionPolicyBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAutoProtectionPolicyBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPolicyBindingsResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse.verify|verify} messages.
+                     * @param message ListAutoProtectionPolicyBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAutoProtectionPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse.verify|verify} messages.
+                     * @param message ListAutoProtectionPolicyBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAutoProtectionPolicyBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAutoProtectionPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse;
+
+                    /**
+                     * Decodes a ListAutoProtectionPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAutoProtectionPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse;
+
+                    /**
+                     * Verifies a ListAutoProtectionPolicyBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAutoProtectionPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAutoProtectionPolicyBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAutoProtectionPolicyBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListAutoProtectionPolicyBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAutoProtectionPolicyBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAutoProtectionPolicyBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitiateDeleteAutoProtectionPolicyBindingRequest. */
+                interface IInitiateDeleteAutoProtectionPolicyBindingRequest {
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest name */
+                    name?: (string|null);
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest etag */
+                    etag?: (string|null);
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an InitiateDeleteAutoProtectionPolicyBindingRequest. */
+                class InitiateDeleteAutoProtectionPolicyBindingRequest implements IInitiateDeleteAutoProtectionPolicyBindingRequest {
+
+                    /**
+                     * Constructs a new InitiateDeleteAutoProtectionPolicyBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest);
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest name. */
+                    public name: string;
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest etag. */
+                    public etag: string;
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new InitiateDeleteAutoProtectionPolicyBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitiateDeleteAutoProtectionPolicyBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest): google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Encodes the specified InitiateDeleteAutoProtectionPolicyBindingRequest message. Does not implicitly {@link google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message InitiateDeleteAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitiateDeleteAutoProtectionPolicyBindingRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest.verify|verify} messages.
+                     * @param message InitiateDeleteAutoProtectionPolicyBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitiateDeleteAutoProtectionPolicyBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitiateDeleteAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Decodes an InitiateDeleteAutoProtectionPolicyBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitiateDeleteAutoProtectionPolicyBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Verifies an InitiateDeleteAutoProtectionPolicyBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitiateDeleteAutoProtectionPolicyBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitiateDeleteAutoProtectionPolicyBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest;
+
+                    /**
+                     * Creates a plain object from an InitiateDeleteAutoProtectionPolicyBindingRequest message. Also converts values to other types if specified.
+                     * @param message InitiateDeleteAutoProtectionPolicyBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitiateDeleteAutoProtectionPolicyBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitiateDeleteAutoProtectionPolicyBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a BackupDR */
                 class BackupDR extends $protobuf.rpc.Service {
 
@@ -563,6 +3185,412 @@ export namespace google {
                      * @returns Promise
                      */
                     public initializeService(request: google.cloud.backupdr.v1.IInitializeServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateAutoProtectionPolicy.
+                     * @param request CreateAutoProtectionPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAutoProtectionPolicy(request: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest, callback: google.cloud.backupdr.v1.BackupDR.CreateAutoProtectionPolicyCallback): void;
+
+                    /**
+                     * Calls CreateAutoProtectionPolicy.
+                     * @param request CreateAutoProtectionPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAutoProtectionPolicy(request: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListAutoProtectionPolicies.
+                     * @param request ListAutoProtectionPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAutoProtectionPoliciesResponse
+                     */
+                    public listAutoProtectionPolicies(request: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest, callback: google.cloud.backupdr.v1.BackupDR.ListAutoProtectionPoliciesCallback): void;
+
+                    /**
+                     * Calls ListAutoProtectionPolicies.
+                     * @param request ListAutoProtectionPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAutoProtectionPolicies(request: google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest): Promise<google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse>;
+
+                    /**
+                     * Calls GetAutoProtectionPolicy.
+                     * @param request GetAutoProtectionPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutoProtectionPolicy
+                     */
+                    public getAutoProtectionPolicy(request: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest, callback: google.cloud.backupdr.v1.BackupDR.GetAutoProtectionPolicyCallback): void;
+
+                    /**
+                     * Calls GetAutoProtectionPolicy.
+                     * @param request GetAutoProtectionPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutoProtectionPolicy(request: google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest): Promise<google.cloud.backupdr.v1.AutoProtectionPolicy>;
+
+                    /**
+                     * Calls UpdateAutoProtectionPolicy.
+                     * @param request UpdateAutoProtectionPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAutoProtectionPolicy(request: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest, callback: google.cloud.backupdr.v1.BackupDR.UpdateAutoProtectionPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateAutoProtectionPolicy.
+                     * @param request UpdateAutoProtectionPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAutoProtectionPolicy(request: google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAutoProtectionPolicy.
+                     * @param request DeleteAutoProtectionPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAutoProtectionPolicy(request: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest, callback: google.cloud.backupdr.v1.BackupDR.DeleteAutoProtectionPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteAutoProtectionPolicy.
+                     * @param request DeleteAutoProtectionPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAutoProtectionPolicy(request: google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateAutoProtectionPolicyBinding.
+                     * @param request CreateAutoProtectionPolicyBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest, callback: google.cloud.backupdr.v1.BackupDR.CreateAutoProtectionPolicyBindingCallback): void;
+
+                    /**
+                     * Calls CreateAutoProtectionPolicyBinding.
+                     * @param request CreateAutoProtectionPolicyBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetAutoProtectionPolicyBinding.
+                     * @param request GetAutoProtectionPolicyBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutoProtectionPolicyBinding
+                     */
+                    public getAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest, callback: google.cloud.backupdr.v1.BackupDR.GetAutoProtectionPolicyBindingCallback): void;
+
+                    /**
+                     * Calls GetAutoProtectionPolicyBinding.
+                     * @param request GetAutoProtectionPolicyBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest): Promise<google.cloud.backupdr.v1.AutoProtectionPolicyBinding>;
+
+                    /**
+                     * Calls ListAutoProtectionPolicyBindings.
+                     * @param request ListAutoProtectionPolicyBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAutoProtectionPolicyBindingsResponse
+                     */
+                    public listAutoProtectionPolicyBindings(request: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest, callback: google.cloud.backupdr.v1.BackupDR.ListAutoProtectionPolicyBindingsCallback): void;
+
+                    /**
+                     * Calls ListAutoProtectionPolicyBindings.
+                     * @param request ListAutoProtectionPolicyBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAutoProtectionPolicyBindings(request: google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest): Promise<google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse>;
+
+                    /**
+                     * Calls ListAppliedAutoProtectionPolicies.
+                     * @param request ListAppliedAutoProtectionPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAppliedAutoProtectionPoliciesResponse
+                     */
+                    public listAppliedAutoProtectionPolicies(request: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest, callback: google.cloud.backupdr.v1.BackupDR.ListAppliedAutoProtectionPoliciesCallback): void;
+
+                    /**
+                     * Calls ListAppliedAutoProtectionPolicies.
+                     * @param request ListAppliedAutoProtectionPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAppliedAutoProtectionPolicies(request: google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest): Promise<google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse>;
+
+                    /**
+                     * Calls InitiateDeleteAutoProtectionPolicyBinding.
+                     * @param request InitiateDeleteAutoProtectionPolicyBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public initiateDeleteAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest, callback: google.cloud.backupdr.v1.BackupDR.InitiateDeleteAutoProtectionPolicyBindingCallback): void;
+
+                    /**
+                     * Calls InitiateDeleteAutoProtectionPolicyBinding.
+                     * @param request InitiateDeleteAutoProtectionPolicyBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public initiateDeleteAutoProtectionPolicyBinding(request: google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBindingMatchingResources.
+                     * @param request ListBindingMatchingResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBindingMatchingResourcesResponse
+                     */
+                    public listBindingMatchingResources(request: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest, callback: google.cloud.backupdr.v1.BackupDR.ListBindingMatchingResourcesCallback): void;
+
+                    /**
+                     * Calls ListBindingMatchingResources.
+                     * @param request ListBindingMatchingResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBindingMatchingResources(request: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest): Promise<google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse>;
+
+                    /**
+                     * Calls CreateRestoreTemplate.
+                     * @param request CreateRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreTemplate(request: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest, callback: google.cloud.backupdr.v1.BackupDR.CreateRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls CreateRestoreTemplate.
+                     * @param request CreateRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreTemplate(request: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreTemplate.
+                     * @param request GetRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreTemplate
+                     */
+                    public getRestoreTemplate(request: google.cloud.backupdr.v1.IGetRestoreTemplateRequest, callback: google.cloud.backupdr.v1.BackupDR.GetRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls GetRestoreTemplate.
+                     * @param request GetRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreTemplate(request: google.cloud.backupdr.v1.IGetRestoreTemplateRequest): Promise<google.cloud.backupdr.v1.RestoreTemplate>;
+
+                    /**
+                     * Calls ListRestoreTemplates.
+                     * @param request ListRestoreTemplatesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreTemplatesResponse
+                     */
+                    public listRestoreTemplates(request: google.cloud.backupdr.v1.IListRestoreTemplatesRequest, callback: google.cloud.backupdr.v1.BackupDR.ListRestoreTemplatesCallback): void;
+
+                    /**
+                     * Calls ListRestoreTemplates.
+                     * @param request ListRestoreTemplatesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreTemplates(request: google.cloud.backupdr.v1.IListRestoreTemplatesRequest): Promise<google.cloud.backupdr.v1.ListRestoreTemplatesResponse>;
+
+                    /**
+                     * Calls UpdateRestoreTemplate.
+                     * @param request UpdateRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRestoreTemplate(request: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest, callback: google.cloud.backupdr.v1.BackupDR.UpdateRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls UpdateRestoreTemplate.
+                     * @param request UpdateRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRestoreTemplate(request: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteRestoreTemplate.
+                     * @param request DeleteRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreTemplate(request: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest, callback: google.cloud.backupdr.v1.BackupDR.DeleteRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreTemplate.
+                     * @param request DeleteRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreTemplate(request: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RunRestoreTemplate.
+                     * @param request RunRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runRestoreTemplate(request: google.cloud.backupdr.v1.IRunRestoreTemplateRequest, callback: google.cloud.backupdr.v1.BackupDR.RunRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls RunRestoreTemplate.
+                     * @param request RunRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runRestoreTemplate(request: google.cloud.backupdr.v1.IRunRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreTemplateExecution.
+                     * @param request GetRestoreTemplateExecutionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreTemplateExecution
+                     */
+                    public getRestoreTemplateExecution(request: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest, callback: google.cloud.backupdr.v1.BackupDR.GetRestoreTemplateExecutionCallback): void;
+
+                    /**
+                     * Calls GetRestoreTemplateExecution.
+                     * @param request GetRestoreTemplateExecutionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreTemplateExecution(request: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest): Promise<google.cloud.backupdr.v1.RestoreTemplateExecution>;
+
+                    /**
+                     * Calls ListRestoreTemplateExecutions.
+                     * @param request ListRestoreTemplateExecutionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreTemplateExecutionsResponse
+                     */
+                    public listRestoreTemplateExecutions(request: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest, callback: google.cloud.backupdr.v1.BackupDR.ListRestoreTemplateExecutionsCallback): void;
+
+                    /**
+                     * Calls ListRestoreTemplateExecutions.
+                     * @param request ListRestoreTemplateExecutionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreTemplateExecutions(request: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest): Promise<google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse>;
+
+                    /**
+                     * Calls TriggerRestoreCleanup.
+                     * @param request TriggerRestoreCleanupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public triggerRestoreCleanup(request: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest, callback: google.cloud.backupdr.v1.BackupDR.TriggerRestoreCleanupCallback): void;
+
+                    /**
+                     * Calls TriggerRestoreCleanup.
+                     * @param request TriggerRestoreCleanupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public triggerRestoreCleanup(request: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlan.
+                     * @param request CreateRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreVerificationPlan(request: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1.BackupDR.CreateRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlan.
+                     * @param request CreateRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreVerificationPlan(request: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlanAssociation.
+                     * @param request CreateRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1.BackupDR.CreateRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlanAssociation.
+                     * @param request CreateRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreVerificationPlanAssociation.
+                     * @param request GetRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreVerificationPlanAssociation
+                     */
+                    public getRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1.BackupDR.GetRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls GetRestoreVerificationPlanAssociation.
+                     * @param request GetRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest): Promise<google.cloud.backupdr.v1.RestoreVerificationPlanAssociation>;
+
+                    /**
+                     * Calls ListRestoreVerificationPlanAssociations.
+                     * @param request ListRestoreVerificationPlanAssociationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    public listRestoreVerificationPlanAssociations(request: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest, callback: google.cloud.backupdr.v1.BackupDR.ListRestoreVerificationPlanAssociationsCallback): void;
+
+                    /**
+                     * Calls ListRestoreVerificationPlanAssociations.
+                     * @param request ListRestoreVerificationPlanAssociationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreVerificationPlanAssociations(request: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest): Promise<google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse>;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlanAssociation.
+                     * @param request DeleteRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1.BackupDR.DeleteRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlanAssociation.
+                     * @param request DeleteRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls TriggerRestoreVerification.
+                     * @param request TriggerRestoreVerificationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public triggerRestoreVerification(request: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest, callback: google.cloud.backupdr.v1.BackupDR.TriggerRestoreVerificationCallback): void;
+
+                    /**
+                     * Calls TriggerRestoreVerification.
+                     * @param request TriggerRestoreVerificationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public triggerRestoreVerification(request: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreVerificationPlan.
+                     * @param request GetRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreVerificationPlan
+                     */
+                    public getRestoreVerificationPlan(request: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1.BackupDR.GetRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls GetRestoreVerificationPlan.
+                     * @param request GetRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreVerificationPlan(request: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest): Promise<google.cloud.backupdr.v1.RestoreVerificationPlan>;
+
+                    /**
+                     * Calls ListRestoreVerificationPlans.
+                     * @param request ListRestoreVerificationPlansRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreVerificationPlansResponse
+                     */
+                    public listRestoreVerificationPlans(request: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest, callback: google.cloud.backupdr.v1.BackupDR.ListRestoreVerificationPlansCallback): void;
+
+                    /**
+                     * Calls ListRestoreVerificationPlans.
+                     * @param request ListRestoreVerificationPlansRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreVerificationPlans(request: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest): Promise<google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse>;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlan.
+                     * @param request DeleteRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreVerificationPlan(request: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1.BackupDR.DeleteRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlan.
+                     * @param request DeleteRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreVerificationPlan(request: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace BackupDR {
@@ -825,6 +3853,209 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type InitializeServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createAutoProtectionPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAutoProtectionPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listAutoProtectionPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListAutoProtectionPoliciesResponse
+                     */
+                    type ListAutoProtectionPoliciesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListAutoProtectionPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getAutoProtectionPolicy}.
+                     * @param error Error, if any
+                     * @param [response] AutoProtectionPolicy
+                     */
+                    type GetAutoProtectionPolicyCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.AutoProtectionPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|updateAutoProtectionPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAutoProtectionPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|deleteAutoProtectionPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAutoProtectionPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createAutoProtectionPolicyBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAutoProtectionPolicyBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getAutoProtectionPolicyBinding}.
+                     * @param error Error, if any
+                     * @param [response] AutoProtectionPolicyBinding
+                     */
+                    type GetAutoProtectionPolicyBindingCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.AutoProtectionPolicyBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listAutoProtectionPolicyBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListAutoProtectionPolicyBindingsResponse
+                     */
+                    type ListAutoProtectionPolicyBindingsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listAppliedAutoProtectionPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListAppliedAutoProtectionPoliciesResponse
+                     */
+                    type ListAppliedAutoProtectionPoliciesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|initiateDeleteAutoProtectionPolicyBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type InitiateDeleteAutoProtectionPolicyBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listBindingMatchingResources}.
+                     * @param error Error, if any
+                     * @param [response] ListBindingMatchingResourcesResponse
+                     */
+                    type ListBindingMatchingResourcesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] RestoreTemplate
+                     */
+                    type GetRestoreTemplateCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.RestoreTemplate) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listRestoreTemplates}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreTemplatesResponse
+                     */
+                    type ListRestoreTemplatesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListRestoreTemplatesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|updateRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|deleteRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|runRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getRestoreTemplateExecution}.
+                     * @param error Error, if any
+                     * @param [response] RestoreTemplateExecution
+                     */
+                    type GetRestoreTemplateExecutionCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.RestoreTemplateExecution) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listRestoreTemplateExecutions}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreTemplateExecutionsResponse
+                     */
+                    type ListRestoreTemplateExecutionsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|triggerRestoreCleanup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TriggerRestoreCleanupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreVerificationPlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] RestoreVerificationPlanAssociation
+                     */
+                    type GetRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.RestoreVerificationPlanAssociation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listRestoreVerificationPlanAssociations}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    type ListRestoreVerificationPlanAssociationsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|deleteRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|triggerRestoreVerification}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TriggerRestoreVerificationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] RestoreVerificationPlan
+                     */
+                    type GetRestoreVerificationPlanCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.RestoreVerificationPlan) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listRestoreVerificationPlans}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreVerificationPlansResponse
+                     */
+                    type ListRestoreVerificationPlansCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|deleteRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreVerificationPlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a NetworkConfig. */
@@ -4181,6 +7412,9 @@ export namespace google {
 
                     /** BackupPlanAssociation backupPlanRevisionName */
                     backupPlanRevisionName?: (string|null);
+
+                    /** BackupPlanAssociation autoProtectionPolicyBinding */
+                    autoProtectionPolicyBinding?: (string|null);
                 }
 
                 /** Represents a BackupPlanAssociation. */
@@ -4230,6 +7464,9 @@ export namespace google {
 
                     /** BackupPlanAssociation backupPlanRevisionName. */
                     public backupPlanRevisionName: string;
+
+                    /** BackupPlanAssociation autoProtectionPolicyBinding. */
+                    public autoProtectionPolicyBinding: string;
 
                     /** BackupPlanAssociation resourceProperties. */
                     public resourceProperties?: ("cloudSqlInstanceBackupPlanAssociationProperties"|"alloydbClusterBackupPlanAssociationProperties");
@@ -5126,6 +8363,9 @@ export namespace google {
 
                     /** DeleteBackupPlanAssociationRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteBackupPlanAssociationRequest autoProtectionPolicyBinding */
+                    autoProtectionPolicyBinding?: (string|null);
                 }
 
                 /** Represents a DeleteBackupPlanAssociationRequest. */
@@ -5142,6 +8382,9 @@ export namespace google {
 
                     /** DeleteBackupPlanAssociationRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteBackupPlanAssociationRequest autoProtectionPolicyBinding. */
+                    public autoProtectionPolicyBinding: string;
 
                     /**
                      * Creates a new DeleteBackupPlanAssociationRequest instance using the specified properties.
@@ -6974,6 +10217,9 @@ export namespace google {
 
                     /** GcpBackupConfig backupPlanRevisionId */
                     backupPlanRevisionId?: (string|null);
+
+                    /** GcpBackupConfig autoProtectionPolicyBinding */
+                    autoProtectionPolicyBinding?: (string|null);
                 }
 
                 /** Represents a GcpBackupConfig. */
@@ -7002,6 +10248,9 @@ export namespace google {
 
                     /** GcpBackupConfig backupPlanRevisionId. */
                     public backupPlanRevisionId: string;
+
+                    /** GcpBackupConfig autoProtectionPolicyBinding. */
+                    public autoProtectionPolicyBinding: string;
 
                     /**
                      * Creates a new GcpBackupConfig instance using the specified properties.
@@ -7899,6 +11148,9 @@ export namespace google {
 
                     /** Backup kmsKeyVersions */
                     kmsKeyVersions?: (string[]|null);
+
+                    /** Backup verificationSummary */
+                    verificationSummary?: (google.cloud.backupdr.v1.IVerificationSummary|null);
                 }
 
                 /** Represents a Backup. */
@@ -7984,6 +11236,9 @@ export namespace google {
 
                     /** Backup kmsKeyVersions. */
                     public kmsKeyVersions: string[];
+
+                    /** Backup verificationSummary. */
+                    public verificationSummary?: (google.cloud.backupdr.v1.IVerificationSummary|null);
 
                     /** Backup backupProperties. */
                     public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"alloyDbBackupProperties"|"diskBackupProperties");
@@ -8205,6 +11460,125 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a VerificationSummary. */
+                interface IVerificationSummary {
+
+                    /** VerificationSummary lastVerificationTime */
+                    lastVerificationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationSummary lastVerificationState */
+                    lastVerificationState?: (google.cloud.backupdr.v1.VerificationSummary.LastVerificationState|keyof typeof google.cloud.backupdr.v1.VerificationSummary.LastVerificationState|null);
+
+                    /** VerificationSummary lastVerificationExecution */
+                    lastVerificationExecution?: (string|null);
+                }
+
+                /** Represents a VerificationSummary. */
+                class VerificationSummary implements IVerificationSummary {
+
+                    /**
+                     * Constructs a new VerificationSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IVerificationSummary);
+
+                    /** VerificationSummary lastVerificationTime. */
+                    public lastVerificationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationSummary lastVerificationState. */
+                    public lastVerificationState: (google.cloud.backupdr.v1.VerificationSummary.LastVerificationState|keyof typeof google.cloud.backupdr.v1.VerificationSummary.LastVerificationState);
+
+                    /** VerificationSummary lastVerificationExecution. */
+                    public lastVerificationExecution: string;
+
+                    /**
+                     * Creates a new VerificationSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IVerificationSummary): google.cloud.backupdr.v1.VerificationSummary;
+
+                    /**
+                     * Encodes the specified VerificationSummary message. Does not implicitly {@link google.cloud.backupdr.v1.VerificationSummary.verify|verify} messages.
+                     * @param message VerificationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IVerificationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.VerificationSummary.verify|verify} messages.
+                     * @param message VerificationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IVerificationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.VerificationSummary;
+
+                    /**
+                     * Decodes a VerificationSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.VerificationSummary;
+
+                    /**
+                     * Verifies a VerificationSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.VerificationSummary;
+
+                    /**
+                     * Creates a plain object from a VerificationSummary message. Also converts values to other types if specified.
+                     * @param message VerificationSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.VerificationSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VerificationSummary {
+
+                    /** LastVerificationState enum. */
+                    enum LastVerificationState {
+                        STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2
                     }
                 }
 
@@ -14984,6 +18358,472 @@ export namespace google {
                     STOP = 2
                 }
 
+                /** Properties of a ListBindingMatchingResourcesRequest. */
+                interface IListBindingMatchingResourcesRequest {
+
+                    /** ListBindingMatchingResourcesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBindingMatchingResourcesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBindingMatchingResourcesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBindingMatchingResourcesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBindingMatchingResourcesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListBindingMatchingResourcesRequest. */
+                class ListBindingMatchingResourcesRequest implements IListBindingMatchingResourcesRequest {
+
+                    /**
+                     * Constructs a new ListBindingMatchingResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest);
+
+                    /** ListBindingMatchingResourcesRequest parent. */
+                    public parent: string;
+
+                    /** ListBindingMatchingResourcesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBindingMatchingResourcesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBindingMatchingResourcesRequest filter. */
+                    public filter: string;
+
+                    /** ListBindingMatchingResourcesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListBindingMatchingResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBindingMatchingResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest): google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest;
+
+                    /**
+                     * Encodes the specified ListBindingMatchingResourcesRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest.verify|verify} messages.
+                     * @param message ListBindingMatchingResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBindingMatchingResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest.verify|verify} messages.
+                     * @param message ListBindingMatchingResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBindingMatchingResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBindingMatchingResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest;
+
+                    /**
+                     * Decodes a ListBindingMatchingResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBindingMatchingResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest;
+
+                    /**
+                     * Verifies a ListBindingMatchingResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBindingMatchingResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBindingMatchingResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a ListBindingMatchingResourcesRequest message. Also converts values to other types if specified.
+                     * @param message ListBindingMatchingResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBindingMatchingResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBindingMatchingResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBindingMatchingResourcesResponse. */
+                interface IListBindingMatchingResourcesResponse {
+
+                    /** ListBindingMatchingResourcesResponse matchingResources */
+                    matchingResources?: (google.cloud.backupdr.v1.IBindingMatchingResource[]|null);
+
+                    /** ListBindingMatchingResourcesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListBindingMatchingResourcesResponse. */
+                class ListBindingMatchingResourcesResponse implements IListBindingMatchingResourcesResponse {
+
+                    /**
+                     * Constructs a new ListBindingMatchingResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse);
+
+                    /** ListBindingMatchingResourcesResponse matchingResources. */
+                    public matchingResources: google.cloud.backupdr.v1.IBindingMatchingResource[];
+
+                    /** ListBindingMatchingResourcesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListBindingMatchingResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBindingMatchingResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse): google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse;
+
+                    /**
+                     * Encodes the specified ListBindingMatchingResourcesResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.verify|verify} messages.
+                     * @param message ListBindingMatchingResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBindingMatchingResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.verify|verify} messages.
+                     * @param message ListBindingMatchingResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBindingMatchingResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBindingMatchingResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse;
+
+                    /**
+                     * Decodes a ListBindingMatchingResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBindingMatchingResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse;
+
+                    /**
+                     * Verifies a ListBindingMatchingResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBindingMatchingResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBindingMatchingResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a ListBindingMatchingResourcesResponse message. Also converts values to other types if specified.
+                     * @param message ListBindingMatchingResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBindingMatchingResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBindingMatchingResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BindingMatchingResource. */
+                interface IBindingMatchingResource {
+
+                    /** BindingMatchingResource name */
+                    name?: (string|null);
+
+                    /** BindingMatchingResource resource */
+                    resource?: (string|null);
+
+                    /** BindingMatchingResource lastEvaluationTime */
+                    lastEvaluationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BindingMatchingResource autoProtectionDetails */
+                    autoProtectionDetails?: (google.cloud.backupdr.v1.IAutoProtectionDetails|null);
+                }
+
+                /** Represents a BindingMatchingResource. */
+                class BindingMatchingResource implements IBindingMatchingResource {
+
+                    /**
+                     * Constructs a new BindingMatchingResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBindingMatchingResource);
+
+                    /** BindingMatchingResource name. */
+                    public name: string;
+
+                    /** BindingMatchingResource resource. */
+                    public resource: string;
+
+                    /** BindingMatchingResource lastEvaluationTime. */
+                    public lastEvaluationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BindingMatchingResource autoProtectionDetails. */
+                    public autoProtectionDetails?: (google.cloud.backupdr.v1.IAutoProtectionDetails|null);
+
+                    /**
+                     * Creates a new BindingMatchingResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BindingMatchingResource instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBindingMatchingResource): google.cloud.backupdr.v1.BindingMatchingResource;
+
+                    /**
+                     * Encodes the specified BindingMatchingResource message. Does not implicitly {@link google.cloud.backupdr.v1.BindingMatchingResource.verify|verify} messages.
+                     * @param message BindingMatchingResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBindingMatchingResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BindingMatchingResource message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BindingMatchingResource.verify|verify} messages.
+                     * @param message BindingMatchingResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBindingMatchingResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BindingMatchingResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BindingMatchingResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BindingMatchingResource;
+
+                    /**
+                     * Decodes a BindingMatchingResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BindingMatchingResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BindingMatchingResource;
+
+                    /**
+                     * Verifies a BindingMatchingResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BindingMatchingResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BindingMatchingResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BindingMatchingResource;
+
+                    /**
+                     * Creates a plain object from a BindingMatchingResource message. Also converts values to other types if specified.
+                     * @param message BindingMatchingResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BindingMatchingResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BindingMatchingResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BindingMatchingResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoProtectionDetails. */
+                interface IAutoProtectionDetails {
+
+                    /** AutoProtectionDetails state */
+                    state?: (google.cloud.backupdr.v1.AutoProtectionDetails.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionDetails.State|null);
+
+                    /** AutoProtectionDetails backupPlanAssociation */
+                    backupPlanAssociation?: (string|null);
+
+                    /** AutoProtectionDetails dataSource */
+                    dataSource?: (string|null);
+
+                    /** AutoProtectionDetails error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an AutoProtectionDetails. */
+                class AutoProtectionDetails implements IAutoProtectionDetails {
+
+                    /**
+                     * Constructs a new AutoProtectionDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAutoProtectionDetails);
+
+                    /** AutoProtectionDetails state. */
+                    public state: (google.cloud.backupdr.v1.AutoProtectionDetails.State|keyof typeof google.cloud.backupdr.v1.AutoProtectionDetails.State);
+
+                    /** AutoProtectionDetails backupPlanAssociation. */
+                    public backupPlanAssociation: string;
+
+                    /** AutoProtectionDetails dataSource. */
+                    public dataSource: string;
+
+                    /** AutoProtectionDetails error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new AutoProtectionDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoProtectionDetails instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAutoProtectionDetails): google.cloud.backupdr.v1.AutoProtectionDetails;
+
+                    /**
+                     * Encodes the specified AutoProtectionDetails message. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionDetails.verify|verify} messages.
+                     * @param message AutoProtectionDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAutoProtectionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoProtectionDetails message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AutoProtectionDetails.verify|verify} messages.
+                     * @param message AutoProtectionDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAutoProtectionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoProtectionDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoProtectionDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AutoProtectionDetails;
+
+                    /**
+                     * Decodes an AutoProtectionDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoProtectionDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AutoProtectionDetails;
+
+                    /**
+                     * Verifies an AutoProtectionDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoProtectionDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoProtectionDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AutoProtectionDetails;
+
+                    /**
+                     * Creates a plain object from an AutoProtectionDetails message. Also converts values to other types if specified.
+                     * @param message AutoProtectionDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AutoProtectionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoProtectionDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoProtectionDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutoProtectionDetails {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROTECTED = 1,
+                        PROTECTION_FAILED = 2,
+                        UNPROTECTING = 3,
+                        UNPROTECTION_FAILED = 4
+                    }
+                }
+
                 /** Properties of a DataSourceReference. */
                 interface IDataSourceReference {
 
@@ -15895,6 +19735,4870 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchDataSourceReferencesForResourceTypeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreTemplate. */
+                interface IRestoreTemplate {
+
+                    /** RestoreTemplate name */
+                    name?: (string|null);
+
+                    /** RestoreTemplate description */
+                    description?: (string|null);
+
+                    /** RestoreTemplate createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreTemplate labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RestoreTemplate backupSelectionConfig */
+                    backupSelectionConfig?: (google.cloud.backupdr.v1.IBackupSelectionConfig|null);
+
+                    /** RestoreTemplate preRestoreConfig */
+                    preRestoreConfig?: (google.cloud.backupdr.v1.IPreRestoreConfig|null);
+
+                    /** RestoreTemplate postRestoreConfig */
+                    postRestoreConfig?: (google.cloud.backupdr.v1.IPostRestoreConfig|null);
+
+                    /** RestoreTemplate verificationConfig */
+                    verificationConfig?: (google.cloud.backupdr.v1.IVerificationConfig|null);
+
+                    /** RestoreTemplate restoreProperties */
+                    restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestoreTemplate state */
+                    state?: (google.cloud.backupdr.v1.RestoreTemplate.State|keyof typeof google.cloud.backupdr.v1.RestoreTemplate.State|null);
+
+                    /** RestoreTemplate executionSummary */
+                    executionSummary?: (google.cloud.backupdr.v1.IExecutionSummary|null);
+
+                    /** RestoreTemplate etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a RestoreTemplate. */
+                class RestoreTemplate implements IRestoreTemplate {
+
+                    /**
+                     * Constructs a new RestoreTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestoreTemplate);
+
+                    /** RestoreTemplate name. */
+                    public name: string;
+
+                    /** RestoreTemplate description. */
+                    public description: string;
+
+                    /** RestoreTemplate createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreTemplate labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreTemplate backupSelectionConfig. */
+                    public backupSelectionConfig?: (google.cloud.backupdr.v1.IBackupSelectionConfig|null);
+
+                    /** RestoreTemplate preRestoreConfig. */
+                    public preRestoreConfig?: (google.cloud.backupdr.v1.IPreRestoreConfig|null);
+
+                    /** RestoreTemplate postRestoreConfig. */
+                    public postRestoreConfig?: (google.cloud.backupdr.v1.IPostRestoreConfig|null);
+
+                    /** RestoreTemplate verificationConfig. */
+                    public verificationConfig?: (google.cloud.backupdr.v1.IVerificationConfig|null);
+
+                    /** RestoreTemplate restoreProperties. */
+                    public restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestoreTemplate state. */
+                    public state: (google.cloud.backupdr.v1.RestoreTemplate.State|keyof typeof google.cloud.backupdr.v1.RestoreTemplate.State);
+
+                    /** RestoreTemplate executionSummary. */
+                    public executionSummary?: (google.cloud.backupdr.v1.IExecutionSummary|null);
+
+                    /** RestoreTemplate etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new RestoreTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreTemplate instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestoreTemplate): google.cloud.backupdr.v1.RestoreTemplate;
+
+                    /**
+                     * Encodes the specified RestoreTemplate message. Does not implicitly {@link google.cloud.backupdr.v1.RestoreTemplate.verify|verify} messages.
+                     * @param message RestoreTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestoreTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreTemplate message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestoreTemplate.verify|verify} messages.
+                     * @param message RestoreTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestoreTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestoreTemplate;
+
+                    /**
+                     * Decodes a RestoreTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestoreTemplate;
+
+                    /**
+                     * Verifies a RestoreTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestoreTemplate;
+
+                    /**
+                     * Creates a plain object from a RestoreTemplate message. Also converts values to other types if specified.
+                     * @param message RestoreTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestoreTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreTemplate {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of an ExecutionSummary. */
+                interface IExecutionSummary {
+
+                    /** ExecutionSummary lastExecution */
+                    lastExecution?: (string|null);
+
+                    /** ExecutionSummary lastExecutionState */
+                    lastExecutionState?: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|null);
+                }
+
+                /** Represents an ExecutionSummary. */
+                class ExecutionSummary implements IExecutionSummary {
+
+                    /**
+                     * Constructs a new ExecutionSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IExecutionSummary);
+
+                    /** ExecutionSummary lastExecution. */
+                    public lastExecution: string;
+
+                    /** ExecutionSummary lastExecutionState. */
+                    public lastExecutionState: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState);
+
+                    /**
+                     * Creates a new ExecutionSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutionSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IExecutionSummary): google.cloud.backupdr.v1.ExecutionSummary;
+
+                    /**
+                     * Encodes the specified ExecutionSummary message. Does not implicitly {@link google.cloud.backupdr.v1.ExecutionSummary.verify|verify} messages.
+                     * @param message ExecutionSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IExecutionSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutionSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ExecutionSummary.verify|verify} messages.
+                     * @param message ExecutionSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IExecutionSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutionSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ExecutionSummary;
+
+                    /**
+                     * Decodes an ExecutionSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ExecutionSummary;
+
+                    /**
+                     * Verifies an ExecutionSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutionSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutionSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ExecutionSummary;
+
+                    /**
+                     * Creates a plain object from an ExecutionSummary message. Also converts values to other types if specified.
+                     * @param message ExecutionSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ExecutionSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutionSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutionSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreTemplateRequest. */
+                interface ICreateRestoreTemplateRequest {
+
+                    /** CreateRestoreTemplateRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreTemplateRequest restoreTemplateId */
+                    restoreTemplateId?: (string|null);
+
+                    /** CreateRestoreTemplateRequest restoreTemplate */
+                    restoreTemplate?: (google.cloud.backupdr.v1.IRestoreTemplate|null);
+
+                    /** CreateRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreTemplateRequest. */
+                class CreateRestoreTemplateRequest implements ICreateRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest);
+
+                    /** CreateRestoreTemplateRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreTemplateRequest restoreTemplateId. */
+                    public restoreTemplateId: string;
+
+                    /** CreateRestoreTemplateRequest restoreTemplate. */
+                    public restoreTemplate?: (google.cloud.backupdr.v1.IRestoreTemplate|null);
+
+                    /** CreateRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest): google.cloud.backupdr.v1.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message CreateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message CreateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICreateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a CreateRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a CreateRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CreateRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreTemplateRequest. */
+                interface IGetRestoreTemplateRequest {
+
+                    /** GetRestoreTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreTemplateRequest. */
+                class GetRestoreTemplateRequest implements IGetRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new GetRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetRestoreTemplateRequest);
+
+                    /** GetRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetRestoreTemplateRequest): google.cloud.backupdr.v1.GetRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreTemplateRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreTemplateRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a GetRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a GetRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRestoreTemplateRequest. */
+                interface IUpdateRestoreTemplateRequest {
+
+                    /** UpdateRestoreTemplateRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRestoreTemplateRequest restoreTemplate */
+                    restoreTemplate?: (google.cloud.backupdr.v1.IRestoreTemplate|null);
+
+                    /** UpdateRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateRestoreTemplateRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateRestoreTemplateRequest. */
+                class UpdateRestoreTemplateRequest implements IUpdateRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new UpdateRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest);
+
+                    /** UpdateRestoreTemplateRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRestoreTemplateRequest restoreTemplate. */
+                    public restoreTemplate?: (google.cloud.backupdr.v1.IRestoreTemplate|null);
+
+                    /** UpdateRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateRestoreTemplateRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest): google.cloud.backupdr.v1.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified UpdateRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1.UpdateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message UpdateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.UpdateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message UpdateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Decodes an UpdateRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Verifies an UpdateRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.UpdateRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreTemplateRequest. */
+                interface IDeleteRestoreTemplateRequest {
+
+                    /** DeleteRestoreTemplateRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteRestoreTemplateRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteRestoreTemplateRequest. */
+                class DeleteRestoreTemplateRequest implements IDeleteRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest);
+
+                    /** DeleteRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteRestoreTemplateRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest): google.cloud.backupdr.v1.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreTemplateRequest.verify|verify} messages.
+                     * @param message DeleteRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreTemplateRequest.verify|verify} messages.
+                     * @param message DeleteRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.DeleteRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunRestoreTemplateRequest. */
+                interface IRunRestoreTemplateRequest {
+
+                    /** RunRestoreTemplateRequest name */
+                    name?: (string|null);
+
+                    /** RunRestoreTemplateRequest backup */
+                    backup?: (string|null);
+
+                    /** RunRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RunRestoreTemplateRequest. */
+                class RunRestoreTemplateRequest implements IRunRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new RunRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRunRestoreTemplateRequest);
+
+                    /** RunRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /** RunRestoreTemplateRequest backup. */
+                    public backup: string;
+
+                    /** RunRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RunRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRunRestoreTemplateRequest): google.cloud.backupdr.v1.RunRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1.RunRestoreTemplateRequest.verify|verify} messages.
+                     * @param message RunRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRunRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RunRestoreTemplateRequest.verify|verify} messages.
+                     * @param message RunRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRunRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RunRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a RunRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RunRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a RunRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RunRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a RunRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message RunRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RunRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunRestoreTemplateResponse. */
+                interface IRunRestoreTemplateResponse {
+
+                    /** RunRestoreTemplateResponse restoreTemplateExecution */
+                    restoreTemplateExecution?: (string|null);
+                }
+
+                /** Represents a RunRestoreTemplateResponse. */
+                class RunRestoreTemplateResponse implements IRunRestoreTemplateResponse {
+
+                    /**
+                     * Constructs a new RunRestoreTemplateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRunRestoreTemplateResponse);
+
+                    /** RunRestoreTemplateResponse restoreTemplateExecution. */
+                    public restoreTemplateExecution: string;
+
+                    /**
+                     * Creates a new RunRestoreTemplateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRestoreTemplateResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRunRestoreTemplateResponse): google.cloud.backupdr.v1.RunRestoreTemplateResponse;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateResponse message. Does not implicitly {@link google.cloud.backupdr.v1.RunRestoreTemplateResponse.verify|verify} messages.
+                     * @param message RunRestoreTemplateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRunRestoreTemplateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RunRestoreTemplateResponse.verify|verify} messages.
+                     * @param message RunRestoreTemplateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRunRestoreTemplateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRestoreTemplateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRestoreTemplateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RunRestoreTemplateResponse;
+
+                    /**
+                     * Decodes a RunRestoreTemplateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRestoreTemplateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RunRestoreTemplateResponse;
+
+                    /**
+                     * Verifies a RunRestoreTemplateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRestoreTemplateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRestoreTemplateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RunRestoreTemplateResponse;
+
+                    /**
+                     * Creates a plain object from a RunRestoreTemplateResponse message. Also converts values to other types if specified.
+                     * @param message RunRestoreTemplateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RunRestoreTemplateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRestoreTemplateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunRestoreTemplateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplatesRequest. */
+                interface IListRestoreTemplatesRequest {
+
+                    /** ListRestoreTemplatesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreTemplatesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreTemplatesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreTemplatesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreTemplatesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreTemplatesRequest. */
+                class ListRestoreTemplatesRequest implements IListRestoreTemplatesRequest {
+
+                    /**
+                     * Constructs a new ListRestoreTemplatesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreTemplatesRequest);
+
+                    /** ListRestoreTemplatesRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreTemplatesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreTemplatesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreTemplatesRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreTemplatesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreTemplatesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplatesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreTemplatesRequest): google.cloud.backupdr.v1.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplatesRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplatesRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Verifies a ListRestoreTemplatesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplatesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplatesRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplatesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplatesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplatesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplatesResponse. */
+                interface IListRestoreTemplatesResponse {
+
+                    /** ListRestoreTemplatesResponse restoreTemplates */
+                    restoreTemplates?: (google.cloud.backupdr.v1.IRestoreTemplate[]|null);
+
+                    /** ListRestoreTemplatesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreTemplatesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreTemplatesResponse. */
+                class ListRestoreTemplatesResponse implements IListRestoreTemplatesResponse {
+
+                    /**
+                     * Constructs a new ListRestoreTemplatesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreTemplatesResponse);
+
+                    /** ListRestoreTemplatesResponse restoreTemplates. */
+                    public restoreTemplates: google.cloud.backupdr.v1.IRestoreTemplate[];
+
+                    /** ListRestoreTemplatesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreTemplatesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreTemplatesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplatesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreTemplatesResponse): google.cloud.backupdr.v1.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplatesResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplatesResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Verifies a ListRestoreTemplatesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplatesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplatesResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplatesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplatesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackupSelectionConfig. */
+                interface IBackupSelectionConfig {
+
+                    /** BackupSelectionConfig dataSource */
+                    dataSource?: (string|null);
+                }
+
+                /** Represents a BackupSelectionConfig. */
+                class BackupSelectionConfig implements IBackupSelectionConfig {
+
+                    /**
+                     * Constructs a new BackupSelectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBackupSelectionConfig);
+
+                    /** BackupSelectionConfig dataSource. */
+                    public dataSource?: (string|null);
+
+                    /** BackupSelectionConfig source. */
+                    public source?: "dataSource";
+
+                    /**
+                     * Creates a new BackupSelectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupSelectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBackupSelectionConfig): google.cloud.backupdr.v1.BackupSelectionConfig;
+
+                    /**
+                     * Encodes the specified BackupSelectionConfig message. Does not implicitly {@link google.cloud.backupdr.v1.BackupSelectionConfig.verify|verify} messages.
+                     * @param message BackupSelectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBackupSelectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupSelectionConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupSelectionConfig.verify|verify} messages.
+                     * @param message BackupSelectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBackupSelectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupSelectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupSelectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BackupSelectionConfig;
+
+                    /**
+                     * Decodes a BackupSelectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupSelectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BackupSelectionConfig;
+
+                    /**
+                     * Verifies a BackupSelectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupSelectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupSelectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BackupSelectionConfig;
+
+                    /**
+                     * Creates a plain object from a BackupSelectionConfig message. Also converts values to other types if specified.
+                     * @param message BackupSelectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BackupSelectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupSelectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupSelectionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreRestoreConfig. */
+                interface IPreRestoreConfig {
+
+                    /** PreRestoreConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
+                    /** PreRestoreConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+                }
+
+                /** Represents a PreRestoreConfig. */
+                class PreRestoreConfig implements IPreRestoreConfig {
+
+                    /**
+                     * Constructs a new PreRestoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPreRestoreConfig);
+
+                    /** PreRestoreConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** PreRestoreConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** PreRestoreConfig preRestoreAction. */
+                    public preRestoreAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new PreRestoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreRestoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPreRestoreConfig): google.cloud.backupdr.v1.PreRestoreConfig;
+
+                    /**
+                     * Encodes the specified PreRestoreConfig message. Does not implicitly {@link google.cloud.backupdr.v1.PreRestoreConfig.verify|verify} messages.
+                     * @param message PreRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPreRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreRestoreConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PreRestoreConfig.verify|verify} messages.
+                     * @param message PreRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPreRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreRestoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PreRestoreConfig;
+
+                    /**
+                     * Decodes a PreRestoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PreRestoreConfig;
+
+                    /**
+                     * Verifies a PreRestoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreRestoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreRestoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PreRestoreConfig;
+
+                    /**
+                     * Creates a plain object from a PreRestoreConfig message. Also converts values to other types if specified.
+                     * @param message PreRestoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PreRestoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreRestoreConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreRestoreConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostRestoreConfig. */
+                interface IPostRestoreConfig {
+
+                    /** PostRestoreConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
+                    /** PostRestoreConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+                }
+
+                /** Represents a PostRestoreConfig. */
+                class PostRestoreConfig implements IPostRestoreConfig {
+
+                    /**
+                     * Constructs a new PostRestoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPostRestoreConfig);
+
+                    /** PostRestoreConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** PostRestoreConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** PostRestoreConfig postRestoreAction. */
+                    public postRestoreAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new PostRestoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostRestoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPostRestoreConfig): google.cloud.backupdr.v1.PostRestoreConfig;
+
+                    /**
+                     * Encodes the specified PostRestoreConfig message. Does not implicitly {@link google.cloud.backupdr.v1.PostRestoreConfig.verify|verify} messages.
+                     * @param message PostRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPostRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostRestoreConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PostRestoreConfig.verify|verify} messages.
+                     * @param message PostRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPostRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostRestoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PostRestoreConfig;
+
+                    /**
+                     * Decodes a PostRestoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PostRestoreConfig;
+
+                    /**
+                     * Verifies a PostRestoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostRestoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostRestoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PostRestoreConfig;
+
+                    /**
+                     * Creates a plain object from a PostRestoreConfig message. Also converts values to other types if specified.
+                     * @param message PostRestoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PostRestoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostRestoreConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostRestoreConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerificationConfig. */
+                interface IVerificationConfig {
+
+                    /** VerificationConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
+                    /** VerificationConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+                }
+
+                /** Represents a VerificationConfig. */
+                class VerificationConfig implements IVerificationConfig {
+
+                    /**
+                     * Constructs a new VerificationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IVerificationConfig);
+
+                    /** VerificationConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** VerificationConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** VerificationConfig verificationAction. */
+                    public verificationAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new VerificationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IVerificationConfig): google.cloud.backupdr.v1.VerificationConfig;
+
+                    /**
+                     * Encodes the specified VerificationConfig message. Does not implicitly {@link google.cloud.backupdr.v1.VerificationConfig.verify|verify} messages.
+                     * @param message VerificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IVerificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.VerificationConfig.verify|verify} messages.
+                     * @param message VerificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IVerificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.VerificationConfig;
+
+                    /**
+                     * Decodes a VerificationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.VerificationConfig;
+
+                    /**
+                     * Verifies a VerificationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.VerificationConfig;
+
+                    /**
+                     * Creates a plain object from a VerificationConfig message. Also converts values to other types if specified.
+                     * @param message VerificationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.VerificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreTemplateExecution. */
+                interface IRestoreTemplateExecution {
+
+                    /** RestoreTemplateExecution name */
+                    name?: (string|null);
+
+                    /** RestoreTemplateExecution resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreTemplateExecution createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution type */
+                    type?: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionType|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionType|null);
+
+                    /** RestoreTemplateExecution phase */
+                    phase?: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionPhase|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionPhase|null);
+
+                    /** RestoreTemplateExecution state */
+                    state?: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|null);
+
+                    /** RestoreTemplateExecution preparePhaseInfo */
+                    preparePhaseInfo?: (google.cloud.backupdr.v1.IPreparePhaseInfo|null);
+
+                    /** RestoreTemplateExecution preRestorePhaseInfo */
+                    preRestorePhaseInfo?: (google.cloud.backupdr.v1.IPreRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution restorePhaseInfo */
+                    restorePhaseInfo?: (google.cloud.backupdr.v1.IRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution postRestorePhaseInfo */
+                    postRestorePhaseInfo?: (google.cloud.backupdr.v1.IPostRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution verificationPhaseInfo */
+                    verificationPhaseInfo?: (google.cloud.backupdr.v1.IVerificationPhaseInfo|null);
+
+                    /** RestoreTemplateExecution cleanupPhaseInfo */
+                    cleanupPhaseInfo?: (google.cloud.backupdr.v1.ICleanupPhaseInfo|null);
+                }
+
+                /** Represents a RestoreTemplateExecution. */
+                class RestoreTemplateExecution implements IRestoreTemplateExecution {
+
+                    /**
+                     * Constructs a new RestoreTemplateExecution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestoreTemplateExecution);
+
+                    /** RestoreTemplateExecution name. */
+                    public name: string;
+
+                    /** RestoreTemplateExecution resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreTemplateExecution createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution type. */
+                    public type: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionType|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionType);
+
+                    /** RestoreTemplateExecution phase. */
+                    public phase: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionPhase|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionPhase);
+
+                    /** RestoreTemplateExecution state. */
+                    public state: (google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1.RestoreTemplateExecution.ExecutionState);
+
+                    /** RestoreTemplateExecution preparePhaseInfo. */
+                    public preparePhaseInfo?: (google.cloud.backupdr.v1.IPreparePhaseInfo|null);
+
+                    /** RestoreTemplateExecution preRestorePhaseInfo. */
+                    public preRestorePhaseInfo?: (google.cloud.backupdr.v1.IPreRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution restorePhaseInfo. */
+                    public restorePhaseInfo?: (google.cloud.backupdr.v1.IRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution postRestorePhaseInfo. */
+                    public postRestorePhaseInfo?: (google.cloud.backupdr.v1.IPostRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution verificationPhaseInfo. */
+                    public verificationPhaseInfo?: (google.cloud.backupdr.v1.IVerificationPhaseInfo|null);
+
+                    /** RestoreTemplateExecution cleanupPhaseInfo. */
+                    public cleanupPhaseInfo?: (google.cloud.backupdr.v1.ICleanupPhaseInfo|null);
+
+                    /**
+                     * Creates a new RestoreTemplateExecution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreTemplateExecution instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestoreTemplateExecution): google.cloud.backupdr.v1.RestoreTemplateExecution;
+
+                    /**
+                     * Encodes the specified RestoreTemplateExecution message. Does not implicitly {@link google.cloud.backupdr.v1.RestoreTemplateExecution.verify|verify} messages.
+                     * @param message RestoreTemplateExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestoreTemplateExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreTemplateExecution message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestoreTemplateExecution.verify|verify} messages.
+                     * @param message RestoreTemplateExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestoreTemplateExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreTemplateExecution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreTemplateExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestoreTemplateExecution;
+
+                    /**
+                     * Decodes a RestoreTemplateExecution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreTemplateExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestoreTemplateExecution;
+
+                    /**
+                     * Verifies a RestoreTemplateExecution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreTemplateExecution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreTemplateExecution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestoreTemplateExecution;
+
+                    /**
+                     * Creates a plain object from a RestoreTemplateExecution message. Also converts values to other types if specified.
+                     * @param message RestoreTemplateExecution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestoreTemplateExecution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreTemplateExecution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreTemplateExecution
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreTemplateExecution {
+
+                    /** ExecutionType enum. */
+                    enum ExecutionType {
+                        EXECUTION_TYPE_UNSPECIFIED = 0,
+                        SCHEDULED = 1,
+                        ON_DEMAND = 2
+                    }
+
+                    /** ExecutionPhase enum. */
+                    enum ExecutionPhase {
+                        EXECUTION_PHASE_UNSPECIFIED = 0,
+                        PREPARING = 1,
+                        EXECUTING_PRE_RESTORE_ACTION = 2,
+                        RESTORING = 3,
+                        EXECUTING_POST_RESTORE_ACTION = 4,
+                        VERIFYING = 5,
+                        CLEANING_UP = 6,
+                        COMPLETED = 7
+                    }
+
+                    /** ExecutionState enum. */
+                    enum ExecutionState {
+                        EXECUTION_STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of a PreparePhaseInfo. */
+                interface IPreparePhaseInfo {
+
+                    /** PreparePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** PreparePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PreparePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo backupSelectionConfig */
+                    backupSelectionConfig?: (google.cloud.backupdr.v1.IBackupSelectionConfig|null);
+
+                    /** PreparePhaseInfo backup */
+                    backup?: (string|null);
+
+                    /** PreparePhaseInfo isBackupExplicitlyPassed */
+                    isBackupExplicitlyPassed?: (boolean|null);
+
+                    /** PreparePhaseInfo restoreVerificationPlanAssociation */
+                    restoreVerificationPlanAssociation?: (string|null);
+                }
+
+                /** Represents a PreparePhaseInfo. */
+                class PreparePhaseInfo implements IPreparePhaseInfo {
+
+                    /**
+                     * Constructs a new PreparePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPreparePhaseInfo);
+
+                    /** PreparePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** PreparePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PreparePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo backupSelectionConfig. */
+                    public backupSelectionConfig?: (google.cloud.backupdr.v1.IBackupSelectionConfig|null);
+
+                    /** PreparePhaseInfo backup. */
+                    public backup: string;
+
+                    /** PreparePhaseInfo isBackupExplicitlyPassed. */
+                    public isBackupExplicitlyPassed: boolean;
+
+                    /** PreparePhaseInfo restoreVerificationPlanAssociation. */
+                    public restoreVerificationPlanAssociation: string;
+
+                    /**
+                     * Creates a new PreparePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreparePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPreparePhaseInfo): google.cloud.backupdr.v1.PreparePhaseInfo;
+
+                    /**
+                     * Encodes the specified PreparePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.PreparePhaseInfo.verify|verify} messages.
+                     * @param message PreparePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPreparePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreparePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PreparePhaseInfo.verify|verify} messages.
+                     * @param message PreparePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPreparePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreparePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreparePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PreparePhaseInfo;
+
+                    /**
+                     * Decodes a PreparePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreparePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PreparePhaseInfo;
+
+                    /**
+                     * Verifies a PreparePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreparePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreparePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PreparePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PreparePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PreparePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PreparePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreparePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreparePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreRestorePhaseInfo. */
+                interface IPreRestorePhaseInfo {
+
+                    /** PreRestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** PreRestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PreRestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo preRestoreConfig */
+                    preRestoreConfig?: (google.cloud.backupdr.v1.IPreRestoreConfig|null);
+
+                    /** PreRestorePhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+                }
+
+                /** Represents a PreRestorePhaseInfo. */
+                class PreRestorePhaseInfo implements IPreRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new PreRestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPreRestorePhaseInfo);
+
+                    /** PreRestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** PreRestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PreRestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo preRestoreConfig. */
+                    public preRestoreConfig?: (google.cloud.backupdr.v1.IPreRestoreConfig|null);
+
+                    /** PreRestorePhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** PreRestorePhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new PreRestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreRestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPreRestorePhaseInfo): google.cloud.backupdr.v1.PreRestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified PreRestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.PreRestorePhaseInfo.verify|verify} messages.
+                     * @param message PreRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPreRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreRestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PreRestorePhaseInfo.verify|verify} messages.
+                     * @param message PreRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPreRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreRestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PreRestorePhaseInfo;
+
+                    /**
+                     * Decodes a PreRestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PreRestorePhaseInfo;
+
+                    /**
+                     * Verifies a PreRestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreRestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreRestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PreRestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PreRestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PreRestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PreRestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreRestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreRestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestorePhaseInfo. */
+                interface IRestorePhaseInfo {
+
+                    /** RestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** RestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** RestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo restoreProperties */
+                    restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestorePhaseInfo restoreResource */
+                    restoreResource?: (string|null);
+
+                    /** RestorePhaseInfo restoreDuration */
+                    restoreDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a RestorePhaseInfo. */
+                class RestorePhaseInfo implements IRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new RestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestorePhaseInfo);
+
+                    /** RestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** RestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** RestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo restoreProperties. */
+                    public restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestorePhaseInfo restoreResource. */
+                    public restoreResource: string;
+
+                    /** RestorePhaseInfo restoreDuration. */
+                    public restoreDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new RestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestorePhaseInfo): google.cloud.backupdr.v1.RestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified RestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.RestorePhaseInfo.verify|verify} messages.
+                     * @param message RestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestorePhaseInfo.verify|verify} messages.
+                     * @param message RestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestorePhaseInfo;
+
+                    /**
+                     * Decodes a RestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestorePhaseInfo;
+
+                    /**
+                     * Verifies a RestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a RestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message RestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostRestorePhaseInfo. */
+                interface IPostRestorePhaseInfo {
+
+                    /** PostRestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** PostRestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PostRestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo postRestoreConfig */
+                    postRestoreConfig?: (google.cloud.backupdr.v1.IPostRestoreConfig|null);
+
+                    /** PostRestorePhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+                }
+
+                /** Represents a PostRestorePhaseInfo. */
+                class PostRestorePhaseInfo implements IPostRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new PostRestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IPostRestorePhaseInfo);
+
+                    /** PostRestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** PostRestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PostRestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo postRestoreConfig. */
+                    public postRestoreConfig?: (google.cloud.backupdr.v1.IPostRestoreConfig|null);
+
+                    /** PostRestorePhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** PostRestorePhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new PostRestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostRestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IPostRestorePhaseInfo): google.cloud.backupdr.v1.PostRestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified PostRestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.PostRestorePhaseInfo.verify|verify} messages.
+                     * @param message PostRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IPostRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostRestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.PostRestorePhaseInfo.verify|verify} messages.
+                     * @param message PostRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IPostRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostRestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.PostRestorePhaseInfo;
+
+                    /**
+                     * Decodes a PostRestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.PostRestorePhaseInfo;
+
+                    /**
+                     * Verifies a PostRestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostRestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostRestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.PostRestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PostRestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PostRestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.PostRestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostRestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostRestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerificationPhaseInfo. */
+                interface IVerificationPhaseInfo {
+
+                    /** VerificationPhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** VerificationPhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** VerificationPhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo verificationConfig */
+                    verificationConfig?: (google.cloud.backupdr.v1.IVerificationConfig|null);
+
+                    /** VerificationPhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+                }
+
+                /** Represents a VerificationPhaseInfo. */
+                class VerificationPhaseInfo implements IVerificationPhaseInfo {
+
+                    /**
+                     * Constructs a new VerificationPhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IVerificationPhaseInfo);
+
+                    /** VerificationPhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** VerificationPhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** VerificationPhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo verificationConfig. */
+                    public verificationConfig?: (google.cloud.backupdr.v1.IVerificationConfig|null);
+
+                    /** VerificationPhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** VerificationPhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new VerificationPhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationPhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IVerificationPhaseInfo): google.cloud.backupdr.v1.VerificationPhaseInfo;
+
+                    /**
+                     * Encodes the specified VerificationPhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.VerificationPhaseInfo.verify|verify} messages.
+                     * @param message VerificationPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IVerificationPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationPhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.VerificationPhaseInfo.verify|verify} messages.
+                     * @param message VerificationPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IVerificationPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationPhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.VerificationPhaseInfo;
+
+                    /**
+                     * Decodes a VerificationPhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.VerificationPhaseInfo;
+
+                    /**
+                     * Verifies a VerificationPhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationPhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationPhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.VerificationPhaseInfo;
+
+                    /**
+                     * Creates a plain object from a VerificationPhaseInfo message. Also converts values to other types if specified.
+                     * @param message VerificationPhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.VerificationPhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationPhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationPhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CleanupPhaseInfo. */
+                interface ICleanupPhaseInfo {
+
+                    /** CleanupPhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState|null);
+
+                    /** CleanupPhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** CleanupPhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo cleanupDuration */
+                    cleanupDuration?: (google.protobuf.IDuration|null);
+
+                    /** CleanupPhaseInfo successCleanupRule */
+                    successCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo failureCleanupRule */
+                    failureCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo cleanupTime */
+                    cleanupTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CleanupPhaseInfo. */
+                class CleanupPhaseInfo implements ICleanupPhaseInfo {
+
+                    /**
+                     * Constructs a new CleanupPhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICleanupPhaseInfo);
+
+                    /** CleanupPhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1.PhaseState|keyof typeof google.cloud.backupdr.v1.PhaseState);
+
+                    /** CleanupPhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** CleanupPhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo cleanupDuration. */
+                    public cleanupDuration?: (google.protobuf.IDuration|null);
+
+                    /** CleanupPhaseInfo successCleanupRule. */
+                    public successCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo failureCleanupRule. */
+                    public failureCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo cleanupTime. */
+                    public cleanupTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CleanupPhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CleanupPhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICleanupPhaseInfo): google.cloud.backupdr.v1.CleanupPhaseInfo;
+
+                    /**
+                     * Encodes the specified CleanupPhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1.CleanupPhaseInfo.verify|verify} messages.
+                     * @param message CleanupPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICleanupPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CleanupPhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CleanupPhaseInfo.verify|verify} messages.
+                     * @param message CleanupPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICleanupPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CleanupPhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CleanupPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CleanupPhaseInfo;
+
+                    /**
+                     * Decodes a CleanupPhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CleanupPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CleanupPhaseInfo;
+
+                    /**
+                     * Verifies a CleanupPhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CleanupPhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CleanupPhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CleanupPhaseInfo;
+
+                    /**
+                     * Creates a plain object from a CleanupPhaseInfo message. Also converts values to other types if specified.
+                     * @param message CleanupPhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CleanupPhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CleanupPhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CleanupPhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreTemplateExecutionRequest. */
+                interface IGetRestoreTemplateExecutionRequest {
+
+                    /** GetRestoreTemplateExecutionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreTemplateExecutionRequest. */
+                class GetRestoreTemplateExecutionRequest implements IGetRestoreTemplateExecutionRequest {
+
+                    /**
+                     * Constructs a new GetRestoreTemplateExecutionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest);
+
+                    /** GetRestoreTemplateExecutionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreTemplateExecutionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreTemplateExecutionRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest): google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateExecutionRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateExecutionRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreTemplateExecutionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreTemplateExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Decodes a GetRestoreTemplateExecutionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreTemplateExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Verifies a GetRestoreTemplateExecutionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreTemplateExecutionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreTemplateExecutionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreTemplateExecutionRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreTemplateExecutionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreTemplateExecutionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreTemplateExecutionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreCleanupRequest. */
+                interface ITriggerRestoreCleanupRequest {
+
+                    /** TriggerRestoreCleanupRequest name */
+                    name?: (string|null);
+
+                    /** TriggerRestoreCleanupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreCleanupRequest. */
+                class TriggerRestoreCleanupRequest implements ITriggerRestoreCleanupRequest {
+
+                    /**
+                     * Constructs a new TriggerRestoreCleanupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest);
+
+                    /** TriggerRestoreCleanupRequest name. */
+                    public name: string;
+
+                    /** TriggerRestoreCleanupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new TriggerRestoreCleanupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreCleanupRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest): google.cloud.backupdr.v1.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Encodes the specified TriggerRestoreCleanupRequest message. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreCleanupRequest.verify|verify} messages.
+                     * @param message TriggerRestoreCleanupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreCleanupRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreCleanupRequest.verify|verify} messages.
+                     * @param message TriggerRestoreCleanupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreCleanupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreCleanupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Decodes a TriggerRestoreCleanupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreCleanupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Verifies a TriggerRestoreCleanupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreCleanupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreCleanupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreCleanupRequest message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreCleanupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.TriggerRestoreCleanupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreCleanupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreCleanupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplateExecutionsRequest. */
+                interface IListRestoreTemplateExecutionsRequest {
+
+                    /** ListRestoreTemplateExecutionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreTemplateExecutionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreTemplateExecutionsRequest. */
+                class ListRestoreTemplateExecutionsRequest implements IListRestoreTemplateExecutionsRequest {
+
+                    /**
+                     * Constructs a new ListRestoreTemplateExecutionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest);
+
+                    /** ListRestoreTemplateExecutionsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreTemplateExecutionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreTemplateExecutionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreTemplateExecutionsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreTemplateExecutionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreTemplateExecutionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplateExecutionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Verifies a ListRestoreTemplateExecutionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplateExecutionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplateExecutionsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplateExecutionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplateExecutionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplateExecutionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplateExecutionsResponse. */
+                interface IListRestoreTemplateExecutionsResponse {
+
+                    /** ListRestoreTemplateExecutionsResponse restoreTemplateExecutions */
+                    restoreTemplateExecutions?: (google.cloud.backupdr.v1.IRestoreTemplateExecution[]|null);
+
+                    /** ListRestoreTemplateExecutionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreTemplateExecutionsResponse. */
+                class ListRestoreTemplateExecutionsResponse implements IListRestoreTemplateExecutionsResponse {
+
+                    /**
+                     * Constructs a new ListRestoreTemplateExecutionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse);
+
+                    /** ListRestoreTemplateExecutionsResponse restoreTemplateExecutions. */
+                    public restoreTemplateExecutions: google.cloud.backupdr.v1.IRestoreTemplateExecution[];
+
+                    /** ListRestoreTemplateExecutionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreTemplateExecutionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreTemplateExecutionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplateExecutionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Verifies a ListRestoreTemplateExecutionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplateExecutionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplateExecutionsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplateExecutionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreTemplateExecutionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplateExecutionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplateExecutionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** PhaseState enum. */
+                enum PhaseState {
+                    PHASE_STATE_UNSPECIFIED = 0,
+                    PENDING = 1,
+                    RUNNING = 2,
+                    SUCCEEDED = 3,
+                    FAILED = 4,
+                    TIMED_OUT = 5,
+                    SKIPPED = 6,
+                    WAITING = 7
+                }
+
+                /** Properties of a RestoreVerificationPlan. */
+                interface IRestoreVerificationPlan {
+
+                    /** RestoreVerificationPlan name */
+                    name?: (string|null);
+
+                    /** RestoreVerificationPlan description */
+                    description?: (string|null);
+
+                    /** RestoreVerificationPlan createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RestoreVerificationPlan state */
+                    state?: (google.cloud.backupdr.v1.RestoreVerificationPlan.State|keyof typeof google.cloud.backupdr.v1.RestoreVerificationPlan.State|null);
+
+                    /** RestoreVerificationPlan schedule */
+                    schedule?: (string|null);
+
+                    /** RestoreVerificationPlan timeZone */
+                    timeZone?: (string|null);
+
+                    /** RestoreVerificationPlan successCleanupRule */
+                    successCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** RestoreVerificationPlan failureCleanupRule */
+                    failureCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+                }
+
+                /** Represents a RestoreVerificationPlan. */
+                class RestoreVerificationPlan implements IRestoreVerificationPlan {
+
+                    /**
+                     * Constructs a new RestoreVerificationPlan.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestoreVerificationPlan);
+
+                    /** RestoreVerificationPlan name. */
+                    public name: string;
+
+                    /** RestoreVerificationPlan description. */
+                    public description: string;
+
+                    /** RestoreVerificationPlan createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreVerificationPlan state. */
+                    public state: (google.cloud.backupdr.v1.RestoreVerificationPlan.State|keyof typeof google.cloud.backupdr.v1.RestoreVerificationPlan.State);
+
+                    /** RestoreVerificationPlan schedule. */
+                    public schedule: string;
+
+                    /** RestoreVerificationPlan timeZone. */
+                    public timeZone: string;
+
+                    /** RestoreVerificationPlan successCleanupRule. */
+                    public successCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /** RestoreVerificationPlan failureCleanupRule. */
+                    public failureCleanupRule?: (google.cloud.backupdr.v1.IRestoreVerificationCleanupRule|null);
+
+                    /**
+                     * Creates a new RestoreVerificationPlan instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationPlan instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestoreVerificationPlan): google.cloud.backupdr.v1.RestoreVerificationPlan;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlan message. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationPlan.verify|verify} messages.
+                     * @param message RestoreVerificationPlan message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestoreVerificationPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlan message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationPlan.verify|verify} messages.
+                     * @param message RestoreVerificationPlan message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestoreVerificationPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationPlan message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationPlan
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestoreVerificationPlan;
+
+                    /**
+                     * Decodes a RestoreVerificationPlan message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationPlan
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestoreVerificationPlan;
+
+                    /**
+                     * Verifies a RestoreVerificationPlan message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationPlan message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationPlan
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestoreVerificationPlan;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationPlan message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationPlan
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestoreVerificationPlan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationPlan to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationPlan
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreVerificationPlan {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        INACTIVE = 4,
+                        UPDATING = 5,
+                        ERROR = 6
+                    }
+                }
+
+                /** Properties of a RestoreVerificationCleanupRule. */
+                interface IRestoreVerificationCleanupRule {
+
+                    /** RestoreVerificationCleanupRule cleanupDelay */
+                    cleanupDelay?: (google.protobuf.IDuration|null);
+
+                    /** RestoreVerificationCleanupRule skipCleanup */
+                    skipCleanup?: (boolean|null);
+                }
+
+                /** Represents a RestoreVerificationCleanupRule. */
+                class RestoreVerificationCleanupRule implements IRestoreVerificationCleanupRule {
+
+                    /**
+                     * Constructs a new RestoreVerificationCleanupRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestoreVerificationCleanupRule);
+
+                    /** RestoreVerificationCleanupRule cleanupDelay. */
+                    public cleanupDelay?: (google.protobuf.IDuration|null);
+
+                    /** RestoreVerificationCleanupRule skipCleanup. */
+                    public skipCleanup?: (boolean|null);
+
+                    /**
+                     * Creates a new RestoreVerificationCleanupRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationCleanupRule instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestoreVerificationCleanupRule): google.cloud.backupdr.v1.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Encodes the specified RestoreVerificationCleanupRule message. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationCleanupRule.verify|verify} messages.
+                     * @param message RestoreVerificationCleanupRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestoreVerificationCleanupRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationCleanupRule message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationCleanupRule.verify|verify} messages.
+                     * @param message RestoreVerificationCleanupRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestoreVerificationCleanupRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationCleanupRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationCleanupRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Decodes a RestoreVerificationCleanupRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationCleanupRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Verifies a RestoreVerificationCleanupRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationCleanupRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationCleanupRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationCleanupRule message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationCleanupRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestoreVerificationCleanupRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationCleanupRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationCleanupRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreVerificationPlanRequest. */
+                interface ICreateRestoreVerificationPlanRequest {
+
+                    /** CreateRestoreVerificationPlanRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlanId */
+                    restoreVerificationPlanId?: (string|null);
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlan */
+                    restoreVerificationPlan?: (google.cloud.backupdr.v1.IRestoreVerificationPlan|null);
+
+                    /** CreateRestoreVerificationPlanRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreVerificationPlanRequest. */
+                class CreateRestoreVerificationPlanRequest implements ICreateRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest);
+
+                    /** CreateRestoreVerificationPlanRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlanId. */
+                    public restoreVerificationPlanId: string;
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlan. */
+                    public restoreVerificationPlan?: (google.cloud.backupdr.v1.IRestoreVerificationPlan|null);
+
+                    /** CreateRestoreVerificationPlanRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest): google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a CreateRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreVerificationPlanRequest. */
+                interface IGetRestoreVerificationPlanRequest {
+
+                    /** GetRestoreVerificationPlanRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreVerificationPlanRequest. */
+                class GetRestoreVerificationPlanRequest implements IGetRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new GetRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest);
+
+                    /** GetRestoreVerificationPlanRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest): google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a GetRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlansRequest. */
+                interface IListRestoreVerificationPlansRequest {
+
+                    /** ListRestoreVerificationPlansRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreVerificationPlansRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlansRequest. */
+                class ListRestoreVerificationPlansRequest implements IListRestoreVerificationPlansRequest {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlansRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest);
+
+                    /** ListRestoreVerificationPlansRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreVerificationPlansRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreVerificationPlansRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreVerificationPlansRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreVerificationPlansRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlansRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlansRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest): google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlansRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlansRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlansRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlansRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlansRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlansRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlansRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlansRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlansRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlansResponse. */
+                interface IListRestoreVerificationPlansResponse {
+
+                    /** ListRestoreVerificationPlansResponse restoreVerificationPlans */
+                    restoreVerificationPlans?: (google.cloud.backupdr.v1.IRestoreVerificationPlan[]|null);
+
+                    /** ListRestoreVerificationPlansResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlansResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlansResponse. */
+                class ListRestoreVerificationPlansResponse implements IListRestoreVerificationPlansResponse {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlansResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse);
+
+                    /** ListRestoreVerificationPlansResponse restoreVerificationPlans. */
+                    public restoreVerificationPlans: google.cloud.backupdr.v1.IRestoreVerificationPlan[];
+
+                    /** ListRestoreVerificationPlansResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreVerificationPlansResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlansResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlansResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse): google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlansResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlansResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlansResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlansResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlansResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlansResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlansResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlansResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlansResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreVerificationPlanRequest. */
+                interface IDeleteRestoreVerificationPlanRequest {
+
+                    /** DeleteRestoreVerificationPlanRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteRestoreVerificationPlanRequest. */
+                class DeleteRestoreVerificationPlanRequest implements IDeleteRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest);
+
+                    /** DeleteRestoreVerificationPlanRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreVerificationPlanRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteRestoreVerificationPlanRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreVerificationPlanAssociation. */
+                interface IRestoreVerificationPlanAssociation {
+
+                    /** RestoreVerificationPlanAssociation name */
+                    name?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation description */
+                    description?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation state */
+                    state?: (google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.State|keyof typeof google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.State|null);
+
+                    /** RestoreVerificationPlanAssociation triggerSummary */
+                    triggerSummary?: (google.cloud.backupdr.v1.ITriggerSummary|null);
+
+                    /** RestoreVerificationPlanAssociation resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation restoreTemplate */
+                    restoreTemplate?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a RestoreVerificationPlanAssociation. */
+                class RestoreVerificationPlanAssociation implements IRestoreVerificationPlanAssociation {
+
+                    /**
+                     * Constructs a new RestoreVerificationPlanAssociation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation);
+
+                    /** RestoreVerificationPlanAssociation name. */
+                    public name: string;
+
+                    /** RestoreVerificationPlanAssociation description. */
+                    public description: string;
+
+                    /** RestoreVerificationPlanAssociation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation state. */
+                    public state: (google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.State|keyof typeof google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.State);
+
+                    /** RestoreVerificationPlanAssociation triggerSummary. */
+                    public triggerSummary?: (google.cloud.backupdr.v1.ITriggerSummary|null);
+
+                    /** RestoreVerificationPlanAssociation resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreVerificationPlanAssociation restoreTemplate. */
+                    public restoreTemplate?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreVerificationPlanAssociation association. */
+                    public association?: "restoreTemplate";
+
+                    /**
+                     * Creates a new RestoreVerificationPlanAssociation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationPlanAssociation instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation): google.cloud.backupdr.v1.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlanAssociation message. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.verify|verify} messages.
+                     * @param message RestoreVerificationPlanAssociation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlanAssociation message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RestoreVerificationPlanAssociation.verify|verify} messages.
+                     * @param message RestoreVerificationPlanAssociation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationPlanAssociation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationPlanAssociation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Decodes a RestoreVerificationPlanAssociation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationPlanAssociation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Verifies a RestoreVerificationPlanAssociation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationPlanAssociation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationPlanAssociation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationPlanAssociation message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationPlanAssociation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.RestoreVerificationPlanAssociation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationPlanAssociation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationPlanAssociation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreVerificationPlanAssociation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        INACTIVE = 4,
+                        UPDATING = 5,
+                        ERROR = 6
+                    }
+                }
+
+                /** Properties of a TriggerSummary. */
+                interface ITriggerSummary {
+
+                    /** TriggerSummary lastTriggerTime */
+                    lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary nextTriggerTime */
+                    nextTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary lastTriggerError */
+                    lastTriggerError?: (google.rpc.IStatus|null);
+
+                    /** TriggerSummary lastVerificationExecution */
+                    lastVerificationExecution?: (string|null);
+                }
+
+                /** Represents a TriggerSummary. */
+                class TriggerSummary implements ITriggerSummary {
+
+                    /**
+                     * Constructs a new TriggerSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ITriggerSummary);
+
+                    /** TriggerSummary lastTriggerTime. */
+                    public lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary nextTriggerTime. */
+                    public nextTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary lastTriggerError. */
+                    public lastTriggerError?: (google.rpc.IStatus|null);
+
+                    /** TriggerSummary lastVerificationExecution. */
+                    public lastVerificationExecution: string;
+
+                    /**
+                     * Creates a new TriggerSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ITriggerSummary): google.cloud.backupdr.v1.TriggerSummary;
+
+                    /**
+                     * Encodes the specified TriggerSummary message. Does not implicitly {@link google.cloud.backupdr.v1.TriggerSummary.verify|verify} messages.
+                     * @param message TriggerSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ITriggerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.TriggerSummary.verify|verify} messages.
+                     * @param message TriggerSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ITriggerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.TriggerSummary;
+
+                    /**
+                     * Decodes a TriggerSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.TriggerSummary;
+
+                    /**
+                     * Verifies a TriggerSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.TriggerSummary;
+
+                    /**
+                     * Creates a plain object from a TriggerSummary message. Also converts values to other types if specified.
+                     * @param message TriggerSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.TriggerSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreVerificationPlanAssociationRequest. */
+                interface ICreateRestoreVerificationPlanAssociationRequest {
+
+                    /** CreateRestoreVerificationPlanAssociationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociationId */
+                    restoreVerificationPlanAssociationId?: (string|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociation */
+                    restoreVerificationPlanAssociation?: (google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreVerificationPlanAssociationRequest. */
+                class CreateRestoreVerificationPlanAssociationRequest implements ICreateRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociationId. */
+                    public restoreVerificationPlanAssociationId: string;
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociation. */
+                    public restoreVerificationPlanAssociation?: (google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a CreateRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreVerificationPlanAssociationRequest. */
+                interface IGetRestoreVerificationPlanAssociationRequest {
+
+                    /** GetRestoreVerificationPlanAssociationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreVerificationPlanAssociationRequest. */
+                class GetRestoreVerificationPlanAssociationRequest implements IGetRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new GetRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest);
+
+                    /** GetRestoreVerificationPlanAssociationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a GetRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlanAssociationsRequest. */
+                interface IListRestoreVerificationPlanAssociationsRequest {
+
+                    /** ListRestoreVerificationPlanAssociationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlanAssociationsRequest. */
+                class ListRestoreVerificationPlanAssociationsRequest implements IListRestoreVerificationPlanAssociationsRequest {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlanAssociationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlanAssociationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlanAssociationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlanAssociationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlanAssociationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlanAssociationsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlanAssociationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlanAssociationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlanAssociationsResponse. */
+                interface IListRestoreVerificationPlanAssociationsResponse {
+
+                    /** ListRestoreVerificationPlanAssociationsResponse restoreVerificationPlanAssociations */
+                    restoreVerificationPlanAssociations?: (google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[]|null);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlanAssociationsResponse. */
+                class ListRestoreVerificationPlanAssociationsResponse implements IListRestoreVerificationPlanAssociationsResponse {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlanAssociationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse restoreVerificationPlanAssociations. */
+                    public restoreVerificationPlanAssociations: google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[];
+
+                    /** ListRestoreVerificationPlanAssociationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreVerificationPlanAssociationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlanAssociationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlanAssociationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlanAssociationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlanAssociationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlanAssociationsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlanAssociationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlanAssociationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreVerificationPlanAssociationRequest. */
+                interface IDeleteRestoreVerificationPlanAssociationRequest {
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteRestoreVerificationPlanAssociationRequest. */
+                class DeleteRestoreVerificationPlanAssociationRequest implements IDeleteRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest);
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreVerificationRequest. */
+                interface ITriggerRestoreVerificationRequest {
+
+                    /** TriggerRestoreVerificationRequest name */
+                    name?: (string|null);
+
+                    /** TriggerRestoreVerificationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreVerificationRequest. */
+                class TriggerRestoreVerificationRequest implements ITriggerRestoreVerificationRequest {
+
+                    /**
+                     * Constructs a new TriggerRestoreVerificationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest);
+
+                    /** TriggerRestoreVerificationRequest name. */
+                    public name: string;
+
+                    /** TriggerRestoreVerificationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new TriggerRestoreVerificationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreVerificationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest): google.cloud.backupdr.v1.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationRequest message. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreVerificationRequest.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreVerificationRequest.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreVerificationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreVerificationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Verifies a TriggerRestoreVerificationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreVerificationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreVerificationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreVerificationRequest message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreVerificationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.TriggerRestoreVerificationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreVerificationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreVerificationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreVerificationResponse. */
+                interface ITriggerRestoreVerificationResponse {
+
+                    /** TriggerRestoreVerificationResponse restoreTemplateExecution */
+                    restoreTemplateExecution?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreVerificationResponse. */
+                class TriggerRestoreVerificationResponse implements ITriggerRestoreVerificationResponse {
+
+                    /**
+                     * Constructs a new TriggerRestoreVerificationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse);
+
+                    /** TriggerRestoreVerificationResponse restoreTemplateExecution. */
+                    public restoreTemplateExecution: string;
+
+                    /**
+                     * Creates a new TriggerRestoreVerificationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreVerificationResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse): google.cloud.backupdr.v1.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationResponse message. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreVerificationResponse.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.TriggerRestoreVerificationResponse.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreVerificationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreVerificationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Verifies a TriggerRestoreVerificationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreVerificationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreVerificationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreVerificationResponse message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreVerificationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.TriggerRestoreVerificationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreVerificationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreVerificationResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18188,6 +26892,9 @@ export namespace google {
 
                     /** CreateAutoProtectionPolicyRequest autoProtectionPolicy */
                     autoProtectionPolicy?: (google.cloud.backupdr.v1beta.IAutoProtectionPolicy|null);
+
+                    /** CreateAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateAutoProtectionPolicyRequest. */
@@ -18207,6 +26914,9 @@ export namespace google {
 
                     /** CreateAutoProtectionPolicyRequest autoProtectionPolicy. */
                     public autoProtectionPolicy?: (google.cloud.backupdr.v1beta.IAutoProtectionPolicy|null);
+
+                    /** CreateAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateAutoProtectionPolicyRequest instance using the specified properties.
@@ -18391,6 +27101,9 @@ export namespace google {
 
                     /** UpdateAutoProtectionPolicyRequest updateMask */
                     updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents an UpdateAutoProtectionPolicyRequest. */
@@ -18407,6 +27120,9 @@ export namespace google {
 
                     /** UpdateAutoProtectionPolicyRequest updateMask. */
                     public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new UpdateAutoProtectionPolicyRequest instance using the specified properties.
@@ -18494,6 +27210,9 @@ export namespace google {
 
                     /** DeleteAutoProtectionPolicyRequest etag */
                     etag?: (string|null);
+
+                    /** DeleteAutoProtectionPolicyRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a DeleteAutoProtectionPolicyRequest. */
@@ -18510,6 +27229,9 @@ export namespace google {
 
                     /** DeleteAutoProtectionPolicyRequest etag. */
                     public etag: string;
+
+                    /** DeleteAutoProtectionPolicyRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new DeleteAutoProtectionPolicyRequest instance using the specified properties.
@@ -19089,6 +27811,9 @@ export namespace google {
 
                     /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBinding */
                     autoProtectionPolicyBinding?: (google.cloud.backupdr.v1beta.IAutoProtectionPolicyBinding|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateAutoProtectionPolicyBindingRequest. */
@@ -19108,6 +27833,9 @@ export namespace google {
 
                     /** CreateAutoProtectionPolicyBindingRequest autoProtectionPolicyBinding. */
                     public autoProtectionPolicyBinding?: (google.cloud.backupdr.v1beta.IAutoProtectionPolicyBinding|null);
+
+                    /** CreateAutoProtectionPolicyBindingRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateAutoProtectionPolicyBindingRequest instance using the specified properties.
@@ -19519,6 +28247,12 @@ export namespace google {
 
                     /** InitiateDeleteAutoProtectionPolicyBindingRequest name */
                     name?: (string|null);
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest etag */
+                    etag?: (string|null);
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents an InitiateDeleteAutoProtectionPolicyBindingRequest. */
@@ -19532,6 +28266,12 @@ export namespace google {
 
                     /** InitiateDeleteAutoProtectionPolicyBindingRequest name. */
                     public name: string;
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest etag. */
+                    public etag: string;
+
+                    /** InitiateDeleteAutoProtectionPolicyBindingRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new InitiateDeleteAutoProtectionPolicyBindingRequest instance using the specified properties.
@@ -19686,6 +28426,258 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteManagementServer(request: google.cloud.backupdr.v1beta.IDeleteManagementServerRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateRestoreTemplate.
+                     * @param request CreateRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreTemplate(request: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest, callback: google.cloud.backupdr.v1beta.BackupDR.CreateRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls CreateRestoreTemplate.
+                     * @param request CreateRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreTemplate(request: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreTemplate.
+                     * @param request GetRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreTemplate
+                     */
+                    public getRestoreTemplate(request: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest, callback: google.cloud.backupdr.v1beta.BackupDR.GetRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls GetRestoreTemplate.
+                     * @param request GetRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreTemplate(request: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest): Promise<google.cloud.backupdr.v1beta.RestoreTemplate>;
+
+                    /**
+                     * Calls ListRestoreTemplates.
+                     * @param request ListRestoreTemplatesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreTemplatesResponse
+                     */
+                    public listRestoreTemplates(request: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest, callback: google.cloud.backupdr.v1beta.BackupDR.ListRestoreTemplatesCallback): void;
+
+                    /**
+                     * Calls ListRestoreTemplates.
+                     * @param request ListRestoreTemplatesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreTemplates(request: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest): Promise<google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse>;
+
+                    /**
+                     * Calls UpdateRestoreTemplate.
+                     * @param request UpdateRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRestoreTemplate(request: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest, callback: google.cloud.backupdr.v1beta.BackupDR.UpdateRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls UpdateRestoreTemplate.
+                     * @param request UpdateRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRestoreTemplate(request: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteRestoreTemplate.
+                     * @param request DeleteRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreTemplate(request: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest, callback: google.cloud.backupdr.v1beta.BackupDR.DeleteRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreTemplate.
+                     * @param request DeleteRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreTemplate(request: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RunRestoreTemplate.
+                     * @param request RunRestoreTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runRestoreTemplate(request: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest, callback: google.cloud.backupdr.v1beta.BackupDR.RunRestoreTemplateCallback): void;
+
+                    /**
+                     * Calls RunRestoreTemplate.
+                     * @param request RunRestoreTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runRestoreTemplate(request: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreTemplateExecution.
+                     * @param request GetRestoreTemplateExecutionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreTemplateExecution
+                     */
+                    public getRestoreTemplateExecution(request: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest, callback: google.cloud.backupdr.v1beta.BackupDR.GetRestoreTemplateExecutionCallback): void;
+
+                    /**
+                     * Calls GetRestoreTemplateExecution.
+                     * @param request GetRestoreTemplateExecutionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreTemplateExecution(request: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest): Promise<google.cloud.backupdr.v1beta.RestoreTemplateExecution>;
+
+                    /**
+                     * Calls ListRestoreTemplateExecutions.
+                     * @param request ListRestoreTemplateExecutionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreTemplateExecutionsResponse
+                     */
+                    public listRestoreTemplateExecutions(request: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest, callback: google.cloud.backupdr.v1beta.BackupDR.ListRestoreTemplateExecutionsCallback): void;
+
+                    /**
+                     * Calls ListRestoreTemplateExecutions.
+                     * @param request ListRestoreTemplateExecutionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreTemplateExecutions(request: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest): Promise<google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse>;
+
+                    /**
+                     * Calls TriggerRestoreCleanup.
+                     * @param request TriggerRestoreCleanupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public triggerRestoreCleanup(request: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest, callback: google.cloud.backupdr.v1beta.BackupDR.TriggerRestoreCleanupCallback): void;
+
+                    /**
+                     * Calls TriggerRestoreCleanup.
+                     * @param request TriggerRestoreCleanupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public triggerRestoreCleanup(request: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlan.
+                     * @param request CreateRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1beta.BackupDR.CreateRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlan.
+                     * @param request CreateRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlanAssociation.
+                     * @param request CreateRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1beta.BackupDR.CreateRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls CreateRestoreVerificationPlanAssociation.
+                     * @param request CreateRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreVerificationPlanAssociation.
+                     * @param request GetRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreVerificationPlanAssociation
+                     */
+                    public getRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1beta.BackupDR.GetRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls GetRestoreVerificationPlanAssociation.
+                     * @param request GetRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest): Promise<google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation>;
+
+                    /**
+                     * Calls ListRestoreVerificationPlanAssociations.
+                     * @param request ListRestoreVerificationPlanAssociationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    public listRestoreVerificationPlanAssociations(request: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest, callback: google.cloud.backupdr.v1beta.BackupDR.ListRestoreVerificationPlanAssociationsCallback): void;
+
+                    /**
+                     * Calls ListRestoreVerificationPlanAssociations.
+                     * @param request ListRestoreVerificationPlanAssociationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreVerificationPlanAssociations(request: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest): Promise<google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse>;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlanAssociation.
+                     * @param request DeleteRestoreVerificationPlanAssociationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest, callback: google.cloud.backupdr.v1beta.BackupDR.DeleteRestoreVerificationPlanAssociationCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlanAssociation.
+                     * @param request DeleteRestoreVerificationPlanAssociationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreVerificationPlanAssociation(request: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls TriggerRestoreVerification.
+                     * @param request TriggerRestoreVerificationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public triggerRestoreVerification(request: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest, callback: google.cloud.backupdr.v1beta.BackupDR.TriggerRestoreVerificationCallback): void;
+
+                    /**
+                     * Calls TriggerRestoreVerification.
+                     * @param request TriggerRestoreVerificationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public triggerRestoreVerification(request: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRestoreVerificationPlan.
+                     * @param request GetRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreVerificationPlan
+                     */
+                    public getRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1beta.BackupDR.GetRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls GetRestoreVerificationPlan.
+                     * @param request GetRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest): Promise<google.cloud.backupdr.v1beta.RestoreVerificationPlan>;
+
+                    /**
+                     * Calls ListRestoreVerificationPlans.
+                     * @param request ListRestoreVerificationPlansRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreVerificationPlansResponse
+                     */
+                    public listRestoreVerificationPlans(request: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest, callback: google.cloud.backupdr.v1beta.BackupDR.ListRestoreVerificationPlansCallback): void;
+
+                    /**
+                     * Calls ListRestoreVerificationPlans.
+                     * @param request ListRestoreVerificationPlansRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreVerificationPlans(request: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest): Promise<google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse>;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlan.
+                     * @param request DeleteRestoreVerificationPlanRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest, callback: google.cloud.backupdr.v1beta.BackupDR.DeleteRestoreVerificationPlanCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreVerificationPlan.
+                     * @param request DeleteRestoreVerificationPlanRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreVerificationPlan(request: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls CreateBackupVault.
@@ -20347,6 +29339,132 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteManagementServerCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|createRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|getRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] RestoreTemplate
+                     */
+                    type GetRestoreTemplateCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.RestoreTemplate) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|listRestoreTemplates}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreTemplatesResponse
+                     */
+                    type ListRestoreTemplatesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|updateRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|deleteRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|runRestoreTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunRestoreTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|getRestoreTemplateExecution}.
+                     * @param error Error, if any
+                     * @param [response] RestoreTemplateExecution
+                     */
+                    type GetRestoreTemplateExecutionCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.RestoreTemplateExecution) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|listRestoreTemplateExecutions}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreTemplateExecutionsResponse
+                     */
+                    type ListRestoreTemplateExecutionsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|triggerRestoreCleanup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TriggerRestoreCleanupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|createRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreVerificationPlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|createRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|getRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] RestoreVerificationPlanAssociation
+                     */
+                    type GetRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|listRestoreVerificationPlanAssociations}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    type ListRestoreVerificationPlanAssociationsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|deleteRestoreVerificationPlanAssociation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreVerificationPlanAssociationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|triggerRestoreVerification}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TriggerRestoreVerificationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|getRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] RestoreVerificationPlan
+                     */
+                    type GetRestoreVerificationPlanCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.RestoreVerificationPlan) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|listRestoreVerificationPlans}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreVerificationPlansResponse
+                     */
+                    type ListRestoreVerificationPlansCallback = (error: (Error|null), response?: google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|deleteRestoreVerificationPlan}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreVerificationPlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.backupdr.v1beta.BackupDR|createBackupVault}.
@@ -28233,6 +37351,9 @@ export namespace google {
 
                     /** Backup kmsKeyVersions */
                     kmsKeyVersions?: (string[]|null);
+
+                    /** Backup verificationSummary */
+                    verificationSummary?: (google.cloud.backupdr.v1beta.IVerificationSummary|null);
                 }
 
                 /** Represents a Backup. */
@@ -28318,6 +37439,9 @@ export namespace google {
 
                     /** Backup kmsKeyVersions. */
                     public kmsKeyVersions: string[];
+
+                    /** Backup verificationSummary. */
+                    public verificationSummary?: (google.cloud.backupdr.v1beta.IVerificationSummary|null);
 
                     /** Backup backupProperties. */
                     public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"alloyDbBackupProperties"|"diskBackupProperties");
@@ -28539,6 +37663,125 @@ export namespace google {
                         SCHEDULED = 1,
                         ON_DEMAND = 2,
                         ON_DEMAND_OPERATIONAL = 3
+                    }
+                }
+
+                /** Properties of a VerificationSummary. */
+                interface IVerificationSummary {
+
+                    /** VerificationSummary lastVerificationTime */
+                    lastVerificationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationSummary lastVerificationState */
+                    lastVerificationState?: (google.cloud.backupdr.v1beta.VerificationSummary.LastVerificationState|keyof typeof google.cloud.backupdr.v1beta.VerificationSummary.LastVerificationState|null);
+
+                    /** VerificationSummary lastVerificationExecution */
+                    lastVerificationExecution?: (string|null);
+                }
+
+                /** Represents a VerificationSummary. */
+                class VerificationSummary implements IVerificationSummary {
+
+                    /**
+                     * Constructs a new VerificationSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IVerificationSummary);
+
+                    /** VerificationSummary lastVerificationTime. */
+                    public lastVerificationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationSummary lastVerificationState. */
+                    public lastVerificationState: (google.cloud.backupdr.v1beta.VerificationSummary.LastVerificationState|keyof typeof google.cloud.backupdr.v1beta.VerificationSummary.LastVerificationState);
+
+                    /** VerificationSummary lastVerificationExecution. */
+                    public lastVerificationExecution: string;
+
+                    /**
+                     * Creates a new VerificationSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IVerificationSummary): google.cloud.backupdr.v1beta.VerificationSummary;
+
+                    /**
+                     * Encodes the specified VerificationSummary message. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationSummary.verify|verify} messages.
+                     * @param message VerificationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IVerificationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationSummary.verify|verify} messages.
+                     * @param message VerificationSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IVerificationSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.VerificationSummary;
+
+                    /**
+                     * Decodes a VerificationSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.VerificationSummary;
+
+                    /**
+                     * Verifies a VerificationSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.VerificationSummary;
+
+                    /**
+                     * Creates a plain object from a VerificationSummary message. Also converts values to other types if specified.
+                     * @param message VerificationSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.VerificationSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VerificationSummary {
+
+                    /** LastVerificationState enum. */
+                    enum LastVerificationState {
+                        STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2
                     }
                 }
 
@@ -36970,6 +46213,4870 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RestoreTemplate. */
+                interface IRestoreTemplate {
+
+                    /** RestoreTemplate name */
+                    name?: (string|null);
+
+                    /** RestoreTemplate description */
+                    description?: (string|null);
+
+                    /** RestoreTemplate createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreTemplate labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RestoreTemplate backupSelectionConfig */
+                    backupSelectionConfig?: (google.cloud.backupdr.v1beta.IBackupSelectionConfig|null);
+
+                    /** RestoreTemplate preRestoreConfig */
+                    preRestoreConfig?: (google.cloud.backupdr.v1beta.IPreRestoreConfig|null);
+
+                    /** RestoreTemplate postRestoreConfig */
+                    postRestoreConfig?: (google.cloud.backupdr.v1beta.IPostRestoreConfig|null);
+
+                    /** RestoreTemplate verificationConfig */
+                    verificationConfig?: (google.cloud.backupdr.v1beta.IVerificationConfig|null);
+
+                    /** RestoreTemplate restoreProperties */
+                    restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestoreTemplate state */
+                    state?: (google.cloud.backupdr.v1beta.RestoreTemplate.State|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplate.State|null);
+
+                    /** RestoreTemplate executionSummary */
+                    executionSummary?: (google.cloud.backupdr.v1beta.IExecutionSummary|null);
+
+                    /** RestoreTemplate etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a RestoreTemplate. */
+                class RestoreTemplate implements IRestoreTemplate {
+
+                    /**
+                     * Constructs a new RestoreTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestoreTemplate);
+
+                    /** RestoreTemplate name. */
+                    public name: string;
+
+                    /** RestoreTemplate description. */
+                    public description: string;
+
+                    /** RestoreTemplate createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplate resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreTemplate labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreTemplate backupSelectionConfig. */
+                    public backupSelectionConfig?: (google.cloud.backupdr.v1beta.IBackupSelectionConfig|null);
+
+                    /** RestoreTemplate preRestoreConfig. */
+                    public preRestoreConfig?: (google.cloud.backupdr.v1beta.IPreRestoreConfig|null);
+
+                    /** RestoreTemplate postRestoreConfig. */
+                    public postRestoreConfig?: (google.cloud.backupdr.v1beta.IPostRestoreConfig|null);
+
+                    /** RestoreTemplate verificationConfig. */
+                    public verificationConfig?: (google.cloud.backupdr.v1beta.IVerificationConfig|null);
+
+                    /** RestoreTemplate restoreProperties. */
+                    public restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestoreTemplate state. */
+                    public state: (google.cloud.backupdr.v1beta.RestoreTemplate.State|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplate.State);
+
+                    /** RestoreTemplate executionSummary. */
+                    public executionSummary?: (google.cloud.backupdr.v1beta.IExecutionSummary|null);
+
+                    /** RestoreTemplate etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new RestoreTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreTemplate instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestoreTemplate): google.cloud.backupdr.v1beta.RestoreTemplate;
+
+                    /**
+                     * Encodes the specified RestoreTemplate message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreTemplate.verify|verify} messages.
+                     * @param message RestoreTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestoreTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreTemplate message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreTemplate.verify|verify} messages.
+                     * @param message RestoreTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestoreTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestoreTemplate;
+
+                    /**
+                     * Decodes a RestoreTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestoreTemplate;
+
+                    /**
+                     * Verifies a RestoreTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestoreTemplate;
+
+                    /**
+                     * Creates a plain object from a RestoreTemplate message. Also converts values to other types if specified.
+                     * @param message RestoreTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestoreTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreTemplate {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of an ExecutionSummary. */
+                interface IExecutionSummary {
+
+                    /** ExecutionSummary lastExecution */
+                    lastExecution?: (string|null);
+
+                    /** ExecutionSummary lastExecutionState */
+                    lastExecutionState?: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|null);
+                }
+
+                /** Represents an ExecutionSummary. */
+                class ExecutionSummary implements IExecutionSummary {
+
+                    /**
+                     * Constructs a new ExecutionSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IExecutionSummary);
+
+                    /** ExecutionSummary lastExecution. */
+                    public lastExecution: string;
+
+                    /** ExecutionSummary lastExecutionState. */
+                    public lastExecutionState: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState);
+
+                    /**
+                     * Creates a new ExecutionSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutionSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IExecutionSummary): google.cloud.backupdr.v1beta.ExecutionSummary;
+
+                    /**
+                     * Encodes the specified ExecutionSummary message. Does not implicitly {@link google.cloud.backupdr.v1beta.ExecutionSummary.verify|verify} messages.
+                     * @param message ExecutionSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IExecutionSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutionSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ExecutionSummary.verify|verify} messages.
+                     * @param message ExecutionSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IExecutionSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutionSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ExecutionSummary;
+
+                    /**
+                     * Decodes an ExecutionSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutionSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ExecutionSummary;
+
+                    /**
+                     * Verifies an ExecutionSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutionSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutionSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ExecutionSummary;
+
+                    /**
+                     * Creates a plain object from an ExecutionSummary message. Also converts values to other types if specified.
+                     * @param message ExecutionSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ExecutionSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutionSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutionSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreTemplateRequest. */
+                interface ICreateRestoreTemplateRequest {
+
+                    /** CreateRestoreTemplateRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreTemplateRequest restoreTemplateId */
+                    restoreTemplateId?: (string|null);
+
+                    /** CreateRestoreTemplateRequest restoreTemplate */
+                    restoreTemplate?: (google.cloud.backupdr.v1beta.IRestoreTemplate|null);
+
+                    /** CreateRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreTemplateRequest. */
+                class CreateRestoreTemplateRequest implements ICreateRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest);
+
+                    /** CreateRestoreTemplateRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreTemplateRequest restoreTemplateId. */
+                    public restoreTemplateId: string;
+
+                    /** CreateRestoreTemplateRequest restoreTemplate. */
+                    public restoreTemplate?: (google.cloud.backupdr.v1beta.IRestoreTemplate|null);
+
+                    /** CreateRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest): google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message CreateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message CreateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ICreateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a CreateRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a CreateRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.CreateRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreTemplateRequest. */
+                interface IGetRestoreTemplateRequest {
+
+                    /** GetRestoreTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreTemplateRequest. */
+                class GetRestoreTemplateRequest implements IGetRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new GetRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest);
+
+                    /** GetRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest): google.cloud.backupdr.v1beta.GetRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreTemplateRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreTemplateRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IGetRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.GetRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a GetRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.GetRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a GetRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.GetRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.GetRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRestoreTemplateRequest. */
+                interface IUpdateRestoreTemplateRequest {
+
+                    /** UpdateRestoreTemplateRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRestoreTemplateRequest restoreTemplate */
+                    restoreTemplate?: (google.cloud.backupdr.v1beta.IRestoreTemplate|null);
+
+                    /** UpdateRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateRestoreTemplateRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateRestoreTemplateRequest. */
+                class UpdateRestoreTemplateRequest implements IUpdateRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new UpdateRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest);
+
+                    /** UpdateRestoreTemplateRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRestoreTemplateRequest restoreTemplate. */
+                    public restoreTemplate?: (google.cloud.backupdr.v1beta.IRestoreTemplate|null);
+
+                    /** UpdateRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateRestoreTemplateRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest): google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified UpdateRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message UpdateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest.verify|verify} messages.
+                     * @param message UpdateRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IUpdateRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Decodes an UpdateRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Verifies an UpdateRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.UpdateRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreTemplateRequest. */
+                interface IDeleteRestoreTemplateRequest {
+
+                    /** DeleteRestoreTemplateRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteRestoreTemplateRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteRestoreTemplateRequest. */
+                class DeleteRestoreTemplateRequest implements IDeleteRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest);
+
+                    /** DeleteRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteRestoreTemplateRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest): google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest.verify|verify} messages.
+                     * @param message DeleteRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest.verify|verify} messages.
+                     * @param message DeleteRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IDeleteRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.DeleteRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunRestoreTemplateRequest. */
+                interface IRunRestoreTemplateRequest {
+
+                    /** RunRestoreTemplateRequest name */
+                    name?: (string|null);
+
+                    /** RunRestoreTemplateRequest backup */
+                    backup?: (string|null);
+
+                    /** RunRestoreTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RunRestoreTemplateRequest. */
+                class RunRestoreTemplateRequest implements IRunRestoreTemplateRequest {
+
+                    /**
+                     * Constructs a new RunRestoreTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest);
+
+                    /** RunRestoreTemplateRequest name. */
+                    public name: string;
+
+                    /** RunRestoreTemplateRequest backup. */
+                    public backup: string;
+
+                    /** RunRestoreTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RunRestoreTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRestoreTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest): google.cloud.backupdr.v1beta.RunRestoreTemplateRequest;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.RunRestoreTemplateRequest.verify|verify} messages.
+                     * @param message RunRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RunRestoreTemplateRequest.verify|verify} messages.
+                     * @param message RunRestoreTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRunRestoreTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRestoreTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RunRestoreTemplateRequest;
+
+                    /**
+                     * Decodes a RunRestoreTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRestoreTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RunRestoreTemplateRequest;
+
+                    /**
+                     * Verifies a RunRestoreTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRestoreTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRestoreTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RunRestoreTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a RunRestoreTemplateRequest message. Also converts values to other types if specified.
+                     * @param message RunRestoreTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RunRestoreTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRestoreTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunRestoreTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunRestoreTemplateResponse. */
+                interface IRunRestoreTemplateResponse {
+
+                    /** RunRestoreTemplateResponse restoreTemplateExecution */
+                    restoreTemplateExecution?: (string|null);
+                }
+
+                /** Represents a RunRestoreTemplateResponse. */
+                class RunRestoreTemplateResponse implements IRunRestoreTemplateResponse {
+
+                    /**
+                     * Constructs a new RunRestoreTemplateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRunRestoreTemplateResponse);
+
+                    /** RunRestoreTemplateResponse restoreTemplateExecution. */
+                    public restoreTemplateExecution: string;
+
+                    /**
+                     * Creates a new RunRestoreTemplateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRestoreTemplateResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRunRestoreTemplateResponse): google.cloud.backupdr.v1beta.RunRestoreTemplateResponse;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.RunRestoreTemplateResponse.verify|verify} messages.
+                     * @param message RunRestoreTemplateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRunRestoreTemplateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRestoreTemplateResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RunRestoreTemplateResponse.verify|verify} messages.
+                     * @param message RunRestoreTemplateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRunRestoreTemplateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRestoreTemplateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRestoreTemplateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RunRestoreTemplateResponse;
+
+                    /**
+                     * Decodes a RunRestoreTemplateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRestoreTemplateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RunRestoreTemplateResponse;
+
+                    /**
+                     * Verifies a RunRestoreTemplateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRestoreTemplateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRestoreTemplateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RunRestoreTemplateResponse;
+
+                    /**
+                     * Creates a plain object from a RunRestoreTemplateResponse message. Also converts values to other types if specified.
+                     * @param message RunRestoreTemplateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RunRestoreTemplateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRestoreTemplateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunRestoreTemplateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplatesRequest. */
+                interface IListRestoreTemplatesRequest {
+
+                    /** ListRestoreTemplatesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreTemplatesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreTemplatesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreTemplatesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreTemplatesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreTemplatesRequest. */
+                class ListRestoreTemplatesRequest implements IListRestoreTemplatesRequest {
+
+                    /**
+                     * Constructs a new ListRestoreTemplatesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest);
+
+                    /** ListRestoreTemplatesRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreTemplatesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreTemplatesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreTemplatesRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreTemplatesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreTemplatesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplatesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest): google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Verifies a ListRestoreTemplatesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplatesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplatesRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplatesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplatesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplatesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplatesResponse. */
+                interface IListRestoreTemplatesResponse {
+
+                    /** ListRestoreTemplatesResponse restoreTemplates */
+                    restoreTemplates?: (google.cloud.backupdr.v1beta.IRestoreTemplate[]|null);
+
+                    /** ListRestoreTemplatesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreTemplatesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreTemplatesResponse. */
+                class ListRestoreTemplatesResponse implements IListRestoreTemplatesResponse {
+
+                    /**
+                     * Constructs a new ListRestoreTemplatesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplatesResponse);
+
+                    /** ListRestoreTemplatesResponse restoreTemplates. */
+                    public restoreTemplates: google.cloud.backupdr.v1beta.IRestoreTemplate[];
+
+                    /** ListRestoreTemplatesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreTemplatesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreTemplatesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplatesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplatesResponse): google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Decodes a ListRestoreTemplatesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Verifies a ListRestoreTemplatesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplatesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplatesResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplatesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplatesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackupSelectionConfig. */
+                interface IBackupSelectionConfig {
+
+                    /** BackupSelectionConfig dataSource */
+                    dataSource?: (string|null);
+                }
+
+                /** Represents a BackupSelectionConfig. */
+                class BackupSelectionConfig implements IBackupSelectionConfig {
+
+                    /**
+                     * Constructs a new BackupSelectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IBackupSelectionConfig);
+
+                    /** BackupSelectionConfig dataSource. */
+                    public dataSource?: (string|null);
+
+                    /** BackupSelectionConfig source. */
+                    public source?: "dataSource";
+
+                    /**
+                     * Creates a new BackupSelectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupSelectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IBackupSelectionConfig): google.cloud.backupdr.v1beta.BackupSelectionConfig;
+
+                    /**
+                     * Encodes the specified BackupSelectionConfig message. Does not implicitly {@link google.cloud.backupdr.v1beta.BackupSelectionConfig.verify|verify} messages.
+                     * @param message BackupSelectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IBackupSelectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupSelectionConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.BackupSelectionConfig.verify|verify} messages.
+                     * @param message BackupSelectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IBackupSelectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupSelectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupSelectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.BackupSelectionConfig;
+
+                    /**
+                     * Decodes a BackupSelectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupSelectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.BackupSelectionConfig;
+
+                    /**
+                     * Verifies a BackupSelectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupSelectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupSelectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.BackupSelectionConfig;
+
+                    /**
+                     * Creates a plain object from a BackupSelectionConfig message. Also converts values to other types if specified.
+                     * @param message BackupSelectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.BackupSelectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupSelectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupSelectionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreRestoreConfig. */
+                interface IPreRestoreConfig {
+
+                    /** PreRestoreConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+
+                    /** PreRestoreConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a PreRestoreConfig. */
+                class PreRestoreConfig implements IPreRestoreConfig {
+
+                    /**
+                     * Constructs a new PreRestoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IPreRestoreConfig);
+
+                    /** PreRestoreConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** PreRestoreConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** PreRestoreConfig preRestoreAction. */
+                    public preRestoreAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new PreRestoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreRestoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IPreRestoreConfig): google.cloud.backupdr.v1beta.PreRestoreConfig;
+
+                    /**
+                     * Encodes the specified PreRestoreConfig message. Does not implicitly {@link google.cloud.backupdr.v1beta.PreRestoreConfig.verify|verify} messages.
+                     * @param message PreRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IPreRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreRestoreConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.PreRestoreConfig.verify|verify} messages.
+                     * @param message PreRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IPreRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreRestoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.PreRestoreConfig;
+
+                    /**
+                     * Decodes a PreRestoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.PreRestoreConfig;
+
+                    /**
+                     * Verifies a PreRestoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreRestoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreRestoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.PreRestoreConfig;
+
+                    /**
+                     * Creates a plain object from a PreRestoreConfig message. Also converts values to other types if specified.
+                     * @param message PreRestoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.PreRestoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreRestoreConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreRestoreConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostRestoreConfig. */
+                interface IPostRestoreConfig {
+
+                    /** PostRestoreConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+
+                    /** PostRestoreConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a PostRestoreConfig. */
+                class PostRestoreConfig implements IPostRestoreConfig {
+
+                    /**
+                     * Constructs a new PostRestoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IPostRestoreConfig);
+
+                    /** PostRestoreConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** PostRestoreConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** PostRestoreConfig postRestoreAction. */
+                    public postRestoreAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new PostRestoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostRestoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IPostRestoreConfig): google.cloud.backupdr.v1beta.PostRestoreConfig;
+
+                    /**
+                     * Encodes the specified PostRestoreConfig message. Does not implicitly {@link google.cloud.backupdr.v1beta.PostRestoreConfig.verify|verify} messages.
+                     * @param message PostRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IPostRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostRestoreConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.PostRestoreConfig.verify|verify} messages.
+                     * @param message PostRestoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IPostRestoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostRestoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.PostRestoreConfig;
+
+                    /**
+                     * Decodes a PostRestoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostRestoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.PostRestoreConfig;
+
+                    /**
+                     * Verifies a PostRestoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostRestoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostRestoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.PostRestoreConfig;
+
+                    /**
+                     * Creates a plain object from a PostRestoreConfig message. Also converts values to other types if specified.
+                     * @param message PostRestoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.PostRestoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostRestoreConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostRestoreConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerificationConfig. */
+                interface IVerificationConfig {
+
+                    /** VerificationConfig cloudRunJob */
+                    cloudRunJob?: (string|null);
+
+                    /** VerificationConfig timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a VerificationConfig. */
+                class VerificationConfig implements IVerificationConfig {
+
+                    /**
+                     * Constructs a new VerificationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IVerificationConfig);
+
+                    /** VerificationConfig cloudRunJob. */
+                    public cloudRunJob?: (string|null);
+
+                    /** VerificationConfig timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** VerificationConfig verificationAction. */
+                    public verificationAction?: "cloudRunJob";
+
+                    /**
+                     * Creates a new VerificationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationConfig instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IVerificationConfig): google.cloud.backupdr.v1beta.VerificationConfig;
+
+                    /**
+                     * Encodes the specified VerificationConfig message. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationConfig.verify|verify} messages.
+                     * @param message VerificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IVerificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationConfig.verify|verify} messages.
+                     * @param message VerificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IVerificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.VerificationConfig;
+
+                    /**
+                     * Decodes a VerificationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.VerificationConfig;
+
+                    /**
+                     * Verifies a VerificationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.VerificationConfig;
+
+                    /**
+                     * Creates a plain object from a VerificationConfig message. Also converts values to other types if specified.
+                     * @param message VerificationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.VerificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** PhaseState enum. */
+                enum PhaseState {
+                    PHASE_STATE_UNSPECIFIED = 0,
+                    PENDING = 1,
+                    RUNNING = 2,
+                    SUCCEEDED = 3,
+                    FAILED = 4,
+                    TIMED_OUT = 5,
+                    SKIPPED = 6,
+                    WAITING = 7
+                }
+
+                /** Properties of a RestoreTemplateExecution. */
+                interface IRestoreTemplateExecution {
+
+                    /** RestoreTemplateExecution name */
+                    name?: (string|null);
+
+                    /** RestoreTemplateExecution resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreTemplateExecution createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution type */
+                    type?: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionType|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionType|null);
+
+                    /** RestoreTemplateExecution phase */
+                    phase?: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionPhase|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionPhase|null);
+
+                    /** RestoreTemplateExecution state */
+                    state?: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|null);
+
+                    /** RestoreTemplateExecution preparePhaseInfo */
+                    preparePhaseInfo?: (google.cloud.backupdr.v1beta.IPreparePhaseInfo|null);
+
+                    /** RestoreTemplateExecution preRestorePhaseInfo */
+                    preRestorePhaseInfo?: (google.cloud.backupdr.v1beta.IPreRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution restorePhaseInfo */
+                    restorePhaseInfo?: (google.cloud.backupdr.v1beta.IRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution postRestorePhaseInfo */
+                    postRestorePhaseInfo?: (google.cloud.backupdr.v1beta.IPostRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution verificationPhaseInfo */
+                    verificationPhaseInfo?: (google.cloud.backupdr.v1beta.IVerificationPhaseInfo|null);
+
+                    /** RestoreTemplateExecution cleanupPhaseInfo */
+                    cleanupPhaseInfo?: (google.cloud.backupdr.v1beta.ICleanupPhaseInfo|null);
+                }
+
+                /** Represents a RestoreTemplateExecution. */
+                class RestoreTemplateExecution implements IRestoreTemplateExecution {
+
+                    /**
+                     * Constructs a new RestoreTemplateExecution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestoreTemplateExecution);
+
+                    /** RestoreTemplateExecution name. */
+                    public name: string;
+
+                    /** RestoreTemplateExecution resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreTemplateExecution createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreTemplateExecution type. */
+                    public type: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionType|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionType);
+
+                    /** RestoreTemplateExecution phase. */
+                    public phase: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionPhase|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionPhase);
+
+                    /** RestoreTemplateExecution state. */
+                    public state: (google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState|keyof typeof google.cloud.backupdr.v1beta.RestoreTemplateExecution.ExecutionState);
+
+                    /** RestoreTemplateExecution preparePhaseInfo. */
+                    public preparePhaseInfo?: (google.cloud.backupdr.v1beta.IPreparePhaseInfo|null);
+
+                    /** RestoreTemplateExecution preRestorePhaseInfo. */
+                    public preRestorePhaseInfo?: (google.cloud.backupdr.v1beta.IPreRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution restorePhaseInfo. */
+                    public restorePhaseInfo?: (google.cloud.backupdr.v1beta.IRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution postRestorePhaseInfo. */
+                    public postRestorePhaseInfo?: (google.cloud.backupdr.v1beta.IPostRestorePhaseInfo|null);
+
+                    /** RestoreTemplateExecution verificationPhaseInfo. */
+                    public verificationPhaseInfo?: (google.cloud.backupdr.v1beta.IVerificationPhaseInfo|null);
+
+                    /** RestoreTemplateExecution cleanupPhaseInfo. */
+                    public cleanupPhaseInfo?: (google.cloud.backupdr.v1beta.ICleanupPhaseInfo|null);
+
+                    /**
+                     * Creates a new RestoreTemplateExecution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreTemplateExecution instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestoreTemplateExecution): google.cloud.backupdr.v1beta.RestoreTemplateExecution;
+
+                    /**
+                     * Encodes the specified RestoreTemplateExecution message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreTemplateExecution.verify|verify} messages.
+                     * @param message RestoreTemplateExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestoreTemplateExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreTemplateExecution message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreTemplateExecution.verify|verify} messages.
+                     * @param message RestoreTemplateExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestoreTemplateExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreTemplateExecution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreTemplateExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestoreTemplateExecution;
+
+                    /**
+                     * Decodes a RestoreTemplateExecution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreTemplateExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestoreTemplateExecution;
+
+                    /**
+                     * Verifies a RestoreTemplateExecution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreTemplateExecution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreTemplateExecution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestoreTemplateExecution;
+
+                    /**
+                     * Creates a plain object from a RestoreTemplateExecution message. Also converts values to other types if specified.
+                     * @param message RestoreTemplateExecution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestoreTemplateExecution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreTemplateExecution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreTemplateExecution
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreTemplateExecution {
+
+                    /** ExecutionType enum. */
+                    enum ExecutionType {
+                        EXECUTION_TYPE_UNSPECIFIED = 0,
+                        SCHEDULED = 1,
+                        ON_DEMAND = 2
+                    }
+
+                    /** ExecutionPhase enum. */
+                    enum ExecutionPhase {
+                        EXECUTION_PHASE_UNSPECIFIED = 0,
+                        PREPARING = 1,
+                        EXECUTING_PRE_RESTORE_ACTION = 2,
+                        RESTORING = 3,
+                        EXECUTING_POST_RESTORE_ACTION = 4,
+                        VERIFYING = 5,
+                        CLEANING_UP = 6,
+                        COMPLETED = 7
+                    }
+
+                    /** ExecutionState enum. */
+                    enum ExecutionState {
+                        EXECUTION_STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of a PreparePhaseInfo. */
+                interface IPreparePhaseInfo {
+
+                    /** PreparePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** PreparePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PreparePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo backupSelectionConfig */
+                    backupSelectionConfig?: (google.cloud.backupdr.v1beta.IBackupSelectionConfig|null);
+
+                    /** PreparePhaseInfo backup */
+                    backup?: (string|null);
+
+                    /** PreparePhaseInfo isBackupExplicitlyPassed */
+                    isBackupExplicitlyPassed?: (boolean|null);
+
+                    /** PreparePhaseInfo restoreVerificationPlanAssociation */
+                    restoreVerificationPlanAssociation?: (string|null);
+                }
+
+                /** Represents a PreparePhaseInfo. */
+                class PreparePhaseInfo implements IPreparePhaseInfo {
+
+                    /**
+                     * Constructs a new PreparePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IPreparePhaseInfo);
+
+                    /** PreparePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** PreparePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PreparePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreparePhaseInfo backupSelectionConfig. */
+                    public backupSelectionConfig?: (google.cloud.backupdr.v1beta.IBackupSelectionConfig|null);
+
+                    /** PreparePhaseInfo backup. */
+                    public backup: string;
+
+                    /** PreparePhaseInfo isBackupExplicitlyPassed. */
+                    public isBackupExplicitlyPassed: boolean;
+
+                    /** PreparePhaseInfo restoreVerificationPlanAssociation. */
+                    public restoreVerificationPlanAssociation: string;
+
+                    /**
+                     * Creates a new PreparePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreparePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IPreparePhaseInfo): google.cloud.backupdr.v1beta.PreparePhaseInfo;
+
+                    /**
+                     * Encodes the specified PreparePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.PreparePhaseInfo.verify|verify} messages.
+                     * @param message PreparePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IPreparePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreparePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.PreparePhaseInfo.verify|verify} messages.
+                     * @param message PreparePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IPreparePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreparePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreparePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.PreparePhaseInfo;
+
+                    /**
+                     * Decodes a PreparePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreparePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.PreparePhaseInfo;
+
+                    /**
+                     * Verifies a PreparePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreparePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreparePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.PreparePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PreparePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PreparePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.PreparePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreparePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreparePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreRestorePhaseInfo. */
+                interface IPreRestorePhaseInfo {
+
+                    /** PreRestorePhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+
+                    /** PreRestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** PreRestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PreRestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo preRestoreConfig */
+                    preRestoreConfig?: (google.cloud.backupdr.v1beta.IPreRestoreConfig|null);
+                }
+
+                /** Represents a PreRestorePhaseInfo. */
+                class PreRestorePhaseInfo implements IPreRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new PreRestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IPreRestorePhaseInfo);
+
+                    /** PreRestorePhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** PreRestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** PreRestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PreRestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreRestorePhaseInfo preRestoreConfig. */
+                    public preRestoreConfig?: (google.cloud.backupdr.v1beta.IPreRestoreConfig|null);
+
+                    /** PreRestorePhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new PreRestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreRestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IPreRestorePhaseInfo): google.cloud.backupdr.v1beta.PreRestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified PreRestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.PreRestorePhaseInfo.verify|verify} messages.
+                     * @param message PreRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IPreRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreRestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.PreRestorePhaseInfo.verify|verify} messages.
+                     * @param message PreRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IPreRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreRestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.PreRestorePhaseInfo;
+
+                    /**
+                     * Decodes a PreRestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.PreRestorePhaseInfo;
+
+                    /**
+                     * Verifies a PreRestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreRestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreRestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.PreRestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PreRestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PreRestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.PreRestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreRestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreRestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestorePhaseInfo. */
+                interface IRestorePhaseInfo {
+
+                    /** RestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** RestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** RestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo restoreProperties */
+                    restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestorePhaseInfo restoreResource */
+                    restoreResource?: (string|null);
+
+                    /** RestorePhaseInfo restoreDuration */
+                    restoreDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a RestorePhaseInfo. */
+                class RestorePhaseInfo implements IRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new RestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestorePhaseInfo);
+
+                    /** RestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** RestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** RestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePhaseInfo restoreProperties. */
+                    public restoreProperties?: (google.protobuf.IStruct|null);
+
+                    /** RestorePhaseInfo restoreResource. */
+                    public restoreResource: string;
+
+                    /** RestorePhaseInfo restoreDuration. */
+                    public restoreDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new RestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestorePhaseInfo): google.cloud.backupdr.v1beta.RestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified RestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestorePhaseInfo.verify|verify} messages.
+                     * @param message RestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestorePhaseInfo.verify|verify} messages.
+                     * @param message RestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestorePhaseInfo;
+
+                    /**
+                     * Decodes a RestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestorePhaseInfo;
+
+                    /**
+                     * Verifies a RestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a RestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message RestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostRestorePhaseInfo. */
+                interface IPostRestorePhaseInfo {
+
+                    /** PostRestorePhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+
+                    /** PostRestorePhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** PostRestorePhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PostRestorePhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo postRestoreConfig */
+                    postRestoreConfig?: (google.cloud.backupdr.v1beta.IPostRestoreConfig|null);
+                }
+
+                /** Represents a PostRestorePhaseInfo. */
+                class PostRestorePhaseInfo implements IPostRestorePhaseInfo {
+
+                    /**
+                     * Constructs a new PostRestorePhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IPostRestorePhaseInfo);
+
+                    /** PostRestorePhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** PostRestorePhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** PostRestorePhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PostRestorePhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PostRestorePhaseInfo postRestoreConfig. */
+                    public postRestoreConfig?: (google.cloud.backupdr.v1beta.IPostRestoreConfig|null);
+
+                    /** PostRestorePhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new PostRestorePhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostRestorePhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IPostRestorePhaseInfo): google.cloud.backupdr.v1beta.PostRestorePhaseInfo;
+
+                    /**
+                     * Encodes the specified PostRestorePhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.PostRestorePhaseInfo.verify|verify} messages.
+                     * @param message PostRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IPostRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostRestorePhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.PostRestorePhaseInfo.verify|verify} messages.
+                     * @param message PostRestorePhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IPostRestorePhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostRestorePhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.PostRestorePhaseInfo;
+
+                    /**
+                     * Decodes a PostRestorePhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostRestorePhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.PostRestorePhaseInfo;
+
+                    /**
+                     * Verifies a PostRestorePhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostRestorePhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostRestorePhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.PostRestorePhaseInfo;
+
+                    /**
+                     * Creates a plain object from a PostRestorePhaseInfo message. Also converts values to other types if specified.
+                     * @param message PostRestorePhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.PostRestorePhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostRestorePhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostRestorePhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerificationPhaseInfo. */
+                interface IVerificationPhaseInfo {
+
+                    /** VerificationPhaseInfo cloudRunExecution */
+                    cloudRunExecution?: (string|null);
+
+                    /** VerificationPhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** VerificationPhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** VerificationPhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo verificationConfig */
+                    verificationConfig?: (google.cloud.backupdr.v1beta.IVerificationConfig|null);
+                }
+
+                /** Represents a VerificationPhaseInfo. */
+                class VerificationPhaseInfo implements IVerificationPhaseInfo {
+
+                    /**
+                     * Constructs a new VerificationPhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IVerificationPhaseInfo);
+
+                    /** VerificationPhaseInfo cloudRunExecution. */
+                    public cloudRunExecution?: (string|null);
+
+                    /** VerificationPhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** VerificationPhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** VerificationPhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VerificationPhaseInfo verificationConfig. */
+                    public verificationConfig?: (google.cloud.backupdr.v1beta.IVerificationConfig|null);
+
+                    /** VerificationPhaseInfo result. */
+                    public result?: "cloudRunExecution";
+
+                    /**
+                     * Creates a new VerificationPhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerificationPhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IVerificationPhaseInfo): google.cloud.backupdr.v1beta.VerificationPhaseInfo;
+
+                    /**
+                     * Encodes the specified VerificationPhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationPhaseInfo.verify|verify} messages.
+                     * @param message VerificationPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IVerificationPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerificationPhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.VerificationPhaseInfo.verify|verify} messages.
+                     * @param message VerificationPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IVerificationPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerificationPhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerificationPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.VerificationPhaseInfo;
+
+                    /**
+                     * Decodes a VerificationPhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerificationPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.VerificationPhaseInfo;
+
+                    /**
+                     * Verifies a VerificationPhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerificationPhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerificationPhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.VerificationPhaseInfo;
+
+                    /**
+                     * Creates a plain object from a VerificationPhaseInfo message. Also converts values to other types if specified.
+                     * @param message VerificationPhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.VerificationPhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerificationPhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerificationPhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CleanupPhaseInfo. */
+                interface ICleanupPhaseInfo {
+
+                    /** CleanupPhaseInfo phaseState */
+                    phaseState?: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState|null);
+
+                    /** CleanupPhaseInfo error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** CleanupPhaseInfo startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo cleanupDuration */
+                    cleanupDuration?: (google.protobuf.IDuration|null);
+
+                    /** CleanupPhaseInfo successCleanupRule */
+                    successCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo failureCleanupRule */
+                    failureCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo cleanupTime */
+                    cleanupTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CleanupPhaseInfo. */
+                class CleanupPhaseInfo implements ICleanupPhaseInfo {
+
+                    /**
+                     * Constructs a new CleanupPhaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ICleanupPhaseInfo);
+
+                    /** CleanupPhaseInfo phaseState. */
+                    public phaseState: (google.cloud.backupdr.v1beta.PhaseState|keyof typeof google.cloud.backupdr.v1beta.PhaseState);
+
+                    /** CleanupPhaseInfo error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** CleanupPhaseInfo startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CleanupPhaseInfo cleanupDuration. */
+                    public cleanupDuration?: (google.protobuf.IDuration|null);
+
+                    /** CleanupPhaseInfo successCleanupRule. */
+                    public successCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo failureCleanupRule. */
+                    public failureCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** CleanupPhaseInfo cleanupTime. */
+                    public cleanupTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CleanupPhaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CleanupPhaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ICleanupPhaseInfo): google.cloud.backupdr.v1beta.CleanupPhaseInfo;
+
+                    /**
+                     * Encodes the specified CleanupPhaseInfo message. Does not implicitly {@link google.cloud.backupdr.v1beta.CleanupPhaseInfo.verify|verify} messages.
+                     * @param message CleanupPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ICleanupPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CleanupPhaseInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.CleanupPhaseInfo.verify|verify} messages.
+                     * @param message CleanupPhaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ICleanupPhaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CleanupPhaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CleanupPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.CleanupPhaseInfo;
+
+                    /**
+                     * Decodes a CleanupPhaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CleanupPhaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.CleanupPhaseInfo;
+
+                    /**
+                     * Verifies a CleanupPhaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CleanupPhaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CleanupPhaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.CleanupPhaseInfo;
+
+                    /**
+                     * Creates a plain object from a CleanupPhaseInfo message. Also converts values to other types if specified.
+                     * @param message CleanupPhaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.CleanupPhaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CleanupPhaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CleanupPhaseInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreTemplateExecutionRequest. */
+                interface IGetRestoreTemplateExecutionRequest {
+
+                    /** GetRestoreTemplateExecutionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreTemplateExecutionRequest. */
+                class GetRestoreTemplateExecutionRequest implements IGetRestoreTemplateExecutionRequest {
+
+                    /**
+                     * Constructs a new GetRestoreTemplateExecutionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest);
+
+                    /** GetRestoreTemplateExecutionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreTemplateExecutionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreTemplateExecutionRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest): google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateExecutionRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreTemplateExecutionRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest.verify|verify} messages.
+                     * @param message GetRestoreTemplateExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IGetRestoreTemplateExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreTemplateExecutionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreTemplateExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Decodes a GetRestoreTemplateExecutionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreTemplateExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Verifies a GetRestoreTemplateExecutionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreTemplateExecutionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreTemplateExecutionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreTemplateExecutionRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreTemplateExecutionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.GetRestoreTemplateExecutionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreTemplateExecutionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreTemplateExecutionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreCleanupRequest. */
+                interface ITriggerRestoreCleanupRequest {
+
+                    /** TriggerRestoreCleanupRequest name */
+                    name?: (string|null);
+
+                    /** TriggerRestoreCleanupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreCleanupRequest. */
+                class TriggerRestoreCleanupRequest implements ITriggerRestoreCleanupRequest {
+
+                    /**
+                     * Constructs a new TriggerRestoreCleanupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest);
+
+                    /** TriggerRestoreCleanupRequest name. */
+                    public name: string;
+
+                    /** TriggerRestoreCleanupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new TriggerRestoreCleanupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreCleanupRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest): google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Encodes the specified TriggerRestoreCleanupRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest.verify|verify} messages.
+                     * @param message TriggerRestoreCleanupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreCleanupRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest.verify|verify} messages.
+                     * @param message TriggerRestoreCleanupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ITriggerRestoreCleanupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreCleanupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreCleanupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Decodes a TriggerRestoreCleanupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreCleanupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Verifies a TriggerRestoreCleanupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreCleanupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreCleanupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreCleanupRequest message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreCleanupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.TriggerRestoreCleanupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreCleanupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreCleanupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplateExecutionsRequest. */
+                interface IListRestoreTemplateExecutionsRequest {
+
+                    /** ListRestoreTemplateExecutionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreTemplateExecutionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreTemplateExecutionsRequest. */
+                class ListRestoreTemplateExecutionsRequest implements IListRestoreTemplateExecutionsRequest {
+
+                    /**
+                     * Constructs a new ListRestoreTemplateExecutionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest);
+
+                    /** ListRestoreTemplateExecutionsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreTemplateExecutionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreTemplateExecutionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreTemplateExecutionsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreTemplateExecutionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreTemplateExecutionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplateExecutionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Verifies a ListRestoreTemplateExecutionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplateExecutionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplateExecutionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplateExecutionsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplateExecutionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplateExecutionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplateExecutionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreTemplateExecutionsResponse. */
+                interface IListRestoreTemplateExecutionsResponse {
+
+                    /** ListRestoreTemplateExecutionsResponse restoreTemplateExecutions */
+                    restoreTemplateExecutions?: (google.cloud.backupdr.v1beta.IRestoreTemplateExecution[]|null);
+
+                    /** ListRestoreTemplateExecutionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreTemplateExecutionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreTemplateExecutionsResponse. */
+                class ListRestoreTemplateExecutionsResponse implements IListRestoreTemplateExecutionsResponse {
+
+                    /**
+                     * Constructs a new ListRestoreTemplateExecutionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsResponse);
+
+                    /** ListRestoreTemplateExecutionsResponse restoreTemplateExecutions. */
+                    public restoreTemplateExecutions: google.cloud.backupdr.v1beta.IRestoreTemplateExecution[];
+
+                    /** ListRestoreTemplateExecutionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreTemplateExecutionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreTemplateExecutionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreTemplateExecutionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsResponse): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreTemplateExecutionsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse.verify|verify} messages.
+                     * @param message ListRestoreTemplateExecutionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreTemplateExecutionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Decodes a ListRestoreTemplateExecutionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Verifies a ListRestoreTemplateExecutionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreTemplateExecutionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreTemplateExecutionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreTemplateExecutionsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreTemplateExecutionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreTemplateExecutionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreTemplateExecutionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreTemplateExecutionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreVerificationPlan. */
+                interface IRestoreVerificationPlan {
+
+                    /** RestoreVerificationPlan name */
+                    name?: (string|null);
+
+                    /** RestoreVerificationPlan description */
+                    description?: (string|null);
+
+                    /** RestoreVerificationPlan createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RestoreVerificationPlan state */
+                    state?: (google.cloud.backupdr.v1beta.RestoreVerificationPlan.State|keyof typeof google.cloud.backupdr.v1beta.RestoreVerificationPlan.State|null);
+
+                    /** RestoreVerificationPlan schedule */
+                    schedule?: (string|null);
+
+                    /** RestoreVerificationPlan timeZone */
+                    timeZone?: (string|null);
+
+                    /** RestoreVerificationPlan successCleanupRule */
+                    successCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** RestoreVerificationPlan failureCleanupRule */
+                    failureCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+                }
+
+                /** Represents a RestoreVerificationPlan. */
+                class RestoreVerificationPlan implements IRestoreVerificationPlan {
+
+                    /**
+                     * Constructs a new RestoreVerificationPlan.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationPlan);
+
+                    /** RestoreVerificationPlan name. */
+                    public name: string;
+
+                    /** RestoreVerificationPlan description. */
+                    public description: string;
+
+                    /** RestoreVerificationPlan createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlan labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreVerificationPlan state. */
+                    public state: (google.cloud.backupdr.v1beta.RestoreVerificationPlan.State|keyof typeof google.cloud.backupdr.v1beta.RestoreVerificationPlan.State);
+
+                    /** RestoreVerificationPlan schedule. */
+                    public schedule: string;
+
+                    /** RestoreVerificationPlan timeZone. */
+                    public timeZone: string;
+
+                    /** RestoreVerificationPlan successCleanupRule. */
+                    public successCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /** RestoreVerificationPlan failureCleanupRule. */
+                    public failureCleanupRule?: (google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule|null);
+
+                    /**
+                     * Creates a new RestoreVerificationPlan instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationPlan instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationPlan): google.cloud.backupdr.v1beta.RestoreVerificationPlan;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlan message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationPlan.verify|verify} messages.
+                     * @param message RestoreVerificationPlan message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestoreVerificationPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlan message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationPlan.verify|verify} messages.
+                     * @param message RestoreVerificationPlan message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestoreVerificationPlan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationPlan message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationPlan
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestoreVerificationPlan;
+
+                    /**
+                     * Decodes a RestoreVerificationPlan message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationPlan
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestoreVerificationPlan;
+
+                    /**
+                     * Verifies a RestoreVerificationPlan message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationPlan message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationPlan
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestoreVerificationPlan;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationPlan message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationPlan
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestoreVerificationPlan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationPlan to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationPlan
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreVerificationPlan {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        INACTIVE = 4,
+                        UPDATING = 5,
+                        ERROR = 6
+                    }
+                }
+
+                /** Properties of a RestoreVerificationCleanupRule. */
+                interface IRestoreVerificationCleanupRule {
+
+                    /** RestoreVerificationCleanupRule cleanupDelay */
+                    cleanupDelay?: (google.protobuf.IDuration|null);
+
+                    /** RestoreVerificationCleanupRule skipCleanup */
+                    skipCleanup?: (boolean|null);
+                }
+
+                /** Represents a RestoreVerificationCleanupRule. */
+                class RestoreVerificationCleanupRule implements IRestoreVerificationCleanupRule {
+
+                    /**
+                     * Constructs a new RestoreVerificationCleanupRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule);
+
+                    /** RestoreVerificationCleanupRule cleanupDelay. */
+                    public cleanupDelay?: (google.protobuf.IDuration|null);
+
+                    /** RestoreVerificationCleanupRule skipCleanup. */
+                    public skipCleanup?: (boolean|null);
+
+                    /**
+                     * Creates a new RestoreVerificationCleanupRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationCleanupRule instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule): google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Encodes the specified RestoreVerificationCleanupRule message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule.verify|verify} messages.
+                     * @param message RestoreVerificationCleanupRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationCleanupRule message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule.verify|verify} messages.
+                     * @param message RestoreVerificationCleanupRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestoreVerificationCleanupRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationCleanupRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationCleanupRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Decodes a RestoreVerificationCleanupRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationCleanupRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Verifies a RestoreVerificationCleanupRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationCleanupRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationCleanupRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationCleanupRule message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationCleanupRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestoreVerificationCleanupRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationCleanupRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationCleanupRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreVerificationPlanRequest. */
+                interface ICreateRestoreVerificationPlanRequest {
+
+                    /** CreateRestoreVerificationPlanRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlanId */
+                    restoreVerificationPlanId?: (string|null);
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlan */
+                    restoreVerificationPlan?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlan|null);
+
+                    /** CreateRestoreVerificationPlanRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreVerificationPlanRequest. */
+                class CreateRestoreVerificationPlanRequest implements ICreateRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest);
+
+                    /** CreateRestoreVerificationPlanRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlanId. */
+                    public restoreVerificationPlanId: string;
+
+                    /** CreateRestoreVerificationPlanRequest restoreVerificationPlan. */
+                    public restoreVerificationPlan?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlan|null);
+
+                    /** CreateRestoreVerificationPlanRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a CreateRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreVerificationPlanRequest. */
+                interface IGetRestoreVerificationPlanRequest {
+
+                    /** GetRestoreVerificationPlanRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreVerificationPlanRequest. */
+                class GetRestoreVerificationPlanRequest implements IGetRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new GetRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest);
+
+                    /** GetRestoreVerificationPlanRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a GetRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.GetRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlansRequest. */
+                interface IListRestoreVerificationPlansRequest {
+
+                    /** ListRestoreVerificationPlansRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreVerificationPlansRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreVerificationPlansRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlansRequest. */
+                class ListRestoreVerificationPlansRequest implements IListRestoreVerificationPlansRequest {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlansRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest);
+
+                    /** ListRestoreVerificationPlansRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreVerificationPlansRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreVerificationPlansRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreVerificationPlansRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreVerificationPlansRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlansRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlansRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlansRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlansRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlansRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlansRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlansRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlansRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlansRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreVerificationPlansRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlansRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlansRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlansResponse. */
+                interface IListRestoreVerificationPlansResponse {
+
+                    /** ListRestoreVerificationPlansResponse restoreVerificationPlans */
+                    restoreVerificationPlans?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlan[]|null);
+
+                    /** ListRestoreVerificationPlansResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlansResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlansResponse. */
+                class ListRestoreVerificationPlansResponse implements IListRestoreVerificationPlansResponse {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlansResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansResponse);
+
+                    /** ListRestoreVerificationPlansResponse restoreVerificationPlans. */
+                    public restoreVerificationPlans: google.cloud.backupdr.v1beta.IRestoreVerificationPlan[];
+
+                    /** ListRestoreVerificationPlansResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreVerificationPlansResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlansResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlansResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansResponse): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlansResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlansResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlansResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlansResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlansResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlansResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlansResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlansResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlansResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlansResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlansResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreVerificationPlansResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlansResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlansResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreVerificationPlanRequest. */
+                interface IDeleteRestoreVerificationPlanRequest {
+
+                    /** DeleteRestoreVerificationPlanRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteRestoreVerificationPlanRequest. */
+                class DeleteRestoreVerificationPlanRequest implements IDeleteRestoreVerificationPlanRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreVerificationPlanRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest);
+
+                    /** DeleteRestoreVerificationPlanRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreVerificationPlanRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteRestoreVerificationPlanRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteRestoreVerificationPlanRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreVerificationPlanRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreVerificationPlanRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreVerificationPlanRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreVerificationPlanRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreVerificationPlanRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreVerificationPlanRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreVerificationPlanRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreVerificationPlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreVerificationPlanAssociation. */
+                interface IRestoreVerificationPlanAssociation {
+
+                    /** RestoreVerificationPlanAssociation restoreTemplate */
+                    restoreTemplate?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation name */
+                    name?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation description */
+                    description?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation state */
+                    state?: (google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.State|keyof typeof google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.State|null);
+
+                    /** RestoreVerificationPlanAssociation triggerSummary */
+                    triggerSummary?: (google.cloud.backupdr.v1beta.ITriggerSummary|null);
+
+                    /** RestoreVerificationPlanAssociation resourceType */
+                    resourceType?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a RestoreVerificationPlanAssociation. */
+                class RestoreVerificationPlanAssociation implements IRestoreVerificationPlanAssociation {
+
+                    /**
+                     * Constructs a new RestoreVerificationPlanAssociation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation);
+
+                    /** RestoreVerificationPlanAssociation restoreTemplate. */
+                    public restoreTemplate?: (string|null);
+
+                    /** RestoreVerificationPlanAssociation name. */
+                    public name: string;
+
+                    /** RestoreVerificationPlanAssociation description. */
+                    public description: string;
+
+                    /** RestoreVerificationPlanAssociation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreVerificationPlanAssociation state. */
+                    public state: (google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.State|keyof typeof google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.State);
+
+                    /** RestoreVerificationPlanAssociation triggerSummary. */
+                    public triggerSummary?: (google.cloud.backupdr.v1beta.ITriggerSummary|null);
+
+                    /** RestoreVerificationPlanAssociation resourceType. */
+                    public resourceType: string;
+
+                    /** RestoreVerificationPlanAssociation labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreVerificationPlanAssociation association. */
+                    public association?: "restoreTemplate";
+
+                    /**
+                     * Creates a new RestoreVerificationPlanAssociation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVerificationPlanAssociation instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation): google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlanAssociation message. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.verify|verify} messages.
+                     * @param message RestoreVerificationPlanAssociation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVerificationPlanAssociation message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation.verify|verify} messages.
+                     * @param message RestoreVerificationPlanAssociation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVerificationPlanAssociation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVerificationPlanAssociation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Decodes a RestoreVerificationPlanAssociation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVerificationPlanAssociation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Verifies a RestoreVerificationPlanAssociation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVerificationPlanAssociation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVerificationPlanAssociation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation;
+
+                    /**
+                     * Creates a plain object from a RestoreVerificationPlanAssociation message. Also converts values to other types if specified.
+                     * @param message RestoreVerificationPlanAssociation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.RestoreVerificationPlanAssociation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVerificationPlanAssociation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVerificationPlanAssociation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestoreVerificationPlanAssociation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        INACTIVE = 4,
+                        UPDATING = 5,
+                        ERROR = 6
+                    }
+                }
+
+                /** Properties of a TriggerSummary. */
+                interface ITriggerSummary {
+
+                    /** TriggerSummary lastTriggerTime */
+                    lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary nextTriggerTime */
+                    nextTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary lastTriggerError */
+                    lastTriggerError?: (google.rpc.IStatus|null);
+
+                    /** TriggerSummary lastVerificationExecution */
+                    lastVerificationExecution?: (string|null);
+                }
+
+                /** Represents a TriggerSummary. */
+                class TriggerSummary implements ITriggerSummary {
+
+                    /**
+                     * Constructs a new TriggerSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ITriggerSummary);
+
+                    /** TriggerSummary lastTriggerTime. */
+                    public lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary nextTriggerTime. */
+                    public nextTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TriggerSummary lastTriggerError. */
+                    public lastTriggerError?: (google.rpc.IStatus|null);
+
+                    /** TriggerSummary lastVerificationExecution. */
+                    public lastVerificationExecution: string;
+
+                    /**
+                     * Creates a new TriggerSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerSummary instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ITriggerSummary): google.cloud.backupdr.v1beta.TriggerSummary;
+
+                    /**
+                     * Encodes the specified TriggerSummary message. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerSummary.verify|verify} messages.
+                     * @param message TriggerSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ITriggerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerSummary message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerSummary.verify|verify} messages.
+                     * @param message TriggerSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ITriggerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.TriggerSummary;
+
+                    /**
+                     * Decodes a TriggerSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.TriggerSummary;
+
+                    /**
+                     * Verifies a TriggerSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.TriggerSummary;
+
+                    /**
+                     * Creates a plain object from a TriggerSummary message. Also converts values to other types if specified.
+                     * @param message TriggerSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.TriggerSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreVerificationPlanAssociationRequest. */
+                interface ICreateRestoreVerificationPlanAssociationRequest {
+
+                    /** CreateRestoreVerificationPlanAssociationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociationId */
+                    restoreVerificationPlanAssociationId?: (string|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociation */
+                    restoreVerificationPlanAssociation?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreVerificationPlanAssociationRequest. */
+                class CreateRestoreVerificationPlanAssociationRequest implements ICreateRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociationId. */
+                    public restoreVerificationPlanAssociationId: string;
+
+                    /** CreateRestoreVerificationPlanAssociationRequest restoreVerificationPlanAssociation. */
+                    public restoreVerificationPlanAssociation?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation|null);
+
+                    /** CreateRestoreVerificationPlanAssociationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ICreateRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a CreateRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a CreateRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.CreateRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreVerificationPlanAssociationRequest. */
+                interface IGetRestoreVerificationPlanAssociationRequest {
+
+                    /** GetRestoreVerificationPlanAssociationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreVerificationPlanAssociationRequest. */
+                class GetRestoreVerificationPlanAssociationRequest implements IGetRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new GetRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest);
+
+                    /** GetRestoreVerificationPlanAssociationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message GetRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IGetRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a GetRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a GetRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.GetRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlanAssociationsRequest. */
+                interface IListRestoreVerificationPlanAssociationsRequest {
+
+                    /** ListRestoreVerificationPlanAssociationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlanAssociationsRequest. */
+                class ListRestoreVerificationPlanAssociationsRequest implements IListRestoreVerificationPlanAssociationsRequest {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlanAssociationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest);
+
+                    /** ListRestoreVerificationPlanAssociationsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreVerificationPlanAssociationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlanAssociationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlanAssociationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlanAssociationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlanAssociationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlanAssociationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlanAssociationsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlanAssociationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlanAssociationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlanAssociationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreVerificationPlanAssociationsResponse. */
+                interface IListRestoreVerificationPlanAssociationsResponse {
+
+                    /** ListRestoreVerificationPlanAssociationsResponse restoreVerificationPlanAssociations */
+                    restoreVerificationPlanAssociations?: (google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation[]|null);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreVerificationPlanAssociationsResponse. */
+                class ListRestoreVerificationPlanAssociationsResponse implements IListRestoreVerificationPlanAssociationsResponse {
+
+                    /**
+                     * Constructs a new ListRestoreVerificationPlanAssociationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsResponse);
+
+                    /** ListRestoreVerificationPlanAssociationsResponse restoreVerificationPlanAssociations. */
+                    public restoreVerificationPlanAssociations: google.cloud.backupdr.v1beta.IRestoreVerificationPlanAssociation[];
+
+                    /** ListRestoreVerificationPlanAssociationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreVerificationPlanAssociationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreVerificationPlanAssociationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreVerificationPlanAssociationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsResponse): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreVerificationPlanAssociationsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse.verify|verify} messages.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IListRestoreVerificationPlanAssociationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Decodes a ListRestoreVerificationPlanAssociationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Verifies a ListRestoreVerificationPlanAssociationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreVerificationPlanAssociationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreVerificationPlanAssociationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreVerificationPlanAssociationsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreVerificationPlanAssociationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.ListRestoreVerificationPlanAssociationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreVerificationPlanAssociationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreVerificationPlanAssociationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreVerificationPlanAssociationRequest. */
+                interface IDeleteRestoreVerificationPlanAssociationRequest {
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteRestoreVerificationPlanAssociationRequest. */
+                class DeleteRestoreVerificationPlanAssociationRequest implements IDeleteRestoreVerificationPlanAssociationRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreVerificationPlanAssociationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest);
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreVerificationPlanAssociationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteRestoreVerificationPlanAssociationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreVerificationPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest.verify|verify} messages.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.IDeleteRestoreVerificationPlanAssociationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanAssociationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreVerificationPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreVerificationPlanAssociationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreVerificationPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreVerificationPlanAssociationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreVerificationPlanAssociationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreVerificationPlanAssociationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.DeleteRestoreVerificationPlanAssociationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreVerificationPlanAssociationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreVerificationPlanAssociationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreVerificationRequest. */
+                interface ITriggerRestoreVerificationRequest {
+
+                    /** TriggerRestoreVerificationRequest name */
+                    name?: (string|null);
+
+                    /** TriggerRestoreVerificationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreVerificationRequest. */
+                class TriggerRestoreVerificationRequest implements ITriggerRestoreVerificationRequest {
+
+                    /**
+                     * Constructs a new TriggerRestoreVerificationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest);
+
+                    /** TriggerRestoreVerificationRequest name. */
+                    public name: string;
+
+                    /** TriggerRestoreVerificationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new TriggerRestoreVerificationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreVerificationRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest): google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationRequest message. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreVerificationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreVerificationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Verifies a TriggerRestoreVerificationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreVerificationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreVerificationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreVerificationRequest message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreVerificationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.TriggerRestoreVerificationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreVerificationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreVerificationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerRestoreVerificationResponse. */
+                interface ITriggerRestoreVerificationResponse {
+
+                    /** TriggerRestoreVerificationResponse restoreTemplateExecution */
+                    restoreTemplateExecution?: (string|null);
+                }
+
+                /** Represents a TriggerRestoreVerificationResponse. */
+                class TriggerRestoreVerificationResponse implements ITriggerRestoreVerificationResponse {
+
+                    /**
+                     * Constructs a new TriggerRestoreVerificationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationResponse);
+
+                    /** TriggerRestoreVerificationResponse restoreTemplateExecution. */
+                    public restoreTemplateExecution: string;
+
+                    /**
+                     * Creates a new TriggerRestoreVerificationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerRestoreVerificationResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationResponse): google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationResponse message. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerRestoreVerificationResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse.verify|verify} messages.
+                     * @param message TriggerRestoreVerificationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1beta.ITriggerRestoreVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerRestoreVerificationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Decodes a TriggerRestoreVerificationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerRestoreVerificationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Verifies a TriggerRestoreVerificationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerRestoreVerificationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerRestoreVerificationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse;
+
+                    /**
+                     * Creates a plain object from a TriggerRestoreVerificationResponse message. Also converts values to other types if specified.
+                     * @param message TriggerRestoreVerificationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1beta.TriggerRestoreVerificationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerRestoreVerificationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerRestoreVerificationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a BackupDrProtectionSummary */
                 class BackupDrProtectionSummary extends $protobuf.rpc.Service {
 
@@ -38095,6 +52202,483 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -40552,483 +55136,6 @@ export namespace google {
             GA = 4,
             DEPRECATED = 5
         }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-
-            /** FieldInfo referencedTypes */
-            referencedTypes?: (google.api.ITypeReference[]|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /** FieldInfo referencedTypes. */
-            public referencedTypes: google.api.ITypeReference[];
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
-        /** Properties of a TypeReference. */
-        interface ITypeReference {
-
-            /** TypeReference typeName */
-            typeName?: (string|null);
-        }
-
-        /** Represents a TypeReference. */
-        class TypeReference implements ITypeReference {
-
-            /**
-             * Constructs a new TypeReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ITypeReference);
-
-            /** TypeReference typeName. */
-            public typeName: string;
-
-            /**
-             * Creates a new TypeReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TypeReference instance
-             */
-            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
-
-            /**
-             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
-
-            /**
-             * Verifies a TypeReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TypeReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
-
-            /**
-             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-             * @param message TypeReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TypeReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for TypeReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
     }
 
     /** Namespace protobuf. */
@@ -43225,11 +57332,11 @@ export namespace google {
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.fieldInfo */
-            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
-
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
@@ -45542,109 +59649,6 @@ export namespace google {
             VISIBILITY_EXPORT = 2
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -45845,6 +59849,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -45942,6 +60049,335 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

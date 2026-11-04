@@ -188,6 +188,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "FetchWorkspaceHistory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CommitWorkspaceChanges": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -265,6 +269,10 @@
           "retry_params_name": "default"
         },
         "CreateCompilationResult": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateCompilationResultLongRunning": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

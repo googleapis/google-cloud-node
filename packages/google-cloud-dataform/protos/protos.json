@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.dataform.v1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1",
                     "ruby_package": "Google::Cloud::Dataform::V1",
-                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/GitRepositoryLink",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}"
+                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/AccountConnector",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/accountConnectors/{account_connector}"
                   },
                   "nested": {
                     "Dataform": {
@@ -1018,6 +1018,34 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,compilation_result"
+                            }
+                          ]
+                        },
+                        "CreateCompilationResultLongRunning": {
+                          "requestType": "CreateCompilationResultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/repositories/*}/compilationResults:createLongRunning",
+                            "(google.api.http).body": "compilation_result",
+                            "(google.api.method_signature)": "parent,compilation_result",
+                            "(google.longrunning.operation_info).response_type": "CompilationResult",
+                            "(google.longrunning.operation_info).metadata_type": "CreateCompilationResultMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/repositories/*}/compilationResults:createLongRunning",
+                                "body": "compilation_result"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,compilation_result"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CompilationResult",
+                                "metadata_type": "CreateCompilationResultMetadata"
+                              }
                             }
                           ]
                         },
@@ -3605,6 +3633,50 @@
                         }
                       }
                     },
+                    "CreateCompilationResultMetadata": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createCompilationResultRequest": {
+                          "type": "CreateCompilationResultRequest",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATED": 1,
+                            "RUNNING": 2,
+                            "FINISHED": 3,
+                            "SUCCEEDED": 4,
+                            "FAILED": 5
+                          }
+                        }
+                      }
+                    },
                     "Target": {
                       "fields": {
                         "database": {
@@ -3677,7 +3749,8 @@
                             "assertion",
                             "declaration",
                             "notebook",
-                            "dataPreparation"
+                            "dataPreparation",
+                            "bigqueryUnitTest"
                           ]
                         },
                         "_internalMetadata": {
@@ -3710,6 +3783,10 @@
                         "dataPreparation": {
                           "type": "DataPreparation",
                           "id": 9
+                        },
+                        "bigqueryUnitTest": {
+                          "type": "BigQueryUnitTest",
+                          "id": 11
                         },
                         "target": {
                           "type": "Target",
@@ -4036,6 +4113,36 @@
                             }
                           }
                         },
+                        "BigQueryUnitTest": {
+                          "fields": {
+                            "dependencyTargets": {
+                              "rule": "repeated",
+                              "type": "Target",
+                              "id": 1
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "testQuery": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "expectedOutputQuery": {
+                              "type": "string",
+                              "id": 6
+                            }
+                          }
+                        },
                         "LoadConfig": {
                           "oneofs": {
                             "mode": {
@@ -4253,6 +4360,11 @@
                           "oneof": [
                             "queryPriority"
                           ]
+                        },
+                        "_concurrentActionsLimit": {
+                          "oneof": [
+                            "concurrentActionsLimit"
+                          ]
                         }
                       },
                       "fields": {
@@ -4314,6 +4426,21 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "concurrentActionsLimit": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "executionMode": {
+                          "type": "ExecutionMode",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "reserved": [
@@ -4346,6 +4473,14 @@
                             "QUERY_PRIORITY_UNSPECIFIED": 0,
                             "INTERACTIVE": 1,
                             "BATCH": 2
+                          }
+                        },
+                        "ExecutionMode": {
+                          "values": {
+                            "EXECUTION_MODE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "ALL_EXCEPT_UNIT_TESTS": 2,
+                            "UNIT_TESTS_ONLY": 3
                           }
                         }
                       }
@@ -4700,7 +4835,8 @@
                           "oneof": [
                             "bigqueryAction",
                             "notebookAction",
-                            "dataPreparationAction"
+                            "dataPreparationAction",
+                            "bigqueryUnitTestAction"
                           ]
                         },
                         "_internalMetadata": {
@@ -4727,6 +4863,13 @@
                         "dataPreparationAction": {
                           "type": "DataPreparationAction",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "bigqueryUnitTestAction": {
+                          "type": "BigQueryUnitTestAction",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -4927,6 +5070,52 @@
                             }
                           }
                         },
+                        "BigQueryUnitTestAction": {
+                          "fields": {
+                            "actualResultsJobId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "actualResultsSqlScript": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "expectedResultsJobId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "expectedResultsSqlScript": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalProcessedBytes": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalBilledBytes": {
+                              "type": "int64",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "PENDING": 0,
@@ -4935,7 +5124,8 @@
                             "DISABLED": 3,
                             "SUCCEEDED": 4,
                             "CANCELLED": 5,
-                            "FAILED": 6
+                            "FAILED": 6,
+                            "QUEUED": 7
                           }
                         }
                       }
@@ -5826,8 +6016,8 @@
                     "java_package": "com.google.cloud.dataform.v1beta1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1beta1",
                     "ruby_package": "Google::Cloud::Dataform::V1beta1",
-                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/GitRepositoryLink",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}"
+                    "(google.api.resource_definition).type": "developerconnect.googleapis.com/AccountConnector",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/accountConnectors/{account_connector}"
                   },
                   "nested": {
                     "Dataform": {
@@ -6602,6 +6792,20 @@
                             }
                           ]
                         },
+                        "FetchWorkspaceHistory": {
+                          "requestType": "FetchWorkspaceHistoryRequest",
+                          "responseType": "FetchWorkspaceHistoryResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchHistory"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:fetchHistory"
+                              }
+                            }
+                          ]
+                        },
                         "CommitWorkspaceChanges": {
                           "requestType": "CommitWorkspaceChangesRequest",
                           "responseType": "CommitWorkspaceChangesResponse",
@@ -6933,6 +7137,34 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,compilation_result"
+                            }
+                          ]
+                        },
+                        "CreateCompilationResultLongRunning": {
+                          "requestType": "CreateCompilationResultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/compilationResults:createLongRunning",
+                            "(google.api.http).body": "compilation_result",
+                            "(google.api.method_signature)": "parent,compilation_result",
+                            "(google.longrunning.operation_info).response_type": "CompilationResult",
+                            "(google.longrunning.operation_info).metadata_type": "CreateCompilationResultMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/repositories/*}/compilationResults:createLongRunning",
+                                "body": "compilation_result"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,compilation_result"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CompilationResult",
+                                "metadata_type": "CreateCompilationResultMetadata"
+                              }
                             }
                           ]
                         },
@@ -7441,6 +7673,11 @@
                       "nested": {
                         "GitRemoteSettings": {
                           "oneofs": {
+                            "_accountConnector": {
+                              "oneof": [
+                                "accountConnector"
+                              ]
+                            },
                             "_gitRepositoryLink": {
                               "oneof": [
                                 "gitRepositoryLink"
@@ -7482,6 +7719,15 @@
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "accountConnector": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "developerconnect.googleapis.com/AccountConnector",
+                                "proto3_optional": true
                               }
                             },
                             "gitRepositoryLink": {
@@ -8525,6 +8771,52 @@
                         "commitsBehind": {
                           "type": "int32",
                           "id": 2
+                        }
+                      }
+                    },
+                    "FetchWorkspaceHistoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FetchWorkspaceHistoryResponse": {
+                      "fields": {
+                        "commits": {
+                          "rule": "repeated",
+                          "type": "CommitLogEntry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reachesShallowBoundary": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -9784,6 +10076,50 @@
                         }
                       }
                     },
+                    "CreateCompilationResultMetadata": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createCompilationResultRequest": {
+                          "type": "CreateCompilationResultRequest",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATED": 1,
+                            "RUNNING": 2,
+                            "FINISHED": 3,
+                            "SUCCEEDED": 4,
+                            "FAILED": 5
+                          }
+                        }
+                      }
+                    },
                     "Target": {
                       "fields": {
                         "database": {
@@ -9856,7 +10192,8 @@
                             "assertion",
                             "declaration",
                             "notebook",
-                            "dataPreparation"
+                            "dataPreparation",
+                            "bigqueryUnitTest"
                           ]
                         },
                         "_internalMetadata": {
@@ -9889,6 +10226,10 @@
                         "dataPreparation": {
                           "type": "DataPreparation",
                           "id": 9
+                        },
+                        "bigqueryUnitTest": {
+                          "type": "BigQueryUnitTest",
+                          "id": 11
                         },
                         "target": {
                           "type": "Target",
@@ -10215,6 +10556,36 @@
                             }
                           }
                         },
+                        "BigQueryUnitTest": {
+                          "fields": {
+                            "dependencyTargets": {
+                              "rule": "repeated",
+                              "type": "Target",
+                              "id": 1
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "testQuery": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "expectedOutputQuery": {
+                              "type": "string",
+                              "id": 6
+                            }
+                          }
+                        },
                         "LoadConfig": {
                           "oneofs": {
                             "mode": {
@@ -10439,6 +10810,11 @@
                           "oneof": [
                             "queryPriority"
                           ]
+                        },
+                        "_concurrentActionsLimit": {
+                          "oneof": [
+                            "concurrentActionsLimit"
+                          ]
                         }
                       },
                       "fields": {
@@ -10500,6 +10876,21 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "concurrentActionsLimit": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "executionMode": {
+                          "type": "ExecutionMode",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "reserved": [
@@ -10532,6 +10923,14 @@
                             "QUERY_PRIORITY_UNSPECIFIED": 0,
                             "INTERACTIVE": 1,
                             "BATCH": 2
+                          }
+                        },
+                        "ExecutionMode": {
+                          "values": {
+                            "EXECUTION_MODE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "ALL_EXCEPT_UNIT_TESTS": 2,
+                            "UNIT_TESTS_ONLY": 3
                           }
                         }
                       }
@@ -10886,7 +11285,8 @@
                           "oneof": [
                             "bigqueryAction",
                             "notebookAction",
-                            "dataPreparationAction"
+                            "dataPreparationAction",
+                            "bigqueryUnitTestAction"
                           ]
                         },
                         "_internalMetadata": {
@@ -10913,6 +11313,13 @@
                         "dataPreparationAction": {
                           "type": "DataPreparationAction",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "bigqueryUnitTestAction": {
+                          "type": "BigQueryUnitTestAction",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11113,6 +11520,52 @@
                             }
                           }
                         },
+                        "BigQueryUnitTestAction": {
+                          "fields": {
+                            "actualResultsJobId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "actualResultsSqlScript": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "expectedResultsJobId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "expectedResultsSqlScript": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalProcessedBytes": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalBilledBytes": {
+                              "type": "int64",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "PENDING": 0,
@@ -11121,7 +11574,8 @@
                             "DISABLED": 3,
                             "SUCCEEDED": 4,
                             "CANCELLED": 5,
-                            "FAILED": 6
+                            "FAILED": 6,
+                            "QUEUED": 7
                           }
                         }
                       }
@@ -12718,6 +13172,43 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
               }
             },
             "resourceReference": {

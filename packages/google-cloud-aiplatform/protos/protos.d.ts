@@ -122944,6 +122944,9 @@ export namespace google {
                         /** SourceCodeSpec developerConnectSource */
                         developerConnectSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
 
+                        /** SourceCodeSpec gitSource */
+                        gitSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource|null);
+
                         /** SourceCodeSpec pythonSpec */
                         pythonSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
 
@@ -122966,6 +122969,9 @@ export namespace google {
                         /** SourceCodeSpec developerConnectSource. */
                         public developerConnectSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
 
+                        /** SourceCodeSpec gitSource. */
+                        public gitSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource|null);
+
                         /** SourceCodeSpec pythonSpec. */
                         public pythonSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
 
@@ -122973,7 +122979,7 @@ export namespace google {
                         public imageSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IImageSpec|null);
 
                         /** SourceCodeSpec source. */
-                        public source?: ("inlineSource"|"developerConnectSource");
+                        public source?: ("inlineSource"|"developerConnectSource"|"gitSource");
 
                         /** SourceCodeSpec languageSpec. */
                         public languageSpec?: ("pythonSpec"|"imageSpec");
@@ -123452,6 +123458,115 @@ export namespace google {
 
                             /**
                              * Gets the default type url for DeveloperConnectSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GitSource. */
+                        interface IGitSource {
+
+                            /** GitSource url */
+                            url?: (string|null);
+
+                            /** GitSource dir */
+                            dir?: (string|null);
+
+                            /** GitSource revision */
+                            revision?: (string|null);
+                        }
+
+                        /** Represents a GitSource. */
+                        class GitSource implements IGitSource {
+
+                            /**
+                             * Constructs a new GitSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource);
+
+                            /** GitSource url. */
+                            public url: string;
+
+                            /** GitSource dir. */
+                            public dir: string;
+
+                            /** GitSource revision. */
+                            public revision: string;
+
+                            /**
+                             * Creates a new GitSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitSource instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Encodes the specified GitSource message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Verifies a GitSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                             * @param message GitSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.GitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitSource
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -314965,6 +315080,9 @@ export namespace google {
                         /** SourceCodeSpec developerConnectSource */
                         developerConnectSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
 
+                        /** SourceCodeSpec gitSource */
+                        gitSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource|null);
+
                         /** SourceCodeSpec pythonSpec */
                         pythonSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
 
@@ -314987,6 +315105,9 @@ export namespace google {
                         /** SourceCodeSpec developerConnectSource. */
                         public developerConnectSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IDeveloperConnectSource|null);
 
+                        /** SourceCodeSpec gitSource. */
+                        public gitSource?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource|null);
+
                         /** SourceCodeSpec pythonSpec. */
                         public pythonSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
 
@@ -314994,7 +315115,7 @@ export namespace google {
                         public imageSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IImageSpec|null);
 
                         /** SourceCodeSpec source. */
-                        public source?: ("inlineSource"|"developerConnectSource");
+                        public source?: ("inlineSource"|"developerConnectSource"|"gitSource");
 
                         /** SourceCodeSpec languageSpec. */
                         public languageSpec?: ("pythonSpec"|"imageSpec");
@@ -315473,6 +315594,115 @@ export namespace google {
 
                             /**
                              * Gets the default type url for DeveloperConnectSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GitSource. */
+                        interface IGitSource {
+
+                            /** GitSource url */
+                            url?: (string|null);
+
+                            /** GitSource dir */
+                            dir?: (string|null);
+
+                            /** GitSource revision */
+                            revision?: (string|null);
+                        }
+
+                        /** Represents a GitSource. */
+                        class GitSource implements IGitSource {
+
+                            /**
+                             * Constructs a new GitSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource);
+
+                            /** GitSource url. */
+                            public url: string;
+
+                            /** GitSource dir. */
+                            public dir: string;
+
+                            /** GitSource revision. */
+                            public revision: string;
+
+                            /**
+                             * Creates a new GitSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitSource instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Encodes the specified GitSource message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Verifies a GitSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource;
+
+                            /**
+                             * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                             * @param message GitSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.SourceCodeSpec.GitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitSource
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */

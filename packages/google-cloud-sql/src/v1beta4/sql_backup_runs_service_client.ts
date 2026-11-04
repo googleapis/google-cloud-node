@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_backup_runs_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for managing database backups.
  * @class
  * @memberof v1beta4
  */

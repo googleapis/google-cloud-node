@@ -42,6 +42,7 @@ import * as gapicConfig from './sql_backups_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for managing database backups for Cloud SQL instances.
  * @class
  * @memberof v1
  */

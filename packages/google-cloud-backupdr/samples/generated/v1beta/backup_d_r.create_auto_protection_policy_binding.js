@@ -37,12 +37,23 @@ function main(parent, autoProtectionPolicyBindingId, autoProtectionPolicyBinding
   /**
    *  Required. The ID to use for the binding.
    *  This will become the final component of the binding's resource name.
+   *  This value must start with a lowercase letter followed by up to 62
+   *  lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
    */
   // const autoProtectionPolicyBindingId = 'abc123'
   /**
    *  Required. The AutoProtectionPolicyBinding resource to create.
    */
   // const autoProtectionPolicyBinding = {}
+  /**
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
+   */
+  // const requestId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1beta;

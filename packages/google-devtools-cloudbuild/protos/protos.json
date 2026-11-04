@@ -2912,7 +2912,8 @@
                         "VerifyOption": {
                           "values": {
                             "NOT_VERIFIED": 0,
-                            "VERIFIED": 1
+                            "VERIFIED": 1,
+                            "BEST_EFFORT": 3
                           }
                         },
                         "MachineType": {
@@ -2988,6 +2989,11 @@
                           }
                         },
                         "DefaultLogsBucketBehavior": {
+                          "valuesOptions": {
+                            "LEGACY_BUCKET": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED": 0,
                             "REGIONAL_USER_OWNED_BUCKET": 1,
@@ -3224,6 +3230,7 @@
                           "type": "PrivateServiceConnect",
                           "id": 5,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
@@ -3299,6 +3306,9 @@
                           }
                         },
                         "PrivateServiceConnect": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "networkAttachment": {
                               "type": "string",

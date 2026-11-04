@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_databases_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service to manage databases.
  * @class
  * @memberof v1beta4
  */

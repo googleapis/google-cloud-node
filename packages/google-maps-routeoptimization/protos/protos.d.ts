@@ -3152,7 +3152,8 @@ export namespace google {
                     enum TravelMode {
                         TRAVEL_MODE_UNSPECIFIED = 0,
                         DRIVING = 1,
-                        WALKING = 2
+                        WALKING = 2,
+                        TWO_WHEELER = 5
                     }
 
                     /** UnloadingPolicy enum. */
@@ -4752,6 +4753,9 @@ export namespace google {
 
                         /** Visit injectedSolutionLocationToken */
                         injectedSolutionLocationToken?: (number|null);
+
+                        /** Visit visitType */
+                        visitType?: (google.maps.routeoptimization.v1.ShipmentRoute.Visit.VisitType|keyof typeof google.maps.routeoptimization.v1.ShipmentRoute.Visit.VisitType|null);
                     }
 
                     /** Represents a Visit. */
@@ -4789,6 +4793,9 @@ export namespace google {
 
                         /** Visit injectedSolutionLocationToken. */
                         public injectedSolutionLocationToken?: (number|null);
+
+                        /** Visit visitType. */
+                        public visitType: (google.maps.routeoptimization.v1.ShipmentRoute.Visit.VisitType|keyof typeof google.maps.routeoptimization.v1.ShipmentRoute.Visit.VisitType);
 
                         /**
                          * Creates a new Visit instance using the specified properties.
@@ -4866,6 +4873,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Visit {
+
+                        /** VisitType enum. */
+                        enum VisitType {
+                            VISIT_TYPE_UNSPECIFIED = 0,
+                            PICKUP_SHIPMENT = 1,
+                            DELIVER_SHIPMENT = 2
+                        }
                     }
 
                     /** Properties of a Transition. */
