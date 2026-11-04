@@ -154,18 +154,17 @@ describe('Partition Query', () => {
     });
   });
 
-  it('disables autoPaginate for the stream request', () => {
+  it('disables autoPaginate for the stream request', async () => {
     const overrides: ApiOverride = {
       partitionQueryStream: (request, options) => {
         expect(options?.autoPaginate).to.be.false;
         return stream({values: [{referenceValue: DOC1}]});
       },
     };
-    return createInstance(overrides).then(async firestore => {
-      const query = firestore.collectionGroup('collectionId');
-      const result = await getPartitions(query, 2);
-      expect(result.length).to.equal(2);
-    });
+    const firestore = await createInstance(overrides);
+    const query = firestore.collectionGroup('collectionId');
+    const result = await getPartitions(query, 2);
+    expect(result.length).to.equal(2);
   });
 
   it('does not issue RPC if only a single partition is requested', () => {
