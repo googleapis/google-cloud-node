@@ -1822,115 +1822,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a CloudSqlSingleUserCredentials. */
-                interface ICloudSqlSingleUserCredentials {
-
-                    /** CloudSqlSingleUserCredentials instanceId */
-                    instanceId?: (string|null);
-
-                    /** CloudSqlSingleUserCredentials username */
-                    username?: (string|null);
-
-                    /** CloudSqlSingleUserCredentials password */
-                    password?: (string|null);
-                }
-
-                /** Represents a CloudSqlSingleUserCredentials. */
-                class CloudSqlSingleUserCredentials implements ICloudSqlSingleUserCredentials {
-
-                    /**
-                     * Constructs a new CloudSqlSingleUserCredentials.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials);
-
-                    /** CloudSqlSingleUserCredentials instanceId. */
-                    public instanceId: string;
-
-                    /** CloudSqlSingleUserCredentials username. */
-                    public username: string;
-
-                    /** CloudSqlSingleUserCredentials password. */
-                    public password: string;
-
-                    /**
-                     * Creates a new CloudSqlSingleUserCredentials instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CloudSqlSingleUserCredentials instance
-                     */
-                    public static create(properties?: google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials): google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials;
-
-                    /**
-                     * Encodes the specified CloudSqlSingleUserCredentials message. Does not implicitly {@link google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials.verify|verify} messages.
-                     * @param message CloudSqlSingleUserCredentials message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CloudSqlSingleUserCredentials message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials.verify|verify} messages.
-                     * @param message CloudSqlSingleUserCredentials message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CloudSqlSingleUserCredentials message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CloudSqlSingleUserCredentials
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials;
-
-                    /**
-                     * Decodes a CloudSqlSingleUserCredentials message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CloudSqlSingleUserCredentials
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials;
-
-                    /**
-                     * Verifies a CloudSqlSingleUserCredentials message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CloudSqlSingleUserCredentials message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CloudSqlSingleUserCredentials
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials;
-
-                    /**
-                     * Creates a plain object from a CloudSqlSingleUserCredentials message. Also converts values to other types if specified.
-                     * @param message CloudSqlSingleUserCredentials
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CloudSqlSingleUserCredentials to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CloudSqlSingleUserCredentials
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Represents a SecretManagerService */
                 class SecretManagerService extends $protobuf.rpc.Service {
 
@@ -2755,7 +2646,7 @@ export namespace google {
                     parent?: (string|null);
 
                     /** EnableManagedRotationRequest cloudSqlSingleUserCredentials */
-                    cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials|null);
+                    cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials|null);
                 }
 
                 /** Represents an EnableManagedRotationRequest. */
@@ -2771,10 +2662,10 @@ export namespace google {
                     public parent: string;
 
                     /** EnableManagedRotationRequest cloudSqlSingleUserCredentials. */
-                    public cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.ICloudSqlSingleUserCredentials|null);
+                    public cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials|null);
 
-                    /** EnableManagedRotationRequest credential. */
-                    public credential?: "cloudSqlSingleUserCredentials";
+                    /** EnableManagedRotationRequest credentials. */
+                    public credentials?: "cloudSqlSingleUserCredentials";
 
                     /**
                      * Creates a new EnableManagedRotationRequest instance using the specified properties.
@@ -2852,6 +2743,118 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EnableManagedRotationRequest {
+
+                    /** Properties of a CloudSQLSingleUserCredentials. */
+                    interface ICloudSQLSingleUserCredentials {
+
+                        /** CloudSQLSingleUserCredentials instanceId */
+                        instanceId?: (string|null);
+
+                        /** CloudSQLSingleUserCredentials username */
+                        username?: (string|null);
+
+                        /** CloudSQLSingleUserCredentials password */
+                        password?: (string|null);
+                    }
+
+                    /** Represents a CloudSQLSingleUserCredentials. */
+                    class CloudSQLSingleUserCredentials implements ICloudSQLSingleUserCredentials {
+
+                        /**
+                         * Constructs a new CloudSQLSingleUserCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials);
+
+                        /** CloudSQLSingleUserCredentials instanceId. */
+                        public instanceId: string;
+
+                        /** CloudSQLSingleUserCredentials username. */
+                        public username: string;
+
+                        /** CloudSQLSingleUserCredentials password. */
+                        public password: string;
+
+                        /**
+                         * Creates a new CloudSQLSingleUserCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudSQLSingleUserCredentials instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Encodes the specified CloudSQLSingleUserCredentials message. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials.verify|verify} messages.
+                         * @param message CloudSQLSingleUserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudSQLSingleUserCredentials message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials.verify|verify} messages.
+                         * @param message CloudSQLSingleUserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudSQLSingleUserCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudSQLSingleUserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Decodes a CloudSQLSingleUserCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudSQLSingleUserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Verifies a CloudSQLSingleUserCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudSQLSingleUserCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudSQLSingleUserCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Creates a plain object from a CloudSQLSingleUserCredentials message. Also converts values to other types if specified.
+                         * @param message CloudSQLSingleUserCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudSQLSingleUserCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudSQLSingleUserCredentials
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RotateSecretRequest. */

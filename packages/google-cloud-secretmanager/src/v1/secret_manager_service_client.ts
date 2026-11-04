@@ -2339,7 +2339,7 @@ export class SecretManagerServiceClient {
    *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
    *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
-   * @param {google.cloud.secretmanager.v1.CloudSqlSingleUserCredentials} request.cloudSqlSingleUserCredentials
+   * @param {google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials} request.cloudSqlSingleUserCredentials
    *   Credentials required for Cloud SQL DB for Single user Managed Rotation.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
