@@ -1428,6 +1428,833 @@ describe('v1.BackupDRClient', () => {
     });
   });
 
+  describe('getAutoProtectionPolicy', () => {
+    it('invokes getAutoProtectionPolicy without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+      );
+      client.innerApiCalls.getAutoProtectionPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutoProtectionPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicy without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+      );
+      client.innerApiCalls.getAutoProtectionPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutoProtectionPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IAutoProtectionPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicy with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutoProtectionPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getAutoProtectionPolicy(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicy with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getAutoProtectionPolicy(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getAutoProtectionPolicyBinding', () => {
+    it('invokes getAutoProtectionPolicyBinding without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+      );
+      client.innerApiCalls.getAutoProtectionPolicyBinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutoProtectionPolicyBinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicyBinding without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+      );
+      client.innerApiCalls.getAutoProtectionPolicyBinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutoProtectionPolicyBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicyBinding with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutoProtectionPolicyBinding = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getAutoProtectionPolicyBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutoProtectionPolicyBinding with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getAutoProtectionPolicyBinding(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getRestoreTemplate', () => {
+    it('invokes getRestoreTemplate without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+      );
+      client.innerApiCalls.getRestoreTemplate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getRestoreTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplate without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+      );
+      client.innerApiCalls.getRestoreTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRestoreTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IRestoreTemplate | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplate with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRestoreTemplate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getRestoreTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplate with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getRestoreTemplate(request), expectedError);
+    });
+  });
+
+  describe('getRestoreTemplateExecution', () => {
+    it('invokes getRestoreTemplateExecution without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+      );
+      client.innerApiCalls.getRestoreTemplateExecution =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getRestoreTemplateExecution(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplateExecution without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+      );
+      client.innerApiCalls.getRestoreTemplateExecution =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRestoreTemplateExecution(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IRestoreTemplateExecution | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplateExecution with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRestoreTemplateExecution = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getRestoreTemplateExecution(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreTemplateExecution as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreTemplateExecution with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreTemplateExecutionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getRestoreTemplateExecution(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getRestoreVerificationPlanAssociation', () => {
+    it('invokes getRestoreVerificationPlanAssociation without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+      );
+      client.innerApiCalls.getRestoreVerificationPlanAssociation =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getRestoreVerificationPlanAssociation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlanAssociation without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+      );
+      client.innerApiCalls.getRestoreVerificationPlanAssociation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRestoreVerificationPlanAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlanAssociation with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRestoreVerificationPlanAssociation =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getRestoreVerificationPlanAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlanAssociation with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getRestoreVerificationPlanAssociation(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getRestoreVerificationPlan', () => {
+    it('invokes getRestoreVerificationPlan without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+      );
+      client.innerApiCalls.getRestoreVerificationPlan =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getRestoreVerificationPlan(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlan without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+      );
+      client.innerApiCalls.getRestoreVerificationPlan =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRestoreVerificationPlan(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IRestoreVerificationPlan | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlan with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRestoreVerificationPlan = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getRestoreVerificationPlan(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRestoreVerificationPlan with closed client', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.GetRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getRestoreVerificationPlan(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('createManagementServer', () => {
     it('invokes createManagementServer without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
@@ -4750,6 +5577,2988 @@ describe('v1.BackupDRClient', () => {
       );
       await assert.rejects(
         client.checkInitializeServiceProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createAutoProtectionPolicy', () => {
+    it('invokes createAutoProtectionPolicy without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAutoProtectionPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAutoProtectionPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicy without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAutoProtectionPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAutoProtectionPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicy with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createAutoProtectionPolicy(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicy with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createAutoProtectionPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAutoProtectionPolicyProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateAutoProtectionPolicyProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAutoProtectionPolicyProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateAutoProtectionPolicyProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateAutoProtectionPolicy', () => {
+    it('invokes updateAutoProtectionPolicy without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest(),
+      );
+      request.autoProtectionPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest',
+        ['autoProtectionPolicy', 'name'],
+      );
+      request.autoProtectionPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `auto_protection_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAutoProtectionPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAutoProtectionPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutoProtectionPolicy without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest(),
+      );
+      request.autoProtectionPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest',
+        ['autoProtectionPolicy', 'name'],
+      );
+      request.autoProtectionPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `auto_protection_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAutoProtectionPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAutoProtectionPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutoProtectionPolicy with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest(),
+      );
+      request.autoProtectionPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest',
+        ['autoProtectionPolicy', 'name'],
+      );
+      request.autoProtectionPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `auto_protection_policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateAutoProtectionPolicy(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutoProtectionPolicy with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest(),
+      );
+      request.autoProtectionPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateAutoProtectionPolicyRequest',
+        ['autoProtectionPolicy', 'name'],
+      );
+      request.autoProtectionPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `auto_protection_policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateAutoProtectionPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAutoProtectionPolicyProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateAutoProtectionPolicyProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAutoProtectionPolicyProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateAutoProtectionPolicyProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAutoProtectionPolicy', () => {
+    it('invokes deleteAutoProtectionPolicy without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAutoProtectionPolicy =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAutoProtectionPolicy(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutoProtectionPolicy without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAutoProtectionPolicy =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAutoProtectionPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutoProtectionPolicy with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteAutoProtectionPolicy(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAutoProtectionPolicy with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteAutoProtectionPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAutoProtectionPolicy = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAutoProtectionPolicy(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAutoProtectionPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAutoProtectionPolicyProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteAutoProtectionPolicyProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAutoProtectionPolicyProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAutoProtectionPolicyProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createAutoProtectionPolicyBinding', () => {
+    it('invokes createAutoProtectionPolicyBinding without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAutoProtectionPolicyBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.createAutoProtectionPolicyBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicyBinding without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAutoProtectionPolicyBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAutoProtectionPolicyBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicyBinding with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutoProtectionPolicyBinding =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createAutoProtectionPolicyBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAutoProtectionPolicyBinding with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateAutoProtectionPolicyBindingRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAutoProtectionPolicyBinding =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.createAutoProtectionPolicyBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAutoProtectionPolicyBindingProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateAutoProtectionPolicyBindingProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAutoProtectionPolicyBindingProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateAutoProtectionPolicyBindingProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('initiateDeleteAutoProtectionPolicyBinding', () => {
+    it('invokes initiateDeleteAutoProtectionPolicyBinding without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.initiateDeleteAutoProtectionPolicyBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.initiateDeleteAutoProtectionPolicyBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initiateDeleteAutoProtectionPolicyBinding without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.initiateDeleteAutoProtectionPolicyBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.initiateDeleteAutoProtectionPolicyBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initiateDeleteAutoProtectionPolicyBinding with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.initiateDeleteAutoProtectionPolicyBinding =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.initiateDeleteAutoProtectionPolicyBinding(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initiateDeleteAutoProtectionPolicyBinding with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.InitiateDeleteAutoProtectionPolicyBindingRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.initiateDeleteAutoProtectionPolicyBinding =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.initiateDeleteAutoProtectionPolicyBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .initiateDeleteAutoProtectionPolicyBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkInitiateDeleteAutoProtectionPolicyBindingProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkInitiateDeleteAutoProtectionPolicyBindingProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkInitiateDeleteAutoProtectionPolicyBindingProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkInitiateDeleteAutoProtectionPolicyBindingProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createRestoreTemplate', () => {
+    it('invokes createRestoreTemplate without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreTemplate =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createRestoreTemplate(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreTemplate without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createRestoreTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRestoreTemplate,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreTemplate with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreTemplate = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createRestoreTemplate(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreTemplate with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreTemplateRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreTemplate = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createRestoreTemplate(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateRestoreTemplateProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateRestoreTemplateProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateRestoreTemplateProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateRestoreTemplateProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateRestoreTemplate', () => {
+    it('invokes updateRestoreTemplate without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest(),
+      );
+      request.restoreTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest',
+        ['restoreTemplate', 'name'],
+      );
+      request.restoreTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `restore_template.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateRestoreTemplate =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateRestoreTemplate(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRestoreTemplate without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest(),
+      );
+      request.restoreTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest',
+        ['restoreTemplate', 'name'],
+      );
+      request.restoreTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `restore_template.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateRestoreTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateRestoreTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRestoreTemplate,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRestoreTemplate with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest(),
+      );
+      request.restoreTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest',
+        ['restoreTemplate', 'name'],
+      );
+      request.restoreTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `restore_template.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRestoreTemplate = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateRestoreTemplate(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRestoreTemplate with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest(),
+      );
+      request.restoreTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.UpdateRestoreTemplateRequest',
+        ['restoreTemplate', 'name'],
+      );
+      request.restoreTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `restore_template.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRestoreTemplate = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateRestoreTemplate(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateRestoreTemplateProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateRestoreTemplateProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateRestoreTemplateProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateRestoreTemplateProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteRestoreTemplate', () => {
+    it('invokes deleteRestoreTemplate without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreTemplate =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteRestoreTemplate(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreTemplate without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteRestoreTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreTemplate with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreTemplate = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteRestoreTemplate(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreTemplate with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreTemplate = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteRestoreTemplate(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteRestoreTemplateProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteRestoreTemplateProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteRestoreTemplateProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteRestoreTemplateProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('runRestoreTemplate', () => {
+    it('invokes runRestoreTemplate without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RunRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.RunRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.runRestoreTemplate =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.runRestoreTemplate(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runRestoreTemplate without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RunRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.RunRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.runRestoreTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.runRestoreTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runRestoreTemplate with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RunRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.RunRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runRestoreTemplate = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.runRestoreTemplate(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runRestoreTemplate with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.RunRestoreTemplateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.RunRestoreTemplateRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runRestoreTemplate = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.runRestoreTemplate(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runRestoreTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRunRestoreTemplateProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRunRestoreTemplateProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRunRestoreTemplateProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkRunRestoreTemplateProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('triggerRestoreCleanup', () => {
+    it('invokes triggerRestoreCleanup without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.triggerRestoreCleanup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.triggerRestoreCleanup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreCleanup without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.triggerRestoreCleanup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.triggerRestoreCleanup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreCleanup with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.triggerRestoreCleanup = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.triggerRestoreCleanup(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreCleanup with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreCleanupRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.triggerRestoreCleanup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.triggerRestoreCleanup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreCleanup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkTriggerRestoreCleanupProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkTriggerRestoreCleanupProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTriggerRestoreCleanupProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkTriggerRestoreCleanupProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createRestoreVerificationPlan', () => {
+    it('invokes createRestoreVerificationPlan without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreVerificationPlan =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createRestoreVerificationPlan(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlan without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreVerificationPlan =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createRestoreVerificationPlan(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlan with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreVerificationPlan = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createRestoreVerificationPlan(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlan with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreVerificationPlan = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createRestoreVerificationPlan(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateRestoreVerificationPlanProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateRestoreVerificationPlanProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateRestoreVerificationPlanProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateRestoreVerificationPlanProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createRestoreVerificationPlanAssociation', () => {
+    it('invokes createRestoreVerificationPlanAssociation without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreVerificationPlanAssociation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.createRestoreVerificationPlanAssociation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlanAssociation without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRestoreVerificationPlanAssociation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createRestoreVerificationPlanAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlanAssociation with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreVerificationPlanAssociation =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createRestoreVerificationPlanAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRestoreVerificationPlanAssociation with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.CreateRestoreVerificationPlanAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRestoreVerificationPlanAssociation =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.createRestoreVerificationPlanAssociation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateRestoreVerificationPlanAssociationProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateRestoreVerificationPlanAssociationProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateRestoreVerificationPlanAssociationProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateRestoreVerificationPlanAssociationProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteRestoreVerificationPlanAssociation', () => {
+    it('invokes deleteRestoreVerificationPlanAssociation without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreVerificationPlanAssociation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.deleteRestoreVerificationPlanAssociation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlanAssociation without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreVerificationPlanAssociation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteRestoreVerificationPlanAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlanAssociation with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreVerificationPlanAssociation =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteRestoreVerificationPlanAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlanAssociation with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreVerificationPlanAssociation =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.deleteRestoreVerificationPlanAssociation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteRestoreVerificationPlanAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteRestoreVerificationPlanAssociationProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteRestoreVerificationPlanAssociationProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteRestoreVerificationPlanAssociationProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteRestoreVerificationPlanAssociationProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('triggerRestoreVerification', () => {
+    it('invokes triggerRestoreVerification without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.triggerRestoreVerification =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.triggerRestoreVerification(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreVerification without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.triggerRestoreVerification =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.triggerRestoreVerification(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreVerification with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.triggerRestoreVerification = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.triggerRestoreVerification(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes triggerRestoreVerification with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.TriggerRestoreVerificationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.triggerRestoreVerification = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.triggerRestoreVerification(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.triggerRestoreVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkTriggerRestoreVerificationProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkTriggerRestoreVerificationProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTriggerRestoreVerificationProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkTriggerRestoreVerificationProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteRestoreVerificationPlan', () => {
+    it('invokes deleteRestoreVerificationPlan without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreVerificationPlan =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteRestoreVerificationPlan(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlan without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteRestoreVerificationPlan =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteRestoreVerificationPlan(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.backupdr.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlan with call error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreVerificationPlan = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteRestoreVerificationPlan(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteRestoreVerificationPlan with LRO error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.DeleteRestoreVerificationPlanRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteRestoreVerificationPlan = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteRestoreVerificationPlan(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRestoreVerificationPlan as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteRestoreVerificationPlanProgress without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteRestoreVerificationPlanProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteRestoreVerificationPlanProgress with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteRestoreVerificationPlanProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -8819,6 +12628,2885 @@ describe('v1.BackupDRClient', () => {
       );
     });
   });
+
+  describe('listAutoProtectionPolicies', () => {
+    it('invokes listAutoProtectionPolicies without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAutoProtectionPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAutoProtectionPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPolicies without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAutoProtectionPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAutoProtectionPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPolicies with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAutoProtectionPolicies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAutoProtectionPolicies(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPoliciesStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAutoProtectionPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAutoProtectionPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AutoProtectionPolicy[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.backupdr.v1.AutoProtectionPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutoProtectionPolicies, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAutoProtectionPoliciesStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutoProtectionPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAutoProtectionPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AutoProtectionPolicy[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.backupdr.v1.AutoProtectionPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAutoProtectionPolicies, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAutoProtectionPolicies without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAutoProtectionPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[] =
+        [];
+      const iterable = client.listAutoProtectionPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAutoProtectionPolicies with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutoProtectionPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAutoProtectionPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAutoProtectionPolicyBindings', () => {
+    it('invokes listAutoProtectionPolicyBindings without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+      ];
+      client.innerApiCalls.listAutoProtectionPolicyBindings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAutoProtectionPolicyBindings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPolicyBindings without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+      ];
+      client.innerApiCalls.listAutoProtectionPolicyBindings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAutoProtectionPolicyBindings(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPolicyBindings with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAutoProtectionPolicyBindings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAutoProtectionPolicyBindings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAutoProtectionPolicyBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAutoProtectionPolicyBindingsStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+      ];
+      client.descriptors.page.listAutoProtectionPolicyBindings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAutoProtectionPolicyBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listAutoProtectionPolicyBindings,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAutoProtectionPolicyBindingsStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutoProtectionPolicyBindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAutoProtectionPolicyBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listAutoProtectionPolicyBindings,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAutoProtectionPolicyBindings without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding(),
+        ),
+      ];
+      client.descriptors.page.listAutoProtectionPolicyBindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[] =
+        [];
+      const iterable = client.listAutoProtectionPolicyBindingsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAutoProtectionPolicyBindings with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAutoProtectionPolicyBindingsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAutoProtectionPolicyBindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAutoProtectionPolicyBindingsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAutoProtectionPolicyBindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listAppliedAutoProtectionPolicies', () => {
+    it('invokes listAppliedAutoProtectionPolicies without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAppliedAutoProtectionPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listAppliedAutoProtectionPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAppliedAutoProtectionPolicies without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+      ];
+      client.innerApiCalls.listAppliedAutoProtectionPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAppliedAutoProtectionPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAppliedAutoProtectionPolicies with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAppliedAutoProtectionPolicies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listAppliedAutoProtectionPolicies(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppliedAutoProtectionPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAppliedAutoProtectionPoliciesStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAppliedAutoProtectionPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAppliedAutoProtectionPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listAppliedAutoProtectionPolicies,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAppliedAutoProtectionPoliciesStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAppliedAutoProtectionPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAppliedAutoProtectionPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listAppliedAutoProtectionPolicies,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAppliedAutoProtectionPolicies without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy(),
+        ),
+      ];
+      client.descriptors.page.listAppliedAutoProtectionPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[] =
+        [];
+      const iterable = client.listAppliedAutoProtectionPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAppliedAutoProtectionPolicies with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListAppliedAutoProtectionPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAppliedAutoProtectionPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAppliedAutoProtectionPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listAppliedAutoProtectionPolicies
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listBindingMatchingResources', () => {
+    it('invokes listBindingMatchingResources without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+      ];
+      client.innerApiCalls.listBindingMatchingResources =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listBindingMatchingResources(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBindingMatchingResources without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+      ];
+      client.innerApiCalls.listBindingMatchingResources =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBindingMatchingResources(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.backupdr.v1.IBindingMatchingResource[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBindingMatchingResources with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBindingMatchingResources = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listBindingMatchingResources(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBindingMatchingResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBindingMatchingResourcesStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+      ];
+      client.descriptors.page.listBindingMatchingResources.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBindingMatchingResourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.BindingMatchingResource[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.BindingMatchingResource,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listBindingMatchingResources,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listBindingMatchingResourcesStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBindingMatchingResources.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBindingMatchingResourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.BindingMatchingResource[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.BindingMatchingResource,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listBindingMatchingResources,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listBindingMatchingResources without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.BindingMatchingResource(),
+        ),
+      ];
+      client.descriptors.page.listBindingMatchingResources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IBindingMatchingResource[] =
+        [];
+      const iterable = client.listBindingMatchingResourcesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listBindingMatchingResources with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListBindingMatchingResourcesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBindingMatchingResources.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBindingMatchingResourcesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IBindingMatchingResource[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listBindingMatchingResources
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listRestoreTemplates', () => {
+    it('invokes listRestoreTemplates without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreTemplates =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRestoreTemplates(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplates without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreTemplates =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRestoreTemplates(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.backupdr.v1.IRestoreTemplate[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplates with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRestoreTemplates = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listRestoreTemplates(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplatesStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+      ];
+      client.descriptors.page.listRestoreTemplates.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRestoreTemplatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreTemplate[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.backupdr.v1.RestoreTemplate) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listRestoreTemplates.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRestoreTemplates, request),
+      );
+      assert(
+        (client.descriptors.page.listRestoreTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listRestoreTemplatesStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreTemplates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRestoreTemplatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreTemplate[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.backupdr.v1.RestoreTemplate) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listRestoreTemplates.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRestoreTemplates, request),
+      );
+      assert(
+        (client.descriptors.page.listRestoreTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreTemplates without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplate(),
+        ),
+      ];
+      client.descriptors.page.listRestoreTemplates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IRestoreTemplate[] = [];
+      const iterable = client.listRestoreTemplatesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listRestoreTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreTemplates with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplatesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreTemplates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRestoreTemplatesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IRestoreTemplate[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listRestoreTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listRestoreTemplateExecutions', () => {
+    it('invokes listRestoreTemplateExecutions without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreTemplateExecutions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRestoreTemplateExecutions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplateExecutions without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreTemplateExecutions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRestoreTemplateExecutions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplateExecutions with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRestoreTemplateExecutions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listRestoreTemplateExecutions(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreTemplateExecutions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreTemplateExecutionsStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+      ];
+      client.descriptors.page.listRestoreTemplateExecutions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRestoreTemplateExecutionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreTemplateExecution[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreTemplateExecution,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreTemplateExecutions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listRestoreTemplateExecutionsStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreTemplateExecutions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRestoreTemplateExecutionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreTemplateExecution[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreTemplateExecution,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreTemplateExecutions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreTemplateExecutions without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreTemplateExecution(),
+        ),
+      ];
+      client.descriptors.page.listRestoreTemplateExecutions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[] =
+        [];
+      const iterable = client.listRestoreTemplateExecutionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreTemplateExecutions with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreTemplateExecutionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreTemplateExecutions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRestoreTemplateExecutionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreTemplateExecutions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listRestoreVerificationPlanAssociations', () => {
+    it('invokes listRestoreVerificationPlanAssociations without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreVerificationPlanAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listRestoreVerificationPlanAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlanAssociations without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreVerificationPlanAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRestoreVerificationPlanAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlanAssociations with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRestoreVerificationPlanAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listRestoreVerificationPlanAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listRestoreVerificationPlanAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlanAssociationsStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+      ];
+      client.descriptors.page.listRestoreVerificationPlanAssociations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listRestoreVerificationPlanAssociationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreVerificationPlanAssociations,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listRestoreVerificationPlanAssociationsStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreVerificationPlanAssociations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listRestoreVerificationPlanAssociationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreVerificationPlanAssociations,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreVerificationPlanAssociations without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation(),
+        ),
+      ];
+      client.descriptors.page.listRestoreVerificationPlanAssociations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[] =
+        [];
+      const iterable =
+        client.listRestoreVerificationPlanAssociationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreVerificationPlanAssociations with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlanAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreVerificationPlanAssociations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listRestoreVerificationPlanAssociationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlanAssociations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listRestoreVerificationPlans', () => {
+    it('invokes listRestoreVerificationPlans without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreVerificationPlans =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRestoreVerificationPlans(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlans without error using callback', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+      ];
+      client.innerApiCalls.listRestoreVerificationPlans =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRestoreVerificationPlans(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlans with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRestoreVerificationPlans = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listRestoreVerificationPlans(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRestoreVerificationPlans as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRestoreVerificationPlansStream without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+      ];
+      client.descriptors.page.listRestoreVerificationPlans.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRestoreVerificationPlansStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreVerificationPlan[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreVerificationPlan,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreVerificationPlans,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listRestoreVerificationPlansStream with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreVerificationPlans.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRestoreVerificationPlansStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.backupdr.v1.RestoreVerificationPlan[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.backupdr.v1.RestoreVerificationPlan,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRestoreVerificationPlans,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreVerificationPlans without error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.backupdr.v1.RestoreVerificationPlan(),
+        ),
+      ];
+      client.descriptors.page.listRestoreVerificationPlans.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[] =
+        [];
+      const iterable = client.listRestoreVerificationPlansAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRestoreVerificationPlans with error', async () => {
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.backupdr.v1.ListRestoreVerificationPlansRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRestoreVerificationPlans.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRestoreVerificationPlansAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listRestoreVerificationPlans
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
@@ -9670,6 +16358,263 @@ describe('v1.BackupDRClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('appliedAutoProtectionPolicy', async () => {
+      const fakePath = '/rendered/path/appliedAutoProtectionPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        applied_auto_protection_policy: 'appliedAutoProtectionPolicyValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.appliedAutoProtectionPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.appliedAutoProtectionPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('appliedAutoProtectionPolicyPath', () => {
+        const result = client.appliedAutoProtectionPolicyPath(
+          'projectValue',
+          'locationValue',
+          'appliedAutoProtectionPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchProjectFromAppliedAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchLocationFromAppliedAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAppliedAutoProtectionPolicyFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchAppliedAutoProtectionPolicyFromAppliedAutoProtectionPolicyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'appliedAutoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('autoProtectionPolicy', async () => {
+      const fakePath = '/rendered/path/autoProtectionPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.autoProtectionPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autoProtectionPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autoProtectionPolicyPath', () => {
+        const result = client.autoProtectionPolicyPath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchProjectFromAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchLocationFromAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromAutoProtectionPolicyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('autoProtectionPolicyBinding', async () => {
+      const fakePath = '/rendered/path/autoProtectionPolicyBinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+        binding: 'bindingValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.autoProtectionPolicyBindingPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.autoProtectionPolicyBindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autoProtectionPolicyBindingPath', () => {
+        const result = client.autoProtectionPolicyBindingPath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+          'bindingValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchProjectFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchLocationFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromAutoProtectionPolicyBindingName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBindingFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchBindingFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'bindingValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
@@ -10059,6 +17004,119 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
+    describe('bindingMatchingResource', async () => {
+      const fakePath = '/rendered/path/bindingMatchingResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+        binding: 'bindingValue',
+        matching_resource: 'matchingResourceValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.bindingMatchingResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bindingMatchingResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bindingMatchingResourcePath', () => {
+        const result = client.bindingMatchingResourcePath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+          'bindingValue',
+          'matchingResourceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchProjectFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchLocationFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromBindingMatchingResourceName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBindingFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchBindingFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'bindingValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMatchingResourceFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchMatchingResourceFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'matchingResourceValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('dataSource', async () => {
       const fakePath = '/rendered/path/dataSource';
       const expectedParameters = {
@@ -10441,6 +17499,348 @@ describe('v1.BackupDRClient', () => {
         assert(
           (
             client.pathTemplates.resourceBackupConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreTemplate', async () => {
+      const fakePath = '/rendered/path/restoreTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_template: 'restoreTemplateValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.restoreTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreTemplatePath', () => {
+        const result = client.restoreTemplatePath(
+          'projectValue',
+          'locationValue',
+          'restoreTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreTemplateName', () => {
+        const result = client.matchProjectFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreTemplateName', () => {
+        const result = client.matchLocationFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreTemplateFromRestoreTemplateName', () => {
+        const result =
+          client.matchRestoreTemplateFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'restoreTemplateValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreTemplateExecution', async () => {
+      const fakePath = '/rendered/path/restoreTemplateExecution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_template: 'restoreTemplateValue',
+        execution: 'executionValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.restoreTemplateExecutionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreTemplateExecutionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreTemplateExecutionPath', () => {
+        const result = client.restoreTemplateExecutionPath(
+          'projectValue',
+          'locationValue',
+          'restoreTemplateValue',
+          'executionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchProjectFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchLocationFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreTemplateFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchRestoreTemplateFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'restoreTemplateValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchExecutionFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchExecutionFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreVerificationPlan', async () => {
+      const fakePath = '/rendered/path/restoreVerificationPlan';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restoreVerificationPlan: 'restoreVerificationPlanValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.restoreVerificationPlanPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreVerificationPlanPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreVerificationPlanPath', () => {
+        const result = client.restoreVerificationPlanPath(
+          'projectValue',
+          'locationValue',
+          'restoreVerificationPlanValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchProjectFromRestoreVerificationPlanName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchLocationFromRestoreVerificationPlanName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreVerificationPlanFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchRestoreVerificationPlanFromRestoreVerificationPlanName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'restoreVerificationPlanValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreVerificationPlanAssociation', async () => {
+      const fakePath = '/rendered/path/restoreVerificationPlanAssociation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_verification_plan: 'restoreVerificationPlanValue',
+        association: 'associationValue',
+      };
+      const client = new backupdrModule.v1.BackupDRClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.restoreVerificationPlanAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('restoreVerificationPlanAssociationPath', () => {
+        const result = client.restoreVerificationPlanAssociationPath(
+          'projectValue',
+          'locationValue',
+          'restoreVerificationPlanValue',
+          'associationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchProjectFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchLocationFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'restoreVerificationPlanValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssociationFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchAssociationFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'associationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -2701,6 +2701,21 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
+                            },
+                            "disks": {
+                              "rule": "repeated",
+                              "type": "AttachedDisk",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bootDisk": {
+                              "type": "Disk",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

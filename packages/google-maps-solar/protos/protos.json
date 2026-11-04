@@ -179,6 +179,11 @@
                               "type": "DetectionStatus",
                               "id": 1
                             },
+                            "arrays": {
+                              "rule": "repeated",
+                              "type": "SolarArray",
+                              "id": 2
+                            },
                             "latestCaptureDate": {
                               "type": "google.type.Date",
                               "id": 3
@@ -191,6 +196,14 @@
                                 "DETECTION_STATUS_DATA_UNAVAILABLE": 1,
                                 "DETECTION_STATUS_ARRAYS_DETECTED": 2,
                                 "DETECTION_STATUS_NO_ARRAYS_DETECTED": 3
+                              }
+                            },
+                            "SolarArray": {
+                              "fields": {
+                                "polygonGeojson": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 3
+                                }
                               }
                             }
                           }
@@ -2893,6 +2906,69 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
                 }
               }
             }

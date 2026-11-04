@@ -29,11 +29,12 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The inline source for the input content for document embeddings.
+   *  The inline source for the input content for license assignment.
    */
   // const inlineSource = {}
   /**
-   *  Required. The parent UserStore   resource name, format:
+   *  Required. The parent UserStore google.cloud.discoveryengine.v1.UserStore 
+   *  resource name, format:
    *  `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    */
   // const parent = 'abc123'

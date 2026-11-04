@@ -8207,6 +8207,201 @@ describe('v1.DataformClient', () => {
     });
   });
 
+  describe('createCompilationResultLongRunning', () => {
+    it('invokes createCompilationResultLongRunning without error', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.createCompilationResultLongRunning(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning without error using callback', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCompilationResultLongRunning(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dataform.v1.ICompilationResult,
+              protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning with call error', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createCompilationResultLongRunning(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning with LRO error', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.createCompilationResultLongRunning(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateCompilationResultLongRunningProgress without error', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateCompilationResultLongRunningProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateCompilationResultLongRunningProgress with error', async () => {
+      const client = new dataformModule.v1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateCompilationResultLongRunningProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('queryTeamFolderContents', () => {
     it('invokes queryTeamFolderContents without error', async () => {
       const client = new dataformModule.v1.DataformClient({

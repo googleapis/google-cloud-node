@@ -168,6 +168,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "enableRemainingRouteReporting": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableRouteDeviationReporting": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -229,6 +243,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "remainingRoute": {
+                          "type": "Route",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastRouteDeviation": {
+                          "type": "RouteDeviation",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "traveledDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 4,
@@ -269,6 +297,33 @@
                         }
                       }
                     },
+                    "RouteDeviation": {
+                      "fields": {
+                        "location": {
+                          "type": "Location",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "source": {
+                          "type": "TriggerSource",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TriggerSource": {
+                          "values": {
+                            "TRIGGER_SOURCE_UNSPECIFIED": 0,
+                            "DRIVER_INITIATED_REROUTE": 1,
+                            "SYSTEM_INITIATED_REROUTE": 2
+                          }
+                        }
+                      }
+                    },
                     "Stop": {
                       "fields": {
                         "point": {
@@ -299,6 +354,117 @@
                         "serverTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SimplePolyline": {
+                      "fields": {
+                        "points": {
+                          "rule": "repeated",
+                          "type": "google.type.LatLng",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SpeedReadingInterval": {
+                      "oneofs": {
+                        "_startPolylinePointIndex": {
+                          "oneof": [
+                            "startPolylinePointIndex"
+                          ]
+                        },
+                        "_endPolylinePointIndex": {
+                          "oneof": [
+                            "endPolylinePointIndex"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "startPolylinePointIndex": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "endPolylinePointIndex": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "speed": {
+                          "type": "Speed",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Speed": {
+                          "values": {
+                            "SPEED_UNSPECIFIED": 0,
+                            "NORMAL": 1,
+                            "SLOW": 2,
+                            "TRAFFIC_JAM": 3
+                          }
+                        }
+                      }
+                    },
+                    "Route": {
+                      "oneofs": {
+                        "format": {
+                          "oneof": [
+                            "simplePolyline",
+                            "encodedPolyline",
+                            "s2Polyline",
+                            "geoJson"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "simplePolyline": {
+                          "type": "SimplePolyline",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encodedPolyline": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "s2Polyline": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "geoJson": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "trafficInformation": {
+                          "rule": "repeated",
+                          "type": "SpeedReadingInterval",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -339,6 +505,24 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "navconnect.googleapis.com/Trip"
+                          }
+                        },
+                        "routePolylineFormat": {
+                          "type": "RoutePolylineFormat",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RoutePolylineFormat": {
+                          "values": {
+                            "ROUTE_POLYLINE_FORMAT_UNSPECIFIED": 0,
+                            "SIMPLE": 1,
+                            "ENCODED": 4,
+                            "S2ENCODED": 2,
+                            "GEO_JSON": 3
                           }
                         }
                       }
@@ -2546,6 +2730,69 @@
                 "paths": {
                   "rule": "repeated",
                   "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
                   "id": 1
                 }
               }

@@ -23,10 +23,12 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {PassThrough} from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -207,17 +209,29 @@ export class AssistantServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
       assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
       ),
       assistantPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
       ),
+      collectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}',
+      ),
+      dataConnectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataConnector',
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}',
       ),
       identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -284,6 +298,14 @@ export class AssistantServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
         ),
+      projectLocationCollectionDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/widgetConfigs/{widget_config}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
+        ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}',
@@ -303,6 +325,10 @@ export class AssistantServiceClient {
       projectLocationCollectionEngineSessionsPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}',
+        ),
+      projectLocationCollectionEngineWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/widgetConfigs/{widget_config}',
         ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}',
@@ -359,6 +385,24 @@ export class AssistantServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
         ),
+      projectLocationDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/widgetConfigs/{widget_config}',
+        ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}',
+      ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listAssistants: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'assistants',
+      ),
     };
 
     // Some of the methods on this service provide streaming responses.
@@ -421,7 +465,14 @@ export class AssistantServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const assistantServiceStubMethods = ['streamAssist'];
+    const assistantServiceStubMethods = [
+      'streamAssist',
+      'createAssistant',
+      'deleteAssistant',
+      'updateAssistant',
+      'getAssistant',
+      'listAssistants',
+    ];
     for (const methodName of assistantServiceStubMethods) {
       const callPromise = this.assistantServiceStub.then(
         stub =>
@@ -449,7 +500,10 @@ export class AssistantServiceClient {
         },
       );
 
-      const descriptor = this.descriptors.stream[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -525,7 +579,12 @@ export class AssistantServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.assist.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -547,6 +606,611 @@ export class AssistantServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates an {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+   * @param {google.cloud.discoveryengine.v1.Assistant} request.assistant
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} to
+   *   create.
+   * @param {string} request.assistantId
+   *   Required. The ID to use for the
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}, which will become
+   *   the final component of the
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}'s resource name.
+   *
+   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+   *   with a length limit of 63 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/assistant_service.create_assistant.js</caption>
+   * region_tag:discoveryengine_v1_generated_AssistantService_CreateAssistant_async
+   */
+  createAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      (
+        | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAssistant(
+    request: protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAssistant(
+    request: protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      (
+        | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAssistant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAssistant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAssistant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          (
+            | protos.google.cloud.discoveryengine.v1.ICreateAssistantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAssistant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes an {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}. Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+   *
+   *   If the caller does not have permission to delete the
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} to delete
+   *   does not exist, a NOT_FOUND error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/assistant_service.delete_assistant.js</caption>
+   * region_tag:discoveryengine_v1_generated_AssistantService_DeleteAssistant_async
+   */
+  deleteAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAssistant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAssistant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAssistant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.discoveryengine.v1.IDeleteAssistantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAssistant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.Assistant} request.assistant
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} to
+   *   update.
+   *
+   *   The {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}'s `name` field
+   *   is used to identify the
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} to update. Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+   *
+   *   If the caller does not have permission to update the
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} to update
+   *   does not exist, a NOT_FOUND error is returned.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/assistant_service.update_assistant.js</caption>
+   * region_tag:discoveryengine_v1_generated_AssistantService_UpdateAssistant_async
+   */
+  updateAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      (
+        | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      (
+        | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'assistant.name': request.assistant!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAssistant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAssistant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAssistant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          (
+            | protos.google.cloud.discoveryengine.v1.IUpdateAssistantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAssistant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets an {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}. Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/assistant_service.get_assistant.js</caption>
+   * region_tag:discoveryengine_v1_generated_AssistantService_GetAssistant_async
+   */
+  getAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IGetAssistantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      protos.google.cloud.discoveryengine.v1.IGetAssistantRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IGetAssistantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAssistant(
+    request: protos.google.cloud.discoveryengine.v1.IGetAssistantRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAssistant(
+    request?: protos.google.cloud.discoveryengine.v1.IGetAssistantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant,
+      protos.google.cloud.discoveryengine.v1.IGetAssistantRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAssistant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAssistant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAssistant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAssistant,
+          (
+            | protos.google.cloud.discoveryengine.v1.IGetAssistantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAssistant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Assists the user with a query in a streaming fashion.
@@ -606,6 +1270,264 @@ export class AssistantServiceClient {
     });
     this._log.info('streamAssist stream %j', options);
     return this.innerApiCalls.streamAssist(request, options);
+  }
+
+  /**
+   * Lists all {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}s under an
+   * {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}s
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000; anything above that will be coerced down to 1000.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListAssistantsResponse.next_page_token|ListAssistantsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|AssistantService.ListAssistants}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|ListAssistants}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAssistantsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAssistants(
+    request?: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant[],
+      protos.google.cloud.discoveryengine.v1.IListAssistantsRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListAssistantsResponse,
+    ]
+  >;
+  listAssistants(
+    request: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListAssistantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IAssistant
+    >,
+  ): void;
+  listAssistants(
+    request: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListAssistantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IAssistant
+    >,
+  ): void;
+  listAssistants(
+    request?: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListAssistantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IAssistant
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+      | protos.google.cloud.discoveryengine.v1.IListAssistantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.IAssistant
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAssistant[],
+      protos.google.cloud.discoveryengine.v1.IListAssistantsRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListAssistantsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListAssistantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IAssistant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssistants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssistants request %j', request);
+    return this.innerApiCalls
+      .listAssistants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1.IAssistant[],
+          protos.google.cloud.discoveryengine.v1.IListAssistantsRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListAssistantsResponse,
+        ]) => {
+          this._log.info('listAssistants values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAssistants`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}s
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000; anything above that will be coerced down to 1000.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListAssistantsResponse.next_page_token|ListAssistantsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|AssistantService.ListAssistants}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|ListAssistants}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAssistantsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAssistantsStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAssistants'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAssistants stream %j', request);
+    return this.descriptors.page.listAssistants.createStream(
+      this.innerApiCalls.listAssistants as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAssistants`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}s
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000; anything above that will be coerced down to 1000.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListAssistantsResponse.next_page_token|ListAssistantsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|AssistantService.ListAssistants}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1.AssistantService.ListAssistants|ListAssistants}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1.Assistant|Assistant}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/assistant_service.list_assistants.js</caption>
+   * region_tag:discoveryengine_v1_generated_AssistantService_ListAssistants_async
+   */
+  listAssistantsAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListAssistantsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IAssistant> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAssistants'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAssistants iterate %j', request);
+    return this.descriptors.page.listAssistants.asyncIterate(
+      this.innerApiCalls['listAssistants'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IAssistant>;
   }
 
   /**
@@ -688,6 +1610,44 @@ export class AssistantServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
 
   /**
    * Return a fully-qualified assistAnswer resource name string.
@@ -876,6 +1836,110 @@ export class AssistantServiceClient {
   }
 
   /**
+   * Return a fully-qualified collection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  collectionPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.collectionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
+  }
+
+  /**
+   * Return a fully-qualified dataConnector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  dataConnectorPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .collection;
+  }
+
+  /**
    * Return a fully-qualified engine resource name string.
    *
    * @param {string} project
@@ -1001,6 +2065,58 @@ export class AssistantServiceClient {
     return this.pathTemplates.identityMappingStorePathTemplate.match(
       identityMappingStoreName,
     ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
   }
 
   /**
@@ -2596,6 +3712,230 @@ export class AssistantServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionEngineControl resource name string.
    *
    * @param {string} project
@@ -3126,6 +4466,109 @@ export class AssistantServiceClient {
     return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(
       projectLocationCollectionEngineSessionsName,
     ).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).engine;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).widget_config;
   }
 
   /**
@@ -4332,6 +5775,143 @@ export class AssistantServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
   }
 
   /**

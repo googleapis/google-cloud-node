@@ -21,16 +21,20 @@
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const aclConfigServiceClient = new discoveryengine.AclConfigServiceClient();
   const assistantServiceClient = new discoveryengine.AssistantServiceClient();
   const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
+  const collectionServiceClient = new discoveryengine.CollectionServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();
   const conversationalSearchServiceClient = new discoveryengine.ConversationalSearchServiceClient();
+  const dataConnectorServiceClient = new discoveryengine.DataConnectorServiceClient();
   const dataStoreServiceClient = new discoveryengine.DataStoreServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const engineServiceClient = new discoveryengine.EngineServiceClient();
   const groundedGenerationServiceClient = new discoveryengine.GroundedGenerationServiceClient();
   const identityMappingStoreServiceClient = new discoveryengine.IdentityMappingStoreServiceClient();
+  const licenseConfigServiceClient = new discoveryengine.LicenseConfigServiceClient();
   const projectServiceClient = new discoveryengine.ProjectServiceClient();
   const rankServiceClient = new discoveryengine.RankServiceClient();
   const recommendationServiceClient = new discoveryengine.RecommendationServiceClient();
@@ -42,6 +46,8 @@ function main() {
   const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
   const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();
+  const userStoreServiceClient = new discoveryengine.UserStoreServiceClient();
+  const widgetConfigServiceClient = new discoveryengine.WidgetConfigServiceClient();
 }
 
 main();

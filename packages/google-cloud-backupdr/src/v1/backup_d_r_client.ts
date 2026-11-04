@@ -217,6 +217,15 @@ export class BackupDRClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      appliedAutoProtectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/appliedAutoProtectionPolicies/{applied_auto_protection_policy}',
+      ),
+      autoProtectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}',
+      ),
+      autoProtectionPolicyBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}',
+      ),
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup}',
       ),
@@ -231,6 +240,9 @@ export class BackupDRClient {
       ),
       backupVaultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupVaults/{backupvault}',
+      ),
+      bindingMatchingResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}/matchingResources/{matching_resource}',
       ),
       dataSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}',
@@ -250,6 +262,19 @@ export class BackupDRClient {
       resourceBackupConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}',
       ),
+      restoreTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreTemplates/{restore_template}',
+      ),
+      restoreTemplateExecutionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreTemplates/{restore_template}/executions/{execution}',
+      ),
+      restoreVerificationPlanPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}',
+      ),
+      restoreVerificationPlanAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -318,6 +343,47 @@ export class BackupDRClient {
           'nextPageToken',
           'dataSourceReferences',
         ),
+      listAutoProtectionPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'autoProtectionPolicies',
+      ),
+      listAutoProtectionPolicyBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'autoProtectionPolicyBindings',
+      ),
+      listAppliedAutoProtectionPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'appliedAutoProtectionPolicies',
+      ),
+      listBindingMatchingResources: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'matchingResources',
+      ),
+      listRestoreTemplates: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'restoreTemplates',
+      ),
+      listRestoreTemplateExecutions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'restoreTemplateExecutions',
+      ),
+      listRestoreVerificationPlanAssociations:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'restoreVerificationPlanAssociations',
+        ),
+      listRestoreVerificationPlans: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'restoreVerificationPlans',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -477,6 +543,100 @@ export class BackupDRClient {
     const initializeServiceMetadata = protoFilesRoot.lookup(
       '.google.cloud.backupdr.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const createAutoProtectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.AutoProtectionPolicy',
+    ) as gax.protobuf.Type;
+    const createAutoProtectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const updateAutoProtectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.AutoProtectionPolicy',
+    ) as gax.protobuf.Type;
+    const updateAutoProtectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteAutoProtectionPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteAutoProtectionPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createAutoProtectionPolicyBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.AutoProtectionPolicyBinding',
+    ) as gax.protobuf.Type;
+    const createAutoProtectionPolicyBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const initiateDeleteAutoProtectionPolicyBindingResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.backupdr.v1.AutoProtectionPolicyBinding',
+      ) as gax.protobuf.Type;
+    const initiateDeleteAutoProtectionPolicyBindingMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.backupdr.v1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const createRestoreTemplateResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.RestoreTemplate',
+    ) as gax.protobuf.Type;
+    const createRestoreTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const updateRestoreTemplateResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.RestoreTemplate',
+    ) as gax.protobuf.Type;
+    const updateRestoreTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteRestoreTemplateResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteRestoreTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const runRestoreTemplateResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.RunRestoreTemplateResponse',
+    ) as gax.protobuf.Type;
+    const runRestoreTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const triggerRestoreCleanupResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.RestoreTemplateExecution',
+    ) as gax.protobuf.Type;
+    const triggerRestoreCleanupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createRestoreVerificationPlanResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.RestoreVerificationPlan',
+    ) as gax.protobuf.Type;
+    const createRestoreVerificationPlanMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createRestoreVerificationPlanAssociationResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation',
+      ) as gax.protobuf.Type;
+    const createRestoreVerificationPlanAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.backupdr.v1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const deleteRestoreVerificationPlanAssociationResponse =
+      protoFilesRoot.lookup('.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteRestoreVerificationPlanAssociationMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.backupdr.v1.OperationMetadata',
+      ) as gax.protobuf.Type;
+    const triggerRestoreVerificationResponse = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.TriggerRestoreVerificationResponse',
+    ) as gax.protobuf.Type;
+    const triggerRestoreVerificationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteRestoreVerificationPlanResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteRestoreVerificationPlanMetadata = protoFilesRoot.lookup(
+      '.google.cloud.backupdr.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createManagementServer: new this._gaxModule.LongrunningDescriptor(
@@ -584,6 +744,141 @@ export class BackupDRClient {
         initializeServiceResponse.decode.bind(initializeServiceResponse),
         initializeServiceMetadata.decode.bind(initializeServiceMetadata),
       ),
+      createAutoProtectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAutoProtectionPolicyResponse.decode.bind(
+          createAutoProtectionPolicyResponse,
+        ),
+        createAutoProtectionPolicyMetadata.decode.bind(
+          createAutoProtectionPolicyMetadata,
+        ),
+      ),
+      updateAutoProtectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAutoProtectionPolicyResponse.decode.bind(
+          updateAutoProtectionPolicyResponse,
+        ),
+        updateAutoProtectionPolicyMetadata.decode.bind(
+          updateAutoProtectionPolicyMetadata,
+        ),
+      ),
+      deleteAutoProtectionPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAutoProtectionPolicyResponse.decode.bind(
+          deleteAutoProtectionPolicyResponse,
+        ),
+        deleteAutoProtectionPolicyMetadata.decode.bind(
+          deleteAutoProtectionPolicyMetadata,
+        ),
+      ),
+      createAutoProtectionPolicyBinding:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createAutoProtectionPolicyBindingResponse.decode.bind(
+            createAutoProtectionPolicyBindingResponse,
+          ),
+          createAutoProtectionPolicyBindingMetadata.decode.bind(
+            createAutoProtectionPolicyBindingMetadata,
+          ),
+        ),
+      initiateDeleteAutoProtectionPolicyBinding:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          initiateDeleteAutoProtectionPolicyBindingResponse.decode.bind(
+            initiateDeleteAutoProtectionPolicyBindingResponse,
+          ),
+          initiateDeleteAutoProtectionPolicyBindingMetadata.decode.bind(
+            initiateDeleteAutoProtectionPolicyBindingMetadata,
+          ),
+        ),
+      createRestoreTemplate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createRestoreTemplateResponse.decode.bind(
+          createRestoreTemplateResponse,
+        ),
+        createRestoreTemplateMetadata.decode.bind(
+          createRestoreTemplateMetadata,
+        ),
+      ),
+      updateRestoreTemplate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateRestoreTemplateResponse.decode.bind(
+          updateRestoreTemplateResponse,
+        ),
+        updateRestoreTemplateMetadata.decode.bind(
+          updateRestoreTemplateMetadata,
+        ),
+      ),
+      deleteRestoreTemplate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteRestoreTemplateResponse.decode.bind(
+          deleteRestoreTemplateResponse,
+        ),
+        deleteRestoreTemplateMetadata.decode.bind(
+          deleteRestoreTemplateMetadata,
+        ),
+      ),
+      runRestoreTemplate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        runRestoreTemplateResponse.decode.bind(runRestoreTemplateResponse),
+        runRestoreTemplateMetadata.decode.bind(runRestoreTemplateMetadata),
+      ),
+      triggerRestoreCleanup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        triggerRestoreCleanupResponse.decode.bind(
+          triggerRestoreCleanupResponse,
+        ),
+        triggerRestoreCleanupMetadata.decode.bind(
+          triggerRestoreCleanupMetadata,
+        ),
+      ),
+      createRestoreVerificationPlan: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createRestoreVerificationPlanResponse.decode.bind(
+          createRestoreVerificationPlanResponse,
+        ),
+        createRestoreVerificationPlanMetadata.decode.bind(
+          createRestoreVerificationPlanMetadata,
+        ),
+      ),
+      createRestoreVerificationPlanAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createRestoreVerificationPlanAssociationResponse.decode.bind(
+            createRestoreVerificationPlanAssociationResponse,
+          ),
+          createRestoreVerificationPlanAssociationMetadata.decode.bind(
+            createRestoreVerificationPlanAssociationMetadata,
+          ),
+        ),
+      deleteRestoreVerificationPlanAssociation:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteRestoreVerificationPlanAssociationResponse.decode.bind(
+            deleteRestoreVerificationPlanAssociationResponse,
+          ),
+          deleteRestoreVerificationPlanAssociationMetadata.decode.bind(
+            deleteRestoreVerificationPlanAssociationMetadata,
+          ),
+        ),
+      triggerRestoreVerification: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        triggerRestoreVerificationResponse.decode.bind(
+          triggerRestoreVerificationResponse,
+        ),
+        triggerRestoreVerificationMetadata.decode.bind(
+          triggerRestoreVerificationMetadata,
+        ),
+      ),
+      deleteRestoreVerificationPlan: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteRestoreVerificationPlanResponse.decode.bind(
+          deleteRestoreVerificationPlanResponse,
+        ),
+        deleteRestoreVerificationPlanMetadata.decode.bind(
+          deleteRestoreVerificationPlanMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -673,6 +968,35 @@ export class BackupDRClient {
       'listDataSourceReferences',
       'fetchDataSourceReferencesForResourceType',
       'initializeService',
+      'createAutoProtectionPolicy',
+      'listAutoProtectionPolicies',
+      'getAutoProtectionPolicy',
+      'updateAutoProtectionPolicy',
+      'deleteAutoProtectionPolicy',
+      'createAutoProtectionPolicyBinding',
+      'getAutoProtectionPolicyBinding',
+      'listAutoProtectionPolicyBindings',
+      'listAppliedAutoProtectionPolicies',
+      'initiateDeleteAutoProtectionPolicyBinding',
+      'listBindingMatchingResources',
+      'createRestoreTemplate',
+      'getRestoreTemplate',
+      'listRestoreTemplates',
+      'updateRestoreTemplate',
+      'deleteRestoreTemplate',
+      'runRestoreTemplate',
+      'getRestoreTemplateExecution',
+      'listRestoreTemplateExecutions',
+      'triggerRestoreCleanup',
+      'createRestoreVerificationPlan',
+      'createRestoreVerificationPlanAssociation',
+      'getRestoreVerificationPlanAssociation',
+      'listRestoreVerificationPlanAssociations',
+      'deleteRestoreVerificationPlanAssociation',
+      'triggerRestoreVerification',
+      'getRestoreVerificationPlan',
+      'listRestoreVerificationPlans',
+      'deleteRestoreVerificationPlan',
     ];
     for (const methodName of backupDRStubMethods) {
       const callPromise = this.backupDRStub.then(
@@ -1856,6 +2180,886 @@ export class BackupDRClient {
           {} | undefined,
         ]) => {
           this._log.info('getDataSourceReference response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single AutoProtectionPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicy|AutoProtectionPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetAutoProtectionPolicy_async
+   */
+  getAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+      (
+        | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+          | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+      (
+        | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAutoProtectionPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+          | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAutoProtectionPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutoProtectionPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+          (
+            | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAutoProtectionPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns the auto protection policy binding read from the CCFE tables.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the binding to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding|AutoProtectionPolicyBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_auto_protection_policy_binding.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetAutoProtectionPolicyBinding_async
+   */
+  getAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+      (
+        | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+          | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+      | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+      (
+        | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAutoProtectionPolicyBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+          | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getAutoProtectionPolicyBinding response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutoProtectionPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+          (
+            | protos.google.cloud.backupdr.v1.IGetAutoProtectionPolicyBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getAutoProtectionPolicyBinding response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a RestoreTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the restore template to retrieve.
+   *   Format:
+   *   'projects/{project_id}/locations/{location}/restoreTemplates/{restore_template_id}'
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.RestoreTemplate|RestoreTemplate}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetRestoreTemplate_async
+   */
+  getRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplate,
+      protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplate,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplate,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreTemplate,
+          | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplate,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplate,
+      protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRestoreTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreTemplate,
+          | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRestoreTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestoreTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IRestoreTemplate,
+          (
+            | protos.google.cloud.backupdr.v1.IGetRestoreTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRestoreTemplate response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a RestoreTemplateExecution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the restore template execution to retrieve.
+   *   Format:
+   *   'projects/{project_id}/locations/{location}/restoreTemplates/{restore_template_id}/executions/{execution_id}'
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.RestoreTemplateExecution|RestoreTemplateExecution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_restore_template_execution.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetRestoreTemplateExecution_async
+   */
+  getRestoreTemplateExecution(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getRestoreTemplateExecution(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreTemplateExecution(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreTemplateExecution(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+          | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+      | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRestoreTemplateExecution request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+          | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRestoreTemplateExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestoreTemplateExecution(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+          (
+            | protos.google.cloud.backupdr.v1.IGetRestoreTemplateExecutionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRestoreTemplateExecution response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single RestoreVerificationPlanAssociation in a given
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the RestoreVerificationPlanAssociation to
+   *   retrieve.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation|RestoreVerificationPlanAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_restore_verification_plan_association.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetRestoreVerificationPlanAssociation_async
+   */
+  getRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+          | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRestoreVerificationPlanAssociation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+          | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getRestoreVerificationPlanAssociation response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestoreVerificationPlanAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+          (
+            | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getRestoreVerificationPlanAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single RestoreVerificationPlan. Returns the requested
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the `RestoreVerificationPlan` to retrieve.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlan|RestoreVerificationPlan}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.get_restore_verification_plan.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_GetRestoreVerificationPlan_async
+   */
+  getRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest,
+    callback: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+          | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+      | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+      (
+        | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRestoreVerificationPlan request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+          | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRestoreVerificationPlan response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestoreVerificationPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+          (
+            | protos.google.cloud.backupdr.v1.IGetRestoreVerificationPlanRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRestoreVerificationPlan response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4595,6 +5799,12 @@ export class BackupDRClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} [request.autoProtectionPolicyBinding]
+   *   Optional. This field is exclusively used by Backup and DR's auto-protection
+   *   feature. The resource name of the `AutoProtectionPolicyBinding` that
+   *   triggered the deletion of this association.
+   *   Format:
+   *   `projects/{project}/locations/{location}/autoProtectionPolicies/{policy}/bindings/{binding}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5137,6 +6347,2829 @@ export class BackupDRClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.backupdr.v1.InitializeServiceResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new AutoProtectionPolicy in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this policy will be created.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.autoProtectionPolicyId
+   *   Required. The ID to use for the policy.
+   *   This will become the final component of the policy's resource name.
+   *
+   *   This value must start with a lowercase letter followed by up to 62
+   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   * @param {google.cloud.backupdr.v1.AutoProtectionPolicy} request.autoProtectionPolicy
+   *   Required. The AutoProtectionPolicy resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateAutoProtectionPolicy_async
+   */
+  createAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAutoProtectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAutoProtectionPolicy request %j', request);
+    return this.innerApiCalls
+      .createAutoProtectionPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAutoProtectionPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createAutoProtectionPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateAutoProtectionPolicy_async
+   */
+  async checkCreateAutoProtectionPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicy,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createAutoProtectionPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAutoProtectionPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicy,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single AutoProtectionPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.backupdr.v1.AutoProtectionPolicy} request.autoProtectionPolicy
+   *   Required. The policy to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   AutoProtectionPolicy resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.update_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_UpdateAutoProtectionPolicy_async
+   */
+  updateAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IUpdateAutoProtectionPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'auto_protection_policy.name': request.autoProtectionPolicy!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAutoProtectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAutoProtectionPolicy request %j', request);
+    return this.innerApiCalls
+      .updateAutoProtectionPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAutoProtectionPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateAutoProtectionPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.update_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_UpdateAutoProtectionPolicy_async
+   */
+  async checkUpdateAutoProtectionPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicy,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateAutoProtectionPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAutoProtectionPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicy,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single AutoProtectionPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the autoprotectionpolicy.
+   *   If an etag is provided and does not match the current etag of the
+   *   connection, deletion will be blocked.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteAutoProtectionPolicy_async
+   */
+  deleteAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAutoProtectionPolicy(
+    request: protos.google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAutoProtectionPolicy(
+    request?: protos.google.cloud.backupdr.v1.IDeleteAutoProtectionPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAutoProtectionPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAutoProtectionPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteAutoProtectionPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAutoProtectionPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteAutoProtectionPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_auto_protection_policy.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteAutoProtectionPolicy_async
+   */
+  async checkDeleteAutoProtectionPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteAutoProtectionPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAutoProtectionPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new AutoProtectionPolicyBinding in a given project and
+   * location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this binding will be created.
+   *   Format:
+   *   projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}
+   * @param {string} request.autoProtectionPolicyBindingId
+   *   Required. The ID to use for the binding.
+   *   This will become the final component of the binding's resource name.
+   *
+   *   This value must start with a lowercase letter followed by up to 62
+   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   * @param {google.cloud.backupdr.v1.AutoProtectionPolicyBinding} request.autoProtectionPolicyBinding
+   *   Required. The AutoProtectionPolicyBinding resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_auto_protection_policy_binding.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateAutoProtectionPolicyBinding_async
+   */
+  createAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.ICreateAutoProtectionPolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createAutoProtectionPolicyBinding response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAutoProtectionPolicyBinding request %j', request);
+    return this.innerApiCalls
+      .createAutoProtectionPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createAutoProtectionPolicyBinding response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createAutoProtectionPolicyBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_auto_protection_policy_binding.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateAutoProtectionPolicyBinding_async
+   */
+  async checkCreateAutoProtectionPolicyBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createAutoProtectionPolicyBinding long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAutoProtectionPolicyBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * InitiateDeleteAutoProtectionPolicyBinding initiates delete for
+   * AutoProtectionPolicy Binding
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the binding to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the AutoProtectionPolicyBinding.
+   *   If an etag is provided and does not match the current etag of the
+   *   binding, deletion will be blocked and an ABORTED error will be returned.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.initiate_delete_auto_protection_policy_binding.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_InitiateDeleteAutoProtectionPolicyBinding_async
+   */
+  initiateDeleteAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  initiateDeleteAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  initiateDeleteAutoProtectionPolicyBinding(
+    request: protos.google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  initiateDeleteAutoProtectionPolicyBinding(
+    request?: protos.google.cloud.backupdr.v1.IInitiateDeleteAutoProtectionPolicyBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'initiateDeleteAutoProtectionPolicyBinding response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'initiateDeleteAutoProtectionPolicyBinding request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .initiateDeleteAutoProtectionPolicyBinding(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'initiateDeleteAutoProtectionPolicyBinding response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `initiateDeleteAutoProtectionPolicyBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.initiate_delete_auto_protection_policy_binding.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_InitiateDeleteAutoProtectionPolicyBinding_async
+   */
+  async checkInitiateDeleteAutoProtectionPolicyBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('initiateDeleteAutoProtectionPolicyBinding long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.initiateDeleteAutoProtectionPolicyBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new RestoreTemplate in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The restore template project and location in the format
+   *   'projects/{project_id}/locations/{location}'.
+   * @param {string} request.restoreTemplateId
+   *   Required. The ID of the restore template to create. The ID must be
+   *   unique for the specified project and location.
+   * @param {google.cloud.backupdr.v1.RestoreTemplate} request.restoreTemplate
+   *   Required. A RestoreTemplate resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreTemplate_async
+   */
+  createRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreTemplateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRestoreTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRestoreTemplate request %j', request);
+    return this.innerApiCalls
+      .createRestoreTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRestoreTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createRestoreTemplate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreTemplate_async
+   */
+  async checkCreateRestoreTemplateProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplate,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createRestoreTemplate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createRestoreTemplate,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplate,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the settings of a RestoreTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   RestoreTemplate resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {google.cloud.backupdr.v1.RestoreTemplate} request.restoreTemplate
+   *   Required. The restore template to update.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is 'false'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.update_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_UpdateRestoreTemplate_async
+   */
+  updateRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IUpdateRestoreTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplate,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'restore_template.name': request.restoreTemplate!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRestoreTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRestoreTemplate request %j', request);
+    return this.innerApiCalls
+      .updateRestoreTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplate,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRestoreTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateRestoreTemplate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.update_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_UpdateRestoreTemplate_async
+   */
+  async checkUpdateRestoreTemplateProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplate,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateRestoreTemplate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateRestoreTemplate,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplate,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a RestoreTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the restore template to delete.
+   *   Format:
+   *   'projects/{project_id}/locations/{location}/restoreTemplates/{restore_template_id}'
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child RestoreTemplateExecutions will also be
+   *   deleted. If false and the RestoreTemplate has any child executions, the
+   *   request will fail.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreTemplate_async
+   */
+  deleteRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRestoreTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRestoreTemplate request %j', request);
+    return this.innerApiCalls
+      .deleteRestoreTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRestoreTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteRestoreTemplate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreTemplate_async
+   */
+  async checkDeleteRestoreTemplateProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteRestoreTemplate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRestoreTemplate,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Runs a RestoreTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the restore template to run.
+   *   Format:
+   *   'projects/{project_id}/locations/{location}/restoreTemplates/{restore_template_id}'
+   * @param {string} [request.backup]
+   *   Optional. The resource name of the Backup to restore from.
+   *   If not specified, the latest backup matching the backup selection
+   *   configuration in the RestoreTemplate will be used.
+   *   Format:
+   *   'projects/{project}/locations/{location}/backupVaults/{backup_vault}/dataSources/{data_source}/backups/{backup}'
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.run_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_RunRestoreTemplate_async
+   */
+  runRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IRunRestoreTemplateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  runRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IRunRestoreTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  runRestoreTemplate(
+    request: protos.google.cloud.backupdr.v1.IRunRestoreTemplateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  runRestoreTemplate(
+    request?: protos.google.cloud.backupdr.v1.IRunRestoreTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runRestoreTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runRestoreTemplate request %j', request);
+    return this.innerApiCalls
+      .runRestoreTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRunRestoreTemplateResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runRestoreTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `runRestoreTemplate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.run_restore_template.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_RunRestoreTemplate_async
+   */
+  async checkRunRestoreTemplateProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RunRestoreTemplateResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('runRestoreTemplate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runRestoreTemplate,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RunRestoreTemplateResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Triggers cleanup of restored resources created during execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the restore template execution.
+   *   Format:
+   *   'projects/{project_id}/locations/{location}/restoreTemplates/{restore_template_id}/executions/{execution_id}'
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.trigger_restore_cleanup.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_TriggerRestoreCleanup_async
+   */
+  triggerRestoreCleanup(
+    request?: protos.google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  triggerRestoreCleanup(
+    request: protos.google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  triggerRestoreCleanup(
+    request: protos.google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  triggerRestoreCleanup(
+    request?: protos.google.cloud.backupdr.v1.ITriggerRestoreCleanupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('triggerRestoreCleanup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('triggerRestoreCleanup request %j', request);
+    return this.innerApiCalls
+      .triggerRestoreCleanup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('triggerRestoreCleanup response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `triggerRestoreCleanup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.trigger_restore_cleanup.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_TriggerRestoreCleanup_async
+   */
+  async checkTriggerRestoreCleanupProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplateExecution,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('triggerRestoreCleanup long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.triggerRestoreCleanup,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RestoreTemplateExecution,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new RestoreVerificationPlan in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The `RestoreVerificationPlan` project and location in the format
+   *   `projects/{project}/locations/{location}`. In Google Cloud Backup and DR
+   *   locations map to Google Cloud regions, for example **us-central1**.
+   * @param {string} request.restoreVerificationPlanId
+   *   Required. The name of the `RestoreVerificationPlan` to create. The name
+   *   must be unique for the specified project and location. The name must start
+   *   with a lowercase letter followed by up to 62 lowercase letters, numbers, or
+   *   hyphens. Pattern, `^[a-z]([-a-z0-9]*[a-z0-9])?$`.
+   * @param {google.cloud.backupdr.v1.RestoreVerificationPlan} request.restoreVerificationPlan
+   *   Required. The `RestoreVerificationPlan` resource object to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_verification_plan.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreVerificationPlan_async
+   */
+  createRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createRestoreVerificationPlan response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRestoreVerificationPlan request %j', request);
+    return this.innerApiCalls
+      .createRestoreVerificationPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createRestoreVerificationPlan response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createRestoreVerificationPlan()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_verification_plan.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreVerificationPlan_async
+   */
+  async checkCreateRestoreVerificationPlanProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RestoreVerificationPlan,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createRestoreVerificationPlan long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createRestoreVerificationPlan,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RestoreVerificationPlan,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new RestoreVerificationPlanAssociation in a given
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this association will be created.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+   * @param {string} request.restoreVerificationPlanAssociationId
+   *   Required. The ID to use for the association, which will become the final
+   *   component of the association's resource name.
+   *
+   *   This value should be 1-63 characters, and valid characters are
+   *   /[a-z0-9_-]/.
+   * @param {google.cloud.backupdr.v1.RestoreVerificationPlanAssociation} request.restoreVerificationPlanAssociation
+   *   Required. The RestoreVerificationPlanAssociation resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know
+   *   that the server has already received the duplicate request and can avoid
+   *   responding with an error. The request ID must be a valid UUID with the
+   *   exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_verification_plan_association.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreVerificationPlanAssociation_async
+   */
+  createRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.ICreateRestoreVerificationPlanAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createRestoreVerificationPlanAssociation response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'createRestoreVerificationPlanAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .createRestoreVerificationPlanAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createRestoreVerificationPlanAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createRestoreVerificationPlanAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.create_restore_verification_plan_association.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_CreateRestoreVerificationPlanAssociation_async
+   */
+  async checkCreateRestoreVerificationPlanAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createRestoreVerificationPlanAssociation long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createRestoreVerificationPlanAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single RestoreVerificationPlanAssociation in a given
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the RestoreVerificationPlanAssociation to
+   *   delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know
+   *   that the server has already received the duplicate request and can avoid
+   *   responding with an error. The request ID must be a valid UUID with the
+   *   exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_verification_plan_association.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreVerificationPlanAssociation_async
+   */
+  deleteRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreVerificationPlanAssociation(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreVerificationPlanAssociation(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteRestoreVerificationPlanAssociation response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'deleteRestoreVerificationPlanAssociation request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .deleteRestoreVerificationPlanAssociation(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRestoreVerificationPlanAssociation response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteRestoreVerificationPlanAssociation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_verification_plan_association.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreVerificationPlanAssociation_async
+   */
+  async checkDeleteRestoreVerificationPlanAssociationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteRestoreVerificationPlanAssociation long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRestoreVerificationPlanAssociation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Triggers a new Restore Verification for the association in a given
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the RestoreVerificationPlanAssociation to
+   *   trigger.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know
+   *   that the server has already received the duplicate request and can avoid
+   *   responding with an error. The request ID must be a valid UUID with the
+   *   exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.trigger_restore_verification.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_TriggerRestoreVerification_async
+   */
+  triggerRestoreVerification(
+    request?: protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  triggerRestoreVerification(
+    request: protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  triggerRestoreVerification(
+    request: protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  triggerRestoreVerification(
+    request?: protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('triggerRestoreVerification response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('triggerRestoreVerification request %j', request);
+    return this.innerApiCalls
+      .triggerRestoreVerification(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.backupdr.v1.ITriggerRestoreVerificationResponse,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('triggerRestoreVerification response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `triggerRestoreVerification()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.trigger_restore_verification.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_TriggerRestoreVerification_async
+   */
+  async checkTriggerRestoreVerificationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.backupdr.v1.TriggerRestoreVerificationResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('triggerRestoreVerification long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.triggerRestoreVerification,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.backupdr.v1.TriggerRestoreVerificationResponse,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single RestoreVerificationPlan. If the `force` flag is set to
+   * `true`, any RestoreVerificationPlanAssociations linked to this
+   * RestoreVerificationPlan will also be deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the `RestoreVerificationPlan` to delete.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}`
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any RestoreVerificationPlanAssociations linked to
+   *   this RestoreVerificationPlan will also be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_verification_plan.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreVerificationPlan_async
+   */
+  deleteRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreVerificationPlan(
+    request: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRestoreVerificationPlan(
+    request?: protos.google.cloud.backupdr.v1.IDeleteRestoreVerificationPlanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.backupdr.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteRestoreVerificationPlan response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRestoreVerificationPlan request %j', request);
+    return this.innerApiCalls
+      .deleteRestoreVerificationPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.backupdr.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRestoreVerificationPlan response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteRestoreVerificationPlan()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.delete_restore_verification_plan.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_DeleteRestoreVerificationPlan_async
+   */
+  async checkDeleteRestoreVerificationPlanProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.backupdr.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteRestoreVerificationPlan long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRestoreVerificationPlan,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
       protos.google.cloud.backupdr.v1.OperationMetadata
     >;
   }
@@ -8445,6 +12478,2087 @@ export class BackupDRClient {
     ) as AsyncIterable<protos.google.cloud.backupdr.v1.IDataSourceReference>;
   }
   /**
+   * Lists AutoProtectionPolicies for a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicy|AutoProtectionPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAutoProtectionPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAutoProtectionPolicies(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[],
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest | null,
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse,
+    ]
+  >;
+  listAutoProtectionPolicies(
+    request: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy
+    >,
+  ): void;
+  listAutoProtectionPolicies(
+    request: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy
+    >,
+  ): void;
+  listAutoProtectionPolicies(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+          | protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[],
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest | null,
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+          | protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAutoProtectionPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAutoProtectionPolicies request %j', request);
+    return this.innerApiCalls
+      .listAutoProtectionPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicy[],
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest | null,
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse,
+        ]) => {
+          this._log.info('listAutoProtectionPolicies values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAutoProtectionPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicy|AutoProtectionPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAutoProtectionPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAutoProtectionPoliciesStream(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAutoProtectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAutoProtectionPolicies stream %j', request);
+    return this.descriptors.page.listAutoProtectionPolicies.createStream(
+      this.innerApiCalls.listAutoProtectionPolicies as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAutoProtectionPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicy|AutoProtectionPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_auto_protection_policies.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListAutoProtectionPolicies_async
+   */
+  listAutoProtectionPoliciesAsync(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IAutoProtectionPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAutoProtectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAutoProtectionPolicies iterate %j', request);
+    return this.descriptors.page.listAutoProtectionPolicies.asyncIterate(
+      this.innerApiCalls['listAutoProtectionPolicies'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IAutoProtectionPolicy>;
+  }
+  /**
+   * Returns the auto protection policy bindings read from the CCFE tables.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page is 500.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding|AutoProtectionPolicyBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAutoProtectionPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAutoProtectionPolicyBindings(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[],
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest | null,
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse,
+    ]
+  >;
+  listAutoProtectionPolicyBindings(
+    request: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding
+    >,
+  ): void;
+  listAutoProtectionPolicyBindings(
+    request: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding
+    >,
+  ): void;
+  listAutoProtectionPolicyBindings(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+          | protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+      | protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[],
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest | null,
+      protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+          | protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAutoProtectionPolicyBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAutoProtectionPolicyBindings request %j', request);
+    return this.innerApiCalls
+      .listAutoProtectionPolicyBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding[],
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest | null,
+          protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse,
+        ]) => {
+          this._log.info(
+            'listAutoProtectionPolicyBindings values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAutoProtectionPolicyBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page is 500.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding|AutoProtectionPolicyBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAutoProtectionPolicyBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAutoProtectionPolicyBindingsStream(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listAutoProtectionPolicyBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAutoProtectionPolicyBindings stream %j', request);
+    return this.descriptors.page.listAutoProtectionPolicyBindings.createStream(
+      this.innerApiCalls.listAutoProtectionPolicyBindings as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAutoProtectionPolicyBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return in a single page is 500.
+   *   If unspecified, a server-default value will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+   *   page.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The following fields are filterable:
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response. The
+   *   following fields are sortable:
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.AutoProtectionPolicyBinding|AutoProtectionPolicyBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_auto_protection_policy_bindings.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListAutoProtectionPolicyBindings_async
+   */
+  listAutoProtectionPolicyBindingsAsync(
+    request?: protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listAutoProtectionPolicyBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAutoProtectionPolicyBindings iterate %j', request);
+    return this.descriptors.page.listAutoProtectionPolicyBindings.asyncIterate(
+      this.innerApiCalls['listAutoProtectionPolicyBindings'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding>;
+  }
+  /**
+   * Lists AppliedAutoProtectionPolicies in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   applied policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of applied policies to return in a single
+   *   page. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. If unspecified or set to 0, a default page size of 500 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAppliedAutoProtectionPolicies` call.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy|AppliedAutoProtectionPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAppliedAutoProtectionPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAppliedAutoProtectionPolicies(
+    request?: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[],
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest | null,
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse,
+    ]
+  >;
+  listAppliedAutoProtectionPolicies(
+    request: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy
+    >,
+  ): void;
+  listAppliedAutoProtectionPolicies(
+    request: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy
+    >,
+  ): void;
+  listAppliedAutoProtectionPolicies(
+    request?: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+          | protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+      | protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[],
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest | null,
+      protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+          | protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAppliedAutoProtectionPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAppliedAutoProtectionPolicies request %j', request);
+    return this.innerApiCalls
+      .listAppliedAutoProtectionPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy[],
+          protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest | null,
+          protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse,
+        ]) => {
+          this._log.info(
+            'listAppliedAutoProtectionPolicies values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAppliedAutoProtectionPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   applied policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of applied policies to return in a single
+   *   page. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. If unspecified or set to 0, a default page size of 500 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAppliedAutoProtectionPolicies` call.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy|AppliedAutoProtectionPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAppliedAutoProtectionPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAppliedAutoProtectionPoliciesStream(
+    request?: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listAppliedAutoProtectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAppliedAutoProtectionPolicies stream %j', request);
+    return this.descriptors.page.listAppliedAutoProtectionPolicies.createStream(
+      this.innerApiCalls.listAppliedAutoProtectionPolicies as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAppliedAutoProtectionPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve the list of
+   *   applied policies. Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of applied policies to return in a single
+   *   page. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. If unspecified or set to 0, a default page size of 500 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListAppliedAutoProtectionPolicies` call.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression that sorts the results in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.AppliedAutoProtectionPolicy|AppliedAutoProtectionPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_applied_auto_protection_policies.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListAppliedAutoProtectionPolicies_async
+   */
+  listAppliedAutoProtectionPoliciesAsync(
+    request?: protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listAppliedAutoProtectionPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAppliedAutoProtectionPolicies iterate %j', request);
+    return this.descriptors.page.listAppliedAutoProtectionPolicies.asyncIterate(
+      this.innerApiCalls['listAppliedAutoProtectionPolicies'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IAppliedAutoProtectionPolicy>;
+  }
+  /**
+   * Lists Binding Matching Resources for a given AutoProtectionPolicyBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, auto protection policy and binding for
+   *   which to retrieve `BindingMatchingResources` information. Format:
+   *   `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`.
+   *   In Google Cloud Backup and DR, locations map to Google Cloud regions, for
+   *   example **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `BindingMatchingResources` to return in a
+   *   single response. The default page size is 100 and maximum page size is 200.
+   *   Note that the response may include a partial list and a caller should
+   *   only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   received from a previous `ListBindingMatchingResources` call. Provide this
+   *   to retrieve the subsequent page in a multi-page list of results. When
+   *   paginating, all other parameters provided to `ListBindingMatchingResources`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.BindingMatchingResource|BindingMatchingResource}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBindingMatchingResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBindingMatchingResources(
+    request?: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IBindingMatchingResource[],
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest | null,
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse,
+    ]
+  >;
+  listBindingMatchingResources(
+    request: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+      | protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IBindingMatchingResource
+    >,
+  ): void;
+  listBindingMatchingResources(
+    request: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+      | protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IBindingMatchingResource
+    >,
+  ): void;
+  listBindingMatchingResources(
+    request?: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+          | protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IBindingMatchingResource
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+      | protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IBindingMatchingResource
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IBindingMatchingResource[],
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest | null,
+      protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+          | protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IBindingMatchingResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBindingMatchingResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBindingMatchingResources request %j', request);
+    return this.innerApiCalls
+      .listBindingMatchingResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IBindingMatchingResource[],
+          protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest | null,
+          protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse,
+        ]) => {
+          this._log.info('listBindingMatchingResources values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listBindingMatchingResources`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, auto protection policy and binding for
+   *   which to retrieve `BindingMatchingResources` information. Format:
+   *   `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`.
+   *   In Google Cloud Backup and DR, locations map to Google Cloud regions, for
+   *   example **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `BindingMatchingResources` to return in a
+   *   single response. The default page size is 100 and maximum page size is 200.
+   *   Note that the response may include a partial list and a caller should
+   *   only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   received from a previous `ListBindingMatchingResources` call. Provide this
+   *   to retrieve the subsequent page in a multi-page list of results. When
+   *   paginating, all other parameters provided to `ListBindingMatchingResources`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.BindingMatchingResource|BindingMatchingResource} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBindingMatchingResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBindingMatchingResourcesStream(
+    request?: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBindingMatchingResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBindingMatchingResources stream %j', request);
+    return this.descriptors.page.listBindingMatchingResources.createStream(
+      this.innerApiCalls.listBindingMatchingResources as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listBindingMatchingResources`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, auto protection policy and binding for
+   *   which to retrieve `BindingMatchingResources` information. Format:
+   *   `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`.
+   *   In Google Cloud Backup and DR, locations map to Google Cloud regions, for
+   *   example **us-central1**.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `BindingMatchingResources` to return in a
+   *   single response. The default page size is 100 and maximum page size is 200.
+   *   Note that the response may include a partial list and a caller should
+   *   only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListBindingMatchingResourcesResponse.next_page_token|next_page_token}
+   *   received from a previous `ListBindingMatchingResources` call. Provide this
+   *   to retrieve the subsequent page in a multi-page list of results. When
+   *   paginating, all other parameters provided to `ListBindingMatchingResources`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.BindingMatchingResource|BindingMatchingResource}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_binding_matching_resources.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListBindingMatchingResources_async
+   */
+  listBindingMatchingResourcesAsync(
+    request?: protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IBindingMatchingResource> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBindingMatchingResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBindingMatchingResources iterate %j', request);
+    return this.descriptors.page.listBindingMatchingResources.asyncIterate(
+      this.innerApiCalls['listBindingMatchingResources'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IBindingMatchingResource>;
+  }
+  /**
+   * Lists RestoreTemplates in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which to list the restore
+   *   templates.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRestoreTemplates`
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.RestoreTemplate|RestoreTemplate}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRestoreTemplatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreTemplates(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplate[],
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse,
+    ]
+  >;
+  listRestoreTemplates(
+    request: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplate
+    >,
+  ): void;
+  listRestoreTemplates(
+    request: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplate
+    >,
+  ): void;
+  listRestoreTemplates(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreTemplate
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplate
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplate[],
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreTemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRestoreTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRestoreTemplates request %j', request);
+    return this.innerApiCalls
+      .listRestoreTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IRestoreTemplate[],
+          protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest | null,
+          protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse,
+        ]) => {
+          this._log.info('listRestoreTemplates values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listRestoreTemplates`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which to list the restore
+   *   templates.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRestoreTemplates`
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.RestoreTemplate|RestoreTemplate} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRestoreTemplatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreTemplatesStream(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreTemplates stream %j', request);
+    return this.descriptors.page.listRestoreTemplates.createStream(
+      this.innerApiCalls.listRestoreTemplates as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listRestoreTemplates`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which to list the restore
+   *   templates.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRestoreTemplates`
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.RestoreTemplate|RestoreTemplate}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_restore_templates.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListRestoreTemplates_async
+   */
+  listRestoreTemplatesAsync(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreTemplate> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreTemplates iterate %j', request);
+    return this.descriptors.page.listRestoreTemplates.asyncIterate(
+      this.innerApiCalls['listRestoreTemplates'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreTemplate>;
+  }
+  /**
+   * Lists RestoreTemplateExecutions in a given project, location and restore
+   * template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, and restore template for which to retrieve
+   *   executions information.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreTemplates/{restore_template}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.RestoreTemplateExecution|RestoreTemplateExecution}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRestoreTemplateExecutionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreTemplateExecutions(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[],
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse,
+    ]
+  >;
+  listRestoreTemplateExecutions(
+    request: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution
+    >,
+  ): void;
+  listRestoreTemplateExecutions(
+    request: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution
+    >,
+  ): void;
+  listRestoreTemplateExecutions(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[],
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRestoreTemplateExecutions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRestoreTemplateExecutions request %j', request);
+    return this.innerApiCalls
+      .listRestoreTemplateExecutions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IRestoreTemplateExecution[],
+          protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest | null,
+          protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse,
+        ]) => {
+          this._log.info('listRestoreTemplateExecutions values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listRestoreTemplateExecutions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, and restore template for which to retrieve
+   *   executions information.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreTemplates/{restore_template}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.RestoreTemplateExecution|RestoreTemplateExecution} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRestoreTemplateExecutionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreTemplateExecutionsStream(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreTemplateExecutions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreTemplateExecutions stream %j', request);
+    return this.descriptors.page.listRestoreTemplateExecutions.createStream(
+      this.innerApiCalls.listRestoreTemplateExecutions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listRestoreTemplateExecutions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project, location, and restore template for which to retrieve
+   *   executions information.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreTemplates/{restore_template}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.RestoreTemplateExecution|RestoreTemplateExecution}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_restore_template_executions.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListRestoreTemplateExecutions_async
+   */
+  listRestoreTemplateExecutionsAsync(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreTemplateExecution> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreTemplateExecutions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreTemplateExecutions iterate %j', request);
+    return this.descriptors.page.listRestoreTemplateExecutions.asyncIterate(
+      this.innerApiCalls['listRestoreTemplateExecutions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreTemplateExecution>;
+  }
+  /**
+   * Lists RestoreVerificationPlanAssociations in a given
+   * RestoreVerificationPlan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent RestoreVerificationPlan name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of associations to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 500 associations will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRestoreVerificationPlanAssociations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlanAssociations` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation|RestoreVerificationPlanAssociation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRestoreVerificationPlanAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreVerificationPlanAssociations(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[],
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse,
+    ]
+  >;
+  listRestoreVerificationPlanAssociations(
+    request: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation
+    >,
+  ): void;
+  listRestoreVerificationPlanAssociations(
+    request: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation
+    >,
+  ): void;
+  listRestoreVerificationPlanAssociations(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[],
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listRestoreVerificationPlanAssociations values %j',
+            values,
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listRestoreVerificationPlanAssociations request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .listRestoreVerificationPlanAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation[],
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest | null,
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse,
+        ]) => {
+          this._log.info(
+            'listRestoreVerificationPlanAssociations values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listRestoreVerificationPlanAssociations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent RestoreVerificationPlan name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of associations to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 500 associations will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRestoreVerificationPlanAssociations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlanAssociations` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation|RestoreVerificationPlanAssociation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRestoreVerificationPlanAssociationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreVerificationPlanAssociationsStream(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listRestoreVerificationPlanAssociations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listRestoreVerificationPlanAssociations stream %j',
+      request,
+    );
+    return this.descriptors.page.listRestoreVerificationPlanAssociations.createStream(
+      this.innerApiCalls.listRestoreVerificationPlanAssociations as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listRestoreVerificationPlanAssociations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent RestoreVerificationPlan name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of associations to return. The service may
+   *   return fewer than this value.
+   *   If unspecified, at most 500 associations will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListRestoreVerificationPlanAssociations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlanAssociations` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlanAssociation|RestoreVerificationPlanAssociation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_restore_verification_plan_associations.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListRestoreVerificationPlanAssociations_async
+   */
+  listRestoreVerificationPlanAssociationsAsync(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listRestoreVerificationPlanAssociations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listRestoreVerificationPlanAssociations iterate %j',
+      request,
+    );
+    return this.descriptors.page.listRestoreVerificationPlanAssociations.asyncIterate(
+      this.innerApiCalls['listRestoreVerificationPlanAssociations'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation>;
+  }
+  /**
+   * Lists RestoreVerificationPlans in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve
+   *   `RestoreVerificationPlans` information. Format:
+   *   `projects/{project}/locations/{location}`. In Google Cloud Backup and DR,
+   *   locations map to Google Cloud regions, for example **us-central1**. To
+   *   retrieve restore verification plans for all locations, use
+   *   "-" for the `{location}` value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `RestoreVerificationPlans` to return in a
+   *   single response. If not specified, a default value will be chosen by the
+   *   service. Note that the response may include a partial list and a caller
+   *   should only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   received from a previous `ListRestoreVerificationPlans` call.
+   *   Provide this to retrieve the subsequent page in a multi-page list of
+   *   results. When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlans` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlan|RestoreVerificationPlan}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRestoreVerificationPlansAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreVerificationPlans(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[],
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse,
+    ]
+  >;
+  listRestoreVerificationPlans(
+    request: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan
+    >,
+  ): void;
+  listRestoreVerificationPlans(
+    request: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan
+    >,
+  ): void;
+  listRestoreVerificationPlans(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+      | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse
+      | null
+      | undefined,
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[],
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest | null,
+      protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+          | protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse
+          | null
+          | undefined,
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRestoreVerificationPlans values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRestoreVerificationPlans request %j', request);
+    return this.innerApiCalls
+      .listRestoreVerificationPlans(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.backupdr.v1.IRestoreVerificationPlan[],
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest | null,
+          protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse,
+        ]) => {
+          this._log.info('listRestoreVerificationPlans values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listRestoreVerificationPlans`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve
+   *   `RestoreVerificationPlans` information. Format:
+   *   `projects/{project}/locations/{location}`. In Google Cloud Backup and DR,
+   *   locations map to Google Cloud regions, for example **us-central1**. To
+   *   retrieve restore verification plans for all locations, use
+   *   "-" for the `{location}` value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `RestoreVerificationPlans` to return in a
+   *   single response. If not specified, a default value will be chosen by the
+   *   service. Note that the response may include a partial list and a caller
+   *   should only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   received from a previous `ListRestoreVerificationPlans` call.
+   *   Provide this to retrieve the subsequent page in a multi-page list of
+   *   results. When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlans` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlan|RestoreVerificationPlan} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRestoreVerificationPlansAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRestoreVerificationPlansStream(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreVerificationPlans'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreVerificationPlans stream %j', request);
+    return this.descriptors.page.listRestoreVerificationPlans.createStream(
+      this.innerApiCalls.listRestoreVerificationPlans as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listRestoreVerificationPlans`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve
+   *   `RestoreVerificationPlans` information. Format:
+   *   `projects/{project}/locations/{location}`. In Google Cloud Backup and DR,
+   *   locations map to Google Cloud regions, for example **us-central1**. To
+   *   retrieve restore verification plans for all locations, use
+   *   "-" for the `{location}` value.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `RestoreVerificationPlans` to return in a
+   *   single response. If not specified, a default value will be chosen by the
+   *   service. Note that the response may include a partial list and a caller
+   *   should only rely on the response's
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
+   *   {@link protos.google.cloud.backupdr.v1.ListRestoreVerificationPlansResponse.next_page_token|next_page_token}
+   *   received from a previous `ListRestoreVerificationPlans` call.
+   *   Provide this to retrieve the subsequent page in a multi-page list of
+   *   results. When paginating, all other parameters provided to
+   *   `ListRestoreVerificationPlans` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.backupdr.v1.RestoreVerificationPlan|RestoreVerificationPlan}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_d_r.list_restore_verification_plans.js</caption>
+   * region_tag:backupdr_v1_generated_BackupDR_ListRestoreVerificationPlans_async
+   */
+  listRestoreVerificationPlansAsync(
+    request?: protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreVerificationPlan> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listRestoreVerificationPlans'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRestoreVerificationPlans iterate %j', request);
+    return this.descriptors.page.listRestoreVerificationPlans.asyncIterate(
+      this.innerApiCalls['listRestoreVerificationPlans'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.backupdr.v1.IRestoreVerificationPlan>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -8887,6 +15001,215 @@ export class BackupDRClient {
   // --------------------
 
   /**
+   * Return a fully-qualified appliedAutoProtectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} applied_auto_protection_policy
+   * @returns {string} Resource name string.
+   */
+  appliedAutoProtectionPolicyPath(
+    project: string,
+    location: string,
+    appliedAutoProtectionPolicy: string,
+  ) {
+    return this.pathTemplates.appliedAutoProtectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      applied_auto_protection_policy: appliedAutoProtectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AppliedAutoProtectionPolicy resource.
+   *
+   * @param {string} appliedAutoProtectionPolicyName
+   *   A fully-qualified path representing AppliedAutoProtectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAppliedAutoProtectionPolicyName(
+    appliedAutoProtectionPolicyName: string,
+  ) {
+    return this.pathTemplates.appliedAutoProtectionPolicyPathTemplate.match(
+      appliedAutoProtectionPolicyName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AppliedAutoProtectionPolicy resource.
+   *
+   * @param {string} appliedAutoProtectionPolicyName
+   *   A fully-qualified path representing AppliedAutoProtectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAppliedAutoProtectionPolicyName(
+    appliedAutoProtectionPolicyName: string,
+  ) {
+    return this.pathTemplates.appliedAutoProtectionPolicyPathTemplate.match(
+      appliedAutoProtectionPolicyName,
+    ).location;
+  }
+
+  /**
+   * Parse the applied_auto_protection_policy from AppliedAutoProtectionPolicy resource.
+   *
+   * @param {string} appliedAutoProtectionPolicyName
+   *   A fully-qualified path representing AppliedAutoProtectionPolicy resource.
+   * @returns {string} A string representing the applied_auto_protection_policy.
+   */
+  matchAppliedAutoProtectionPolicyFromAppliedAutoProtectionPolicyName(
+    appliedAutoProtectionPolicyName: string,
+  ) {
+    return this.pathTemplates.appliedAutoProtectionPolicyPathTemplate.match(
+      appliedAutoProtectionPolicyName,
+    ).applied_auto_protection_policy;
+  }
+
+  /**
+   * Return a fully-qualified autoProtectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} auto_protection_policy
+   * @returns {string} Resource name string.
+   */
+  autoProtectionPolicyPath(
+    project: string,
+    location: string,
+    autoProtectionPolicy: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      auto_protection_policy: autoProtectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AutoProtectionPolicy resource.
+   *
+   * @param {string} autoProtectionPolicyName
+   *   A fully-qualified path representing AutoProtectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAutoProtectionPolicyName(autoProtectionPolicyName: string) {
+    return this.pathTemplates.autoProtectionPolicyPathTemplate.match(
+      autoProtectionPolicyName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AutoProtectionPolicy resource.
+   *
+   * @param {string} autoProtectionPolicyName
+   *   A fully-qualified path representing AutoProtectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAutoProtectionPolicyName(autoProtectionPolicyName: string) {
+    return this.pathTemplates.autoProtectionPolicyPathTemplate.match(
+      autoProtectionPolicyName,
+    ).location;
+  }
+
+  /**
+   * Parse the auto_protection_policy from AutoProtectionPolicy resource.
+   *
+   * @param {string} autoProtectionPolicyName
+   *   A fully-qualified path representing AutoProtectionPolicy resource.
+   * @returns {string} A string representing the auto_protection_policy.
+   */
+  matchAutoProtectionPolicyFromAutoProtectionPolicyName(
+    autoProtectionPolicyName: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyPathTemplate.match(
+      autoProtectionPolicyName,
+    ).auto_protection_policy;
+  }
+
+  /**
+   * Return a fully-qualified autoProtectionPolicyBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} auto_protection_policy
+   * @param {string} binding
+   * @returns {string} Resource name string.
+   */
+  autoProtectionPolicyBindingPath(
+    project: string,
+    location: string,
+    autoProtectionPolicy: string,
+    binding: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyBindingPathTemplate.render({
+      project: project,
+      location: location,
+      auto_protection_policy: autoProtectionPolicy,
+      binding: binding,
+    });
+  }
+
+  /**
+   * Parse the project from AutoProtectionPolicyBinding resource.
+   *
+   * @param {string} autoProtectionPolicyBindingName
+   *   A fully-qualified path representing AutoProtectionPolicyBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAutoProtectionPolicyBindingName(
+    autoProtectionPolicyBindingName: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyBindingPathTemplate.match(
+      autoProtectionPolicyBindingName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AutoProtectionPolicyBinding resource.
+   *
+   * @param {string} autoProtectionPolicyBindingName
+   *   A fully-qualified path representing AutoProtectionPolicyBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAutoProtectionPolicyBindingName(
+    autoProtectionPolicyBindingName: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyBindingPathTemplate.match(
+      autoProtectionPolicyBindingName,
+    ).location;
+  }
+
+  /**
+   * Parse the auto_protection_policy from AutoProtectionPolicyBinding resource.
+   *
+   * @param {string} autoProtectionPolicyBindingName
+   *   A fully-qualified path representing AutoProtectionPolicyBinding resource.
+   * @returns {string} A string representing the auto_protection_policy.
+   */
+  matchAutoProtectionPolicyFromAutoProtectionPolicyBindingName(
+    autoProtectionPolicyBindingName: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyBindingPathTemplate.match(
+      autoProtectionPolicyBindingName,
+    ).auto_protection_policy;
+  }
+
+  /**
+   * Parse the binding from AutoProtectionPolicyBinding resource.
+   *
+   * @param {string} autoProtectionPolicyBindingName
+   *   A fully-qualified path representing AutoProtectionPolicyBinding resource.
+   * @returns {string} A string representing the binding.
+   */
+  matchBindingFromAutoProtectionPolicyBindingName(
+    autoProtectionPolicyBindingName: string,
+  ) {
+    return this.pathTemplates.autoProtectionPolicyBindingPathTemplate.match(
+      autoProtectionPolicyBindingName,
+    ).binding;
+  }
+
+  /**
    * Return a fully-qualified backup resource name string.
    *
    * @param {string} project
@@ -9210,6 +15533,107 @@ export class BackupDRClient {
   }
 
   /**
+   * Return a fully-qualified bindingMatchingResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} auto_protection_policy
+   * @param {string} binding
+   * @param {string} matching_resource
+   * @returns {string} Resource name string.
+   */
+  bindingMatchingResourcePath(
+    project: string,
+    location: string,
+    autoProtectionPolicy: string,
+    binding: string,
+    matchingResource: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.render({
+      project: project,
+      location: location,
+      auto_protection_policy: autoProtectionPolicy,
+      binding: binding,
+      matching_resource: matchingResource,
+    });
+  }
+
+  /**
+   * Parse the project from BindingMatchingResource resource.
+   *
+   * @param {string} bindingMatchingResourceName
+   *   A fully-qualified path representing BindingMatchingResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBindingMatchingResourceName(
+    bindingMatchingResourceName: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.match(
+      bindingMatchingResourceName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from BindingMatchingResource resource.
+   *
+   * @param {string} bindingMatchingResourceName
+   *   A fully-qualified path representing BindingMatchingResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBindingMatchingResourceName(
+    bindingMatchingResourceName: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.match(
+      bindingMatchingResourceName,
+    ).location;
+  }
+
+  /**
+   * Parse the auto_protection_policy from BindingMatchingResource resource.
+   *
+   * @param {string} bindingMatchingResourceName
+   *   A fully-qualified path representing BindingMatchingResource resource.
+   * @returns {string} A string representing the auto_protection_policy.
+   */
+  matchAutoProtectionPolicyFromBindingMatchingResourceName(
+    bindingMatchingResourceName: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.match(
+      bindingMatchingResourceName,
+    ).auto_protection_policy;
+  }
+
+  /**
+   * Parse the binding from BindingMatchingResource resource.
+   *
+   * @param {string} bindingMatchingResourceName
+   *   A fully-qualified path representing BindingMatchingResource resource.
+   * @returns {string} A string representing the binding.
+   */
+  matchBindingFromBindingMatchingResourceName(
+    bindingMatchingResourceName: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.match(
+      bindingMatchingResourceName,
+    ).binding;
+  }
+
+  /**
+   * Parse the matching_resource from BindingMatchingResource resource.
+   *
+   * @param {string} bindingMatchingResourceName
+   *   A fully-qualified path representing BindingMatchingResource resource.
+   * @returns {string} A string representing the matching_resource.
+   */
+  matchMatchingResourceFromBindingMatchingResourceName(
+    bindingMatchingResourceName: string,
+  ) {
+    return this.pathTemplates.bindingMatchingResourcePathTemplate.match(
+      bindingMatchingResourceName,
+    ).matching_resource;
+  }
+
+  /**
    * Return a fully-qualified dataSource resource name string.
    *
    * @param {string} project
@@ -9518,6 +15942,298 @@ export class BackupDRClient {
     return this.pathTemplates.resourceBackupConfigPathTemplate.match(
       resourceBackupConfigName,
     ).resource_backup_config;
+  }
+
+  /**
+   * Return a fully-qualified restoreTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_template
+   * @returns {string} Resource name string.
+   */
+  restoreTemplatePath(
+    project: string,
+    location: string,
+    restoreTemplate: string,
+  ) {
+    return this.pathTemplates.restoreTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      restore_template: restoreTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_template from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the restore_template.
+   */
+  matchRestoreTemplateFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).restore_template;
+  }
+
+  /**
+   * Return a fully-qualified restoreTemplateExecution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_template
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  restoreTemplateExecutionPath(
+    project: string,
+    location: string,
+    restoreTemplate: string,
+    execution: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.render({
+      project: project,
+      location: location,
+      restore_template: restoreTemplate,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_template from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the restore_template.
+   */
+  matchRestoreTemplateFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).restore_template;
+  }
+
+  /**
+   * Parse the execution from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).execution;
+  }
+
+  /**
+   * Return a fully-qualified restoreVerificationPlan resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restoreVerificationPlan
+   * @returns {string} Resource name string.
+   */
+  restoreVerificationPlanPath(
+    project: string,
+    location: string,
+    restoreVerificationPlan: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.render({
+      project: project,
+      location: location,
+      restoreVerificationPlan: restoreVerificationPlan,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).location;
+  }
+
+  /**
+   * Parse the restoreVerificationPlan from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the restoreVerificationPlan.
+   */
+  matchRestoreVerificationPlanFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).restoreVerificationPlan;
+  }
+
+  /**
+   * Return a fully-qualified restoreVerificationPlanAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_verification_plan
+   * @param {string} association
+   * @returns {string} Resource name string.
+   */
+  restoreVerificationPlanAssociationPath(
+    project: string,
+    location: string,
+    restoreVerificationPlan: string,
+    association: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        restore_verification_plan: restoreVerificationPlan,
+        association: association,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_verification_plan from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the restore_verification_plan.
+   */
+  matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).restore_verification_plan;
+  }
+
+  /**
+   * Parse the association from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the association.
+   */
+  matchAssociationFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).association;
   }
 
   /**
