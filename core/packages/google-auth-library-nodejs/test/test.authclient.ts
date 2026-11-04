@@ -431,6 +431,22 @@ describe('AuthClient', () => {
         );
       });
 
+      it('logs bodies that are not plain objects unchanged', () => {
+        const buffer = Buffer.from('binary payload');
+        const array = [{access_token: 'secret-access'}];
+
+        assert.strictEqual(AuthClient.redactForLog(buffer), buffer);
+        assert.strictEqual(AuthClient.redactForLog(array), array);
+        assert.strictEqual(AuthClient.redactForLog('text'), 'text');
+        assert.strictEqual(AuthClient.redactForLog(undefined), undefined);
+        assert.deepStrictEqual(
+          AuthClient.redactForLog(
+            Object.assign(Object.create(null), {access_token: 'secret'}),
+          ),
+          {access_token: '***REDACTED***'},
+        );
+      });
+
       it('logs payloads without a method name at DEBUG severity', async () => {
         const options: GaxiosOptionsPrepared = {
           headers: new Headers(),

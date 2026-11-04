@@ -432,11 +432,17 @@ export abstract class AuthClient
 
   /**
    * Returns a copy of a response body for logging, with credential fields
-   * replaced by a placeholder. The body itself is not changed.
+   * replaced by a placeholder. The body itself is not changed. Only plain
+   * objects (parsed JSON) are copied; anything else, such as a `Buffer` or a
+   * stream, is returned as is.
    * @param data A response body
    */
   static redactForLog(data: unknown): unknown {
-    if (data === null || typeof data !== 'object' || Array.isArray(data)) {
+    if (data === null || typeof data !== 'object') {
+      return data;
+    }
+    const proto: unknown = Object.getPrototypeOf(data);
+    if (proto !== Object.prototype && proto !== null) {
       return data;
     }
     const copy: Record<string, unknown> = {...data};
