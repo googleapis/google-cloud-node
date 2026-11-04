@@ -16,12 +16,16 @@ import * as protos from '../../protos/locations';
 import assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import {LocationsClient} from '../../src/locationService';
 import {GrpcClient as OriginalGrpcClient} from '../../src/grpc';
 
 import * as protobuf from 'protobufjs';
 import {GoogleAuth, PassThroughClient} from 'google-auth-library';
+import {clearMetadataCache, fallback, loggingUtils} from '../../src';
+import {OtelHarness} from './otelHarness';
+import {setMockFallbackResponse} from './utils';
+import type {LogPayload} from '../../src/observability/LoggerHelper';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -388,6 +392,133 @@ describe('LocationsClient', () => {
           client.descriptors.page.listLocations.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams,
+      );
+    });
+  });
+
+  describe('telemetry propagation', () => {
+    class TestLogSink implements loggingUtils.DebugLogBackend {
+      logs: Array<{namespace: string; fields: loggingUtils.LogFields}> = [];
+      filters: string[] = [];
+      log(namespace: string, fields: loggingUtils.LogFields): void {
+        this.logs.push({namespace, fields});
+      }
+      setFilters(filters: string[]): void {
+        this.filters = filters;
+      }
+    }
+
+    let harness: OtelHarness;
+    let sink: TestLogSink;
+
+    beforeEach(() => {
+      clearMetadataCache();
+      sink = new TestLogSink();
+      loggingUtils.setBackend(sink);
+      harness = new OtelHarness();
+      harness.setup();
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    });
+
+    afterEach(() => {
+      clearMetadataCache();
+      loggingUtils.setBackend(undefined);
+      harness.teardown();
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
+    it('propagates tracing, logging, servicePath, port, and REST fallback in LocationsClient', async () => {
+      const errorJson = {
+        error: {code: 404, message: 'location not found', status: 'NOT_FOUND'},
+      };
+      const fallbackGrpc = new fallback.GrpcClient({fallback: 'rest'});
+      setMockFallbackResponse(
+        fallbackGrpc,
+        new Response(Buffer.from(JSON.stringify(errorJson)), {status: 404}),
+      );
+      (
+        fallbackGrpc.auth as unknown as {defaultServicePath: string}
+      ).defaultServicePath = 'secretmanager.googleapis.com';
+
+      const client = new LocationsClient(fallbackGrpc, {
+        servicePath: '127.0.0.1',
+        port: 8080,
+        fallback: 'rest',
+        enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
+      });
+
+      await assert.rejects(
+        client.getLocation({name: 'projects/p/locations/us-central1'}, {}),
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name=projects/*/locations/*}',
+      )!;
+      const clientSpan = spans.find(
+        s => s.name === 'LocationsClient.GetLocation',
+      )!;
+      assert.ok(attemptSpan);
+      assert.ok(clientSpan);
+      assert.strictEqual(
+        clientSpan.attributes['rpc.method'],
+        'google.cloud.location.Locations/GetLocation',
+      );
+      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(clientSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(attemptSpan.attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        attemptSpan.attributes['url.template'],
+        '/v1/{name=projects/*/locations/*}',
+      );
+      assert.strictEqual(
+        attemptSpan.attributes['http.response.status_code'],
+        404,
+      );
+      assert.strictEqual(attemptSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(attemptSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        attemptSpan.attributes['url.domain'],
+        'secretmanager.googleapis.com',
+      );
+      assert.strictEqual(clientSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(clientSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        clientSpan.attributes['url.domain'],
+        'secretmanager.googleapis.com',
+      );
+
+      assert.strictEqual(sink.logs.length, 2);
+      const [attemptLog, callLog] = sink.logs;
+      const attemptOther = attemptLog.fields.other as LogPayload;
+      const callOther = callLog.fields.other as LogPayload;
+      assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+      assert.strictEqual(callOther['rpc.system.name'], 'http');
+      assert.strictEqual(
+        attemptOther['rpc.method'],
+        'google.cloud.location.Locations/GetLocation',
+      );
+      assert.strictEqual(
+        callOther['rpc.method'],
+        'google.cloud.location.Locations/GetLocation',
+      );
+      assert.strictEqual(attemptOther['http.response.status_code'], 404);
+      assert.strictEqual(callOther['http.response.status_code'], 404);
+      assert.strictEqual(attemptOther['error.type'], '404');
+      assert.strictEqual(callOther['error.type'], '404');
+      assert.strictEqual(attemptOther['server.address'], '127.0.0.1');
+      assert.strictEqual(
+        attemptOther['url.domain'],
+        'secretmanager.googleapis.com',
+      );
+      assert.strictEqual(callOther['server.address'], '127.0.0.1');
+      assert.strictEqual(
+        callOther['url.domain'],
+        'secretmanager.googleapis.com',
       );
     });
   });

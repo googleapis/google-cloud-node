@@ -72,14 +72,29 @@ export class OperationsClient {
     operationsProtos: any,
     options: ClientOptions,
   ) {
+    const gaxGrpcEndpoint = gaxGrpc as unknown as {
+      _servicePath?: string;
+      _port?: number;
+    };
+    const servicePath =
+      options?.servicePath ||
+      options?.apiEndpoint ||
+      gaxGrpcEndpoint._servicePath ||
+      SERVICE_ADDRESS;
+    const port = options?.port ?? gaxGrpcEndpoint._port ?? DEFAULT_SERVICE_PORT;
     const opts = Object.assign(
       {
-        servicePath: SERVICE_ADDRESS,
-        port: DEFAULT_SERVICE_PORT,
         clientConfig: {},
       },
       options,
+      {
+        servicePath,
+        port,
+      },
     ) as ClientOptions & ClientStubOptions;
+    if (!opts.fallback && gaxGrpc.fallback) {
+      opts.fallback = gaxGrpc.fallback;
+    }
 
     const googleApiClient = ['gl-node/' + process.versions.node];
     if (opts.libName && opts.libVersion) {
@@ -97,15 +112,20 @@ export class OperationsClient {
       configData,
       opts.clientConfig || {},
       {'x-goog-api-client': googleApiClient.join(' ')},
+      opts.enableTelemetryTracing,
+      undefined,
+      opts.enableTelemetryLogging,
     );
+    const parsedPort =
+      typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
     for (const methodName of Object.keys(defaults)) {
       const otherArgs = defaults[methodName].otherArgs;
       if (otherArgs) {
-        if (!otherArgs.servicePath && opts.servicePath) {
+        if (opts.servicePath) {
           otherArgs.servicePath = opts.servicePath;
         }
-        if (otherArgs.port === undefined && opts.port !== undefined) {
-          otherArgs.port = opts.port;
+        if (parsedPort !== undefined && !Number.isNaN(parsedPort)) {
+          otherArgs.port = parsedPort;
         }
       }
     }
@@ -153,6 +173,7 @@ export class OperationsClient {
         innerCallPromise,
         defaults[methodName],
         this.descriptor[methodName],
+        opts.fallback,
       );
     }
   }
@@ -600,7 +621,8 @@ export class OperationsClientBuilder {
      * @param {Object=} opts.clientConfig - The customized config to build the call settings. See {@link gax.constructSettings} for the format.
      */
     this.operationsClient = opts => {
-      if (gaxGrpc.fallback) {
+      opts = opts || {};
+      if (gaxGrpc.fallback && !opts.fallback) {
         opts.fallback = gaxGrpc.fallback;
       }
       return new OperationsClient(gaxGrpc, operationsProtos, opts);

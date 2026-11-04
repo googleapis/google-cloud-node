@@ -254,7 +254,6 @@ export function buildLogAttributes(
       (attributes as Record<string, unknown>)[key] = value;
     }
   }
-  attributes['gcp.client.language'] = 'node';
   if (rawAddress !== undefined && !isPreConnectionFailure(err)) {
     attributes['server.address'] = rawAddress;
   }
