@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import {Span, TracerProvider, context, trace} from '@opentelemetry/api';
+import {Span, TracerProvider, context, diag, trace} from '@opentelemetry/api';
 import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import {
@@ -214,6 +214,68 @@ describe('instrument', () => {
         );
       } finally {
         getTracerProviderStub.restore();
+        _resetTracingEnabledForTest();
+        ensureInitialContextManagerSet();
+      }
+    });
+
+    it('should not call setGlobalContextManager or diag.error when a context manager is already registered', async () => {
+      const fakeTracerProvider = {
+        getTracer: () => ({
+          startActiveSpan: (
+            _name: string,
+            _opts: unknown,
+            fn: (span: unknown) => unknown,
+          ) => {
+            const fakeSpan = {
+              spanContext: () => ({
+                traceId: '5'.repeat(32),
+                spanId: '6'.repeat(16),
+                traceFlags: 1,
+              }),
+              setAttribute: () => fakeSpan,
+              setAttributes: () => fakeSpan,
+              addEvent: () => fakeSpan,
+              addLink: () => fakeSpan,
+              addLinks: () => fakeSpan,
+              setStatus: () => fakeSpan,
+              updateName: () => fakeSpan,
+              end: () => {},
+              isRecording: () => true,
+              recordException: () => {},
+            };
+            return context.with(trace.setSpan(context.active(), fakeSpan), () =>
+              fn(fakeSpan),
+            );
+          },
+        }),
+      };
+
+      context.disable();
+      ensureInitialContextManagerSet();
+      _resetTracingEnabledForTest();
+
+      const sandbox = sinon.createSandbox();
+      const setGlobalSpy = sandbox.spy(context, 'setGlobalContextManager');
+      const diagErrorSpy = sandbox.spy(diag, 'error');
+      sandbox
+        .stub(trace, 'getTracerProvider')
+        .returns(fakeTracerProvider as unknown as TracerProvider);
+
+      try {
+        // First trace sets globalTracingEnabled = true; subsequent traces hit the cached fast path
+        await startTrace('Test.first', undefined, async span => {
+          span.end();
+        });
+        await startTrace('Test.second', undefined, async span => {
+          span.end();
+        });
+        ensureInitialContextManagerSet();
+
+        assert.strictEqual(setGlobalSpy.callCount, 0);
+        assert.strictEqual(diagErrorSpy.callCount, 0);
+      } finally {
+        sandbox.restore();
         _resetTracingEnabledForTest();
         ensureInitialContextManagerSet();
       }

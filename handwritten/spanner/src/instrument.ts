@@ -145,6 +145,15 @@ let defaultContextManager: ContextManager | undefined;
  * was called.
  */
 function ensureInitialContextManagerSet() {
+  const currentContextManager = (
+    context as unknown as {_getContextManager?: () => ContextManager}
+  )._getContextManager?.();
+  if (
+    currentContextManager &&
+    currentContextManager.constructor?.name !== 'NoopContextManager'
+  ) {
+    return;
+  }
   if (!defaultContextManager) {
     const ContextManagerClass =
       AsyncLocalStorageContextManager || AsyncHooksContextManager;
