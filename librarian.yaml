@@ -1475,6 +1475,7 @@ libraries:
   - name: google-cloud-saasplatform-saasservicemgmt
     version: 0.7.0
     apis:
+      - path: google/cloud/saasplatform/saasservicemgmt/v1
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     copyright_year: "2026"
     nodejs:
