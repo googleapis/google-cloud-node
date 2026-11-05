@@ -1,0 +1,7 @@
+**/*.log
+**/node_modules
+.coverage
+.nyc_output
+coverage/
+build/
+*_sponge_log.xml
