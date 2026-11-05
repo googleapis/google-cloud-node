@@ -23,6 +23,7 @@ import {
   buildWorkspaceDepCompileFilterArgs,
   checkBreakingChanges,
   compareSourceTexts,
+  escapeMarkdownSummaryText,
   escapeWorkflowCommandProperty,
   escapeWorkflowCommandValue,
   isIgnoredSourceFile,
@@ -779,7 +780,7 @@ describe('breaking-change-check', () => {
   });
 
   describe('CLI flag, git range, and GitHub Actions workflow escaping helpers', () => {
-    it('escapes %, CR, LF, :, and , in workflow commands to prevent annotation injection', () => {
+    it('escapes %, CR, LF, :, and , in workflow commands and HTML in step summaries', () => {
       assert.equal(
         escapeWorkflowCommandValue('100%\r\n::set-env name=FOO::BAR'),
         '100%25%0D%0A::set-env name=FOO::BAR',
@@ -787,6 +788,10 @@ describe('breaking-change-check', () => {
       assert.equal(
         escapeWorkflowCommandProperty('pkg/a:b,c%d\ne.ts'),
         'pkg/a%3Ab%2Cc%25d%0Ae.ts',
+      );
+      assert.equal(
+        escapeMarkdownSummaryText("Type 'Box<T>' & </details>\nnext"),
+        "Type 'Box&lt;T&gt;' &amp; &lt;/details&gt; next",
       );
     });
 
@@ -820,22 +825,48 @@ describe('breaking-change-check', () => {
       }
     });
 
-    it('builds pnpm workspace dependency compile filters only for public packages', async () => {
-      await createTempGitRepo(({tmpDir, writeFiles}) => {
+    it('builds pnpm workspace dependency compile filters for public packages and removed base deps', async () => {
+      await createTempGitRepo(({tmpDir, writeFiles, commitAll, git}) => {
         writeFiles({
-          'pub/package.json': {name: '@google-cloud/pub', version: '1.0.0'},
+          'core/packages/helper/package.json': {
+            name: '@google-cloud/removed-helper',
+            version: '1.0.0',
+          },
+          'pub/package.json': {
+            name: '@google-cloud/pub',
+            version: '1.0.0',
+            dependencies: {'@google-cloud/removed-helper': 'workspace:*'},
+          },
           'priv/package.json': {
             name: '@google-cloud/priv',
             private: true,
             version: '1.0.0',
           },
         });
-        const args = buildWorkspaceDepCompileFilterArgs([
-          path.join(tmpDir, 'pub'),
-          path.join(tmpDir, 'priv'),
-          path.join(tmpDir, 'pub'),
+        const baseSha = commitAll('base');
+        writeFiles({
+          'pub/package.json': {name: '@google-cloud/pub', version: '1.0.0'},
+        });
+        const args = buildWorkspaceDepCompileFilterArgs(
+          [
+            path.join(tmpDir, 'pub'),
+            path.join(tmpDir, 'priv'),
+            path.join(tmpDir, 'pub'),
+          ],
+          {
+            absRepoRoot: tmpDir,
+            baseRev: baseSha,
+            reader: {
+              getFileAtRev: (rev, rel) => git('show', `${rev}:${rel}`),
+            },
+          },
+        );
+        assert.deepEqual(args, [
+          '--filter',
+          '@google-cloud/pub^...',
+          '--filter',
+          '@google-cloud/removed-helper...',
         ]);
-        assert.deepEqual(args, ['--filter', '@google-cloud/pub^...']);
       });
     });
   });
@@ -1023,6 +1054,503 @@ describe('breaking-change-check', () => {
         });
       },
     );
+
+    it(
+      'enforces dual ESM/CJS exports lanes, removed conditions/exports, private: true, ambient d.ts, and tsconfig changes',
+      {timeout: 60000},
+      async () => {
+        await createTempGitRepo(async ({tmpDir, writeFiles, commitAll}) => {
+          writeFiles({
+            'tsconfig.base.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'CommonJS',
+                strict: false,
+                strictNullChecks: false,
+              },
+            },
+            'pkg-dual/package.json': {
+              name: '@test/dual',
+              version: '1.0.0',
+              exports: {
+                '.': {
+                  import: {
+                    types: './build/esm/index.d.mts',
+                    default: './build/esm/index.mjs',
+                  },
+                  require: {
+                    types: './build/cjs/index.d.cts',
+                    default: './build/cjs/index.cjs',
+                  },
+                },
+              },
+            },
+            'pkg-dual/tsconfig.json': {
+              compilerOptions: {
+                strict: true,
+                module: 'NodeNext',
+                moduleResolution: 'NodeNext',
+              },
+            },
+            'pkg-dual/src/index.mts':
+              'export function runEsm(x: string | number): string { return String(x); }\n',
+            'pkg-dual/src/index.cts':
+              'export function runCjs(x: string | number): string { return String(x); }\n',
+            'pkg-ambient/package.json': {
+              name: '@test/ambient',
+              version: '1.0.0',
+              types: 'types/firestore.d.ts',
+              files: ['types', 'pipelines'],
+            },
+            'pkg-ambient/pipelines/package.json': {
+              name: '@test/ambient-pipelines',
+              types: '../types/pipelines.d.ts',
+            },
+            'pkg-ambient/tsconfig.json': {compilerOptions: {strict: true}},
+            'pkg-ambient/types/shim.d.ts':
+              "declare module 'third-party-shim' { export interface ShimObj { ok: boolean; } }\n",
+            'pkg-ambient/types/firestore.d.ts': [
+              '/// <reference path="./shim.d.ts" />',
+              'declare namespace TestFs {',
+              '  export interface Settings { host?: string; }',
+              '  /** @internal */',
+              '  export type InternalKind = "a" | "b";',
+              '  export class Doc { kind: InternalKind; constructor(s?: Settings); }',
+              '  export namespace Pipelines {',
+              '    export interface ExecOpts { atomic?: boolean; }',
+              '  }',
+              '}',
+              "declare module '@test/ambient' {",
+              '  export = TestFs;',
+              '}',
+              '',
+            ].join('\n'),
+            'pkg-ambient/types/pipelines.d.ts': [
+              "import './firestore';",
+              "declare module '@test/ambient/pipelines' {",
+              '  export = TestFs.Pipelines;',
+              '}',
+              '',
+            ].join('\n'),
+            'pkg-pub/package.json': {
+              name: '@test/pub',
+              version: '1.0.0',
+              exports: {
+                '.': './build/src/index.js',
+                './extra': './build/src/extra.js',
+              },
+              types: './build/src/index.d.ts',
+            },
+            'pkg-pub/tsconfig.json': {
+              extends: '../tsconfig.base.json',
+              compilerOptions: {outDir: 'build'},
+            },
+            'pkg-pub/src/index.ts':
+              'export function greet(name = null as string | null) { return name; }\n',
+            'pkg-pub/src/extra.ts': 'export const EXTRA = 1;\n',
+          });
+          const baseSha = commitAll('base');
+
+          // 1. Narrow CJS lane only (`runCjs`) and break ambient `Settings.host` & `ExecOpts.atomic`
+          writeFiles({
+            'pkg-dual/src/index.cts':
+              'export function runCjs(x: number): string { return String(x); }\n',
+            'pkg-ambient/types/firestore.d.ts': [
+              '/// <reference path="./shim.d.ts" />',
+              'declare namespace TestFs {',
+              '  export interface Settings { host: string; }',
+              '  /** @internal */',
+              '  export type InternalKind = "a" | "b";',
+              '  export class Doc { kind: InternalKind; constructor(s?: Settings); }',
+              '  export namespace Pipelines {',
+              '    export interface ExecOpts { atomic: boolean; }',
+              '  }',
+              '}',
+              "declare module '@test/ambient' {",
+              '  export = TestFs;',
+              '}',
+              '',
+            ].join('\n'),
+          });
+          const step1Sha = commitAll('narrow-cjs-and-ambient');
+          const step1Errs = await checkBreakingChanges({
+            diffRevArgs: [baseSha, step1Sha],
+            baseRev: baseSha,
+            headRev: step1Sha,
+            repoRoot: tmpDir,
+          });
+          assert.ok(
+            step1Errs.some(
+              e => e.includes('index.cts') && e.includes('runCjs'),
+            ),
+            `Expected CJS lane narrowing error, got: ${step1Errs.join('; ')}`,
+          );
+          assert.ok(
+            step1Errs.some(
+              e =>
+                e.includes('firestore.d.ts') &&
+                e.includes("Interface/Type 'Settings'"),
+            ),
+            `Expected ambient firestore.d.ts error, got: ${step1Errs.join('; ')}`,
+          );
+          assert.ok(
+            step1Errs.some(
+              e =>
+                e.includes('pipelines.d.ts') &&
+                e.includes("Interface/Type 'ExecOpts'"),
+            ),
+            `Expected legacy subdir pipelines.d.ts error, got: ${step1Errs.join('; ')}`,
+          );
+
+          // 2. Drop `require` condition on dual pkg, mark `pkg-ambient` private, delete `exports` on `pkg-pub`,
+          //    and flip `strictNullChecks: true` in `tsconfig.base.json` (`name = null` inferred without null vs with null).
+          writeFiles({
+            'tsconfig.base.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'CommonJS',
+                strict: false,
+                strictNullChecks: true,
+              },
+            },
+            'pkg-dual/package.json': {
+              name: '@test/dual',
+              version: '1.0.0',
+              exports: {
+                '.': {
+                  import: {
+                    types: './build/esm/index.d.mts',
+                    default: './build/esm/index.mjs',
+                  },
+                },
+              },
+            },
+            'pkg-ambient/package.json': {
+              name: '@test/ambient',
+              version: '1.0.0',
+              private: true,
+              types: 'types/firestore.d.ts',
+            },
+            'pkg-pub/package.json': {
+              name: '@test/pub',
+              version: '1.0.0',
+              main: './build/src/index.js',
+              types: './build/src/index.d.ts',
+            },
+            'pkg-pub/src/index.ts':
+              'export function greet(name: string) { return name; }\n',
+          });
+          const step2Sha = commitAll('pkg-manifest-and-tsconfig-breaks');
+          const step2Errs = await checkBreakingChanges({
+            diffRevArgs: [step1Sha, step2Sha],
+            baseRev: step1Sha,
+            headRev: step2Sha,
+            repoRoot: tmpDir,
+          });
+          assert.ok(
+            step2Errs.some(e =>
+              e.includes("removed CommonJS ('require') support"),
+            ),
+            `Expected dropped require condition error, got: ${step2Errs.join('; ')}`,
+          );
+          assert.ok(
+            step2Errs.some(e => e.includes('"private": true')),
+            `Expected private: true conversion error, got: ${step2Errs.join('; ')}`,
+          );
+          assert.ok(
+            step2Errs.some(
+              e => e.includes("'./extra'") && e.includes('removed'),
+            ),
+            `Expected ./extra subpath removal when exports deleted, got: ${step2Errs.join('; ')}`,
+          );
+          assert.ok(
+            step2Errs.some(
+              e => e.includes('pkg-pub') && e.includes("Function 'greet'"),
+            ),
+            `Expected signature error on '.', got: ${step2Errs.join('; ')}`,
+          );
+
+          // 3. Pure tsconfig*.json edit (`strictNullChecks: false -> true`) with ZERO .ts edits
+          //    changes emitted .d.ts types (`host = null`: `any` -> `null`; `[1, null]`: `number[]` -> `(number | null)[]`).
+          writeFiles({
+            'pkg-cfg/package.json': {
+              name: '@test/cfg',
+              version: '1.0.0',
+              types: './build/src/index.d.ts',
+            },
+            'pkg-cfg/tsconfig.base.json': {
+              compilerOptions: {
+                strict: false,
+                strictNullChecks: false,
+                outDir: 'build',
+              },
+            },
+            'pkg-cfg/tsconfig.json': {extends: './tsconfig.base.json'},
+            'pkg-cfg/src/index.ts':
+              'export function setHost(host = null): void {}\nexport const ITEMS = [1, null];\n',
+          });
+          const cfgBase = commitAll('cfg-base');
+          writeFiles({
+            'pkg-cfg/tsconfig.base.json': {
+              compilerOptions: {
+                strict: false,
+                strictNullChecks: true,
+                outDir: 'build',
+              },
+            },
+          });
+          const cfgHead = commitAll('cfg-strict-only');
+          const cfgErrs = await checkBreakingChanges({
+            diffRevArgs: [cfgBase, cfgHead],
+            baseRev: cfgBase,
+            headRev: cfgHead,
+            repoRoot: tmpDir,
+          });
+          assert.ok(
+            cfgErrs.some(
+              e => e.includes('pkg-cfg') && e.includes("Function 'setHost'"),
+            ),
+            `Expected tsconfig.base.json strictNullChecks change to catch setHost(any -> null), got: ${cfgErrs.join('; ')}`,
+          );
+        });
+      },
+    );
+  });
+
+  describe('variance, any-safety, expandos, predicates, and overload shadowing', () => {
+    it('enforces covariant readonly/getter properties and invariant mutable class/value properties', () => {
+      assert.ok(
+        compareSourceTexts(
+          'export class Doc { readonly id: string = "a"; }',
+          'export class Doc { readonly id: string | undefined = undefined; }',
+        ).some(e => e.includes("Class 'Doc': property 'id'")),
+      );
+      assert.deepEqual(
+        compareSourceTexts(
+          'export class Doc { readonly id: string | undefined = "a"; }',
+          'export class Doc { readonly id: string = "a"; }',
+        ),
+        [],
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Auth { get token(): string { return "t"; } }',
+          'export class Auth { get token(): string | null { return null; } }',
+        ).some(e => e.includes("Class 'Auth': property 'token'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Cfg { endpoint: string = "a"; }',
+          'export class Cfg { endpoint: string | undefined = undefined; }',
+        ).some(e => e.includes("Class 'Cfg': property 'endpoint'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Cfg { port: string | number = 80; }',
+          'export class Cfg { port: number = 80; }',
+        ).some(e => e.includes("Class 'Cfg': property 'port'")),
+      );
+      assert.deepEqual(
+        compareSourceTexts(
+          'export class Box { get v(): string { return ""; } set v(x: string) {} }',
+          'export class Box { get v(): string { return ""; } set v(x: string | number) {} }',
+        ),
+        [],
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export const DEFAULTS: { readonly retries: number } = { retries: 3 };',
+          'export const DEFAULTS: { readonly retries: number | undefined } = { retries: undefined };',
+        ).some(e => e.includes("Value 'DEFAULTS': property 'retries'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export let logLevel: string | number = 1;',
+          'export const logLevel: string | number = 1;',
+        ).some(e => e.includes("was made readonly ('const')")),
+      );
+    });
+
+    it('catches narrowing from any and widening returns to any across direct and nested types while allowing any -> unknown', () => {
+      assert.ok(
+        compareSourceTexts(
+          'export function send(body: any): void {}',
+          'export function send(body: string): void {}',
+        ).length > 0,
+      );
+      assert.deepEqual(
+        compareSourceTexts(
+          'export function send(body: any): void {}',
+          'export function send(body: unknown): void {}',
+        ),
+        [],
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function getId(): string { return "x"; }',
+          'export function getId(): any { return "x"; }',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export async function fetchId(): Promise<string> { return "x"; }',
+          'export async function fetchId(): Promise<any> { return "x"; }',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function batch(items: any[]): void {}',
+          'export function batch(items: string[]): void {}',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function put(doc: Record<string, any>): void {}',
+          'export function put(doc: Record<string, number>): void {}',
+        ).length > 0,
+      );
+    });
+
+    it('checks callable expandos, merged class/enum namespaces, required input callbacks, and contravariant callback output types', () => {
+      assert.ok(
+        compareSourceTexts(
+          'export function req(u: string): void {} req.resetStats = (): void => {}; req.defaults = (o: {timeout?: number | string}) => req;',
+          'export function req(u: string): void {} req.defaults = (o: {timeout: number}) => req;',
+        ).some(e => e.includes("'resetStats' was removed")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Client {} export namespace Client { export interface Opts { a?: number; } export type Mode = "x" | "y"; }',
+          'export class Client {} export namespace Client { export interface Opts { a: number; } }',
+        ).some(e =>
+          e.includes("Namespace 'Client': export 'Mode' was removed"),
+        ),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export enum Kind { A = 1 } export namespace Kind { export function from(s: string): Kind { return Kind.A; } }',
+          'export enum Kind { A = 1 } export namespace Kind {}',
+        ).some(e => e.includes("Namespace 'Kind': export 'from' was removed")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export interface Opts { onErr: (err: Error) => void; } export function run(o: Opts): void {}',
+          'export interface Opts { onErr: (err: Error | string) => void; } export function run(o: Opts): void {}',
+        ).some(e => e.includes("callback property 'onErr'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export type RequestCallback<T> = (err: Error | null, res?: T) => void; export interface Row { id: string; count: number; } export class Table { getRows(cb: RequestCallback<Row[]>): void {} }',
+          'export type RequestCallback<T> = (err: Error | null, res?: T) => void; export interface Row { id: string; count?: number; } export class Table { getRows(cb: RequestCallback<Row[]>): void {} }',
+        ).some(e =>
+          e.includes("required output property 'count' was made optional"),
+        ),
+      );
+    });
+
+    it('checks NodeNext .d.mts generics, type guards/asserts/this params, static & nested generics, rest tails, setter/inherited visibility, @internal constructors/enums, and overload shadowing', () => {
+      assert.ok(
+        compareSourceTexts(
+          'export interface Envelope<T extends string | number> { payload?: T; }',
+          'export interface Envelope<T extends string> { payload?: T; }',
+          {},
+          {
+            entryFileName: 'index.d.mts',
+            compilerOptions: {module: 199, moduleResolution: 99},
+          },
+        ).some(e =>
+          e.includes('type parameter constraint became more restrictive'),
+        ),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export namespace NS { export interface Base { a: string; } export interface Sub extends Base { b: number; } } export function f<T extends NS.Base>(x: T): T { return x; }',
+          'export namespace NS { export interface Base { a: string; } export interface Sub extends Base { b: number; } } export function f<T extends NS.Sub>(x: T): T { return x; }',
+        ).some(e => e.includes('generic constraint became more restrictive')),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function isStr(x: unknown): x is string { return typeof x === "string"; }',
+          'export function isStr(x: unknown): boolean { return typeof x === "string"; }',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function check(x: unknown): asserts x is string { if (typeof x !== "string") throw new Error(); }',
+          'export function check(x: unknown): void { if (typeof x !== "string") throw new Error(); }',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class C { id = 1; } export function run(x: number): number { return x; }',
+          'export class C { id = 1; } export function run(this: C, x: number): number { return x; }',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Util { static wrap<T>(v: T | string): T { return v as T; } }',
+          'export class Util { static wrap<T>(v: T): T { return v; } }',
+        ).some(e => e.includes("Value 'Util': method 'wrap'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Box<T> { send<U>(owner: T, item: U | string): U { return item as U; } }',
+          'export class Box<T> { send<U>(owner: T, item: U): U { return item; } }',
+        ).some(e => e.includes("Class 'Box': method 'send'")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function log(...args: Array<string | number>): void {}',
+          'export function log(first?: string | number, ...rest: number[]): void {}',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export function tags(...args: readonly (string | number)[]): void {}',
+          'export function tags(...args: readonly string[]): void {}',
+        ).length > 0,
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export class Box { get v(): number { return 1; } set v(x: number) {} }',
+          'export class Box { get v(): number { return 1; } protected set v(x: number) {} }',
+        ).some(e => e.includes("setter 'v' visibility was restricted")),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'class Base {} export class Client extends Base { public open(): void {} }',
+          'class Base { protected open(): void {} } export class Client extends Base {}',
+        ).some(e =>
+          e.includes(
+            "member 'open' visibility was restricted from 'public' to 'protected'",
+          ),
+        ),
+      );
+      assert.deepEqual(
+        compareSourceTexts(
+          'export declare class Secret { /** @internal */ constructor(raw: string); readonly ok: boolean; } export declare enum Kind { A = 1, /** @internal */ _B = 2 } declare function h(x: string): void; export { /** @internal */ h };',
+          'export declare class Secret { /** @internal */ constructor(raw: number, f: boolean); readonly ok: boolean; } export declare enum Kind { A = 1 }',
+          {},
+          {entryFileName: 'mod.d.ts'},
+        ),
+        [],
+      );
+      assert.ok(
+        compareSourceTexts(
+          'export declare function parse(x: string): RegExp;',
+          'export declare function parse(x: unknown): unknown;\nexport declare function parse(x: string): RegExp;',
+          {},
+          {entryFileName: 'mod.d.ts'},
+        ).some(e => e.includes('is shadowed by earlier overload')),
+      );
+      assert.ok(
+        compareSourceTexts(
+          'interface One { a: string; } export function run(v: One): void {}',
+          'import {One} from "./other"; export function run(v: One): void {}',
+          {'__head__/other.ts': 'export interface One { b: number; }'},
+        ).length > 0,
+      );
+    });
   });
 
   describe('historical commits (PR #9539 and PR #9549)', () => {

@@ -16,6 +16,7 @@ jobs:
   breaking-change-check:
     name: Check for breaking changes in public TypeScript interfaces
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
@@ -30,13 +31,14 @@ jobs:
               - 'core/**/*.mts'
               - 'core/**/*.cts'
               - 'core/**/package.json'
-              - 'core/**/tsconfig.json'
+              - 'core/**/tsconfig*.json'
               - 'handwritten/**/*.ts'
               - 'handwritten/**/*.mts'
               - 'handwritten/**/*.cts'
               - 'handwritten/**/package.json'
-              - 'handwritten/**/tsconfig.json'
+              - 'handwritten/**/tsconfig*.json'
               - 'bin/breaking-change-check.mjs'
+              - 'bin/breaking-change-check/**'
               - 'bin/test/breaking-change-check.test.mjs'
               - '.github/workflows/breaking-change-check.yaml'
             packages_changed:
@@ -44,14 +46,15 @@ jobs:
               - 'core/**/*.mts'
               - 'core/**/*.cts'
               - 'core/**/package.json'
-              - 'core/**/tsconfig.json'
+              - 'core/**/tsconfig*.json'
               - 'handwritten/**/*.ts'
               - 'handwritten/**/*.mts'
               - 'handwritten/**/*.cts'
               - 'handwritten/**/package.json'
-              - 'handwritten/**/tsconfig.json'
+              - 'handwritten/**/tsconfig*.json'
             checker_self:
               - 'bin/breaking-change-check.mjs'
+              - 'bin/breaking-change-check/**'
               - 'bin/test/breaking-change-check.test.mjs'
               - '.github/workflows/breaking-change-check.yaml'
       - name: Use Node.js 24
