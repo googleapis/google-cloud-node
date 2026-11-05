@@ -3368,12 +3368,42 @@ class Database extends common.GrpcServiceObject {
 
           this._releaseOnEnd(session!, snapshot, span);
 
+          if (proxyStream.destroyed) {
+            // The caller already gave up on the stream: do not start the query.
+            snapshot.end();
+            return;
+          }
+
           let dataReceived = false;
+          let dataEnded = false;
+          let snapshotEnded = false;
           let dataStream = snapshot.runStream(query);
 
-          const endListener = () => {
-            snapshot.end();
+          const endSnapshotOnce = () => {
+            if (!snapshotEnded) {
+              snapshotEnded = true;
+              snapshot.end();
+            }
           };
+
+          const endListener = () => {
+            dataEnded = true;
+            endSnapshotOnce();
+          };
+          // When the caller stops consuming early (`stream.destroy()`, or the
+          // documented `this.end()` inside a 'data' handler), stop the
+          // underlying query as well. Otherwise the RPC keeps running (and a Go
+          // Shared Core stream stays parked in flow control) until it is
+          // garbage collected or never, and the session is not released.
+          const stopEarly = () => {
+            if (!dataEnded && !dataStream.destroyed) {
+              dataStream.destroy();
+            }
+            if (!dataEnded) {
+              endSnapshotOnce();
+            }
+          };
+          proxyStream.once('close', stopEarly).once('finish', stopEarly);
           dataStream
             .once('data', () => (dataReceived = true))
             .once('error', err => {
@@ -3397,14 +3427,16 @@ class Database extends common.GrpcServiceObject {
                 dataStream.unpipe(proxyStream);
                 dataStream.removeListener('end', endListener);
                 dataStream.end();
-                snapshot.end();
+                endSnapshotOnce();
                 span.end();
                 // Create a new data stream and add it to the end user stream.
                 dataStream = this.runStream(query, options);
+                dataStream.once('end', () => (dataEnded = true));
                 dataStream.pipe(proxyStream);
               } else {
+                dataEnded = true;
                 proxyStream.destroy(err);
-                snapshot.end();
+                endSnapshotOnce();
               }
             })
             .on('stats', stats => proxyStream.emit('stats', stats))

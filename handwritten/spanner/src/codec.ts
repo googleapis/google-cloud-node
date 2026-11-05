@@ -832,6 +832,22 @@ const DEFAULT_JSON_OPTIONS: JSONOptions = {
   includeNameless: false,
 };
 
+/**
+ * Formats an error thrown while serializing a column to JSON.
+ *
+ * @private
+ */
+export function formatColumnSerializationError(
+  fieldName: string,
+  err: Error,
+): Error {
+  err.message = [
+    `Serializing column "${fieldName}" encountered an error: ${err.message}`,
+    'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+  ].join(' ');
+  return err;
+}
+
 function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
   const json: Json = {};
 
@@ -854,13 +870,7 @@ function convertFieldsToJson(fields: Field[], options?: JSONOptions): Json {
     try {
       json[fieldName] = convertValueToJson(field.value, resolvedOptions);
     } catch (e) {
-      (e as Error).message = [
-        `Serializing column "${fieldName}" encountered an error: ${
-          (e as Error).message
-        }`,
-        'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-      ].join(' ');
-      throw e;
+      throw formatColumnSerializationError(fieldName, e as Error);
     }
   }
 
@@ -937,14 +947,17 @@ export function getDecoder(
   switch (type.code) {
     case spannerClient.spanner.v1.TypeCode.BYTES:
     case 'BYTES':
-      decoder = val => Buffer.from(val, 'base64');
+      decoder = val =>
+        Buffer.isBuffer(val) ? val : Buffer.from(val, 'base64');
       break;
 
     case spannerClient.spanner.v1.TypeCode.PROTO:
     case 'PROTO':
       if (jsonMode) {
         decoder = val => {
-          const decoded = Buffer.from(val, 'base64');
+          const decoded = Buffer.isBuffer(val)
+            ? val
+            : Buffer.from(val, 'base64');
           if (columnMetadata) {
             return (columnMetadata as any)['toObject'](
               (columnMetadata as any)['decode'](decoded),
@@ -954,7 +967,9 @@ export function getDecoder(
         };
       } else {
         decoder = val => {
-          const decoded = Buffer.from(val, 'base64');
+          const decoded = Buffer.isBuffer(val)
+            ? val
+            : Buffer.from(val, 'base64');
           return new ProtoMessage({
             value: decoded,
             fullName: type.protoTypeFqn!,
@@ -1155,17 +1170,23 @@ export function getDecoder(
           const isArr = Array.isArray(val);
           const structObj: Json = {};
           const len = fieldDecoders.length;
-          for (let i = 0; i < len; i++) {
-            const {name, decodedName, decoder, index} = fieldDecoders[i];
-            structObj[decodedName!] = decoder(
-              isArr
-                ? val[index]
-                : name !== null &&
-                    name !== undefined &&
-                    Object.prototype.hasOwnProperty.call(val, name)
-                  ? val[name]
-                  : val[index],
-            );
+          let currentFieldName = '';
+          try {
+            for (let i = 0; i < len; i++) {
+              const {name, decodedName, decoder, index} = fieldDecoders[i];
+              currentFieldName = decodedName!;
+              structObj[currentFieldName] = decoder(
+                isArr
+                  ? val[index]
+                  : name !== null &&
+                      name !== undefined &&
+                      Object.prototype.hasOwnProperty.call(val, name)
+                    ? val[name]
+                    : val[index],
+              );
+            }
+          } catch (e) {
+            throw formatColumnSerializationError(currentFieldName, e as Error);
           }
           return structObj;
         };
@@ -1199,6 +1220,31 @@ function decode(
   return getDecoder(type, columnMetadata)(value);
 }
 
+let preciseDateFastLayoutSupported: boolean | undefined;
+
+function isPreciseDateFastLayoutSupported(): boolean {
+  if (preciseDateFastLayoutSupported !== undefined) {
+    return preciseDateFastLayoutSupported;
+  }
+  try {
+    const probe = new PreciseDate(0) as unknown as Record<string, unknown>;
+    if (
+      typeof probe._micros !== 'number' ||
+      typeof probe._nanos !== 'number' ||
+      typeof probe._picos !== 'number'
+    ) {
+      preciseDateFastLayoutSupported = false;
+      return false;
+    }
+    const negRef = new PreciseDate({seconds: -1, nanos: 1});
+    preciseDateFastLayoutSupported =
+      negRef.getTime() === -2000 && negRef.getNanoseconds() === 1;
+  } catch {
+    preciseDateFastLayoutSupported = false;
+  }
+  return preciseDateFastLayoutSupported;
+}
+
 /**
  * Fast-path parser for RFC 3339 formatted Spanner UTC timestamp strings.
  *
@@ -1210,7 +1256,57 @@ function decode(
  * @param {string} isoString The Zulu timestamp string (e.g. "2021-05-11T16:46:04.872345678Z").
  * @returns {PreciseDate} The parsed PreciseDate instance.
  */
-function parsePreciseDate(isoString: string): PreciseDate {
+function parsePreciseDate(
+  isoString: string | {seconds: number; nanos: number},
+): PreciseDate {
+  if (typeof isoString === 'object' && isoString !== null) {
+    const {seconds, nanos} = isoString;
+    if (
+      typeof seconds === 'number' &&
+      typeof nanos === 'number' &&
+      (preciseDateFastLayoutSupported ?? isPreciseDateFastLayoutSupported()) &&
+      nanos >= 0 &&
+      nanos < 1_000_000_000
+    ) {
+      const milliseconds = (nanos / 1_000_000) | 0;
+      const rem = nanos - milliseconds * 1_000_000;
+      const microseconds = (rem / 1_000) | 0;
+      const nanoseconds = rem - microseconds * 1_000;
+      let utcMillis: number;
+      if (seconds >= 0 || nanos === 0) {
+        utcMillis = seconds * 1000 + milliseconds;
+      } else if (milliseconds === 0) {
+        utcMillis = (seconds - 1) * 1000;
+      } else if (seconds === -1) {
+        utcMillis = milliseconds;
+      } else {
+        utcMillis = seconds * 1000 + milliseconds;
+      }
+      if (Number.isSafeInteger(utcMillis)) {
+        const preciseDate = Reflect.construct(
+          Date,
+          [utcMillis],
+          PreciseDate,
+        ) as PreciseDate;
+        const internal = preciseDate as unknown as {
+          _micros: number;
+          _nanos: number;
+          _picos: number;
+        };
+        internal._micros =
+          utcMillis < 0 && nanos > 0 && microseconds === 0 && nanoseconds === 0
+            ? -0
+            : microseconds;
+        internal._nanos = utcMillis < 0 && nanoseconds === 0 ? -0 : nanoseconds;
+        internal._picos = 0;
+        return preciseDate;
+      }
+    }
+    if (!(isoString instanceof Date)) {
+      return new PreciseDate({seconds, nanos});
+    }
+  }
+
   if (
     typeof isoString === 'string' &&
     isoString.length >= 20 &&
@@ -1287,7 +1383,7 @@ function parsePreciseDate(isoString: string): PreciseDate {
     return preciseDate;
   }
 
-  return new PreciseDate(isoString);
+  return new PreciseDate(isoString as string);
 }
 
 /**
@@ -1584,8 +1680,11 @@ function getType(value: Value, enableUuidAsUntyped?: boolean): Type {
   }
 
   if (typeof value === 'string') {
-    const isUuidUntyped = enableUuidAsUntyped ?? isUuidUntypedEnv();
-    if (isUuidUntyped && isUuid(value)) {
+    if (
+      enableUuidAsUntyped !== false &&
+      isUuid(value) &&
+      (enableUuidAsUntyped || isUuidUntypedEnv())
+    ) {
       return TYPE_UNSPECIFIED;
     }
     return TYPE_STRING;
