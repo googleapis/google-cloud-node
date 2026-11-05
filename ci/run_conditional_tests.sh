@@ -41,27 +41,17 @@ for arg in "$@"; do
         --strict)
             STRICT=true
             ;;
-        --list-dirs)
-            LIST_DIRS=true
-            ;;
     esac
 done
-
-if [[ "${LIST_DIRS}" == "true" ]]; then
-    export TEST_TYPE="${TEST_TYPE:-units}"
-fi
 
 if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
     if [ -z "${GIT_DIFF_ARG}" ]; then
         echo "Error: STRICT mode requires GIT_DIFF_ARG to be set." >&2
         exit 1
     fi
-    if [[ -z "${RUN_TESTS_MODE}" && "${LIST_DIRS}" != "true" ]]; then
-        export RUN_TESTS_MODE="RUN_UNIT_TESTS"
-        export BUILD_TYPE="${BUILD_TYPE:-presubmit}"
-        export TEST_TYPE="${TEST_TYPE:-units}"
-        export SHARD_TOTAL="${SHARD_TOTAL:-1}"
-        export SHARD_INDEX="${SHARD_INDEX:-0}"
+    if [[ -z "${RUN_TESTS_MODE}" ]]; then
+        echo "Error: STRICT mode requires RUN_TESTS_MODE to be set." >&2
+        exit 1
     fi
     set +e
     git diff --quiet ${GIT_DIFF_ARG}
@@ -131,7 +121,6 @@ fi
 
 if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
     subdirs=(
-        ci
         core
         packages
         handwritten
@@ -139,7 +128,6 @@ if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
     )
 else
     subdirs=(
-        ci
         core
         containers
         packages
@@ -161,7 +149,7 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # on Windows due to incompatible npm scripts.
 #
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests="ci/ core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
 
 # Gather all test directories into an array
 test_dirs=()
@@ -181,8 +169,8 @@ for subdir in "${subdirs[@]}"; do
             echo "Skipping ${TEST_TYPE} test for ${d} (no samples/package.json found)"
             continue
         fi
-        if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core" || "${subdir}" == "ci") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
-            echo "Skipping ${TEST_TYPE} test for handwritten, core, and ci packages: ${d}"
+        if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
+            echo "Skipping ${TEST_TYPE} test for handwritten and core packages: ${d}"
             continue
         fi
 
@@ -304,12 +292,6 @@ for subdir in "${subdirs[@]}"; do
         fi
     done
 done
-if [[ "${LIST_DIRS}" == "true" ]]; then
-    if (( ${#test_dirs[@]} > 0 )); then
-        printf '%s\n' "${test_dirs[@]}"
-    fi
-    exit 0
-fi
 # If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
 if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
     count=${#test_dirs[@]}
