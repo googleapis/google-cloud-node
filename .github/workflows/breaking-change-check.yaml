@@ -56,13 +56,11 @@ jobs:
           node-version: 24
       - uses: ./.github/actions/pnpm-lockfile-check
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
-        with:
-          link-workspace-packages: 'true'
       - name: Compile affected packages and workspace dependents via pnpm
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           BASE_SHA=$(git merge-base HEAD^1 HEAD 2>/dev/null || git rev-parse HEAD^1)
-          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[${BASE_SHA}...HEAD]..." --filter "!./packages/*" --if-present run compile
+          pnpm --filter "...[${BASE_SHA}...HEAD]" --filter "!./packages/*" --if-present run compile
       - name: Run ci/breaking-change-check unit and harness tests
         if: steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
