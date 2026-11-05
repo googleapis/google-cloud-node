@@ -173,11 +173,13 @@ export function getSigArity(checker, sig) {
   const decl = sig.getDeclaration ? sig.getDeclaration() : sig.declaration;
   let minArgs = 0;
   let maxArgs = sig.parameters.length;
-  let isUnboundedRest = false;
+  let hasRestTail = false;
+  let restMinElem = 0;
 
   if (decl && decl.parameters && decl.parameters.length > 0) {
     const lastParam = decl.parameters[decl.parameters.length - 1];
     if (lastParam.dotDotDotToken) {
+      hasRestTail = true;
       const restTupleType = lastParam.type
         ? checker.getTypeFromTypeNode(lastParam.type)
         : undefined;
@@ -190,7 +192,6 @@ export function getSigArity(checker, sig) {
         let req = 0;
         for (const f of elemFlags) {
           if (f & ts.ElementFlags.Required) req++;
-          else break;
         }
         return {
           min: req,
@@ -199,12 +200,11 @@ export function getSigArity(checker, sig) {
         };
       };
       if (!restTupleType) {
-        isUnboundedRest = true;
         maxArgs = Infinity;
       } else if (checker.isTupleType(restTupleType)) {
         const b = computeSingleTupleBounds(restTupleType);
-        isUnboundedRest = b.unbounded;
-        maxArgs = b.unbounded ? Infinity : decl.parameters.length - 1 + b.max;
+        restMinElem = b.min;
+        maxArgs = b.unbounded ? Infinity : sig.parameters.length - 1 + b.max;
       } else if (
         restTupleType.isUnion &&
         restTupleType.isUnion() &&
@@ -212,56 +212,21 @@ export function getSigArity(checker, sig) {
         restTupleType.types.every(m => checker.isTupleType(m))
       ) {
         const bounds = restTupleType.types.map(computeSingleTupleBounds);
-        isUnboundedRest = bounds.some(b => b.unbounded);
+        const isUnbounded = bounds.some(b => b.unbounded);
         const maxElem = Math.max(...bounds.map(b => b.max));
-        const minElem = Math.min(...bounds.map(b => b.min));
-        maxArgs = isUnboundedRest
-          ? Infinity
-          : decl.parameters.length - 1 + maxElem;
-        // Also record accurate minimum arity across union-of-tuples rest params (`...args: [a, b?] | [opts?]`).
-        let fixedMin = 0;
-        let stoppedOptional = false;
-        for (let i = 0; i < decl.parameters.length - 1; i++) {
-          const pSym = sig.parameters[i];
-          const pDecl =
-            pSym &&
-            (pSym.valueDeclaration ||
-              (pSym.declarations && pSym.declarations[0]));
-          const isOpt =
-            Boolean(pSym && pSym.flags & ts.SymbolFlags.Optional) ||
-            Boolean(
-              pDecl &&
-              ts.isParameter(pDecl) &&
-              (pDecl.questionToken || pDecl.initializer),
-            );
-          if (isOpt) {
-            stoppedOptional = true;
-            break;
-          }
-          fixedMin++;
-        }
-        const tpDecls =
-          decl && decl.typeParameters ? [...decl.typeParameters] : [];
-        const maxTp = tpDecls.length;
-        const minTp = tpDecls.filter(tp => !tp.default).length;
-        return {
-          minArgs: stoppedOptional ? fixedMin : fixedMin + minElem,
-          maxArgs,
-          minTp,
-          maxTp,
-          tpDecls,
-        };
+        restMinElem = Math.min(...bounds.map(b => b.min));
+        maxArgs = isUnbounded ? Infinity : sig.parameters.length - 1 + maxElem;
       } else {
-        isUnboundedRest = true;
         maxArgs = Infinity;
       }
     }
   }
 
-  for (let i = 0; i < sig.parameters.length; i++) {
-    if (isUnboundedRest && i === sig.parameters.length - 1) {
-      break;
-    }
+  let stoppedOptional = false;
+  const fixedLimit = hasRestTail
+    ? sig.parameters.length - 1
+    : sig.parameters.length;
+  for (let i = 0; i < fixedLimit; i++) {
     const pSym = sig.parameters[i];
     const pDecl =
       pSym.valueDeclaration || (pSym.declarations && pSym.declarations[0]);
@@ -273,12 +238,19 @@ export function getSigArity(checker, sig) {
         (pDecl.questionToken || pDecl.initializer),
       );
     if (isOpt) {
+      stoppedOptional = true;
       break;
     }
     minArgs++;
   }
+  if (hasRestTail && !stoppedOptional && restMinElem > 0) {
+    minArgs += restMinElem;
+  }
 
-  const tpDecls = decl && decl.typeParameters ? [...decl.typeParameters] : [];
+  const tpDecls =
+    decl && !ts.isClassLike(decl) && decl.typeParameters
+      ? [...decl.typeParameters]
+      : [];
   const maxTp = tpDecls.length;
   const minTp = tpDecls.filter(tp => !tp.default).length;
   return {minArgs, maxArgs, minTp, maxTp, tpDecls};
@@ -623,6 +595,43 @@ export function buildGenericBridgeSource(pairsInfo, checker, dtsFiles) {
   return {bridgeCode: lines.join('\n') + '\n', taskMap};
 }
 
+function getTpDeclsKey(tpDecls, sf) {
+  return tpDecls
+    .map(
+      tp =>
+        `${tp.name.text}:${tp.constraint ? tp.constraint.getText(sf).replace(/\s+/g, ' ').trim() : ''}`,
+    )
+    .join('|');
+}
+
+function collectCompatibleGenericSigGroups(checker, bSigs, hSigs, bSf) {
+  if (bSigs.length === 0 || hSigs.length === 0) return [];
+  const bArities = bSigs.map(s => getSigArity(checker, s));
+  const hArities = hSigs.map(s => getSigArity(checker, s));
+  const byTpCount = new Map();
+  for (const bAr of bArities) {
+    if (bAr.maxTp > 0) {
+      const list = byTpCount.get(bAr.maxTp) || [];
+      list.push(bAr);
+      byTpCount.set(bAr.maxTp, list);
+    }
+  }
+  const groups = [];
+  for (const [tpCount, bGroup] of byTpCount.entries()) {
+    const firstKey = getTpDeclsKey(bGroup[0].tpDecls, bSf);
+    const sameConstraints = bGroup.every(
+      g => getTpDeclsKey(g.tpDecls, bSf) === firstKey,
+    );
+    const hasMatchingHead = hArities.some(
+      hAr => hAr.minTp <= tpCount && hAr.maxTp >= tpCount,
+    );
+    if (sameConstraints && hasMatchingHead) {
+      groups.push({tpCount, tpDecls: bGroup[0].tpDecls});
+    }
+  }
+  return groups;
+}
+
 function probeObjectGenericMethods(
   checker,
   bObjType,
@@ -654,20 +663,21 @@ function probeObjectGenericMethods(
     );
     const bSigs = checker.getSignaturesOfType(bMType, ts.SignatureKind.Call);
     const hSigs = checker.getSignaturesOfType(hMType, ts.SignatureKind.Call);
-    if (bSigs.length === 1 && hSigs.length === 1) {
-      const bAr = getSigArity(checker, bSigs[0]);
-      const hAr = getSigArity(checker, hSigs[0]);
-      if (bAr.maxTp > 0 && hAr.minTp <= bAr.maxTp && hAr.maxTp >= bAr.maxTp) {
-        genericItems.push({
-          kind: 'method',
-          exportName: expName,
-          methodName: mName,
-          isStatic,
-          ownerTpDecls,
-          tpDecls: bAr.tpDecls,
-          key: `${absBSf}::method::${ownerPrefix}::${mName}::0`,
-        });
-      }
+    for (const grp of collectCompatibleGenericSigGroups(
+      checker,
+      bSigs,
+      hSigs,
+      bSf,
+    )) {
+      genericItems.push({
+        kind: 'method',
+        exportName: expName,
+        methodName: mName,
+        isStatic,
+        ownerTpDecls,
+        tpDecls: grp.tpDecls,
+        key: `${absBSf}::method::${ownerPrefix}::${mName}::${grp.tpCount}`,
+      });
     }
   }
 }
@@ -732,6 +742,19 @@ export function collectGenericProbeItemsFromChecker(checker, bSf, hSf) {
           tpDecls: bTp.decls,
           key: `${absBSf}::type::${expName}`,
         });
+        if (
+          resolvedB.flags & ts.SymbolFlags.Class &&
+          resolvedH.flags & ts.SymbolFlags.Class &&
+          hasRuntimeValue(bSym, resolvedB) &&
+          hasRuntimeValue(hSym, resolvedH)
+        ) {
+          genericItems.push({
+            kind: 'valueFn',
+            exportName: expName,
+            tpDecls: bTp.decls,
+            key: `${absBSf}::ctor::${expName}::${bTp.max}`,
+          });
+        }
       }
 
       if (ownerArityCompatible && !(resolvedB.flags & ts.SymbolFlags.Enum)) {
@@ -774,21 +797,18 @@ export function collectGenericProbeItemsFromChecker(checker, bSf, hSf) {
           hValT,
           ts.SignatureKind.Call,
         );
-        if (bCallSigs.length === 1 && hCallSigs.length === 1) {
-          const bAr = getSigArity(checker, bCallSigs[0]);
-          const hAr = getSigArity(checker, hCallSigs[0]);
-          if (
-            bAr.maxTp > 0 &&
-            hAr.minTp <= bAr.maxTp &&
-            hAr.maxTp >= bAr.maxTp
-          ) {
-            genericItems.push({
-              kind: 'valueFn',
-              exportName: expName,
-              tpDecls: bAr.tpDecls,
-              key: `${absBSf}::fn::${expName}::0`,
-            });
-          }
+        for (const grp of collectCompatibleGenericSigGroups(
+          checker,
+          bCallSigs,
+          hCallSigs,
+          bSf,
+        )) {
+          genericItems.push({
+            kind: 'valueFn',
+            exportName: expName,
+            tpDecls: grp.tpDecls,
+            key: `${absBSf}::fn::${expName}::${grp.tpCount}`,
+          });
         }
       }
       // Static generic methods on classes + generic methods on exported constant objects / callable expandos

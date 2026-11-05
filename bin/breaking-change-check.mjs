@@ -282,13 +282,24 @@ export async function checkBreakingChanges({
       );
       continue;
     }
+    if (
+      typeof basePkgJson.name === 'string' &&
+      typeof headPkgJson.name === 'string' &&
+      basePkgJson.name !== headPkgJson.name
+    ) {
+      allErrors.push(
+        `[${relPkgDir}/package.json] Published package was renamed from '${basePkgJson.name}' to '${headPkgJson.name}'.`,
+      );
+    }
 
+    const basePkgRoot = path.join(pkgDir, '__base_pkg__');
     const baseTsParsed = parsePkgTsconfigAtRev(
       pkgDir,
       relPkgDir,
       absRepoRoot,
       baseRev,
       reader,
+      basePkgRoot,
     );
     const headTsParsed = parsePkgTsconfigAtRev(
       pkgDir,
@@ -296,6 +307,7 @@ export async function checkBreakingChanges({
       absRepoRoot,
       headRev,
       reader,
+      pkgDir,
     );
 
     const baseEntryInfo = resolvePackageEntrypoints(
@@ -347,15 +359,50 @@ export async function checkBreakingChanges({
           }
         }
       }
-    } else if (baseEntryInfo.subdirSubpaths.size > 0) {
-      for (const subKey of baseEntryInfo.subdirSubpaths.keys()) {
-        const retained = headPkgJson.exports
-          ? headEntryInfo.subpaths.has(subKey)
-          : headEntryInfo.subdirSubpaths.has(subKey);
-        if (!retained) {
+    } else {
+      if (headPkgJson.exports) {
+        const hRootLane = headEntryInfo.subpaths.get('.');
+        if (!hRootLane) {
           allErrors.push(
-            `[${relPkgDir}/package.json] Public subdirectory entrypoint '${subKey}' was removed.`,
+            `[${relPkgDir}/package.json] Public subpath export '.' was removed from package.json#exports.`,
           );
+        } else {
+          if (!hRootLane.supportsRequire) {
+            allErrors.push(
+              `[${relPkgDir}/package.json] Public subpath export '.' removed CommonJS ('require') support from package.json#exports.`,
+            );
+          }
+          if (!hRootLane.supportsImport) {
+            allErrors.push(
+              `[${relPkgDir}/package.json] Public subpath export '.' removed ESM ('import') support from package.json#exports.`,
+            );
+          }
+        }
+      }
+      if (baseEntryInfo.subdirSubpaths.size > 0) {
+        for (const subKey of baseEntryInfo.subdirSubpaths.keys()) {
+          const retained = headPkgJson.exports
+            ? headEntryInfo.subpaths.has(subKey)
+            : headEntryInfo.subdirSubpaths.has(subKey);
+          if (!retained) {
+            allErrors.push(
+              `[${relPkgDir}/package.json] Public subdirectory entrypoint '${subKey}' was removed.`,
+            );
+          } else if (headPkgJson.exports) {
+            const hSubLane = headEntryInfo.subpaths.get(subKey);
+            if (hSubLane) {
+              if (!hSubLane.supportsRequire) {
+                allErrors.push(
+                  `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed CommonJS ('require') support from package.json#exports.`,
+                );
+              }
+              if (!hSubLane.supportsImport) {
+                allErrors.push(
+                  `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed ESM ('import') support from package.json#exports.`,
+                );
+              }
+            }
+          }
         }
       }
     }
@@ -364,7 +411,6 @@ export async function checkBreakingChanges({
       continue;
     }
 
-    const basePkgRoot = path.join(pkgDir, '__base_pkg__');
     const toBasePkgPath = absInPkg =>
       path.join(basePkgRoot, path.relative(pkgDir, absInPkg));
     const fromBasePkgPath = absInBase =>
@@ -397,7 +443,21 @@ export async function checkBreakingChanges({
 
     const resolveHostRealpath = p => {
       const resolved = path.resolve(p);
-      if (isBaseVirtual(resolved) || !defaultHost.realpath) return resolved;
+      if (isBaseVirtual(resolved)) {
+        const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+        if (isSegOrPrefix(relInBase, 'node_modules') && defaultHost.realpath) {
+          const realCandidate = fromBasePkgPath(resolved);
+          try {
+            return fs.existsSync(realCandidate)
+              ? defaultHost.realpath(realCandidate)
+              : realCandidate;
+          } catch {
+            return realCandidate;
+          }
+        }
+        return resolved;
+      }
+      if (!defaultHost.realpath) return resolved;
       if (
         headRev !== null &&
         isInsideDir(resolved, pkgDir) &&
@@ -422,7 +482,7 @@ export async function checkBreakingChanges({
         if (isBaseVirtual(resolved)) {
           const relInBase = toPosix(path.relative(basePkgRoot, resolved));
           if (isSegOrPrefix(relInBase, 'node_modules')) {
-            return false;
+            return defaultHost.directoryExists(path.join(pkgDir, relInBase));
           }
           const repoRel = relInBase
             ? toPosix(path.posix.join(relPkgDir, relInBase))
@@ -445,7 +505,7 @@ export async function checkBreakingChanges({
         if (isBaseVirtual(resolved)) {
           const relInBase = toPosix(path.relative(basePkgRoot, resolved));
           if (isSegOrPrefix(relInBase, 'node_modules')) {
-            return false;
+            return defaultHost.fileExists(path.join(pkgDir, relInBase));
           }
           const repoRel = toPosix(path.posix.join(relPkgDir, relInBase));
           return baseTree.files.has(repoRel);
@@ -484,11 +544,23 @@ export async function checkBreakingChanges({
         redirectedReference,
         options,
       ) {
+        const isBaseContain = isBaseVirtual(path.resolve(containingFile));
+        const effectiveOptions = isBaseContain
+          ? {
+              ...options,
+              module: baseCompilerOptions.module,
+              moduleResolution: baseCompilerOptions.moduleResolution,
+              baseUrl: baseCompilerOptions.baseUrl,
+              paths: baseCompilerOptions.paths,
+              pathsBasePath: baseCompilerOptions.pathsBasePath,
+              rootDirs: baseCompilerOptions.rootDirs,
+            }
+          : options;
         return moduleLiterals.map(lit => {
           const res = ts.resolveModuleName(
             lit.text,
             containingFile,
-            options,
+            effectiveOptions,
             this,
             undefined,
             redirectedReference,
@@ -517,7 +589,13 @@ export async function checkBreakingChanges({
         });
       },
       getSourceFile(fileName, languageVersion, onError, shouldCreate) {
-        const resolved = path.resolve(fileName);
+        let resolved = path.resolve(fileName);
+        if (isBaseVirtual(resolved)) {
+          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+          if (isSegOrPrefix(relInBase, 'node_modules')) {
+            resolved = fromBasePkgPath(resolved);
+          }
+        }
         if (pkgSfCache.has(resolved)) return pkgSfCache.get(resolved);
         if (isInPkgSource(resolved)) {
           const text = this.readFile(resolved);
@@ -536,7 +614,7 @@ export async function checkBreakingChanges({
           return sharedExternalSfCache.get(resolved);
         }
         const sf = defaultHost.getSourceFile(
-          fileName,
+          resolved,
           languageVersion,
           onError,
           shouldCreate,
@@ -570,6 +648,36 @@ export async function checkBreakingChanges({
       }
     };
 
+    const resolveLaneSources = (lane, parsed, existsFn) => {
+      if (!lane) return [];
+      const files = [];
+      if (lane.supportsImport) {
+        files.push(
+          resolveFirstSource(
+            [...lane.importTargets, ...lane.defaultTargets],
+            parsed,
+            existsFn,
+          ),
+        );
+      }
+      if (lane.supportsRequire) {
+        files.push(
+          resolveFirstSource(
+            [...lane.requireTargets, ...lane.defaultTargets],
+            parsed,
+            existsFn,
+          ),
+        );
+      }
+      if (files.filter(Boolean).length === 0) {
+        files.push(
+          resolveFirstSource(lane.defaultTargets, parsed, existsFn),
+          resolveFirstSource(lane.allTargets, parsed, existsFn),
+        );
+      }
+      return [...new Set(files.filter(Boolean))];
+    };
+
     const entryPairs = [];
     const baseSubpathEntries = [...baseEntryInfo.subpaths.entries()];
     if (basePkgJson.exports && baseSubpathEntries.length > 0) {
@@ -577,32 +685,26 @@ export async function checkBreakingChanges({
         // `exports` was removed completely: compare base `.` lanes against head fallback entrypoint!
         const rootLane = baseEntryInfo.subpaths.get('.');
         if (rootLane) {
-          const bRootFiles = [
-            resolveFirstSource(
-              rootLane.importTargets,
-              baseTsParsed,
-              baseExistsAbs,
-            ),
-            resolveFirstSource(
-              rootLane.requireTargets,
-              baseTsParsed,
-              baseExistsAbs,
-            ),
-            resolveFirstSource(
-              rootLane.defaultTargets,
-              baseTsParsed,
-              baseExistsAbs,
-            ),
-            resolveFirstSource(
-              rootLane.allTargets,
-              baseTsParsed,
-              baseExistsAbs,
-            ),
-          ].filter(Boolean);
-          const uniqueB = [...new Set(bRootFiles)];
+          const uniqueB = resolveLaneSources(
+            rootLane,
+            baseTsParsed,
+            baseExistsAbs,
+          );
           for (const bFile of uniqueB) {
-            const hFile = headEntryInfo.entryFiles[0] || bFile;
+            const hFile = headEntryInfo.primaryFile || null;
             addEntryPair(entryPairs, bFile, hFile);
+          }
+        }
+        for (const [subpath, bLane] of baseSubpathEntries) {
+          if (subpath !== '.' && headEntryInfo.subdirSubpaths.has(subpath)) {
+            const hSubFile = headEntryInfo.subdirSourceMap.get(subpath) || null;
+            for (const bFile of resolveLaneSources(
+              bLane,
+              baseTsParsed,
+              baseExistsAbs,
+            )) {
+              addEntryPair(entryPairs, bFile, hSubFile);
+            }
           }
         }
       } else {
@@ -611,43 +713,17 @@ export async function checkBreakingChanges({
           if (!hLane) continue;
 
           const laneCandidates = [];
-          if (
-            bLane.importTargets.length > 0 ||
-            hLane.importTargets.length > 0
-          ) {
-            if (bLane.supportsImport && hLane.supportsImport) {
-              laneCandidates.push([
-                [
-                  ...bLane.importTargets,
-                  ...bLane.defaultTargets,
-                  ...bLane.allTargets,
-                ],
-                [
-                  ...hLane.importTargets,
-                  ...hLane.defaultTargets,
-                  ...hLane.allTargets,
-                ],
-              ]);
-            }
+          if (bLane.supportsImport && hLane.supportsImport) {
+            laneCandidates.push([
+              [...bLane.importTargets, ...bLane.defaultTargets],
+              [...hLane.importTargets, ...hLane.defaultTargets],
+            ]);
           }
-          if (
-            bLane.requireTargets.length > 0 ||
-            hLane.requireTargets.length > 0
-          ) {
-            if (bLane.supportsRequire && hLane.supportsRequire) {
-              laneCandidates.push([
-                [
-                  ...bLane.requireTargets,
-                  ...bLane.defaultTargets,
-                  ...bLane.allTargets,
-                ],
-                [
-                  ...hLane.requireTargets,
-                  ...hLane.defaultTargets,
-                  ...hLane.allTargets,
-                ],
-              ]);
-            }
+          if (bLane.supportsRequire && hLane.supportsRequire) {
+            laneCandidates.push([
+              [...bLane.requireTargets, ...bLane.defaultTargets],
+              [...hLane.requireTargets, ...hLane.defaultTargets],
+            ]);
           }
           if (laneCandidates.length === 0) {
             laneCandidates.push([bLane.allTargets, hLane.allTargets]);
@@ -668,12 +744,64 @@ export async function checkBreakingChanges({
           }
         }
       }
+    } else if (headPkgJson.exports) {
+      // Legacy `"main"`/`"types"` migrated to `package.json#exports`
+      if (baseEntryInfo.primaryFile) {
+        const hRootLane = headEntryInfo.subpaths.get('.');
+        if (hRootLane) {
+          const hFiles = resolveLaneSources(
+            hRootLane,
+            headTsParsed,
+            headExistsAbs,
+          );
+          if (hFiles.length === 0) {
+            addEntryPair(entryPairs, baseEntryInfo.primaryFile, null);
+          } else {
+            for (const hFile of hFiles) {
+              addEntryPair(entryPairs, baseEntryInfo.primaryFile, hFile);
+            }
+          }
+        }
+      }
+      for (const [
+        subKey,
+        bSubFile,
+      ] of baseEntryInfo.subdirSourceMap.entries()) {
+        const hSubLane = headEntryInfo.subpaths.get(subKey);
+        if (hSubLane) {
+          const hFiles = resolveLaneSources(
+            hSubLane,
+            headTsParsed,
+            headExistsAbs,
+          );
+          if (hFiles.length === 0) {
+            addEntryPair(entryPairs, bSubFile, null);
+          } else {
+            for (const hFile of hFiles) {
+              addEntryPair(entryPairs, bSubFile, hFile);
+            }
+          }
+        }
+      }
     } else {
-      for (const bFile of baseEntryInfo.entryFiles) {
-        const hFile = headExistsAbs(bFile)
-          ? bFile
-          : headEntryInfo.entryFiles[0] || bFile;
-        addEntryPair(entryPairs, bFile, hFile);
+      if (baseEntryInfo.primaryFile) {
+        addEntryPair(
+          entryPairs,
+          baseEntryInfo.primaryFile,
+          headEntryInfo.primaryFile,
+        );
+      }
+      for (const [
+        subKey,
+        bSubFile,
+      ] of baseEntryInfo.subdirSourceMap.entries()) {
+        if (headEntryInfo.subdirSubpaths.has(subKey)) {
+          addEntryPair(
+            entryPairs,
+            bSubFile,
+            headEntryInfo.subdirSourceMap.get(subKey) || null,
+          );
+        }
       }
     }
 
@@ -702,6 +830,7 @@ export async function checkBreakingChanges({
         baseCompilerOptions,
         isBaseFilePredicate: isBaseVirtual,
         entrypointDtsTargets,
+        packageName: headPkgJson.name || basePkgJson.name || null,
       },
     );
 
@@ -723,24 +852,19 @@ export async function checkBreakingChanges({
         const resolved = path.resolve(f);
         if (isBaseVirtual(resolved)) {
           const rel = toPosix(path.relative(basePkgRoot, resolved));
-          if (
-            rel.endsWith('package.json') ||
-            isSegOrPrefix(rel, 'node_modules')
-          ) {
+          if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
             return customHost.fileExists(resolved);
           }
           return false;
         }
-        if (
-          headTree !== null &&
-          isInsideDir(resolved, pkgDir) &&
-          toPosix(path.relative(pkgDir, resolved)).endsWith('package.json') &&
-          !isSegOrPrefix(
-            toPosix(path.relative(pkgDir, resolved)),
-            'node_modules',
-          )
-        ) {
-          return customHost.fileExists(resolved);
+        if (isInsideDir(resolved, pkgDir)) {
+          const relInPkg = toPosix(path.relative(pkgDir, resolved));
+          if (!isExternalOrBuildRel(relInPkg)) {
+            if (relInPkg.endsWith('.json')) {
+              return customHost.fileExists(resolved);
+            }
+            return false;
+          }
         }
         return defaultHost.fileExists(resolved);
       },
@@ -748,24 +872,19 @@ export async function checkBreakingChanges({
         const resolved = path.resolve(f);
         if (isBaseVirtual(resolved)) {
           const rel = toPosix(path.relative(basePkgRoot, resolved));
-          if (
-            rel.endsWith('package.json') ||
-            isSegOrPrefix(rel, 'node_modules')
-          ) {
+          if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
             return customHost.readFile(resolved);
           }
           return undefined;
         }
-        if (
-          headRev !== null &&
-          isInsideDir(resolved, pkgDir) &&
-          toPosix(path.relative(pkgDir, resolved)).endsWith('package.json') &&
-          !isSegOrPrefix(
-            toPosix(path.relative(pkgDir, resolved)),
-            'node_modules',
-          )
-        ) {
-          return customHost.readFile(resolved);
+        if (isInsideDir(resolved, pkgDir)) {
+          const relInPkg = toPosix(path.relative(pkgDir, resolved));
+          if (!isExternalOrBuildRel(relInPkg)) {
+            if (relInPkg.endsWith('.json')) {
+              return customHost.readFile(resolved);
+            }
+            return undefined;
+          }
         }
         return defaultHost.readFile(resolved);
       },
@@ -780,6 +899,11 @@ export async function checkBreakingChanges({
       },
       getSourceFile(fileName, lv, onError, shouldCreate) {
         const resolved = path.resolve(fileName);
+        if (isInPkgSource(resolved) && resolved.endsWith('.json')) {
+          const text = this.readFile(resolved);
+          if (text === undefined) return undefined;
+          return ts.createSourceFile(resolved, text, lv, true);
+        }
         const isTsStdLib = resolved.includes(
           `${path.sep}node_modules${path.sep}typescript${path.sep}lib${path.sep}`,
         );
@@ -838,8 +962,11 @@ export function escapeMarkdownSummaryText(str) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+    .replace(/([`*_[\]])/g, '\\$1')
     .replace(/\r?\n/g, ' ');
 }
+
+const MAX_SUMMARY_ITEMS_OVERFLOW = 200;
 
 async function main() {
   try {
@@ -888,6 +1015,7 @@ async function main() {
     if (process.env.GITHUB_STEP_SUMMARY) {
       const shown = errors.slice(0, MAX_SUMMARY_ITEMS_INLINE);
       const overflow = errors.slice(MAX_SUMMARY_ITEMS_INLINE);
+      const cappedOverflow = overflow.slice(0, MAX_SUMMARY_ITEMS_OVERFLOW);
       const summaryLines = [
         '### ⚠️ Breaking Changes Detected in Public TypeScript Interfaces',
         '',
@@ -895,21 +1023,29 @@ async function main() {
         '',
         ...shown.map(err => `- ${escapeMarkdownSummaryText(err)}`),
       ];
-      if (overflow.length > 0) {
+      if (cappedOverflow.length > 0) {
         summaryLines.push(
           '',
           `<details><summary>Show ${overflow.length} remaining breaking change(s)</summary>`,
           '',
-          ...overflow.map(err => `- ${escapeMarkdownSummaryText(err)}`),
-          '',
-          '</details>',
+          ...cappedOverflow.map(err => `- ${escapeMarkdownSummaryText(err)}`),
         );
+        if (overflow.length > MAX_SUMMARY_ITEMS_OVERFLOW) {
+          summaryLines.push(
+            `- ...and ${overflow.length - MAX_SUMMARY_ITEMS_OVERFLOW} more breaking change(s) (see full job logs).`,
+          );
+        }
+        summaryLines.push('', '</details>');
       }
       summaryLines.push('');
-      fs.appendFileSync(
-        process.env.GITHUB_STEP_SUMMARY,
-        summaryLines.join('\n'),
-      );
+      try {
+        fs.appendFileSync(
+          process.env.GITHUB_STEP_SUMMARY,
+          summaryLines.join('\n'),
+        );
+      } catch {
+        // Ignore step summary size/write limits so exit code is preserved.
+      }
     }
     process.exitCode = 1;
   } catch (err) {

@@ -161,6 +161,7 @@ export function stripInternalFromDts(sf) {
     return sf.text;
   }
   let ambientDepth = 0;
+  let strippedTopLevelExport = false;
   const transformer = context => {
     const visit = node => {
       if (ts.isConstructorDeclaration(node) && hasInternalTag(node, sf)) {
@@ -189,12 +190,14 @@ export function stripInternalFromDts(sf) {
         ts.isNamedExports(node.exportClause)
       ) {
         if (hasInternalTag(node, sf)) {
+          if (ambientDepth === 0) strippedTopLevelExport = true;
           return undefined;
         }
         const origSpecs = node.exportClause.elements;
         const keptSpecs = origSpecs.filter(sp => !hasInternalTag(sp, sf));
         if (keptSpecs.length !== origSpecs.length) {
           if (keptSpecs.length === 0) {
+            if (ambientDepth === 0) strippedTopLevelExport = true;
             return node.moduleSpecifier
               ? undefined
               : ts.factory.createExportDeclaration(
@@ -215,6 +218,10 @@ export function stripInternalFromDts(sf) {
           );
         }
       }
+      if (ts.isExportAssignment(node) && hasInternalTag(node, sf)) {
+        if (ambientDepth === 0) strippedTopLevelExport = true;
+        return undefined;
+      }
       if (
         (ts.isTypeAliasDeclaration(node) ||
           ts.isInterfaceDeclaration(node) ||
@@ -223,7 +230,10 @@ export function stripInternalFromDts(sf) {
         hasInternalTag(node, sf)
       ) {
         const flags = ts.getCombinedModifierFlags(node);
-        if (flags & ts.ModifierFlags.Export) {
+        if (flags & ts.ModifierFlags.Export || node.name) {
+          if (ambientDepth === 0) {
+            strippedTopLevelExport = true;
+          }
           const visited = ts.visitEachChild(node, visit, context);
           return stripExportModifierKeepLocal(visited, ambientDepth > 0);
         }
@@ -243,6 +253,12 @@ export function stripInternalFromDts(sf) {
           ts.isCallSignatureDeclaration(node)) &&
         hasInternalTag(node, sf)
       ) {
+        if (
+          ambientDepth === 0 &&
+          ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export
+        ) {
+          strippedTopLevelExport = true;
+        }
         return undefined;
       }
       if (ts.isModuleDeclaration(node)) {
@@ -256,9 +272,21 @@ export function stripInternalFromDts(sf) {
     return root => ts.visitNode(root, visit);
   };
   const res = ts.transform(sf, [transformer]);
+  const transformedSf = res.transformed[0];
+  const hasExplicitExportListOrAssign = transformedSf.statements.some(
+    st =>
+      ts.isExportAssignment(st) ||
+      (ts.isExportDeclaration(st) &&
+        !st.moduleSpecifier &&
+        st.exportClause &&
+        ts.isNamedExports(st.exportClause)),
+  );
   const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed});
-  const printed = printer.printFile(res.transformed[0]);
+  let printed = printer.printFile(transformedSf);
   res.dispose();
+  if (strippedTopLevelExport && !hasExplicitExportListOrAssign) {
+    printed += '\nexport {};\n';
+  }
   return printed;
 }
 
@@ -391,7 +419,7 @@ function addModifierToAmbientStmt(st, modKind) {
  * into a self-contained external module so `base` and `head` do not globally merge
  * ambient namespaces and `checker.getSymbolAtLocation(sf)` resolves all public exports.
  */
-export function unwrapAmbientModuleDts(sf) {
+export function unwrapAmbientModuleDts(sf, packageName = null) {
   const hasTopLevelExport = sf.statements.some(
     st =>
       ts.isExportAssignment(st) ||
@@ -413,10 +441,20 @@ export function unwrapAmbientModuleDts(sf) {
     return {text: sf.text, unwrapped: false, depSpecifiers: []};
   }
 
-  const targetMod = ambientModules[ambientModules.length - 1];
+  const targetMod =
+    (packageName &&
+      ambientModules.find(
+        m =>
+          m.name.text === packageName ||
+          m.name.text.startsWith(`${packageName}/`),
+      )) ||
+    ambientModules[ambientModules.length - 1];
   const innerStmts = targetMod.body.statements;
   const hasExplicitExport = innerStmts.some(
-    s => ts.isExportAssignment(s) || ts.isExportDeclaration(s),
+    s =>
+      ts.isExportAssignment(s) ||
+      ts.isExportDeclaration(s) ||
+      Boolean(ts.getCombinedModifierFlags(s) & ts.ModifierFlags.Export),
   );
 
   const liftedStmts = [];
@@ -895,7 +933,10 @@ export function collectClassAccessibility(sf) {
   if (!sf) return map;
   const scopeStack = [];
   const visit = node => {
-    if (ts.isModuleDeclaration(node) && ts.isIdentifier(node.name)) {
+    if (
+      ts.isModuleDeclaration(node) &&
+      (ts.isIdentifier(node.name) || ts.isStringLiteral(node.name))
+    ) {
       scopeStack.push(node.name.text);
       ts.forEachChild(node, visit);
       scopeStack.pop();
@@ -937,7 +978,10 @@ export function getQualifiedDeclName(decl) {
   }
   let cur = decl.parent;
   while (cur && !ts.isSourceFile(cur)) {
-    if (ts.isModuleDeclaration(cur) && ts.isIdentifier(cur.name)) {
+    if (
+      ts.isModuleDeclaration(cur) &&
+      (ts.isIdentifier(cur.name) || ts.isStringLiteral(cur.name))
+    ) {
       parts.unshift(cur.name.text);
     }
     cur = cur.parent;
@@ -1023,6 +1067,9 @@ const TSCONFIG_DECL_OPTION_KEYS = [
   'noImplicitAny',
   'noImplicitThis',
   'useUnknownInCatchVariables',
+  'useDefineForClassFields',
+  'isolatedDeclarations',
+  'resolveJsonModule',
   'module',
   'moduleResolution',
   'esModuleInterop',
@@ -1030,10 +1077,33 @@ const TSCONFIG_DECL_OPTION_KEYS = [
   'target',
 ];
 
+const TSCONFIG_DECL_COMPLEX_OPTION_KEYS = [
+  'types',
+  'typeRoots',
+  'lib',
+  'paths',
+];
+
 function doDeclCompilerOptionsDiffer(optsA, optsB) {
   if (!optsA || !optsB) return false;
   for (const k of TSCONFIG_DECL_OPTION_KEYS) {
     if (optsA[k] !== optsB[k]) return true;
+  }
+  for (const k of TSCONFIG_DECL_COMPLEX_OPTION_KEYS) {
+    if (JSON.stringify(optsA[k] ?? null) !== JSON.stringify(optsB[k] ?? null)) {
+      return true;
+    }
+  }
+  const normBaseUrl = u =>
+    typeof u === 'string' ? u.replace(`${path.sep}__base_pkg__`, '') : '';
+  if (normBaseUrl(optsA.baseUrl) !== normBaseUrl(optsB.baseUrl)) return true;
+  const normRootDirs = dirs =>
+    Array.isArray(dirs) ? dirs.map(d => normBaseUrl(d)) : null;
+  if (
+    JSON.stringify(normRootDirs(optsA.rootDirs)) !==
+    JSON.stringify(normRootDirs(optsB.rootDirs))
+  ) {
+    return true;
   }
   return false;
 }
@@ -1057,6 +1127,9 @@ function normalizeSinglePassFiles(
     let rawDtsText;
 
     if (sf.isDeclarationFile) {
+      // Keep original text in `rawDtsTextByPath` before `stripInternalFromDts` so `unwrapAmbientModuleDts`
+      // sees original `export` modifiers inside `declare module '...'` blocks before stripping `@internal`.
+      rawDtsTextByPath.set(dtsPath, sf.text);
       rawDtsText = stripInternalFromDts(sf);
     } else {
       let emittedText;
@@ -1125,7 +1198,9 @@ function normalizeSinglePassFiles(
       }
     }
 
-    rawDtsTextByPath.set(dtsPath, rawDtsText);
+    if (!rawDtsTextByPath.has(dtsPath)) {
+      rawDtsTextByPath.set(dtsPath, rawDtsText);
+    }
     const rawDtsSf = ts.createSourceFile(
       dtsPath,
       rawDtsText,
@@ -1149,6 +1224,7 @@ export function emitToNormalizedDtsMap(
     baseCompilerOptions = null,
     isBaseFilePredicate = null,
     entrypointDtsTargets = null,
+    packageName = null,
   } = extraOptions;
 
   const dtsFiles = new Map();
@@ -1241,14 +1317,27 @@ export function emitToNormalizedDtsMap(
       ts.ScriptTarget.ES2022,
       true,
     );
-    const {text, unwrapped, depSpecifiers} = unwrapAmbientModuleDts(sf);
+    const {text, unwrapped, depSpecifiers} = unwrapAmbientModuleDts(
+      sf,
+      packageName,
+    );
     if (!unwrapped) continue;
-    const unwrappedSf = ts.createSourceFile(
+    const unwrappedRawSf = ts.createSourceFile(
       dtsPath,
       text,
       ts.ScriptTarget.ES2022,
       true,
     );
+    const strippedInternalText = stripInternalFromDts(unwrappedRawSf);
+    const unwrappedSf =
+      strippedInternalText === text
+        ? unwrappedRawSf
+        : ts.createSourceFile(
+            dtsPath,
+            strippedInternalText,
+            ts.ScriptTarget.ES2022,
+            true,
+          );
     rawMetaByFile.set(dtsPath, collectClassAccessibility(unwrappedSf));
     const stripped = stripPrivateMembersFromSourceFile(unwrappedSf);
     dtsFiles.set(dtsPath, stripped.text);

@@ -88,6 +88,13 @@ function formatTypePairDiff(checker, baseType, headType) {
 }
 
 function isSymbolReadonly(sym) {
+  if (!sym) return false;
+  if (
+    ((sym.checkFlags || (sym.links && sym.links.checkFlags) || 0) & 8) !==
+    0
+  ) {
+    return true; // ts.CheckFlags.Readonly
+  }
   const decls = sym.declarations;
   if (!decls || decls.length === 0) return false;
   let sawGetter = false;
@@ -95,6 +102,9 @@ function isSymbolReadonly(sym) {
   let sawProp = false;
   let allPropsReadonly = true;
   for (const d of decls) {
+    if (ts.isMappedTypeNode(d) && d.readonlyToken) {
+      return d.readonlyToken.kind !== ts.SyntaxKind.MinusToken;
+    }
     if (ts.isGetAccessorDeclaration(d)) {
       sawGetter = true;
     } else if (ts.isSetAccessorDeclaration(d)) {
@@ -122,6 +132,30 @@ function isSymbolReadonly(sym) {
   if (sawProp) return allPropsReadonly;
   if (sawGetter && !sawSetter) return true;
   return false;
+}
+
+function isSymbolWriteonly(sym) {
+  const decls = sym && sym.declarations;
+  if (!decls || decls.length === 0) return false;
+  let sawGetter = false;
+  let sawSetter = false;
+  let sawProp = false;
+  for (const d of decls) {
+    if (ts.isGetAccessorDeclaration(d)) {
+      const flags = ts.getCombinedModifierFlags(d);
+      if (!(flags & ts.ModifierFlags.Private)) sawGetter = true;
+    } else if (ts.isSetAccessorDeclaration(d)) {
+      const flags = ts.getCombinedModifierFlags(d);
+      if (!(flags & ts.ModifierFlags.Private)) sawSetter = true;
+    } else if (
+      ts.isPropertyDeclaration(d) ||
+      ts.isPropertySignature(d) ||
+      ts.isParameter(d)
+    ) {
+      sawProp = true;
+    }
+  }
+  return sawSetter && !sawGetter && !sawProp;
 }
 
 function getSymbolWriteType(checker, propSym, sf, fallbackReadType) {
@@ -340,20 +374,36 @@ function hasUnsafeAnyAssignment(
     return false;
   }
 
-  // Plain object literal / mapped types (e.g. `Record<string, any>` or `{ data: any }` -> `{ data: User }`)
+  // Plain object literal / mapped / generic reference / interface types (e.g. `GaxiosResponse<any>` or `{ data: any }` -> `{ data: User }`)
   if (
-    depth <= 2 &&
+    depth <= 5 &&
     sCallSigs.length === 0 &&
     checker.getSignaturesOfType(source, ts.SignatureKind.Construct).length === 0
   ) {
-    const isAnonOrMapped =
+    const hasRefTypeArgs =
       Boolean(
-        source.objectFlags & (ts.ObjectFlags.Anonymous | ts.ObjectFlags.Mapped),
+        source.objectFlags & ts.ObjectFlags.Reference &&
+        (checker.getTypeArguments(source) || []).length > 0,
       ) ||
       Boolean(
-        target.objectFlags & (ts.ObjectFlags.Anonymous | ts.ObjectFlags.Mapped),
+        target.objectFlags & ts.ObjectFlags.Reference &&
+        (checker.getTypeArguments(target) || []).length > 0,
       );
-    if (isAnonOrMapped) {
+    const shouldCheckProps =
+      hasRefTypeArgs ||
+      Boolean(
+        source.objectFlags &
+        (ts.ObjectFlags.Anonymous |
+          ts.ObjectFlags.Mapped |
+          ts.ObjectFlags.Interface),
+      ) ||
+      Boolean(
+        target.objectFlags &
+        (ts.ObjectFlags.Anonymous |
+          ts.ObjectFlags.Mapped |
+          ts.ObjectFlags.Interface),
+      );
+    if (shouldCheckProps) {
       const tProps = checker.getPropertiesOfType(target);
       if (tProps.length > 0 && tProps.length <= 40) {
         for (const tProp of tProps) {
@@ -399,32 +449,57 @@ function computeGenericDeclarationParamVariances(checker, rootExports) {
   const genericDecls = new Map();
   const seenSyms = new Set();
 
-  const collectFromExports = exportsList => {
-    for (const expSym of exportsList) {
-      const resolved = resolveAliased(checker, expSym);
-      if (seenSyms.has(resolved)) continue;
-      seenSyms.add(resolved);
-      const decls = resolved.declarations || [];
-      const tpDecls = decls.find(
-        d =>
-          (ts.isTypeAliasDeclaration(d) ||
-            ts.isInterfaceDeclaration(d) ||
-            ts.isClassDeclaration(d)) &&
-          d.typeParameters &&
-          d.typeParameters.length > 0,
-      );
-      if (tpDecls) {
-        genericDecls.set(resolved, {
-          tpNames: tpDecls.typeParameters.map(tp => tp.name.text),
-          decls,
-        });
-      }
-      if (resolved.flags & ts.SymbolFlags.Module) {
-        collectFromExports(checker.getExportsOfModule(resolved) || []);
+  const registerCandidateSym = rawSym => {
+    if (!rawSym) return;
+    const resolved = resolveAliased(checker, rawSym);
+    if (!resolved || seenSyms.has(resolved)) return;
+    seenSyms.add(resolved);
+    const decls = resolved.declarations || [];
+    const tpDecls = decls.find(
+      d =>
+        (ts.isTypeAliasDeclaration(d) ||
+          ts.isInterfaceDeclaration(d) ||
+          ts.isClassDeclaration(d)) &&
+        d.typeParameters &&
+        d.typeParameters.length > 0,
+    );
+    if (tpDecls) {
+      genericDecls.set(resolved, {
+        tpNames: tpDecls.typeParameters.map(tp => tp.name.text),
+        decls,
+      });
+    }
+    if (resolved.flags & ts.SymbolFlags.Module) {
+      for (const s of checker.getExportsOfModule(resolved) || []) {
+        registerCandidateSym(s);
       }
     }
+    const scanTypeRefs = node => {
+      if (!node) return;
+      if (ts.isTypeReferenceNode(node)) {
+        const idNode = ts.isIdentifier(node.typeName)
+          ? node.typeName
+          : node.typeName.right;
+        const refSym = checker.getSymbolAtLocation(idNode);
+        if (refSym) registerCandidateSym(refSym);
+      } else if (ts.isExpressionWithTypeArguments(node)) {
+        const expr = node.expression;
+        const idNode = ts.isIdentifier(expr)
+          ? expr
+          : ts.isPropertyAccessExpression(expr)
+            ? expr.name
+            : null;
+        const refSym = idNode && checker.getSymbolAtLocation(idNode);
+        if (refSym) registerCandidateSym(refSym);
+      }
+      ts.forEachChild(node, scanTypeRefs);
+    };
+    for (const d of decls) scanTypeRefs(d);
   };
-  collectFromExports(rootExports);
+
+  for (const expSym of rootExports) {
+    registerCandidateSym(expSym);
+  }
 
   const varianceBySym = new Map();
   for (const [sym, info] of genericDecls.entries()) {
@@ -434,7 +509,7 @@ function computeGenericDeclarationParamVariances(checker, rootExports) {
     );
   }
 
-  for (let pass = 0; pass < 4; pass++) {
+  for (let pass = 0; pass < 8; pass++) {
     let changed = false;
     for (const [sym, info] of genericDecls.entries()) {
       const slots = varianceBySym.get(sym);
@@ -488,10 +563,46 @@ function computeGenericDeclarationParamVariances(checker, rootExports) {
           }
           return;
         }
+        if (ts.isExpressionWithTypeArguments(node)) {
+          if (node.typeArguments && node.typeArguments.length > 0) {
+            const expr = node.expression;
+            const refId = ts.isIdentifier(expr)
+              ? expr
+              : ts.isPropertyAccessExpression(expr)
+                ? expr.name
+                : null;
+            const refSym = refId && checker.getSymbolAtLocation(refId);
+            const resolvedRef = refSym
+              ? resolveAliased(checker, refSym)
+              : undefined;
+            const refVar = resolvedRef && varianceBySym.get(resolvedRef);
+            for (let i = 0; i < node.typeArguments.length; i++) {
+              const arg = node.typeArguments[i];
+              const pv = refVar && refVar[i];
+              if (pv) {
+                if (pv.out) walkType(arg, pol);
+                if (pv.in) walkType(arg, flipPolarity(pol));
+                if (!pv.in && !pv.out) walkType(arg, pol);
+              } else {
+                walkType(arg, pol);
+              }
+            }
+          }
+          return;
+        }
         if (ts.isFunctionTypeNode(node) || ts.isConstructorTypeNode(node)) {
           const flipped = flipPolarity(pol);
           for (const p of node.parameters) walkType(p.type, flipped);
           walkType(node.type, pol);
+          return;
+        }
+        if (ts.isConditionalTypeNode(node)) {
+          walkType(node.checkType, 'in');
+          walkType(node.checkType, 'out');
+          walkType(node.extendsType, 'in');
+          walkType(node.extendsType, 'out');
+          walkType(node.trueType, pol);
+          walkType(node.falseType, pol);
           return;
         }
         ts.forEachChild(node, child => {
@@ -523,7 +634,12 @@ function computeGenericDeclarationParamVariances(checker, rootExports) {
           }
           for (const m of d.members) {
             const mFlags = ts.getCombinedModifierFlags(m);
-            if (mFlags & ts.ModifierFlags.Private) continue;
+            if (
+              mFlags & ts.ModifierFlags.Private ||
+              (m.name && ts.isPrivateIdentifier(m.name))
+            ) {
+              continue;
+            }
             walkType(m, 'out');
           }
         }
@@ -562,6 +678,36 @@ export function classifyModuleTypeVariance(
     return sym ? resolveAliased(checker, sym) : undefined;
   };
 
+  const pendingWorklist = [];
+  const queuedWorkKeys = new Set();
+  let nextSymId = 1;
+  const symIds = new Map();
+  const getSymId = sym => {
+    let id = symIds.get(sym);
+    if (!id) {
+      id = nextSymId++;
+      symIds.set(sym, id);
+    }
+    return id;
+  };
+  const enqueueSymPolarity = (resolved, polarity) => {
+    if (!resolved) return;
+    if (
+      !(
+        resolved.flags &
+        (ts.SymbolFlags.Interface | ts.SymbolFlags.TypeAlias)
+      ) ||
+      resolved.flags & ts.SymbolFlags.Class
+    ) {
+      return;
+    }
+    const key = `${polarity}::${getSymId(resolved)}`;
+    if (!queuedWorkKeys.has(key)) {
+      queuedWorkKeys.add(key);
+      pendingWorklist.push([resolved, polarity]);
+    }
+  };
+
   const recordResolved = (resolved, polarity) => {
     if (!resolved) return;
     const expName = targetSymToExportName.get(resolved);
@@ -569,6 +715,7 @@ export function classifyModuleTypeVariance(
       if (polarity === 'in') inInput.add(expName);
       else inOutput.add(expName);
     }
+    enqueueSymPolarity(resolved, polarity);
   };
 
   const visitTypeNode = (node, polarity) => {
@@ -599,6 +746,33 @@ export function classifyModuleTypeVariance(
       }
       return;
     }
+    if (ts.isExpressionWithTypeArguments(node)) {
+      const expr = node.expression;
+      const idNode = ts.isIdentifier(expr)
+        ? expr
+        : ts.isPropertyAccessExpression(expr)
+          ? expr.name
+          : null;
+      const sym = idNode ? checker.getSymbolAtLocation(idNode) : undefined;
+      const resolvedRef = sym ? resolveAliased(checker, sym) : undefined;
+      recordResolved(resolvedRef, polarity);
+      if (node.typeArguments && node.typeArguments.length > 0) {
+        const refVariances =
+          resolvedRef && genericParamVariances.get(resolvedRef);
+        for (let i = 0; i < node.typeArguments.length; i++) {
+          const arg = node.typeArguments[i];
+          const pv = refVariances && refVariances[i];
+          if (pv) {
+            if (pv.out) visitTypeNode(arg, polarity);
+            if (pv.in) visitTypeNode(arg, flipPolarity(polarity));
+            if (!pv.in && !pv.out) visitTypeNode(arg, polarity);
+          } else {
+            visitTypeNode(arg, polarity);
+          }
+        }
+      }
+      return;
+    }
     if (ts.isFunctionTypeNode(node) || ts.isConstructorTypeNode(node)) {
       const flipped = flipPolarity(polarity);
       for (const p of node.parameters) {
@@ -607,11 +781,25 @@ export function classifyModuleTypeVariance(
       visitTypeNode(node.type, polarity);
       return;
     }
+    if (ts.isConditionalTypeNode(node)) {
+      visitTypeNode(node.checkType, 'in');
+      visitTypeNode(node.checkType, 'out');
+      visitTypeNode(node.extendsType, 'in');
+      visitTypeNode(node.extendsType, 'out');
+      visitTypeNode(node.trueType, polarity);
+      visitTypeNode(node.falseType, polarity);
+      return;
+    }
     ts.forEachChild(node, child => {
       if (ts.isParameter(child)) {
         visitTypeNode(child.type, flipPolarity(polarity));
+      } else if (ts.isMethodSignature(child)) {
+        // Interface/type-literal MethodSignatures are always checked via `checkSignatureSetCompatibility`
+        // in 'normal' polarity (`checkObjectMembers` line 2802: `if (variance === 'input' && !isMethodDecl)`),
+        // so their parameters are always 'in' and return types are always 'out'!
+        for (const p of child.parameters) visitTypeNode(p.type, 'in');
+        visitTypeNode(child.type, 'out');
       } else if (
-        ts.isMethodSignature(child) ||
         ts.isCallSignatureDeclaration(child) ||
         ts.isConstructSignatureDeclaration(child)
       ) {
@@ -624,9 +812,68 @@ export function classifyModuleTypeVariance(
     });
   };
 
+  const seenClassDecls = new Set();
+  const visitClassDeclAndHeritage = clsStmt => {
+    if (!clsStmt || seenClassDecls.has(clsStmt)) return;
+    seenClassDecls.add(clsStmt);
+    if (clsStmt.heritageClauses) {
+      for (const hc of clsStmt.heritageClauses) {
+        visitTypeNode(hc, 'out');
+        for (const expr of hc.types) {
+          const baseId = ts.isPropertyAccessExpression(expr.expression)
+            ? expr.expression.name
+            : expr.expression;
+          const baseSym = checker.getSymbolAtLocation(baseId);
+          const resolvedBase = baseSym
+            ? resolveAliased(checker, baseSym)
+            : undefined;
+          if (resolvedBase) {
+            for (const bd of resolvedBase.declarations || []) {
+              if (ts.isClassDeclaration(bd)) {
+                visitClassDeclAndHeritage(bd);
+              }
+            }
+          }
+        }
+      }
+    }
+    for (const m of clsStmt.members) {
+      const mFlags = ts.getCombinedModifierFlags(m);
+      if (
+        mFlags & ts.ModifierFlags.Private ||
+        (m.name && ts.isPrivateIdentifier(m.name))
+      ) {
+        continue;
+      }
+      if (ts.isConstructorDeclaration(m)) {
+        for (const p of m.parameters) visitTypeNode(p.type, 'in');
+      } else if (ts.isMethodDeclaration(m)) {
+        for (const p of m.parameters) visitTypeNode(p.type, 'in');
+        visitTypeNode(m.type, 'out');
+      } else if (ts.isPropertyDeclaration(m)) {
+        visitTypeNode(m.type, 'out');
+        if (!(mFlags & ts.ModifierFlags.Readonly)) {
+          visitTypeNode(m.type, 'in');
+        }
+      } else if (ts.isGetAccessorDeclaration(m)) {
+        visitTypeNode(m.type, 'out');
+      } else if (ts.isSetAccessorDeclaration(m)) {
+        for (const p of m.parameters) visitTypeNode(p.type, 'in');
+      }
+    }
+  };
+
+  const seenModSyms = new Set();
   const visitExportDeclarations = exportsList => {
     for (const expSym of exportsList) {
       const resolved = resolveAliased(checker, expSym);
+      if (
+        resolved.flags & ts.SymbolFlags.Module &&
+        !seenModSyms.has(resolved)
+      ) {
+        seenModSyms.add(resolved);
+        visitExportDeclarations(checker.getExportsOfModule(resolved) || []);
+      }
       for (const stmt of resolved.declarations || []) {
         if (ts.isFunctionDeclaration(stmt)) {
           for (const p of stmt.parameters) visitTypeNode(p.type, 'in');
@@ -634,23 +881,16 @@ export function classifyModuleTypeVariance(
         } else if (ts.isVariableDeclaration(stmt)) {
           visitTypeNode(stmt.type, 'out');
         } else if (ts.isClassDeclaration(stmt)) {
+          visitClassDeclAndHeritage(stmt);
+        } else if (ts.isInterfaceDeclaration(stmt)) {
           for (const m of stmt.members) {
-            const mFlags = ts.getCombinedModifierFlags(m);
-            if (mFlags & ts.ModifierFlags.Private) continue;
-            if (ts.isConstructorDeclaration(m)) {
-              for (const p of m.parameters) visitTypeNode(p.type, 'in');
-            } else if (ts.isMethodDeclaration(m)) {
+            if (
+              ts.isMethodSignature(m) ||
+              ts.isCallSignatureDeclaration(m) ||
+              ts.isConstructSignatureDeclaration(m)
+            ) {
               for (const p of m.parameters) visitTypeNode(p.type, 'in');
               visitTypeNode(m.type, 'out');
-            } else if (ts.isPropertyDeclaration(m)) {
-              visitTypeNode(m.type, 'out');
-              if (!(mFlags & ts.ModifierFlags.Readonly)) {
-                visitTypeNode(m.type, 'in');
-              }
-            } else if (ts.isGetAccessorDeclaration(m)) {
-              visitTypeNode(m.type, 'out');
-            } else if (ts.isSetAccessorDeclaration(m)) {
-              for (const p of m.parameters) visitTypeNode(p.type, 'in');
             }
           }
         }
@@ -659,43 +899,19 @@ export function classifyModuleTypeVariance(
   };
   visitExportDeclarations(baseExports);
 
-  // Transitively propagate variance through exported non-generic interfaces and type aliases
+  // Transitively propagate variance through both exported and unexported interfaces and type aliases
   // (e.g. `query(): Promise<QueryResult>` -> `interface QueryResult { rows: Row[] }` marks `Row` as output).
-  const expNameToResolved = new Map();
-  for (const [sym, name] of targetSymToExportName.entries()) {
-    expNameToResolved.set(name, sym);
-  }
-  const propagated = new Set();
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (const [name, sym] of expNameToResolved.entries()) {
-      const pols = [];
-      if (inInput.has(name) && !propagated.has(`in::${name}`)) pols.push('in');
-      if (inOutput.has(name) && !propagated.has(`out::${name}`))
-        pols.push('out');
-      for (const pol of pols) {
-        propagated.add(`${pol}::${name}`);
-        const prevIn = inInput.size;
-        const prevOut = inOutput.size;
-        for (const decl of sym.declarations || []) {
-          if (decl.typeParameters && decl.typeParameters.length > 0) {
-            // Generic containers' parameter usages were already propagated per-instantiation above;
-            // still propagate any concrete non-type-parameter references inside their body at `pol`.
-          }
-          if (ts.isTypeAliasDeclaration(decl)) {
-            visitTypeNode(decl.type, pol);
-          } else if (ts.isInterfaceDeclaration(decl)) {
-            if (decl.heritageClauses) {
-              for (const hc of decl.heritageClauses) visitTypeNode(hc, pol);
-            }
-            for (const m of decl.members) {
-              visitTypeNode(m, pol);
-            }
-          }
+  while (pendingWorklist.length > 0) {
+    const [sym, pol] = pendingWorklist.pop();
+    for (const decl of sym.declarations || []) {
+      if (ts.isTypeAliasDeclaration(decl)) {
+        visitTypeNode(decl.type, pol);
+      } else if (ts.isInterfaceDeclaration(decl)) {
+        if (decl.heritageClauses) {
+          for (const hc of decl.heritageClauses) visitTypeNode(hc, pol);
         }
-        if (inInput.size !== prevIn || inOutput.size !== prevOut) {
-          changed = true;
+        for (const m of decl.members) {
+          visitTypeNode(m, pol);
         }
       }
     }
@@ -731,9 +947,9 @@ function checkEnumSymbol(checker, exportName, baseSym, headSym, errors) {
       continue;
     }
     const hVal = hMembers.get(mName);
-    if (bVal !== undefined && hVal !== undefined && bVal !== hVal) {
+    if (bVal !== undefined && bVal !== hVal) {
       errors.push(
-        `Enum '${exportName}': member '${mName}' value changed (was ${JSON.stringify(bVal)}, now ${JSON.stringify(hVal)}).`,
+        `Enum '${exportName}': member '${mName}' value changed (was ${JSON.stringify(bVal)}, now ${hVal === undefined ? 'computed' : JSON.stringify(hVal)}).`,
       );
       ok = false;
     }
@@ -762,13 +978,18 @@ function isBasePackageFile(filePath, refModFile) {
   return resolved === refModFile || resolved.startsWith(dir + path.sep);
 }
 
-function isHeadPackageFile(filePath, refHeadModFile) {
+function isHeadPackageFile(filePath, refHeadModFile, refBaseModFile = '') {
   const resolved = path.resolve(filePath);
   if (
     resolved.includes(`${path.sep}node_modules${path.sep}`) ||
     resolved.includes(`${path.sep}__base_pkg__${path.sep}`)
   ) {
     return false;
+  }
+  const sepBasePkg = `${path.sep}__base_pkg__${path.sep}`;
+  if (refBaseModFile && refBaseModFile.includes(sepBasePkg)) {
+    const pkgRoot = refBaseModFile.slice(0, refBaseModFile.indexOf(sepBasePkg));
+    return resolved === pkgRoot || resolved.startsWith(pkgRoot + path.sep);
   }
   if (refHeadModFile.includes('__head__')) {
     const root = refHeadModFile.slice(
@@ -780,7 +1001,7 @@ function isHeadPackageFile(filePath, refHeadModFile) {
   if (refHeadModFile.includes(`${path.sep}src${path.sep}`)) {
     const pkgRoot = refHeadModFile.slice(
       0,
-      refHeadModFile.indexOf(`${path.sep}src${path.sep}`),
+      refHeadModFile.lastIndexOf(`${path.sep}src${path.sep}`),
     );
     return resolved === pkgRoot || resolved.startsWith(pkgRoot + path.sep);
   }
@@ -832,7 +1053,6 @@ function isSelfContainedUnchangedSymbol(resolved, declFile, context) {
   if (bContent === undefined || bContent !== hContent) return false;
   const bSf = context.program.getSourceFile(declFile);
   if (!bSf || hasRelativeModuleSpecifier(bSf)) return false;
-  context.unifiedModuleSymbols.add(resolved);
   return true;
 }
 
@@ -864,6 +1084,18 @@ function findMatchingHeadDeclarationsInScope(bDecl0, headHelperSf, targetName) {
     currentStmts = nextStmts;
     if (currentStmts.length === 0) return [];
   }
+  if (ts.isVariableDeclaration(bDecl0)) {
+    const varDecls = [];
+    for (const st of currentStmts) {
+      if (!ts.isVariableStatement(st)) continue;
+      for (const d of st.declarationList.declarations) {
+        if (ts.isIdentifier(d.name) && d.name.text === targetName) {
+          varDecls.push(d);
+        }
+      }
+    }
+    return varDecls;
+  }
   return currentStmts.filter(
     st => st.kind === bDecl0.kind && st.name && st.name.text === targetName,
   );
@@ -871,6 +1103,7 @@ function findMatchingHeadDeclarationsInScope(bDecl0, headHelperSf, targetName) {
 
 function collectHeadLocalBindingsByName(checker, hRootNode, tpScope) {
   const map = new Map();
+  const hSf = hRootNode && hRootNode.getSourceFile();
   const walk = (node, activeTp) => {
     if (!node) return;
     if (
@@ -896,8 +1129,14 @@ function collectHeadLocalBindingsByName(checker, hRootNode, tpScope) {
       if (idNode && !activeTp.has(idNode.text)) {
         const sym = checker.getSymbolAtLocation(idNode);
         const resolved = sym ? resolveAliased(checker, sym) : undefined;
-        if (resolved && !map.has(idNode.text)) {
-          map.set(idNode.text, resolved);
+        if (resolved) {
+          const fullKey = hSf ? node.typeName.getText(hSf).trim() : idNode.text;
+          if (!map.has(fullKey)) {
+            map.set(fullKey, resolved);
+          }
+          if (!map.has(idNode.text)) {
+            map.set(idNode.text, resolved);
+          }
         }
       }
       if (node.typeArguments) {
@@ -964,7 +1203,7 @@ function isAstTypeExplainedByUnifiedExports(
       return hDecl0.kind === bDecl0.kind && bDeclName === hDeclName;
     }
     const bInPkg = isBasePackageFile(bFile, baseModFile);
-    const hInPkg = isHeadPackageFile(hFile, headModFile);
+    const hInPkg = isHeadPackageFile(hFile, headModFile, baseModFile);
     // External `node_modules`/stdlib symbols live in the same SourceFiles across `cmpProg`;
     // forbid both shadowing with an in-package type AND swapping aliased external imports (`Readable` -> `Writable`).
     if (!bInPkg) {
@@ -974,7 +1213,20 @@ function isAstTypeExplainedByUnifiedExports(
   };
 
   const checkResolvedLocalSymbol = (resolved, refName) => {
-    if (!resolved || resolved.flags & ts.SymbolFlags.TypeParameter) return;
+    if (!resolved) return;
+    if (resolved.flags & ts.SymbolFlags.TypeParameter) {
+      const tpDecl = resolved.declarations && resolved.declarations[0];
+      if (
+        tpDecl &&
+        tpDecl.getSourceFile() === bSf &&
+        tpDecl.pos >= bTypeNode.pos &&
+        tpDecl.end <= bTypeNode.end
+      ) {
+        return;
+      }
+      sawUnexplainedLocal = true;
+      return;
+    }
     if (refName && !verifyMatchingHeadBinding(refName, resolved)) {
       sawUnexplainedLocal = true;
       return;
@@ -995,6 +1247,12 @@ function isAstTypeExplainedByUnifiedExports(
           hRes.declarations[0] &&
           path.resolve(hRes.declarations[0].getSourceFile().fileName);
         if (!hFile || hFile === expectedHeadFile) {
+          if (visitedSymbols.size === 0) {
+            context.unifiedModuleSymbols.add(resolved);
+            if (hRes) {
+              context.verifiedHeadCounterpartMap.set(resolved, hRes);
+            }
+          }
           sawUnified = true;
           return;
         }
@@ -1047,25 +1305,65 @@ function isAstTypeExplainedByUnifiedExports(
             const nextVisited = new Set(visitedSymbols);
             nextVisited.add(resolved);
             const subTp = new Set(bHelperTps.map(tp => tp.name.text));
-            const helperOk = ts.isTypeAliasDeclaration(bDecl0)
-              ? isAstTypeExplainedByUnifiedExports(
+            const tpMetaOk = bHelperTps.every((bTp, idx) => {
+              const hTp = hHelperTps[idx];
+              if (Boolean(bTp.constraint) !== Boolean(hTp.constraint)) {
+                return false;
+              }
+              if (
+                bTp.constraint &&
+                !isAstTypeExplainedByUnifiedExports(
                   checker,
-                  bDecl0.type,
-                  hDecl0.type,
+                  bTp.constraint,
+                  hTp.constraint,
                   context,
                   subTp,
                   nextVisited,
                   true,
                 )
-              : isAstTypeExplainedByUnifiedExports(
+              ) {
+                return false;
+              }
+              if (Boolean(bTp.default) !== Boolean(hTp.default)) {
+                return false;
+              }
+              if (
+                bTp.default &&
+                !isAstTypeExplainedByUnifiedExports(
                   checker,
-                  bDecl0,
-                  hDecl0,
+                  bTp.default,
+                  hTp.default,
                   context,
                   subTp,
                   nextVisited,
                   true,
-                );
+                )
+              ) {
+                return false;
+              }
+              return true;
+            });
+            const helperOk =
+              tpMetaOk &&
+              (ts.isTypeAliasDeclaration(bDecl0)
+                ? isAstTypeExplainedByUnifiedExports(
+                    checker,
+                    bDecl0.type,
+                    hDecl0.type,
+                    context,
+                    subTp,
+                    nextVisited,
+                    true,
+                  )
+                : isAstTypeExplainedByUnifiedExports(
+                    checker,
+                    bDecl0,
+                    hDecl0,
+                    context,
+                    subTp,
+                    nextVisited,
+                    true,
+                  ));
             if (helperOk) {
               // Only cache globally when no outer co-inductive cycle assumption is still open!
               if (visitedSymbols.size === 0) {
@@ -1077,6 +1375,57 @@ function isAstTypeExplainedByUnifiedExports(
               sawUnified = true;
               return;
             }
+          }
+        }
+      }
+      if (ts.isEnumDeclaration(bDecl0) && bDecl0.name && context.program) {
+        const hRes = refName && headBindingsByName.get(refName);
+        const cacheKey = hRes ? hRes : resolved;
+        if (
+          context.failedHelperSymbols &&
+          context.failedHelperSymbols.has(cacheKey)
+        ) {
+          sawUnexplainedLocal = true;
+          return;
+        }
+        const headFile =
+          hRes && hRes.declarations && hRes.declarations[0]
+            ? path.resolve(hRes.declarations[0].getSourceFile().fileName)
+            : mapBaseFileToHeadFile(declFile);
+        const headHelperSf =
+          headFile && context.program.getSourceFile(headFile);
+        const hDecls = findMatchingHeadDeclarationsInScope(
+          bDecl0,
+          headHelperSf,
+          bDecl0.name.text,
+        );
+        if (hDecls.length >= 1) {
+          const hDecl0 = hDecls[0];
+          const hEnumSym =
+            hDecl0.symbol || checker.getSymbolAtLocation(hDecl0.name);
+          if (hEnumSym) {
+            const subErrors = [];
+            checkEnumSymbol(
+              checker,
+              bDecl0.name.text,
+              resolved,
+              hEnumSym,
+              subErrors,
+            );
+            if (subErrors.length === 0) {
+              if (visitedSymbols.size === 0) {
+                context.unifiedModuleSymbols.add(resolved);
+                if (context.verifiedHeadCounterpartMap) {
+                  context.verifiedHeadCounterpartMap.set(resolved, hEnumSym);
+                }
+              }
+              sawUnified = true;
+              return;
+            }
+            if (!context.failedHelperSymbols) {
+              context.failedHelperSymbols = new Set();
+            }
+            context.failedHelperSymbols.add(cacheKey);
           }
         }
       }
@@ -1249,12 +1598,7 @@ function isAstTypeExplainedByUnifiedExports(
           ) {
             const fnName = bDecl0.name && bDecl0.name.text;
             const hFnDecls = fnName
-              ? headQuerySf.statements.filter(
-                  st =>
-                    ts.isFunctionDeclaration(st) &&
-                    st.name &&
-                    st.name.text === fnName,
-                )
+              ? findMatchingHeadDeclarationsInScope(bDecl0, headQuerySf, fnName)
               : [];
             if (hFnDecls.length === bDecls.length) {
               const nextVis = new Set(visitedSymbols);
@@ -1283,17 +1627,12 @@ function isAstTypeExplainedByUnifiedExports(
             ts.isIdentifier(bDecl0.name)
           ) {
             const varName = bDecl0.name.text;
-            let hVarDecl = null;
-            for (const st of headQuerySf.statements) {
-              if (!ts.isVariableStatement(st)) continue;
-              for (const d of st.declarationList.declarations) {
-                if (ts.isIdentifier(d.name) && d.name.text === varName) {
-                  hVarDecl = d;
-                  break;
-                }
-              }
-              if (hVarDecl) break;
-            }
+            const hVarDecls = findMatchingHeadDeclarationsInScope(
+              bDecl0,
+              headQuerySf,
+              varName,
+            );
+            const hVarDecl = hVarDecls[0] || null;
             if (hVarDecl) {
               const bVT = checker.getTypeAtLocation(bDecl0);
               const hVT = checker.getTypeAtLocation(hVarDecl);
@@ -1322,7 +1661,8 @@ function isAstTypeExplainedByUnifiedExports(
         } else if (!activeTpNames.has(idNode.text)) {
           const sym = checker.getSymbolAtLocation(idNode);
           const resolved = sym ? resolveAliased(checker, sym) : undefined;
-          checkResolvedLocalSymbol(resolved, idNode.text);
+          const refKey = bSf ? node.typeName.getText(bSf).trim() : idNode.text;
+          checkResolvedLocalSymbol(resolved, refKey);
         }
       }
       if (node.typeArguments) {
@@ -1338,6 +1678,19 @@ function isAstTypeExplainedByUnifiedExports(
     : sawUnified && !sawUnexplainedLocal;
 }
 
+function getNonThisParamNodes(decl) {
+  if (!decl || !decl.parameters) return [];
+  if (
+    decl.parameters.length > 0 &&
+    decl.parameters[0].name &&
+    ts.isIdentifier(decl.parameters[0].name) &&
+    decl.parameters[0].name.text === 'this'
+  ) {
+    return decl.parameters.slice(1);
+  }
+  return decl.parameters;
+}
+
 function isReturnMismatchExplainedByUnifiedTypes(
   checker,
   baseSig,
@@ -1349,15 +1702,18 @@ function isReturnMismatchExplainedByUnifiedTypes(
   const hDecl = headSig.getDeclaration ? headSig.getDeclaration() : undefined;
   if (!bDecl || !hDecl || !bDecl.type || !hDecl.type) return false;
 
-  const tpSet = new Set((bDecl.typeParameters || []).map(tp => tp.name.text));
-  let cur = bDecl.parent;
-  while (cur && !ts.isSourceFile(cur)) {
-    if (cur.typeParameters) {
-      for (const tp of cur.typeParameters) tpSet.add(tp.name.text);
-    }
-    cur = cur.parent;
-  }
+  const bOwnTps = bDecl.typeParameters || [];
+  const hOwnTps = hDecl.typeParameters || [];
+  const sameOwnTpOrder =
+    bOwnTps.length <= hOwnTps.length &&
+    bOwnTps.every((tp, idx) => tp.name.text === hOwnTps[idx].name.text);
+  const tpSet = new Set([
+    ...(sameOwnTpOrder ? bOwnTps.map(tp => tp.name.text) : []),
+    ...unifiedConstrainedTpNames,
+  ]);
 
+  const bParamNodes = getNonThisParamNodes(bDecl);
+  const hParamNodes = getNonThisParamNodes(hDecl);
   for (let i = 0; i < baseSig.parameters.length; i++) {
     const bPSym = baseSig.parameters[i];
     const hPSym = headSig.parameters[i];
@@ -1365,10 +1721,8 @@ function isReturnMismatchExplainedByUnifiedTypes(
     const bPT = checker.getTypeOfSymbolAtLocation(bPSym, bDecl);
     const hPT = checker.getTypeOfSymbolAtLocation(hPSym, hDecl);
     if (isAssignableCompat(checker, bPT, hPT)) continue;
-    const bPNode =
-      bDecl.parameters && bDecl.parameters[i] && bDecl.parameters[i].type;
-    const hPNode =
-      hDecl.parameters && hDecl.parameters[i] && hDecl.parameters[i].type;
+    const bPNode = bParamNodes[i] && bParamNodes[i].type;
+    const hPNode = hParamNodes[i] && hParamNodes[i].type;
     if (
       !isAstTypeExplainedByUnifiedExports(
         checker,
@@ -1448,8 +1802,9 @@ function checkSignatureSetCompatibility(
   }
 
   // Check explicit generic instantiation bridge probes if present (catches <T>(x: T | string) -> <T>(x: T),
-  // including static methods and generic methods on generic classes where TS uses method bivariance!).
-  let bridgeHandledGeneric = false;
+  // including static methods, generic constructors, and generic methods on generic classes where TS uses method bivariance!).
+  const bridgedTpCounts = new Set();
+  let bridgedAllConstructSigs = false;
   if (fnBridgeKeyPrefix && context.bridgeResults) {
     for (const [key, res] of context.bridgeResults.entries()) {
       if (!key.startsWith(fnBridgeKeyPrefix)) continue;
@@ -1465,16 +1820,20 @@ function checkSignatureSetCompatibility(
         !isErrorType(res.baseInst) &&
         !isErrorType(res.headInst)
       ) {
-        const bInstSigs = checker.getSignaturesOfType(
-          res.baseInst,
-          ts.SignatureKind.Call,
-        );
-        const hInstSigs = checker.getSignaturesOfType(
-          res.headInst,
-          ts.SignatureKind.Call,
-        );
+        const bInstSigs = checker.getSignaturesOfType(res.baseInst, sigKind);
+        const hInstSigs = checker.getSignaturesOfType(res.headInst, sigKind);
         if (bInstSigs.length > 0 && hInstSigs.length > 0) {
-          bridgeHandledGeneric = true;
+          const tpSuffix = Number(key.slice(fnBridgeKeyPrefix.length));
+          if (sigKind === ts.SignatureKind.Construct) {
+            bridgedAllConstructSigs = true;
+          } else if (Number.isFinite(tpSuffix) && tpSuffix > 0) {
+            bridgedTpCounts.add(tpSuffix);
+          } else {
+            for (const s of baseSigs) {
+              const mtp = getSigArity(checker, s).maxTp;
+              if (mtp > 0) bridgedTpCounts.add(mtp);
+            }
+          }
           const allInstCovered = bInstSigs.every(bIS =>
             hInstSigs.some(hIS =>
               doesHeadSignatureCoverBase(
@@ -1495,42 +1854,94 @@ function checkSignatureSetCompatibility(
             return;
           }
           // Also verify type-parameter defaults (explicit bridge instantiates `<T, C>`, skipping defaults!).
-          if (baseSigs.length === 1 && headSigs.length === 1) {
-            const bAr = getSigArity(checker, baseSigs[0]);
-            const hAr = getSigArity(checker, headSigs[0]);
-            const allTpNames = new Set([
-              ...bAr.tpDecls.map(tp => tp.name.text),
-              ...hAr.tpDecls.map(tp => tp.name.text),
-            ]);
-            for (
-              let i = 0;
-              i < bAr.tpDecls.length && i < hAr.tpDecls.length;
-              i++
-            ) {
-              const bDef = bAr.tpDecls[i].default;
-              const hDef = hAr.tpDecls[i].default;
-              if (!bDef) continue;
-              if (!hDef) {
-                errors.push(
-                  `${labelPrefix} generic type parameter '${bAr.tpDecls[i].name.text}' default was removed.`,
-                );
-                return;
+          const bGroupSigs =
+            Number.isFinite(tpSuffix) && tpSuffix > 0
+              ? baseSigs.filter(s => getSigArity(checker, s).maxTp === tpSuffix)
+              : baseSigs;
+          const hGroupSigs =
+            Number.isFinite(tpSuffix) && tpSuffix > 0
+              ? headSigs.filter(s => {
+                  const hAr = getSigArity(checker, s);
+                  return hAr.minTp <= tpSuffix && hAr.maxTp >= tpSuffix;
+                })
+              : headSigs;
+          for (const bSig of bGroupSigs) {
+            const bAr = getSigArity(checker, bSig);
+            if (!bAr.tpDecls.some(tp => Boolean(tp.default))) continue;
+            if (bGroupSigs.length === 1 && hGroupSigs.length === 1) {
+              const hAr = getSigArity(checker, hGroupSigs[0]);
+              const allTpNames = new Set([
+                ...bAr.tpDecls.map(tp => tp.name.text),
+                ...hAr.tpDecls.map(tp => tp.name.text),
+              ]);
+              for (
+                let i = 0;
+                i < bAr.tpDecls.length && i < hAr.tpDecls.length;
+                i++
+              ) {
+                const bDef = bAr.tpDecls[i].default;
+                const hDef = hAr.tpDecls[i].default;
+                if (!bDef) continue;
+                if (!hDef) {
+                  errors.push(
+                    `${labelPrefix} generic type parameter '${bAr.tpDecls[i].name.text}' default was removed.`,
+                  );
+                  return;
+                }
+                const bDT = checker.getTypeFromTypeNode(bDef);
+                const hDT = checker.getTypeFromTypeNode(hDef);
+                const defOk =
+                  (isAssignableCompat(checker, bDT, hDT) &&
+                    isAssignableCompat(checker, hDT, bDT)) ||
+                  isAstTypeExplainedByUnifiedExports(
+                    checker,
+                    bDef,
+                    hDef,
+                    context,
+                    allTpNames,
+                  );
+                if (!defOk) {
+                  errors.push(
+                    `${labelPrefix} generic type parameter '${bAr.tpDecls[i].name.text}' default changed incompatibly ${formatTypePairDiff(checker, bDT, hDT)}.`,
+                  );
+                  return;
+                }
               }
-              const bDT = checker.getTypeFromTypeNode(bDef);
-              const hDT = checker.getTypeFromTypeNode(hDef);
-              const defOk =
-                (isAssignableCompat(checker, bDT, hDT) &&
-                  isAssignableCompat(checker, hDT, bDT)) ||
-                isAstTypeExplainedByUnifiedExports(
-                  checker,
-                  bDef,
-                  hDef,
-                  context,
-                  allTpNames,
-                );
-              if (!defOk) {
+            } else {
+              const coveredByHead = hGroupSigs.some(hSig => {
+                const hAr = getSigArity(checker, hSig);
+                const allTpNames = new Set([
+                  ...bAr.tpDecls.map(tp => tp.name.text),
+                  ...hAr.tpDecls.map(tp => tp.name.text),
+                ]);
+                for (
+                  let i = 0;
+                  i < bAr.tpDecls.length && i < hAr.tpDecls.length;
+                  i++
+                ) {
+                  const bDef = bAr.tpDecls[i].default;
+                  const hDef = hAr.tpDecls[i].default;
+                  if (!bDef) continue;
+                  if (!hDef) return false;
+                  const bDT = checker.getTypeFromTypeNode(bDef);
+                  const hDT = checker.getTypeFromTypeNode(hDef);
+                  const defOk =
+                    (isAssignableCompat(checker, bDT, hDT) &&
+                      isAssignableCompat(checker, hDT, bDT)) ||
+                    isAstTypeExplainedByUnifiedExports(
+                      checker,
+                      bDef,
+                      hDef,
+                      context,
+                      allTpNames,
+                    );
+                  if (!defOk) return false;
+                }
+                return true;
+              });
+              if (!coveredByHead) {
                 errors.push(
-                  `${labelPrefix} generic type parameter '${bAr.tpDecls[i].name.text}' default changed incompatibly ${formatTypePairDiff(checker, bDT, hDT)}.`,
+                  `${labelPrefix} generic type parameter default was removed or changed incompatibly.`,
                 );
                 return;
               }
@@ -1568,9 +1979,16 @@ function checkSignatureSetCompatibility(
         }
       }
     }
-    if (voidBrokeToPromise || bridgeHandledGeneric) {
+    if (voidBrokeToPromise) {
       return;
     }
+  }
+  if (
+    bridgedAllConstructSigs ||
+    (bridgedTpCounts.size > 0 &&
+      baseSigs.every(s => bridgedTpCounts.has(getSigArity(checker, s).maxTp)))
+  ) {
+    return;
   }
 
   // Multi-overload generic functions or fallback unbridged generic methods carry signature-level
@@ -1580,7 +1998,6 @@ function checkSignatureSetCompatibility(
   );
   const wholeGenericAssignable =
     hasOwnSigTypeParams &&
-    sigKind === ts.SignatureKind.Call &&
     !ignoreReturnType &&
     isAssignableCompat(checker, headType, baseType);
 
@@ -1589,6 +2006,7 @@ function checkSignatureSetCompatibility(
     if (uncoveredAritySigs.has(bSig)) continue;
     const bAr = getSigArity(checker, bSig);
     const sigHasTp = bAr.maxTp > 0;
+    if (sigHasTp && bridgedTpCounts.has(bAr.maxTp)) continue;
     const matchIdx = headSigs.findIndex(hSig =>
       doesHeadSignatureCoverBase(
         checker,
@@ -1687,7 +2105,12 @@ function typeContainsOwnTypeParam(type, ownTpNames, checker, seen = new Set()) {
   ) {
     const str = checker.typeToString(type);
     for (const tpName of ownTpNames) {
-      if (new RegExp(`\\b${tpName}\\b`).test(str)) return true;
+      const escaped = tpName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (
+        new RegExp(`(?<![A-Za-z0-9_$])${escaped}(?![A-Za-z0-9_$])`).test(str)
+      ) {
+        return true;
+      }
     }
   }
   if (type.isUnionOrIntersection && type.isUnionOrIntersection()) {
@@ -1738,64 +2161,155 @@ function areConcreteUnionConstituentsCovered(
   cParamType,
   pParamType,
   ownTpSet,
+  depth = 0,
+  allowFallback = true,
 ) {
-  if (!(cParamType.isUnion && cParamType.isUnion())) return true;
-  for (const member of cParamType.types) {
-    if (!typeContainsOwnTypeParam(member, ownTpSet, checker)) {
-      if (!isAssignableCompat(checker, member, pParamType)) {
-        return false;
-      }
-    }
+  if (depth > 4) return true;
+  if (!typeContainsOwnTypeParam(cParamType, ownTpSet, checker)) {
+    return isAssignableCompat(checker, cParamType, pParamType);
   }
-  return true;
+  const isBareOwnTpCovered = (tpType, targetType) => {
+    if (!targetType) return false;
+    if (targetType.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown)) {
+      return true;
+    }
+    if (
+      targetType.flags & ts.TypeFlags.TypeParameter &&
+      targetType.symbol &&
+      tpType.symbol &&
+      ownTpSet.has(targetType.symbol.getName()) &&
+      targetType.symbol.getName() === tpType.symbol.getName()
+    ) {
+      return true;
+    }
+    if (targetType.isUnion && targetType.isUnion()) {
+      return targetType.types.some(m => isBareOwnTpCovered(tpType, m));
+    }
+    const con =
+      checker.getBaseConstraintOfType(tpType) || checker.getUnknownType();
+    return isAssignableCompat(checker, con, targetType);
+  };
+  if (
+    cParamType.flags & ts.TypeFlags.TypeParameter &&
+    cParamType.symbol &&
+    ownTpSet.has(cParamType.symbol.getName())
+  ) {
+    return isBareOwnTpCovered(cParamType, pParamType);
+  }
+  if (cParamType.isUnion && cParamType.isUnion()) {
+    return cParamType.types.every(member =>
+      areConcreteUnionConstituentsCovered(
+        checker,
+        member,
+        pParamType,
+        ownTpSet,
+        depth + 1,
+        allowFallback,
+      ),
+    );
+  }
+  const cArgs = checker.getTypeArguments(cParamType) || [];
+  const pArgs = checker.getTypeArguments(pParamType) || [];
+  if (cArgs.length > 0) {
+    if (pParamType.isUnion && pParamType.isUnion()) {
+      return pParamType.types.some(pm =>
+        areConcreteUnionConstituentsCovered(
+          checker,
+          cParamType,
+          pm,
+          ownTpSet,
+          depth + 1,
+          allowFallback,
+        ),
+      );
+    }
+    const cName = cParamType.symbol && cParamType.symbol.getName();
+    const pName = pParamType.symbol && pParamType.symbol.getName();
+    if (
+      cArgs.length === pArgs.length &&
+      ((cParamType.symbol && cParamType.symbol === pParamType.symbol) ||
+        (checker.isTupleType(cParamType) && checker.isTupleType(pParamType)) ||
+        shareCovariantContainerGroup(cName, pName))
+    ) {
+      return cArgs.every((cArg, idx) =>
+        areConcreteUnionConstituentsCovered(
+          checker,
+          cArg,
+          pArgs[idx],
+          ownTpSet,
+          depth + 1,
+          allowFallback,
+        ),
+      );
+    }
+    return Boolean(
+      pParamType.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown),
+    );
+  }
+  return allowFallback;
+}
+
+function hasTpModifier(tp, kind) {
+  const mods = (tp && ts.canHaveModifiers(tp) && ts.getModifiers(tp)) || [];
+  return mods.some(m => m.kind === kind);
+}
+
+function hasTypeFlagInUnion(t, flag) {
+  if (!t) return false;
+  if (t.flags & flag) return true;
+  if (t.isUnion && t.isUnion()) {
+    return t.types.some(m => Boolean(m.flags & flag));
+  }
+  return false;
 }
 
 function checkTypePredicateCompat(
   checker,
-  baseSig,
-  headSig,
+  consumerSig,
+  providerSig,
   context,
   tpScope,
   unifiedConstrainedTpNames,
+  polarity = 'normal',
 ) {
-  const bPred = checker.getTypePredicateOfSignature(baseSig);
-  if (!bPred) return true;
-  const hPred = checker.getTypePredicateOfSignature(headSig);
-  if (!hPred) return false;
+  const cPred = checker.getTypePredicateOfSignature(consumerSig);
+  if (!cPred) return true;
+  const pPred = checker.getTypePredicateOfSignature(providerSig);
+  if (!pPred) return false;
 
-  const bIsAsserts =
-    bPred.kind === ts.TypePredicateKind.AssertsIdentifier ||
-    bPred.kind === ts.TypePredicateKind.AssertsThis;
-  const hIsAsserts =
-    hPred.kind === ts.TypePredicateKind.AssertsIdentifier ||
-    hPred.kind === ts.TypePredicateKind.AssertsThis;
-  const bIsThis =
-    bPred.kind === ts.TypePredicateKind.This ||
-    bPred.kind === ts.TypePredicateKind.AssertsThis;
-  const hIsThis =
-    hPred.kind === ts.TypePredicateKind.This ||
-    hPred.kind === ts.TypePredicateKind.AssertsThis;
+  const cIsAsserts =
+    cPred.kind === ts.TypePredicateKind.AssertsIdentifier ||
+    cPred.kind === ts.TypePredicateKind.AssertsThis;
+  const pIsAsserts =
+    pPred.kind === ts.TypePredicateKind.AssertsIdentifier ||
+    pPred.kind === ts.TypePredicateKind.AssertsThis;
+  const cIsThis =
+    cPred.kind === ts.TypePredicateKind.This ||
+    cPred.kind === ts.TypePredicateKind.AssertsThis;
+  const pIsThis =
+    pPred.kind === ts.TypePredicateKind.This ||
+    pPred.kind === ts.TypePredicateKind.AssertsThis;
 
-  if (bIsAsserts !== hIsAsserts || bIsThis !== hIsThis) return false;
-  if (!bIsThis && bPred.parameterIndex !== hPred.parameterIndex) return false;
+  if (cIsAsserts !== pIsAsserts || cIsThis !== pIsThis) return false;
+  if (!cIsThis && cPred.parameterIndex !== pPred.parameterIndex) return false;
 
-  if (bPred.type) {
-    if (!hPred.type) return false;
-    if (isAssignableCompat(checker, hPred.type, bPred.type)) return true;
-    const bDecl = baseSig.getDeclaration && baseSig.getDeclaration();
-    const hDecl = headSig.getDeclaration && headSig.getDeclaration();
-    const bPredNode =
-      bDecl && bDecl.type && ts.isTypePredicateNode(bDecl.type)
-        ? bDecl.type.type
+  if (cPred.type) {
+    if (!pPred.type) return false;
+    if (isAssignableCompat(checker, pPred.type, cPred.type)) return true;
+    const cDecl = consumerSig.getDeclaration && consumerSig.getDeclaration();
+    const pDecl = providerSig.getDeclaration && providerSig.getDeclaration();
+    const cPredNode =
+      cDecl && cDecl.type && ts.isTypePredicateNode(cDecl.type)
+        ? cDecl.type.type
         : null;
-    const hPredNode =
-      hDecl && hDecl.type && ts.isTypePredicateNode(hDecl.type)
-        ? hDecl.type.type
+    const pPredNode =
+      pDecl && pDecl.type && ts.isTypePredicateNode(pDecl.type)
+        ? pDecl.type.type
         : null;
     return isAstTypeExplainedByUnifiedExports(
       checker,
-      bPredNode,
-      hPredNode,
+      polarity === 'normal' ? cPredNode : pPredNode,
+      polarity === 'normal' ? pPredNode : cPredNode,
       context,
       tpScope,
       new Set(),
@@ -1837,7 +2351,7 @@ function doesHeadSignatureCoverBase(
     if (pArity.minTp > cArity.minTp || pArity.maxTp < cArity.maxTp)
       return false;
   } else {
-    if (consumerSig.parameters.length < pArity.minArgs) {
+    if (cArity.minArgs < pArity.minArgs || cArity.maxArgs < pArity.maxArgs) {
       return false;
     }
   }
@@ -1851,32 +2365,56 @@ function doesHeadSignatureCoverBase(
       ts.getCombinedModifierFlags(d) & ts.ModifierFlags.Static,
     );
     const out = [];
-    let cur = d.parent;
+    let cur = ts.isClassLike(d) ? d : d.parent;
     while (cur && !ts.isSourceFile(cur)) {
       if (
         (ts.isInterfaceDeclaration(cur) ||
           (ts.isClassDeclaration(cur) && !isStaticSig)) &&
         cur.typeParameters
       ) {
-        out.push(...cur.typeParameters);
+        if (context && context.currentOwnerBaseSym) {
+          const isCurrentOwner =
+            (context.currentOwnerBaseSym.declarations || []).includes(cur) ||
+            Boolean(
+              context.currentOwnerHeadSym &&
+              (context.currentOwnerHeadSym.declarations || []).includes(cur),
+            );
+          if (isCurrentOwner) {
+            for (const tp of cur.typeParameters) {
+              if (
+                !context.ownerUnifiedTpNames ||
+                context.ownerUnifiedTpNames.has(tp.name.text)
+              ) {
+                out.push(tp);
+              }
+            }
+          } else if (context.ownerHeritageUnified) {
+            out.push(...cur.typeParameters);
+          }
+        } else {
+          out.push(...cur.typeParameters);
+        }
       }
       cur = cur.parent;
     }
     return out;
   };
-  const cTpDeclsFull = [
-    ...cArity.tpDecls,
-    ...collectEnclosingTpDecls(consumerSig),
-  ];
-  const pTpDeclsFull = [
-    ...pArity.tpDecls,
-    ...collectEnclosingTpDecls(providerSig),
-  ];
+  const cEnclosingTpDecls = collectEnclosingTpDecls(consumerSig);
+  const pEnclosingTpDecls = collectEnclosingTpDecls(providerSig);
+  const cTpDeclsFull = [...cArity.tpDecls, ...cEnclosingTpDecls];
+  const pTpDeclsFull = [...pArity.tpDecls, ...pEnclosingTpDecls];
   const allSigTpNames = new Set([
     ...cTpDeclsFull.map(tp => tp.name.text),
     ...pTpDeclsFull.map(tp => tp.name.text),
   ]);
   for (let i = 0; i < cArity.tpDecls.length && i < pArity.tpDecls.length; i++) {
+    if (
+      polarity === 'normal' &&
+      hasTpModifier(cArity.tpDecls[i], ts.SyntaxKind.ConstKeyword) &&
+      !hasTpModifier(pArity.tpDecls[i], ts.SyntaxKind.ConstKeyword)
+    ) {
+      return false;
+    }
     const bTpType = checker.getTypeAtLocation(cArity.tpDecls[i]);
     const hTpType = checker.getTypeAtLocation(pArity.tpDecls[i]);
     const bCon = checker.getBaseConstraintOfType(bTpType);
@@ -1916,12 +2454,13 @@ function doesHeadSignatureCoverBase(
   }
 
   // Track positionally identical type parameters whose constraint and default match in both directions.
-  if (polarity === 'normal' && cTpDeclsFull.length === pTpDeclsFull.length) {
+  const verifyPositionalTpList = (cList, pList) => {
+    if (polarity !== 'normal' || cList.length > pList.length) return;
     let allPositionalMatch = true;
     const candidateTpNames = [];
-    for (let i = 0; i < cTpDeclsFull.length; i++) {
-      const bTp = cTpDeclsFull[i];
-      const hTp = pTpDeclsFull[i];
+    for (let i = 0; i < cList.length; i++) {
+      const bTp = cList[i];
+      const hTp = pList[i];
       if (bTp.name.text !== hTp.name.text) {
         allPositionalMatch = false;
         break;
@@ -1976,7 +2515,9 @@ function doesHeadSignatureCoverBase(
     if (allPositionalMatch) {
       for (const n of candidateTpNames) unifiedConstrainedTpNames.add(n);
     }
-  }
+  };
+  verifyPositionalTpList(cArity.tpDecls, pArity.tpDecls);
+  verifyPositionalTpList(cEnclosingTpDecls, pEnclosingTpDecls);
 
   // Check explicit `this:` parameter compatibility (`M1`).
   if (providerSig.thisParameter) {
@@ -2073,20 +2614,26 @@ function doesHeadSignatureCoverBase(
   };
 
   const maxRestProbe = Math.max(
-    consumerSig.parameters.length,
+    consumerSig.parameters.length + (cArity.maxArgs === Infinity ? 1 : 0),
     providerSig.parameters.length + (pArity.maxArgs === Infinity ? 1 : 0),
   );
-  const paramCheckCount =
-    polarity === 'normal'
-      ? Math.min(cArity.maxArgs, maxRestProbe)
-      : Math.min(consumerSig.parameters.length, providerSig.parameters.length);
+  const paramCheckCount = Math.min(
+    polarity === 'normal' ? cArity.maxArgs : pArity.maxArgs,
+    maxRestProbe,
+  );
 
-  const ownTpSet = ownGenericUnifiedByTS
-    ? new Set([
-        ...cArity.tpDecls.map(tp => tp.name.text),
-        ...pArity.tpDecls.map(tp => tp.name.text),
-      ])
-    : new Set();
+  const ownTpSet =
+    ownGenericUnifiedByTS || unifiedConstrainedTpNames.size > 0
+      ? new Set([
+          ...(ownGenericUnifiedByTS
+            ? [
+                ...cArity.tpDecls.map(tp => tp.name.text),
+                ...pArity.tpDecls.map(tp => tp.name.text),
+              ]
+            : []),
+          ...unifiedConstrainedTpNames,
+        ])
+      : new Set();
 
   for (let i = 0; i < paramCheckCount; i++) {
     const cParamType = getParamTypeInDts(consumerSig, i, consumerSf);
@@ -2115,31 +2662,9 @@ function doesHeadSignatureCoverBase(
       if (cOpt && !pOpt) return false;
     }
 
-    if (isAssignableCompat(checker, cParamType, pParamType)) {
-      continue;
-    }
-
-    if (
-      ownGenericUnifiedByTS &&
-      (typeContainsOwnTypeParam(cParamType, ownTpSet, checker) ||
-        typeContainsOwnTypeParam(pParamType, ownTpSet, checker)) &&
-      areConcreteUnionConstituentsCovered(
-        checker,
-        cParamType,
-        pParamType,
-        ownTpSet,
-      )
-    ) {
-      continue;
-    }
-
     // Check function/callback parameters with properly flipped polarity!
     const nonNullC = checker.getNonNullableType(cParamType);
     const nonNullP = checker.getNonNullableType(pParamType);
-    const cNullish = cParamType.flags !== nonNullC.flags;
-    const pNullish = pParamType.flags !== nonNullP.flags;
-    if (cNullish && !pNullish) return false;
-
     const cCbSigs = checker.getSignaturesOfType(
       nonNullC,
       ts.SignatureKind.Call,
@@ -2148,8 +2673,50 @@ function doesHeadSignatureCoverBase(
       nonNullP,
       ts.SignatureKind.Call,
     );
-    if (cCbSigs.length > 0 && pCbSigs.length > 0) {
+    const hasCbSigs = cCbSigs.length > 0 && pCbSigs.length > 0;
+    const isDirectAssignable = isAssignableCompat(
+      checker,
+      cParamType,
+      pParamType,
+    );
+    if (isDirectAssignable && !hasCbSigs) {
+      continue;
+    }
+
+    if (
+      ownTpSet.size > 0 &&
+      !hasCbSigs &&
+      (typeContainsOwnTypeParam(cParamType, ownTpSet, checker) ||
+        typeContainsOwnTypeParam(pParamType, ownTpSet, checker)) &&
+      areConcreteUnionConstituentsCovered(
+        checker,
+        cParamType,
+        pParamType,
+        ownTpSet,
+        0,
+        ownGenericUnifiedByTS,
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      hasTypeFlagInUnion(cParamType, ts.TypeFlags.Null) &&
+      !hasTypeFlagInUnion(pParamType, ts.TypeFlags.Null)
+    ) {
+      return false;
+    }
+    if (
+      hasTypeFlagInUnion(cParamType, ts.TypeFlags.Undefined) &&
+      !hasTypeFlagInUnion(pParamType, ts.TypeFlags.Undefined)
+    ) {
+      return false;
+    }
+
+    if (hasCbSigs) {
       const nextPolarity = polarity === 'normal' ? 'callback' : 'normal';
+      const cbUnifiedByTS =
+        isDirectAssignable || isAssignableCompat(checker, nonNullC, nonNullP);
       const cbOk = cCbSigs.every(cCb =>
         pCbSigs.some(pCb =>
           polarity === 'normal'
@@ -2163,6 +2730,7 @@ function doesHeadSignatureCoverBase(
                 false,
                 nextPolarity,
                 depth + 1,
+                cbUnifiedByTS,
               )
             : doesHeadSignatureCoverBase(
                 checker,
@@ -2174,39 +2742,45 @@ function doesHeadSignatureCoverBase(
                 false,
                 nextPolarity,
                 depth + 1,
+                cbUnifiedByTS,
               ),
         ),
       );
-      if (cbOk) continue;
+      if (cbOk) {
+        if (isDirectAssignable) continue;
+        const cCustomProps = checker
+          .getPropertiesOfType(nonNullC)
+          .filter(pr => !isBuiltinFunctionProperty(pr.getName()));
+        const pCustomProps = checker
+          .getPropertiesOfType(nonNullP)
+          .filter(pr => !isBuiltinFunctionProperty(pr.getName()));
+        if (cCustomProps.length === 0 && pCustomProps.length === 0) {
+          continue;
+        }
+      }
     }
 
     // Check if parameter mismatch is solely over already-verified exported types/classes/symbols.
     const cDecl = consumerSig.getDeclaration && consumerSig.getDeclaration();
     const pDecl = providerSig.getDeclaration && providerSig.getDeclaration();
+    const sameOwnSigTpOrder =
+      cArity.tpDecls.length <= pArity.tpDecls.length &&
+      cArity.tpDecls.every(
+        (tp, idx) => tp.name.text === pArity.tpDecls[idx].name.text,
+      );
     const sigTpScope = new Set([
-      ...cArity.tpDecls.map(tp => tp.name.text),
-      ...pArity.tpDecls.map(tp => tp.name.text),
+      ...(sameOwnSigTpOrder ? cArity.tpDecls.map(tp => tp.name.text) : []),
+      ...unifiedConstrainedTpNames,
     ]);
-    const addEnclosingTp = declNode => {
-      let cur = declNode && declNode.parent;
-      while (cur && !ts.isSourceFile(cur)) {
-        if (cur.typeParameters) {
-          for (const tp of cur.typeParameters) sigTpScope.add(tp.name.text);
-        }
-        cur = cur.parent;
-      }
-    };
-    addEnclosingTp(cDecl);
-    addEnclosingTp(pDecl);
 
+    const cParamNodes = getNonThisParamNodes(cDecl);
+    const pParamNodes = getNonThisParamNodes(pDecl);
     const cClampedIdx =
-      cDecl && cDecl.parameters ? Math.min(i, cDecl.parameters.length - 1) : -1;
+      cParamNodes.length > 0 ? Math.min(i, cParamNodes.length - 1) : -1;
     const pClampedIdx =
-      pDecl && pDecl.parameters ? Math.min(i, pDecl.parameters.length - 1) : -1;
-    const cParamNodeDecl =
-      cClampedIdx >= 0 ? cDecl.parameters[cClampedIdx] : null;
-    const pParamNodeDecl =
-      pClampedIdx >= 0 ? pDecl.parameters[pClampedIdx] : null;
+      pParamNodes.length > 0 ? Math.min(i, pParamNodes.length - 1) : -1;
+    const cParamNodeDecl = cClampedIdx >= 0 ? cParamNodes[cClampedIdx] : null;
+    const pParamNodeDecl = pClampedIdx >= 0 ? pParamNodes[pClampedIdx] : null;
     const cPNode = cParamNodeDecl && cParamNodeDecl.type;
     const pPNode = pParamNodeDecl && pParamNodeDecl.type;
     const cSlotReachable =
@@ -2291,14 +2865,14 @@ function doesHeadSignatureCoverBase(
 
   if (!ignoreReturnType) {
     if (
-      polarity === 'normal' &&
       !checkTypePredicateCompat(
         checker,
-        baseSig,
-        headSig,
+        consumerSig,
+        providerSig,
         context,
         allSigTpNames,
         unifiedConstrainedTpNames,
+        polarity,
       )
     ) {
       return false;
@@ -2319,10 +2893,17 @@ function doesHeadSignatureCoverBase(
     }
     if (!isAssignableCompat(checker, pRet, cRet)) {
       if (
-        ownGenericUnifiedByTS &&
+        ownTpSet.size > 0 &&
         (typeContainsOwnTypeParam(cRet, ownTpSet, checker) ||
           typeContainsOwnTypeParam(pRet, ownTpSet, checker)) &&
-        areConcreteUnionConstituentsCovered(checker, pRet, cRet, ownTpSet)
+        areConcreteUnionConstituentsCovered(
+          checker,
+          pRet,
+          cRet,
+          ownTpSet,
+          0,
+          ownGenericUnifiedByTS,
+        )
       ) {
         return true;
       }
@@ -2350,8 +2931,10 @@ function checkIndexSignatures(
   ownerLabel,
   baseType,
   headType,
+  context,
   variance,
   errors,
+  ownerUnifiedTpNames = new Set(),
 ) {
   const baseIndices = checker.getIndexInfosOfType(baseType) || [];
   if (baseIndices.length === 0) return;
@@ -2374,6 +2957,10 @@ function checkIndexSignatures(
       errors.push(
         `${ownerLabel}: index signature '[key: ${keyStr}]' was made readonly.`,
       );
+    } else if (bIdx.isReadonly && !hIdx.isReadonly && variance === 'input') {
+      errors.push(
+        `${ownerLabel}: index signature '[key: ${keyStr}]' removed 'readonly' modifier on input type.`,
+      );
     }
     let valOk;
     if (variance === 'output') {
@@ -2385,6 +2972,26 @@ function checkIndexSignatures(
           isAssignableCompat(checker, bIdx.type, hIdx.type);
     } else {
       valOk = isAssignableCompat(checker, bIdx.type, hIdx.type);
+    }
+    if (
+      !valOk &&
+      context &&
+      bIdx.declaration &&
+      bIdx.declaration.type &&
+      hIdx.declaration &&
+      hIdx.declaration.type &&
+      isAstTypeExplainedByUnifiedExports(
+        checker,
+        bIdx.declaration.type,
+        hIdx.declaration.type,
+        context,
+        new Set(),
+        new Set(),
+        false,
+        ownerUnifiedTpNames,
+      )
+    ) {
+      valOk = true;
     }
     if (!valOk) {
       errors.push(
@@ -2476,31 +3083,79 @@ function checkObjectMembers(
         bDeclMeta && bDeclMeta.visibility ? bDeclMeta.visibility : 'public';
       const hVis =
         hDeclMeta && hDeclMeta.visibility ? hDeclMeta.visibility : 'public';
-      // Direct own-class members were already checked in checkClassMetaRestrictions; catch cross-class inherited demotions cleanly (deduped at end).
-      if (
-        bVis === 'public' &&
-        rankVisibility(hVis) < rankVisibility('public')
-      ) {
-        const bOwnParent =
-          bProp.declarations &&
-          bProp.declarations[0] &&
-          bProp.declarations[0].parent;
-        const hOwnParent =
-          hProp.declarations &&
-          hProp.declarations[0] &&
-          hProp.declarations[0].parent;
-        if (
-          !bOwnParent ||
-          !hOwnParent ||
-          !ts.isClassDeclaration(bOwnParent) ||
-          !ts.isClassDeclaration(hOwnParent) ||
-          (bOwnParent.name && bOwnParent.name.text) !==
-            (hOwnParent.name && hOwnParent.name.text)
-        ) {
+      const bOwnParent =
+        bProp.declarations &&
+        bProp.declarations[0] &&
+        bProp.declarations[0].parent;
+      const hOwnParent =
+        hProp.declarations &&
+        hProp.declarations[0] &&
+        hProp.declarations[0].parent;
+      const isDirectOnCurrentOwner = Boolean(
+        context &&
+        context.currentOwnerBaseSym &&
+        context.currentOwnerHeadSym &&
+        bOwnParent &&
+        hOwnParent &&
+        (context.currentOwnerBaseSym.declarations || []).includes(bOwnParent) &&
+        (context.currentOwnerHeadSym.declarations || []).includes(hOwnParent),
+      );
+      // Direct own-class members were already checked in checkClassMetaRestrictions; catch inherited demotions cleanly (deduped at end).
+      if (!isDirectOnCurrentOwner) {
+        if (bVis !== 'private' && rankVisibility(hVis) < rankVisibility(bVis)) {
           errors.push(
-            `${ownerLabel}: member '${displayName}' visibility was restricted from 'public' to '${hVis}'.`,
+            `${ownerLabel}: member '${displayName}' visibility was restricted from '${bVis}' to '${hVis}'.`,
           );
           continue;
+        }
+        if (bDeclMeta && hDeclMeta) {
+          const bHasAccessor =
+            bDeclMeta.getterVis !== null || bDeclMeta.setterVis !== null;
+          const hHasAccessor =
+            hDeclMeta.getterVis !== null || hDeclMeta.setterVis !== null;
+          if (bHasAccessor || hHasAccessor) {
+            const bReadVis = bHasAccessor ? bDeclMeta.getterVis : bVis;
+            const hReadVis = hHasAccessor ? hDeclMeta.getterVis : hVis;
+            const bWriteVis = bHasAccessor
+              ? bDeclMeta.setterVis
+              : bDeclMeta.isReadonly
+                ? null
+                : bVis;
+            const hWriteVis = hHasAccessor
+              ? hDeclMeta.setterVis
+              : hDeclMeta.isReadonly
+                ? null
+                : hVis;
+            if (
+              bReadVis &&
+              bReadVis !== 'private' &&
+              ((hReadVis &&
+                rankVisibility(hReadVis) < rankVisibility(bReadVis)) ||
+                (!hReadVis && hWriteVis !== null))
+            ) {
+              errors.push(
+                `${ownerLabel}: getter '${displayName}' visibility was restricted from '${bReadVis}' to '${hReadVis || 'removed'}'.`,
+              );
+            }
+            if (
+              bWriteVis &&
+              bWriteVis !== 'private' &&
+              ((hWriteVis &&
+                rankVisibility(hWriteVis) < rankVisibility(bWriteVis)) ||
+                (!hWriteVis &&
+                  hReadVis !== null &&
+                  bDeclMeta.setterVis === 'protected'))
+            ) {
+              errors.push(
+                `${ownerLabel}: setter '${displayName}' visibility was restricted from '${bWriteVis}' to '${hWriteVis || 'removed'}'.`,
+              );
+            }
+          }
+          if (!bDeclMeta.isAbstract && hDeclMeta.isAbstract) {
+            errors.push(
+              `${ownerLabel}: member '${displayName}' was made abstract.`,
+            );
+          }
         }
       }
     }
@@ -2532,6 +3187,17 @@ function checkObjectMembers(
     if (!bReadonly && hReadonly) {
       errors.push(
         `${ownerLabel}: property '${displayName}' was made readonly.`,
+      );
+    }
+    const bWriteonly = isSymbolWriteonly(bProp);
+    const hWriteonly = isSymbolWriteonly(hProp);
+    if (
+      !bWriteonly &&
+      hWriteonly &&
+      (isClassOrValue || variance === 'output')
+    ) {
+      errors.push(
+        `${ownerLabel}: property '${displayName}' became write-only (getter removed).`,
       );
     }
 
@@ -2581,12 +3247,48 @@ function checkObjectMembers(
     const isMethodDecl = Boolean(
       bDecl && (ts.isMethodDeclaration(bDecl) || ts.isMethodSignature(bDecl)),
     );
+    const isInheritedFromAncestor = Boolean(
+      bDecl &&
+      bDecl.parent &&
+      context &&
+      context.currentOwnerBaseSym &&
+      !(context.currentOwnerBaseSym.declarations || []).includes(bDecl.parent),
+    );
+    let effectiveMemberTpNames = ownerUnifiedTpNames;
+    if (isInheritedFromAncestor && context) {
+      if (!context.ownerHeritageUnified) {
+        effectiveMemberTpNames = new Set();
+      } else {
+        const bP = bDecl.parent;
+        const hP = hDeclForOrigin && hDeclForOrigin.parent;
+        const bPTps = (bP && bP.typeParameters) || [];
+        const hPTps = (hP && hP.typeParameters) || [];
+        if (
+          bPTps.length <= hPTps.length &&
+          bPTps.every((tp, idx) => tp.name.text === hPTps[idx].name.text)
+        ) {
+          effectiveMemberTpNames = new Set([
+            ...ownerUnifiedTpNames,
+            ...bPTps.map(tp => tp.name.text),
+          ]);
+        } else {
+          effectiveMemberTpNames = new Set();
+        }
+      }
+    }
 
     if (bCallSigs.length > 0 && (isMethodDecl || hCallSigs.length > 0)) {
       if (variance === 'input' && !isMethodDecl) {
         // Required or optional callback property on input options (`H7`), e.g. `onError: (err: Error) => void`
+        const nullishCompatible =
+          (!hasTypeFlagInUnion(bPropType, ts.TypeFlags.Null) ||
+            hasTypeFlagInUnion(hPropType, ts.TypeFlags.Null)) &&
+          (!hasTypeFlagInUnion(bPropType, ts.TypeFlags.Undefined) ||
+            hasTypeFlagInUnion(hPropType, ts.TypeFlags.Undefined) ||
+            hPropOpt);
+        const cbDirectOk = isAssignableCompat(checker, nonNullB, nonNullH);
         const cbCovered =
-          isAssignableCompat(checker, nonNullB, nonNullH) ||
+          nullishCompatible &&
           bCallSigs.every(bCb =>
             hCallSigs.some(hCb =>
               doesHeadSignatureCoverBase(
@@ -2599,6 +3301,7 @@ function checkObjectMembers(
                 false,
                 'callback',
                 1,
+                cbDirectOk,
               ),
             ),
           );
@@ -2609,6 +3312,7 @@ function checkObjectMembers(
             (hProp.declarations && hProp.declarations[0]);
           const hDeclNode = hDecl && hDecl.type;
           if (
+            nullishCompatible &&
             isAstTypeExplainedByUnifiedExports(
               checker,
               bDeclNode,
@@ -2617,7 +3321,7 @@ function checkObjectMembers(
               new Set(),
               new Set(),
               false,
-              ownerUnifiedTpNames,
+              effectiveMemberTpNames,
             )
           ) {
             continue;
@@ -2627,7 +3331,29 @@ function checkObjectMembers(
           );
         }
       } else {
+        const readNullishOk =
+          (hasTypeFlagInUnion(bPropType, ts.TypeFlags.Null) ||
+            !hasTypeFlagInUnion(hPropType, ts.TypeFlags.Null)) &&
+          (hasTypeFlagInUnion(bPropType, ts.TypeFlags.Undefined) ||
+            bPropOpt ||
+            !hasTypeFlagInUnion(hPropType, ts.TypeFlags.Undefined));
+        const writeNullishOk =
+          variance !== 'class' ||
+          bReadonly ||
+          isMethodDecl ||
+          ((!hasTypeFlagInUnion(bWriteType, ts.TypeFlags.Null) ||
+            hasTypeFlagInUnion(hWriteType, ts.TypeFlags.Null)) &&
+            (!hasTypeFlagInUnion(bWriteType, ts.TypeFlags.Undefined) ||
+              hasTypeFlagInUnion(hWriteType, ts.TypeFlags.Undefined) ||
+              hPropOpt));
+        if (!readNullishOk || !writeNullishOk) {
+          errors.push(
+            `${ownerLabel}: property '${displayName}' became more restrictive ${formatTypePairDiff(checker, bPropType, hPropType)}.`,
+          );
+          continue;
+        }
         const methodPrefix = `${path.resolve(baseSf.fileName)}::method::${ownerLabel}::${displayName}::`;
+        const beforeSigErrLen = errors.length;
         checkSignatureSetCompatibility(
           checker,
           `${ownerLabel}: method '${displayName}'`,
@@ -2640,6 +3366,55 @@ function checkObjectMembers(
           errors,
           {fnBridgeKeyPrefix: methodPrefix},
         );
+        // Mutable non-method function property on a class/value (`hook: (req: string) => string`)
+        // also supports user assignment (`instance.hook = ...`), requiring contravariant write compatibility!
+        if (
+          errors.length === beforeSigErrLen &&
+          variance === 'class' &&
+          !bReadonly &&
+          !isMethodDecl
+        ) {
+          const writeDirectOk = isAssignableCompat(checker, nonNullB, nonNullH);
+          const writeCovered = bCallSigs.every(bCb =>
+            hCallSigs.some(hCb =>
+              doesHeadSignatureCoverBase(
+                checker,
+                bCb,
+                hCb,
+                baseSf,
+                headSf,
+                context,
+                false,
+                'callback',
+                1,
+                writeDirectOk,
+              ),
+            ),
+          );
+          if (!writeCovered) {
+            const bDeclNode = bDecl && bDecl.type;
+            const hDecl =
+              hProp.valueDeclaration ||
+              (hProp.declarations && hProp.declarations[0]);
+            const hDeclNode = hDecl && hDecl.type;
+            if (
+              !isAstTypeExplainedByUnifiedExports(
+                checker,
+                bDeclNode,
+                hDeclNode,
+                context,
+                new Set(),
+                new Set(),
+                false,
+                effectiveMemberTpNames,
+              )
+            ) {
+              errors.push(
+                `${ownerLabel}: property '${displayName}' became more restrictive ${formatTypePairDiff(checker, bPropType, hPropType)}.`,
+              );
+            }
+          }
+        }
       }
     } else {
       let propOk;
@@ -2671,7 +3446,7 @@ function checkObjectMembers(
             new Set(),
             new Set(),
             false,
-            ownerUnifiedTpNames,
+            effectiveMemberTpNames,
           )
         ) {
           continue;
@@ -2708,8 +3483,10 @@ function checkObjectMembers(
     ownerLabel,
     baseType,
     headType,
+    context,
     variance,
     errors,
+    ownerUnifiedTpNames,
   );
 }
 
@@ -2736,29 +3513,47 @@ function checkClassMetaRestrictions(exportName, bMeta, hMeta, errors) {
           `Class '${exportName}' member '${mKey}' visibility was restricted from '${bInfo.visibility}' to '${hInfo.visibility}'.`,
         );
       } else {
-        if (
-          bInfo.getterVis &&
-          bInfo.getterVis !== 'private' &&
-          hInfo.getterVis &&
-          rankVisibility(hInfo.getterVis) < rankVisibility(bInfo.getterVis)
-        ) {
-          errors.push(
-            `Class '${exportName}' getter '${mKey}' visibility was restricted from '${bInfo.getterVis}' to '${hInfo.getterVis}'.`,
-          );
-        }
-        if (
-          bInfo.setterVis &&
-          bInfo.setterVis !== 'private' &&
-          ((hInfo.setterVis &&
-            rankVisibility(hInfo.setterVis) <
-              rankVisibility(bInfo.setterVis)) ||
-            (!hInfo.setterVis &&
-              hInfo.getterVis !== null &&
-              bInfo.setterVis === 'protected'))
-        ) {
-          errors.push(
-            `Class '${exportName}' setter '${mKey}' visibility was restricted from '${bInfo.setterVis}' to '${hInfo.setterVis || 'removed'}'.`,
-          );
+        const bHasAccessor =
+          bInfo.getterVis !== null || bInfo.setterVis !== null;
+        const hHasAccessor =
+          hInfo.getterVis !== null || hInfo.setterVis !== null;
+        if (bHasAccessor || hHasAccessor) {
+          const bReadVis = bHasAccessor ? bInfo.getterVis : bInfo.visibility;
+          const hReadVis = hHasAccessor ? hInfo.getterVis : hInfo.visibility;
+          const bWriteVis = bHasAccessor
+            ? bInfo.setterVis
+            : bInfo.isReadonly
+              ? null
+              : bInfo.visibility;
+          const hWriteVis = hHasAccessor
+            ? hInfo.setterVis
+            : hInfo.isReadonly
+              ? null
+              : hInfo.visibility;
+          if (
+            bReadVis &&
+            bReadVis !== 'private' &&
+            ((hReadVis &&
+              rankVisibility(hReadVis) < rankVisibility(bReadVis)) ||
+              (!hReadVis && hWriteVis !== null))
+          ) {
+            errors.push(
+              `Class '${exportName}' getter '${mKey}' visibility was restricted from '${bReadVis}' to '${hReadVis || 'removed'}'.`,
+            );
+          }
+          if (
+            bWriteVis &&
+            bWriteVis !== 'private' &&
+            ((hWriteVis &&
+              rankVisibility(hWriteVis) < rankVisibility(bWriteVis)) ||
+              (!hWriteVis &&
+                hReadVis !== null &&
+                bInfo.setterVis === 'protected'))
+          ) {
+            errors.push(
+              `Class '${exportName}' setter '${mKey}' visibility was restricted from '${bWriteVis}' to '${hWriteVis || 'removed'}'.`,
+            );
+          }
         }
       }
       if (!bInfo.isReadonly && hInfo.isReadonly) {
@@ -2782,6 +3577,135 @@ function checkClassMetaRestrictions(exportName, bMeta, hMeta, errors) {
       }
     }
   }
+}
+
+function areOwnerHeritageClausesUnified(
+  checker,
+  baseSym,
+  headSym,
+  context,
+  ownerUnifiedTpNames,
+  visited = new Set(),
+) {
+  if (!baseSym || !headSym || visited.has(baseSym)) return true;
+  visited.add(baseSym);
+
+  const collectHeritageExprs = sym => {
+    const exprs = [];
+    for (const d of sym.declarations || []) {
+      if (
+        (ts.isClassDeclaration(d) || ts.isInterfaceDeclaration(d)) &&
+        d.heritageClauses
+      ) {
+        for (const hc of d.heritageClauses) {
+          if (hc.token === ts.SyntaxKind.ExtendsKeyword) {
+            exprs.push(...hc.types);
+          }
+        }
+      }
+    }
+    return exprs;
+  };
+
+  const bExprs = collectHeritageExprs(baseSym);
+  const hExprs = collectHeritageExprs(headSym);
+  if (bExprs.length === 0 && hExprs.length === 0) return true;
+  if (bExprs.length !== hExprs.length) return false;
+
+  for (let i = 0; i < bExprs.length; i++) {
+    const bExpr = bExprs[i];
+    const hExpr = hExprs[i];
+    const bSf = bExpr.getSourceFile();
+    const hSf = hExpr.getSourceFile();
+    const bHeadText = bExpr.expression.getText(bSf).trim();
+    const hHeadText = hExpr.expression.getText(hSf).trim();
+    if (bHeadText !== hHeadText) return false;
+
+    const bArgs = bExpr.typeArguments || [];
+    const hArgs = hExpr.typeArguments || [];
+    if (bArgs.length !== hArgs.length) return false;
+    for (let j = 0; j < bArgs.length; j++) {
+      if (
+        !isAstTypeExplainedByUnifiedExports(
+          checker,
+          bArgs[j],
+          hArgs[j],
+          context,
+          ownerUnifiedTpNames,
+          new Set(),
+          true,
+          ownerUnifiedTpNames,
+        )
+      ) {
+        return false;
+      }
+    }
+
+    const bBaseSym = checker.getSymbolAtLocation(
+      ts.isPropertyAccessExpression(bExpr.expression)
+        ? bExpr.expression.name
+        : bExpr.expression,
+    );
+    const hBaseSym = checker.getSymbolAtLocation(
+      ts.isPropertyAccessExpression(hExpr.expression)
+        ? hExpr.expression.name
+        : hExpr.expression,
+    );
+    const resB = bBaseSym ? resolveAliased(checker, bBaseSym) : undefined;
+    const resH = hBaseSym ? resolveAliased(checker, hBaseSym) : undefined;
+    if (resB && resH) {
+      const bTpInfo = getTypeParameterDecls(resB);
+      const hTpInfo = getTypeParameterDecls(resH);
+      const ancTpNames = new Set();
+      if (
+        bTpInfo.decls.length <= hTpInfo.decls.length &&
+        bTpInfo.decls.every(
+          (tp, idx) => tp.name.text === hTpInfo.decls[idx].name.text,
+        )
+      ) {
+        for (const tp of bTpInfo.decls) ancTpNames.add(tp.name.text);
+      } else if (bTpInfo.decls.length > 0 || hTpInfo.decls.length > 0) {
+        return false;
+      }
+      for (
+        let k = bArgs.length;
+        k < bTpInfo.decls.length && k < hTpInfo.decls.length;
+        k++
+      ) {
+        const bDef = bTpInfo.decls[k].default;
+        const hDef = hTpInfo.decls[k].default;
+        if (Boolean(bDef) !== Boolean(hDef)) return false;
+        if (
+          bDef &&
+          !isAstTypeExplainedByUnifiedExports(
+            checker,
+            bDef,
+            hDef,
+            context,
+            ancTpNames,
+            new Set(),
+            true,
+            ancTpNames,
+          )
+        ) {
+          return false;
+        }
+      }
+      if (
+        !areOwnerHeritageClausesUnified(
+          checker,
+          resB,
+          resH,
+          context,
+          ancTpNames,
+          visited,
+        )
+      ) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 function checkTypeSymbol(
@@ -2810,7 +3734,7 @@ function checkTypeSymbol(
 
   let baseType = checker.getDeclaredTypeOfSymbol(baseSym);
   let headType = checker.getDeclaredTypeOfSymbol(headSym);
-  const unbridgedPositionalOwnerTpNames = new Set();
+  const positionalOwnerTpNames = new Set();
 
   if (bTpInfo.max > 0) {
     const key = `${path.resolve(baseSf.fileName)}::type::${exportName}`;
@@ -2863,7 +3787,7 @@ function checkTypeSymbol(
               allTpNames,
               new Set(),
               false,
-              unbridgedPositionalOwnerTpNames,
+              positionalOwnerTpNames,
             );
         if (!conOk) {
           errors.push(
@@ -2872,37 +3796,68 @@ function checkTypeSymbol(
           return false;
         }
         if (bTpInfo.decls[i].name.text === hTpInfo.decls[i].name.text) {
-          unbridgedPositionalOwnerTpNames.add(bTpInfo.decls[i].name.text);
+          positionalOwnerTpNames.add(bTpInfo.decls[i].name.text);
         }
-      }
-      // Record remaining unconstrained positionally identical type parameters (`<T>` vs `<T>`, rejecting `<T, U>` -> `<U, T>` swaps).
-      let positionalOrderIntact = bTpInfo.decls.length <= hTpInfo.decls.length;
-      if (positionalOrderIntact) {
-        for (let i = 0; i < bTpInfo.decls.length; i++) {
-          if (
-            !hTpInfo.decls[i] ||
-            bTpInfo.decls[i].name.text !== hTpInfo.decls[i].name.text
-          ) {
-            positionalOrderIntact = false;
-            break;
-          }
-        }
-      }
-      if (positionalOrderIntact) {
-        for (const tp of bTpInfo.decls) {
-          unbridgedPositionalOwnerTpNames.add(tp.name.text);
-        }
-      } else {
-        unbridgedPositionalOwnerTpNames.clear();
       }
     }
-    const allOwnerTpNames = new Set([
-      ...bTpInfo.decls.map(tp => tp.name.text),
-      ...hTpInfo.decls.map(tp => tp.name.text),
-    ]);
+    // Record positionally identical type parameters (`<T>` vs `<T>`, rejecting `<T, U>` -> `<U, T>` swaps)
+    // for both bridged and unbridged generic types/interfaces/classes.
+    let positionalOrderIntact = bTpInfo.decls.length <= hTpInfo.decls.length;
+    if (positionalOrderIntact) {
+      for (let i = 0; i < bTpInfo.decls.length; i++) {
+        if (
+          !hTpInfo.decls[i] ||
+          bTpInfo.decls[i].name.text !== hTpInfo.decls[i].name.text
+        ) {
+          positionalOrderIntact = false;
+          break;
+        }
+      }
+    }
+    if (positionalOrderIntact) {
+      for (const tp of bTpInfo.decls) {
+        positionalOwnerTpNames.add(tp.name.text);
+      }
+    } else {
+      positionalOwnerTpNames.clear();
+    }
     for (let i = 0; i < bTpInfo.decls.length && i < hTpInfo.decls.length; i++) {
-      const bDef = bTpInfo.decls[i].default;
-      const hDef = hTpInfo.decls[i].default;
+      const bTp = bTpInfo.decls[i];
+      const hTp = hTpInfo.decls[i];
+      const bIn = hasTpModifier(bTp, ts.SyntaxKind.InKeyword);
+      const bOut = hasTpModifier(bTp, ts.SyntaxKind.OutKeyword);
+      const hIn = hasTpModifier(hTp, ts.SyntaxKind.InKeyword);
+      const hOut = hasTpModifier(hTp, ts.SyntaxKind.OutKeyword);
+      if (
+        (bOut && !hOut) ||
+        (bIn && !hIn) ||
+        (!bIn &&
+          hIn &&
+          (bOut ||
+            variance !== 'input' ||
+            (context.inOutput && context.inOutput.has(exportName)))) ||
+        (!bOut &&
+          hOut &&
+          (bIn ||
+            variance !== 'output' ||
+            (context.inInput && context.inInput.has(exportName))))
+      ) {
+        errors.push(
+          `Type '${exportName}' type parameter '${bTp.name.text}' variance modifier ('in'/'out') changed incompatibly.`,
+        );
+        return false;
+      }
+      if (
+        hasTpModifier(bTp, ts.SyntaxKind.ConstKeyword) &&
+        !hasTpModifier(hTp, ts.SyntaxKind.ConstKeyword)
+      ) {
+        errors.push(
+          `Type '${exportName}' type parameter '${bTp.name.text}' removed 'const' modifier.`,
+        );
+        return false;
+      }
+      const bDef = bTp.default;
+      const hDef = hTp.default;
       if (!bDef) continue;
       if (!hDef) {
         errors.push(
@@ -2920,7 +3875,10 @@ function checkTypeSymbol(
           bDef,
           hDef,
           context,
-          allOwnerTpNames,
+          positionalOwnerTpNames,
+          new Set(),
+          false,
+          positionalOwnerTpNames,
         );
       if (!defOk) {
         errors.push(
@@ -2930,6 +3888,21 @@ function checkTypeSymbol(
       }
     }
   }
+
+  const ownerHeritageUnified = areOwnerHeritageClausesUnified(
+    checker,
+    baseSym,
+    headSym,
+    context,
+    positionalOwnerTpNames,
+  );
+  const memberContext = {
+    ...context,
+    currentOwnerBaseSym: baseSym,
+    currentOwnerHeadSym: headSym,
+    ownerUnifiedTpNames: positionalOwnerTpNames,
+    ownerHeritageUnified,
+  };
 
   const startErrLen = errors.length;
 
@@ -2955,8 +3928,8 @@ function checkTypeSymbol(
         checker,
         bExt,
         hExt,
-        context,
-        new Set((bClsDecl.typeParameters || []).map(tp => tp.name.text)),
+        memberContext,
+        positionalOwnerTpNames,
       ),
     );
     checkObjectMembers(
@@ -2966,12 +3939,12 @@ function checkTypeSymbol(
       headType,
       baseSf,
       headSf,
-      context,
+      memberContext,
       errors,
       'class',
       {
         verifiedExternalExtends,
-        ownerUnifiedTpNames: unbridgedPositionalOwnerTpNames,
+        ownerUnifiedTpNames: positionalOwnerTpNames,
       },
     );
     return errors.length === startErrLen;
@@ -2990,27 +3963,73 @@ function checkTypeSymbol(
       ts.SignatureKind.Construct,
       baseSf,
       headSf,
-      context,
+      memberContext,
       errors,
     );
   }
+
+  const bAliasDecl =
+    !(baseSym.flags & ts.SymbolFlags.Interface) &&
+    (baseSym.declarations || []).find(ts.isTypeAliasDeclaration);
+  const hAliasDecl =
+    !(headSym.flags & ts.SymbolFlags.Interface) &&
+    (headSym.declarations || []).find(ts.isTypeAliasDeclaration);
 
   const baseCallSigs = checker.getSignaturesOfType(
     baseType,
     ts.SignatureKind.Call,
   );
   if (baseCallSigs.length > 0) {
-    checkSignatureSetCompatibility(
-      checker,
-      `Callable type '${exportName}' signature`,
-      baseType,
-      headType,
-      ts.SignatureKind.Call,
-      baseSf,
-      headSf,
-      context,
-      errors,
+    const usedInInput = Boolean(
+      context.inInput && context.inInput.has(exportName),
     );
+    const usedInOutput = Boolean(
+      context.inOutput && context.inOutput.has(exportName),
+    );
+    const isFnTypeAlias = Boolean(
+      bAliasDecl && ts.isFunctionTypeNode(bAliasDecl.type),
+    );
+    if (!usedInInput || usedInOutput) {
+      checkSignatureSetCompatibility(
+        checker,
+        `Callable type '${exportName}' signature`,
+        baseType,
+        headType,
+        ts.SignatureKind.Call,
+        baseSf,
+        headSf,
+        memberContext,
+        errors,
+      );
+    }
+    if (usedInInput || (isFnTypeAlias && !usedInOutput)) {
+      const headCallSigs = checker.getSignaturesOfType(
+        headType,
+        ts.SignatureKind.Call,
+      );
+      const cbDirectOk = isAssignableCompat(checker, baseType, headType);
+      for (const bSig of baseCallSigs) {
+        const covered = headCallSigs.some(hSig =>
+          doesHeadSignatureCoverBase(
+            checker,
+            bSig,
+            hSig,
+            baseSf,
+            headSf,
+            memberContext,
+            false,
+            'callback',
+            1,
+            cbDirectOk,
+          ),
+        );
+        if (!covered) {
+          errors.push(
+            `Callable type '${exportName}' signature '${checker.signatureToString(bSig)}' became more restrictive for implementations.`,
+          );
+        }
+      }
+    }
   }
 
   const isTupleOrArray =
@@ -3021,16 +4040,12 @@ function checkTypeSymbol(
   const baseProps = checker.getPropertiesOfType(baseType);
   const baseIndices = checker.getIndexInfosOfType(baseType) || [];
 
-  const bAliasDecl =
-    !(baseSym.flags & ts.SymbolFlags.Interface) &&
-    (baseSym.declarations || []).find(ts.isTypeAliasDeclaration);
-  const hAliasDecl =
-    !(headSym.flags & ts.SymbolFlags.Interface) &&
-    (headSym.declarations || []).find(ts.isTypeAliasDeclaration);
-  if (bAliasDecl && hAliasDecl) {
-    const aliasTpNames = new Set(
-      (bAliasDecl.typeParameters || []).map(tp => tp.name.text),
-    );
+  if (
+    bAliasDecl &&
+    hAliasDecl &&
+    baseCallSigs.length === 0 &&
+    baseConstructSigs.length === 0
+  ) {
     const defaultsOk = (bAliasDecl.typeParameters || []).every((btp, idx) => {
       const htp = (hAliasDecl.typeParameters || [])[idx];
       if (!btp.default) return true;
@@ -3044,11 +4059,11 @@ function checkTypeSymbol(
           checker,
           btp.default,
           htp.default,
-          context,
-          aliasTpNames,
+          memberContext,
+          positionalOwnerTpNames,
           new Set(),
           false,
-          unbridgedPositionalOwnerTpNames,
+          positionalOwnerTpNames,
         )
       );
     });
@@ -3058,11 +4073,11 @@ function checkTypeSymbol(
         checker,
         bAliasDecl.type,
         hAliasDecl.type,
-        context,
-        aliasTpNames,
+        memberContext,
+        positionalOwnerTpNames,
         new Set(),
         false,
-        unbridgedPositionalOwnerTpNames,
+        positionalOwnerTpNames,
       )
     ) {
       return errors.length === startErrLen;
@@ -3092,11 +4107,31 @@ function checkTypeSymbol(
       headType,
       baseSf,
       headSf,
-      context,
+      memberContext,
       errors,
       variance,
-      {ownerUnifiedTpNames: unbridgedPositionalOwnerTpNames},
+      {ownerUnifiedTpNames: positionalOwnerTpNames},
     );
+    if (variance === 'input') {
+      const headCallSigs = checker.getSignaturesOfType(
+        headType,
+        ts.SignatureKind.Call,
+      );
+      const headConstructSigs = checker.getSignaturesOfType(
+        headType,
+        ts.SignatureKind.Construct,
+      );
+      if (baseCallSigs.length === 0 && headCallSigs.length > 0) {
+        errors.push(
+          `Interface/Type '${exportName}': new required call signature was added.`,
+        );
+      }
+      if (baseConstructSigs.length === 0 && headConstructSigs.length > 0) {
+        errors.push(
+          `Interface/Type '${exportName}': new required construct signature was added.`,
+        );
+      }
+    }
     if (
       isPureInterfacePair ||
       errors.length > startErrLen ||
@@ -3182,7 +4217,12 @@ function checkNamespaceSubExports(
         (ts.SymbolFlags.Interface |
           ts.SymbolFlags.TypeAlias |
           ts.SymbolFlags.Enum) &&
-      !(resB.flags & ts.SymbolFlags.Class)
+      !(
+        resB.flags &
+        (ts.SymbolFlags.Class |
+          ts.SymbolFlags.Function |
+          ts.SymbolFlags.Variable)
+      )
     ) {
       if (!(resB.flags & ts.SymbolFlags.Enum)) {
         nsTargetSymToExpName.set(resB, fullName);
@@ -3202,12 +4242,23 @@ function checkNamespaceSubExports(
     bSubExports,
     nsTargetSymToExpName,
   );
+  const nsContext = {
+    ...context,
+    inInput,
+    inOutput,
+  };
   for (const [bSub, fullName, subName] of nsTypeFirst) {
     const resB = resolveAliased(checker, bSub);
     const resH = resolveAliased(checker, hSubMap.get(subName));
     if (
       resB.flags & ts.SymbolFlags.Interface &&
       resH.flags & ts.SymbolFlags.Interface &&
+      !(
+        resB.flags &
+        (ts.SymbolFlags.Class |
+          ts.SymbolFlags.Function |
+          ts.SymbolFlags.Variable)
+      ) &&
       !(inOutput.has(fullName) && !inInput.has(fullName))
     ) {
       context.unifiedModuleSymbols.add(resB);
@@ -3225,13 +4276,15 @@ function checkNamespaceSubExports(
       hSubMap.get(subName),
       baseSf,
       headSf,
-      context,
+      nsContext,
       v,
       errors,
       visitedNamespaces,
     );
     const resB = resolveAliased(checker, bSub);
-    if (resB.flags & ts.SymbolFlags.Enum && errors.length === before) {
+    if (errors.length > before) {
+      context.unifiedModuleSymbols.delete(resB);
+    } else if (resB.flags & ts.SymbolFlags.Enum) {
       context.unifiedModuleSymbols.add(resB);
     }
   }
@@ -3246,12 +4299,12 @@ function checkNamespaceSubExports(
       hSubMap.get(subName),
       baseSf,
       headSf,
-      context,
+      nsContext,
       v,
       errors,
       visitedNamespaces,
     );
-    if (v !== 'output' && errors.length === before) {
+    if (errors.length === before) {
       context.unifiedModuleSymbols.add(resolveAliased(checker, bSub));
     }
   }
@@ -3263,7 +4316,7 @@ function checkNamespaceSubExports(
       hSubMap.get(subName),
       baseSf,
       headSf,
-      context,
+      nsContext,
       'input',
       errors,
       visitedNamespaces,
@@ -3325,11 +4378,38 @@ function checkValueSymbol(
     return;
   }
 
+  const bValTpInfo = getTypeParameterDecls(resolvedBaseSym);
+  const hValTpInfo = getTypeParameterDecls(resolvedHeadSym);
+  const valOwnerTpNames = new Set();
+  if (
+    bValTpInfo.decls.length <= hValTpInfo.decls.length &&
+    bValTpInfo.decls.every(
+      (tp, idx) => tp.name.text === hValTpInfo.decls[idx].name.text,
+    )
+  ) {
+    for (const tp of bValTpInfo.decls) valOwnerTpNames.add(tp.name.text);
+  }
+  const valHeritageUnified = areOwnerHeritageClausesUnified(
+    checker,
+    resolvedBaseSym,
+    resolvedHeadSym,
+    context,
+    valOwnerTpNames,
+  );
+  const valContext = {
+    ...context,
+    currentOwnerBaseSym: resolvedBaseSym,
+    currentOwnerHeadSym: resolvedHeadSym,
+    ownerUnifiedTpNames: valOwnerTpNames,
+    ownerHeritageUnified: valHeritageUnified,
+  };
+
   const baseConstructSigs = checker.getSignaturesOfType(
     baseValType,
     ts.SignatureKind.Construct,
   );
   if (baseConstructSigs.length > 0) {
+    const ctorPrefix = `${path.resolve(baseSf.fileName)}::ctor::${exportName}::`;
     checkSignatureSetCompatibility(
       checker,
       `Constructor for '${exportName}'`,
@@ -3338,9 +4418,9 @@ function checkValueSymbol(
       ts.SignatureKind.Construct,
       baseSf,
       headSf,
-      context,
+      valContext,
       errors,
-      {ignoreReturnType: true},
+      {ignoreReturnType: true, fnBridgeKeyPrefix: ctorPrefix},
     );
   }
 
@@ -3358,7 +4438,7 @@ function checkValueSymbol(
       ts.SignatureKind.Call,
       baseSf,
       headSf,
-      context,
+      valContext,
       errors,
       {fnBridgeKeyPrefix: fnPrefix},
     );
@@ -3380,6 +4460,17 @@ function checkValueSymbol(
           !isBuiltinFunctionProperty(p.getName()),
       );
 
+  const bReadonly = isSymbolReadonly(resolvedBaseSym);
+  const hReadonly = isSymbolReadonly(resolvedHeadSym);
+  if (
+    baseConstructSigs.length === 0 &&
+    baseCallSigs.length === 0 &&
+    !bReadonly &&
+    hReadonly
+  ) {
+    errors.push(`Exported value '${exportName}' was made readonly ('const').`);
+  }
+
   if (
     baseConstructSigs.length > 0 ||
     hasCustomCallableProps ||
@@ -3387,6 +4478,7 @@ function checkValueSymbol(
       baseCallSigs.length === 0 &&
       checker.getPropertiesOfType(baseValType).length > 0)
   ) {
+    const beforeObjErrs = errors.length;
     checkObjectMembers(
       checker,
       `Value '${exportName}'`,
@@ -3394,7 +4486,7 @@ function checkValueSymbol(
       headValType,
       baseSf,
       headSf,
-      context,
+      valContext,
       errors,
       'class',
       {
@@ -3403,16 +4495,31 @@ function checkValueSymbol(
         isStaticClassSide: Boolean(
           resolvedBaseSym.flags & ts.SymbolFlags.Class,
         ),
+        ownerUnifiedTpNames: valOwnerTpNames,
       },
     );
-  } else if (baseConstructSigs.length === 0 && baseCallSigs.length === 0) {
-    const bReadonly = isSymbolReadonly(resolvedBaseSym);
-    const hReadonly = isSymbolReadonly(resolvedHeadSym);
-    if (!bReadonly && hReadonly) {
-      errors.push(
-        `Exported value '${exportName}' was made readonly ('const').`,
-      );
+    if (
+      errors.length === beforeObjErrs &&
+      baseConstructSigs.length === 0 &&
+      baseCallSigs.length === 0 &&
+      !bReadonly &&
+      !isAssignableCompat(checker, baseValType, headValType)
+    ) {
+      const bDecl0 =
+        resolvedBaseSym.declarations && resolvedBaseSym.declarations[0];
+      const hDecl0 =
+        resolvedHeadSym.declarations && resolvedHeadSym.declarations[0];
+      const bTNode = bDecl0 && bDecl0.type;
+      const hTNode = hDecl0 && hDecl0.type;
+      if (
+        !isAstTypeExplainedByUnifiedExports(checker, bTNode, hTNode, context)
+      ) {
+        errors.push(
+          `Mutable exported variable '${exportName}' type was narrowed incompatibly ${formatTypePairDiff(checker, baseValType, headValType)}.`,
+        );
+      }
     }
+  } else if (baseConstructSigs.length === 0 && baseCallSigs.length === 0) {
     const covOk = isAssignableCompat(checker, headValType, baseValType);
     const contraOk = isAssignableCompat(checker, baseValType, headValType);
     if (!covOk && !contraOk) {
@@ -3538,7 +4645,7 @@ function compareSingleExportPair(
       resolvedHeadSym.flags & ts.SymbolFlags.Class
     ) {
       context.unifiedModuleSymbols.add(resolvedBaseSym);
-    } else if (typePassed && variance !== 'output') {
+    } else if (typePassed) {
       context.unifiedModuleSymbols.add(resolvedBaseSym);
     } else if (context.unifiedModuleSymbols.has(resolvedBaseSym)) {
       // Remove pre-seeded mutually recursive input interface if it actually failed member verification!
@@ -3547,6 +4654,7 @@ function compareSingleExportPair(
   }
 
   if (bHasVal && hHasVal) {
+    const valErrBefore = errors.length;
     checkValueSymbol(
       checker,
       exportName,
@@ -3560,6 +4668,12 @@ function compareSingleExportPair(
       errors,
       visitedNamespaces,
     );
+    if (
+      errors.length > valErrBefore &&
+      !(resolvedBaseSym.flags & ts.SymbolFlags.Class)
+    ) {
+      context.unifiedModuleSymbols.delete(resolvedBaseSym);
+    }
   }
 
   // `H5`: Also verify exported types/interfaces/sub-namespaces inside declarations merged with
@@ -3595,7 +4709,7 @@ export function compareModules(
   if (!baseSf || !headSf) return errors;
   const baseModSym = checker.getSymbolAtLocation(baseSf);
   const headModSym = checker.getSymbolAtLocation(headSf);
-  if (!baseModSym || !headModSym) return errors;
+  if (!baseModSym) return errors;
 
   const rawMetaByFile = extraContext.rawMetaByFile || new Map();
   if (rawBaseSf && !rawMetaByFile.has(path.resolve(rawBaseSf.fileName))) {
@@ -3612,12 +4726,15 @@ export function compareModules(
   }
 
   const baseExports = [...checker.getExportsOfModule(baseModSym)];
-  const headExports = [...checker.getExportsOfModule(headModSym)];
+  const headExports = headModSym
+    ? [...checker.getExportsOfModule(headModSym)]
+    : [];
 
   const baseEq =
     baseModSym.exports &&
     baseModSym.exports.get(ts.InternalSymbolName.ExportEquals);
   const headEq =
+    headModSym &&
     headModSym.exports &&
     headModSym.exports.get(ts.InternalSymbolName.ExportEquals);
   const shouldIncludeExportEq = (eqSym, existingList) => {
@@ -3661,7 +4778,12 @@ export function compareModules(
         (ts.SymbolFlags.Interface |
           ts.SymbolFlags.TypeAlias |
           ts.SymbolFlags.Enum) &&
-      !(resolvedBase.flags & ts.SymbolFlags.Class)
+      !(
+        resolvedBase.flags &
+        (ts.SymbolFlags.Class |
+          ts.SymbolFlags.Function |
+          ts.SymbolFlags.Variable)
+      )
     ) {
       if (!(resolvedBase.flags & ts.SymbolFlags.Enum)) {
         targetSymToExportName.set(resolvedBase, name);
@@ -3735,6 +4857,12 @@ export function compareModules(
     if (
       resolvedB.flags & ts.SymbolFlags.Interface &&
       resolvedH.flags & ts.SymbolFlags.Interface &&
+      !(
+        resolvedB.flags &
+        (ts.SymbolFlags.Class |
+          ts.SymbolFlags.Function |
+          ts.SymbolFlags.Variable)
+      ) &&
       !(inOutput.has(exportName) && !inInput.has(exportName))
     ) {
       // Pre-seed mutually recursive input interfaces (`GaxiosOptionsPrepared <-> RetryConfig`);
@@ -3756,6 +4884,8 @@ export function compareModules(
     dtsFiles: extraContext.dtsFiles || null,
     unifiedModuleSymbols,
     verifiedHeadCounterpartMap,
+    inInput,
+    inOutput,
   };
 
   const sharedVisitedNamespaces = new Set();
@@ -3780,7 +4910,9 @@ export function compareModules(
       sharedVisitedNamespaces,
     );
     const resolvedBase = resolveAliased(checker, baseSym);
-    if (resolvedBase.flags & ts.SymbolFlags.Enum && errors.length === before) {
+    if (errors.length > before) {
+      unifiedModuleSymbols.delete(resolvedBase);
+    } else if (resolvedBase.flags & ts.SymbolFlags.Enum) {
       unifiedModuleSymbols.add(resolvedBase);
     }
   }
@@ -3804,7 +4936,7 @@ export function compareModules(
       errors,
       sharedVisitedNamespaces,
     );
-    if (variance !== 'output' && errors.length === before) {
+    if (errors.length === before) {
       unifiedModuleSymbols.add(resolveAliased(checker, baseSym));
     }
   }
@@ -3843,9 +4975,10 @@ export function runDtsPairComparisons(
     noEmit: true,
   };
 
+  const localDtsFiles = new Map(dtsFiles);
   const parsedDtsCache = new Map();
   const dtsDirs = new Set();
-  for (const k of dtsFiles.keys()) {
+  for (const k of localDtsFiles.keys()) {
     let dir = path.dirname(path.resolve(k));
     while (dir && !dtsDirs.has(dir)) {
       dtsDirs.add(dir);
@@ -3857,13 +4990,13 @@ export function runDtsPairComparisons(
 
   const jsFileMapsToDts = resolved => {
     if (resolved.endsWith('.mjs')) {
-      return dtsFiles.has(resolved.slice(0, -4) + '.d.mts');
+      return localDtsFiles.has(resolved.slice(0, -4) + '.d.mts');
     }
     if (resolved.endsWith('.cjs')) {
-      return dtsFiles.has(resolved.slice(0, -4) + '.d.cts');
+      return localDtsFiles.has(resolved.slice(0, -4) + '.d.cts');
     }
     if (resolved.endsWith('.js')) {
-      return dtsFiles.has(resolved.slice(0, -3) + '.d.ts');
+      return localDtsFiles.has(resolved.slice(0, -3) + '.d.ts');
     }
     return false;
   };
@@ -3872,7 +5005,7 @@ export function runDtsPairComparisons(
     ...sharedHost,
     realpath(p) {
       const resolved = path.resolve(p);
-      if (dtsFiles.has(resolved)) return resolved;
+      if (localDtsFiles.has(resolved)) return resolved;
       return sharedHost.realpath ? sharedHost.realpath(resolved) : resolved;
     },
     directoryExists(dirName) {
@@ -3882,12 +5015,12 @@ export function runDtsPairComparisons(
     },
     fileExists(fileName) {
       const resolved = path.resolve(fileName);
-      if (dtsFiles.has(resolved)) return true;
+      if (localDtsFiles.has(resolved)) return true;
       // Hide raw .ts/.mts/.cts/.js/.mjs/.cjs counterparts whenever a normalized .d.ts exists in memory!
       if (
         (/\.(c|m)?ts$/.test(resolved) &&
           !isDeclarationFilePath(resolved) &&
-          dtsFiles.has(toDtsFileName(resolved))) ||
+          localDtsFiles.has(toDtsFileName(resolved))) ||
         jsFileMapsToDts(resolved)
       ) {
         return false;
@@ -3896,16 +5029,16 @@ export function runDtsPairComparisons(
     },
     readFile(fileName) {
       const resolved = path.resolve(fileName);
-      if (dtsFiles.has(resolved)) return dtsFiles.get(resolved);
+      if (localDtsFiles.has(resolved)) return localDtsFiles.get(resolved);
       return sharedHost.readFile(resolved);
     },
     getSourceFile(fileName, languageVersion, onError, shouldCreate) {
       const resolved = path.resolve(fileName);
       if (parsedDtsCache.has(resolved)) return parsedDtsCache.get(resolved);
-      if (dtsFiles.has(resolved)) {
+      if (localDtsFiles.has(resolved)) {
         const sf = ts.createSourceFile(
           resolved,
-          dtsFiles.get(resolved),
+          localDtsFiles.get(resolved),
           languageVersion,
           true,
         );
@@ -3919,11 +5052,71 @@ export function runDtsPairComparisons(
         shouldCreate,
       );
     },
+    resolveModuleNameLiterals(
+      moduleLiterals,
+      containingFile,
+      redirectedReference,
+      options,
+    ) {
+      const baseResolved = sharedHost.resolveModuleNameLiterals
+        ? sharedHost.resolveModuleNameLiterals.call(
+            this,
+            moduleLiterals,
+            containingFile,
+            redirectedReference,
+            options,
+          )
+        : moduleLiterals.map(lit =>
+            ts.resolveModuleName(
+              lit.text,
+              containingFile,
+              options,
+              this,
+              undefined,
+              redirectedReference,
+            ),
+          );
+      return baseResolved.map((res, idx) => {
+        if (res && res.resolvedModule) return res;
+        const spec = moduleLiterals[idx].text;
+        if (spec.startsWith('.') || path.isAbsolute(spec)) {
+          const absBase = path.isAbsolute(spec)
+            ? path.resolve(spec)
+            : path.resolve(path.dirname(containingFile), spec);
+          const dtsCandidates = [];
+          if (absBase.endsWith('.mjs')) {
+            const stem = absBase.slice(0, -4);
+            dtsCandidates.push([`${stem}.d.mts`, ts.Extension.Dmts]);
+            dtsCandidates.push([`${stem}.mts`, ts.Extension.Mts]);
+          } else if (absBase.endsWith('.cjs')) {
+            const stem = absBase.slice(0, -4);
+            dtsCandidates.push([`${stem}.d.cts`, ts.Extension.Dcts]);
+            dtsCandidates.push([`${stem}.cts`, ts.Extension.Cts]);
+          } else if (absBase.endsWith('.js')) {
+            const stem = absBase.slice(0, -3);
+            dtsCandidates.push([`${stem}.d.ts`, ts.Extension.Dts]);
+            dtsCandidates.push([`${stem}.ts`, ts.Extension.Ts]);
+          }
+          for (const [candPath, ext] of dtsCandidates) {
+            if (localDtsFiles.has(candPath)) {
+              return {
+                resolvedModule: {
+                  resolvedFileName: candPath,
+                  extension: ext,
+                  isExternalLibraryImport: false,
+                },
+              };
+            }
+          }
+        }
+        return res;
+      });
+    },
   };
 
   const rootNames = [];
   for (const pair of dtsPairs) {
-    if (dtsFiles.has(pair.baseDts) && dtsFiles.has(pair.headDts)) {
+    if (localDtsFiles.has(pair.baseDts) && localDtsFiles.has(pair.headDts)) {
       rootNames.push(pair.baseDts, pair.headDts);
     }
   }
@@ -3959,9 +5152,13 @@ export function runDtsPairComparisons(
       path.dirname(dtsPairs[0].headDts),
       '__bcc_generic_bridge__.mts',
     );
-    const built = buildGenericBridgeSource(pairsProbeMeta, checker, dtsFiles);
+    const built = buildGenericBridgeSource(
+      pairsProbeMeta,
+      checker,
+      localDtsFiles,
+    );
     if (built.taskMap.size > 0) {
-      dtsFiles.set(bridgePath, built.bridgeCode);
+      localDtsFiles.set(bridgePath, built.bridgeCode);
       dtsDirs.add(path.dirname(bridgePath));
       cmpProg = ts.createProgram({
         rootNames: [...rootNames, bridgePath],
@@ -3987,7 +5184,7 @@ export function runDtsPairComparisons(
       cmpProg.getSourceFile(pair.headDts),
       null,
       null,
-      {rawMetaByFile, bridgeResults, program: cmpProg, dtsFiles},
+      {rawMetaByFile, bridgeResults, program: cmpProg, dtsFiles: localDtsFiles},
     );
     pairResults.push({label: pair.label, errors: errs});
   }

@@ -1551,51 +1551,496 @@ describe('breaking-change-check', () => {
         ).length > 0,
       );
     });
+
+    it(
+      'covers callback arity/rest tails, callable nullability, generic helpers, Reference any-safety, index signatures, overloaded generic methods, and variance modifiers',
+      {timeout: 60000},
+      async () => {
+        // H2: Callback required parameter changed to optional or rest, and callback rest-tail truncation
+        assert.ok(
+          compareSourceTexts(
+            'export function onMsg(cb: (topic: string, data: string) => void): void {}',
+            'export function onMsg(cb: (topic: string, ...data: string[]) => void): void {}',
+          ).length > 0,
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function onLog(cb: (lvl: number, ...tags: string[]) => void): void {}',
+            'export function onLog(cb: (lvl: number, meta: string, ...counts: number[]) => void): void {}',
+          ).length > 0,
+        );
+        // H2: Callable property nullability & mutable callable property write variance
+        assert.ok(
+          compareSourceTexts(
+            'export class Sender { send: (msg: string) => Promise<void> = async () => {}; }',
+            'export class Sender { send: ((msg: string) => Promise<void>) | null = null; }',
+          ).some(e => e.includes("Class 'Sender': property 'send'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface Opts { onError?: ((err: Error) => void) | null; } export function run(o: Opts): void {}',
+            'export interface Opts { onError?: (err: Error) => void; } export function run(o: Opts): void {}',
+          ).some(e => e.includes("callback property 'onError'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export class Client { hook: (req: string) => string = s => s; }',
+            'export class Client { hook: (req: string | number) => string = s => String(s); }',
+          ).some(e => e.includes("Class 'Client': property 'hook'")),
+        );
+        // H3: Unexported generic type alias helper constraint/default narrowing & @internal default class in .d.ts
+        assert.ok(
+          compareSourceTexts(
+            'export interface Opts { a?: string; }\ntype Env<T extends string | number = string> = { opts?: Opts; payload: T };\nexport declare function read(): Env;',
+            'export interface Opts { a?: string | number; }\ntype Env<T extends number = number> = { opts?: Opts; payload: T };\nexport declare function read(): Env;',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ).length > 0,
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            '/** @internal */\nexport default class InternalThing { x: string; }\nexport interface Pub { a: number; }',
+            '/** @internal */\nexport default class InternalThing { x: number; }\nexport interface Pub { a: number; }',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ),
+          [],
+        );
+        // M2: hasUnsafeAnyAssignment on ObjectFlags.Reference generic interfaces
+        assert.ok(
+          compareSourceTexts(
+            'export interface GaxiosResponse<T = any> { data: T; }\nexport function handle(res: GaxiosResponse<any>): void {}',
+            'export interface GaxiosResponse<T = any> { data: T; }\nexport function handle(res: GaxiosResponse<{ id: string }>): void {}',
+          ).length > 0,
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface GaxiosResponse<T = any> { data: T; }\nexport declare function fetchUser(): Promise<GaxiosResponse<{ id: string }>>;',
+            'export interface GaxiosResponse<T = any> { data: T; }\nexport declare function fetchUser(): Promise<GaxiosResponse<any>>;',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ).length > 0,
+        );
+        // M4: Index signature referencing unified exported class
+        assert.deepEqual(
+          compareSourceTexts(
+            'export class Topic { name = ""; }\nexport interface TopicMap { [key: string]: Topic; }',
+            'export class Topic { name = ""; flush(): void {} }\nexport interface TopicMap { [key: string]: Topic; }',
+          ),
+          [],
+        );
+        // M5: Multi-overload generic methods & single rest tuple minArgs
+        assert.ok(
+          compareSourceTexts(
+            'export class Table {\n  insert<T>(rows: Array<T | string>): Promise<void>;\n  insert<T>(rows: Array<T | string>, cb: (err: Error | null) => void): void;\n  insert<T>(_rows: Array<T | string>): any {}\n}',
+            'export class Table {\n  insert<T>(rows: Array<T>): Promise<void>;\n  insert<T>(rows: Array<T>, cb: (err: Error | null) => void): void;\n  insert<T>(_rows: Array<T>): any {}\n}',
+          ).some(e => e.includes("Class 'Table': method 'insert'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function exec(...args: string[]): void {}',
+            'export function exec(...args: [string, ...string[]]): void {}',
+          ).length > 0,
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function exec(...args: string[]): void {}',
+            'export function exec(...args: [...string[], { strict: boolean }]): void {}',
+          ).length > 0,
+        );
+        // L1 & L2: Variance modifiers (in/out/const) and removed class getter with setter retained
+        assert.ok(
+          compareSourceTexts(
+            'export interface Producer<out T> { get(): T; }',
+            'export interface Producer<in out T> { get(): T; }',
+          ).some(e => e.includes('variance modifier')),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function routes<const T extends readonly string[]>(r: T): T { return r; }',
+            'export function routes<T extends readonly string[]>(r: T): T { return r; }',
+          ).length > 0,
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export class Box { get v(): string | undefined { return ""; } set v(x: string | undefined) {} }',
+            'export class Box { set v(x: string | undefined) {} }',
+          ).some(e => e.includes("getter 'v' visibility was restricted")),
+        );
+        // Output-only interface wrapping a unified class + non-exported @internal interface in .d.ts
+        assert.deepEqual(
+          compareSourceTexts(
+            'export interface ClientConfig { port?: number; }\nexport class Topic { constructor(c?: ClientConfig) {} }\nexport interface GetTopicsResponse { topics: Topic[]; }\nexport declare function getTopics(): Promise<GetTopicsResponse>;',
+            'export interface ClientConfig { port?: number | string; }\nexport class Topic { constructor(c?: ClientConfig) {} }\nexport interface GetTopicsResponse { topics: Topic[]; totalCount: number; }\nexport declare function getTopics(): Promise<GetTopicsResponse>;',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ),
+          [],
+        );
+        assert.ok(
+          compareSourceTexts(
+            '/** @internal */\ninterface InternalMeta { tag: string | number; }\nexport interface PublicOpts { meta?: InternalMeta; }',
+            '/** @internal */\ninterface InternalMeta { tag: number; }\nexport interface PublicOpts { meta?: InternalMeta; }',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ).length > 0,
+        );
+        // Round 2A & 2B: unexported enum unification, variance across MethodSignature/unexported wrappers/callbacks/inherited classes,
+        // dropping all exports, ambient module @internal & local helpers, Node10 .mts generics, callback type predicates, Readonly<T>, and property-to-accessor restrictions
+        assert.deepEqual(
+          compareSourceTexts(
+            'enum Mode { A = "a", B = "b" }\nexport function setMode(m: Mode, extra?: string): void {}',
+            'enum Mode { A = "a", B = "b" }\nexport function setMode(m: Mode, extra?: string | number): void {}',
+          ),
+          [],
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface Row { id: number; label: string; }\ninterface QueryPage { rows: Row[]; }\nexport declare function query(): Promise<QueryPage>;',
+            'export interface Row { id?: number; label: string; }\ninterface QueryPage { rows: Row[]; }\nexport declare function query(): Promise<QueryPage>;',
+          ).some(e => e.includes("Interface/Type 'Row'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface Token { secret: string; }\nexport interface AuthClient { send(token: Token): void; }\nexport function connect(auth: AuthClient): void {}',
+            'export interface Token { secret: string; requiredNew: number; }\nexport interface AuthClient { send(token: Token): void; }\nexport function connect(auth: AuthClient): void {}',
+          ).some(e => e.includes("Interface/Type 'Token'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'type Callback<T> = (err: Error | null, res?: T) => void;\nexport interface Row { id: string; count: number; }\nexport class Table { getRows(cb: Callback<Row[]>): void {} }',
+            'type Callback<T> = (err: Error | null, res?: T) => void;\nexport interface Row { id: string; count?: number; }\nexport class Table { getRows(cb: Callback<Row[]>): void {} }',
+          ).some(e => e.includes("Interface/Type 'Row'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function foo(x: string): void {}',
+            'function foo(x: string): void {}',
+          ).some(e => e.includes("Export 'foo' was removed")),
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            "declare module 'pkg' {\n  interface LocalHelper { a: string; }\n  /** @internal */\n  export interface Secret { b: string; }\n  export interface Pub { x?: LocalHelper; }\n}",
+            "declare module 'pkg' {\n  interface LocalHelper { a: string; }\n  export interface Pub { x?: LocalHelper; }\n}",
+            {},
+            {entryFileName: 'index.d.ts'},
+          ),
+          [],
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            'export interface Box<T> { items: Array<T>; }',
+            'export interface Box<T> { items: T[]; }',
+            {},
+            {entryFileName: 'index.mts'},
+          ),
+          [],
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export function filter(pred: (x: unknown) => boolean): void {}',
+            'export function filter(pred: (x: unknown) => x is string): void {}',
+          ).length > 0,
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export const cfg: { host: string } = { host: "a" };',
+            'export const cfg: Readonly<{ host: string }> = { host: "a" };',
+          ).some(e => e.includes("property 'host' was made readonly")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export class Box { public v: string = ""; }',
+            'export class Box { public get v(): string { return ""; } protected set v(x: string) {} }',
+          ).some(e => e.includes("setter 'v' visibility was restricted")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export let config: { port?: number } = {};',
+            'export const config: { port?: number } = {};',
+          ).some(e => e.includes("Exported value 'config' was made readonly")),
+        );
+        // Round 3 & Round 4: inherited generic base class/interface instantiation changes, swapped type parameters,
+        // keyof input parameter variance, heritage contravariant type args, and adding optional defaulted type params
+        assert.ok(
+          compareSourceTexts(
+            'export class BaseService<T> { value!: T; fetch(): Promise<T> { return null as any; } send(item: T): void {} }\nexport class UserService extends BaseService<string> {}',
+            'export class BaseService<T> { value!: T; fetch(): Promise<T> { return null as any; } send(item: T): void {} }\nexport class UserService extends BaseService<number> {}',
+          ).some(
+            e =>
+              e.includes("Class 'UserService': method 'fetch'") ||
+              e.includes("Class 'UserService': property 'value'"),
+          ),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export class Tag { private x = 1; }\nexport interface Box<T, U> { first: [Tag, T]; }',
+            'export class Tag { private x = 1; }\nexport interface Box<U, T> { first: [Tag, T]; }',
+          ).some(e => e.includes("Interface/Type 'Box': property 'first'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface Options { a?: string; b?: number; }\nexport function getOption(key: keyof Options): unknown { return key; }',
+            'export interface Options { a?: string; b: number; }\nexport function getOption(key: keyof Options): unknown { return key; }',
+          ).some(e => e.includes("Interface/Type 'Options'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export interface Command { id: string; }\nexport class BaseProcessor<T> { handle(cmd: T): void {} }\nexport class MyProcessor extends BaseProcessor<Command> {}',
+            'export interface Command { id: string; priority: number; }\nexport class BaseProcessor<T> { handle(cmd: T): void {} }\nexport class MyProcessor extends BaseProcessor<Command> {}',
+          ).some(e => e.includes("Interface/Type 'Command'")),
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            'export declare function create<T = string>(val?: T): T;',
+            'export declare function create<T = string, U = number>(val?: T): T;',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ),
+          [],
+        );
+        // Round 5: input callback type aliases, inherited base-class visibility demotions, generic class constructors, and swapped multi-overload generic type params
+        assert.ok(
+          compareSourceTexts(
+            'export type Handler = (ev: string) => void | Promise<void>;\nexport function onEvent(h: Handler): void {}',
+            'export type Handler = (ev: string | number) => Promise<void>;\nexport function onEvent(h: Handler): void {}',
+          ).some(e => e.includes("Callable type 'Handler'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'class InternalBase { public open(): void {} }\nexport class Client extends InternalBase {}',
+            'class InternalBase { protected open(): void {} }\nexport class Client extends InternalBase {}',
+          ).some(e =>
+            e.includes(
+              "Class 'Client': member 'open' visibility was restricted from 'public' to 'protected'",
+            ),
+          ),
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            'export class Box<T> { value?: T; }',
+            'export class Box<T> { value?: T; constructor(init?: T) {} }',
+          ),
+          [],
+        );
+        assert.deepEqual(
+          compareSourceTexts(
+            'export class Box<T> { constructor(val: T) {} }',
+            'export class Box<T> { constructor(val: T | null) {} }',
+          ),
+          [],
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export class Box<T> { constructor(val: T | null) {} }',
+            'export class Box<T> { constructor(val: T) {} }',
+          ).some(e => e.includes("Constructor for 'Box'")),
+        );
+        assert.ok(
+          compareSourceTexts(
+            'export declare function fn(x: number): number;\nexport declare function fn<T extends object, U>(a: T, b: unknown): T;',
+            'export declare function fn(x: number): number;\nexport declare function fn<T extends object, U>(a: U, b: T): T;',
+            {},
+            {entryFileName: 'index.d.ts'},
+          ).some(e => e.includes("Function 'fn'")),
+        );
+        // H1 & M1 + Round 1B: Legacy types/main repointing, tsconfig paths/baseUrl in base, dual .mts/.cts lane deletion, and subdir stub package.json
+        await createTempGitRepo(async ({tmpDir, writeFiles, commitAll}) => {
+          writeFiles({
+            'pkg/package.json': {
+              name: '@google-cloud/legacy-pkg',
+              version: '1.0.0',
+              main: './build/src/index.js',
+              types: './build/src/index.d.ts',
+            },
+            'pkg/tsconfig.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'CommonJS',
+                strict: true,
+                resolveJsonModule: true,
+                baseUrl: '.',
+                paths: {'@/*': ['src/*']},
+                outDir: 'build',
+              },
+            },
+            'pkg/src/schema.json': {version: 1, endpoint: 'a'},
+            'pkg/src/types.ts':
+              'export interface PathConfig { port?: string | number; }',
+            'pkg/src/index.ts':
+              'import schema from "./schema.json";\nexport {PathConfig} from "@/types";\nexport const SCHEMA = schema;\nexport function oldApi(x: string | number): void {}',
+            'pkg-dual/package.json': {
+              name: '@google-cloud/dual-pkg',
+              version: '1.0.0',
+              exports: {
+                '.': {
+                  import: './build/esm/index.mjs',
+                  default: './build/cjs/index.cjs',
+                },
+              },
+            },
+            'pkg-dual/tsconfig.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'NodeNext',
+                moduleResolution: 'NodeNext',
+                strict: true,
+                outDir: 'build',
+              },
+            },
+            'pkg-dual/src/index.mts':
+              'export function dualFn(x: string | number): void {}\n',
+            'pkg-dual/src/index.cts':
+              'export function dualFn(x: string | number): void {}\n',
+          });
+          const baseSha = commitAll('base');
+          // Narrow PathConfig via `@/types`, repoint types/main to src/v2.ts + rename pkg, and delete pkg-dual/src/index.mts
+          writeFiles({
+            'pkg/package.json': {
+              name: '@google-cloud/renamed-pkg',
+              version: '1.0.0',
+              exports: {
+                '.': {
+                  import: './build/src/v2.mjs',
+                },
+              },
+            },
+            'pkg/src/types.ts':
+              'export interface PathConfig { port?: number; }',
+            'pkg/src/v2.ts':
+              'export {PathConfig} from "@/types";\nexport function oldApi(x: number): void {}',
+            'pkg-dual/src/index.mts': null,
+          });
+          const headSha = commitAll('head');
+          const errs = await checkBreakingChanges({
+            diffRevArgs: [baseSha, headSha],
+            baseRev: baseSha,
+            headRev: headSha,
+            repoRoot: tmpDir,
+          });
+          assert.ok(
+            errs.some(e => e.includes('Published package was renamed')),
+          );
+          assert.ok(
+            errs.some(e => e.includes("removed CommonJS ('require') support")),
+          );
+          assert.ok(errs.some(e => e.includes("Function 'oldApi'")));
+          assert.ok(
+            errs.some(e =>
+              e.includes("Interface/Type 'PathConfig': property 'port'"),
+            ),
+          );
+          assert.ok(
+            errs.some(
+              e =>
+                e.includes('pkg-dual/src/index.mts') &&
+                e.includes('Public entrypoint source file was deleted'),
+            ),
+          );
+        });
+      },
+    );
   });
 
   describe('historical commits (PR #9539 and PR #9549)', () => {
     it(
       'detects the breaking change in PR #9539 (4443d6d6b1) and passes on its revert PR #9549 (d62a64f338)',
       {timeout: 60000},
-      async t => {
+      async () => {
+        // Always verify the exact PR #9539 / PR #9549 Pub/Sub ClientConfig.port breaking change & revert
+        // in a hermetic git repo so shallow CI clones (fetch-depth: 2) never skip this test!
+        await createTempGitRepo(async ({tmpDir, writeFiles, commitAll}) => {
+          writeFiles({
+            'handwritten/pubsub/package.json': {
+              name: '@google-cloud/pubsub',
+              version: '4.0.0',
+              main: './build/src/index.js',
+              types: './build/src/index.d.ts',
+            },
+            'handwritten/pubsub/tsconfig.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'CommonJS',
+                strict: true,
+                outDir: 'build',
+              },
+            },
+            'handwritten/pubsub/src/pubsub.ts':
+              'export interface ClientConfig {\n  projectId?: string;\n  port?: string | number;\n}\nexport class PubSub {\n  constructor(options?: ClientConfig) {}\n}\n',
+            'handwritten/pubsub/src/index.ts':
+              'export {ClientConfig, PubSub} from "./pubsub";\n',
+          });
+          const beforePr9539 = commitAll('before PR #9539');
+          // PR #9539 commit: narrows ClientConfig.port from `string | number` to `number`
+          writeFiles({
+            'handwritten/pubsub/src/pubsub.ts':
+              'export interface ClientConfig {\n  projectId?: string;\n  port?: number;\n}\nexport class PubSub {\n  constructor(options?: ClientConfig) {}\n}\n',
+          });
+          const pr9539Sha = commitAll('PR #9539');
+          const pr9539Errors = await checkBreakingChanges({
+            diffRevArgs: [beforePr9539, pr9539Sha],
+            baseRev: beforePr9539,
+            headRev: pr9539Sha,
+            repoRoot: tmpDir,
+          });
+          assert.ok(
+            pr9539Errors.some(
+              e =>
+                e.includes("Interface/Type 'ClientConfig': property 'port'") &&
+                e.includes("was 'string | number | undefined'") &&
+                e.includes("now 'number | undefined'"),
+            ),
+            `Expected PR #9539 ClientConfig.port breaking change, got: ${pr9539Errors.join('\n')}`,
+          );
+
+          // PR #9549 commit: reverts ClientConfig.port back to `string | number`
+          writeFiles({
+            'handwritten/pubsub/src/pubsub.ts':
+              'export interface ClientConfig {\n  projectId?: string;\n  port?: string | number;\n}\nexport class PubSub {\n  constructor(options?: ClientConfig) {}\n}\n',
+          });
+          const pr9549Sha = commitAll('PR #9549');
+          const pr9549Errors = await checkBreakingChanges({
+            diffRevArgs: [pr9539Sha, pr9549Sha],
+            baseRev: pr9539Sha,
+            headRev: pr9549Sha,
+            repoRoot: tmpDir,
+          });
+          assert.deepEqual(pr9549Errors, []);
+        });
+
         const pubsubDeps = path.join(
           REPO_ROOT,
           'handwritten/pubsub/node_modules',
         );
         if (
-          !hasGitCommit('4443d6d6b1^') ||
-          !hasGitCommit('d62a64f338^') ||
-          !fs.existsSync(pubsubDeps)
+          hasGitCommit('4443d6d6b1^') &&
+          hasGitCommit('d62a64f338^') &&
+          fs.existsSync(pubsubDeps)
         ) {
-          t.skip(
-            'Skipping historical commit check (shallow git clone or handwritten/pubsub dependencies not linked).',
+          const breakingErrors = await checkBreakingChanges({
+            diffRevArgs: ['4443d6d6b1^', '4443d6d6b1'],
+            baseRev: '4443d6d6b1^',
+            headRev: '4443d6d6b1',
+            repoRoot: REPO_ROOT,
+          });
+          assert.ok(
+            breakingErrors.some(
+              e =>
+                e.includes("Interface/Type 'ClientConfig': property 'port'") &&
+                e.includes("was 'string | number | undefined'") &&
+                e.includes("now 'number | undefined'"),
+            ),
+            `Expected PR #9539 ClientConfig.port breaking change, got: ${breakingErrors.join('\n')}`,
           );
-          return;
+
+          const revertErrors = await checkBreakingChanges({
+            diffRevArgs: ['d62a64f338^', 'd62a64f338'],
+            baseRev: 'd62a64f338^',
+            headRev: 'd62a64f338',
+            repoRoot: REPO_ROOT,
+          });
+          assert.deepEqual(revertErrors, []);
         }
-
-        const breakingErrors = await checkBreakingChanges({
-          diffRevArgs: ['4443d6d6b1^', '4443d6d6b1'],
-          baseRev: '4443d6d6b1^',
-          headRev: '4443d6d6b1',
-          repoRoot: REPO_ROOT,
-        });
-        assert.ok(
-          breakingErrors.some(
-            e =>
-              e.includes("Interface/Type 'ClientConfig': property 'port'") &&
-              e.includes("was 'string | number | undefined'") &&
-              e.includes("now 'number | undefined'"),
-          ),
-          `Expected PR #9539 ClientConfig.port breaking change, got: ${breakingErrors.join('\n')}`,
-        );
-
-        const revertErrors = await checkBreakingChanges({
-          diffRevArgs: ['d62a64f338^', 'd62a64f338'],
-          baseRev: 'd62a64f338^',
-          headRev: 'd62a64f338',
-          repoRoot: REPO_ROOT,
-        });
-        assert.deepEqual(revertErrors, []);
       },
     );
   });

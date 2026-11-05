@@ -97,6 +97,9 @@ export function createGitReader(repoRoot) {
     let val;
     try {
       val = runGit(['show', key], repoRoot);
+      if (typeof val === 'string' && val.startsWith(`tree ${key}\n`)) {
+        val = undefined;
+      }
     } catch (err) {
       if (isFatalSpawnError(err)) {
         throw err;
@@ -186,6 +189,12 @@ function extractFlatTargets(val, out = []) {
 }
 
 function analyzeExportEntryConditions(val) {
+  const typesImportTargets = [];
+  const typesRequireTargets = [];
+  const typesDefaultTargets = [];
+  const runtimeImportTargets = [];
+  const runtimeRequireTargets = [];
+  const runtimeDefaultTargets = [];
   const lane = {
     importTargets: [],
     requireTargets: [],
@@ -202,21 +211,21 @@ function analyzeExportEntryConditions(val) {
     if (!node) return;
     if (typeof node === 'string') {
       if (mode === 'import') {
-        lane.importTargets.push(node);
+        runtimeImportTargets.push(node);
         if (!lane.blockedImport) lane.supportsImport = true;
         lane.sawRuntimeCondition = true;
       } else if (mode === 'require') {
-        lane.requireTargets.push(node);
+        runtimeRequireTargets.push(node);
         if (!lane.blockedRequire) lane.supportsRequire = true;
         lane.sawRuntimeCondition = true;
       } else if (mode === 'types-import') {
-        lane.importTargets.push(node);
+        typesImportTargets.push(node);
       } else if (mode === 'types-require') {
-        lane.requireTargets.push(node);
+        typesRequireTargets.push(node);
       } else if (mode === 'types') {
-        lane.defaultTargets.push(node);
+        typesDefaultTargets.push(node);
       } else {
-        lane.defaultTargets.push(node);
+        runtimeDefaultTargets.push(node);
         if (!lane.blockedImport) lane.supportsImport = true;
         if (!lane.blockedRequire) lane.supportsRequire = true;
         lane.sawRuntimeCondition = true;
@@ -240,17 +249,17 @@ function analyzeExportEntryConditions(val) {
       if (hasTypes) {
         if (typeof node.types === 'string') {
           if (mode === 'import' || mode === 'types-import') {
-            lane.importTargets.push(node.types);
+            typesImportTargets.push(node.types);
             if (mode === 'import' && isPureTypesObj && !lane.blockedImport) {
               lane.supportsImport = true;
             }
           } else if (mode === 'require' || mode === 'types-require') {
-            lane.requireTargets.push(node.types);
+            typesRequireTargets.push(node.types);
             if (mode === 'require' && isPureTypesObj && !lane.blockedRequire) {
               lane.supportsRequire = true;
             }
           } else {
-            lane.defaultTargets.push(node.types);
+            typesDefaultTargets.push(node.types);
           }
         } else if (node.types && typeof node.types === 'object') {
           if (node.types.import) visit(node.types.import, 'types-import');
@@ -277,16 +286,50 @@ function analyzeExportEntryConditions(val) {
         visit(node.node, mode);
       }
       if (hasDefault) {
-        visit(node.default, mode);
+        const defaultMode =
+          mode === 'any'
+            ? (hasImport || hasModule) && !hasRequire
+              ? 'require'
+              : hasRequire && !(hasImport || hasModule)
+                ? 'import'
+                : hasRequire && (hasImport || hasModule)
+                  ? null
+                  : mode
+            : mode;
+        if (defaultMode) {
+          visit(node.default, defaultMode);
+        }
       }
     }
   };
 
   visit(val, 'any');
-  if (!lane.sawRuntimeCondition && lane.defaultTargets.length > 0) {
-    // Pure `{ types: "./foo.d.ts" }` entry with no JS condition keys
-    lane.supportsImport = true;
-    lane.supportsRequire = true;
+  lane.importTargets = [
+    ...typesImportTargets,
+    ...typesDefaultTargets,
+    ...runtimeImportTargets,
+  ];
+  lane.requireTargets = [
+    ...typesRequireTargets,
+    ...typesDefaultTargets,
+    ...runtimeRequireTargets,
+  ];
+  lane.defaultTargets = [...typesDefaultTargets, ...runtimeDefaultTargets];
+
+  if (!lane.sawRuntimeCondition) {
+    // Pure `types` entry with no JS runtime condition keys
+    if (
+      !lane.blockedImport &&
+      (lane.importTargets.length > 0 || lane.defaultTargets.length > 0)
+    ) {
+      lane.supportsImport = true;
+    }
+    if (
+      !lane.blockedRequire &&
+      (lane.requireTargets.length > 0 || lane.defaultTargets.length > 0)
+    ) {
+      lane.supportsRequire = true;
+    }
   }
   for (const t of [
     ...lane.importTargets,
@@ -330,10 +373,13 @@ export function collectExportsSubpathLanes(exportsField) {
 
 function getCandidateExtensionsForTarget(target) {
   if (/\.d\.mts$|\.mjs$|\.mts$/.test(target)) {
-    return ['.mts', '.d.mts', '.ts', '.d.ts', '.cts', '.d.cts'];
+    return ['.mts', '.d.mts', '.ts', '.d.ts'];
   }
   if (/\.d\.cts$|\.cjs$|\.cts$/.test(target)) {
-    return ['.cts', '.d.cts', '.ts', '.d.ts', '.mts', '.d.mts'];
+    return ['.cts', '.d.cts', '.ts', '.d.ts'];
+  }
+  if (/\.d\.ts$/.test(target)) {
+    return ['.d.ts', '.ts'];
   }
   return ['.ts', '.d.ts', '.mts', '.d.mts', '.cts', '.d.cts'];
 }
@@ -356,26 +402,40 @@ export function mapTargetToPackageSource(
   if (
     /\.(c|m)?ts$/.test(clean) &&
     !clean.startsWith('build/') &&
-    !clean.startsWith('dist/')
+    !clean.startsWith('dist/') &&
+    !clean.startsWith('esm/') &&
+    !clean.startsWith('cjs/')
   ) {
     const direct = path.resolve(pkgDir, clean);
-    if (existsCheck(direct)) return direct;
+    if (
+      direct.startsWith(pkgDir + path.sep) &&
+      !isIgnoredSourceFile(path.relative(pkgDir, direct)) &&
+      existsCheck(direct)
+    ) {
+      return direct;
+    }
   }
 
   const opts = (parsedTs && parsedTs.options) || {};
   const outDir = opts.outDir
     ? path.resolve(pkgDir, opts.outDir)
     : path.join(pkgDir, 'build');
+  const declDir = opts.declarationDir
+    ? path.resolve(pkgDir, opts.declarationDir)
+    : null;
   const rootDir = opts.rootDir ? path.resolve(pkgDir, opts.rootDir) : null;
 
   const stems = [];
   const absTarget = path.resolve(pkgDir, clean);
+  if (declDir && absTarget.startsWith(declDir + path.sep)) {
+    stems.push(path.relative(declDir, absTarget));
+  }
   if (absTarget.startsWith(outDir + path.sep)) {
     stems.push(path.relative(outDir, absTarget));
   }
   stems.push(
-    clean.replace(/^(build|dist)\/(cjs|esm)\//, ''),
-    clean.replace(/^(build|dist)\//, ''),
+    clean.replace(/^(build|dist)\/(types|typings|cjs|esm)\//, ''),
+    clean.replace(/^(build|dist|esm|cjs)\//, ''),
     clean,
   );
 
@@ -437,13 +497,30 @@ export function resolvePackageEntrypoints(
   readRelFn = null,
 ) {
   if (!pkgJson || pkgJson.private === true) {
-    return {subpaths: new Map(), subdirSubpaths: new Map(), entryFiles: []};
+    return {
+      subpaths: new Map(),
+      subdirSubpaths: new Map(),
+      subdirSourceMap: new Map(),
+      primaryFile: null,
+      entryFiles: [],
+    };
   }
   const subpaths = collectExportsSubpathLanes(pkgJson.exports);
   const subdirSubpaths = new Map();
+  const subdirSourceMap = new Map();
   const rawTargets = [];
+  let primaryFile = null;
 
   if (pkgJson.exports) {
+    const dotLane = subpaths.get('.');
+    if (dotLane && dotLane.allTargets.length > 0) {
+      primaryFile = mapTargetToPackageSource(
+        pkgDir,
+        dotLane.allTargets[0],
+        parsedTs,
+        existsCheck,
+      );
+    }
     for (const lane of subpaths.values()) {
       rawTargets.push(...lane.allTargets);
     }
@@ -451,6 +528,12 @@ export function resolvePackageEntrypoints(
     const primary =
       pkgJson.types || pkgJson.typings || pkgJson.main || 'src/index.ts';
     rawTargets.push(primary);
+    primaryFile = mapTargetToPackageSource(
+      pkgDir,
+      primary,
+      parsedTs,
+      existsCheck,
+    );
     // Support legacy published sub-directory package.json entrypoints (e.g. `"files": ["pipelines"]`
     // where `pipelines/package.json` declares `"typings": "../types/pipelines.d.ts"`).
     if (readRelFn && Array.isArray(pkgJson.files)) {
@@ -476,7 +559,15 @@ export function resolvePackageEntrypoints(
           );
           if (!joined.startsWith('..')) {
             rawTargets.push(joined);
-            subdirSubpaths.set(`./${cleanDir}`, joined);
+            const subKey = `./${cleanDir}`;
+            subdirSubpaths.set(subKey, joined);
+            const subSrc = mapTargetToPackageSource(
+              pkgDir,
+              joined,
+              parsedTs,
+              existsCheck,
+            );
+            if (subSrc) subdirSourceMap.set(subKey, subSrc);
           }
         }
       }
@@ -492,7 +583,10 @@ export function resolvePackageEntrypoints(
       entryFiles.push(src);
     }
   }
-  return {subpaths, subdirSubpaths, entryFiles};
+  if (pkgJson.exports && !primaryFile && entryFiles.length > 0) {
+    primaryFile = entryFiles[0];
+  }
+  return {subpaths, subdirSubpaths, subdirSourceMap, primaryFile, entryFiles};
 }
 
 export function parsePkgTsconfigAtRev(
@@ -501,6 +595,7 @@ export function parsePkgTsconfigAtRev(
   absRepoRoot,
   rev,
   reader,
+  effectiveBasePath = pkgDir,
 ) {
   const defaultParsed = {
     options: {
@@ -542,31 +637,102 @@ export function parsePkgTsconfigAtRev(
     },
   };
 
-  const configPath = path.join(pkgDir, 'tsconfig.json');
-  if (!configHost.fileExists(configPath)) {
+  const configCandidates = [
+    path.join(pkgDir, 'tsconfig.json'),
+    path.join(pkgDir, 'tsconfig.cjs.json'),
+    path.join(pkgDir, 'tsconfig.esm.json'),
+  ];
+  const configPath = configCandidates.find(p => configHost.fileExists(p));
+  if (!configPath) {
     return defaultParsed;
   }
   const cf = ts.readConfigFile(configPath, p => configHost.readFile(p));
   if (!cf.config) {
     return defaultParsed;
   }
-  return ts.parseJsonConfigFileContent(cf.config, configHost, pkgDir);
+  const parsed = ts.parseJsonConfigFileContent(cf.config, configHost, pkgDir);
+  // Also merge secondary `tsconfig.cjs.json` compilerOptions if `tsconfig.json` has none of its own
+  // or is a solution-style `tsconfig.json` with `references` and no `outDir`/`rootDir`.
+  if (
+    configPath.endsWith('tsconfig.json') &&
+    (!cf.config.compilerOptions ||
+      Object.keys(cf.config.compilerOptions).length === 0 ||
+      (!parsed.options.outDir &&
+        !parsed.options.rootDir &&
+        Array.isArray(cf.config.references)))
+  ) {
+    const cjsPath = path.join(pkgDir, 'tsconfig.cjs.json');
+    if (configHost.fileExists(cjsPath)) {
+      const cjsCf = ts.readConfigFile(cjsPath, p => configHost.readFile(p));
+      if (cjsCf.config) {
+        const cjsParsed = ts.parseJsonConfigFileContent(
+          cjsCf.config,
+          configHost,
+          pkgDir,
+        );
+        parsed.options = {...parsed.options, ...cjsParsed.options};
+      }
+    }
+  }
+  if (effectiveBasePath !== pkgDir && parsed.options) {
+    const rebaseDirOpt = val => {
+      if (typeof val !== 'string') return val;
+      const absVal = path.resolve(pkgDir, val);
+      if (absVal === pkgDir || absVal.startsWith(pkgDir + path.sep)) {
+        return path.join(effectiveBasePath, path.relative(pkgDir, absVal));
+      }
+      return val;
+    };
+    if (
+      typeof parsed.options.baseUrl === 'string' ||
+      typeof parsed.options.pathsBasePath === 'string' ||
+      Array.isArray(parsed.options.rootDirs)
+    ) {
+      parsed.options = {
+        ...parsed.options,
+        ...(typeof parsed.options.baseUrl === 'string'
+          ? {baseUrl: rebaseDirOpt(parsed.options.baseUrl)}
+          : {}),
+        ...(typeof parsed.options.pathsBasePath === 'string'
+          ? {pathsBasePath: rebaseDirOpt(parsed.options.pathsBasePath)}
+          : {}),
+        ...(Array.isArray(parsed.options.rootDirs)
+          ? {rootDirs: parsed.options.rootDirs.map(d => rebaseDirOpt(d))}
+          : {}),
+      };
+    }
+  }
+  return parsed;
 }
 
 function pkgJsonHasPublicTsEntry(rawPjText) {
   const pj = parseJsonSafe(rawPjText);
   if (!pj || pj.private === true) return false;
+  if (
+    (typeof pj.types === 'string' && pj.types.startsWith('../')) ||
+    (typeof pj.typings === 'string' && pj.typings.startsWith('../')) ||
+    (typeof pj.main === 'string' && pj.main.startsWith('../'))
+  ) {
+    return false;
+  }
   if (typeof pj.types === 'string' || typeof pj.typings === 'string') {
     return true;
   }
   if (pj.exports) {
     const s = JSON.stringify(pj.exports);
+    if (s.includes('"../')) return false;
     if (/\.d\.(c|m)?ts"|"types"|\.(c|m)?ts"/.test(s)) {
       return true;
     }
   }
   return false;
 }
+
+const TSCONFIG_CANDIDATE_NAMES = [
+  'tsconfig.json',
+  'tsconfig.cjs.json',
+  'tsconfig.esm.json',
+];
 
 function findPackageDir(
   repoRoot,
@@ -579,17 +745,28 @@ function findPackageDir(
   let currentDir = path.resolve(repoRoot, path.dirname(repoRelFile));
   const visited = [];
 
+  const hasAnyTsconfigAt = (absTargetDir, relTargetDir, rev) => {
+    for (const tcName of TSCONFIG_CANDIDATE_NAMES) {
+      if (rev === null) {
+        if (fs.existsSync(path.join(absTargetDir, tcName))) return true;
+      } else {
+        const tcRel = relTargetDir ? `${relTargetDir}/${tcName}` : tcName;
+        if (getFileAtRev(rev, tcRel) !== undefined) return true;
+      }
+    }
+    return false;
+  };
+
   const isTsPackageAt = absDir => {
     const relDir = toPosix(path.relative(repoRoot, absDir));
     if (
-      /(^|\/)(baselines|baselines-esm|templates|fixtures|test-fixtures)(\/|$)/.test(
+      /(^|\/)(baselines|baselines-esm|templates|fixtures|test-fixtures|samples|test|tests|system-test)(\/|$)/.test(
         relDir,
       )
     ) {
       return false;
     }
     const pjRel = relDir ? `${relDir}/package.json` : 'package.json';
-    const tcRel = relDir ? `${relDir}/tsconfig.json` : 'tsconfig.json';
 
     const headPj =
       headRev === null
@@ -597,19 +774,34 @@ function findPackageDir(
           ? fs.readFileSync(path.join(absDir, 'package.json'), 'utf8')
           : undefined
         : getFileAtRev(headRev, pjRel);
-    const headTcExists =
-      headRev === null
-        ? fs.existsSync(path.join(absDir, 'tsconfig.json'))
-        : getFileAtRev(headRev, tcRel) !== undefined;
+    const headTcExists = hasAnyTsconfigAt(absDir, relDir, headRev);
+    const basePj = getFileAtRev(baseRev, pjRel);
+    const baseTcExists = hasAnyTsconfigAt(absDir, relDir, baseRev);
+
+    // If this directory has no `tsconfig*.json`, check whether its immediate parent is itself a
+    // TypeScript package with `tsconfig*.json` (in which case `absDir` is a subdirectory stub!).
+    if (!headTcExists && !baseTcExists) {
+      const parentDir = path.dirname(absDir);
+      if (
+        parentDir !== repoRoot &&
+        parentDir.startsWith(`${repoRoot}${path.sep}`)
+      ) {
+        const parentRel = toPosix(path.relative(repoRoot, parentDir));
+        const parentHasTc =
+          hasAnyTsconfigAt(parentDir, parentRel, headRev) ||
+          hasAnyTsconfigAt(parentDir, parentRel, baseRev);
+        if (parentHasTc) {
+          return false;
+        }
+      }
+    }
+
     if (
       headPj !== undefined &&
       (headTcExists || pkgJsonHasPublicTsEntry(headPj))
     ) {
       return true;
     }
-
-    const basePj = getFileAtRev(baseRev, pjRel);
-    const baseTcExists = getFileAtRev(baseRev, tcRel) !== undefined;
     return (
       basePj !== undefined && (baseTcExists || pkgJsonHasPublicTsEntry(basePj))
     );
@@ -682,6 +874,9 @@ export function resolveGitDiffRange(isStrict, repoRoot = DEFAULT_REPO_ROOT) {
     try {
       const parsed = parseRevArgs([ref], [], repoRoot);
       runGit(['rev-parse', '--verify', `${parsed.baseRev}^{commit}`], repoRoot);
+      if (parsed.headRev === null) {
+        parsed.diffRevArgs = [parsed.baseRev];
+      }
       return parsed;
     } catch {
       // Try next fallback.
@@ -702,6 +897,9 @@ function parseRevArgs(
     const spec = revArgs[0];
     if (spec.includes('...')) {
       const [left, right] = spec.split('...');
+      if (!left || (right && right.startsWith('-'))) {
+        throw new Error(`Invalid git revision argument: ${spec}`);
+      }
       const headRev = right || 'HEAD';
       try {
         const baseRev = runGit(['merge-base', left, headRev], repoRoot).trim();
@@ -723,6 +921,9 @@ function parseRevArgs(
     }
     if (spec.includes('..')) {
       const [left, right] = spec.split('..');
+      if (!left || (right && right.startsWith('-'))) {
+        throw new Error(`Invalid git revision argument: ${spec}`);
+      }
       const headRev = right || 'HEAD';
       return {
         diffRevArgs: [left, headRev],
@@ -806,6 +1007,8 @@ function parseDiffNameStatusNullDelimited(diffOutput) {
 }
 
 const TSCONFIG_NAME_RE = /^tsconfig(\..+)?\.json$/;
+const VALID_PKG_NAME_RE =
+  /^(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/i;
 
 export function collectTouchedPackages(
   {
@@ -832,6 +1035,7 @@ export function collectTouchedPackages(
         '*.ts',
         '*.mts',
         '*.cts',
+        '*.json',
         '*package.json',
         '*tsconfig*.json',
         ...pathspecArgs,
@@ -844,20 +1048,21 @@ export function collectTouchedPackages(
 
   const rawEntries = parseDiffNameStatusNullDelimited(diffOutput);
   const touchedPackages = new Set();
-  const tsExtRe = /\.(c|m)?ts$/;
+  const tsOrJsonExtRe = /\.(?:(c|m)?ts|json)$/;
 
   for (const item of rawEntries) {
     const candidatePath = item.filePath;
     const baseName = path.basename(candidatePath);
     const oldBaseName = path.basename(item.oldPath);
     const isRelevantConfig =
-      baseName === 'package.json' ||
-      oldBaseName === 'package.json' ||
-      TSCONFIG_NAME_RE.test(baseName) ||
-      TSCONFIG_NAME_RE.test(oldBaseName);
+      ((baseName === 'package.json' || TSCONFIG_NAME_RE.test(baseName)) &&
+        !isIgnoredSourceFile(candidatePath)) ||
+      ((oldBaseName === 'package.json' || TSCONFIG_NAME_RE.test(oldBaseName)) &&
+        !isIgnoredSourceFile(item.oldPath));
     const isRelevantTs =
-      (tsExtRe.test(candidatePath) && !isIgnoredSourceFile(candidatePath)) ||
-      (tsExtRe.test(item.oldPath) && !isIgnoredSourceFile(item.oldPath));
+      (tsOrJsonExtRe.test(candidatePath) &&
+        !isIgnoredSourceFile(candidatePath)) ||
+      (tsOrJsonExtRe.test(item.oldPath) && !isIgnoredSourceFile(item.oldPath));
     if (!isRelevantConfig && !isRelevantTs) continue;
 
     const pkgDir =
@@ -895,6 +1100,7 @@ function collectWorkspacePackageNames(absRepoRoot) {
         '--',
         'core/**/package.json',
         'handwritten/**/package.json',
+        'packages/**/package.json',
       ],
       absRepoRoot,
     );
@@ -921,7 +1127,12 @@ function collectWorkspacePackageNames(absRepoRoot) {
  * Also includes any workspace dependency removed since `baseRev` so base type-checking succeeds.
  */
 export function buildWorkspaceDepCompileFilterArgs(packages, options = {}) {
-  const {absRepoRoot = null, baseRev = null, reader = null} = options || {};
+  const {
+    absRepoRoot = null,
+    baseRev = null,
+    headRev = null,
+    reader = null,
+  } = options || {};
   const filterArgs = [];
   const seenSelectors = new Set();
   let workspaceNames = null;
@@ -935,26 +1146,39 @@ export function buildWorkspaceDepCompileFilterArgs(packages, options = {}) {
 
   for (const pkgDir of packages) {
     const pjPath = path.join(pkgDir, 'package.json');
-    const headPj = fs.existsSync(pjPath)
-      ? parseJsonSafe(fs.readFileSync(pjPath, 'utf8'))
-      : null;
+    const relPj = absRepoRoot
+      ? toPosix(path.relative(absRepoRoot, pjPath))
+      : '';
+    const headPj =
+      headRev !== null && absRepoRoot && reader
+        ? parseJsonSafe(reader.getFileAtRev(headRev, relPj))
+        : fs.existsSync(pjPath)
+          ? parseJsonSafe(fs.readFileSync(pjPath, 'utf8'))
+          : null;
 
     let basePj = null;
-    if (absRepoRoot && baseRev && reader) {
-      const relPj = toPosix(path.relative(absRepoRoot, pjPath));
+    const hasBaseReader = Boolean(absRepoRoot && baseRev && reader);
+    if (hasBaseReader) {
       basePj = parseJsonSafe(reader.getFileAtRev(baseRev, relPj));
     }
 
     const wasPublicInBase = basePj && basePj.private !== true;
     const isPublicInHead = headPj && headPj.private !== true;
+    if (hasBaseReader && !wasPublicInBase) {
+      continue;
+    }
 
-    if (isPublicInHead && typeof headPj.name === 'string' && headPj.name) {
+    if (
+      isPublicInHead &&
+      typeof headPj.name === 'string' &&
+      VALID_PKG_NAME_RE.test(headPj.name)
+    ) {
       addSelector(`${headPj.name}^...`);
     } else if (
       !wasPublicInBase ||
       !headPj ||
       typeof headPj.name !== 'string' ||
-      !headPj.name
+      !VALID_PKG_NAME_RE.test(headPj.name)
     ) {
       if (!wasPublicInBase) continue;
     }
@@ -978,7 +1202,7 @@ export function buildWorkspaceDepCompileFilterArgs(packages, options = {}) {
           workspaceNames = collectWorkspacePackageNames(absRepoRoot);
         }
         for (const dep of removedDeps) {
-          if (workspaceNames.has(dep)) {
+          if (workspaceNames.has(dep) && VALID_PKG_NAME_RE.test(dep)) {
             addSelector(`${dep}...`);
           }
         }
@@ -1002,6 +1226,7 @@ export async function compileTouchedWorkspaceDeps(range) {
   const filterArgs = buildWorkspaceDepCompileFilterArgs(touchedPackages, {
     absRepoRoot,
     baseRev: range.baseRev,
+    headRev: range.headRev,
     reader,
   });
   if (filterArgs.length === 0) {
