@@ -41,9 +41,8 @@ async function enableTracing() {
   });
   provider.register();
 
-  // 3. ENABLE TRACING SPANS
-  // Set the flag before client libraries or RPC callers initialize, or pass
-  // `{enableTelemetryTracing: true}` to an individual client constructor.
+  // 3. ENABLE TRACING SPANS WITH ENV VARIABLE
+  // Sets the flag before client libraries or RPC callers initialize
   process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
 
   // 4. IMPORT CLIENT LIBRARIES AFTER OPENTELEMETRY SETUP
@@ -65,17 +64,17 @@ async function enableLogging() {
   const util = require('util');
   const {loggingUtils} = require('google-gax');
 
-  // 1. ENABLE TELEMETRY LOGGING
-  // In production, prefer `{enableTelemetryLogging: true}` on the client or a
-  // service-scoped filter (e.g. `GOOGLE_SDK_NODE_LOGGING=secretmanager`) over
-  // `*`, `true`, or `all` so `'auth'` debug logs remain disabled.
+  // 1. ENABLE TELEMETRY LOGGING WITH ENV VARIABLE
+  // In production, prefer a service-scoped filter (e.g.
+  // `GOOGLE_SDK_NODE_LOGGING=secretmanager`) over `*`, `true`, or `all` so
+  // `'auth'` debug logs remain disabled.
   process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
 
-  // Or enable logging for a specific client without setting an env variable:
-  // const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
-  // const client = new SecretManagerServiceClient({enableTelemetryLogging: true});
-
   // 2. CONFIGURE AN OUTPUT BACKEND (DEFAULT NODEBACKEND OR PLUGGABLE BACKEND)
+  // When exporting log data (e.g. structured JSON for Cloud Logging or forwarding
+  // to an external logger), view the `google-logging-utils` documentation:
+  // https://github.com/googleapis/google-cloud-node/blob/main/core/packages/logging-utils/README.md
+  //
   // Option A — Default `NodeBackend` (writes formatted log lines to `stderr`):
   // No configuration is needed to use the default backend (`undefined` resets to default).
   loggingUtils.setBackend(undefined);
@@ -114,6 +113,8 @@ async function enableLogging() {
   // 3. CALL CLIENT LIBRARIES AS USUAL
   // Failed API calls emit structured `WARNING` logs and failed transport
   // attempts emit `DEBUG` logs through the configured backend.
+  // const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
+  // const client = new SecretManagerServiceClient();
   // await client.listSecrets({parent: 'projects/my-project'});
 
   console.log('Logging initialized successfully.');
