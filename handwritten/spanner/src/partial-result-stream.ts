@@ -20,7 +20,14 @@ import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 
-import {codec, JSONOptions, Json, Field, Value} from './codec';
+import {
+  codec,
+  formatColumnSerializationError,
+  JSONOptions,
+  Json,
+  Field,
+  Value,
+} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import {isDefined, isEmpty, isString} from './helper';
@@ -126,7 +133,7 @@ export interface Row extends Array<Field> {
  * Row implementation extending Array to provide a shared, non-enumerable
  * toJSON method without per-row closures or Object.setPrototypeOf overhead.
  */
-class RowImpl extends Array<Field> implements Row {
+export class RowImpl extends Array<Field> implements Row {
   toJSON(options?: JSONOptions): Json {
     return codec.convertFieldsToJson(this, options);
   }
@@ -185,24 +192,19 @@ export function createJsonRow(
 ): Json {
   const json: Json = {};
   const len = fields.length;
+  let currentFieldName = '';
 
-  for (let i = 0; i < len; i++) {
-    const {name} = fields[i];
-    if (!name && !includeNameless) {
-      continue;
+  try {
+    for (let i = 0; i < len; i++) {
+      const {name} = fields[i];
+      if (!name && !includeNameless) {
+        continue;
+      }
+      currentFieldName = name || `_${i}`;
+      json[currentFieldName] = decoders[i](values[i]);
     }
-    const fieldName = name || `_${i}`;
-    try {
-      json[fieldName] = decoders[i](values[i]);
-    } catch (e) {
-      (e as Error).message = [
-        `Serializing column "${fieldName}" encountered an error: ${
-          (e as Error).message
-        }`,
-        'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-      ].join(' ');
-      throw e;
-    }
+  } catch (e) {
+    throw formatColumnSerializationError(currentFieldName, e as Error);
   }
   return json;
 }
@@ -243,7 +245,8 @@ export function formatRow(
   const jsonMode = Boolean(options?.json);
   const jsonOptions = options?.jsonOptions;
   const isJsonStubbed =
-    codec.convertFieldsToJson !== originalConvertFieldsToJson;
+    codec.convertFieldsToJson !== originalConvertFieldsToJson ||
+    codec.decode !== originalDecode;
 
   if (jsonMode && !isJsonStubbed) {
     return createJsonRow(
