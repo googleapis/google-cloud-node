@@ -311,6 +311,11 @@ export class DataformClient {
         'nextPageToken',
         'branches',
       ),
+      fetchWorkspaceHistory: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'commits',
+      ),
       queryDirectoryContents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -424,6 +429,12 @@ export class DataformClient {
     const moveRepositoryMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataform.v1beta1.MoveRepositoryMetadata',
     ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.CompilationResult',
+    ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteTeamFolderTree: new this._gaxModule.LongrunningDescriptor(
@@ -455,6 +466,16 @@ export class DataformClient {
         moveRepositoryResponse.decode.bind(moveRepositoryResponse),
         moveRepositoryMetadata.decode.bind(moveRepositoryMetadata),
       ),
+      createCompilationResultLongRunning:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createCompilationResultLongRunningResponse.decode.bind(
+            createCompilationResultLongRunningResponse,
+          ),
+          createCompilationResultLongRunningMetadata.decode.bind(
+            createCompilationResultLongRunningMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -549,6 +570,7 @@ export class DataformClient {
       'pushGitCommits',
       'fetchFileGitStatuses',
       'fetchGitAheadBehind',
+      'fetchWorkspaceHistory',
       'commitWorkspaceChanges',
       'resetWorkspaceChanges',
       'fetchFileDiff',
@@ -569,6 +591,7 @@ export class DataformClient {
       'listCompilationResults',
       'getCompilationResult',
       'createCompilationResult',
+      'createCompilationResultLongRunning',
       'queryCompilationResultActions',
       'listWorkflowConfigs',
       'getWorkflowConfig',
@@ -9694,6 +9717,185 @@ export class DataformClient {
     >;
   }
   /**
+   * Creates a new CompilationResult in a given project and location
+   * asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to create the compilation result. Must be
+   *   in the format `projects/* /locations/* /repositories/*`.
+   * @param {google.cloud.dataform.v1beta1.CompilationResult} request.compilationResult
+   *   Required. The compilation result to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCompilationResultLongRunning request %j', request);
+    return this.innerApiCalls
+      .createCompilationResultLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createCompilationResultLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  async checkCreateCompilationResultLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataform.v1beta1.CompilationResult,
+      protos.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata
+    >
+  > {
+    this._log.info('createCompilationResultLongRunning long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCompilationResultLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataform.v1beta1.CompilationResult,
+      protos.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata
+    >;
+  }
+  /**
    * Returns the contents of a given TeamFolder.
    *
    * @param {Object} request
@@ -12147,6 +12349,247 @@ export class DataformClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IBranchMetadata>;
+  }
+  /**
+   * Fetches a Workspace's history of commits.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceHistory(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+    ]
+  >;
+  fetchWorkspaceHistory(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): void;
+  fetchWorkspaceHistory(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): void;
+  fetchWorkspaceHistory(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchWorkspaceHistory values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchWorkspaceHistory request %j', request);
+    return this.innerApiCalls
+      .fetchWorkspaceHistory(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+        ]) => {
+          this._log.info('fetchWorkspaceHistory values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceHistory`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceHistoryStream(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceHistory'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchWorkspaceHistory stream %j', request);
+    return this.descriptors.page.fetchWorkspaceHistory.createStream(
+      this.innerApiCalls.fetchWorkspaceHistory as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceHistory`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_workspace_history.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_FetchWorkspaceHistory_async
+   */
+  fetchWorkspaceHistoryAsync(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceHistory'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchWorkspaceHistory iterate %j', request);
+    return this.descriptors.page.fetchWorkspaceHistory.asyncIterate(
+      this.innerApiCalls['fetchWorkspaceHistory'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry>;
   }
   /**
    * Returns the contents of a given Workspace directory.

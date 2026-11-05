@@ -11126,6 +11126,13 @@ export namespace google {
                     CONNECTION_TYPE_READER = 3
                 }
 
+                /** IpVersion enum. */
+                enum IpVersion {
+                    IP_VERSION_UNSPECIFIED = 0,
+                    IPV4 = 1,
+                    IPV6 = 2
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -15032,6 +15039,9 @@ export namespace google {
 
                     /** PscAutoConnection connectionType */
                     connectionType?: (google.cloud.memorystore.v1beta.ConnectionType|keyof typeof google.cloud.memorystore.v1beta.ConnectionType|null);
+
+                    /** PscAutoConnection ipVersion */
+                    ipVersion?: (google.cloud.memorystore.v1beta.IpVersion|keyof typeof google.cloud.memorystore.v1beta.IpVersion|null);
                 }
 
                 /** Represents a PscAutoConnection. */
@@ -15069,6 +15079,9 @@ export namespace google {
 
                     /** PscAutoConnection connectionType. */
                     public connectionType: (google.cloud.memorystore.v1beta.ConnectionType|keyof typeof google.cloud.memorystore.v1beta.ConnectionType);
+
+                    /** PscAutoConnection ipVersion. */
+                    public ipVersion: (google.cloud.memorystore.v1beta.IpVersion|keyof typeof google.cloud.memorystore.v1beta.IpVersion);
 
                     /** PscAutoConnection ports. */
                     public ports?: "port";

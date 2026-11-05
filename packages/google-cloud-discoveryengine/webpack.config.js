@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'AssistantService',
-    filename: './assistant-service.js',
+    library: 'AclConfigService',
+    filename: './acl-config-service.js',
   },
   node: {
     child_process: 'empty',

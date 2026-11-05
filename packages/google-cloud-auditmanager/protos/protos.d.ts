@@ -565,6 +565,9 @@ export namespace google {
 
                     /** GenerateAuditScopeReportRequest validateOnly */
                     validateOnly?: (boolean|null);
+
+                    /** GenerateAuditScopeReportRequest parameterOverrides */
+                    parameterOverrides?: ({ [k: string]: google.cloud.auditmanager.v1.IParameterOverrides }|null);
                 }
 
                 /** Represents a GenerateAuditScopeReportRequest. */
@@ -590,6 +593,9 @@ export namespace google {
 
                     /** GenerateAuditScopeReportRequest validateOnly. */
                     public validateOnly: boolean;
+
+                    /** GenerateAuditScopeReportRequest parameterOverrides. */
+                    public parameterOverrides: { [k: string]: google.cloud.auditmanager.v1.IParameterOverrides };
 
                     /**
                      * Creates a new GenerateAuditScopeReportRequest instance using the specified properties.
@@ -696,6 +702,9 @@ export namespace google {
                     /** GenerateAuditReportRequest complianceFramework */
                     complianceFramework?: (string|null);
 
+                    /** GenerateAuditReportRequest parameterOverrides */
+                    parameterOverrides?: ({ [k: string]: google.cloud.auditmanager.v1.IParameterOverrides }|null);
+
                     /** GenerateAuditReportRequest validateOnly */
                     validateOnly?: (boolean|null);
                 }
@@ -723,6 +732,9 @@ export namespace google {
 
                     /** GenerateAuditReportRequest complianceFramework. */
                     public complianceFramework: string;
+
+                    /** GenerateAuditReportRequest parameterOverrides. */
+                    public parameterOverrides: { [k: string]: google.cloud.auditmanager.v1.IParameterOverrides };
 
                     /** GenerateAuditReportRequest validateOnly. */
                     public validateOnly: boolean;
@@ -2289,6 +2301,9 @@ export namespace google {
 
                     /** AuditReport scopeId */
                     scopeId?: (string|null);
+
+                    /** AuditReport cloudControlParameterStates */
+                    cloudControlParameterStates?: ({ [k: string]: google.cloud.auditmanager.v1.ICloudControlParameterStates }|null);
                 }
 
                 /** Represents an AuditReport. */
@@ -2332,6 +2347,9 @@ export namespace google {
 
                     /** AuditReport scopeId. */
                     public scopeId: string;
+
+                    /** AuditReport cloudControlParameterStates. */
+                    public cloudControlParameterStates: { [k: string]: google.cloud.auditmanager.v1.ICloudControlParameterStates };
 
                     /**
                      * Creates a new AuditReport instance using the specified properties.
@@ -3610,6 +3628,9 @@ export namespace google {
 
                     /** AuditSchedule errorMessage */
                     errorMessage?: (string|null);
+
+                    /** AuditSchedule parameterOverrides */
+                    parameterOverrides?: ({ [k: string]: google.cloud.auditmanager.v1.IParameterOverrides }|null);
                 }
 
                 /** Represents an AuditSchedule. */
@@ -3656,6 +3677,9 @@ export namespace google {
 
                     /** AuditSchedule errorMessage. */
                     public errorMessage: string;
+
+                    /** AuditSchedule parameterOverrides. */
+                    public parameterOverrides: { [k: string]: google.cloud.auditmanager.v1.IParameterOverrides };
 
                     /**
                      * Creates a new AuditSchedule instance using the specified properties.
@@ -3870,6 +3894,627 @@ export namespace google {
                         QUARTERLY = 4,
                         ANNUALLY = 5
                     }
+                }
+
+                /** Properties of a Parameter. */
+                interface IParameter {
+
+                    /** Parameter name */
+                    name?: (string|null);
+
+                    /** Parameter parameterValue */
+                    parameterValue?: (google.cloud.auditmanager.v1.IParamValue|null);
+                }
+
+                /** Represents a Parameter. */
+                class Parameter implements IParameter {
+
+                    /**
+                     * Constructs a new Parameter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IParameter);
+
+                    /** Parameter name. */
+                    public name: string;
+
+                    /** Parameter parameterValue. */
+                    public parameterValue?: (google.cloud.auditmanager.v1.IParamValue|null);
+
+                    /**
+                     * Creates a new Parameter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Parameter instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IParameter): google.cloud.auditmanager.v1.Parameter;
+
+                    /**
+                     * Encodes the specified Parameter message. Does not implicitly {@link google.cloud.auditmanager.v1.Parameter.verify|verify} messages.
+                     * @param message Parameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Parameter message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.Parameter.verify|verify} messages.
+                     * @param message Parameter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Parameter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Parameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.Parameter;
+
+                    /**
+                     * Decodes a Parameter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Parameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.Parameter;
+
+                    /**
+                     * Verifies a Parameter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Parameter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Parameter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.Parameter;
+
+                    /**
+                     * Creates a plain object from a Parameter message. Also converts values to other types if specified.
+                     * @param message Parameter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.Parameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Parameter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Parameter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StringList. */
+                interface IStringList {
+
+                    /** StringList values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a StringList. */
+                class StringList implements IStringList {
+
+                    /**
+                     * Constructs a new StringList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IStringList);
+
+                    /** StringList values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new StringList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StringList instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IStringList): google.cloud.auditmanager.v1.StringList;
+
+                    /**
+                     * Encodes the specified StringList message. Does not implicitly {@link google.cloud.auditmanager.v1.StringList.verify|verify} messages.
+                     * @param message StringList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StringList message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.StringList.verify|verify} messages.
+                     * @param message StringList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StringList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StringList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.StringList;
+
+                    /**
+                     * Decodes a StringList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StringList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.StringList;
+
+                    /**
+                     * Verifies a StringList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StringList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StringList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.StringList;
+
+                    /**
+                     * Creates a plain object from a StringList message. Also converts values to other types if specified.
+                     * @param message StringList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.StringList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StringList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StringList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParamValue. */
+                interface IParamValue {
+
+                    /** ParamValue stringValue */
+                    stringValue?: (string|null);
+
+                    /** ParamValue boolValue */
+                    boolValue?: (boolean|null);
+
+                    /** ParamValue stringListValue */
+                    stringListValue?: (google.cloud.auditmanager.v1.IStringList|null);
+
+                    /** ParamValue numberValue */
+                    numberValue?: (number|null);
+
+                    /** ParamValue oneofValue */
+                    oneofValue?: (google.cloud.auditmanager.v1.IParameter|null);
+                }
+
+                /** Represents a ParamValue. */
+                class ParamValue implements IParamValue {
+
+                    /**
+                     * Constructs a new ParamValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IParamValue);
+
+                    /** ParamValue stringValue. */
+                    public stringValue?: (string|null);
+
+                    /** ParamValue boolValue. */
+                    public boolValue?: (boolean|null);
+
+                    /** ParamValue stringListValue. */
+                    public stringListValue?: (google.cloud.auditmanager.v1.IStringList|null);
+
+                    /** ParamValue numberValue. */
+                    public numberValue?: (number|null);
+
+                    /** ParamValue oneofValue. */
+                    public oneofValue?: (google.cloud.auditmanager.v1.IParameter|null);
+
+                    /** ParamValue kind. */
+                    public kind?: ("stringValue"|"boolValue"|"stringListValue"|"numberValue"|"oneofValue");
+
+                    /**
+                     * Creates a new ParamValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParamValue instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IParamValue): google.cloud.auditmanager.v1.ParamValue;
+
+                    /**
+                     * Encodes the specified ParamValue message. Does not implicitly {@link google.cloud.auditmanager.v1.ParamValue.verify|verify} messages.
+                     * @param message ParamValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IParamValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParamValue message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ParamValue.verify|verify} messages.
+                     * @param message ParamValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IParamValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParamValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParamValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ParamValue;
+
+                    /**
+                     * Decodes a ParamValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParamValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ParamValue;
+
+                    /**
+                     * Verifies a ParamValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParamValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParamValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ParamValue;
+
+                    /**
+                     * Creates a plain object from a ParamValue message. Also converts values to other types if specified.
+                     * @param message ParamValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ParamValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParamValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParamValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParameterOverrides. */
+                interface IParameterOverrides {
+
+                    /** ParameterOverrides parameters */
+                    parameters?: (google.cloud.auditmanager.v1.IParameter[]|null);
+                }
+
+                /** Represents a ParameterOverrides. */
+                class ParameterOverrides implements IParameterOverrides {
+
+                    /**
+                     * Constructs a new ParameterOverrides.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IParameterOverrides);
+
+                    /** ParameterOverrides parameters. */
+                    public parameters: google.cloud.auditmanager.v1.IParameter[];
+
+                    /**
+                     * Creates a new ParameterOverrides instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParameterOverrides instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IParameterOverrides): google.cloud.auditmanager.v1.ParameterOverrides;
+
+                    /**
+                     * Encodes the specified ParameterOverrides message. Does not implicitly {@link google.cloud.auditmanager.v1.ParameterOverrides.verify|verify} messages.
+                     * @param message ParameterOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IParameterOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParameterOverrides message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ParameterOverrides.verify|verify} messages.
+                     * @param message ParameterOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IParameterOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParameterOverrides message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParameterOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ParameterOverrides;
+
+                    /**
+                     * Decodes a ParameterOverrides message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParameterOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ParameterOverrides;
+
+                    /**
+                     * Verifies a ParameterOverrides message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParameterOverrides message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParameterOverrides
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ParameterOverrides;
+
+                    /**
+                     * Creates a plain object from a ParameterOverrides message. Also converts values to other types if specified.
+                     * @param message ParameterOverrides
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ParameterOverrides, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParameterOverrides to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParameterOverrides
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParameterState. */
+                interface IParameterState {
+
+                    /** ParameterState parameter */
+                    parameter?: (google.cloud.auditmanager.v1.IParameter|null);
+
+                    /** ParameterState isOverridden */
+                    isOverridden?: (boolean|null);
+                }
+
+                /** Represents a ParameterState. */
+                class ParameterState implements IParameterState {
+
+                    /**
+                     * Constructs a new ParameterState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IParameterState);
+
+                    /** ParameterState parameter. */
+                    public parameter?: (google.cloud.auditmanager.v1.IParameter|null);
+
+                    /** ParameterState isOverridden. */
+                    public isOverridden: boolean;
+
+                    /**
+                     * Creates a new ParameterState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParameterState instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IParameterState): google.cloud.auditmanager.v1.ParameterState;
+
+                    /**
+                     * Encodes the specified ParameterState message. Does not implicitly {@link google.cloud.auditmanager.v1.ParameterState.verify|verify} messages.
+                     * @param message ParameterState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IParameterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParameterState message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ParameterState.verify|verify} messages.
+                     * @param message ParameterState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IParameterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParameterState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParameterState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ParameterState;
+
+                    /**
+                     * Decodes a ParameterState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParameterState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ParameterState;
+
+                    /**
+                     * Verifies a ParameterState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParameterState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParameterState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ParameterState;
+
+                    /**
+                     * Creates a plain object from a ParameterState message. Also converts values to other types if specified.
+                     * @param message ParameterState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ParameterState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParameterState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParameterState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudControlParameterStates. */
+                interface ICloudControlParameterStates {
+
+                    /** CloudControlParameterStates parameterStates */
+                    parameterStates?: (google.cloud.auditmanager.v1.IParameterState[]|null);
+                }
+
+                /** Represents a CloudControlParameterStates. */
+                class CloudControlParameterStates implements ICloudControlParameterStates {
+
+                    /**
+                     * Constructs a new CloudControlParameterStates.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.ICloudControlParameterStates);
+
+                    /** CloudControlParameterStates parameterStates. */
+                    public parameterStates: google.cloud.auditmanager.v1.IParameterState[];
+
+                    /**
+                     * Creates a new CloudControlParameterStates instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudControlParameterStates instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.ICloudControlParameterStates): google.cloud.auditmanager.v1.CloudControlParameterStates;
+
+                    /**
+                     * Encodes the specified CloudControlParameterStates message. Does not implicitly {@link google.cloud.auditmanager.v1.CloudControlParameterStates.verify|verify} messages.
+                     * @param message CloudControlParameterStates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.ICloudControlParameterStates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudControlParameterStates message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.CloudControlParameterStates.verify|verify} messages.
+                     * @param message CloudControlParameterStates message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.ICloudControlParameterStates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudControlParameterStates message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudControlParameterStates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.CloudControlParameterStates;
+
+                    /**
+                     * Decodes a CloudControlParameterStates message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudControlParameterStates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.CloudControlParameterStates;
+
+                    /**
+                     * Verifies a CloudControlParameterStates message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudControlParameterStates message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudControlParameterStates
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.CloudControlParameterStates;
+
+                    /**
+                     * Creates a plain object from a CloudControlParameterStates message. Also converts values to other types if specified.
+                     * @param message CloudControlParameterStates
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.CloudControlParameterStates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudControlParameterStates to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudControlParameterStates
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

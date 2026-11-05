@@ -914,6 +914,40 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "csamFilterSettings": {
+                          "type": "CsamFilterSettings",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CsamFilterSettings": {
+                      "fields": {
+                        "filterEnforcement": {
+                          "type": "CsamFilterEnforcement",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confidenceLevel": {
+                          "type": "DetectionConfidenceLevel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CsamFilterEnforcement": {
+                          "values": {
+                            "CSAM_FILTER_ENFORCEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
                         }
                       }
                     },

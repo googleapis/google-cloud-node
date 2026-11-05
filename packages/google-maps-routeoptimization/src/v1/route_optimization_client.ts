@@ -467,10 +467,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.protobuf.Duration} request.timeout
    *   If this timeout is set, the server returns a response before the timeout
    *   period has elapsed or the server deadline for synchronous requests is
@@ -806,10 +807,11 @@ export class RouteOptimizationClient {
    *   Required. Target project and location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {number[]} request.modelConfigs
    *   Required. Input/Output information each purchase model, such as file paths
    *   and data formats.
@@ -993,10 +995,6 @@ export class RouteOptimizationClient {
    * {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse},
    * if successful.
    *
-   * Experimental: See
-   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-   * for more details.
-   *
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1004,10 +1002,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.protobuf.Duration} request.timeout
    *   If this timeout is set, the server returns a response before the timeout
    *   period has elapsed or the server deadline for synchronous requests is
@@ -1364,14 +1363,10 @@ export class RouteOptimizationClient {
    * `<parent>/operations/<operation_id>` and can be used to track
    * progress of the computation. The
    * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
-   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursLongRunningMetadata}.
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursUriMetadata}.
    * The {@link protos.google.longrunning.Operation.response|response} field type is
    * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse|OptimizeToursUriResponse},
    * if successful.
-   *
-   * Experimental: See
-   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-   * for more details.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1379,10 +1374,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.maps.routeoptimization.v1.Uri} request.input
    *   Required. The URI of the Cloud Storage object containing the
    *   `OptimizeToursRequest`.

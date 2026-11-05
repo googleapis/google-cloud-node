@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_operations_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service to fetch operations for database instances.
  * @class
  * @memberof v1beta4
  */
