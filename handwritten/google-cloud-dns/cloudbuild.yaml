@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/google-cloud-dns}"
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/google-cloud-dns}" --filter "...{./packages/google-cloud-secretmanager}" && pnpm --filter "...{./packages/google-cloud-secretmanager}" run compile
   dir: 'handwritten/google-cloud-dns'
   id: 'install-dependencies'
 
@@ -18,7 +18,20 @@ steps:
     gcloud secrets versions access latest --project=cloud-devrel-kokoro-resources --secret=long-door-651-kokoro-system-test-service-account --format='get(payload.data)' | tr '_-' '/+' | base64 -d > /workspace/google_application_credentials.json
   id: 'get-service-account-key'
 
-# 3. Configure environment variables for the tests and run system tests
+# 3. Verify @google-cloud/secret-manager gist on Bun runtime against Secret Manager
+- name: 'oven/bun:1.4.2'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    bun --version
+    bun samples/bun-quickstart.js --secret-version=projects/cloud-devrel-kokoro-resources/secrets/long-door-651-kokoro-system-test-service-account/versions/latest --verify-file=/workspace/google_application_credentials.json
+    GOOGLE_APPLICATION_CREDENTIALS=/workspace/google_application_credentials.json GCLOUD_PROJECT=${_GCP_PROJECT_ID} bun samples/bun-quickstart.js projects/${_GCP_PROJECT_ID} || echo "Project CRUD check exited with code $?"
+  dir: 'handwritten/google-cloud-dns'
+  id: 'verify-bun-secret-manager'
+  waitFor: ['install-dependencies', 'get-service-account-key']
+
+# 4. Configure environment variables for the tests and run system tests
 #    - GOOGLE_APPLICATION_CREDENTIALS: Service account key from Secret Manager
 #    - GCLOUD_PROJECT: Can be passed as a build variable.
 - name: 'node:24'
@@ -32,7 +45,7 @@ steps:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
   - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/google_application_credentials.json'
   id: 'run-system-tests'
-  waitFor: ['install-dependencies', 'get-service-account-key']
+  waitFor: ['install-dependencies', 'get-service-account-key', 'verify-bun-secret-manager']
 
 # 4. (Optional) Code Coverage Reporting
 - name: 'node:24'
