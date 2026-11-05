@@ -684,6 +684,7 @@ export class Bigtable {
    *   const apiResponse = data[2];
    * });
    * ```
+   * @deprecated Use {@link InstanceAdminClient#createInstance} from `@google-cloud/bigtable/build/src/admin` instead.
    */
   createInstance(
     id: string,
@@ -834,6 +835,7 @@ export class Bigtable {
    *   }
    * });
    * ```
+   * @deprecated Use {@link InstanceAdminClient#listInstances} from `@google-cloud/bigtable/build/src/admin` instead.
    */
   getInstances(
     gaxOptionsOrCallback?: CallOptions | GetInstancesCallback,
