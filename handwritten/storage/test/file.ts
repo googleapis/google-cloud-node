@@ -52,7 +52,12 @@ import {
 import * as crypto from 'crypto';
 import duplexify from 'duplexify';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
-import {ExceptionMessages, IdempotencyStrategy} from '../src/storage.js';
+import {
+  ExceptionMessages,
+  EXPLICIT_IDEMPOTENCY_STRATEGY,
+  IdempotencyStrategy,
+  RetryOptions,
+} from '../src/storage.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
@@ -108,9 +113,12 @@ describe('File', () => {
   // md5 hash of 'test data'
   const MD5_HASH = '63M6AMDJ0zbmVpGjerVCkw==';
 
+  let defaultRetryableErrorFn: RetryOptions['retryableErrorFn'];
+
   before(() => {
     sandbox = createSandbox();
     STORAGE = new Storage({projectId: PROJECT_ID});
+    defaultRetryableErrorFn = STORAGE.retryOptions.retryableErrorFn;
     storageTransport = sandbox.createStubInstance(StorageTransport);
     STORAGE.storageTransport = storageTransport;
     ProxiedFile = proxyquire('../src/file.js', {
@@ -120,6 +128,12 @@ describe('File', () => {
   });
 
   beforeEach(() => {
+    STORAGE.retryOptions.autoRetry = true;
+    STORAGE.retryOptions.maxRetries = 3;
+    STORAGE.retryOptions.retryableErrorFn = defaultRetryableErrorFn;
+    STORAGE.retryOptions.idempotencyStrategy =
+      IdempotencyStrategy.RetryConditional;
+    STORAGE.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = false;
     BUCKET = new Bucket(STORAGE, 'bucket-name');
 
     file = new File(BUCKET, FILE_NAME);
@@ -239,6 +253,69 @@ describe('File', () => {
         await file.delete((err: GaxiosError | null) => {
           assert.strictEqual(err, error);
         });
+      });
+
+      it('should return 204 No Content if delete receives a 404 on retry', async () => {
+        const error = new GaxiosError(
+          'Not Found',
+          {} as GaxiosOptionsPrepared,
+        ) as GaxiosError & {isRetry?: boolean};
+        error.status = 404;
+        error.code = '404';
+        error.isRetry = true;
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        const [resp] = await file.delete();
+        assert.strictEqual(resp.status, 204);
+      });
+
+      it('should return an error if delete receives a 404 on the initial attempt', async () => {
+        const error = new GaxiosError('Not Found', {} as GaxiosOptionsPrepared);
+        error.status = 404;
+        error.code = '404';
+
+        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        await assert.rejects(
+          async () => {
+            await file.delete();
+          },
+          (err: GaxiosError) => {
+            assert.strictEqual(err.status, 404);
+            return true;
+          },
+        );
+      });
+
+      it('should keep autoRetry enabled by default when precondition is absent, unless RetryConditional is explicit', async () => {
+        let autoRetryDuringDefaultCall: boolean | undefined;
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((_reqOpts, cb) => {
+            autoRetryDuringDefaultCall = file.storage.retryOptions.autoRetry;
+            const resp = {status: 204, data: ''};
+            if (cb) cb(null, resp.data, resp);
+            return Promise.resolve(resp);
+          });
+
+        await file.delete();
+        assert.strictEqual(autoRetryDuringDefaultCall, true);
+
+        file.storage.retryOptions.idempotencyStrategy =
+          IdempotencyStrategy.RetryConditional;
+        let autoRetryDuringExplicitCall: boolean | undefined;
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((_reqOpts, cb) => {
+            autoRetryDuringExplicitCall = file.storage.retryOptions.autoRetry;
+            const resp = {status: 204, data: ''};
+            if (cb) cb(null, resp.data, resp);
+            return Promise.resolve(resp);
+          });
+
+        await file.delete();
+        assert.strictEqual(autoRetryDuringExplicitCall, false);
+        assert.strictEqual(file.storage.retryOptions.autoRetry, true);
+        file.storage.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = false;
       });
     });
 
@@ -5300,6 +5377,32 @@ describe('File', () => {
       }
       assert.strictEqual(retryCount, 2);
     });
+
+    it('should retry by default when precondition is absent, unless RetryConditional is explicit', async () => {
+      let retryCount = 0;
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = false;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      sandbox.stub(file, 'createWriteStream').callsFake(() => {
+        retryCount++;
+        return new DelayedStream500Error(retryCount);
+      });
+
+      await file.save(DATA, {resumable: false});
+      assert.strictEqual(retryCount, 2);
+
+      // Now explicitly set RetryConditional without preconditions
+      retryCount = 0;
+      file.storage.retryOptions.idempotencyStrategy =
+        IdempotencyStrategy.RetryConditional;
+      await assert.rejects(async () => {
+        await file.save(DATA, {resumable: false});
+      });
+      assert.strictEqual(retryCount, 1);
+      file.storage.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = false;
+    });
   });
 
   describe('setMetadata', () => {
@@ -5320,6 +5423,118 @@ describe('File', () => {
         {overrideUnlockedRetention: true},
         assert.ifError,
       );
+    });
+
+    it('should fetch latest metadata via getMetadata if setMetadata receives a 412 on retry', async () => {
+      const newFile = new File(BUCKET, 'new-file', {
+        preconditionOpts: {ifMetagenerationMatch: 1},
+      });
+      const error412 = new GaxiosError(
+        'Precondition Failed',
+        {} as GaxiosOptionsPrepared,
+      ) as GaxiosError & {isRetry?: boolean};
+      error412.status = 412;
+      error412.code = '412';
+      error412.isRetry = true;
+
+      const recoveredMetadata = {name: 'new-file', metageneration: '2'};
+      const recoveredResp = {
+        status: 200,
+        data: recoveredMetadata,
+      } as unknown as GaxiosResponse<FileMetadata>;
+
+      newFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts: StorageRequestOptions, cb) => {
+          if (reqOpts.method === 'PATCH') {
+            return Promise.reject(error412);
+          }
+          if (reqOpts.method === 'GET') {
+            // Verify ifMetagenerationMatch was stripped for the recovery GET
+            assert.strictEqual(
+              reqOpts.queryParameters?.ifMetagenerationMatch,
+              undefined,
+            );
+            if (cb) cb(null, recoveredMetadata, recoveredResp);
+            return Promise.resolve(recoveredResp);
+          }
+          return Promise.reject(new Error('Unexpected method'));
+        });
+
+      const [metadata] = await newFile.setMetadata({
+        contentType: 'text/plain',
+      });
+      assert.deepStrictEqual(metadata, recoveredMetadata);
+      const getMetadataMethod = (
+        newFile as unknown as {
+          methods: {
+            getMetadata: {
+              reqOpts: {queryParameters: {ifMetagenerationMatch?: number}};
+            };
+          };
+        }
+      ).methods.getMetadata;
+      assert.strictEqual(
+        getMetadataMethod.reqOpts.queryParameters.ifMetagenerationMatch,
+        1,
+      );
+    });
+
+    it('should reject with 412 if setMetadata receives a 412 on initial attempt', async () => {
+      const newFile = new File(BUCKET, 'new-file', {
+        preconditionOpts: {ifMetagenerationMatch: 1},
+      });
+      const error412 = new GaxiosError(
+        'Precondition Failed',
+        {} as GaxiosOptionsPrepared,
+      );
+      error412.status = 412;
+      error412.code = '412';
+
+      newFile.storageTransport.makeRequest = sandbox.stub().rejects(error412);
+
+      await assert.rejects(
+        async () => {
+          await newFile.setMetadata({contentType: 'text/plain'});
+        },
+        (err: GaxiosError) => {
+          assert.strictEqual(err.status, 412);
+          return true;
+        },
+      );
+    });
+
+    it('should keep autoRetry enabled by default when precondition is absent, unless RetryConditional is explicit', async () => {
+      const newFile = new File(BUCKET, 'new-file');
+      let autoRetryDuringDefaultCall: boolean | undefined;
+      newFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((_reqOpts, cb) => {
+          autoRetryDuringDefaultCall = newFile.storage.retryOptions.autoRetry;
+          const resp = {status: 200, data: {name: 'new-file'}};
+          if (cb) cb(null, resp.data, resp);
+          return Promise.resolve(resp);
+        });
+
+      await newFile.setMetadata({contentType: 'text/plain'});
+      assert.strictEqual(autoRetryDuringDefaultCall, true);
+
+      newFile.storage.retryOptions.idempotencyStrategy =
+        IdempotencyStrategy.RetryConditional;
+      let autoRetryDuringExplicitCall: boolean | undefined;
+      newFile.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((_reqOpts, cb) => {
+          autoRetryDuringExplicitCall = newFile.storage.retryOptions.autoRetry;
+          const resp = {status: 200, data: {name: 'new-file'}};
+          if (cb) cb(null, resp.data, resp);
+          return Promise.resolve(resp);
+        });
+
+      await newFile.setMetadata({contentType: 'text/plain'});
+      assert.strictEqual(autoRetryDuringExplicitCall, false);
+      assert.strictEqual(newFile.storage.retryOptions.autoRetry, true);
+      newFile.storage.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = false;
     });
   });
 
