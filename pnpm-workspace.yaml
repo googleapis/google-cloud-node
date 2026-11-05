@@ -11,6 +11,7 @@ packages:
   - 'packages/*'
   - 'handwritten/*'
   - 'containers/*'
+  - 'ci/breaking-change-check'
   - '!**/fixtures/**'
   - '!**/test-fixtures/**'
   - '!**/baselines/**'
