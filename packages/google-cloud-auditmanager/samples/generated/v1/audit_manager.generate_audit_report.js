@@ -52,6 +52,13 @@ function main(scope, reportFormat, complianceFramework) {
    */
   // const complianceFramework = 'abc123'
   /**
+   *  Optional. Maps dynamic parameter overrides by Cloud Control resource name
+   *  at execution time. For example,
+   *  `{"organizations/123/locations/global/cloudControls/control-1":
+   *  {parameters: ... }}`
+   */
+  // const parameterOverrides = [1,2,3,4]
+  /**
    *  Optional. If `true`, only validates the request and does not generate the
    *  audit report. This executes standard request validation (such as schema,
    *  framework existence, scope, and IAM checks) and skips the apply phase.

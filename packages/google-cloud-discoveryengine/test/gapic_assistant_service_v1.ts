@@ -57,6 +57,15 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     : sinon.stub().resolves([response]);
 }
 
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+}
+
 function stubServerStreamingCall<ResponseType>(
   response?: ResponseType,
   error?: Error,
@@ -75,6 +84,44 @@ function stubServerStreamingCall<ResponseType>(
   setImmediate(() => {
     mockStream.end();
   });
+  return sinon.stub().returns(mockStream);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
   return sinon.stub().returns(mockStream);
 }
 
@@ -294,6 +341,538 @@ describe('v1.AssistantServiceClient', () => {
     });
   });
 
+  describe('createAssistant', () => {
+    it('invokes createAssistant without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.CreateAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.CreateAssistantRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.createAssistant = stubSimpleCall(expectedResponse);
+      const [response] = await client.createAssistant(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAssistant without error using callback', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.CreateAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.CreateAssistantRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.createAssistant =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAssistant(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IAssistant | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAssistant with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.CreateAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.CreateAssistantRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAssistant = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createAssistant(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAssistant with closed client', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.CreateAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.CreateAssistantRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createAssistant(request), expectedError);
+    });
+  });
+
+  describe('deleteAssistant', () => {
+    it('invokes deleteAssistant without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.DeleteAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.DeleteAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteAssistant = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAssistant(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAssistant without error using callback', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.DeleteAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.DeleteAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteAssistant =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAssistant(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAssistant with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.DeleteAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.DeleteAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAssistant = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAssistant(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAssistant with closed client', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.DeleteAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.DeleteAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteAssistant(request), expectedError);
+    });
+  });
+
+  describe('updateAssistant', () => {
+    it('invokes updateAssistant without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.UpdateAssistantRequest(),
+      );
+      request.assistant ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateAssistantRequest',
+        ['assistant', 'name'],
+      );
+      request.assistant.name = defaultValue1;
+      const expectedHeaderRequestParams = `assistant.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.updateAssistant = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAssistant(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAssistant without error using callback', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.UpdateAssistantRequest(),
+      );
+      request.assistant ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateAssistantRequest',
+        ['assistant', 'name'],
+      );
+      request.assistant.name = defaultValue1;
+      const expectedHeaderRequestParams = `assistant.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.updateAssistant =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAssistant(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IAssistant | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAssistant with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.UpdateAssistantRequest(),
+      );
+      request.assistant ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateAssistantRequest',
+        ['assistant', 'name'],
+      );
+      request.assistant.name = defaultValue1;
+      const expectedHeaderRequestParams = `assistant.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAssistant = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAssistant(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAssistant with closed client', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.UpdateAssistantRequest(),
+      );
+      request.assistant ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateAssistantRequest',
+        ['assistant', 'name'],
+      );
+      request.assistant.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateAssistant(request), expectedError);
+    });
+  });
+
+  describe('getAssistant', () => {
+    it('invokes getAssistant without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.getAssistant = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAssistant(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAssistant without error using callback', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Assistant(),
+      );
+      client.innerApiCalls.getAssistant =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAssistant(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IAssistant | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAssistant with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAssistant = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAssistant(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAssistant with closed client', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAssistant(request), expectedError);
+    });
+  });
+
   describe('streamAssist', () => {
     it('invokes streamAssist without error', async () => {
       const client = new assistantserviceModule.v1.AssistantServiceClient({
@@ -474,6 +1053,334 @@ describe('v1.AssistantServiceClient', () => {
         gaxServerStreamingRetries: true,
       });
       assert(client);
+    });
+  });
+
+  describe('listAssistants', () => {
+    it('invokes listAssistants without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+      ];
+      client.innerApiCalls.listAssistants = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAssistants(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssistants without error using callback', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+      ];
+      client.innerApiCalls.listAssistants =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAssistants(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IAssistant[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssistants with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAssistants = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAssistants(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssistants as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssistantsStream without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+      ];
+      client.descriptors.page.listAssistants.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAssistantsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1.Assistant[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1.Assistant) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAssistants.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssistants, request),
+      );
+      assert(
+        (client.descriptors.page.listAssistants.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAssistantsStream with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssistants.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAssistantsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1.Assistant[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1.Assistant) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAssistants.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssistants, request),
+      );
+      assert(
+        (client.descriptors.page.listAssistants.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAssistants without error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Assistant(),
+        ),
+      ];
+      client.descriptors.page.listAssistants.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1.IAssistant[] = [];
+      const iterable = client.listAssistantsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAssistants.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAssistants.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAssistants with error', async () => {
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListAssistantsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListAssistantsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssistants.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAssistantsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1.IAssistant[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAssistants.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAssistants.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
     });
   });
   describe('getLocation', () => {
@@ -676,6 +1583,55 @@ describe('v1.AssistantServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aclConfig', async () => {
+      const fakePath = '/rendered/path/aclConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.aclConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclConfigPath', () => {
+        const result = client.aclConfigPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAclConfigName', () => {
+        const result = client.matchProjectFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAclConfigName', () => {
+        const result = client.matchLocationFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('assistAnswer', async () => {
       const fakePath = '/rendered/path/assistAnswer';
       const expectedParameters = {
@@ -864,6 +1820,134 @@ describe('v1.AssistantServiceClient', () => {
       });
     });
 
+    describe('collection', async () => {
+      const fakePath = '/rendered/path/collection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.collectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.collectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('collectionPath', () => {
+        const result = client.collectionPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.collectionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCollectionName', () => {
+        const result = client.matchProjectFromCollectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCollectionName', () => {
+        const result = client.matchLocationFromCollectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromCollectionName', () => {
+        const result = client.matchCollectionFromCollectionName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataConnector', async () => {
+      const fakePath = '/rendered/path/dataConnector';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataConnectorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataConnectorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataConnectorPath', () => {
+        const result = client.dataConnectorPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataConnectorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataConnectorName', () => {
+        const result = client.matchProjectFromDataConnectorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataConnectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataConnectorName', () => {
+        const result = client.matchLocationFromDataConnectorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataConnectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromDataConnectorName', () => {
+        const result = client.matchCollectionFromDataConnectorName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.dataConnectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -1015,6 +2099,70 @@ describe('v1.AssistantServiceClient', () => {
             client.pathTemplates.identityMappingStorePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('licenseConfig', async () => {
+      const fakePath = '/rendered/path/licenseConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        license_config: 'licenseConfigValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.licenseConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.licenseConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('licenseConfigPath', () => {
+        const result = client.licenseConfigPath(
+          'projectValue',
+          'locationValue',
+          'licenseConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLicenseConfigName', () => {
+        const result = client.matchProjectFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLicenseConfigName', () => {
+        const result = client.matchLocationFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLicenseConfigFromLicenseConfigName', () => {
+        const result = client.matchLicenseConfigFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'licenseConfigValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2988,6 +4136,279 @@ describe('v1.AssistantServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionDataStoreWidgetConfig', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreWidgetConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        widget_config: 'widgetConfigValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreWidgetConfigPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreWidgetConfigPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'widgetConfigValue',
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWidgetConfigFromProjectLocationCollectionDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchWidgetConfigFromProjectLocationCollectionDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'widgetConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineCollaborativeProjectSessions', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineCollaborativeProjectSessions';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        collaborative_project: 'collaborativeProjectValue',
+        session: 'sessionValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineCollaborativeProjectSessionsPath', () => {
+        const result =
+          client.projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'engineValue',
+            'collaborativeProjectValue',
+            'sessionValue',
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collaborativeProjectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationCollectionEngineControl', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
       const expectedParameters = {
@@ -3627,6 +5048,132 @@ describe('v1.AssistantServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionEngineSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineWidgetConfig', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineWidgetConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        widget_config: 'widgetConfigValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineWidgetConfigPath', () => {
+        const result = client.projectLocationCollectionEngineWidgetConfigPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'widgetConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineWidgetConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineWidgetConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineWidgetConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineWidgetConfigName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWidgetConfigFromProjectLocationCollectionEngineWidgetConfigName', () => {
+        const result =
+          client.matchWidgetConfigFromProjectLocationCollectionEngineWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'widgetConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineWidgetConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -5100,6 +6647,176 @@ describe('v1.AssistantServiceClient', () => {
               .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreWidgetConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreWidgetConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        widget_config: 'widgetConfigValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreWidgetConfigPath', () => {
+        const result = client.projectLocationDataStoreWidgetConfigPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'widgetConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreWidgetConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWidgetConfigFromProjectLocationDataStoreWidgetConfigName', () => {
+        const result =
+          client.matchWidgetConfigFromProjectLocationDataStoreWidgetConfigName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'widgetConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreWidgetConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('userStore', async () => {
+      const fakePath = '/rendered/path/userStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        user_store: 'userStoreValue',
+      };
+      const client = new assistantserviceModule.v1.AssistantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.userStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userStorePath', () => {
+        const result = client.userStorePath(
+          'projectValue',
+          'locationValue',
+          'userStoreValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromUserStoreName', () => {
+        const result = client.matchProjectFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromUserStoreName', () => {
+        const result = client.matchLocationFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUserStoreFromUserStoreName', () => {
+        const result = client.matchUserStoreFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'userStoreValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

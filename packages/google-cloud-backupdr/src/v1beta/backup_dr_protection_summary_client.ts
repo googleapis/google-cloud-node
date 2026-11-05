@@ -257,6 +257,19 @@ export class BackupDrProtectionSummaryClient {
       resourceBackupConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/resourceBackupConfigs/{resource_backup_config}',
       ),
+      restoreTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreTemplates/{restore_template}',
+      ),
+      restoreTemplateExecutionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreTemplates/{restore_template}/executions/{execution}',
+      ),
+      restoreVerificationPlanPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}',
+      ),
+      restoreVerificationPlanAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1823,6 +1836,298 @@ export class BackupDrProtectionSummaryClient {
     return this.pathTemplates.resourceBackupConfigPathTemplate.match(
       resourceBackupConfigName,
     ).resource_backup_config;
+  }
+
+  /**
+   * Return a fully-qualified restoreTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_template
+   * @returns {string} Resource name string.
+   */
+  restoreTemplatePath(
+    project: string,
+    location: string,
+    restoreTemplate: string,
+  ) {
+    return this.pathTemplates.restoreTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      restore_template: restoreTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_template from RestoreTemplate resource.
+   *
+   * @param {string} restoreTemplateName
+   *   A fully-qualified path representing RestoreTemplate resource.
+   * @returns {string} A string representing the restore_template.
+   */
+  matchRestoreTemplateFromRestoreTemplateName(restoreTemplateName: string) {
+    return this.pathTemplates.restoreTemplatePathTemplate.match(
+      restoreTemplateName,
+    ).restore_template;
+  }
+
+  /**
+   * Return a fully-qualified restoreTemplateExecution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_template
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  restoreTemplateExecutionPath(
+    project: string,
+    location: string,
+    restoreTemplate: string,
+    execution: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.render({
+      project: project,
+      location: location,
+      restore_template: restoreTemplate,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_template from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the restore_template.
+   */
+  matchRestoreTemplateFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).restore_template;
+  }
+
+  /**
+   * Parse the execution from RestoreTemplateExecution resource.
+   *
+   * @param {string} restoreTemplateExecutionName
+   *   A fully-qualified path representing RestoreTemplateExecution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromRestoreTemplateExecutionName(
+    restoreTemplateExecutionName: string,
+  ) {
+    return this.pathTemplates.restoreTemplateExecutionPathTemplate.match(
+      restoreTemplateExecutionName,
+    ).execution;
+  }
+
+  /**
+   * Return a fully-qualified restoreVerificationPlan resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restoreVerificationPlan
+   * @returns {string} Resource name string.
+   */
+  restoreVerificationPlanPath(
+    project: string,
+    location: string,
+    restoreVerificationPlan: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.render({
+      project: project,
+      location: location,
+      restoreVerificationPlan: restoreVerificationPlan,
+    });
+  }
+
+  /**
+   * Parse the project from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).location;
+  }
+
+  /**
+   * Parse the restoreVerificationPlan from RestoreVerificationPlan resource.
+   *
+   * @param {string} restoreVerificationPlanName
+   *   A fully-qualified path representing RestoreVerificationPlan resource.
+   * @returns {string} A string representing the restoreVerificationPlan.
+   */
+  matchRestoreVerificationPlanFromRestoreVerificationPlanName(
+    restoreVerificationPlanName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanPathTemplate.match(
+      restoreVerificationPlanName,
+    ).restoreVerificationPlan;
+  }
+
+  /**
+   * Return a fully-qualified restoreVerificationPlanAssociation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} restore_verification_plan
+   * @param {string} association
+   * @returns {string} Resource name string.
+   */
+  restoreVerificationPlanAssociationPath(
+    project: string,
+    location: string,
+    restoreVerificationPlan: string,
+    association: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        restore_verification_plan: restoreVerificationPlan,
+        association: association,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).location;
+  }
+
+  /**
+   * Parse the restore_verification_plan from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the restore_verification_plan.
+   */
+  matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).restore_verification_plan;
+  }
+
+  /**
+   * Parse the association from RestoreVerificationPlanAssociation resource.
+   *
+   * @param {string} restoreVerificationPlanAssociationName
+   *   A fully-qualified path representing RestoreVerificationPlanAssociation resource.
+   * @returns {string} A string representing the association.
+   */
+  matchAssociationFromRestoreVerificationPlanAssociationName(
+    restoreVerificationPlanAssociationName: string,
+  ) {
+    return this.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match(
+      restoreVerificationPlanAssociationName,
+    ).association;
   }
 
   /**

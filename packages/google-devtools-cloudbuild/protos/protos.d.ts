@@ -8531,7 +8531,8 @@ export namespace google {
                     /** VerifyOption enum. */
                     enum VerifyOption {
                         NOT_VERIFIED = 0,
-                        VERIFIED = 1
+                        VERIFIED = 1,
+                        BEST_EFFORT = 3
                     }
 
                     /** MachineType enum. */

@@ -513,6 +513,9 @@ export class NavConnectServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the trip to get.
    *   Format: projects/{project}/trips/{trip_id}
+   * @param {google.maps.navconnect.v1.GetTripRequest.RoutePolylineFormat} [request.routePolylineFormat]
+   *   Optional. The format of the route polyline to return.
+   *   If not set, `SIMPLE` route polyline will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

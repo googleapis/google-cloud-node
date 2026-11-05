@@ -413,6 +413,12 @@ export class DataformClient {
     const moveRepositoryMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataform.v1.MoveRepositoryMetadata',
     ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1.CompilationResult',
+    ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1.CreateCompilationResultMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteTeamFolderTree: new this._gaxModule.LongrunningDescriptor(
@@ -435,6 +441,16 @@ export class DataformClient {
         moveRepositoryResponse.decode.bind(moveRepositoryResponse),
         moveRepositoryMetadata.decode.bind(moveRepositoryMetadata),
       ),
+      createCompilationResultLongRunning:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createCompilationResultLongRunningResponse.decode.bind(
+            createCompilationResultLongRunningResponse,
+          ),
+          createCompilationResultLongRunningMetadata.decode.bind(
+            createCompilationResultLongRunningMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -543,6 +559,7 @@ export class DataformClient {
       'listCompilationResults',
       'getCompilationResult',
       'createCompilationResult',
+      'createCompilationResultLongRunning',
       'queryCompilationResultActions',
       'listWorkflowConfigs',
       'getWorkflowConfig',
@@ -8631,6 +8648,185 @@ export class DataformClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.dataform.v1.MoveRepositoryMetadata
+    >;
+  }
+  /**
+   * Creates a new CompilationResult in a given project and location
+   * asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to create the compilation result. Must be
+   *   in the format `projects/* /locations/* /repositories/*`.
+   * @param {google.cloud.dataform.v1.CompilationResult} request.compilationResult
+   *   Required. The compilation result to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1.ICreateCompilationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1.ICreateCompilationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1.ICreateCompilationResultRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1.ICreateCompilationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1.ICompilationResult,
+            protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1.ICompilationResult,
+        protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1.ICompilationResult,
+            protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCompilationResultLongRunning request %j', request);
+    return this.innerApiCalls
+      .createCompilationResultLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataform.v1.ICompilationResult,
+            protos.google.cloud.dataform.v1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createCompilationResultLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  async checkCreateCompilationResultLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataform.v1.CompilationResult,
+      protos.google.cloud.dataform.v1.CreateCompilationResultMetadata
+    >
+  > {
+    this._log.info('createCompilationResultLongRunning long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCompilationResultLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataform.v1.CompilationResult,
+      protos.google.cloud.dataform.v1.CreateCompilationResultMetadata
     >;
   }
   /**

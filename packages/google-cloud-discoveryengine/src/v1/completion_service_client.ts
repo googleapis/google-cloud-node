@@ -210,17 +210,29 @@ export class CompletionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
       assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
       ),
       assistantPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
       ),
+      collectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}',
+      ),
+      dataConnectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataConnector',
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}',
       ),
       identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -242,6 +254,10 @@ export class CompletionServiceClient {
       projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}',
+        ),
+      projectLocationCollectionDataStoreCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/completionConfig',
         ),
       projectLocationCollectionDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -287,6 +303,18 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
         ),
+      projectLocationCollectionDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/widgetConfigs/{widget_config}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
+        ),
+      projectLocationCollectionEngineCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/completionConfig',
+        ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}',
@@ -307,6 +335,10 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}',
         ),
+      projectLocationCollectionEngineWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/widgetConfigs/{widget_config}',
+        ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}',
       ),
@@ -317,6 +349,10 @@ export class CompletionServiceClient {
       projectLocationDataStoreBranchDocumentChunkPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}',
+        ),
+      projectLocationDataStoreCompletionConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/completionConfig',
         ),
       projectLocationDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -362,6 +398,13 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
         ),
+      projectLocationDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/widgetConfigs/{widget_config}',
+        ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -418,6 +461,9 @@ export class CompletionServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/assistants/*/agents/*/operations/*}',
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
@@ -606,6 +652,7 @@ export class CompletionServiceClient {
     // and create an API call method for each.
     const completionServiceStubMethods = [
       'completeQuery',
+      'advancedCompleteQuery',
       'importSuggestionDenyListEntries',
       'purgeSuggestionDenyListEntries',
       'importCompletionSuggestions',
@@ -702,7 +749,13 @@ export class CompletionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud_search.query',
+      'https://www.googleapis.com/auth/discoveryengine.assist.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -754,11 +807,11 @@ export class CompletionServiceClient {
    *
    *   * `document` is the default model for regular dataStores.
    *   * `search-history` is the default model for site search dataStores.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -884,6 +937,215 @@ export class CompletionServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('completeQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Completes the user input with advanced keyword suggestions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.completionConfig
+   *   Required. The completion_config of the parent dataStore or engine resource
+   *   name for which the completion is performed, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/* /completionConfig`
+   *   `projects/* /locations/global/collections/default_collection/engines/* /completionConfig`.
+   * @param {string} request.query
+   *   Required. The typeahead input used to fetch suggestions. Maximum length is
+   *   128 characters.
+   *
+   *   The query can not be empty for most of the suggestion types. If it is
+   *   empty, an `INVALID_ARGUMENT` error is returned. The exception is when the
+   *   suggestion_types contains only the type `RECENT_SEARCH`, the query can
+   *   be an empty string. The is called "zero prefix" feature, which returns
+   *   user's recently searched queries given the empty query.
+   * @param {string} request.queryModel
+   *   Specifies the autocomplete query model, which only applies to the QUERY
+   *   SuggestionType. This overrides any model specified in the Configuration >
+   *   Autocomplete section of the Cloud console. Currently supported values:
+   *
+   *   * `document` - Using suggestions generated from user-imported documents.
+   *   * `search-history` - Using suggestions generated from the past history of
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+   *   API calls. Do not use it when there is no traffic for Search API.
+   *   * `user-event` - Using suggestions generated from user-imported search
+   *   events.
+   *   * `document-completable` - Using suggestions taken directly from
+   *   user-imported document fields marked as completable.
+   *
+   *   Default values:
+   *
+   *   * `document` is the default model for regular dataStores.
+   *   * `search-history` is the default model for site search dataStores.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   * @param {google.cloud.discoveryengine.v1.UserInfo} [request.userInfo]
+   *   Optional. Information about the end user.
+   *
+   *   This should be the same identifier information as
+   *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_info|UserEvent.user_info}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.user_info|SearchRequest.user_info}.
+   * @param {boolean} request.includeTailSuggestions
+   *   Indicates if tail suggestions should be returned if there are no
+   *   suggestions that match the full query. Even if set to true, if there are
+   *   suggestions that match the full query, those are returned and no
+   *   tail suggestions are returned.
+   * @param {google.cloud.discoveryengine.v1.AdvancedCompleteQueryRequest.BoostSpec} [request.boostSpec]
+   *   Optional. Specification to boost suggestions matching the condition.
+   * @param {number[]} [request.suggestionTypes]
+   *   Optional. Suggestion types to return. If empty or unspecified, query
+   *   suggestions are returned. Only one suggestion type is supported at the
+   *   moment.
+   * @param {number[]} [request.suggestionTypeSpecs]
+   *   Optional. Specification of each suggestion type.
+   * @param {string[]} [request.experimentIds]
+   *   Optional. Experiment ids for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.AdvancedCompleteQueryResponse|AdvancedCompleteQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/completion_service.advanced_complete_query.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_AdvancedCompleteQuery_async
+   */
+  advancedCompleteQuery(
+    request?: protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  advancedCompleteQuery(
+    request: protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  advancedCompleteQuery(
+    request: protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  advancedCompleteQuery(
+    request?: protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        completion_config: request.completionConfig ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('advancedCompleteQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('advancedCompleteQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .advancedCompleteQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IAdvancedCompleteQueryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('advancedCompleteQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1939,6 +2201,44 @@ export class CompletionServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
+
+  /**
    * Return a fully-qualified assistAnswer resource name string.
    *
    * @param {string} project
@@ -2125,6 +2425,110 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified collection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  collectionPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.collectionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
+  }
+
+  /**
+   * Return a fully-qualified dataConnector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  dataConnectorPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .collection;
+  }
+
+  /**
    * Return a fully-qualified engine resource name string.
    *
    * @param {string} project
@@ -2250,6 +2654,58 @@ export class CompletionServiceClient {
     return this.pathTemplates.identityMappingStorePathTemplate.match(
       identityMappingStoreName,
     ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
   }
 
   /**
@@ -2727,6 +3183,91 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
       projectLocationCollectionDataStoreBranchDocumentChunkName,
     ).chunk;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreCompletionConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_completionConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreCompletionConfigName(
+    projectLocationCollectionDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match(
+      projectLocationCollectionDataStoreCompletionConfigName,
+    ).data_store;
   }
 
   /**
@@ -3845,6 +4386,315 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCompletionConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCompletionConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineCompletionConfigName
+   *   A fully-qualified path representing project_location_collection_engine_completionConfig resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCompletionConfigName(
+    projectLocationCollectionEngineCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match(
+      projectLocationCollectionEngineCompletionConfigName,
+    ).engine;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionEngineControl resource name string.
    *
    * @param {string} project
@@ -4378,6 +5228,109 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionEngineWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).engine;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
@@ -4664,6 +5617,73 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
       projectLocationDataStoreBranchDocumentChunkName,
     ).chunk;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreCompletionConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreCompletionConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreCompletionConfig resource.
+   *
+   * @param {string} projectLocationDataStoreCompletionConfigName
+   *   A fully-qualified path representing project_location_data_store_completionConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreCompletionConfigName(
+    projectLocationDataStoreCompletionConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match(
+      projectLocationDataStoreCompletionConfigName,
+    ).data_store;
   }
 
   /**
@@ -5581,6 +6601,143 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
   }
 
   /**

@@ -244,6 +244,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateCompilationResultLongRunning": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "QueryCompilationResultActions": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

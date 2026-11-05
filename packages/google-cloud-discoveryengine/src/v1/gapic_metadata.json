@@ -5,21 +5,110 @@
   "protoPackage": "google.cloud.discoveryengine.v1",
   "libraryPackage": "@google-cloud/discoveryengine",
   "services": {
+    "AclConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AclConfigServiceClient",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "updateAclConfig"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "getAclConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AclConfigServiceClient",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "updateAclConfig"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "getAclConfig"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AssistantService": {
       "clients": {
         "grpc": {
           "libraryClient": "AssistantServiceClient",
           "rpcs": {
+            "CreateAssistant": {
+              "methods": [
+                "createAssistant"
+              ]
+            },
+            "DeleteAssistant": {
+              "methods": [
+                "deleteAssistant"
+              ]
+            },
+            "UpdateAssistant": {
+              "methods": [
+                "updateAssistant"
+              ]
+            },
+            "GetAssistant": {
+              "methods": [
+                "getAssistant"
+              ]
+            },
             "StreamAssist": {
               "methods": [
                 "streamAssist"
+              ]
+            },
+            "ListAssistants": {
+              "methods": [
+                "listAssistants",
+                "listAssistantsStream",
+                "listAssistantsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
           "libraryClient": "AssistantServiceClient",
-          "rpcs": {}
+          "rpcs": {
+            "CreateAssistant": {
+              "methods": [
+                "createAssistant"
+              ]
+            },
+            "DeleteAssistant": {
+              "methods": [
+                "deleteAssistant"
+              ]
+            },
+            "UpdateAssistant": {
+              "methods": [
+                "updateAssistant"
+              ]
+            },
+            "GetAssistant": {
+              "methods": [
+                "getAssistant"
+              ]
+            },
+            "ListAssistants": {
+              "methods": [
+                "listAssistants",
+                "listAssistantsStream",
+                "listAssistantsAsync"
+              ]
+            }
+          }
         }
       }
     },
@@ -77,6 +166,50 @@
         }
       }
     },
+    "CollectionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CollectionServiceClient",
+          "rpcs": {
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "DeleteCollection": {
+              "methods": [
+                "deleteCollection"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CollectionServiceClient",
+          "rpcs": {
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "DeleteCollection": {
+              "methods": [
+                "deleteCollection"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompletionService": {
       "clients": {
         "grpc": {
@@ -85,6 +218,11 @@
             "CompleteQuery": {
               "methods": [
                 "completeQuery"
+              ]
+            },
+            "AdvancedCompleteQuery": {
+              "methods": [
+                "advancedCompleteQuery"
               ]
             },
             "ImportSuggestionDenyListEntries": {
@@ -115,6 +253,11 @@
             "CompleteQuery": {
               "methods": [
                 "completeQuery"
+              ]
+            },
+            "AdvancedCompleteQuery": {
+              "methods": [
+                "advancedCompleteQuery"
               ]
             },
             "ImportSuggestionDenyListEntries": {
@@ -366,6 +509,50 @@
         }
       }
     },
+    "DataConnectorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataConnectorServiceClient",
+          "rpcs": {
+            "GetDataConnector": {
+              "methods": [
+                "getDataConnector"
+              ]
+            },
+            "UpdateDataConnector": {
+              "methods": [
+                "updateDataConnector"
+              ]
+            },
+            "SetUpDataConnector": {
+              "methods": [
+                "setUpDataConnector"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataConnectorServiceClient",
+          "rpcs": {
+            "GetDataConnector": {
+              "methods": [
+                "getDataConnector"
+              ]
+            },
+            "UpdateDataConnector": {
+              "methods": [
+                "updateDataConnector"
+              ]
+            },
+            "SetUpDataConnector": {
+              "methods": [
+                "setUpDataConnector"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataStoreService": {
       "clients": {
         "grpc": {
@@ -379,6 +566,16 @@
             "UpdateDataStore": {
               "methods": [
                 "updateDataStore"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "CreateDataStore": {
@@ -411,6 +608,16 @@
             "UpdateDataStore": {
               "methods": [
                 "updateDataStore"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "CreateDataStore": {
@@ -547,6 +754,16 @@
                 "getEngine"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
             "CreateEngine": {
               "methods": [
                 "createEngine"
@@ -577,6 +794,16 @@
             "GetEngine": {
               "methods": [
                 "getEngine"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "CreateEngine": {
@@ -725,6 +952,84 @@
                 "listIdentityMappingStores",
                 "listIdentityMappingStoresStream",
                 "listIdentityMappingStoresAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicenseConfigServiceClient",
+          "rpcs": {
+            "CreateLicenseConfig": {
+              "methods": [
+                "createLicenseConfig"
+              ]
+            },
+            "UpdateLicenseConfig": {
+              "methods": [
+                "updateLicenseConfig"
+              ]
+            },
+            "GetLicenseConfig": {
+              "methods": [
+                "getLicenseConfig"
+              ]
+            },
+            "DistributeLicenseConfig": {
+              "methods": [
+                "distributeLicenseConfig"
+              ]
+            },
+            "RetractLicenseConfig": {
+              "methods": [
+                "retractLicenseConfig"
+              ]
+            },
+            "ListLicenseConfigs": {
+              "methods": [
+                "listLicenseConfigs",
+                "listLicenseConfigsStream",
+                "listLicenseConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicenseConfigServiceClient",
+          "rpcs": {
+            "CreateLicenseConfig": {
+              "methods": [
+                "createLicenseConfig"
+              ]
+            },
+            "UpdateLicenseConfig": {
+              "methods": [
+                "updateLicenseConfig"
+              ]
+            },
+            "GetLicenseConfig": {
+              "methods": [
+                "getLicenseConfig"
+              ]
+            },
+            "DistributeLicenseConfig": {
+              "methods": [
+                "distributeLicenseConfig"
+              ]
+            },
+            "RetractLicenseConfig": {
+              "methods": [
+                "retractLicenseConfig"
+              ]
+            },
+            "ListLicenseConfigs": {
+              "methods": [
+                "listLicenseConfigs",
+                "listLicenseConfigsStream",
+                "listLicenseConfigsAsync"
               ]
             }
           }
@@ -952,9 +1257,31 @@
         "grpc": {
           "libraryClient": "ServingConfigServiceClient",
           "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "createServingConfig"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "deleteServingConfig"
+              ]
+            },
             "UpdateServingConfig": {
               "methods": [
                 "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
               ]
             }
           }
@@ -962,9 +1289,31 @@
         "grpc-fallback": {
           "libraryClient": "ServingConfigServiceClient",
           "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "createServingConfig"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "deleteServingConfig"
+              ]
+            },
             "UpdateServingConfig": {
               "methods": [
                 "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
               ]
             }
           }
@@ -1270,6 +1619,11 @@
         "grpc": {
           "libraryClient": "UserLicenseServiceClient",
           "rpcs": {
+            "ListLicenseConfigsUsageStats": {
+              "methods": [
+                "listLicenseConfigsUsageStats"
+              ]
+            },
             "BatchUpdateUserLicenses": {
               "methods": [
                 "batchUpdateUserLicenses"
@@ -1287,6 +1641,11 @@
         "grpc-fallback": {
           "libraryClient": "UserLicenseServiceClient",
           "rpcs": {
+            "ListLicenseConfigsUsageStats": {
+              "methods": [
+                "listLicenseConfigsUsageStats"
+              ]
+            },
             "BatchUpdateUserLicenses": {
               "methods": [
                 "batchUpdateUserLicenses"
@@ -1297,6 +1656,74 @@
                 "listUserLicenses",
                 "listUserLicensesStream",
                 "listUserLicensesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserStoreServiceClient",
+          "rpcs": {
+            "GetUserStore": {
+              "methods": [
+                "getUserStore"
+              ]
+            },
+            "UpdateUserStore": {
+              "methods": [
+                "updateUserStore"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserStoreServiceClient",
+          "rpcs": {
+            "GetUserStore": {
+              "methods": [
+                "getUserStore"
+              ]
+            },
+            "UpdateUserStore": {
+              "methods": [
+                "updateUserStore"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "WidgetConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WidgetConfigServiceClient",
+          "rpcs": {
+            "GetWidgetConfig": {
+              "methods": [
+                "getWidgetConfig"
+              ]
+            },
+            "UpdateWidgetConfig": {
+              "methods": [
+                "updateWidgetConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WidgetConfigServiceClient",
+          "rpcs": {
+            "GetWidgetConfig": {
+              "methods": [
+                "getWidgetConfig"
+              ]
+            },
+            "UpdateWidgetConfig": {
+              "methods": [
+                "updateWidgetConfig"
               ]
             }
           }
