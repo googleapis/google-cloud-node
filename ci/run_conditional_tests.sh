@@ -112,21 +112,17 @@ fi
 
 # Then detect changes in the test scripts (triggers full test suite when ci/ changes).
 
-if [[ "${GIT_DIFF_ARG}" == *" -- "* ]]; then
-    ci_diff_sep=""
-else
-    ci_diff_sep="--"
-fi
+commit_range="${GIT_DIFF_ARG%% -- *}"
 set +e
-git diff --quiet ${GIT_DIFF_ARG} ${ci_diff_sep} ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh'
+git diff --quiet ${commit_range} -- ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh'
 changed=$?
 set -e
 if [[ "${changed}" -eq 0 ]]; then
     echo "no change detected in ci"
 else
     echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ${ci_diff_sep} ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh':"
-    git diff ${GIT_DIFF_ARG} ${ci_diff_sep} ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh'
+    echo "result of git diff ${commit_range} -- ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh':"
+    git diff ${commit_range} -- ci ':!ci/breaking-change-check' ':!ci/run_conditional_tests.sh'
     GIT_DIFF_ARG=""
 fi
 
