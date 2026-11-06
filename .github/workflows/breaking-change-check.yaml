@@ -3,6 +3,7 @@ name: breaking-change-check
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 concurrency:
@@ -27,104 +28,35 @@ jobs:
           filters: |
             check:
               - 'core/**/*.ts'
+              - 'core/**/package.json'
+              - 'core/**/tsconfig*.json'
               - 'handwritten/**/*.ts'
+              - 'handwritten/**/package.json'
+              - 'handwritten/**/tsconfig*.json'
+              - '.github/workflows/breaking-change-check.yaml'
+            self:
+              - 'core/test-utils/**'
               - '.github/workflows/breaking-change-check.yaml'
       - name: Use Node.js 24
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
       - uses: ./.github/actions/pnpm-lockfile-check
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
       - name: Compile affected packages and workspace dependents via pnpm
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[HEAD^1...HEAD]" --filter "!./packages/*" --if-present run compile
-      - name: Check declaration changes with pnpm dlx @api-extractor-tools/change-detector
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+          BASE_SHA=$(git merge-base HEAD^1 HEAD 2>/dev/null || git rev-parse HEAD^1)
+          pnpm --filter "...[${BASE_SHA}...HEAD]..." --filter "!./packages/*" --if-present run compile
+      - name: Run breaking-change-check unit and harness tests
+        if: steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          node --input-type=module - <<'EOF'
-          import {execFileSync} from 'node:child_process';
-          import fs from 'node:fs';
-          import {createRequire} from 'node:module';
-          import path from 'node:path';
-
-          const require = createRequire(path.join(process.cwd(), 'package.json'));
-          const ts = require('typescript');
-
-          const diff = execFileSync(
-            'git',
-            [
-              'diff',
-              '--name-status',
-              'HEAD^1...HEAD',
-              '--',
-              '*.ts',
-              ':!packages',
-              ':!**/test/**',
-              ':!**/tests/**',
-              ':!**/system-test/**',
-              ':!**/samples/**',
-              ':!**/fixtures/**',
-              ':!**/benchmark/**',
-            ],
-            {encoding: 'utf8'},
-          );
-
-          const findCompiledDts = file => {
-            let dir = path.dirname(path.resolve(file));
-            while (dir !== path.dirname(dir) && !fs.existsSync(path.join(dir, 'package.json'))) {
-              dir = path.dirname(dir);
-            }
-            const relInPkg = path.relative(dir, path.resolve(file));
-            const candidates = [
-              path.join(dir, 'build', relInPkg.replace(/\.ts$/, '.d.ts')),
-              path.join(dir, 'build', relInPkg.replace(/^src[\\/]/, '').replace(/\.ts$/, '.d.ts')),
-            ];
-            return candidates.find(c => fs.existsSync(c));
-          };
-
-          const breaking = [];
-          for (const line of diff.split('\n').map(l => l.trim()).filter(Boolean)) {
-            const [status, oldPath, newPath] = line.split(/\t+/);
-            const file = status?.startsWith('R') ? newPath : oldPath;
-            if (!status || !file || !oldPath || !file.endsWith('.ts') || /\.(test|spec)\.ts$/.test(file)) continue;
-            if (status.startsWith('A')) continue;
-            if (status.startsWith('D')) {
-              breaking.push({file: oldPath, explanation: 'Public source file was deleted.'});
-              continue;
-            }
-            const baseSrc = execFileSync('git', ['show', `HEAD^1:${oldPath}`], {encoding: 'utf8'});
-            fs.writeFileSync('/tmp/base.d.ts', ts.transpileDeclaration(baseSrc, {fileName: oldPath, compilerOptions: {stripInternal: true}}).outputText);
-            const compiledDts = findCompiledDts(file);
-            const headDts = compiledDts
-              ? fs.readFileSync(compiledDts, 'utf8')
-              : ts.transpileDeclaration(fs.readFileSync(file, 'utf8'), {fileName: file, compilerOptions: {stripInternal: true}}).outputText;
-            fs.writeFileSync('/tmp/head.d.ts', headDts);
-
-            const out = execFileSync(
-              'pnpm',
-              ['dlx', '@api-extractor-tools/change-detector', '/tmp/base.d.ts', '/tmp/head.d.ts', '--json'],
-              {encoding: 'utf8'},
-            );
-            const report = JSON.parse(out.slice(out.indexOf('{')));
-            const visit = list => {
-              for (const c of list || []) {
-                if (c.action === 'removed' || c.impact === 'narrowing') {
-                  breaking.push({file, explanation: c.explanation});
-                }
-                if (c.nestedChanges) visit(c.nestedChanges);
-              }
-            };
-            for (const group of Object.values(report.changes || {})) visit(group);
-          }
-
-          if (breaking.length > 0) {
-            for (const b of breaking) {
-              console.log(`::error file=${b.file},title=Breaking Change Detected::${b.explanation}`);
-            }
-            process.exitCode = 1;
-          } else {
-            console.log('No breaking changes detected.');
-          }
-          EOF
+          pnpm --dir core/test-utils exec jest test/breaking-change-check.test.ts
+      - name: Check public TypeScript interfaces with core/test-utils
+        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          BREAKING_CHANGE_BASE_REF: ${{ github.event_name == 'workflow_dispatch' && 'HEAD^1' || '' }}
+        run: |
+          pnpm --dir core/test-utils run check
