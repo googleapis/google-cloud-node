@@ -98,7 +98,7 @@
     "nise": "^6.1.1",
     "null-loader": "^4.0.1",
     "path-to-regexp": "^8.2.0",
-    "protobufjs": "~7.5.0",
+    "protobufjs": "~7.6.5",
     "sinon": "21.0.3",
     "tmp": "^0.2.3",
     "ts-loader": "^9.5.2",
