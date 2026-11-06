@@ -15,9 +15,9 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach, after} from 'mocha';
 import * as gcpMetadata from 'gcp-metadata';
-import {heap as heapProfiler} from 'pprof';
 import * as sinon from 'sinon';
 
+import * as heapProfiler from '../src/heap-profiler';
 import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
 const packageJson = require('../../package.json');
