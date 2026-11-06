@@ -173,6 +173,57 @@ describe('MessageQueues', () => {
         assert.strictEqual(stub.callCount, 1);
       });
 
+      describe('with concurrent additions', () => {
+        async function addConcurrently(messages: Message[]) {
+          const batches: string[][] = [];
+          sandbox
+            .stub(messageQueue, '_sendBatch')
+            .callsFake(async (batch: messageTypes.QueuedMessages) => {
+              batches.push(batch.map(m => m.message.ackId));
+              batch.forEach(m => m.responsePromise?.resolve());
+              return [];
+            });
+
+          await Promise.all(messages.map(m => messageQueue.add(m)));
+
+          const sent = batches.flat().sort();
+          const added = messages.map(m => m.ackId).sort();
+          assert.deepStrictEqual(sent, added);
+          return batches;
+        }
+
+        for (const maxMessages of [1, 2]) {
+          it(`should keep every batch within maxMessages of ${maxMessages}`, async () => {
+            messageQueue.setOptions({maxMessages, maxMilliseconds: 1});
+            const messages = Array.from({length: 6}, fakeMessage);
+
+            const batches = await addConcurrently(messages);
+
+            const sizes = batches.map(b => b.length);
+            assert.ok(
+              sizes.every(size => size <= maxMessages),
+              `${sizes}`,
+            );
+          });
+        }
+
+        it('should keep every batch within MAX_BATCH_BYTES', async () => {
+          messageQueue.setOptions({maxMilliseconds: 1});
+          const messages = Array.from({length: 6}, (_, i) => {
+            const ackId = `${i}`.padEnd(messageTypes.MAX_BATCH_BYTES / 2, 'x');
+            return {ackId} as Message;
+          });
+
+          const batches = await addConcurrently(messages);
+
+          const bytes = batches.map(b => b.join('').length);
+          assert.ok(
+            bytes.every(size => size <= messageTypes.MAX_BATCH_BYTES),
+            `${bytes}`,
+          );
+        });
+      });
+
       it('should schedule a flush if needed', () => {
         const clock = TestUtils.useFakeTimers(sandbox);
         const stub = sandbox.stub(messageQueue, 'flush');
