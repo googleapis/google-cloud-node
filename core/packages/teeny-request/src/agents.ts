@@ -24,6 +24,50 @@ export const pool = new Map<string, HTTPAgent>();
 export type HttpAnyAgent = HTTPAgent | HTTPSAgent;
 
 /**
+ * The subset of `pool` options that is safe to hand to a cached agent.
+ *
+ * `pool` is given per request, but the agent built from it is shared by every
+ * later request in the process. Anything that decides where a connection goes
+ * or how the peer is verified (host, port, ca, cert, key, rejectUnauthorized,
+ * checkServerIdentity, servername, headers, createConnection, ...) therefore
+ * has to be dropped here, otherwise a single request can downgrade or redirect
+ * the traffic of unrelated requests.
+ */
+const SAFE_POOL_OPTIONS = [
+  'keepAlive',
+  'keepAliveMsecs',
+  'maxSockets',
+  'maxFreeSockets',
+  'maxTotalSockets',
+  'scheduling',
+  'timeout',
+];
+
+function safePoolOptions(reqOpts: Options) {
+  const requested = reqOpts.pool as {[key: string]: unknown} | undefined;
+  const safe: {[key: string]: unknown} = {};
+  if (!requested) {
+    return safe;
+  }
+  for (const key of SAFE_POOL_OPTIONS) {
+    if (requested[key] !== undefined) {
+      safe[key] = requested[key];
+    }
+  }
+  return safe;
+}
+
+// Pool entries are kept per target, so a request to one host can never hand its
+// agent to a request for another host.
+function poolKey(uri: string): string {
+  try {
+    return new URL(uri).host;
+  } catch (err) {
+    return 'unknown';
+  }
+}
+
+/**
  * Determines if a proxy should be considered based on the environment.
  *
  * @param uri The request uri
@@ -74,7 +118,7 @@ export function getAgent(
     process.env.HTTPS_PROXY ||
     process.env.https_proxy;
 
-  const poolOptions = Object.assign({}, reqOpts.pool);
+  const poolOptions = safePoolOptions(reqOpts);
 
   const manuallyProvidedProxy = !!reqOpts.proxy;
   const shouldUseProxy = manuallyProvidedProxy || shouldUseProxyForURI(uri);
@@ -91,7 +135,7 @@ export function getAgent(
   let key = isHttp ? 'http' : 'https';
 
   if (reqOpts.forever) {
-    key += ':forever';
+    key += `:forever:${poolKey(uri)}`;
 
     if (!pool.has(key)) {
       // tslint:disable-next-line variable-name
