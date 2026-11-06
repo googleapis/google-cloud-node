@@ -2736,6 +2736,7 @@ export class MessagingClient {
         this._terminated = true;
         stub.close();
         void this.operationsClient.close();
+        return;
       });
     }
     return Promise.resolve();
