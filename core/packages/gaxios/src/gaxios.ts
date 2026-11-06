@@ -554,27 +554,36 @@ export class Gaxios implements FetchCompliance {
       // don't do any of the following options - use the user-provided agent.
     } else if (proxy && this.#urlMayUseProxy(opts.url, opts.noProxy)) {
       const HttpsProxyAgent = await Gaxios.#getProxyAgent();
+      const {cert, key} = opts;
+      const cacheKey = JSON.stringify([proxy, cert, key]);
 
-      if (this.agentCache.has(proxy)) {
-        opts.agent = this.agentCache.get(proxy);
+      if (this.agentCache.has(cacheKey)) {
+        opts.agent = this.agentCache.get(cacheKey);
       } else {
-        opts.agent = new HttpsProxyAgent(proxy, {
-          cert: opts.cert,
-          key: opts.key,
-        });
+        const agent = new HttpsProxyAgent(proxy, {cert, key});
 
-        this.agentCache.set(proxy, opts.agent);
+        if (cert && key) {
+          const connect = agent.connect.bind(agent);
+          agent.connect = (req, target) =>
+            connect(
+              req,
+              target.secureEndpoint ? {...target, cert, key} : target,
+            );
+        }
+
+        opts.agent = agent;
+        this.agentCache.set(cacheKey, agent);
       }
     } else if (opts.cert && opts.key) {
       // Configure client for mTLS
-      if (this.agentCache.has(opts.key)) {
-        opts.agent = this.agentCache.get(opts.key);
+      const {cert, key} = opts;
+      const cacheKey = JSON.stringify([cert, key]);
+
+      if (this.agentCache.has(cacheKey)) {
+        opts.agent = this.agentCache.get(cacheKey);
       } else {
-        opts.agent = new HTTPSAgent({
-          cert: opts.cert,
-          key: opts.key,
-        });
-        this.agentCache.set(opts.key, opts.agent);
+        opts.agent = new HTTPSAgent({cert, key});
+        this.agentCache.set(cacheKey, opts.agent);
       }
     }
 
