@@ -26,6 +26,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {
+  EXPLICIT_IDEMPOTENCY_STRATEGY,
   IdempotencyStrategy,
   isExplicitIdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
@@ -95,7 +96,7 @@ export class StorageTransport {
   authClient: GoogleAuth<AuthClient>;
   private providedUserAgent?: string;
   private packageJson: PackageJson;
-  private retryOptions: RetryOptions;
+  retryOptions: RetryOptions;
   private baseUrl: string;
   private timeout?: number;
   private projectId?: string;
@@ -117,9 +118,14 @@ export class StorageTransport {
     }
     this.providedUserAgent = options.userAgent;
     this.packageJson = getPackageJSON();
-    this.retryOptions = options.retryOptions || {};
-    this.retryOptions.retryableErrorFn =
-      this.retryOptions.retryableErrorFn || RETRYABLE_ERR_FN_DEFAULT;
+    this.retryOptions = {
+      ...options.retryOptions,
+      [EXPLICIT_IDEMPOTENCY_STRATEGY]: isExplicitIdempotencyStrategy(
+        options.retryOptions,
+      ),
+      retryableErrorFn:
+        options.retryOptions?.retryableErrorFn || RETRYABLE_ERR_FN_DEFAULT,
+    };
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
     this.projectId = options.projectId;
@@ -456,22 +462,7 @@ export class StorageTransport {
       };
 
       const enrichedPromise = requestPromise.catch(err => {
-        const decorated = decorateError(err);
-        if (
-          decorated?.isRetry &&
-          isObjectDelete &&
-          (decorated?.code === 404 || decorated?.status === 404)
-        ) {
-          return {
-            ...(decorated.response || {}),
-            config: decorated.config || ({} as GaxiosOptionsPrepared),
-            headers: decorated.response?.headers || new Headers(),
-            status: 204,
-            statusText: 'No Content',
-            data: '' as unknown as T,
-          } as GaxiosResponse<T>;
-        }
-        throw decorated;
+        throw decorateError(err);
       });
 
       if (callback) {

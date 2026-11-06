@@ -256,15 +256,35 @@ describe('File', () => {
       });
 
       it('should return 204 No Content if delete receives a 404 on retry', async () => {
-        const error = new GaxiosError(
-          'Not Found',
-          {} as GaxiosOptionsPrepared,
-        ) as GaxiosError & {isRetry?: boolean};
-        error.status = 404;
-        error.code = '404';
-        error.isRetry = true;
+        const authClient = new GoogleAuth();
+        const requestStub = sandbox.stub(authClient, 'request');
+        requestStub.callsFake(async opts => {
+          return (
+            opts.adapter as unknown as (options: unknown) => Promise<never>
+          )({
+            ...opts,
+            retryConfig: {...opts.retryConfig, currentRetryAttempt: 1},
+          });
+        });
 
-        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
+        const realTransport = new StorageTransport({
+          apiEndpoint: 'https://storage.googleapis.com',
+          baseUrl: 'https://storage.googleapis.com',
+          authClient,
+          projectId: PROJECT_ID,
+          retryOptions: file.storage.retryOptions,
+          scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+          packageJson: {name: 'test-package', version: '1.0.0'},
+        });
+        sandbox.stub(realTransport.gaxiosInstance, 'request').resolves({
+          status: 404,
+          statusText: 'Not Found',
+          data: 'Not Found',
+          headers: new Headers(),
+          config: {} as GaxiosOptionsPrepared,
+        } as never);
+
+        file.storageTransport = realTransport;
         const [resp] = await file.delete();
         assert.strictEqual(resp.status, 204);
       });

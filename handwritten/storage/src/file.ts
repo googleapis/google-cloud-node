@@ -247,7 +247,7 @@ export interface GetSignedUrlConfig extends Pick<
   queryParams?: Query;
 }
 
-export interface GetFileMetadataOptions {
+export interface GetFileMetadataOptions extends PreconditionOptions {
   userProject?: string;
 }
 
@@ -2022,16 +2022,6 @@ class File extends ServiceObject<File, FileMetadata> {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    const retryOptions = {...this.storage.retryOptions};
-    if (
-      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts,
-        true,
-      )
-    ) {
-      retryOptions.autoRetry = false;
-    }
-
     resumableUpload.createURI(
       {
         authClient: this.storage.storageTransport.authClient,
@@ -2048,7 +2038,15 @@ class File extends ServiceObject<File, FileMetadata> {
         private: options.private,
         public: options.public,
         userProject: options.userProject || this.userProject,
-        retryOptions: retryOptions,
+        retryOptions: {
+          ...this.storage.retryOptions,
+          autoRetry: this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+            options?.preconditionOpts,
+            true,
+          )
+            ? this.storage.retryOptions.autoRetry
+            : false,
+        },
         params: options?.preconditionOpts || this.instancePreconditionOpts,
         universeDomain: this.bucket.storage.universeDomain,
         useAuthWithCustomEndpoint: this.storage.useAuthWithCustomEndpoint,
@@ -2056,7 +2054,6 @@ class File extends ServiceObject<File, FileMetadata> {
       },
       callback!,
     );
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
@@ -2502,16 +2499,6 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         if (resp.status === 404) {
-          if ((resp as GaxiosResponse & {isRetry?: boolean}).isRetry) {
-            return [
-              {
-                ...resp,
-                status: 204,
-                statusText: 'No Content',
-                data: '',
-              },
-            ];
-          }
           if (options.ignoreNotFound) {
             return respTuple;
           }
@@ -2527,21 +2514,6 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         return respTuple;
-      } catch (err) {
-        const error = err as GaxiosError & {isRetry?: boolean};
-        if ((error.code === 404 || error.status === 404) && error.isRetry) {
-          return [
-            {
-              ...(error.response || {}),
-              config: error.config || ({} as GaxiosOptionsPrepared),
-              headers: error.response?.headers || new Headers(),
-              status: 204,
-              statusText: 'No Content',
-              data: '',
-            } as GaxiosResponse,
-          ];
-        }
-        throw err;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
@@ -4648,51 +4620,20 @@ class File extends ServiceObject<File, FileMetadata> {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
         const error = err as GaxiosError & {isRetry?: boolean};
         if ((error.code === 412 || error.status === 412) && error.isRetry) {
-          const getMetadataOpts: GetFileMetadataOptions = {};
+          const getMetadataOpts: GetFileMetadataOptions = {
+            ifMetagenerationMatch: undefined,
+          };
           if (options.userProject) {
             getMetadataOpts.userProject = options.userProject;
           }
-          const getMetadataMethod =
-            typeof this.methods.getMetadata === 'object'
-              ? this.methods.getMetadata
-              : undefined;
-          const getMetadataReqOpts = getMetadataMethod?.reqOpts as
-            | (StorageRequestOptions & {qs?: Record<string, unknown>})
-            | undefined;
-          const savedQueryParamsIfMetagenerationMatch =
-            getMetadataReqOpts?.queryParameters?.ifMetagenerationMatch;
-          const savedQsIfMetagenerationMatch =
-            getMetadataReqOpts?.qs?.ifMetagenerationMatch;
-          if (getMetadataReqOpts?.queryParameters) {
-            delete getMetadataReqOpts.queryParameters.ifMetagenerationMatch;
-          }
-          if (getMetadataReqOpts?.qs) {
-            delete getMetadataReqOpts.qs.ifMetagenerationMatch;
-          }
-          const restorePrecondition = () => {
-            if (
-              savedQueryParamsIfMetagenerationMatch !== undefined &&
-              getMetadataReqOpts?.queryParameters
-            ) {
-              getMetadataReqOpts.queryParameters.ifMetagenerationMatch =
-                savedQueryParamsIfMetagenerationMatch;
-            }
-            if (
-              savedQsIfMetagenerationMatch !== undefined &&
-              getMetadataReqOpts?.qs
-            ) {
-              getMetadataReqOpts.qs.ifMetagenerationMatch =
-                savedQsIfMetagenerationMatch;
-            }
-          };
+          let getResp;
           try {
-            const [metadata] = await this.getMetadata(getMetadataOpts);
-            restorePrecondition();
-            cb!(null, metadata);
+            getResp = await this.getMetadata(getMetadataOpts);
           } catch (getErr) {
-            restorePrecondition();
             cb!(getErr as GaxiosError);
+            return;
           }
+          cb!(null, ...getResp);
           return;
         }
         cb!(err as GaxiosError);
@@ -4830,15 +4771,6 @@ class File extends ServiceObject<File, FileMetadata> {
   ): void {
     options.metadata ??= {};
 
-    const retryOptions = {...this.storage.retryOptions};
-    if (
-      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options.preconditionOpts,
-        true,
-      )
-    ) {
-      retryOptions.autoRetry = false;
-    }
     const cfg = {
       authClient: this.storage.storageTransport.authClient,
       apiEndpoint: this.storage.apiEndpoint,
@@ -4855,7 +4787,15 @@ class File extends ServiceObject<File, FileMetadata> {
       public: options.public,
       uri: options.uri,
       userProject: options.userProject || this.userProject,
-      retryOptions: {...retryOptions},
+      retryOptions: {
+        ...this.storage.retryOptions,
+        autoRetry: this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+          options.preconditionOpts,
+          true,
+        )
+          ? this.storage.retryOptions.autoRetry
+          : false,
+      },
       params: options?.preconditionOpts || this.instancePreconditionOpts,
       chunkSize: options?.chunkSize,
       highWaterMark: options?.highWaterMark,
@@ -4870,7 +4810,6 @@ class File extends ServiceObject<File, FileMetadata> {
       uploadStream = resumableUpload.upload(cfg);
     } catch (error) {
       dup.destroy(error as Error);
-      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       return;
     }
 
@@ -4891,7 +4830,6 @@ class File extends ServiceObject<File, FileMetadata> {
       .on('progress', evt => dup.emit('progress', evt));
 
     dup.setWritable(uploadStream);
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**

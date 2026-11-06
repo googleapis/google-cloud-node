@@ -1739,6 +1739,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       if (validationError) return validationError;
     }
 
+    this.disableAutoRetryConditionallyIdempotent_(
+      this.methods.setMetadata, // Not relevant but param is required
+      AvailableServiceObjectMethods.setMetadata, // Same as above
+      options,
+    );
+
     const convertToFile = (file: string | File): File => {
       if (file instanceof File) {
         return file;
@@ -1774,7 +1780,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             IdempotencyStrategy.RetryNever
         ) {
           maxRetries = 0;
-          this.storage.retryOptions.autoRetry = false;
         }
 
         const deleteSourceObjects = options.deleteSourceObjects;

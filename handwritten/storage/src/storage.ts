@@ -944,9 +944,15 @@ export class Storage {
       get() {
         return idempotencyStrategy;
       },
-      set(val: IdempotencyStrategy) {
+      set: (val: IdempotencyStrategy) => {
         idempotencyStrategy = val;
-        retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = val !== undefined;
+        const isExplicit = val !== undefined;
+        retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = isExplicit;
+        if (this.storageTransport?.retryOptions) {
+          this.storageTransport.retryOptions.idempotencyStrategy = val;
+          this.storageTransport.retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] =
+            isExplicit;
+        }
       },
       enumerable: true,
       configurable: true,
