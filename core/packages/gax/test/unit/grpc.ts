@@ -19,14 +19,17 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import assert from 'assert';
+import * as net from 'net';
 import * as path from 'path';
 import * as sinon from 'sinon';
+import tls from 'tls';
 import fs, {mkdirSync, writeFileSync} from 'fs';
 import * as fsp from 'fs/promises';
 import {afterEach, describe, it, beforeEach} from 'mocha';
 
 import {protobuf} from '../../src/index';
 import {
+  ensurePqcCurvesConfigured,
   GoogleProtoFilesRoot,
   GrpcClient,
   GrpcClientOptions,
@@ -862,6 +865,180 @@ dvorak
         /mTLS is not supported outside of googleapis.com universe domain/,
       );
       await fsp.rm(tmpFolder, {recursive: true, force: true}); // Cleanup.
+    });
+  });
+
+  describe('ensurePqcCurvesConfigured', () => {
+    const initialDefaultCurve = tls.DEFAULT_ECDH_CURVE;
+    const runtimeSupportsMlkem1024 = (() => {
+      try {
+        tls.createSecureContext({ecdhCurve: 'MLKEM1024'});
+        return true;
+      } catch {
+        return false;
+      }
+    })();
+
+    afterEach(() => {
+      sinon.restore();
+      tls.DEFAULT_ECDH_CURVE = initialDefaultCurve;
+    });
+
+    it('configures tls.DEFAULT_ECDH_CURVE to include MLKEM1024 when set to auto', function () {
+      if (!runtimeSupportsMlkem1024) {
+        this.skip();
+      }
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      ensurePqcCurvesConfigured();
+      assert.ok(
+        tls.DEFAULT_ECDH_CURVE.includes('MLKEM1024'),
+        `Expected tls.DEFAULT_ECDH_CURVE (${tls.DEFAULT_ECDH_CURVE}) to include MLKEM1024`,
+      );
+    });
+
+    it('preserves custom tls.DEFAULT_ECDH_CURVE values without overwriting', () => {
+      tls.DEFAULT_ECDH_CURVE = 'X25519:P-256';
+      ensurePqcCurvesConfigured();
+      assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'X25519:P-256');
+    });
+
+    it('falls back to secondary PQC curve candidate when primary candidate is rejected', () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      const stub = sinon.stub(tls, 'createSecureContext');
+      stub
+        .withArgs({ecdhCurve: 'DEFAULT:MLKEM1024'})
+        .throws(new Error('DEFAULT keyword unsupported'));
+      stub
+        .withArgs({
+          ecdhCurve: 'X25519MLKEM768:MLKEM1024:X25519:P-256:P-384',
+        })
+        .returns({} as tls.SecureContext);
+      ensurePqcCurvesConfigured();
+      assert.strictEqual(
+        tls.DEFAULT_ECDH_CURVE,
+        'X25519MLKEM768:MLKEM1024:X25519:P-256:P-384',
+      );
+    });
+
+    it('falls back to auto when tls.createSecureContext rejects PQC curve candidates', () => {
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      sinon.stub(tls, 'createSecureContext').throws(new Error('unsupported'));
+      ensurePqcCurvesConfigured();
+      assert.strictEqual(tls.DEFAULT_ECDH_CURVE, 'auto');
+    });
+
+    it('advertises 0x0202 (MLKEM1024) in TLS ClientHello supported_groups', async function () {
+      if (!runtimeSupportsMlkem1024) {
+        this.skip();
+      }
+      tls.DEFAULT_ECDH_CURVE = 'auto';
+      ensurePqcCurvesConfigured();
+
+      const supportedGroups = await new Promise<number[]>((resolve, reject) => {
+        let client: tls.TLSSocket | undefined;
+        let settled = false;
+        const server = net.createServer(socket => {
+          const chunks: Buffer[] = [];
+          const cleanup = () => {
+            client?.destroy();
+            socket.destroy();
+            server.close();
+          };
+          socket.on('error', err => {
+            if (!settled) {
+              settled = true;
+              cleanup();
+              reject(err);
+            }
+          });
+          socket.on('data', (chunk: Buffer) => {
+            chunks.push(chunk);
+            const buf = Buffer.concat(chunks);
+            if (buf.length < 5) {
+              return;
+            }
+            const recordLen = buf.readUInt16BE(3);
+            if (buf.length < 5 + recordLen) {
+              return;
+            }
+            if (settled) {
+              return;
+            }
+            settled = true;
+            cleanup();
+            try {
+              let pos = 5 + 4 + 2 + 32;
+              if (pos >= buf.length) {
+                throw new Error('Truncated ClientHello session ID');
+              }
+              pos += 1 + buf[pos];
+              if (pos + 2 > buf.length) {
+                throw new Error('Truncated ClientHello cipher suites');
+              }
+              pos += 2 + buf.readUInt16BE(pos);
+              if (pos >= buf.length) {
+                throw new Error('Truncated ClientHello compression methods');
+              }
+              pos += 1 + buf[pos];
+              if (pos + 2 > buf.length) {
+                throw new Error('Truncated ClientHello extensions length');
+              }
+              const extTotalLen = buf.readUInt16BE(pos);
+              pos += 2;
+              const end = Math.min(buf.length, pos + extTotalLen);
+              const groups: number[] = [];
+              while (pos + 4 <= end) {
+                const extType = buf.readUInt16BE(pos);
+                const extLen = buf.readUInt16BE(pos + 2);
+                pos += 4;
+                if (extType === 0x000a && pos + 2 <= end) {
+                  const listLen = buf.readUInt16BE(pos);
+                  for (
+                    let i = 0;
+                    i + 1 < listLen && pos + 2 + i + 1 < end;
+                    i += 2
+                  ) {
+                    groups.push(buf.readUInt16BE(pos + 2 + i));
+                  }
+                }
+                pos += extLen;
+              }
+              resolve(groups);
+            } catch (err) {
+              reject(err);
+            }
+          });
+        });
+        server.on('error', err => {
+          if (!settled) {
+            settled = true;
+            client?.destroy();
+            server.close();
+            reject(err);
+          }
+        });
+        server.listen(0, '127.0.0.1', () => {
+          const addr = server.address() as net.AddressInfo;
+          client = tls.connect({
+            port: addr.port,
+            host: '127.0.0.1',
+            servername: 'localhost',
+          });
+          client.on('error', err => {
+            if (!settled) {
+              settled = true;
+              client?.destroy();
+              server.close();
+              reject(err);
+            }
+          });
+        });
+      });
+
+      assert.ok(
+        supportedGroups.includes(0x0202),
+        `Expected ClientHello supported_groups (${supportedGroups.map(g => '0x' + g.toString(16)).join(', ')}) to include 0x0202 (MLKEM1024)`,
+      );
     });
   });
 });
