@@ -132,7 +132,7 @@ export type SetAppProfileMetadataResponse = [google.protobuf.Empty];
  * const instance = bigtable.instance('my-instance');
  * const appProfile = instance.appProfile('my-app-profile');
  * ```
- * @deprecated Use {@link InstanceAdminClient} from `@google-cloud/bigtable/build/src/admin` instead.
+ * @deprecated Use {@link InstanceAdminClient} from @google-cloud/bigtable instead.
  */
 export class AppProfile {
   bigtable: Bigtable;
@@ -255,7 +255,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_create_app_profile
    * ```
-   * @deprecated Use {@link InstanceAdminClient#createAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#createAppProfile} from @google-cloud/bigtable instead.
    */
   create(
     optionsOrCallback?: AppProfileOptions | CreateAppProfileCallback,
@@ -292,7 +292,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_delete_app_profile
    * ```
-   * @deprecated Use {@link InstanceAdminClient#deleteAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#deleteAppProfile} from @google-cloud/bigtable instead.
    */
   delete(
     optionsOrCallback?: DeleteAppProfileOptions | DeleteAppProfileCallback,
@@ -340,7 +340,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_exists_app_profile
    * ```
-   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from @google-cloud/bigtable instead.
    */
   exists(
     optionsOrCallback?: CallOptions | AppProfileExistsCallback,
@@ -377,7 +377,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_get_app_profile
    * ```
-   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from @google-cloud/bigtable instead.
    */
   get(
     optionsOrCallback?: CallOptions | GetAppProfileCallback,
@@ -418,7 +418,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_app_profile_get_meta
    * ```
-   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#getAppProfile} from @google-cloud/bigtable instead.
    */
   getMetadata(
     optionsOrCallback?: CallOptions | GetAppProfileMetadataCallback,
@@ -475,7 +475,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
    * <caption>include:samples/api-reference-doc-snippets/app-profile.js</caption>
    * region_tag:bigtable_api_app_profile_set_meta
    * ```
-   * @deprecated Use {@link InstanceAdminClient#updateAppProfile} from `@google-cloud/bigtable/build/src/admin` instead.
+   * @deprecated Use {@link InstanceAdminClient#updateAppProfile} from @google-cloud/bigtable instead.
    */
   setMetadata(
     metadata: AppProfileOptions,
