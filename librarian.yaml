@@ -1475,6 +1475,7 @@ libraries:
   - name: google-cloud-saasplatform-saasservicemgmt
     version: 0.7.0
     apis:
+      - path: google/cloud/saasplatform/saasservicemgmt/v1
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     copyright_year: "2026"
     nodejs:
@@ -1491,12 +1492,10 @@ libraries:
       main_service: scheduler
   - name: google-cloud-secretmanager
     version: 7.2.0
-    comment: Generation is skipped temporarily so the EnableManagedRotationRequest change (oneof credentials renamed to credential, top-level CloudSqlSingleUserCredentials) is regenerated in a separate pull request, which removes skip_generate before the next release.
     apis:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:

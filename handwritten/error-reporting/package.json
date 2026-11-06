@@ -51,7 +51,7 @@
     "codecov": "^3.6.2",
     "express": "^4.17.1",
     "gts": "^6.0.2",
-    "joi": "^17.13.8",
+    "joi": "^17.13.9",
     "js-green-licenses": "^4.0.0",
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^6.0.0",
