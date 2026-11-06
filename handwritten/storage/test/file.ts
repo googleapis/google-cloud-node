@@ -17,6 +17,8 @@ import assert from 'assert';
 import {
   Bucket,
   CRC32C,
+  CreateReadStreamOptions,
+  CreateWriteStreamOptions,
   File,
   GaxiosError,
   GaxiosOptionsPrepared,
@@ -1179,6 +1181,12 @@ describe('File', () => {
         .resume();
     });
 
+    it('should pass highWaterMark to the returned stream', () => {
+      const options: CreateReadStreamOptions = {highWaterMark: 12345};
+      const stream = file.createReadStream(options);
+      assert.strictEqual(stream.readableHighWaterMark, 12345);
+    });
+
     describe('authenticating', () => {
       it('should create an authenticated request', () => {
         file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
@@ -2256,6 +2264,48 @@ describe('File', () => {
         done();
       });
 
+      writable.write('data');
+    });
+
+    it('should set highWaterMark on the returned stream', () => {
+      const options: CreateWriteStreamOptions = {highWaterMark: 12345};
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, 12345);
+    });
+
+    it('should propagate highWaterMark to resumable upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: true,
+      };
+
+      file.startResumableUpload_ = sandbox.stub().callsFake((dup, opts) => {
+        assert.strictEqual(dup.writableHighWaterMark, highWaterMark);
+        assert.strictEqual(opts.highWaterMark, highWaterMark);
+        done();
+      });
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+      writable.write('data');
+    });
+
+    it('should propagate highWaterMark to simple upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: false,
+      };
+
+      file.startSimpleUpload_ = sandbox.stub().callsFake((dup, opts) => {
+        assert.strictEqual(dup.writableHighWaterMark, highWaterMark);
+        assert.strictEqual(opts.highWaterMark, highWaterMark);
+        done();
+      });
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
       writable.write('data');
     });
 
@@ -5748,6 +5798,7 @@ describe('File', () => {
           uri: 'http://resumable-uri',
           userProject: 'user-project-id',
           chunkSize: 262144, // 256 KiB
+          highWaterMark: 12345,
         };
 
         const resumableUpload = {
@@ -5765,6 +5816,7 @@ describe('File', () => {
             assert.strictEqual(opts.uri, options.uri);
             assert.strictEqual(opts.userProject, options.userProject);
             assert.strictEqual(opts.chunkSize, options.chunkSize);
+            assert.strictEqual(opts.highWaterMark, options.highWaterMark);
 
             setImmediate(done);
             return new PassThrough();
@@ -5773,6 +5825,18 @@ describe('File', () => {
 
         resumableUpload.upload(options);
         file.startResumableUpload_(duplexify(), options);
+      });
+
+      it('should pass highWaterMark to the upload stream', done => {
+        const dup = duplexify();
+        const highWaterMark = 12345;
+
+        dup.setWritable = (stream: Duplex) => {
+          assert.strictEqual(stream.writableHighWaterMark, highWaterMark);
+          done();
+        };
+
+        file.startResumableUpload_(dup, {highWaterMark});
       });
 
       it('should emit the response', done => {
@@ -6033,6 +6097,34 @@ describe('File', () => {
         .resolves({});
 
       await file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass highWaterMark if set', async () => {
+      const options: CreateWriteStreamOptions = {
+        highWaterMark: 12345,
+      };
+      const dup = duplexify();
+      let setWritableStream: Duplex | undefined;
+      dup.setWritable = sandbox.stub().callsFake((stream: Duplex) => {
+        setWritableStream = stream;
+      });
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          const mediaPart = options_.multipart?.[1];
+          assert.strictEqual(mediaPart?.content, setWritableStream);
+          assert.strictEqual(
+            setWritableStream?.writableHighWaterMark,
+            options.highWaterMark,
+          );
+          assert.strictEqual(
+            setWritableStream?.readableHighWaterMark,
+            options.highWaterMark,
+          );
+        })
+        .resolves({});
+
+      await file.startSimpleUpload_(dup, options);
     });
 
     describe('request', () => {
