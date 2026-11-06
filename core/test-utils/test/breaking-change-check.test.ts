@@ -100,7 +100,7 @@ interface VarianceSets {
   exportedAccess: Map<ts.Symbol, string>;
 }
 
-const sharedDocumentRegistry = ts.createDocumentRegistry();
+let sharedDocumentRegistry = ts.createDocumentRegistry();
 const REGISTRY_OPTS: ts.CompilerOptions = {target: ts.ScriptTarget.ES2022};
 
 const toPosix = (p: string): string => p.split(path.sep).join('/');
@@ -473,6 +473,7 @@ function createOverlayProgram(
         : baseHost.realpath(abs);
     },
   };
+  const pkgPrefixCmp = normPathCmp(pkgDir) + '/';
   const host: ts.CompilerHost = {
     ...baseHost,
     getCurrentDirectory: () => pkgDir,
@@ -492,7 +493,10 @@ function createOverlayProgram(
       if (overlay.deleted.has(abs)) return undefined;
       const text = baseHost.readFile(abs);
       if (text === undefined) return undefined;
-      if (toPosix(abs).includes('/node_modules/')) {
+      if (
+        toPosix(abs).includes('/node_modules/') ||
+        !normPathCmp(abs).startsWith(pkgPrefixCmp)
+      ) {
         return sharedDocumentRegistry.acquireDocument(
           abs,
           REGISTRY_OPTS,
@@ -3541,8 +3545,9 @@ export function compareTypeScriptSnippets(
     noEmit: true,
     skipLibCheck: true,
     typeRoots: [
-      path.join(REPO_ROOT, 'ci/breaking-change-check/node_modules/@types'),
-    ],
+      path.join(REPO_ROOT, 'core/test-utils/node_modules/@types'),
+      path.join(REPO_ROOT, 'node_modules/@types'),
+    ].filter(p => fs.existsSync(p)),
     types: needsNodeTypes ? ['node'] : [],
   };
   const entryAbs = path.resolve(virtualRoot, entryRel);
@@ -3792,6 +3797,8 @@ export function runGitDiffBreakingChangeCheck(
     pkgDiffs.set(pkgDir, list);
   }
 
+  if (pkgDiffs.size > 0) ensureWorkspaceTypeDeclarations(repoRoot);
+
   for (const [pkgDir, entries] of pkgDiffs) {
     const baseOverlay: FileOverlay = {overrides: new Map(), deleted: new Set()};
     const headOverlay: FileOverlay = {overrides: new Map(), deleted: new Set()};
@@ -3961,11 +3968,11 @@ export function runGitDiffBreakingChangeCheck(
 }
 
 // ============================================================================
-// Mocha Test Suites
+// Test Suites
 // ============================================================================
 
 const checkMode = process.env.BREAKING_CHANGE_CHECK_MODE;
-const hasMocha = typeof describe === 'function' && checkMode !== 'lib';
+const hasTestRunner = typeof describe === 'function' && checkMode !== 'lib';
 const runDiffGateOnly = checkMode === 'diff';
 
 const diffTs = (
@@ -3991,11 +3998,28 @@ const expectPasses = (cases: readonly string[]): void => {
   }
 };
 
-if (hasMocha && !runDiffGateOnly) {
-  describe('codebase public interface compilation harness', function () {
-    this.timeout(300_000);
+function ensureWorkspaceTypeDeclarations(repoRoot: string): void {
+  for (const [depRel, dtsRel] of [
+    ['core/packages/gaxios', 'build/cjs/src/index.d.ts'],
+    ['core/packages/teeny-request', 'build/src/index.d.ts'],
+  ]) {
+    const depDir = path.join(repoRoot, depRel);
+    if (
+      fs.existsSync(path.join(depDir, 'package.json')) &&
+      !fs.existsSync(path.join(depDir, dtsRel))
+    ) {
+      execFileSync('npm', ['run', 'compile'], {
+        cwd: depDir,
+        stdio: 'ignore',
+      });
+    }
+  }
+}
 
+if (hasTestRunner && !runDiffGateOnly) {
+  describe('codebase public interface compilation harness', () => {
     it('discovers, exercises, and compiles consumer TypeScript code across public packages', () => {
+      ensureWorkspaceTypeDeclarations(REPO_ROOT);
       const includeGeneratedPackages =
         process.env.BREAKING_CHANGE_CHECK_ALL_PACKAGES === '1';
       const packages = discoverPublicPackages(REPO_ROOT, {
@@ -4037,6 +4061,9 @@ if (hasMocha && !runDiffGateOnly) {
         }
       }
 
+      pkgProgram = undefined;
+      sharedDocumentRegistry = ts.createDocumentRegistry();
+
       const invalidRatio =
         totalBaseInvalid / Math.max(1, totalCompiledProbes + totalBaseInvalid);
       assert.ok(totalEntrypoints >= 35);
@@ -4055,12 +4082,10 @@ if (hasMocha && !runDiffGateOnly) {
       ]) {
         assert.ok(packagesWithProbes.includes(expectedPkg));
       }
-    });
+    }, 300_000);
   });
 
-  describe('compiler-driven TypeScript breaking-change detection', function () {
-    this.timeout(120_000);
-
+  describe('compiler-driven TypeScript breaking-change detection', () => {
     it('detects narrowed interface properties including 2-way, 3-way, and disjoint types while allowing widenings', () => {
       expectBreaks([
         'export interface ClientConfig { port?: string | number; } ==> export interface ClientConfig { port?: number; }',
@@ -4070,7 +4095,7 @@ if (hasMocha && !runDiffGateOnly) {
       expectPasses([
         'export interface ClientConfig { port?: number; } ==> export interface ClientConfig { port?: string | number; }',
       ]);
-    });
+    }, 120_000);
 
     it('detects optional->required, added required, removed optional, mutable->readonly, and removed index signatures', () => {
       expectBreaks([
@@ -4083,7 +4108,7 @@ if (hasMocha && !runDiffGateOnly) {
       expectPasses([
         'export interface Opts { port: number; } ==> export interface Opts { port?: number; enabled?: boolean; }',
       ]);
-    });
+    }, 120_000);
 
     it('detects narrowed function, class method (bypassing TS method bivariance), and constructor parameters', () => {
       expectBreaks([
@@ -4097,7 +4122,7 @@ if (hasMocha && !runDiffGateOnly) {
       expectPasses([
         'export function connect(a: string, b?: number): void { void a; void b; } ==> export function connect(a: string, b = 8080): void { void a; void b; }',
       ]);
-    });
+    }, 120_000);
 
     it('detects widened return types and weakened response interfaces while allowing new response properties', () => {
       expectBreaks([
@@ -4110,7 +4135,7 @@ if (hasMocha && !runDiffGateOnly) {
         'export class Client { getHost(): string | undefined { return "x"; } } ==> export class Client { getHost(): string { return "x"; } }',
         'export interface Row { data: string; }\nexport declare function fetchRow(): Promise<Row>; ==> export interface Row { data: string; count: number; }\nexport declare function fetchRow(): Promise<Row>;',
       ]);
-    });
+    }, 120_000);
 
     it('handles class visibility, private fields, abstract classes, symbols, generics, overloads, enums, renames, and @internal', () => {
       expectBreaks([
@@ -4156,7 +4181,7 @@ if (hasMocha && !runDiffGateOnly) {
         ).length,
         0,
       );
-    });
+    }, 120_000);
 
     it('detects unexported parameter interfaces, generic aliases, getter-only narrowing, default exports, and ignores unused helpers and internal file moves', () => {
       expectBreaks([
@@ -4224,8 +4249,14 @@ if (hasMocha && !runDiffGateOnly) {
         isIgnoredSourceFile('handwritten/spanner/observability-test/pool.ts'),
         true,
       );
+      assert.equal(
+        isIgnoredSourceFile(
+          'core/test-utils/test/breaking-change-check.test.ts',
+        ),
+        true,
+      );
       assert.equal(isIgnoredSourceFile('core/test-utils/src/index.ts'), false);
-    });
+    }, 120_000);
 
     it('catches unexported aliases/classes/recursive types, nested & namespace output variance, method-shorthand callbacks, generic defaults, merged symbols, and unique symbols', () => {
       expectBreaks([
@@ -4355,15 +4386,15 @@ if (hasMocha && !runDiffGateOnly) {
         );
       } finally {
         fs.rmSync(tmpDir, {recursive: true, force: true});
+        snippetSeedProgram = undefined;
+        sharedDocumentRegistry = ts.createDocumentRegistry();
       }
-    });
+    }, 120_000);
   });
 }
 
-if (hasMocha && runDiffGateOnly) {
-  describe('git diff breaking-change gate', function () {
-    this.timeout(600_000);
-
+if (hasTestRunner && runDiffGateOnly) {
+  describe('git diff breaking-change gate', () => {
     it('verifies public TypeScript interfaces do not become more restrictive against base revision', () => {
       const result = runGitDiffBreakingChangeCheck({
         repoRoot: REPO_ROOT,
@@ -4381,6 +4412,6 @@ if (hasMocha && runDiffGateOnly) {
         true,
         `Detected ${result.findings.length} breaking public TypeScript interface change(s).`,
       );
-    });
+    }, 600_000);
   });
 }

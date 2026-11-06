@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
+    "check": "BREAKING_CHANGE_CHECK_MODE=diff jest --no-coverage test/breaking-change-check.test.ts -t \"git diff breaking-change gate\"",
     "compile": "tsc -p .",
     "fix": "gts fix",
     "lint": "gts check",

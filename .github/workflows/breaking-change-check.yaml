@@ -33,31 +33,30 @@ jobs:
               - 'handwritten/**/*.ts'
               - 'handwritten/**/package.json'
               - 'handwritten/**/tsconfig*.json'
-              - 'ci/breaking-change-check/**'
               - '.github/workflows/breaking-change-check.yaml'
             self:
-              - 'ci/breaking-change-check/**'
+              - 'core/test-utils/**'
               - '.github/workflows/breaking-change-check.yaml'
       - name: Use Node.js 24
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
       - uses: ./.github/actions/pnpm-lockfile-check
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
       - name: Compile affected packages and workspace dependents via pnpm
-        if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.changes.outputs.check == 'true' || steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           BASE_SHA=$(git merge-base HEAD^1 HEAD 2>/dev/null || git rev-parse HEAD^1)
-          pnpm --filter "...[${BASE_SHA}...HEAD]" --filter "!./packages/*" --if-present run compile
-      - name: Run ci/breaking-change-check unit and harness tests
+          pnpm --filter "...[${BASE_SHA}...HEAD]..." --filter "!./packages/*" --if-present run compile
+      - name: Run breaking-change-check unit and harness tests
         if: steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          pnpm --dir ci/breaking-change-check test
-      - name: Check public TypeScript interfaces with ci/breaking-change-check
+          pnpm --dir core/test-utils exec jest --no-coverage test/breaking-change-check.test.ts
+      - name: Check public TypeScript interfaces with core/test-utils
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           BREAKING_CHANGE_BASE_REF: ${{ github.event_name == 'workflow_dispatch' && 'HEAD^1' || '' }}
         run: |
-          pnpm --dir ci/breaking-change-check run check
+          pnpm --dir core/test-utils run check
