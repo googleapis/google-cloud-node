@@ -125,6 +125,15 @@ describe('Entry', () => {
       assert.strictEqual(entry.metadata.insertId, userDefinedInsertId);
     });
 
+    it('should convert a numeric insertId to a string', () => {
+      const eventId = 'event-id';
+      fakeEventIdNewOverride = () => eventId;
+      const entry = new Entry({
+        insertId: 12345,
+      });
+      assert.strictEqual(entry.metadata.insertId, '12345');
+    });
+
     it('should localize data', () => {
       assert.strictEqual(entry.data, DATA);
     });
@@ -373,7 +382,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', () => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;
@@ -557,7 +566,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', () => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;

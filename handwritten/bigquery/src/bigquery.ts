@@ -2935,9 +2935,13 @@ export class BigQueryTimestamp {
     } else {
       pd = this.fromFloatValue_(value);
     }
-    // to keep backward compatibility, only converts with microsecond
-    // or nanosecond precision if needed.
-    if (pd.getMicroseconds() > 0 || pd.getNanoseconds() > 0) {
+    // to keep backward compatibility, only converts with microsecond,
+    // nanosecond, or picosecond precision if needed.
+    if (
+      pd.getMicroseconds() > 0 ||
+      pd.getNanoseconds() > 0 ||
+      (typeof pd.getPicoseconds === 'function' && pd.getPicoseconds() > 0)
+    ) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();
