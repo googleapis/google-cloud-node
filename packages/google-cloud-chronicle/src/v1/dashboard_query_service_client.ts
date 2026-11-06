@@ -545,7 +545,7 @@ export class DashboardQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDashboardQuery request %j', request);
+    this._log.debug('getDashboardQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDashboardQuery,
@@ -556,7 +556,7 @@ export class DashboardQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDashboardQuery response %j', response);
+          this._log.debug('getDashboardQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class DashboardQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDashboardQuery response %j', response);
+          this._log.debug('getDashboardQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -702,7 +702,7 @@ export class DashboardQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeDashboardQuery request %j', request);
+    this._log.debug('executeDashboardQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
@@ -713,7 +713,7 @@ export class DashboardQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeDashboardQuery response %j', response);
+          this._log.debug('executeDashboardQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -728,7 +728,7 @@ export class DashboardQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('executeDashboardQuery response %j', response);
+          this._log.debug('executeDashboardQuery response %j', response);
           return [response, options, rawResponse];
         },
       )

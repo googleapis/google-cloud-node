@@ -765,7 +765,7 @@ export class RecommendationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('recommend request %j', request);
+    this._log.debug('recommend request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IRecommendResponse,
@@ -776,7 +776,7 @@ export class RecommendationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('recommend response %j', response);
+          this._log.debug('recommend response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -788,7 +788,7 @@ export class RecommendationServiceClient {
           protos.google.cloud.discoveryengine.v1.IRecommendRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('recommend response %j', response);
+          this._log.debug('recommend response %j', response);
           return [response, options, rawResponse];
         },
       )

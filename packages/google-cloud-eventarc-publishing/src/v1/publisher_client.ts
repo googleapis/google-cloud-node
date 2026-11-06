@@ -496,7 +496,7 @@ export class PublisherClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('publishChannelConnectionEvents request %j', request);
+    this._log.debug('publishChannelConnectionEvents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsResponse,
@@ -507,7 +507,7 @@ export class PublisherClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'publishChannelConnectionEvents response %j',
             response,
           );
@@ -525,7 +525,7 @@ export class PublisherClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'publishChannelConnectionEvents response %j',
             response,
           );
@@ -655,7 +655,7 @@ export class PublisherClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('publishEvents request %j', request);
+    this._log.debug('publishEvents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
@@ -666,7 +666,7 @@ export class PublisherClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('publishEvents response %j', response);
+          this._log.debug('publishEvents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -681,7 +681,7 @@ export class PublisherClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('publishEvents response %j', response);
+          this._log.debug('publishEvents response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -805,7 +805,7 @@ export class PublisherClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('publish request %j', request);
+    this._log.debug('publish request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
@@ -816,7 +816,7 @@ export class PublisherClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('publish response %j', response);
+          this._log.debug('publish response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -831,7 +831,7 @@ export class PublisherClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('publish response %j', response);
+          this._log.debug('publish response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -525,7 +525,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDocument request %j', request);
+    this._log.debug('createDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.ICreateDocumentResponse,
@@ -536,7 +536,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -551,7 +551,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -668,7 +668,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDocument request %j', request);
+    this._log.debug('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IDocument,
@@ -679,7 +679,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -694,7 +694,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -828,7 +828,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDocument request %j', request);
+    this._log.debug('updateDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IUpdateDocumentResponse,
@@ -839,7 +839,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -854,7 +854,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -978,7 +978,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDocument request %j', request);
+    this._log.debug('deleteDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -989,7 +989,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1004,7 +1004,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1121,7 +1121,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lockDocument request %j', request);
+    this._log.debug('lockDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IDocument,
@@ -1132,7 +1132,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lockDocument response %j', response);
+          this._log.debug('lockDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1147,7 +1147,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('lockDocument response %j', response);
+          this._log.debug('lockDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1271,7 +1271,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchAcl request %j', request);
+    this._log.debug('fetchAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IFetchAclResponse,
@@ -1282,7 +1282,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchAcl response %j', response);
+          this._log.debug('fetchAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1294,7 +1294,7 @@ export class DocumentServiceClient {
           protos.google.cloud.contentwarehouse.v1.IFetchAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('fetchAcl response %j', response);
+          this._log.debug('fetchAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1431,7 +1431,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setAcl request %j', request);
+    this._log.debug('setAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.ISetAclResponse,
@@ -1442,7 +1442,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setAcl response %j', response);
+          this._log.debug('setAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1454,7 +1454,7 @@ export class DocumentServiceClient {
           protos.google.cloud.contentwarehouse.v1.ISetAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setAcl response %j', response);
+          this._log.debug('setAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1676,11 +1676,11 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchDocuments values %j', values);
+          this._log.debug('searchDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchDocuments request %j', request);
+    this._log.debug('searchDocuments request %j', request);
     return this.innerApiCalls
       .searchDocuments(request, options, wrappedCallback)
       ?.then(
@@ -1689,7 +1689,7 @@ export class DocumentServiceClient {
           protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest | null,
           protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse,
         ]) => {
-          this._log.info('searchDocuments values %j', response);
+          this._log.debug('searchDocuments values %j', response);
           return [response, input, output];
         },
       );
@@ -1823,7 +1823,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDocuments stream %j', request);
+    this._log.debug('searchDocuments stream %j', request);
     return this.descriptors.page.searchDocuments.createStream(
       this.innerApiCalls.searchDocuments as GaxCall,
       request,
@@ -1962,7 +1962,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDocuments iterate %j', request);
+    this._log.debug('searchDocuments iterate %j', request);
     return this.descriptors.page.searchDocuments.asyncIterate(
       this.innerApiCalls['searchDocuments'] as GaxCall,
       request as {},

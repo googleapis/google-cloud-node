@@ -481,7 +481,7 @@ export class GatewayControlClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateCredentials request %j', request);
+    this._log.debug('generateCredentials request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse,
@@ -492,7 +492,7 @@ export class GatewayControlClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateCredentials response %j', response);
+          this._log.debug('generateCredentials response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -507,7 +507,7 @@ export class GatewayControlClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateCredentials response %j', response);
+          this._log.debug('generateCredentials response %j', response);
           return [response, options, rawResponse];
         },
       )

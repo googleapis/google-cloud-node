@@ -690,7 +690,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSite request %j', request);
+    this._log.debug('getSite request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISite,
@@ -699,7 +699,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSite response %j', response);
+          this._log.debug('getSite response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -711,7 +711,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.IGetSiteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSite response %j', response);
+          this._log.debug('getSite response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -817,7 +817,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSite request %j', request);
+    this._log.debug('createSite request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISite,
@@ -826,7 +826,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSite response %j', response);
+          this._log.debug('createSite response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -838,7 +838,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.ICreateSiteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSite response %j', response);
+          this._log.debug('createSite response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -955,7 +955,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateSites request %j', request);
+    this._log.debug('batchCreateSites request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateSitesResponse,
@@ -966,7 +966,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateSites response %j', response);
+          this._log.debug('batchCreateSites response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -978,7 +978,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateSitesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateSites response %j', response);
+          this._log.debug('batchCreateSites response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1085,7 +1085,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSite request %j', request);
+    this._log.debug('updateSite request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISite,
@@ -1094,7 +1094,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSite response %j', response);
+          this._log.debug('updateSite response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1106,7 +1106,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.IUpdateSiteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSite response %j', response);
+          this._log.debug('updateSite response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1223,7 +1223,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateSites request %j', request);
+    this._log.debug('batchUpdateSites request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateSitesResponse,
@@ -1234,7 +1234,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateSites response %j', response);
+          this._log.debug('batchUpdateSites response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1246,7 +1246,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateSitesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateSites response %j', response);
+          this._log.debug('batchUpdateSites response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1359,7 +1359,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateSites request %j', request);
+    this._log.debug('batchDeactivateSites request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateSitesResponse,
@@ -1370,7 +1370,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateSites response %j', response);
+          this._log.debug('batchDeactivateSites response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1385,7 +1385,7 @@ export class SiteServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateSites response %j', response);
+          this._log.debug('batchDeactivateSites response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1504,7 +1504,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchSubmitSitesForApproval request %j', request);
+    this._log.debug('batchSubmitSitesForApproval request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchSubmitSitesForApprovalResponse,
@@ -1515,7 +1515,7 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchSubmitSitesForApproval response %j', response);
+          this._log.debug('batchSubmitSitesForApproval response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1530,7 +1530,7 @@ export class SiteServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchSubmitSitesForApproval response %j', response);
+          this._log.debug('batchSubmitSitesForApproval response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1675,11 +1675,11 @@ export class SiteServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSites values %j', values);
+          this._log.debug('listSites values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSites request %j', request);
+    this._log.debug('listSites request %j', request);
     return this.innerApiCalls
       .listSites(request, options, wrappedCallback)
       ?.then(
@@ -1688,7 +1688,7 @@ export class SiteServiceClient {
           protos.google.ads.admanager.v1.IListSitesRequest | null,
           protos.google.ads.admanager.v1.IListSitesResponse,
         ]) => {
-          this._log.info('listSites values %j', response);
+          this._log.debug('listSites values %j', response);
           return [response, input, output];
         },
       );
@@ -1758,7 +1758,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSites stream %j', request);
+    this._log.debug('listSites stream %j', request);
     return this.descriptors.page.listSites.createStream(
       this.innerApiCalls.listSites as GaxCall,
       request,
@@ -1833,7 +1833,7 @@ export class SiteServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSites iterate %j', request);
+    this._log.debug('listSites iterate %j', request);
     return this.descriptors.page.listSites.asyncIterate(
       this.innerApiCalls['listSites'] as GaxCall,
       request as {},

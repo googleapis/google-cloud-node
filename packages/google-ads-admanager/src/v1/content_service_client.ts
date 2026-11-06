@@ -681,7 +681,7 @@ export class ContentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getContent request %j', request);
+    this._log.debug('getContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IContent,
@@ -690,7 +690,7 @@ export class ContentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getContent response %j', response);
+          this._log.debug('getContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -702,7 +702,7 @@ export class ContentServiceClient {
           protos.google.ads.admanager.v1.IGetContentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getContent response %j', response);
+          this._log.debug('getContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -861,11 +861,11 @@ export class ContentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listContent values %j', values);
+          this._log.debug('listContent values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listContent request %j', request);
+    this._log.debug('listContent request %j', request);
     return this.innerApiCalls
       .listContent(request, options, wrappedCallback)
       ?.then(
@@ -874,7 +874,7 @@ export class ContentServiceClient {
           protos.google.ads.admanager.v1.IListContentRequest | null,
           protos.google.ads.admanager.v1.IListContentResponse,
         ]) => {
-          this._log.info('listContent values %j', response);
+          this._log.debug('listContent values %j', response);
           return [response, input, output];
         },
       );
@@ -954,7 +954,7 @@ export class ContentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContent stream %j', request);
+    this._log.debug('listContent stream %j', request);
     return this.descriptors.page.listContent.createStream(
       this.innerApiCalls.listContent as GaxCall,
       request,
@@ -1039,7 +1039,7 @@ export class ContentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContent iterate %j', request);
+    this._log.debug('listContent iterate %j', request);
     return this.descriptors.page.listContent.asyncIterate(
       this.innerApiCalls['listContent'] as GaxCall,
       request as {},

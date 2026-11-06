@@ -491,7 +491,7 @@ export class MerchantReviewsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMerchantReview request %j', request);
+    this._log.debug('getMerchantReview request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
@@ -502,7 +502,7 @@ export class MerchantReviewsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMerchantReview response %j', response);
+          this._log.debug('getMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -517,7 +517,7 @@ export class MerchantReviewsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMerchantReview response %j', response);
+          this._log.debug('getMerchantReview response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -643,7 +643,7 @@ export class MerchantReviewsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertMerchantReview request %j', request);
+    this._log.debug('insertMerchantReview request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
@@ -654,7 +654,7 @@ export class MerchantReviewsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertMerchantReview response %j', response);
+          this._log.debug('insertMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -669,7 +669,7 @@ export class MerchantReviewsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertMerchantReview response %j', response);
+          this._log.debug('insertMerchantReview response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -787,7 +787,7 @@ export class MerchantReviewsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteMerchantReview request %j', request);
+    this._log.debug('deleteMerchantReview request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -798,7 +798,7 @@ export class MerchantReviewsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteMerchantReview response %j', response);
+          this._log.debug('deleteMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -813,7 +813,7 @@ export class MerchantReviewsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteMerchantReview response %j', response);
+          this._log.debug('deleteMerchantReview response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -950,11 +950,11 @@ export class MerchantReviewsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMerchantReviews values %j', values);
+          this._log.debug('listMerchantReviews values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMerchantReviews request %j', request);
+    this._log.debug('listMerchantReviews request %j', request);
     return this.innerApiCalls
       .listMerchantReviews(request, options, wrappedCallback)
       ?.then(
@@ -963,7 +963,7 @@ export class MerchantReviewsServiceClient {
           protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest | null,
           protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse,
         ]) => {
-          this._log.info('listMerchantReviews values %j', response);
+          this._log.debug('listMerchantReviews values %j', response);
           return [response, input, output];
         },
       );
@@ -1015,7 +1015,7 @@ export class MerchantReviewsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMerchantReviews stream %j', request);
+    this._log.debug('listMerchantReviews stream %j', request);
     return this.descriptors.page.listMerchantReviews.createStream(
       this.innerApiCalls.listMerchantReviews as GaxCall,
       request,
@@ -1072,7 +1072,7 @@ export class MerchantReviewsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMerchantReviews iterate %j', request);
+    this._log.debug('listMerchantReviews iterate %j', request);
     return this.descriptors.page.listMerchantReviews.asyncIterate(
       this.innerApiCalls['listMerchantReviews'] as GaxCall,
       request as {},

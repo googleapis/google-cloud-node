@@ -528,7 +528,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAlertConfig request %j', request);
+    this._log.debug('getAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2beta.IAlertConfig,
@@ -539,7 +539,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAlertConfig response %j', response);
+          this._log.debug('getAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -551,7 +551,7 @@ export class ProjectServiceClient {
           protos.google.cloud.retail.v2beta.IGetAlertConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAlertConfig response %j', response);
+          this._log.debug('getAlertConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -674,7 +674,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAlertConfig request %j', request);
+    this._log.debug('updateAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2beta.IAlertConfig,
@@ -685,7 +685,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAlertConfig response %j', response);
+          this._log.debug('updateAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -700,7 +700,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAlertConfig response %j', response);
+          this._log.debug('updateAlertConfig response %j', response);
           return [response, options, rawResponse];
         },
       )

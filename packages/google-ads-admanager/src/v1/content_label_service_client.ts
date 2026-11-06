@@ -686,7 +686,7 @@ export class ContentLabelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getContentLabel request %j', request);
+    this._log.debug('getContentLabel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IContentLabel,
@@ -697,7 +697,7 @@ export class ContentLabelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getContentLabel response %j', response);
+          this._log.debug('getContentLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -709,7 +709,7 @@ export class ContentLabelServiceClient {
           protos.google.ads.admanager.v1.IGetContentLabelRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getContentLabel response %j', response);
+          this._log.debug('getContentLabel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -861,11 +861,11 @@ export class ContentLabelServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listContentLabels values %j', values);
+          this._log.debug('listContentLabels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listContentLabels request %j', request);
+    this._log.debug('listContentLabels request %j', request);
     return this.innerApiCalls
       .listContentLabels(request, options, wrappedCallback)
       ?.then(
@@ -874,7 +874,7 @@ export class ContentLabelServiceClient {
           protos.google.ads.admanager.v1.IListContentLabelsRequest | null,
           protos.google.ads.admanager.v1.IListContentLabelsResponse,
         ]) => {
-          this._log.info('listContentLabels values %j', response);
+          this._log.debug('listContentLabels values %j', response);
           return [response, input, output];
         },
       );
@@ -941,7 +941,7 @@ export class ContentLabelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContentLabels stream %j', request);
+    this._log.debug('listContentLabels stream %j', request);
     return this.descriptors.page.listContentLabels.createStream(
       this.innerApiCalls.listContentLabels as GaxCall,
       request,
@@ -1013,7 +1013,7 @@ export class ContentLabelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContentLabels iterate %j', request);
+    this._log.debug('listContentLabels iterate %j', request);
     return this.descriptors.page.listContentLabels.asyncIterate(
       this.innerApiCalls['listContentLabels'] as GaxCall,
       request as {},

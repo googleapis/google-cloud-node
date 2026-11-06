@@ -823,7 +823,7 @@ export class DataConnectorServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataConnector request %j', request);
+    this._log.debug('getDataConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IDataConnector,
@@ -834,7 +834,7 @@ export class DataConnectorServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataConnector response %j', response);
+          this._log.debug('getDataConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -849,7 +849,7 @@ export class DataConnectorServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataConnector response %j', response);
+          this._log.debug('getDataConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -998,7 +998,7 @@ export class DataConnectorServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataConnector request %j', request);
+    this._log.debug('updateDataConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IDataConnector,
@@ -1009,7 +1009,7 @@ export class DataConnectorServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataConnector response %j', response);
+          this._log.debug('updateDataConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1024,7 +1024,7 @@ export class DataConnectorServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataConnector response %j', response);
+          this._log.debug('updateDataConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1194,11 +1194,11 @@ export class DataConnectorServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('setUpDataConnector response %j', rawResponse);
+          this._log.debug('setUpDataConnector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('setUpDataConnector request %j', request);
+    this._log.debug('setUpDataConnector request %j', request);
     return this.innerApiCalls
       .setUpDataConnector(request, options, wrappedCallback)
       ?.then(
@@ -1210,7 +1210,7 @@ export class DataConnectorServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setUpDataConnector response %j', rawResponse);
+          this._log.debug('setUpDataConnector response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

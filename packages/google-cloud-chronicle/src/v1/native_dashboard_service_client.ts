@@ -576,7 +576,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createNativeDashboard request %j', request);
+    this._log.debug('createNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
@@ -587,7 +587,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createNativeDashboard response %j', response);
+          this._log.debug('createNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -602,7 +602,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createNativeDashboard response %j', response);
+          this._log.debug('createNativeDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -718,7 +718,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNativeDashboard request %j', request);
+    this._log.debug('getNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
@@ -729,7 +729,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNativeDashboard response %j', response);
+          this._log.debug('getNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -744,7 +744,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getNativeDashboard response %j', response);
+          this._log.debug('getNativeDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -876,7 +876,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateNativeDashboard request %j', request);
+    this._log.debug('updateNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
@@ -887,7 +887,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateNativeDashboard response %j', response);
+          this._log.debug('updateNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -902,7 +902,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateNativeDashboard response %j', response);
+          this._log.debug('updateNativeDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1024,7 +1024,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('duplicateNativeDashboard request %j', request);
+    this._log.debug('duplicateNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
@@ -1035,7 +1035,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('duplicateNativeDashboard response %j', response);
+          this._log.debug('duplicateNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1050,7 +1050,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('duplicateNativeDashboard response %j', response);
+          this._log.debug('duplicateNativeDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1169,7 +1169,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteNativeDashboard request %j', request);
+    this._log.debug('deleteNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1180,7 +1180,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteNativeDashboard response %j', response);
+          this._log.debug('deleteNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1195,7 +1195,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteNativeDashboard response %j', response);
+          this._log.debug('deleteNativeDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1306,7 +1306,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('addChart request %j', request);
+    this._log.debug('addChart request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IAddChartResponse,
@@ -1315,7 +1315,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('addChart response %j', response);
+          this._log.debug('addChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1327,7 +1327,7 @@ export class NativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IAddChartRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('addChart response %j', response);
+          this._log.debug('addChart response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1436,7 +1436,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeChart request %j', request);
+    this._log.debug('removeChart request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
@@ -1447,7 +1447,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeChart response %j', response);
+          this._log.debug('removeChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1459,7 +1459,7 @@ export class NativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IRemoveChartRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('removeChart response %j', response);
+          this._log.debug('removeChart response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1583,7 +1583,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('editChart request %j', request);
+    this._log.debug('editChart request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IEditChartResponse,
@@ -1592,7 +1592,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('editChart response %j', response);
+          this._log.debug('editChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1604,7 +1604,7 @@ export class NativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IEditChartRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('editChart response %j', response);
+          this._log.debug('editChart response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1719,7 +1719,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('duplicateChart request %j', request);
+    this._log.debug('duplicateChart request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
@@ -1730,7 +1730,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('duplicateChart response %j', response);
+          this._log.debug('duplicateChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1742,7 +1742,7 @@ export class NativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IDuplicateChartRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('duplicateChart response %j', response);
+          this._log.debug('duplicateChart response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1862,7 +1862,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('exportNativeDashboards request %j', request);
+    this._log.debug('exportNativeDashboards request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
@@ -1873,7 +1873,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('exportNativeDashboards response %j', response);
+          this._log.debug('exportNativeDashboards response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1888,7 +1888,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('exportNativeDashboards response %j', response);
+          this._log.debug('exportNativeDashboards response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2008,7 +2008,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('importNativeDashboards request %j', request);
+    this._log.debug('importNativeDashboards request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
@@ -2019,7 +2019,7 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('importNativeDashboards response %j', response);
+          this._log.debug('importNativeDashboards response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2034,7 +2034,7 @@ export class NativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('importNativeDashboards response %j', response);
+          this._log.debug('importNativeDashboards response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2172,11 +2172,11 @@ export class NativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNativeDashboards values %j', values);
+          this._log.debug('listNativeDashboards values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNativeDashboards request %j', request);
+    this._log.debug('listNativeDashboards request %j', request);
     return this.innerApiCalls
       .listNativeDashboards(request, options, wrappedCallback)
       ?.then(
@@ -2185,7 +2185,7 @@ export class NativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest | null,
           protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse,
         ]) => {
-          this._log.info('listNativeDashboards values %j', response);
+          this._log.debug('listNativeDashboards values %j', response);
           return [response, input, output];
         },
       );
@@ -2238,7 +2238,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNativeDashboards stream %j', request);
+    this._log.debug('listNativeDashboards stream %j', request);
     return this.descriptors.page.listNativeDashboards.createStream(
       this.innerApiCalls.listNativeDashboards as GaxCall,
       request,
@@ -2296,7 +2296,7 @@ export class NativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNativeDashboards iterate %j', request);
+    this._log.debug('listNativeDashboards iterate %j', request);
     return this.descriptors.page.listNativeDashboards.asyncIterate(
       this.innerApiCalls['listNativeDashboards'] as GaxCall,
       request as {},

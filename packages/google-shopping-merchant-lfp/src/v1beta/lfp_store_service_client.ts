@@ -498,7 +498,7 @@ export class LfpStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLfpStore request %j', request);
+    this._log.debug('getLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
@@ -509,7 +509,7 @@ export class LfpStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLfpStore response %j', response);
+          this._log.debug('getLfpStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -524,7 +524,7 @@ export class LfpStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLfpStore response %j', response);
+          this._log.debug('getLfpStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -645,7 +645,7 @@ export class LfpStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertLfpStore request %j', request);
+    this._log.debug('insertLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.lfp.v1beta.ILfpStore,
@@ -656,7 +656,7 @@ export class LfpStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertLfpStore response %j', response);
+          this._log.debug('insertLfpStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -671,7 +671,7 @@ export class LfpStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertLfpStore response %j', response);
+          this._log.debug('insertLfpStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -789,7 +789,7 @@ export class LfpStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteLfpStore request %j', request);
+    this._log.debug('deleteLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -800,7 +800,7 @@ export class LfpStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteLfpStore response %j', response);
+          this._log.debug('deleteLfpStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -815,7 +815,7 @@ export class LfpStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteLfpStore response %j', response);
+          this._log.debug('deleteLfpStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -957,11 +957,11 @@ export class LfpStoreServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLfpStores values %j', values);
+          this._log.debug('listLfpStores values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLfpStores request %j', request);
+    this._log.debug('listLfpStores request %j', request);
     return this.innerApiCalls
       .listLfpStores(request, options, wrappedCallback)
       ?.then(
@@ -970,7 +970,7 @@ export class LfpStoreServiceClient {
           protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresRequest | null,
           protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresResponse,
         ]) => {
-          this._log.info('listLfpStores values %j', response);
+          this._log.debug('listLfpStores values %j', response);
           return [response, input, output];
         },
       );
@@ -1026,7 +1026,7 @@ export class LfpStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLfpStores stream %j', request);
+    this._log.debug('listLfpStores stream %j', request);
     return this.descriptors.page.listLfpStores.createStream(
       this.innerApiCalls.listLfpStores as GaxCall,
       request,
@@ -1087,7 +1087,7 @@ export class LfpStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLfpStores iterate %j', request);
+    this._log.debug('listLfpStores iterate %j', request);
     return this.descriptors.page.listLfpStores.asyncIterate(
       this.innerApiCalls['listLfpStores'] as GaxCall,
       request as {},

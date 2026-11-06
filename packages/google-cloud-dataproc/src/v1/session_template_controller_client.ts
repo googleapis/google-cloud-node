@@ -520,7 +520,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSessionTemplate request %j', request);
+    this._log.debug('createSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.ISessionTemplate,
@@ -531,7 +531,7 @@ export class SessionTemplateControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSessionTemplate response %j', response);
+          this._log.debug('createSessionTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -546,7 +546,7 @@ export class SessionTemplateControllerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSessionTemplate response %j', response);
+          this._log.debug('createSessionTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -657,7 +657,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSessionTemplate request %j', request);
+    this._log.debug('updateSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.ISessionTemplate,
@@ -668,7 +668,7 @@ export class SessionTemplateControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSessionTemplate response %j', response);
+          this._log.debug('updateSessionTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -683,7 +683,7 @@ export class SessionTemplateControllerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSessionTemplate response %j', response);
+          this._log.debug('updateSessionTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -794,7 +794,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSessionTemplate request %j', request);
+    this._log.debug('getSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.ISessionTemplate,
@@ -805,7 +805,7 @@ export class SessionTemplateControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSessionTemplate response %j', response);
+          this._log.debug('getSessionTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -820,7 +820,7 @@ export class SessionTemplateControllerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSessionTemplate response %j', response);
+          this._log.debug('getSessionTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -931,7 +931,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSessionTemplate request %j', request);
+    this._log.debug('deleteSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -942,7 +942,7 @@ export class SessionTemplateControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSessionTemplate response %j', response);
+          this._log.debug('deleteSessionTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -957,7 +957,7 @@ export class SessionTemplateControllerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSessionTemplate response %j', response);
+          this._log.debug('deleteSessionTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1093,11 +1093,11 @@ export class SessionTemplateControllerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessionTemplates values %j', values);
+          this._log.debug('listSessionTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSessionTemplates request %j', request);
+    this._log.debug('listSessionTemplates request %j', request);
     return this.innerApiCalls
       .listSessionTemplates(request, options, wrappedCallback)
       ?.then(
@@ -1106,7 +1106,7 @@ export class SessionTemplateControllerClient {
           protos.google.cloud.dataproc.v1.IListSessionTemplatesRequest | null,
           protos.google.cloud.dataproc.v1.IListSessionTemplatesResponse,
         ]) => {
-          this._log.info('listSessionTemplates values %j', response);
+          this._log.debug('listSessionTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -1157,7 +1157,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessionTemplates stream %j', request);
+    this._log.debug('listSessionTemplates stream %j', request);
     return this.descriptors.page.listSessionTemplates.createStream(
       this.innerApiCalls.listSessionTemplates as GaxCall,
       request,
@@ -1213,7 +1213,7 @@ export class SessionTemplateControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessionTemplates iterate %j', request);
+    this._log.debug('listSessionTemplates iterate %j', request);
     return this.descriptors.page.listSessionTemplates.asyncIterate(
       this.innerApiCalls['listSessionTemplates'] as GaxCall,
       request as {},

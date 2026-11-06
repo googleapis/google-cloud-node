@@ -613,7 +613,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runReport request %j', request);
+    this._log.debug('runReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IRunReportResponse,
@@ -624,7 +624,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runReport response %j', response);
+          this._log.debug('runReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -636,7 +636,7 @@ export class BetaAnalyticsDataClient {
           protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runReport response %j', response);
+          this._log.debug('runReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -807,7 +807,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runPivotReport request %j', request);
+    this._log.debug('runPivotReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IRunPivotReportResponse,
@@ -818,7 +818,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runPivotReport response %j', response);
+          this._log.debug('runPivotReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -833,7 +833,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('runPivotReport response %j', response);
+          this._log.debug('runPivotReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -956,7 +956,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRunReports request %j', request);
+    this._log.debug('batchRunReports request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
@@ -967,7 +967,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRunReports response %j', response);
+          this._log.debug('batchRunReports response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -982,7 +982,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchRunReports response %j', response);
+          this._log.debug('batchRunReports response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1111,7 +1111,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRunPivotReports request %j', request);
+    this._log.debug('batchRunPivotReports request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
@@ -1122,7 +1122,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRunPivotReports response %j', response);
+          this._log.debug('batchRunPivotReports response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1137,7 +1137,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchRunPivotReports response %j', response);
+          this._log.debug('batchRunPivotReports response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1267,7 +1267,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMetadata request %j', request);
+    this._log.debug('getMetadata request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IMetadata,
@@ -1278,7 +1278,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMetadata response %j', response);
+          this._log.debug('getMetadata response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1290,7 +1290,7 @@ export class BetaAnalyticsDataClient {
           protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getMetadata response %j', response);
+          this._log.debug('getMetadata response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1448,7 +1448,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runRealtimeReport request %j', request);
+    this._log.debug('runRealtimeReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
@@ -1459,7 +1459,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runRealtimeReport response %j', response);
+          this._log.debug('runRealtimeReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1474,7 +1474,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('runRealtimeReport response %j', response);
+          this._log.debug('runRealtimeReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1621,7 +1621,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('checkCompatibility request %j', request);
+    this._log.debug('checkCompatibility request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
@@ -1632,7 +1632,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('checkCompatibility response %j', response);
+          this._log.debug('checkCompatibility response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1647,7 +1647,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('checkCompatibility response %j', response);
+          this._log.debug('checkCompatibility response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1804,7 +1804,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryAudienceExport request %j', request);
+    this._log.debug('queryAudienceExport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IQueryAudienceExportResponse,
@@ -1815,7 +1815,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryAudienceExport response %j', response);
+          this._log.debug('queryAudienceExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1830,7 +1830,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryAudienceExport response %j', response);
+          this._log.debug('queryAudienceExport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1953,7 +1953,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAudienceExport request %j', request);
+    this._log.debug('getAudienceExport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.analytics.data.v1beta.IAudienceExport,
@@ -1964,7 +1964,7 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAudienceExport response %j', response);
+          this._log.debug('getAudienceExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1979,7 +1979,7 @@ export class BetaAnalyticsDataClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAudienceExport response %j', response);
+          this._log.debug('getAudienceExport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2141,11 +2141,11 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAudienceExport response %j', rawResponse);
+          this._log.debug('createAudienceExport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAudienceExport request %j', request);
+    this._log.debug('createAudienceExport request %j', request);
     return this.innerApiCalls
       .createAudienceExport(request, options, wrappedCallback)
       ?.then(
@@ -2157,7 +2157,7 @@ export class BetaAnalyticsDataClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAudienceExport response %j', rawResponse);
+          this._log.debug('createAudienceExport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2326,11 +2326,11 @@ export class BetaAnalyticsDataClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAudienceExports values %j', values);
+          this._log.debug('listAudienceExports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAudienceExports request %j', request);
+    this._log.debug('listAudienceExports request %j', request);
     return this.innerApiCalls
       .listAudienceExports(request, options, wrappedCallback)
       ?.then(
@@ -2339,7 +2339,7 @@ export class BetaAnalyticsDataClient {
           protos.google.analytics.data.v1beta.IListAudienceExportsRequest | null,
           protos.google.analytics.data.v1beta.IListAudienceExportsResponse,
         ]) => {
-          this._log.info('listAudienceExports values %j', response);
+          this._log.debug('listAudienceExports values %j', response);
           return [response, input, output];
         },
       );
@@ -2391,7 +2391,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceExports stream %j', request);
+    this._log.debug('listAudienceExports stream %j', request);
     return this.descriptors.page.listAudienceExports.createStream(
       this.innerApiCalls.listAudienceExports as GaxCall,
       request,
@@ -2448,7 +2448,7 @@ export class BetaAnalyticsDataClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceExports iterate %j', request);
+    this._log.debug('listAudienceExports iterate %j', request);
     return this.descriptors.page.listAudienceExports.asyncIterate(
       this.innerApiCalls['listAudienceExports'] as GaxCall,
       request as {},

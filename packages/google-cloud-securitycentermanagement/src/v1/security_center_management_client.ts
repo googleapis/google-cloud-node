@@ -627,7 +627,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'getEffectiveSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -641,7 +641,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -663,7 +663,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -785,7 +785,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'getSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -799,7 +799,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -817,7 +817,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -963,7 +963,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'createSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -977,7 +977,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'createSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -999,7 +999,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1148,7 +1148,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'updateSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -1162,7 +1162,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1184,7 +1184,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1326,7 +1326,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'deleteSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -1340,7 +1340,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'deleteSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1362,7 +1362,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1491,7 +1491,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'simulateSecurityHealthAnalyticsCustomModule request %j',
       request,
     );
@@ -1505,7 +1505,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'simulateSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1527,7 +1527,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'simulateSecurityHealthAnalyticsCustomModule response %j',
             response,
           );
@@ -1663,7 +1663,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'getEffectiveEventThreatDetectionCustomModule request %j',
       request,
     );
@@ -1677,7 +1677,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getEffectiveEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -1699,7 +1699,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getEffectiveEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -1824,7 +1824,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEventThreatDetectionCustomModule request %j', request);
+    this._log.debug('getEventThreatDetectionCustomModule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
@@ -1835,7 +1835,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -1853,7 +1853,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -1998,7 +1998,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'createEventThreatDetectionCustomModule request %j',
       request,
     );
@@ -2012,7 +2012,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'createEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2030,7 +2030,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2172,7 +2172,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'updateEventThreatDetectionCustomModule request %j',
       request,
     );
@@ -2186,7 +2186,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2204,7 +2204,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2345,7 +2345,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'deleteEventThreatDetectionCustomModule request %j',
       request,
     );
@@ -2359,7 +2359,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'deleteEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2377,7 +2377,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2505,7 +2505,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'validateEventThreatDetectionCustomModule request %j',
       request,
     );
@@ -2519,7 +2519,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'validateEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2541,7 +2541,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'validateEventThreatDetectionCustomModule response %j',
             response,
           );
@@ -2677,7 +2677,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSecurityCenterService request %j', request);
+    this._log.debug('getSecurityCenterService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
@@ -2688,7 +2688,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSecurityCenterService response %j', response);
+          this._log.debug('getSecurityCenterService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2703,7 +2703,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSecurityCenterService response %j', response);
+          this._log.debug('getSecurityCenterService response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2842,7 +2842,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSecurityCenterService request %j', request);
+    this._log.debug('updateSecurityCenterService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
@@ -2853,7 +2853,7 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSecurityCenterService response %j', response);
+          this._log.debug('updateSecurityCenterService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2868,7 +2868,7 @@ export class SecurityCenterManagementClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSecurityCenterService response %j', response);
+          this._log.debug('updateSecurityCenterService response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3011,14 +3011,14 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listEffectiveSecurityHealthAnalyticsCustomModules request %j',
       request,
     );
@@ -3034,7 +3034,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
             response,
           );
@@ -3092,7 +3092,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listEffectiveSecurityHealthAnalyticsCustomModules stream %j',
       request,
     );
@@ -3156,7 +3156,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listEffectiveSecurityHealthAnalyticsCustomModules iterate %j',
       request,
     );
@@ -3289,14 +3289,14 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listSecurityHealthAnalyticsCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listSecurityHealthAnalyticsCustomModules request %j',
       request,
     );
@@ -3312,7 +3312,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listSecurityHealthAnalyticsCustomModules values %j',
             response,
           );
@@ -3370,7 +3370,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listSecurityHealthAnalyticsCustomModules stream %j',
       request,
     );
@@ -3433,7 +3433,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listSecurityHealthAnalyticsCustomModules iterate %j',
       request,
     );
@@ -3563,14 +3563,14 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listDescendantSecurityHealthAnalyticsCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listDescendantSecurityHealthAnalyticsCustomModules request %j',
       request,
     );
@@ -3586,7 +3586,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listDescendantSecurityHealthAnalyticsCustomModules values %j',
             response,
           );
@@ -3644,7 +3644,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listDescendantSecurityHealthAnalyticsCustomModules stream %j',
       request,
     );
@@ -3708,7 +3708,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listDescendantSecurityHealthAnalyticsCustomModules iterate %j',
       request,
     );
@@ -3839,14 +3839,14 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listEffectiveEventThreatDetectionCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listEffectiveEventThreatDetectionCustomModules request %j',
       request,
     );
@@ -3862,7 +3862,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listEffectiveEventThreatDetectionCustomModules values %j',
             response,
           );
@@ -3920,7 +3920,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listEffectiveEventThreatDetectionCustomModules stream %j',
       request,
     );
@@ -3984,7 +3984,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listEffectiveEventThreatDetectionCustomModules iterate %j',
       request,
     );
@@ -4116,14 +4116,17 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listEventThreatDetectionCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEventThreatDetectionCustomModules request %j', request);
+    this._log.debug(
+      'listEventThreatDetectionCustomModules request %j',
+      request,
+    );
     return this.innerApiCalls
       .listEventThreatDetectionCustomModules(request, options, wrappedCallback)
       ?.then(
@@ -4132,7 +4135,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listEventThreatDetectionCustomModules values %j',
             response,
           );
@@ -4191,7 +4194,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEventThreatDetectionCustomModules stream %j', request);
+    this._log.debug('listEventThreatDetectionCustomModules stream %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
       request,
@@ -4252,7 +4255,10 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEventThreatDetectionCustomModules iterate %j', request);
+    this._log.debug(
+      'listEventThreatDetectionCustomModules iterate %j',
+      request,
+    );
     return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
       request as {},
@@ -4378,14 +4384,14 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listDescendantEventThreatDetectionCustomModules values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listDescendantEventThreatDetectionCustomModules request %j',
       request,
     );
@@ -4401,7 +4407,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listDescendantEventThreatDetectionCustomModules values %j',
             response,
           );
@@ -4460,7 +4466,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listDescendantEventThreatDetectionCustomModules stream %j',
       request,
     );
@@ -4525,7 +4531,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listDescendantEventThreatDetectionCustomModules iterate %j',
       request,
     );
@@ -4658,11 +4664,11 @@ export class SecurityCenterManagementClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSecurityCenterServices values %j', values);
+          this._log.debug('listSecurityCenterServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSecurityCenterServices request %j', request);
+    this._log.debug('listSecurityCenterServices request %j', request);
     return this.innerApiCalls
       .listSecurityCenterServices(request, options, wrappedCallback)
       ?.then(
@@ -4671,7 +4677,7 @@ export class SecurityCenterManagementClient {
           protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
           protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
         ]) => {
-          this._log.info('listSecurityCenterServices values %j', response);
+          this._log.debug('listSecurityCenterServices values %j', response);
           return [response, input, output];
         },
       );
@@ -4728,7 +4734,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSecurityCenterServices stream %j', request);
+    this._log.debug('listSecurityCenterServices stream %j', request);
     return this.descriptors.page.listSecurityCenterServices.createStream(
       this.innerApiCalls.listSecurityCenterServices as GaxCall,
       request,
@@ -4790,7 +4796,7 @@ export class SecurityCenterManagementClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSecurityCenterServices iterate %j', request);
+    this._log.debug('listSecurityCenterServices iterate %j', request);
     return this.descriptors.page.listSecurityCenterServices.asyncIterate(
       this.innerApiCalls['listSecurityCenterServices'] as GaxCall,
       request as {},

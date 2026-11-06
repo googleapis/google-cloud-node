@@ -464,7 +464,7 @@ export class ImageFamilyViewsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IImageFamilyView,
@@ -475,7 +475,7 @@ export class ImageFamilyViewsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -487,7 +487,7 @@ export class ImageFamilyViewsClient {
           protos.google.cloud.compute.v1.IGetImageFamilyViewRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )

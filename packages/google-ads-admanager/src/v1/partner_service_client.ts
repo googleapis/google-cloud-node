@@ -688,7 +688,7 @@ export class PartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPartner request %j', request);
+    this._log.debug('getPartner request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPartner,
@@ -697,7 +697,7 @@ export class PartnerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPartner response %j', response);
+          this._log.debug('getPartner response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -709,7 +709,7 @@ export class PartnerServiceClient {
           protos.google.ads.admanager.v1.IGetPartnerRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPartner response %j', response);
+          this._log.debug('getPartner response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -819,7 +819,7 @@ export class PartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePartner request %j', request);
+    this._log.debug('updatePartner request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPartner,
@@ -830,7 +830,7 @@ export class PartnerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePartner response %j', response);
+          this._log.debug('updatePartner response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -842,7 +842,7 @@ export class PartnerServiceClient {
           protos.google.ads.admanager.v1.IUpdatePartnerRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePartner response %j', response);
+          this._log.debug('updatePartner response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -959,7 +959,7 @@ export class PartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdatePartners request %j', request);
+    this._log.debug('batchUpdatePartners request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdatePartnersResponse,
@@ -970,7 +970,7 @@ export class PartnerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdatePartners response %j', response);
+          this._log.debug('batchUpdatePartners response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -985,7 +985,7 @@ export class PartnerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdatePartners response %j', response);
+          this._log.debug('batchUpdatePartners response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1139,11 +1139,11 @@ export class PartnerServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPartners values %j', values);
+          this._log.debug('listPartners values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPartners request %j', request);
+    this._log.debug('listPartners request %j', request);
     return this.innerApiCalls
       .listPartners(request, options, wrappedCallback)
       ?.then(
@@ -1152,7 +1152,7 @@ export class PartnerServiceClient {
           protos.google.ads.admanager.v1.IListPartnersRequest | null,
           protos.google.ads.admanager.v1.IListPartnersResponse,
         ]) => {
-          this._log.info('listPartners values %j', response);
+          this._log.debug('listPartners values %j', response);
           return [response, input, output];
         },
       );
@@ -1227,7 +1227,7 @@ export class PartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPartners stream %j', request);
+    this._log.debug('listPartners stream %j', request);
     return this.descriptors.page.listPartners.createStream(
       this.innerApiCalls.listPartners as GaxCall,
       request,
@@ -1307,7 +1307,7 @@ export class PartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPartners iterate %j', request);
+    this._log.debug('listPartners iterate %j', request);
     return this.descriptors.page.listPartners.asyncIterate(
       this.innerApiCalls['listPartners'] as GaxCall,
       request as {},

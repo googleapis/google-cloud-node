@@ -694,7 +694,7 @@ export class LineItemTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLineItemTemplate request %j', request);
+    this._log.debug('getLineItemTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ILineItemTemplate,
@@ -705,7 +705,7 @@ export class LineItemTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLineItemTemplate response %j', response);
+          this._log.debug('getLineItemTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -720,7 +720,7 @@ export class LineItemTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLineItemTemplate response %j', response);
+          this._log.debug('getLineItemTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -873,11 +873,11 @@ export class LineItemTemplateServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLineItemTemplates values %j', values);
+          this._log.debug('listLineItemTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLineItemTemplates request %j', request);
+    this._log.debug('listLineItemTemplates request %j', request);
     return this.innerApiCalls
       .listLineItemTemplates(request, options, wrappedCallback)
       ?.then(
@@ -886,7 +886,7 @@ export class LineItemTemplateServiceClient {
           protos.google.ads.admanager.v1.IListLineItemTemplatesRequest | null,
           protos.google.ads.admanager.v1.IListLineItemTemplatesResponse,
         ]) => {
-          this._log.info('listLineItemTemplates values %j', response);
+          this._log.debug('listLineItemTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -954,7 +954,7 @@ export class LineItemTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLineItemTemplates stream %j', request);
+    this._log.debug('listLineItemTemplates stream %j', request);
     return this.descriptors.page.listLineItemTemplates.createStream(
       this.innerApiCalls.listLineItemTemplates as GaxCall,
       request,
@@ -1027,7 +1027,7 @@ export class LineItemTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLineItemTemplates iterate %j', request);
+    this._log.debug('listLineItemTemplates iterate %j', request);
     return this.descriptors.page.listLineItemTemplates.asyncIterate(
       this.innerApiCalls['listLineItemTemplates'] as GaxCall,
       request as {},

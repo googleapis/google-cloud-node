@@ -461,7 +461,7 @@ export class NavConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTrip request %j', request);
+    this._log.debug('createTrip request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.navconnect.v1.ITrip,
@@ -472,7 +472,7 @@ export class NavConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTrip response %j', response);
+          this._log.debug('createTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -484,7 +484,7 @@ export class NavConnectServiceClient {
           protos.google.maps.navconnect.v1.ICreateTripRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTrip response %j', response);
+          this._log.debug('createTrip response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -591,7 +591,7 @@ export class NavConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTrip request %j', request);
+    this._log.debug('getTrip request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.navconnect.v1.ITrip,
@@ -600,7 +600,7 @@ export class NavConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTrip response %j', response);
+          this._log.debug('getTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -612,7 +612,7 @@ export class NavConnectServiceClient {
           protos.google.maps.navconnect.v1.IGetTripRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTrip response %j', response);
+          this._log.debug('getTrip response %j', response);
           return [response, options, rawResponse];
         },
       )

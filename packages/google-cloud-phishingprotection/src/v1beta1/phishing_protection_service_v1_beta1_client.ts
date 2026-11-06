@@ -475,7 +475,7 @@ export class PhishingProtectionServiceV1Beta1Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reportPhishing request %j', request);
+    this._log.debug('reportPhishing request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
@@ -486,7 +486,7 @@ export class PhishingProtectionServiceV1Beta1Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('reportPhishing response %j', response);
+          this._log.debug('reportPhishing response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -501,7 +501,7 @@ export class PhishingProtectionServiceV1Beta1Client {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('reportPhishing response %j', response);
+          this._log.debug('reportPhishing response %j', response);
           return [response, options, rawResponse];
         },
       )

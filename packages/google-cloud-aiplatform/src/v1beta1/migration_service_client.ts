@@ -2659,11 +2659,11 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchMigrateResources response %j', rawResponse);
+          this._log.debug('batchMigrateResources response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchMigrateResources request %j', request);
+    this._log.debug('batchMigrateResources request %j', request);
     return this.innerApiCalls
       .batchMigrateResources(request, options, wrappedCallback)
       ?.then(
@@ -2675,7 +2675,7 @@ export class MigrationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchMigrateResources response %j', rawResponse);
+          this._log.debug('batchMigrateResources response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2842,11 +2842,11 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchMigratableResources values %j', values);
+          this._log.debug('searchMigratableResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchMigratableResources request %j', request);
+    this._log.debug('searchMigratableResources request %j', request);
     return this.innerApiCalls
       .searchMigratableResources(request, options, wrappedCallback)
       ?.then(
@@ -2855,7 +2855,7 @@ export class MigrationServiceClient {
           protos.google.cloud.aiplatform.v1beta1.ISearchMigratableResourcesRequest | null,
           protos.google.cloud.aiplatform.v1beta1.ISearchMigratableResourcesResponse,
         ]) => {
-          this._log.info('searchMigratableResources values %j', response);
+          this._log.debug('searchMigratableResources values %j', response);
           return [response, input, output];
         },
       );
@@ -2917,7 +2917,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchMigratableResources stream %j', request);
+    this._log.debug('searchMigratableResources stream %j', request);
     return this.descriptors.page.searchMigratableResources.createStream(
       this.innerApiCalls.searchMigratableResources as GaxCall,
       request,
@@ -2984,7 +2984,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchMigratableResources iterate %j', request);
+    this._log.debug('searchMigratableResources iterate %j', request);
     return this.descriptors.page.searchMigratableResources.asyncIterate(
       this.innerApiCalls['searchMigratableResources'] as GaxCall,
       request as {},

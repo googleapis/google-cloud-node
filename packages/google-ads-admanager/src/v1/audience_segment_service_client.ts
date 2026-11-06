@@ -702,7 +702,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAudienceSegment request %j', request);
+    this._log.debug('getAudienceSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAudienceSegment,
@@ -713,7 +713,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAudienceSegment response %j', response);
+          this._log.debug('getAudienceSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -725,7 +725,7 @@ export class AudienceSegmentServiceClient {
           protos.google.ads.admanager.v1.IGetAudienceSegmentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAudienceSegment response %j', response);
+          this._log.debug('getAudienceSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -840,7 +840,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAudienceSegment request %j', request);
+    this._log.debug('createAudienceSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAudienceSegment,
@@ -851,7 +851,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAudienceSegment response %j', response);
+          this._log.debug('createAudienceSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -866,7 +866,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createAudienceSegment response %j', response);
+          this._log.debug('createAudienceSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -989,7 +989,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateAudienceSegments request %j', request);
+    this._log.debug('batchCreateAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateAudienceSegmentsResponse,
@@ -1000,7 +1000,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateAudienceSegments response %j', response);
+          this._log.debug('batchCreateAudienceSegments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1015,7 +1015,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateAudienceSegments response %j', response);
+          this._log.debug('batchCreateAudienceSegments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1128,7 +1128,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAudienceSegment request %j', request);
+    this._log.debug('updateAudienceSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAudienceSegment,
@@ -1139,7 +1139,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAudienceSegment response %j', response);
+          this._log.debug('updateAudienceSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1154,7 +1154,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAudienceSegment response %j', response);
+          this._log.debug('updateAudienceSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1277,7 +1277,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateAudienceSegments request %j', request);
+    this._log.debug('batchUpdateAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
@@ -1288,7 +1288,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateAudienceSegments response %j', response);
+          this._log.debug('batchUpdateAudienceSegments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1303,7 +1303,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateAudienceSegments response %j', response);
+          this._log.debug('batchUpdateAudienceSegments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1423,7 +1423,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateAudienceSegments request %j', request);
+    this._log.debug('batchActivateAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateAudienceSegmentsResponse,
@@ -1434,7 +1434,10 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateAudienceSegments response %j', response);
+          this._log.debug(
+            'batchActivateAudienceSegments response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1449,7 +1452,10 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateAudienceSegments response %j', response);
+          this._log.debug(
+            'batchActivateAudienceSegments response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -1569,7 +1575,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateAudienceSegments request %j', request);
+    this._log.debug('batchDeactivateAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateAudienceSegmentsResponse,
@@ -1580,7 +1586,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateAudienceSegments response %j',
             response,
           );
@@ -1598,7 +1604,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateAudienceSegments response %j',
             response,
           );
@@ -1721,7 +1727,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchApproveAudienceSegments request %j', request);
+    this._log.debug('batchApproveAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchApproveAudienceSegmentsResponse,
@@ -1732,7 +1738,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchApproveAudienceSegments response %j', response);
+          this._log.debug('batchApproveAudienceSegments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1747,7 +1753,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchApproveAudienceSegments response %j', response);
+          this._log.debug('batchApproveAudienceSegments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1867,7 +1873,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRejectAudienceSegments request %j', request);
+    this._log.debug('batchRejectAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchRejectAudienceSegmentsResponse,
@@ -1878,7 +1884,7 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRejectAudienceSegments response %j', response);
+          this._log.debug('batchRejectAudienceSegments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1893,7 +1899,7 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchRejectAudienceSegments response %j', response);
+          this._log.debug('batchRejectAudienceSegments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2013,7 +2019,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchPopulateAudienceSegments request %j', request);
+    this._log.debug('batchPopulateAudienceSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchPopulateAudienceSegmentsResponse,
@@ -2024,7 +2030,10 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchPopulateAudienceSegments response %j', response);
+          this._log.debug(
+            'batchPopulateAudienceSegments response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2039,7 +2048,10 @@ export class AudienceSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchPopulateAudienceSegments response %j', response);
+          this._log.debug(
+            'batchPopulateAudienceSegments response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -2204,11 +2216,11 @@ export class AudienceSegmentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAudienceSegments values %j', values);
+          this._log.debug('listAudienceSegments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAudienceSegments request %j', request);
+    this._log.debug('listAudienceSegments request %j', request);
     return this.innerApiCalls
       .listAudienceSegments(request, options, wrappedCallback)
       ?.then(
@@ -2217,7 +2229,7 @@ export class AudienceSegmentServiceClient {
           protos.google.ads.admanager.v1.IListAudienceSegmentsRequest | null,
           protos.google.ads.admanager.v1.IListAudienceSegmentsResponse,
         ]) => {
-          this._log.info('listAudienceSegments values %j', response);
+          this._log.debug('listAudienceSegments values %j', response);
           return [response, input, output];
         },
       );
@@ -2297,7 +2309,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceSegments stream %j', request);
+    this._log.debug('listAudienceSegments stream %j', request);
     return this.descriptors.page.listAudienceSegments.createStream(
       this.innerApiCalls.listAudienceSegments as GaxCall,
       request,
@@ -2382,7 +2394,7 @@ export class AudienceSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceSegments iterate %j', request);
+    this._log.debug('listAudienceSegments iterate %j', request);
     return this.descriptors.page.listAudienceSegments.asyncIterate(
       this.innerApiCalls['listAudienceSegments'] as GaxCall,
       request as {},

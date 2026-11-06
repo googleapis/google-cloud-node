@@ -705,7 +705,7 @@ export class ManagedNotebookServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRuntime request %j', request);
+    this._log.debug('getRuntime request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.notebooks.v1.IRuntime,
@@ -716,7 +716,7 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRuntime response %j', response);
+          this._log.debug('getRuntime response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -728,7 +728,7 @@ export class ManagedNotebookServiceClient {
           protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRuntime response %j', response);
+          this._log.debug('getRuntime response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -850,7 +850,7 @@ export class ManagedNotebookServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('refreshRuntimeTokenInternal request %j', request);
+    this._log.debug('refreshRuntimeTokenInternal request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
@@ -861,7 +861,7 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('refreshRuntimeTokenInternal response %j', response);
+          this._log.debug('refreshRuntimeTokenInternal response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -876,7 +876,7 @@ export class ManagedNotebookServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('refreshRuntimeTokenInternal response %j', response);
+          this._log.debug('refreshRuntimeTokenInternal response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1018,11 +1018,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRuntime response %j', rawResponse);
+          this._log.debug('createRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRuntime request %j', request);
+    this._log.debug('createRuntime request %j', request);
     return this.innerApiCalls
       .createRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1034,7 +1034,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRuntime response %j', rawResponse);
+          this._log.debug('createRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1213,11 +1213,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateRuntime response %j', rawResponse);
+          this._log.debug('updateRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateRuntime request %j', request);
+    this._log.debug('updateRuntime request %j', request);
     return this.innerApiCalls
       .updateRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1229,7 +1229,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRuntime response %j', rawResponse);
+          this._log.debug('updateRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1385,11 +1385,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRuntime response %j', rawResponse);
+          this._log.debug('deleteRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRuntime request %j', request);
+    this._log.debug('deleteRuntime request %j', request);
     return this.innerApiCalls
       .deleteRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1401,7 +1401,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRuntime response %j', rawResponse);
+          this._log.debug('deleteRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1561,11 +1561,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('startRuntime response %j', rawResponse);
+          this._log.debug('startRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('startRuntime request %j', request);
+    this._log.debug('startRuntime request %j', request);
     return this.innerApiCalls
       .startRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1577,7 +1577,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('startRuntime response %j', rawResponse);
+          this._log.debug('startRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1737,11 +1737,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('stopRuntime response %j', rawResponse);
+          this._log.debug('stopRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('stopRuntime request %j', request);
+    this._log.debug('stopRuntime request %j', request);
     return this.innerApiCalls
       .stopRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1753,7 +1753,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopRuntime response %j', rawResponse);
+          this._log.debug('stopRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1913,11 +1913,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('switchRuntime response %j', rawResponse);
+          this._log.debug('switchRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('switchRuntime request %j', request);
+    this._log.debug('switchRuntime request %j', request);
     return this.innerApiCalls
       .switchRuntime(request, options, wrappedCallback)
       ?.then(
@@ -1929,7 +1929,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('switchRuntime response %j', rawResponse);
+          this._log.debug('switchRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2085,11 +2085,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('resetRuntime response %j', rawResponse);
+          this._log.debug('resetRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('resetRuntime request %j', request);
+    this._log.debug('resetRuntime request %j', request);
     return this.innerApiCalls
       .resetRuntime(request, options, wrappedCallback)
       ?.then(
@@ -2101,7 +2101,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('resetRuntime response %j', rawResponse);
+          this._log.debug('resetRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2257,11 +2257,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('upgradeRuntime response %j', rawResponse);
+          this._log.debug('upgradeRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('upgradeRuntime request %j', request);
+    this._log.debug('upgradeRuntime request %j', request);
     return this.innerApiCalls
       .upgradeRuntime(request, options, wrappedCallback)
       ?.then(
@@ -2273,7 +2273,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('upgradeRuntime response %j', rawResponse);
+          this._log.debug('upgradeRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2432,11 +2432,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('reportRuntimeEvent response %j', rawResponse);
+          this._log.debug('reportRuntimeEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('reportRuntimeEvent request %j', request);
+    this._log.debug('reportRuntimeEvent request %j', request);
     return this.innerApiCalls
       .reportRuntimeEvent(request, options, wrappedCallback)
       ?.then(
@@ -2448,7 +2448,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('reportRuntimeEvent response %j', rawResponse);
+          this._log.debug('reportRuntimeEvent response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2604,11 +2604,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('diagnoseRuntime response %j', rawResponse);
+          this._log.debug('diagnoseRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('diagnoseRuntime request %j', request);
+    this._log.debug('diagnoseRuntime request %j', request);
     return this.innerApiCalls
       .diagnoseRuntime(request, options, wrappedCallback)
       ?.then(
@@ -2620,7 +2620,7 @@ export class ManagedNotebookServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('diagnoseRuntime response %j', rawResponse);
+          this._log.debug('diagnoseRuntime response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2763,11 +2763,11 @@ export class ManagedNotebookServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRuntimes values %j', values);
+          this._log.debug('listRuntimes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRuntimes request %j', request);
+    this._log.debug('listRuntimes request %j', request);
     return this.innerApiCalls
       .listRuntimes(request, options, wrappedCallback)
       ?.then(
@@ -2776,7 +2776,7 @@ export class ManagedNotebookServiceClient {
           protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
           protos.google.cloud.notebooks.v1.IListRuntimesResponse,
         ]) => {
-          this._log.info('listRuntimes values %j', response);
+          this._log.debug('listRuntimes values %j', response);
           return [response, input, output];
         },
       );
@@ -2822,7 +2822,7 @@ export class ManagedNotebookServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuntimes stream %j', request);
+    this._log.debug('listRuntimes stream %j', request);
     return this.descriptors.page.listRuntimes.createStream(
       this.innerApiCalls.listRuntimes as GaxCall,
       request,
@@ -2873,7 +2873,7 @@ export class ManagedNotebookServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuntimes iterate %j', request);
+    this._log.debug('listRuntimes iterate %j', request);
     return this.descriptors.page.listRuntimes.asyncIterate(
       this.innerApiCalls['listRuntimes'] as GaxCall,
       request as {},

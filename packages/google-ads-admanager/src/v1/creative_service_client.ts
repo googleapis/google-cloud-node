@@ -686,7 +686,7 @@ export class CreativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCreative request %j', request);
+    this._log.debug('getCreative request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICreative,
@@ -695,7 +695,7 @@ export class CreativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCreative response %j', response);
+          this._log.debug('getCreative response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -707,7 +707,7 @@ export class CreativeServiceClient {
           protos.google.ads.admanager.v1.IGetCreativeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCreative response %j', response);
+          this._log.debug('getCreative response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -821,7 +821,7 @@ export class CreativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCreatives request %j', request);
+    this._log.debug('batchActivateCreatives request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCreativesResponse,
@@ -832,7 +832,7 @@ export class CreativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateCreatives response %j', response);
+          this._log.debug('batchActivateCreatives response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -847,7 +847,7 @@ export class CreativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateCreatives response %j', response);
+          this._log.debug('batchActivateCreatives response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -967,7 +967,7 @@ export class CreativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCreatives request %j', request);
+    this._log.debug('batchDeactivateCreatives request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCreativesResponse,
@@ -978,7 +978,7 @@ export class CreativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateCreatives response %j', response);
+          this._log.debug('batchDeactivateCreatives response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -993,7 +993,7 @@ export class CreativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateCreatives response %j', response);
+          this._log.debug('batchDeactivateCreatives response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1144,11 +1144,11 @@ export class CreativeServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCreatives values %j', values);
+          this._log.debug('listCreatives values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCreatives request %j', request);
+    this._log.debug('listCreatives request %j', request);
     return this.innerApiCalls
       .listCreatives(request, options, wrappedCallback)
       ?.then(
@@ -1157,7 +1157,7 @@ export class CreativeServiceClient {
           protos.google.ads.admanager.v1.IListCreativesRequest | null,
           protos.google.ads.admanager.v1.IListCreativesResponse,
         ]) => {
-          this._log.info('listCreatives values %j', response);
+          this._log.debug('listCreatives values %j', response);
           return [response, input, output];
         },
       );
@@ -1229,7 +1229,7 @@ export class CreativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreatives stream %j', request);
+    this._log.debug('listCreatives stream %j', request);
     return this.descriptors.page.listCreatives.createStream(
       this.innerApiCalls.listCreatives as GaxCall,
       request,
@@ -1306,7 +1306,7 @@ export class CreativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreatives iterate %j', request);
+    this._log.debug('listCreatives iterate %j', request);
     return this.descriptors.page.listCreatives.asyncIterate(
       this.innerApiCalls['listCreatives'] as GaxCall,
       request as {},

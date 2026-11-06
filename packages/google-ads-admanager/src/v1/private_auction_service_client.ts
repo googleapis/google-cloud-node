@@ -696,7 +696,7 @@ export class PrivateAuctionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPrivateAuction request %j', request);
+    this._log.debug('getPrivateAuction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPrivateAuction,
@@ -707,7 +707,7 @@ export class PrivateAuctionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPrivateAuction response %j', response);
+          this._log.debug('getPrivateAuction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class PrivateAuctionServiceClient {
           protos.google.ads.admanager.v1.IGetPrivateAuctionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPrivateAuction response %j', response);
+          this._log.debug('getPrivateAuction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -833,7 +833,7 @@ export class PrivateAuctionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPrivateAuction request %j', request);
+    this._log.debug('createPrivateAuction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPrivateAuction,
@@ -844,7 +844,7 @@ export class PrivateAuctionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPrivateAuction response %j', response);
+          this._log.debug('createPrivateAuction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -859,7 +859,7 @@ export class PrivateAuctionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createPrivateAuction response %j', response);
+          this._log.debug('createPrivateAuction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -975,7 +975,7 @@ export class PrivateAuctionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePrivateAuction request %j', request);
+    this._log.debug('updatePrivateAuction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPrivateAuction,
@@ -986,7 +986,7 @@ export class PrivateAuctionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePrivateAuction response %j', response);
+          this._log.debug('updatePrivateAuction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1001,7 +1001,7 @@ export class PrivateAuctionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePrivateAuction response %j', response);
+          this._log.debug('updatePrivateAuction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1149,11 +1149,11 @@ export class PrivateAuctionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPrivateAuctions values %j', values);
+          this._log.debug('listPrivateAuctions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPrivateAuctions request %j', request);
+    this._log.debug('listPrivateAuctions request %j', request);
     return this.innerApiCalls
       .listPrivateAuctions(request, options, wrappedCallback)
       ?.then(
@@ -1162,7 +1162,7 @@ export class PrivateAuctionServiceClient {
           protos.google.ads.admanager.v1.IListPrivateAuctionsRequest | null,
           protos.google.ads.admanager.v1.IListPrivateAuctionsResponse,
         ]) => {
-          this._log.info('listPrivateAuctions values %j', response);
+          this._log.debug('listPrivateAuctions values %j', response);
           return [response, input, output];
         },
       );
@@ -1225,7 +1225,7 @@ export class PrivateAuctionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrivateAuctions stream %j', request);
+    this._log.debug('listPrivateAuctions stream %j', request);
     return this.descriptors.page.listPrivateAuctions.createStream(
       this.innerApiCalls.listPrivateAuctions as GaxCall,
       request,
@@ -1293,7 +1293,7 @@ export class PrivateAuctionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrivateAuctions iterate %j', request);
+    this._log.debug('listPrivateAuctions iterate %j', request);
     return this.descriptors.page.listPrivateAuctions.asyncIterate(
       this.innerApiCalls['listPrivateAuctions'] as GaxCall,
       request as {},

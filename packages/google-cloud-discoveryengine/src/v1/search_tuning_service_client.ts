@@ -808,7 +808,7 @@ export class SearchTuningServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomModels request %j', request);
+    this._log.debug('listCustomModels request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IListCustomModelsResponse,
@@ -819,7 +819,7 @@ export class SearchTuningServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listCustomModels response %j', response);
+          this._log.debug('listCustomModels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -834,7 +834,7 @@ export class SearchTuningServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listCustomModels response %j', response);
+          this._log.debug('listCustomModels response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -982,11 +982,11 @@ export class SearchTuningServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('trainCustomModel response %j', rawResponse);
+          this._log.debug('trainCustomModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('trainCustomModel request %j', request);
+    this._log.debug('trainCustomModel request %j', request);
     return this.innerApiCalls
       .trainCustomModel(request, options, wrappedCallback)
       ?.then(
@@ -998,7 +998,7 @@ export class SearchTuningServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('trainCustomModel response %j', rawResponse);
+          this._log.debug('trainCustomModel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

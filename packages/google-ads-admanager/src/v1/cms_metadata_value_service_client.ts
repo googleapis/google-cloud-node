@@ -695,7 +695,7 @@ export class CmsMetadataValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCmsMetadataValue request %j', request);
+    this._log.debug('getCmsMetadataValue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICmsMetadataValue,
@@ -706,7 +706,7 @@ export class CmsMetadataValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCmsMetadataValue response %j', response);
+          this._log.debug('getCmsMetadataValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -721,7 +721,7 @@ export class CmsMetadataValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCmsMetadataValue response %j', response);
+          this._log.debug('getCmsMetadataValue response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -843,7 +843,7 @@ export class CmsMetadataValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCmsMetadataValues request %j', request);
+    this._log.debug('batchActivateCmsMetadataValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCmsMetadataValuesResponse,
@@ -854,7 +854,7 @@ export class CmsMetadataValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCmsMetadataValues response %j',
             response,
           );
@@ -872,7 +872,7 @@ export class CmsMetadataValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCmsMetadataValues response %j',
             response,
           );
@@ -997,7 +997,7 @@ export class CmsMetadataValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCmsMetadataValues request %j', request);
+    this._log.debug('batchDeactivateCmsMetadataValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCmsMetadataValuesResponse,
@@ -1008,7 +1008,7 @@ export class CmsMetadataValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCmsMetadataValues response %j',
             response,
           );
@@ -1026,7 +1026,7 @@ export class CmsMetadataValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCmsMetadataValues response %j',
             response,
           );
@@ -1183,11 +1183,11 @@ export class CmsMetadataValueServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCmsMetadataValues values %j', values);
+          this._log.debug('listCmsMetadataValues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCmsMetadataValues request %j', request);
+    this._log.debug('listCmsMetadataValues request %j', request);
     return this.innerApiCalls
       .listCmsMetadataValues(request, options, wrappedCallback)
       ?.then(
@@ -1196,7 +1196,7 @@ export class CmsMetadataValueServiceClient {
           protos.google.ads.admanager.v1.IListCmsMetadataValuesRequest | null,
           protos.google.ads.admanager.v1.IListCmsMetadataValuesResponse,
         ]) => {
-          this._log.info('listCmsMetadataValues values %j', response);
+          this._log.debug('listCmsMetadataValues values %j', response);
           return [response, input, output];
         },
       );
@@ -1265,7 +1265,7 @@ export class CmsMetadataValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCmsMetadataValues stream %j', request);
+    this._log.debug('listCmsMetadataValues stream %j', request);
     return this.descriptors.page.listCmsMetadataValues.createStream(
       this.innerApiCalls.listCmsMetadataValues as GaxCall,
       request,
@@ -1339,7 +1339,7 @@ export class CmsMetadataValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCmsMetadataValues iterate %j', request);
+    this._log.debug('listCmsMetadataValues iterate %j', request);
     return this.descriptors.page.listCmsMetadataValues.asyncIterate(
       this.innerApiCalls['listCmsMetadataValues'] as GaxCall,
       request as {},

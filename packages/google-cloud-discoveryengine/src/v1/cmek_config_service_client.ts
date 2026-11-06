@@ -828,7 +828,7 @@ export class CmekConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCmekConfig request %j', request);
+    this._log.debug('getCmekConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.ICmekConfig,
@@ -839,7 +839,7 @@ export class CmekConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCmekConfig response %j', response);
+          this._log.debug('getCmekConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -854,7 +854,7 @@ export class CmekConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCmekConfig response %j', response);
+          this._log.debug('getCmekConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -978,7 +978,7 @@ export class CmekConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCmekConfigs request %j', request);
+    this._log.debug('listCmekConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
@@ -989,7 +989,7 @@ export class CmekConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listCmekConfigs response %j', response);
+          this._log.debug('listCmekConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1004,7 +1004,7 @@ export class CmekConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listCmekConfigs response %j', response);
+          this._log.debug('listCmekConfigs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1145,11 +1145,11 @@ export class CmekConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCmekConfig response %j', rawResponse);
+          this._log.debug('updateCmekConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCmekConfig request %j', request);
+    this._log.debug('updateCmekConfig request %j', request);
     return this.innerApiCalls
       .updateCmekConfig(request, options, wrappedCallback)
       ?.then(
@@ -1161,7 +1161,7 @@ export class CmekConfigServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCmekConfig response %j', rawResponse);
+          this._log.debug('updateCmekConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1316,11 +1316,11 @@ export class CmekConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCmekConfig response %j', rawResponse);
+          this._log.debug('deleteCmekConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCmekConfig request %j', request);
+    this._log.debug('deleteCmekConfig request %j', request);
     return this.innerApiCalls
       .deleteCmekConfig(request, options, wrappedCallback)
       ?.then(
@@ -1332,7 +1332,7 @@ export class CmekConfigServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCmekConfig response %j', rawResponse);
+          this._log.debug('deleteCmekConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

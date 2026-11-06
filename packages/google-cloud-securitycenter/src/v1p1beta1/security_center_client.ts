@@ -640,7 +640,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSource request %j', request);
+    this._log.debug('createSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.ISource,
@@ -651,7 +651,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSource response %j', response);
+          this._log.debug('createSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -666,7 +666,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSource response %j', response);
+          this._log.debug('createSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -790,7 +790,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFinding request %j', request);
+    this._log.debug('createFinding request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.IFinding,
@@ -801,7 +801,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFinding response %j', response);
+          this._log.debug('createFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -816,7 +816,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createFinding response %j', response);
+          this._log.debug('createFinding response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -941,7 +941,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createNotificationConfig request %j', request);
+    this._log.debug('createNotificationConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig,
@@ -952,7 +952,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createNotificationConfig response %j', response);
+          this._log.debug('createNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -967,7 +967,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createNotificationConfig response %j', response);
+          this._log.debug('createNotificationConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1085,7 +1085,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteNotificationConfig request %j', request);
+    this._log.debug('deleteNotificationConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1096,7 +1096,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteNotificationConfig response %j', response);
+          this._log.debug('deleteNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1111,7 +1111,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteNotificationConfig response %j', response);
+          this._log.debug('deleteNotificationConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1218,7 +1218,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1227,7 +1227,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1239,7 +1239,7 @@ export class SecurityCenterClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1357,7 +1357,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNotificationConfig request %j', request);
+    this._log.debug('getNotificationConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig,
@@ -1368,7 +1368,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNotificationConfig response %j', response);
+          this._log.debug('getNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1383,7 +1383,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getNotificationConfig response %j', response);
+          this._log.debug('getNotificationConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1501,7 +1501,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOrganizationSettings request %j', request);
+    this._log.debug('getOrganizationSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.IOrganizationSettings,
@@ -1512,7 +1512,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOrganizationSettings response %j', response);
+          this._log.debug('getOrganizationSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1527,7 +1527,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getOrganizationSettings response %j', response);
+          this._log.debug('getOrganizationSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1645,7 +1645,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSource request %j', request);
+    this._log.debug('getSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.ISource,
@@ -1656,7 +1656,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSource response %j', response);
+          this._log.debug('getSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1671,7 +1671,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSource response %j', response);
+          this._log.debug('getSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1795,7 +1795,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setFindingState request %j', request);
+    this._log.debug('setFindingState request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.IFinding,
@@ -1806,7 +1806,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setFindingState response %j', response);
+          this._log.debug('setFindingState response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1821,7 +1821,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('setFindingState response %j', response);
+          this._log.debug('setFindingState response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1936,7 +1936,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1945,7 +1945,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1957,7 +1957,7 @@ export class SecurityCenterClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2066,7 +2066,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -2075,7 +2075,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2087,7 +2087,7 @@ export class SecurityCenterClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2218,7 +2218,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFinding request %j', request);
+    this._log.debug('updateFinding request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.IFinding,
@@ -2229,7 +2229,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFinding response %j', response);
+          this._log.debug('updateFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2244,7 +2244,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateFinding response %j', response);
+          this._log.debug('updateFinding response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2366,7 +2366,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateNotificationConfig request %j', request);
+    this._log.debug('updateNotificationConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig,
@@ -2377,7 +2377,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateNotificationConfig response %j', response);
+          this._log.debug('updateNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2392,7 +2392,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateNotificationConfig response %j', response);
+          this._log.debug('updateNotificationConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2513,7 +2513,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateOrganizationSettings request %j', request);
+    this._log.debug('updateOrganizationSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.IOrganizationSettings,
@@ -2524,7 +2524,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateOrganizationSettings response %j', response);
+          this._log.debug('updateOrganizationSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2539,7 +2539,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateOrganizationSettings response %j', response);
+          this._log.debug('updateOrganizationSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2660,7 +2660,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSource request %j', request);
+    this._log.debug('updateSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.ISource,
@@ -2671,7 +2671,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSource response %j', response);
+          this._log.debug('updateSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2686,7 +2686,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSource response %j', response);
+          this._log.debug('updateSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2813,7 +2813,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSecurityMarks request %j', request);
+    this._log.debug('updateSecurityMarks request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securitycenter.v1p1beta1.ISecurityMarks,
@@ -2824,7 +2824,7 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSecurityMarks response %j', response);
+          this._log.debug('updateSecurityMarks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2839,7 +2839,7 @@ export class SecurityCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSecurityMarks response %j', response);
+          this._log.debug('updateSecurityMarks response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2980,11 +2980,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runAssetDiscovery response %j', rawResponse);
+          this._log.debug('runAssetDiscovery response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runAssetDiscovery request %j', request);
+    this._log.debug('runAssetDiscovery request %j', request);
     return this.innerApiCalls
       .runAssetDiscovery(request, options, wrappedCallback)
       ?.then(
@@ -2996,7 +2996,7 @@ export class SecurityCenterClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runAssetDiscovery response %j', rawResponse);
+          this._log.debug('runAssetDiscovery response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3264,11 +3264,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('groupAssets values %j', values);
+          this._log.debug('groupAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('groupAssets request %j', request);
+    this._log.debug('groupAssets request %j', request);
     return this.innerApiCalls
       .groupAssets(request, options, wrappedCallback)
       ?.then(
@@ -3277,7 +3277,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsResponse,
         ]) => {
-          this._log.info('groupAssets values %j', response);
+          this._log.debug('groupAssets values %j', response);
           return [response, input, output];
         },
       );
@@ -3441,7 +3441,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('groupAssets stream %j', request);
+    this._log.debug('groupAssets stream %j', request);
     return this.descriptors.page.groupAssets.createStream(
       this.innerApiCalls.groupAssets as GaxCall,
       request,
@@ -3610,7 +3610,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('groupAssets iterate %j', request);
+    this._log.debug('groupAssets iterate %j', request);
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
       request as {},
@@ -3844,11 +3844,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('groupFindings values %j', values);
+          this._log.debug('groupFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('groupFindings request %j', request);
+    this._log.debug('groupFindings request %j', request);
     return this.innerApiCalls
       .groupFindings(request, options, wrappedCallback)
       ?.then(
@@ -3857,7 +3857,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsResponse,
         ]) => {
-          this._log.info('groupFindings values %j', response);
+          this._log.debug('groupFindings values %j', response);
           return [response, input, output];
         },
       );
@@ -4015,7 +4015,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('groupFindings stream %j', request);
+    this._log.debug('groupFindings stream %j', request);
     return this.descriptors.page.groupFindings.createStream(
       this.innerApiCalls.groupFindings as GaxCall,
       request,
@@ -4178,7 +4178,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('groupFindings iterate %j', request);
+    this._log.debug('groupFindings iterate %j', request);
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
       request as {},
@@ -4416,11 +4416,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAssets values %j', values);
+          this._log.debug('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAssets request %j', request);
+    this._log.debug('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
       ?.then(
@@ -4429,7 +4429,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IListAssetsRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IListAssetsResponse,
         ]) => {
-          this._log.info('listAssets values %j', response);
+          this._log.debug('listAssets values %j', response);
           return [response, input, output];
         },
       );
@@ -4597,7 +4597,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets stream %j', request);
+    this._log.debug('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -4770,7 +4770,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets iterate %j', request);
+    this._log.debug('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -5005,11 +5005,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFindings values %j', values);
+          this._log.debug('listFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFindings request %j', request);
+    this._log.debug('listFindings request %j', request);
     return this.innerApiCalls
       .listFindings(request, options, wrappedCallback)
       ?.then(
@@ -5018,7 +5018,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IListFindingsRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IListFindingsResponse,
         ]) => {
-          this._log.info('listFindings values %j', response);
+          this._log.debug('listFindings values %j', response);
           return [response, input, output];
         },
       );
@@ -5180,7 +5180,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindings stream %j', request);
+    this._log.debug('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
       request,
@@ -5347,7 +5347,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindings iterate %j', request);
+    this._log.debug('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
       request as {},
@@ -5465,11 +5465,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNotificationConfigs values %j', values);
+          this._log.debug('listNotificationConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNotificationConfigs request %j', request);
+    this._log.debug('listNotificationConfigs request %j', request);
     return this.innerApiCalls
       .listNotificationConfigs(request, options, wrappedCallback)
       ?.then(
@@ -5478,7 +5478,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsResponse,
         ]) => {
-          this._log.info('listNotificationConfigs values %j', response);
+          this._log.debug('listNotificationConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -5526,7 +5526,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNotificationConfigs stream %j', request);
+    this._log.debug('listNotificationConfigs stream %j', request);
     return this.descriptors.page.listNotificationConfigs.createStream(
       this.innerApiCalls.listNotificationConfigs as GaxCall,
       request,
@@ -5579,7 +5579,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNotificationConfigs iterate %j', request);
+    this._log.debug('listNotificationConfigs iterate %j', request);
     return this.descriptors.page.listNotificationConfigs.asyncIterate(
       this.innerApiCalls['listNotificationConfigs'] as GaxCall,
       request as {},
@@ -5698,11 +5698,11 @@ export class SecurityCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSources values %j', values);
+          this._log.debug('listSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSources request %j', request);
+    this._log.debug('listSources request %j', request);
     return this.innerApiCalls
       .listSources(request, options, wrappedCallback)
       ?.then(
@@ -5711,7 +5711,7 @@ export class SecurityCenterClient {
           protos.google.cloud.securitycenter.v1p1beta1.IListSourcesRequest | null,
           protos.google.cloud.securitycenter.v1p1beta1.IListSourcesResponse,
         ]) => {
-          this._log.info('listSources values %j', response);
+          this._log.debug('listSources values %j', response);
           return [response, input, output];
         },
       );
@@ -5760,7 +5760,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSources stream %j', request);
+    this._log.debug('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
       request,
@@ -5814,7 +5814,7 @@ export class SecurityCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSources iterate %j', request);
+    this._log.debug('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
       request as {},

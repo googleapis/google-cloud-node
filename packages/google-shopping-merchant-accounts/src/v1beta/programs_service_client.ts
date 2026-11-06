@@ -552,7 +552,7 @@ export class ProgramsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProgram request %j', request);
+    this._log.debug('getProgram request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IProgram,
@@ -563,7 +563,7 @@ export class ProgramsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProgram response %j', response);
+          this._log.debug('getProgram response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -578,7 +578,7 @@ export class ProgramsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProgram response %j', response);
+          this._log.debug('getProgram response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -697,7 +697,7 @@ export class ProgramsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enableProgram request %j', request);
+    this._log.debug('enableProgram request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IProgram,
@@ -708,7 +708,7 @@ export class ProgramsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('enableProgram response %j', response);
+          this._log.debug('enableProgram response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -723,7 +723,7 @@ export class ProgramsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('enableProgram response %j', response);
+          this._log.debug('enableProgram response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -842,7 +842,7 @@ export class ProgramsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disableProgram request %j', request);
+    this._log.debug('disableProgram request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IProgram,
@@ -853,7 +853,7 @@ export class ProgramsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('disableProgram response %j', response);
+          this._log.debug('disableProgram response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -868,7 +868,7 @@ export class ProgramsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('disableProgram response %j', response);
+          this._log.debug('disableProgram response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1001,11 +1001,11 @@ export class ProgramsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPrograms values %j', values);
+          this._log.debug('listPrograms values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPrograms request %j', request);
+    this._log.debug('listPrograms request %j', request);
     return this.innerApiCalls
       .listPrograms(request, options, wrappedCallback)
       ?.then(
@@ -1014,7 +1014,7 @@ export class ProgramsServiceClient {
           protos.google.shopping.merchant.accounts.v1beta.IListProgramsRequest | null,
           protos.google.shopping.merchant.accounts.v1beta.IListProgramsResponse,
         ]) => {
-          this._log.info('listPrograms values %j', response);
+          this._log.debug('listPrograms values %j', response);
           return [response, input, output];
         },
       );
@@ -1062,7 +1062,7 @@ export class ProgramsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrograms stream %j', request);
+    this._log.debug('listPrograms stream %j', request);
     return this.descriptors.page.listPrograms.createStream(
       this.innerApiCalls.listPrograms as GaxCall,
       request,
@@ -1115,7 +1115,7 @@ export class ProgramsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrograms iterate %j', request);
+    this._log.debug('listPrograms iterate %j', request);
     return this.descriptors.page.listPrograms.asyncIterate(
       this.innerApiCalls['listPrograms'] as GaxCall,
       request as {},

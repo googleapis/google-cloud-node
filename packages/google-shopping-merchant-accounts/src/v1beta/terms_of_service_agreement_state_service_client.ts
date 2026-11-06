@@ -529,7 +529,7 @@ export class TermsOfServiceAgreementStateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTermsOfServiceAgreementState request %j', request);
+    this._log.debug('getTermsOfServiceAgreementState request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
@@ -540,7 +540,7 @@ export class TermsOfServiceAgreementStateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getTermsOfServiceAgreementState response %j',
             response,
           );
@@ -558,7 +558,7 @@ export class TermsOfServiceAgreementStateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getTermsOfServiceAgreementState response %j',
             response,
           );
@@ -679,7 +679,7 @@ export class TermsOfServiceAgreementStateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'retrieveForApplicationTermsOfServiceAgreementState request %j',
       request,
     );
@@ -693,7 +693,7 @@ export class TermsOfServiceAgreementStateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'retrieveForApplicationTermsOfServiceAgreementState response %j',
             response,
           );
@@ -715,7 +715,7 @@ export class TermsOfServiceAgreementStateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'retrieveForApplicationTermsOfServiceAgreementState response %j',
             response,
           );

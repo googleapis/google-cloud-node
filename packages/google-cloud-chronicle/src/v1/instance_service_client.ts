@@ -525,7 +525,7 @@ export class InstanceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IInstance,
@@ -536,7 +536,7 @@ export class InstanceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -548,7 +548,7 @@ export class InstanceServiceClient {
           protos.google.cloud.chronicle.v1.IGetInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )

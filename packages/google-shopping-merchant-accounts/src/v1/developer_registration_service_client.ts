@@ -551,7 +551,7 @@ export class DeveloperRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('registerGcp request %j', request);
+    this._log.debug('registerGcp request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IDeveloperRegistration,
@@ -562,7 +562,7 @@ export class DeveloperRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('registerGcp response %j', response);
+          this._log.debug('registerGcp response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -577,7 +577,7 @@ export class DeveloperRegistrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('registerGcp response %j', response);
+          this._log.debug('registerGcp response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -694,7 +694,7 @@ export class DeveloperRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDeveloperRegistration request %j', request);
+    this._log.debug('getDeveloperRegistration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IDeveloperRegistration,
@@ -705,7 +705,7 @@ export class DeveloperRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDeveloperRegistration response %j', response);
+          this._log.debug('getDeveloperRegistration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -720,7 +720,7 @@ export class DeveloperRegistrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDeveloperRegistration response %j', response);
+          this._log.debug('getDeveloperRegistration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -841,7 +841,7 @@ export class DeveloperRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('unregisterGcp request %j', request);
+    this._log.debug('unregisterGcp request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -852,7 +852,7 @@ export class DeveloperRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('unregisterGcp response %j', response);
+          this._log.debug('unregisterGcp response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -867,7 +867,7 @@ export class DeveloperRegistrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('unregisterGcp response %j', response);
+          this._log.debug('unregisterGcp response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -964,7 +964,7 @@ export class DeveloperRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAccountForGcpRegistration request %j', request);
+    this._log.debug('getAccountForGcpRegistration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IGetAccountForGcpRegistrationResponse,
@@ -973,7 +973,7 @@ export class DeveloperRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAccountForGcpRegistration response %j', response);
+          this._log.debug('getAccountForGcpRegistration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -985,7 +985,7 @@ export class DeveloperRegistrationServiceClient {
           protos.google.protobuf.IEmpty | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAccountForGcpRegistration response %j', response);
+          this._log.debug('getAccountForGcpRegistration response %j', response);
           return [response, options, rawResponse];
         },
       )

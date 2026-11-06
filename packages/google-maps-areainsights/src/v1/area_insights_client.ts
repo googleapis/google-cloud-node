@@ -463,7 +463,7 @@ export class AreaInsightsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeInsights request %j', request);
+    this._log.debug('computeInsights request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.areainsights.v1.IComputeInsightsResponse,
@@ -474,7 +474,7 @@ export class AreaInsightsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('computeInsights response %j', response);
+          this._log.debug('computeInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -489,7 +489,7 @@ export class AreaInsightsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('computeInsights response %j', response);
+          this._log.debug('computeInsights response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -695,7 +695,7 @@ export class RichMediaAdsCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRichMediaAdsCompany request %j', request);
+    this._log.debug('getRichMediaAdsCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IRichMediaAdsCompany,
@@ -706,7 +706,7 @@ export class RichMediaAdsCompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRichMediaAdsCompany response %j', response);
+          this._log.debug('getRichMediaAdsCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -721,7 +721,7 @@ export class RichMediaAdsCompanyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRichMediaAdsCompany response %j', response);
+          this._log.debug('getRichMediaAdsCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,11 +878,11 @@ export class RichMediaAdsCompanyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRichMediaAdsCompanies values %j', values);
+          this._log.debug('listRichMediaAdsCompanies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRichMediaAdsCompanies request %j', request);
+    this._log.debug('listRichMediaAdsCompanies request %j', request);
     return this.innerApiCalls
       .listRichMediaAdsCompanies(request, options, wrappedCallback)
       ?.then(
@@ -891,7 +891,7 @@ export class RichMediaAdsCompanyServiceClient {
           protos.google.ads.admanager.v1.IListRichMediaAdsCompaniesRequest | null,
           protos.google.ads.admanager.v1.IListRichMediaAdsCompaniesResponse,
         ]) => {
-          this._log.info('listRichMediaAdsCompanies values %j', response);
+          this._log.debug('listRichMediaAdsCompanies values %j', response);
           return [response, input, output];
         },
       );
@@ -963,7 +963,7 @@ export class RichMediaAdsCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRichMediaAdsCompanies stream %j', request);
+    this._log.debug('listRichMediaAdsCompanies stream %j', request);
     return this.descriptors.page.listRichMediaAdsCompanies.createStream(
       this.innerApiCalls.listRichMediaAdsCompanies as GaxCall,
       request,
@@ -1040,7 +1040,7 @@ export class RichMediaAdsCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRichMediaAdsCompanies iterate %j', request);
+    this._log.debug('listRichMediaAdsCompanies iterate %j', request);
     return this.descriptors.page.listRichMediaAdsCompanies.asyncIterate(
       this.innerApiCalls['listRichMediaAdsCompanies'] as GaxCall,
       request as {},

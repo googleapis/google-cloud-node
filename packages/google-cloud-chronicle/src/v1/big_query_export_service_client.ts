@@ -546,7 +546,7 @@ export class BigQueryExportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBigQueryExport request %j', request);
+    this._log.debug('getBigQueryExport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBigQueryExport,
@@ -557,7 +557,7 @@ export class BigQueryExportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBigQueryExport response %j', response);
+          this._log.debug('getBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -572,7 +572,7 @@ export class BigQueryExportServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBigQueryExport response %j', response);
+          this._log.debug('getBigQueryExport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -687,7 +687,7 @@ export class BigQueryExportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBigQueryExport request %j', request);
+    this._log.debug('updateBigQueryExport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBigQueryExport,
@@ -698,7 +698,7 @@ export class BigQueryExportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBigQueryExport response %j', response);
+          this._log.debug('updateBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -713,7 +713,7 @@ export class BigQueryExportServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBigQueryExport response %j', response);
+          this._log.debug('updateBigQueryExport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -833,7 +833,7 @@ export class BigQueryExportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('provisionBigQueryExport request %j', request);
+    this._log.debug('provisionBigQueryExport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBigQueryExport,
@@ -844,7 +844,7 @@ export class BigQueryExportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('provisionBigQueryExport response %j', response);
+          this._log.debug('provisionBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -859,7 +859,7 @@ export class BigQueryExportServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('provisionBigQueryExport response %j', response);
+          this._log.debug('provisionBigQueryExport response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -561,7 +561,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDiscoveredApiObservation request %j', request);
+    this._log.debug('getDiscoveredApiObservation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IDiscoveredApiObservation,
@@ -572,7 +572,7 @@ export class ApiHubDiscoveryClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDiscoveredApiObservation response %j', response);
+          this._log.debug('getDiscoveredApiObservation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -587,7 +587,7 @@ export class ApiHubDiscoveryClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDiscoveredApiObservation response %j', response);
+          this._log.debug('getDiscoveredApiObservation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -707,7 +707,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDiscoveredApiOperation request %j', request);
+    this._log.debug('getDiscoveredApiOperation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IDiscoveredApiOperation,
@@ -718,7 +718,7 @@ export class ApiHubDiscoveryClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDiscoveredApiOperation response %j', response);
+          this._log.debug('getDiscoveredApiOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -733,7 +733,7 @@ export class ApiHubDiscoveryClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDiscoveredApiOperation response %j', response);
+          this._log.debug('getDiscoveredApiOperation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -872,11 +872,11 @@ export class ApiHubDiscoveryClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDiscoveredApiObservations values %j', values);
+          this._log.debug('listDiscoveredApiObservations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDiscoveredApiObservations request %j', request);
+    this._log.debug('listDiscoveredApiObservations request %j', request);
     return this.innerApiCalls
       .listDiscoveredApiObservations(request, options, wrappedCallback)
       ?.then(
@@ -885,7 +885,7 @@ export class ApiHubDiscoveryClient {
           protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsRequest | null,
           protos.google.cloud.apihub.v1.IListDiscoveredApiObservationsResponse,
         ]) => {
-          this._log.info('listDiscoveredApiObservations values %j', response);
+          this._log.debug('listDiscoveredApiObservations values %j', response);
           return [response, input, output];
         },
       );
@@ -939,7 +939,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDiscoveredApiObservations stream %j', request);
+    this._log.debug('listDiscoveredApiObservations stream %j', request);
     return this.descriptors.page.listDiscoveredApiObservations.createStream(
       this.innerApiCalls.listDiscoveredApiObservations as GaxCall,
       request,
@@ -998,7 +998,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDiscoveredApiObservations iterate %j', request);
+    this._log.debug('listDiscoveredApiObservations iterate %j', request);
     return this.descriptors.page.listDiscoveredApiObservations.asyncIterate(
       this.innerApiCalls['listDiscoveredApiObservations'] as GaxCall,
       request as {},
@@ -1122,11 +1122,11 @@ export class ApiHubDiscoveryClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDiscoveredApiOperations values %j', values);
+          this._log.debug('listDiscoveredApiOperations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDiscoveredApiOperations request %j', request);
+    this._log.debug('listDiscoveredApiOperations request %j', request);
     return this.innerApiCalls
       .listDiscoveredApiOperations(request, options, wrappedCallback)
       ?.then(
@@ -1135,7 +1135,7 @@ export class ApiHubDiscoveryClient {
           protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsRequest | null,
           protos.google.cloud.apihub.v1.IListDiscoveredApiOperationsResponse,
         ]) => {
-          this._log.info('listDiscoveredApiOperations values %j', response);
+          this._log.debug('listDiscoveredApiOperations values %j', response);
           return [response, input, output];
         },
       );
@@ -1188,7 +1188,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDiscoveredApiOperations stream %j', request);
+    this._log.debug('listDiscoveredApiOperations stream %j', request);
     return this.descriptors.page.listDiscoveredApiOperations.createStream(
       this.innerApiCalls.listDiscoveredApiOperations as GaxCall,
       request,
@@ -1246,7 +1246,7 @@ export class ApiHubDiscoveryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDiscoveredApiOperations iterate %j', request);
+    this._log.debug('listDiscoveredApiOperations iterate %j', request);
     return this.descriptors.page.listDiscoveredApiOperations.asyncIterate(
       this.innerApiCalls['listDiscoveredApiOperations'] as GaxCall,
       request as {},

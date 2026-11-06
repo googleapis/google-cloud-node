@@ -473,7 +473,7 @@ export class OrderTrackingSignalsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createOrderTrackingSignal request %j', request);
+    this._log.debug('createOrderTrackingSignal request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal,
@@ -484,7 +484,7 @@ export class OrderTrackingSignalsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createOrderTrackingSignal response %j', response);
+          this._log.debug('createOrderTrackingSignal response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -499,7 +499,7 @@ export class OrderTrackingSignalsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createOrderTrackingSignal response %j', response);
+          this._log.debug('createOrderTrackingSignal response %j', response);
           return [response, options, rawResponse];
         },
       )

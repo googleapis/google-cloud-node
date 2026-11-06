@@ -585,7 +585,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFindingsRefinement request %j', request);
+    this._log.debug('getFindingsRefinement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFindingsRefinement,
@@ -596,7 +596,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFindingsRefinement response %j', response);
+          this._log.debug('getFindingsRefinement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -611,7 +611,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFindingsRefinement response %j', response);
+          this._log.debug('getFindingsRefinement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -732,7 +732,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFindingsRefinement request %j', request);
+    this._log.debug('createFindingsRefinement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFindingsRefinement,
@@ -743,7 +743,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFindingsRefinement response %j', response);
+          this._log.debug('createFindingsRefinement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -758,7 +758,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createFindingsRefinement response %j', response);
+          this._log.debug('createFindingsRefinement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -883,7 +883,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFindingsRefinement request %j', request);
+    this._log.debug('updateFindingsRefinement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFindingsRefinement,
@@ -894,7 +894,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFindingsRefinement response %j', response);
+          this._log.debug('updateFindingsRefinement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -909,7 +909,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateFindingsRefinement response %j', response);
+          this._log.debug('updateFindingsRefinement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1028,7 +1028,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFindingsRefinementDeployment request %j', request);
+    this._log.debug('getFindingsRefinementDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFindingsRefinementDeployment,
@@ -1039,7 +1039,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getFindingsRefinementDeployment response %j',
             response,
           );
@@ -1057,7 +1057,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getFindingsRefinementDeployment response %j',
             response,
           );
@@ -1186,7 +1186,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFindingsRefinementDeployment request %j', request);
+    this._log.debug('updateFindingsRefinementDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFindingsRefinementDeployment,
@@ -1197,7 +1197,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateFindingsRefinementDeployment response %j',
             response,
           );
@@ -1215,7 +1215,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateFindingsRefinementDeployment response %j',
             response,
           );
@@ -1339,7 +1339,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeFindingsRefinementActivity request %j', request);
+    this._log.debug('computeFindingsRefinementActivity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse,
@@ -1350,7 +1350,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'computeFindingsRefinementActivity response %j',
             response,
           );
@@ -1368,7 +1368,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'computeFindingsRefinementActivity response %j',
             response,
           );
@@ -1492,7 +1492,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'computeAllFindingsRefinementActivities request %j',
       request,
     );
@@ -1506,7 +1506,7 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'computeAllFindingsRefinementActivities response %j',
             response,
           );
@@ -1524,7 +1524,7 @@ export class FindingsRefinementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'computeAllFindingsRefinementActivities response %j',
             response,
           );
@@ -1662,11 +1662,11 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFindingsRefinements values %j', values);
+          this._log.debug('listFindingsRefinements values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFindingsRefinements request %j', request);
+    this._log.debug('listFindingsRefinements request %j', request);
     return this.innerApiCalls
       .listFindingsRefinements(request, options, wrappedCallback)
       ?.then(
@@ -1675,7 +1675,7 @@ export class FindingsRefinementServiceClient {
           protos.google.cloud.chronicle.v1.IListFindingsRefinementsRequest | null,
           protos.google.cloud.chronicle.v1.IListFindingsRefinementsResponse,
         ]) => {
-          this._log.info('listFindingsRefinements values %j', response);
+          this._log.debug('listFindingsRefinements values %j', response);
           return [response, input, output];
         },
       );
@@ -1725,7 +1725,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindingsRefinements stream %j', request);
+    this._log.debug('listFindingsRefinements stream %j', request);
     return this.descriptors.page.listFindingsRefinements.createStream(
       this.innerApiCalls.listFindingsRefinements as GaxCall,
       request,
@@ -1780,7 +1780,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindingsRefinements iterate %j', request);
+    this._log.debug('listFindingsRefinements iterate %j', request);
     return this.descriptors.page.listFindingsRefinements.asyncIterate(
       this.innerApiCalls['listFindingsRefinements'] as GaxCall,
       request as {},
@@ -1911,14 +1911,14 @@ export class FindingsRefinementServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listAllFindingsRefinementDeployments values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAllFindingsRefinementDeployments request %j', request);
+    this._log.debug('listAllFindingsRefinementDeployments request %j', request);
     return this.innerApiCalls
       .listAllFindingsRefinementDeployments(request, options, wrappedCallback)
       ?.then(
@@ -1927,7 +1927,7 @@ export class FindingsRefinementServiceClient {
           protos.google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest | null,
           protos.google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listAllFindingsRefinementDeployments values %j',
             response,
           );
@@ -1992,7 +1992,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAllFindingsRefinementDeployments stream %j', request);
+    this._log.debug('listAllFindingsRefinementDeployments stream %j', request);
     return this.descriptors.page.listAllFindingsRefinementDeployments.createStream(
       this.innerApiCalls.listAllFindingsRefinementDeployments as GaxCall,
       request,
@@ -2059,7 +2059,7 @@ export class FindingsRefinementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAllFindingsRefinementDeployments iterate %j', request);
+    this._log.debug('listAllFindingsRefinementDeployments iterate %j', request);
     return this.descriptors.page.listAllFindingsRefinementDeployments.asyncIterate(
       this.innerApiCalls['listAllFindingsRefinementDeployments'] as GaxCall,
       request as {},

@@ -676,7 +676,7 @@ export class DaiSessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDaiSession request %j', request);
+    this._log.debug('getDaiSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IDaiSession,
@@ -687,7 +687,7 @@ export class DaiSessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDaiSession response %j', response);
+          this._log.debug('getDaiSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -699,7 +699,7 @@ export class DaiSessionServiceClient {
           protos.google.ads.admanager.v1.IGetDaiSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDaiSession response %j', response);
+          this._log.debug('getDaiSession response %j', response);
           return [response, options, rawResponse];
         },
       )

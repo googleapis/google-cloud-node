@@ -544,7 +544,7 @@ export class AccountTaxServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAccountTax request %j', request);
+    this._log.debug('getAccountTax request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
@@ -555,7 +555,7 @@ export class AccountTaxServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAccountTax response %j', response);
+          this._log.debug('getAccountTax response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -570,7 +570,7 @@ export class AccountTaxServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAccountTax response %j', response);
+          this._log.debug('getAccountTax response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -689,7 +689,7 @@ export class AccountTaxServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAccountTax request %j', request);
+    this._log.debug('updateAccountTax request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
@@ -700,7 +700,7 @@ export class AccountTaxServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAccountTax response %j', response);
+          this._log.debug('updateAccountTax response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -715,7 +715,7 @@ export class AccountTaxServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAccountTax response %j', response);
+          this._log.debug('updateAccountTax response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -849,11 +849,11 @@ export class AccountTaxServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAccountTax values %j', values);
+          this._log.debug('listAccountTax values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAccountTax request %j', request);
+    this._log.debug('listAccountTax request %j', request);
     return this.innerApiCalls
       .listAccountTax(request, options, wrappedCallback)
       ?.then(
@@ -862,7 +862,7 @@ export class AccountTaxServiceClient {
           protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxRequest | null,
           protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxResponse,
         ]) => {
-          this._log.info('listAccountTax values %j', response);
+          this._log.debug('listAccountTax values %j', response);
           return [response, input, output];
         },
       );
@@ -908,7 +908,7 @@ export class AccountTaxServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountTax stream %j', request);
+    this._log.debug('listAccountTax stream %j', request);
     return this.descriptors.page.listAccountTax.createStream(
       this.innerApiCalls.listAccountTax as GaxCall,
       request,
@@ -959,7 +959,7 @@ export class AccountTaxServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountTax iterate %j', request);
+    this._log.debug('listAccountTax iterate %j', request);
     return this.descriptors.page.listAccountTax.asyncIterate(
       this.innerApiCalls['listAccountTax'] as GaxCall,
       request as {},

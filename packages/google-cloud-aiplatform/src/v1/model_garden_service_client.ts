@@ -2332,7 +2332,7 @@ export class ModelGardenServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPublisherModel request %j', request);
+    this._log.debug('getPublisherModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IPublisherModel,
@@ -2343,7 +2343,7 @@ export class ModelGardenServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPublisherModel response %j', response);
+          this._log.debug('getPublisherModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2358,7 +2358,7 @@ export class ModelGardenServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPublisherModel response %j', response);
+          this._log.debug('getPublisherModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2511,11 +2511,11 @@ export class ModelGardenServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deploy response %j', rawResponse);
+          this._log.debug('deploy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deploy request %j', request);
+    this._log.debug('deploy request %j', request);
     return this.innerApiCalls
       .deploy(request, options, wrappedCallback)
       ?.then(
@@ -2527,7 +2527,7 @@ export class ModelGardenServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deploy response %j', rawResponse);
+          this._log.debug('deploy response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

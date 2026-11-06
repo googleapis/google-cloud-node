@@ -626,7 +626,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFramework request %j', request);
+    this._log.debug('getFramework request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
@@ -637,7 +637,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFramework response %j', response);
+          this._log.debug('getFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -652,7 +652,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFramework response %j', response);
+          this._log.debug('getFramework response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFramework request %j', request);
+    this._log.debug('createFramework request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
@@ -791,7 +791,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFramework response %j', response);
+          this._log.debug('createFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -806,7 +806,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createFramework response %j', response);
+          this._log.debug('createFramework response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -942,7 +942,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFramework request %j', request);
+    this._log.debug('updateFramework request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
@@ -953,7 +953,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFramework response %j', response);
+          this._log.debug('updateFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -968,7 +968,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateFramework response %j', response);
+          this._log.debug('updateFramework response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1096,7 +1096,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFramework request %j', request);
+    this._log.debug('deleteFramework request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1107,7 +1107,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFramework response %j', response);
+          this._log.debug('deleteFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1122,7 +1122,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteFramework response %j', response);
+          this._log.debug('deleteFramework response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1254,7 +1254,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCloudControl request %j', request);
+    this._log.debug('getCloudControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
@@ -1265,7 +1265,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCloudControl response %j', response);
+          this._log.debug('getCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1280,7 +1280,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCloudControl response %j', response);
+          this._log.debug('getCloudControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1410,7 +1410,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCloudControl request %j', request);
+    this._log.debug('createCloudControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
@@ -1421,7 +1421,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCloudControl response %j', response);
+          this._log.debug('createCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1436,7 +1436,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCloudControl response %j', response);
+          this._log.debug('createCloudControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1579,7 +1579,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCloudControl request %j', request);
+    this._log.debug('updateCloudControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
@@ -1590,7 +1590,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCloudControl response %j', response);
+          this._log.debug('updateCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1605,7 +1605,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCloudControl response %j', response);
+          this._log.debug('updateCloudControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1735,7 +1735,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCloudControl request %j', request);
+    this._log.debug('deleteCloudControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1746,7 +1746,7 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCloudControl response %j', response);
+          this._log.debug('deleteCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1761,7 +1761,7 @@ export class ConfigClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCloudControl response %j', response);
+          this._log.debug('deleteCloudControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1902,11 +1902,11 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFrameworks values %j', values);
+          this._log.debug('listFrameworks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFrameworks request %j', request);
+    this._log.debug('listFrameworks request %j', request);
     return this.innerApiCalls
       .listFrameworks(request, options, wrappedCallback)
       ?.then(
@@ -1915,7 +1915,7 @@ export class ConfigClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse,
         ]) => {
-          this._log.info('listFrameworks values %j', response);
+          this._log.debug('listFrameworks values %j', response);
           return [response, input, output];
         },
       );
@@ -1968,7 +1968,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworks stream %j', request);
+    this._log.debug('listFrameworks stream %j', request);
     return this.descriptors.page.listFrameworks.createStream(
       this.innerApiCalls.listFrameworks as GaxCall,
       request,
@@ -2026,7 +2026,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworks iterate %j', request);
+    this._log.debug('listFrameworks iterate %j', request);
     return this.descriptors.page.listFrameworks.asyncIterate(
       this.innerApiCalls['listFrameworks'] as GaxCall,
       request as {},
@@ -2157,11 +2157,11 @@ export class ConfigClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCloudControls values %j', values);
+          this._log.debug('listCloudControls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCloudControls request %j', request);
+    this._log.debug('listCloudControls request %j', request);
     return this.innerApiCalls
       .listCloudControls(request, options, wrappedCallback)
       ?.then(
@@ -2170,7 +2170,7 @@ export class ConfigClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse,
         ]) => {
-          this._log.info('listCloudControls values %j', response);
+          this._log.debug('listCloudControls values %j', response);
           return [response, input, output];
         },
       );
@@ -2228,7 +2228,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCloudControls stream %j', request);
+    this._log.debug('listCloudControls stream %j', request);
     return this.descriptors.page.listCloudControls.createStream(
       this.innerApiCalls.listCloudControls as GaxCall,
       request,
@@ -2291,7 +2291,7 @@ export class ConfigClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCloudControls iterate %j', request);
+    this._log.debug('listCloudControls iterate %j', request);
     return this.descriptors.page.listCloudControls.asyncIterate(
       this.innerApiCalls['listCloudControls'] as GaxCall,
       request as {},

@@ -696,7 +696,7 @@ export class ThirdPartyCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getThirdPartyCompany request %j', request);
+    this._log.debug('getThirdPartyCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IThirdPartyCompany,
@@ -707,7 +707,7 @@ export class ThirdPartyCompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getThirdPartyCompany response %j', response);
+          this._log.debug('getThirdPartyCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -722,7 +722,7 @@ export class ThirdPartyCompanyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getThirdPartyCompany response %j', response);
+          this._log.debug('getThirdPartyCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -876,11 +876,11 @@ export class ThirdPartyCompanyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listThirdPartyCompanies values %j', values);
+          this._log.debug('listThirdPartyCompanies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listThirdPartyCompanies request %j', request);
+    this._log.debug('listThirdPartyCompanies request %j', request);
     return this.innerApiCalls
       .listThirdPartyCompanies(request, options, wrappedCallback)
       ?.then(
@@ -889,7 +889,7 @@ export class ThirdPartyCompanyServiceClient {
           protos.google.ads.admanager.v1.IListThirdPartyCompaniesRequest | null,
           protos.google.ads.admanager.v1.IListThirdPartyCompaniesResponse,
         ]) => {
-          this._log.info('listThirdPartyCompanies values %j', response);
+          this._log.debug('listThirdPartyCompanies values %j', response);
           return [response, input, output];
         },
       );
@@ -958,7 +958,7 @@ export class ThirdPartyCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listThirdPartyCompanies stream %j', request);
+    this._log.debug('listThirdPartyCompanies stream %j', request);
     return this.descriptors.page.listThirdPartyCompanies.createStream(
       this.innerApiCalls.listThirdPartyCompanies as GaxCall,
       request,
@@ -1032,7 +1032,7 @@ export class ThirdPartyCompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listThirdPartyCompanies iterate %j', request);
+    this._log.debug('listThirdPartyCompanies iterate %j', request);
     return this.descriptors.page.listThirdPartyCompanies.asyncIterate(
       this.innerApiCalls['listThirdPartyCompanies'] as GaxCall,
       request as {},

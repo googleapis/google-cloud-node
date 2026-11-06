@@ -499,7 +499,7 @@ export class MaintenanceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getResourceMaintenance request %j', request);
+    this._log.debug('getResourceMaintenance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.maintenance.api.v1.IResourceMaintenance,
@@ -510,7 +510,7 @@ export class MaintenanceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getResourceMaintenance response %j', response);
+          this._log.debug('getResourceMaintenance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -525,7 +525,7 @@ export class MaintenanceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getResourceMaintenance response %j', response);
+          this._log.debug('getResourceMaintenance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -665,11 +665,11 @@ export class MaintenanceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('summarizeMaintenances values %j', values);
+          this._log.debug('summarizeMaintenances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('summarizeMaintenances request %j', request);
+    this._log.debug('summarizeMaintenances request %j', request);
     return this.innerApiCalls
       .summarizeMaintenances(request, options, wrappedCallback)
       ?.then(
@@ -678,7 +678,7 @@ export class MaintenanceClient {
           protos.google.cloud.maintenance.api.v1.ISummarizeMaintenancesRequest | null,
           protos.google.cloud.maintenance.api.v1.ISummarizeMaintenancesResponse,
         ]) => {
-          this._log.info('summarizeMaintenances values %j', response);
+          this._log.debug('summarizeMaintenances values %j', response);
           return [response, input, output];
         },
       );
@@ -733,7 +733,7 @@ export class MaintenanceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('summarizeMaintenances stream %j', request);
+    this._log.debug('summarizeMaintenances stream %j', request);
     return this.descriptors.page.summarizeMaintenances.createStream(
       this.innerApiCalls.summarizeMaintenances as GaxCall,
       request,
@@ -793,7 +793,7 @@ export class MaintenanceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('summarizeMaintenances iterate %j', request);
+    this._log.debug('summarizeMaintenances iterate %j', request);
     return this.descriptors.page.summarizeMaintenances.asyncIterate(
       this.innerApiCalls['summarizeMaintenances'] as GaxCall,
       request as {},
@@ -912,11 +912,11 @@ export class MaintenanceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listResourceMaintenances values %j', values);
+          this._log.debug('listResourceMaintenances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listResourceMaintenances request %j', request);
+    this._log.debug('listResourceMaintenances request %j', request);
     return this.innerApiCalls
       .listResourceMaintenances(request, options, wrappedCallback)
       ?.then(
@@ -925,7 +925,7 @@ export class MaintenanceClient {
           protos.google.cloud.maintenance.api.v1.IListResourceMaintenancesRequest | null,
           protos.google.cloud.maintenance.api.v1.IListResourceMaintenancesResponse,
         ]) => {
-          this._log.info('listResourceMaintenances values %j', response);
+          this._log.debug('listResourceMaintenances values %j', response);
           return [response, input, output];
         },
       );
@@ -974,7 +974,7 @@ export class MaintenanceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceMaintenances stream %j', request);
+    this._log.debug('listResourceMaintenances stream %j', request);
     return this.descriptors.page.listResourceMaintenances.createStream(
       this.innerApiCalls.listResourceMaintenances as GaxCall,
       request,
@@ -1028,7 +1028,7 @@ export class MaintenanceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceMaintenances iterate %j', request);
+    this._log.debug('listResourceMaintenances iterate %j', request);
     return this.descriptors.page.listResourceMaintenances.asyncIterate(
       this.innerApiCalls['listResourceMaintenances'] as GaxCall,
       request as {},

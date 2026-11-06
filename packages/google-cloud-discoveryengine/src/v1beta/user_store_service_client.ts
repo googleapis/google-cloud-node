@@ -652,7 +652,7 @@ export class UserStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUserStore request %j', request);
+    this._log.debug('getUserStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IUserStore,
@@ -663,7 +663,7 @@ export class UserStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUserStore response %j', response);
+          this._log.debug('getUserStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -678,7 +678,7 @@ export class UserStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUserStore response %j', response);
+          this._log.debug('getUserStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -799,7 +799,7 @@ export class UserStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUserStore request %j', request);
+    this._log.debug('updateUserStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IUserStore,
@@ -810,7 +810,7 @@ export class UserStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUserStore response %j', response);
+          this._log.debug('updateUserStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -825,7 +825,7 @@ export class UserStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateUserStore response %j', response);
+          this._log.debug('updateUserStore response %j', response);
           return [response, options, rawResponse];
         },
       )

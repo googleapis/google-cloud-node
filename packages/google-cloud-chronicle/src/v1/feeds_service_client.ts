@@ -594,7 +594,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchServiceAccountForCustomer request %j', request);
+    this._log.debug('fetchServiceAccountForCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeedServiceAccount,
@@ -605,7 +605,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'fetchServiceAccountForCustomer response %j',
             response,
           );
@@ -623,7 +623,7 @@ export class FeedsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'fetchServiceAccountForCustomer response %j',
             response,
           );
@@ -734,7 +734,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFeed request %j', request);
+    this._log.debug('createFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -745,7 +745,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.ICreateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -862,7 +862,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeed request %j', request);
+    this._log.debug('getFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -871,7 +871,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -883,7 +883,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGetFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -993,7 +993,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFeed request %j', request);
+    this._log.debug('deleteFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1004,7 +1004,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1016,7 +1016,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IDeleteFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1123,7 +1123,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enableFeed request %j', request);
+    this._log.debug('enableFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1134,7 +1134,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('enableFeed response %j', response);
+          this._log.debug('enableFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1146,7 +1146,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IEnableFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('enableFeed response %j', response);
+          this._log.debug('enableFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1253,7 +1253,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disableFeed request %j', request);
+    this._log.debug('disableFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1264,7 +1264,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('disableFeed response %j', response);
+          this._log.debug('disableFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1276,7 +1276,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IDisableFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('disableFeed response %j', response);
+          this._log.debug('disableFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1383,7 +1383,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeedPack request %j', request);
+    this._log.debug('getFeedPack request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeedPack,
@@ -1394,7 +1394,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeedPack response %j', response);
+          this._log.debug('getFeedPack response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1406,7 +1406,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGetFeedPackRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeedPack response %j', response);
+          this._log.debug('getFeedPack response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1517,7 +1517,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFeed request %j', request);
+    this._log.debug('updateFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1528,7 +1528,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1540,7 +1540,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IUpdateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1661,7 +1661,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('importPushLogs request %j', request);
+    this._log.debug('importPushLogs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.IHttpBody,
@@ -1672,7 +1672,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('importPushLogs response %j', response);
+          this._log.debug('importPushLogs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1684,7 +1684,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IImportPushLogsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importPushLogs response %j', response);
+          this._log.debug('importPushLogs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1801,7 +1801,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateSecret request %j', request);
+    this._log.debug('generateSecret request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IGenerateSecretResponse,
@@ -1812,7 +1812,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateSecret response %j', response);
+          this._log.debug('generateSecret response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1824,7 +1824,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGenerateSecretRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateSecret response %j', response);
+          this._log.debug('generateSecret response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1952,11 +1952,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeeds values %j', values);
+          this._log.debug('listFeeds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeeds request %j', request);
+    this._log.debug('listFeeds request %j', request);
     return this.innerApiCalls
       .listFeeds(request, options, wrappedCallback)
       ?.then(
@@ -1965,7 +1965,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedsRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedsResponse,
         ]) => {
-          this._log.info('listFeeds values %j', response);
+          this._log.debug('listFeeds values %j', response);
           return [response, input, output];
         },
       );
@@ -2014,7 +2014,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeeds stream %j', request);
+    this._log.debug('listFeeds stream %j', request);
     return this.descriptors.page.listFeeds.createStream(
       this.innerApiCalls.listFeeds as GaxCall,
       request,
@@ -2068,7 +2068,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeeds iterate %j', request);
+    this._log.debug('listFeeds iterate %j', request);
     return this.descriptors.page.listFeeds.asyncIterate(
       this.innerApiCalls['listFeeds'] as GaxCall,
       request as {},
@@ -2189,11 +2189,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeedPacks values %j', values);
+          this._log.debug('listFeedPacks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeedPacks request %j', request);
+    this._log.debug('listFeedPacks request %j', request);
     return this.innerApiCalls
       .listFeedPacks(request, options, wrappedCallback)
       ?.then(
@@ -2202,7 +2202,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedPacksRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedPacksResponse,
         ]) => {
-          this._log.info('listFeedPacks values %j', response);
+          this._log.debug('listFeedPacks values %j', response);
           return [response, input, output];
         },
       );
@@ -2253,7 +2253,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedPacks stream %j', request);
+    this._log.debug('listFeedPacks stream %j', request);
     return this.descriptors.page.listFeedPacks.createStream(
       this.innerApiCalls.listFeedPacks as GaxCall,
       request,
@@ -2309,7 +2309,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedPacks iterate %j', request);
+    this._log.debug('listFeedPacks iterate %j', request);
     return this.descriptors.page.listFeedPacks.asyncIterate(
       this.innerApiCalls['listFeedPacks'] as GaxCall,
       request as {},
@@ -2429,11 +2429,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeedSourceTypeSchemas values %j', values);
+          this._log.debug('listFeedSourceTypeSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeedSourceTypeSchemas request %j', request);
+    this._log.debug('listFeedSourceTypeSchemas request %j', request);
     return this.innerApiCalls
       .listFeedSourceTypeSchemas(request, options, wrappedCallback)
       ?.then(
@@ -2442,7 +2442,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedSourceTypeSchemasRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedSourceTypeSchemasResponse,
         ]) => {
-          this._log.info('listFeedSourceTypeSchemas values %j', response);
+          this._log.debug('listFeedSourceTypeSchemas values %j', response);
           return [response, input, output];
         },
       );
@@ -2492,7 +2492,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedSourceTypeSchemas stream %j', request);
+    this._log.debug('listFeedSourceTypeSchemas stream %j', request);
     return this.descriptors.page.listFeedSourceTypeSchemas.createStream(
       this.innerApiCalls.listFeedSourceTypeSchemas as GaxCall,
       request,
@@ -2547,7 +2547,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedSourceTypeSchemas iterate %j', request);
+    this._log.debug('listFeedSourceTypeSchemas iterate %j', request);
     return this.descriptors.page.listFeedSourceTypeSchemas.asyncIterate(
       this.innerApiCalls['listFeedSourceTypeSchemas'] as GaxCall,
       request as {},
@@ -2668,11 +2668,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogTypeSchemas values %j', values);
+          this._log.debug('listLogTypeSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogTypeSchemas request %j', request);
+    this._log.debug('listLogTypeSchemas request %j', request);
     return this.innerApiCalls
       .listLogTypeSchemas(request, options, wrappedCallback)
       ?.then(
@@ -2681,7 +2681,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListLogTypeSchemasRequest | null,
           protos.google.cloud.chronicle.v1.IListLogTypeSchemasResponse,
         ]) => {
-          this._log.info('listLogTypeSchemas values %j', response);
+          this._log.debug('listLogTypeSchemas values %j', response);
           return [response, input, output];
         },
       );
@@ -2731,7 +2731,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogTypeSchemas stream %j', request);
+    this._log.debug('listLogTypeSchemas stream %j', request);
     return this.descriptors.page.listLogTypeSchemas.createStream(
       this.innerApiCalls.listLogTypeSchemas as GaxCall,
       request,
@@ -2786,7 +2786,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogTypeSchemas iterate %j', request);
+    this._log.debug('listLogTypeSchemas iterate %j', request);
     return this.descriptors.page.listLogTypeSchemas.asyncIterate(
       this.innerApiCalls['listLogTypeSchemas'] as GaxCall,
       request as {},

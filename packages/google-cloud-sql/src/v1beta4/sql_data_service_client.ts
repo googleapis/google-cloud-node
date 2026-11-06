@@ -460,7 +460,7 @@ export class SqlDataServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamSqlData stream %j', options);
+    this._log.debug('streamSqlData stream %j', options);
     return this.innerApiCalls.streamSqlData(null, options);
   }
 

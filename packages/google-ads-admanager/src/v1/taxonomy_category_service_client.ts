@@ -693,7 +693,7 @@ export class TaxonomyCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTaxonomyCategory request %j', request);
+    this._log.debug('getTaxonomyCategory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITaxonomyCategory,
@@ -704,7 +704,7 @@ export class TaxonomyCategoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTaxonomyCategory response %j', response);
+          this._log.debug('getTaxonomyCategory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class TaxonomyCategoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTaxonomyCategory response %j', response);
+          this._log.debug('getTaxonomyCategory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -866,11 +866,11 @@ export class TaxonomyCategoryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTaxonomyCategories values %j', values);
+          this._log.debug('listTaxonomyCategories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTaxonomyCategories request %j', request);
+    this._log.debug('listTaxonomyCategories request %j', request);
     return this.innerApiCalls
       .listTaxonomyCategories(request, options, wrappedCallback)
       ?.then(
@@ -879,7 +879,7 @@ export class TaxonomyCategoryServiceClient {
           protos.google.ads.admanager.v1.IListTaxonomyCategoriesRequest | null,
           protos.google.ads.admanager.v1.IListTaxonomyCategoriesResponse,
         ]) => {
-          this._log.info('listTaxonomyCategories values %j', response);
+          this._log.debug('listTaxonomyCategories values %j', response);
           return [response, input, output];
         },
       );
@@ -941,7 +941,7 @@ export class TaxonomyCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTaxonomyCategories stream %j', request);
+    this._log.debug('listTaxonomyCategories stream %j', request);
     return this.descriptors.page.listTaxonomyCategories.createStream(
       this.innerApiCalls.listTaxonomyCategories as GaxCall,
       request,
@@ -1008,7 +1008,7 @@ export class TaxonomyCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTaxonomyCategories iterate %j', request);
+    this._log.debug('listTaxonomyCategories iterate %j', request);
     return this.descriptors.page.listTaxonomyCategories.asyncIterate(
       this.innerApiCalls['listTaxonomyCategories'] as GaxCall,
       request as {},

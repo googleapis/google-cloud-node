@@ -529,7 +529,7 @@ export class AutofeedSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAutofeedSettings request %j', request);
+    this._log.debug('getAutofeedSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
@@ -540,7 +540,7 @@ export class AutofeedSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAutofeedSettings response %j', response);
+          this._log.debug('getAutofeedSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -555,7 +555,7 @@ export class AutofeedSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAutofeedSettings response %j', response);
+          this._log.debug('getAutofeedSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -674,7 +674,7 @@ export class AutofeedSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAutofeedSettings request %j', request);
+    this._log.debug('updateAutofeedSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
@@ -685,7 +685,7 @@ export class AutofeedSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAutofeedSettings response %j', response);
+          this._log.debug('updateAutofeedSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -700,7 +700,7 @@ export class AutofeedSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAutofeedSettings response %j', response);
+          this._log.debug('updateAutofeedSettings response %j', response);
           return [response, options, rawResponse];
         },
       )

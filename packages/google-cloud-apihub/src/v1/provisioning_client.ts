@@ -605,7 +605,7 @@ export class ProvisioningClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getApiHubInstance request %j', request);
+    this._log.debug('getApiHubInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IApiHubInstance,
@@ -616,7 +616,7 @@ export class ProvisioningClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getApiHubInstance response %j', response);
+          this._log.debug('getApiHubInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -628,7 +628,7 @@ export class ProvisioningClient {
           protos.google.cloud.apihub.v1.IGetApiHubInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getApiHubInstance response %j', response);
+          this._log.debug('getApiHubInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -743,7 +743,7 @@ export class ProvisioningClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lookupApiHubInstance request %j', request);
+    this._log.debug('lookupApiHubInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.ILookupApiHubInstanceResponse,
@@ -754,7 +754,7 @@ export class ProvisioningClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lookupApiHubInstance response %j', response);
+          this._log.debug('lookupApiHubInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -769,7 +769,7 @@ export class ProvisioningClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('lookupApiHubInstance response %j', response);
+          this._log.debug('lookupApiHubInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -914,11 +914,11 @@ export class ProvisioningClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createApiHubInstance response %j', rawResponse);
+          this._log.debug('createApiHubInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createApiHubInstance request %j', request);
+    this._log.debug('createApiHubInstance request %j', request);
     return this.innerApiCalls
       .createApiHubInstance(request, options, wrappedCallback)
       ?.then(
@@ -930,7 +930,7 @@ export class ProvisioningClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createApiHubInstance response %j', rawResponse);
+          this._log.debug('createApiHubInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1085,11 +1085,11 @@ export class ProvisioningClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteApiHubInstance response %j', rawResponse);
+          this._log.debug('deleteApiHubInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteApiHubInstance request %j', request);
+    this._log.debug('deleteApiHubInstance request %j', request);
     return this.innerApiCalls
       .deleteApiHubInstance(request, options, wrappedCallback)
       ?.then(
@@ -1101,7 +1101,7 @@ export class ProvisioningClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteApiHubInstance response %j', rawResponse);
+          this._log.debug('deleteApiHubInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
