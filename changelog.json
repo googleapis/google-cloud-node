@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "badbf72e-3449-467e-ab97-c180fe6b766d",
+      "createTime": "2026-11-06T20:29:27.772Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "bda12dab723a139faed9b326354f2a3175d192bb",
           "message": "Re-throw upload error after aborting in uploadFileInChunks",
@@ -107377,5 +107394,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-03T06:14:32.627Z"
+  "updateTime": "2026-11-06T20:29:27.772Z"
 }
