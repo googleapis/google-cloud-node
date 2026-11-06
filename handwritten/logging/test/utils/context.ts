@@ -25,7 +25,7 @@ import {
 } from '../../src/utils/context';
 import {InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 import {trace} from '@opentelemetry/api';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 //const {Resource} = require('@opentelemetry/resources');
 import {SEMRESATTRS_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {NodeSDK} from '@opentelemetry/sdk-node';
@@ -106,7 +106,7 @@ describe('context', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-logging-context-test',
           }),
           traceExporter: new InMemorySpanExporter(),
@@ -323,7 +323,7 @@ describe('context', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-context-test',
           }),
           traceExporter: new InMemorySpanExporter(),

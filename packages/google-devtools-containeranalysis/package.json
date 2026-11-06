@@ -45,7 +45,7 @@
     "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/grafeas": "^7.0.0",
+    "@google-cloud/grafeas": "^7.1.0",
     "google-gax": "^6.0.0"
   },
   "devDependencies": {

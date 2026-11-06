@@ -23,7 +23,7 @@ import {AuthClient} from './authclient';
 import {IdTokenProvider} from './idtokenclient';
 import {GaxiosError} from 'gaxios';
 import {SignBlobResponse} from './googleauth';
-import {originalOrCamelOptions} from '../util';
+import {isAdcWarningSuppressed, originalOrCamelOptions} from '../util';
 
 export interface ImpersonatedOptions extends OAuth2ClientOptions {
   /**
@@ -121,6 +121,11 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
    */
   constructor(options: ImpersonatedOptions = {}) {
     super(options);
+    if (!isAdcWarningSuppressed()) {
+      console.warn(
+        'The `Impersonated` constructor does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
     // Start with an expired refresh token, which will automatically be
     // refreshed before the first API call is made.
     this.credentials = {

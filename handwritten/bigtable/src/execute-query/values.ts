@@ -38,10 +38,7 @@ export type ExecuteQueryParameterValue =
   | null;
 
 export type SqlValue =
-  | ExecuteQueryParameterValue
-  | Struct
-  | Array<SqlValue>
-  | BigtableMap;
+  ExecuteQueryParameterValue | Struct | Array<SqlValue> | BigtableMap;
 
 /**
  * A custom class created to allow setting year, month and date to 0.
@@ -117,9 +114,10 @@ type MapKey = bigint | string | Uint8Array | null;
 // internal representation of the map contains the original key and value tuple
 type _MapValue = [MapKey, SqlValue];
 
-export class EncodedKeyMap
-  implements Map<bigint | string | Uint8Array | null, SqlValue>
-{
+export class EncodedKeyMap implements ReadonlyMap<
+  bigint | string | Uint8Array | null,
+  SqlValue
+> {
   private map_impl: Map<bigint | string | null, _MapValue>;
   /**
    * Class representing a Map Value returned by ExecuteQuery. Native JS Map

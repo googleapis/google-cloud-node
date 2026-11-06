@@ -8124,6 +8124,9 @@ export namespace google {
                         /** InstanceConfig freeInstanceAvailability */
                         freeInstanceAvailability?: (google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability|keyof typeof google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability|null);
 
+                        /** InstanceConfig allowedProcessingUnits */
+                        allowedProcessingUnits?: (google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits[]|null);
+
                         /** InstanceConfig quorumType */
                         quorumType?: (google.spanner.admin.instance.v1.InstanceConfig.QuorumType|keyof typeof google.spanner.admin.instance.v1.InstanceConfig.QuorumType|null);
 
@@ -8175,6 +8178,9 @@ export namespace google {
 
                         /** InstanceConfig freeInstanceAvailability. */
                         public freeInstanceAvailability: (google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability|keyof typeof google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability);
+
+                        /** InstanceConfig allowedProcessingUnits. */
+                        public allowedProcessingUnits: google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits[];
 
                         /** InstanceConfig quorumType. */
                         public quorumType: (google.spanner.admin.instance.v1.InstanceConfig.QuorumType|keyof typeof google.spanner.admin.instance.v1.InstanceConfig.QuorumType);
@@ -8283,6 +8289,115 @@ export namespace google {
                             UNSUPPORTED = 2,
                             DISABLED = 3,
                             QUOTA_EXCEEDED = 4
+                        }
+
+                        /** Properties of an AllowedProcessingUnits. */
+                        interface IAllowedProcessingUnits {
+
+                            /** AllowedProcessingUnits minProcessingUnits */
+                            minProcessingUnits?: (number|null);
+
+                            /** AllowedProcessingUnits maxProcessingUnits */
+                            maxProcessingUnits?: (number|null);
+
+                            /** AllowedProcessingUnits processingUnitIncrement */
+                            processingUnitIncrement?: (number|null);
+                        }
+
+                        /** Represents an AllowedProcessingUnits. */
+                        class AllowedProcessingUnits implements IAllowedProcessingUnits {
+
+                            /**
+                             * Constructs a new AllowedProcessingUnits.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits);
+
+                            /** AllowedProcessingUnits minProcessingUnits. */
+                            public minProcessingUnits: number;
+
+                            /** AllowedProcessingUnits maxProcessingUnits. */
+                            public maxProcessingUnits: number;
+
+                            /** AllowedProcessingUnits processingUnitIncrement. */
+                            public processingUnitIncrement: number;
+
+                            /**
+                             * Creates a new AllowedProcessingUnits instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AllowedProcessingUnits instance
+                             */
+                            public static create(properties?: google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits): google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits;
+
+                            /**
+                             * Encodes the specified AllowedProcessingUnits message. Does not implicitly {@link google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits.verify|verify} messages.
+                             * @param message AllowedProcessingUnits message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AllowedProcessingUnits message, length delimited. Does not implicitly {@link google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits.verify|verify} messages.
+                             * @param message AllowedProcessingUnits message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.spanner.admin.instance.v1.InstanceConfig.IAllowedProcessingUnits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AllowedProcessingUnits message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AllowedProcessingUnits
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits;
+
+                            /**
+                             * Decodes an AllowedProcessingUnits message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AllowedProcessingUnits
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits;
+
+                            /**
+                             * Verifies an AllowedProcessingUnits message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AllowedProcessingUnits message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AllowedProcessingUnits
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits;
+
+                            /**
+                             * Creates a plain object from an AllowedProcessingUnits message. Also converts values to other types if specified.
+                             * @param message AllowedProcessingUnits
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.spanner.admin.instance.v1.InstanceConfig.AllowedProcessingUnits, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AllowedProcessingUnits to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AllowedProcessingUnits
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** QuorumType enum. */

@@ -19,11 +19,15 @@ import * as protos from '../../protos/iam_service';
 import assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import {IamClient} from '../../src/iamService';
 import * as protobuf from 'protobufjs';
 import {GrpcClient as OriginalGrpcClient} from '../../src/grpc';
 import {GoogleAuth, PassThroughClient} from 'google-auth-library';
+import {clearMetadataCache, fallback, loggingUtils} from '../../src';
+import {OtelHarness} from './otelHarness';
+import {setMockFallbackResponse} from './utils';
+import type {LogPayload} from '../../src/observability/LoggerHelper';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -407,6 +411,125 @@ describe('IAM service', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined),
       );
+    });
+  });
+
+  describe('telemetry propagation', () => {
+    class TestLogSink implements loggingUtils.DebugLogBackend {
+      logs: Array<{namespace: string; fields: loggingUtils.LogFields}> = [];
+      filters: string[] = [];
+      log(namespace: string, fields: loggingUtils.LogFields): void {
+        this.logs.push({namespace, fields});
+      }
+      setFilters(filters: string[]): void {
+        this.filters = filters;
+      }
+    }
+
+    let harness: OtelHarness;
+    let sink: TestLogSink;
+
+    beforeEach(() => {
+      clearMetadataCache();
+      sink = new TestLogSink();
+      loggingUtils.setBackend(sink);
+      harness = new OtelHarness();
+      harness.setup();
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    });
+
+    afterEach(() => {
+      clearMetadataCache();
+      loggingUtils.setBackend(undefined);
+      harness.teardown();
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
+    it('propagates tracing, logging, servicePath, port, and REST fallback in IamClient', async () => {
+      const errorJson = {
+        error: {code: 404, message: 'policy not found', status: 'NOT_FOUND'},
+      };
+      const fallbackGrpc = new fallback.GrpcClient({fallback: 'rest'});
+      setMockFallbackResponse(
+        fallbackGrpc,
+        new Response(Buffer.from(JSON.stringify(errorJson)), {status: 404}),
+      );
+      (
+        fallbackGrpc.auth as unknown as {defaultServicePath: string}
+      ).defaultServicePath = 'cloudkms.googleapis.com';
+
+      const client = new IamClient(fallbackGrpc, {
+        servicePath: '127.0.0.1',
+        port: 8080,
+        fallback: 'rest',
+        enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
+      });
+
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      request.resource = 'projects/p/locations/global/keyRings/r';
+      await assert.rejects(client.getIamPolicy(request, {}));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans.find(
+        s => s.name === 'POST /v1/{resource=**}:getIamPolicy',
+      )!;
+      const clientSpan = spans.find(
+        s => s.name === 'IAMPolicyClient.GetIamPolicy',
+      )!;
+      assert.ok(attemptSpan);
+      assert.ok(clientSpan);
+      assert.strictEqual(
+        clientSpan.attributes['rpc.method'],
+        'google.iam.v1.IAMPolicy/GetIamPolicy',
+      );
+      assert.strictEqual(attemptSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(clientSpan.attributes['rpc.system.name'], 'http');
+      assert.strictEqual(attemptSpan.attributes['http.request.method'], 'POST');
+      assert.strictEqual(
+        attemptSpan.attributes['http.response.status_code'],
+        404,
+      );
+      assert.strictEqual(attemptSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(attemptSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        attemptSpan.attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      assert.strictEqual(clientSpan.attributes['server.address'], '127.0.0.1');
+      assert.strictEqual(clientSpan.attributes['server.port'], 8080);
+      assert.strictEqual(
+        clientSpan.attributes['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+
+      assert.strictEqual(sink.logs.length, 2);
+      const [attemptLog, callLog] = sink.logs;
+      const attemptOther = attemptLog.fields.other as LogPayload;
+      const callOther = callLog.fields.other as LogPayload;
+      assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+      assert.strictEqual(callOther['rpc.system.name'], 'http');
+      assert.strictEqual(
+        attemptOther['rpc.method'],
+        'google.iam.v1.IAMPolicy/GetIamPolicy',
+      );
+      assert.strictEqual(
+        callOther['rpc.method'],
+        'google.iam.v1.IAMPolicy/GetIamPolicy',
+      );
+      assert.strictEqual(attemptOther['http.response.status_code'], 404);
+      assert.strictEqual(callOther['http.response.status_code'], 404);
+      assert.strictEqual(attemptOther['error.type'], '404');
+      assert.strictEqual(callOther['error.type'], '404');
+      assert.strictEqual(attemptOther['server.address'], '127.0.0.1');
+      assert.strictEqual(attemptOther['url.domain'], 'cloudkms.googleapis.com');
+      assert.strictEqual(callOther['server.address'], '127.0.0.1');
+      assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
     });
   });
 });

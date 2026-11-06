@@ -16,7 +16,7 @@ import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as child_process from 'child_process';
 import * as crypto from 'crypto';
-import {CredentialRequest} from '../src/auth/credentials';
+import {CredentialRequest, CredentialBody} from '../src/auth/credentials';
 import * as fs from 'fs';
 import {
   BASE_PATH,
@@ -45,7 +45,6 @@ import {
   AnyAuthClient,
   GdchClient,
 } from '../src';
-import {CredentialBody} from '../src/auth/credentials';
 import * as envDetect from '../src/auth/envDetect';
 import {Compute} from '../src/auth/computeclient';
 import {
@@ -62,7 +61,10 @@ import {
 import {AuthClient, DEFAULT_UNIVERSE} from '../src/auth/authclient';
 import {ExternalAccountAuthorizedUserClient} from '../src/auth/externalAccountAuthorizedUserClient';
 import {stringify} from 'querystring';
-import {GoogleAuthExceptionMessages} from '../src/auth/googleauth';
+import {
+  GoogleAuthExceptionMessages,
+  GoogleAuthOptions,
+} from '../src/auth/googleauth';
 import {IMPERSONATED_ACCOUNT_TYPE} from '../src/auth/impersonated';
 import {USER_REFRESH_ACCOUNT_TYPE} from '../src/auth/refreshclient';
 import {Gaxios, GaxiosError, GaxiosPromise, GaxiosResponse} from 'gaxios';
@@ -3054,7 +3056,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3070,7 +3072,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           servicePath: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3086,7 +3088,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           apiEndpoint: 'http://hardwaremanagement.us-west1.gdch.google.com///',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3103,7 +3105,7 @@ describe('googleauth', () => {
         clientOptions: {
           apiAudience: 'https://explicit-audience.local/',
           apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3112,6 +3114,256 @@ describe('googleauth', () => {
         (client as GdchClient).apiAudience,
         'https://explicit-audience.local/',
       );
+    });
+  });
+
+  describe('credential deprecation and validation warnings', () => {
+    const keyFilenameWarning =
+      'The `keyFilename` option is deprecated. Please use the `auth` object constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+    const credentialsWarning =
+      'The `credentials` option is deprecated. Please use the `auth` object constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+    const fromJSONWarning =
+      'The `fromJSON` method is deprecated. Please use the `JWT` constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+    const fromStreamWarning =
+      'The `fromStream` method is deprecated. Please use the `JWT` constructor with a parsed stream instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+    const externalAccountWarning =
+      'The `fromJSON` method does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+    const impersonatedWarning =
+      'The `Impersonated` constructor does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.';
+
+    let sandbox: sinon.SinonSandbox;
+    let auth: GoogleAuth;
+    let warnSpy: sinon.SinonStub;
+
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+      auth = new GoogleAuth();
+      warnSpy = sandbox.stub(console, 'warn');
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should not warn when GoogleAuth is instantiated without keyFilename or credentials', () => {
+      new GoogleAuth();
+      assert.strictEqual(warnSpy.called, false);
+    });
+
+    it('should warn when GoogleAuth is instantiated with keyFilename or keyFile', () => {
+      new GoogleAuth({keyFilename: './test/fixtures/private.json'});
+      assert(warnSpy.calledOnceWithExactly(keyFilenameWarning));
+
+      warnSpy.resetHistory();
+      new GoogleAuth({keyFile: './test/fixtures/private.json'});
+      assert(warnSpy.calledOnceWithExactly(keyFilenameWarning));
+    });
+
+    it('should warn when GoogleAuth is instantiated with credentials', () => {
+      new GoogleAuth({credentials: privateJSON});
+      assert(warnSpy.calledOnceWithExactly(credentialsWarning));
+    });
+
+    it('should warn when fromJSON is called directly', () => {
+      auth.fromJSON(privateJSON);
+      assert(warnSpy.calledOnceWithExactly(fromJSONWarning));
+    });
+
+    it('should warn for both fromJSON and ExternalAccountClient when fromJSON is called with external_account', () => {
+      auth.fromJSON(externalAccountJSON);
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(fromJSONWarning));
+      assert(warnSpy.secondCall.calledWithExactly(externalAccountWarning));
+    });
+
+    it('should warn for both fromJSON and Impersonated (without duplicate fromJSON warning) when fromJSON is called with impersonated_service_account', () => {
+      const impersonatedJson = JSON.parse(
+        fs.readFileSync(
+          './test/fixtures/impersonated_application_default_credentials.json',
+          'utf-8',
+        ),
+      );
+      auth.fromJSON(impersonatedJson);
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(fromJSONWarning));
+      assert(warnSpy.secondCall.calledWithExactly(impersonatedWarning));
+    });
+
+    it('should warn when fromStream is called directly (without duplicate fromJSON warning)', async () => {
+      const stream = fs.createReadStream('./test/fixtures/private.json');
+      await auth.fromStream(stream);
+      assert(warnSpy.calledOnceWithExactly(fromStreamWarning));
+    });
+
+    it('should warn for both fromStream and ExternalAccountClient when fromStream is called with external_account', async () => {
+      const stream = fs.createReadStream(
+        './test/fixtures/external-account-cred.json',
+      );
+      await auth.fromStream(stream);
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(fromStreamWarning));
+      assert(warnSpy.secondCall.calledWithExactly(externalAccountWarning));
+    });
+
+    it('should warn for both fromStream and Impersonated when fromStream is called with impersonated_service_account', async () => {
+      const stream = fs.createReadStream(
+        './test/fixtures/impersonated_application_default_credentials.json',
+      );
+      await auth.fromStream(stream);
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(fromStreamWarning));
+      assert(warnSpy.secondCall.calledWithExactly(impersonatedWarning));
+    });
+
+    it('should warn only once for service_account via getClient() with credentials or keyFilename', async () => {
+      const authWithCreds = new GoogleAuth({credentials: privateJSON});
+      await authWithCreds.getClient();
+      assert(warnSpy.calledOnceWithExactly(credentialsWarning));
+
+      warnSpy.resetHistory();
+      const authWithKeyFile = new GoogleAuth({
+        keyFilename: './test/fixtures/private.json',
+      });
+      await authWithKeyFile.getClient();
+      assert(warnSpy.calledOnceWithExactly(keyFilenameWarning));
+    });
+
+    it('should warn for credentials/keyFilename and ExternalAccountClient via getClient() with external_account', async () => {
+      const authWithCreds = new GoogleAuth({credentials: externalAccountJSON});
+      await authWithCreds.getClient();
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(credentialsWarning));
+      assert(warnSpy.secondCall.calledWithExactly(externalAccountWarning));
+
+      warnSpy.resetHistory();
+      const authWithKeyFile = new GoogleAuth({
+        keyFilename: './test/fixtures/external-account-cred.json',
+      });
+      await authWithKeyFile.getClient();
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(keyFilenameWarning));
+      assert(warnSpy.secondCall.calledWithExactly(externalAccountWarning));
+    });
+
+    it('should warn for credentials/keyFilename and Impersonated via getClient() with impersonated_service_account', async () => {
+      const impersonatedJson = JSON.parse(
+        fs.readFileSync(
+          './test/fixtures/impersonated_application_default_credentials.json',
+          'utf-8',
+        ),
+      );
+      const authWithCreds = new GoogleAuth({credentials: impersonatedJson});
+      await authWithCreds.getClient();
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(credentialsWarning));
+      assert(warnSpy.secondCall.calledWithExactly(impersonatedWarning));
+
+      warnSpy.resetHistory();
+      const authWithKeyFile = new GoogleAuth({
+        keyFilename:
+          './test/fixtures/impersonated_application_default_credentials.json',
+      });
+      await authWithKeyFile.getClient();
+      assert.strictEqual(warnSpy.callCount, 2);
+      assert(warnSpy.firstCall.calledWithExactly(keyFilenameWarning));
+      assert(warnSpy.secondCall.calledWithExactly(impersonatedWarning));
+    });
+
+    it('should preserve this.fromJSON in the call chain for fromStream, getClient, and fromImpersonatedJSON', async () => {
+      const fromJsonSpy = sandbox.spy(auth, 'fromJSON');
+      const stream = fs.createReadStream('./test/fixtures/private.json');
+      await auth.fromStream(stream);
+      assert.strictEqual(fromJsonSpy.callCount, 1);
+      assert(warnSpy.calledOnceWithExactly(fromStreamWarning));
+
+      fromJsonSpy.resetHistory();
+      warnSpy.resetHistory();
+      const impersonatedJson = JSON.parse(
+        fs.readFileSync(
+          './test/fixtures/impersonated_application_default_credentials.json',
+          'utf-8',
+        ),
+      );
+      auth.fromImpersonatedJSON(impersonatedJson);
+      assert.strictEqual(fromJsonSpy.callCount, 1);
+      assert(warnSpy.calledOnceWithExactly(impersonatedWarning));
+    });
+
+    it('should suppress warnings when loading credentials via ADC (_getApplicationCredentialsFromFilePath)', async () => {
+      await auth._getApplicationCredentialsFromFilePath(
+        './test/fixtures/private.json',
+      );
+      await auth._getApplicationCredentialsFromFilePath(
+        './test/fixtures/refresh.json',
+      );
+      await auth._getApplicationCredentialsFromFilePath(
+        './test/fixtures/external-account-cred.json',
+      );
+      await auth._getApplicationCredentialsFromFilePath(
+        './test/fixtures/impersonated_application_default_credentials.json',
+      );
+      assert.strictEqual(warnSpy.called, false);
+    });
+
+    it('should not suppress warnings on concurrent non-ADC calls while ADC stream is reading', async () => {
+      const otherAuth = new GoogleAuth();
+      const adcPromise = auth._getApplicationCredentialsFromFilePath(
+        './test/fixtures/external-account-cred.json',
+      );
+      // Direct fromJSON call interleaved while ADC stream I/O is in flight
+      otherAuth.fromJSON(privateJSON);
+      await adcPromise;
+      assert(warnSpy.calledOnceWithExactly(fromJSONWarning));
+    });
+
+    it('should sync GAPIC JWT values on cachedCredential when getClient() is called after getProjectId()', async () => {
+      const authWithKeyFile = new GoogleAuth({
+        keyFilename: './test/fixtures/private.json',
+        scopes: ['https://www.googleapis.com/auth/pubsub'],
+      });
+      // Resolve projectId from keyFilename, which caches the JWT client before GAPIC properties are set
+      await authWithKeyFile.getProjectId();
+      assert(authWithKeyFile.cachedCredential instanceof JWT);
+      assert.strictEqual(
+        authWithKeyFile.cachedCredential.useJWTAccessWithScope,
+        undefined,
+      );
+
+      // Simulate GAPIC client constructor setting properties on the shared GoogleAuth instance
+      authWithKeyFile.useJWTAccessWithScope = true;
+      authWithKeyFile.defaultServicePath = 'pubsub.googleapis.com';
+      authWithKeyFile.defaultScopes = [
+        'https://www.googleapis.com/auth/pubsub',
+      ];
+
+      const client = (await authWithKeyFile.getClient()) as JWT;
+      assert.strictEqual(client.useJWTAccessWithScope, true);
+      assert.strictEqual(client.defaultServicePath, 'pubsub.googleapis.com');
+      assert.deepStrictEqual(client.defaultScopes, [
+        'https://www.googleapis.com/auth/pubsub',
+      ]);
+      client.key = fs.readFileSync('./test/fixtures/private.pem', 'utf8');
+      const headers = await authWithKeyFile.getRequestHeaders();
+      assert(headers.get('authorization')?.startsWith('Bearer '));
+    });
+
+    it('should not overwrite existing defined properties on JWT in setGapicJWTValues()', () => {
+      const jwt = new JWT({
+        email: 'test@example.com',
+        key: 'key',
+      });
+      jwt.useJWTAccessWithScope = false;
+      jwt.defaultServicePath = 'custom.googleapis.com';
+      auth.useJWTAccessWithScope = undefined;
+      auth.defaultServicePath = undefined;
+      auth.defaultScopes = ['https://www.googleapis.com/auth/cloud-platform'];
+
+      auth.setGapicJWTValues(jwt);
+      assert.strictEqual(jwt.useJWTAccessWithScope, false);
+      assert.strictEqual(jwt.defaultServicePath, 'custom.googleapis.com');
+      assert.deepStrictEqual(jwt.defaultScopes, [
+        'https://www.googleapis.com/auth/cloud-platform',
+      ]);
     });
   });
 });

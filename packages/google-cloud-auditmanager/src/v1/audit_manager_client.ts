@@ -1248,6 +1248,11 @@ export class AuditManagerClient {
    *     validation in custom UIs before submitting requests.
    *   * **CI/CD & Automation**: Test your scripts, permissions, and parameters
    *     safely without consuming resource quotas.
+   * @param {number[]} [request.parameterOverrides]
+   *   Optional. Maps dynamic parameter overrides by Cloud Control resource name
+   *   at execution time. For example,
+   *   `{"organizations/123/locations/global/cloudControls/control-1":
+   *   {parameters: [...]}}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1701,6 +1706,11 @@ export class AuditManagerClient {
    * @param {string} request.complianceFramework
    *   Required. The framework that's used for the audit report. For example,
    *   `NIST_800_53`.
+   * @param {number[]} [request.parameterOverrides]
+   *   Optional. Maps dynamic parameter overrides by Cloud Control resource name
+   *   at execution time. For example,
+   *   `{"organizations/123/locations/global/cloudControls/control-1":
+   *   {parameters: [...]}}`
    * @param {boolean} [request.validateOnly]
    *   Optional. If `true`, only validates the request and does not generate the
    *   audit report. This executes standard request validation (such as schema,

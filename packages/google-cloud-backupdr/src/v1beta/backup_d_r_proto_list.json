@@ -13,5 +13,10 @@
   "../../protos/google/cloud/backupdr/v1beta/backupvault_gce.proto",
   "../../protos/google/cloud/backupdr/v1beta/bindingmatchingresource.proto",
   "../../protos/google/cloud/backupdr/v1beta/datasourcereference.proto",
-  "../../protos/google/cloud/backupdr/v1beta/protection_summary.proto"
+  "../../protos/google/cloud/backupdr/v1beta/protection_summary.proto",
+  "../../protos/google/cloud/backupdr/v1beta/restore_template.proto",
+  "../../protos/google/cloud/backupdr/v1beta/restore_template_common.proto",
+  "../../protos/google/cloud/backupdr/v1beta/restore_template_execution.proto",
+  "../../protos/google/cloud/backupdr/v1beta/restore_verification_plan.proto",
+  "../../protos/google/cloud/backupdr/v1beta/restore_verification_plan_association.proto"
 ]

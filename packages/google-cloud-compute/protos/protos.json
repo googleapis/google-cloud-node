@@ -14774,6 +14774,8 @@
                             "MEMORY_OPTIMIZED": 281753417,
                             "MEMORY_OPTIMIZED_M3": 276301372,
                             "MEMORY_OPTIMIZED_M4": 276301373,
+                            "MEMORY_OPTIMIZED_M4N": 512278961,
+                            "MEMORY_OPTIMIZED_M4N_6TB": 69895574,
                             "MEMORY_OPTIMIZED_M4_6TB": 210543650,
                             "MEMORY_OPTIMIZED_X4_1440_24T": 206669823,
                             "MEMORY_OPTIMIZED_X4_16TB": 183089120,
@@ -150261,6 +150263,7 @@
                             "COMPUTE_OPTIMIZED_C3D": 383246484,
                             "COMPUTE_OPTIMIZED_H3": 428004939,
                             "COMPUTE_OPTIMIZED_H4D": 383251320,
+                            "COMPUTE_OPTIMIZED_H4D_3TB": 443379866,
                             "GENERAL_PURPOSE": 299793543,
                             "GENERAL_PURPOSE_C4": 301911817,
                             "GENERAL_PURPOSE_C4A": 232460888,
@@ -230915,6 +230918,11 @@
                             "ipv6NexthopAddress"
                           ]
                         },
+                        "_linkedCustomHardware": {
+                          "oneof": [
+                            "linkedCustomHardware"
+                          ]
+                        },
                         "_managementType": {
                           "oneof": [
                             "managementType"
@@ -231055,6 +231063,13 @@
                         "ipv6NexthopAddress": {
                           "type": "string",
                           "id": 27968211,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "linkedCustomHardware": {
+                          "type": "string",
+                          "id": 139494608,
                           "options": {
                             "proto3_optional": true
                           }
@@ -232022,6 +232037,11 @@
                             "ipv6NexthopAddress"
                           ]
                         },
+                        "_linkedCustomHardware": {
+                          "oneof": [
+                            "linkedCustomHardware"
+                          ]
+                        },
                         "_linkedVpnTunnel": {
                           "oneof": [
                             "linkedVpnTunnel"
@@ -232139,6 +232159,13 @@
                         "ipv6NexthopAddress": {
                           "type": "string",
                           "id": 27968211,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "linkedCustomHardware": {
+                          "type": "string",
+                          "id": 139494608,
                           "options": {
                             "proto3_optional": true
                           }
@@ -258168,6 +258195,11 @@
                           "oneof": [
                             "identityCertificateEnabled"
                           ]
+                        },
+                        "_identityType": {
+                          "oneof": [
+                            "identityType"
+                          ]
                         }
                       },
                       "fields": {
@@ -258183,6 +258215,23 @@
                           "id": 342892440,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "identityType": {
+                          "type": "string",
+                          "id": 25665051,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IdentityType": {
+                          "values": {
+                            "UNDEFINED_IDENTITY_TYPE": 0,
+                            "AGENT_IDENTITY": 71547096,
+                            "IDENTITY_TYPE_UNSPECIFIED": 157537011,
+                            "SERVICE_ACCOUNT": 178301539
                           }
                         }
                       }
@@ -286323,8 +286372,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/googleapis/google-cloud-node/compare/reports-v0.18.0...reports-v0.18.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
 ## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.17.1...reports-v0.18.0) (2026-10-08)
 
 

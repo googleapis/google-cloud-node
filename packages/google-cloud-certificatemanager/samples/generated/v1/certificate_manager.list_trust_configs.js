@@ -34,22 +34,22 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of TrustConfigs to return per call.
+   *  Optional. Maximum number of TrustConfigs to return per call.
    */
   // const pageSize = 1234
   /**
-   *  The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *  that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *  the system should return the next page of data.
+   *  Optional. The value returned by the last `ListTrustConfigsResponse`.
+   *  Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+   *  and that the system should return the next page of data.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter expression to restrict the TrustConfigs returned.
+   *  Optional. Filter expression to restrict the TrustConfigs returned.
    */
   // const filter = 'abc123'
   /**
-   *  A list of TrustConfig field names used to specify the order of the
-   *  returned results. The default sorting order is ascending. To specify
+   *  Optional. A list of TrustConfig field names used to specify the order of
+   *  the returned results. The default sorting order is ascending. To specify
    *  descending order for a field, add a suffix `" desc"`.
    */
   // const orderBy = 'abc123'

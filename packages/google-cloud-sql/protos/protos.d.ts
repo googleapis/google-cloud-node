@@ -30335,7 +30335,8 @@ export namespace google {
                         CLOUD_IAM_GROUP_USER = 4,
                         CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5,
                         CLOUD_IAM_WORKFORCE_IDENTITY = 6,
-                        ENTRAID_USER = 7
+                        ENTRAID_USER = 7,
+                        ACTIVE_DIRECTORY_USER = 8
                     }
 
                     /** DualPasswordType enum. */
@@ -62742,7 +62743,8 @@ export namespace google {
                         CLOUD_IAM_GROUP_USER = 4,
                         CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5,
                         CLOUD_IAM_WORKFORCE_IDENTITY = 6,
-                        ENTRAID_USER = 7
+                        ENTRAID_USER = 7,
+                        ACTIVE_DIRECTORY_USER = 8
                     }
 
                     /** DualPasswordType enum. */
@@ -62995,59 +62997,59 @@ export namespace google {
 
                     /**
                      * Calls Start.
-                     * @param request SqlWorkloadCapturesStartRequest message or plain object
+                     * @param request WorkloadCapturesStartRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
                      */
-                    public start(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StartCallback): void;
+                    public start(request: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StartCallback): void;
 
                     /**
                      * Calls Start.
-                     * @param request SqlWorkloadCapturesStartRequest message or plain object
+                     * @param request WorkloadCapturesStartRequest message or plain object
                      * @returns Promise
                      */
-                    public start(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+                    public start(request: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
                      * Calls Stop.
-                     * @param request SqlWorkloadCapturesStopRequest message or plain object
+                     * @param request WorkloadCapturesStopRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
                      */
-                    public stop(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StopCallback): void;
+                    public stop(request: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StopCallback): void;
 
                     /**
                      * Calls Stop.
-                     * @param request SqlWorkloadCapturesStopRequest message or plain object
+                     * @param request WorkloadCapturesStopRequest message or plain object
                      * @returns Promise
                      */
-                    public stop(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+                    public stop(request: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
                      * Calls StartReplay.
-                     * @param request SqlWorkloadCapturesStartReplayRequest message or plain object
+                     * @param request WorkloadCapturesStartReplayRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
                      */
-                    public startReplay(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StartReplayCallback): void;
+                    public startReplay(request: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StartReplayCallback): void;
 
                     /**
                      * Calls StartReplay.
-                     * @param request SqlWorkloadCapturesStartReplayRequest message or plain object
+                     * @param request WorkloadCapturesStartReplayRequest message or plain object
                      * @returns Promise
                      */
-                    public startReplay(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+                    public startReplay(request: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
                      * Calls StopReplay.
-                     * @param request SqlWorkloadCapturesStopReplayRequest message or plain object
+                     * @param request WorkloadCapturesStopReplayRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
                      */
-                    public stopReplay(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StopReplayCallback): void;
+                    public stopReplay(request: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest, callback: google.cloud.sql.v1beta4.SqlWorkloadCapturesService.StopReplayCallback): void;
 
                     /**
                      * Calls StopReplay.
-                     * @param request SqlWorkloadCapturesStopReplayRequest message or plain object
+                     * @param request WorkloadCapturesStopReplayRequest message or plain object
                      * @returns Promise
                      */
-                    public stopReplay(request: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+                    public stopReplay(request: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
                      * Calls List.
@@ -63102,442 +63104,442 @@ export namespace google {
                     type ListCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.WorkloadCapturesListResponse) => void;
                 }
 
-                /** Properties of a SqlWorkloadCapturesStartRequest. */
-                interface ISqlWorkloadCapturesStartRequest {
+                /** Properties of a WorkloadCapturesStartRequest. */
+                interface IWorkloadCapturesStartRequest {
 
-                    /** SqlWorkloadCapturesStartRequest project */
+                    /** WorkloadCapturesStartRequest project */
                     project?: (string|null);
 
-                    /** SqlWorkloadCapturesStartRequest instance */
+                    /** WorkloadCapturesStartRequest instance */
                     instance?: (string|null);
 
-                    /** SqlWorkloadCapturesStartRequest startWorkloadCaptureContext */
+                    /** WorkloadCapturesStartRequest startWorkloadCaptureContext */
                     startWorkloadCaptureContext?: (google.cloud.sql.v1beta4.IStartWorkloadCaptureContext|null);
                 }
 
-                /** Represents a SqlWorkloadCapturesStartRequest. */
-                class SqlWorkloadCapturesStartRequest implements ISqlWorkloadCapturesStartRequest {
+                /** Represents a WorkloadCapturesStartRequest. */
+                class WorkloadCapturesStartRequest implements IWorkloadCapturesStartRequest {
 
                     /**
-                     * Constructs a new SqlWorkloadCapturesStartRequest.
+                     * Constructs a new WorkloadCapturesStartRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest);
+                    constructor(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest);
 
-                    /** SqlWorkloadCapturesStartRequest project. */
+                    /** WorkloadCapturesStartRequest project. */
                     public project: string;
 
-                    /** SqlWorkloadCapturesStartRequest instance. */
+                    /** WorkloadCapturesStartRequest instance. */
                     public instance: string;
 
-                    /** SqlWorkloadCapturesStartRequest startWorkloadCaptureContext. */
+                    /** WorkloadCapturesStartRequest startWorkloadCaptureContext. */
                     public startWorkloadCaptureContext?: (google.cloud.sql.v1beta4.IStartWorkloadCaptureContext|null);
 
                     /**
-                     * Creates a new SqlWorkloadCapturesStartRequest instance using the specified properties.
+                     * Creates a new WorkloadCapturesStartRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SqlWorkloadCapturesStartRequest instance
+                     * @returns WorkloadCapturesStartRequest instance
                      */
-                    public static create(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest;
+                    public static create(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest): google.cloud.sql.v1beta4.WorkloadCapturesStartRequest;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStartRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStartRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStartRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStartRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStartRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStartRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStartRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStartRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStartRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStartRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStartRequest message from the specified reader or buffer.
+                     * Decodes a WorkloadCapturesStartRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SqlWorkloadCapturesStartRequest
+                     * @returns WorkloadCapturesStartRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.WorkloadCapturesStartRequest;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStartRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a WorkloadCapturesStartRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SqlWorkloadCapturesStartRequest
+                     * @returns WorkloadCapturesStartRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.WorkloadCapturesStartRequest;
 
                     /**
-                     * Verifies a SqlWorkloadCapturesStartRequest message.
+                     * Verifies a WorkloadCapturesStartRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SqlWorkloadCapturesStartRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a WorkloadCapturesStartRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SqlWorkloadCapturesStartRequest
+                     * @returns WorkloadCapturesStartRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.WorkloadCapturesStartRequest;
 
                     /**
-                     * Creates a plain object from a SqlWorkloadCapturesStartRequest message. Also converts values to other types if specified.
-                     * @param message SqlWorkloadCapturesStartRequest
+                     * Creates a plain object from a WorkloadCapturesStartRequest message. Also converts values to other types if specified.
+                     * @param message WorkloadCapturesStartRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.sql.v1beta4.WorkloadCapturesStartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SqlWorkloadCapturesStartRequest to JSON.
+                     * Converts this WorkloadCapturesStartRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for SqlWorkloadCapturesStartRequest
+                     * Gets the default type url for WorkloadCapturesStartRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a SqlWorkloadCapturesStopRequest. */
-                interface ISqlWorkloadCapturesStopRequest {
+                /** Properties of a WorkloadCapturesStopRequest. */
+                interface IWorkloadCapturesStopRequest {
 
-                    /** SqlWorkloadCapturesStopRequest project */
+                    /** WorkloadCapturesStopRequest project */
                     project?: (string|null);
 
-                    /** SqlWorkloadCapturesStopRequest instance */
+                    /** WorkloadCapturesStopRequest instance */
                     instance?: (string|null);
 
-                    /** SqlWorkloadCapturesStopRequest stopWorkloadCaptureContext */
+                    /** WorkloadCapturesStopRequest stopWorkloadCaptureContext */
                     stopWorkloadCaptureContext?: (google.cloud.sql.v1beta4.IStopWorkloadCaptureContext|null);
                 }
 
-                /** Represents a SqlWorkloadCapturesStopRequest. */
-                class SqlWorkloadCapturesStopRequest implements ISqlWorkloadCapturesStopRequest {
+                /** Represents a WorkloadCapturesStopRequest. */
+                class WorkloadCapturesStopRequest implements IWorkloadCapturesStopRequest {
 
                     /**
-                     * Constructs a new SqlWorkloadCapturesStopRequest.
+                     * Constructs a new WorkloadCapturesStopRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest);
+                    constructor(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest);
 
-                    /** SqlWorkloadCapturesStopRequest project. */
+                    /** WorkloadCapturesStopRequest project. */
                     public project: string;
 
-                    /** SqlWorkloadCapturesStopRequest instance. */
+                    /** WorkloadCapturesStopRequest instance. */
                     public instance: string;
 
-                    /** SqlWorkloadCapturesStopRequest stopWorkloadCaptureContext. */
+                    /** WorkloadCapturesStopRequest stopWorkloadCaptureContext. */
                     public stopWorkloadCaptureContext?: (google.cloud.sql.v1beta4.IStopWorkloadCaptureContext|null);
 
                     /**
-                     * Creates a new SqlWorkloadCapturesStopRequest instance using the specified properties.
+                     * Creates a new WorkloadCapturesStopRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SqlWorkloadCapturesStopRequest instance
+                     * @returns WorkloadCapturesStopRequest instance
                      */
-                    public static create(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest;
+                    public static create(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest): google.cloud.sql.v1beta4.WorkloadCapturesStopRequest;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStopRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStopRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStopRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStopRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStopRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStopRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStopRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStopRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStopRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStopRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStopRequest message from the specified reader or buffer.
+                     * Decodes a WorkloadCapturesStopRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SqlWorkloadCapturesStopRequest
+                     * @returns WorkloadCapturesStopRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.WorkloadCapturesStopRequest;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStopRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a WorkloadCapturesStopRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SqlWorkloadCapturesStopRequest
+                     * @returns WorkloadCapturesStopRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.WorkloadCapturesStopRequest;
 
                     /**
-                     * Verifies a SqlWorkloadCapturesStopRequest message.
+                     * Verifies a WorkloadCapturesStopRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SqlWorkloadCapturesStopRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a WorkloadCapturesStopRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SqlWorkloadCapturesStopRequest
+                     * @returns WorkloadCapturesStopRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.WorkloadCapturesStopRequest;
 
                     /**
-                     * Creates a plain object from a SqlWorkloadCapturesStopRequest message. Also converts values to other types if specified.
-                     * @param message SqlWorkloadCapturesStopRequest
+                     * Creates a plain object from a WorkloadCapturesStopRequest message. Also converts values to other types if specified.
+                     * @param message WorkloadCapturesStopRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.sql.v1beta4.WorkloadCapturesStopRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SqlWorkloadCapturesStopRequest to JSON.
+                     * Converts this WorkloadCapturesStopRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for SqlWorkloadCapturesStopRequest
+                     * Gets the default type url for WorkloadCapturesStopRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a SqlWorkloadCapturesStartReplayRequest. */
-                interface ISqlWorkloadCapturesStartReplayRequest {
+                /** Properties of a WorkloadCapturesStartReplayRequest. */
+                interface IWorkloadCapturesStartReplayRequest {
 
-                    /** SqlWorkloadCapturesStartReplayRequest project */
+                    /** WorkloadCapturesStartReplayRequest project */
                     project?: (string|null);
 
-                    /** SqlWorkloadCapturesStartReplayRequest instance */
+                    /** WorkloadCapturesStartReplayRequest instance */
                     instance?: (string|null);
 
-                    /** SqlWorkloadCapturesStartReplayRequest startWorkloadReplayContext */
+                    /** WorkloadCapturesStartReplayRequest startWorkloadReplayContext */
                     startWorkloadReplayContext?: (google.cloud.sql.v1beta4.IStartWorkloadReplayContext|null);
 
-                    /** SqlWorkloadCapturesStartReplayRequest workloadId */
+                    /** WorkloadCapturesStartReplayRequest workloadId */
                     workloadId?: (string|null);
                 }
 
-                /** Represents a SqlWorkloadCapturesStartReplayRequest. */
-                class SqlWorkloadCapturesStartReplayRequest implements ISqlWorkloadCapturesStartReplayRequest {
+                /** Represents a WorkloadCapturesStartReplayRequest. */
+                class WorkloadCapturesStartReplayRequest implements IWorkloadCapturesStartReplayRequest {
 
                     /**
-                     * Constructs a new SqlWorkloadCapturesStartReplayRequest.
+                     * Constructs a new WorkloadCapturesStartReplayRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest);
+                    constructor(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest);
 
-                    /** SqlWorkloadCapturesStartReplayRequest project. */
+                    /** WorkloadCapturesStartReplayRequest project. */
                     public project: string;
 
-                    /** SqlWorkloadCapturesStartReplayRequest instance. */
+                    /** WorkloadCapturesStartReplayRequest instance. */
                     public instance: string;
 
-                    /** SqlWorkloadCapturesStartReplayRequest startWorkloadReplayContext. */
+                    /** WorkloadCapturesStartReplayRequest startWorkloadReplayContext. */
                     public startWorkloadReplayContext?: (google.cloud.sql.v1beta4.IStartWorkloadReplayContext|null);
 
-                    /** SqlWorkloadCapturesStartReplayRequest workloadId. */
+                    /** WorkloadCapturesStartReplayRequest workloadId. */
                     public workloadId: string;
 
                     /**
-                     * Creates a new SqlWorkloadCapturesStartReplayRequest instance using the specified properties.
+                     * Creates a new WorkloadCapturesStartReplayRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SqlWorkloadCapturesStartReplayRequest instance
+                     * @returns WorkloadCapturesStartReplayRequest instance
                      */
-                    public static create(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest;
+                    public static create(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest): google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStartReplayRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStartReplayRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStartReplayRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStartReplayRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStartReplayRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStartReplayRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStartReplayRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStartReplayRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStartReplayRequest message from the specified reader or buffer.
+                     * Decodes a WorkloadCapturesStartReplayRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SqlWorkloadCapturesStartReplayRequest
+                     * @returns WorkloadCapturesStartReplayRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStartReplayRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a WorkloadCapturesStartReplayRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SqlWorkloadCapturesStartReplayRequest
+                     * @returns WorkloadCapturesStartReplayRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest;
 
                     /**
-                     * Verifies a SqlWorkloadCapturesStartReplayRequest message.
+                     * Verifies a WorkloadCapturesStartReplayRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SqlWorkloadCapturesStartReplayRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a WorkloadCapturesStartReplayRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SqlWorkloadCapturesStartReplayRequest
+                     * @returns WorkloadCapturesStartReplayRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest;
 
                     /**
-                     * Creates a plain object from a SqlWorkloadCapturesStartReplayRequest message. Also converts values to other types if specified.
-                     * @param message SqlWorkloadCapturesStartReplayRequest
+                     * Creates a plain object from a WorkloadCapturesStartReplayRequest message. Also converts values to other types if specified.
+                     * @param message WorkloadCapturesStartReplayRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SqlWorkloadCapturesStartReplayRequest to JSON.
+                     * Converts this WorkloadCapturesStartReplayRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for SqlWorkloadCapturesStartReplayRequest
+                     * Gets the default type url for WorkloadCapturesStartReplayRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a SqlWorkloadCapturesStopReplayRequest. */
-                interface ISqlWorkloadCapturesStopReplayRequest {
+                /** Properties of a WorkloadCapturesStopReplayRequest. */
+                interface IWorkloadCapturesStopReplayRequest {
 
-                    /** SqlWorkloadCapturesStopReplayRequest project */
+                    /** WorkloadCapturesStopReplayRequest project */
                     project?: (string|null);
 
-                    /** SqlWorkloadCapturesStopReplayRequest instance */
+                    /** WorkloadCapturesStopReplayRequest instance */
                     instance?: (string|null);
 
-                    /** SqlWorkloadCapturesStopReplayRequest stopWorkloadReplayContext */
+                    /** WorkloadCapturesStopReplayRequest stopWorkloadReplayContext */
                     stopWorkloadReplayContext?: (google.cloud.sql.v1beta4.IStopWorkloadReplayContext|null);
                 }
 
-                /** Represents a SqlWorkloadCapturesStopReplayRequest. */
-                class SqlWorkloadCapturesStopReplayRequest implements ISqlWorkloadCapturesStopReplayRequest {
+                /** Represents a WorkloadCapturesStopReplayRequest. */
+                class WorkloadCapturesStopReplayRequest implements IWorkloadCapturesStopReplayRequest {
 
                     /**
-                     * Constructs a new SqlWorkloadCapturesStopReplayRequest.
+                     * Constructs a new WorkloadCapturesStopReplayRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest);
+                    constructor(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest);
 
-                    /** SqlWorkloadCapturesStopReplayRequest project. */
+                    /** WorkloadCapturesStopReplayRequest project. */
                     public project: string;
 
-                    /** SqlWorkloadCapturesStopReplayRequest instance. */
+                    /** WorkloadCapturesStopReplayRequest instance. */
                     public instance: string;
 
-                    /** SqlWorkloadCapturesStopReplayRequest stopWorkloadReplayContext. */
+                    /** WorkloadCapturesStopReplayRequest stopWorkloadReplayContext. */
                     public stopWorkloadReplayContext?: (google.cloud.sql.v1beta4.IStopWorkloadReplayContext|null);
 
                     /**
-                     * Creates a new SqlWorkloadCapturesStopReplayRequest instance using the specified properties.
+                     * Creates a new WorkloadCapturesStopReplayRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns SqlWorkloadCapturesStopReplayRequest instance
+                     * @returns WorkloadCapturesStopReplayRequest instance
                      */
-                    public static create(properties?: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest;
+                    public static create(properties?: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest): google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStopReplayRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStopReplayRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStopReplayRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStopReplayRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified SqlWorkloadCapturesStopReplayRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest.verify|verify} messages.
-                     * @param message SqlWorkloadCapturesStopReplayRequest message or plain object to encode
+                     * Encodes the specified WorkloadCapturesStopReplayRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest.verify|verify} messages.
+                     * @param message WorkloadCapturesStopReplayRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStopReplayRequest message from the specified reader or buffer.
+                     * Decodes a WorkloadCapturesStopReplayRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns SqlWorkloadCapturesStopReplayRequest
+                     * @returns WorkloadCapturesStopReplayRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest;
 
                     /**
-                     * Decodes a SqlWorkloadCapturesStopReplayRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a WorkloadCapturesStopReplayRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns SqlWorkloadCapturesStopReplayRequest
+                     * @returns WorkloadCapturesStopReplayRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest;
 
                     /**
-                     * Verifies a SqlWorkloadCapturesStopReplayRequest message.
+                     * Verifies a WorkloadCapturesStopReplayRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a SqlWorkloadCapturesStopReplayRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a WorkloadCapturesStopReplayRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns SqlWorkloadCapturesStopReplayRequest
+                     * @returns WorkloadCapturesStopReplayRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest;
 
                     /**
-                     * Creates a plain object from a SqlWorkloadCapturesStopReplayRequest message. Also converts values to other types if specified.
-                     * @param message SqlWorkloadCapturesStopReplayRequest
+                     * Creates a plain object from a WorkloadCapturesStopReplayRequest message. Also converts values to other types if specified.
+                     * @param message WorkloadCapturesStopReplayRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this SqlWorkloadCapturesStopReplayRequest to JSON.
+                     * Converts this WorkloadCapturesStopReplayRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for SqlWorkloadCapturesStopReplayRequest
+                     * Gets the default type url for WorkloadCapturesStopReplayRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

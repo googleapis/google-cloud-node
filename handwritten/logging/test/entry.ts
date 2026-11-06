@@ -15,13 +15,13 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as entryTypes from '../src/entry';
 import * as common from '../src/utils/common';
 import * as http from 'http';
 import {InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 import {trace} from '@opentelemetry/api';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 import {SEMRESATTRS_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {NodeSDK} from '@opentelemetry/sdk-node';
 
@@ -125,6 +125,15 @@ describe('Entry', () => {
       assert.strictEqual(entry.metadata.insertId, userDefinedInsertId);
     });
 
+    it('should convert a numeric insertId to a string', () => {
+      const eventId = 'event-id';
+      fakeEventIdNewOverride = () => eventId;
+      const entry = new Entry({
+        insertId: 12345,
+      });
+      assert.strictEqual(entry.metadata.insertId, '12345');
+    });
+
     it('should localize data', () => {
       assert.strictEqual(entry.data, DATA);
     });
@@ -222,7 +231,7 @@ describe('Entry', () => {
     it('should pass removeCircular to objToStruct_', done => {
       fakeObjToStruct = (
         obj: {},
-        options: common.ObjectToStructConverterConfig,
+        options: common.ObjectToStructConverterConfig
       ) => {
         assert.strictEqual(options.removeCircular, true);
         done();
@@ -315,7 +324,7 @@ describe('Entry', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-logging-entry-test',
           }),
           traceExporter: new InMemorySpanExporter(),
@@ -325,7 +334,7 @@ describe('Entry', () => {
       });
 
       after(() => {
-        sdk.shutdown();
+        return sdk.shutdown();
       });
 
       it('should detect open telemetry trace and span if open telemetry context present', () => {
@@ -335,12 +344,12 @@ describe('Entry', () => {
             const json = entry.toJSON();
             assert.strictEqual(
               json.trace,
-              `projects//traces/${span.spanContext().traceId}`,
+              `projects//traces/${span.spanContext().traceId}`
             );
             assert.strictEqual(json.spanId, span.spanContext().spanId);
             assert.strictEqual(
               json.traceSampled,
-              (span.spanContext().traceFlags & 1) !== 0,
+              (span.spanContext().traceFlags & 1) !== 0
             );
           });
       });
@@ -360,12 +369,12 @@ describe('Entry', () => {
             const json = entry.toJSON();
             assert.strictEqual(
               json.trace,
-              `projects//traces/${span.spanContext().traceId}`,
+              `projects//traces/${span.spanContext().traceId}`
             );
             assert.strictEqual(json.spanId, span.spanContext().spanId);
             assert.strictEqual(
               json.traceSampled,
-              (span.spanContext().traceFlags & 1) !== 0,
+              (span.spanContext().traceFlags & 1) !== 0
             );
           });
       });
@@ -373,7 +382,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', () => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;
@@ -413,7 +422,7 @@ describe('Entry', () => {
       entry.data = 'this is a log';
       const json = entry.toStructuredJSON();
       assert(
-        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!)),
+        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!))
       );
       delete json.timestamp;
       const expectedJSON = {
@@ -441,7 +450,7 @@ describe('Entry', () => {
       entry.metadata.timestamp = new Date();
       const json = entry.toStructuredJSON();
       assert(
-        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!)),
+        withinExpectedTimeBoundaries(nanosAndSecondsToDate(json.timestamp!))
       );
     });
 
@@ -493,7 +502,7 @@ describe('Entry', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-logging-entry-test',
           }),
           traceExporter: new InMemorySpanExporter(),
@@ -503,7 +512,7 @@ describe('Entry', () => {
       });
 
       after(() => {
-        sdk.shutdown();
+        return sdk.shutdown();
       });
 
       it('should detect open telemetry trace and span if open telemetry context present', () => {
@@ -513,15 +522,15 @@ describe('Entry', () => {
             const json = entry.toStructuredJSON();
             assert.strictEqual(
               json[entryTypes.TRACE_KEY],
-              `projects//traces/${span.spanContext().traceId}`,
+              `projects//traces/${span.spanContext().traceId}`
             );
             assert.strictEqual(
               json[entryTypes.SPAN_ID_KEY],
-              span.spanContext().spanId,
+              span.spanContext().spanId
             );
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              (span.spanContext().traceFlags & 1) !== 0,
+              (span.spanContext().traceFlags & 1) !== 0
             );
           });
       });
@@ -541,15 +550,15 @@ describe('Entry', () => {
             const json = entry.toStructuredJSON();
             assert.strictEqual(
               json[entryTypes.TRACE_KEY],
-              `projects//traces/${span.spanContext().traceId}`,
+              `projects//traces/${span.spanContext().traceId}`
             );
             assert.strictEqual(
               json[entryTypes.SPAN_ID_KEY],
-              span.spanContext().spanId,
+              span.spanContext().spanId
             );
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              (span.spanContext().traceFlags & 1) !== 0,
+              (span.spanContext().traceFlags & 1) !== 0
             );
           });
       });
@@ -557,7 +566,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', () => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;
@@ -571,7 +580,7 @@ describe('Entry', () => {
             assert.strictEqual(json[entryTypes.SPAN_ID_KEY], expected.spanId);
             assert.strictEqual(
               json[entryTypes.TRACE_SAMPLED_KEY],
-              expected.traceSampled,
+              expected.traceSampled
             );
           });
       });

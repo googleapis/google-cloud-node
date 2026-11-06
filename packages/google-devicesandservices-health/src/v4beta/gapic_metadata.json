@@ -15,11 +15,6 @@
                 "getDataPoint"
               ]
             },
-            "DailyRollUpDataPoints": {
-              "methods": [
-                "dailyRollUpDataPoints"
-              ]
-            },
             "ExportExerciseTcx": {
               "methods": [
                 "exportExerciseTcx"
@@ -59,6 +54,13 @@
                 "rollUpDataPoints",
                 "rollUpDataPointsStream",
                 "rollUpDataPointsAsync"
+              ]
+            },
+            "DailyRollUpDataPoints": {
+              "methods": [
+                "dailyRollUpDataPoints",
+                "dailyRollUpDataPointsStream",
+                "dailyRollUpDataPointsAsync"
               ]
             }
           }
@@ -71,11 +73,6 @@
                 "getDataPoint"
               ]
             },
-            "DailyRollUpDataPoints": {
-              "methods": [
-                "dailyRollUpDataPoints"
-              ]
-            },
             "ExportExerciseTcx": {
               "methods": [
                 "exportExerciseTcx"
@@ -115,6 +112,13 @@
                 "rollUpDataPoints",
                 "rollUpDataPointsStream",
                 "rollUpDataPointsAsync"
+              ]
+            },
+            "DailyRollUpDataPoints": {
+              "methods": [
+                "dailyRollUpDataPoints",
+                "dailyRollUpDataPointsStream",
+                "dailyRollUpDataPointsAsync"
               ]
             }
           }

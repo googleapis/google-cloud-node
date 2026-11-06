@@ -18,6 +18,7 @@ import {OutgoingHttpHeaders} from 'http';
 import objectHash from 'object-hash';
 import * as protobuf from 'protobufjs';
 import * as gax from './gax';
+import {setSettingsDefaultDomain} from './observability/contextUtil';
 import * as routingHeader from './routingHeader';
 import {Status} from './status';
 import {GoogleAuth, AuthClient} from 'google-auth-library';
@@ -110,6 +111,7 @@ export class GrpcClient {
   private _servicePath?: string;
   private _port?: number;
   private _enableTelemetryTracing?: boolean;
+  private _enableTelemetryLogging?: boolean;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -166,6 +168,9 @@ export class GrpcClient {
     this._enableTelemetryTracing = (
       options as GrpcClientOptions
     ).enableTelemetryTracing;
+    this._enableTelemetryLogging = (
+      options as GrpcClientOptions
+    ).enableTelemetryLogging;
   }
 
   /**
@@ -221,6 +226,8 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+   * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -231,6 +238,7 @@ export class GrpcClient {
     enableTelemetryTracing?: boolean,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _legacyTelemetryInfo?: unknown,
+    enableTelemetryLogging?: boolean,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -298,14 +306,27 @@ export class GrpcClient {
     if (this._port !== undefined) {
       otherArgs.port = this._port;
     }
-    return gax.constructSettings(
+    const defaults = gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       Status,
       otherArgs,
       enableTelemetryTracing ?? this._enableTelemetryTracing,
+      _legacyTelemetryInfo,
+      enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
+    const defaultServicePath = (this.auth as {defaultServicePath?: unknown})
+      ?.defaultServicePath;
+    if (
+      typeof defaultServicePath === 'string' &&
+      defaultServicePath.includes('.')
+    ) {
+      for (const methodName of Object.keys(defaults)) {
+        setSettingsDefaultDomain(defaults[methodName], defaultServicePath);
+      }
+    }
+    return defaults;
   }
 
   /**

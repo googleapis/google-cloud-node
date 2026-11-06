@@ -95,11 +95,11 @@ jobs:
               continue;
             }
             const baseSrc = execFileSync('git', ['show', `HEAD^1:${oldPath}`], {encoding: 'utf8'});
-            fs.writeFileSync('/tmp/base.d.ts', ts.transpileDeclaration(baseSrc, {fileName: oldPath}).outputText);
+            fs.writeFileSync('/tmp/base.d.ts', ts.transpileDeclaration(baseSrc, {fileName: oldPath, compilerOptions: {stripInternal: true}}).outputText);
             const compiledDts = findCompiledDts(file);
             const headDts = compiledDts
               ? fs.readFileSync(compiledDts, 'utf8')
-              : ts.transpileDeclaration(fs.readFileSync(file, 'utf8'), {fileName: file}).outputText;
+              : ts.transpileDeclaration(fs.readFileSync(file, 'utf8'), {fileName: file, compilerOptions: {stripInternal: true}}).outputText;
             fs.writeFileSync('/tmp/head.d.ts', headDts);
 
             const out = execFileSync(

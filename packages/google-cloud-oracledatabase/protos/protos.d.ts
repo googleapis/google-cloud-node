@@ -23484,6 +23484,685 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OdbDnsZone. */
+                interface IOdbDnsZone {
+
+                    /** OdbDnsZone name */
+                    name?: (string|null);
+
+                    /** OdbDnsZone domain */
+                    domain?: (string|null);
+
+                    /** OdbDnsZone labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** OdbDnsZone state */
+                    state?: (google.cloud.oracledatabase.v1.OdbDnsZone.State|keyof typeof google.cloud.oracledatabase.v1.OdbDnsZone.State|null);
+
+                    /** OdbDnsZone createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an OdbDnsZone. */
+                class OdbDnsZone implements IOdbDnsZone {
+
+                    /**
+                     * Constructs a new OdbDnsZone.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IOdbDnsZone);
+
+                    /** OdbDnsZone name. */
+                    public name: string;
+
+                    /** OdbDnsZone domain. */
+                    public domain: string;
+
+                    /** OdbDnsZone labels. */
+                    public labels: { [k: string]: string };
+
+                    /** OdbDnsZone state. */
+                    public state: (google.cloud.oracledatabase.v1.OdbDnsZone.State|keyof typeof google.cloud.oracledatabase.v1.OdbDnsZone.State);
+
+                    /** OdbDnsZone createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new OdbDnsZone instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OdbDnsZone instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IOdbDnsZone): google.cloud.oracledatabase.v1.OdbDnsZone;
+
+                    /**
+                     * Encodes the specified OdbDnsZone message. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbDnsZone.verify|verify} messages.
+                     * @param message OdbDnsZone message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IOdbDnsZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OdbDnsZone message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbDnsZone.verify|verify} messages.
+                     * @param message OdbDnsZone message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IOdbDnsZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OdbDnsZone message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OdbDnsZone
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.OdbDnsZone;
+
+                    /**
+                     * Decodes an OdbDnsZone message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OdbDnsZone
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.OdbDnsZone;
+
+                    /**
+                     * Verifies an OdbDnsZone message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OdbDnsZone message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OdbDnsZone
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.OdbDnsZone;
+
+                    /**
+                     * Creates a plain object from an OdbDnsZone message. Also converts values to other types if specified.
+                     * @param message OdbDnsZone
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.OdbDnsZone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OdbDnsZone to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OdbDnsZone
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OdbDnsZone {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        INACTIVE = 3,
+                        TERMINATING = 4,
+                        FAILED = 5
+                    }
+                }
+
+                /** Properties of a CreateOdbDnsZoneRequest. */
+                interface ICreateOdbDnsZoneRequest {
+
+                    /** CreateOdbDnsZoneRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateOdbDnsZoneRequest odbDnsZoneId */
+                    odbDnsZoneId?: (string|null);
+
+                    /** CreateOdbDnsZoneRequest odbDnsZone */
+                    odbDnsZone?: (google.cloud.oracledatabase.v1.IOdbDnsZone|null);
+
+                    /** CreateOdbDnsZoneRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateOdbDnsZoneRequest. */
+                class CreateOdbDnsZoneRequest implements ICreateOdbDnsZoneRequest {
+
+                    /**
+                     * Constructs a new CreateOdbDnsZoneRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest);
+
+                    /** CreateOdbDnsZoneRequest parent. */
+                    public parent: string;
+
+                    /** CreateOdbDnsZoneRequest odbDnsZoneId. */
+                    public odbDnsZoneId: string;
+
+                    /** CreateOdbDnsZoneRequest odbDnsZone. */
+                    public odbDnsZone?: (google.cloud.oracledatabase.v1.IOdbDnsZone|null);
+
+                    /** CreateOdbDnsZoneRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateOdbDnsZoneRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOdbDnsZoneRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest): google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest;
+
+                    /**
+                     * Encodes the specified CreateOdbDnsZoneRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message CreateOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOdbDnsZoneRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message CreateOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOdbDnsZoneRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest;
+
+                    /**
+                     * Decodes a CreateOdbDnsZoneRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest;
+
+                    /**
+                     * Verifies a CreateOdbDnsZoneRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOdbDnsZoneRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOdbDnsZoneRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest;
+
+                    /**
+                     * Creates a plain object from a CreateOdbDnsZoneRequest message. Also converts values to other types if specified.
+                     * @param message CreateOdbDnsZoneRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOdbDnsZoneRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOdbDnsZoneRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteOdbDnsZoneRequest. */
+                interface IDeleteOdbDnsZoneRequest {
+
+                    /** DeleteOdbDnsZoneRequest name */
+                    name?: (string|null);
+
+                    /** DeleteOdbDnsZoneRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteOdbDnsZoneRequest. */
+                class DeleteOdbDnsZoneRequest implements IDeleteOdbDnsZoneRequest {
+
+                    /**
+                     * Constructs a new DeleteOdbDnsZoneRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest);
+
+                    /** DeleteOdbDnsZoneRequest name. */
+                    public name: string;
+
+                    /** DeleteOdbDnsZoneRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteOdbDnsZoneRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteOdbDnsZoneRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest): google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest;
+
+                    /**
+                     * Encodes the specified DeleteOdbDnsZoneRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message DeleteOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteOdbDnsZoneRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message DeleteOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteOdbDnsZoneRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest;
+
+                    /**
+                     * Decodes a DeleteOdbDnsZoneRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest;
+
+                    /**
+                     * Verifies a DeleteOdbDnsZoneRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteOdbDnsZoneRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteOdbDnsZoneRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteOdbDnsZoneRequest message. Also converts values to other types if specified.
+                     * @param message DeleteOdbDnsZoneRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteOdbDnsZoneRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteOdbDnsZoneRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbDnsZonesRequest. */
+                interface IListOdbDnsZonesRequest {
+
+                    /** ListOdbDnsZonesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOdbDnsZonesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOdbDnsZonesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListOdbDnsZonesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListOdbDnsZonesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListOdbDnsZonesRequest. */
+                class ListOdbDnsZonesRequest implements IListOdbDnsZonesRequest {
+
+                    /**
+                     * Constructs a new ListOdbDnsZonesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest);
+
+                    /** ListOdbDnsZonesRequest parent. */
+                    public parent: string;
+
+                    /** ListOdbDnsZonesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOdbDnsZonesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListOdbDnsZonesRequest filter. */
+                    public filter: string;
+
+                    /** ListOdbDnsZonesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListOdbDnsZonesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbDnsZonesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest): google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest;
+
+                    /**
+                     * Encodes the specified ListOdbDnsZonesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest.verify|verify} messages.
+                     * @param message ListOdbDnsZonesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbDnsZonesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest.verify|verify} messages.
+                     * @param message ListOdbDnsZonesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbDnsZonesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbDnsZonesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest;
+
+                    /**
+                     * Decodes a ListOdbDnsZonesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbDnsZonesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest;
+
+                    /**
+                     * Verifies a ListOdbDnsZonesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbDnsZonesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbDnsZonesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest;
+
+                    /**
+                     * Creates a plain object from a ListOdbDnsZonesRequest message. Also converts values to other types if specified.
+                     * @param message ListOdbDnsZonesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbDnsZonesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbDnsZonesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbDnsZonesResponse. */
+                interface IListOdbDnsZonesResponse {
+
+                    /** ListOdbDnsZonesResponse odbDnsZones */
+                    odbDnsZones?: (google.cloud.oracledatabase.v1.IOdbDnsZone[]|null);
+
+                    /** ListOdbDnsZonesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListOdbDnsZonesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListOdbDnsZonesResponse. */
+                class ListOdbDnsZonesResponse implements IListOdbDnsZonesResponse {
+
+                    /**
+                     * Constructs a new ListOdbDnsZonesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse);
+
+                    /** ListOdbDnsZonesResponse odbDnsZones. */
+                    public odbDnsZones: google.cloud.oracledatabase.v1.IOdbDnsZone[];
+
+                    /** ListOdbDnsZonesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListOdbDnsZonesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListOdbDnsZonesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbDnsZonesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse): google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse;
+
+                    /**
+                     * Encodes the specified ListOdbDnsZonesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse.verify|verify} messages.
+                     * @param message ListOdbDnsZonesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbDnsZonesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse.verify|verify} messages.
+                     * @param message ListOdbDnsZonesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbDnsZonesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbDnsZonesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse;
+
+                    /**
+                     * Decodes a ListOdbDnsZonesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbDnsZonesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse;
+
+                    /**
+                     * Verifies a ListOdbDnsZonesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbDnsZonesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbDnsZonesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse;
+
+                    /**
+                     * Creates a plain object from a ListOdbDnsZonesResponse message. Also converts values to other types if specified.
+                     * @param message ListOdbDnsZonesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbDnsZonesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbDnsZonesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetOdbDnsZoneRequest. */
+                interface IGetOdbDnsZoneRequest {
+
+                    /** GetOdbDnsZoneRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOdbDnsZoneRequest. */
+                class GetOdbDnsZoneRequest implements IGetOdbDnsZoneRequest {
+
+                    /**
+                     * Constructs a new GetOdbDnsZoneRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest);
+
+                    /** GetOdbDnsZoneRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOdbDnsZoneRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOdbDnsZoneRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest): google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest;
+
+                    /**
+                     * Encodes the specified GetOdbDnsZoneRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message GetOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOdbDnsZoneRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest.verify|verify} messages.
+                     * @param message GetOdbDnsZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOdbDnsZoneRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest;
+
+                    /**
+                     * Decodes a GetOdbDnsZoneRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOdbDnsZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest;
+
+                    /**
+                     * Verifies a GetOdbDnsZoneRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOdbDnsZoneRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOdbDnsZoneRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest;
+
+                    /**
+                     * Creates a plain object from a GetOdbDnsZoneRequest message. Also converts values to other types if specified.
+                     * @param message GetOdbDnsZoneRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOdbDnsZoneRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetOdbDnsZoneRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OdbNetwork. */
                 interface IOdbNetwork {
 
@@ -25446,6 +26125,62 @@ export namespace google {
                     public deleteOdbSubnet(request: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListOdbDnsZones.
+                     * @param request ListOdbDnsZonesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOdbDnsZonesResponse
+                     */
+                    public listOdbDnsZones(request: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListOdbDnsZonesCallback): void;
+
+                    /**
+                     * Calls ListOdbDnsZones.
+                     * @param request ListOdbDnsZonesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOdbDnsZones(request: google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest): Promise<google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse>;
+
+                    /**
+                     * Calls GetOdbDnsZone.
+                     * @param request GetOdbDnsZoneRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OdbDnsZone
+                     */
+                    public getOdbDnsZone(request: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetOdbDnsZoneCallback): void;
+
+                    /**
+                     * Calls GetOdbDnsZone.
+                     * @param request GetOdbDnsZoneRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOdbDnsZone(request: google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest): Promise<google.cloud.oracledatabase.v1.OdbDnsZone>;
+
+                    /**
+                     * Calls CreateOdbDnsZone.
+                     * @param request CreateOdbDnsZoneRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createOdbDnsZone(request: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateOdbDnsZoneCallback): void;
+
+                    /**
+                     * Calls CreateOdbDnsZone.
+                     * @param request CreateOdbDnsZoneRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createOdbDnsZone(request: google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteOdbDnsZone.
+                     * @param request DeleteOdbDnsZoneRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteOdbDnsZone(request: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteOdbDnsZoneCallback): void;
+
+                    /**
+                     * Calls DeleteOdbDnsZone.
+                     * @param request DeleteOdbDnsZoneRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteOdbDnsZone(request: google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListExadbVmClusters.
                      * @param request ListExadbVmClustersRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListExadbVmClustersResponse
@@ -26287,6 +27022,34 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteOdbSubnetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listOdbDnsZones}.
+                     * @param error Error, if any
+                     * @param [response] ListOdbDnsZonesResponse
+                     */
+                    type ListOdbDnsZonesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListOdbDnsZonesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getOdbDnsZone}.
+                     * @param error Error, if any
+                     * @param [response] OdbDnsZone
+                     */
+                    type GetOdbDnsZoneCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.OdbDnsZone) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createOdbDnsZone}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateOdbDnsZoneCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteOdbDnsZone}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteOdbDnsZoneCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listExadbVmClusters}.
@@ -32092,6 +32855,9 @@ export namespace google {
                     /** CloudVmCluster backupOdbSubnet */
                     backupOdbSubnet?: (string|null);
 
+                    /** CloudVmCluster odbDnsZone */
+                    odbDnsZone?: (string|null);
+
                     /** CloudVmCluster identityConnector */
                     identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);
 
@@ -32146,6 +32912,9 @@ export namespace google {
 
                     /** CloudVmCluster backupOdbSubnet. */
                     public backupOdbSubnet: string;
+
+                    /** CloudVmCluster odbDnsZone. */
+                    public odbDnsZone: string;
 
                     /** CloudVmCluster identityConnector. */
                     public identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);

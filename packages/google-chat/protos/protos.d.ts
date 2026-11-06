@@ -16462,6 +16462,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public moveSectionItem(request: google.chat.v1.IMoveSectionItemRequest): Promise<google.chat.v1.MoveSectionItemResponse>;
+
+                /**
+                 * Calls ReplaceMessageCards.
+                 * @param request ReplaceMessageCardsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ReplaceMessageCardsResponse
+                 */
+                public replaceMessageCards(request: google.chat.v1.IReplaceMessageCardsRequest, callback: google.chat.v1.ChatService.ReplaceMessageCardsCallback): void;
+
+                /**
+                 * Calls ReplaceMessageCards.
+                 * @param request ReplaceMessageCardsRequest message or plain object
+                 * @returns Promise
+                 */
+                public replaceMessageCards(request: google.chat.v1.IReplaceMessageCardsRequest): Promise<google.chat.v1.ReplaceMessageCardsResponse>;
             }
 
             namespace ChatService {
@@ -16829,6 +16843,13 @@ export namespace google {
                  * @param [response] MoveSectionItemResponse
                  */
                 type MoveSectionItemCallback = (error: (Error|null), response?: google.chat.v1.MoveSectionItemResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|replaceMessageCards}.
+                 * @param error Error, if any
+                 * @param [response] ReplaceMessageCardsResponse
+                 */
+                type ReplaceMessageCardsCallback = (error: (Error|null), response?: google.chat.v1.ReplaceMessageCardsResponse) => void;
             }
 
             /** Properties of a Membership. */
@@ -17841,6 +17862,9 @@ export namespace google {
                 /** Message accessoryWidgets */
                 accessoryWidgets?: (google.chat.v1.IAccessoryWidget[]|null);
 
+                /** Message elements */
+                elements?: (google.chat.v1.IElements|null);
+
                 /** Message markupSyntax */
                 markupSyntax?: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax|null);
             }
@@ -17934,6 +17958,9 @@ export namespace google {
 
                 /** Message accessoryWidgets. */
                 public accessoryWidgets: google.chat.v1.IAccessoryWidget[];
+
+                /** Message elements. */
+                public elements?: (google.chat.v1.IElements|null);
 
                 /** Message markupSyntax. */
                 public markupSyntax: (google.chat.v1.MarkupSyntax|keyof typeof google.chat.v1.MarkupSyntax);
@@ -20015,6 +20042,9 @@ export namespace google {
 
                 /** CardWithId card */
                 card?: (google.apps.card.v1.ICard|null);
+
+                /** CardWithId ownerUser */
+                ownerUser?: (google.chat.v1.IUser|null);
             }
 
             /** Represents a CardWithId. */
@@ -20031,6 +20061,9 @@ export namespace google {
 
                 /** CardWithId card. */
                 public card?: (google.apps.card.v1.ICard|null);
+
+                /** CardWithId ownerUser. */
+                public ownerUser?: (google.chat.v1.IUser|null);
 
                 /**
                  * Creates a new CardWithId instance using the specified properties.
@@ -20104,6 +20137,200 @@ export namespace google {
 
                 /**
                  * Gets the default type url for CardWithId
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReplaceMessageCardsRequest. */
+            interface IReplaceMessageCardsRequest {
+
+                /** ReplaceMessageCardsRequest name */
+                name?: (string|null);
+
+                /** ReplaceMessageCardsRequest cardsV2 */
+                cardsV2?: (google.chat.v1.ICardWithId[]|null);
+            }
+
+            /** Represents a ReplaceMessageCardsRequest. */
+            class ReplaceMessageCardsRequest implements IReplaceMessageCardsRequest {
+
+                /**
+                 * Constructs a new ReplaceMessageCardsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReplaceMessageCardsRequest);
+
+                /** ReplaceMessageCardsRequest name. */
+                public name: string;
+
+                /** ReplaceMessageCardsRequest cardsV2. */
+                public cardsV2: google.chat.v1.ICardWithId[];
+
+                /**
+                 * Creates a new ReplaceMessageCardsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReplaceMessageCardsRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IReplaceMessageCardsRequest): google.chat.v1.ReplaceMessageCardsRequest;
+
+                /**
+                 * Encodes the specified ReplaceMessageCardsRequest message. Does not implicitly {@link google.chat.v1.ReplaceMessageCardsRequest.verify|verify} messages.
+                 * @param message ReplaceMessageCardsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReplaceMessageCardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReplaceMessageCardsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ReplaceMessageCardsRequest.verify|verify} messages.
+                 * @param message ReplaceMessageCardsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReplaceMessageCardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReplaceMessageCardsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReplaceMessageCardsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReplaceMessageCardsRequest;
+
+                /**
+                 * Decodes a ReplaceMessageCardsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReplaceMessageCardsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReplaceMessageCardsRequest;
+
+                /**
+                 * Verifies a ReplaceMessageCardsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReplaceMessageCardsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReplaceMessageCardsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReplaceMessageCardsRequest;
+
+                /**
+                 * Creates a plain object from a ReplaceMessageCardsRequest message. Also converts values to other types if specified.
+                 * @param message ReplaceMessageCardsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReplaceMessageCardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReplaceMessageCardsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReplaceMessageCardsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReplaceMessageCardsResponse. */
+            interface IReplaceMessageCardsResponse {
+            }
+
+            /** Represents a ReplaceMessageCardsResponse. */
+            class ReplaceMessageCardsResponse implements IReplaceMessageCardsResponse {
+
+                /**
+                 * Constructs a new ReplaceMessageCardsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReplaceMessageCardsResponse);
+
+                /**
+                 * Creates a new ReplaceMessageCardsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReplaceMessageCardsResponse instance
+                 */
+                public static create(properties?: google.chat.v1.IReplaceMessageCardsResponse): google.chat.v1.ReplaceMessageCardsResponse;
+
+                /**
+                 * Encodes the specified ReplaceMessageCardsResponse message. Does not implicitly {@link google.chat.v1.ReplaceMessageCardsResponse.verify|verify} messages.
+                 * @param message ReplaceMessageCardsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReplaceMessageCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReplaceMessageCardsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ReplaceMessageCardsResponse.verify|verify} messages.
+                 * @param message ReplaceMessageCardsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReplaceMessageCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReplaceMessageCardsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReplaceMessageCardsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReplaceMessageCardsResponse;
+
+                /**
+                 * Decodes a ReplaceMessageCardsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReplaceMessageCardsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReplaceMessageCardsResponse;
+
+                /**
+                 * Verifies a ReplaceMessageCardsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReplaceMessageCardsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReplaceMessageCardsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReplaceMessageCardsResponse;
+
+                /**
+                 * Creates a plain object from a ReplaceMessageCardsResponse message. Also converts values to other types if specified.
+                 * @param message ReplaceMessageCardsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReplaceMessageCardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReplaceMessageCardsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReplaceMessageCardsResponse
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -22364,6 +22591,630 @@ export namespace google {
                     SPACE_OWNER_VIA_APP = 6,
                     SPACE_MEMBER = 7
                 }
+            }
+
+            /** Properties of an Elements. */
+            interface IElements {
+
+                /** Elements citedSources */
+                citedSources?: (google.chat.v1.ICitedSource[]|null);
+
+                /** Elements citations */
+                citations?: (google.chat.v1.ICitation[]|null);
+            }
+
+            /** Represents an Elements. */
+            class Elements implements IElements {
+
+                /**
+                 * Constructs a new Elements.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IElements);
+
+                /** Elements citedSources. */
+                public citedSources: google.chat.v1.ICitedSource[];
+
+                /** Elements citations. */
+                public citations: google.chat.v1.ICitation[];
+
+                /**
+                 * Creates a new Elements instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Elements instance
+                 */
+                public static create(properties?: google.chat.v1.IElements): google.chat.v1.Elements;
+
+                /**
+                 * Encodes the specified Elements message. Does not implicitly {@link google.chat.v1.Elements.verify|verify} messages.
+                 * @param message Elements message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IElements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Elements message, length delimited. Does not implicitly {@link google.chat.v1.Elements.verify|verify} messages.
+                 * @param message Elements message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IElements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Elements message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Elements
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Elements;
+
+                /**
+                 * Decodes an Elements message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Elements
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Elements;
+
+                /**
+                 * Verifies an Elements message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Elements message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Elements
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Elements;
+
+                /**
+                 * Creates a plain object from an Elements message. Also converts values to other types if specified.
+                 * @param message Elements
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Elements, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Elements to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Elements
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Citation. */
+            interface ICitation {
+
+                /** Citation id */
+                id?: (string|null);
+
+                /** Citation citedSources */
+                citedSources?: (google.chat.v1.ICitedSource[]|null);
+            }
+
+            /** Represents a Citation. */
+            class Citation implements ICitation {
+
+                /**
+                 * Constructs a new Citation.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICitation);
+
+                /** Citation id. */
+                public id: string;
+
+                /** Citation citedSources. */
+                public citedSources: google.chat.v1.ICitedSource[];
+
+                /**
+                 * Creates a new Citation instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Citation instance
+                 */
+                public static create(properties?: google.chat.v1.ICitation): google.chat.v1.Citation;
+
+                /**
+                 * Encodes the specified Citation message. Does not implicitly {@link google.chat.v1.Citation.verify|verify} messages.
+                 * @param message Citation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Citation message, length delimited. Does not implicitly {@link google.chat.v1.Citation.verify|verify} messages.
+                 * @param message Citation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Citation message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Citation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Citation;
+
+                /**
+                 * Decodes a Citation message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Citation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Citation;
+
+                /**
+                 * Verifies a Citation message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Citation message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Citation
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Citation;
+
+                /**
+                 * Creates a plain object from a Citation message. Also converts values to other types if specified.
+                 * @param message Citation
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Citation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Citation to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Citation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CitedSource. */
+            interface ICitedSource {
+
+                /** CitedSource title */
+                title?: (string|null);
+
+                /** CitedSource uri */
+                uri?: (string|null);
+
+                /** CitedSource snippet */
+                snippet?: (google.chat.v1.CitedSource.ISnippet|null);
+
+                /** CitedSource footer */
+                footer?: (google.chat.v1.CitedSource.IFooter|null);
+            }
+
+            /** Represents a CitedSource. */
+            class CitedSource implements ICitedSource {
+
+                /**
+                 * Constructs a new CitedSource.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICitedSource);
+
+                /** CitedSource title. */
+                public title: string;
+
+                /** CitedSource uri. */
+                public uri: string;
+
+                /** CitedSource snippet. */
+                public snippet?: (google.chat.v1.CitedSource.ISnippet|null);
+
+                /** CitedSource footer. */
+                public footer?: (google.chat.v1.CitedSource.IFooter|null);
+
+                /**
+                 * Creates a new CitedSource instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CitedSource instance
+                 */
+                public static create(properties?: google.chat.v1.ICitedSource): google.chat.v1.CitedSource;
+
+                /**
+                 * Encodes the specified CitedSource message. Does not implicitly {@link google.chat.v1.CitedSource.verify|verify} messages.
+                 * @param message CitedSource message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICitedSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CitedSource message, length delimited. Does not implicitly {@link google.chat.v1.CitedSource.verify|verify} messages.
+                 * @param message CitedSource message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICitedSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CitedSource message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CitedSource
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CitedSource;
+
+                /**
+                 * Decodes a CitedSource message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CitedSource
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CitedSource;
+
+                /**
+                 * Verifies a CitedSource message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CitedSource message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CitedSource
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CitedSource;
+
+                /**
+                 * Creates a plain object from a CitedSource message. Also converts values to other types if specified.
+                 * @param message CitedSource
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CitedSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CitedSource to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CitedSource
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace CitedSource {
+
+                /** Properties of a Snippet. */
+                interface ISnippet {
+
+                    /** Snippet text */
+                    text?: (string|null);
+
+                    /** Snippet imagePreview */
+                    imagePreview?: (google.chat.v1.IElementsImage|null);
+                }
+
+                /** Represents a Snippet. */
+                class Snippet implements ISnippet {
+
+                    /**
+                     * Constructs a new Snippet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.CitedSource.ISnippet);
+
+                    /** Snippet text. */
+                    public text: string;
+
+                    /** Snippet imagePreview. */
+                    public imagePreview?: (google.chat.v1.IElementsImage|null);
+
+                    /**
+                     * Creates a new Snippet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Snippet instance
+                     */
+                    public static create(properties?: google.chat.v1.CitedSource.ISnippet): google.chat.v1.CitedSource.Snippet;
+
+                    /**
+                     * Encodes the specified Snippet message. Does not implicitly {@link google.chat.v1.CitedSource.Snippet.verify|verify} messages.
+                     * @param message Snippet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.CitedSource.ISnippet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Snippet message, length delimited. Does not implicitly {@link google.chat.v1.CitedSource.Snippet.verify|verify} messages.
+                     * @param message Snippet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.CitedSource.ISnippet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Snippet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Snippet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CitedSource.Snippet;
+
+                    /**
+                     * Decodes a Snippet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Snippet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CitedSource.Snippet;
+
+                    /**
+                     * Verifies a Snippet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Snippet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Snippet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.CitedSource.Snippet;
+
+                    /**
+                     * Creates a plain object from a Snippet message. Also converts values to other types if specified.
+                     * @param message Snippet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.CitedSource.Snippet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Snippet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Snippet
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Footer. */
+                interface IFooter {
+
+                    /** Footer text */
+                    text?: (string|null);
+                }
+
+                /** Represents a Footer. */
+                class Footer implements IFooter {
+
+                    /**
+                     * Constructs a new Footer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.CitedSource.IFooter);
+
+                    /** Footer text. */
+                    public text: string;
+
+                    /**
+                     * Creates a new Footer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Footer instance
+                     */
+                    public static create(properties?: google.chat.v1.CitedSource.IFooter): google.chat.v1.CitedSource.Footer;
+
+                    /**
+                     * Encodes the specified Footer message. Does not implicitly {@link google.chat.v1.CitedSource.Footer.verify|verify} messages.
+                     * @param message Footer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.CitedSource.IFooter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Footer message, length delimited. Does not implicitly {@link google.chat.v1.CitedSource.Footer.verify|verify} messages.
+                     * @param message Footer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.CitedSource.IFooter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Footer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Footer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CitedSource.Footer;
+
+                    /**
+                     * Decodes a Footer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Footer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CitedSource.Footer;
+
+                    /**
+                     * Verifies a Footer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Footer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Footer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.CitedSource.Footer;
+
+                    /**
+                     * Creates a plain object from a Footer message. Also converts values to other types if specified.
+                     * @param message Footer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.CitedSource.Footer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Footer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Footer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Properties of an ElementsImage. */
+            interface IElementsImage {
+
+                /** ElementsImage imageUri */
+                imageUri?: (string|null);
+            }
+
+            /** Represents an ElementsImage. */
+            class ElementsImage implements IElementsImage {
+
+                /**
+                 * Constructs a new ElementsImage.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IElementsImage);
+
+                /** ElementsImage imageUri. */
+                public imageUri?: (string|null);
+
+                /** ElementsImage image. */
+                public image?: "imageUri";
+
+                /**
+                 * Creates a new ElementsImage instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ElementsImage instance
+                 */
+                public static create(properties?: google.chat.v1.IElementsImage): google.chat.v1.ElementsImage;
+
+                /**
+                 * Encodes the specified ElementsImage message. Does not implicitly {@link google.chat.v1.ElementsImage.verify|verify} messages.
+                 * @param message ElementsImage message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IElementsImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ElementsImage message, length delimited. Does not implicitly {@link google.chat.v1.ElementsImage.verify|verify} messages.
+                 * @param message ElementsImage message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IElementsImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ElementsImage message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ElementsImage
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ElementsImage;
+
+                /**
+                 * Decodes an ElementsImage message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ElementsImage
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ElementsImage;
+
+                /**
+                 * Verifies an ElementsImage message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ElementsImage message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ElementsImage
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ElementsImage;
+
+                /**
+                 * Creates a plain object from an ElementsImage message. Also converts values to other types if specified.
+                 * @param message ElementsImage
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ElementsImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ElementsImage to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ElementsImage
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** MarkupSyntax enum. */
@@ -30317,31 +31168,6 @@ export namespace google {
         }
     }
 
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Code enum. */
-        enum Code {
-            OK = 0,
-            CANCELLED = 1,
-            UNKNOWN = 2,
-            INVALID_ARGUMENT = 3,
-            DEADLINE_EXCEEDED = 4,
-            NOT_FOUND = 5,
-            ALREADY_EXISTS = 6,
-            PERMISSION_DENIED = 7,
-            UNAUTHENTICATED = 16,
-            RESOURCE_EXHAUSTED = 8,
-            FAILED_PRECONDITION = 9,
-            ABORTED = 10,
-            OUT_OF_RANGE = 11,
-            UNIMPLEMENTED = 12,
-            INTERNAL = 13,
-            UNAVAILABLE = 14,
-            DATA_LOSS = 15
-        }
-    }
-
     /** Namespace api. */
     namespace api {
 
@@ -33277,6 +34103,31 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Code enum. */
+        enum Code {
+            OK = 0,
+            CANCELLED = 1,
+            UNKNOWN = 2,
+            INVALID_ARGUMENT = 3,
+            DEADLINE_EXCEEDED = 4,
+            NOT_FOUND = 5,
+            ALREADY_EXISTS = 6,
+            PERMISSION_DENIED = 7,
+            UNAUTHENTICATED = 16,
+            RESOURCE_EXHAUSTED = 8,
+            FAILED_PRECONDITION = 9,
+            ABORTED = 10,
+            OUT_OF_RANGE = 11,
+            UNIMPLEMENTED = 12,
+            INTERNAL = 13,
+            UNAVAILABLE = 14,
+            DATA_LOSS = 15
         }
     }
 }

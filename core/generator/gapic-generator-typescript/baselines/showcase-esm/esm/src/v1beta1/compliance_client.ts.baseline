@@ -522,7 +522,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataBody request %j', request);
+    this._log.debug('repeatDataBody request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -531,7 +531,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataBody response %j', response);
+          this._log.debug('repeatDataBody response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -543,7 +543,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataBody response %j', response);
+          this._log.debug('repeatDataBody response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -657,7 +657,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataBodyInfo request %j', request);
+    this._log.debug('repeatDataBodyInfo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -666,7 +666,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataBodyInfo response %j', response);
+          this._log.debug('repeatDataBodyInfo response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -678,7 +678,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataBodyInfo response %j', response);
+          this._log.debug('repeatDataBodyInfo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -791,7 +791,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataQuery request %j', request);
+    this._log.debug('repeatDataQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -800,7 +800,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataQuery response %j', response);
+          this._log.debug('repeatDataQuery response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -812,7 +812,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataQuery response %j', response);
+          this._log.debug('repeatDataQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -934,7 +934,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataSimplePath request %j', request);
+    this._log.debug('repeatDataSimplePath request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -943,7 +943,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataSimplePath response %j', response);
+          this._log.debug('repeatDataSimplePath response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -955,7 +955,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataSimplePath response %j', response);
+          this._log.debug('repeatDataSimplePath response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1073,7 +1073,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataPathResource request %j', request);
+    this._log.debug('repeatDataPathResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -1082,7 +1082,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataPathResource response %j', response);
+          this._log.debug('repeatDataPathResource response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1094,7 +1094,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataPathResource response %j', response);
+          this._log.debug('repeatDataPathResource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1211,7 +1211,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataPathTrailingResource request %j', request);
+    this._log.debug('repeatDataPathTrailingResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -1220,7 +1220,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'repeatDataPathTrailingResource response %j',
             response,
           );
@@ -1235,7 +1235,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'repeatDataPathTrailingResource response %j',
             response,
           );
@@ -1350,7 +1350,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataBodyPut request %j', request);
+    this._log.debug('repeatDataBodyPut request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -1359,7 +1359,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataBodyPut response %j', response);
+          this._log.debug('repeatDataBodyPut response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1371,7 +1371,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataBodyPut response %j', response);
+          this._log.debug('repeatDataBodyPut response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1483,7 +1483,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('repeatDataBodyPatch request %j', request);
+    this._log.debug('repeatDataBodyPatch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IRepeatResponse,
@@ -1492,7 +1492,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('repeatDataBodyPatch response %j', response);
+          this._log.debug('repeatDataBodyPatch response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1504,7 +1504,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IRepeatRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repeatDataBodyPatch response %j', response);
+          this._log.debug('repeatDataBodyPatch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1608,7 +1608,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEnum request %j', request);
+    this._log.debug('getEnum request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IEnumResponse,
@@ -1617,7 +1617,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEnum response %j', response);
+          this._log.debug('getEnum response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1629,7 +1629,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IEnumRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEnum response %j', response);
+          this._log.debug('getEnum response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1735,7 +1735,7 @@ export class ComplianceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyEnum request %j', request);
+    this._log.debug('verifyEnum request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IEnumResponse,
@@ -1744,7 +1744,7 @@ export class ComplianceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyEnum response %j', response);
+          this._log.debug('verifyEnum response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1756,7 +1756,7 @@ export class ComplianceClient {
           protos.google.showcase.v1beta1.IEnumResponse | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('verifyEnum response %j', response);
+          this._log.debug('verifyEnum response %j', response);
           return [response, options, rawResponse];
         },
       )

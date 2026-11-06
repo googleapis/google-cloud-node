@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/precise-date-v6.2.0...precise-date-v6.2.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **tools:** Export test-utils types and exempt cloud-profiler on Bun ([#9611](https://github.com/googleapis/google-cloud-node/issues/9611)) ([ec74599](https://github.com/googleapis/google-cloud-node/commit/ec745996da1c3ced29382dbd4365e80e6800a840))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/precise-date-v6.1.0...precise-date-v6.2.0) (2026-10-08)
 
 

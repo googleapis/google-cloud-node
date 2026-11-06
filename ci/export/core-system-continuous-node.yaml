@@ -1,5 +1,5 @@
 createTime: '2025-09-18T18:59:44.053456230Z'
-description: Continuous build with node 18
+description: Continuous build with node 22
 filename: ci/cloudbuild_with_gapic_showcase.yaml
 github:
   name: google-cloud-node

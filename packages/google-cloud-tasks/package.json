@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": {
@@ -57,11 +57,11 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos esm/src --esm",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c .jsdoc.json",
     "postpack": "minifyProtoJson",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "system-test:cjs": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
     "system-test:esm": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",

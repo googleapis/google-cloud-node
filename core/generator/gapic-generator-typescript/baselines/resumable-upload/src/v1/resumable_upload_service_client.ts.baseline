@@ -471,7 +471,7 @@ export class ResumableUploadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUploadStatus request %j', request);
+    this._log.debug('getUploadStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.samples.resumable.v1.IGetUploadStatusResponse,
@@ -482,7 +482,7 @@ export class ResumableUploadServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUploadStatus response %j', response);
+          this._log.debug('getUploadStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -497,7 +497,7 @@ export class ResumableUploadServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUploadStatus response %j', response);
+          this._log.debug('getUploadStatus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -566,7 +566,7 @@ export class ResumableUploadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createResumableUpload request %j', request);
+    this._log.debug('createResumableUpload request %j', request);
     return (
       this.innerApiCalls['createResumableUpload'](request, {
         ...options,

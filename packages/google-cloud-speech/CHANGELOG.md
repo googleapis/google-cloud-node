@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/speech-v8.2.0...speech-v8.2.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/speech-v8.1.1...speech-v8.2.0) (2026-10-08)
 
 

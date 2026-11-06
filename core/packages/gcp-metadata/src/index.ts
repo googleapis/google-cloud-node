@@ -168,10 +168,10 @@ async function metadataAccessor<T>(
     responseType: 'text',
     timeout: requestTimeout(),
   } as GaxiosOptions;
-  log.info('instance request %j', req);
+  log.debug('instance request %j', req);
 
   const res = await requestMethod<T>(req);
-  log.info('instance metadata is %s', res.data);
+  log.debug('instance metadata is %s', res.data);
 
   const metadataFlavor = res.headers.get(HEADER_NAME);
   if (metadataFlavor !== HEADER_VALUE) {

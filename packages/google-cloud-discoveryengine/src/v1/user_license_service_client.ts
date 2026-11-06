@@ -212,17 +212,29 @@ export class UserLicenseServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
       assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
       ),
       assistantPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
       ),
+      collectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}',
+      ),
+      dataConnectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataConnector',
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}',
       ),
       identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -289,6 +301,14 @@ export class UserLicenseServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
         ),
+      projectLocationCollectionDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/widgetConfigs/{widget_config}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
+        ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}',
@@ -308,6 +328,10 @@ export class UserLicenseServiceClient {
       projectLocationCollectionEngineSessionsPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}',
+        ),
+      projectLocationCollectionEngineWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/widgetConfigs/{widget_config}',
         ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}',
@@ -363,6 +387,10 @@ export class UserLicenseServiceClient {
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
+        ),
+      projectLocationDataStoreWidgetConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/widgetConfigs/{widget_config}',
         ),
       userStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/userStores/{user_store}',
@@ -434,6 +462,9 @@ export class UserLicenseServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/assistants/*/agents/*/operations/*}',
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
@@ -576,6 +607,7 @@ export class UserLicenseServiceClient {
     // and create an API call method for each.
     const userLicenseServiceStubMethods = [
       'listUserLicenses',
+      'listLicenseConfigsUsageStats',
       'batchUpdateUserLicenses',
     ];
     for (const methodName of userLicenseServiceStubMethods) {
@@ -672,7 +704,11 @@ export class UserLicenseServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -694,6 +730,152 @@ export class UserLicenseServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Lists all the
+   * {@link protos.google.cloud.discoveryengine.v1.LicenseConfigUsageStats|LicenseConfigUsageStats}s
+   * associated with the project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.ListLicenseConfigsUsageStatsResponse|ListLicenseConfigsUsageStatsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_license_service.list_license_configs_usage_stats.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserLicenseService_ListLicenseConfigsUsageStats_async
+   */
+  listLicenseConfigsUsageStats(
+    request?: protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  listLicenseConfigsUsageStats(
+    request: protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  listLicenseConfigsUsageStats(
+    request: protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  listLicenseConfigsUsageStats(
+    request?: protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+          | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+      | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLicenseConfigsUsageStats request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+          | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listLicenseConfigsUsageStats response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listLicenseConfigsUsageStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listLicenseConfigsUsageStats response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Updates the User License.
@@ -702,9 +884,10 @@ export class UserLicenseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.discoveryengine.v1.BatchUpdateUserLicensesRequest.InlineSource} request.inlineSource
-   *   The inline source for the input content for document embeddings.
+   *   The inline source for the input content for license assignment.
    * @param {string} request.parent
-   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   Required. The parent {@link protos.google.cloud.discoveryengine.v1.UserStore|UserStore}
+   *   resource name, format:
    *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {boolean} [request.deleteUnassignedUserLicenses]
    *   Optional. If true, if user licenses removed associated license config, the
@@ -878,12 +1061,13 @@ export class UserLicenseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   Required. The parent {@link protos.google.cloud.discoveryengine.v1.UserStore|UserStore}
+   *   resource name, format:
    *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
-   *   above 50 will be coerced to 50.
+   *   requested. If unspecified, defaults to 100. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
@@ -898,7 +1082,8 @@ export class UserLicenseServiceClient {
    *   Supported fields:
    *
    *   * `license_assignment_state`
-   *
+   *   * `user_principal`
+   *   *
    *   Examples:
    *
    *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
@@ -907,6 +1092,25 @@ export class UserLicenseServiceClient {
    *   who attempted login but no license assigned.
    *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
    *   out users who attempted login but no license assigned.
+   *   * `user_principal = user1@example.com` to list user license for
+   *   `user1@example.com`.
+   * @param {string} [request.orderBy]
+   *   Optional. The order in which the
+   *   {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense}s are listed. The
+   *   value must be a comma-separated list of fields. Default sorting order is
+   *   ascending. To specify descending order for a field, append a " desc"
+   *   suffix. Redundant space characters in the syntax are insignificant.
+   *
+   *   Supported fields (only `user_principal` is supported for now):
+   *
+   *   * `user_principal`
+   *
+   *   If not set, the default ordering is by `user_principal`.
+   *
+   *   Examples:
+   *
+   *   * `user_principal` to order by `user_principal` in ascending order.
+   *   * `user_principal desc` to order by `user_principal` in descending order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1027,12 +1231,13 @@ export class UserLicenseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   Required. The parent {@link protos.google.cloud.discoveryengine.v1.UserStore|UserStore}
+   *   resource name, format:
    *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
-   *   above 50 will be coerced to 50.
+   *   requested. If unspecified, defaults to 100. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
@@ -1047,7 +1252,8 @@ export class UserLicenseServiceClient {
    *   Supported fields:
    *
    *   * `license_assignment_state`
-   *
+   *   * `user_principal`
+   *   *
    *   Examples:
    *
    *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
@@ -1056,6 +1262,25 @@ export class UserLicenseServiceClient {
    *   who attempted login but no license assigned.
    *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
    *   out users who attempted login but no license assigned.
+   *   * `user_principal = user1@example.com` to list user license for
+   *   `user1@example.com`.
+   * @param {string} [request.orderBy]
+   *   Optional. The order in which the
+   *   {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense}s are listed. The
+   *   value must be a comma-separated list of fields. Default sorting order is
+   *   ascending. To specify descending order for a field, append a " desc"
+   *   suffix. Redundant space characters in the syntax are insignificant.
+   *
+   *   Supported fields (only `user_principal` is supported for now):
+   *
+   *   * `user_principal`
+   *
+   *   If not set, the default ordering is by `user_principal`.
+   *
+   *   Examples:
+   *
+   *   * `user_principal` to order by `user_principal` in ascending order.
+   *   * `user_principal desc` to order by `user_principal` in descending order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1099,12 +1324,13 @@ export class UserLicenseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent {@link protos.|UserStore} resource name, format:
+   *   Required. The parent {@link protos.google.cloud.discoveryengine.v1.UserStore|UserStore}
+   *   resource name, format:
    *   `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, defaults to 10. The maximum value is 50; values
-   *   above 50 will be coerced to 50.
+   *   requested. If unspecified, defaults to 100. The maximum value is 1000;
+   *   values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} [request.pageToken]
@@ -1119,7 +1345,8 @@ export class UserLicenseServiceClient {
    *   Supported fields:
    *
    *   * `license_assignment_state`
-   *
+   *   * `user_principal`
+   *   *
    *   Examples:
    *
    *   * `license_assignment_state = ASSIGNED` to list assigned user licenses.
@@ -1128,6 +1355,25 @@ export class UserLicenseServiceClient {
    *   who attempted login but no license assigned.
    *   * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
    *   out users who attempted login but no license assigned.
+   *   * `user_principal = user1@example.com` to list user license for
+   *   `user1@example.com`.
+   * @param {string} [request.orderBy]
+   *   Optional. The order in which the
+   *   {@link protos.google.cloud.discoveryengine.v1.UserLicense|UserLicense}s are listed. The
+   *   value must be a comma-separated list of fields. Default sorting order is
+   *   ascending. To specify descending order for a field, append a " desc"
+   *   suffix. Redundant space characters in the syntax are insignificant.
+   *
+   *   Supported fields (only `user_principal` is supported for now):
+   *
+   *   * `user_principal`
+   *
+   *   If not set, the default ordering is by `user_principal`.
+   *
+   *   Examples:
+   *
+   *   * `user_principal` to order by `user_principal` in ascending order.
+   *   * `user_principal desc` to order by `user_principal` in descending order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1470,6 +1716,44 @@ export class UserLicenseServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
+
+  /**
    * Return a fully-qualified assistAnswer resource name string.
    *
    * @param {string} project
@@ -1656,6 +1940,110 @@ export class UserLicenseServiceClient {
   }
 
   /**
+   * Return a fully-qualified collection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  collectionPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.collectionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
+  }
+
+  /**
+   * Return a fully-qualified dataConnector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  dataConnectorPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from DataConnector resource.
+   *
+   * @param {string} dataConnectorName
+   *   A fully-qualified path representing DataConnector resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromDataConnectorName(dataConnectorName: string) {
+    return this.pathTemplates.dataConnectorPathTemplate.match(dataConnectorName)
+      .collection;
+  }
+
+  /**
    * Return a fully-qualified engine resource name string.
    *
    * @param {string} project
@@ -1781,6 +2169,58 @@ export class UserLicenseServiceClient {
     return this.pathTemplates.identityMappingStorePathTemplate.match(
       identityMappingStoreName,
     ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
   }
 
   /**
@@ -3376,6 +3816,230 @@ export class UserLicenseServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionDataStoreWidgetConfigName(
+    projectLocationCollectionDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreWidgetConfigPathTemplate.match(
+      projectLocationCollectionDataStoreWidgetConfigName,
+    ).widget_config;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionEngineControl resource name string.
    *
    * @param {string} project
@@ -3906,6 +4570,109 @@ export class UserLicenseServiceClient {
     return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(
       projectLocationCollectionEngineSessionsName,
     ).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineWidgetConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).engine;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationCollectionEngineWidgetConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineWidgetConfigName
+   *   A fully-qualified path representing project_location_collection_engine_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationCollectionEngineWidgetConfigName(
+    projectLocationCollectionEngineWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineWidgetConfigPathTemplate.match(
+      projectLocationCollectionEngineWidgetConfigName,
+    ).widget_config;
   }
 
   /**
@@ -5112,6 +5879,91 @@ export class UserLicenseServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreWidgetConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} widget_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreWidgetConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    widgetConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        widget_config: widgetConfig,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).data_store;
+  }
+
+  /**
+   * Parse the widget_config from ProjectLocationDataStoreWidgetConfig resource.
+   *
+   * @param {string} projectLocationDataStoreWidgetConfigName
+   *   A fully-qualified path representing project_location_data_store_widget_config resource.
+   * @returns {string} A string representing the widget_config.
+   */
+  matchWidgetConfigFromProjectLocationDataStoreWidgetConfigName(
+    projectLocationDataStoreWidgetConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationDataStoreWidgetConfigPathTemplate.match(
+      projectLocationDataStoreWidgetConfigName,
+    ).widget_config;
   }
 
   /**

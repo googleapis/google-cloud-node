@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_users_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Cloud SQL users service.
  * @class
  * @memberof v1beta4
  */

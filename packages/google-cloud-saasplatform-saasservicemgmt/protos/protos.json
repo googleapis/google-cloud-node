@@ -8,6 +8,3816 @@
               "nested": {
                 "saasservicemgmt": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.SaasPlatform.SaasServiceMgmt.V1",
+                        "go_package": "cloud.google.com/go/saasplatform/saasservicemgmt/apiv1/saasservicemgmtpb;saasservicemgmtpb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "SaasRolloutsServiceProto",
+                        "java_package": "com.google.cloud.saasplatform.saasservicemgmt.v1",
+                        "php_namespace": "Google\\Cloud\\SaasPlatform\\SaasServiceMgmt\\V1",
+                        "ruby_package": "Google::Cloud::SaasPlatform::SaasServiceMgmt::V1",
+                        "(google.api.resource_definition).type": "designcenter.googleapis.com/ApplicationTemplateRevision",
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/spaces/{space}/applicationTemplates/{application_template}/revisions/{revision}"
+                      },
+                      "nested": {
+                        "UnitOperationErrorCategory": {
+                          "values": {
+                            "UNIT_OPERATION_ERROR_CATEGORY_UNSPECIFIED": 0,
+                            "NOT_APPLICABLE": 1,
+                            "FATAL": 2,
+                            "RETRIABLE": 3,
+                            "IGNORABLE": 4,
+                            "STANDARD": 5
+                          }
+                        },
+                        "Blueprint": {
+                          "fields": {
+                            "package": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "engine": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "UnitVariable": {
+                          "fields": {
+                            "variable": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "STRING": 1,
+                                "INT": 2,
+                                "BOOL": 3,
+                                "STRUCT": 4,
+                                "LIST": 5
+                              }
+                            }
+                          }
+                        },
+                        "UnitCondition": {
+                          "fields": {
+                            "status": {
+                              "type": "Status",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "lastTransitionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "reason": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Status": {
+                              "values": {
+                                "STATUS_UNSPECIFIED": 0,
+                                "STATUS_UNKNOWN": 1,
+                                "STATUS_TRUE": 2,
+                                "STATUS_FALSE": 3
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "TYPE_READY": 1,
+                                "TYPE_UPDATING": 2,
+                                "TYPE_PROVISIONED": 3,
+                                "TYPE_OPERATION_ERROR": 4,
+                                "TYPE_FLAGS_CONFIG_INITIALIZED": 5,
+                                "TYPE_APP_CREATED_OR_ALREADY_EXISTS": 6,
+                                "TYPE_APP_COMPONENTS_REGISTERED": 7
+                              }
+                            }
+                          }
+                        },
+                        "UnitOperationCondition": {
+                          "fields": {
+                            "status": {
+                              "type": "Status",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "lastTransitionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "reason": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Status": {
+                              "values": {
+                                "STATUS_UNSPECIFIED": 0,
+                                "STATUS_UNKNOWN": 1,
+                                "STATUS_TRUE": 2,
+                                "STATUS_FALSE": 3
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "TYPE_SCHEDULED": 2,
+                                "TYPE_RUNNING": 3,
+                                "TYPE_SUCCEEDED": 4,
+                                "TYPE_CANCELLED": 5,
+                                "TYPE_APP_CREATED": 6,
+                                "TYPE_APP_COMPONENTS_REGISTERED": 7,
+                                "TYPE_WORKLOAD_SUCCEEDED": 8
+                              }
+                            }
+                          }
+                        },
+                        "SaasCondition": {
+                          "fields": {
+                            "status": {
+                              "type": "Status",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "lastTransitionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "reason": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Status": {
+                              "values": {
+                                "STATUS_UNSPECIFIED": 0,
+                                "STATUS_UNKNOWN": 1,
+                                "STATUS_TRUE": 2,
+                                "STATUS_FALSE": 3
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "TYPE_READY": 1,
+                                "TYPE_SYNCHRONIZED": 2
+                              }
+                            }
+                          }
+                        },
+                        "Aggregate": {
+                          "fields": {
+                            "group": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "count": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DurationLimits": {
+                          "fields": {
+                            "unitOperationTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Location": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Saas": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/Saas",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/saas/{saas}",
+                            "(google.api.resource).plural": "saas",
+                            "(google.api.resource).singular": "saas"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "locations": {
+                              "rule": "repeated",
+                              "type": "Location",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "applicationTemplate": {
+                              "type": "CompositeRef",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "blueprintRepo": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "conditions": {
+                              "rule": "repeated",
+                              "type": "SaasCondition",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "options": {
+                                "allow_alias": true
+                              },
+                              "valuesOptions": {
+                                "STATE_TYPE_UNSPECIFIED": {
+                                  "deprecated": true
+                                }
+                              },
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "STATE_TYPE_UNSPECIFIED": 0,
+                                "STATE_ACTIVE": 1,
+                                "STATE_RUNNING": 2,
+                                "STATE_FAILED": 3
+                              }
+                            }
+                          }
+                        },
+                        "Tenant": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/Tenant",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/tenants/{tenant}",
+                            "(google.api.resource).plural": "tenants",
+                            "(google.api.resource).singular": "tenant"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "consumerResource": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "saas": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "UnitKind": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/UnitKind",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/unitKinds/{unit_kind}",
+                            "(google.api.resource).plural": "unitKinds",
+                            "(google.api.resource).singular": "unitKind"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "defaultRelease": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "dependencies": {
+                              "rule": "repeated",
+                              "type": "Dependency",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "inputVariableMappings": {
+                              "rule": "repeated",
+                              "type": "VariableMapping",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "outputVariableMappings": {
+                              "rule": "repeated",
+                              "type": "VariableMapping",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "saas": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            },
+                            "applicationTemplateComponent": {
+                              "type": "ComponentRef",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "appParams": {
+                              "type": "AppParams",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "boundaryType": {
+                              "type": "BoundaryType",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "durationLimits": {
+                              "type": "DurationLimits",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "deleteTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10306,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BoundaryType": {
+                              "values": {
+                                "BOUNDARY_TYPE_UNSPECIFIED": 0,
+                                "BOUNDARY_TYPE_TENANT_PROJECT": 1,
+                                "BOUNDARY_TYPE_MANAGED_PROJECT": 2
+                              }
+                            }
+                          }
+                        },
+                        "Unit": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/Unit",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/units/{unit}",
+                            "(google.api.resource).plural": "units",
+                            "(google.api.resource).singular": "unit"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "unitKind": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "release": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "tenant": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Tenant"
+                              }
+                            },
+                            "ongoingOperations": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "pendingOperations": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "scheduledOperations": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 24,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "dependents": {
+                              "rule": "repeated",
+                              "type": "UnitDependency",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dependencies": {
+                              "rule": "repeated",
+                              "type": "UnitDependency",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "outputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maintenance": {
+                              "type": "MaintenanceSettings",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "state": {
+                              "type": "UnitState",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "conditions": {
+                              "rule": "repeated",
+                              "type": "UnitCondition",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "managementMode": {
+                              "type": "ManagementMode",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "systemManagedState": {
+                              "type": "SystemManagedState",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "systemCleanupAt": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 26,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "application": {
+                              "type": "string",
+                              "id": 29,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "apphub.googleapis.com/Application"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 10305,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 10306,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MaintenanceSettings": {
+                              "fields": {
+                                "pinnedUntilTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UnitState": {
+                              "values": {
+                                "UNIT_STATE_UNSPECIFIED": 0,
+                                "UNIT_STATE_NOT_PROVISIONED": 1,
+                                "UNIT_STATE_PROVISIONING": 2,
+                                "UNIT_STATE_UPDATING": 3,
+                                "UNIT_STATE_DEPROVISIONING": 4,
+                                "UNIT_STATE_READY": 5,
+                                "UNIT_STATE_ERROR": 6
+                              }
+                            },
+                            "ManagementMode": {
+                              "values": {
+                                "MANAGEMENT_MODE_UNSPECIFIED": 0,
+                                "MANAGEMENT_MODE_USER": 1,
+                                "MANAGEMENT_MODE_SYSTEM": 2
+                              }
+                            },
+                            "SystemManagedState": {
+                              "values": {
+                                "SYSTEM_MANAGED_STATE_UNSPECIFIED": 0,
+                                "SYSTEM_MANAGED_STATE_ACTIVE": 1,
+                                "SYSTEM_MANAGED_STATE_INACTIVE": 2,
+                                "SYSTEM_MANAGED_STATE_DECOMMISSIONED": 3
+                              }
+                            }
+                          }
+                        },
+                        "UnitDependency": {
+                          "fields": {
+                            "alias": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            }
+                          }
+                        },
+                        "UnitOperation": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/UnitOperation",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/unitOperations/{unit_operation}",
+                            "(google.api.resource).plural": "unitOperations",
+                            "(google.api.resource).singular": "unitOperation"
+                          },
+                          "oneofs": {
+                            "unitOperationType": {
+                              "oneof": [
+                                "provision",
+                                "upgrade",
+                                "deprovision"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "provision": {
+                              "type": "Provision",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "upgrade": {
+                              "type": "Upgrade",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deprovision": {
+                              "type": "Deprovision",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            },
+                            "parentUnitOperation": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "rollout": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "cancel": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "state": {
+                              "type": "UnitOperationState",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "conditions": {
+                              "rule": "repeated",
+                              "type": "UnitOperationCondition",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "schedule": {
+                              "type": "Schedule",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "engineState": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorCategory": {
+                              "type": "UnitOperationErrorCategory",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "durationLimits": {
+                              "type": "DurationLimits",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "deleteTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10305,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "UnitOperationState": {
+                              "values": {
+                                "UNIT_OPERATION_STATE_UNKNOWN": 0,
+                                "UNIT_OPERATION_STATE_PENDING": 1,
+                                "UNIT_OPERATION_STATE_SCHEDULED": 2,
+                                "UNIT_OPERATION_STATE_RUNNING": 4,
+                                "UNIT_OPERATION_STATE_SUCCEEDED": 5,
+                                "UNIT_OPERATION_STATE_FAILED": 6,
+                                "UNIT_OPERATION_STATE_CANCELLED": 7
+                              }
+                            }
+                          }
+                        },
+                        "Provision": {
+                          "fields": {
+                            "release": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "inputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Deprovision": {
+                          "fields": {}
+                        },
+                        "Upgrade": {
+                          "fields": {
+                            "release": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "inputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Schedule": {
+                          "fields": {
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Release": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/Release",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/releases/{release}",
+                            "(google.api.resource).plural": "releases",
+                            "(google.api.resource).singular": "release"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "unitKind": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "blueprint": {
+                              "type": "Blueprint",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "releaseRequirements": {
+                              "type": "ReleaseRequirements",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "inputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "outputVariables": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputVariableDefaults": {
+                              "rule": "repeated",
+                              "type": "UnitVariable",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "applicationTemplateComponent": {
+                              "type": "ComponentRef",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ReleaseRequirements": {
+                              "fields": {
+                                "upgradeableFromReleases": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "VariableMapping": {
+                          "oneofs": {
+                            "mappingType": {
+                              "oneof": [
+                                "from",
+                                "to"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "from": {
+                              "type": "FromMapping",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "to": {
+                              "type": "ToMapping",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "variable": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "FromMapping": {
+                          "fields": {
+                            "dependency": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "outputVariable": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ToMapping": {
+                          "fields": {
+                            "dependency": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "inputVariable": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ignoreForLookup": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Dependency": {
+                          "fields": {
+                            "unitKind": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "alias": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "CompositeRef": {
+                          "fields": {
+                            "applicationTemplate": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "designcenter.googleapis.com/ApplicationTemplate"
+                              }
+                            },
+                            "revision": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "designcenter.googleapis.com/ApplicationTemplateRevision"
+                              }
+                            },
+                            "syncOperation": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ComponentRef": {
+                          "fields": {
+                            "compositeRef": {
+                              "type": "CompositeRef",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "component": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "revision": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "AppParams": {
+                          "fields": {
+                            "group": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "scope": {
+                              "type": "Scope",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Scope": {
+                              "fields": {
+                                "type": {
+                                  "type": "Type",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Type": {
+                                  "values": {
+                                    "TYPE_UNSPECIFIED": 0,
+                                    "TYPE_REGIONAL": 1,
+                                    "TYPE_GLOBAL": 2
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SaasDeployments": {
+                          "options": {
+                            "(google.api.default_host)": "saasservicemgmt.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/saasservicemgmt.read-write,https://www.googleapis.com/auth/saasservicemgmt.readonly"
+                          },
+                          "methods": {
+                            "ListSaas": {
+                              "requestType": "ListSaasRequest",
+                              "responseType": "ListSaasResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/saas",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/saas"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetSaas": {
+                              "requestType": "GetSaasRequest",
+                              "responseType": "Saas",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/saas/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/saas/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateSaas": {
+                              "requestType": "CreateSaasRequest",
+                              "responseType": "Saas",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/saas",
+                                "(google.api.http).body": "saas",
+                                "(google.api.method_signature)": "parent,saas,saas_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/saas",
+                                    "body": "saas"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,saas,saas_id"
+                                }
+                              ]
+                            },
+                            "UpdateSaas": {
+                              "requestType": "UpdateSaasRequest",
+                              "responseType": "Saas",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{saas.name=projects/*/locations/*/saas/*}",
+                                "(google.api.http).body": "saas",
+                                "(google.api.method_signature)": "saas,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{saas.name=projects/*/locations/*/saas/*}",
+                                    "body": "saas"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "saas,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteSaas": {
+                              "requestType": "DeleteSaasRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/saas/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/saas/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListTenants": {
+                              "requestType": "ListTenantsRequest",
+                              "responseType": "ListTenantsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/tenants",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/tenants"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetTenant": {
+                              "requestType": "GetTenantRequest",
+                              "responseType": "Tenant",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/tenants/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/tenants/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateTenant": {
+                              "requestType": "CreateTenantRequest",
+                              "responseType": "Tenant",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/tenants",
+                                "(google.api.http).body": "tenant",
+                                "(google.api.method_signature)": "parent,tenant,tenant_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/tenants",
+                                    "body": "tenant"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,tenant,tenant_id"
+                                }
+                              ]
+                            },
+                            "UpdateTenant": {
+                              "requestType": "UpdateTenantRequest",
+                              "responseType": "Tenant",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{tenant.name=projects/*/locations/*/tenants/*}",
+                                "(google.api.http).body": "tenant",
+                                "(google.api.method_signature)": "tenant,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{tenant.name=projects/*/locations/*/tenants/*}",
+                                    "body": "tenant"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "tenant,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteTenant": {
+                              "requestType": "DeleteTenantRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/tenants/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/tenants/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListUnitKinds": {
+                              "requestType": "ListUnitKindsRequest",
+                              "responseType": "ListUnitKindsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/unitKinds",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/unitKinds"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetUnitKind": {
+                              "requestType": "GetUnitKindRequest",
+                              "responseType": "UnitKind",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/unitKinds/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/unitKinds/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateUnitKind": {
+                              "requestType": "CreateUnitKindRequest",
+                              "responseType": "UnitKind",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/unitKinds",
+                                "(google.api.http).body": "unit_kind",
+                                "(google.api.method_signature)": "parent,unit_kind,unit_kind_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/unitKinds",
+                                    "body": "unit_kind"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,unit_kind,unit_kind_id"
+                                }
+                              ]
+                            },
+                            "UpdateUnitKind": {
+                              "requestType": "UpdateUnitKindRequest",
+                              "responseType": "UnitKind",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{unit_kind.name=projects/*/locations/*/unitKinds/*}",
+                                "(google.api.http).body": "unit_kind",
+                                "(google.api.method_signature)": "unit_kind,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{unit_kind.name=projects/*/locations/*/unitKinds/*}",
+                                    "body": "unit_kind"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "unit_kind,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteUnitKind": {
+                              "requestType": "DeleteUnitKindRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/unitKinds/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/unitKinds/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListUnits": {
+                              "requestType": "ListUnitsRequest",
+                              "responseType": "ListUnitsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/units",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/units"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetUnit": {
+                              "requestType": "GetUnitRequest",
+                              "responseType": "Unit",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/units/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/units/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateUnit": {
+                              "requestType": "CreateUnitRequest",
+                              "responseType": "Unit",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/units",
+                                "(google.api.http).body": "unit",
+                                "(google.api.method_signature)": "parent,unit,unit_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/units",
+                                    "body": "unit"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,unit,unit_id"
+                                }
+                              ]
+                            },
+                            "UpdateUnit": {
+                              "requestType": "UpdateUnitRequest",
+                              "responseType": "Unit",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{unit.name=projects/*/locations/*/units/*}",
+                                "(google.api.http).body": "unit",
+                                "(google.api.method_signature)": "unit,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{unit.name=projects/*/locations/*/units/*}",
+                                    "body": "unit"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "unit,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteUnit": {
+                              "requestType": "DeleteUnitRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/units/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/units/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListUnitOperations": {
+                              "requestType": "ListUnitOperationsRequest",
+                              "responseType": "ListUnitOperationsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/unitOperations",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/unitOperations"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetUnitOperation": {
+                              "requestType": "GetUnitOperationRequest",
+                              "responseType": "UnitOperation",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/unitOperations/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/unitOperations/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateUnitOperation": {
+                              "requestType": "CreateUnitOperationRequest",
+                              "responseType": "UnitOperation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/unitOperations",
+                                "(google.api.http).body": "unit_operation",
+                                "(google.api.method_signature)": "parent,unit_operation,unit_operation_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/unitOperations",
+                                    "body": "unit_operation"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,unit_operation,unit_operation_id"
+                                }
+                              ]
+                            },
+                            "UpdateUnitOperation": {
+                              "requestType": "UpdateUnitOperationRequest",
+                              "responseType": "UnitOperation",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{unit_operation.name=projects/*/locations/*/unitOperations/*}",
+                                "(google.api.http).body": "unit_operation",
+                                "(google.api.method_signature)": "unit_operation,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{unit_operation.name=projects/*/locations/*/unitOperations/*}",
+                                    "body": "unit_operation"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "unit_operation,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteUnitOperation": {
+                              "requestType": "DeleteUnitOperationRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/unitOperations/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/unitOperations/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListReleases": {
+                              "requestType": "ListReleasesRequest",
+                              "responseType": "ListReleasesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/releases",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/releases"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetRelease": {
+                              "requestType": "GetReleaseRequest",
+                              "responseType": "Release",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/releases/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/releases/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateRelease": {
+                              "requestType": "CreateReleaseRequest",
+                              "responseType": "Release",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/releases",
+                                "(google.api.http).body": "release",
+                                "(google.api.method_signature)": "parent,release,release_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/releases",
+                                    "body": "release"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,release,release_id"
+                                }
+                              ]
+                            },
+                            "UpdateRelease": {
+                              "requestType": "UpdateReleaseRequest",
+                              "responseType": "Release",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{release.name=projects/*/locations/*/releases/*}",
+                                "(google.api.http).body": "release",
+                                "(google.api.method_signature)": "release,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{release.name=projects/*/locations/*/releases/*}",
+                                    "body": "release"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "release,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteRelease": {
+                              "requestType": "DeleteReleaseRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/releases/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/releases/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ListSaasRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListSaasResponse": {
+                          "fields": {
+                            "saas": {
+                              "rule": "repeated",
+                              "type": "Saas",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetSaasRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            }
+                          }
+                        },
+                        "CreateSaasRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            },
+                            "saasId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "saas": {
+                              "type": "Saas",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateSaasRequest": {
+                          "fields": {
+                            "saas": {
+                              "type": "Saas",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteSaasRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Saas"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListTenantsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Tenant"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListTenantsResponse": {
+                          "fields": {
+                            "tenants": {
+                              "rule": "repeated",
+                              "type": "Tenant",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetTenantRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Tenant"
+                              }
+                            }
+                          }
+                        },
+                        "CreateTenantRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Tenant"
+                              }
+                            },
+                            "tenantId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "tenant": {
+                              "type": "Tenant",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateTenantRequest": {
+                          "fields": {
+                            "tenant": {
+                              "type": "Tenant",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteTenantRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Tenant"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListUnitKindsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListUnitKindsResponse": {
+                          "fields": {
+                            "unitKinds": {
+                              "rule": "repeated",
+                              "type": "UnitKind",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetUnitKindRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            }
+                          }
+                        },
+                        "CreateUnitKindRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "unitKindId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unitKind": {
+                              "type": "UnitKind",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateUnitKindRequest": {
+                          "fields": {
+                            "unitKind": {
+                              "type": "UnitKind",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteUnitKindRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListUnitsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListUnitsResponse": {
+                          "fields": {
+                            "units": {
+                              "rule": "repeated",
+                              "type": "Unit",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetUnitRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            }
+                          }
+                        },
+                        "CreateUnitRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            },
+                            "unitId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unit": {
+                              "type": "Unit",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateUnitRequest": {
+                          "fields": {
+                            "unit": {
+                              "type": "Unit",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteUnitRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Unit"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListUnitOperationsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListUnitOperationsResponse": {
+                          "fields": {
+                            "unitOperations": {
+                              "rule": "repeated",
+                              "type": "UnitOperation",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetUnitOperationRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            }
+                          }
+                        },
+                        "CreateUnitOperationRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "unitOperationId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unitOperation": {
+                              "type": "UnitOperation",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateUnitOperationRequest": {
+                          "fields": {
+                            "unitOperation": {
+                              "type": "UnitOperation",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteUnitOperationRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitOperation"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListReleasesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListReleasesResponse": {
+                          "fields": {
+                            "releases": {
+                              "rule": "repeated",
+                              "type": "Release",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetReleaseRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            }
+                          }
+                        },
+                        "CreateReleaseRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "releaseId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "release": {
+                              "type": "Release",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateReleaseRequest": {
+                          "fields": {
+                            "release": {
+                              "type": "Release",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteReleaseRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "RolloutAction": {
+                          "values": {
+                            "ROLLOUT_ACTION_UNSPECIFIED": 0,
+                            "ROLLOUT_ACTION_RUN": 1,
+                            "ROLLOUT_ACTION_PAUSE": 2,
+                            "ROLLOUT_ACTION_CANCEL": 3
+                          }
+                        },
+                        "Rollout": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/Rollout",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/rollouts/{rollout_id}",
+                            "(google.api.resource).plural": "rollouts",
+                            "(google.api.resource).singular": "rollout"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "release": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Release"
+                              }
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "RolloutState",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "stateMessage": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "stateTransitionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "rootRollout": {
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "parentRollout": {
+                              "type": "string",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "rolloutOrchestrationStrategy": {
+                              "type": "string",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "unitFilter": {
+                              "type": "string",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "rolloutKind": {
+                              "type": "string",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/RolloutKind"
+                              }
+                            },
+                            "stats": {
+                              "type": "RolloutStats",
+                              "id": 24,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "control": {
+                              "type": "RolloutControl",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveUnitFilter": {
+                              "type": "string",
+                              "id": 26,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "deleteTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10305,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RolloutState": {
+                              "values": {
+                                "ROLLOUT_STATE_UNSPECIFIED": 0,
+                                "ROLLOUT_STATE_RUNNING": 1,
+                                "ROLLOUT_STATE_PAUSED": 2,
+                                "ROLLOUT_STATE_SUCCEEDED": 3,
+                                "ROLLOUT_STATE_FAILED": 4,
+                                "ROLLOUT_STATE_CANCELLED": 5,
+                                "ROLLOUT_STATE_WAITING": 6,
+                                "ROLLOUT_STATE_CANCELLING": 7,
+                                "ROLLOUT_STATE_RESUMING": 8,
+                                "ROLLOUT_STATE_PAUSING": 9
+                              }
+                            }
+                          }
+                        },
+                        "RolloutKind": {
+                          "options": {
+                            "(google.api.resource).type": "saasservicemgmt.googleapis.com/RolloutKind",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/rolloutKinds/{rollout_kind_id}",
+                            "(google.api.resource).plural": "rolloutKinds",
+                            "(google.api.resource).singular": "rolloutKind"
+                          },
+                          "oneofs": {
+                            "_errorBudget": {
+                              "oneof": [
+                                "errorBudget"
+                              ]
+                            },
+                            "_unitUpdatePacing": {
+                              "oneof": [
+                                "unitUpdatePacing"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "unitKind": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/UnitKind"
+                              }
+                            },
+                            "rolloutOrchestrationStrategy": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "unitFilter": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "updateUnitKindStrategy": {
+                              "type": "UpdateUnitKindStrategy",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "errorBudget": {
+                              "type": "ErrorBudget",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "unitUpdatePacing": {
+                              "type": "UnitUpdatePacing",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10401,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "annotations": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10402,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "uid": {
+                              "type": "string",
+                              "id": 10201,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10303,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10304,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "UpdateUnitKindStrategy": {
+                              "values": {
+                                "UPDATE_UNIT_KIND_STRATEGY_UNSPECIFIED": 0,
+                                "UPDATE_UNIT_KIND_STRATEGY_ON_START": 1,
+                                "UPDATE_UNIT_KIND_STRATEGY_NEVER": 2
+                              }
+                            }
+                          }
+                        },
+                        "ErrorBudget": {
+                          "oneofs": {
+                            "_allowedCount": {
+                              "oneof": [
+                                "allowedCount"
+                              ]
+                            },
+                            "_allowedPercentage": {
+                              "oneof": [
+                                "allowedPercentage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "allowedCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "allowedPercentage": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "UnitUpdatePacing": {
+                          "oneofs": {
+                            "_maxConcurrentOperationsPercent": {
+                              "oneof": [
+                                "maxConcurrentOperationsPercent"
+                              ]
+                            },
+                            "_maxConcurrentOperationsCount": {
+                              "oneof": [
+                                "maxConcurrentOperationsCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "maxConcurrentOperationsPercent": {
+                              "type": "google.type.Decimal",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxConcurrentOperationsCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RolloutStats": {
+                          "oneofs": {
+                            "_estimatedTotalUnitCount": {
+                              "oneof": [
+                                "estimatedTotalUnitCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "operationsByState": {
+                              "rule": "repeated",
+                              "type": "Aggregate",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            },
+                            "estimatedTotalUnitCount": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RolloutControl": {
+                          "oneofs": {
+                            "actionParams": {
+                              "oneof": [
+                                "runParams"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "runParams": {
+                              "type": "RunRolloutActionParams",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "action": {
+                              "type": "RolloutAction",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RunRolloutActionParams": {
+                              "fields": {
+                                "retryFailedOperations": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SaasRollouts": {
+                          "options": {
+                            "(google.api.default_host)": "saasservicemgmt.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/saasservicemgmt.read-write,https://www.googleapis.com/auth/saasservicemgmt.readonly"
+                          },
+                          "methods": {
+                            "ListRollouts": {
+                              "requestType": "ListRolloutsRequest",
+                              "responseType": "ListRolloutsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/rollouts",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/rollouts"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetRollout": {
+                              "requestType": "GetRolloutRequest",
+                              "responseType": "Rollout",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/rollouts/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/rollouts/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateRollout": {
+                              "requestType": "CreateRolloutRequest",
+                              "responseType": "Rollout",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/rollouts",
+                                "(google.api.http).body": "rollout",
+                                "(google.api.method_signature)": "parent,rollout,rollout_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/rollouts",
+                                    "body": "rollout"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,rollout,rollout_id"
+                                }
+                              ]
+                            },
+                            "UpdateRollout": {
+                              "requestType": "UpdateRolloutRequest",
+                              "responseType": "Rollout",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{rollout.name=projects/*/locations/*/rollouts/*}",
+                                "(google.api.http).body": "rollout",
+                                "(google.api.method_signature)": "rollout,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{rollout.name=projects/*/locations/*/rollouts/*}",
+                                    "body": "rollout"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "rollout,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteRollout": {
+                              "requestType": "DeleteRolloutRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/rollouts/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/rollouts/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListRolloutKinds": {
+                              "requestType": "ListRolloutKindsRequest",
+                              "responseType": "ListRolloutKindsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/rolloutKinds",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/rolloutKinds"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetRolloutKind": {
+                              "requestType": "GetRolloutKindRequest",
+                              "responseType": "RolloutKind",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/rolloutKinds/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/rolloutKinds/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateRolloutKind": {
+                              "requestType": "CreateRolloutKindRequest",
+                              "responseType": "RolloutKind",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/rolloutKinds",
+                                "(google.api.http).body": "rollout_kind",
+                                "(google.api.method_signature)": "parent,rollout_kind,rollout_kind_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/rolloutKinds",
+                                    "body": "rollout_kind"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,rollout_kind,rollout_kind_id"
+                                }
+                              ]
+                            },
+                            "UpdateRolloutKind": {
+                              "requestType": "UpdateRolloutKindRequest",
+                              "responseType": "RolloutKind",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{rollout_kind.name=projects/*/locations/*/rolloutKinds/*}",
+                                "(google.api.http).body": "rollout_kind",
+                                "(google.api.method_signature)": "rollout_kind,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{rollout_kind.name=projects/*/locations/*/rolloutKinds/*}",
+                                    "body": "rollout_kind"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "rollout_kind,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteRolloutKind": {
+                              "requestType": "DeleteRolloutKindRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/rolloutKinds/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/rolloutKinds/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ListRolloutsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListRolloutsResponse": {
+                          "fields": {
+                            "rollouts": {
+                              "rule": "repeated",
+                              "type": "Rollout",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetRolloutRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            }
+                          }
+                        },
+                        "CreateRolloutRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "rolloutId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "rollout": {
+                              "type": "Rollout",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateRolloutRequest": {
+                          "fields": {
+                            "rollout": {
+                              "type": "Rollout",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteRolloutRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/Rollout"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "ListRolloutKindsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/RolloutKind"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 10505
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 10506
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 10507
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 10508
+                            }
+                          }
+                        },
+                        "ListRolloutKindsResponse": {
+                          "fields": {
+                            "rolloutKinds": {
+                              "rule": "repeated",
+                              "type": "RolloutKind",
+                              "id": 10509
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 10510
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 10511
+                            }
+                          }
+                        },
+                        "GetRolloutKindRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/RolloutKind"
+                              }
+                            }
+                          }
+                        },
+                        "CreateRolloutKindRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 10006,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "saasservicemgmt.googleapis.com/RolloutKind"
+                              }
+                            },
+                            "rolloutKindId": {
+                              "type": "string",
+                              "id": 10503,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "rolloutKind": {
+                              "type": "RolloutKind",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        },
+                        "UpdateRolloutKindRequest": {
+                          "fields": {
+                            "rolloutKind": {
+                              "type": "RolloutKind",
+                              "id": 10504,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 10512
+                            }
+                          }
+                        },
+                        "DeleteRolloutKindRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 10001,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "saasservicemgmt.googleapis.com/RolloutKind"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 10202
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 10501
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 10502
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.SaasPlatform.SaasServiceMgmt.V1Beta1",
@@ -5626,8 +9436,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {
@@ -5909,6 +9719,18 @@
                 "VISIBILITY_EXPORT": 2
               }
             },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -5929,18 +9751,6 @@
                 },
                 "value": {
                   "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
                   "id": 2
                 }
               }
@@ -5982,6 +9792,25 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/decimal;decimal",
+            "java_multiple_files": true,
+            "java_outer_classname": "DecimalProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Decimal": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

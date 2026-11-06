@@ -1,4 +1,7 @@
 [
+  "../../protos/google/cloud/backupdr/v1/appliedautoprotectionpolicy.proto",
+  "../../protos/google/cloud/backupdr/v1/autoprotectionpolicy.proto",
+  "../../protos/google/cloud/backupdr/v1/autoprotectionpolicybinding.proto",
   "../../protos/google/cloud/backupdr/v1/backupdr.proto",
   "../../protos/google/cloud/backupdr/v1/backupplan.proto",
   "../../protos/google/cloud/backupdr/v1/backupplanassociation.proto",
@@ -8,6 +11,12 @@
   "../../protos/google/cloud/backupdr/v1/backupvault_cloudsql.proto",
   "../../protos/google/cloud/backupdr/v1/backupvault_disk.proto",
   "../../protos/google/cloud/backupdr/v1/backupvault_gce.proto",
+  "../../protos/google/cloud/backupdr/v1/bindingmatchingresource.proto",
   "../../protos/google/cloud/backupdr/v1/datasourcereference.proto",
-  "../../protos/google/cloud/backupdr/v1/protection_summary.proto"
+  "../../protos/google/cloud/backupdr/v1/protection_summary.proto",
+  "../../protos/google/cloud/backupdr/v1/restore_template.proto",
+  "../../protos/google/cloud/backupdr/v1/restore_template_common.proto",
+  "../../protos/google/cloud/backupdr/v1/restore_template_execution.proto",
+  "../../protos/google/cloud/backupdr/v1/restore_verification_plan.proto",
+  "../../protos/google/cloud/backupdr/v1/restore_verification_plan_association.proto"
 ]

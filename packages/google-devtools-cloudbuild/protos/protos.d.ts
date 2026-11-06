@@ -6768,6 +6768,9 @@ export namespace google {
                     /** BuildTrigger sourceToBuild */
                     sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
 
+                    /** BuildTrigger approvalConfig */
+                    approvalConfig?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
+
                     /** BuildTrigger serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -6843,6 +6846,9 @@ export namespace google {
 
                     /** BuildTrigger sourceToBuild. */
                     public sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
+
+                    /** BuildTrigger approvalConfig. */
+                    public approvalConfig?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
 
                     /** BuildTrigger serviceAccount. */
                     public serviceAccount: string;
@@ -8525,7 +8531,8 @@ export namespace google {
                     /** VerifyOption enum. */
                     enum VerifyOption {
                         NOT_VERIFIED = 0,
-                        VERIFIED = 1
+                        VERIFIED = 1,
+                        BEST_EFFORT = 3
                     }
 
                     /** MachineType enum. */

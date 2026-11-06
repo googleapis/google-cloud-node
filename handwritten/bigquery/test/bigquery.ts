@@ -24,7 +24,7 @@ import * as assert from 'assert';
 import {describe, it, after, afterEach, before, beforeEach} from 'mocha';
 import * as Big from 'big.js';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as crypto from 'crypto';
 
@@ -933,10 +933,16 @@ describe('BigQuery', () => {
   describe('timestamp', () => {
     const INPUT_STRING = '2016-12-06T12:00:00.000Z';
     const INPUT_STRING_MICROS = '2016-12-06T12:00:00.123456Z';
+    const INPUT_STRING_NANOS_ZERO_MICROS = '2016-12-06T12:00:00.123000789Z';
     const INPUT_DATE = new Date(INPUT_STRING);
     const INPUT_PRECISE_DATE = new PreciseDate(INPUT_STRING_MICROS);
+    const INPUT_PRECISE_DATE_NANOS_ZERO_MICROS = new PreciseDate(
+      INPUT_STRING_NANOS_ZERO_MICROS,
+    );
     const EXPECTED_VALUE = INPUT_DATE.toJSON();
     const EXPECTED_VALUE_MICROS = INPUT_PRECISE_DATE.toISOString();
+    const EXPECTED_VALUE_NANOS_ZERO_MICROS =
+      INPUT_PRECISE_DATE_NANOS_ZERO_MICROS.toISOString();
 
     // tslint:disable-next-line ban
     it.skip('should expose static and instance constructors', () => {
@@ -987,6 +993,83 @@ describe('BigQuery', () => {
     it('should accept a PreciseDate object', () => {
       const timestamp = bq.timestamp(INPUT_PRECISE_DATE);
       assert.strictEqual(timestamp.value, EXPECTED_VALUE_MICROS);
+    });
+
+    it('should preserve nanoseconds when microseconds are 0', () => {
+      assert.strictEqual(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS.getMicroseconds(),
+        0,
+      );
+      assert.strictEqual(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS.getNanoseconds(),
+        789,
+      );
+      assert.strictEqual(
+        EXPECTED_VALUE_NANOS_ZERO_MICROS,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const timestampFromPreciseDate = bq.timestamp(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
+      );
+      assert.strictEqual(
+        timestampFromPreciseDate.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const staticTimestampFromPreciseDate = BigQuery.timestamp(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
+      );
+      assert.strictEqual(
+        staticTimestampFromPreciseDate.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const timestampFromString = bq.timestamp(INPUT_STRING_NANOS_ZERO_MICROS);
+      assert.strictEqual(
+        timestampFromString.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const zeroMillisAndMicros = '2016-12-06T12:00:00.000000789Z';
+      assert.strictEqual(
+        bq.timestamp(new PreciseDate(zeroMillisAndMicros)).value,
+        zeroMillisAndMicros,
+      );
+
+      const preEpochZeroMicros = '1969-12-25T00:00:00.123000789Z';
+      assert.strictEqual(
+        bq.timestamp(new PreciseDate(preEpochZeroMicros)).value,
+        preEpochZeroMicros,
+      );
+
+      const queryParam = BigQuery.valueToQueryParameter_(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
+      );
+      assert.strictEqual(
+        queryParam.parameterValue?.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+    });
+
+    it('should preserve picoseconds for PreciseDate inputs', () => {
+      const inputPicoseconds = '2023-01-01T12:00:00.123456789123Z';
+      const pdPicoseconds = new PreciseDate(inputPicoseconds);
+      assert.strictEqual(pdPicoseconds.getPicoseconds(), 123);
+      assert.strictEqual(bq.timestamp(pdPicoseconds).value, inputPicoseconds);
+
+      const inputPicosecondsZeroMicrosNanos =
+        '2023-01-01T12:00:00.123000000123Z';
+      const pdZeroMicrosNanos = new PreciseDate(
+        inputPicosecondsZeroMicrosNanos,
+      );
+      assert.strictEqual(pdZeroMicrosNanos.getMicroseconds(), 0);
+      assert.strictEqual(pdZeroMicrosNanos.getNanoseconds(), 0);
+      assert.strictEqual(pdZeroMicrosNanos.getPicoseconds(), 123);
+      assert.strictEqual(
+        bq.timestamp(pdZeroMicrosNanos).value,
+        inputPicosecondsZeroMicrosNanos,
+      );
     });
   });
 
@@ -1538,6 +1621,44 @@ describe('BigQuery', () => {
           },
         ],
       });
+    });
+
+    it('should return correct type for TIMESTAMP(12) by default', () => {
+      const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      try {
+        const type =
+          BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
+
+        assert.deepStrictEqual(type, {
+          type: 'TIMESTAMP',
+          timestampPrecision: '12',
+        });
+      } finally {
+        if (originalValue === undefined) {
+          delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+        } else {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
+        }
+      }
+    });
+
+    it('should throw for TIMESTAMP(12) when BIGQUERY_PICOSECOND_SUPPORT is false', () => {
+      const originalValue = process.env.BIGQUERY_PICOSECOND_SUPPORT;
+      try {
+        for (const val of ['false', 'FALSE', 'False']) {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = val;
+          assert.throws(() => {
+            BigQuery.getTypeDescriptorFromProvidedType_('TIMESTAMP(12)');
+          }, /Invalid type provided: "TIMESTAMP\(12\)"/);
+        }
+      } finally {
+        if (originalValue === undefined) {
+          delete process.env.BIGQUERY_PICOSECOND_SUPPORT;
+        } else {
+          process.env.BIGQUERY_PICOSECOND_SUPPORT = originalValue;
+        }
+      }
     });
 
     it('should throw for invalid provided type', () => {
@@ -3440,7 +3561,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }
@@ -3514,7 +3635,9 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
-          if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+          if (
+            process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() === 'false'
+          ) {
             return;
           }
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
@@ -3553,7 +3676,7 @@ describe('BigQuery', () => {
         }
       }
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               timestampOutputFormat: 'ISO8601_STRING',
             }

@@ -706,6 +706,52 @@ describe('teeny', () => {
         await new Promise<void>(resolve => server.close(() => resolve()));
         nock.disableNetConnect();
       }
+
+      const multibyteContentLengthScope = nock(uri)
+        .post('/content-length-utf8', 'hello 🌍')
+        .matchHeader('content-length', '10')
+        .reply(200, 'ok');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {
+            uri: `${uri}/content-length-utf8`,
+            method: 'POST',
+            body: 'hello 🌍',
+          },
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'ok');
+              multibyteContentLengthScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const contentLengthScope = nock(uri)
+        .post('/content-length', 'hello')
+        .matchHeader('content-length', '5')
+        .reply(200, 'ok');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {uri: `${uri}/content-length`, method: 'POST', body: 'hello'},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'ok');
+              contentLengthScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
     } finally {
       if (!hadBun) {
         delete globalRecord.Bun;

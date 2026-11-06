@@ -214,6 +214,9 @@ export class SqlWorkloadCapturesServiceClient {
       blueGreenDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/blueGreenDeployments/{blue_green_deployment}',
       ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/instances/{instance}',
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -414,53 +417,50 @@ export class SqlWorkloadCapturesServiceClient {
    * region_tag:sqladmin_v1beta4_generated_SqlWorkloadCapturesService_Start_async
    */
   start(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest,
     options?: CallOptions,
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
-        | undefined
-      ),
+      protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest | undefined,
       {} | undefined,
     ]
   >;
   start(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   start(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   start(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
       | null
       | undefined,
       {} | null | undefined
@@ -468,10 +468,7 @@ export class SqlWorkloadCapturesServiceClient {
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
-        | undefined
-      ),
+      protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -498,7 +495,7 @@ export class SqlWorkloadCapturesServiceClient {
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
           | null
           | undefined,
           {} | null | undefined
@@ -515,7 +512,7 @@ export class SqlWorkloadCapturesServiceClient {
         ([response, options, rawResponse]: [
           protos.google.cloud.sql.v1beta4.IOperation,
           (
-            | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartRequest
+            | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartRequest
             | undefined
           ),
           {} | undefined,
@@ -563,53 +560,50 @@ export class SqlWorkloadCapturesServiceClient {
    * region_tag:sqladmin_v1beta4_generated_SqlWorkloadCapturesService_Stop_async
    */
   stop(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest,
     options?: CallOptions,
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
-        | undefined
-      ),
+      protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest | undefined,
       {} | undefined,
     ]
   >;
   stop(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   stop(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   stop(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
       | null
       | undefined,
       {} | null | undefined
@@ -617,10 +611,7 @@ export class SqlWorkloadCapturesServiceClient {
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
-        | undefined
-      ),
+      protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -647,7 +638,7 @@ export class SqlWorkloadCapturesServiceClient {
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
           | null
           | undefined,
           {} | null | undefined
@@ -664,7 +655,7 @@ export class SqlWorkloadCapturesServiceClient {
         ([response, options, rawResponse]: [
           protos.google.cloud.sql.v1beta4.IOperation,
           (
-            | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopRequest
+            | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopRequest
             | undefined
           ),
           {} | undefined,
@@ -715,53 +706,53 @@ export class SqlWorkloadCapturesServiceClient {
    * region_tag:sqladmin_v1beta4_generated_SqlWorkloadCapturesService_StartReplay_async
    */
   startReplay(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest,
     options?: CallOptions,
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+        | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
   startReplay(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   startReplay(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   startReplay(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
       | null
       | undefined,
       {} | null | undefined
@@ -770,7 +761,7 @@ export class SqlWorkloadCapturesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+        | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
         | undefined
       ),
       {} | undefined,
@@ -800,7 +791,7 @@ export class SqlWorkloadCapturesServiceClient {
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
           | null
           | undefined,
           {} | null | undefined
@@ -817,7 +808,7 @@ export class SqlWorkloadCapturesServiceClient {
         ([response, options, rawResponse]: [
           protos.google.cloud.sql.v1beta4.IOperation,
           (
-            | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStartReplayRequest
+            | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStartReplayRequest
             | undefined
           ),
           {} | undefined,
@@ -866,53 +857,53 @@ export class SqlWorkloadCapturesServiceClient {
    * region_tag:sqladmin_v1beta4_generated_SqlWorkloadCapturesService_StopReplay_async
    */
   stopReplay(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest,
     options?: CallOptions,
   ): Promise<
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+        | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
   stopReplay(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   stopReplay(
-    request: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest,
+    request: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest,
     callback: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
       | null
       | undefined,
       {} | null | undefined
     >,
   ): void;
   stopReplay(
-    request?: protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest,
+    request?: protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+      | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
       | null
       | undefined,
       {} | null | undefined
@@ -921,7 +912,7 @@ export class SqlWorkloadCapturesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       (
-        | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+        | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
         | undefined
       ),
       {} | undefined,
@@ -950,7 +941,7 @@ export class SqlWorkloadCapturesServiceClient {
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+          | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
           | null
           | undefined,
           {} | null | undefined
@@ -967,7 +958,7 @@ export class SqlWorkloadCapturesServiceClient {
         ([response, options, rawResponse]: [
           protos.google.cloud.sql.v1beta4.IOperation,
           (
-            | protos.google.cloud.sql.v1beta4.ISqlWorkloadCapturesStopReplayRequest
+            | protos.google.cloud.sql.v1beta4.IWorkloadCapturesStopReplayRequest
             | undefined
           ),
           {} | undefined,
@@ -1316,6 +1307,42 @@ export class SqlWorkloadCapturesServiceClient {
     return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
       blueGreenDeploymentName,
     ).blue_green_deployment;
+  }
+
+  /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project: string, instance: string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
   }
 
   /**

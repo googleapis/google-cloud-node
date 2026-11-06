@@ -128,7 +128,7 @@ export {
 
 export {makeUUID, decodeAnyProtosInArray, decodeProtobufAny} from './util';
 
-export {checkTelemetryEnabled} from './observability/util';
+export {checkTracingEnabled} from './observability/util';
 export {
   StaticTraceContext,
   resolveStaticTraceContext,

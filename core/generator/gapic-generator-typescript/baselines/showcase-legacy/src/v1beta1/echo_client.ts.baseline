@@ -623,7 +623,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('echo request %j', request);
+    this._log.debug('echo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IEchoResponse,
@@ -632,7 +632,7 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('echo response %j', response);
+          this._log.debug('echo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -644,7 +644,7 @@ export class EchoClient {
           protos.google.showcase.v1beta1.IEchoRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('echo response %j', response);
+          this._log.debug('echo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -747,7 +747,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('echoErrorDetails request %j', request);
+    this._log.debug('echoErrorDetails request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IEchoErrorDetailsResponse,
@@ -758,7 +758,7 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('echoErrorDetails response %j', response);
+          this._log.debug('echoErrorDetails response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -770,7 +770,7 @@ export class EchoClient {
           protos.google.showcase.v1beta1.IEchoErrorDetailsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('echoErrorDetails response %j', response);
+          this._log.debug('echoErrorDetails response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -872,7 +872,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pagedExpandLegacy request %j', request);
+    this._log.debug('pagedExpandLegacy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IPagedExpandResponse,
@@ -883,7 +883,7 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pagedExpandLegacy response %j', response);
+          this._log.debug('pagedExpandLegacy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -895,7 +895,7 @@ export class EchoClient {
           protos.google.showcase.v1beta1.IPagedExpandLegacyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('pagedExpandLegacy response %j', response);
+          this._log.debug('pagedExpandLegacy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -988,7 +988,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('block request %j', request);
+    this._log.debug('block request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IBlockResponse,
@@ -997,7 +997,7 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('block response %j', response);
+          this._log.debug('block response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1009,7 +1009,7 @@ export class EchoClient {
           protos.google.showcase.v1beta1.IBlockRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('block response %j', response);
+          this._log.debug('block response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1050,7 +1050,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('expand stream %j', options);
+    this._log.debug('expand stream %j', options);
     return this.innerApiCalls.expand(request, options);
   }
 
@@ -1105,7 +1105,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('collect stream %j', options);
+    this._log.debug('collect stream %j', options);
     return this.innerApiCalls.collect(null, options, callback);
   }
 
@@ -1129,7 +1129,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('chat stream %j', options);
+    this._log.debug('chat stream %j', options);
     return this.innerApiCalls.chat(null, options);
   }
 
@@ -1250,11 +1250,11 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('wait response %j', rawResponse);
+          this._log.debug('wait response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('wait request %j', request);
+    this._log.debug('wait request %j', request);
     return this.innerApiCalls
       .wait(request, options, wrappedCallback)
       ?.then(
@@ -1266,7 +1266,7 @@ export class EchoClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('wait response %j', rawResponse);
+          this._log.debug('wait response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1404,11 +1404,11 @@ export class EchoClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('pagedExpand values %j', values);
+          this._log.debug('pagedExpand values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('pagedExpand request %j', request);
+    this._log.debug('pagedExpand request %j', request);
     return this.innerApiCalls
       .pagedExpand(request, options, wrappedCallback)
       ?.then(
@@ -1417,7 +1417,7 @@ export class EchoClient {
           protos.google.showcase.v1beta1.IPagedExpandRequest | null,
           protos.google.showcase.v1beta1.IPagedExpandResponse,
         ]) => {
-          this._log.info('pagedExpand values %j', response);
+          this._log.debug('pagedExpand values %j', response);
           return [response, input, output];
         },
       );
@@ -1457,7 +1457,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pagedExpand stream %j', request);
+    this._log.debug('pagedExpand stream %j', request);
     return this.descriptors.page.pagedExpand.createStream(
       this.innerApiCalls.pagedExpand as GaxCall,
       request,
@@ -1502,7 +1502,7 @@ export class EchoClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pagedExpand iterate %j', request);
+    this._log.debug('pagedExpand iterate %j', request);
     return this.descriptors.page.pagedExpand.asyncIterate(
       this.innerApiCalls['pagedExpand'] as GaxCall,
       request as {},

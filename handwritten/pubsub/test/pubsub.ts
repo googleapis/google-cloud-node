@@ -17,7 +17,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as gax from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import defer = require('p-defer');
 
@@ -196,7 +196,7 @@ describe('PubSub', () => {
       './snapshot': {Snapshot: FakeSnapshot},
       './subscription': {Subscription},
       './topic': {Topic: FakeTopic},
-      './index': {v1:v1Override},
+      './index': {v1: v1Override},
       './util': fakeUtil,
     }).PubSub;
   });
@@ -338,6 +338,19 @@ describe('PubSub', () => {
 
       const pubsub = new PubSub(options);
       assert.strictEqual(pubsub.auth, fakeGoogleAuthInstance);
+    });
+
+    it('should reuse an existing GoogleAuth instance if provided in options.auth', () => {
+      const existingAuth = {} as gax.GoogleAuth;
+      let googleAuthCalled = false;
+      googleAuthOverride = () => {
+        googleAuthCalled = true;
+        return {};
+      };
+
+      const pubsub = new PubSub({auth: existingAuth});
+      assert.strictEqual(pubsub.auth, existingAuth);
+      assert.strictEqual(googleAuthCalled, false);
     });
 
     it('should localize the options provided', () => {
@@ -1553,11 +1566,138 @@ describe('PubSub', () => {
         options: pubsubTypes.ClientConfig,
       ) {
         assert.strictEqual(options, pubsub.options);
+        assert.strictEqual(options.auth, pubsub.auth);
         return FAKE_CLIENT_INSTANCE;
       };
 
       const client = await pubsub.getClientAsync_(CONFIG);
       assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
+    });
+
+    it('should sync GAPIC JWT values on cachedCredential after instantiating client without overwriting defined properties', async () => {
+      pubsub.projectId = PROJECT_ID_PLACEHOLDER;
+      const fakeJwt: {
+        useJWTAccessWithScope?: boolean;
+        defaultServicePath?: string;
+        defaultScopes?: string[];
+      } = {
+        useJWTAccessWithScope: undefined,
+        defaultServicePath: 'custom.googleapis.com',
+        defaultScopes: undefined,
+      };
+      const setGapicJWTValuesSpy = sandbox.spy(function (
+        this: {
+          useJWTAccessWithScope?: boolean;
+          defaultServicePath?: string;
+          defaultScopes?: string[];
+        },
+        client: typeof fakeJwt,
+      ) {
+        // Simulate older google-auth-library setGapicJWTValues using '=' instead of '??='
+        client.defaultServicePath = this.defaultServicePath;
+        client.useJWTAccessWithScope = this.useJWTAccessWithScope;
+        client.defaultScopes = this.defaultScopes;
+      });
+      sandbox.stub(pubsub, 'auth').value({
+        cachedCredential: null,
+        useJWTAccessWithScope: true,
+        defaultServicePath: 'pubsub.googleapis.com',
+        defaultScopes: ['https://www.googleapis.com/auth/pubsub'],
+        getProjectId: async function () {
+          // Simulate getProjectId() caching a JWT client before GAPIC constructor runs
+          this.cachedCredential = fakeJwt;
+          return PROJECT_ID;
+        },
+        setGapicJWTValues: setGapicJWTValuesSpy,
+      });
+
+      // tslint:disable-next-line only-arrow-functions no-any
+      v1ClientOverrides.FakeClient = function () {
+        return FAKE_CLIENT_INSTANCE;
+      };
+
+      await pubsub.getClientAsync_(CONFIG);
+      assert(setGapicJWTValuesSpy.calledOnceWithExactly(fakeJwt));
+      assert.strictEqual(fakeJwt.useJWTAccessWithScope, true);
+      assert.strictEqual(fakeJwt.defaultServicePath, 'custom.googleapis.com');
+      assert.deepStrictEqual(fakeJwt.defaultScopes, [
+        'https://www.googleapis.com/auth/pubsub',
+      ]);
+    });
+
+    it('should bridge CallOptions.signal when google-gax CallSettings does not preserve signal', async () => {
+      let cancelCalled = false;
+      let capturedRetryCodes: number[] | undefined;
+      let rejectInnerPromise: ((err: Error) => void) | undefined;
+
+      // Simulate google-gax < 6.14.0 where CallSettings drops `signal`
+      class LegacyCallSettings {
+        signal?: AbortSignal;
+        constructor() {
+          this.signal = undefined;
+        }
+      }
+
+      const fakeGaxClient = {
+        _gaxModule: {
+          CallSettings: LegacyCallSettings,
+          createApiCall(
+            _func: unknown,
+            settings?: {retry?: {retryCodes?: number[]}},
+          ) {
+            return (
+              _req: unknown,
+              callOptions?: gax.CallOptions,
+              callback?: Function,
+            ) => {
+              capturedRetryCodes =
+                callOptions?.retry?.retryCodes ?? settings?.retry?.retryCodes;
+              if (callback) {
+                return undefined;
+              }
+              const p = new Promise((_resolve, reject) => {
+                rejectInnerPromise = reject;
+              }) as gax.CancellablePromise<[unknown, unknown, unknown]>;
+              p.cancel = () => {
+                cancelCalled = true;
+                const err = Object.assign(new Error('Call cancelled.'), {
+                  code: gax.Status.CANCELLED,
+                });
+                rejectInnerPromise?.(err);
+              };
+              return p;
+            };
+          },
+        },
+        close: sandbox.stub(),
+      };
+
+      v1ClientOverrides.FakeClient = function () {
+        return fakeGaxClient;
+      };
+
+      const client = (await pubsub.getClientAsync_(
+        CONFIG,
+      )) as unknown as typeof fakeGaxClient;
+      const wrappedCall = client._gaxModule.createApiCall(
+        {},
+        {retry: {retryCodes: [gax.Status.CANCELLED, gax.Status.UNAVAILABLE]}},
+      );
+
+      const abortController = new AbortController();
+      const callbackPromise = new Promise<Error | null>(resolve => {
+        void wrappedCall(
+          {},
+          {signal: abortController.signal},
+          (err: Error | null) => resolve(err),
+        );
+      });
+
+      abortController.abort();
+      const err = await callbackPromise;
+      assert.strictEqual(cancelCalled, true);
+      assert.deepStrictEqual(capturedRetryCodes, [-1]);
+      assert.strictEqual((err as {code?: number})?.code, gax.Status.CANCELLED);
     });
   });
 
@@ -1675,6 +1815,63 @@ describe('PubSub', () => {
       };
 
       pubsub.request(CONFIG, assert.ifError);
+    });
+
+    it('should immediately invoke callback with CANCELLED error if gaxOpts.signal is already aborted', done => {
+      const abortController = new AbortController();
+      abortController.abort();
+
+      let getClientCalled = false;
+      pubsub.getClient_ = () => {
+        getClientCalled = true;
+      };
+
+      const configWithSignal: pubsubTypes.RequestConfig = {
+        client: 'PublisherClient',
+        method: 'publish',
+        reqOpts: {},
+        gaxOpts: {signal: abortController.signal},
+      };
+
+      pubsub.request(configWithSignal, (err: gax.ServiceError | null) => {
+        assert.strictEqual(getClientCalled, false);
+        assert.ok(err);
+        assert.strictEqual(err.code, gax.Status.CANCELLED);
+        assert.strictEqual(err.details, 'Call cancelled.');
+        assert.ok(err.metadata instanceof gax.grpc.Metadata);
+        done();
+      });
+    });
+
+    it('should invoke callback with CANCELLED error if gaxOpts.signal is aborted while getClient_ is in flight', done => {
+      const abortController = new AbortController();
+      let clientMethodCalled = false;
+      const fakeClient = {
+        publish() {
+          clientMethodCalled = true;
+        },
+      };
+
+      pubsub.getClient_ = (_config, callback) => {
+        abortController.abort();
+        callback(null, fakeClient as unknown as gax.ClientStub);
+      };
+
+      const configWithSignal: pubsubTypes.RequestConfig = {
+        client: 'PublisherClient',
+        method: 'publish',
+        reqOpts: {},
+        gaxOpts: {signal: abortController.signal},
+      };
+
+      pubsub.request(configWithSignal, (err: gax.ServiceError | null) => {
+        assert.strictEqual(clientMethodCalled, false);
+        assert.ok(err);
+        assert.strictEqual(err.code, gax.Status.CANCELLED);
+        assert.strictEqual(err.details, 'Call cancelled.');
+        assert.ok(err.metadata instanceof gax.grpc.Metadata);
+        done();
+      });
     });
   });
 
@@ -1885,6 +2082,49 @@ describe('PubSub', () => {
 
       await pubsub.validateSchema!(ischema, {});
       assert.ok(called);
+    });
+
+    it('syncs GAPIC JWT values on cachedCredential in getSchemaClient()', async () => {
+      pubsub.projectId = PROJECT_ID_PLACEHOLDER;
+      const fakeJwt: {
+        useJWTAccessWithScope?: boolean;
+        defaultServicePath?: string;
+        defaultScopes?: string[];
+      } = {
+        useJWTAccessWithScope: undefined,
+        defaultServicePath: undefined,
+        defaultScopes: ['https://www.googleapis.com/auth/custom'],
+      };
+      const setGapicJWTValuesSpy = sandbox.spy(function (
+        this: {
+          useJWTAccessWithScope?: boolean;
+          defaultServicePath?: string;
+          defaultScopes?: string[];
+        },
+        client: typeof fakeJwt,
+      ) {
+        client.defaultServicePath = this.defaultServicePath;
+        client.useJWTAccessWithScope = this.useJWTAccessWithScope;
+        client.defaultScopes = this.defaultScopes;
+      });
+      sandbox.stub(pubsub, 'auth').value({
+        cachedCredential: null,
+        getProjectId: async function () {
+          this.cachedCredential = fakeJwt;
+          return PROJECT_ID;
+        },
+        setGapicJWTValues: setGapicJWTValuesSpy,
+      });
+
+      const client = await pubsub.getSchemaClient();
+      assert(setGapicJWTValuesSpy.calledOnceWithExactly(fakeJwt));
+      assert.strictEqual(fakeJwt.useJWTAccessWithScope, true);
+      assert.strictEqual(fakeJwt.defaultServicePath, 'pubsub.googleapis.com');
+      assert.deepStrictEqual(fakeJwt.defaultScopes, [
+        'https://www.googleapis.com/auth/custom',
+      ]);
+      sandbox.stub(client!, 'close').resolves();
+      await pubsub.close();
     });
   });
 });

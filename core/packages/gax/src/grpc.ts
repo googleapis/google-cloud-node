@@ -27,6 +27,7 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
+import {setSettingsDefaultDomain} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
@@ -63,6 +64,16 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
    * options.
    */
   enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either `enableTelemetryLogging: true` is passed here or, when unset, the
+   * `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+   * namespace. Explicitly setting `enableTelemetryLogging: false` disables logging
+   * for this client even when `GOOGLE_SDK_NODE_LOGGING` matches.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface MetadataValue {
@@ -134,6 +145,7 @@ export class GrpcClient {
   private _servicePath?: string;
   private _port?: number;
   private _enableTelemetryTracing?: boolean;
+  private _enableTelemetryLogging?: boolean;
   /**
    * Base directory for resolving client certificates.
    *
@@ -193,6 +205,7 @@ export class GrpcClient {
         ? parseInt(options.port, 10)
         : options.port;
     this._enableTelemetryTracing = options.enableTelemetryTracing;
+    this._enableTelemetryLogging = options.enableTelemetryLogging;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);
@@ -396,6 +409,8 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+   * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -406,6 +421,7 @@ export class GrpcClient {
     enableTelemetryTracing?: boolean,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _legacyTelemetryInfo?: unknown,
+    enableTelemetryLogging?: boolean,
   ) {
     const otherArgs: Record<string, unknown> = {
       metadataBuilder: this.metadataBuilder(headers),
@@ -416,14 +432,27 @@ export class GrpcClient {
     if (this._port !== undefined) {
       otherArgs.port = this._port;
     }
-    return gax.constructSettings(
+    const defaults = gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       this.grpc.status,
       otherArgs,
       enableTelemetryTracing ?? this._enableTelemetryTracing,
+      _legacyTelemetryInfo,
+      enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
+    const defaultServicePath = (this.auth as {defaultServicePath?: unknown})
+      ?.defaultServicePath;
+    if (
+      typeof defaultServicePath === 'string' &&
+      defaultServicePath.includes('.')
+    ) {
+      for (const methodName of Object.keys(defaults)) {
+        setSettingsDefaultDomain(defaults[methodName], defaultServicePath);
+      }
+    }
+    return defaults;
   }
 
   /**

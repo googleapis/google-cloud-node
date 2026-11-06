@@ -221,6 +221,9 @@ export class EvaluationServiceClient {
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
+      assistantSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}',
+      ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
@@ -3687,8 +3690,8 @@ export class EvaluationServiceClient {
    * @param {string} [request.displayName]
    *   Optional. The display name of the evaluation run.
    * @param {string} [request.appVersion]
-   *   Optional. The app version to evaluate.
-   *   Format:
+   *   Optional. The app version to evaluate. At most one of `app_version` or
+   *   `deployment` can be set. Format:
    *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
    * @param {google.cloud.ces.v1beta.EvaluationConfig} [request.config]
    *   Optional. The configuration to use for the run.
@@ -7220,6 +7223,81 @@ export class EvaluationServiceClient {
   matchVersionFromAppVersionName(appVersionName: string) {
     return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
       .version;
+  }
+
+  /**
+   * Return a fully-qualified assistantSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} app
+   * @param {string} assistant_session
+   * @returns {string} Resource name string.
+   */
+  assistantSessionPath(
+    project: string,
+    location: string,
+    app: string,
+    assistantSession: string,
+  ) {
+    return this.pathTemplates.assistantSessionPathTemplate.render({
+      project: project,
+      location: location,
+      app: app,
+      assistant_session: assistantSession,
+    });
+  }
+
+  /**
+   * Parse the project from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).location;
+  }
+
+  /**
+   * Parse the app from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the app.
+   */
+  matchAppFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).app;
+  }
+
+  /**
+   * Parse the assistant_session from AssistantSession resource.
+   *
+   * @param {string} assistantSessionName
+   *   A fully-qualified path representing AssistantSession resource.
+   * @returns {string} A string representing the assistant_session.
+   */
+  matchAssistantSessionFromAssistantSessionName(assistantSessionName: string) {
+    return this.pathTemplates.assistantSessionPathTemplate.match(
+      assistantSessionName,
+    ).assistant_session;
   }
 
   /**

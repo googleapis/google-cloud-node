@@ -255,6 +255,11 @@ export class DataPointsServiceClient {
         'nextPageToken',
         'rollupDataPoints',
       ),
+      dailyRollUpDataPoints: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rollupDataPoints',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -517,6 +522,17 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
    *
+   *   ## Examples:
+   *
+   *   ##
+   *   `users/me/dataTypes/sleep/dataPoints/a1b2c3d4-e5f6-7890-1234-567890abcdef`
+   *
+   *   `users/1234567890/dataTypes/sleep/dataPoints/a1b2c3d4-e5f6-7890-1234-567890abcdef`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
+   *
    *   See
    *   {@link protos.google.devicesandservices.health.v4beta.DataPoint.name|DataPoint.name}
    *   for examples and possible values.
@@ -657,215 +673,17 @@ export class DataPointsServiceClient {
       });
   }
   /**
-   * Roll up data points over civil time intervals for supported data types.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent data type of the Data Point collection.
-   *
-   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
-   *
-   *   - `users/me/dataTypes/steps`
-   *   - `users/me/dataTypes/distance`
-   *
-   *   For a list of the supported data types see the [DailyRollupDataPoint
-   *   value][google.devicesandservices.health.v4beta.DailyRollupDataPoint]
-   *   union field.
-   * @param {google.devicesandservices.health.v4beta.CivilTimeInterval} request.range
-   *   Required. Closed-open range of data points that will be rolled up.
-   *   The start time must be aligned with the aggregation window.
-   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
-   *   `active-minutes` and `total-calories` is 14 days.
-   *   The maximum range for all other data types is 90 days.
-   * @param {number} [request.windowSizeDays]
-   *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
-   *   specified.
-   *
-   *   If the requested range is not an exact multiple of `window_size_days`, the
-   *   final bucket chronologically will be truncated at the upper endpoint of the
-   *   range and will cover a duration shorter than `window_size_days`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of data points to return.
-   *   If unspecified, at most 1440 data points will be returned.
-   *   The maximum page size is 10000; values above that will be truncated
-   *   accordingly.
-   * @param {string} [request.pageToken]
-   *   Optional. The `next_page_token` from a previous request, if any.
-   *   All other request fields need to be the same as in the initial request
-   *   when the page token is specified.
-   * @param {string} [request.dataSourceFamily]
-   *   Optional. The data source family name to roll up.
-   *   If empty, data points from all available data sources will be rolled up.
-   *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
-   *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
-   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
-   *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
-   *   Google data, such as data from tracker devices, manually logged data, and
-   *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
-   *   source was registered through this API with the same OAuth client ID as
-   *   the caller.
-   *
-   *   Callers that were only granted write scopes for the requested data type
-   *   may only read the data they wrote themselves: their requests are
-   *   implicitly restricted to `self-sources`, and requesting any other data
-   *   source family fails with `PERMISSION_DENIED`.
-   *
-   *   If no data point matches the requested data source family, the response is
-   *   an empty list rather than an error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsResponse|DailyRollUpDataPointsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v4beta/data_points_service.daily_roll_up_data_points.js</caption>
-   * region_tag:health_v4beta_generated_DataPointsService_DailyRollUpDataPoints_async
-   */
-  dailyRollUpDataPoints(
-    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
-    options?: CallOptions,
-  ): Promise<
-    [
-      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-      (
-        | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  dailyRollUpDataPoints(
-    request: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  dailyRollUpDataPoints(
-    request: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
-    callback: Callback<
-      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  dailyRollUpDataPoints(
-    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-          | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >,
-  ): Promise<
-    [
-      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-      (
-        | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('dailyRollUpDataPoints request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-          | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('dailyRollUpDataPoints response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .dailyRollUpDataPoints(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
-          (
-            | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('dailyRollUpDataPoints response %j', response);
-          return [response, options, rawResponse];
-        },
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos,
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos,
-          );
-        }
-        throw error;
-      });
-  }
-  /**
    * Exports exercise data in TCX format.
    *
    * **IMPORTANT:** HTTP clients must append `?alt=media` to the
    * request URL to download the raw TCX file.
    *
-   * Example:
+   * ## Examples:
+   *
+   * ##
    * `https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints/EXERCISE_ID:exportExerciseTcx?alt=media`
+   *
+   * `https://health.googleapis.com/v4/users/1234567890/dataTypes/exercise/dataPoints/EXERCISE_ID:exportExerciseTcx?alt=media`
    *
    * Without `alt=media`, the server returns a JSON response
    * (`ExportExerciseTcxResponse`)
@@ -883,10 +701,14 @@ export class DataPointsServiceClient {
    *   Required. The resource name of the exercise data point to export.
    *
    *   Format: `users/{user}/dataTypes/exercise/dataPoints/{data_point}`
-   *   Example: `users/me/dataTypes/exercise/dataPoints/2026443605080188808`
    *
-   *   The `{user}` is the alias `"me"` currently. Future versions may support
-   *   user IDs.
+   *   Examples:
+   *   - `users/me/dataTypes/exercise/dataPoints/2026443605080188808`
+   *   - `users/1234567890/dataTypes/exercise/dataPoints/2026443605080188808`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *   The `{data_point}` ID maps to the exercise ID, which is a long integer.
    * @param {boolean} [request.partialData]
    *   Optional. Indicates whether to include the TCX data points when the GPS
@@ -1036,7 +858,15 @@ export class DataPointsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name where the data point will be created.
-   *   Format: `users/{user}/dataTypes/{data_type}`
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    * @param {google.devicesandservices.health.v4beta.DataPoint} request.dataPoint
    *   Required. The data point to create.
    * @param {object} [options]
@@ -1213,6 +1043,17 @@ export class DataPointsServiceClient {
    *   The data point's `name` field is used to identify the data point to update.
    *
    *   Format: `users/{user}/dataTypes/{data_type}/dataPoints/{data_point}`
+   *
+   *   ## Examples:
+   *
+   *   ##
+   *   `users/me/dataTypes/sleep/dataPoints/a1b2c3d4-e5f6-7890-1234-567890abcdef`
+   *
+   *   `users/1234567890/dataTypes/sleep/dataPoints/a1b2c3d4-e5f6-7890-1234-567890abcdef`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1382,10 +1223,17 @@ export class DataPointsServiceClient {
    *   The request object that will be sent.
    * @param {string} [request.parent]
    *   Optional. Parent (data type) for the Data Point collection
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/-`
+   *   - `users/1234567890/dataTypes/-`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the
    *   [DataPoint
@@ -1570,10 +1418,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/weight`
+   *   - `users/1234567890/dataTypes/weight`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [DataPoint
    *   data][google.devicesandservices.health.v4beta.DataPoint] union
@@ -1696,20 +1550,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be returned.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -1851,10 +1711,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/weight`
+   *   - `users/1234567890/dataTypes/weight`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [DataPoint
    *   data][google.devicesandservices.health.v4beta.DataPoint] union
@@ -1977,20 +1843,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be returned.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2055,10 +1927,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/weight`
+   *   - `users/1234567890/dataTypes/weight`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [DataPoint
    *   data][google.devicesandservices.health.v4beta.DataPoint] union
@@ -2181,20 +2059,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be returned.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2258,10 +2142,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/heart-rate`
+   *   - `users/1234567890/dataTypes/heart-rate`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the
    *   [DataPoint
@@ -2288,18 +2178,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all data sources will be reconciled.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2432,10 +2330,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/heart-rate`
+   *   - `users/1234567890/dataTypes/heart-rate`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the
    *   [DataPoint
@@ -2462,18 +2366,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all data sources will be reconciled.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2529,10 +2441,16 @@ export class DataPointsServiceClient {
    * @param {string} request.parent
    *   Required. Parent data type of the Data Point collection.
    *
-   *   Format: `users/me/dataTypes/{data_type}`, e.g.:
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/heart-rate`
+   *   - `users/1234567890/dataTypes/heart-rate`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the
    *   [DataPoint
@@ -2559,18 +2477,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all data sources will be reconciled.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2628,7 +2554,13 @@ export class DataPointsServiceClient {
    *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [RollupDataPoint
    *   value][google.devicesandservices.health.v4beta.RollupDataPoint]
@@ -2659,20 +2591,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be rolled up.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2808,7 +2746,13 @@ export class DataPointsServiceClient {
    *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [RollupDataPoint
    *   value][google.devicesandservices.health.v4beta.RollupDataPoint]
@@ -2839,20 +2783,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be rolled up.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -2911,7 +2861,13 @@ export class DataPointsServiceClient {
    *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
    *
    *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
    *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
    *
    *   For a list of the supported data types see the [RollupDataPoint
    *   value][google.devicesandservices.health.v4beta.RollupDataPoint]
@@ -2942,20 +2898,26 @@ export class DataPointsServiceClient {
    *
    *   If empty, data points from all available data sources will be rolled up.
    *
-   *   Format: `users/me/dataSourceFamilies/{data_source_family}`
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
-   *   from all available data sources.
-   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
    *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
    *   Watch). Excludes manually logged data.
-   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
    *   Google data, such as data from tracker devices, manually logged data, and
    *   Health Connect.
-   *   - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
-   *   calling client wrote through this API, that is, data points whose data
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
    *   source was registered through this API with the same OAuth client ID as
    *   the caller.
    *
@@ -3001,6 +2963,427 @@ export class DataPointsServiceClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.devicesandservices.health.v4beta.IRollupDataPoint>;
+  }
+  /**
+   * Roll up data points over civil time intervals for supported data types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
+   *
+   *   For a list of the supported data types see the [DailyRollupDataPoint
+   *   value][google.devicesandservices.health.v4beta.DailyRollupDataPoint]
+   *   union field.
+   * @param {google.devicesandservices.health.v4beta.CivilTimeInterval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The start time must be aligned with the aggregation window.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {number} [request.windowSizeDays]
+   *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
+   *   specified.
+   *
+   *   If the requested range is not an exact multiple of `window_size_days`, the
+   *   final bucket chronologically will be truncated at the upper endpoint of the
+   *   range and will cover a duration shorter than `window_size_days`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
+   *   source was registered through this API with the same OAuth client ID as
+   *   the caller.
+   *
+   *   Callers that were only granted write scopes for the requested data type
+   *   may only read the data they wrote themselves: their requests are
+   *   implicitly restricted to `self-sources`, and requesting any other data
+   *   source family fails with `PERMISSION_DENIED`.
+   *
+   *   If no data point matches the requested data source family, the response is
+   *   an empty list rather than an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint|DailyRollupDataPoint}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `dailyRollUpDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  dailyRollUpDataPoints(
+    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[],
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
+    ]
+  >;
+  dailyRollUpDataPoints(
+    request: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint
+    >,
+  ): void;
+  dailyRollUpDataPoints(
+    request: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    callback: PaginationCallback<
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint
+    >,
+  ): void;
+  dailyRollUpDataPoints(
+    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+          | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint
+        >,
+    callback?: PaginationCallback<
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+      | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse
+      | null
+      | undefined,
+      protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint
+    >,
+  ): Promise<
+    [
+      protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[],
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest | null,
+      protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+          | protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse
+          | null
+          | undefined,
+          protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('dailyRollUpDataPoints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('dailyRollUpDataPoints request %j', request);
+    return this.innerApiCalls
+      .dailyRollUpDataPoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[],
+          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest | null,
+          protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
+        ]) => {
+          this._log.info('dailyRollUpDataPoints values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `dailyRollUpDataPoints`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
+   *
+   *   For a list of the supported data types see the [DailyRollupDataPoint
+   *   value][google.devicesandservices.health.v4beta.DailyRollupDataPoint]
+   *   union field.
+   * @param {google.devicesandservices.health.v4beta.CivilTimeInterval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The start time must be aligned with the aggregation window.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {number} [request.windowSizeDays]
+   *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
+   *   specified.
+   *
+   *   If the requested range is not an exact multiple of `window_size_days`, the
+   *   final bucket chronologically will be truncated at the upper endpoint of the
+   *   range and will cover a duration shorter than `window_size_days`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
+   *   source was registered through this API with the same OAuth client ID as
+   *   the caller.
+   *
+   *   Callers that were only granted write scopes for the requested data type
+   *   may only read the data they wrote themselves: their requests are
+   *   implicitly restricted to `self-sources`, and requesting any other data
+   *   source family fails with `PERMISSION_DENIED`.
+   *
+   *   If no data point matches the requested data source family, the response is
+   *   an empty list rather than an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint|DailyRollupDataPoint} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `dailyRollUpDataPointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  dailyRollUpDataPointsStream(
+    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['dailyRollUpDataPoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('dailyRollUpDataPoints stream %j', request);
+    return this.descriptors.page.dailyRollUpDataPoints.createStream(
+      this.innerApiCalls.dailyRollUpDataPoints as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `dailyRollUpDataPoints`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent data type of the Data Point collection.
+   *
+   *   Format: `users/{user}/dataTypes/{data_type}`, e.g.:
+   *
+   *   - `users/me/dataTypes/steps`
+   *   - `users/1234567890/dataTypes/steps`
+   *   - `users/me/dataTypes/distance`
+   *   - `users/1234567890/dataTypes/distance`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID (retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}).
+   *
+   *   For a list of the supported data types see the [DailyRollupDataPoint
+   *   value][google.devicesandservices.health.v4beta.DailyRollupDataPoint]
+   *   union field.
+   * @param {google.devicesandservices.health.v4beta.CivilTimeInterval} request.range
+   *   Required. Closed-open range of data points that will be rolled up.
+   *   The start time must be aligned with the aggregation window.
+   *   The maximum range for `calories-in-heart-rate-zone`, `heart-rate`,
+   *   `active-minutes` and `total-calories` is 14 days.
+   *   The maximum range for all other data types is 90 days.
+   * @param {number} [request.windowSizeDays]
+   *   Optional. Aggregation window size, in number of days. Defaults to 1 if not
+   *   specified.
+   *
+   *   If the requested range is not an exact multiple of `window_size_days`, the
+   *   final bucket chronologically will be truncated at the upper endpoint of the
+   *   range and will cover a duration shorter than `window_size_days`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of data points to return.
+   *   If unspecified, at most 1440 data points will be returned.
+   *   The maximum page size is 10000; values above that will be truncated
+   *   accordingly.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token from a previous request, if any.
+   *   All other request fields need to be the same as in the initial request
+   *   when the page token is specified.
+   * @param {string} [request.dataSourceFamily]
+   *   Optional. The data source family name to roll up.
+   *   If empty, data points from all available data sources will be rolled up.
+   *
+   *   Format: `users/{user}/dataSourceFamilies/{data_source_family}`
+   *
+   *   The `{user}` can be either the alias `me` or the authenticated user's
+   *   numeric Health User ID, retrieved via
+   *   {@link protos.google.devicesandservices.health.v4beta.HealthProfileService.GetIdentity|GetIdentity}
+   *   (e.g. `users/me/dataSourceFamilies/...` or
+   *   `users/1234567890/dataSourceFamilies/...`).
+   *
+   *   The supported values are:
+   *
+   *   - `users/{user}/dataSourceFamilies/all-sources` - Default value. Includes
+   *   data from all available data sources.
+   *   - `users/{user}/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/{user}/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
+   *   - `users/{user}/dataSourceFamilies/self-sources` - Includes only the data
+   *   the calling client wrote through this API, that is, data points whose data
+   *   source was registered through this API with the same OAuth client ID as
+   *   the caller.
+   *
+   *   Callers that were only granted write scopes for the requested data type
+   *   may only read the data they wrote themselves: their requests are
+   *   implicitly restricted to `self-sources`, and requesting any other data
+   *   source family fails with `PERMISSION_DENIED`.
+   *
+   *   If no data point matches the requested data source family, the response is
+   *   an empty list rather than an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint|DailyRollupDataPoint}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4beta/data_points_service.daily_roll_up_data_points.js</caption>
+   * region_tag:health_v4beta_generated_DataPointsService_DailyRollUpDataPoints_async
+   */
+  dailyRollUpDataPointsAsync(
+    request?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['dailyRollUpDataPoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('dailyRollUpDataPoints iterate %j', request);
+    return this.descriptors.page.dailyRollUpDataPoints.asyncIterate(
+      this.innerApiCalls['dailyRollUpDataPoints'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint>;
   }
   // --------------------
   // -- Path templates --

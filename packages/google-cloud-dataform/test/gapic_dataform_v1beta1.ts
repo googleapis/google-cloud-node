@@ -8947,6 +8947,201 @@ describe('v1beta1.DataformClient', () => {
     });
   });
 
+  describe('createCompilationResultLongRunning', () => {
+    it('invokes createCompilationResultLongRunning without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.createCompilationResultLongRunning(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCompilationResultLongRunning(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dataform.v1beta1.ICompilationResult,
+              protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning with call error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createCompilationResultLongRunning(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCompilationResultLongRunning with LRO error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.CreateCompilationResultRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCompilationResultLongRunning =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.createCompilationResultLongRunning(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResultLongRunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateCompilationResultLongRunningProgress without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateCompilationResultLongRunningProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateCompilationResultLongRunningProgress with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateCompilationResultLongRunningProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('queryTeamFolderContents', () => {
     it('invokes queryTeamFolderContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
@@ -12045,6 +12240,360 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (
           client.descriptors.page.fetchWorkspaceBranches
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('fetchWorkspaceHistory', () => {
+    it('invokes fetchWorkspaceHistory without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+      ];
+      client.innerApiCalls.fetchWorkspaceHistory =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchWorkspaceHistory(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceHistory without error using callback', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+      ];
+      client.innerApiCalls.fetchWorkspaceHistory =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchWorkspaceHistory(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.dataform.v1beta1.ICommitLogEntry[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceHistory with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchWorkspaceHistory = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchWorkspaceHistory(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchWorkspaceHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchWorkspaceHistoryStream without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+      ];
+      client.descriptors.page.fetchWorkspaceHistory.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchWorkspaceHistoryStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dataform.v1beta1.CommitLogEntry[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dataform.v1beta1.CommitLogEntry) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchWorkspaceHistory, request),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes fetchWorkspaceHistoryStream with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchWorkspaceHistory.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.fetchWorkspaceHistoryStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dataform.v1beta1.CommitLogEntry[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dataform.v1beta1.CommitLogEntry) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchWorkspaceHistory, request),
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchWorkspaceHistory without error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dataform.v1beta1.CommitLogEntry(),
+        ),
+      ];
+      client.descriptors.page.fetchWorkspaceHistory.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dataform.v1beta1.ICommitLogEntry[] =
+        [];
+      const iterable = client.fetchWorkspaceHistoryAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchWorkspaceHistory with error', async () => {
+      const client = new dataformModule.v1beta1.DataformClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchWorkspaceHistory.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.fetchWorkspaceHistoryAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dataform.v1beta1.ICommitLogEntry[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.fetchWorkspaceHistory
             .asyncIterate as SinonStub
         )
           .getCall(0)

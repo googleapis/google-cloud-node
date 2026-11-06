@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG NODE_VERSION=16
+ARG NODE_VERSION=22
 ARG FLAKYBOT_VERSION=1.1.0
 
 FROM node:${NODE_VERSION}-slim as build

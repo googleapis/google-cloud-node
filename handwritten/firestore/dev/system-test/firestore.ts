@@ -7585,11 +7585,7 @@ describe('BulkWriter class', () => {
     });
     await writer.close();
     expect(retryCount).to.equal(3);
-    if (firestore._settings.preferRest) {
-      expect(code).to.equal(400);
-    } else {
-      expect(code).to.equal(Status.INVALID_ARGUMENT);
-    }
+    expect(code).to.equal(Status.INVALID_ARGUMENT);
   });
 });
 

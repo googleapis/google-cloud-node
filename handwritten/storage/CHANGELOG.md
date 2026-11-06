@@ -1,9 +1,34 @@
 # Changelog
 
-
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.4.0...storage-v9.0.0) (2026-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **storage:** Migrates response headers to standard Web Headers objects and replaces ApiError with GaxiosError.
+    - apiResponse.headers is now a WHATWG Headers instance (use
+    .get('header-name')).
+    - ApiError is no longer exported from root; callers should use
+    GaxiosError or base Error.
+    - Minimum runtime environment aligned to Node.js >= 22.
+    - Low-level request options migrate from uri/qs/json to url/params/data.
+    See MIGRATION.md for complete details.
+
+### Features
+
+* **storage:** Migrate HTTP transport layer from teeny-request to gaxios ([#9443](https://github.com/googleapis/google-cloud-node/issues/9443)) ([36caaba](https://github.com/googleapis/google-cloud-node/commit/36caaba8499e2d4493b5693c96f0d7a9c3966236))
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+* **storage:** Handle early stream destruction in createReadStream ([#9586](https://github.com/googleapis/google-cloud-node/issues/9586)) ([2e7c984](https://github.com/googleapis/google-cloud-node/commit/2e7c9847f4b60858daded5b62782aec537424411)), refs [#7603](https://github.com/googleapis/google-cloud-node/issues/7603)
+* **storage:** Re-throw upload error after aborting in uploadFileInChunks ([#9566](https://github.com/googleapis/google-cloud-node/issues/9566)) ([bda12da](https://github.com/googleapis/google-cloud-node/commit/bda12dab723a139faed9b326354f2a3175d192bb)), refs [#9193](https://github.com/googleapis/google-cloud-node/issues/9193)
 
 ## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.3.0...storage-v8.4.0) (2026-10-08)
 

@@ -250,6 +250,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "UpdateAppVersion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteAppVersion": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",

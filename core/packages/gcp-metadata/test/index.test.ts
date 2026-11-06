@@ -17,6 +17,7 @@
 import assert from 'assert';
 
 import {GaxiosError} from 'gaxios';
+import * as logging from 'google-logging-utils';
 import {beforeEach, afterEach, describe, it} from 'mocha';
 import nock from 'nock';
 import {SinonSandbox, createSandbox} from 'sinon';
@@ -88,6 +89,26 @@ describe('unit test', () => {
       .reply(200, {}, HEADERS);
     await gcp.instance(PROPERTY);
     scope.done();
+  });
+
+  it('should log request/response payloads at DEBUG severity', async () => {
+    // Same logger instance src/index.ts holds (the shared placeholder when
+    // logging is disabled, which still emits 'log' events).
+    const logger = logging.log('gcp-metadata');
+    const logged: logging.LogFields[] = [];
+    const listener = (fields: logging.LogFields) => logged.push(fields);
+    logger.on('log', listener);
+    try {
+      const scope = nock(HOST)
+        .get(`${PATH}/${TYPE}/${PROPERTY}`)
+        .reply(200, {}, HEADERS);
+      await gcp.instance(PROPERTY);
+      scope.done();
+    } finally {
+      logger.instance.removeListener('log', listener);
+    }
+    const severities = logged.map(fields => fields.severity);
+    assert.deepStrictEqual(severities, ['DEBUG', 'DEBUG']);
   });
 
   it('should use GCE_METADATA_IP if available', async () => {

@@ -22,12 +22,21 @@ import {
 } from '@google-cloud/projectify';
 import * as htmlEntities from 'html-entities';
 import * as extend from 'extend';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {CredentialBody} from 'google-auth-library';
-import * as r from 'teeny-request';
+import {
+  AuthClient,
+  CredentialBody,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
 import * as retryRequest from 'retry-request';
 import {Duplex, DuplexOptions, Readable, Transform, Writable} from 'stream';
-import {teenyRequest} from 'teeny-request';
+import {
+  CoreOptions,
+  Options,
+  OptionsWithUri,
+  Response,
+  teenyRequest,
+} from 'teeny-request';
 
 import {Interceptor} from './service-object';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service';
@@ -94,7 +103,7 @@ export interface DuplexifyConstructor {
 }
 
 export interface ParsedHttpRespMessage {
-  resp: r.Response;
+  resp: Response;
   err?: ApiError;
 }
 
@@ -128,8 +137,10 @@ export interface PackageJson {
   version: string;
 }
 
-export interface MakeAuthenticatedRequestFactoryConfig
-  extends Omit<GoogleAuthOptions, 'authClient'> {
+export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
+  GoogleAuthOptions,
+  'authClient'
+> {
   /**
    * Automatically retry requests if the response is related to rate limits or
    * certain intermittent server errors. We will exponentially backoff
@@ -183,7 +194,7 @@ export interface OnAuthenticatedCallback {
 export interface GoogleErrorBody {
   code: number;
   errors?: GoogleInnerError[];
-  response: r.Response;
+  response: Response;
   message?: string;
 }
 
@@ -207,20 +218,17 @@ export interface MakeWritableStreamOptions {
   /**
    * Request object, in the format of a standard Node.js http.request() object.
    */
-  request?: r.Options;
+  request?: Options;
 
   makeAuthenticatedRequest(
-    reqOpts: r.OptionsWithUri,
+    reqOpts: OptionsWithUri,
     fnobj: {
-      onAuthenticated(
-        err: Error | null,
-        authenticatedReqOpts?: r.Options,
-      ): void;
+      onAuthenticated(err: Error | null, authenticatedReqOpts?: Options): void;
     },
   ): void;
 }
 
-export interface DecorateRequestOptions extends r.CoreOptions {
+export interface DecorateRequestOptions extends CoreOptions {
   autoPaginate?: boolean;
   autoPaginateVal?: boolean;
   objectMode?: boolean;
@@ -244,7 +252,7 @@ export interface ParsedHttpResponseBody {
 export class ApiError extends Error {
   code?: number;
   errors?: GoogleInnerError[];
-  response?: r.Response;
+  response?: Response;
   constructor(errorMessage: string);
   constructor(errorBody: GoogleErrorBody);
   constructor(errorBodyOrMessage?: GoogleErrorBody | string) {
@@ -317,7 +325,7 @@ export class ApiError extends Error {
  */
 export class PartialFailureError extends Error {
   errors?: GoogleInnerError[];
-  response?: r.Response;
+  response?: Response;
   constructor(b: GoogleErrorBody) {
     super();
     const errorObject = b;
@@ -331,7 +339,7 @@ export class PartialFailureError extends Error {
 }
 
 export interface BodyResponseCallback {
-  (err: Error | ApiError | null, body?: ResponseBody, res?: r.Response): void;
+  (err: Error | ApiError | null, body?: ResponseBody, res?: Response): void;
 }
 
 export interface RetryOptions {
@@ -363,7 +371,7 @@ export interface MakeRequestConfig {
 
   stream?: Duplexify;
 
-  shouldRetryFn?: (response?: r.Response) => boolean;
+  shouldRetryFn?: (response?: Response) => boolean;
 }
 
 export class Util {
@@ -390,7 +398,7 @@ export class Util {
    */
   handleResp(
     err: Error | null,
-    resp?: r.Response | null,
+    resp?: Response | null,
     body?: ResponseBody,
     callback?: BodyResponseCallback,
   ) {
@@ -424,7 +432,7 @@ export class Util {
    * @param {?error} parsedHttpRespMessage.err - An error detected.
    * @param {object} parsedHttpRespMessage.resp - The original response object.
    */
-  parseHttpRespMessage(httpRespMessage: r.Response) {
+  parseHttpRespMessage(httpRespMessage: Response) {
     const parsedHttpRespMessage = {
       resp: httpRespMessage,
     } as ParsedHttpRespMessage;
@@ -520,7 +528,7 @@ export class Util {
           body: writeStream,
         },
       ],
-    }) as r.OptionsWithUri;
+    }) as OptionsWithUri;
 
     options.makeAuthenticatedRequest(reqOpts, {
       onAuthenticated(err, authenticatedReqOpts) {
@@ -639,8 +647,7 @@ export class Util {
     function makeAuthenticatedRequest(
       reqOpts: DecorateRequestOptions,
       optionsOrCallback?:
-        | MakeAuthenticatedRequestOptions
-        | BodyResponseCallback,
+        MakeAuthenticatedRequestOptions | BodyResponseCallback,
     ): void | Abortable | Duplexify {
       let stream: Duplexify;
       let projectId: string;
@@ -868,7 +875,7 @@ export class Util {
       request: teenyRequest.defaults(requestDefaults),
       retries: autoRetryValue !== false ? maxRetryValue : 0,
       noResponseRetries: autoRetryValue !== false ? maxRetryValue : 0,
-      shouldRetryFn(httpRespMessage: r.Response) {
+      shouldRetryFn(httpRespMessage: Response) {
         const err = util.parseHttpRespMessage(httpRespMessage).err;
         if (config.retryOptions?.retryableErrorFn) {
           return err && config.retryOptions?.retryableErrorFn(err);
@@ -886,7 +893,7 @@ export class Util {
 
     if (!config.stream) {
       return retryRequest(reqOpts, options, (err, response, body) => {
-        util.handleResp(err, response as {} as r.Response, body, callback!);
+        util.handleResp(err, response as {} as Response, body, callback!);
       });
     }
     const dup = config.stream as AbortableDuplex;
@@ -943,7 +950,11 @@ export class Util {
       reqOpts.json = replaceProjectIdToken(reqOpts.json, projectId);
     }
 
-    reqOpts.uri = replaceProjectIdToken(reqOpts.uri, projectId);
+    const encodedProjectId =
+      typeof projectId === 'string' && projectId !== DEFAULT_PROJECT_ID_TOKEN
+        ? encodeURIPath(projectId)
+        : projectId;
+    reqOpts.uri = replaceProjectIdToken(reqOpts.uri, encodedProjectId);
 
     return reqOpts;
   }
@@ -1112,8 +1123,8 @@ export function encodeWithoutSlashes(str: string): string {
  */
 export function encodeURIPath(uri: string): string {
   const processSegment = (segment: string): string => {
-    if (segment === '') {
-      return '';
+    if (segment === '' || segment === DEFAULT_PROJECT_ID_TOKEN) {
+      return segment;
     }
     let decoded = segment;
     try {

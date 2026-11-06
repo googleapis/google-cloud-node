@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
 
@@ -590,6 +590,27 @@ describe('Service', () => {
           };
 
           service.request_(reqOpts, assert.ifError);
+        });
+
+        it('should preserve DEFAULT_PROJECT_ID_TOKEN placeholder when projectId is not provided', done => {
+          const config = extend({}, CONFIG, {projectIdRequired: true});
+          const serviceWithoutProject = new Service(config);
+
+          const expectedUri = [
+            serviceWithoutProject.baseUrl,
+            'projects',
+            DEFAULT_PROJECT_ID_TOKEN,
+            reqOpts.uri,
+          ].join('/');
+
+          serviceWithoutProject.makeAuthenticatedRequest = (
+            reqOpts_: DecorateRequestOptions,
+          ) => {
+            assert.strictEqual(reqOpts_.uri, expectedUri);
+            done();
+          };
+
+          serviceWithoutProject.request_(reqOpts, assert.ifError);
         });
       });
     });

@@ -15,7 +15,6 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import Long = require('long');
-import * as proxyquire from 'proxyquire';
 import * as sn from 'sinon';
 
 import {RowStateEnum} from '../src/chunktransformer.js';
@@ -179,6 +178,23 @@ describe('Bigtable/EncodedKeyMap', () => {
       assert.deepStrictEqual(resultForEach[0][1], 'valueForBuffer1');
       assert.deepStrictEqual(resultForEach[1][0], 'stringKey1');
       assert.deepStrictEqual(resultForEach[1][1], 'valueForString1');
+    });
+    it('implements ReadonlyMap without adding extra methods', () => {
+      const map = new EncodedKeyMap([
+        [Buffer.from('existingBuffer'), 'initialBufferValue'],
+        ['existingNullValue', null],
+      ]);
+      const readonlyMap: ReadonlyMap<
+        string | bigint | Uint8Array | null,
+        SqlValue
+      > = map;
+      assert.strictEqual(
+        readonlyMap.get(Buffer.from('existingBuffer')),
+        'initialBufferValue',
+      );
+      assert.strictEqual(readonlyMap.get('existingNullValue'), null);
+      assert.strictEqual('getOrInsert' in map, false);
+      assert.strictEqual('getOrInsertComputed' in map, false);
     });
   });
 });

@@ -496,7 +496,7 @@ export class SequenceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSequence request %j', request);
+    this._log.debug('createSequence request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.ISequence,
@@ -507,7 +507,7 @@ export class SequenceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSequence response %j', response);
+          this._log.debug('createSequence response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -519,7 +519,7 @@ export class SequenceServiceClient {
           protos.google.showcase.v1beta1.ICreateSequenceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSequence response %j', response);
+          this._log.debug('createSequence response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -629,7 +629,7 @@ export class SequenceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSequenceReport request %j', request);
+    this._log.debug('getSequenceReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.ISequenceReport,
@@ -640,7 +640,7 @@ export class SequenceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSequenceReport response %j', response);
+          this._log.debug('getSequenceReport response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -652,7 +652,7 @@ export class SequenceServiceClient {
           protos.google.showcase.v1beta1.IGetSequenceReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSequenceReport response %j', response);
+          this._log.debug('getSequenceReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -756,7 +756,7 @@ export class SequenceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('attemptSequence request %j', request);
+    this._log.debug('attemptSequence request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -767,7 +767,7 @@ export class SequenceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('attemptSequence response %j', response);
+          this._log.debug('attemptSequence response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -779,7 +779,7 @@ export class SequenceServiceClient {
           protos.google.showcase.v1beta1.IAttemptSequenceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('attemptSequence response %j', response);
+          this._log.debug('attemptSequence response %j', response);
           return [response, options, rawResponse];
         },
       )

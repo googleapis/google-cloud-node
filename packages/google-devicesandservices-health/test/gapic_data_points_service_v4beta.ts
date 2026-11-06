@@ -506,153 +506,6 @@ describe('v4beta.DataPointsServiceClient', () => {
     });
   });
 
-  describe('dailyRollUpDataPoints', () => {
-    it('invokes dailyRollUpDataPoints without error', async () => {
-      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        },
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
-        ['parent'],
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsResponse(),
-      );
-      client.innerApiCalls.dailyRollUpDataPoints =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.dailyRollUpDataPoints(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes dailyRollUpDataPoints without error using callback', async () => {
-      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        },
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
-        ['parent'],
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsResponse(),
-      );
-      client.innerApiCalls.dailyRollUpDataPoints =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.dailyRollUpDataPoints(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes dailyRollUpDataPoints with error', async () => {
-      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        },
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
-        ['parent'],
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCall(
-        undefined,
-        expectedError,
-      );
-      await assert.rejects(
-        client.dailyRollUpDataPoints(request),
-        expectedError,
-      );
-      const actualRequest = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes dailyRollUpDataPoints with closed client', async () => {
-      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        },
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
-        ['parent'],
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.dailyRollUpDataPoints(request),
-        expectedError,
-      );
-    });
-  });
-
   describe('exportExerciseTcx', () => {
     it('invokes exportExerciseTcx without error', async () => {
       const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
@@ -2458,6 +2311,379 @@ describe('v4beta.DataPointsServiceClient', () => {
       );
       assert(
         (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('dailyRollUpDataPoints', () => {
+    it('invokes dailyRollUpDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.dailyRollUpDataPoints =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.dailyRollUpDataPoints(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPoints without error using callback', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+      ];
+      client.innerApiCalls.dailyRollUpDataPoints =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.dailyRollUpDataPoints(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.dailyRollUpDataPoints = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.dailyRollUpDataPoints(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.dailyRollUpDataPoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes dailyRollUpDataPointsStream without error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+      ];
+      client.descriptors.page.dailyRollUpDataPoints.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.dailyRollUpDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.dailyRollUpDataPoints, request),
+      );
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes dailyRollUpDataPointsStream with error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.dailyRollUpDataPoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.dailyRollUpDataPointsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.dailyRollUpDataPoints, request),
+      );
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with dailyRollUpDataPoints without error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4beta.DailyRollupDataPoint(),
+        ),
+      ];
+      client.descriptors.page.dailyRollUpDataPoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[] =
+        [];
+      const iterable = client.dailyRollUpDataPointsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with dailyRollUpDataPoints with error', async () => {
+      const client = new datapointsserviceModule.v4beta.DataPointsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4beta.DailyRollUpDataPointsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.dailyRollUpDataPoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.dailyRollUpDataPointsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4beta.IDailyRollupDataPoint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.dailyRollUpDataPoints
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,

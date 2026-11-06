@@ -1,5 +1,5 @@
 createTime: '2026-03-13T22:11:26.340573887Z'
-description: Presubmit build with node 18
+description: Presubmit build with node 22
 filename: ci/cloudbuild.yaml
 github:
   name: google-cloud-node

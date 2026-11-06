@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:22
 
 # Create folder structure
 RUN mkdir -p /in

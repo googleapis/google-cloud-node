@@ -170,6 +170,11 @@
                 "createAppVersion"
               ]
             },
+            "UpdateAppVersion": {
+              "methods": [
+                "updateAppVersion"
+              ]
+            },
             "DeleteAppVersion": {
               "methods": [
                 "deleteAppVersion"
@@ -450,6 +455,11 @@
                 "createAppVersion"
               ]
             },
+            "UpdateAppVersion": {
+              "methods": [
+                "updateAppVersion"
+              ]
+            },
             "DeleteAppVersion": {
               "methods": [
                 "deleteAppVersion"
@@ -563,6 +573,84 @@
                 "listChangelogs",
                 "listChangelogsStream",
                 "listChangelogsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AssistantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AssistantServiceClient",
+          "rpcs": {
+            "GetAssistantSession": {
+              "methods": [
+                "getAssistantSession"
+              ]
+            },
+            "CreateAssistantSession": {
+              "methods": [
+                "createAssistantSession"
+              ]
+            },
+            "DeleteAssistantSession": {
+              "methods": [
+                "deleteAssistantSession"
+              ]
+            },
+            "RunAssistant": {
+              "methods": [
+                "runAssistant"
+              ]
+            },
+            "ChatAiAssistant": {
+              "methods": [
+                "chatAiAssistant"
+              ]
+            },
+            "ListAssistantSessions": {
+              "methods": [
+                "listAssistantSessions",
+                "listAssistantSessionsStream",
+                "listAssistantSessionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AssistantServiceClient",
+          "rpcs": {
+            "GetAssistantSession": {
+              "methods": [
+                "getAssistantSession"
+              ]
+            },
+            "CreateAssistantSession": {
+              "methods": [
+                "createAssistantSession"
+              ]
+            },
+            "DeleteAssistantSession": {
+              "methods": [
+                "deleteAssistantSession"
+              ]
+            },
+            "RunAssistant": {
+              "methods": [
+                "runAssistant"
+              ]
+            },
+            "ChatAiAssistant": {
+              "methods": [
+                "chatAiAssistant"
+              ]
+            },
+            "ListAssistantSessions": {
+              "methods": [
+                "listAssistantSessions",
+                "listAssistantSessionsStream",
+                "listAssistantSessionsAsync"
               ]
             }
           }
@@ -967,6 +1055,16 @@
                 "runSession"
               ]
             },
+            "CancelAssistantTurn": {
+              "methods": [
+                "cancelAssistantTurn"
+              ]
+            },
+            "GenerateOnboardingSuggestions": {
+              "methods": [
+                "generateOnboardingSuggestions"
+              ]
+            },
             "StreamRunSession": {
               "methods": [
                 "streamRunSession"
@@ -975,6 +1073,11 @@
             "BidiRunSession": {
               "methods": [
                 "bidiRunSession"
+              ]
+            },
+            "StreamChatAiAssistant": {
+              "methods": [
+                "streamChatAiAssistant"
               ]
             }
           }
@@ -985,6 +1088,16 @@
             "RunSession": {
               "methods": [
                 "runSession"
+              ]
+            },
+            "CancelAssistantTurn": {
+              "methods": [
+                "cancelAssistantTurn"
+              ]
+            },
+            "GenerateOnboardingSuggestions": {
+              "methods": [
+                "generateOnboardingSuggestions"
               ]
             }
           }

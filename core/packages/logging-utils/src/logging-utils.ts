@@ -123,7 +123,7 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
     // Look for the Node config variable for what systems to enable. We'll store
     // these for the log method below, which will call setFilters() once.
     let nodeFlag = process.env[env.nodeEnables] ?? '*';
-    if (nodeFlag === 'all') {
+    if (nodeFlag === 'all' || nodeFlag === 'true') {
       nodeFlag = '*';
     }
     this.filters = nodeFlag.split(',');

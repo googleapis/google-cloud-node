@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/compute",
   "description": "Google Compute Engine Client Library for Node.js",
-  "version": "7.8.0",
+  "version": "7.9.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -112,7 +112,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "docs": "node --max-old-space-size=8192 ./node_modules/.bin/jsdoc -c .jsdoc.js",
+    "docs": "NODE_OPTIONS=--max-old-space-size=8192 jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",

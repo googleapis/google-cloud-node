@@ -40,6 +40,15 @@ function main(parent) {
    */
   // const appContent = Buffer.from('string')
   /**
+   *  Optional. Patch content as a JSON string.
+   */
+  // const jsonPatchContent = 'abc123'
+  /**
+   *  Optional. A Cloud Storage URI pointing to a JSON file containing the
+   *  patches.
+   */
+  // const jsonPatchGcsUri = 'abc123'
+  /**
    *  Required. The parent resource name with the location of the app to import.
    */
   // const parent = 'abc123'

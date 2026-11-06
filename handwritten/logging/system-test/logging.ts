@@ -30,7 +30,7 @@ import {Logging, Sink, Log, Entry, TailEntriesResponse} from '../src';
 import * as http from 'http';
 import * as instrumentation from '../src/utils/instrumentation';
 import {trace} from '@opentelemetry/api';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 import {SEMRESATTRS_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {TraceExporter} from '@google-cloud/opentelemetry-cloud-trace-exporter';
 import {NodeSDK} from '@opentelemetry/sdk-node';
@@ -792,7 +792,7 @@ describe('Logging', () => {
         // initialize the SDK and register with the OpenTelemetry API
         // this enables the API to record telemetry
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: TESTS_PREFIX,
           }),
           // Add cloud trace exporter as SDK trace exporter

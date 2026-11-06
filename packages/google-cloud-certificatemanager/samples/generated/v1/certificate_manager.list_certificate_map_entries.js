@@ -35,25 +35,26 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of certificate map entries to return. The service may return
-   *  fewer than this value.
-   *  If unspecified, at most 50 certificate map entries will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Optional. Maximum number of certificate map entries to return. The service
+   *  may return fewer than this value. If unspecified, at most 50 certificate
+   *  map entries will be returned. The maximum value is 1000; values above 1000
+   *  will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  The value returned by the last `ListCertificateMapEntriesResponse`.
-   *  Indicates that this is a continuation of a prior
-   *  `ListCertificateMapEntries` call, and that the system should return the
-   *  next page of data.
+   *  Optional. The value returned by the last
+   *  `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+   *  of a prior `ListCertificateMapEntries` call, and that the system should
+   *  return the next page of data.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter expression to restrict the returned Certificate Map Entries.
+   *  Optional. Filter expression to restrict the returned Certificate Map
+   *  Entries.
    */
   // const filter = 'abc123'
   /**
-   *  A list of Certificate Map Entry field names used to specify
+   *  Optional. A list of Certificate Map Entry field names used to specify
    *  the order of the returned results. The default sorting order is ascending.
    *  To specify descending order for a field, add a suffix `" desc"`.
    */

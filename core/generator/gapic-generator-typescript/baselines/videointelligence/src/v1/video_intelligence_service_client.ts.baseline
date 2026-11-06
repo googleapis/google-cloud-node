@@ -531,11 +531,11 @@ export class VideoIntelligenceServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('annotateVideo response %j', rawResponse);
+          this._log.debug('annotateVideo response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('annotateVideo request %j', request);
+    this._log.debug('annotateVideo request %j', request);
     return this.innerApiCalls
       .annotateVideo(request, options, wrappedCallback)
       ?.then(
@@ -547,7 +547,7 @@ export class VideoIntelligenceServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('annotateVideo response %j', rawResponse);
+          this._log.debug('annotateVideo response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

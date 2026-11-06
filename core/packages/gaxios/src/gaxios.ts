@@ -41,7 +41,7 @@ const randomUUID = async () =>
  * compatible with the `fetch` API.
  */
 interface FetchCompliance {
-  fetch: typeof fetch;
+  fetch: (...args: Parameters<typeof fetch>) => ReturnType<typeof fetch>;
 }
 
 const HTTP_STATUS_NO_CONTENT = 204;
@@ -88,7 +88,7 @@ export class Gaxios implements FetchCompliance {
    *
    * ```ts
    * const gaxios = new Gaxios();
-   * const myFetch: typeof fetch = (...args) => gaxios.fetch(...args);
+   * const myFetch: GaxiosOptions['fetchImplementation'] = (...args) => gaxios.fetch(...args);
    * await myFetch('https://example.com');
    * ```
    *
@@ -700,9 +700,10 @@ export class Gaxios implements FetchCompliance {
    * Should use {@link Gaxios[#getFetch]} to retrieve.
    */
   //
-  static #fetch?: typeof nodeFetch | typeof fetch;
+  static #fetch?:
+    typeof nodeFetch | NonNullable<GaxiosOptions['fetchImplementation']>;
 
-  static #bunFetch?: typeof fetch;
+  static #bunFetch?: NonNullable<GaxiosOptions['fetchImplementation']>;
 
   /**
    * Imports, caches, and returns a proxy agent - if not already imported
@@ -715,7 +716,7 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
-  static #createBunFetch(): typeof fetch {
+  static #createBunFetch(): NonNullable<GaxiosOptions['fetchImplementation']> {
     return async (input, init) => {
       const rawInit = init
         ? ({...init} as Omit<RequestInit, 'body'> & {
@@ -727,6 +728,8 @@ export class Gaxios implements FetchCompliance {
             proxy?: string;
             cert?: string;
             key?: string;
+            size?: number;
+            maxContentLength?: number;
             tls?: {cert?: string; key?: string};
           })
         : undefined;
@@ -806,6 +809,7 @@ export class Gaxios implements FetchCompliance {
         }
         throw err;
       }
+      const maxSize = rawInit?.size ?? rawInit?.maxContentLength ?? 0;
       if (
         res?.body &&
         typeof Readable.fromWeb === 'function' &&
@@ -819,13 +823,23 @@ export class Gaxios implements FetchCompliance {
         const origArrayBuffer = res.arrayBuffer.bind(res);
         const origBlob = res.blob.bind(res);
         const readBuffer = async () => {
-          const chunks: Buffer[] = [];
-          for await (const chunk of nodeStream!) {
-            chunks.push(
-              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
-            );
+          nodeStream ||= Readable.fromWeb(rawBody);
+          const chunks: Uint8Array[] = [];
+          let totalBytes = 0;
+          for await (const chunk of nodeStream) {
+            const bytes = chunk as Uint8Array;
+            totalBytes += bytes.byteLength;
+            if (maxSize > 0 && totalBytes > maxSize) {
+              throw Object.assign(
+                new Error(
+                  `content size at ${String((input as {url?: unknown})?.url ?? input)} over limit: ${maxSize}`,
+                ),
+                {type: 'max-size'},
+              );
+            }
+            chunks.push(bytes);
           }
-          return Buffer.concat(chunks);
+          return Buffer.concat(chunks, totalBytes);
         };
         Object.defineProperty(res, 'body', {
           get() {
@@ -836,15 +850,15 @@ export class Gaxios implements FetchCompliance {
           enumerable: true,
         });
         res.text = async () => {
-          if (!nodeStream) return origText();
+          if (!nodeStream && maxSize <= 0) return origText();
           return (await readBuffer()).toString('utf8');
         };
         res.json = async () => {
-          if (!nodeStream) return origJson();
+          if (!nodeStream && maxSize <= 0) return origJson();
           return JSON.parse(await res.text());
         };
         res.arrayBuffer = async () => {
-          if (!nodeStream) return origArrayBuffer();
+          if (!nodeStream && maxSize <= 0) return origArrayBuffer();
           const buf = await readBuffer();
           return buf.buffer.slice(
             buf.byteOffset,
@@ -852,7 +866,7 @@ export class Gaxios implements FetchCompliance {
           );
         };
         res.blob = async () => {
-          if (!nodeStream) return origBlob();
+          if (!nodeStream && maxSize <= 0) return origBlob();
           const buf = await readBuffer();
           const contentType = res.headers?.get?.('content-type') ?? '';
           return new Blob([buf], contentType ? {type: contentType} : undefined);

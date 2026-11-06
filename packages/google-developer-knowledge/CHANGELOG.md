@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.10.1](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.10.0...developer-knowledge-v0.10.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare script in pubsub-api and developer-knowledge ([#9666](https://github.com/googleapis/google-cloud-node/issues/9666)) ([3fb024d](https://github.com/googleapis/google-cloud-node/commit/3fb024d6f3613c923b0b8dd8bc34b3990017c2c3))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.9.0...developer-knowledge-v0.10.0) (2026-10-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9620](https://github.com/googleapis/google-cloud-node/issues/9620)) ([c812bc3](https://github.com/googleapis/google-cloud-node/commit/c812bc38fd5af3d710057ec9aa4a19eeff621175))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.8.0...developer-knowledge-v0.9.0) (2026-10-08)
 
 

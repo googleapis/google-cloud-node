@@ -28,7 +28,10 @@ import {
   extractFromSettings,
   extractServiceFromApiName,
   getActiveTraceContext,
+  resolveEndpointAndDomain,
+  resolveRpcMethod,
   resolveStaticTraceContext,
+  setSettingsDefaultDomain,
   StaticTraceContext,
   DEFAULT_GCP_REPO,
 } from '../../src/observability/contextUtil';
@@ -43,6 +46,7 @@ describe('contextUtil', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
     delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
     delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
     delete process.env.SERVER_ADDRESS;
@@ -58,6 +62,7 @@ describe('contextUtil', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
     delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
     delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
     delete process.env.SERVER_ADDRESS;
@@ -346,6 +351,228 @@ describe('contextUtil', () => {
       const metadata = resolveStaticTraceContext();
       assert.strictEqual(metadata.serverAddress, 'custom.endpoint.com');
       assert.strictEqual(metadata.serverPort, 8443);
+    });
+  });
+
+  describe('resolveEndpointAndDomain', () => {
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'KeyManagementServiceClient',
+      methodName: 'GetKeyRing',
+      rpcType: 'grpc',
+    };
+
+    it('splits embedded ports from host:port and [ipv6]:port server addresses', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com:8443'},
+          {},
+        ),
+        {rawAddress: 'example.com', rawPort: 8443, urlDomain: 'example.com'},
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: '[::1]:8080'},
+          {},
+        ),
+        {rawAddress: '[::1]', rawPort: 8080, urlDomain: '[::1]'},
+      );
+      // An explicit server port takes precedence over the embedded port.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com:8443', serverPort: 443},
+          {},
+        ),
+        {rawAddress: 'example.com', rawPort: 443, urlDomain: 'example.com'},
+      );
+    });
+
+    it('prefers dynamic endpoint and domain values over static ones', () => {
+      const staticArgs: StaticTraceContext = {
+        serverAddress: 'static.example.com',
+        serverPort: 9443,
+        urlDomain: 'static.googleapis.com',
+      };
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {
+            ...dynamicArgs,
+            serverAddress: 'dynamic.example.com',
+            serverPort: 8443,
+            urlDomain: 'dynamic.googleapis.com',
+          },
+          staticArgs,
+        ),
+        {
+          rawAddress: 'dynamic.example.com',
+          rawPort: 8443,
+          urlDomain: 'dynamic.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, staticArgs),
+        {
+          rawAddress: 'static.example.com',
+          rawPort: 9443,
+          urlDomain: 'static.googleapis.com',
+        },
+      );
+    });
+
+    it('preserves canonical url.domain without fabricating <service>.googleapis.com from short gcpClientService names', () => {
+      // Captured GAPIC default service domain stays canonical over emulator/regional overrides.
+      const emulatorSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
+        otherArgs: {servicePath: '127.0.0.1:8080'},
+      });
+      setSettingsDefaultDomain(emulatorSettings, 'cloudkms.googleapis.com');
+      const emulatorStatic = resolveStaticTraceContext(emulatorSettings);
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, emulatorStatic, 443),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: 8080,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+
+      // Explicit dotted gcpClientService stays canonical over an overridden serverAddress.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: '127.0.0.1'},
+          {gcpClientService: 'texttospeech.googleapis.com'},
+        ),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: undefined,
+          urlDomain: 'texttospeech.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, {
+          gcpClientService: 'storage.googleapis.com',
+        }),
+        {
+          rawAddress: undefined,
+          rawPort: undefined,
+          urlDomain: 'storage.googleapis.com',
+        },
+      );
+
+      // Short gcpClientService never shadows this._servicePath (serverAddress) for cloud*.googleapis.com APIs.
+      const cloudApis: Array<[string, string]> = [
+        ['kms', 'cloudkms.googleapis.com'],
+        ['asset', 'cloudasset.googleapis.com'],
+        ['resourcemanager', 'cloudresourcemanager.googleapis.com'],
+        ['functions', 'cloudfunctions.googleapis.com'],
+        ['tasks', 'cloudtasks.googleapis.com'],
+        ['trace', 'cloudtrace.googleapis.com'],
+        ['storage', 'bigquerystorage.googleapis.com'],
+      ];
+      for (const [svc, host] of cloudApis) {
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {
+            gcpClientService: svc,
+            serverAddress: host,
+          }),
+          {
+            rawAddress: host,
+            rawPort: undefined,
+            urlDomain: host,
+          },
+        );
+        // When servicePath/serverAddress is unset, never fabricates a bogus domain or fallback server.address.
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {gcpClientService: svc}),
+          {
+            rawAddress: undefined,
+            rawPort: undefined,
+            urlDomain: undefined,
+          },
+        );
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {gcpClientService: svc}, 443),
+          {
+            rawAddress: undefined,
+            rawPort: undefined,
+            urlDomain: undefined,
+          },
+        );
+      }
+
+      // Falls back to server address when neither urlDomain nor default domain is set.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com'},
+          {},
+        ),
+        {
+          rawAddress: 'example.com',
+          rawPort: undefined,
+          urlDomain: 'example.com',
+        },
+      );
+    });
+
+    it('derives the server address from an explicit url.domain and applies defaultPort when provided', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          dynamicArgs,
+          {gcpClientService: 'kms', urlDomain: 'cloudkms.googleapis.com'},
+          443,
+        ),
+        {
+          rawAddress: 'cloudkms.googleapis.com',
+          rawPort: 443,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          dynamicArgs,
+          {gcpClientService: 'storage.googleapis.com'},
+          443,
+        ),
+        {
+          rawAddress: 'storage.googleapis.com',
+          rawPort: 443,
+          urlDomain: 'storage.googleapis.com',
+        },
+      );
+      // An explicit server port is kept over defaultPort.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com', serverPort: 8443},
+          {},
+          443,
+        ),
+        {rawAddress: 'example.com', rawPort: 8443, urlDomain: 'example.com'},
+      );
+      // defaultPort is not applied when there is no address or domain.
+      assert.deepStrictEqual(resolveEndpointAndDomain(dynamicArgs, {}, 443), {
+        rawAddress: undefined,
+        rawPort: undefined,
+        urlDomain: undefined,
+      });
+    });
+  });
+
+  describe('resolveRpcMethod', () => {
+    it('prefixes methodName with apiName when apiName is available', () => {
+      assert.strictEqual(
+        resolveRpcMethod({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          methodName: 'GetKeyRing',
+        }),
+        'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+      );
+      assert.strictEqual(
+        resolveRpcMethod({methodName: 'GetKeyRing'}),
+        'GetKeyRing',
+      );
+      assert.strictEqual(
+        resolveRpcMethod({apiName: '', methodName: 'GetKeyRing'}),
+        'GetKeyRing',
+      );
     });
   });
 

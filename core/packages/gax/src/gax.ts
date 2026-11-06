@@ -24,7 +24,11 @@ import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
-import {checkTelemetryEnabled} from './observability/util';
+import {checkTracingEnabled, checkLoggingEnabled} from './observability/util';
+import {
+  getSettingsDefaultDomain,
+  setSettingsDefaultDomain,
+} from './observability/contextUtil';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -173,11 +177,16 @@ export interface CallOptions {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  enableTelemetryLogging?: boolean;
   /**
    * Internal context used by resumable upload methods. Populated by
    * GAPIC-generated client libraries; do not set manually.
    */
   resumableUpload?: ResumableUploadContext;
+  /**
+   * An AbortSignal to cancel the ongoing non-streaming API call.
+   */
+  signal?: AbortSignal;
 }
 
 export class CallSettings {
@@ -195,7 +204,9 @@ export class CallSettings {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  enableTelemetryLogging?: boolean;
   resumableUpload?: ResumableUploadContext;
+  signal?: AbortSignal;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -230,8 +241,10 @@ export class CallSettings {
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
     this.enableTelemetryTracing = settings.enableTelemetryTracing;
+    this.enableTelemetryLogging = settings.enableTelemetryLogging;
     this.resumableUpload =
       'resumableUpload' in settings ? settings.resumableUpload : undefined;
+    this.signal = 'signal' in settings ? settings.signal : undefined;
   }
 
   /**
@@ -244,10 +257,16 @@ export class CallSettings {
    */
   merge(options?: CallOptions | null) {
     if (!options) {
-      return new CallSettings(this);
+      const merged = new CallSettings(this);
+      const defaultDomain = getSettingsDefaultDomain(this);
+      if (defaultDomain) {
+        setSettingsDefaultDomain(merged, defaultDomain);
+      }
+      return merged;
     }
     let timeout = this.timeout;
     let retry = this.retry;
+    let retryCloned = false;
     let autoPaginate = this.autoPaginate;
     let maxResults = this.maxResults;
     let otherArgs = this.otherArgs;
@@ -256,7 +275,9 @@ export class CallSettings {
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
     let enableTelemetryTracing = this.enableTelemetryTracing;
+    let enableTelemetryLogging = this.enableTelemetryLogging;
     let resumableUpload = this.resumableUpload;
+    let signal = this.signal;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -266,14 +287,37 @@ export class CallSettings {
     // If a method-specific timeout is set in the service config, and the retry codes for that
     // method are non-null, then that timeout value will be used to
     // override backoff settings.
-    if (retry?.retryCodes) {
-      retry!.backoffSettings.initialRpcTimeoutMillis = timeout;
-      retry!.backoffSettings.maxRpcTimeoutMillis = timeout;
-      retry!.backoffSettings.totalTimeoutMillis = timeout;
+    if (
+      retry?.retryCodes &&
+      !('retry' in options && (!options.retry || options.retry.backoffSettings))
+    ) {
+      const backoff = retry.backoffSettings;
+      if (
+        !backoff ||
+        backoff.initialRpcTimeoutMillis !== timeout ||
+        backoff.maxRpcTimeoutMillis !== timeout ||
+        backoff.totalTimeoutMillis !== timeout
+      ) {
+        retry = cloneRetryOptions(retry);
+        retryCloned = true;
+        retry!.backoffSettings.initialRpcTimeoutMillis = timeout;
+        retry!.backoffSettings.maxRpcTimeoutMillis = timeout;
+        retry!.backoffSettings.totalTimeoutMillis = timeout;
+      }
     }
 
     if ('retry' in options) {
-      retry = mergeRetryOptions(retry || ({} as RetryOptions), options.retry!);
+      const mergedRetry = mergeRetryOptions(
+        retry || ({} as RetryOptions),
+        options.retry!,
+      );
+      if (
+        !mergedRetry ||
+        mergedRetry.backoffSettings !== retry?.backoffSettings
+      ) {
+        retryCloned = false;
+      }
+      retry = mergedRetry;
     }
 
     if ('autoPaginate' in options && !options.autoPaginate) {
@@ -299,6 +343,10 @@ export class CallSettings {
     }
 
     if ('maxRetries' in options && options.maxRetries !== undefined) {
+      if (!retryCloned) {
+        retry = cloneRetryOptions(retry);
+        retryCloned = true;
+      }
       retry!.backoffSettings!.maxRetries = options.maxRetries;
       delete retry!.backoffSettings!.totalTimeoutMillis;
     }
@@ -315,11 +363,17 @@ export class CallSettings {
     if ('enableTelemetryTracing' in options) {
       enableTelemetryTracing = options.enableTelemetryTracing;
     }
+    if ('enableTelemetryLogging' in options) {
+      enableTelemetryLogging = options.enableTelemetryLogging;
+    }
     if ('resumableUpload' in options) {
       resumableUpload = options.resumableUpload;
     }
+    if ('signal' in options) {
+      signal = options.signal;
+    }
 
-    return new CallSettings({
+    const merged = new CallSettings({
       timeout,
       retry,
       bundleOptions: this.bundleOptions,
@@ -331,8 +385,21 @@ export class CallSettings {
       apiName,
       retryRequestOptions,
       enableTelemetryTracing,
+      enableTelemetryLogging,
       resumableUpload,
+      signal,
     });
+    const defaultDomain =
+      (options instanceof CallSettings
+        ? getSettingsDefaultDomain(options)
+        : undefined) ??
+      (!('apiName' in options) || options.apiName === this.apiName
+        ? getSettingsDefaultDomain(this)
+        : undefined);
+    if (defaultDomain) {
+      setSettingsDefaultDomain(merged, defaultDomain);
+    }
+    return merged;
   }
 }
 
@@ -662,6 +729,20 @@ function constructRetry(
   return createRetryOptions(codes!, backoffSettings!);
 }
 
+function cloneRetryOptions(
+  retry?: RetryOptions | null,
+): RetryOptions | null | undefined {
+  if (!retry) {
+    return retry;
+  }
+  return createRetryOptions(
+    retry.retryCodes ? [...retry.retryCodes] : retry.retryCodes,
+    retry.backoffSettings ? {...retry.backoffSettings} : retry.backoffSettings,
+    retry.shouldRetryFn,
+    retry.getResumptionRequestFn,
+  );
+}
+
 /**
  * Helper for {@link constructSettings}
  *
@@ -807,6 +888,9 @@ export interface ClientConfig {
  *   calls.
  * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
  *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
+ * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+ * @param {boolean} [enableTelemetryLogging] - Flag to enable or disable telemetry
+ *   logging for this client, taking precedence over `GOOGLE_SDK_NODE_LOGGING` when set.
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -819,6 +903,7 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _legacyTelemetryInfo?: unknown,
+  enableTelemetryLogging?: boolean,
 ) {
   const env: Record<string, string | undefined> =
     typeof process === 'object' && typeof process.env === 'object'
@@ -827,7 +912,7 @@ export function constructSettings(
   const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
   const isEnvSet = envTracing !== undefined && envTracing !== '';
 
-  const isEnvEnabled = checkTelemetryEnabled();
+  const isEnvEnabled = checkTracingEnabled();
 
   // Tracing is only enabled via GOOGLE_SDK_NODE_ENABLE_TRACING or when the user
   // passes enableTelemetryTracing: true in their client options. If
@@ -836,7 +921,25 @@ export function constructSettings(
     ? isEnvEnabled
     : Boolean(enableTelemetryTracing);
 
+  const experimentalLogging =
+    env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
+  const isExperimentalLoggingEnabled =
+    experimentalLogging === 'true' || experimentalLogging === '1';
+  const isLoggingEnvEnabled =
+    isExperimentalLoggingEnabled && enableTelemetryLogging === undefined
+      ? checkLoggingEnabled(new CallSettings({apiName: serviceName}))
+      : false;
+  const resolvedLogging =
+    enableTelemetryLogging !== undefined
+      ? enableTelemetryLogging
+      : isLoggingEnvEnabled
+        ? true
+        : undefined;
+  const loggingRequested =
+    isExperimentalLoggingEnabled && Boolean(resolvedLogging);
+
   otherArgs = otherArgs || {};
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -893,11 +996,22 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs: tracingRequested
-        ? {...otherArgs, internalMethodName: methodName}
-        : otherArgs,
+      otherArgs:
+        tracingRequested || loggingRequested
+          ? {
+              ...otherArgs,
+              internalMethodName: methodName,
+              enableTelemetryTracing: tracingRequested,
+              enableTelemetryLogging: loggingRequested,
+            }
+          : otherArgs,
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
+      enableTelemetryLogging: isExperimentalLoggingEnabled
+        ? resolvedLogging
+        : enableTelemetryLogging !== undefined
+          ? false
+          : undefined,
     });
   }
 
