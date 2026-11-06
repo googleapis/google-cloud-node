@@ -90,6 +90,16 @@ export enum IdempotencyStrategy {
   RetryNever,
 }
 
+export const EXPLICIT_IDEMPOTENCY_STRATEGY = Symbol.for(
+  'explicitIdempotencyStrategy',
+);
+
+export function isExplicitIdempotencyStrategy(
+  retryOptions?: RetryOptions,
+): boolean {
+  return Boolean(retryOptions?.[EXPLICIT_IDEMPOTENCY_STRATEGY]);
+}
+
 export interface RetryOptions {
   retryDelayMultiplier?: number;
   totalTimeout?: number;
@@ -98,6 +108,7 @@ export interface RetryOptions {
   maxRetries?: number;
   retryableErrorFn?: (err: GaxiosError) => boolean;
   idempotencyStrategy?: IdempotencyStrategy;
+  [EXPLICIT_IDEMPOTENCY_STRATEGY]?: boolean;
 }
 
 export interface PreconditionOptions {
@@ -434,6 +445,10 @@ export function isRequestIdempotent(
     return true;
   }
 
+  const explicitRetryConditional = Boolean(
+    (config as {explicitRetryConditional?: boolean}).explicitRetryConditional,
+  );
+
   if (method === 'PUT') {
     const isResumable = url.includes('upload_id=');
     const isSpecialMutation =
@@ -442,19 +457,35 @@ export function isRequestIdempotent(
   }
 
   if (method === 'DELETE') {
-    return !url.includes('/o/');
+    if (explicitRetryConditional) {
+      return (
+        !url.includes('/o/') && !/\/(defaultObjectAcl|acl)(\/|\?|$)/.test(url)
+      );
+    }
+    return !/\/(defaultObjectAcl|acl)(\/|\?|$)/.test(url);
   }
 
   if (method === 'POST') {
-    return /\/v1\/b(\?|$)/.test(url);
+    if (explicitRetryConditional) {
+      return /\/v1\/b(\?|$)/.test(url);
+    }
+    return /\/v1\/b(\?|$)/.test(url) || /\/b\/[^/?]+\/o(\?|$)/.test(url);
+  }
+
+  if (method === 'PATCH') {
+    if (explicitRetryConditional) {
+      return false;
+    }
+    return /\/b\/[^/?]+\/o\/[^/?]+(\?|$)/.test(url);
   }
 
   return false;
 }
 
 export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
-  if (!err || !err.config) return false;
-  return isRequestIdempotent(err.config) && isTransientError(err);
+  if (!err) return false;
+  if (err.config && !isRequestIdempotent(err.config)) return false;
+  return isTransientError(err);
 };
 
 /*! Developer Documentation
@@ -874,33 +905,56 @@ export class Storage {
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     this.baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
 
+    let idempotencyStrategy =
+      options.retryOptions?.idempotencyStrategy !== undefined
+        ? options.retryOptions?.idempotencyStrategy
+        : IDEMPOTENCY_STRATEGY_DEFAULT;
+
+    const retryOptions: RetryOptions = {
+      autoRetry:
+        options.retryOptions?.autoRetry !== undefined
+          ? options.retryOptions?.autoRetry
+          : AUTO_RETRY_DEFAULT,
+      maxRetries: options.retryOptions?.maxRetries
+        ? options.retryOptions?.maxRetries
+        : MAX_RETRY_DEFAULT,
+      retryDelayMultiplier: options.retryOptions?.retryDelayMultiplier
+        ? options.retryOptions?.retryDelayMultiplier
+        : RETRY_DELAY_MULTIPLIER_DEFAULT,
+      totalTimeout: options.retryOptions?.totalTimeout
+        ? options.retryOptions?.totalTimeout
+        : TOTAL_TIMEOUT_DEFAULT,
+      maxRetryDelay: options.retryOptions?.maxRetryDelay
+        ? options.retryOptions?.maxRetryDelay
+        : MAX_RETRY_DELAY_DEFAULT,
+      retryableErrorFn: options.retryOptions?.retryableErrorFn
+        ? options.retryOptions?.retryableErrorFn
+        : RETRYABLE_ERR_FN_DEFAULT,
+      idempotencyStrategy,
+    };
+
+    Object.defineProperty(retryOptions, EXPLICIT_IDEMPOTENCY_STRATEGY, {
+      value: options.retryOptions?.idempotencyStrategy !== undefined,
+      writable: true,
+      enumerable: false,
+      configurable: true,
+    });
+
+    Object.defineProperty(retryOptions, 'idempotencyStrategy', {
+      get() {
+        return idempotencyStrategy;
+      },
+      set(val: IdempotencyStrategy) {
+        idempotencyStrategy = val;
+        retryOptions[EXPLICIT_IDEMPOTENCY_STRATEGY] = val !== undefined;
+      },
+      enumerable: true,
+      configurable: true,
+    });
+
     const config = {
       apiEndpoint: options.apiEndpoint!,
-      retryOptions: {
-        autoRetry:
-          options.retryOptions?.autoRetry !== undefined
-            ? options.retryOptions?.autoRetry
-            : AUTO_RETRY_DEFAULT,
-        maxRetries: options.retryOptions?.maxRetries
-          ? options.retryOptions?.maxRetries
-          : MAX_RETRY_DEFAULT,
-        retryDelayMultiplier: options.retryOptions?.retryDelayMultiplier
-          ? options.retryOptions?.retryDelayMultiplier
-          : RETRY_DELAY_MULTIPLIER_DEFAULT,
-        totalTimeout: options.retryOptions?.totalTimeout
-          ? options.retryOptions?.totalTimeout
-          : TOTAL_TIMEOUT_DEFAULT,
-        maxRetryDelay: options.retryOptions?.maxRetryDelay
-          ? options.retryOptions?.maxRetryDelay
-          : MAX_RETRY_DELAY_DEFAULT,
-        retryableErrorFn: options.retryOptions?.retryableErrorFn
-          ? options.retryOptions?.retryableErrorFn
-          : RETRYABLE_ERR_FN_DEFAULT,
-        idempotencyStrategy:
-          options.retryOptions?.idempotencyStrategy !== undefined
-            ? options.retryOptions?.idempotencyStrategy
-            : IDEMPOTENCY_STRATEGY_DEFAULT,
-      },
+      retryOptions,
       baseUrl: this.baseUrl,
       customEndpoint: this.customEndpoint,
       useAuthWithCustomEndpoint: options?.useAuthWithCustomEndpoint,
@@ -931,6 +985,7 @@ export class Storage {
     this.storageTransport = new StorageTransport({
       ...config,
       ...options,
+      retryOptions: this.retryOptions,
       interceptors: this.interceptors,
     });
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;

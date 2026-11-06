@@ -32,6 +32,7 @@ import {randomUUID} from 'crypto';
 import {
   ExceptionMessages,
   IdempotencyStrategy,
+  isExplicitIdempotencyStrategy,
   PreconditionOptions,
   Storage,
 } from './storage.js';
@@ -1256,12 +1257,18 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   private shouldRetryBasedOnPreconditionAndIdempotencyStrat(
     options?: PreconditionOptions,
+    defaultRetryAlways = false,
   ): boolean {
+    const isConditional = defaultRetryAlways
+      ? this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional &&
+        isExplicitIdempotencyStrategy(this.storage.retryOptions)
+      : this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional;
     return !(
       (options?.ifGenerationMatch === undefined &&
         this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     );
@@ -2015,14 +2022,12 @@ class File extends ServiceObject<File, FileMetadata> {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    const retryOptions = this.storage.retryOptions;
+    const retryOptions = {...this.storage.retryOptions};
     if (
-      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
-      this.storage.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryNever
+      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+        options?.preconditionOpts,
+        true,
+      )
     ) {
       retryOptions.autoRetry = false;
     }
@@ -2497,6 +2502,16 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         if (resp.status === 404) {
+          if ((resp as GaxiosResponse & {isRetry?: boolean}).isRetry) {
+            return [
+              {
+                ...resp,
+                status: 204,
+                statusText: 'No Content',
+                data: '',
+              },
+            ];
+          }
           if (options.ignoreNotFound) {
             return respTuple;
           }
@@ -2512,6 +2527,21 @@ class File extends ServiceObject<File, FileMetadata> {
         }
 
         return respTuple;
+      } catch (err) {
+        const error = err as GaxiosError & {isRetry?: boolean};
+        if ((error.code === 404 || error.status === 404) && error.isRetry) {
+          return [
+            {
+              ...(error.response || {}),
+              config: error.config || ({} as GaxiosOptionsPrepared),
+              headers: error.response?.headers || new Headers(),
+              status: 204,
+              statusText: 'No Content',
+              data: '',
+            } as GaxiosResponse,
+          ];
+        }
+        throw err;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
@@ -4494,6 +4524,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
         options?.preconditionOpts,
+        true,
       )
     ) {
       maxRetries = 0;
@@ -4557,7 +4588,9 @@ class File extends ServiceObject<File, FileMetadata> {
         maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
       },
-    );
+    ).finally(() => {
+      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+    });
     if (!callback) {
       return returnValue;
     }
@@ -4612,6 +4645,56 @@ class File extends ServiceObject<File, FileMetadata> {
       try {
         resp = await super.setMetadata(metadata, options);
       } catch (err) {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+        const error = err as GaxiosError & {isRetry?: boolean};
+        if ((error.code === 412 || error.status === 412) && error.isRetry) {
+          const getMetadataOpts: GetFileMetadataOptions = {};
+          if (options.userProject) {
+            getMetadataOpts.userProject = options.userProject;
+          }
+          const getMetadataMethod =
+            typeof this.methods.getMetadata === 'object'
+              ? this.methods.getMetadata
+              : undefined;
+          const getMetadataReqOpts = getMetadataMethod?.reqOpts as
+            | (StorageRequestOptions & {qs?: Record<string, unknown>})
+            | undefined;
+          const savedQueryParamsIfMetagenerationMatch =
+            getMetadataReqOpts?.queryParameters?.ifMetagenerationMatch;
+          const savedQsIfMetagenerationMatch =
+            getMetadataReqOpts?.qs?.ifMetagenerationMatch;
+          if (getMetadataReqOpts?.queryParameters) {
+            delete getMetadataReqOpts.queryParameters.ifMetagenerationMatch;
+          }
+          if (getMetadataReqOpts?.qs) {
+            delete getMetadataReqOpts.qs.ifMetagenerationMatch;
+          }
+          const restorePrecondition = () => {
+            if (
+              savedQueryParamsIfMetagenerationMatch !== undefined &&
+              getMetadataReqOpts?.queryParameters
+            ) {
+              getMetadataReqOpts.queryParameters.ifMetagenerationMatch =
+                savedQueryParamsIfMetagenerationMatch;
+            }
+            if (
+              savedQsIfMetagenerationMatch !== undefined &&
+              getMetadataReqOpts?.qs
+            ) {
+              getMetadataReqOpts.qs.ifMetagenerationMatch =
+                savedQsIfMetagenerationMatch;
+            }
+          };
+          try {
+            const [metadata] = await this.getMetadata(getMetadataOpts);
+            restorePrecondition();
+            cb!(null, metadata);
+          } catch (getErr) {
+            restorePrecondition();
+            cb!(getErr as GaxiosError);
+          }
+          return;
+        }
         cb!(err as GaxiosError);
         return;
       } finally {
@@ -4747,10 +4830,11 @@ class File extends ServiceObject<File, FileMetadata> {
   ): void {
     options.metadata ??= {};
 
-    const retryOptions = this.storage.retryOptions;
+    const retryOptions = {...this.storage.retryOptions};
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
         options.preconditionOpts,
+        true,
       )
     ) {
       retryOptions.autoRetry = false;
@@ -4873,6 +4957,15 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts,
     );
 
+    if (
+      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+        options.preconditionOpts,
+        true,
+      )
+    ) {
+      reqOpts.maxRetries = 0;
+    }
+
     const writeStream = new ProgressStream();
     writeStream.on('progress', evt => dup.emit('progress', evt));
     dup.setWritable(writeStream);
@@ -4923,13 +5016,21 @@ class File extends ServiceObject<File, FileMetadata> {
     methodType: AvailableServiceObjectMethods,
     localPreconditionOptions?: PreconditionOptions,
   ): void {
+    const isExplicitConditional =
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional &&
+      isExplicitIdempotencyStrategy(this.storage.retryOptions);
+
     if (
       (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.queryParameters?.ifGenerationMatch === undefined &&
         coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         localPreconditionOptions?.ifGenerationMatch === undefined &&
+        (localPreconditionOptions as {preconditionOpts?: PreconditionOptions})
+          ?.preconditionOpts?.ifGenerationMatch === undefined &&
         methodType === AvailableServiceObjectMethods.delete &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isExplicitConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     ) {
@@ -4938,11 +5039,15 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.queryParameters?.ifMetagenerationMatch ===
+          undefined &&
         coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
         localPreconditionOptions?.ifMetagenerationMatch === undefined &&
+        (localPreconditionOptions as {preconditionOpts?: PreconditionOptions})
+          ?.preconditionOpts?.ifMetagenerationMatch === undefined &&
         methodType === AvailableServiceObjectMethods.setMetadata &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isExplicitConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     ) {

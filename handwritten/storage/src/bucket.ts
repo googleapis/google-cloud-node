@@ -55,6 +55,7 @@ import {
   Cors,
   PreconditionOptions,
   IdempotencyStrategy,
+  isExplicitIdempotencyStrategy,
   BucketOptions,
 } from './storage.js';
 import {
@@ -1738,12 +1739,6 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       if (validationError) return validationError;
     }
 
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.setMetadata, // Not relevant but param is required
-      AvailableServiceObjectMethods.setMetadata, // Same as above
-      options,
-    );
-
     const convertToFile = (file: string | File): File => {
       if (file instanceof File) {
         return file;
@@ -1779,6 +1774,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             IdempotencyStrategy.RetryNever
         ) {
           maxRetries = 0;
+          this.storage.retryOptions.autoRetry = false;
         }
 
         const deleteSourceObjects = options.deleteSourceObjects;
@@ -4620,7 +4616,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
           maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
         },
-      );
+      ).finally(() => {
+        if (newFile?.storage?.retryOptions) {
+          newFile.storage.retryOptions.autoRetry = this.instanceRetryValue;
+        }
+      });
 
       if (!callback) {
         return returnValue;
@@ -4655,13 +4655,16 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     );
 
     // Do not retry if precondition option ifGenerationMatch is not set
-    // because this is a file operation
+    // and idempotencyStrategy is explicitly set to RetryConditional
+    const isExplicitConditional =
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional &&
+      isExplicitIdempotencyStrategy(this.storage.retryOptions);
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       (options?.preconditionOpts?.ifGenerationMatch === undefined &&
         this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isExplicitConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     ) {
@@ -4802,6 +4805,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   ): void {
     if (
       typeof coreOpts === 'object' &&
+      coreOpts?.reqOpts?.queryParameters?.ifMetagenerationMatch === undefined &&
       coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
       localPreconditionOptions?.ifMetagenerationMatch === undefined &&
       this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&

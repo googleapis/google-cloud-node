@@ -574,5 +574,185 @@ describe('Storage Transport', () => {
         },
       );
     });
+
+    it('should retry Object Delete, Object Patch, and Object Insert by default without preconditions', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({
+        method: 'DELETE',
+        url: '/storage/v1/b/bucket/o/object',
+      });
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'DELETE',
+            url: 'https://storage.googleapis.com/storage/v1/b/bucket/o/object',
+          },
+        } as unknown as GaxiosError),
+        true,
+      );
+
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'PATCH',
+            url: 'https://storage.googleapis.com/storage/v1/b/bucket/o/object',
+          },
+        } as unknown as GaxiosError),
+        true,
+      );
+
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'POST',
+            url: 'https://storage.googleapis.com/upload/storage/v1/b/bucket/o',
+          },
+        } as unknown as GaxiosError),
+        true,
+      );
+
+      // Bucket PATCH without preconditions should still NOT retry by default
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'PATCH',
+            url: 'https://storage.googleapis.com/storage/v1/b/bucket',
+          },
+        } as unknown as GaxiosError),
+        false,
+      );
+    });
+
+    it('should convert 404 to 204 No Content on retried Object Delete, but reject on initial 404', async () => {
+      const gaxios = new Gaxios();
+      let callCount = 0;
+      sandbox.stub(gaxios, 'request').callsFake(async () => {
+        callCount++;
+        const err = new GaxiosError(
+          'Not Found',
+          {
+            retryConfig: {currentRetryAttempt: callCount > 1 ? 1 : 0},
+          } as unknown as GaxiosOptionsPrepared,
+          {
+            status: 404,
+            statusText: 'Not Found',
+            headers: new Headers(),
+            data: {},
+            config: {} as GaxiosOptionsPrepared,
+          } as unknown as GaxiosResponse,
+        );
+        err.status = 404;
+        throw err;
+      });
+
+      const customTransport = new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient: authClientStub,
+        gaxiosInstance: gaxios,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      requestStub.callsFake(async (opts: any) => {
+        return opts.adapter(opts);
+      });
+
+      // initial 404 (callCount === 1, currentRetryAttempt === 0) -> should reject with 404
+      await assert.rejects(
+        customTransport.makeRequest({
+          method: 'DELETE',
+          url: '/storage/v1/b/bucket/o/object',
+        }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err: any) => {
+          assert.strictEqual(err.code, 404);
+          assert.strictEqual(err.isRetry, undefined);
+          return true;
+        },
+      );
+
+      // simulate retried 404 (currentRetryAttempt === 1) -> should resolve with 204
+      const resp = await customTransport.makeRequest({
+        method: 'DELETE',
+        url: '/storage/v1/b/bucket/o/object',
+      });
+      assert.strictEqual(resp.status, 204);
+    });
+
+    it('should mark error with isRetry = true when a retried request fails with 412', async () => {
+      const gaxios = new Gaxios();
+      sandbox.stub(gaxios, 'request').callsFake(async () => {
+        const err = new GaxiosError(
+          'Precondition Failed',
+          {
+            retryConfig: {currentRetryAttempt: 1},
+          } as unknown as GaxiosOptionsPrepared,
+          {
+            status: 412,
+            statusText: 'Precondition Failed',
+            headers: new Headers(),
+            data: {},
+            config: {} as GaxiosOptionsPrepared,
+          } as unknown as GaxiosResponse,
+        );
+        err.status = 412;
+        throw err;
+      });
+
+      const customTransport = new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient: authClientStub,
+        gaxiosInstance: gaxios,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      requestStub.callsFake(async (opts: any) => {
+        return opts.adapter(opts);
+      });
+
+      await assert.rejects(
+        customTransport.makeRequest({
+          method: 'PATCH',
+          url: '/storage/v1/b/bucket/o/object',
+        }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err: any) => {
+          assert.strictEqual(err.code, 412);
+          assert.strictEqual(err.isRetry, true);
+          return true;
+        },
+      );
+    });
   });
 });

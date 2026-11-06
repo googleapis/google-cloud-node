@@ -390,10 +390,10 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
     optionsOrCallback: SetMetadataOptions | MetadataCallback<HmacKeyMetadata>,
     cb?: MetadataCallback<HmacKeyMetadata>,
   ): Promise<SetMetadataResponse<HmacKeyMetadata>> | void {
-    // ETag preconditions are not currently supported. Retries should be disabled if the idempotency strategy is not set to RetryAlways
     if (
+      metadata?.etag === undefined &&
       this.storage.retryOptions.idempotencyStrategy !==
-      IdempotencyStrategy.RetryAlways
+        IdempotencyStrategy.RetryAlways
     ) {
       this.storage.retryOptions.autoRetry = false;
     }
