@@ -1,0 +1,36 @@
+{
+  "name": "breaking-change-check",
+  "version": "0.0.1",
+  "private": true,
+  "description": "TypeScript consumer compilation harness and intent-aware breaking change check",
+  "repository": {
+    "type": "git",
+    "directory": "ci/breaking-change-check",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "clean": "gts clean",
+    "precompile": "gts clean",
+    "compile": "tsc -p .",
+    "pretest": "tsc -p .",
+    "test": "node ../../bin/run-test.cjs --no-c8 build/test",
+    "check": "tsc -p . && BREAKING_CHANGE_CHECK_MODE=diff node ../../bin/run-test.cjs --no-c8 --no-parallel build/test --grep \"git diff breaking-change gate\"",
+    "lint": "gts check",
+    "fix": "gts fix",
+    "prelint": "echo 'no samples to prelint'",
+    "samples-test": "echo 'no samples test'",
+    "system-test": "echo 'no system test'"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.8",
+    "gts": "^6.0.2",
+    "mocha": "^11.1.0",
+    "typescript": "^5.8.3"
+  }
+}
