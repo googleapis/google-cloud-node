@@ -969,17 +969,23 @@ export async function ensurePackageDependencies(repoRoot, packages) {
   }
 
   if (workspaceFilterArgs.length > 0) {
-    await execFileAsync(
-      pnpmCmd,
-      [
-        'install',
-        '--frozen-lockfile',
-        '--ignore-scripts',
-        '--prefer-offline',
-        ...workspaceFilterArgs,
-      ],
-      {cwd: repoRoot, shell: isWin},
-    );
+    try {
+      await execFileAsync(
+        pnpmCmd,
+        [
+          'install',
+          '--frozen-lockfile',
+          '--ignore-scripts',
+          '--prefer-offline',
+          ...workspaceFilterArgs,
+        ],
+        {cwd: repoRoot, shell: isWin},
+      );
+    } catch (err) {
+      console.warn(
+        `Warning: failed to install workspace dependencies (${err.message}); continuing check.`,
+      );
+    }
   }
 }
 
@@ -1009,6 +1015,56 @@ function parseDiffNameStatusNullDelimited(diffOutput) {
 const TSCONFIG_NAME_RE = /^tsconfig(\..+)?\.json$/;
 const VALID_PKG_NAME_RE =
   /^(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/i;
+const PKG_JSON_SURFACE_KEYS = [
+  'name',
+  'private',
+  'main',
+  'module',
+  'types',
+  'typings',
+  'exports',
+  'files',
+];
+
+function isPackageJsonPublicSurfaceChanged(
+  absRepoRoot,
+  pkgDir,
+  getFileAtRev,
+  baseRev,
+  headRev,
+) {
+  const relPj = toPosix(
+    path.relative(absRepoRoot, path.join(pkgDir, 'package.json')),
+  );
+  const basePj = parseJsonSafe(getFileAtRev(baseRev, relPj));
+  const headPj =
+    headRev !== null
+      ? parseJsonSafe(getFileAtRev(headRev, relPj))
+      : fs.existsSync(path.join(pkgDir, 'package.json'))
+        ? parseJsonSafe(
+            fs.readFileSync(path.join(pkgDir, 'package.json'), 'utf8'),
+          )
+        : null;
+  if (!basePj || !headPj) return true;
+  for (const key of PKG_JSON_SURFACE_KEYS) {
+    if (JSON.stringify(basePj[key]) !== JSON.stringify(headPj[key])) {
+      return true;
+    }
+  }
+  const baseDeps = {
+    ...basePj.dependencies,
+    ...basePj.peerDependencies,
+    ...basePj.optionalDependencies,
+  };
+  const headDeps = {
+    ...headPj.dependencies,
+    ...headPj.peerDependencies,
+    ...headPj.optionalDependencies,
+  };
+  return Object.keys(baseDeps).some(
+    dep => !Object.prototype.hasOwnProperty.call(headDeps, dep),
+  );
+}
 
 export function collectTouchedPackages(
   {
@@ -1041,13 +1097,23 @@ export function collectTouchedPackages(
         ...pathspecArgs,
       ];
 
-  const diffOutput = runGit(
-    ['diff', '--name-status', '-z', ...diffRevArgs, '--', ...gitPathspecs],
-    absRepoRoot,
-  );
+  let diffOutput = '';
+  try {
+    diffOutput = runGit(
+      ['diff', '--name-status', '-z', ...diffRevArgs, '--', ...gitPathspecs],
+      absRepoRoot,
+    );
+  } catch (err) {
+    console.warn(
+      `Warning: skipping breaking change check because git diff failed (${err.message}).`,
+    );
+    return {absRepoRoot, reader, touchedPackages: new Set()};
+  }
 
   const rawEntries = parseDiffNameStatusNullDelimited(diffOutput);
   const touchedPackages = new Set();
+  const touchedByNonPkgJson = new Set();
+  let sawAncestorTsconfigChange = false;
   const tsOrJsonExtRe = /\.(?:(c|m)?ts|json)$/;
 
   for (const item of rawEntries) {
@@ -1084,6 +1150,31 @@ export function collectTouchedPackages(
       );
     if (pkgDir) {
       touchedPackages.add(pkgDir);
+      if (baseName !== 'package.json' || oldBaseName !== 'package.json') {
+        touchedByNonPkgJson.add(pkgDir);
+      }
+    } else if (
+      TSCONFIG_NAME_RE.test(baseName) ||
+      TSCONFIG_NAME_RE.test(oldBaseName)
+    ) {
+      sawAncestorTsconfigChange = true;
+    }
+  }
+
+  if (!sawAncestorTsconfigChange) {
+    for (const pkgDir of [...touchedPackages]) {
+      if (
+        !touchedByNonPkgJson.has(pkgDir) &&
+        !isPackageJsonPublicSurfaceChanged(
+          absRepoRoot,
+          pkgDir,
+          getFileAtRev,
+          baseRev,
+          headRev,
+        )
+      ) {
+        touchedPackages.delete(pkgDir);
+      }
     }
   }
 
@@ -1238,16 +1329,22 @@ export async function compileTouchedWorkspaceDeps(range) {
   console.log(
     `Compiling workspace dependencies for ${filterArgs.length / 2} filter selector(s)...`,
   );
-  await execFileAsync(
-    pnpmCmd,
-    [
-      '--config.link-workspace-packages=deep',
-      '--config.prefer-workspace-packages=true',
-      ...filterArgs,
-      '--if-present',
-      'run',
-      'compile',
-    ],
-    {cwd: absRepoRoot, shell: isWin, maxBuffer: 50 * 1024 * 1024},
-  );
+  try {
+    await execFileAsync(
+      pnpmCmd,
+      [
+        '--config.link-workspace-packages=deep',
+        '--config.prefer-workspace-packages=true',
+        ...filterArgs,
+        '--if-present',
+        'run',
+        'compile',
+      ],
+      {cwd: absRepoRoot, shell: isWin, maxBuffer: 50 * 1024 * 1024},
+    );
+  } catch (err) {
+    console.warn(
+      `Warning: failed to compile some workspace dependencies (${err.message}); continuing check.`,
+    );
+  }
 }

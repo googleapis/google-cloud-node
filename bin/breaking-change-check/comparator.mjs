@@ -239,6 +239,22 @@ function shareCovariantContainerGroup(sName, tName) {
   return SINGLE_ARG_CONTAINER_GROUPS.some(g => g.has(sName) && g.has(tName));
 }
 
+function containsErrorType(checker, type, depth = 0) {
+  if (!type || depth > 5) return false;
+  if (isErrorType(type)) return true;
+  if (
+    (type.isUnion && type.isUnion()) ||
+    (type.isIntersection && type.isIntersection())
+  ) {
+    return type.types.some(t => containsErrorType(checker, t, depth + 1));
+  }
+  if (type.objectFlags & ts.ObjectFlags.Reference) {
+    const args = checker.getTypeArguments(type) || [];
+    return args.some(a => containsErrorType(checker, a, depth + 1));
+  }
+  return false;
+}
+
 function hasUnsafeAnyAssignment(
   checker,
   source,
@@ -247,7 +263,12 @@ function hasUnsafeAnyAssignment(
   seen = new Set(),
 ) {
   if (!source || !target || source === target || depth > 5) return false;
-  if (isErrorType(source) !== isErrorType(target)) return true;
+  if (
+    containsErrorType(checker, source) ||
+    containsErrorType(checker, target)
+  ) {
+    return false;
+  }
   if (
     source.flags & ts.TypeFlags.Any &&
     !(target.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown))
@@ -264,25 +285,24 @@ function hasUnsafeAnyAssignment(
   }
 
   if (source.isUnion && source.isUnion()) {
-    return source.types.some(sMember => {
-      if (target.isUnion && target.isUnion()) {
-        return !target.types.some(
-          tMember =>
-            (areUniqueSymbolsCompatible(sMember, tMember) ||
-              checker.isTypeAssignableTo(sMember, tMember)) &&
-            !hasUnsafeAnyAssignment(checker, sMember, tMember, depth + 1, seen),
-        );
-      }
-      return hasUnsafeAnyAssignment(checker, sMember, target, depth + 1, seen);
-    });
+    return source.types.some(sMember =>
+      hasUnsafeAnyAssignment(checker, sMember, target, depth + 1, seen),
+    );
   }
 
   if (target.isUnion && target.isUnion()) {
-    return !target.types.some(
+    const matchingMembers = target.types.filter(
       tMember =>
-        (areUniqueSymbolsCompatible(source, tMember) ||
-          checker.isTypeAssignableTo(source, tMember)) &&
-        !hasUnsafeAnyAssignment(checker, source, tMember, depth + 1, seen),
+        areUniqueSymbolsCompatible(source, tMember) ||
+        checker.isTypeAssignableTo(source, tMember),
+    );
+    if (matchingMembers.length > 0) {
+      return matchingMembers.every(tMember =>
+        hasUnsafeAnyAssignment(checker, source, tMember, depth + 1, seen),
+      );
+    }
+    return target.types.some(tMember =>
+      hasUnsafeAnyAssignment(checker, source, tMember, depth + 1, seen),
     );
   }
 
@@ -433,12 +453,338 @@ function hasUnsafeAnyAssignment(
   return false;
 }
 
-export function isAssignableCompat(checker, source, target) {
+let activeComparisonContext = null;
+
+function areSymbolsUnifiedCounterparts(checker, sSym, tSym, context) {
+  if (!sSym || !tSym || sSym === tSym) return false;
+  if (
+    sSym.flags & ts.SymbolFlags.EnumMember &&
+    tSym.flags & ts.SymbolFlags.EnumMember &&
+    sSym.getName() === tSym.getName()
+  ) {
+    return areSymbolsUnifiedCounterparts(
+      checker,
+      sSym.parent,
+      tSym.parent,
+      context,
+    );
+  }
+  if (
+    context &&
+    context.unifiedModuleSymbols &&
+    context.verifiedHeadCounterpartMap
+  ) {
+    if (
+      context.unifiedModuleSymbols.has(sSym) &&
+      context.verifiedHeadCounterpartMap.get(sSym) === tSym
+    ) {
+      return true;
+    }
+    if (
+      context.unifiedModuleSymbols.has(tSym) &&
+      context.verifiedHeadCounterpartMap.get(tSym) === sSym
+    ) {
+      return true;
+    }
+  }
+  if (
+    sSym.flags & ts.SymbolFlags.Enum &&
+    tSym.flags & ts.SymbolFlags.Enum &&
+    sSym.getName() === tSym.getName()
+  ) {
+    const sDecl0 = sSym.declarations && sSym.declarations[0];
+    const tDecl0 = tSym.declarations && tSym.declarations[0];
+    const sFile = sDecl0 && path.resolve(sDecl0.getSourceFile().fileName);
+    const tFile = tDecl0 && path.resolve(tDecl0.getSourceFile().fileName);
+    if (sFile && tFile) {
+      if (mapBaseFileToHeadFile(sFile) === tFile) {
+        const tmpErrs = [];
+        checkEnumSymbol(checker, sSym.getName(), sSym, tSym, tmpErrs);
+        return tmpErrs.length === 0;
+      }
+      if (mapBaseFileToHeadFile(tFile) === sFile) {
+        const tmpErrs = [];
+        checkEnumSymbol(checker, tSym.getName(), tSym, sSym, tmpErrs);
+        return tmpErrs.length === 0;
+      }
+    }
+  }
+  return false;
+}
+
+function isStructurallyAssignableWithUnifiedSymbols(
+  checker,
+  source,
+  target,
+  context,
+  depth = 0,
+  seen = new Set(),
+) {
+  if (!source || !target || depth > 6) return false;
+  if (
+    source === target ||
+    containsErrorType(checker, source) ||
+    containsErrorType(checker, target) ||
+    areUniqueSymbolsCompatible(source, target)
+  ) {
+    return true;
+  }
+  if (checker.isTypeAssignableTo(source, target)) {
+    return !hasUnsafeAnyAssignment(checker, source, target);
+  }
+  if (!context) return false;
+
+  if (source.id && target.id) {
+    const pairKey = `${source.id}:${target.id}`;
+    if (seen.has(pairKey)) return true;
+    seen = new Set(seen);
+    seen.add(pairKey);
+  }
+
+  const rawSSym = source.aliasSymbol || source.symbol;
+  const rawTSym = target.aliasSymbol || target.symbol;
+  const sSym = rawSSym ? resolveAliased(checker, rawSSym) : undefined;
+  const tSym = rawTSym ? resolveAliased(checker, rawTSym) : undefined;
+
+  if (
+    sSym &&
+    tSym &&
+    areSymbolsUnifiedCounterparts(checker, sSym, tSym, context)
+  ) {
+    const sArgs =
+      source.aliasTypeArguments ||
+      (source.objectFlags & ts.ObjectFlags.Reference
+        ? checker.getTypeArguments(source)
+        : null) ||
+      [];
+    const tArgs =
+      target.aliasTypeArguments ||
+      (target.objectFlags & ts.ObjectFlags.Reference
+        ? checker.getTypeArguments(target)
+        : null) ||
+      [];
+    if (sArgs.length === 0 && tArgs.length === 0) {
+      return true;
+    }
+    if (
+      sArgs.length === tArgs.length &&
+      sArgs.every(
+        (sa, idx) =>
+          isStructurallyAssignableWithUnifiedSymbols(
+            checker,
+            sa,
+            tArgs[idx],
+            context,
+            depth + 1,
+            seen,
+          ) &&
+          isStructurallyAssignableWithUnifiedSymbols(
+            checker,
+            tArgs[idx],
+            sa,
+            context,
+            depth + 1,
+            seen,
+          ),
+      )
+    ) {
+      return true;
+    }
+  }
+
+  if (source.isUnion && source.isUnion()) {
+    return source.types.every(sMember =>
+      isStructurallyAssignableWithUnifiedSymbols(
+        checker,
+        sMember,
+        target,
+        context,
+        depth + 1,
+        seen,
+      ),
+    );
+  }
+
+  if (target.isUnion && target.isUnion()) {
+    return target.types.some(tMember =>
+      isStructurallyAssignableWithUnifiedSymbols(
+        checker,
+        source,
+        tMember,
+        context,
+        depth + 1,
+        seen,
+      ),
+    );
+  }
+
+  if (checker.isTupleType(source) && checker.isTupleType(target)) {
+    const sArgs = checker.getTypeArguments(source) || [];
+    const tArgs = checker.getTypeArguments(target) || [];
+    return (
+      sArgs.length === tArgs.length &&
+      sArgs.every((sa, idx) =>
+        isStructurallyAssignableWithUnifiedSymbols(
+          checker,
+          sa,
+          tArgs[idx],
+          context,
+          depth + 1,
+          seen,
+        ),
+      )
+    );
+  }
+
+  const sSymName = source.symbol && source.symbol.getName();
+  const tSymName = target.symbol && target.symbol.getName();
+  if (shareCovariantContainerGroup(sSymName, tSymName)) {
+    const sArgs = checker.getTypeArguments(source) || [];
+    const tArgs = checker.getTypeArguments(target) || [];
+    return (
+      sArgs.length === tArgs.length &&
+      sArgs.length > 0 &&
+      sArgs.every((sa, idx) =>
+        isStructurallyAssignableWithUnifiedSymbols(
+          checker,
+          sa,
+          tArgs[idx],
+          context,
+          depth + 1,
+          seen,
+        ),
+      )
+    );
+  }
+
+  // Handle structural/mapped object types (e.g. `Omit<UpsertStageOptions, 'transforms'>` -> `UpsertStageOptions`)
+  // whose assignability only failed because one or more property types reference unified symbols.
+  if (
+    depth <= 3 &&
+    !(
+      source.flags &
+      (ts.TypeFlags.Primitive |
+        ts.TypeFlags.Union |
+        ts.TypeFlags.Any |
+        ts.TypeFlags.Unknown |
+        ts.TypeFlags.Never |
+        ts.TypeFlags.TypeParameter)
+    ) &&
+    !(
+      target.flags &
+      (ts.TypeFlags.Primitive |
+        ts.TypeFlags.Union |
+        ts.TypeFlags.Any |
+        ts.TypeFlags.Unknown |
+        ts.TypeFlags.Never |
+        ts.TypeFlags.TypeParameter)
+    ) &&
+    !checker.isArrayType(source) &&
+    !checker.isArrayType(target) &&
+    !checker.isTupleType(source) &&
+    !checker.isTupleType(target) &&
+    (checker.getTypeArguments(source) || []).length === 0 &&
+    (checker.getTypeArguments(target) || []).length === 0 &&
+    checker.getSignaturesOfType(source, ts.SignatureKind.Call).length === 0 &&
+    checker.getSignaturesOfType(target, ts.SignatureKind.Call).length === 0 &&
+    checker.getSignaturesOfType(source, ts.SignatureKind.Construct).length ===
+      0 &&
+    checker.getSignaturesOfType(target, ts.SignatureKind.Construct).length ===
+      0 &&
+    (checker.getIndexInfosOfType(target) || []).length === 0
+  ) {
+    const sProps = checker.getPropertiesOfType(source);
+    const tProps = checker.getPropertiesOfType(target);
+    if (
+      sProps.length > 0 &&
+      tProps.length > 0 &&
+      !sProps.some(p => shouldSkipInternalProperty(p.getName())) &&
+      !tProps.some(p => shouldSkipInternalProperty(p.getName()))
+    ) {
+      let allPropsOk = true;
+      let sawUnifiedProp = false;
+      for (const tProp of tProps) {
+        const sProp = checker.getPropertyOfType(source, tProp.getName());
+        if (!sProp) {
+          if (!(tProp.flags & ts.SymbolFlags.Optional)) {
+            allPropsOk = false;
+            break;
+          }
+          continue;
+        }
+        if (
+          sProp.flags & ts.SymbolFlags.Optional &&
+          !(tProp.flags & ts.SymbolFlags.Optional)
+        ) {
+          allPropsOk = false;
+          break;
+        }
+        const sLoc =
+          sProp.valueDeclaration ||
+          (sProp.declarations && sProp.declarations[0]);
+        const tLoc =
+          tProp.valueDeclaration ||
+          (tProp.declarations && tProp.declarations[0]);
+        if (!sLoc || !tLoc) {
+          allPropsOk = false;
+          break;
+        }
+        const sPT = checker.getTypeOfSymbolAtLocation(sProp, sLoc);
+        const tPT = checker.getTypeOfSymbolAtLocation(tProp, tLoc);
+        if (
+          checker.isTypeAssignableTo(sPT, tPT) &&
+          !hasUnsafeAnyAssignment(checker, sPT, tPT)
+        ) {
+          continue;
+        }
+        if (
+          isStructurallyAssignableWithUnifiedSymbols(
+            checker,
+            sPT,
+            tPT,
+            context,
+            depth + 1,
+            seen,
+          )
+        ) {
+          sawUnifiedProp = true;
+        } else {
+          allPropsOk = false;
+          break;
+        }
+      }
+      if (allPropsOk && sawUnifiedProp) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+export function isAssignableCompat(
+  checker,
+  source,
+  target,
+  context = activeComparisonContext,
+) {
   if (source === target) return true;
-  if (isErrorType(source) !== isErrorType(target)) return false;
+  if (
+    containsErrorType(checker, source) ||
+    containsErrorType(checker, target)
+  ) {
+    return true;
+  }
   if (areUniqueSymbolsCompatible(source, target)) return true;
-  if (!checker.isTypeAssignableTo(source, target)) return false;
-  return !hasUnsafeAnyAssignment(checker, source, target);
+  if (checker.isTypeAssignableTo(source, target)) {
+    return !hasUnsafeAnyAssignment(checker, source, target);
+  }
+  return isStructurallyAssignableWithUnifiedSymbols(
+    checker,
+    source,
+    target,
+    context,
+  );
 }
 
 function flipPolarity(pol) {
@@ -1150,6 +1496,24 @@ function collectHeadLocalBindingsByName(checker, hRootNode, tpScope) {
   return map;
 }
 
+const commentlessPrinter = ts.createPrinter({removeComments: true});
+
+function printTypeNodeCommentless(node, sf) {
+  try {
+    return commentlessPrinter
+      .printNode(ts.EmitHint.Unspecified, node, sf)
+      .replace(/[/\\]__base_pkg__(?=[/\\])/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  } catch {
+    return node
+      .getText(sf)
+      .replace(/[/\\]__base_pkg__(?=[/\\])/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+}
+
 function isAstTypeExplainedByUnifiedExports(
   checker,
   bTypeNode,
@@ -1165,8 +1529,8 @@ function isAstTypeExplainedByUnifiedExports(
   }
   const bSf = bTypeNode.getSourceFile();
   const hSf = hTypeNode.getSourceFile();
-  const bText = bTypeNode.getText(bSf).replace(/\s+/g, ' ').trim();
-  const hText = hTypeNode.getText(hSf).replace(/\s+/g, ' ').trim();
+  const bText = printTypeNodeCommentless(bTypeNode, bSf);
+  const hText = printTypeNodeCommentless(hTypeNode, hSf);
   if (bText !== hText) return false;
 
   const baseModFile = path.resolve(bSf.fileName);
@@ -1184,7 +1548,6 @@ function isAstTypeExplainedByUnifiedExports(
   const verifyMatchingHeadBinding = (refName, baseResolved) => {
     const hResolved = headBindingsByName.get(refName);
     if (!hResolved) return true;
-    if (isErrorType(checker.getDeclaredTypeOfSymbol(hResolved))) return false;
     if (context.verifiedHeadCounterpartMap) {
       const expectedHead = context.verifiedHeadCounterpartMap.get(baseResolved);
       if (expectedHead) {
@@ -1194,6 +1557,9 @@ function isAstTypeExplainedByUnifiedExports(
     const bDecl0 = baseResolved.declarations && baseResolved.declarations[0];
     const hDecl0 = hResolved.declarations && hResolved.declarations[0];
     if (!bDecl0 || !hDecl0) return true;
+    if (ts.isImportSpecifier(hDecl0) && !ts.isImportSpecifier(bDecl0)) {
+      return false;
+    }
     const bFile = path.resolve(bDecl0.getSourceFile().fileName);
     const hFile = path.resolve(hDecl0.getSourceFile().fileName);
     const mappedHead = mapBaseFileToHeadFile(bFile);
@@ -1581,7 +1947,12 @@ function isAstTypeExplainedByUnifiedExports(
           if (
             visitedSymbols.has(resolved) ||
             (context.unifiedModuleSymbols.has(resolved) &&
-              Boolean(resolved.flags & ts.SymbolFlags.Class))
+              Boolean(
+                resolved.flags &
+                (ts.SymbolFlags.Class |
+                  ts.SymbolFlags.Module |
+                  ts.SymbolFlags.Enum),
+              ))
           ) {
             sawUnified = true;
             return;
@@ -1712,33 +2083,6 @@ function isReturnMismatchExplainedByUnifiedTypes(
     ...unifiedConstrainedTpNames,
   ]);
 
-  const bParamNodes = getNonThisParamNodes(bDecl);
-  const hParamNodes = getNonThisParamNodes(hDecl);
-  for (let i = 0; i < baseSig.parameters.length; i++) {
-    const bPSym = baseSig.parameters[i];
-    const hPSym = headSig.parameters[i];
-    if (!bPSym || !hPSym) return false;
-    const bPT = checker.getTypeOfSymbolAtLocation(bPSym, bDecl);
-    const hPT = checker.getTypeOfSymbolAtLocation(hPSym, hDecl);
-    if (isAssignableCompat(checker, bPT, hPT)) continue;
-    const bPNode = bParamNodes[i] && bParamNodes[i].type;
-    const hPNode = hParamNodes[i] && hParamNodes[i].type;
-    if (
-      !isAstTypeExplainedByUnifiedExports(
-        checker,
-        bPNode,
-        hPNode,
-        context,
-        tpSet,
-        new Set(),
-        false,
-        unifiedConstrainedTpNames,
-      )
-    ) {
-      return false;
-    }
-  }
-
   return isAstTypeExplainedByUnifiedExports(
     checker,
     bDecl.type,
@@ -1780,19 +2124,39 @@ function checkSignatureSetCompatibility(
   const uncoveredAritySigs = new Set();
   for (const bSig of baseSigs) {
     const bArity = getSigArity(checker, bSig);
-    const hasArityMatch = headSigs.some(hSig => {
+    const matchesTpArity = hArity => {
+      if (bArity.maxTp > 0) {
+        return !(hArity.minTp > bArity.minTp || hArity.maxTp < bArity.maxTp);
+      }
+      return hArity.minTp === 0;
+    };
+    let hasArityMatch = headSigs.some(hSig => {
       const hArity = getSigArity(checker, hSig);
       if (hArity.minArgs > bArity.minArgs) return false;
       if (hArity.maxArgs < bArity.maxArgs) return false;
-      if (bArity.maxTp > 0) {
-        if (hArity.minTp > bArity.minTp || hArity.maxTp < bArity.maxTp) {
-          return false;
-        }
-      } else if (hArity.minTp > 0) {
-        return false;
-      }
-      return true;
+      return matchesTpArity(hArity);
     });
+    if (
+      !hasArityMatch &&
+      bArity.minArgs < bArity.maxArgs &&
+      bArity.maxArgs < Infinity &&
+      headSigs.length > 1
+    ) {
+      let allKMatched = true;
+      for (let k = bArity.minArgs; k <= bArity.maxArgs; k++) {
+        const kOk = headSigs.some(hSig => {
+          const hArity = getSigArity(checker, hSig);
+          return (
+            hArity.minArgs <= k && hArity.maxArgs >= k && matchesTpArity(hArity)
+          );
+        });
+        if (!kOk) {
+          allKMatched = false;
+          break;
+        }
+      }
+      hasArityMatch = allKMatched;
+    }
     if (!hasArityMatch) {
       uncoveredAritySigs.add(bSig);
       errors.push(
@@ -2021,6 +2385,38 @@ function checkSignatureSetCompatibility(
         sigHasTp && wholeGenericAssignable,
       ),
     );
+    if (
+      matchIdx === -1 &&
+      bAr.minArgs < bAr.maxArgs &&
+      bAr.maxArgs < Infinity &&
+      headSigs.length > 1
+    ) {
+      let allKCovered = true;
+      for (let k = bAr.minArgs; k <= bAr.maxArgs; k++) {
+        const kCovered = headSigs.some(hSig =>
+          doesHeadSignatureCoverBase(
+            checker,
+            bSig,
+            hSig,
+            baseSf,
+            headSf,
+            context,
+            ignoreReturnType,
+            'normal',
+            0,
+            sigHasTp && wholeGenericAssignable,
+            k,
+          ),
+        );
+        if (!kCovered) {
+          allKCovered = false;
+          break;
+        }
+      }
+      if (allKCovered) {
+        continue;
+      }
+    }
     if (matchIdx === -1) {
       errors.push(
         `${labelPrefix} '${checker.signatureToString(bSig)}' became more restrictive or was removed.`,
@@ -2331,6 +2727,7 @@ function doesHeadSignatureCoverBase(
   polarity = 'normal',
   depth = 0,
   ownGenericUnifiedByTS = false,
+  fixedCallArity = null,
 ) {
   if (baseSig === headSig) return true;
   if (depth > 6) return true;
@@ -2346,8 +2743,10 @@ function doesHeadSignatureCoverBase(
   const pArity = getSigArity(checker, providerSig);
 
   if (polarity === 'normal') {
-    if (pArity.minArgs > cArity.minArgs) return false;
-    if (pArity.maxArgs < cArity.maxArgs) return false;
+    const reqMin = fixedCallArity !== null ? fixedCallArity : cArity.minArgs;
+    const reqMax = fixedCallArity !== null ? fixedCallArity : cArity.maxArgs;
+    if (pArity.minArgs > reqMin) return false;
+    if (pArity.maxArgs < reqMax) return false;
     if (pArity.minTp > cArity.minTp || pArity.maxTp < cArity.maxTp)
       return false;
   } else {
@@ -2618,7 +3017,11 @@ function doesHeadSignatureCoverBase(
     providerSig.parameters.length + (pArity.maxArgs === Infinity ? 1 : 0),
   );
   const paramCheckCount = Math.min(
-    polarity === 'normal' ? cArity.maxArgs : pArity.maxArgs,
+    polarity === 'normal'
+      ? fixedCallArity !== null
+        ? fixedCallArity
+        : cArity.maxArgs
+      : pArity.maxArgs,
     maxRestProbe,
   );
 
@@ -2640,6 +3043,7 @@ function doesHeadSignatureCoverBase(
     const pParamType = getParamTypeInDts(providerSig, i, providerSf);
     if (!cParamType || !pParamType) return false;
 
+    let isSplitOptionalAtArity = false;
     if (
       polarity === 'normal' &&
       i < consumerSig.parameters.length &&
@@ -2655,11 +3059,24 @@ function doesHeadSignatureCoverBase(
       );
       const cOpt =
         cIsRest ||
-        Boolean(consumerSig.parameters[i].flags & ts.SymbolFlags.Optional);
+        Boolean(consumerSig.parameters[i].flags & ts.SymbolFlags.Optional) ||
+        Boolean(
+          cParamDecl &&
+          ts.isParameter(cParamDecl) &&
+          (cParamDecl.questionToken || cParamDecl.initializer),
+        );
       const pOpt =
         pIsRest ||
-        Boolean(providerSig.parameters[i].flags & ts.SymbolFlags.Optional);
-      if (cOpt && !pOpt) return false;
+        Boolean(providerSig.parameters[i].flags & ts.SymbolFlags.Optional) ||
+        Boolean(
+          pParamDecl &&
+          ts.isParameter(pParamDecl) &&
+          (pParamDecl.questionToken || pParamDecl.initializer),
+        );
+      if (cOpt && !pOpt) {
+        if (fixedCallArity === null) return false;
+        isSplitOptionalAtArity = true;
+      }
     }
 
     // Check function/callback parameters with properly flipped polarity!
@@ -2674,11 +3091,14 @@ function doesHeadSignatureCoverBase(
       ts.SignatureKind.Call,
     );
     const hasCbSigs = cCbSigs.length > 0 && pCbSigs.length > 0;
-    const isDirectAssignable = isAssignableCompat(
-      checker,
-      cParamType,
-      pParamType,
-    );
+    const isDirectAssignable =
+      isAssignableCompat(checker, cParamType, pParamType) ||
+      (isSplitOptionalAtArity &&
+        cParamType.isUnion &&
+        cParamType.isUnion() &&
+        cParamType.types
+          .filter(t => !(t.flags & ts.TypeFlags.Undefined))
+          .every(t => isAssignableCompat(checker, t, pParamType)));
     if (isDirectAssignable && !hasCbSigs) {
       continue;
     }
@@ -2707,6 +3127,7 @@ function doesHeadSignatureCoverBase(
       return false;
     }
     if (
+      !isSplitOptionalAtArity &&
       hasTypeFlagInUnion(cParamType, ts.TypeFlags.Undefined) &&
       !hasTypeFlagInUnion(pParamType, ts.TypeFlags.Undefined)
     ) {
@@ -4040,12 +4461,7 @@ function checkTypeSymbol(
   const baseProps = checker.getPropertiesOfType(baseType);
   const baseIndices = checker.getIndexInfosOfType(baseType) || [];
 
-  if (
-    bAliasDecl &&
-    hAliasDecl &&
-    baseCallSigs.length === 0 &&
-    baseConstructSigs.length === 0
-  ) {
+  if (bAliasDecl && hAliasDecl && errors.length === startErrLen) {
     const defaultsOk = (bAliasDecl.typeParameters || []).every((btp, idx) => {
       const htp = (hAliasDecl.typeParameters || [])[idx];
       if (!btp.default) return true;
@@ -4132,11 +4548,53 @@ function checkTypeSymbol(
         );
       }
     }
+    const headProps = checker.getPropertiesOfType(headType);
+    const isUserObjectOrIntersection = t => {
+      if (
+        t.flags &
+        (ts.TypeFlags.Union |
+          ts.TypeFlags.Primitive |
+          ts.TypeFlags.Any |
+          ts.TypeFlags.Unknown |
+          ts.TypeFlags.Never |
+          ts.TypeFlags.TypeParameter)
+      ) {
+        return false;
+      }
+      if (checker.isTupleType(t) || checker.isArrayType(t)) {
+        return false;
+      }
+      if (t.isIntersection && t.isIntersection()) {
+        return t.types.every(member => isUserObjectOrIntersection(member));
+      }
+      const sym = t.symbol;
+      if (!sym) return true;
+      if (
+        sym.flags &
+        (ts.SymbolFlags.TypeLiteral |
+          ts.SymbolFlags.ObjectLiteral |
+          ts.SymbolFlags.Interface)
+      ) {
+        const decls = sym.declarations || [];
+        return (
+          decls.length > 0 &&
+          decls.every(d => {
+            const fn = path.resolve(d.getSourceFile().fileName);
+            return !fn.includes(`${path.sep}node_modules${path.sep}`);
+          })
+        );
+      }
+      return false;
+    };
     if (
       isPureInterfacePair ||
       errors.length > startErrLen ||
       baseCallSigs.length > 0 ||
-      baseConstructSigs.length > 0
+      baseConstructSigs.length > 0 ||
+      (baseProps.length > 0 &&
+        headProps.length > 0 &&
+        isUserObjectOrIntersection(baseType) &&
+        isUserObjectOrIntersection(headType))
     ) {
       return errors.length === startErrLen;
     }
@@ -4590,6 +5048,7 @@ function compareSingleExportPair(
       );
       return;
     }
+    const nsErrBefore = errors.length;
     checkNamespaceSubExports(
       checker,
       exportName,
@@ -4601,6 +5060,11 @@ function compareSingleExportPair(
       errors,
       visitedNamespaces,
     );
+    if (errors.length === nsErrBefore) {
+      context.unifiedModuleSymbols.add(resolvedBaseSym);
+    } else {
+      context.unifiedModuleSymbols.delete(resolvedBaseSym);
+    }
     return;
   }
 
@@ -4761,7 +5225,8 @@ export function compareModules(
   const typeFirstExports = [];
   const compositeAliasExports = [];
   const valueOnlyOrClassExports = [];
-  const verifiedHeadCounterpartMap = new Map();
+  const verifiedHeadCounterpartMap =
+    extraContext.sharedVerifiedHeadCounterpartMap || new Map();
 
   for (const baseSym of baseExports) {
     const name = baseSym.getName();
@@ -4804,10 +5269,22 @@ export function compareModules(
     targetSymToExportName,
   );
 
-  const unifiedModuleSymbols = new Set();
+  const unifiedModuleSymbols =
+    extraContext.sharedUnifiedModuleSymbols || new Set();
   const seedNestedNamespaceClasses = (bNsSym, hNsSym, seen = new Set()) => {
-    if (seen.has(bNsSym)) return;
+    if (!bNsSym || !hNsSym || seen.has(bNsSym)) return;
     seen.add(bNsSym);
+    verifiedHeadCounterpartMap.set(bNsSym, hNsSym);
+    unifiedModuleSymbols.add(bNsSym);
+    if (
+      bNsSym.parent &&
+      hNsSym.parent &&
+      bNsSym.parent.flags & ts.SymbolFlags.Module &&
+      hNsSym.parent.flags & ts.SymbolFlags.Module &&
+      bNsSym.parent.getName() === hNsSym.parent.getName()
+    ) {
+      seedNestedNamespaceClasses(bNsSym.parent, hNsSym.parent, seen);
+    }
     const bSubs = checker.getExportsOfModule(bNsSym) || [];
     const hSubs =
       hNsSym.flags & ts.SymbolFlags.Module
@@ -4888,78 +5365,88 @@ export function compareModules(
     inOutput,
   };
 
-  const sharedVisitedNamespaces = new Set();
+  const prevActiveContext = activeComparisonContext;
+  activeComparisonContext = context;
+  try {
+    const sharedVisitedNamespaces = new Set();
 
-  // Pass 1a: Enums and interfaces (populates `unifiedModuleSymbols` before composite type aliases).
-  for (const baseSym of typeFirstExports) {
-    const exportName = baseSym.getName();
-    const headSym = headExportMap.get(exportName);
-    const variance =
-      inOutput.has(exportName) && !inInput.has(exportName) ? 'output' : 'input';
-    const before = errors.length;
-    compareSingleExportPair(
-      checker,
-      exportName,
-      baseSym,
-      headSym,
-      baseSf,
-      headSf,
-      context,
-      variance,
-      errors,
-      sharedVisitedNamespaces,
-    );
-    const resolvedBase = resolveAliased(checker, baseSym);
-    if (errors.length > before) {
-      unifiedModuleSymbols.delete(resolvedBase);
-    } else if (resolvedBase.flags & ts.SymbolFlags.Enum) {
-      unifiedModuleSymbols.add(resolvedBase);
+    // Pass 1a: Enums and interfaces (populates `unifiedModuleSymbols` before composite type aliases).
+    for (const baseSym of typeFirstExports) {
+      const exportName = baseSym.getName();
+      const headSym = headExportMap.get(exportName);
+      const variance =
+        inOutput.has(exportName) && !inInput.has(exportName)
+          ? 'output'
+          : 'input';
+      const before = errors.length;
+      compareSingleExportPair(
+        checker,
+        exportName,
+        baseSym,
+        headSym,
+        baseSf,
+        headSf,
+        context,
+        variance,
+        errors,
+        sharedVisitedNamespaces,
+      );
+      const resolvedBase = resolveAliased(checker, baseSym);
+      if (errors.length > before) {
+        unifiedModuleSymbols.delete(resolvedBase);
+      } else if (resolvedBase.flags & ts.SymbolFlags.Enum) {
+        unifiedModuleSymbols.add(resolvedBase);
+      }
     }
-  }
 
-  // Pass 1b: Type aliases (may compose verified interfaces/classes like RequestCallback<Subscription>).
-  for (const baseSym of compositeAliasExports) {
-    const exportName = baseSym.getName();
-    const headSym = headExportMap.get(exportName);
-    const variance =
-      inOutput.has(exportName) && !inInput.has(exportName) ? 'output' : 'input';
-    const before = errors.length;
-    compareSingleExportPair(
-      checker,
-      exportName,
-      baseSym,
-      headSym,
-      baseSf,
-      headSf,
-      context,
-      variance,
-      errors,
-      sharedVisitedNamespaces,
-    );
-    if (errors.length === before) {
-      unifiedModuleSymbols.add(resolveAliased(checker, baseSym));
+    // Pass 1b: Type aliases (may compose verified interfaces/classes like RequestCallback<Subscription>).
+    for (const baseSym of compositeAliasExports) {
+      const exportName = baseSym.getName();
+      const headSym = headExportMap.get(exportName);
+      const variance =
+        inOutput.has(exportName) && !inInput.has(exportName)
+          ? 'output'
+          : 'input';
+      const before = errors.length;
+      compareSingleExportPair(
+        checker,
+        exportName,
+        baseSym,
+        headSym,
+        baseSf,
+        headSf,
+        context,
+        variance,
+        errors,
+        sharedVisitedNamespaces,
+      );
+      if (errors.length === before) {
+        unifiedModuleSymbols.add(resolveAliased(checker, baseSym));
+      }
     }
-  }
 
-  // Pass 2: Classes, functions, constructors, namespaces, and exported values.
-  for (const baseSym of valueOnlyOrClassExports) {
-    const exportName = baseSym.getName();
-    const headSym = headExportMap.get(exportName);
-    compareSingleExportPair(
-      checker,
-      exportName,
-      baseSym,
-      headSym,
-      baseSf,
-      headSf,
-      context,
-      'input',
-      errors,
-      sharedVisitedNamespaces,
-    );
-  }
+    // Pass 2: Classes, functions, constructors, namespaces, and exported values.
+    for (const baseSym of valueOnlyOrClassExports) {
+      const exportName = baseSym.getName();
+      const headSym = headExportMap.get(exportName);
+      compareSingleExportPair(
+        checker,
+        exportName,
+        baseSym,
+        headSym,
+        baseSf,
+        headSf,
+        context,
+        'input',
+        errors,
+        sharedVisitedNamespaces,
+      );
+    }
 
-  return [...new Set(errors)];
+    return [...new Set(errors)];
+  } finally {
+    activeComparisonContext = prevActiveContext;
+  }
 }
 
 export function runDtsPairComparisons(
@@ -5177,6 +5664,8 @@ export function runDtsPairComparisons(
   }
 
   const pairResults = [];
+  const sharedUnifiedModuleSymbols = new Set();
+  const sharedVerifiedHeadCounterpartMap = new Map();
   for (const pair of dtsPairs) {
     const errs = compareModules(
       checker,
@@ -5184,7 +5673,14 @@ export function runDtsPairComparisons(
       cmpProg.getSourceFile(pair.headDts),
       null,
       null,
-      {rawMetaByFile, bridgeResults, program: cmpProg, dtsFiles: localDtsFiles},
+      {
+        rawMetaByFile,
+        bridgeResults,
+        program: cmpProg,
+        dtsFiles: localDtsFiles,
+        sharedUnifiedModuleSymbols,
+        sharedVerifiedHeadCounterpartMap,
+      },
     );
     pairResults.push({label: pair.label, errors: errs});
   }

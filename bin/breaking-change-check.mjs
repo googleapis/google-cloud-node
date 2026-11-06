@@ -228,716 +228,731 @@ export async function checkBreakingChanges({
 
   for (const pkgDir of touchedPackages) {
     const relPkgDir = toPosix(path.relative(absRepoRoot, pkgDir));
-    const baseTree = getSubtreeAtRev(baseRev, relPkgDir);
-    const headTree =
-      headRev !== null ? getSubtreeAtRev(headRev, relPkgDir) : null;
+    try {
+      const baseTree = getSubtreeAtRev(baseRev, relPkgDir);
+      const headTree =
+        headRev !== null ? getSubtreeAtRev(headRev, relPkgDir) : null;
 
-    const readBaseRel = relInsidePkg => {
-      const repoRel = toPosix(
-        path.posix.join(relPkgDir, toPosix(relInsidePkg)),
-      );
-      return getFileAtRev(baseRev, repoRel);
-    };
-    const baseExistsAbs = absPath => {
-      const relInPkg = toPosix(path.relative(pkgDir, absPath));
-      if (relInPkg.startsWith('..')) return false;
-      const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
-      return baseTree.files.has(repoRel);
-    };
-    const readHeadRel = relInsidePkg => {
-      if (headRev !== null) {
+      const readBaseRel = relInsidePkg => {
         const repoRel = toPosix(
           path.posix.join(relPkgDir, toPosix(relInsidePkg)),
         );
-        return getFileAtRev(headRev, repoRel);
-      }
-      const abs = path.join(pkgDir, relInsidePkg);
-      return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : undefined;
-    };
-    const headExistsAbs = absPath => {
-      const relInPkg = toPosix(path.relative(pkgDir, absPath));
-      if (relInPkg.startsWith('..')) return false;
-      if (headTree !== null) {
+        return getFileAtRev(baseRev, repoRel);
+      };
+      const baseExistsAbs = absPath => {
+        const relInPkg = toPosix(path.relative(pkgDir, absPath));
+        if (relInPkg.startsWith('..')) return false;
         const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
-        return headTree.files.has(repoRel);
+        return baseTree.files.has(repoRel);
+      };
+      const readHeadRel = relInsidePkg => {
+        if (headRev !== null) {
+          const repoRel = toPosix(
+            path.posix.join(relPkgDir, toPosix(relInsidePkg)),
+          );
+          return getFileAtRev(headRev, repoRel);
+        }
+        const abs = path.join(pkgDir, relInsidePkg);
+        return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : undefined;
+      };
+      const headExistsAbs = absPath => {
+        const relInPkg = toPosix(path.relative(pkgDir, absPath));
+        if (relInPkg.startsWith('..')) return false;
+        if (headTree !== null) {
+          const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
+          return headTree.files.has(repoRel);
+        }
+        return fs.existsSync(absPath);
+      };
+
+      const basePkgJson = parseJsonSafe(readBaseRel('package.json'));
+      const headPkgJson = parseJsonSafe(readHeadRel('package.json'));
+
+      if (!basePkgJson || basePkgJson.private === true) {
+        continue;
       }
-      return fs.existsSync(absPath);
-    };
+      if (!headPkgJson) {
+        allErrors.push(
+          `[${relPkgDir}/package.json] Published package was deleted.`,
+        );
+        continue;
+      }
+      if (headPkgJson.private === true) {
+        allErrors.push(
+          `[${relPkgDir}/package.json] Public package was marked "private": true.`,
+        );
+        continue;
+      }
+      if (
+        typeof basePkgJson.name === 'string' &&
+        typeof headPkgJson.name === 'string' &&
+        basePkgJson.name !== headPkgJson.name
+      ) {
+        allErrors.push(
+          `[${relPkgDir}/package.json] Published package was renamed from '${basePkgJson.name}' to '${headPkgJson.name}'.`,
+        );
+      }
 
-    const basePkgJson = parseJsonSafe(readBaseRel('package.json'));
-    const headPkgJson = parseJsonSafe(readHeadRel('package.json'));
-
-    if (!basePkgJson || basePkgJson.private === true) {
-      continue;
-    }
-    if (!headPkgJson) {
-      allErrors.push(
-        `[${relPkgDir}/package.json] Published package was deleted.`,
+      const basePkgRoot = path.join(pkgDir, '__base_pkg__');
+      const baseTsParsed = parsePkgTsconfigAtRev(
+        pkgDir,
+        relPkgDir,
+        absRepoRoot,
+        baseRev,
+        reader,
+        basePkgRoot,
       );
-      continue;
-    }
-    if (headPkgJson.private === true) {
-      allErrors.push(
-        `[${relPkgDir}/package.json] Public package was marked "private": true.`,
+      const headTsParsed = parsePkgTsconfigAtRev(
+        pkgDir,
+        relPkgDir,
+        absRepoRoot,
+        headRev,
+        reader,
+        pkgDir,
       );
-      continue;
-    }
-    if (
-      typeof basePkgJson.name === 'string' &&
-      typeof headPkgJson.name === 'string' &&
-      basePkgJson.name !== headPkgJson.name
-    ) {
-      allErrors.push(
-        `[${relPkgDir}/package.json] Published package was renamed from '${basePkgJson.name}' to '${headPkgJson.name}'.`,
+
+      const baseEntryInfo = resolvePackageEntrypoints(
+        pkgDir,
+        basePkgJson,
+        baseTsParsed,
+        baseExistsAbs,
+        readBaseRel,
       );
-    }
+      const headEntryInfo = resolvePackageEntrypoints(
+        pkgDir,
+        headPkgJson,
+        headTsParsed,
+        headExistsAbs,
+        readHeadRel,
+      );
 
-    const basePkgRoot = path.join(pkgDir, '__base_pkg__');
-    const baseTsParsed = parsePkgTsconfigAtRev(
-      pkgDir,
-      relPkgDir,
-      absRepoRoot,
-      baseRev,
-      reader,
-      basePkgRoot,
-    );
-    const headTsParsed = parsePkgTsconfigAtRev(
-      pkgDir,
-      relPkgDir,
-      absRepoRoot,
-      headRev,
-      reader,
-      pkgDir,
-    );
-
-    const baseEntryInfo = resolvePackageEntrypoints(
-      pkgDir,
-      basePkgJson,
-      baseTsParsed,
-      baseExistsAbs,
-      readBaseRel,
-    );
-    const headEntryInfo = resolvePackageEntrypoints(
-      pkgDir,
-      headPkgJson,
-      headTsParsed,
-      headExistsAbs,
-      readHeadRel,
-    );
-
-    // Check `package.json#exports` subpath removals, deleted `exports` field, and dropped import/require conditions (`H6`).
-    if (basePkgJson.exports) {
-      if (!headPkgJson.exports) {
-        for (const baseSubpath of baseEntryInfo.subpaths.keys()) {
-          if (
-            baseSubpath !== '.' &&
-            !headEntryInfo.subdirSubpaths.has(baseSubpath)
-          ) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' was removed (package.json#exports was deleted).`,
-            );
+      // Check `package.json#exports` subpath removals, deleted `exports` field, and dropped import/require conditions (`H6`).
+      if (basePkgJson.exports) {
+        if (!headPkgJson.exports) {
+          for (const baseSubpath of baseEntryInfo.subpaths.keys()) {
+            if (
+              baseSubpath !== '.' &&
+              !headEntryInfo.subdirSubpaths.has(baseSubpath)
+            ) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' was removed (package.json#exports was deleted).`,
+              );
+            }
+          }
+        } else {
+          for (const [baseSubpath, bLane] of baseEntryInfo.subpaths.entries()) {
+            const hLane = headEntryInfo.subpaths.get(baseSubpath);
+            if (!hLane) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' was removed from package.json#exports.`,
+              );
+              continue;
+            }
+            if (bLane.supportsRequire && !hLane.supportsRequire) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' removed CommonJS ('require') support from package.json#exports.`,
+              );
+            }
+            if (bLane.supportsImport && !hLane.supportsImport) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' removed ESM ('import') support from package.json#exports.`,
+              );
+            }
           }
         }
       } else {
-        for (const [baseSubpath, bLane] of baseEntryInfo.subpaths.entries()) {
-          const hLane = headEntryInfo.subpaths.get(baseSubpath);
-          if (!hLane) {
+        if (headPkgJson.exports) {
+          const hRootLane = headEntryInfo.subpaths.get('.');
+          if (!hRootLane) {
             allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' was removed from package.json#exports.`,
+              `[${relPkgDir}/package.json] Public subpath export '.' was removed from package.json#exports.`,
             );
-            continue;
+          } else {
+            if (!hRootLane.supportsRequire) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '.' removed CommonJS ('require') support from package.json#exports.`,
+              );
+            }
+            if (!hRootLane.supportsImport) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subpath export '.' removed ESM ('import') support from package.json#exports.`,
+              );
+            }
           }
-          if (bLane.supportsRequire && !hLane.supportsRequire) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' removed CommonJS ('require') support from package.json#exports.`,
-            );
-          }
-          if (bLane.supportsImport && !hLane.supportsImport) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '${baseSubpath}' removed ESM ('import') support from package.json#exports.`,
-            );
+        }
+        if (baseEntryInfo.subdirSubpaths.size > 0) {
+          for (const subKey of baseEntryInfo.subdirSubpaths.keys()) {
+            const retained = headPkgJson.exports
+              ? headEntryInfo.subpaths.has(subKey)
+              : headEntryInfo.subdirSubpaths.has(subKey);
+            if (!retained) {
+              allErrors.push(
+                `[${relPkgDir}/package.json] Public subdirectory entrypoint '${subKey}' was removed.`,
+              );
+            } else if (headPkgJson.exports) {
+              const hSubLane = headEntryInfo.subpaths.get(subKey);
+              if (hSubLane) {
+                if (!hSubLane.supportsRequire) {
+                  allErrors.push(
+                    `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed CommonJS ('require') support from package.json#exports.`,
+                  );
+                }
+                if (!hSubLane.supportsImport) {
+                  allErrors.push(
+                    `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed ESM ('import') support from package.json#exports.`,
+                  );
+                }
+              }
+            }
           }
         }
       }
-    } else {
-      if (headPkgJson.exports) {
-        const hRootLane = headEntryInfo.subpaths.get('.');
-        if (!hRootLane) {
+
+      if (baseEntryInfo.entryFiles.length === 0) {
+        continue;
+      }
+
+      const toBasePkgPath = absInPkg =>
+        path.join(basePkgRoot, path.relative(pkgDir, absInPkg));
+      const fromBasePkgPath = absInBase =>
+        path.join(pkgDir, path.relative(basePkgRoot, absInBase));
+      const isInsideDir = (child, dir) =>
+        child === dir || child.startsWith(dir + path.sep);
+      const isBaseVirtual = abs => isInsideDir(abs, basePkgRoot);
+      const isInPkgSource = abs => {
+        if (isBaseVirtual(abs)) {
+          const rel = toPosix(path.relative(basePkgRoot, abs));
+          return !isSegOrPrefix(rel, 'node_modules');
+        }
+        if (isInsideDir(abs, pkgDir)) {
+          const rel = toPosix(path.relative(pkgDir, abs));
+          return !isExternalOrBuildRel(rel);
+        }
+        return false;
+      };
+
+      const compilerOptions = {
+        ...headTsParsed.options,
+        skipLibCheck: true,
+      };
+      const baseCompilerOptions = {
+        ...baseTsParsed.options,
+        skipLibCheck: true,
+      };
+      const defaultHost = ts.createCompilerHost(compilerOptions);
+      const pkgSfCache = new Map();
+
+      const resolveHostRealpath = p => {
+        const resolved = path.resolve(p);
+        if (isBaseVirtual(resolved)) {
+          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+          if (
+            isSegOrPrefix(relInBase, 'node_modules') &&
+            defaultHost.realpath
+          ) {
+            const realCandidate = fromBasePkgPath(resolved);
+            try {
+              return fs.existsSync(realCandidate)
+                ? defaultHost.realpath(realCandidate)
+                : realCandidate;
+            } catch {
+              return realCandidate;
+            }
+          }
+          return resolved;
+        }
+        if (!defaultHost.realpath) return resolved;
+        if (
+          headRev !== null &&
+          isInsideDir(resolved, pkgDir) &&
+          !isExternalOrBuildRel(toPosix(path.relative(pkgDir, resolved)))
+        ) {
+          return resolved;
+        }
+        try {
+          return fs.existsSync(resolved)
+            ? defaultHost.realpath(resolved)
+            : resolved;
+        } catch {
+          return resolved;
+        }
+      };
+
+      const customHost = {
+        ...defaultHost,
+        realpath: resolveHostRealpath,
+        directoryExists(dirName) {
+          const resolved = path.resolve(dirName);
+          if (isBaseVirtual(resolved)) {
+            const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+            if (isSegOrPrefix(relInBase, 'node_modules')) {
+              return defaultHost.directoryExists(path.join(pkgDir, relInBase));
+            }
+            const repoRel = relInBase
+              ? toPosix(path.posix.join(relPkgDir, relInBase))
+              : relPkgDir;
+            return baseTree.dirs.has(repoRel);
+          }
+          if (headTree !== null && isInsideDir(resolved, pkgDir)) {
+            const relInPkg = toPosix(path.relative(pkgDir, resolved));
+            if (!isExternalOrBuildRel(relInPkg)) {
+              const repoRel = relInPkg
+                ? toPosix(path.posix.join(relPkgDir, relInPkg))
+                : relPkgDir;
+              return headTree.dirs.has(repoRel);
+            }
+          }
+          return defaultHost.directoryExists(resolved);
+        },
+        fileExists(fileName) {
+          const resolved = path.resolve(fileName);
+          if (isBaseVirtual(resolved)) {
+            const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+            if (isSegOrPrefix(relInBase, 'node_modules')) {
+              return defaultHost.fileExists(path.join(pkgDir, relInBase));
+            }
+            const repoRel = toPosix(path.posix.join(relPkgDir, relInBase));
+            return baseTree.files.has(repoRel);
+          }
+          if (headTree !== null && isInsideDir(resolved, pkgDir)) {
+            const relInPkg = toPosix(path.relative(pkgDir, resolved));
+            if (!isExternalOrBuildRel(relInPkg)) {
+              const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
+              return headTree.files.has(repoRel);
+            }
+          }
+          return defaultHost.fileExists(resolved);
+        },
+        readFile(fileName) {
+          const resolved = path.resolve(fileName);
+          if (isBaseVirtual(resolved)) {
+            const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+            if (isSegOrPrefix(relInBase, 'node_modules')) {
+              return defaultHost.readFile(path.join(pkgDir, relInBase));
+            }
+            const repoRel = toPosix(path.posix.join(relPkgDir, relInBase));
+            return getFileAtRev(baseRev, repoRel);
+          }
+          if (headRev !== null && isInsideDir(resolved, pkgDir)) {
+            const relInPkg = toPosix(path.relative(pkgDir, resolved));
+            if (!isExternalOrBuildRel(relInPkg)) {
+              const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
+              return getFileAtRev(headRev, repoRel);
+            }
+          }
+          return defaultHost.readFile(resolved);
+        },
+        resolveModuleNameLiterals(
+          moduleLiterals,
+          containingFile,
+          redirectedReference,
+          options,
+        ) {
+          const isBaseContain = isBaseVirtual(path.resolve(containingFile));
+          const effectiveOptions = isBaseContain
+            ? {
+                ...options,
+                module: baseCompilerOptions.module,
+                moduleResolution: baseCompilerOptions.moduleResolution,
+                baseUrl: baseCompilerOptions.baseUrl,
+                paths: baseCompilerOptions.paths,
+                pathsBasePath: baseCompilerOptions.pathsBasePath,
+                rootDirs: baseCompilerOptions.rootDirs,
+              }
+            : options;
+          return moduleLiterals.map(lit => {
+            const res = ts.resolveModuleName(
+              lit.text,
+              containingFile,
+              effectiveOptions,
+              this,
+              undefined,
+              redirectedReference,
+            );
+            if (res.resolvedModule) {
+              let rf = path.resolve(res.resolvedModule.resolvedFileName);
+              if (isBaseVirtual(rf)) {
+                const rel = toPosix(path.relative(basePkgRoot, rf));
+                if (isSegOrPrefix(rel, 'node_modules')) {
+                  rf = fromBasePkgPath(rf);
+                }
+              }
+              if (rf.includes(`${path.sep}node_modules${path.sep}`)) {
+                const realRf = realpathSafe(rf);
+                if (realRf !== res.resolvedModule.resolvedFileName) {
+                  return {
+                    resolvedModule: {
+                      ...res.resolvedModule,
+                      resolvedFileName: realRf,
+                    },
+                  };
+                }
+              }
+            }
+            return res;
+          });
+        },
+        getSourceFile(fileName, languageVersion, onError, shouldCreate) {
+          let resolved = path.resolve(fileName);
+          if (isBaseVirtual(resolved)) {
+            const relInBase = toPosix(path.relative(basePkgRoot, resolved));
+            if (isSegOrPrefix(relInBase, 'node_modules')) {
+              resolved = fromBasePkgPath(resolved);
+            }
+          }
+          if (pkgSfCache.has(resolved)) return pkgSfCache.get(resolved);
+          if (isInPkgSource(resolved)) {
+            const text = this.readFile(resolved);
+            if (text === undefined) return undefined;
+            const sf = ts.createSourceFile(
+              resolved,
+              text,
+              languageVersion,
+              true,
+            );
+            pkgSfCache.set(resolved, sf);
+            return sf;
+          }
+          const isTsStdLib = resolved.includes(
+            `${path.sep}node_modules${path.sep}typescript${path.sep}lib${path.sep}`,
+          );
+          if (isTsStdLib && SHARED_TS_LIB_CACHE.has(resolved)) {
+            return SHARED_TS_LIB_CACHE.get(resolved);
+          }
+          if (sharedExternalSfCache.has(resolved)) {
+            return sharedExternalSfCache.get(resolved);
+          }
+          const sf = defaultHost.getSourceFile(
+            resolved,
+            languageVersion,
+            onError,
+            shouldCreate,
+          );
+          if (isTsStdLib && sf) {
+            SHARED_TS_LIB_CACHE.set(resolved, sf);
+          }
+          sharedExternalSfCache.set(resolved, sf);
+          return sf;
+        },
+      };
+
+      const resolveFirstSource = (targets, parsed, existsFn) =>
+        targets
+          .map(t => mapTargetToPackageSource(pkgDir, t, parsed, existsFn))
+          .find(Boolean) || null;
+
+      const addEntryPair = (entryPairs, bFile, hFile) => {
+        if (!bFile) return;
+        const relLabel = toPosix(path.relative(absRepoRoot, hFile || bFile));
+        if (!hFile || !headExistsAbs(hFile)) {
           allErrors.push(
-            `[${relPkgDir}/package.json] Public subpath export '.' was removed from package.json#exports.`,
+            `[${relLabel}] Public entrypoint source file was deleted.`,
           );
         } else {
-          if (!hRootLane.supportsRequire) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '.' removed CommonJS ('require') support from package.json#exports.`,
-            );
-          }
-          if (!hRootLane.supportsImport) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subpath export '.' removed ESM ('import') support from package.json#exports.`,
-            );
-          }
+          entryPairs.push({
+            label: relLabel,
+            baseSrc: toBasePkgPath(bFile),
+            headSrc: hFile,
+          });
         }
-      }
-      if (baseEntryInfo.subdirSubpaths.size > 0) {
-        for (const subKey of baseEntryInfo.subdirSubpaths.keys()) {
-          const retained = headPkgJson.exports
-            ? headEntryInfo.subpaths.has(subKey)
-            : headEntryInfo.subdirSubpaths.has(subKey);
-          if (!retained) {
-            allErrors.push(
-              `[${relPkgDir}/package.json] Public subdirectory entrypoint '${subKey}' was removed.`,
-            );
-          } else if (headPkgJson.exports) {
-            const hSubLane = headEntryInfo.subpaths.get(subKey);
-            if (hSubLane) {
-              if (!hSubLane.supportsRequire) {
-                allErrors.push(
-                  `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed CommonJS ('require') support from package.json#exports.`,
-                );
-              }
-              if (!hSubLane.supportsImport) {
-                allErrors.push(
-                  `[${relPkgDir}/package.json] Public subpath export '${subKey}' removed ESM ('import') support from package.json#exports.`,
-                );
-              }
-            }
-          }
-        }
-      }
-    }
+      };
 
-    if (baseEntryInfo.entryFiles.length === 0) {
-      continue;
-    }
-
-    const toBasePkgPath = absInPkg =>
-      path.join(basePkgRoot, path.relative(pkgDir, absInPkg));
-    const fromBasePkgPath = absInBase =>
-      path.join(pkgDir, path.relative(basePkgRoot, absInBase));
-    const isInsideDir = (child, dir) =>
-      child === dir || child.startsWith(dir + path.sep);
-    const isBaseVirtual = abs => isInsideDir(abs, basePkgRoot);
-    const isInPkgSource = abs => {
-      if (isBaseVirtual(abs)) {
-        const rel = toPosix(path.relative(basePkgRoot, abs));
-        return !isSegOrPrefix(rel, 'node_modules');
-      }
-      if (isInsideDir(abs, pkgDir)) {
-        const rel = toPosix(path.relative(pkgDir, abs));
-        return !isExternalOrBuildRel(rel);
-      }
-      return false;
-    };
-
-    const compilerOptions = {
-      ...headTsParsed.options,
-      skipLibCheck: true,
-    };
-    const baseCompilerOptions = {
-      ...baseTsParsed.options,
-      skipLibCheck: true,
-    };
-    const defaultHost = ts.createCompilerHost(compilerOptions);
-    const pkgSfCache = new Map();
-
-    const resolveHostRealpath = p => {
-      const resolved = path.resolve(p);
-      if (isBaseVirtual(resolved)) {
-        const relInBase = toPosix(path.relative(basePkgRoot, resolved));
-        if (isSegOrPrefix(relInBase, 'node_modules') && defaultHost.realpath) {
-          const realCandidate = fromBasePkgPath(resolved);
-          try {
-            return fs.existsSync(realCandidate)
-              ? defaultHost.realpath(realCandidate)
-              : realCandidate;
-          } catch {
-            return realCandidate;
-          }
-        }
-        return resolved;
-      }
-      if (!defaultHost.realpath) return resolved;
-      if (
-        headRev !== null &&
-        isInsideDir(resolved, pkgDir) &&
-        !isExternalOrBuildRel(toPosix(path.relative(pkgDir, resolved)))
-      ) {
-        return resolved;
-      }
-      try {
-        return fs.existsSync(resolved)
-          ? defaultHost.realpath(resolved)
-          : resolved;
-      } catch {
-        return resolved;
-      }
-    };
-
-    const customHost = {
-      ...defaultHost,
-      realpath: resolveHostRealpath,
-      directoryExists(dirName) {
-        const resolved = path.resolve(dirName);
-        if (isBaseVirtual(resolved)) {
-          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
-          if (isSegOrPrefix(relInBase, 'node_modules')) {
-            return defaultHost.directoryExists(path.join(pkgDir, relInBase));
-          }
-          const repoRel = relInBase
-            ? toPosix(path.posix.join(relPkgDir, relInBase))
-            : relPkgDir;
-          return baseTree.dirs.has(repoRel);
-        }
-        if (headTree !== null && isInsideDir(resolved, pkgDir)) {
-          const relInPkg = toPosix(path.relative(pkgDir, resolved));
-          if (!isExternalOrBuildRel(relInPkg)) {
-            const repoRel = relInPkg
-              ? toPosix(path.posix.join(relPkgDir, relInPkg))
-              : relPkgDir;
-            return headTree.dirs.has(repoRel);
-          }
-        }
-        return defaultHost.directoryExists(resolved);
-      },
-      fileExists(fileName) {
-        const resolved = path.resolve(fileName);
-        if (isBaseVirtual(resolved)) {
-          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
-          if (isSegOrPrefix(relInBase, 'node_modules')) {
-            return defaultHost.fileExists(path.join(pkgDir, relInBase));
-          }
-          const repoRel = toPosix(path.posix.join(relPkgDir, relInBase));
-          return baseTree.files.has(repoRel);
-        }
-        if (headTree !== null && isInsideDir(resolved, pkgDir)) {
-          const relInPkg = toPosix(path.relative(pkgDir, resolved));
-          if (!isExternalOrBuildRel(relInPkg)) {
-            const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
-            return headTree.files.has(repoRel);
-          }
-        }
-        return defaultHost.fileExists(resolved);
-      },
-      readFile(fileName) {
-        const resolved = path.resolve(fileName);
-        if (isBaseVirtual(resolved)) {
-          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
-          if (isSegOrPrefix(relInBase, 'node_modules')) {
-            return defaultHost.readFile(path.join(pkgDir, relInBase));
-          }
-          const repoRel = toPosix(path.posix.join(relPkgDir, relInBase));
-          return getFileAtRev(baseRev, repoRel);
-        }
-        if (headRev !== null && isInsideDir(resolved, pkgDir)) {
-          const relInPkg = toPosix(path.relative(pkgDir, resolved));
-          if (!isExternalOrBuildRel(relInPkg)) {
-            const repoRel = toPosix(path.posix.join(relPkgDir, relInPkg));
-            return getFileAtRev(headRev, repoRel);
-          }
-        }
-        return defaultHost.readFile(resolved);
-      },
-      resolveModuleNameLiterals(
-        moduleLiterals,
-        containingFile,
-        redirectedReference,
-        options,
-      ) {
-        const isBaseContain = isBaseVirtual(path.resolve(containingFile));
-        const effectiveOptions = isBaseContain
-          ? {
-              ...options,
-              module: baseCompilerOptions.module,
-              moduleResolution: baseCompilerOptions.moduleResolution,
-              baseUrl: baseCompilerOptions.baseUrl,
-              paths: baseCompilerOptions.paths,
-              pathsBasePath: baseCompilerOptions.pathsBasePath,
-              rootDirs: baseCompilerOptions.rootDirs,
-            }
-          : options;
-        return moduleLiterals.map(lit => {
-          const res = ts.resolveModuleName(
-            lit.text,
-            containingFile,
-            effectiveOptions,
-            this,
-            undefined,
-            redirectedReference,
+      const resolveLaneSources = (lane, parsed, existsFn) => {
+        if (!lane) return [];
+        const files = [];
+        if (lane.supportsImport) {
+          files.push(
+            resolveFirstSource(
+              [...lane.importTargets, ...lane.defaultTargets],
+              parsed,
+              existsFn,
+            ),
           );
-          if (res.resolvedModule) {
-            let rf = path.resolve(res.resolvedModule.resolvedFileName);
-            if (isBaseVirtual(rf)) {
-              const rel = toPosix(path.relative(basePkgRoot, rf));
-              if (isSegOrPrefix(rel, 'node_modules')) {
-                rf = fromBasePkgPath(rf);
-              }
-            }
-            if (rf.includes(`${path.sep}node_modules${path.sep}`)) {
-              const realRf = realpathSafe(rf);
-              if (realRf !== res.resolvedModule.resolvedFileName) {
-                return {
-                  resolvedModule: {
-                    ...res.resolvedModule,
-                    resolvedFileName: realRf,
-                  },
-                };
-              }
-            }
-          }
-          return res;
-        });
-      },
-      getSourceFile(fileName, languageVersion, onError, shouldCreate) {
-        let resolved = path.resolve(fileName);
-        if (isBaseVirtual(resolved)) {
-          const relInBase = toPosix(path.relative(basePkgRoot, resolved));
-          if (isSegOrPrefix(relInBase, 'node_modules')) {
-            resolved = fromBasePkgPath(resolved);
-          }
         }
-        if (pkgSfCache.has(resolved)) return pkgSfCache.get(resolved);
-        if (isInPkgSource(resolved)) {
-          const text = this.readFile(resolved);
-          if (text === undefined) return undefined;
-          const sf = ts.createSourceFile(resolved, text, languageVersion, true);
-          pkgSfCache.set(resolved, sf);
-          return sf;
-        }
-        const isTsStdLib = resolved.includes(
-          `${path.sep}node_modules${path.sep}typescript${path.sep}lib${path.sep}`,
-        );
-        if (isTsStdLib && SHARED_TS_LIB_CACHE.has(resolved)) {
-          return SHARED_TS_LIB_CACHE.get(resolved);
-        }
-        if (sharedExternalSfCache.has(resolved)) {
-          return sharedExternalSfCache.get(resolved);
-        }
-        const sf = defaultHost.getSourceFile(
-          resolved,
-          languageVersion,
-          onError,
-          shouldCreate,
-        );
-        if (isTsStdLib && sf) {
-          SHARED_TS_LIB_CACHE.set(resolved, sf);
-        }
-        sharedExternalSfCache.set(resolved, sf);
-        return sf;
-      },
-    };
-
-    const resolveFirstSource = (targets, parsed, existsFn) =>
-      targets
-        .map(t => mapTargetToPackageSource(pkgDir, t, parsed, existsFn))
-        .find(Boolean) || null;
-
-    const addEntryPair = (entryPairs, bFile, hFile) => {
-      if (!bFile) return;
-      const relLabel = toPosix(path.relative(absRepoRoot, hFile || bFile));
-      if (!hFile || !headExistsAbs(hFile)) {
-        allErrors.push(
-          `[${relLabel}] Public entrypoint source file was deleted.`,
-        );
-      } else {
-        entryPairs.push({
-          label: relLabel,
-          baseSrc: toBasePkgPath(bFile),
-          headSrc: hFile,
-        });
-      }
-    };
-
-    const resolveLaneSources = (lane, parsed, existsFn) => {
-      if (!lane) return [];
-      const files = [];
-      if (lane.supportsImport) {
-        files.push(
-          resolveFirstSource(
-            [...lane.importTargets, ...lane.defaultTargets],
-            parsed,
-            existsFn,
-          ),
-        );
-      }
-      if (lane.supportsRequire) {
-        files.push(
-          resolveFirstSource(
-            [...lane.requireTargets, ...lane.defaultTargets],
-            parsed,
-            existsFn,
-          ),
-        );
-      }
-      if (files.filter(Boolean).length === 0) {
-        files.push(
-          resolveFirstSource(lane.defaultTargets, parsed, existsFn),
-          resolveFirstSource(lane.allTargets, parsed, existsFn),
-        );
-      }
-      return [...new Set(files.filter(Boolean))];
-    };
-
-    const entryPairs = [];
-    const baseSubpathEntries = [...baseEntryInfo.subpaths.entries()];
-    if (basePkgJson.exports && baseSubpathEntries.length > 0) {
-      if (!headPkgJson.exports) {
-        // `exports` was removed completely: compare base `.` lanes against head fallback entrypoint!
-        const rootLane = baseEntryInfo.subpaths.get('.');
-        if (rootLane) {
-          const uniqueB = resolveLaneSources(
-            rootLane,
-            baseTsParsed,
-            baseExistsAbs,
+        if (lane.supportsRequire) {
+          files.push(
+            resolveFirstSource(
+              [...lane.requireTargets, ...lane.defaultTargets],
+              parsed,
+              existsFn,
+            ),
           );
-          for (const bFile of uniqueB) {
-            const hFile = headEntryInfo.primaryFile || null;
-            addEntryPair(entryPairs, bFile, hFile);
-          }
         }
-        for (const [subpath, bLane] of baseSubpathEntries) {
-          if (subpath !== '.' && headEntryInfo.subdirSubpaths.has(subpath)) {
-            const hSubFile = headEntryInfo.subdirSourceMap.get(subpath) || null;
-            for (const bFile of resolveLaneSources(
-              bLane,
-              baseTsParsed,
-              baseExistsAbs,
-            )) {
-              addEntryPair(entryPairs, bFile, hSubFile);
-            }
-          }
+        if (files.filter(Boolean).length === 0) {
+          files.push(
+            resolveFirstSource(lane.defaultTargets, parsed, existsFn),
+            resolveFirstSource(lane.allTargets, parsed, existsFn),
+          );
         }
-      } else {
-        for (const [subpath, bLane] of baseSubpathEntries) {
-          const hLane = headEntryInfo.subpaths.get(subpath);
-          if (!hLane) continue;
+        return [...new Set(files.filter(Boolean))];
+      };
 
-          const laneCandidates = [];
-          if (bLane.supportsImport && hLane.supportsImport) {
-            laneCandidates.push([
-              [...bLane.importTargets, ...bLane.defaultTargets],
-              [...hLane.importTargets, ...hLane.defaultTargets],
-            ]);
-          }
-          if (bLane.supportsRequire && hLane.supportsRequire) {
-            laneCandidates.push([
-              [...bLane.requireTargets, ...bLane.defaultTargets],
-              [...hLane.requireTargets, ...hLane.defaultTargets],
-            ]);
-          }
-          if (laneCandidates.length === 0) {
-            laneCandidates.push([bLane.allTargets, hLane.allTargets]);
-          }
-
-          for (const [bTargets, hTargets] of laneCandidates) {
-            const bFile = resolveFirstSource(
-              bTargets,
+      const entryPairs = [];
+      const baseSubpathEntries = [...baseEntryInfo.subpaths.entries()];
+      if (basePkgJson.exports && baseSubpathEntries.length > 0) {
+        if (!headPkgJson.exports) {
+          // `exports` was removed completely: compare base `.` lanes against head fallback entrypoint!
+          const rootLane = baseEntryInfo.subpaths.get('.');
+          if (rootLane) {
+            const uniqueB = resolveLaneSources(
+              rootLane,
               baseTsParsed,
               baseExistsAbs,
             );
-            const hFile = resolveFirstSource(
-              hTargets,
+            for (const bFile of uniqueB) {
+              const hFile = headEntryInfo.primaryFile || null;
+              addEntryPair(entryPairs, bFile, hFile);
+            }
+          }
+          for (const [subpath, bLane] of baseSubpathEntries) {
+            if (subpath !== '.' && headEntryInfo.subdirSubpaths.has(subpath)) {
+              const hSubFile =
+                headEntryInfo.subdirSourceMap.get(subpath) || null;
+              for (const bFile of resolveLaneSources(
+                bLane,
+                baseTsParsed,
+                baseExistsAbs,
+              )) {
+                addEntryPair(entryPairs, bFile, hSubFile);
+              }
+            }
+          }
+        } else {
+          for (const [subpath, bLane] of baseSubpathEntries) {
+            const hLane = headEntryInfo.subpaths.get(subpath);
+            if (!hLane) continue;
+
+            const laneCandidates = [];
+            if (bLane.supportsImport && hLane.supportsImport) {
+              laneCandidates.push([
+                [...bLane.importTargets, ...bLane.defaultTargets],
+                [...hLane.importTargets, ...hLane.defaultTargets],
+              ]);
+            }
+            if (bLane.supportsRequire && hLane.supportsRequire) {
+              laneCandidates.push([
+                [...bLane.requireTargets, ...bLane.defaultTargets],
+                [...hLane.requireTargets, ...hLane.defaultTargets],
+              ]);
+            }
+            if (laneCandidates.length === 0) {
+              laneCandidates.push([bLane.allTargets, hLane.allTargets]);
+            }
+
+            for (const [bTargets, hTargets] of laneCandidates) {
+              const bFile = resolveFirstSource(
+                bTargets,
+                baseTsParsed,
+                baseExistsAbs,
+              );
+              const hFile = resolveFirstSource(
+                hTargets,
+                headTsParsed,
+                headExistsAbs,
+              );
+              addEntryPair(entryPairs, bFile, hFile);
+            }
+          }
+        }
+      } else if (headPkgJson.exports) {
+        // Legacy `"main"`/`"types"` migrated to `package.json#exports`
+        if (baseEntryInfo.primaryFile) {
+          const hRootLane = headEntryInfo.subpaths.get('.');
+          if (hRootLane) {
+            const hFiles = resolveLaneSources(
+              hRootLane,
               headTsParsed,
               headExistsAbs,
             );
-            addEntryPair(entryPairs, bFile, hFile);
-          }
-        }
-      }
-    } else if (headPkgJson.exports) {
-      // Legacy `"main"`/`"types"` migrated to `package.json#exports`
-      if (baseEntryInfo.primaryFile) {
-        const hRootLane = headEntryInfo.subpaths.get('.');
-        if (hRootLane) {
-          const hFiles = resolveLaneSources(
-            hRootLane,
-            headTsParsed,
-            headExistsAbs,
-          );
-          if (hFiles.length === 0) {
-            addEntryPair(entryPairs, baseEntryInfo.primaryFile, null);
-          } else {
-            for (const hFile of hFiles) {
-              addEntryPair(entryPairs, baseEntryInfo.primaryFile, hFile);
+            if (hFiles.length === 0) {
+              addEntryPair(entryPairs, baseEntryInfo.primaryFile, null);
+            } else {
+              for (const hFile of hFiles) {
+                addEntryPair(entryPairs, baseEntryInfo.primaryFile, hFile);
+              }
             }
           }
         }
-      }
-      for (const [
-        subKey,
-        bSubFile,
-      ] of baseEntryInfo.subdirSourceMap.entries()) {
-        const hSubLane = headEntryInfo.subpaths.get(subKey);
-        if (hSubLane) {
-          const hFiles = resolveLaneSources(
-            hSubLane,
-            headTsParsed,
-            headExistsAbs,
-          );
-          if (hFiles.length === 0) {
-            addEntryPair(entryPairs, bSubFile, null);
-          } else {
-            for (const hFile of hFiles) {
-              addEntryPair(entryPairs, bSubFile, hFile);
+        for (const [
+          subKey,
+          bSubFile,
+        ] of baseEntryInfo.subdirSourceMap.entries()) {
+          const hSubLane = headEntryInfo.subpaths.get(subKey);
+          if (hSubLane) {
+            const hFiles = resolveLaneSources(
+              hSubLane,
+              headTsParsed,
+              headExistsAbs,
+            );
+            if (hFiles.length === 0) {
+              addEntryPair(entryPairs, bSubFile, null);
+            } else {
+              for (const hFile of hFiles) {
+                addEntryPair(entryPairs, bSubFile, hFile);
+              }
             }
           }
         }
-      }
-    } else {
-      if (baseEntryInfo.primaryFile) {
-        addEntryPair(
-          entryPairs,
-          baseEntryInfo.primaryFile,
-          headEntryInfo.primaryFile,
-        );
-      }
-      for (const [
-        subKey,
-        bSubFile,
-      ] of baseEntryInfo.subdirSourceMap.entries()) {
-        if (headEntryInfo.subdirSubpaths.has(subKey)) {
+      } else {
+        if (baseEntryInfo.primaryFile) {
           addEntryPair(
             entryPairs,
-            bSubFile,
-            headEntryInfo.subdirSourceMap.get(subKey) || null,
+            baseEntryInfo.primaryFile,
+            headEntryInfo.primaryFile,
           );
         }
-      }
-    }
-
-    if (entryPairs.length === 0) continue;
-
-    const uniqueEntryPairs = [];
-    const seenPairKeys = new Set();
-    for (const p of entryPairs) {
-      const k = `${p.baseSrc}::${p.headSrc}`;
-      if (!seenPairKeys.has(k)) {
-        seenPairKeys.add(k);
-        uniqueEntryPairs.push(p);
-      }
-    }
-
-    const srcRoots = uniqueEntryPairs.flatMap(p => [p.baseSrc, p.headSrc]);
-    const entrypointDtsTargets = srcRoots.map(s =>
-      toDtsFileName(path.resolve(s)),
-    );
-    const {dtsFiles, rawMetaByFile} = emitToNormalizedDtsMap(
-      srcRoots,
-      isInPkgSource,
-      compilerOptions,
-      customHost,
-      {
-        baseCompilerOptions,
-        isBaseFilePredicate: isBaseVirtual,
-        entrypointDtsTargets,
-        packageName: headPkgJson.name || basePkgJson.name || null,
-      },
-    );
-
-    const dtsPairs = uniqueEntryPairs.map(p => ({
-      label: p.label,
-      baseDts: dtsFiles.has(toDtsFileName(p.baseSrc))
-        ? toDtsFileName(p.baseSrc)
-        : p.baseSrc,
-      headDts: dtsFiles.has(toDtsFileName(p.headSrc))
-        ? toDtsFileName(p.headSrc)
-        : p.headSrc,
-    }));
-
-    const cmpHost = {
-      ...defaultHost,
-      realpath: resolveHostRealpath,
-      directoryExists: d => customHost.directoryExists(d),
-      fileExists(f) {
-        const resolved = path.resolve(f);
-        if (isBaseVirtual(resolved)) {
-          const rel = toPosix(path.relative(basePkgRoot, resolved));
-          if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
-            return customHost.fileExists(resolved);
+        for (const [
+          subKey,
+          bSubFile,
+        ] of baseEntryInfo.subdirSourceMap.entries()) {
+          if (headEntryInfo.subdirSubpaths.has(subKey)) {
+            addEntryPair(
+              entryPairs,
+              bSubFile,
+              headEntryInfo.subdirSourceMap.get(subKey) || null,
+            );
           }
-          return false;
         }
-        if (isInsideDir(resolved, pkgDir)) {
-          const relInPkg = toPosix(path.relative(pkgDir, resolved));
-          if (!isExternalOrBuildRel(relInPkg)) {
-            if (relInPkg.endsWith('.json')) {
+      }
+
+      if (entryPairs.length === 0) continue;
+
+      const uniqueEntryPairs = [];
+      const seenPairKeys = new Set();
+      for (const p of entryPairs) {
+        const k = `${p.baseSrc}::${p.headSrc}`;
+        if (!seenPairKeys.has(k)) {
+          seenPairKeys.add(k);
+          uniqueEntryPairs.push(p);
+        }
+      }
+
+      const srcRoots = uniqueEntryPairs.flatMap(p => [p.baseSrc, p.headSrc]);
+      const entrypointDtsTargets = srcRoots.map(s =>
+        toDtsFileName(path.resolve(s)),
+      );
+      const {dtsFiles, rawMetaByFile} = emitToNormalizedDtsMap(
+        srcRoots,
+        isInPkgSource,
+        compilerOptions,
+        customHost,
+        {
+          baseCompilerOptions,
+          isBaseFilePredicate: isBaseVirtual,
+          entrypointDtsTargets,
+          packageName: headPkgJson.name || basePkgJson.name || null,
+        },
+      );
+
+      const dtsPairs = uniqueEntryPairs.map(p => ({
+        label: p.label,
+        baseDts: dtsFiles.has(toDtsFileName(p.baseSrc))
+          ? toDtsFileName(p.baseSrc)
+          : p.baseSrc,
+        headDts: dtsFiles.has(toDtsFileName(p.headSrc))
+          ? toDtsFileName(p.headSrc)
+          : p.headSrc,
+      }));
+
+      const cmpHost = {
+        ...defaultHost,
+        realpath: resolveHostRealpath,
+        directoryExists: d => customHost.directoryExists(d),
+        fileExists(f) {
+          const resolved = path.resolve(f);
+          if (isBaseVirtual(resolved)) {
+            const rel = toPosix(path.relative(basePkgRoot, resolved));
+            if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
               return customHost.fileExists(resolved);
             }
             return false;
           }
-        }
-        return defaultHost.fileExists(resolved);
-      },
-      readFile(f) {
-        const resolved = path.resolve(f);
-        if (isBaseVirtual(resolved)) {
-          const rel = toPosix(path.relative(basePkgRoot, resolved));
-          if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
-            return customHost.readFile(resolved);
+          if (isInsideDir(resolved, pkgDir)) {
+            const relInPkg = toPosix(path.relative(pkgDir, resolved));
+            if (!isExternalOrBuildRel(relInPkg)) {
+              if (relInPkg.endsWith('.json')) {
+                return customHost.fileExists(resolved);
+              }
+              return false;
+            }
           }
-          return undefined;
-        }
-        if (isInsideDir(resolved, pkgDir)) {
-          const relInPkg = toPosix(path.relative(pkgDir, resolved));
-          if (!isExternalOrBuildRel(relInPkg)) {
-            if (relInPkg.endsWith('.json')) {
+          return defaultHost.fileExists(resolved);
+        },
+        readFile(f) {
+          const resolved = path.resolve(f);
+          if (isBaseVirtual(resolved)) {
+            const rel = toPosix(path.relative(basePkgRoot, resolved));
+            if (rel.endsWith('.json') || isSegOrPrefix(rel, 'node_modules')) {
               return customHost.readFile(resolved);
             }
             return undefined;
           }
-        }
-        return defaultHost.readFile(resolved);
-      },
-      resolveModuleNameLiterals(lits, containingFile, redir, opts) {
-        return customHost.resolveModuleNameLiterals.call(
-          this,
-          lits,
-          containingFile,
-          redir,
-          opts,
-        );
-      },
-      getSourceFile(fileName, lv, onError, shouldCreate) {
-        const resolved = path.resolve(fileName);
-        if (isInPkgSource(resolved) && resolved.endsWith('.json')) {
-          const text = this.readFile(resolved);
-          if (text === undefined) return undefined;
-          return ts.createSourceFile(resolved, text, lv, true);
-        }
-        const isTsStdLib = resolved.includes(
-          `${path.sep}node_modules${path.sep}typescript${path.sep}lib${path.sep}`,
-        );
-        if (isTsStdLib && SHARED_TS_LIB_CACHE.has(resolved)) {
-          return SHARED_TS_LIB_CACHE.get(resolved);
-        }
-        if (sharedExternalSfCache.has(resolved)) {
-          return sharedExternalSfCache.get(resolved);
-        }
-        const sf = defaultHost.getSourceFile(
-          fileName,
-          lv,
-          onError,
-          shouldCreate,
-        );
-        if (isTsStdLib && sf) {
-          SHARED_TS_LIB_CACHE.set(resolved, sf);
-        }
-        sharedExternalSfCache.set(resolved, sf);
-        return sf;
-      },
-    };
+          if (isInsideDir(resolved, pkgDir)) {
+            const relInPkg = toPosix(path.relative(pkgDir, resolved));
+            if (!isExternalOrBuildRel(relInPkg)) {
+              if (relInPkg.endsWith('.json')) {
+                return customHost.readFile(resolved);
+              }
+              return undefined;
+            }
+          }
+          return defaultHost.readFile(resolved);
+        },
+        resolveModuleNameLiterals(lits, containingFile, redir, opts) {
+          return customHost.resolveModuleNameLiterals.call(
+            this,
+            lits,
+            containingFile,
+            redir,
+            opts,
+          );
+        },
+        getSourceFile(fileName, lv, onError, shouldCreate) {
+          const resolved = path.resolve(fileName);
+          if (isInPkgSource(resolved) && resolved.endsWith('.json')) {
+            const text = this.readFile(resolved);
+            if (text === undefined) return undefined;
+            return ts.createSourceFile(resolved, text, lv, true);
+          }
+          const isTsStdLib = resolved.includes(
+            `${path.sep}node_modules${path.sep}typescript${path.sep}lib${path.sep}`,
+          );
+          if (isTsStdLib && SHARED_TS_LIB_CACHE.has(resolved)) {
+            return SHARED_TS_LIB_CACHE.get(resolved);
+          }
+          if (sharedExternalSfCache.has(resolved)) {
+            return sharedExternalSfCache.get(resolved);
+          }
+          const sf = defaultHost.getSourceFile(
+            fileName,
+            lv,
+            onError,
+            shouldCreate,
+          );
+          if (isTsStdLib && sf) {
+            SHARED_TS_LIB_CACHE.set(resolved, sf);
+          }
+          sharedExternalSfCache.set(resolved, sf);
+          return sf;
+        },
+      };
 
-    const results = runDtsPairComparisons(
-      dtsPairs,
-      dtsFiles,
-      rawMetaByFile,
-      compilerOptions,
-      cmpHost,
-    );
-    for (const {label, errors} of results) {
-      for (const err of errors) {
-        allErrors.push(`[${label}] ${err}`);
+      const results = runDtsPairComparisons(
+        dtsPairs,
+        dtsFiles,
+        rawMetaByFile,
+        compilerOptions,
+        cmpHost,
+      );
+      for (const {label, errors} of results) {
+        for (const err of errors) {
+          allErrors.push(`[${label}] ${err}`);
+        }
       }
+    } catch (err) {
+      console.warn(
+        `Warning: skipping breaking change check for ${relPkgDir} due to unexpected error: ${err.message}`,
+      );
     }
   }
 

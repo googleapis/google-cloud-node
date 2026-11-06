@@ -2043,5 +2043,181 @@ describe('breaking-change-check', () => {
         }
       },
     );
+
+    it(
+      'avoids false positives on constructable union aliases, widened class/enum unions, distributed unions, overload splitting, subpath namespace exports, unresolved imports, and version-only package.json bumps',
+      {timeout: 120000},
+      async () => {
+        // 1. Constructable union type alias (e.g. `AnyAuthClientConstructor`), widened class/enum unions,
+        // distributed union properties, intersection type aliases with JSDoc/optional additions,
+        // optional-parameter overload splitting, and unresolved external imports.
+        const errs1 = compareSourceTexts(
+          `
+          import {MissingExternalType} from 'non-existent-external-pkg-xyz';
+          export class AuthClient {
+            private secret = 1;
+            request(): void {}
+          }
+          export class JwtClient extends AuthClient {
+            authorize(): void {}
+          }
+          export type ALL_EXPORTS = typeof AuthClient | typeof JwtClient | string;
+          export type AnyAuthClientConstructor = Extract<ALL_EXPORTS, typeof AuthClient>;
+          export enum Mode {
+            FAST = 'FAST',
+            SAFE = 'SAFE',
+          }
+          export type StageOptions = { rawOptions?: Record<string, unknown> };
+          export type UpsertStageOptions = StageOptions & {
+            transforms?: string[];
+            client?: string | AuthClient;
+          };
+          export interface DistributedOpts {
+            item?: { kind: 'a' | 'b'; value: number };
+          }
+          export class Pipeline {
+            insert(options?: UpsertStageOptions): Pipeline { return this; }
+          }
+          export declare function runWithClient(
+            client: AuthClient,
+            mode: Mode,
+            ext: MissingExternalType,
+          ): void;
+          `,
+          `
+          import {MissingExternalType} from 'non-existent-external-pkg-xyz';
+          export class AuthClient {
+            private secret = 1;
+            request(): void {}
+            newHelperMethod(): string { return 'ok'; }
+          }
+          export class JwtClient extends AuthClient {
+            authorize(): void {}
+          }
+          export type ALL_EXPORTS = typeof AuthClient | typeof JwtClient | string;
+          export type AnyAuthClientConstructor = Extract<ALL_EXPORTS, typeof AuthClient>;
+          export enum Mode {
+            FAST = 'FAST',
+            SAFE = 'SAFE',
+            TURBO = 'TURBO',
+          }
+          export type StageOptions = { rawOptions?: Record<string, unknown> };
+          export type UpsertStageOptions = StageOptions & {
+            /** Added JSDoc comment and optional property */
+            additionalFields?: string[];
+            transforms?: string[];
+            client?: string | AuthClient;
+          };
+          export interface DistributedOpts {
+            item?: { kind: 'a'; value: number } | { kind: 'b'; value: number };
+          }
+          export class Pipeline {
+            insert(): Pipeline;
+            insert(options: UpsertStageOptions): Pipeline;
+            insert(options?: UpsertStageOptions): Pipeline { return this; }
+          }
+          export declare function runWithClient(
+            client: AuthClient | string,
+            mode: Mode | null,
+            ext: MissingExternalType,
+          ): void;
+          `,
+        );
+        assert.deepEqual(errs1, []);
+
+        // 2. Subpath ambient `.d.ts` (`export = Ns.Sub`) referencing parent namespace classes,
+        // and version-only / devDependencies-only `package.json` edits skipped by `collectTouchedPackages`.
+        await createTempGitRepo(async ({tmpDir, writeFiles, commitAll}) => {
+          writeFiles({
+            'handwritten/pkg/package.json': {
+              name: '@google-cloud/pkg',
+              version: '1.0.0',
+              types: './types/main.d.ts',
+              exports: {
+                '.': {types: './types/main.d.ts', default: './build/index.js'},
+                './sub': {types: './types/sub.d.ts', default: './build/sub.js'},
+              },
+            },
+            'handwritten/pkg/tsconfig.json': {
+              compilerOptions: {
+                target: 'ES2022',
+                module: 'CommonJS',
+                strict: true,
+              },
+            },
+            'handwritten/pkg/types/main.d.ts': `
+              declare namespace MyCloud {
+                export class DocRef {
+                  private _id: string;
+                  id: string;
+                }
+                export namespace Sub {
+                  export type StageOpts = {
+                    doc: string | DocRef;
+                  };
+                }
+              }
+              export = MyCloud;
+            `,
+            'handwritten/pkg/types/sub.d.ts': `
+              import './main';
+              import Sub = MyCloud.Sub;
+              export = Sub;
+            `,
+          });
+          const baseSha = commitAll('base');
+
+          // Touch only `version` and `devDependencies` in `package.json` -> should skip package completely.
+          writeFiles({
+            'handwritten/pkg/package.json': {
+              name: '@google-cloud/pkg',
+              version: '1.0.1',
+              types: './types/main.d.ts',
+              exports: {
+                '.': {types: './types/main.d.ts', default: './build/index.js'},
+                './sub': {types: './types/sub.d.ts', default: './build/sub.js'},
+              },
+              devDependencies: {typescript: '^5.0.0'},
+            },
+          });
+          const verBumpSha = commitAll('chore: release 1.0.1');
+          const verBumpErrs = await checkBreakingChanges({
+            diffRevArgs: [baseSha, verBumpSha],
+            baseRev: baseSha,
+            headRev: verBumpSha,
+            repoRoot: tmpDir,
+          });
+          assert.deepEqual(verBumpErrs, []);
+
+          // Now add a non-breaking method to `MyCloud.DocRef` in `main.d.ts` and check that `sub.d.ts` passes.
+          writeFiles({
+            'handwritten/pkg/types/main.d.ts': `
+              declare namespace MyCloud {
+                export class DocRef {
+                  private _id: string;
+                  id: string;
+                  newMethod(): void;
+                }
+                export namespace Sub {
+                  export type StageOpts = {
+                    /** JSDoc comment update */
+                    doc: string | DocRef;
+                  };
+                }
+              }
+              export = MyCloud;
+            `,
+          });
+          const subUpdateSha = commitAll('feat: add DocRef.newMethod');
+          const subUpdateErrs = await checkBreakingChanges({
+            diffRevArgs: [verBumpSha, subUpdateSha],
+            baseRev: verBumpSha,
+            headRev: subUpdateSha,
+            repoRoot: tmpDir,
+          });
+          assert.deepEqual(subUpdateErrs, []);
+        });
+      },
+    );
   });
 });
