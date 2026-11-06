@@ -615,7 +615,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCluster request %j', request);
+    this._log.debug('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.ICluster,
@@ -626,7 +626,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -638,7 +638,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IGetClusterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -745,7 +745,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTopic request %j', request);
+    this._log.debug('getTopic request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.ITopic,
@@ -756,7 +756,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTopic response %j', response);
+          this._log.debug('getTopic response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -768,7 +768,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IGetTopicRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTopic response %j', response);
+          this._log.debug('getTopic response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -889,7 +889,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTopic request %j', request);
+    this._log.debug('createTopic request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.ITopic,
@@ -900,7 +900,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTopic response %j', response);
+          this._log.debug('createTopic response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -912,7 +912,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.ICreateTopicRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTopic response %j', response);
+          this._log.debug('createTopic response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1029,7 +1029,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTopic request %j', request);
+    this._log.debug('updateTopic request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.ITopic,
@@ -1040,7 +1040,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTopic response %j', response);
+          this._log.debug('updateTopic response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1052,7 +1052,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IUpdateTopicRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTopic response %j', response);
+          this._log.debug('updateTopic response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1164,7 +1164,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTopic request %j', request);
+    this._log.debug('deleteTopic request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1175,7 +1175,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTopic response %j', response);
+          this._log.debug('deleteTopic response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1187,7 +1187,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IDeleteTopicRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTopic response %j', response);
+          this._log.debug('deleteTopic response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1299,7 +1299,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConsumerGroup request %j', request);
+    this._log.debug('getConsumerGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConsumerGroup,
@@ -1310,7 +1310,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConsumerGroup response %j', response);
+          this._log.debug('getConsumerGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1325,7 +1325,7 @@ export class ManagedKafkaClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConsumerGroup response %j', response);
+          this._log.debug('getConsumerGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1448,7 +1448,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConsumerGroup request %j', request);
+    this._log.debug('updateConsumerGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConsumerGroup,
@@ -1459,7 +1459,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConsumerGroup response %j', response);
+          this._log.debug('updateConsumerGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1474,7 +1474,7 @@ export class ManagedKafkaClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateConsumerGroup response %j', response);
+          this._log.debug('updateConsumerGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1592,7 +1592,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteConsumerGroup request %j', request);
+    this._log.debug('deleteConsumerGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1603,7 +1603,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteConsumerGroup response %j', response);
+          this._log.debug('deleteConsumerGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1618,7 +1618,7 @@ export class ManagedKafkaClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteConsumerGroup response %j', response);
+          this._log.debug('deleteConsumerGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1727,7 +1727,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAcl request %j', request);
+    this._log.debug('getAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IAcl,
@@ -1736,7 +1736,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAcl response %j', response);
+          this._log.debug('getAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1748,7 +1748,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IGetAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAcl response %j', response);
+          this._log.debug('getAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1880,7 +1880,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAcl request %j', request);
+    this._log.debug('createAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IAcl,
@@ -1891,7 +1891,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAcl response %j', response);
+          this._log.debug('createAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1903,7 +1903,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.ICreateAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAcl response %j', response);
+          this._log.debug('createAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2015,7 +2015,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAcl request %j', request);
+    this._log.debug('updateAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IAcl,
@@ -2026,7 +2026,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAcl response %j', response);
+          this._log.debug('updateAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2038,7 +2038,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IUpdateAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAcl response %j', response);
+          this._log.debug('updateAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2148,7 +2148,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAcl request %j', request);
+    this._log.debug('deleteAcl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2159,7 +2159,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAcl response %j', response);
+          this._log.debug('deleteAcl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2171,7 +2171,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IDeleteAclRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAcl response %j', response);
+          this._log.debug('deleteAcl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2291,7 +2291,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('addAclEntry request %j', request);
+    this._log.debug('addAclEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
@@ -2302,7 +2302,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('addAclEntry response %j', response);
+          this._log.debug('addAclEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2314,7 +2314,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IAddAclEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('addAclEntry response %j', response);
+          this._log.debug('addAclEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2435,7 +2435,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeAclEntry request %j', request);
+    this._log.debug('removeAclEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
@@ -2446,7 +2446,7 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeAclEntry response %j', response);
+          this._log.debug('removeAclEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2461,7 +2461,7 @@ export class ManagedKafkaClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeAclEntry response %j', response);
+          this._log.debug('removeAclEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2622,11 +2622,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCluster request %j', request);
+    this._log.debug('createCluster request %j', request);
     return this.innerApiCalls
       .createCluster(request, options, wrappedCallback)
       ?.then(
@@ -2638,7 +2638,7 @@ export class ManagedKafkaClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2812,11 +2812,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCluster request %j', request);
+    this._log.debug('updateCluster request %j', request);
     return this.innerApiCalls
       .updateCluster(request, options, wrappedCallback)
       ?.then(
@@ -2828,7 +2828,7 @@ export class ManagedKafkaClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2996,11 +2996,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCluster request %j', request);
+    this._log.debug('deleteCluster request %j', request);
     return this.innerApiCalls
       .deleteCluster(request, options, wrappedCallback)
       ?.then(
@@ -3012,7 +3012,7 @@ export class ManagedKafkaClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3170,11 +3170,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClusters values %j', values);
+          this._log.debug('listClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClusters request %j', request);
+    this._log.debug('listClusters request %j', request);
     return this.innerApiCalls
       .listClusters(request, options, wrappedCallback)
       ?.then(
@@ -3183,7 +3183,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IListClustersRequest | null,
           protos.google.cloud.managedkafka.v1.IListClustersResponse,
         ]) => {
-          this._log.info('listClusters values %j', response);
+          this._log.debug('listClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -3238,7 +3238,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters stream %j', request);
+    this._log.debug('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -3298,7 +3298,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters iterate %j', request);
+    this._log.debug('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -3419,11 +3419,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTopics values %j', values);
+          this._log.debug('listTopics values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTopics request %j', request);
+    this._log.debug('listTopics request %j', request);
     return this.innerApiCalls
       .listTopics(request, options, wrappedCallback)
       ?.then(
@@ -3432,7 +3432,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IListTopicsRequest | null,
           protos.google.cloud.managedkafka.v1.IListTopicsResponse,
         ]) => {
-          this._log.info('listTopics values %j', response);
+          this._log.debug('listTopics values %j', response);
           return [response, input, output];
         },
       );
@@ -3483,7 +3483,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTopics stream %j', request);
+    this._log.debug('listTopics stream %j', request);
     return this.descriptors.page.listTopics.createStream(
       this.innerApiCalls.listTopics as GaxCall,
       request,
@@ -3539,7 +3539,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTopics iterate %j', request);
+    this._log.debug('listTopics iterate %j', request);
     return this.descriptors.page.listTopics.asyncIterate(
       this.innerApiCalls['listTopics'] as GaxCall,
       request as {},
@@ -3661,11 +3661,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConsumerGroups values %j', values);
+          this._log.debug('listConsumerGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConsumerGroups request %j', request);
+    this._log.debug('listConsumerGroups request %j', request);
     return this.innerApiCalls
       .listConsumerGroups(request, options, wrappedCallback)
       ?.then(
@@ -3674,7 +3674,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest | null,
           protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse,
         ]) => {
-          this._log.info('listConsumerGroups values %j', response);
+          this._log.debug('listConsumerGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -3726,7 +3726,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConsumerGroups stream %j', request);
+    this._log.debug('listConsumerGroups stream %j', request);
     return this.descriptors.page.listConsumerGroups.createStream(
       this.innerApiCalls.listConsumerGroups as GaxCall,
       request,
@@ -3783,7 +3783,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConsumerGroups iterate %j', request);
+    this._log.debug('listConsumerGroups iterate %j', request);
     return this.descriptors.page.listConsumerGroups.asyncIterate(
       this.innerApiCalls['listConsumerGroups'] as GaxCall,
       request as {},
@@ -3899,11 +3899,11 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAcls values %j', values);
+          this._log.debug('listAcls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAcls request %j', request);
+    this._log.debug('listAcls request %j', request);
     return this.innerApiCalls
       .listAcls(request, options, wrappedCallback)
       ?.then(
@@ -3912,7 +3912,7 @@ export class ManagedKafkaClient {
           protos.google.cloud.managedkafka.v1.IListAclsRequest | null,
           protos.google.cloud.managedkafka.v1.IListAclsResponse,
         ]) => {
-          this._log.info('listAcls values %j', response);
+          this._log.debug('listAcls values %j', response);
           return [response, input, output];
         },
       );
@@ -3964,7 +3964,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAcls stream %j', request);
+    this._log.debug('listAcls stream %j', request);
     return this.descriptors.page.listAcls.createStream(
       this.innerApiCalls.listAcls as GaxCall,
       request,
@@ -4021,7 +4021,7 @@ export class ManagedKafkaClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAcls iterate %j', request);
+    this._log.debug('listAcls iterate %j', request);
     return this.descriptors.page.listAcls.asyncIterate(
       this.innerApiCalls['listAcls'] as GaxCall,
       request as {},

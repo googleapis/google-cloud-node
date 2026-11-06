@@ -605,7 +605,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPage request %j', request);
+    this._log.debug('getPage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IPage,
@@ -616,7 +616,7 @@ export class PagesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPage response %j', response);
+          this._log.debug('getPage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -628,7 +628,7 @@ export class PagesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPage response %j', response);
+          this._log.debug('getPage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -764,7 +764,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPage request %j', request);
+    this._log.debug('createPage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IPage,
@@ -775,7 +775,7 @@ export class PagesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPage response %j', response);
+          this._log.debug('createPage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -790,7 +790,7 @@ export class PagesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createPage response %j', response);
+          this._log.debug('createPage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -925,7 +925,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePage request %j', request);
+    this._log.debug('updatePage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IPage,
@@ -936,7 +936,7 @@ export class PagesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePage response %j', response);
+          this._log.debug('updatePage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -951,7 +951,7 @@ export class PagesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePage response %j', response);
+          this._log.debug('updatePage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1075,7 +1075,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePage request %j', request);
+    this._log.debug('deletePage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1086,7 +1086,7 @@ export class PagesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePage response %j', response);
+          this._log.debug('deletePage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1101,7 +1101,7 @@ export class PagesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePage response %j', response);
+          this._log.debug('deletePage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1255,11 +1255,11 @@ export class PagesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPages values %j', values);
+          this._log.debug('listPages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPages request %j', request);
+    this._log.debug('listPages request %j', request);
     return this.innerApiCalls
       .listPages(request, options, wrappedCallback)
       ?.then(
@@ -1268,7 +1268,7 @@ export class PagesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListPagesResponse,
         ]) => {
-          this._log.info('listPages values %j', response);
+          this._log.debug('listPages values %j', response);
           return [response, input, output];
         },
       );
@@ -1337,7 +1337,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPages stream %j', request);
+    this._log.debug('listPages stream %j', request);
     return this.descriptors.page.listPages.createStream(
       this.innerApiCalls.listPages as GaxCall,
       request,
@@ -1411,7 +1411,7 @@ export class PagesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPages iterate %j', request);
+    this._log.debug('listPages iterate %j', request);
     return this.descriptors.page.listPages.asyncIterate(
       this.innerApiCalls['listPages'] as GaxCall,
       request as {},

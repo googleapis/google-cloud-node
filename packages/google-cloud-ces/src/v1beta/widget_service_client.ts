@@ -536,7 +536,7 @@ export class WidgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateChatToken request %j', request);
+    this._log.debug('generateChatToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IGenerateChatTokenResponse,
@@ -547,7 +547,7 @@ export class WidgetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateChatToken response %j', response);
+          this._log.debug('generateChatToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -559,7 +559,7 @@ export class WidgetServiceClient {
           protos.google.cloud.ces.v1beta.IGenerateChatTokenRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateChatToken response %j', response);
+          this._log.debug('generateChatToken response %j', response);
           return [response, options, rawResponse];
         },
       )

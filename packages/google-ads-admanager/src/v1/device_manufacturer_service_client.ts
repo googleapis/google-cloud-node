@@ -695,7 +695,7 @@ export class DeviceManufacturerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDeviceManufacturer request %j', request);
+    this._log.debug('getDeviceManufacturer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IDeviceManufacturer,
@@ -706,7 +706,7 @@ export class DeviceManufacturerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDeviceManufacturer response %j', response);
+          this._log.debug('getDeviceManufacturer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -721,7 +721,7 @@ export class DeviceManufacturerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDeviceManufacturer response %j', response);
+          this._log.debug('getDeviceManufacturer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -873,11 +873,11 @@ export class DeviceManufacturerServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDeviceManufacturers values %j', values);
+          this._log.debug('listDeviceManufacturers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDeviceManufacturers request %j', request);
+    this._log.debug('listDeviceManufacturers request %j', request);
     return this.innerApiCalls
       .listDeviceManufacturers(request, options, wrappedCallback)
       ?.then(
@@ -886,7 +886,7 @@ export class DeviceManufacturerServiceClient {
           protos.google.ads.admanager.v1.IListDeviceManufacturersRequest | null,
           protos.google.ads.admanager.v1.IListDeviceManufacturersResponse,
         ]) => {
-          this._log.info('listDeviceManufacturers values %j', response);
+          this._log.debug('listDeviceManufacturers values %j', response);
           return [response, input, output];
         },
       );
@@ -953,7 +953,7 @@ export class DeviceManufacturerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceManufacturers stream %j', request);
+    this._log.debug('listDeviceManufacturers stream %j', request);
     return this.descriptors.page.listDeviceManufacturers.createStream(
       this.innerApiCalls.listDeviceManufacturers as GaxCall,
       request,
@@ -1025,7 +1025,7 @@ export class DeviceManufacturerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceManufacturers iterate %j', request);
+    this._log.debug('listDeviceManufacturers iterate %j', request);
     return this.descriptors.page.listDeviceManufacturers.asyncIterate(
       this.innerApiCalls['listDeviceManufacturers'] as GaxCall,
       request as {},

@@ -529,7 +529,7 @@ export class ShippingSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getShippingSettings request %j', request);
+    this._log.debug('getShippingSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IShippingSettings,
@@ -540,7 +540,7 @@ export class ShippingSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getShippingSettings response %j', response);
+          this._log.debug('getShippingSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -555,7 +555,7 @@ export class ShippingSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getShippingSettings response %j', response);
+          this._log.debug('getShippingSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -676,7 +676,7 @@ export class ShippingSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertShippingSettings request %j', request);
+    this._log.debug('insertShippingSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IShippingSettings,
@@ -687,7 +687,7 @@ export class ShippingSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertShippingSettings response %j', response);
+          this._log.debug('insertShippingSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -702,7 +702,7 @@ export class ShippingSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertShippingSettings response %j', response);
+          this._log.debug('insertShippingSettings response %j', response);
           return [response, options, rawResponse];
         },
       )

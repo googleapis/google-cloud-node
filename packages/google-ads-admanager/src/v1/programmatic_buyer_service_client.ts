@@ -695,7 +695,7 @@ export class ProgrammaticBuyerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProgrammaticBuyer request %j', request);
+    this._log.debug('getProgrammaticBuyer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IProgrammaticBuyer,
@@ -706,7 +706,7 @@ export class ProgrammaticBuyerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProgrammaticBuyer response %j', response);
+          this._log.debug('getProgrammaticBuyer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -721,7 +721,7 @@ export class ProgrammaticBuyerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProgrammaticBuyer response %j', response);
+          this._log.debug('getProgrammaticBuyer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -879,11 +879,11 @@ export class ProgrammaticBuyerServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProgrammaticBuyers values %j', values);
+          this._log.debug('listProgrammaticBuyers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProgrammaticBuyers request %j', request);
+    this._log.debug('listProgrammaticBuyers request %j', request);
     return this.innerApiCalls
       .listProgrammaticBuyers(request, options, wrappedCallback)
       ?.then(
@@ -892,7 +892,7 @@ export class ProgrammaticBuyerServiceClient {
           protos.google.ads.admanager.v1.IListProgrammaticBuyersRequest | null,
           protos.google.ads.admanager.v1.IListProgrammaticBuyersResponse,
         ]) => {
-          this._log.info('listProgrammaticBuyers values %j', response);
+          this._log.debug('listProgrammaticBuyers values %j', response);
           return [response, input, output];
         },
       );
@@ -965,7 +965,7 @@ export class ProgrammaticBuyerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProgrammaticBuyers stream %j', request);
+    this._log.debug('listProgrammaticBuyers stream %j', request);
     return this.descriptors.page.listProgrammaticBuyers.createStream(
       this.innerApiCalls.listProgrammaticBuyers as GaxCall,
       request,
@@ -1043,7 +1043,7 @@ export class ProgrammaticBuyerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProgrammaticBuyers iterate %j', request);
+    this._log.debug('listProgrammaticBuyers iterate %j', request);
     return this.descriptors.page.listProgrammaticBuyers.asyncIterate(
       this.innerApiCalls['listProgrammaticBuyers'] as GaxCall,
       request as {},

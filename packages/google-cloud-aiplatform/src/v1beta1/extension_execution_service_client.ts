@@ -719,7 +719,7 @@ export class ExtensionExecutionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeExtension request %j', request);
+    this._log.debug('executeExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IExecuteExtensionResponse,
@@ -730,7 +730,7 @@ export class ExtensionExecutionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeExtension response %j', response);
+          this._log.debug('executeExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -745,7 +745,7 @@ export class ExtensionExecutionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('executeExtension response %j', response);
+          this._log.debug('executeExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -864,7 +864,7 @@ export class ExtensionExecutionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryExtension request %j', request);
+    this._log.debug('queryExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IQueryExtensionResponse,
@@ -875,7 +875,7 @@ export class ExtensionExecutionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryExtension response %j', response);
+          this._log.debug('queryExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -890,7 +890,7 @@ export class ExtensionExecutionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryExtension response %j', response);
+          this._log.debug('queryExtension response %j', response);
           return [response, options, rawResponse];
         },
       )

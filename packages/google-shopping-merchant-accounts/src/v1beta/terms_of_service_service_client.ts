@@ -529,7 +529,7 @@ export class TermsOfServiceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTermsOfService request %j', request);
+    this._log.debug('getTermsOfService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
@@ -540,7 +540,7 @@ export class TermsOfServiceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTermsOfService response %j', response);
+          this._log.debug('getTermsOfService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -555,7 +555,7 @@ export class TermsOfServiceServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTermsOfService response %j', response);
+          this._log.debug('getTermsOfService response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -673,7 +673,7 @@ export class TermsOfServiceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveLatestTermsOfService request %j', request);
+    this._log.debug('retrieveLatestTermsOfService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ITermsOfService,
@@ -684,7 +684,7 @@ export class TermsOfServiceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveLatestTermsOfService response %j', response);
+          this._log.debug('retrieveLatestTermsOfService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -699,7 +699,7 @@ export class TermsOfServiceServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('retrieveLatestTermsOfService response %j', response);
+          this._log.debug('retrieveLatestTermsOfService response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -823,7 +823,7 @@ export class TermsOfServiceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('acceptTermsOfService request %j', request);
+    this._log.debug('acceptTermsOfService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -834,7 +834,7 @@ export class TermsOfServiceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('acceptTermsOfService response %j', response);
+          this._log.debug('acceptTermsOfService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -849,7 +849,7 @@ export class TermsOfServiceServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('acceptTermsOfService response %j', response);
+          this._log.debug('acceptTermsOfService response %j', response);
           return [response, options, rawResponse];
         },
       )

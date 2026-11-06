@@ -707,7 +707,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCustomTargetingValue request %j', request);
+    this._log.debug('getCustomTargetingValue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingValue,
@@ -718,7 +718,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCustomTargetingValue response %j', response);
+          this._log.debug('getCustomTargetingValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -733,7 +733,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCustomTargetingValue response %j', response);
+          this._log.debug('getCustomTargetingValue response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -854,7 +854,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCustomTargetingValue request %j', request);
+    this._log.debug('createCustomTargetingValue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingValue,
@@ -865,7 +865,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCustomTargetingValue response %j', response);
+          this._log.debug('createCustomTargetingValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -880,7 +880,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCustomTargetingValue response %j', response);
+          this._log.debug('createCustomTargetingValue response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1002,7 +1002,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateCustomTargetingValues request %j', request);
+    this._log.debug('batchCreateCustomTargetingValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateCustomTargetingValuesResponse,
@@ -1013,7 +1013,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateCustomTargetingValues response %j',
             response,
           );
@@ -1031,7 +1031,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateCustomTargetingValues response %j',
             response,
           );
@@ -1156,7 +1156,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCustomTargetingValue request %j', request);
+    this._log.debug('updateCustomTargetingValue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingValue,
@@ -1167,7 +1167,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCustomTargetingValue response %j', response);
+          this._log.debug('updateCustomTargetingValue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1182,7 +1182,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCustomTargetingValue response %j', response);
+          this._log.debug('updateCustomTargetingValue response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1304,7 +1304,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateCustomTargetingValues request %j', request);
+    this._log.debug('batchUpdateCustomTargetingValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingValuesResponse,
@@ -1315,7 +1315,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateCustomTargetingValues response %j',
             response,
           );
@@ -1333,7 +1333,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateCustomTargetingValues response %j',
             response,
           );
@@ -1458,7 +1458,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCustomTargetingValues request %j', request);
+    this._log.debug('batchActivateCustomTargetingValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCustomTargetingValuesResponse,
@@ -1469,7 +1469,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCustomTargetingValues response %j',
             response,
           );
@@ -1487,7 +1487,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCustomTargetingValues response %j',
             response,
           );
@@ -1611,7 +1611,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCustomTargetingValues request %j', request);
+    this._log.debug('batchDeactivateCustomTargetingValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingValuesResponse,
@@ -1622,7 +1622,7 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCustomTargetingValues response %j',
             response,
           );
@@ -1640,7 +1640,7 @@ export class CustomTargetingValueServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCustomTargetingValues response %j',
             response,
           );
@@ -1802,11 +1802,11 @@ export class CustomTargetingValueServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCustomTargetingValues values %j', values);
+          this._log.debug('listCustomTargetingValues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCustomTargetingValues request %j', request);
+    this._log.debug('listCustomTargetingValues request %j', request);
     return this.innerApiCalls
       .listCustomTargetingValues(request, options, wrappedCallback)
       ?.then(
@@ -1815,7 +1815,7 @@ export class CustomTargetingValueServiceClient {
           protos.google.ads.admanager.v1.IListCustomTargetingValuesRequest | null,
           protos.google.ads.admanager.v1.IListCustomTargetingValuesResponse,
         ]) => {
-          this._log.info('listCustomTargetingValues values %j', response);
+          this._log.debug('listCustomTargetingValues values %j', response);
           return [response, input, output];
         },
       );
@@ -1889,7 +1889,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomTargetingValues stream %j', request);
+    this._log.debug('listCustomTargetingValues stream %j', request);
     return this.descriptors.page.listCustomTargetingValues.createStream(
       this.innerApiCalls.listCustomTargetingValues as GaxCall,
       request,
@@ -1968,7 +1968,7 @@ export class CustomTargetingValueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomTargetingValues iterate %j', request);
+    this._log.debug('listCustomTargetingValues iterate %j', request);
     return this.descriptors.page.listCustomTargetingValues.asyncIterate(
       this.innerApiCalls['listCustomTargetingValues'] as GaxCall,
       request as {},

@@ -532,7 +532,7 @@ export class CheckoutSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCheckoutSettings request %j', request);
+    this._log.debug('getCheckoutSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ICheckoutSettings,
@@ -543,7 +543,7 @@ export class CheckoutSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCheckoutSettings response %j', response);
+          this._log.debug('getCheckoutSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -558,7 +558,7 @@ export class CheckoutSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCheckoutSettings response %j', response);
+          this._log.debug('getCheckoutSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -678,7 +678,7 @@ export class CheckoutSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCheckoutSettings request %j', request);
+    this._log.debug('createCheckoutSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ICheckoutSettings,
@@ -689,7 +689,7 @@ export class CheckoutSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCheckoutSettings response %j', response);
+          this._log.debug('createCheckoutSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -704,7 +704,7 @@ export class CheckoutSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCheckoutSettings response %j', response);
+          this._log.debug('createCheckoutSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -830,7 +830,7 @@ export class CheckoutSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCheckoutSettings request %j', request);
+    this._log.debug('updateCheckoutSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ICheckoutSettings,
@@ -841,7 +841,7 @@ export class CheckoutSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCheckoutSettings response %j', response);
+          this._log.debug('updateCheckoutSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -856,7 +856,7 @@ export class CheckoutSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCheckoutSettings response %j', response);
+          this._log.debug('updateCheckoutSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -975,7 +975,7 @@ export class CheckoutSettingsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCheckoutSettings request %j', request);
+    this._log.debug('deleteCheckoutSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -986,7 +986,7 @@ export class CheckoutSettingsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCheckoutSettings response %j', response);
+          this._log.debug('deleteCheckoutSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1001,7 +1001,7 @@ export class CheckoutSettingsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCheckoutSettings response %j', response);
+          this._log.debug('deleteCheckoutSettings response %j', response);
           return [response, options, rawResponse];
         },
       )

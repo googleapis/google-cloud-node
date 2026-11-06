@@ -577,11 +577,11 @@ export class AccountIssueServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAccountIssues values %j', values);
+          this._log.debug('listAccountIssues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAccountIssues request %j', request);
+    this._log.debug('listAccountIssues request %j', request);
     return this.innerApiCalls
       .listAccountIssues(request, options, wrappedCallback)
       ?.then(
@@ -590,7 +590,7 @@ export class AccountIssueServiceClient {
           protos.google.shopping.merchant.accounts.v1.IListAccountIssuesRequest | null,
           protos.google.shopping.merchant.accounts.v1.IListAccountIssuesResponse,
         ]) => {
-          this._log.info('listAccountIssues values %j', response);
+          this._log.debug('listAccountIssues values %j', response);
           return [response, input, output];
         },
       );
@@ -650,7 +650,7 @@ export class AccountIssueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountIssues stream %j', request);
+    this._log.debug('listAccountIssues stream %j', request);
     return this.descriptors.page.listAccountIssues.createStream(
       this.innerApiCalls.listAccountIssues as GaxCall,
       request,
@@ -715,7 +715,7 @@ export class AccountIssueServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountIssues iterate %j', request);
+    this._log.debug('listAccountIssues iterate %j', request);
     return this.descriptors.page.listAccountIssues.asyncIterate(
       this.innerApiCalls['listAccountIssues'] as GaxCall,
       request as {},

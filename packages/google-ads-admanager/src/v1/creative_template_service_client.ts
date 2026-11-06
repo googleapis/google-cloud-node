@@ -693,7 +693,7 @@ export class CreativeTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCreativeTemplate request %j', request);
+    this._log.debug('getCreativeTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICreativeTemplate,
@@ -704,7 +704,7 @@ export class CreativeTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCreativeTemplate response %j', response);
+          this._log.debug('getCreativeTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class CreativeTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCreativeTemplate response %j', response);
+          this._log.debug('getCreativeTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,11 +878,11 @@ export class CreativeTemplateServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCreativeTemplates values %j', values);
+          this._log.debug('listCreativeTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCreativeTemplates request %j', request);
+    this._log.debug('listCreativeTemplates request %j', request);
     return this.innerApiCalls
       .listCreativeTemplates(request, options, wrappedCallback)
       ?.then(
@@ -891,7 +891,7 @@ export class CreativeTemplateServiceClient {
           protos.google.ads.admanager.v1.IListCreativeTemplatesRequest | null,
           protos.google.ads.admanager.v1.IListCreativeTemplatesResponse,
         ]) => {
-          this._log.info('listCreativeTemplates values %j', response);
+          this._log.debug('listCreativeTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -965,7 +965,7 @@ export class CreativeTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreativeTemplates stream %j', request);
+    this._log.debug('listCreativeTemplates stream %j', request);
     return this.descriptors.page.listCreativeTemplates.createStream(
       this.innerApiCalls.listCreativeTemplates as GaxCall,
       request,
@@ -1044,7 +1044,7 @@ export class CreativeTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreativeTemplates iterate %j', request);
+    this._log.debug('listCreativeTemplates iterate %j', request);
     return this.descriptors.page.listCreativeTemplates.asyncIterate(
       this.innerApiCalls['listCreativeTemplates'] as GaxCall,
       request as {},

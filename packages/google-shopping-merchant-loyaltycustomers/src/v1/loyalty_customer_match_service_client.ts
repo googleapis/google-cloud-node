@@ -503,7 +503,7 @@ export class LoyaltyCustomerMatchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('manageLoyaltyCustomerMatch request %j', request);
+    this._log.debug('manageLoyaltyCustomerMatch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.loyaltycustomers.v1.IManageLoyaltyCustomerMatchResponse,
@@ -514,7 +514,7 @@ export class LoyaltyCustomerMatchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('manageLoyaltyCustomerMatch response %j', response);
+          this._log.debug('manageLoyaltyCustomerMatch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -529,7 +529,7 @@ export class LoyaltyCustomerMatchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('manageLoyaltyCustomerMatch response %j', response);
+          this._log.debug('manageLoyaltyCustomerMatch response %j', response);
           return [response, options, rawResponse];
         },
       )

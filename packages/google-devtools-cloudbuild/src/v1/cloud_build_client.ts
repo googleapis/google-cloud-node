@@ -692,7 +692,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBuild request %j', request);
+    this._log.debug('getBuild request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IBuild,
@@ -703,7 +703,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBuild response %j', response);
+          this._log.debug('getBuild response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -715,7 +715,7 @@ export class CloudBuildClient {
           protos.google.devtools.cloudbuild.v1.IGetBuildRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBuild response %j', response);
+          this._log.debug('getBuild response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -844,7 +844,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelBuild request %j', request);
+    this._log.debug('cancelBuild request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IBuild,
@@ -855,7 +855,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelBuild response %j', response);
+          this._log.debug('cancelBuild response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -867,7 +867,7 @@ export class CloudBuildClient {
           protos.google.devtools.cloudbuild.v1.ICancelBuildRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('cancelBuild response %j', response);
+          this._log.debug('cancelBuild response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1000,7 +1000,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBuildTrigger request %j', request);
+    this._log.debug('createBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IBuildTrigger,
@@ -1011,7 +1011,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBuildTrigger response %j', response);
+          this._log.debug('createBuildTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1026,7 +1026,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createBuildTrigger response %j', response);
+          this._log.debug('createBuildTrigger response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1157,7 +1157,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBuildTrigger request %j', request);
+    this._log.debug('getBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IBuildTrigger,
@@ -1168,7 +1168,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBuildTrigger response %j', response);
+          this._log.debug('getBuildTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1183,7 +1183,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBuildTrigger response %j', response);
+          this._log.debug('getBuildTrigger response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1320,7 +1320,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBuildTrigger request %j', request);
+    this._log.debug('deleteBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1331,7 +1331,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBuildTrigger response %j', response);
+          this._log.debug('deleteBuildTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1346,7 +1346,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteBuildTrigger response %j', response);
+          this._log.debug('deleteBuildTrigger response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1486,7 +1486,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBuildTrigger request %j', request);
+    this._log.debug('updateBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IBuildTrigger,
@@ -1497,7 +1497,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBuildTrigger response %j', response);
+          this._log.debug('updateBuildTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1512,7 +1512,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBuildTrigger response %j', response);
+          this._log.debug('updateBuildTrigger response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1641,7 +1641,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('receiveTriggerWebhook request %j', request);
+    this._log.debug('receiveTriggerWebhook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
@@ -1652,7 +1652,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('receiveTriggerWebhook response %j', response);
+          this._log.debug('receiveTriggerWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1667,7 +1667,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('receiveTriggerWebhook response %j', response);
+          this._log.debug('receiveTriggerWebhook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1794,7 +1794,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkerPool request %j', request);
+    this._log.debug('getWorkerPool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IWorkerPool,
@@ -1805,7 +1805,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkerPool response %j', response);
+          this._log.debug('getWorkerPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1820,7 +1820,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkerPool response %j', response);
+          this._log.debug('getWorkerPool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1954,7 +1954,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDefaultServiceAccount request %j', request);
+    this._log.debug('getDefaultServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v1.IDefaultServiceAccount,
@@ -1965,7 +1965,7 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDefaultServiceAccount response %j', response);
+          this._log.debug('getDefaultServiceAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1980,7 +1980,7 @@ export class CloudBuildClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDefaultServiceAccount response %j', response);
+          this._log.debug('getDefaultServiceAccount response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2135,11 +2135,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createBuild response %j', rawResponse);
+          this._log.debug('createBuild response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBuild request %j', request);
+    this._log.debug('createBuild request %j', request);
     return this.innerApiCalls
       .createBuild(request, options, wrappedCallback)
       ?.then(
@@ -2151,7 +2151,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBuild response %j', rawResponse);
+          this._log.debug('createBuild response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2348,11 +2348,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('retryBuild response %j', rawResponse);
+          this._log.debug('retryBuild response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('retryBuild request %j', request);
+    this._log.debug('retryBuild request %j', request);
     return this.innerApiCalls
       .retryBuild(request, options, wrappedCallback)
       ?.then(
@@ -2364,7 +2364,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('retryBuild response %j', rawResponse);
+          this._log.debug('retryBuild response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2538,11 +2538,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('approveBuild response %j', rawResponse);
+          this._log.debug('approveBuild response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('approveBuild request %j', request);
+    this._log.debug('approveBuild request %j', request);
     return this.innerApiCalls
       .approveBuild(request, options, wrappedCallback)
       ?.then(
@@ -2554,7 +2554,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('approveBuild response %j', rawResponse);
+          this._log.debug('approveBuild response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2736,11 +2736,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runBuildTrigger response %j', rawResponse);
+          this._log.debug('runBuildTrigger response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runBuildTrigger request %j', request);
+    this._log.debug('runBuildTrigger request %j', request);
     return this.innerApiCalls
       .runBuildTrigger(request, options, wrappedCallback)
       ?.then(
@@ -2752,7 +2752,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runBuildTrigger response %j', rawResponse);
+          this._log.debug('runBuildTrigger response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2928,11 +2928,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkerPool response %j', rawResponse);
+          this._log.debug('createWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkerPool request %j', request);
+    this._log.debug('createWorkerPool request %j', request);
     return this.innerApiCalls
       .createWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -2944,7 +2944,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkerPool response %j', rawResponse);
+          this._log.debug('createWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3123,11 +3123,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkerPool response %j', rawResponse);
+          this._log.debug('deleteWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkerPool request %j', request);
+    this._log.debug('deleteWorkerPool request %j', request);
     return this.innerApiCalls
       .deleteWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -3139,7 +3139,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkerPool response %j', rawResponse);
+          this._log.debug('deleteWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3315,11 +3315,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkerPool response %j', rawResponse);
+          this._log.debug('updateWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkerPool request %j', request);
+    this._log.debug('updateWorkerPool request %j', request);
     return this.innerApiCalls
       .updateWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -3331,7 +3331,7 @@ export class CloudBuildClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkerPool response %j', rawResponse);
+          this._log.debug('updateWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3505,11 +3505,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBuilds values %j', values);
+          this._log.debug('listBuilds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBuilds request %j', request);
+    this._log.debug('listBuilds request %j', request);
     return this.innerApiCalls
       .listBuilds(request, options, wrappedCallback)
       ?.then(
@@ -3518,7 +3518,7 @@ export class CloudBuildClient {
           protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
           protos.google.devtools.cloudbuild.v1.IListBuildsResponse,
         ]) => {
-          this._log.info('listBuilds values %j', response);
+          this._log.debug('listBuilds values %j', response);
           return [response, input, output];
         },
       );
@@ -3586,7 +3586,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuilds stream %j', request);
+    this._log.debug('listBuilds stream %j', request);
     return this.descriptors.page.listBuilds.createStream(
       this.innerApiCalls.listBuilds as GaxCall,
       request,
@@ -3659,7 +3659,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuilds iterate %j', request);
+    this._log.debug('listBuilds iterate %j', request);
     return this.descriptors.page.listBuilds.asyncIterate(
       this.innerApiCalls['listBuilds'] as GaxCall,
       request as {},
@@ -3787,11 +3787,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBuildTriggers values %j', values);
+          this._log.debug('listBuildTriggers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBuildTriggers request %j', request);
+    this._log.debug('listBuildTriggers request %j', request);
     return this.innerApiCalls
       .listBuildTriggers(request, options, wrappedCallback)
       ?.then(
@@ -3800,7 +3800,7 @@ export class CloudBuildClient {
           protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest | null,
           protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse,
         ]) => {
-          this._log.info('listBuildTriggers values %j', response);
+          this._log.debug('listBuildTriggers values %j', response);
           return [response, input, output];
         },
       );
@@ -3858,7 +3858,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuildTriggers stream %j', request);
+    this._log.debug('listBuildTriggers stream %j', request);
     return this.descriptors.page.listBuildTriggers.createStream(
       this.innerApiCalls.listBuildTriggers as GaxCall,
       request,
@@ -3921,7 +3921,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuildTriggers iterate %j', request);
+    this._log.debug('listBuildTriggers iterate %j', request);
     return this.descriptors.page.listBuildTriggers.asyncIterate(
       this.innerApiCalls['listBuildTriggers'] as GaxCall,
       request as {},
@@ -4049,11 +4049,11 @@ export class CloudBuildClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkerPools values %j', values);
+          this._log.debug('listWorkerPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkerPools request %j', request);
+    this._log.debug('listWorkerPools request %j', request);
     return this.innerApiCalls
       .listWorkerPools(request, options, wrappedCallback)
       ?.then(
@@ -4062,7 +4062,7 @@ export class CloudBuildClient {
           protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
           protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
         ]) => {
-          this._log.info('listWorkerPools values %j', response);
+          this._log.debug('listWorkerPools values %j', response);
           return [response, input, output];
         },
       );
@@ -4120,7 +4120,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkerPools stream %j', request);
+    this._log.debug('listWorkerPools stream %j', request);
     return this.descriptors.page.listWorkerPools.createStream(
       this.innerApiCalls.listWorkerPools as GaxCall,
       request,
@@ -4183,7 +4183,7 @@ export class CloudBuildClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkerPools iterate %j', request);
+    this._log.debug('listWorkerPools iterate %j', request);
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,
       request as {},

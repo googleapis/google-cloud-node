@@ -488,7 +488,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNotificationSubscription request %j', request);
+    this._log.debug('getNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
@@ -499,7 +499,7 @@ export class NotificationsApiServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNotificationSubscription response %j', response);
+          this._log.debug('getNotificationSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -514,7 +514,7 @@ export class NotificationsApiServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getNotificationSubscription response %j', response);
+          this._log.debug('getNotificationSubscription response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -645,7 +645,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createNotificationSubscription request %j', request);
+    this._log.debug('createNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
@@ -656,7 +656,7 @@ export class NotificationsApiServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'createNotificationSubscription response %j',
             response,
           );
@@ -674,7 +674,7 @@ export class NotificationsApiServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createNotificationSubscription response %j',
             response,
           );
@@ -798,7 +798,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateNotificationSubscription request %j', request);
+    this._log.debug('updateNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
@@ -809,7 +809,7 @@ export class NotificationsApiServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateNotificationSubscription response %j',
             response,
           );
@@ -827,7 +827,7 @@ export class NotificationsApiServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateNotificationSubscription response %j',
             response,
           );
@@ -947,7 +947,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteNotificationSubscription request %j', request);
+    this._log.debug('deleteNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -958,7 +958,7 @@ export class NotificationsApiServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'deleteNotificationSubscription response %j',
             response,
           );
@@ -976,7 +976,7 @@ export class NotificationsApiServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteNotificationSubscription response %j',
             response,
           );
@@ -1112,11 +1112,11 @@ export class NotificationsApiServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNotificationSubscriptions values %j', values);
+          this._log.debug('listNotificationSubscriptions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNotificationSubscriptions request %j', request);
+    this._log.debug('listNotificationSubscriptions request %j', request);
     return this.innerApiCalls
       .listNotificationSubscriptions(request, options, wrappedCallback)
       ?.then(
@@ -1125,7 +1125,7 @@ export class NotificationsApiServiceClient {
           protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest | null,
           protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse,
         ]) => {
-          this._log.info('listNotificationSubscriptions values %j', response);
+          this._log.debug('listNotificationSubscriptions values %j', response);
           return [response, input, output];
         },
       );
@@ -1173,7 +1173,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNotificationSubscriptions stream %j', request);
+    this._log.debug('listNotificationSubscriptions stream %j', request);
     return this.descriptors.page.listNotificationSubscriptions.createStream(
       this.innerApiCalls.listNotificationSubscriptions as GaxCall,
       request,
@@ -1226,7 +1226,7 @@ export class NotificationsApiServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNotificationSubscriptions iterate %j', request);
+    this._log.debug('listNotificationSubscriptions iterate %j', request);
     return this.descriptors.page.listNotificationSubscriptions.asyncIterate(
       this.innerApiCalls['listNotificationSubscriptions'] as GaxCall,
       request as {},

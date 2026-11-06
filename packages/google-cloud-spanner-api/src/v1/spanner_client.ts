@@ -550,7 +550,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSession request %j', request);
+    this._log.debug('createSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.ISession,
@@ -559,7 +559,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class SpannerClient {
           protos.google.spanner.v1.ICreateSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -688,7 +688,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateSessions request %j', request);
+    this._log.debug('batchCreateSessions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IBatchCreateSessionsResponse,
@@ -699,7 +699,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateSessions response %j', response);
+          this._log.debug('batchCreateSessions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -711,7 +711,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IBatchCreateSessionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateSessions response %j', response);
+          this._log.debug('batchCreateSessions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -816,7 +816,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSession request %j', request);
+    this._log.debug('getSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.ISession,
@@ -825,7 +825,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -837,7 +837,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IGetSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -942,7 +942,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSession request %j', request);
+    this._log.debug('deleteSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -951,7 +951,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -963,7 +963,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IDeleteSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1177,7 +1177,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeSql request %j', request);
+    this._log.debug('executeSql request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IResultSet,
@@ -1186,7 +1186,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeSql response %j', response);
+          this._log.debug('executeSql response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1198,7 +1198,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IExecuteSqlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('executeSql response %j', response);
+          this._log.debug('executeSql response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1346,7 +1346,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeBatchDml request %j', request);
+    this._log.debug('executeBatchDml request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IExecuteBatchDmlResponse,
@@ -1355,7 +1355,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeBatchDml response %j', response);
+          this._log.debug('executeBatchDml response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1367,7 +1367,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IExecuteBatchDmlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('executeBatchDml response %j', response);
+          this._log.debug('executeBatchDml response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1560,7 +1560,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('read request %j', request);
+    this._log.debug('read request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IResultSet,
@@ -1569,7 +1569,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('read response %j', response);
+          this._log.debug('read response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1581,7 +1581,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IReadRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('read response %j', response);
+          this._log.debug('read response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1708,7 +1708,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('beginTransaction request %j', request);
+    this._log.debug('beginTransaction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.ITransaction,
@@ -1717,7 +1717,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('beginTransaction response %j', response);
+          this._log.debug('beginTransaction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1729,7 +1729,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IBeginTransactionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('beginTransaction response %j', response);
+          this._log.debug('beginTransaction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1885,7 +1885,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('commit request %j', request);
+    this._log.debug('commit request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.ICommitResponse,
@@ -1894,7 +1894,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('commit response %j', response);
+          this._log.debug('commit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1906,7 +1906,7 @@ export class SpannerClient {
           protos.google.spanner.v1.ICommitRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('commit response %j', response);
+          this._log.debug('commit response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2019,7 +2019,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('rollback request %j', request);
+    this._log.debug('rollback request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2028,7 +2028,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('rollback response %j', response);
+          this._log.debug('rollback response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2040,7 +2040,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IRollbackRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rollback response %j', response);
+          this._log.debug('rollback response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2197,7 +2197,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('partitionQuery request %j', request);
+    this._log.debug('partitionQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IPartitionResponse,
@@ -2206,7 +2206,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('partitionQuery response %j', response);
+          this._log.debug('partitionQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2218,7 +2218,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IPartitionQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('partitionQuery response %j', response);
+          this._log.debug('partitionQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2362,7 +2362,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('partitionRead request %j', request);
+    this._log.debug('partitionRead request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.spanner.v1.IPartitionResponse,
@@ -2371,7 +2371,7 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('partitionRead response %j', response);
+          this._log.debug('partitionRead response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2383,7 +2383,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IPartitionReadRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('partitionRead response %j', response);
+          this._log.debug('partitionRead response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2539,7 +2539,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeStreamingSql stream %j', options);
+    this._log.debug('executeStreamingSql stream %j', options);
     return this.innerApiCalls.executeStreamingSql(request, options);
   }
 
@@ -2655,7 +2655,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingRead stream %j', options);
+    this._log.debug('streamingRead stream %j', options);
     return this.innerApiCalls.streamingRead(request, options);
   }
 
@@ -2712,7 +2712,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchWrite stream %j', options);
+    this._log.debug('batchWrite stream %j', options);
     return this.innerApiCalls.batchWrite(request, options);
   }
 
@@ -2761,7 +2761,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchCacheUpdate stream %j', options);
+    this._log.debug('fetchCacheUpdate stream %j', options);
     return this.innerApiCalls.fetchCacheUpdate(request, options);
   }
 
@@ -2877,11 +2877,11 @@ export class SpannerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessions values %j', values);
+          this._log.debug('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSessions request %j', request);
+    this._log.debug('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
       ?.then(
@@ -2890,7 +2890,7 @@ export class SpannerClient {
           protos.google.spanner.v1.IListSessionsRequest | null,
           protos.google.spanner.v1.IListSessionsResponse,
         ]) => {
-          this._log.info('listSessions values %j', response);
+          this._log.debug('listSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -2949,7 +2949,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions stream %j', request);
+    this._log.debug('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -3013,7 +3013,7 @@ export class SpannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions iterate %j', request);
+    this._log.debug('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},

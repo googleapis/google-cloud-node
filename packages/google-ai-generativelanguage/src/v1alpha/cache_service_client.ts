@@ -501,7 +501,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCachedContent request %j', request);
+    this._log.debug('createCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.ICachedContent,
@@ -512,7 +512,7 @@ export class CacheServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCachedContent response %j', response);
+          this._log.debug('createCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -527,7 +527,7 @@ export class CacheServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCachedContent response %j', response);
+          this._log.debug('createCachedContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -645,7 +645,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCachedContent request %j', request);
+    this._log.debug('getCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.ICachedContent,
@@ -656,7 +656,7 @@ export class CacheServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCachedContent response %j', response);
+          this._log.debug('getCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -671,7 +671,7 @@ export class CacheServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCachedContent response %j', response);
+          this._log.debug('getCachedContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -790,7 +790,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCachedContent request %j', request);
+    this._log.debug('updateCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.ICachedContent,
@@ -801,7 +801,7 @@ export class CacheServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCachedContent response %j', response);
+          this._log.debug('updateCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -816,7 +816,7 @@ export class CacheServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCachedContent response %j', response);
+          this._log.debug('updateCachedContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -934,7 +934,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCachedContent request %j', request);
+    this._log.debug('deleteCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -945,7 +945,7 @@ export class CacheServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCachedContent response %j', response);
+          this._log.debug('deleteCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -960,7 +960,7 @@ export class CacheServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCachedContent response %j', response);
+          this._log.debug('deleteCachedContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1090,11 +1090,11 @@ export class CacheServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCachedContents values %j', values);
+          this._log.debug('listCachedContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCachedContents request %j', request);
+    this._log.debug('listCachedContents request %j', request);
     return this.innerApiCalls
       .listCachedContents(request, options, wrappedCallback)
       ?.then(
@@ -1103,7 +1103,7 @@ export class CacheServiceClient {
           protos.google.ai.generativelanguage.v1alpha.IListCachedContentsRequest | null,
           protos.google.ai.generativelanguage.v1alpha.IListCachedContentsResponse,
         ]) => {
-          this._log.info('listCachedContents values %j', response);
+          this._log.debug('listCachedContents values %j', response);
           return [response, input, output];
         },
       );
@@ -1148,7 +1148,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCachedContents stream %j', request);
+    this._log.debug('listCachedContents stream %j', request);
     return this.descriptors.page.listCachedContents.createStream(
       this.innerApiCalls.listCachedContents as GaxCall,
       request,
@@ -1198,7 +1198,7 @@ export class CacheServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCachedContents iterate %j', request);
+    this._log.debug('listCachedContents iterate %j', request);
     return this.descriptors.page.listCachedContents.asyncIterate(
       this.innerApiCalls['listCachedContents'] as GaxCall,
       request as {},

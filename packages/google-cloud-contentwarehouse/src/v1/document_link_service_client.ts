@@ -505,7 +505,7 @@ export class DocumentLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLinkedTargets request %j', request);
+    this._log.debug('listLinkedTargets request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsResponse,
@@ -516,7 +516,7 @@ export class DocumentLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listLinkedTargets response %j', response);
+          this._log.debug('listLinkedTargets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -531,7 +531,7 @@ export class DocumentLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listLinkedTargets response %j', response);
+          this._log.debug('listLinkedTargets response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -657,7 +657,7 @@ export class DocumentLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDocumentLink request %j', request);
+    this._log.debug('createDocumentLink request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.contentwarehouse.v1.IDocumentLink,
@@ -668,7 +668,7 @@ export class DocumentLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDocumentLink response %j', response);
+          this._log.debug('createDocumentLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -683,7 +683,7 @@ export class DocumentLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDocumentLink response %j', response);
+          this._log.debug('createDocumentLink response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -805,7 +805,7 @@ export class DocumentLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDocumentLink request %j', request);
+    this._log.debug('deleteDocumentLink request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -816,7 +816,7 @@ export class DocumentLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDocumentLink response %j', response);
+          this._log.debug('deleteDocumentLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -831,7 +831,7 @@ export class DocumentLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDocumentLink response %j', response);
+          this._log.debug('deleteDocumentLink response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -973,11 +973,11 @@ export class DocumentLinkServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLinkedSources values %j', values);
+          this._log.debug('listLinkedSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLinkedSources request %j', request);
+    this._log.debug('listLinkedSources request %j', request);
     return this.innerApiCalls
       .listLinkedSources(request, options, wrappedCallback)
       ?.then(
@@ -986,7 +986,7 @@ export class DocumentLinkServiceClient {
           protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest | null,
           protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse,
         ]) => {
-          this._log.info('listLinkedSources values %j', response);
+          this._log.debug('listLinkedSources values %j', response);
           return [response, input, output];
         },
       );
@@ -1043,7 +1043,7 @@ export class DocumentLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLinkedSources stream %j', request);
+    this._log.debug('listLinkedSources stream %j', request);
     return this.descriptors.page.listLinkedSources.createStream(
       this.innerApiCalls.listLinkedSources as GaxCall,
       request,
@@ -1105,7 +1105,7 @@ export class DocumentLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLinkedSources iterate %j', request);
+    this._log.debug('listLinkedSources iterate %j', request);
     return this.descriptors.page.listLinkedSources.asyncIterate(
       this.innerApiCalls['listLinkedSources'] as GaxCall,
       request as {},

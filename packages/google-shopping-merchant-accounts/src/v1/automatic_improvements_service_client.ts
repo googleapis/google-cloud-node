@@ -536,7 +536,7 @@ export class AutomaticImprovementsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAutomaticImprovements request %j', request);
+    this._log.debug('getAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IAutomaticImprovements,
@@ -547,7 +547,7 @@ export class AutomaticImprovementsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAutomaticImprovements response %j', response);
+          this._log.debug('getAutomaticImprovements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -562,7 +562,7 @@ export class AutomaticImprovementsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAutomaticImprovements response %j', response);
+          this._log.debug('getAutomaticImprovements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -691,7 +691,7 @@ export class AutomaticImprovementsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAutomaticImprovements request %j', request);
+    this._log.debug('updateAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IAutomaticImprovements,
@@ -702,7 +702,7 @@ export class AutomaticImprovementsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAutomaticImprovements response %j', response);
+          this._log.debug('updateAutomaticImprovements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -717,7 +717,7 @@ export class AutomaticImprovementsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAutomaticImprovements response %j', response);
+          this._log.debug('updateAutomaticImprovements response %j', response);
           return [response, options, rawResponse];
         },
       )

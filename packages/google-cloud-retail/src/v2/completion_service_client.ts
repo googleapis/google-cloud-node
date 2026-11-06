@@ -619,7 +619,7 @@ export class CompletionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('completeQuery request %j', request);
+    this._log.debug('completeQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.ICompleteQueryResponse,
@@ -630,7 +630,7 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -642,7 +642,7 @@ export class CompletionServiceClient {
           protos.google.cloud.retail.v2.ICompleteQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -795,11 +795,11 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importCompletionData response %j', rawResponse);
+          this._log.debug('importCompletionData response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importCompletionData request %j', request);
+    this._log.debug('importCompletionData request %j', request);
     return this.innerApiCalls
       .importCompletionData(request, options, wrappedCallback)
       ?.then(
@@ -811,7 +811,7 @@ export class CompletionServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importCompletionData response %j', rawResponse);
+          this._log.debug('importCompletionData response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

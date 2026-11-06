@@ -500,7 +500,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createJob request %j', request);
+    this._log.debug('createJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.transcoder.v1.IJob,
@@ -511,7 +511,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createJob response %j', response);
+          this._log.debug('createJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -523,7 +523,7 @@ export class TranscoderServiceClient {
           protos.google.cloud.video.transcoder.v1.ICreateJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createJob response %j', response);
+          this._log.debug('createJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -629,7 +629,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getJob request %j', request);
+    this._log.debug('getJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.transcoder.v1.IJob,
@@ -640,7 +640,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getJob response %j', response);
+          this._log.debug('getJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -652,7 +652,7 @@ export class TranscoderServiceClient {
           protos.google.cloud.video.transcoder.v1.IGetJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getJob response %j', response);
+          this._log.debug('getJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -767,7 +767,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteJob request %j', request);
+    this._log.debug('deleteJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -778,7 +778,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteJob response %j', response);
+          this._log.debug('deleteJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -790,7 +790,7 @@ export class TranscoderServiceClient {
           protos.google.cloud.video.transcoder.v1.IDeleteJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteJob response %j', response);
+          this._log.debug('deleteJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -916,7 +916,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createJobTemplate request %j', request);
+    this._log.debug('createJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.transcoder.v1.IJobTemplate,
@@ -927,7 +927,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createJobTemplate response %j', response);
+          this._log.debug('createJobTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -942,7 +942,7 @@ export class TranscoderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createJobTemplate response %j', response);
+          this._log.debug('createJobTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1061,7 +1061,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getJobTemplate request %j', request);
+    this._log.debug('getJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.transcoder.v1.IJobTemplate,
@@ -1072,7 +1072,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getJobTemplate response %j', response);
+          this._log.debug('getJobTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1087,7 +1087,7 @@ export class TranscoderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getJobTemplate response %j', response);
+          this._log.debug('getJobTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1208,7 +1208,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteJobTemplate request %j', request);
+    this._log.debug('deleteJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1219,7 +1219,7 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteJobTemplate response %j', response);
+          this._log.debug('deleteJobTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1234,7 +1234,7 @@ export class TranscoderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteJobTemplate response %j', response);
+          this._log.debug('deleteJobTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1370,11 +1370,11 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listJobs values %j', values);
+          this._log.debug('listJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listJobs request %j', request);
+    this._log.debug('listJobs request %j', request);
     return this.innerApiCalls
       .listJobs(request, options, wrappedCallback)
       ?.then(
@@ -1383,7 +1383,7 @@ export class TranscoderServiceClient {
           protos.google.cloud.video.transcoder.v1.IListJobsRequest | null,
           protos.google.cloud.video.transcoder.v1.IListJobsResponse,
         ]) => {
-          this._log.info('listJobs values %j', response);
+          this._log.debug('listJobs values %j', response);
           return [response, input, output];
         },
       );
@@ -1434,7 +1434,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobs stream %j', request);
+    this._log.debug('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
@@ -1490,7 +1490,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobs iterate %j', request);
+    this._log.debug('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
@@ -1612,11 +1612,11 @@ export class TranscoderServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listJobTemplates values %j', values);
+          this._log.debug('listJobTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listJobTemplates request %j', request);
+    this._log.debug('listJobTemplates request %j', request);
     return this.innerApiCalls
       .listJobTemplates(request, options, wrappedCallback)
       ?.then(
@@ -1625,7 +1625,7 @@ export class TranscoderServiceClient {
           protos.google.cloud.video.transcoder.v1.IListJobTemplatesRequest | null,
           protos.google.cloud.video.transcoder.v1.IListJobTemplatesResponse,
         ]) => {
-          this._log.info('listJobTemplates values %j', response);
+          this._log.debug('listJobTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -1677,7 +1677,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobTemplates stream %j', request);
+    this._log.debug('listJobTemplates stream %j', request);
     return this.descriptors.page.listJobTemplates.createStream(
       this.innerApiCalls.listJobTemplates as GaxCall,
       request,
@@ -1734,7 +1734,7 @@ export class TranscoderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobTemplates iterate %j', request);
+    this._log.debug('listJobTemplates iterate %j', request);
     return this.descriptors.page.listJobTemplates.asyncIterate(
       this.innerApiCalls['listJobTemplates'] as GaxCall,
       request as {},

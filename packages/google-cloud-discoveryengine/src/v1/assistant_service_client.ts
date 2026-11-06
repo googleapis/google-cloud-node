@@ -715,7 +715,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAssistant request %j', request);
+    this._log.debug('createAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IAssistant,
@@ -726,7 +726,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAssistant response %j', response);
+          this._log.debug('createAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -741,7 +741,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createAssistant response %j', response);
+          this._log.debug('createAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -867,7 +867,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAssistant request %j', request);
+    this._log.debug('deleteAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -878,7 +878,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAssistant response %j', response);
+          this._log.debug('deleteAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -893,7 +893,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteAssistant response %j', response);
+          this._log.debug('deleteAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1025,7 +1025,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAssistant request %j', request);
+    this._log.debug('updateAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IAssistant,
@@ -1036,7 +1036,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAssistant response %j', response);
+          this._log.debug('updateAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1051,7 +1051,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAssistant response %j', response);
+          this._log.debug('updateAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1164,7 +1164,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAssistant request %j', request);
+    this._log.debug('getAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IAssistant,
@@ -1175,7 +1175,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAssistant response %j', response);
+          this._log.debug('getAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1190,7 +1190,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAssistant response %j', response);
+          this._log.debug('getAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1268,7 +1268,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamAssist stream %j', options);
+    this._log.debug('streamAssist stream %j', options);
     return this.innerApiCalls.streamAssist(request, options);
   }
 
@@ -1392,11 +1392,11 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAssistants values %j', values);
+          this._log.debug('listAssistants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAssistants request %j', request);
+    this._log.debug('listAssistants request %j', request);
     return this.innerApiCalls
       .listAssistants(request, options, wrappedCallback)
       ?.then(
@@ -1405,7 +1405,7 @@ export class AssistantServiceClient {
           protos.google.cloud.discoveryengine.v1.IListAssistantsRequest | null,
           protos.google.cloud.discoveryengine.v1.IListAssistantsResponse,
         ]) => {
-          this._log.info('listAssistants values %j', response);
+          this._log.debug('listAssistants values %j', response);
           return [response, input, output];
         },
       );
@@ -1461,7 +1461,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssistants stream %j', request);
+    this._log.debug('listAssistants stream %j', request);
     return this.descriptors.page.listAssistants.createStream(
       this.innerApiCalls.listAssistants as GaxCall,
       request,
@@ -1522,7 +1522,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssistants iterate %j', request);
+    this._log.debug('listAssistants iterate %j', request);
     return this.descriptors.page.listAssistants.asyncIterate(
       this.innerApiCalls['listAssistants'] as GaxCall,
       request as {},

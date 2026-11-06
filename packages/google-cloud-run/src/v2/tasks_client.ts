@@ -499,7 +499,7 @@ export class TasksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTask request %j', request);
+    this._log.debug('getTask request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.ITask,
@@ -508,7 +508,7 @@ export class TasksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTask response %j', response);
+          this._log.debug('getTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -520,7 +520,7 @@ export class TasksClient {
           protos.google.cloud.run.v2.IGetTaskRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTask response %j', response);
+          this._log.debug('getTask response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -645,11 +645,11 @@ export class TasksClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTasks values %j', values);
+          this._log.debug('listTasks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTasks request %j', request);
+    this._log.debug('listTasks request %j', request);
     return this.innerApiCalls
       .listTasks(request, options, wrappedCallback)
       ?.then(
@@ -658,7 +658,7 @@ export class TasksClient {
           protos.google.cloud.run.v2.IListTasksRequest | null,
           protos.google.cloud.run.v2.IListTasksResponse,
         ]) => {
-          this._log.info('listTasks values %j', response);
+          this._log.debug('listTasks values %j', response);
           return [response, input, output];
         },
       );
@@ -708,7 +708,7 @@ export class TasksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTasks stream %j', request);
+    this._log.debug('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
       request,
@@ -763,7 +763,7 @@ export class TasksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTasks iterate %j', request);
+    this._log.debug('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
       request as {},

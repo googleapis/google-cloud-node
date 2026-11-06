@@ -699,7 +699,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCreativeWrapper request %j', request);
+    this._log.debug('getCreativeWrapper request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICreativeWrapper,
@@ -710,7 +710,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCreativeWrapper response %j', response);
+          this._log.debug('getCreativeWrapper response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -722,7 +722,7 @@ export class CreativeWrapperServiceClient {
           protos.google.ads.admanager.v1.IGetCreativeWrapperRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCreativeWrapper response %j', response);
+          this._log.debug('getCreativeWrapper response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -836,7 +836,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCreativeWrapper request %j', request);
+    this._log.debug('createCreativeWrapper request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICreativeWrapper,
@@ -847,7 +847,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCreativeWrapper response %j', response);
+          this._log.debug('createCreativeWrapper response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -862,7 +862,7 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCreativeWrapper response %j', response);
+          this._log.debug('createCreativeWrapper response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -985,7 +985,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateCreativeWrappers request %j', request);
+    this._log.debug('batchCreateCreativeWrappers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateCreativeWrappersResponse,
@@ -996,7 +996,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateCreativeWrappers response %j', response);
+          this._log.debug('batchCreateCreativeWrappers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1011,7 +1011,7 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateCreativeWrappers response %j', response);
+          this._log.debug('batchCreateCreativeWrappers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1127,7 +1127,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCreativeWrapper request %j', request);
+    this._log.debug('updateCreativeWrapper request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICreativeWrapper,
@@ -1138,7 +1138,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCreativeWrapper response %j', response);
+          this._log.debug('updateCreativeWrapper response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1153,7 +1153,7 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCreativeWrapper response %j', response);
+          this._log.debug('updateCreativeWrapper response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1276,7 +1276,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateCreativeWrappers request %j', request);
+    this._log.debug('batchUpdateCreativeWrappers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateCreativeWrappersResponse,
@@ -1287,7 +1287,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateCreativeWrappers response %j', response);
+          this._log.debug('batchUpdateCreativeWrappers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1302,7 +1302,7 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateCreativeWrappers response %j', response);
+          this._log.debug('batchUpdateCreativeWrappers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1422,7 +1422,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCreativeWrappers request %j', request);
+    this._log.debug('batchActivateCreativeWrappers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCreativeWrappersResponse,
@@ -1433,7 +1433,10 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateCreativeWrappers response %j', response);
+          this._log.debug(
+            'batchActivateCreativeWrappers response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1448,7 +1451,10 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateCreativeWrappers response %j', response);
+          this._log.debug(
+            'batchActivateCreativeWrappers response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -1569,7 +1575,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCreativeWrappers request %j', request);
+    this._log.debug('batchDeactivateCreativeWrappers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCreativeWrappersResponse,
@@ -1580,7 +1586,7 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCreativeWrappers response %j',
             response,
           );
@@ -1598,7 +1604,7 @@ export class CreativeWrapperServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCreativeWrappers response %j',
             response,
           );
@@ -1756,11 +1762,11 @@ export class CreativeWrapperServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCreativeWrappers values %j', values);
+          this._log.debug('listCreativeWrappers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCreativeWrappers request %j', request);
+    this._log.debug('listCreativeWrappers request %j', request);
     return this.innerApiCalls
       .listCreativeWrappers(request, options, wrappedCallback)
       ?.then(
@@ -1769,7 +1775,7 @@ export class CreativeWrapperServiceClient {
           protos.google.ads.admanager.v1.IListCreativeWrappersRequest | null,
           protos.google.ads.admanager.v1.IListCreativeWrappersResponse,
         ]) => {
-          this._log.info('listCreativeWrappers values %j', response);
+          this._log.debug('listCreativeWrappers values %j', response);
           return [response, input, output];
         },
       );
@@ -1839,7 +1845,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreativeWrappers stream %j', request);
+    this._log.debug('listCreativeWrappers stream %j', request);
     return this.descriptors.page.listCreativeWrappers.createStream(
       this.innerApiCalls.listCreativeWrappers as GaxCall,
       request,
@@ -1914,7 +1920,7 @@ export class CreativeWrapperServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCreativeWrappers iterate %j', request);
+    this._log.debug('listCreativeWrappers iterate %j', request);
     return this.descriptors.page.listCreativeWrappers.asyncIterate(
       this.innerApiCalls['listCreativeWrappers'] as GaxCall,
       request as {},

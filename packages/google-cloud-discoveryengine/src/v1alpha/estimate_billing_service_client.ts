@@ -776,11 +776,11 @@ export class EstimateBillingServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('estimateDataSize response %j', rawResponse);
+          this._log.debug('estimateDataSize response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('estimateDataSize request %j', request);
+    this._log.debug('estimateDataSize request %j', request);
     return this.innerApiCalls
       .estimateDataSize(request, options, wrappedCallback)
       ?.then(
@@ -792,7 +792,7 @@ export class EstimateBillingServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('estimateDataSize response %j', rawResponse);
+          this._log.debug('estimateDataSize response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

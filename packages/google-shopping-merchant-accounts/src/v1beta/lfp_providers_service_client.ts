@@ -547,7 +547,7 @@ export class LfpProvidersServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('linkLfpProvider request %j', request);
+    this._log.debug('linkLfpProvider request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse,
@@ -558,7 +558,7 @@ export class LfpProvidersServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('linkLfpProvider response %j', response);
+          this._log.debug('linkLfpProvider response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -573,7 +573,7 @@ export class LfpProvidersServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('linkLfpProvider response %j', response);
+          this._log.debug('linkLfpProvider response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -712,11 +712,11 @@ export class LfpProvidersServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('findLfpProviders values %j', values);
+          this._log.debug('findLfpProviders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('findLfpProviders request %j', request);
+    this._log.debug('findLfpProviders request %j', request);
     return this.innerApiCalls
       .findLfpProviders(request, options, wrappedCallback)
       ?.then(
@@ -725,7 +725,7 @@ export class LfpProvidersServiceClient {
           protos.google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest | null,
           protos.google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse,
         ]) => {
-          this._log.info('findLfpProviders values %j', response);
+          this._log.debug('findLfpProviders values %j', response);
           return [response, input, output];
         },
       );
@@ -779,7 +779,7 @@ export class LfpProvidersServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('findLfpProviders stream %j', request);
+    this._log.debug('findLfpProviders stream %j', request);
     return this.descriptors.page.findLfpProviders.createStream(
       this.innerApiCalls.findLfpProviders as GaxCall,
       request,
@@ -838,7 +838,7 @@ export class LfpProvidersServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('findLfpProviders iterate %j', request);
+    this._log.debug('findLfpProviders iterate %j', request);
     return this.descriptors.page.findLfpProviders.asyncIterate(
       this.innerApiCalls['findLfpProviders'] as GaxCall,
       request as {},

@@ -503,7 +503,7 @@ export class RegionalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertRegionalInventory request %j', request);
+    this._log.debug('insertRegionalInventory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.inventories.v1beta.IRegionalInventory,
@@ -514,7 +514,7 @@ export class RegionalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertRegionalInventory response %j', response);
+          this._log.debug('insertRegionalInventory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -529,7 +529,7 @@ export class RegionalInventoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertRegionalInventory response %j', response);
+          this._log.debug('insertRegionalInventory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -652,7 +652,7 @@ export class RegionalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRegionalInventory request %j', request);
+    this._log.debug('deleteRegionalInventory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -663,7 +663,7 @@ export class RegionalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteRegionalInventory response %j', response);
+          this._log.debug('deleteRegionalInventory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -678,7 +678,7 @@ export class RegionalInventoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteRegionalInventory response %j', response);
+          this._log.debug('deleteRegionalInventory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -823,11 +823,11 @@ export class RegionalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRegionalInventories values %j', values);
+          this._log.debug('listRegionalInventories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRegionalInventories request %j', request);
+    this._log.debug('listRegionalInventories request %j', request);
     return this.innerApiCalls
       .listRegionalInventories(request, options, wrappedCallback)
       ?.then(
@@ -836,7 +836,7 @@ export class RegionalInventoryServiceClient {
           protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesRequest | null,
           protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesResponse,
         ]) => {
-          this._log.info('listRegionalInventories values %j', response);
+          this._log.debug('listRegionalInventories values %j', response);
           return [response, input, output];
         },
       );
@@ -891,7 +891,7 @@ export class RegionalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRegionalInventories stream %j', request);
+    this._log.debug('listRegionalInventories stream %j', request);
     return this.descriptors.page.listRegionalInventories.createStream(
       this.innerApiCalls.listRegionalInventories as GaxCall,
       request,
@@ -951,7 +951,7 @@ export class RegionalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRegionalInventories iterate %j', request);
+    this._log.debug('listRegionalInventories iterate %j', request);
     return this.descriptors.page.listRegionalInventories.asyncIterate(
       this.innerApiCalls['listRegionalInventories'] as GaxCall,
       request as {},

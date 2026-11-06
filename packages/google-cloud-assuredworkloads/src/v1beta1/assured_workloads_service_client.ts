@@ -536,7 +536,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWorkload request %j', request);
+    this._log.debug('updateWorkload request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.assuredworkloads.v1beta1.IWorkload,
@@ -547,7 +547,7 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWorkload response %j', response);
+          this._log.debug('updateWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -562,7 +562,7 @@ export class AssuredWorkloadsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkload response %j', response);
+          this._log.debug('updateWorkload response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -690,7 +690,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('restrictAllowedResources request %j', request);
+    this._log.debug('restrictAllowedResources request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.assuredworkloads.v1beta1.IRestrictAllowedResourcesResponse,
@@ -701,7 +701,7 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('restrictAllowedResources response %j', response);
+          this._log.debug('restrictAllowedResources response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -716,7 +716,7 @@ export class AssuredWorkloadsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('restrictAllowedResources response %j', response);
+          this._log.debug('restrictAllowedResources response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -843,7 +843,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWorkload request %j', request);
+    this._log.debug('deleteWorkload request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -854,7 +854,7 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWorkload response %j', response);
+          this._log.debug('deleteWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -869,7 +869,7 @@ export class AssuredWorkloadsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkload response %j', response);
+          this._log.debug('deleteWorkload response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -986,7 +986,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkload request %j', request);
+    this._log.debug('getWorkload request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.assuredworkloads.v1beta1.IWorkload,
@@ -997,7 +997,7 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkload response %j', response);
+          this._log.debug('getWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1012,7 +1012,7 @@ export class AssuredWorkloadsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkload response %j', response);
+          this._log.debug('getWorkload response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1144,7 +1144,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('analyzeWorkloadMove request %j', request);
+    this._log.debug('analyzeWorkloadMove request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.assuredworkloads.v1beta1.IAnalyzeWorkloadMoveResponse,
@@ -1155,7 +1155,7 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('analyzeWorkloadMove response %j', response);
+          this._log.debug('analyzeWorkloadMove response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1170,7 +1170,7 @@ export class AssuredWorkloadsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('analyzeWorkloadMove response %j', response);
+          this._log.debug('analyzeWorkloadMove response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1313,11 +1313,11 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkload response %j', rawResponse);
+          this._log.debug('createWorkload response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkload request %j', request);
+    this._log.debug('createWorkload request %j', request);
     return this.innerApiCalls
       .createWorkload(request, options, wrappedCallback)
       ?.then(
@@ -1329,7 +1329,7 @@ export class AssuredWorkloadsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkload response %j', rawResponse);
+          this._log.debug('createWorkload response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1478,11 +1478,11 @@ export class AssuredWorkloadsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkloads values %j', values);
+          this._log.debug('listWorkloads values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkloads request %j', request);
+    this._log.debug('listWorkloads request %j', request);
     return this.innerApiCalls
       .listWorkloads(request, options, wrappedCallback)
       ?.then(
@@ -1491,7 +1491,7 @@ export class AssuredWorkloadsServiceClient {
           protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest | null,
           protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsResponse,
         ]) => {
-          this._log.info('listWorkloads values %j', response);
+          this._log.debug('listWorkloads values %j', response);
           return [response, input, output];
         },
       );
@@ -1537,7 +1537,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloads stream %j', request);
+    this._log.debug('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
       request,
@@ -1588,7 +1588,7 @@ export class AssuredWorkloadsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloads iterate %j', request);
+    this._log.debug('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
       request as {},

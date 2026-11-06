@@ -537,7 +537,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -548,7 +548,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('delete response %j', rawResponse);
+          this._log.debug('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -707,7 +707,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteNamedSet request %j', request);
+    this._log.debug('deleteNamedSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -718,7 +718,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('deleteNamedSet response %j', rawResponse);
+          this._log.debug('deleteNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -877,7 +877,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRoutePolicy request %j', request);
+    this._log.debug('deleteRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -888,7 +888,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('deleteRoutePolicy response %j', rawResponse);
+          this._log.debug('deleteRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1018,7 +1018,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IRouter,
@@ -1027,7 +1027,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1039,7 +1039,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IGetRouterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1159,7 +1159,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNamedSet request %j', request);
+    this._log.debug('getNamedSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
@@ -1170,7 +1170,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNamedSet response %j', response);
+          this._log.debug('getNamedSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1182,7 +1182,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IGetNamedSetRouterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getNamedSet response %j', response);
+          this._log.debug('getNamedSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1304,7 +1304,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNatIpInfo request %j', request);
+    this._log.debug('getNatIpInfo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.INatIpInfoResponse,
@@ -1315,7 +1315,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNatIpInfo response %j', response);
+          this._log.debug('getNatIpInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1327,7 +1327,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IGetNatIpInfoRouterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getNatIpInfo response %j', response);
+          this._log.debug('getNatIpInfo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1447,7 +1447,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRoutePolicy request %j', request);
+    this._log.debug('getRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IRoutersGetRoutePolicyResponse,
@@ -1458,7 +1458,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRoutePolicy response %j', response);
+          this._log.debug('getRoutePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1473,7 +1473,7 @@ export class RoutersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRoutePolicy response %j', response);
+          this._log.debug('getRoutePolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1590,7 +1590,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRouterStatus request %j', request);
+    this._log.debug('getRouterStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IRouterStatusResponse,
@@ -1601,7 +1601,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRouterStatus response %j', response);
+          this._log.debug('getRouterStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1616,7 +1616,7 @@ export class RoutersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRouterStatus response %j', response);
+          this._log.debug('getRouterStatus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1746,7 +1746,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1757,7 +1757,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('insert response %j', rawResponse);
+          this._log.debug('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1911,7 +1911,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patch request %j', request);
+    this._log.debug('patch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1920,7 +1920,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('patch response %j', rawResponse);
+          this._log.debug('patch response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2079,7 +2079,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patchNamedSet request %j', request);
+    this._log.debug('patchNamedSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2090,7 +2090,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('patchNamedSet response %j', rawResponse);
+          this._log.debug('patchNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2249,7 +2249,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patchRoutePolicy request %j', request);
+    this._log.debug('patchRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2260,7 +2260,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('patchRoutePolicy response %j', rawResponse);
+          this._log.debug('patchRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2395,7 +2395,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('preview request %j', request);
+    this._log.debug('preview request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IRoutersPreviewResponse,
@@ -2406,7 +2406,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('preview response %j', response);
+          this._log.debug('preview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2418,7 +2418,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IPreviewRouterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('preview response %j', response);
+          this._log.debug('preview response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2553,7 +2553,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('update request %j', request);
+    this._log.debug('update request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2564,7 +2564,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('update response %j', rawResponse);
+          this._log.debug('update response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2723,7 +2723,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateNamedSet request %j', request);
+    this._log.debug('updateNamedSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2734,7 +2734,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('updateNamedSet response %j', rawResponse);
+          this._log.debug('updateNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2893,7 +2893,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRoutePolicy request %j', request);
+    this._log.debug('updateRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2904,7 +2904,7 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('updateRoutePolicy response %j', rawResponse);
+          this._log.debug('updateRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -3081,7 +3081,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregatedList iterate %j', request);
+    this._log.debug('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -3285,11 +3285,11 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('getNatMappingInfo values %j', values);
+          this._log.debug('getNatMappingInfo values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('getNatMappingInfo request %j', request);
+    this._log.debug('getNatMappingInfo request %j', request);
     return this.innerApiCalls
       .getNatMappingInfo(request, options, wrappedCallback)
       ?.then(
@@ -3298,7 +3298,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IGetNatMappingInfoRoutersRequest | null,
           protos.google.cloud.compute.v1.IVmEndpointNatMappingsList,
         ]) => {
-          this._log.info('getNatMappingInfo values %j', response);
+          this._log.debug('getNatMappingInfo values %j', response);
           return [response, input, output];
         },
       );
@@ -3430,7 +3430,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNatMappingInfo stream %j', request);
+    this._log.debug('getNatMappingInfo stream %j', request);
     return this.descriptors.page.getNatMappingInfo.createStream(
       this.innerApiCalls.getNatMappingInfo as GaxCall,
       request,
@@ -3567,7 +3567,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNatMappingInfo iterate %j', request);
+    this._log.debug('getNatMappingInfo iterate %j', request);
     return this.descriptors.page.getNatMappingInfo.asyncIterate(
       this.innerApiCalls['getNatMappingInfo'] as GaxCall,
       request as {},
@@ -3751,11 +3751,11 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -3764,7 +3764,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IListRoutersRequest | null,
           protos.google.cloud.compute.v1.IRouterList,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -3888,7 +3888,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -4017,7 +4017,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -4224,11 +4224,11 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBgpRoutes values %j', values);
+          this._log.debug('listBgpRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBgpRoutes request %j', request);
+    this._log.debug('listBgpRoutes request %j', request);
     return this.innerApiCalls
       .listBgpRoutes(request, options, wrappedCallback)
       ?.then(
@@ -4237,7 +4237,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IListBgpRoutesRoutersRequest | null,
           protos.google.cloud.compute.v1.IRoutersListBgpRoutes,
         ]) => {
-          this._log.info('listBgpRoutes values %j', response);
+          this._log.debug('listBgpRoutes values %j', response);
           return [response, input, output];
         },
       );
@@ -4380,7 +4380,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBgpRoutes stream %j', request);
+    this._log.debug('listBgpRoutes stream %j', request);
     return this.descriptors.page.listBgpRoutes.createStream(
       this.innerApiCalls.listBgpRoutes as GaxCall,
       request,
@@ -4528,7 +4528,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBgpRoutes iterate %j', request);
+    this._log.debug('listBgpRoutes iterate %j', request);
     return this.descriptors.page.listBgpRoutes.asyncIterate(
       this.innerApiCalls['listBgpRoutes'] as GaxCall,
       request as {},
@@ -4721,11 +4721,11 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNamedSets values %j', values);
+          this._log.debug('listNamedSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNamedSets request %j', request);
+    this._log.debug('listNamedSets request %j', request);
     return this.innerApiCalls
       .listNamedSets(request, options, wrappedCallback)
       ?.then(
@@ -4734,7 +4734,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest | null,
           protos.google.cloud.compute.v1.IRoutersListNamedSets,
         ]) => {
-          this._log.info('listNamedSets values %j', response);
+          this._log.debug('listNamedSets values %j', response);
           return [response, input, output];
         },
       );
@@ -4862,7 +4862,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNamedSets stream %j', request);
+    this._log.debug('listNamedSets stream %j', request);
     return this.descriptors.page.listNamedSets.createStream(
       this.innerApiCalls.listNamedSets as GaxCall,
       request,
@@ -4995,7 +4995,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNamedSets iterate %j', request);
+    this._log.debug('listNamedSets iterate %j', request);
     return this.descriptors.page.listNamedSets.asyncIterate(
       this.innerApiCalls['listNamedSets'] as GaxCall,
       request as {},
@@ -5194,11 +5194,11 @@ export class RoutersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRoutePolicies values %j', values);
+          this._log.debug('listRoutePolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRoutePolicies request %j', request);
+    this._log.debug('listRoutePolicies request %j', request);
     return this.innerApiCalls
       .listRoutePolicies(request, options, wrappedCallback)
       ?.then(
@@ -5207,7 +5207,7 @@ export class RoutersClient {
           protos.google.cloud.compute.v1.IListRoutePoliciesRoutersRequest | null,
           protos.google.cloud.compute.v1.IRoutersListRoutePolicies,
         ]) => {
-          this._log.info('listRoutePolicies values %j', response);
+          this._log.debug('listRoutePolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -5335,7 +5335,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutePolicies stream %j', request);
+    this._log.debug('listRoutePolicies stream %j', request);
     return this.descriptors.page.listRoutePolicies.createStream(
       this.innerApiCalls.listRoutePolicies as GaxCall,
       request,
@@ -5468,7 +5468,7 @@ export class RoutersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutePolicies iterate %j', request);
+    this._log.debug('listRoutePolicies iterate %j', request);
     return this.descriptors.page.listRoutePolicies.asyncIterate(
       this.innerApiCalls['listRoutePolicies'] as GaxCall,
       request as {},

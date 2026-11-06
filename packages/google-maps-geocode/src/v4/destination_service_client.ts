@@ -469,7 +469,7 @@ export class DestinationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDestinations request %j', request);
+    this._log.debug('searchDestinations request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.geocode.v4.ISearchDestinationsResponse,
@@ -480,7 +480,7 @@ export class DestinationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('searchDestinations response %j', response);
+          this._log.debug('searchDestinations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -492,7 +492,7 @@ export class DestinationServiceClient {
           protos.google.maps.geocode.v4.ISearchDestinationsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('searchDestinations response %j', response);
+          this._log.debug('searchDestinations response %j', response);
           return [response, options, rawResponse];
         },
       )

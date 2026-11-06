@@ -534,7 +534,7 @@ export class EmailPreferencesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEmailPreferences request %j', request);
+    this._log.debug('getEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IEmailPreferences,
@@ -545,7 +545,7 @@ export class EmailPreferencesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEmailPreferences response %j', response);
+          this._log.debug('getEmailPreferences response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -560,7 +560,7 @@ export class EmailPreferencesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEmailPreferences response %j', response);
+          this._log.debug('getEmailPreferences response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -689,7 +689,7 @@ export class EmailPreferencesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEmailPreferences request %j', request);
+    this._log.debug('updateEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1beta.IEmailPreferences,
@@ -700,7 +700,7 @@ export class EmailPreferencesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEmailPreferences response %j', response);
+          this._log.debug('updateEmailPreferences response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -715,7 +715,7 @@ export class EmailPreferencesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEmailPreferences response %j', response);
+          this._log.debug('updateEmailPreferences response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -693,7 +693,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUser request %j', request);
+    this._log.debug('getUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IUser,
@@ -702,7 +702,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUser response %j', response);
+          this._log.debug('getUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -714,7 +714,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IGetUserRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getUser response %j', response);
+          this._log.debug('getUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -820,7 +820,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createUser request %j', request);
+    this._log.debug('createUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IUser,
@@ -829,7 +829,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createUser response %j', response);
+          this._log.debug('createUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -841,7 +841,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.ICreateUserRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createUser response %j', response);
+          this._log.debug('createUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -958,7 +958,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateUsers request %j', request);
+    this._log.debug('batchCreateUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
@@ -969,7 +969,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateUsers response %j', response);
+          this._log.debug('batchCreateUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -981,7 +981,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateUsersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateUsers response %j', response);
+          this._log.debug('batchCreateUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1094,7 +1094,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateUsers request %j', request);
+    this._log.debug('batchActivateUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
@@ -1105,7 +1105,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateUsers response %j', response);
+          this._log.debug('batchActivateUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1117,7 +1117,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IBatchActivateUsersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateUsers response %j', response);
+          this._log.debug('batchActivateUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1230,7 +1230,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateUsers request %j', request);
+    this._log.debug('batchDeactivateUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
@@ -1241,7 +1241,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateUsers response %j', response);
+          this._log.debug('batchDeactivateUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1256,7 +1256,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateUsers response %j', response);
+          this._log.debug('batchDeactivateUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1361,7 +1361,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUser request %j', request);
+    this._log.debug('updateUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IUser,
@@ -1370,7 +1370,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUser response %j', response);
+          this._log.debug('updateUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1382,7 +1382,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IUpdateUserRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateUser response %j', response);
+          this._log.debug('updateUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1499,7 +1499,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateUsers request %j', request);
+    this._log.debug('batchUpdateUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
@@ -1510,7 +1510,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateUsers response %j', response);
+          this._log.debug('batchUpdateUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1522,7 +1522,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateUsersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateUsers response %j', response);
+          this._log.debug('batchUpdateUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1670,11 +1670,11 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUsers values %j', values);
+          this._log.debug('listUsers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUsers request %j', request);
+    this._log.debug('listUsers request %j', request);
     return this.innerApiCalls
       .listUsers(request, options, wrappedCallback)
       ?.then(
@@ -1683,7 +1683,7 @@ export class UserServiceClient {
           protos.google.ads.admanager.v1.IListUsersRequest | null,
           protos.google.ads.admanager.v1.IListUsersResponse,
         ]) => {
-          this._log.info('listUsers values %j', response);
+          this._log.debug('listUsers values %j', response);
           return [response, input, output];
         },
       );
@@ -1756,7 +1756,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsers stream %j', request);
+    this._log.debug('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
       request,
@@ -1834,7 +1834,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsers iterate %j', request);
+    this._log.debug('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,
       request as {},

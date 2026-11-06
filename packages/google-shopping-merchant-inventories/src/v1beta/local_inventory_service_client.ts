@@ -502,7 +502,7 @@ export class LocalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertLocalInventory request %j', request);
+    this._log.debug('insertLocalInventory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.inventories.v1beta.ILocalInventory,
@@ -513,7 +513,7 @@ export class LocalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertLocalInventory response %j', response);
+          this._log.debug('insertLocalInventory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -528,7 +528,7 @@ export class LocalInventoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertLocalInventory response %j', response);
+          this._log.debug('insertLocalInventory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -651,7 +651,7 @@ export class LocalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteLocalInventory request %j', request);
+    this._log.debug('deleteLocalInventory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -662,7 +662,7 @@ export class LocalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteLocalInventory response %j', response);
+          this._log.debug('deleteLocalInventory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -677,7 +677,7 @@ export class LocalInventoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteLocalInventory response %j', response);
+          this._log.debug('deleteLocalInventory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -823,11 +823,11 @@ export class LocalInventoryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLocalInventories values %j', values);
+          this._log.debug('listLocalInventories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLocalInventories request %j', request);
+    this._log.debug('listLocalInventories request %j', request);
     return this.innerApiCalls
       .listLocalInventories(request, options, wrappedCallback)
       ?.then(
@@ -836,7 +836,7 @@ export class LocalInventoryServiceClient {
           protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesRequest | null,
           protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesResponse,
         ]) => {
-          this._log.info('listLocalInventories values %j', response);
+          this._log.debug('listLocalInventories values %j', response);
           return [response, input, output];
         },
       );
@@ -892,7 +892,7 @@ export class LocalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLocalInventories stream %j', request);
+    this._log.debug('listLocalInventories stream %j', request);
     return this.descriptors.page.listLocalInventories.createStream(
       this.innerApiCalls.listLocalInventories as GaxCall,
       request,
@@ -953,7 +953,7 @@ export class LocalInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLocalInventories iterate %j', request);
+    this._log.debug('listLocalInventories iterate %j', request);
     return this.descriptors.page.listLocalInventories.asyncIterate(
       this.innerApiCalls['listLocalInventories'] as GaxCall,
       request as {},

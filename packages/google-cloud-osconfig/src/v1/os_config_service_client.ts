@@ -531,7 +531,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executePatchJob request %j', request);
+    this._log.debug('executePatchJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchJob,
@@ -542,7 +542,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executePatchJob response %j', response);
+          this._log.debug('executePatchJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -554,7 +554,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.IExecutePatchJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('executePatchJob response %j', response);
+          this._log.debug('executePatchJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -660,7 +660,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPatchJob request %j', request);
+    this._log.debug('getPatchJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchJob,
@@ -671,7 +671,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPatchJob response %j', response);
+          this._log.debug('getPatchJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -683,7 +683,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.IGetPatchJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPatchJob response %j', response);
+          this._log.debug('getPatchJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -789,7 +789,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelPatchJob request %j', request);
+    this._log.debug('cancelPatchJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchJob,
@@ -800,7 +800,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelPatchJob response %j', response);
+          this._log.debug('cancelPatchJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -812,7 +812,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.ICancelPatchJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('cancelPatchJob response %j', response);
+          this._log.debug('cancelPatchJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -934,7 +934,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPatchDeployment request %j', request);
+    this._log.debug('createPatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchDeployment,
@@ -945,7 +945,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPatchDeployment response %j', response);
+          this._log.debug('createPatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -960,7 +960,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createPatchDeployment response %j', response);
+          this._log.debug('createPatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1072,7 +1072,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPatchDeployment request %j', request);
+    this._log.debug('getPatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchDeployment,
@@ -1083,7 +1083,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPatchDeployment response %j', response);
+          this._log.debug('getPatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1098,7 +1098,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPatchDeployment response %j', response);
+          this._log.debug('getPatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1210,7 +1210,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePatchDeployment request %j', request);
+    this._log.debug('deletePatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1221,7 +1221,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePatchDeployment response %j', response);
+          this._log.debug('deletePatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1236,7 +1236,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePatchDeployment response %j', response);
+          this._log.debug('deletePatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1350,7 +1350,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePatchDeployment request %j', request);
+    this._log.debug('updatePatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchDeployment,
@@ -1361,7 +1361,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePatchDeployment response %j', response);
+          this._log.debug('updatePatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1376,7 +1376,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePatchDeployment response %j', response);
+          this._log.debug('updatePatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1489,7 +1489,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pausePatchDeployment request %j', request);
+    this._log.debug('pausePatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchDeployment,
@@ -1500,7 +1500,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pausePatchDeployment response %j', response);
+          this._log.debug('pausePatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1515,7 +1515,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('pausePatchDeployment response %j', response);
+          this._log.debug('pausePatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1628,7 +1628,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resumePatchDeployment request %j', request);
+    this._log.debug('resumePatchDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.osconfig.v1.IPatchDeployment,
@@ -1639,7 +1639,7 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resumePatchDeployment response %j', response);
+          this._log.debug('resumePatchDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1654,7 +1654,7 @@ export class OsConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resumePatchDeployment response %j', response);
+          this._log.debug('resumePatchDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1782,11 +1782,11 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPatchJobs values %j', values);
+          this._log.debug('listPatchJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPatchJobs request %j', request);
+    this._log.debug('listPatchJobs request %j', request);
     return this.innerApiCalls
       .listPatchJobs(request, options, wrappedCallback)
       ?.then(
@@ -1795,7 +1795,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.IListPatchJobsRequest | null,
           protos.google.cloud.osconfig.v1.IListPatchJobsResponse,
         ]) => {
-          this._log.info('listPatchJobs values %j', response);
+          this._log.debug('listPatchJobs values %j', response);
           return [response, input, output];
         },
       );
@@ -1844,7 +1844,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchJobs stream %j', request);
+    this._log.debug('listPatchJobs stream %j', request);
     return this.descriptors.page.listPatchJobs.createStream(
       this.innerApiCalls.listPatchJobs as GaxCall,
       request,
@@ -1898,7 +1898,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchJobs iterate %j', request);
+    this._log.debug('listPatchJobs iterate %j', request);
     return this.descriptors.page.listPatchJobs.asyncIterate(
       this.innerApiCalls['listPatchJobs'] as GaxCall,
       request as {},
@@ -2018,11 +2018,11 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPatchJobInstanceDetails values %j', values);
+          this._log.debug('listPatchJobInstanceDetails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPatchJobInstanceDetails request %j', request);
+    this._log.debug('listPatchJobInstanceDetails request %j', request);
     return this.innerApiCalls
       .listPatchJobInstanceDetails(request, options, wrappedCallback)
       ?.then(
@@ -2031,7 +2031,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsRequest | null,
           protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsResponse,
         ]) => {
-          this._log.info('listPatchJobInstanceDetails values %j', response);
+          this._log.debug('listPatchJobInstanceDetails values %j', response);
           return [response, input, output];
         },
       );
@@ -2081,7 +2081,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchJobInstanceDetails stream %j', request);
+    this._log.debug('listPatchJobInstanceDetails stream %j', request);
     return this.descriptors.page.listPatchJobInstanceDetails.createStream(
       this.innerApiCalls.listPatchJobInstanceDetails as GaxCall,
       request,
@@ -2136,7 +2136,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchJobInstanceDetails iterate %j', request);
+    this._log.debug('listPatchJobInstanceDetails iterate %j', request);
     return this.descriptors.page.listPatchJobInstanceDetails.asyncIterate(
       this.innerApiCalls['listPatchJobInstanceDetails'] as GaxCall,
       request as {},
@@ -2253,11 +2253,11 @@ export class OsConfigServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPatchDeployments values %j', values);
+          this._log.debug('listPatchDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPatchDeployments request %j', request);
+    this._log.debug('listPatchDeployments request %j', request);
     return this.innerApiCalls
       .listPatchDeployments(request, options, wrappedCallback)
       ?.then(
@@ -2266,7 +2266,7 @@ export class OsConfigServiceClient {
           protos.google.cloud.osconfig.v1.IListPatchDeploymentsRequest | null,
           protos.google.cloud.osconfig.v1.IListPatchDeploymentsResponse,
         ]) => {
-          this._log.info('listPatchDeployments values %j', response);
+          this._log.debug('listPatchDeployments values %j', response);
           return [response, input, output];
         },
       );
@@ -2313,7 +2313,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchDeployments stream %j', request);
+    this._log.debug('listPatchDeployments stream %j', request);
     return this.descriptors.page.listPatchDeployments.createStream(
       this.innerApiCalls.listPatchDeployments as GaxCall,
       request,
@@ -2365,7 +2365,7 @@ export class OsConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPatchDeployments iterate %j', request);
+    this._log.debug('listPatchDeployments iterate %j', request);
     return this.descriptors.page.listPatchDeployments.asyncIterate(
       this.innerApiCalls['listPatchDeployments'] as GaxCall,
       request as {},

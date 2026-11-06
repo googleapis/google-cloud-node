@@ -490,7 +490,7 @@ export class SqlWorkloadCapturesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('start request %j', request);
+    this._log.debug('start request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -501,7 +501,7 @@ export class SqlWorkloadCapturesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('start response %j', response);
+          this._log.debug('start response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -513,7 +513,7 @@ export class SqlWorkloadCapturesServiceClient {
           protos.google.cloud.sql.v1.IWorkloadCapturesStartRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('start response %j', response);
+          this._log.debug('start response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -630,7 +630,7 @@ export class SqlWorkloadCapturesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('stop request %j', request);
+    this._log.debug('stop request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -641,7 +641,7 @@ export class SqlWorkloadCapturesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('stop response %j', response);
+          this._log.debug('stop response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -653,7 +653,7 @@ export class SqlWorkloadCapturesServiceClient {
           protos.google.cloud.sql.v1.IWorkloadCapturesStopRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stop response %j', response);
+          this._log.debug('stop response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class SqlWorkloadCapturesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('startReplay request %j', request);
+    this._log.debug('startReplay request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -791,7 +791,7 @@ export class SqlWorkloadCapturesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('startReplay response %j', response);
+          this._log.debug('startReplay response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -806,7 +806,7 @@ export class SqlWorkloadCapturesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('startReplay response %j', response);
+          this._log.debug('startReplay response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -925,7 +925,7 @@ export class SqlWorkloadCapturesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('stopReplay request %j', request);
+    this._log.debug('stopReplay request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -936,7 +936,7 @@ export class SqlWorkloadCapturesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('stopReplay response %j', response);
+          this._log.debug('stopReplay response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -951,7 +951,7 @@ export class SqlWorkloadCapturesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('stopReplay response %j', response);
+          this._log.debug('stopReplay response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1065,7 +1065,7 @@ export class SqlWorkloadCapturesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IWorkloadCapturesListResponse,
@@ -1076,7 +1076,7 @@ export class SqlWorkloadCapturesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1091,7 +1091,7 @@ export class SqlWorkloadCapturesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )

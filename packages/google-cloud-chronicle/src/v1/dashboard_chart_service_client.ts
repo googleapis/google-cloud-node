@@ -545,7 +545,7 @@ export class DashboardChartServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDashboardChart request %j', request);
+    this._log.debug('getDashboardChart request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDashboardChart,
@@ -556,7 +556,7 @@ export class DashboardChartServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDashboardChart response %j', response);
+          this._log.debug('getDashboardChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class DashboardChartServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDashboardChart response %j', response);
+          this._log.debug('getDashboardChart response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -694,7 +694,7 @@ export class DashboardChartServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchGetDashboardCharts request %j', request);
+    this._log.debug('batchGetDashboardCharts request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBatchGetDashboardChartsResponse,
@@ -705,7 +705,7 @@ export class DashboardChartServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchGetDashboardCharts response %j', response);
+          this._log.debug('batchGetDashboardCharts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -720,7 +720,7 @@ export class DashboardChartServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchGetDashboardCharts response %j', response);
+          this._log.debug('batchGetDashboardCharts response %j', response);
           return [response, options, rawResponse];
         },
       )

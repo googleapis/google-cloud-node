@@ -693,7 +693,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPlacement request %j', request);
+    this._log.debug('getPlacement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPlacement,
@@ -704,7 +704,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPlacement response %j', response);
+          this._log.debug('getPlacement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -716,7 +716,7 @@ export class PlacementServiceClient {
           protos.google.ads.admanager.v1.IGetPlacementRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPlacement response %j', response);
+          this._log.debug('getPlacement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -824,7 +824,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPlacement request %j', request);
+    this._log.debug('createPlacement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPlacement,
@@ -835,7 +835,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPlacement response %j', response);
+          this._log.debug('createPlacement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -847,7 +847,7 @@ export class PlacementServiceClient {
           protos.google.ads.admanager.v1.ICreatePlacementRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPlacement response %j', response);
+          this._log.debug('createPlacement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -958,7 +958,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePlacement request %j', request);
+    this._log.debug('updatePlacement request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IPlacement,
@@ -969,7 +969,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePlacement response %j', response);
+          this._log.debug('updatePlacement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -981,7 +981,7 @@ export class PlacementServiceClient {
           protos.google.ads.admanager.v1.IUpdatePlacementRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePlacement response %j', response);
+          this._log.debug('updatePlacement response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1098,7 +1098,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreatePlacements request %j', request);
+    this._log.debug('batchCreatePlacements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreatePlacementsResponse,
@@ -1109,7 +1109,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreatePlacements response %j', response);
+          this._log.debug('batchCreatePlacements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1124,7 +1124,7 @@ export class PlacementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreatePlacements response %j', response);
+          this._log.debug('batchCreatePlacements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1241,7 +1241,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdatePlacements request %j', request);
+    this._log.debug('batchUpdatePlacements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdatePlacementsResponse,
@@ -1252,7 +1252,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdatePlacements response %j', response);
+          this._log.debug('batchUpdatePlacements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1267,7 +1267,7 @@ export class PlacementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdatePlacements response %j', response);
+          this._log.debug('batchUpdatePlacements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1387,7 +1387,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivatePlacements request %j', request);
+    this._log.debug('batchActivatePlacements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivatePlacementsResponse,
@@ -1398,7 +1398,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivatePlacements response %j', response);
+          this._log.debug('batchActivatePlacements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1413,7 +1413,7 @@ export class PlacementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivatePlacements response %j', response);
+          this._log.debug('batchActivatePlacements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1533,7 +1533,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivatePlacements request %j', request);
+    this._log.debug('batchDeactivatePlacements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivatePlacementsResponse,
@@ -1544,7 +1544,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivatePlacements response %j', response);
+          this._log.debug('batchDeactivatePlacements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1559,7 +1559,7 @@ export class PlacementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivatePlacements response %j', response);
+          this._log.debug('batchDeactivatePlacements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1673,7 +1673,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchivePlacements request %j', request);
+    this._log.debug('batchArchivePlacements request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchivePlacementsResponse,
@@ -1684,7 +1684,7 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchivePlacements response %j', response);
+          this._log.debug('batchArchivePlacements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1699,7 +1699,7 @@ export class PlacementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchArchivePlacements response %j', response);
+          this._log.debug('batchArchivePlacements response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1850,11 +1850,11 @@ export class PlacementServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPlacements values %j', values);
+          this._log.debug('listPlacements values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPlacements request %j', request);
+    this._log.debug('listPlacements request %j', request);
     return this.innerApiCalls
       .listPlacements(request, options, wrappedCallback)
       ?.then(
@@ -1863,7 +1863,7 @@ export class PlacementServiceClient {
           protos.google.ads.admanager.v1.IListPlacementsRequest | null,
           protos.google.ads.admanager.v1.IListPlacementsResponse,
         ]) => {
-          this._log.info('listPlacements values %j', response);
+          this._log.debug('listPlacements values %j', response);
           return [response, input, output];
         },
       );
@@ -1935,7 +1935,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPlacements stream %j', request);
+    this._log.debug('listPlacements stream %j', request);
     return this.descriptors.page.listPlacements.createStream(
       this.innerApiCalls.listPlacements as GaxCall,
       request,
@@ -2012,7 +2012,7 @@ export class PlacementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPlacements iterate %j', request);
+    this._log.debug('listPlacements iterate %j', request);
     return this.descriptors.page.listPlacements.asyncIterate(
       this.innerApiCalls['listPlacements'] as GaxCall,
       request as {},

@@ -492,7 +492,7 @@ export class ProductsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProduct request %j', request);
+    this._log.debug('getProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.products.v1beta.IProduct,
@@ -503,7 +503,7 @@ export class ProductsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProduct response %j', response);
+          this._log.debug('getProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -518,7 +518,7 @@ export class ProductsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProduct response %j', response);
+          this._log.debug('getProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -660,11 +660,11 @@ export class ProductsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProducts values %j', values);
+          this._log.debug('listProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProducts request %j', request);
+    this._log.debug('listProducts request %j', request);
     return this.innerApiCalls
       .listProducts(request, options, wrappedCallback)
       ?.then(
@@ -673,7 +673,7 @@ export class ProductsServiceClient {
           protos.google.shopping.merchant.products.v1beta.IListProductsRequest | null,
           protos.google.shopping.merchant.products.v1beta.IListProductsResponse,
         ]) => {
-          this._log.info('listProducts values %j', response);
+          this._log.debug('listProducts values %j', response);
           return [response, input, output];
         },
       );
@@ -725,7 +725,7 @@ export class ProductsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProducts stream %j', request);
+    this._log.debug('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
@@ -782,7 +782,7 @@ export class ProductsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProducts iterate %j', request);
+    this._log.debug('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},

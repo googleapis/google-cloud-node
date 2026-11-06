@@ -727,11 +727,11 @@ export class McmEarningsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchMcmEarnings values %j', values);
+          this._log.debug('fetchMcmEarnings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchMcmEarnings request %j', request);
+    this._log.debug('fetchMcmEarnings request %j', request);
     return this.innerApiCalls
       .fetchMcmEarnings(request, options, wrappedCallback)
       ?.then(
@@ -740,7 +740,7 @@ export class McmEarningsServiceClient {
           protos.google.ads.admanager.v1.IFetchMcmEarningsRequest | null,
           protos.google.ads.admanager.v1.IFetchMcmEarningsResponse,
         ]) => {
-          this._log.info('fetchMcmEarnings values %j', response);
+          this._log.debug('fetchMcmEarnings values %j', response);
           return [response, input, output];
         },
       );
@@ -805,7 +805,7 @@ export class McmEarningsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchMcmEarnings stream %j', request);
+    this._log.debug('fetchMcmEarnings stream %j', request);
     return this.descriptors.page.fetchMcmEarnings.createStream(
       this.innerApiCalls.fetchMcmEarnings as GaxCall,
       request,
@@ -875,7 +875,7 @@ export class McmEarningsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchMcmEarnings iterate %j', request);
+    this._log.debug('fetchMcmEarnings iterate %j', request);
     return this.descriptors.page.fetchMcmEarnings.asyncIterate(
       this.innerApiCalls['fetchMcmEarnings'] as GaxCall,
       request as {},

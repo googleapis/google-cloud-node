@@ -668,11 +668,11 @@ export class CloudChannelReportsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runReportJob response %j', rawResponse);
+          this._log.debug('runReportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runReportJob request %j', request);
+    this._log.debug('runReportJob request %j', request);
     return this.innerApiCalls
       .runReportJob(request, options, wrappedCallback)
       ?.then(
@@ -684,7 +684,7 @@ export class CloudChannelReportsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runReportJob response %j', rawResponse);
+          this._log.debug('runReportJob response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -864,11 +864,11 @@ export class CloudChannelReportsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchReportResults values %j', values);
+          this._log.debug('fetchReportResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchReportResults request %j', request);
+    this._log.debug('fetchReportResults request %j', request);
     return this.innerApiCalls
       .fetchReportResults(request, options, wrappedCallback)
       ?.then(
@@ -877,7 +877,7 @@ export class CloudChannelReportsServiceClient {
           protos.google.cloud.channel.v1.IFetchReportResultsRequest | null,
           protos.google.cloud.channel.v1.IFetchReportResultsResponse,
         ]) => {
-          this._log.info('fetchReportResults values %j', response);
+          this._log.debug('fetchReportResults values %j', response);
           return [response, input, output];
         },
       );
@@ -943,7 +943,7 @@ export class CloudChannelReportsServiceClient {
       'FetchReportResults is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('fetchReportResults stream %j', request);
+    this._log.debug('fetchReportResults stream %j', request);
     return this.descriptors.page.fetchReportResults.createStream(
       this.innerApiCalls.fetchReportResults as GaxCall,
       request,
@@ -1014,7 +1014,7 @@ export class CloudChannelReportsServiceClient {
       'FetchReportResults is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('fetchReportResults iterate %j', request);
+    this._log.debug('fetchReportResults iterate %j', request);
     return this.descriptors.page.fetchReportResults.asyncIterate(
       this.innerApiCalls['fetchReportResults'] as GaxCall,
       request as {},
@@ -1146,11 +1146,11 @@ export class CloudChannelReportsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listReports values %j', values);
+          this._log.debug('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listReports request %j', request);
+    this._log.debug('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
       ?.then(
@@ -1159,7 +1159,7 @@ export class CloudChannelReportsServiceClient {
           protos.google.cloud.channel.v1.IListReportsRequest | null,
           protos.google.cloud.channel.v1.IListReportsResponse,
         ]) => {
-          this._log.info('listReports values %j', response);
+          this._log.debug('listReports values %j', response);
           return [response, input, output];
         },
       );
@@ -1222,7 +1222,7 @@ export class CloudChannelReportsServiceClient {
       'ListReports is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listReports stream %j', request);
+    this._log.debug('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
@@ -1290,7 +1290,7 @@ export class CloudChannelReportsServiceClient {
       'ListReports is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listReports iterate %j', request);
+    this._log.debug('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
