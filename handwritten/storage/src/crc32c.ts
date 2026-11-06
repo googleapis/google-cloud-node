@@ -65,6 +65,24 @@ const CRC32C_EXTENSIONS = [
 
 const CRC32C_EXTENSION_TABLE = new Int32Array(CRC32C_EXTENSIONS);
 
+/**
+ * Slicing-by-8 lookup tables derived from `CRC32C_EXTENSION_TABLE`.
+ * See {@link https://github.com/google/crc32c/blob/21fc8ef30415a635e7351ffa0e5d5367943d4a94/src/crc32c_portable.cc#L16-L386 github.com/google/crc32c}
+ */
+const CRC32C_SLICING_TABLES = Array.from(
+  {length: 8},
+  () => new Int32Array(256)
+);
+CRC32C_SLICING_TABLES[0].set(CRC32C_EXTENSION_TABLE);
+for (let i = 0; i < 256; i++) {
+  let crc = CRC32C_SLICING_TABLES[0][i];
+  for (let t = 1; t < 8; t++) {
+    crc = CRC32C_SLICING_TABLES[0][crc & 0xff] ^ (crc >>> 8);
+    CRC32C_SLICING_TABLES[t][i] = crc;
+  }
+}
+const [T0, T1, T2, T3, T4, T5, T6, T7] = CRC32C_SLICING_TABLES;
+
 /** An interface for CRC32C hashing and validation */
 interface CRC32CValidator {
   /**
@@ -158,10 +176,36 @@ class CRC32C implements CRC32CValidator {
    */
   update(data: Buffer) {
     let current = this.#crc32c ^ 0xffffffff;
+    let i = 0;
+    const len = data.length;
+    const limit = len - 8;
 
-    for (const d of data) {
-      const tablePoly = CRC32C.CRC32C_EXTENSION_TABLE[(d ^ current) & 0xff];
-      current = tablePoly ^ (current >>> 8);
+    while (i <= limit) {
+      const c1 =
+        current ^
+        (data[i] |
+          (data[i + 1] << 8) |
+          (data[i + 2] << 16) |
+          (data[i + 3] << 24));
+      const c2 =
+        data[i + 4] |
+        (data[i + 5] << 8) |
+        (data[i + 6] << 16) |
+        (data[i + 7] << 24);
+      current =
+        T7[c1 & 0xff] ^
+        T6[(c1 >>> 8) & 0xff] ^
+        T5[(c1 >>> 16) & 0xff] ^
+        T4[c1 >>> 24] ^
+        T3[c2 & 0xff] ^
+        T2[(c2 >>> 8) & 0xff] ^
+        T1[(c2 >>> 16) & 0xff] ^
+        T0[c2 >>> 24];
+      i += 8;
+    }
+
+    while (i < len) {
+      current = T0[(current ^ data[i++]) & 0xff] ^ (current >>> 8);
     }
 
     this.#crc32c = current ^ 0xffffffff;
