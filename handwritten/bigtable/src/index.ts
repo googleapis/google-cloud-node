@@ -940,6 +940,7 @@ export class Bigtable {
         if (!gaxClient) {
           // Lazily instantiate client.
           const clientOptions = this.options[config.client]!;
+          // eslint-disable-next-line import/namespace
           gaxClient = new v2[config.client](clientOptions);
           this.api[config.client] = gaxClient;
         }
