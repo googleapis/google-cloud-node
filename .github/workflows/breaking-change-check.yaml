@@ -52,7 +52,7 @@ jobs:
       - name: Run breaking-change-check unit and harness tests
         if: steps.changes.outputs.self == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          pnpm --dir core/test-utils exec jest --no-coverage test/breaking-change-check.test.ts
+          pnpm --dir core/test-utils exec jest test/breaking-change-check.test.ts
       - name: Check public TypeScript interfaces with core/test-utils
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         env:

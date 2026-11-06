@@ -4394,8 +4394,8 @@ if (hasTestRunner && !runDiffGateOnly) {
 }
 
 if (hasTestRunner && runDiffGateOnly) {
-  describe('git diff breaking-change gate', () => {
-    it('verifies public TypeScript interfaces do not become more restrictive against base revision', () => {
+  describe('public TypeScript interface breaking-change check', () => {
+    it('ensures exported TypeScript types, parameter types, return types, and public symbols do not break existing consumer code against the base branch', () => {
       const result = runGitDiffBreakingChangeCheck({
         repoRoot: REPO_ROOT,
         baseRef: process.env.BREAKING_CHANGE_BASE_REF?.trim() || undefined,
@@ -4410,7 +4410,7 @@ if (hasTestRunner && runDiffGateOnly) {
       assert.equal(
         result.passed,
         true,
-        `Detected ${result.findings.length} breaking public TypeScript interface change(s).`,
+        `Detected ${result.findings.length} breaking public TypeScript interface change(s) (e.g., narrowed input/parameter types, widened return/output types, added required properties, or removed exports that cause existing consumer TypeScript code to fail compilation):\n\n${result.summaryMarkdown.trim()}`,
       );
     }, 600_000);
   });
