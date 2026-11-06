@@ -22,6 +22,7 @@ export interface Options {
   grpcServiceConfig: protos.grpc.service_config.ServiceConfig;
   bundleConfigs?: BundleConfig[];
   publishName?: string;
+  directory?: string;
   mainServiceName?: string;
   serviceYaml?: ServiceYaml;
   rest?: boolean;
