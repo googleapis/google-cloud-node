@@ -16,6 +16,7 @@ jobs:
       shard-matrix: ${{ steps.set-matrix.outputs.shard_matrix }}
       shard-total: ${{ steps.set-matrix.outputs.shard_total }}
       generator-changed: ${{ steps.changes.outputs.generator }}
+      gax-changed: ${{ steps.changes.outputs.gax }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
@@ -28,6 +29,10 @@ jobs:
             generator:
               - 'core/generator/**'
               - '.github/workflows/generator-tests.yaml'
+            gax:
+              - 'core/packages/gax/**'
+              - 'core/packages/tools/**'
+              - '.github/workflows/presubmit.yaml'
       - id: set-matrix
         uses: ./.github/actions/calculate-shard-matrix
   units:
@@ -49,6 +54,28 @@ jobs:
           node-version: ${{ matrix.node-version }}
           shard-total: ${{ needs.setup.outputs.shard-total }}
           shard-index: ${{ matrix.shard-index }}
+  gax-test-application:
+    needs: setup
+    if: needs.setup.outputs.gax-changed == 'true'
+    name: gax test-application (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: ./.github/actions/pnpm-lockfile-check
+      - name: Run gax test-application
+        working-directory: core/packages/gax
+        run: pnpm run test-application
   lint:
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -84,7 +111,7 @@ jobs:
 
   wait-for-ci:
     name: Wait for CI
-    needs: [setup, units, lint]
+    needs: [setup, units, lint, gax-test-application]
     runs-on: ubuntu-latest
     if: ${{ !cancelled() }}
     timeout-minutes: 50
@@ -100,7 +127,7 @@ jobs:
   # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
   units-status:
     name: units (${{ matrix.node-version }})
-    needs: [setup, units, wait-for-ci]
+    needs: [setup, units, gax-test-application, wait-for-ci]
     runs-on: ubuntu-latest
     if: ${{ !cancelled() }}
     strategy:
@@ -109,6 +136,7 @@ jobs:
         node-version: [22, 24, 26]
     env:
       WAIT_FOR_CI_RESULT: ${{ needs.wait-for-ci.result }}
+      GAX_TEST_APP_RESULT: ${{ needs.gax-test-application.result }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
@@ -117,6 +145,10 @@ jobs:
         run: |
           if [ "$WAIT_FOR_CI_RESULT" != "success" ]; then
             echo "CI completion check or generator-tests failed (result: $WAIT_FOR_CI_RESULT)."
+            exit 1
+          fi
+          if [ "$GAX_TEST_APP_RESULT" != "success" ] && [ "$GAX_TEST_APP_RESULT" != "skipped" ]; then
+            echo "gax test-application failed (result: $GAX_TEST_APP_RESULT)."
             exit 1
           fi
       - name: Check shard status
