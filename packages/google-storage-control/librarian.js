@@ -31,6 +31,7 @@ try {
   });
 
   execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
+  execSync('npm run compile-protos', {cwd: packageRoot, stdio: 'inherit'});
 
   const files = fs.readdirSync(utilDir);
   for (const file of files) {
