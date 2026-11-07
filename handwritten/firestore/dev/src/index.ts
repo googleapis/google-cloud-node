@@ -1895,7 +1895,12 @@ export class Firestore implements firestore.Firestore {
     request: {},
     requestTag: string,
   ): Promise<Duplex> {
-    const callOptions = this.createCallOptions(methodName);
+    // gax ignores autoPaginate for stream paging methods (e.g.
+    // partitionQueryStream) and warns if it is not explicitly disabled.
+    const callOptions = {
+      ...this.createCallOptions(methodName),
+      autoPaginate: false,
+    };
 
     const bidirectional = methodName === 'listen';
     let numResponses = 0;
