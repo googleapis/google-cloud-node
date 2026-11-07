@@ -1084,6 +1084,155 @@ export class StorageControlClient {
   }
 
   /**
+   * Updates a managed folder. Currently, this RPC only supports updating the
+   * `rapid_cache_config` field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.ManagedFolder} request.managedFolder
+   *   Required. Properties of the managed folder being updated. Currently, this
+   *   RPC only supports updating the `rapid_cache_config` field in
+   *   `managed_folder`.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Update mask for managed_folder.
+   *   Currently, this RPC only supports updating the `rapid_cache_config`
+   *   field in `managed_folder`. This field also supports update mask for the
+   *   subfields in the map of `rapid_cache_config`. The user can specify the
+   *   update mask for `rapid_cache_config.policies` and
+   *   `rapid_cache_config.policies.<key>`, but patching is not supported for
+   *   a field within `RapidCachePolicy.policies.<key>`, like
+   *   rapid_cache_config.policies.[key].ingest_on_write.
+   * @param {number} [request.ifMetagenerationMatch]
+   *   Optional. The operation succeeds conditional on the managed folder's
+   *   current metageneration matching the value here specified.
+   * @param {number} [request.ifMetagenerationNotMatch]
+   *   Optional. The operation succeeds conditional on the managed folder's
+   *   current metageneration NOT matching the value here specified.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateManagedFolder_async
+   */
+
+  updateManagedFolder(
+    request?: protos.google.storage.control.v2.IUpdateManagedFolderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.IUpdateManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateManagedFolder(
+    request: protos.google.storage.control.v2.IUpdateManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IUpdateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateManagedFolder(
+    request: protos.google.storage.control.v2.IUpdateManagedFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IUpdateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Updates a managed folder. Currently, this RPC only supports updating the
+   * `rapid_cache_config` field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.ManagedFolder} request.managedFolder
+   *   Required. Properties of the managed folder being updated. Currently, this
+   *   RPC only supports updating the `rapid_cache_config` field in
+   *   `managed_folder`.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Update mask for managed_folder.
+   *   Currently, this RPC only supports updating the `rapid_cache_config`
+   *   field in `managed_folder`. This field also supports update mask for the
+   *   subfields in the map of `rapid_cache_config`. The user can specify the
+   *   update mask for `rapid_cache_config.policies` and
+   *   `rapid_cache_config.policies.<key>`, but patching is not supported for
+   *   a field within `RapidCachePolicy.policies.<key>`, like
+   *   rapid_cache_config.policies.[key].ingest_on_write.
+   * @param {number} [request.ifMetagenerationMatch]
+   *   Optional. The operation succeeds conditional on the managed folder's
+   *   current metageneration matching the value here specified.
+   * @param {number} [request.ifMetagenerationNotMatch]
+   *   Optional. The operation succeeds conditional on the managed folder's
+   *   current metageneration NOT matching the value here specified.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateManagedFolder_async
+   */
+  updateManagedFolder(
+    request?: protos.google.storage.control.v2.IUpdateManagedFolderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IManagedFolder,
+          | protos.google.storage.control.v2.IUpdateManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IUpdateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.IUpdateManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.updateManagedFolder(request, options);
+    }
+    return this.storageControlInternal.updateManagedFolder(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
    * Disables an Anywhere Cache instance. A disabled instance is read-only. The
    * disablement could be revoked by calling ResumeAnywhereCache. The cache
    * instance will be deleted automatically if it remains in the disabled state
@@ -1549,6 +1698,115 @@ export class StorageControlClient {
       return this.storageControlInternal.getAnywhereCache(request, options);
     }
     return this.storageControlInternal.getAnywhereCache(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Gets a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.RapidCache|RapidCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetRapidCache_async
+   */
+
+  getRapidCache(
+    request?: protos.google.storage.control.v2.IGetRapidCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IRapidCache,
+      protos.google.storage.control.v2.IGetRapidCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getRapidCache(
+    request: protos.google.storage.control.v2.IGetRapidCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IRapidCache,
+      protos.google.storage.control.v2.IGetRapidCacheRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getRapidCache(
+    request: protos.google.storage.control.v2.IGetRapidCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IRapidCache,
+      protos.google.storage.control.v2.IGetRapidCacheRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Gets a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.RapidCache|RapidCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetRapidCache_async
+   */
+  getRapidCache(
+    request?: protos.google.storage.control.v2.IGetRapidCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IRapidCache,
+          | protos.google.storage.control.v2.IGetRapidCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IRapidCache,
+      protos.google.storage.control.v2.IGetRapidCacheRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IRapidCache,
+      protos.google.storage.control.v2.IGetRapidCacheRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.getRapidCache(request, options);
+    }
+    return this.storageControlInternal.getRapidCache(
       request,
       options,
       callback,
@@ -2917,6 +3175,150 @@ export class StorageControlClient {
   }
 
   /**
+   * Retrieves the full content of an object context, including its key, value,
+   * and any associated extended data for a given context key.
+   *
+   * Object contexts can optionally contain extended data. If an object context
+   * contains extended data, the metadata payload structure will contain only
+   * its type URL. To retrieve the full extended data, call this method.
+   *
+   * Returns the complete representation of the context as an
+   * {@link protos.google.storage.control.v2.ObjectFullContext|`ObjectFullContext`}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.generation]
+   *   Optional. If present, selects a specific revision of this object (as
+   *   opposed to the latest version, the default).
+   * @param {string} request.contextKey
+   *   Required. The key of the object context to retrieve.
+   * @param {string} request.name
+   *   Required. The name of the object.
+   *   Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ObjectFullContext|ObjectFullContext}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.view_object_full_context.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ViewObjectFullContext_async
+   */
+
+  viewObjectFullContext(
+    request?: protos.google.storage.control.v2.IViewObjectFullContextRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IObjectFullContext,
+      (
+        | protos.google.storage.control.v2.IViewObjectFullContextRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  viewObjectFullContext(
+    request: protos.google.storage.control.v2.IViewObjectFullContextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IObjectFullContext,
+      | protos.google.storage.control.v2.IViewObjectFullContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  viewObjectFullContext(
+    request: protos.google.storage.control.v2.IViewObjectFullContextRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IObjectFullContext,
+      | protos.google.storage.control.v2.IViewObjectFullContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Retrieves the full content of an object context, including its key, value,
+   * and any associated extended data for a given context key.
+   *
+   * Object contexts can optionally contain extended data. If an object context
+   * contains extended data, the metadata payload structure will contain only
+   * its type URL. To retrieve the full extended data, call this method.
+   *
+   * Returns the complete representation of the context as an
+   * {@link protos.google.storage.control.v2.ObjectFullContext|`ObjectFullContext`}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.generation]
+   *   Optional. If present, selects a specific revision of this object (as
+   *   opposed to the latest version, the default).
+   * @param {string} request.contextKey
+   *   Required. The key of the object context to retrieve.
+   * @param {string} request.name
+   *   Required. The name of the object.
+   *   Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ObjectFullContext|ObjectFullContext}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.view_object_full_context.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ViewObjectFullContext_async
+   */
+  viewObjectFullContext(
+    request?: protos.google.storage.control.v2.IViewObjectFullContextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IObjectFullContext,
+          | protos.google.storage.control.v2.IViewObjectFullContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IObjectFullContext,
+      | protos.google.storage.control.v2.IViewObjectFullContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IObjectFullContext,
+      (
+        | protos.google.storage.control.v2.IViewObjectFullContextRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.viewObjectFullContext(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.viewObjectFullContext(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
    * Renames a source folder to a destination folder. This operation is only
    * applicable to a hierarchical namespace enabled bucket. During a rename, the
    * source and destination folders are locked until the long running operation
@@ -3591,6 +3993,489 @@ export class StorageControlClient {
     >
   > {
     return this.storageControlInternal.checkUpdateAnywhereCacheProgress(name);
+  }
+
+  /**
+   * Creates a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   *   Format: `projects/{project}/buckets/{bucket}`
+   * @param {google.storage.control.v2.RapidCache} request.rapidCache
+   *   Required. The RapidCache to create. Default values for ingest_on_write, ttl
+   *   and admission_policy will be applied if not specified in the request.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateRapidCache_async
+   */
+
+  createRapidCache(
+    request?: protos.google.storage.control.v2.ICreateRapidCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createRapidCache(
+    request: protos.google.storage.control.v2.ICreateRapidCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createRapidCache(
+    request: protos.google.storage.control.v2.ICreateRapidCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Creates a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   *   Format: `projects/{project}/buckets/{bucket}`
+   * @param {google.storage.control.v2.RapidCache} request.rapidCache
+   *   Required. The RapidCache to create. Default values for ingest_on_write, ttl
+   *   and admission_policy will be applied if not specified in the request.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateRapidCache_async
+   */
+  createRapidCache(
+    request?: protos.google.storage.control.v2.ICreateRapidCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IRapidCache,
+            protos.google.storage.control.v2.ICreateRapidCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.createRapidCache(request, options);
+    }
+    return this.storageControlInternal.createRapidCache(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Check the status of the long running operation returned by `createRapidCache()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateRapidCache_async
+   */
+  checkCreateRapidCacheProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.storage.control.v2.RapidCache,
+      protos.google.storage.control.v2.CreateRapidCacheMetadata
+    >
+  > {
+    return this.storageControlInternal.checkCreateRapidCacheProgress(name);
+  }
+
+  /**
+   * Updates a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.RapidCache} request.rapidCache
+   *   Required. The RapidCache to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated. Mutable fields of RapidCache
+   *   include `ttl`, `admission_policy` and `ingest_on_write`.
+   *
+   *   To specify ALL fields, specify a single field with the value `*`. Note: We
+   *   recommend against doing this. If a new field is introduced at a later time,
+   *   an older client updating with the `*` may accidentally reset the new
+   *   field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateRapidCache_async
+   */
+
+  updateRapidCache(
+    request?: protos.google.storage.control.v2.IUpdateRapidCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateRapidCache(
+    request: protos.google.storage.control.v2.IUpdateRapidCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateRapidCache(
+    request: protos.google.storage.control.v2.IUpdateRapidCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Updates a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.RapidCache} request.rapidCache
+   *   Required. The RapidCache to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated. Mutable fields of RapidCache
+   *   include `ttl`, `admission_policy` and `ingest_on_write`.
+   *
+   *   To specify ALL fields, specify a single field with the value `*`. Note: We
+   *   recommend against doing this. If a new field is introduced at a later time,
+   *   an older client updating with the `*` may accidentally reset the new
+   *   field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateRapidCache_async
+   */
+  updateRapidCache(
+    request?: protos.google.storage.control.v2.IUpdateRapidCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IRapidCache,
+            protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.updateRapidCache(request, options);
+    }
+    return this.storageControlInternal.updateRapidCache(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Check the status of the long running operation returned by `updateRapidCache()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateRapidCache_async
+   */
+  checkUpdateRapidCacheProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.storage.control.v2.RapidCache,
+      protos.google.storage.control.v2.UpdateRapidCacheMetadata
+    >
+  > {
+    return this.storageControlInternal.checkUpdateRapidCacheProgress(name);
+  }
+
+  /**
+   * Disables a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.disable_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DisableRapidCache_async
+   */
+
+  disableRapidCache(
+    request?: protos.google.storage.control.v2.IDisableRapidCacheRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  disableRapidCache(
+    request: protos.google.storage.control.v2.IDisableRapidCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  disableRapidCache(
+    request: protos.google.storage.control.v2.IDisableRapidCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Disables a Rapid Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.disable_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DisableRapidCache_async
+   */
+  disableRapidCache(
+    request?: protos.google.storage.control.v2.IDisableRapidCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IRapidCache,
+            protos.google.storage.control.v2.IDisableRapidCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.disableRapidCache(request, options);
+    }
+    return this.storageControlInternal.disableRapidCache(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Check the status of the long running operation returned by `disableRapidCache()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.disable_rapid_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DisableRapidCache_async
+   */
+  checkDisableRapidCacheProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.storage.control.v2.RapidCache,
+      protos.google.storage.control.v2.DisableRapidCacheMetadata
+    >
+  > {
+    return this.storageControlInternal.checkDisableRapidCacheProgress(name);
   }
 
   /**
@@ -4282,7 +5167,207 @@ export class StorageControlClient {
   }
 
   /**
-   * Lists the `IntelligenceFinding` resources for the specified project.
+   * Lists Rapid Cache instances for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.RapidCache|RapidCache}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRapidCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+
+  listRapidCaches(
+    request?: protos.google.storage.control.v2.IListRapidCachesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IRapidCache[],
+      protos.google.storage.control.v2.IListRapidCachesRequest | null,
+      protos.google.storage.control.v2.IListRapidCachesResponse,
+    ]
+  >;
+  listRapidCaches(
+    request: protos.google.storage.control.v2.IListRapidCachesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListRapidCachesRequest,
+      | protos.google.storage.control.v2.IListRapidCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IRapidCache
+    >,
+  ): void;
+  listRapidCaches(
+    request: protos.google.storage.control.v2.IListRapidCachesRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListRapidCachesRequest,
+      | protos.google.storage.control.v2.IListRapidCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IRapidCache
+    >,
+  ): void;
+  /**
+   * Lists Rapid Cache instances for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.RapidCache|RapidCache}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRapidCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRapidCaches(
+    request?: protos.google.storage.control.v2.IListRapidCachesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListRapidCachesRequest,
+          | protos.google.storage.control.v2.IListRapidCachesResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IRapidCache
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.IListRapidCachesRequest,
+      | protos.google.storage.control.v2.IListRapidCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IRapidCache
+    >,
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IRapidCache[],
+      protos.google.storage.control.v2.IListRapidCachesRequest | null,
+      protos.google.storage.control.v2.IListRapidCachesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.listRapidCaches(request, options);
+    }
+    return this.storageControlInternal.listRapidCaches(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Equivalent to `listRapidCaches`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.RapidCache|RapidCache} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRapidCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listRapidCachesStream(
+    request?: protos.google.storage.control.v2.IListRapidCachesRequest,
+    options?: CallOptions,
+  ): Transform {
+    return this.storageControlInternal.listRapidCachesStream(request, options);
+  }
+
+  /**
+   * Equivalent to `listRapidCaches`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.RapidCache|RapidCache}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.list_rapid_caches.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ListRapidCaches_async
+   */
+  listRapidCachesAsync(
+    request?: protos.google.storage.control.v2.IListRapidCachesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.storage.control.v2.IRapidCache> {
+    return this.storageControlInternal.listRapidCachesAsync(request, options);
+  }
+
+  /**
+   * Lists the `IntelligenceFinding` resources for the specified the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4350,7 +5435,7 @@ export class StorageControlClient {
     >,
   ): void;
   /**
-   * Lists the `IntelligenceFinding` resources for the specified project.
+   * Lists the `IntelligenceFinding` resources for the specified the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4523,8 +5608,8 @@ export class StorageControlClient {
   }
 
   /**
-   * Summarize the intelligence findings for the specified scope(org, folder or
-   * project).
+   * Summarizes the intelligence findings for the specified scope (organization,
+   * folder or project).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4607,8 +5692,8 @@ export class StorageControlClient {
     >,
   ): void;
   /**
-   * Summarize the intelligence findings for the specified scope(org, folder or
-   * project).
+   * Summarizes the intelligence findings for the specified scope (organization,
+   * folder or project).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5837,6 +6922,51 @@ export class StorageControlClient {
   }
 
   /**
+   * Return a fully-qualified object resource name string.
+   *
+   * @param {string} project
+   * @param {string} bucket
+   * @param {string} object
+   * @returns {string} Resource name string.
+   */
+  objectPath(project: string, bucket: string, object: string) {
+    return this.storageControlInternal.objectPath(project, bucket, object);
+  }
+
+  /**
+   * Parse the project from Object resource.
+   *
+   * @param {string} objectName
+   *   A fully-qualified path representing Object resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromObjectName(objectName: string) {
+    return this.storageControlInternal.matchProjectFromObjectName(objectName);
+  }
+
+  /**
+   * Parse the bucket from Object resource.
+   *
+   * @param {string} objectName
+   *   A fully-qualified path representing Object resource.
+   * @returns {string} A string representing the bucket.
+   */
+  matchBucketFromObjectName(objectName: string) {
+    return this.storageControlInternal.matchBucketFromObjectName(objectName);
+  }
+
+  /**
+   * Parse the object from Object resource.
+   *
+   * @param {string} objectName
+   *   A fully-qualified path representing Object resource.
+   * @returns {string} A string representing the object.
+   */
+  matchObjectFromObjectName(objectName: string) {
+    return this.storageControlInternal.matchObjectFromObjectName(objectName);
+  }
+
+  /**
    * Return a fully-qualified orgLocationIntelligenceConfig resource name string.
    *
    * @param {string} org
@@ -5942,6 +7072,61 @@ export class StorageControlClient {
   ) {
     return this.storageControlInternal.matchLocationFromProjectLocationIntelligenceConfigName(
       projectLocationIntelligenceConfigName,
+    );
+  }
+
+  /**
+   * Return a fully-qualified rapidCache resource name string.
+   *
+   * @param {string} project
+   * @param {string} bucket
+   * @param {string} rapid_cache
+   * @returns {string} Resource name string.
+   */
+  rapidCachePath(project: string, bucket: string, rapidCache: string) {
+    return this.storageControlInternal.rapidCachePath(
+      project,
+      bucket,
+      rapidCache,
+    );
+  }
+
+  /**
+   * Parse the project from RapidCache resource.
+   *
+   * @param {string} rapidCacheName
+   *   A fully-qualified path representing RapidCache resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRapidCacheName(rapidCacheName: string) {
+    return this.storageControlInternal.matchProjectFromRapidCacheName(
+      rapidCacheName,
+    );
+  }
+
+  /**
+   * Parse the bucket from RapidCache resource.
+   *
+   * @param {string} rapidCacheName
+   *   A fully-qualified path representing RapidCache resource.
+   * @returns {string} A string representing the bucket.
+   */
+  matchBucketFromRapidCacheName(rapidCacheName: string) {
+    return this.storageControlInternal.matchBucketFromRapidCacheName(
+      rapidCacheName,
+    );
+  }
+
+  /**
+   * Parse the rapid_cache from RapidCache resource.
+   *
+   * @param {string} rapidCacheName
+   *   A fully-qualified path representing RapidCache resource.
+   * @returns {string} A string representing the rapid_cache.
+   */
+  matchRapidCacheFromRapidCacheName(rapidCacheName: string) {
+    return this.storageControlInternal.matchRapidCacheFromRapidCacheName(
+      rapidCacheName,
     );
   }
 

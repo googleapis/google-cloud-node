@@ -2285,8 +2285,10 @@ libraries:
       - src/util/samples_and_doc_fix_utils.ts
       - src/util/storage_control_utils.ts
       - src/util/uber_client_builder.ts
+      - system-test/fixtures/sample/src/index.js
+      - system-test/fixtures/sample/src/index.ts
       - test/storage_control_compatibility.ts
-    skip_generate: true
+      - webpack.config.js
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'
