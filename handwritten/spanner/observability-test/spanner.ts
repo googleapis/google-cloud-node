@@ -29,6 +29,7 @@ import * as sinon from 'sinon';
 import {Row} from '../src/partial-result-stream';
 import {END_TO_END_TRACING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
+import {RequestIDError} from '../src/request_id_header';
 const {
   AlwaysOnSampler,
   NodeTracerProvider,
@@ -1174,7 +1175,7 @@ SELECT 1p
     sandbox.restore();
   });
 
-  function assertRunBadSyntaxExpectations() {
+  function assertRunBadSyntaxExpectations(requestID?: string) {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
 
@@ -1273,7 +1274,7 @@ SELECT 1p
       'Expected an error status',
     );
 
-    const want = '3 INVALID_ARGUMENT: ' + messageBadSelect1p;
+    const want = `3 INVALID_ARGUMENT: ${messageBadSelect1p} (x-goog-spanner-request-id: ${requestID})`;
     assert.deepStrictEqual(
       runStreamSpan.status.message,
       want,
@@ -1296,17 +1297,19 @@ SELECT 1p
   it('database.run with bad syntax: async/await', async () => {
     const instance = spanner.instance('instance');
     const database = instance.database('database');
+    let requestID: string | undefined;
 
     try {
       await database.run(selectSql1p);
     } catch (e) {
       // This catch is meant to ensure that we
       // can assert on the generated spans.
+      requestID = (e as RequestIDError).requestID;
     } finally {
       provider.forceFlush();
     }
 
-    assertRunBadSyntaxExpectations();
+    assertRunBadSyntaxExpectations(requestID);
   });
 
   it('database.run with bad syntax: callback', done => {
@@ -1316,12 +1319,14 @@ SELECT 1p
     database.run(selectSql1p, err => {
       assert.ok(err);
       provider.forceFlush();
-      assertRunBadSyntaxExpectations();
+      assertRunBadSyntaxExpectations((err as RequestIDError).requestID);
       done();
     });
   });
 
-  function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData() {
+  function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData(
+    requestID?: string,
+  ) {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
 
@@ -1352,7 +1357,7 @@ SELECT 1p
     );
     const spanSnapshotRun = spans[3];
     assert.strictEqual(spanSnapshotRun.name, 'CloudSpanner.Snapshot.run');
-    const wantSpanErr = '6 ALREADY_EXISTS: ' + messageBadInsertAlreadyExistent;
+    const wantSpanErr = `6 ALREADY_EXISTS: ${messageBadInsertAlreadyExistent} (x-goog-spanner-request-id: ${requestID})`;
     assert.deepStrictEqual(
       spanSnapshotRun.status.code,
       SpanStatusCode.ERROR,
@@ -1456,6 +1461,7 @@ SELECT 1p
     const update = {
       sql: insertAlreadyExistentDataSql,
     };
+    let requestID: string | undefined;
 
     try {
       await database.runTransactionAsync(async transaction => {
@@ -1466,6 +1472,7 @@ SELECT 1p
         }
       });
     } catch (e) {
+      requestID = (e as RequestIDError).requestID;
       assert.strictEqual(
         (e as grpc.ServiceError).code,
         grpc.status.ALREADY_EXISTS,
@@ -1473,7 +1480,7 @@ SELECT 1p
     }
 
     provider.forceFlush();
-    assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData();
+    assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData(requestID);
   });
 });
 
@@ -1720,7 +1727,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         } catch (e) {
           assert.strictEqual(
             (e as grpc.ServiceError).message,
-            '2 UNKNOWN: Test error',
+            `2 UNKNOWN: Test error (x-goog-spanner-request-id: ${(e as RequestIDError).requestID})`,
           );
         }
         await database.close();
@@ -1759,7 +1766,10 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         );
         database.run(selectSql, err => {
           assert.ok(err, 'Missing expected error');
-          assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
+          assert.strictEqual(
+            err!.message,
+            `2 UNKNOWN: Non-retryable error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+          );
           database
             .close()
             .then(() => done())
@@ -1790,7 +1800,10 @@ describe('Traces for ExecuteStream broken stream retries', () => {
             assert.fail('Missing expected error');
           })
           .on('error', err => {
-            assert.strictEqual(err.message, '2 UNKNOWN: Non-retryable error');
+            assert.strictEqual(
+              err.message,
+              `2 UNKNOWN: Non-retryable error (x-goog-spanner-request-id: ${(err as RequestIDError).requestID})`,
+            );
             database
               .close()
               .then(() => {

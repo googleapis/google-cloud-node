@@ -95,10 +95,12 @@ import * as v1 from './v1';
 import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
+  getActiveOrNoopSpan,
   isTracingEnabled,
 } from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
+  createRequestIdInterceptor,
   injectRequestIDIntoError,
   nextSpannerClientId,
 } from './request_id_header';
@@ -1869,6 +1871,9 @@ class Spanner extends GrpcService {
           projectId!,
         );
       }
+      // Captured here (not inside the interceptor) so gax retries, which run
+      // asynchronously, still update the span of the originating operation.
+      let requestIdSpan: ReturnType<typeof getActiveOrNoopSpan> | undefined;
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1877,7 +1882,7 @@ class Spanner extends GrpcService {
           },
         });
         // Attach the x-goog-spanner-request-id to the currently active span.
-        attributeXGoogSpannerRequestIdToActiveSpan(config);
+        requestIdSpan = attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const customInterceptors: any[] =
@@ -1885,9 +1890,11 @@ class Spanner extends GrpcService {
       const shouldIntercept =
         this._metricsEnabled &&
         (config.client === 'SpannerClient' || config.metricsTracer);
-      const interceptors = shouldIntercept
-        ? [...customInterceptors, MetricInterceptor]
-        : customInterceptors;
+      const interceptors = [
+        ...customInterceptors,
+        createRequestIdInterceptor(config, requestIdSpan),
+        ...(shouldIntercept ? [MetricInterceptor] : []),
+      ];
       const headers = Object.assign(
         {},
         config.gaxOpts?.otherArgs?.headers,
