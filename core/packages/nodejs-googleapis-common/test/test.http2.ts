@@ -41,6 +41,9 @@ class FakeClient extends EventEmitter {
     callback();
   };
   destroy = () => {};
+  setTimeout = (timeout: number, callback: () => {}) => {
+    setTimeout(callback, timeout);
+  };
 }
 
 describe('http2', () => {

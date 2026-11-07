@@ -38,7 +38,6 @@ const DEBUG = !!process.env.HTTP2_DEBUG;
  */
 export interface SessionData {
   session: http2.ClientHttp2Session;
-  timeoutHandle?: NodeJS.Timeout;
 }
 
 /**
@@ -71,12 +70,6 @@ export async function request<T>(
 
   // Check for an existing session to this host, or go create a new one.
   const sessionData = _getClient(url.host);
-
-  // Since we're using this session, clear the timeout handle to ensure
-  // it stays in memory and connected for a while further.
-  if (sessionData.timeoutHandle !== undefined) {
-    clearTimeout(sessionData.timeoutHandle);
-  }
 
   // Assemble the querystring based on config.params.  We're using the
   // `qs` module to make life a little easier.
@@ -181,7 +174,7 @@ export async function request<T>(
           return;
         });
     } catch (e) {
-      closeSession(url)
+      closeSession(url.host, session)
         .then(() => reject(e))
         .catch(reject);
       return;
@@ -202,13 +195,6 @@ export async function request<T>(
         req.end(data);
       }
     }
-
-    // Create a timeout so the Http2Session will be cleaned up after
-    // a period of non-use. 500 milliseconds was chosen because it's
-    // a nice round number, and I don't know what would be a better
-    // choice. Keeping this channel open will hold a file descriptor
-    // which will prevent the process from exiting.
-    sessionData.timeoutHandle = setTimeout(() => closeSession(url), 500);
   });
 }
 
@@ -238,6 +224,13 @@ function _getClient(host: string): SessionData {
       .on('goaway', (errorCode, lastStreamId) => {
         console.error(`*GOAWAY*: ${errorCode} : ${lastStreamId}`);
         delete sessions[host];
+      })
+      .setTimeout(500, () => {
+        // Clean up Http2Session after a period of non-use. 500 milliseconds was
+        // chosen because it's a nice round number, and I don't know what would
+        // be a better choice. Keeping this channel open will hold a file
+        // descriptor which will prevent the process from exiting.
+        return closeSession(host, session);
       });
     sessions[host] = {session};
   } else {
@@ -248,25 +241,28 @@ function _getClient(host: string): SessionData {
   return sessions[host];
 }
 
-export async function closeSession(url: URL) {
-  const sessionData = sessions[url.host];
-  if (!sessionData) {
+export async function closeSession(
+  host: string,
+  session: http2.ClientHttp2Session,
+) {
+  const sessionData = sessions[host];
+  if (sessionData?.session !== session) {
+    // session has been replaced with a different session, don't touch
     return;
   }
-  const {session} = sessionData;
-  delete sessions[url.host];
+  delete sessions[host];
   if (DEBUG) {
-    console.error(`Closing ${url.host}`);
+    console.error(`Closing ${host}`);
   }
   session.close(() => {
     if (DEBUG) {
-      console.error(`Closed ${url.host}`);
+      console.error(`Closed ${host}`);
     }
   });
   setTimeout(() => {
     if (session && !session.destroyed) {
       if (DEBUG) {
-        console.log(`Forcing close ${url.host}`);
+        console.log(`Forcing close ${host}`);
       }
       if (session) {
         session.destroy();
