@@ -417,6 +417,43 @@ export abstract class AuthClient
   }
 
   static log = makeLog('auth');
+
+  /**
+   * Fields of a response body that hold a credential. Token endpoints
+   * (OAuth 2.0, STS, IAM Credentials) return them at the top level.
+   */
+  static readonly REDACTED_LOG_FIELDS: readonly string[] = [
+    'access_token',
+    'id_token',
+    'refresh_token',
+    'accessToken',
+    'token',
+  ];
+
+  /**
+   * Returns a copy of a response body for logging, with credential fields
+   * replaced by a placeholder. The body itself is not changed. Only plain
+   * objects (parsed JSON) are copied; anything else, such as a `Buffer` or a
+   * stream, is returned as is.
+   * @param data A response body
+   */
+  static redactForLog(data: unknown): unknown {
+    if (data === null || typeof data !== 'object') {
+      return data;
+    }
+    const proto: unknown = Object.getPrototypeOf(data);
+    if (proto !== Object.prototype && proto !== null) {
+      return data;
+    }
+    const copy: Record<string, unknown> = {...data};
+    for (const field of AuthClient.REDACTED_LOG_FIELDS) {
+      if (copy[field] !== undefined) {
+        copy[field] = '***REDACTED***';
+      }
+    }
+    return copy;
+  }
+
   static readonly DEFAULT_REQUEST_INTERCEPTOR: Parameters<
     Gaxios['interceptors']['request']['add']
   >[0] = {
@@ -482,10 +519,14 @@ export abstract class AuthClient
             '%s [%s] response %j',
             methodName,
             logId,
-            response.data,
+            AuthClient.redactForLog(response.data),
           );
         } else {
-          AuthClient.log.debug('[%s] response %j', logId, response.data);
+          AuthClient.log.debug(
+            '[%s] response %j',
+            logId,
+            AuthClient.redactForLog(response.data),
+          );
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
@@ -504,10 +545,14 @@ export abstract class AuthClient
             '%s [%s] error %j',
             methodName,
             logId,
-            error.response?.data,
+            AuthClient.redactForLog(error.response?.data),
           );
         } else {
-          AuthClient.log.debug('[%s] error %j', logId, error.response?.data);
+          AuthClient.log.debug(
+            '[%s] error %j',
+            logId,
+            AuthClient.redactForLog(error.response?.data),
+          );
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
