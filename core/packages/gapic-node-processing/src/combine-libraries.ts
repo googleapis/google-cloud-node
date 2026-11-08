@@ -301,10 +301,12 @@ const SYSTEM_TEST_FIXTURE_PATH = 'system-test/fixtures/sample/src';
 function getVersionedLibraryDir(normalizedPath: string): string {
   const parts = normalizedPath.split('/');
   const systemTestIndex = parts.indexOf('system-test');
-  if (systemTestIndex < 0) return '';
+  // `system-test` must be preceded by a directory, otherwise there is no
+  // versioned library name to read off.
+  if (systemTestIndex <= 0) return '';
   let index = systemTestIndex - 1;
   if (parts[index] === 'esm') index--;
-  return parts[index] ?? '';
+  return index >= 0 ? parts[index] : '';
 }
 
 export function setOnlyDefaultSystemTests(
@@ -321,6 +323,9 @@ export function setOnlyDefaultSystemTests(
     // runs in, or the "v1" inside "v1p1beta1") makes non-default versions look
     // like the default one.
     const versionedDir = getVersionedLibraryDir(normalizedPath);
+    // If the version cannot be determined, keep the file rather than deleting
+    // fixtures belonging to an unknown version.
+    if (!versionedDir) continue;
     if (!versionedDir.split('-').includes(defaultVersion)) {
       filePaths.splice(i, 1);
     }

@@ -369,6 +369,24 @@ export {BigtableTableAdminClient} from './bigtable_table_admin_client';
       setOnlyDefaultSystemTests('v2', filePaths);
       assert.strictEqual(filePaths.length, 1);
     });
+
+    it('should keep the file when the versioned directory cannot be resolved', () => {
+      // `system-test` at the start of the path leaves no versioned library
+      // directory to read the version from, so the file must not be dropped.
+      const filePaths = [
+        {filePath: 'system-test/fixtures/sample/src/index.ts'},
+      ];
+      setOnlyDefaultSystemTests('v2', filePaths);
+      assert.strictEqual(filePaths.length, 1);
+    });
+
+    it('should keep the file when esm directly precedes an unresolvable system-test', () => {
+      const filePaths = [
+        {filePath: 'esm/system-test/fixtures/sample/src/index.ts'},
+      ];
+      setOnlyDefaultSystemTests('v2', filePaths);
+      assert.strictEqual(filePaths.length, 1);
+    });
   });
 
   describe('isVersionIndexFile', () => {
