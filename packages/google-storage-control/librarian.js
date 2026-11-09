@@ -30,6 +30,7 @@ try {
     stdio: 'inherit',
   });
 
+  // TODO(b/582921805): Disable sample generation once samples are removed from the generator pipeline.
   execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
 
   // TODO(b/582921805): Remove this extra compile-protos pass once the generator
