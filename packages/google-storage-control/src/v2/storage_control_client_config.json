@@ -7,9 +7,8 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
-        "unknown_deadline_exceeded_resource_exhausted_internal_unavailable": [
+        "unknown_resource_exhausted_internal_unavailable": [
           "UNKNOWN",
-          "DEADLINE_EXCEEDED",
           "RESOURCE_EXHAUSTED",
           "INTERNAL",
           "UNAVAILABLE"
@@ -38,7 +37,7 @@
       "methods": {
         "CreateFolder": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "DeleteFolder": {
@@ -48,27 +47,27 @@
         },
         "GetFolder": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListFolders": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "RenameFolder": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "DeleteFolderRecursive": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetStorageLayout": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "CreateManagedFolder": {
@@ -83,77 +82,107 @@
         },
         "GetManagedFolder": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListManagedFolders": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateManagedFolder": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         },
         "CreateAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "UpdateAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "DisableAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "PauseAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ResumeAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetAnywhereCache": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListAnywhereCaches": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "CreateRapidCache": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateRapidCache": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DisableRapidCache": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRapidCache": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListRapidCaches": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         },
         "GetProjectIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "UpdateProjectIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetFolderIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "UpdateFolderIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetOrganizationIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "UpdateOrganizationIntelligenceConfig": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetIamPolicy": {
@@ -173,28 +202,33 @@
         },
         "GetIntelligenceFinding": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListIntelligenceFindings": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "SummarizeIntelligenceFindings": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetIntelligenceFindingRevision": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListIntelligenceFindingRevisions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "unknown_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "ViewObjectFullContext": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

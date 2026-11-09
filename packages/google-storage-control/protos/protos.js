@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots["_google_cloud_storage_control_protos"] || ($protobuf.roots["_google_cloud_storage_control_protos"] = {});
+    var $root = $protobuf.roots._google_cloud_storage_control_protos || ($protobuf.roots._google_cloud_storage_control_protos = {});
     
     $root.google = (function() {
     
@@ -118,7 +118,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createFolder = function createFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createFolder, $root.google.storage.control.v2.CreateFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
+                            return this.rpcCall(createFolder, $root.google.storage.control.v2.CreateFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
                         }, "name", { value: "CreateFolder" });
     
                         /**
@@ -151,7 +151,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteFolder = function deleteFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteFolder, $root.google.storage.control.v2.DeleteFolderRequest, $root.google.protobuf.Empty, request, callback);
+                            return this.rpcCall(deleteFolder, $root.google.storage.control.v2.DeleteFolderRequest, $root.google.protobuf.Empty, request, callback);
                         }, "name", { value: "DeleteFolder" });
     
                         /**
@@ -184,7 +184,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getFolder = function getFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFolder, $root.google.storage.control.v2.GetFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
+                            return this.rpcCall(getFolder, $root.google.storage.control.v2.GetFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
                         }, "name", { value: "GetFolder" });
     
                         /**
@@ -217,7 +217,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listFolders = function listFolders(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listFolders, $root.google.storage.control.v2.ListFoldersRequest, $root.google.storage.control.v2.ListFoldersResponse, request, callback);
+                            return this.rpcCall(listFolders, $root.google.storage.control.v2.ListFoldersRequest, $root.google.storage.control.v2.ListFoldersResponse, request, callback);
                         }, "name", { value: "ListFolders" });
     
                         /**
@@ -250,7 +250,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.renameFolder = function renameFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, renameFolder, $root.google.storage.control.v2.RenameFolderRequest, $root.google.longrunning.Operation, request, callback);
+                            return this.rpcCall(renameFolder, $root.google.storage.control.v2.RenameFolderRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "RenameFolder" });
     
                         /**
@@ -283,7 +283,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteFolderRecursive = function deleteFolderRecursive(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteFolderRecursive, $root.google.storage.control.v2.DeleteFolderRecursiveRequest, $root.google.longrunning.Operation, request, callback);
+                            return this.rpcCall(deleteFolderRecursive, $root.google.storage.control.v2.DeleteFolderRecursiveRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "DeleteFolderRecursive" });
     
                         /**
@@ -316,7 +316,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getStorageLayout = function getStorageLayout(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getStorageLayout, $root.google.storage.control.v2.GetStorageLayoutRequest, $root.google.storage.control.v2.StorageLayout, request, callback);
+                            return this.rpcCall(getStorageLayout, $root.google.storage.control.v2.GetStorageLayoutRequest, $root.google.storage.control.v2.StorageLayout, request, callback);
                         }, "name", { value: "GetStorageLayout" });
     
                         /**
@@ -349,7 +349,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createManagedFolder = function createManagedFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createManagedFolder, $root.google.storage.control.v2.CreateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                            return this.rpcCall(createManagedFolder, $root.google.storage.control.v2.CreateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
                         }, "name", { value: "CreateManagedFolder" });
     
                         /**
@@ -382,7 +382,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteManagedFolder = function deleteManagedFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteManagedFolder, $root.google.storage.control.v2.DeleteManagedFolderRequest, $root.google.protobuf.Empty, request, callback);
+                            return this.rpcCall(deleteManagedFolder, $root.google.storage.control.v2.DeleteManagedFolderRequest, $root.google.protobuf.Empty, request, callback);
                         }, "name", { value: "DeleteManagedFolder" });
     
                         /**
@@ -415,7 +415,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getManagedFolder = function getManagedFolder(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getManagedFolder, $root.google.storage.control.v2.GetManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                            return this.rpcCall(getManagedFolder, $root.google.storage.control.v2.GetManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
                         }, "name", { value: "GetManagedFolder" });
     
                         /**
@@ -448,7 +448,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listManagedFolders = function listManagedFolders(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listManagedFolders, $root.google.storage.control.v2.ListManagedFoldersRequest, $root.google.storage.control.v2.ListManagedFoldersResponse, request, callback);
+                            return this.rpcCall(listManagedFolders, $root.google.storage.control.v2.ListManagedFoldersRequest, $root.google.storage.control.v2.ListManagedFoldersResponse, request, callback);
                         }, "name", { value: "ListManagedFolders" });
     
                         /**
@@ -458,6 +458,39 @@
                          * @instance
                          * @param {google.storage.control.v2.IListManagedFoldersRequest} request ListManagedFoldersRequest message or plain object
                          * @returns {Promise<google.storage.control.v2.ListManagedFoldersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|updateManagedFolder}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef UpdateManagedFolderCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ManagedFolder} [response] ManagedFolder
+                         */
+    
+                        /**
+                         * Calls UpdateManagedFolder.
+                         * @function updateManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest} request UpdateManagedFolderRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.UpdateManagedFolderCallback} callback Node-style callback called with the error, if any, and ManagedFolder
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.updateManagedFolder = function updateManagedFolder(request, callback) {
+                            return this.rpcCall(updateManagedFolder, $root.google.storage.control.v2.UpdateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                        }, "name", { value: "UpdateManagedFolder" });
+    
+                        /**
+                         * Calls UpdateManagedFolder.
+                         * @function updateManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest} request UpdateManagedFolderRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ManagedFolder>} Promise
                          * @variation 2
                          */
     
@@ -481,7 +514,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createAnywhereCache = function createAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createAnywhereCache, $root.google.storage.control.v2.CreateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                            return this.rpcCall(createAnywhereCache, $root.google.storage.control.v2.CreateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "CreateAnywhereCache" });
     
                         /**
@@ -514,7 +547,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateAnywhereCache = function updateAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateAnywhereCache, $root.google.storage.control.v2.UpdateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                            return this.rpcCall(updateAnywhereCache, $root.google.storage.control.v2.UpdateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "UpdateAnywhereCache" });
     
                         /**
@@ -547,7 +580,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.disableAnywhereCache = function disableAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, disableAnywhereCache, $root.google.storage.control.v2.DisableAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return this.rpcCall(disableAnywhereCache, $root.google.storage.control.v2.DisableAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "DisableAnywhereCache" });
     
                         /**
@@ -580,7 +613,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.pauseAnywhereCache = function pauseAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, pauseAnywhereCache, $root.google.storage.control.v2.PauseAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return this.rpcCall(pauseAnywhereCache, $root.google.storage.control.v2.PauseAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "PauseAnywhereCache" });
     
                         /**
@@ -613,7 +646,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.resumeAnywhereCache = function resumeAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, resumeAnywhereCache, $root.google.storage.control.v2.ResumeAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return this.rpcCall(resumeAnywhereCache, $root.google.storage.control.v2.ResumeAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "ResumeAnywhereCache" });
     
                         /**
@@ -646,7 +679,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getAnywhereCache = function getAnywhereCache(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getAnywhereCache, $root.google.storage.control.v2.GetAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return this.rpcCall(getAnywhereCache, $root.google.storage.control.v2.GetAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "GetAnywhereCache" });
     
                         /**
@@ -679,7 +712,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listAnywhereCaches = function listAnywhereCaches(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listAnywhereCaches, $root.google.storage.control.v2.ListAnywhereCachesRequest, $root.google.storage.control.v2.ListAnywhereCachesResponse, request, callback);
+                            return this.rpcCall(listAnywhereCaches, $root.google.storage.control.v2.ListAnywhereCachesRequest, $root.google.storage.control.v2.ListAnywhereCachesResponse, request, callback);
                         }, "name", { value: "ListAnywhereCaches" });
     
                         /**
@@ -689,6 +722,171 @@
                          * @instance
                          * @param {google.storage.control.v2.IListAnywhereCachesRequest} request ListAnywhereCachesRequest message or plain object
                          * @returns {Promise<google.storage.control.v2.ListAnywhereCachesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|createRapidCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef CreateRapidCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateRapidCache.
+                         * @function createRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest} request CreateRapidCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.CreateRapidCacheCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.createRapidCache = function createRapidCache(request, callback) {
+                            return this.rpcCall(createRapidCache, $root.google.storage.control.v2.CreateRapidCacheRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateRapidCache" });
+    
+                        /**
+                         * Calls CreateRapidCache.
+                         * @function createRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest} request CreateRapidCacheRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|updateRapidCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef UpdateRapidCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateRapidCache.
+                         * @function updateRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest} request UpdateRapidCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.UpdateRapidCacheCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.updateRapidCache = function updateRapidCache(request, callback) {
+                            return this.rpcCall(updateRapidCache, $root.google.storage.control.v2.UpdateRapidCacheRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateRapidCache" });
+    
+                        /**
+                         * Calls UpdateRapidCache.
+                         * @function updateRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest} request UpdateRapidCacheRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|disableRapidCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef DisableRapidCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DisableRapidCache.
+                         * @function disableRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest} request DisableRapidCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.DisableRapidCacheCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.disableRapidCache = function disableRapidCache(request, callback) {
+                            return this.rpcCall(disableRapidCache, $root.google.storage.control.v2.DisableRapidCacheRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DisableRapidCache" });
+    
+                        /**
+                         * Calls DisableRapidCache.
+                         * @function disableRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest} request DisableRapidCacheRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|getRapidCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef GetRapidCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.RapidCache} [response] RapidCache
+                         */
+    
+                        /**
+                         * Calls GetRapidCache.
+                         * @function getRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest} request GetRapidCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.GetRapidCacheCallback} callback Node-style callback called with the error, if any, and RapidCache
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.getRapidCache = function getRapidCache(request, callback) {
+                            return this.rpcCall(getRapidCache, $root.google.storage.control.v2.GetRapidCacheRequest, $root.google.storage.control.v2.RapidCache, request, callback);
+                        }, "name", { value: "GetRapidCache" });
+    
+                        /**
+                         * Calls GetRapidCache.
+                         * @function getRapidCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest} request GetRapidCacheRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.RapidCache>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|listRapidCaches}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ListRapidCachesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ListRapidCachesResponse} [response] ListRapidCachesResponse
+                         */
+    
+                        /**
+                         * Calls ListRapidCaches.
+                         * @function listRapidCaches
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListRapidCachesRequest} request ListRapidCachesRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ListRapidCachesCallback} callback Node-style callback called with the error, if any, and ListRapidCachesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.listRapidCaches = function listRapidCaches(request, callback) {
+                            return this.rpcCall(listRapidCaches, $root.google.storage.control.v2.ListRapidCachesRequest, $root.google.storage.control.v2.ListRapidCachesResponse, request, callback);
+                        }, "name", { value: "ListRapidCaches" });
+    
+                        /**
+                         * Calls ListRapidCaches.
+                         * @function listRapidCaches
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListRapidCachesRequest} request ListRapidCachesRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ListRapidCachesResponse>} Promise
                          * @variation 2
                          */
     
@@ -712,7 +910,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getProjectIntelligenceConfig = function getProjectIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getProjectIntelligenceConfig, $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(getProjectIntelligenceConfig, $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetProjectIntelligenceConfig" });
     
                         /**
@@ -745,7 +943,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateProjectIntelligenceConfig = function updateProjectIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateProjectIntelligenceConfig, $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(updateProjectIntelligenceConfig, $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateProjectIntelligenceConfig" });
     
                         /**
@@ -778,7 +976,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getFolderIntelligenceConfig = function getFolderIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFolderIntelligenceConfig, $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(getFolderIntelligenceConfig, $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetFolderIntelligenceConfig" });
     
                         /**
@@ -811,7 +1009,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateFolderIntelligenceConfig = function updateFolderIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateFolderIntelligenceConfig, $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(updateFolderIntelligenceConfig, $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateFolderIntelligenceConfig" });
     
                         /**
@@ -844,7 +1042,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getOrganizationIntelligenceConfig = function getOrganizationIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getOrganizationIntelligenceConfig, $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(getOrganizationIntelligenceConfig, $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetOrganizationIntelligenceConfig" });
     
                         /**
@@ -877,7 +1075,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateOrganizationIntelligenceConfig = function updateOrganizationIntelligenceConfig(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateOrganizationIntelligenceConfig, $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return this.rpcCall(updateOrganizationIntelligenceConfig, $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateOrganizationIntelligenceConfig" });
     
                         /**
@@ -910,7 +1108,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                         }, "name", { value: "GetIamPolicy" });
     
                         /**
@@ -943,7 +1141,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                         }, "name", { value: "SetIamPolicy" });
     
                         /**
@@ -976,7 +1174,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                         }, "name", { value: "TestIamPermissions" });
     
                         /**
@@ -1009,7 +1207,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIntelligenceFinding = function getIntelligenceFinding(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIntelligenceFinding, $root.google.storage.control.v2.GetIntelligenceFindingRequest, $root.google.storage.control.v2.IntelligenceFinding, request, callback);
+                            return this.rpcCall(getIntelligenceFinding, $root.google.storage.control.v2.GetIntelligenceFindingRequest, $root.google.storage.control.v2.IntelligenceFinding, request, callback);
                         }, "name", { value: "GetIntelligenceFinding" });
     
                         /**
@@ -1042,7 +1240,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listIntelligenceFindings = function listIntelligenceFindings(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listIntelligenceFindings, $root.google.storage.control.v2.ListIntelligenceFindingsRequest, $root.google.storage.control.v2.ListIntelligenceFindingsResponse, request, callback);
+                            return this.rpcCall(listIntelligenceFindings, $root.google.storage.control.v2.ListIntelligenceFindingsRequest, $root.google.storage.control.v2.ListIntelligenceFindingsResponse, request, callback);
                         }, "name", { value: "ListIntelligenceFindings" });
     
                         /**
@@ -1075,7 +1273,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.summarizeIntelligenceFindings = function summarizeIntelligenceFindings(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, summarizeIntelligenceFindings, $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest, $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse, request, callback);
+                            return this.rpcCall(summarizeIntelligenceFindings, $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest, $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse, request, callback);
                         }, "name", { value: "SummarizeIntelligenceFindings" });
     
                         /**
@@ -1108,7 +1306,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIntelligenceFindingRevision = function getIntelligenceFindingRevision(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIntelligenceFindingRevision, $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest, $root.google.storage.control.v2.IntelligenceFindingRevision, request, callback);
+                            return this.rpcCall(getIntelligenceFindingRevision, $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest, $root.google.storage.control.v2.IntelligenceFindingRevision, request, callback);
                         }, "name", { value: "GetIntelligenceFindingRevision" });
     
                         /**
@@ -1141,7 +1339,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listIntelligenceFindingRevisions = function listIntelligenceFindingRevisions(request, callback) {
-                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listIntelligenceFindingRevisions, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, request, callback);
+                            return this.rpcCall(listIntelligenceFindingRevisions, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, request, callback);
                         }, "name", { value: "ListIntelligenceFindingRevisions" });
     
                         /**
@@ -1151,6 +1349,39 @@
                          * @instance
                          * @param {google.storage.control.v2.IListIntelligenceFindingRevisionsRequest} request ListIntelligenceFindingRevisionsRequest message or plain object
                          * @returns {Promise<google.storage.control.v2.ListIntelligenceFindingRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|viewObjectFullContext}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ViewObjectFullContextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ObjectFullContext} [response] ObjectFullContext
+                         */
+    
+                        /**
+                         * Calls ViewObjectFullContext.
+                         * @function viewObjectFullContext
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest} request ViewObjectFullContextRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ViewObjectFullContextCallback} callback Node-style callback called with the error, if any, and ObjectFullContext
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.viewObjectFullContext = function viewObjectFullContext(request, callback) {
+                            return this.rpcCall(viewObjectFullContext, $root.google.storage.control.v2.ViewObjectFullContextRequest, $root.google.storage.control.v2.ObjectFullContext, request, callback);
+                        }, "name", { value: "ViewObjectFullContext" });
+    
+                        /**
+                         * Calls ViewObjectFullContext.
+                         * @function viewObjectFullContext
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest} request ViewObjectFullContextRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ObjectFullContext>} Promise
                          * @variation 2
                          */
     
@@ -1232,7 +1463,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         PendingRenameInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -1253,7 +1484,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.PendingRenameInfo();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.PendingRenameInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -1267,6 +1508,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -1503,7 +1749,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Folder.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -1524,7 +1770,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.Folder();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.Folder();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -1554,6 +1810,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -1858,7 +2119,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -1879,7 +2140,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -1905,6 +2176,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -2199,7 +2475,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -2220,7 +2496,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -2250,6 +2536,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -2528,7 +2819,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -2549,7 +2840,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DeleteFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -2575,6 +2876,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -2902,7 +3208,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListFoldersRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -2923,7 +3229,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListFoldersRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListFoldersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -2965,6 +3281,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -3227,7 +3548,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListFoldersResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -3248,7 +3569,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListFoldersResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListFoldersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -3268,6 +3599,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -3545,7 +3881,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RenameFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -3566,7 +3902,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.RenameFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.RenameFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -3596,6 +3942,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -3902,7 +4253,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRecursiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -3923,7 +4274,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteFolderRecursiveRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DeleteFolderRecursiveRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -3949,6 +4310,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -4254,7 +4620,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CommonLongRunningOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -4275,7 +4641,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CommonLongRunningOperationMetadata();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CommonLongRunningOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -4309,6 +4685,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -4579,7 +4960,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RenameFolderMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -4600,7 +4981,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.RenameFolderMetadata();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.RenameFolderMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -4622,6 +5013,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -4847,7 +5243,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteFolderRecursiveMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -4868,7 +5264,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteFolderRecursiveMetadata();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DeleteFolderRecursiveMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -4886,6 +5292,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -5028,6 +5439,7 @@
                          * @property {string|null} [locationType] StorageLayout locationType
                          * @property {google.storage.control.v2.StorageLayout.ICustomPlacementConfig|null} [customPlacementConfig] StorageLayout customPlacementConfig
                          * @property {google.storage.control.v2.StorageLayout.IHierarchicalNamespace|null} [hierarchicalNamespace] StorageLayout hierarchicalNamespace
+                         * @property {google.storage.control.v2.StorageLayout.IRapidCacheInfo|null} [rapidCacheInfo] StorageLayout rapidCacheInfo
                          */
     
                         /**
@@ -5086,6 +5498,14 @@
                         StorageLayout.prototype.hierarchicalNamespace = null;
     
                         /**
+                         * StorageLayout rapidCacheInfo.
+                         * @member {google.storage.control.v2.StorageLayout.IRapidCacheInfo|null|undefined} rapidCacheInfo
+                         * @memberof google.storage.control.v2.StorageLayout
+                         * @instance
+                         */
+                        StorageLayout.prototype.rapidCacheInfo = null;
+    
+                        /**
                          * Creates a new StorageLayout instance using the specified properties.
                          * @function create
                          * @memberof google.storage.control.v2.StorageLayout
@@ -5123,6 +5543,8 @@
                                 $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig.encode(message.customPlacementConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                             if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace"))
                                 $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.encode(message.hierarchicalNamespace, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
+                            if (message.rapidCacheInfo != null && Object.hasOwnProperty.call(message, "rapidCacheInfo"))
+                                $root.google.storage.control.v2.StorageLayout.RapidCacheInfo.encode(message.rapidCacheInfo, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -5136,7 +5558,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         StorageLayout.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -5157,7 +5579,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.StorageLayout();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.StorageLayout();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -5183,10 +5615,19 @@
                                         message.hierarchicalNamespace = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 6: {
+                                        message.rapidCacheInfo = $root.google.storage.control.v2.StorageLayout.RapidCacheInfo.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -5241,6 +5682,11 @@
                                 if (error)
                                     return "hierarchicalNamespace." + error;
                             }
+                            if (message.rapidCacheInfo != null && Object.hasOwnProperty.call(message, "rapidCacheInfo")) {
+                                var error = $root.google.storage.control.v2.StorageLayout.RapidCacheInfo.verify(message.rapidCacheInfo, long + 1);
+                                if (error)
+                                    return "rapidCacheInfo." + error;
+                            }
                             return null;
                         };
     
@@ -5278,6 +5724,11 @@
                                     throw TypeError(".google.storage.control.v2.StorageLayout.hierarchicalNamespace: object expected");
                                 message.hierarchicalNamespace = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.fromObject(object.hierarchicalNamespace, long + 1);
                             }
+                            if (object.rapidCacheInfo != null) {
+                                if (!$util.isObject(object.rapidCacheInfo))
+                                    throw TypeError(".google.storage.control.v2.StorageLayout.rapidCacheInfo: object expected");
+                                message.rapidCacheInfo = $root.google.storage.control.v2.StorageLayout.RapidCacheInfo.fromObject(object.rapidCacheInfo, long + 1);
+                            }
                             return message;
                         };
     
@@ -5304,6 +5755,7 @@
                                 object.locationType = "";
                                 object.customPlacementConfig = null;
                                 object.hierarchicalNamespace = null;
+                                object.rapidCacheInfo = null;
                             }
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
@@ -5315,6 +5767,8 @@
                                 object.customPlacementConfig = $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig.toObject(message.customPlacementConfig, options, q + 1);
                             if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace"))
                                 object.hierarchicalNamespace = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.toObject(message.hierarchicalNamespace, options, q + 1);
+                            if (message.rapidCacheInfo != null && Object.hasOwnProperty.call(message, "rapidCacheInfo"))
+                                object.rapidCacheInfo = $root.google.storage.control.v2.StorageLayout.RapidCacheInfo.toObject(message.rapidCacheInfo, options, q + 1);
                             return object;
                         };
     
@@ -5421,7 +5875,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomPlacementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -5442,7 +5896,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -5458,6 +5922,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -5662,7 +6131,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             HierarchicalNamespace.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -5683,7 +6152,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -5697,6 +6176,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -5814,6 +6298,248 @@
                             return HierarchicalNamespace;
                         })();
     
+                        StorageLayout.RapidCacheInfo = (function() {
+    
+                            /**
+                             * Properties of a RapidCacheInfo.
+                             * @memberof google.storage.control.v2.StorageLayout
+                             * @interface IRapidCacheInfo
+                             * @property {string|null} [cacheType] RapidCacheInfo cacheType
+                             */
+    
+                            /**
+                             * Constructs a new RapidCacheInfo.
+                             * @memberof google.storage.control.v2.StorageLayout
+                             * @classdesc Represents a RapidCacheInfo.
+                             * @implements IRapidCacheInfo
+                             * @constructor
+                             * @param {google.storage.control.v2.StorageLayout.IRapidCacheInfo=} [properties] Properties to set
+                             */
+                            function RapidCacheInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RapidCacheInfo cacheType.
+                             * @member {string} cacheType
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @instance
+                             */
+                            RapidCacheInfo.prototype.cacheType = "";
+    
+                            /**
+                             * Creates a new RapidCacheInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {google.storage.control.v2.StorageLayout.IRapidCacheInfo=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.StorageLayout.RapidCacheInfo} RapidCacheInfo instance
+                             */
+                            RapidCacheInfo.create = function create(properties) {
+                                return new RapidCacheInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RapidCacheInfo message. Does not implicitly {@link google.storage.control.v2.StorageLayout.RapidCacheInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {google.storage.control.v2.StorageLayout.IRapidCacheInfo} message RapidCacheInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RapidCacheInfo.encode = function encode(message, writer, q) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.cacheType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RapidCacheInfo message, length delimited. Does not implicitly {@link google.storage.control.v2.StorageLayout.RapidCacheInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {google.storage.control.v2.StorageLayout.IRapidCacheInfo} message RapidCacheInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RapidCacheInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RapidCacheInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.StorageLayout.RapidCacheInfo} RapidCacheInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RapidCacheInfo.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.StorageLayout.RapidCacheInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cacheType = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RapidCacheInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.StorageLayout.RapidCacheInfo} RapidCacheInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RapidCacheInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RapidCacheInfo message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RapidCacheInfo.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                    if (!$util.isString(message.cacheType))
+                                        return "cacheType: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RapidCacheInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.StorageLayout.RapidCacheInfo} RapidCacheInfo
+                             */
+                            RapidCacheInfo.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.StorageLayout.RapidCacheInfo)
+                                    return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.StorageLayout.RapidCacheInfo: object expected");
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.StorageLayout.RapidCacheInfo();
+                                if (object.cacheType != null)
+                                    message.cacheType = String(object.cacheType);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RapidCacheInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {google.storage.control.v2.StorageLayout.RapidCacheInfo} message RapidCacheInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RapidCacheInfo.toObject = function toObject(message, options, q) {
+                                if (!options)
+                                    options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                var object = {};
+                                if (options.defaults)
+                                    object.cacheType = "";
+                                if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                    object.cacheType = message.cacheType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RapidCacheInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RapidCacheInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RapidCacheInfo
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.StorageLayout.RapidCacheInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RapidCacheInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.StorageLayout.RapidCacheInfo";
+                            };
+    
+                            return RapidCacheInfo;
+                        })();
+    
                         return StorageLayout;
                     })();
     
@@ -5914,7 +6640,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetStorageLayoutRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -5935,7 +6661,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetStorageLayoutRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetStorageLayoutRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -5957,6 +6693,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -6101,6 +6842,7 @@
                          * @property {number|Long|null} [metageneration] ManagedFolder metageneration
                          * @property {google.protobuf.ITimestamp|null} [createTime] ManagedFolder createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ManagedFolder updateTime
+                         * @property {google.storage.control.v2.ManagedFolder.IRapidCacheConfig|null} [rapidCacheConfig] ManagedFolder rapidCacheConfig
                          */
     
                         /**
@@ -6151,6 +6893,23 @@
                         ManagedFolder.prototype.updateTime = null;
     
                         /**
+                         * ManagedFolder rapidCacheConfig.
+                         * @member {google.storage.control.v2.ManagedFolder.IRapidCacheConfig|null|undefined} rapidCacheConfig
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         */
+                        ManagedFolder.prototype.rapidCacheConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ManagedFolder.prototype, "_rapidCacheConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["rapidCacheConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ManagedFolder instance using the specified properties.
                          * @function create
                          * @memberof google.storage.control.v2.ManagedFolder
@@ -6186,6 +6945,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
+                            if (message.rapidCacheConfig != null && Object.hasOwnProperty.call(message, "rapidCacheConfig"))
+                                $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.encode(message.rapidCacheConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
                             return writer;
                         };
     
@@ -6199,7 +6960,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ManagedFolder.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -6220,7 +6981,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ManagedFolder();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ManagedFolder();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -6242,10 +7013,19 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 6: {
+                                        message.rapidCacheConfig = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -6281,6 +7061,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -6296,6 +7077,14 @@
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
+                            }
+                            if (message.rapidCacheConfig != null && Object.hasOwnProperty.call(message, "rapidCacheConfig")) {
+                                properties._rapidCacheConfig = 1;
+                                {
+                                    var error = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.verify(message.rapidCacheConfig, long + 1);
+                                    if (error)
+                                        return "rapidCacheConfig." + error;
+                                }
                             }
                             return null;
                         };
@@ -6338,6 +7127,11 @@
                                 if (!$util.isObject(object.updateTime))
                                     throw TypeError(".google.storage.control.v2.ManagedFolder.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.rapidCacheConfig != null) {
+                                if (!$util.isObject(object.rapidCacheConfig))
+                                    throw TypeError(".google.storage.control.v2.ManagedFolder.rapidCacheConfig: object expected");
+                                message.rapidCacheConfig = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.fromObject(object.rapidCacheConfig, long + 1);
                             }
                             return message;
                         };
@@ -6382,6 +7176,11 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
+                            if (message.rapidCacheConfig != null && Object.hasOwnProperty.call(message, "rapidCacheConfig")) {
+                                object.rapidCacheConfig = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.toObject(message.rapidCacheConfig, options, q + 1);
+                                if (options.oneofs)
+                                    object._rapidCacheConfig = "rapidCacheConfig";
+                            }
                             return object;
                         };
     
@@ -6410,6 +7209,602 @@
                             }
                             return typeUrlPrefix + "/google.storage.control.v2.ManagedFolder";
                         };
+    
+                        ManagedFolder.RapidCacheConfig = (function() {
+    
+                            /**
+                             * Properties of a RapidCacheConfig.
+                             * @memberof google.storage.control.v2.ManagedFolder
+                             * @interface IRapidCacheConfig
+                             * @property {Object.<string,google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy>|null} [policies] RapidCacheConfig policies
+                             */
+    
+                            /**
+                             * Constructs a new RapidCacheConfig.
+                             * @memberof google.storage.control.v2.ManagedFolder
+                             * @classdesc Represents a RapidCacheConfig.
+                             * @implements IRapidCacheConfig
+                             * @constructor
+                             * @param {google.storage.control.v2.ManagedFolder.IRapidCacheConfig=} [properties] Properties to set
+                             */
+                            function RapidCacheConfig(properties) {
+                                this.policies = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RapidCacheConfig policies.
+                             * @member {Object.<string,google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy>} policies
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @instance
+                             */
+                            RapidCacheConfig.prototype.policies = $util.emptyObject;
+    
+                            /**
+                             * Creates a new RapidCacheConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {google.storage.control.v2.ManagedFolder.IRapidCacheConfig=} [properties] Properties to set
+                             * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig} RapidCacheConfig instance
+                             */
+                            RapidCacheConfig.create = function create(properties) {
+                                return new RapidCacheConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RapidCacheConfig message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {google.storage.control.v2.ManagedFolder.IRapidCacheConfig} message RapidCacheConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RapidCacheConfig.encode = function encode(message, writer, q) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                if (message.policies != null && Object.hasOwnProperty.call(message, "policies"))
+                                    for (var keys = Object.keys(message.policies), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.encode(message.policies[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RapidCacheConfig message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {google.storage.control.v2.ManagedFolder.IRapidCacheConfig} message RapidCacheConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RapidCacheConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RapidCacheConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig} RapidCacheConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RapidCacheConfig.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end, message, key, value;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (message.policies === $util.emptyObject)
+                                                message.policies = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            if (end2 > reader.len)
+                                                throw RangeError("index out of range");
+                                            reader.len = end2;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.decode(reader, reader.uint32(), undefined, long + 1);
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7, long);
+                                                    break;
+                                                }
+                                            }
+                                            if (reader.pos !== end2)
+                                                throw RangeError("index out of range");
+                                            reader.len = end;
+                                            if (key === "__proto__")
+                                                $util.makeProp(message.policies, key);
+                                            message.policies[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RapidCacheConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig} RapidCacheConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RapidCacheConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RapidCacheConfig message.
+                             * @function verify
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RapidCacheConfig.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.policies != null && Object.hasOwnProperty.call(message, "policies")) {
+                                    if (!$util.isObject(message.policies))
+                                        return "policies: object expected";
+                                    var key = Object.keys(message.policies);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.verify(message.policies[key[i]], long + 1);
+                                        if (error)
+                                            return "policies." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RapidCacheConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig} RapidCacheConfig
+                             */
+                            RapidCacheConfig.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig)
+                                    return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.storage.control.v2.ManagedFolder.RapidCacheConfig: object expected");
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig();
+                                if (object.policies) {
+                                    if (!$util.isObject(object.policies))
+                                        throw TypeError(".google.storage.control.v2.ManagedFolder.RapidCacheConfig.policies: object expected");
+                                    message.policies = {};
+                                    for (var keys = Object.keys(object.policies), i = 0; i < keys.length; ++i) {
+                                        if (keys[i] === "__proto__")
+                                            $util.makeProp(message.policies, keys[i]);
+                                        if (!$util.isObject(object.policies[keys[i]]))
+                                            throw TypeError(".google.storage.control.v2.ManagedFolder.RapidCacheConfig.policies: object expected");
+                                        message.policies[keys[i]] = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.fromObject(object.policies[keys[i]], long + 1);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RapidCacheConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig} message RapidCacheConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RapidCacheConfig.toObject = function toObject(message, options, q) {
+                                if (!options)
+                                    options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.policies = {};
+                                var keys2;
+                                if (message.policies && (keys2 = Object.keys(message.policies)).length) {
+                                    object.policies = {};
+                                    for (var j = 0; j < keys2.length; ++j) {
+                                        if (keys2[j] === "__proto__")
+                                            $util.makeProp(object.policies, keys2[j]);
+                                        object.policies[keys2[j]] = $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.toObject(message.policies[keys2[j]], options, q + 1);
+                                    }
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RapidCacheConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RapidCacheConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RapidCacheConfig
+                             * @function getTypeUrl
+                             * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RapidCacheConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.storage.control.v2.ManagedFolder.RapidCacheConfig";
+                            };
+    
+                            RapidCacheConfig.RapidCachePolicy = (function() {
+    
+                                /**
+                                 * Properties of a RapidCachePolicy.
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                                 * @interface IRapidCachePolicy
+                                 * @property {string|null} [rapidCacheId] RapidCachePolicy rapidCacheId
+                                 * @property {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite|null} [ingestOnWrite] RapidCachePolicy ingestOnWrite
+                                 */
+    
+                                /**
+                                 * Constructs a new RapidCachePolicy.
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig
+                                 * @classdesc Represents a RapidCachePolicy.
+                                 * @implements IRapidCachePolicy
+                                 * @constructor
+                                 * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy=} [properties] Properties to set
+                                 */
+                                function RapidCachePolicy(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RapidCachePolicy rapidCacheId.
+                                 * @member {string} rapidCacheId
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @instance
+                                 */
+                                RapidCachePolicy.prototype.rapidCacheId = "";
+    
+                                /**
+                                 * RapidCachePolicy ingestOnWrite.
+                                 * @member {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite} ingestOnWrite
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @instance
+                                 */
+                                RapidCachePolicy.prototype.ingestOnWrite = 0;
+    
+                                /**
+                                 * Creates a new RapidCachePolicy instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy=} [properties] Properties to set
+                                 * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy} RapidCachePolicy instance
+                                 */
+                                RapidCachePolicy.create = function create(properties) {
+                                    return new RapidCachePolicy(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RapidCachePolicy message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy} message RapidCachePolicy message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RapidCachePolicy.encode = function encode(message, writer, q) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
+                                    if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.rapidCacheId);
+                                    if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.ingestOnWrite);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RapidCachePolicy message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy} message RapidCachePolicy message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RapidCachePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RapidCachePolicy message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy} RapidCachePolicy
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RapidCachePolicy.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.rapidCacheId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.ingestOnWrite = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RapidCachePolicy message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy} RapidCachePolicy
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RapidCachePolicy.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RapidCachePolicy message.
+                                 * @function verify
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RapidCachePolicy.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                        if (!$util.isString(message.rapidCacheId))
+                                            return "rapidCacheId: string expected";
+                                    if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                        switch (message.ingestOnWrite) {
+                                        default:
+                                            return "ingestOnWrite: enum value expected";
+                                        case 0:
+                                        case 1:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RapidCachePolicy message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy} RapidCachePolicy
+                                 */
+                                RapidCachePolicy.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy)
+                                        return object;
+                                    if (!$util.isObject(object))
+                                        throw TypeError(".google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy: object expected");
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy();
+                                    if (object.rapidCacheId != null)
+                                        message.rapidCacheId = String(object.rapidCacheId);
+                                    switch (object.ingestOnWrite) {
+                                    default:
+                                        if (typeof object.ingestOnWrite === "number") {
+                                            message.ingestOnWrite = object.ingestOnWrite;
+                                            break;
+                                        }
+                                        break;
+                                    case "INGEST_ON_WRITE_UNSPECIFIED":
+                                    case 0:
+                                        message.ingestOnWrite = 0;
+                                        break;
+                                    case "INGEST_ON_WRITE_ENABLED":
+                                    case 1:
+                                        message.ingestOnWrite = 1;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RapidCachePolicy message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy} message RapidCachePolicy
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RapidCachePolicy.toObject = function toObject(message, options, q) {
+                                    if (!options)
+                                        options = {};
+                                    if (q === undefined)
+                                        q = 0;
+                                    if (q > $util.recursionLimit)
+                                        throw Error("max depth exceeded");
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.rapidCacheId = "";
+                                        object.ingestOnWrite = options.enums === String ? "INGEST_ON_WRITE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                        object.rapidCacheId = message.rapidCacheId;
+                                    if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                        object.ingestOnWrite = options.enums === String ? $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite[message.ingestOnWrite] === undefined ? message.ingestOnWrite : $root.google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite[message.ingestOnWrite] : message.ingestOnWrite;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RapidCachePolicy to JSON.
+                                 * @function toJSON
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RapidCachePolicy.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RapidCachePolicy
+                                 * @function getTypeUrl
+                                 * @memberof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RapidCachePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy";
+                                };
+    
+                                /**
+                                 * IngestOnWrite enum.
+                                 * @name google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite
+                                 * @enum {number}
+                                 * @property {number} INGEST_ON_WRITE_UNSPECIFIED=0 INGEST_ON_WRITE_UNSPECIFIED value
+                                 * @property {number} INGEST_ON_WRITE_ENABLED=1 INGEST_ON_WRITE_ENABLED value
+                                 */
+                                RapidCachePolicy.IngestOnWrite = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "INGEST_ON_WRITE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "INGEST_ON_WRITE_ENABLED"] = 1;
+                                    return values;
+                                })();
+    
+                                return RapidCachePolicy;
+                            })();
+    
+                            return RapidCacheConfig;
+                        })();
     
                         return ManagedFolder;
                     })();
@@ -6537,7 +7932,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -6558,7 +7953,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetManagedFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetManagedFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -6584,6 +7989,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -6867,7 +8277,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -6888,7 +8298,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateManagedFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateManagedFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -6914,6 +8334,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -7195,7 +8620,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DeleteManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -7216,7 +8641,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteManagedFolderRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DeleteManagedFolderRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -7246,6 +8681,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -7548,7 +8988,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListManagedFoldersRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -7569,7 +9009,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListManagedFoldersRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListManagedFoldersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -7599,6 +9049,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -7837,7 +9292,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListManagedFoldersResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -7858,7 +9313,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListManagedFoldersResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListManagedFoldersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -7878,6 +9343,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -8021,6 +9491,399 @@
                         return ListManagedFoldersResponse;
                     })();
     
+                    v2.UpdateManagedFolderRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IUpdateManagedFolderRequest
+                         * @property {google.storage.control.v2.IManagedFolder|null} [managedFolder] UpdateManagedFolderRequest managedFolder
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateManagedFolderRequest updateMask
+                         * @property {number|Long|null} [ifMetagenerationMatch] UpdateManagedFolderRequest ifMetagenerationMatch
+                         * @property {number|Long|null} [ifMetagenerationNotMatch] UpdateManagedFolderRequest ifMetagenerationNotMatch
+                         * @property {string|null} [requestId] UpdateManagedFolderRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an UpdateManagedFolderRequest.
+                         * @implements IUpdateManagedFolderRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest=} [properties] Properties to set
+                         */
+                        function UpdateManagedFolderRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateManagedFolderRequest managedFolder.
+                         * @member {google.storage.control.v2.IManagedFolder|null|undefined} managedFolder
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         */
+                        UpdateManagedFolderRequest.prototype.managedFolder = null;
+    
+                        /**
+                         * UpdateManagedFolderRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         */
+                        UpdateManagedFolderRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateManagedFolderRequest ifMetagenerationMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         */
+                        UpdateManagedFolderRequest.prototype.ifMetagenerationMatch = null;
+    
+                        /**
+                         * UpdateManagedFolderRequest ifMetagenerationNotMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         */
+                        UpdateManagedFolderRequest.prototype.ifMetagenerationNotMatch = null;
+    
+                        /**
+                         * UpdateManagedFolderRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         */
+                        UpdateManagedFolderRequest.prototype.requestId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateManagedFolderRequest.prototype, "_ifMetagenerationMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateManagedFolderRequest.prototype, "_ifMetagenerationNotMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationNotMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UpdateManagedFolderRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.UpdateManagedFolderRequest} UpdateManagedFolderRequest instance
+                         */
+                        UpdateManagedFolderRequest.create = function create(properties) {
+                            return new UpdateManagedFolderRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.UpdateManagedFolderRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest} message UpdateManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateManagedFolderRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder"))
+                                $root.google.storage.control.v2.ManagedFolder.encode(message.managedFolder, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.ifMetagenerationMatch);
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.ifMetagenerationNotMatch);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateManagedFolderRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateManagedFolderRequest} message UpdateManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateManagedFolderRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.UpdateManagedFolderRequest} UpdateManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateManagedFolderRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateManagedFolderRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.managedFolder = $root.google.storage.control.v2.ManagedFolder.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ifMetagenerationMatch = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ifMetagenerationNotMatch = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateManagedFolderRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.UpdateManagedFolderRequest} UpdateManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateManagedFolderRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateManagedFolderRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateManagedFolderRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder")) {
+                                var error = $root.google.storage.control.v2.ManagedFolder.verify(message.managedFolder, long + 1);
+                                if (error)
+                                    return "managedFolder." + error;
+                            }
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
+                                properties._ifMetagenerationMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
+                                    return "ifMetagenerationMatch: integer|Long expected";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
+                                properties._ifMetagenerationNotMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
+                                    return "ifMetagenerationNotMatch: integer|Long expected";
+                            }
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.UpdateManagedFolderRequest} UpdateManagedFolderRequest
+                         */
+                        UpdateManagedFolderRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.UpdateManagedFolderRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateManagedFolderRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.UpdateManagedFolderRequest();
+                            if (object.managedFolder != null) {
+                                if (!$util.isObject(object.managedFolder))
+                                    throw TypeError(".google.storage.control.v2.UpdateManagedFolderRequest.managedFolder: object expected");
+                                message.managedFolder = $root.google.storage.control.v2.ManagedFolder.fromObject(object.managedFolder, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (!$util.isObject(object.updateMask))
+                                    throw TypeError(".google.storage.control.v2.UpdateManagedFolderRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            if (object.ifMetagenerationMatch != null)
+                                if ($util.Long)
+                                    message.ifMetagenerationMatch = $util.Long.fromValue(object.ifMetagenerationMatch, false);
+                                else if (typeof object.ifMetagenerationMatch === "string")
+                                    message.ifMetagenerationMatch = parseInt(object.ifMetagenerationMatch, 10);
+                                else if (typeof object.ifMetagenerationMatch === "number")
+                                    message.ifMetagenerationMatch = object.ifMetagenerationMatch;
+                                else if (typeof object.ifMetagenerationMatch === "object")
+                                    message.ifMetagenerationMatch = new $util.LongBits(object.ifMetagenerationMatch.low >>> 0, object.ifMetagenerationMatch.high >>> 0).toNumber();
+                            if (object.ifMetagenerationNotMatch != null)
+                                if ($util.Long)
+                                    message.ifMetagenerationNotMatch = $util.Long.fromValue(object.ifMetagenerationNotMatch, false);
+                                else if (typeof object.ifMetagenerationNotMatch === "string")
+                                    message.ifMetagenerationNotMatch = parseInt(object.ifMetagenerationNotMatch, 10);
+                                else if (typeof object.ifMetagenerationNotMatch === "number")
+                                    message.ifMetagenerationNotMatch = object.ifMetagenerationNotMatch;
+                                else if (typeof object.ifMetagenerationNotMatch === "object")
+                                    message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateManagedFolderRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.UpdateManagedFolderRequest} message UpdateManagedFolderRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateManagedFolderRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.managedFolder = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder"))
+                                object.managedFolder = $root.google.storage.control.v2.ManagedFolder.toObject(message.managedFolder, options, q + 1);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
+                                    object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
+                                else
+                                    object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationMatch = "ifMetagenerationMatch";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
+                                    object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
+                                else
+                                    object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
+                            }
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateManagedFolderRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateManagedFolderRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateManagedFolderRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.UpdateManagedFolderRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateManagedFolderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.UpdateManagedFolderRequest";
+                        };
+    
+                        return UpdateManagedFolderRequest;
+                    })();
+    
                     v2.CreateAnywhereCacheMetadata = (function() {
     
                         /**
@@ -8032,6 +9895,7 @@
                          * @property {string|null} [zone] CreateAnywhereCacheMetadata zone
                          * @property {google.protobuf.IDuration|null} [ttl] CreateAnywhereCacheMetadata ttl
                          * @property {string|null} [admissionPolicy] CreateAnywhereCacheMetadata admissionPolicy
+                         * @property {boolean|null} [ingestOnWrite] CreateAnywhereCacheMetadata ingestOnWrite
                          */
     
                         /**
@@ -8089,6 +9953,14 @@
                          */
                         CreateAnywhereCacheMetadata.prototype.admissionPolicy = null;
     
+                        /**
+                         * CreateAnywhereCacheMetadata ingestOnWrite.
+                         * @member {boolean|null|undefined} ingestOnWrite
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.ingestOnWrite = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -8113,6 +9985,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_admissionPolicy", {
                             get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_ingestOnWrite", {
+                            get: $util.oneOfGetter($oneOfFields = ["ingestOnWrite"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8154,6 +10032,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.admissionPolicy);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.zone);
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.ingestOnWrite);
                             return writer;
                         };
     
@@ -8167,7 +10047,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -8188,7 +10068,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateAnywhereCacheMetadata();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateAnywhereCacheMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -8214,10 +10104,19 @@
                                         message.admissionPolicy = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.ingestOnWrite = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -8282,6 +10181,11 @@
                                 if (!$util.isString(message.admissionPolicy))
                                     return "admissionPolicy: string expected";
                             }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                properties._ingestOnWrite = 1;
+                                if (typeof message.ingestOnWrite !== "boolean")
+                                    return "ingestOnWrite: boolean expected";
+                            }
                             return null;
                         };
     
@@ -8319,6 +10223,8 @@
                             }
                             if (object.admissionPolicy != null)
                                 message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.ingestOnWrite != null)
+                                message.ingestOnWrite = Boolean(object.ingestOnWrite);
                             return message;
                         };
     
@@ -8363,6 +10269,11 @@
                                 if (options.oneofs)
                                     object._zone = "zone";
                             }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                object.ingestOnWrite = message.ingestOnWrite;
+                                if (options.oneofs)
+                                    object._ingestOnWrite = "ingestOnWrite";
+                            }
                             return object;
                         };
     
@@ -8395,6 +10306,461 @@
                         return CreateAnywhereCacheMetadata;
                     })();
     
+                    v2.CreateRapidCacheMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface ICreateRapidCacheMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] CreateRapidCacheMetadata commonMetadata
+                         * @property {string|null} [rapidCacheId] CreateRapidCacheMetadata rapidCacheId
+                         * @property {string|null} [zone] CreateRapidCacheMetadata zone
+                         * @property {google.protobuf.IDuration|null} [ttl] CreateRapidCacheMetadata ttl
+                         * @property {string|null} [admissionPolicy] CreateRapidCacheMetadata admissionPolicy
+                         * @property {boolean|null} [ingestOnWrite] CreateRapidCacheMetadata ingestOnWrite
+                         * @property {string|null} [cacheType] CreateRapidCacheMetadata cacheType
+                         */
+    
+                        /**
+                         * Constructs a new CreateRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a CreateRapidCacheMetadata.
+                         * @implements ICreateRapidCacheMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.ICreateRapidCacheMetadata=} [properties] Properties to set
+                         */
+                        function CreateRapidCacheMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateRapidCacheMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata rapidCacheId.
+                         * @member {string|null|undefined} rapidCacheId
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.rapidCacheId = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.zone = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.ttl = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata admissionPolicy.
+                         * @member {string|null|undefined} admissionPolicy
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.admissionPolicy = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata ingestOnWrite.
+                         * @member {boolean|null|undefined} ingestOnWrite
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.ingestOnWrite = null;
+    
+                        /**
+                         * CreateRapidCacheMetadata cacheType.
+                         * @member {string|null|undefined} cacheType
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         */
+                        CreateRapidCacheMetadata.prototype.cacheType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_rapidCacheId", {
+                            get: $util.oneOfGetter($oneOfFields = ["rapidCacheId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_ttl", {
+                            get: $util.oneOfGetter($oneOfFields = ["ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_admissionPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_ingestOnWrite", {
+                            get: $util.oneOfGetter($oneOfFields = ["ingestOnWrite"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CreateRapidCacheMetadata.prototype, "_cacheType", {
+                            get: $util.oneOfGetter($oneOfFields = ["cacheType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CreateRapidCacheMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.CreateRapidCacheMetadata} CreateRapidCacheMetadata instance
+                         */
+                        CreateRapidCacheMetadata.create = function create(properties) {
+                            return new CreateRapidCacheMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheMetadata} message CreateRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRapidCacheMetadata.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rapidCacheId);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.zone);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.admissionPolicy);
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.ingestOnWrite);
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.cacheType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheMetadata} message CreateRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRapidCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateRapidCacheMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.CreateRapidCacheMetadata} CreateRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRapidCacheMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateRapidCacheMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rapidCacheId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ingestOnWrite = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.cacheType = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.CreateRapidCacheMetadata} CreateRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRapidCacheMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateRapidCacheMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateRapidCacheMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                properties._rapidCacheId = 1;
+                                if (!$util.isString(message.rapidCacheId))
+                                    return "rapidCacheId: string expected";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
+                                properties._ttl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
+                                properties._admissionPolicy = 1;
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                properties._ingestOnWrite = 1;
+                                if (typeof message.ingestOnWrite !== "boolean")
+                                    return "ingestOnWrite: boolean expected";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                properties._cacheType = 1;
+                                if (!$util.isString(message.cacheType))
+                                    return "cacheType: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.CreateRapidCacheMetadata} CreateRapidCacheMetadata
+                         */
+                        CreateRapidCacheMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.CreateRapidCacheMetadata)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateRapidCacheMetadata: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.CreateRapidCacheMetadata();
+                            if (object.commonMetadata != null) {
+                                if (!$util.isObject(object.commonMetadata))
+                                    throw TypeError(".google.storage.control.v2.CreateRapidCacheMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
+                            }
+                            if (object.rapidCacheId != null)
+                                message.rapidCacheId = String(object.rapidCacheId);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.ttl != null) {
+                                if (!$util.isObject(object.ttl))
+                                    throw TypeError(".google.storage.control.v2.CreateRapidCacheMetadata.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.ingestOnWrite != null)
+                                message.ingestOnWrite = Boolean(object.ingestOnWrite);
+                            if (object.cacheType != null)
+                                message.cacheType = String(object.cacheType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateRapidCacheMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.CreateRapidCacheMetadata} message CreateRapidCacheMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateRapidCacheMetadata.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults)
+                                object.commonMetadata = null;
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                object.rapidCacheId = message.rapidCacheId;
+                                if (options.oneofs)
+                                    object._rapidCacheId = "rapidCacheId";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
+                                if (options.oneofs)
+                                    object._ttl = "ttl";
+                            }
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
+                                object.admissionPolicy = message.admissionPolicy;
+                                if (options.oneofs)
+                                    object._admissionPolicy = "admissionPolicy";
+                            }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                object.ingestOnWrite = message.ingestOnWrite;
+                                if (options.oneofs)
+                                    object._ingestOnWrite = "ingestOnWrite";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                object.cacheType = message.cacheType;
+                                if (options.oneofs)
+                                    object._cacheType = "cacheType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateRapidCacheMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateRapidCacheMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateRapidCacheMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.CreateRapidCacheMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateRapidCacheMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.CreateRapidCacheMetadata";
+                        };
+    
+                        return CreateRapidCacheMetadata;
+                    })();
+    
                     v2.UpdateAnywhereCacheMetadata = (function() {
     
                         /**
@@ -8406,6 +10772,7 @@
                          * @property {string|null} [zone] UpdateAnywhereCacheMetadata zone
                          * @property {google.protobuf.IDuration|null} [ttl] UpdateAnywhereCacheMetadata ttl
                          * @property {string|null} [admissionPolicy] UpdateAnywhereCacheMetadata admissionPolicy
+                         * @property {boolean|null} [ingestOnWrite] UpdateAnywhereCacheMetadata ingestOnWrite
                          */
     
                         /**
@@ -8463,6 +10830,14 @@
                          */
                         UpdateAnywhereCacheMetadata.prototype.admissionPolicy = null;
     
+                        /**
+                         * UpdateAnywhereCacheMetadata ingestOnWrite.
+                         * @member {boolean|null|undefined} ingestOnWrite
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.ingestOnWrite = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -8487,6 +10862,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_admissionPolicy", {
                             get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_ingestOnWrite", {
+                            get: $util.oneOfGetter($oneOfFields = ["ingestOnWrite"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8528,6 +10909,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.admissionPolicy);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.zone);
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.ingestOnWrite);
                             return writer;
                         };
     
@@ -8541,7 +10924,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -8562,7 +10945,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateAnywhereCacheMetadata();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateAnywhereCacheMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -8588,10 +10981,19 @@
                                         message.admissionPolicy = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.ingestOnWrite = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -8656,6 +11058,11 @@
                                 if (!$util.isString(message.admissionPolicy))
                                     return "admissionPolicy: string expected";
                             }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                properties._ingestOnWrite = 1;
+                                if (typeof message.ingestOnWrite !== "boolean")
+                                    return "ingestOnWrite: boolean expected";
+                            }
                             return null;
                         };
     
@@ -8693,6 +11100,8 @@
                             }
                             if (object.admissionPolicy != null)
                                 message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.ingestOnWrite != null)
+                                message.ingestOnWrite = Boolean(object.ingestOnWrite);
                             return message;
                         };
     
@@ -8737,6 +11146,11 @@
                                 if (options.oneofs)
                                     object._zone = "zone";
                             }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                object.ingestOnWrite = message.ingestOnWrite;
+                                if (options.oneofs)
+                                    object._ingestOnWrite = "ingestOnWrite";
+                            }
                             return object;
                         };
     
@@ -8769,6 +11183,811 @@
                         return UpdateAnywhereCacheMetadata;
                     })();
     
+                    v2.UpdateRapidCacheMetadata = (function() {
+    
+                        /**
+                         * Properties of an UpdateRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface IUpdateRapidCacheMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] UpdateRapidCacheMetadata commonMetadata
+                         * @property {string|null} [rapidCacheId] UpdateRapidCacheMetadata rapidCacheId
+                         * @property {string|null} [zone] UpdateRapidCacheMetadata zone
+                         * @property {google.protobuf.IDuration|null} [ttl] UpdateRapidCacheMetadata ttl
+                         * @property {string|null} [admissionPolicy] UpdateRapidCacheMetadata admissionPolicy
+                         * @property {boolean|null} [ingestOnWrite] UpdateRapidCacheMetadata ingestOnWrite
+                         * @property {string|null} [cacheType] UpdateRapidCacheMetadata cacheType
+                         */
+    
+                        /**
+                         * Constructs a new UpdateRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an UpdateRapidCacheMetadata.
+                         * @implements IUpdateRapidCacheMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.IUpdateRapidCacheMetadata=} [properties] Properties to set
+                         */
+                        function UpdateRapidCacheMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateRapidCacheMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata rapidCacheId.
+                         * @member {string|null|undefined} rapidCacheId
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.rapidCacheId = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.zone = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.ttl = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata admissionPolicy.
+                         * @member {string|null|undefined} admissionPolicy
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.admissionPolicy = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata ingestOnWrite.
+                         * @member {boolean|null|undefined} ingestOnWrite
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.ingestOnWrite = null;
+    
+                        /**
+                         * UpdateRapidCacheMetadata cacheType.
+                         * @member {string|null|undefined} cacheType
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         */
+                        UpdateRapidCacheMetadata.prototype.cacheType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_rapidCacheId", {
+                            get: $util.oneOfGetter($oneOfFields = ["rapidCacheId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_ttl", {
+                            get: $util.oneOfGetter($oneOfFields = ["ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_admissionPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_ingestOnWrite", {
+                            get: $util.oneOfGetter($oneOfFields = ["ingestOnWrite"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(UpdateRapidCacheMetadata.prototype, "_cacheType", {
+                            get: $util.oneOfGetter($oneOfFields = ["cacheType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UpdateRapidCacheMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.UpdateRapidCacheMetadata} UpdateRapidCacheMetadata instance
+                         */
+                        UpdateRapidCacheMetadata.create = function create(properties) {
+                            return new UpdateRapidCacheMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheMetadata} message UpdateRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRapidCacheMetadata.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rapidCacheId);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.zone);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.admissionPolicy);
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.ingestOnWrite);
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.cacheType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheMetadata} message UpdateRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRapidCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateRapidCacheMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.UpdateRapidCacheMetadata} UpdateRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRapidCacheMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateRapidCacheMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rapidCacheId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ingestOnWrite = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.cacheType = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.UpdateRapidCacheMetadata} UpdateRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRapidCacheMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateRapidCacheMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateRapidCacheMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                properties._rapidCacheId = 1;
+                                if (!$util.isString(message.rapidCacheId))
+                                    return "rapidCacheId: string expected";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
+                                properties._ttl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
+                                properties._admissionPolicy = 1;
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                properties._ingestOnWrite = 1;
+                                if (typeof message.ingestOnWrite !== "boolean")
+                                    return "ingestOnWrite: boolean expected";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                properties._cacheType = 1;
+                                if (!$util.isString(message.cacheType))
+                                    return "cacheType: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.UpdateRapidCacheMetadata} UpdateRapidCacheMetadata
+                         */
+                        UpdateRapidCacheMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.UpdateRapidCacheMetadata)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateRapidCacheMetadata: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.UpdateRapidCacheMetadata();
+                            if (object.commonMetadata != null) {
+                                if (!$util.isObject(object.commonMetadata))
+                                    throw TypeError(".google.storage.control.v2.UpdateRapidCacheMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
+                            }
+                            if (object.rapidCacheId != null)
+                                message.rapidCacheId = String(object.rapidCacheId);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.ttl != null) {
+                                if (!$util.isObject(object.ttl))
+                                    throw TypeError(".google.storage.control.v2.UpdateRapidCacheMetadata.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.ingestOnWrite != null)
+                                message.ingestOnWrite = Boolean(object.ingestOnWrite);
+                            if (object.cacheType != null)
+                                message.cacheType = String(object.cacheType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateRapidCacheMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.UpdateRapidCacheMetadata} message UpdateRapidCacheMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateRapidCacheMetadata.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults)
+                                object.commonMetadata = null;
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                object.rapidCacheId = message.rapidCacheId;
+                                if (options.oneofs)
+                                    object._rapidCacheId = "rapidCacheId";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
+                                if (options.oneofs)
+                                    object._ttl = "ttl";
+                            }
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
+                                object.admissionPolicy = message.admissionPolicy;
+                                if (options.oneofs)
+                                    object._admissionPolicy = "admissionPolicy";
+                            }
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                object.ingestOnWrite = message.ingestOnWrite;
+                                if (options.oneofs)
+                                    object._ingestOnWrite = "ingestOnWrite";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                object.cacheType = message.cacheType;
+                                if (options.oneofs)
+                                    object._cacheType = "cacheType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateRapidCacheMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateRapidCacheMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateRapidCacheMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.UpdateRapidCacheMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateRapidCacheMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.UpdateRapidCacheMetadata";
+                        };
+    
+                        return UpdateRapidCacheMetadata;
+                    })();
+    
+                    v2.DisableRapidCacheMetadata = (function() {
+    
+                        /**
+                         * Properties of a DisableRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface IDisableRapidCacheMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] DisableRapidCacheMetadata commonMetadata
+                         * @property {string|null} [rapidCacheId] DisableRapidCacheMetadata rapidCacheId
+                         * @property {string|null} [zone] DisableRapidCacheMetadata zone
+                         * @property {string|null} [cacheType] DisableRapidCacheMetadata cacheType
+                         */
+    
+                        /**
+                         * Constructs a new DisableRapidCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DisableRapidCacheMetadata.
+                         * @implements IDisableRapidCacheMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.IDisableRapidCacheMetadata=} [properties] Properties to set
+                         */
+                        function DisableRapidCacheMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisableRapidCacheMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @instance
+                         */
+                        DisableRapidCacheMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * DisableRapidCacheMetadata rapidCacheId.
+                         * @member {string|null|undefined} rapidCacheId
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @instance
+                         */
+                        DisableRapidCacheMetadata.prototype.rapidCacheId = null;
+    
+                        /**
+                         * DisableRapidCacheMetadata zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @instance
+                         */
+                        DisableRapidCacheMetadata.prototype.zone = null;
+    
+                        /**
+                         * DisableRapidCacheMetadata cacheType.
+                         * @member {string|null|undefined} cacheType
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @instance
+                         */
+                        DisableRapidCacheMetadata.prototype.cacheType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DisableRapidCacheMetadata.prototype, "_rapidCacheId", {
+                            get: $util.oneOfGetter($oneOfFields = ["rapidCacheId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DisableRapidCacheMetadata.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DisableRapidCacheMetadata.prototype, "_cacheType", {
+                            get: $util.oneOfGetter($oneOfFields = ["cacheType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DisableRapidCacheMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DisableRapidCacheMetadata} DisableRapidCacheMetadata instance
+                         */
+                        DisableRapidCacheMetadata.create = function create(properties) {
+                            return new DisableRapidCacheMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisableRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheMetadata} message DisableRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableRapidCacheMetadata.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rapidCacheId);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.zone);
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.cacheType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisableRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheMetadata} message DisableRapidCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableRapidCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisableRapidCacheMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DisableRapidCacheMetadata} DisableRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableRapidCacheMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DisableRapidCacheMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rapidCacheId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cacheType = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisableRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DisableRapidCacheMetadata} DisableRapidCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableRapidCacheMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisableRapidCacheMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisableRapidCacheMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                properties._rapidCacheId = 1;
+                                if (!$util.isString(message.rapidCacheId))
+                                    return "rapidCacheId: string expected";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                properties._cacheType = 1;
+                                if (!$util.isString(message.cacheType))
+                                    return "cacheType: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisableRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DisableRapidCacheMetadata} DisableRapidCacheMetadata
+                         */
+                        DisableRapidCacheMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.DisableRapidCacheMetadata)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DisableRapidCacheMetadata: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.DisableRapidCacheMetadata();
+                            if (object.commonMetadata != null) {
+                                if (!$util.isObject(object.commonMetadata))
+                                    throw TypeError(".google.storage.control.v2.DisableRapidCacheMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata, long + 1);
+                            }
+                            if (object.rapidCacheId != null)
+                                message.rapidCacheId = String(object.rapidCacheId);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.cacheType != null)
+                                message.cacheType = String(object.cacheType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisableRapidCacheMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.DisableRapidCacheMetadata} message DisableRapidCacheMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisableRapidCacheMetadata.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults)
+                                object.commonMetadata = null;
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
+                            if (message.rapidCacheId != null && Object.hasOwnProperty.call(message, "rapidCacheId")) {
+                                object.rapidCacheId = message.rapidCacheId;
+                                if (options.oneofs)
+                                    object._rapidCacheId = "rapidCacheId";
+                            }
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType")) {
+                                object.cacheType = message.cacheType;
+                                if (options.oneofs)
+                                    object._cacheType = "cacheType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisableRapidCacheMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisableRapidCacheMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DisableRapidCacheMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DisableRapidCacheMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DisableRapidCacheMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DisableRapidCacheMetadata";
+                        };
+    
+                        return DisableRapidCacheMetadata;
+                    })();
+    
                     v2.AnywhereCache = (function() {
     
                         /**
@@ -8783,6 +12002,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] AnywhereCache createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] AnywhereCache updateTime
                          * @property {boolean|null} [pendingUpdate] AnywhereCache pendingUpdate
+                         * @property {boolean|null} [ingestOnWrite] AnywhereCache ingestOnWrite
                          */
     
                         /**
@@ -8865,6 +12085,23 @@
                         AnywhereCache.prototype.pendingUpdate = false;
     
                         /**
+                         * AnywhereCache ingestOnWrite.
+                         * @member {boolean|null|undefined} ingestOnWrite
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.ingestOnWrite = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AnywhereCache.prototype, "_ingestOnWrite", {
+                            get: $util.oneOfGetter($oneOfFields = ["ingestOnWrite"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new AnywhereCache instance using the specified properties.
                          * @function create
                          * @memberof google.storage.control.v2.AnywhereCache
@@ -8908,6 +12145,8 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.admissionPolicy);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.zone);
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.ingestOnWrite);
                             return writer;
                         };
     
@@ -8921,7 +12160,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         AnywhereCache.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -8942,7 +12181,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.AnywhereCache();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.AnywhereCache();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -8980,10 +12229,19 @@
                                         message.pendingUpdate = reader.bool();
                                         break;
                                     }
+                                case 11: {
+                                        message.ingestOnWrite = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -9019,6 +12277,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -9049,6 +12308,11 @@
                             if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
                                 if (typeof message.pendingUpdate !== "boolean")
                                     return "pendingUpdate: boolean expected";
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                properties._ingestOnWrite = 1;
+                                if (typeof message.ingestOnWrite !== "boolean")
+                                    return "ingestOnWrite: boolean expected";
+                            }
                             return null;
                         };
     
@@ -9095,6 +12359,8 @@
                             }
                             if (object.pendingUpdate != null)
                                 message.pendingUpdate = Boolean(object.pendingUpdate);
+                            if (object.ingestOnWrite != null)
+                                message.ingestOnWrite = Boolean(object.ingestOnWrite);
                             return message;
                         };
     
@@ -9141,6 +12407,11 @@
                                 object.admissionPolicy = message.admissionPolicy;
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 object.zone = message.zone;
+                            if (message.ingestOnWrite != null && Object.hasOwnProperty.call(message, "ingestOnWrite")) {
+                                object.ingestOnWrite = message.ingestOnWrite;
+                                if (options.oneofs)
+                                    object._ingestOnWrite = "ingestOnWrite";
+                            }
                             return object;
                         };
     
@@ -9270,7 +12541,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CreateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -9291,7 +12562,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -9313,6 +12594,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -9549,7 +12835,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -9570,7 +12856,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -9592,6 +12888,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -9822,7 +13123,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         DisableAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -9843,7 +13144,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DisableAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DisableAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -9861,6 +13172,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -10073,7 +13389,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         PauseAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -10094,7 +13410,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.PauseAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.PauseAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -10112,6 +13438,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -10324,7 +13655,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ResumeAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -10345,7 +13676,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ResumeAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ResumeAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -10363,6 +13704,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -10575,7 +13921,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -10596,7 +13942,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetAnywhereCacheRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetAnywhereCacheRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -10614,6 +13970,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -10848,7 +14209,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListAnywhereCachesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -10869,7 +14230,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListAnywhereCachesRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListAnywhereCachesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -10895,6 +14266,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -11125,7 +14501,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListAnywhereCachesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -11146,7 +14522,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListAnywhereCachesResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListAnywhereCachesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -11166,6 +14552,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -11309,6 +14700,2172 @@
                         return ListAnywhereCachesResponse;
                     })();
     
+                    v2.RapidCache = (function() {
+    
+                        /**
+                         * Properties of a RapidCache.
+                         * @memberof google.storage.control.v2
+                         * @interface IRapidCache
+                         * @property {string|null} [name] RapidCache name
+                         * @property {string|null} [zone] RapidCache zone
+                         * @property {string|null} [cacheType] RapidCache cacheType
+                         * @property {google.protobuf.IDuration|null} [ttl] RapidCache ttl
+                         * @property {string|null} [admissionPolicy] RapidCache admissionPolicy
+                         * @property {string|null} [state] RapidCache state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] RapidCache createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] RapidCache updateTime
+                         * @property {boolean|null} [pendingUpdate] RapidCache pendingUpdate
+                         */
+    
+                        /**
+                         * Constructs a new RapidCache.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a RapidCache.
+                         * @implements IRapidCache
+                         * @constructor
+                         * @param {google.storage.control.v2.IRapidCache=} [properties] Properties to set
+                         */
+                        function RapidCache(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RapidCache name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.name = "";
+    
+                        /**
+                         * RapidCache zone.
+                         * @member {string} zone
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.zone = "";
+    
+                        /**
+                         * RapidCache cacheType.
+                         * @member {string} cacheType
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.cacheType = "";
+    
+                        /**
+                         * RapidCache ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.ttl = null;
+    
+                        /**
+                         * RapidCache admissionPolicy.
+                         * @member {string} admissionPolicy
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.admissionPolicy = "";
+    
+                        /**
+                         * RapidCache state.
+                         * @member {string} state
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.state = "";
+    
+                        /**
+                         * RapidCache createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.createTime = null;
+    
+                        /**
+                         * RapidCache updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.updateTime = null;
+    
+                        /**
+                         * RapidCache pendingUpdate.
+                         * @member {boolean} pendingUpdate
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         */
+                        RapidCache.prototype.pendingUpdate = false;
+    
+                        /**
+                         * Creates a new RapidCache instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {google.storage.control.v2.IRapidCache=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.RapidCache} RapidCache instance
+                         */
+                        RapidCache.create = function create(properties) {
+                            return new RapidCache(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RapidCache message. Does not implicitly {@link google.storage.control.v2.RapidCache.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {google.storage.control.v2.IRapidCache} message RapidCache message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RapidCache.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.cacheType);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.admissionPolicy);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork(), q + 1).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.pendingUpdate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RapidCache message, length delimited. Does not implicitly {@link google.storage.control.v2.RapidCache.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {google.storage.control.v2.IRapidCache} message RapidCache message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RapidCache.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RapidCache message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.RapidCache} RapidCache
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RapidCache.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.RapidCache();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.cacheType = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 9: {
+                                        message.pendingUpdate = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RapidCache message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.RapidCache} RapidCache
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RapidCache.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RapidCache message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RapidCache.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                if (!$util.isString(message.cacheType))
+                                    return "cacheType: string expected";
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
+                                if (error)
+                                    return "ttl." + error;
+                            }
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                if (!$util.isString(message.state))
+                                    return "state: string expected";
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
+                                if (typeof message.pendingUpdate !== "boolean")
+                                    return "pendingUpdate: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RapidCache message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.RapidCache} RapidCache
+                         */
+                        RapidCache.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.RapidCache)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.RapidCache: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.RapidCache();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.cacheType != null)
+                                message.cacheType = String(object.cacheType);
+                            if (object.ttl != null) {
+                                if (!$util.isObject(object.ttl))
+                                    throw TypeError(".google.storage.control.v2.RapidCache.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl, long + 1);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.state != null)
+                                message.state = String(object.state);
+                            if (object.createTime != null) {
+                                if (!$util.isObject(object.createTime))
+                                    throw TypeError(".google.storage.control.v2.RapidCache.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (!$util.isObject(object.updateTime))
+                                    throw TypeError(".google.storage.control.v2.RapidCache.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.pendingUpdate != null)
+                                message.pendingUpdate = Boolean(object.pendingUpdate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RapidCache message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {google.storage.control.v2.RapidCache} message RapidCache
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RapidCache.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.zone = "";
+                                object.cacheType = "";
+                                object.ttl = null;
+                                object.admissionPolicy = "";
+                                object.state = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.pendingUpdate = false;
+                            }
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                object.name = message.name;
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                object.zone = message.zone;
+                            if (message.cacheType != null && Object.hasOwnProperty.call(message, "cacheType"))
+                                object.cacheType = message.cacheType;
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                object.admissionPolicy = message.admissionPolicy;
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                object.state = message.state;
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
+                                object.pendingUpdate = message.pendingUpdate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RapidCache to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RapidCache.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RapidCache
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.RapidCache
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RapidCache.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.RapidCache";
+                        };
+    
+                        return RapidCache;
+                    })();
+    
+                    v2.CreateRapidCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface ICreateRapidCacheRequest
+                         * @property {string|null} [parent] CreateRapidCacheRequest parent
+                         * @property {google.storage.control.v2.IRapidCache|null} [rapidCache] CreateRapidCacheRequest rapidCache
+                         * @property {string|null} [requestId] CreateRapidCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a CreateRapidCacheRequest.
+                         * @implements ICreateRapidCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest=} [properties] Properties to set
+                         */
+                        function CreateRapidCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateRapidCacheRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @instance
+                         */
+                        CreateRapidCacheRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateRapidCacheRequest rapidCache.
+                         * @member {google.storage.control.v2.IRapidCache|null|undefined} rapidCache
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @instance
+                         */
+                        CreateRapidCacheRequest.prototype.rapidCache = null;
+    
+                        /**
+                         * CreateRapidCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @instance
+                         */
+                        CreateRapidCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateRapidCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.CreateRapidCacheRequest} CreateRapidCacheRequest instance
+                         */
+                        CreateRapidCacheRequest.create = function create(properties) {
+                            return new CreateRapidCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest} message CreateRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRapidCacheRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache"))
+                                $root.google.storage.control.v2.RapidCache.encode(message.rapidCache, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateRapidCacheRequest} message CreateRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRapidCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateRapidCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.CreateRapidCacheRequest} CreateRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRapidCacheRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.CreateRapidCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rapidCache = $root.google.storage.control.v2.RapidCache.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateRapidCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.CreateRapidCacheRequest} CreateRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRapidCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateRapidCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateRapidCacheRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache")) {
+                                var error = $root.google.storage.control.v2.RapidCache.verify(message.rapidCache, long + 1);
+                                if (error)
+                                    return "rapidCache." + error;
+                            }
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.CreateRapidCacheRequest} CreateRapidCacheRequest
+                         */
+                        CreateRapidCacheRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.CreateRapidCacheRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.CreateRapidCacheRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.CreateRapidCacheRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.rapidCache != null) {
+                                if (!$util.isObject(object.rapidCache))
+                                    throw TypeError(".google.storage.control.v2.CreateRapidCacheRequest.rapidCache: object expected");
+                                message.rapidCache = $root.google.storage.control.v2.RapidCache.fromObject(object.rapidCache, long + 1);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateRapidCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.CreateRapidCacheRequest} message CreateRapidCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateRapidCacheRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.rapidCache = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                object.parent = message.parent;
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache"))
+                                object.rapidCache = $root.google.storage.control.v2.RapidCache.toObject(message.rapidCache, options, q + 1);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateRapidCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateRapidCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateRapidCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.CreateRapidCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateRapidCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.CreateRapidCacheRequest";
+                        };
+    
+                        return CreateRapidCacheRequest;
+                    })();
+    
+                    v2.UpdateRapidCacheRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IUpdateRapidCacheRequest
+                         * @property {google.storage.control.v2.IRapidCache|null} [rapidCache] UpdateRapidCacheRequest rapidCache
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateRapidCacheRequest updateMask
+                         * @property {string|null} [requestId] UpdateRapidCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an UpdateRapidCacheRequest.
+                         * @implements IUpdateRapidCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest=} [properties] Properties to set
+                         */
+                        function UpdateRapidCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateRapidCacheRequest rapidCache.
+                         * @member {google.storage.control.v2.IRapidCache|null|undefined} rapidCache
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @instance
+                         */
+                        UpdateRapidCacheRequest.prototype.rapidCache = null;
+    
+                        /**
+                         * UpdateRapidCacheRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @instance
+                         */
+                        UpdateRapidCacheRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateRapidCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @instance
+                         */
+                        UpdateRapidCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateRapidCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.UpdateRapidCacheRequest} UpdateRapidCacheRequest instance
+                         */
+                        UpdateRapidCacheRequest.create = function create(properties) {
+                            return new UpdateRapidCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest} message UpdateRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRapidCacheRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache"))
+                                $root.google.storage.control.v2.RapidCache.encode(message.rapidCache, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateRapidCacheRequest} message UpdateRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRapidCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateRapidCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.UpdateRapidCacheRequest} UpdateRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRapidCacheRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateRapidCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rapidCache = $root.google.storage.control.v2.RapidCache.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateRapidCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.UpdateRapidCacheRequest} UpdateRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRapidCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateRapidCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateRapidCacheRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache")) {
+                                var error = $root.google.storage.control.v2.RapidCache.verify(message.rapidCache, long + 1);
+                                if (error)
+                                    return "rapidCache." + error;
+                            }
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.UpdateRapidCacheRequest} UpdateRapidCacheRequest
+                         */
+                        UpdateRapidCacheRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.UpdateRapidCacheRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.UpdateRapidCacheRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.UpdateRapidCacheRequest();
+                            if (object.rapidCache != null) {
+                                if (!$util.isObject(object.rapidCache))
+                                    throw TypeError(".google.storage.control.v2.UpdateRapidCacheRequest.rapidCache: object expected");
+                                message.rapidCache = $root.google.storage.control.v2.RapidCache.fromObject(object.rapidCache, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (!$util.isObject(object.updateMask))
+                                    throw TypeError(".google.storage.control.v2.UpdateRapidCacheRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateRapidCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.UpdateRapidCacheRequest} message UpdateRapidCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateRapidCacheRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.rapidCache = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.rapidCache != null && Object.hasOwnProperty.call(message, "rapidCache"))
+                                object.rapidCache = $root.google.storage.control.v2.RapidCache.toObject(message.rapidCache, options, q + 1);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateRapidCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateRapidCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateRapidCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.UpdateRapidCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateRapidCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.UpdateRapidCacheRequest";
+                        };
+    
+                        return UpdateRapidCacheRequest;
+                    })();
+    
+                    v2.DisableRapidCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a DisableRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IDisableRapidCacheRequest
+                         * @property {string|null} [name] DisableRapidCacheRequest name
+                         * @property {string|null} [requestId] DisableRapidCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DisableRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DisableRapidCacheRequest.
+                         * @implements IDisableRapidCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest=} [properties] Properties to set
+                         */
+                        function DisableRapidCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisableRapidCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @instance
+                         */
+                        DisableRapidCacheRequest.prototype.name = "";
+    
+                        /**
+                         * DisableRapidCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @instance
+                         */
+                        DisableRapidCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DisableRapidCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DisableRapidCacheRequest} DisableRapidCacheRequest instance
+                         */
+                        DisableRapidCacheRequest.create = function create(properties) {
+                            return new DisableRapidCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisableRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest} message DisableRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableRapidCacheRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisableRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableRapidCacheRequest} message DisableRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableRapidCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisableRapidCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DisableRapidCacheRequest} DisableRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableRapidCacheRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.DisableRapidCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisableRapidCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DisableRapidCacheRequest} DisableRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableRapidCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisableRapidCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisableRapidCacheRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisableRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DisableRapidCacheRequest} DisableRapidCacheRequest
+                         */
+                        DisableRapidCacheRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.DisableRapidCacheRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.DisableRapidCacheRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.DisableRapidCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisableRapidCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.DisableRapidCacheRequest} message DisableRapidCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisableRapidCacheRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                object.name = message.name;
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisableRapidCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisableRapidCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DisableRapidCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DisableRapidCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DisableRapidCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DisableRapidCacheRequest";
+                        };
+    
+                        return DisableRapidCacheRequest;
+                    })();
+    
+                    v2.GetRapidCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IGetRapidCacheRequest
+                         * @property {string|null} [name] GetRapidCacheRequest name
+                         * @property {string|null} [requestId] GetRapidCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new GetRapidCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a GetRapidCacheRequest.
+                         * @implements IGetRapidCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest=} [properties] Properties to set
+                         */
+                        function GetRapidCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRapidCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @instance
+                         */
+                        GetRapidCacheRequest.prototype.name = "";
+    
+                        /**
+                         * GetRapidCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @instance
+                         */
+                        GetRapidCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new GetRapidCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.GetRapidCacheRequest} GetRapidCacheRequest instance
+                         */
+                        GetRapidCacheRequest.create = function create(properties) {
+                            return new GetRapidCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.GetRapidCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest} message GetRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRapidCacheRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetRapidCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetRapidCacheRequest} message GetRapidCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRapidCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRapidCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.GetRapidCacheRequest} GetRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRapidCacheRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetRapidCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRapidCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.GetRapidCacheRequest} GetRapidCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRapidCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRapidCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRapidCacheRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.GetRapidCacheRequest} GetRapidCacheRequest
+                         */
+                        GetRapidCacheRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.GetRapidCacheRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.GetRapidCacheRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.GetRapidCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRapidCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.GetRapidCacheRequest} message GetRapidCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRapidCacheRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                object.name = message.name;
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRapidCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRapidCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRapidCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.GetRapidCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRapidCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.GetRapidCacheRequest";
+                        };
+    
+                        return GetRapidCacheRequest;
+                    })();
+    
+                    v2.ListRapidCachesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRapidCachesRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IListRapidCachesRequest
+                         * @property {string|null} [parent] ListRapidCachesRequest parent
+                         * @property {number|null} [pageSize] ListRapidCachesRequest pageSize
+                         * @property {string|null} [pageToken] ListRapidCachesRequest pageToken
+                         * @property {string|null} [requestId] ListRapidCachesRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new ListRapidCachesRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListRapidCachesRequest.
+                         * @implements IListRapidCachesRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IListRapidCachesRequest=} [properties] Properties to set
+                         */
+                        function ListRapidCachesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRapidCachesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @instance
+                         */
+                        ListRapidCachesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRapidCachesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @instance
+                         */
+                        ListRapidCachesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRapidCachesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @instance
+                         */
+                        ListRapidCachesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListRapidCachesRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @instance
+                         */
+                        ListRapidCachesRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new ListRapidCachesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListRapidCachesRequest} ListRapidCachesRequest instance
+                         */
+                        ListRapidCachesRequest.create = function create(properties) {
+                            return new ListRapidCachesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRapidCachesRequest message. Does not implicitly {@link google.storage.control.v2.ListRapidCachesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesRequest} message ListRapidCachesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRapidCachesRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRapidCachesRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListRapidCachesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesRequest} message ListRapidCachesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRapidCachesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRapidCachesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListRapidCachesRequest} ListRapidCachesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRapidCachesRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListRapidCachesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRapidCachesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListRapidCachesRequest} ListRapidCachesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRapidCachesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRapidCachesRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRapidCachesRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRapidCachesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListRapidCachesRequest} ListRapidCachesRequest
+                         */
+                        ListRapidCachesRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListRapidCachesRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListRapidCachesRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListRapidCachesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRapidCachesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.ListRapidCachesRequest} message ListRapidCachesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRapidCachesRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRapidCachesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRapidCachesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRapidCachesRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListRapidCachesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRapidCachesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListRapidCachesRequest";
+                        };
+    
+                        return ListRapidCachesRequest;
+                    })();
+    
+                    v2.ListRapidCachesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRapidCachesResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface IListRapidCachesResponse
+                         * @property {Array.<google.storage.control.v2.IRapidCache>|null} [rapidCaches] ListRapidCachesResponse rapidCaches
+                         * @property {string|null} [nextPageToken] ListRapidCachesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRapidCachesResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListRapidCachesResponse.
+                         * @implements IListRapidCachesResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.IListRapidCachesResponse=} [properties] Properties to set
+                         */
+                        function ListRapidCachesResponse(properties) {
+                            this.rapidCaches = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRapidCachesResponse rapidCaches.
+                         * @member {Array.<google.storage.control.v2.IRapidCache>} rapidCaches
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @instance
+                         */
+                        ListRapidCachesResponse.prototype.rapidCaches = $util.emptyArray;
+    
+                        /**
+                         * ListRapidCachesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @instance
+                         */
+                        ListRapidCachesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRapidCachesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListRapidCachesResponse} ListRapidCachesResponse instance
+                         */
+                        ListRapidCachesResponse.create = function create(properties) {
+                            return new ListRapidCachesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRapidCachesResponse message. Does not implicitly {@link google.storage.control.v2.ListRapidCachesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesResponse} message ListRapidCachesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRapidCachesResponse.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.rapidCaches != null && message.rapidCaches.length)
+                                for (var i = 0; i < message.rapidCaches.length; ++i)
+                                    $root.google.storage.control.v2.RapidCache.encode(message.rapidCaches[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRapidCachesResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListRapidCachesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListRapidCachesResponse} message ListRapidCachesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRapidCachesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRapidCachesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListRapidCachesResponse} ListRapidCachesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRapidCachesResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListRapidCachesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.rapidCaches && message.rapidCaches.length))
+                                            message.rapidCaches = [];
+                                        message.rapidCaches.push($root.google.storage.control.v2.RapidCache.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRapidCachesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListRapidCachesResponse} ListRapidCachesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRapidCachesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRapidCachesResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRapidCachesResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.rapidCaches != null && Object.hasOwnProperty.call(message, "rapidCaches")) {
+                                if (!Array.isArray(message.rapidCaches))
+                                    return "rapidCaches: array expected";
+                                for (var i = 0; i < message.rapidCaches.length; ++i) {
+                                    var error = $root.google.storage.control.v2.RapidCache.verify(message.rapidCaches[i], long + 1);
+                                    if (error)
+                                        return "rapidCaches." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRapidCachesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListRapidCachesResponse} ListRapidCachesResponse
+                         */
+                        ListRapidCachesResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ListRapidCachesResponse)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ListRapidCachesResponse: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ListRapidCachesResponse();
+                            if (object.rapidCaches) {
+                                if (!Array.isArray(object.rapidCaches))
+                                    throw TypeError(".google.storage.control.v2.ListRapidCachesResponse.rapidCaches: array expected");
+                                message.rapidCaches = [];
+                                for (var i = 0; i < object.rapidCaches.length; ++i) {
+                                    if (!$util.isObject(object.rapidCaches[i]))
+                                        throw TypeError(".google.storage.control.v2.ListRapidCachesResponse.rapidCaches: object expected");
+                                    message.rapidCaches[i] = $root.google.storage.control.v2.RapidCache.fromObject(object.rapidCaches[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRapidCachesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.ListRapidCachesResponse} message ListRapidCachesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRapidCachesResponse.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rapidCaches = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.rapidCaches && message.rapidCaches.length) {
+                                object.rapidCaches = [];
+                                for (var j = 0; j < message.rapidCaches.length; ++j)
+                                    object.rapidCaches[j] = $root.google.storage.control.v2.RapidCache.toObject(message.rapidCaches[j], options, q + 1);
+                            }
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRapidCachesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRapidCachesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRapidCachesResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListRapidCachesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRapidCachesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListRapidCachesResponse";
+                        };
+    
+                        return ListRapidCachesResponse;
+                    })();
+    
                     v2.IntelligenceConfig = (function() {
     
                         /**
@@ -11439,7 +16996,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -11460,7 +17017,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.IntelligenceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -11494,6 +17061,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -11541,6 +17113,7 @@
                                 case 2:
                                 case 3:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
@@ -11612,6 +17185,10 @@
                             case "TRIAL":
                             case 5:
                                 message.editionConfig = 5;
+                                break;
+                            case "ESSENTIALS":
+                            case 6:
+                                message.editionConfig = 6;
                                 break;
                             }
                             if (object.updateTime != null) {
@@ -11712,6 +17289,7 @@
                          * @property {number} DISABLED=2 DISABLED value
                          * @property {number} STANDARD=3 STANDARD value
                          * @property {number} TRIAL=5 TRIAL value
+                         * @property {number} ESSENTIALS=6 ESSENTIALS value
                          */
                         IntelligenceConfig.EditionConfig = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11720,6 +17298,7 @@
                             values[valuesById[2] = "DISABLED"] = 2;
                             values[valuesById[3] = "STANDARD"] = 3;
                             values[valuesById[5] = "TRIAL"] = 5;
+                            values[valuesById[6] = "ESSENTIALS"] = 6;
                             return values;
                         })();
     
@@ -11856,7 +17435,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -11877,7 +17456,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig.Filter();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceConfig.Filter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -11903,6 +17492,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -12162,7 +17756,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 CloudStorageLocations.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -12183,7 +17777,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -12199,6 +17803,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -12405,7 +18014,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 CloudStorageBuckets.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -12426,7 +18035,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -12442,6 +18061,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -12660,7 +18284,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             EffectiveIntelligenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -12681,7 +18305,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -12699,6 +18333,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -12940,7 +18579,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TrialConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -12961,7 +18600,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceConfig.TrialConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceConfig.TrialConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -12975,6 +18624,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -13197,7 +18851,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateOrganizationIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -13218,7 +18872,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -13240,6 +18904,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -13481,7 +19150,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateFolderIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -13502,7 +19171,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -13524,6 +19203,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -13765,7 +19449,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         UpdateProjectIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -13786,7 +19470,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -13808,6 +19502,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -14027,7 +19726,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetOrganizationIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -14048,7 +19747,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -14062,6 +19771,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -14254,7 +19968,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetFolderIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -14275,7 +19989,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -14289,6 +20013,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -14481,7 +20210,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetProjectIntelligenceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -14502,7 +20231,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -14516,6 +20255,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -14867,7 +20611,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceFinding.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -14888,7 +20632,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.IntelligenceFinding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -14956,6 +20710,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -15426,7 +21185,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ColdlineAndArchivalStorageOperationsSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -15447,7 +21206,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -15471,6 +21240,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -15769,7 +21543,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -15790,7 +21564,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -15820,6 +21604,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -16083,7 +21872,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                        return this.encode(message, writer).ldelim();
                                     };
     
                                     /**
@@ -16104,7 +21893,17 @@
                                             long = 0;
                                         if (long > $Reader.recursionLimit)
                                             throw Error("maximum nesting depth exceeded");
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution();
+                                        var end, message;
+                                        if (length === undefined)
+                                            end = reader.len;
+                                        else {
+                                            end = reader.pos + length;
+                                            if (end > reader.len)
+                                                throw RangeError("index out of range");
+                                            length = reader.len;
+                                            reader.len = end;
+                                        }
+                                        message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
                                             if (tag === error)
@@ -16120,6 +21919,11 @@
                                                 reader.skipType(tag & 7, long);
                                                 break;
                                             }
+                                        }
+                                        if (length !== undefined) {
+                                            if (reader.pos !== end)
+                                                throw RangeError("index out of range");
+                                            reader.len = length;
                                         }
                                         return message;
                                     };
@@ -16348,7 +22152,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                            return this.encode(message, writer).ldelim();
                                         };
     
                                         /**
@@ -16369,7 +22173,17 @@
                                                 long = 0;
                                             if (long > $Reader.recursionLimit)
                                                 throw Error("maximum nesting depth exceeded");
-                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution();
+                                            var end, message;
+                                            if (length === undefined)
+                                                end = reader.len;
+                                            else {
+                                                end = reader.pos + length;
+                                                if (end > reader.len)
+                                                    throw RangeError("index out of range");
+                                                length = reader.len;
+                                                reader.len = end;
+                                            }
+                                            message = new $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.PrefixContribution();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
                                                 if (tag === error)
@@ -16391,6 +22205,11 @@
                                                     reader.skipType(tag & 7, long);
                                                     break;
                                                 }
+                                            }
+                                            if (length !== undefined) {
+                                                if (reader.pos !== end)
+                                                    throw RangeError("index out of range");
+                                                reader.len = length;
                                             }
                                             return message;
                                         };
@@ -16649,7 +22468,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CrossRegionEgressSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -16670,7 +22489,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -16694,6 +22523,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -16992,7 +22826,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -17013,7 +22847,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -17043,6 +22887,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -17306,7 +23155,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                        return this.encode(message, writer).ldelim();
                                     };
     
                                     /**
@@ -17327,7 +23176,17 @@
                                             long = 0;
                                         if (long > $Reader.recursionLimit)
                                             throw Error("maximum nesting depth exceeded");
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution();
+                                        var end, message;
+                                        if (length === undefined)
+                                            end = reader.len;
+                                        else {
+                                            end = reader.pos + length;
+                                            if (end > reader.len)
+                                                throw RangeError("index out of range");
+                                            length = reader.len;
+                                            reader.len = end;
+                                        }
+                                        message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
                                             if (tag === error)
@@ -17343,6 +23202,11 @@
                                                 reader.skipType(tag & 7, long);
                                                 break;
                                             }
+                                        }
+                                        if (length !== undefined) {
+                                            if (reader.pos !== end)
+                                                throw RangeError("index out of range");
+                                            reader.len = length;
                                         }
                                         return message;
                                     };
@@ -17571,7 +23435,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                            return this.encode(message, writer).ldelim();
                                         };
     
                                         /**
@@ -17592,7 +23456,17 @@
                                                 long = 0;
                                             if (long > $Reader.recursionLimit)
                                                 throw Error("maximum nesting depth exceeded");
-                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution();
+                                            var end, message;
+                                            if (length === undefined)
+                                                end = reader.len;
+                                            else {
+                                                end = reader.pos + length;
+                                                if (end > reader.len)
+                                                    throw RangeError("index out of range");
+                                                length = reader.len;
+                                                reader.len = end;
+                                            }
+                                            message = new $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.PrefixContribution();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
                                                 if (tag === error)
@@ -17614,6 +23488,11 @@
                                                     reader.skipType(tag & 7, long);
                                                     break;
                                                 }
+                                            }
+                                            if (length !== undefined) {
+                                                if (reader.pos !== end)
+                                                    throw RangeError("index out of range");
+                                                reader.len = length;
                                             }
                                             return message;
                                         };
@@ -17872,7 +23751,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ThrottledRequestSpike.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -17893,7 +23772,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -17917,6 +23806,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -18215,7 +24109,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -18236,7 +24130,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -18266,6 +24170,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -18529,7 +24438,7 @@
                                      * @returns {$protobuf.Writer} Writer
                                      */
                                     Contribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                        return this.encode(message, writer).ldelim();
                                     };
     
                                     /**
@@ -18550,7 +24459,17 @@
                                             long = 0;
                                         if (long > $Reader.recursionLimit)
                                             throw Error("maximum nesting depth exceeded");
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution();
+                                        var end, message;
+                                        if (length === undefined)
+                                            end = reader.len;
+                                        else {
+                                            end = reader.pos + length;
+                                            if (end > reader.len)
+                                                throw RangeError("index out of range");
+                                            length = reader.len;
+                                            reader.len = end;
+                                        }
+                                        message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
                                             if (tag === error)
@@ -18566,6 +24485,11 @@
                                                 reader.skipType(tag & 7, long);
                                                 break;
                                             }
+                                        }
+                                        if (length !== undefined) {
+                                            if (reader.pos !== end)
+                                                throw RangeError("index out of range");
+                                            reader.len = length;
                                         }
                                         return message;
                                     };
@@ -18794,7 +24718,7 @@
                                          * @returns {$protobuf.Writer} Writer
                                          */
                                         PrefixContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                            return this.encode(message, writer).ldelim();
                                         };
     
                                         /**
@@ -18815,7 +24739,17 @@
                                                 long = 0;
                                             if (long > $Reader.recursionLimit)
                                                 throw Error("maximum nesting depth exceeded");
-                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution();
+                                            var end, message;
+                                            if (length === undefined)
+                                                end = reader.len;
+                                            else {
+                                                end = reader.pos + length;
+                                                if (end > reader.len)
+                                                    throw RangeError("index out of range");
+                                                length = reader.len;
+                                                reader.len = end;
+                                            }
+                                            message = new $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.PrefixContribution();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
                                                 if (tag === error)
@@ -18837,6 +24771,11 @@
                                                     reader.skipType(tag & 7, long);
                                                     break;
                                                 }
+                                            }
+                                            if (length !== undefined) {
+                                                if (reader.pos !== end)
+                                                    throw RangeError("index out of range");
+                                                reader.len = length;
                                             }
                                             return message;
                                         };
@@ -19095,7 +25034,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageGrowthAboveTrend.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -19116,7 +25055,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -19140,6 +25089,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -19427,7 +25381,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 BucketContribution.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -19448,7 +25402,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.BucketContribution();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -19474,6 +25438,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -19746,7 +25715,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IntelligenceFindingRevision.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -19767,7 +25736,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.IntelligenceFindingRevision();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.IntelligenceFindingRevision();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -19789,6 +25768,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -20008,7 +25992,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetIntelligenceFindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -20029,7 +26013,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetIntelligenceFindingRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetIntelligenceFindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -20043,6 +26037,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -20268,7 +26267,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -20289,7 +26288,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingsRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListIntelligenceFindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -20315,6 +26324,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -20545,7 +26559,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -20566,7 +26580,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingsResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListIntelligenceFindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -20586,6 +26610,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -20848,7 +26877,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SummarizeIntelligenceFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -20869,7 +26898,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -20899,6 +26938,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -21177,7 +27221,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SummarizeIntelligenceFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -21198,7 +27242,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -21218,6 +27272,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -21436,7 +27495,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         GetIntelligenceFindingRevisionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -21457,7 +27516,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -21471,6 +27540,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -21685,7 +27759,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -21706,7 +27780,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -21728,6 +27812,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -21950,7 +28039,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ListIntelligenceFindingRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -21971,7 +28060,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -21991,6 +28090,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -22277,7 +28381,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         FindingSummary.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -22298,7 +28402,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.FindingSummary();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.FindingSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -22338,6 +28452,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -22728,7 +28847,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SummaryDetails.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -22749,7 +28868,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.FindingSummary.SummaryDetails();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.control.v2.FindingSummary.SummaryDetails();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -22775,6 +28904,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -22983,6 +29117,724 @@
                         return FindingSummary;
                     })();
     
+                    v2.ObjectFullContext = (function() {
+    
+                        /**
+                         * Properties of an ObjectFullContext.
+                         * @memberof google.storage.control.v2
+                         * @interface IObjectFullContext
+                         * @property {google.storage.control.v2.ObjectFullContext.Type|null} [type] ObjectFullContext type
+                         * @property {string|null} [key] ObjectFullContext key
+                         * @property {string|null} [value] ObjectFullContext value
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ObjectFullContext createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ObjectFullContext updateTime
+                         * @property {google.protobuf.IAny|null} [extendedData] ObjectFullContext extendedData
+                         */
+    
+                        /**
+                         * Constructs a new ObjectFullContext.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an ObjectFullContext.
+                         * @implements IObjectFullContext
+                         * @constructor
+                         * @param {google.storage.control.v2.IObjectFullContext=} [properties] Properties to set
+                         */
+                        function ObjectFullContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ObjectFullContext type.
+                         * @member {google.storage.control.v2.ObjectFullContext.Type} type
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.type = 0;
+    
+                        /**
+                         * ObjectFullContext key.
+                         * @member {string} key
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.key = "";
+    
+                        /**
+                         * ObjectFullContext value.
+                         * @member {string} value
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.value = "";
+    
+                        /**
+                         * ObjectFullContext createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.createTime = null;
+    
+                        /**
+                         * ObjectFullContext updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.updateTime = null;
+    
+                        /**
+                         * ObjectFullContext extendedData.
+                         * @member {google.protobuf.IAny|null|undefined} extendedData
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         */
+                        ObjectFullContext.prototype.extendedData = null;
+    
+                        /**
+                         * Creates a new ObjectFullContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {google.storage.control.v2.IObjectFullContext=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ObjectFullContext} ObjectFullContext instance
+                         */
+                        ObjectFullContext.create = function create(properties) {
+                            return new ObjectFullContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectFullContext message. Does not implicitly {@link google.storage.control.v2.ObjectFullContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {google.storage.control.v2.IObjectFullContext} message ObjectFullContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectFullContext.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
+                            if (message.extendedData != null && Object.hasOwnProperty.call(message, "extendedData"))
+                                $root.google.protobuf.Any.encode(message.extendedData, writer.uint32(/* id 6, wireType 2 =*/50).fork(), q + 1).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ObjectFullContext message, length delimited. Does not implicitly {@link google.storage.control.v2.ObjectFullContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {google.storage.control.v2.IObjectFullContext} message ObjectFullContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ObjectFullContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ObjectFullContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ObjectFullContext} ObjectFullContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectFullContext.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ObjectFullContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.extendedData = $root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ObjectFullContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ObjectFullContext} ObjectFullContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ObjectFullContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ObjectFullContext message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ObjectFullContext.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.extendedData != null && Object.hasOwnProperty.call(message, "extendedData")) {
+                                var error = $root.google.protobuf.Any.verify(message.extendedData, long + 1);
+                                if (error)
+                                    return "extendedData." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ObjectFullContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ObjectFullContext} ObjectFullContext
+                         */
+                        ObjectFullContext.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ObjectFullContext)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ObjectFullContext: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ObjectFullContext();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "CUSTOM":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "GOOGLE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            if (object.createTime != null) {
+                                if (!$util.isObject(object.createTime))
+                                    throw TypeError(".google.storage.control.v2.ObjectFullContext.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (!$util.isObject(object.updateTime))
+                                    throw TypeError(".google.storage.control.v2.ObjectFullContext.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.extendedData != null) {
+                                if (!$util.isObject(object.extendedData))
+                                    throw TypeError(".google.storage.control.v2.ObjectFullContext.extendedData: object expected");
+                                message.extendedData = $root.google.protobuf.Any.fromObject(object.extendedData, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ObjectFullContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {google.storage.control.v2.ObjectFullContext} message ObjectFullContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ObjectFullContext.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.key = "";
+                                object.value = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.extendedData = null;
+                            }
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                object.type = options.enums === String ? $root.google.storage.control.v2.ObjectFullContext.Type[message.type] === undefined ? message.type : $root.google.storage.control.v2.ObjectFullContext.Type[message.type] : message.type;
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                object.key = message.key;
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                object.value = message.value;
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
+                            if (message.extendedData != null && Object.hasOwnProperty.call(message, "extendedData"))
+                                object.extendedData = $root.google.protobuf.Any.toObject(message.extendedData, options, q + 1);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ObjectFullContext to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ObjectFullContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ObjectFullContext
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ObjectFullContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ObjectFullContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ObjectFullContext";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.storage.control.v2.ObjectFullContext.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} CUSTOM=1 CUSTOM value
+                         * @property {number} GOOGLE=2 GOOGLE value
+                         */
+                        ObjectFullContext.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CUSTOM"] = 1;
+                            values[valuesById[2] = "GOOGLE"] = 2;
+                            return values;
+                        })();
+    
+                        return ObjectFullContext;
+                    })();
+    
+                    v2.ViewObjectFullContextRequest = (function() {
+    
+                        /**
+                         * Properties of a ViewObjectFullContextRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IViewObjectFullContextRequest
+                         * @property {number|Long|null} [generation] ViewObjectFullContextRequest generation
+                         * @property {string|null} [contextKey] ViewObjectFullContextRequest contextKey
+                         * @property {string|null} [name] ViewObjectFullContextRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ViewObjectFullContextRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ViewObjectFullContextRequest.
+                         * @implements IViewObjectFullContextRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest=} [properties] Properties to set
+                         */
+                        function ViewObjectFullContextRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ViewObjectFullContextRequest generation.
+                         * @member {number|Long} generation
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @instance
+                         */
+                        ViewObjectFullContextRequest.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ViewObjectFullContextRequest contextKey.
+                         * @member {string} contextKey
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @instance
+                         */
+                        ViewObjectFullContextRequest.prototype.contextKey = "";
+    
+                        /**
+                         * ViewObjectFullContextRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @instance
+                         */
+                        ViewObjectFullContextRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ViewObjectFullContextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ViewObjectFullContextRequest} ViewObjectFullContextRequest instance
+                         */
+                        ViewObjectFullContextRequest.create = function create(properties) {
+                            return new ViewObjectFullContextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ViewObjectFullContextRequest message. Does not implicitly {@link google.storage.control.v2.ViewObjectFullContextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest} message ViewObjectFullContextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ViewObjectFullContextRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            if (message.contextKey != null && Object.hasOwnProperty.call(message, "contextKey"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.contextKey);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ViewObjectFullContextRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ViewObjectFullContextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {google.storage.control.v2.IViewObjectFullContextRequest} message ViewObjectFullContextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ViewObjectFullContextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ViewObjectFullContextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ViewObjectFullContextRequest} ViewObjectFullContextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ViewObjectFullContextRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.control.v2.ViewObjectFullContextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.generation = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.contextKey = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ViewObjectFullContextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ViewObjectFullContextRequest} ViewObjectFullContextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ViewObjectFullContextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ViewObjectFullContextRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ViewObjectFullContextRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
+                                    return "generation: integer|Long expected";
+                            if (message.contextKey != null && Object.hasOwnProperty.call(message, "contextKey"))
+                                if (!$util.isString(message.contextKey))
+                                    return "contextKey: string expected";
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ViewObjectFullContextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ViewObjectFullContextRequest} ViewObjectFullContextRequest
+                         */
+                        ViewObjectFullContextRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.storage.control.v2.ViewObjectFullContextRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.storage.control.v2.ViewObjectFullContextRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.storage.control.v2.ViewObjectFullContextRequest();
+                            if (object.generation != null)
+                                if ($util.Long)
+                                    message.generation = $util.Long.fromValue(object.generation, false);
+                                else if (typeof object.generation === "string")
+                                    message.generation = parseInt(object.generation, 10);
+                                else if (typeof object.generation === "number")
+                                    message.generation = object.generation;
+                                else if (typeof object.generation === "object")
+                                    message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            if (object.contextKey != null)
+                                message.contextKey = String(object.contextKey);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ViewObjectFullContextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {google.storage.control.v2.ViewObjectFullContextRequest} message ViewObjectFullContextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ViewObjectFullContextRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
+                                } else
+                                    object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
+                                object.contextKey = "";
+                                object.name = "";
+                            }
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                                else if (typeof message.generation === "number")
+                                    object.generation = options.longs === String ? String(message.generation) : message.generation;
+                                else
+                                    object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            if (message.contextKey != null && Object.hasOwnProperty.call(message, "contextKey"))
+                                object.contextKey = message.contextKey;
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ViewObjectFullContextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ViewObjectFullContextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ViewObjectFullContextRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ViewObjectFullContextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ViewObjectFullContextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ViewObjectFullContextRequest";
+                        };
+    
+                        return ViewObjectFullContextRequest;
+                    })();
+    
                     /**
                      * FindingType enum.
                      * @name google.storage.control.v2.FindingType
@@ -23100,7 +29952,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.deleteBucket = function deleteBucket(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteBucket, $root.google.storage.v2.DeleteBucketRequest, $root.google.protobuf.Empty, request, callback);
+                        return this.rpcCall(deleteBucket, $root.google.storage.v2.DeleteBucketRequest, $root.google.protobuf.Empty, request, callback);
                     }, "name", { value: "DeleteBucket" });
     
                     /**
@@ -23133,7 +29985,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getBucket = function getBucket(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getBucket, $root.google.storage.v2.GetBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return this.rpcCall(getBucket, $root.google.storage.v2.GetBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "GetBucket" });
     
                     /**
@@ -23166,7 +30018,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.createBucket = function createBucket(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, createBucket, $root.google.storage.v2.CreateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return this.rpcCall(createBucket, $root.google.storage.v2.CreateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "CreateBucket" });
     
                     /**
@@ -23199,7 +30051,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.listBuckets = function listBuckets(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, listBuckets, $root.google.storage.v2.ListBucketsRequest, $root.google.storage.v2.ListBucketsResponse, request, callback);
+                        return this.rpcCall(listBuckets, $root.google.storage.v2.ListBucketsRequest, $root.google.storage.v2.ListBucketsResponse, request, callback);
                     }, "name", { value: "ListBuckets" });
     
                     /**
@@ -23232,7 +30084,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.lockBucketRetentionPolicy = function lockBucketRetentionPolicy(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, lockBucketRetentionPolicy, $root.google.storage.v2.LockBucketRetentionPolicyRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return this.rpcCall(lockBucketRetentionPolicy, $root.google.storage.v2.LockBucketRetentionPolicyRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "LockBucketRetentionPolicy" });
     
                     /**
@@ -23265,7 +30117,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "GetIamPolicy" });
     
                     /**
@@ -23298,7 +30150,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "SetIamPolicy" });
     
                     /**
@@ -23331,7 +30183,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                     }, "name", { value: "TestIamPermissions" });
     
                     /**
@@ -23364,7 +30216,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.updateBucket = function updateBucket(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateBucket, $root.google.storage.v2.UpdateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return this.rpcCall(updateBucket, $root.google.storage.v2.UpdateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "UpdateBucket" });
     
                     /**
@@ -23397,7 +30249,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.composeObject = function composeObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, composeObject, $root.google.storage.v2.ComposeObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return this.rpcCall(composeObject, $root.google.storage.v2.ComposeObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "ComposeObject" });
     
                     /**
@@ -23430,7 +30282,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.deleteObject = function deleteObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteObject, $root.google.storage.v2.DeleteObjectRequest, $root.google.protobuf.Empty, request, callback);
+                        return this.rpcCall(deleteObject, $root.google.storage.v2.DeleteObjectRequest, $root.google.protobuf.Empty, request, callback);
                     }, "name", { value: "DeleteObject" });
     
                     /**
@@ -23463,7 +30315,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.restoreObject = function restoreObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, restoreObject, $root.google.storage.v2.RestoreObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return this.rpcCall(restoreObject, $root.google.storage.v2.RestoreObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "RestoreObject" });
     
                     /**
@@ -23496,7 +30348,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.cancelResumableWrite = function cancelResumableWrite(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, cancelResumableWrite, $root.google.storage.v2.CancelResumableWriteRequest, $root.google.storage.v2.CancelResumableWriteResponse, request, callback);
+                        return this.rpcCall(cancelResumableWrite, $root.google.storage.v2.CancelResumableWriteRequest, $root.google.storage.v2.CancelResumableWriteResponse, request, callback);
                     }, "name", { value: "CancelResumableWrite" });
     
                     /**
@@ -23529,7 +30381,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getObject = function getObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getObject, $root.google.storage.v2.GetObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return this.rpcCall(getObject, $root.google.storage.v2.GetObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "GetObject" });
     
                     /**
@@ -23562,7 +30414,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.readObject = function readObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, readObject, $root.google.storage.v2.ReadObjectRequest, $root.google.storage.v2.ReadObjectResponse, request, callback);
+                        return this.rpcCall(readObject, $root.google.storage.v2.ReadObjectRequest, $root.google.storage.v2.ReadObjectResponse, request, callback);
                     }, "name", { value: "ReadObject" });
     
                     /**
@@ -23595,7 +30447,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.bidiReadObject = function bidiReadObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, bidiReadObject, $root.google.storage.v2.BidiReadObjectRequest, $root.google.storage.v2.BidiReadObjectResponse, request, callback);
+                        return this.rpcCall(bidiReadObject, $root.google.storage.v2.BidiReadObjectRequest, $root.google.storage.v2.BidiReadObjectResponse, request, callback);
                     }, "name", { value: "BidiReadObject" });
     
                     /**
@@ -23628,7 +30480,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.updateObject = function updateObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateObject, $root.google.storage.v2.UpdateObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return this.rpcCall(updateObject, $root.google.storage.v2.UpdateObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "UpdateObject" });
     
                     /**
@@ -23661,7 +30513,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.writeObject = function writeObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, writeObject, $root.google.storage.v2.WriteObjectRequest, $root.google.storage.v2.WriteObjectResponse, request, callback);
+                        return this.rpcCall(writeObject, $root.google.storage.v2.WriteObjectRequest, $root.google.storage.v2.WriteObjectResponse, request, callback);
                     }, "name", { value: "WriteObject" });
     
                     /**
@@ -23694,7 +30546,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.bidiWriteObject = function bidiWriteObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, bidiWriteObject, $root.google.storage.v2.BidiWriteObjectRequest, $root.google.storage.v2.BidiWriteObjectResponse, request, callback);
+                        return this.rpcCall(bidiWriteObject, $root.google.storage.v2.BidiWriteObjectRequest, $root.google.storage.v2.BidiWriteObjectResponse, request, callback);
                     }, "name", { value: "BidiWriteObject" });
     
                     /**
@@ -23727,7 +30579,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.listObjects = function listObjects(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, listObjects, $root.google.storage.v2.ListObjectsRequest, $root.google.storage.v2.ListObjectsResponse, request, callback);
+                        return this.rpcCall(listObjects, $root.google.storage.v2.ListObjectsRequest, $root.google.storage.v2.ListObjectsResponse, request, callback);
                     }, "name", { value: "ListObjects" });
     
                     /**
@@ -23760,7 +30612,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.rewriteObject = function rewriteObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, rewriteObject, $root.google.storage.v2.RewriteObjectRequest, $root.google.storage.v2.RewriteResponse, request, callback);
+                        return this.rpcCall(rewriteObject, $root.google.storage.v2.RewriteObjectRequest, $root.google.storage.v2.RewriteResponse, request, callback);
                     }, "name", { value: "RewriteObject" });
     
                     /**
@@ -23793,7 +30645,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.startResumableWrite = function startResumableWrite(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, startResumableWrite, $root.google.storage.v2.StartResumableWriteRequest, $root.google.storage.v2.StartResumableWriteResponse, request, callback);
+                        return this.rpcCall(startResumableWrite, $root.google.storage.v2.StartResumableWriteRequest, $root.google.storage.v2.StartResumableWriteResponse, request, callback);
                     }, "name", { value: "StartResumableWrite" });
     
                     /**
@@ -23826,7 +30678,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.queryWriteStatus = function queryWriteStatus(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, queryWriteStatus, $root.google.storage.v2.QueryWriteStatusRequest, $root.google.storage.v2.QueryWriteStatusResponse, request, callback);
+                        return this.rpcCall(queryWriteStatus, $root.google.storage.v2.QueryWriteStatusRequest, $root.google.storage.v2.QueryWriteStatusResponse, request, callback);
                     }, "name", { value: "QueryWriteStatus" });
     
                     /**
@@ -23859,7 +30711,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.moveObject = function moveObject(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, moveObject, $root.google.storage.v2.MoveObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return this.rpcCall(moveObject, $root.google.storage.v2.MoveObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "MoveObject" });
     
                     /**
@@ -23987,7 +30839,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     DeleteBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -24008,7 +30860,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.DeleteBucketRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.DeleteBucketRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -24030,6 +30892,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -24325,7 +31192,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -24346,7 +31213,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.GetBucketRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.GetBucketRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -24372,6 +31249,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -24686,7 +31568,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CreateBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -24707,7 +31589,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.CreateBucketRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.CreateBucketRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -24741,6 +31633,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -25043,7 +31940,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListBucketsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -25064,7 +31961,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ListBucketsRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ListBucketsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -25098,6 +32005,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -25368,7 +32280,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListBucketsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -25389,7 +32301,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ListBucketsResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ListBucketsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -25415,6 +32337,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -25665,7 +32592,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LockBucketRetentionPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -25686,7 +32613,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.LockBucketRetentionPolicyRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.LockBucketRetentionPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -25704,6 +32641,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -25991,7 +32933,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     UpdateBucketRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -26012,7 +32954,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.UpdateBucketRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.UpdateBucketRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -26046,6 +32998,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -26433,7 +33390,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ComposeObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -26454,7 +33411,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ComposeObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ComposeObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -26502,6 +33469,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -26848,7 +33820,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SourceObject.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -26869,7 +33841,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ComposeObjectRequest.SourceObject();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.ComposeObjectRequest.SourceObject();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -26891,6 +33873,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -27127,7 +34114,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ObjectPreconditions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -27148,7 +34135,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -27162,6 +34159,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -27480,7 +34482,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     DeleteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -27501,7 +34503,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.DeleteObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.DeleteObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -27543,6 +34555,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -28010,7 +35027,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RestoreObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -28031,7 +35048,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.RestoreObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.RestoreObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -28081,6 +35108,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -28436,7 +35468,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CancelResumableWriteRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -28457,7 +35489,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.CancelResumableWriteRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.CancelResumableWriteRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -28471,6 +35513,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -28652,7 +35699,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CancelResumableWriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -28673,7 +35720,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.CancelResumableWriteResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.CancelResumableWriteResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -28683,6 +35740,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -28995,7 +36057,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -29016,7 +36078,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ReadObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ReadObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -29070,6 +36142,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -29620,7 +36697,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -29641,7 +36718,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.GetObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.GetObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -29695,6 +36782,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -30101,7 +37193,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -30122,7 +37214,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ReadObjectResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ReadObjectResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -30148,6 +37250,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -30540,7 +37647,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -30561,7 +37668,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadObjectSpec();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadObjectSpec();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -30615,6 +37732,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -31011,7 +38133,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -31032,7 +38154,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -31052,6 +38184,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -31299,7 +38436,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -31320,7 +38457,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadObjectResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadObjectResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -31344,6 +38491,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -31601,7 +38753,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectRedirectedError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -31622,7 +38774,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadObjectRedirectedError();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadObjectRedirectedError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -31640,6 +38802,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -31893,7 +39060,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectRedirectedError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -31914,7 +39081,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiWriteObjectRedirectedError();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiWriteObjectRedirectedError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -31936,6 +39113,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -32176,7 +39358,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadObjectError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -32197,7 +39379,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadObjectError();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadObjectError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -32213,6 +39405,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -32433,7 +39630,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadRangeError.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -32454,7 +39651,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ReadRangeError();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ReadRangeError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -32472,6 +39679,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -32716,7 +39928,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReadRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -32737,7 +39949,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ReadRange();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ReadRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -32759,6 +39981,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -33038,7 +40265,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectRangeData.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -33059,7 +40286,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ObjectRangeData();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ObjectRangeData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -33081,6 +40318,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -33300,7 +40542,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiReadHandle.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -33321,7 +40563,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiReadHandle();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiReadHandle();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -33335,6 +40587,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -33536,7 +40793,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteHandle.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -33557,7 +40814,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiWriteHandle();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiWriteHandle();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -33571,6 +40838,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -33888,7 +41160,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -33909,7 +41181,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.WriteObjectSpec();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.WriteObjectSpec();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -33951,6 +41233,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -34381,7 +41668,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -34402,7 +41689,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.WriteObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.WriteObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -34440,6 +41737,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -34770,7 +42072,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     WriteObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -34791,7 +42093,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.WriteObjectResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.WriteObjectResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -34813,6 +42125,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -35148,7 +42465,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AppendObjectSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -35169,7 +42486,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.AppendObjectSpec();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.AppendObjectSpec();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -35207,6 +42534,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -35635,7 +42967,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -35656,7 +42988,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiWriteObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiWriteObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -35706,6 +43048,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -36089,7 +43436,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BidiWriteObjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -36110,7 +43457,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BidiWriteObjectResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BidiWriteObjectResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -36136,6 +43493,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -36548,7 +43910,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListObjectsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -36569,7 +43931,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ListObjectsRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ListObjectsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -36635,6 +44007,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -36954,7 +44331,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     QueryWriteStatusRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -36975,7 +44352,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.QueryWriteStatusRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.QueryWriteStatusRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -36993,6 +44380,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -37235,7 +44627,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     QueryWriteStatusResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -37256,7 +44648,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.QueryWriteStatusResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.QueryWriteStatusResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -37278,6 +44680,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -37813,7 +45220,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RewriteObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -37834,7 +45241,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.RewriteObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.RewriteObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -37936,6 +45353,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -38543,7 +45965,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     RewriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -38564,7 +45986,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.RewriteResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.RewriteResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -38594,6 +46026,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -39017,7 +46454,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     MoveObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -39038,7 +46475,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.MoveObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.MoveObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -39092,6 +46539,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -39516,7 +46968,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StartResumableWriteRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -39537,7 +46989,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.StartResumableWriteRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.StartResumableWriteRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -39559,6 +47021,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -39783,7 +47250,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StartResumableWriteResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -39804,7 +47271,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.StartResumableWriteResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.StartResumableWriteResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -39818,6 +47295,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -40125,7 +47607,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     UpdateObjectRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -40146,7 +47628,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.UpdateObjectRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.UpdateObjectRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -40192,6 +47684,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -40551,7 +48048,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CommonObjectRequestParams.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -40572,7 +48069,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.CommonObjectRequestParams();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.CommonObjectRequestParams();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -40594,6 +48101,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -40810,7 +48322,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ServiceConstants.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -40831,7 +48343,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ServiceConstants();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ServiceConstants();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -40841,6 +48363,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -41414,7 +48941,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Bucket.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -41435,7 +48962,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket(), key, value;
+                        var end, message, key, value;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.Bucket();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -41515,6 +49052,9 @@
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     key = "";
                                     value = "";
                                     while (reader.pos < end2) {
@@ -41531,6 +49071,9 @@
                                             break;
                                         }
                                     }
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                     if (key === "__proto__")
                                         $util.makeProp(message.labels, key);
                                     message.labels[key] = value;
@@ -41600,6 +49143,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -42219,7 +49767,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Billing.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -42240,7 +49788,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Billing();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Billing();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -42254,6 +49812,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -42485,7 +50048,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Cors.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -42506,7 +50069,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Cors();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Cors();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -42538,6 +50111,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -42846,7 +50424,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Encryption.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -42867,7 +50445,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Encryption();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Encryption();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -42893,6 +50481,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -43163,7 +50756,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GoogleManagedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -43184,7 +50777,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -43202,6 +50805,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -43442,7 +51050,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomerManagedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -43463,7 +51071,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -43481,6 +51099,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -43721,7 +51344,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CustomerSuppliedEncryptionEnforcementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -43742,7 +51365,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -43760,6 +51393,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -43988,7 +51626,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IamConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -44009,7 +51647,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.IamConfig();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.IamConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -44027,6 +51675,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -44241,7 +51894,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UniformBucketLevelAccess.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -44262,7 +51915,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -44280,6 +51943,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -44491,7 +52159,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Lifecycle.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -44512,7 +52180,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Lifecycle();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Lifecycle();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -44528,6 +52206,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -44745,7 +52428,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Rule.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -44766,7 +52449,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Lifecycle.Rule();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.Lifecycle.Rule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -44784,6 +52477,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -45003,7 +52701,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Action.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -45024,7 +52722,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Lifecycle.Rule.Action();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.v2.Bucket.Lifecycle.Rule.Action();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -45042,6 +52750,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -45392,7 +53105,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Condition.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -45413,7 +53126,17 @@
                                         long = 0;
                                     if (long > $Reader.recursionLimit)
                                         throw Error("maximum nesting depth exceeded");
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition();
+                                    var end, message;
+                                    if (length === undefined)
+                                        end = reader.len;
+                                    else {
+                                        end = reader.pos + length;
+                                        if (end > reader.len)
+                                            throw RangeError("index out of range");
+                                        length = reader.len;
+                                        reader.len = end;
+                                    }
+                                    message = new $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         if (tag === error)
@@ -45473,6 +53196,11 @@
                                             reader.skipType(tag & 7, long);
                                             break;
                                         }
+                                    }
+                                    if (length !== undefined) {
+                                        if (reader.pos !== end)
+                                            throw RangeError("index out of range");
+                                        reader.len = length;
                                     }
                                     return message;
                                 };
@@ -45837,7 +53565,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Logging.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -45858,7 +53586,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Logging();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Logging();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -45876,6 +53614,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -46077,7 +53820,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         ObjectRetention.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -46098,7 +53841,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.ObjectRetention();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.ObjectRetention();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -46112,6 +53865,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -46326,7 +54084,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         RetentionPolicy.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -46347,7 +54105,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.RetentionPolicy();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.RetentionPolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -46369,6 +54137,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -46614,7 +54387,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         SoftDeletePolicy.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -46635,7 +54408,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.SoftDeletePolicy();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.SoftDeletePolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -46653,6 +54436,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -46873,7 +54661,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Versioning.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -46894,7 +54682,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Versioning();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Versioning();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -46908,6 +54706,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -47111,7 +54914,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Website.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -47132,7 +54935,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Website();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Website();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -47150,6 +54963,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -47353,7 +55171,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         CustomPlacementConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -47374,7 +55192,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.CustomPlacementConfig();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.CustomPlacementConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -47390,6 +55218,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -47642,7 +55475,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Autoclass.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -47663,7 +55496,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.Autoclass();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.Autoclass();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -47689,6 +55532,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -47993,7 +55841,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         IpFilter.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -48014,7 +55862,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.IpFilter();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.IpFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -48046,6 +55904,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -48306,7 +56169,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             PublicNetworkSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -48327,7 +56190,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -48343,6 +56216,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -48569,7 +56447,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             VpcNetworkSource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -48590,7 +56468,17 @@
                                     long = 0;
                                 if (long > $Reader.recursionLimit)
                                     throw Error("maximum nesting depth exceeded");
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.IpFilter.VpcNetworkSource();
+                                var end, message;
+                                if (length === undefined)
+                                    end = reader.len;
+                                else {
+                                    end = reader.pos + length;
+                                    if (end > reader.len)
+                                        throw RangeError("index out of range");
+                                    length = reader.len;
+                                    reader.len = end;
+                                }
+                                message = new $root.google.storage.v2.Bucket.IpFilter.VpcNetworkSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -48610,6 +56498,11 @@
                                         reader.skipType(tag & 7, long);
                                         break;
                                     }
+                                }
+                                if (length !== undefined) {
+                                    if (reader.pos !== end)
+                                        throw RangeError("index out of range");
+                                    reader.len = length;
                                 }
                                 return message;
                             };
@@ -48830,7 +56723,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         HierarchicalNamespace.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -48851,7 +56744,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Bucket.HierarchicalNamespace();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.Bucket.HierarchicalNamespace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -48865,6 +56768,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -49148,7 +57056,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BucketAccessControl.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -49169,7 +57077,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.BucketAccessControl();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.BucketAccessControl();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -49215,6 +57133,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -49497,7 +57420,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ChecksummedData.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -49518,7 +57441,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ChecksummedData();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ChecksummedData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -49536,6 +57469,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -49770,7 +57708,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectChecksums.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -49791,7 +57729,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ObjectChecksums();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ObjectChecksums();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -49809,6 +57757,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -50045,7 +57998,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectCustomContextPayload.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -50066,7 +58019,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ObjectCustomContextPayload();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ObjectCustomContextPayload();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -50088,6 +58051,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -50311,7 +58279,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectContexts.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -50332,7 +58300,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ObjectContexts(), key, value;
+                        var end, message, key, value;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ObjectContexts();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -50342,6 +58320,9 @@
                                     if (message.custom === $util.emptyObject)
                                         message.custom = {};
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     key = "";
                                     value = null;
                                     while (reader.pos < end2) {
@@ -50358,6 +58339,9 @@
                                             break;
                                         }
                                     }
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                     if (key === "__proto__")
                                         $util.makeProp(message.custom, key);
                                     message.custom[key] = value;
@@ -50367,6 +58351,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -50594,7 +58583,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     CustomerEncryption.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -50615,7 +58604,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.CustomerEncryption();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.CustomerEncryption();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -50633,6 +58632,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -51226,7 +59230,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     StorageObject.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -51247,7 +59251,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.StorageObject(), key, value;
+                        var end, message, key, value;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.StorageObject();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -51355,6 +59369,9 @@
                                     if (message.metadata === $util.emptyObject)
                                         message.metadata = {};
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     key = "";
                                     value = "";
                                     while (reader.pos < end2) {
@@ -51371,6 +59388,9 @@
                                             break;
                                         }
                                     }
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                     if (key === "__proto__")
                                         $util.makeProp(message.metadata, key);
                                     message.metadata[key] = value;
@@ -51412,6 +59432,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -52045,7 +60070,7 @@
                          * @returns {$protobuf.Writer} Writer
                          */
                         Retention.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            return this.encode(message, writer).ldelim();
                         };
     
                         /**
@@ -52066,7 +60091,17 @@
                                 long = 0;
                             if (long > $Reader.recursionLimit)
                                 throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.StorageObject.Retention();
+                            var end, message;
+                            if (length === undefined)
+                                end = reader.len;
+                            else {
+                                end = reader.pos + length;
+                                if (end > reader.len)
+                                    throw RangeError("index out of range");
+                                length = reader.len;
+                                reader.len = end;
+                            }
+                            message = new $root.google.storage.v2.StorageObject.Retention();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -52084,6 +60119,11 @@
                                     reader.skipType(tag & 7, long);
                                     break;
                                 }
+                            }
+                            if (length !== undefined) {
+                                if (reader.pos !== end)
+                                    throw RangeError("index out of range");
+                                reader.len = length;
                             }
                             return message;
                         };
@@ -52421,7 +60461,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ObjectAccessControl.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -52442,7 +60482,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ObjectAccessControl();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ObjectAccessControl();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -52488,6 +60538,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -52776,7 +60831,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ListObjectsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -52797,7 +60852,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ListObjectsResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ListObjectsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -52823,6 +60888,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -53073,7 +61143,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ProjectTeam.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -53094,7 +61164,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ProjectTeam();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ProjectTeam();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -53112,6 +61192,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -53324,7 +61409,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Owner.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -53345,7 +61430,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.Owner();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.Owner();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -53363,6 +61458,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -53586,7 +61686,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ContentRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -53607,7 +61707,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.v2.ContentRange();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.storage.v2.ContentRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -53629,6 +61739,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -53914,7 +62029,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Http.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53935,7 +62050,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -53955,6 +62080,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -54288,7 +62418,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 HttpRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54309,7 +62439,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -54361,6 +62501,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -54696,7 +62841,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CustomHttpPattern.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54717,7 +62862,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -54735,6 +62890,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -54963,7 +63123,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CommonLanguageSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54984,7 +63144,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -54999,8 +63169,14 @@
                                     message.destinations = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message.destinations.push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message.destinations.push(reader.int32());
                                 break;
@@ -55013,6 +63189,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -55374,7 +63555,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ClientLibrarySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55395,7 +63576,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -55449,6 +63640,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -55927,7 +64123,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Publishing.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55948,7 +64144,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -56008,6 +64214,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -56402,7 +64613,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 JavaSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56423,7 +64634,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
+                    var end, message, key, value;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.JavaSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -56437,6 +64658,9 @@
                                 if (message.serviceClassNames === $util.emptyObject)
                                     message.serviceClassNames = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = "";
                                 while (reader.pos < end2) {
@@ -56453,6 +64677,9 @@
                                         break;
                                     }
                                 }
+                                if (reader.pos !== end2)
+                                    throw RangeError("index out of range");
+                                reader.len = end;
                                 if (key === "__proto__")
                                     $util.makeProp(message.serviceClassNames, key);
                                 message.serviceClassNames[key] = value;
@@ -56466,6 +64693,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -56701,7 +64933,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CppSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56722,7 +64954,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -56736,6 +64978,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -56944,7 +65191,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PhpSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56965,7 +65212,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -56983,6 +65240,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -57200,7 +65462,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PythonSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -57221,7 +65483,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -57239,6 +65511,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -57469,7 +65746,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -57490,7 +65767,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -57512,6 +65799,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -57724,7 +66016,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 NodeSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -57745,7 +66037,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -57759,6 +66061,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -58021,7 +66328,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DotnetSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58042,7 +66349,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
+                    var end, message, key, value;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.DotnetSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -58056,6 +66373,9 @@
                                 if (message.renamedServices === $util.emptyObject)
                                     message.renamedServices = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = "";
                                 while (reader.pos < end2) {
@@ -58072,6 +66392,9 @@
                                         break;
                                     }
                                 }
+                                if (reader.pos !== end2)
+                                    throw RangeError("index out of range");
+                                reader.len = end;
                                 if (key === "__proto__")
                                     $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
@@ -58081,6 +66404,9 @@
                                 if (message.renamedResources === $util.emptyObject)
                                     message.renamedResources = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = "";
                                 while (reader.pos < end2) {
@@ -58097,6 +66423,9 @@
                                         break;
                                     }
                                 }
+                                if (reader.pos !== end2)
+                                    throw RangeError("index out of range");
+                                reader.len = end;
                                 if (key === "__proto__")
                                     $util.makeProp(message.renamedResources, key);
                                 message.renamedResources[key] = value;
@@ -58124,6 +66453,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -58440,7 +66774,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RubySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58461,7 +66795,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -58475,6 +66819,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -58685,7 +67034,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GoSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58706,7 +67055,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end, message, key, value;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -58720,6 +67079,9 @@
                                 if (message.renamedServices === $util.emptyObject)
                                     message.renamedServices = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = "";
                                 while (reader.pos < end2) {
@@ -58736,6 +67098,9 @@
                                         break;
                                     }
                                 }
+                                if (reader.pos !== end2)
+                                    throw RangeError("index out of range");
+                                reader.len = end;
                                 if (key === "__proto__")
                                     $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
@@ -58745,6 +67110,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -59006,7 +67376,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -59027,7 +67397,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -59055,6 +67435,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -59325,7 +67710,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LongRunning.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -59346,7 +67731,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -59372,6 +67767,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -59662,7 +68062,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -59683,7 +68083,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.SelectiveGapicGeneration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -59703,6 +68113,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -59927,7 +68342,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 BatchingConfigProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -59948,7 +68363,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingConfigProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.BatchingConfigProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -59966,6 +68391,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -60254,7 +68684,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 BatchingSettingsProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60275,7 +68705,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingSettingsProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.BatchingSettingsProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -60317,6 +68757,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -60658,7 +69103,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 BatchingDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60679,7 +69124,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.BatchingDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -60703,6 +69158,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -60992,7 +69452,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -61013,7 +69473,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -61033,6 +69503,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -61305,7 +69780,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -61326,7 +69801,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.TypeReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -61340,6 +69825,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -61605,7 +70095,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -61626,7 +70116,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -61663,8 +70163,14 @@
                                     message.style = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message.style.push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message.style.push(reader.int32());
                                 break;
@@ -61673,6 +70179,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -62024,7 +70535,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62045,7 +70556,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -62063,6 +70584,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -62266,7 +70792,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RoutingRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62287,7 +70813,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingRule();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.RoutingRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -62303,6 +70839,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -62523,7 +71064,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RoutingParameter.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62544,7 +71085,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingParameter();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.api.RoutingParameter();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -62562,6 +71113,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -62777,7 +71333,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62798,7 +71354,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -62814,6 +71380,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -63220,7 +71791,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -63241,7 +71812,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -63266,8 +71847,14 @@
                                     message.publicDependency = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message.publicDependency.push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message.publicDependency.push(reader.int32());
                                 break;
@@ -63277,8 +71864,14 @@
                                     message.weakDependency = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message.weakDependency.push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message.weakDependency.push(reader.int32());
                                 break;
@@ -63333,6 +71926,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -63963,7 +72561,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -63984,7 +72582,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -64054,6 +72662,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -64508,7 +73121,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExtensionRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -64529,7 +73142,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -64551,6 +73174,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -64776,7 +73404,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -64797,7 +73425,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -64815,6 +73453,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -65056,7 +73699,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ExtensionRangeOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -65077,7 +73720,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -65107,6 +73760,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -65425,7 +74083,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Declaration.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -65446,7 +74104,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -65476,6 +74144,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -65828,7 +74501,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -65849,7 +74522,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -65903,6 +74586,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -66377,7 +75065,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -66398,7 +75086,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -66416,6 +75114,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -66683,7 +75386,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -66704,7 +75407,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -66744,6 +75457,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -67062,7 +75780,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EnumReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -67083,7 +75801,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -67101,6 +75829,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -67327,7 +76060,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -67348,7 +76081,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -67370,6 +76113,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -67608,7 +76356,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -67629,7 +76377,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -67653,6 +76411,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -67940,7 +76703,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -67961,7 +76724,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -67995,6 +76768,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -68468,7 +77246,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -68489,7 +77267,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -68591,6 +77379,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -69112,7 +77905,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MessageOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -69133,7 +77926,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -69177,6 +77980,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -69638,7 +78446,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -69659,7 +78467,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -69706,8 +78524,14 @@
                                     message.targets = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message.targets.push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message.targets.push(reader.int32());
                                 break;
@@ -69737,8 +78561,14 @@
                                     message[".google.api.fieldBehavior"] = [];
                                 if ((tag & 7) === 2) {
                                     var end2 = reader.uint32() + reader.pos;
+                                    if (end2 > reader.len)
+                                        throw RangeError("index out of range");
+                                    reader.len = end2;
                                     while (reader.pos < end2)
                                         message[".google.api.fieldBehavior"].push(reader.int32());
+                                    if (reader.pos !== end2)
+                                        throw RangeError("index out of range");
+                                    reader.len = end;
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                                 break;
@@ -69755,6 +78585,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -70427,7 +79262,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -70448,7 +79283,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -70466,6 +79311,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -70790,7 +79640,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -70811,7 +79661,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -70841,6 +79701,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -71319,7 +80184,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -71340,7 +80205,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -71360,6 +80235,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -71629,7 +80509,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -71650,7 +80530,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -71682,6 +80572,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -71976,7 +80871,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -71997,7 +80892,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -72029,6 +80934,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -72339,7 +81249,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -72360,7 +81270,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -72396,6 +81316,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -72733,7 +81658,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -72754,7 +81679,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -72800,6 +81735,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -73208,7 +82148,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UninterpretedOption.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -73229,7 +82169,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -73269,6 +82219,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -73575,7 +82530,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     NamePart.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -73596,7 +82551,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -73614,6 +82579,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         if (!Object.hasOwnProperty.call(message, "namePart"))
                             throw $util.ProtocolError("missing required 'namePart'", { instance: message });
@@ -73908,7 +82878,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -73929,7 +82899,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -73975,6 +82955,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -74570,7 +83555,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -74591,7 +83576,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -74601,6 +83596,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -74779,7 +83779,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ProtoLimitsFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -74800,7 +83800,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.ProtoLimitsFeature();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.FeatureSet.ProtoLimitsFeature();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -74810,6 +83820,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -75022,7 +84037,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -75043,7 +84058,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -75067,6 +84092,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -75471,7 +84501,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -75492,7 +84522,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -75514,6 +84554,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -75817,7 +84862,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SourceCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -75838,7 +84883,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -75854,6 +84909,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -76116,7 +85176,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Location.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -76137,7 +85197,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -76148,8 +85218,14 @@
                                         message.path = [];
                                     if ((tag & 7) === 2) {
                                         var end2 = reader.uint32() + reader.pos;
+                                        if (end2 > reader.len)
+                                            throw RangeError("index out of range");
+                                        reader.len = end2;
                                         while (reader.pos < end2)
                                             message.path.push(reader.int32());
+                                        if (reader.pos !== end2)
+                                            throw RangeError("index out of range");
+                                        reader.len = end;
                                     } else
                                         message.path.push(reader.int32());
                                     break;
@@ -76159,8 +85235,14 @@
                                         message.span = [];
                                     if ((tag & 7) === 2) {
                                         var end2 = reader.uint32() + reader.pos;
+                                        if (end2 > reader.len)
+                                            throw RangeError("index out of range");
+                                        reader.len = end2;
                                         while (reader.pos < end2)
                                             message.span.push(reader.int32());
+                                        if (reader.pos !== end2)
+                                            throw RangeError("index out of range");
+                                        reader.len = end;
                                     } else
                                         message.span.push(reader.int32());
                                     break;
@@ -76183,6 +85265,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -76451,7 +85538,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -76472,7 +85559,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -76488,6 +85585,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -76743,7 +85845,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Annotation.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -76764,7 +85866,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -76775,8 +85887,14 @@
                                         message.path = [];
                                     if ((tag & 7) === 2) {
                                         var end2 = reader.uint32() + reader.pos;
+                                        if (end2 > reader.len)
+                                            throw RangeError("index out of range");
+                                        reader.len = end2;
                                         while (reader.pos < end2)
                                             message.path.push(reader.int32());
+                                        if (reader.pos !== end2)
+                                            throw RangeError("index out of range");
+                                        reader.len = end;
                                     } else
                                         message.path.push(reader.int32());
                                     break;
@@ -76801,6 +85919,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -77109,7 +86232,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -77130,7 +86253,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -77148,6 +86281,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -77367,7 +86505,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -77388,7 +86526,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -77404,6 +86552,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -77619,7 +86772,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -77640,7 +86793,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -77658,6 +86821,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -77857,7 +87025,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -77878,7 +87046,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -77888,6 +87066,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -78068,7 +87251,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -78089,7 +87272,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -78107,6 +87300,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -78322,7 +87520,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "SetIamPolicy" });
     
                     /**
@@ -78355,7 +87553,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "GetIamPolicy" });
     
                     /**
@@ -78388,7 +87586,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                     }, "name", { value: "TestIamPermissions" });
     
                     /**
@@ -78501,7 +87699,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -78522,7 +87720,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.SetIamPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -78544,6 +87752,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -78774,7 +87987,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -78795,7 +88008,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.GetIamPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -78813,6 +88036,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -79032,7 +88260,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -79053,7 +88281,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.TestIamPermissionsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -79073,6 +88311,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -79288,7 +88531,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -79309,7 +88552,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.TestIamPermissionsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -79325,6 +88578,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -79529,7 +88787,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -79550,7 +88808,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.GetPolicyOptions();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -79564,6 +88832,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -79793,7 +89066,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Policy.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -79814,7 +89087,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Policy();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.Policy();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -79844,6 +89127,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -80130,7 +89418,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Binding.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -80151,7 +89439,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Binding();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.Binding();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -80175,6 +89473,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -80415,7 +89718,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -80436,7 +89739,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfig();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.AuditConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -80456,6 +89769,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -80687,7 +90005,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditLogConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -80708,7 +90026,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditLogConfig();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.AuditLogConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -80728,6 +90056,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -81003,7 +90336,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     PolicyDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -81024,7 +90357,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.PolicyDelta();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.PolicyDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -81046,6 +90389,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -81314,7 +90662,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     BindingDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -81335,7 +90683,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.BindingDelta();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.BindingDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -81361,6 +90719,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -81656,7 +91019,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     AuditConfigDelta.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -81677,7 +91040,17 @@
                             long = 0;
                         if (long > $Reader.recursionLimit)
                             throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfigDelta();
+                        var end, message;
+                        if (length === undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = new $root.google.iam.v1.AuditConfigDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             if (tag === error)
@@ -81703,6 +91076,11 @@
                                 reader.skipType(tag & 7, long);
                                 break;
                             }
+                        }
+                        if (length !== undefined) {
+                            if (reader.pos !== end)
+                                throw RangeError("index out of range");
+                            reader.len = length;
                         }
                         return message;
                     };
@@ -82008,7 +91386,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Expr.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -82029,7 +91407,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.type.Expr();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -82055,6 +91443,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -82283,7 +91676,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Interval.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -82304,7 +91697,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Interval();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.type.Interval();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -82322,6 +91725,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -82555,7 +91963,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Date.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -82576,7 +91984,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -82598,6 +92016,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -82796,7 +92219,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
-                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
                 }, "name", { value: "ListOperations" });
     
                 /**
@@ -82829,7 +92252,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
-                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
                 }, "name", { value: "GetOperation" });
     
                 /**
@@ -82862,7 +92285,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
-                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
                 }, "name", { value: "DeleteOperation" });
     
                 /**
@@ -82895,7 +92318,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
-                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
                 }, "name", { value: "CancelOperation" });
     
                 /**
@@ -82928,7 +92351,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
-                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
                 }, "name", { value: "WaitOperation" });
     
                 /**
@@ -83077,7 +92500,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Operation.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -83098,7 +92521,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -83128,6 +92561,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -83381,7 +92819,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -83402,7 +92840,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -83416,6 +92864,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -83652,7 +93105,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -83673,7 +93126,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -83703,6 +93166,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -83954,7 +93422,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -83975,7 +93443,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -84001,6 +93479,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -84240,7 +93723,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -84261,7 +93744,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -84275,6 +93768,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -84467,7 +93965,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -84488,7 +93986,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -84502,6 +94010,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -84705,7 +94218,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -84726,7 +94239,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -84744,6 +94267,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -84961,7 +94489,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -84982,7 +94510,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -85000,6 +94538,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
@@ -85237,7 +94780,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -85258,7 +94801,17 @@
                         long = 0;
                     if (long > $Reader.recursionLimit)
                         throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    var end, message;
+                    if (length === undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -85282,6 +94835,11 @@
                             reader.skipType(tag & 7, long);
                             break;
                         }
+                    }
+                    if (length !== undefined) {
+                        if (reader.pos !== end)
+                            throw RangeError("index out of range");
+                        reader.len = length;
                     }
                     return message;
                 };
