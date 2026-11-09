@@ -32,6 +32,14 @@ try {
 
   execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
 
+  // TODO(b/582921805): Remove this extra compile-protos pass once the generator
+  // natively disambiguates google.storage.v2.Object from the global JS Object.
+  // Librarian compiles protos before running librarian.js, but storage_control_utils.js
+  // subsequently renames `message Object` to `message StorageObject` in storage.proto
+  // and updates protos.d.ts/protos.json; we must re-compile protos so protos/protos.js
+  // also emits `function StorageObject` instead of shadowing global `Object`.
+  execSync('npm run compile-protos', {cwd: packageRoot, stdio: 'inherit'});
+
   const files = fs.readdirSync(utilDir);
   for (const file of files) {
     if (file.endsWith('.js')) {
