@@ -46,8 +46,10 @@ const RuleExecutionErrorServiceClient = v1.RuleExecutionErrorServiceClient;
 type RuleExecutionErrorServiceClient = v1.RuleExecutionErrorServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
+const SearchServiceClient = v1.SearchServiceClient;
+type SearchServiceClient = v1.SearchServiceClient;
 
-export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FeedsServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
-export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FeedsServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
+export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FeedsServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient, SearchServiceClient};
+export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FeedsServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient, SearchServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

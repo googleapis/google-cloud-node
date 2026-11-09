@@ -24,6 +24,8 @@ const MarketingDataInsightsServiceClient = v1.MarketingDataInsightsServiceClient
 type MarketingDataInsightsServiceClient = v1.MarketingDataInsightsServiceClient;
 const PartnerLinkServiceClient = v1.PartnerLinkServiceClient;
 type PartnerLinkServiceClient = v1.PartnerLinkServiceClient;
+const ReportingServiceClient = v1.ReportingServiceClient;
+type ReportingServiceClient = v1.ReportingServiceClient;
 const UserListDirectLicenseServiceClient = v1.UserListDirectLicenseServiceClient;
 type UserListDirectLicenseServiceClient = v1.UserListDirectLicenseServiceClient;
 const UserListGlobalLicenseServiceClient = v1.UserListGlobalLicenseServiceClient;
@@ -31,7 +33,7 @@ type UserListGlobalLicenseServiceClient = v1.UserListGlobalLicenseServiceClient;
 const UserListServiceClient = v1.UserListServiceClient;
 type UserListServiceClient = v1.UserListServiceClient;
 
-export {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
-export default {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
+export {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, ReportingServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
+export default {v1, IngestionServiceClient, MarketingDataInsightsServiceClient, PartnerLinkServiceClient, ReportingServiceClient, UserListDirectLicenseServiceClient, UserListGlobalLicenseServiceClient, UserListServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

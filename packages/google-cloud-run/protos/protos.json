@@ -19,7 +19,7 @@
                     "Builds": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run"
                       },
                       "methods": {
                         "SubmitBuild": {
@@ -236,7 +236,8 @@
                           "oneof": [
                             "reason",
                             "revisionReason",
-                            "executionReason"
+                            "executionReason",
+                            "instanceReason"
                           ]
                         }
                       },
@@ -278,6 +279,13 @@
                         "executionReason": {
                           "type": "ExecutionReason",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceReason": {
+                          "type": "InstanceReason",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -346,7 +354,17 @@
                             "CANCELLED": 3,
                             "CANCELLING": 4,
                             "DELETED": 5,
-                            "DELAYED_START_PENDING": 6
+                            "DELAYED_START_PENDING": 6,
+                            "DELAYED_EXECUTION_EXCEEDING_DURATION_LIMIT": 7
+                          }
+                        },
+                        "InstanceReason": {
+                          "values": {
+                            "INSTANCE_REASON_UNSPECIFIED": 0,
+                            "INSTANCE_DELETED": 1,
+                            "INSTANCE_STOPPED": 2,
+                            "INSTANCE_STOPPING": 3,
+                            "INSTANCE_NON_ZERO_EXIT_CODE": 4
                           }
                         }
                       }
@@ -366,7 +384,7 @@
                     "Executions": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "GetExecution": {
@@ -747,6 +765,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "client": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -774,6 +806,13 @@
                           "rule": "repeated",
                           "type": "Container",
                           "id": 1
+                        },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "volumes": {
                           "rule": "repeated",
@@ -836,10 +875,24 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "workloadIdentityConfig": {
+                          "type": "WorkloadIdentityConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "Container": {
+                      "oneofs": {
+                        "_sandboxLauncher": {
+                          "oneof": [
+                            "sandboxLauncher"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -918,6 +971,14 @@
                           "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sandboxLauncher": {
+                          "type": "bool",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1135,7 +1196,8 @@
                         "Medium": {
                           "values": {
                             "MEDIUM_UNSPECIFIED": 0,
-                            "MEMORY": 1
+                            "MEMORY": 1,
+                            "DISK": 2
                           }
                         }
                       }
@@ -1330,7 +1392,8 @@
                       "oneofs": {
                         "sourceType": {
                           "oneof": [
-                            "cloudStorageSource"
+                            "cloudStorageSource",
+                            "inlinedSource"
                           ]
                         }
                       },
@@ -1338,6 +1401,13 @@
                         "cloudStorageSource": {
                           "type": "CloudStorageSource",
                           "id": 1
+                        },
+                        "inlinedSource": {
+                          "type": "InlinedSource",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1364,6 +1434,105 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "SourceFile": {
+                          "fields": {
+                            "filename": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "content": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "InlinedSource": {
+                          "fields": {
+                            "sources": {
+                              "rule": "repeated",
+                              "type": "SourceFile",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SandboxConfiguration": {
+                      "fields": {
+                        "templates": {
+                          "rule": "repeated",
+                          "type": "SandboxTemplate",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SandboxTemplate": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "image": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "command": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "args": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "env": {
+                          "rule": "repeated",
+                          "type": "EnvVar",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "volumeMounts": {
+                          "rule": "repeated",
+                          "type": "VolumeMount",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workingDir": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1464,6 +1633,18 @@
                       }
                     },
                     "RevisionScaling": {
+                      "oneofs": {
+                        "_cpuUtilization": {
+                          "oneof": [
+                            "cpuUtilization"
+                          ]
+                        },
+                        "_concurrencyUtilization": {
+                          "oneof": [
+                            "concurrencyUtilization"
+                          ]
+                        }
+                      },
                       "fields": {
                         "minInstanceCount": {
                           "type": "int32",
@@ -1478,6 +1659,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "cpuUtilization": {
+                          "type": "float",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "concurrencyUtilization": {
+                          "type": "float",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1489,6 +1686,36 @@
                           "options": {
                             "(google.api.resource_reference).type": "networkservices.googleapis.com/Mesh"
                           }
+                        }
+                      }
+                    },
+                    "AmbientScope": {
+                      "values": {
+                        "AMBIENT_SCOPE_UNSPECIFIED": 0,
+                        "AMBIENT_SCOPE_REGIONAL": 1,
+                        "AMBIENT_SCOPE_GLOBAL": 2
+                      }
+                    },
+                    "AmbientNetworking": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "ambientScope": {
+                          "type": "AmbientScope",
+                          "id": 2
                         }
                       }
                     },
@@ -1661,7 +1888,61 @@
                         "SHUTDOWN": 2
                       }
                     },
+                    "IdentityType": {
+                      "values": {
+                        "IDENTITY_TYPE_UNSPECIFIED": 0,
+                        "IDENTITY_TYPE_SERVICE_ACCOUNT": 1,
+                        "IDENTITY_TYPE_AGENT_IDENTITY": 3
+                      }
+                    },
+                    "WorkloadIdentityConfig": {
+                      "oneofs": {
+                        "_identityCertificateEnabled": {
+                          "oneof": [
+                            "identityCertificateEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "identity": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "identityType": {
+                          "type": "IdentityType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "identityCertificateEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FunctionalType": {
+                      "values": {
+                        "FUNCTIONAL_TYPE_UNSPECIFIED": 0,
+                        "FUNCTIONAL_TYPE_AGENT": 1,
+                        "FUNCTIONAL_TYPE_MCP_SERVER": 2
+                      }
+                    },
                     "ExecutionTemplate": {
+                      "oneofs": {
+                        "_delayExecution": {
+                          "oneof": [
+                            "delayExecution"
+                          ]
+                        }
+                      },
                       "fields": {
                         "labels": {
                           "keyType": "string",
@@ -1690,13 +1971,35 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "delayExecution": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "Instances": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "CreateInstance": {
@@ -1728,6 +2031,44 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,instance"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "Instance"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateInstance": {
+                          "requestType": "UpdateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{instance.name=projects/*/locations/*/instances/*}",
+                            "(google.api.http).body": "instance",
+                            "(google.api.routing).routing_parameters.field": "instance.name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
+                            "(google.api.method_signature)": "instance,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "Instance"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{instance.name=projects/*/locations/*/instances/*}",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "instance.name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,update_mask"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1884,6 +2225,52 @@
                               }
                             }
                           ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).get": "/v2/{resource=projects/*/locations/*/instances/*}:getIamPolicy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{resource=projects/*/locations/*/instances/*}:getIamPolicy"
+                              }
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/instances/*}:setIamPolicy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/instances/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/instances/*}:testIamPermissions",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/instances/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1908,10 +2295,42 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInstanceRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 2,
+                          "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
                           "type": "bool",
                           "id": 4,
                           "options": {
@@ -2068,6 +2487,11 @@
                           "oneof": [
                             "gpuZonalRedundancyDisabled"
                           ]
+                        },
+                        "_sshEnabled": {
+                          "oneof": [
+                            "sshEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -2180,6 +2604,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "volumes": {
                           "rule": "repeated",
                           "type": "Volume",
@@ -2229,9 +2660,31 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "defaultUriDisabled": {
+                          "type": "bool",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "iapEnabled": {
                           "type": "bool",
                           "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sshEnabled": {
+                          "type": "bool",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "restartPolicy": {
+                          "type": "RestartPolicy",
+                          "id": 35,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2302,6 +2755,16 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
+                      },
+                      "nested": {
+                        "RestartPolicy": {
+                          "values": {
+                            "RESTART_POLICY_UNSPECIFIED": 0,
+                            "ALWAYS": 1,
+                            "ON_FAILURE": 2,
+                            "NEVER": 3
+                          }
+                        }
                       }
                     },
                     "InstanceSplit": {
@@ -2352,7 +2815,7 @@
                     "Jobs": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "CreateJob": {
@@ -2630,7 +3093,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -2755,6 +3218,13 @@
                       },
                       "nested": {
                         "Overrides": {
+                          "oneofs": {
+                            "_delayExecution": {
+                              "oneof": [
+                                "delayExecution"
+                              ]
+                            }
+                          },
                           "fields": {
                             "containerOverrides": {
                               "rule": "repeated",
@@ -2771,6 +3241,14 @@
                             "timeout": {
                               "type": "google.protobuf.Duration",
                               "id": 4
+                            },
+                            "delayExecution": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -2972,6 +3450,13 @@
                           "type": "string",
                           "id": 27
                         },
+                        "functionalType": {
+                          "type": "FunctionalType",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -3023,7 +3508,7 @@
                     "Revisions": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "GetRevision": {
@@ -3317,6 +3802,13 @@
                           "type": "Container",
                           "id": 17
                         },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "volumes": {
                           "rule": "repeated",
                           "type": "Volume",
@@ -3396,6 +3888,13 @@
                           "type": "NodeSelector",
                           "id": 40
                         },
+                        "workloadIdentityConfig": {
+                          "type": "WorkloadIdentityConfig",
+                          "id": 52,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "gpuZonalRedundancyDisabled": {
                           "type": "bool",
                           "id": 48,
@@ -3407,6 +3906,27 @@
                         "creator": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 54,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ambientNetworking": {
+                          "type": "AmbientNetworking",
+                          "id": 59,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3494,6 +4014,13 @@
                           "type": "Container",
                           "id": 10
                         },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "volumes": {
                           "rule": "repeated",
                           "type": "Volume",
@@ -3565,6 +4092,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "workloadIdentityConfig": {
+                          "type": "WorkloadIdentityConfig",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "gpuZonalRedundancyDisabled": {
                           "type": "bool",
                           "id": 24,
@@ -3572,13 +4106,34 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ambientNetworking": {
+                          "type": "AmbientNetworking",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "Services": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "CreateService": {
@@ -3821,7 +4376,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -3853,6 +4408,13 @@
                         "allowMissing": {
                           "type": "bool",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "forceNewRevision": {
+                          "type": "bool",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3941,6 +4503,13 @@
                         "(google.api.resource).type": "run.googleapis.com/Service",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/services/{service}",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "oneofs": {
+                        "_sshEnabled": {
+                          "oneof": [
+                            "sshEnabled"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -4106,6 +4675,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "sshEnabled": {
+                          "type": "bool",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "multiRegionSettings": {
                           "type": "MultiRegionSettings",
                           "id": 26,
@@ -4188,6 +4765,13 @@
                         "buildConfig": {
                           "type": "BuildConfig",
                           "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "functionalType": {
+                          "type": "FunctionalType",
+                          "id": 42,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4286,10 +4870,82 @@
                         "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION": 2
                       }
                     },
+                    "SourceUpload": {
+                      "options": {
+                        "(google.api.default_host)": "run.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run"
+                      },
+                      "methods": {
+                        "UploadSource": {
+                          "requestType": "UploadSourceRequest",
+                          "responseType": "UploadSourceResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}:uploadSource",
+                            "(google.api.http).body": "*",
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}:uploadSource",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "projects/*/locations/{location=*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UploadSourceRequest": {
+                      "oneofs": {
+                        "target": {
+                          "oneof": [
+                            "service"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "run.googleapis.com/Service"
+                          }
+                        }
+                      }
+                    },
+                    "UploadSourceResponse": {
+                      "fields": {
+                        "cloudStorageSource": {
+                          "type": "SourceCode.CloudStorageSource",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Tasks": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "GetTask": {
@@ -4500,6 +5156,10 @@
                           "type": "Container",
                           "id": 14
                         },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 40
+                        },
                         "volumes": {
                           "rule": "repeated",
                           "type": "Volume",
@@ -4608,6 +5268,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "workloadIdentityConfig": {
+                          "type": "WorkloadIdentityConfig",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -4645,7 +5312,7 @@
                     "WorkerPools": {
                       "options": {
                         "(google.api.default_host)": "run.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/run,https://www.googleapis.com/auth/run.readonly"
                       },
                       "methods": {
                         "CreateWorkerPool": {
@@ -4888,7 +5555,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {
@@ -5280,6 +5947,13 @@
                           "type": "Container",
                           "id": 6
                         },
+                        "sandboxes": {
+                          "type": "SandboxConfiguration",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "volumes": {
                           "rule": "repeated",
                           "type": "Volume",
@@ -5329,6 +6003,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

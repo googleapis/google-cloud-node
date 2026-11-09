@@ -849,6 +849,17 @@
                         "CONSENT_DENIED": 2
                       }
                     },
+                    "CallInfo": {
+                      "fields": {
+                        "startTimestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CartData": {
                       "fields": {
                         "merchantId": {
@@ -1288,6 +1299,9 @@
                       "valuesOptions": {
                         "INVALID_COUNTRY_CODE": {
                           "deprecated": true
+                        },
+                        "REQUIRED_PREREQUISITE_LINK_MISSING": {
+                          "deprecated": true
                         }
                       },
                       "values": {
@@ -1321,6 +1335,7 @@
                         "INVALID_NUMBER_FORMAT": 27,
                         "INVALID_CONVERSION_ACTION_ID": 28,
                         "INVALID_CONVERSION_ACTION_TYPE": 29,
+                        "ENCRYPTION_NOT_SUPPORTED": 132,
                         "INVALID_CURRENCY_CODE": 30,
                         "INVALID_EVENT": 31,
                         "TOO_MANY_EVENTS": 32,
@@ -1419,7 +1434,12 @@
                         "INVALID_REMOVE_AS_OF_TIME": 125,
                         "REQUEST_TOO_OLD": 126,
                         "CONVERSION_ACTION_TOO_RECENTLY_CREATED": 127,
-                        "INVALID_AD_IDENTIFIER_FOR_ACCOUNT": 128
+                        "INVALID_AD_IDENTIFIER_FOR_ACCOUNT": 128,
+                        "UNSUPPORTED_ACCOUNT_TYPE_FOR_USER_LIST_DIRECT_LICENSE": 129,
+                        "DUPLICATE_ELEMENTS": 130,
+                        "UNSUPPORTED_BASELINE_LOCATION": 131,
+                        "CONVERSION_PRECEDES_CALL": 133,
+                        "INVALID_DATE": 134
                       }
                     },
                     "Event": {
@@ -1602,6 +1622,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "callInfo": {
+                          "type": "CallInfo",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1688,6 +1715,13 @@
                         "visitorPpid": {
                           "type": "string",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "leadId": {
+                          "type": "string",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2400,6 +2434,11 @@
                         "reason": {
                           "type": "ProcessingErrorReason",
                           "id": 2
+                        },
+                        "recordIndices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 3
                         }
                       }
                     },
@@ -2421,6 +2460,11 @@
                         "reason": {
                           "type": "ProcessingWarningReason",
                           "id": 2
+                        },
+                        "recordIndices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 3
                         }
                       }
                     },
@@ -2470,7 +2514,12 @@
                         "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
                         "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
                         "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43,
-                        "PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING": 44
+                        "PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING": 44,
+                        "PROCESSING_ERROR_REASON_DESTINATION_TOO_RECENTLY_CREATED": 45,
+                        "PROCESSING_ERROR_REASON_EXPIRED_CLICK": 46,
+                        "PROCESSING_ERROR_REASON_TOO_RECENT_CALL": 47,
+                        "PROCESSING_ERROR_REASON_EXPIRED_CALL": 48,
+                        "PROCESSING_ERROR_REASON_INVALID_CALL": 49
                       }
                     },
                     "ProcessingWarningReason": {
@@ -2484,7 +2533,9 @@
                         "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
                         "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
                         "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
-                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
+                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9,
+                        "PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 10,
+                        "PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED": 11
                       }
                     },
                     "FieldWarning": {
@@ -2519,7 +2570,8 @@
                         "WARNING_REASON_INVALID_CONTINENT_CODE": 11,
                         "WARNING_REASON_INVALID_DEVICE_CATEGORY": 12,
                         "WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION": 13,
-                        "WARNING_REASON_INVALID_MERCHANT_ID": 14
+                        "WARNING_REASON_INVALID_MERCHANT_ID": 14,
+                        "WARNING_REASON_INVALID_NUMBER_FORMAT": 15
                       }
                     },
                     "RequestStatusPerDestination": {
@@ -3370,6 +3422,198 @@
                         "FEATURE_SET_UNSPECIFIED": 0,
                         "FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT": 1,
                         "FEATURE_SET_AD_EVENT_MANAGEMENT": 2
+                      }
+                    },
+                    "PartnerMatchReportEntry": {
+                      "fields": {
+                        "advertiserAccount": {
+                          "type": "PartnerMatchAdvertiserAccount",
+                          "id": 1
+                        },
+                        "campaign": {
+                          "type": "PartnerMatchCampaign",
+                          "id": 2
+                        },
+                        "adGroup": {
+                          "type": "PartnerMatchAdGroup",
+                          "id": 3
+                        },
+                        "userList": {
+                          "type": "PartnerMatchUserList",
+                          "id": 4
+                        },
+                        "impressionCount": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "mediaCost": {
+                          "type": "google.type.Money",
+                          "id": 6
+                        },
+                        "lineItem": {
+                          "type": "PartnerMatchLineItem",
+                          "id": 7
+                        },
+                        "dataFees": {
+                          "type": "google.type.Money",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "PartnerMatchAdvertiserAccount": {
+                      "fields": {
+                        "accountType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "accountId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PartnerMatchCampaign": {
+                      "fields": {
+                        "campaignId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PartnerMatchAdGroup": {
+                      "fields": {
+                        "adGroupId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PartnerMatchUserList": {
+                      "fields": {
+                        "userListId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PartnerMatchLineItem": {
+                      "fields": {
+                        "lineItemId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReportingService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "RetrievePartnerMatchReport": {
+                          "requestType": "RetrievePartnerMatchReportRequest",
+                          "responseType": "RetrievePartnerMatchReportResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accountTypes/*/accounts/*}/reports:retrievePartnerMatchReport",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accountTypes/*/accounts/*}/reports:retrievePartnerMatchReport"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RetrievePartnerMatchReportRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "startDate": {
+                          "type": "int64",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "endDate": {
+                          "type": "int64",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RetrievePartnerMatchReportResponse": {
+                      "fields": {
+                        "partnerMatchReportEntries": {
+                          "rule": "repeated",
+                          "type": "PartnerMatchReportEntry",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
                       }
                     },
                     "UserList": {
@@ -7269,6 +7513,33 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/money;money",
+            "java_multiple_files": true,
+            "java_outer_classname": "MoneyProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Money": {
+              "fields": {
+                "currencyCode": {
+                  "type": "string",
+                  "id": 1
+                },
+                "units": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             }

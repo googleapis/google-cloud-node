@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, workerPool, workerPoolId) {
+function main(parent, workerPool) {
   // [START run_v2_generated_WorkerPools_CreateWorkerPool_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -40,10 +40,11 @@ function main(parent, workerPool, workerPoolId) {
    */
   // const workerPool = {}
   /**
-   *  Required. The unique identifier for the WorkerPool. It must begin with
+   *  Optional. The unique identifier for the WorkerPool. It must begin with
    *  letter, and cannot end with hyphen; must contain fewer than 50 characters.
    *  The name of the worker pool becomes
    *  `{parent}/workerPools/{worker_pool_id}`.
+   *  If not provided, the server will generate a unique `worker_pool_id`.
    */
   // const workerPoolId = 'abc123'
   /**
@@ -63,7 +64,6 @@ function main(parent, workerPool, workerPoolId) {
     const request = {
       parent,
       workerPool,
-      workerPoolId,
     };
 
     // Run request

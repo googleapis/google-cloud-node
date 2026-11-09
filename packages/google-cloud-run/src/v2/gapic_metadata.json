@@ -97,9 +97,29 @@
                 "getInstance"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
               ]
             },
             "DeleteInstance": {
@@ -134,9 +154,29 @@
                 "getInstance"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
               ]
             },
             "DeleteInstance": {
@@ -413,6 +453,30 @@
                 "listServices",
                 "listServicesStream",
                 "listServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SourceUpload": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SourceUploadClient",
+          "rpcs": {
+            "UploadSource": {
+              "methods": [
+                "uploadSource"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SourceUploadClient",
+          "rpcs": {
+            "UploadSource": {
+              "methods": [
+                "uploadSource"
               ]
             }
           }

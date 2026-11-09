@@ -27,6 +27,7 @@ function main() {
   const jobsClient = new run.JobsClient();
   const revisionsClient = new run.RevisionsClient();
   const servicesClient = new run.ServicesClient();
+  const sourceUploadClient = new run.SourceUploadClient();
   const tasksClient = new run.TasksClient();
   const workerPoolsClient = new run.WorkerPoolsClient();
 }

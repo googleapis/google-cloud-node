@@ -1159,6 +1159,59 @@ describe('v1.PrivateAuctionServiceClient', () => {
       });
     });
 
+    describe('adCategory', async () => {
+      const fakePath = '/rendered/path/adCategory';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_category: 'adCategoryValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.adCategoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adCategoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adCategoryPath', () => {
+        const result = client.adCategoryPath(
+          'networkCodeValue',
+          'adCategoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdCategoryName', () => {
+        const result = client.matchNetworkCodeFromAdCategoryName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdCategoryFromAdCategoryName', () => {
+        const result = client.matchAdCategoryFromAdCategoryName(fakePath);
+        assert.strictEqual(result, 'adCategoryValue');
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adReviewCenterAd', async () => {
       const fakePath = '/rendered/path/adReviewCenterAd';
       const expectedParameters = {
@@ -1380,6 +1433,72 @@ describe('v1.PrivateAuctionServiceClient', () => {
       });
     });
 
+    describe('allocationDeliveryProfile', async () => {
+      const fakePath = '/rendered/path/allocationDeliveryProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        allocation_delivery_profile: 'allocationDeliveryProfileValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.allocationDeliveryProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.allocationDeliveryProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('allocationDeliveryProfilePath', () => {
+        const result = client.allocationDeliveryProfilePath(
+          'networkCodeValue',
+          'allocationDeliveryProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAllocationDeliveryProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromAllocationDeliveryProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAllocationDeliveryProfileFromAllocationDeliveryProfileName', () => {
+        const result =
+          client.matchAllocationDeliveryProfileFromAllocationDeliveryProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'allocationDeliveryProfileValue');
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('application', async () => {
       const fakePath = '/rendered/path/application';
       const expectedParameters = {
@@ -1531,6 +1650,72 @@ describe('v1.PrivateAuctionServiceClient', () => {
         assert.strictEqual(result, 'audienceSegmentValue');
         assert(
           (client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('audienceSegmentCategory', async () => {
+      const fakePath = '/rendered/path/audienceSegmentCategory';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        audience_segment_category: 'audienceSegmentCategoryValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.audienceSegmentCategoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.audienceSegmentCategoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('audienceSegmentCategoryPath', () => {
+        const result = client.audienceSegmentCategoryPath(
+          'networkCodeValue',
+          'audienceSegmentCategoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAudienceSegmentCategoryName', () => {
+        const result =
+          client.matchNetworkCodeFromAudienceSegmentCategoryName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAudienceSegmentCategoryFromAudienceSegmentCategoryName', () => {
+        const result =
+          client.matchAudienceSegmentCategoryFromAudienceSegmentCategoryName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'audienceSegmentCategoryValue');
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1795,6 +1980,59 @@ describe('v1.PrivateAuctionServiceClient', () => {
         assert.strictEqual(result, 'cdnConfigValue');
         assert(
           (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('changeEvent', async () => {
+      const fakePath = '/rendered/path/changeEvent';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        change_event: 'changeEventValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.changeEventPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changeEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changeEventPath', () => {
+        const result = client.changeEventPath(
+          'networkCodeValue',
+          'changeEventValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromChangeEventName', () => {
+        const result = client.matchNetworkCodeFromChangeEventName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChangeEventFromChangeEventName', () => {
+        const result = client.matchChangeEventFromChangeEventName(fakePath);
+        assert.strictEqual(result, 'changeEventValue');
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3093,6 +3331,70 @@ describe('v1.PrivateAuctionServiceClient', () => {
       });
     });
 
+    describe('forecastAdjustment', async () => {
+      const fakePath = '/rendered/path/forecastAdjustment';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        forecast_adjustment: 'forecastAdjustmentValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.forecastAdjustmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.forecastAdjustmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('forecastAdjustmentPath', () => {
+        const result = client.forecastAdjustmentPath(
+          'networkCodeValue',
+          'forecastAdjustmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromForecastAdjustmentName', () => {
+        const result =
+          client.matchNetworkCodeFromForecastAdjustmentName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchForecastAdjustmentFromForecastAdjustmentName', () => {
+        const result =
+          client.matchForecastAdjustmentFromForecastAdjustmentName(fakePath);
+        assert.strictEqual(result, 'forecastAdjustmentValue');
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('geoTarget', async () => {
       const fakePath = '/rendered/path/geoTarget';
       const expectedParameters = {
@@ -3140,6 +3442,59 @@ describe('v1.PrivateAuctionServiceClient', () => {
         assert.strictEqual(result, 'geoTargetValue');
         assert(
           (client.pathTemplates.geoTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('inventoryUrl', async () => {
+      const fakePath = '/rendered/path/inventoryUrl';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        inventory_url: 'inventoryUrlValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.inventoryUrlPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.inventoryUrlPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('inventoryUrlPath', () => {
+        const result = client.inventoryUrlPath(
+          'networkCodeValue',
+          'inventoryUrlValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromInventoryUrlName', () => {
+        const result = client.matchNetworkCodeFromInventoryUrlName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInventoryUrlFromInventoryUrlName', () => {
+        const result = client.matchInventoryUrlFromInventoryUrlName(fakePath);
+        assert.strictEqual(result, 'inventoryUrlValue');
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -4262,6 +4617,56 @@ describe('v1.PrivateAuctionServiceClient', () => {
       });
     });
 
+    describe('proposal', async () => {
+      const fakePath = '/rendered/path/proposal';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        proposal: 'proposalValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.proposalPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.proposalPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('proposalPath', () => {
+        const result = client.proposalPath('networkCodeValue', 'proposalValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.proposalPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromProposalName', () => {
+        const result = client.matchNetworkCodeFromProposalName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.proposalPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchProposalFromProposalName', () => {
+        const result = client.matchProposalFromProposalName(fakePath);
+        assert.strictEqual(result, 'proposalValue');
+        assert(
+          (client.pathTemplates.proposalPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('report', async () => {
       const fakePath = '/rendered/path/report';
       const expectedParameters = {
@@ -4806,6 +5211,72 @@ describe('v1.PrivateAuctionServiceClient', () => {
       });
     });
 
+    describe('trafficForecastSegment', async () => {
+      const fakePath = '/rendered/path/trafficForecastSegment';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        traffic_forecast_segment: 'trafficForecastSegmentValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.trafficForecastSegmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trafficForecastSegmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trafficForecastSegmentPath', () => {
+        const result = client.trafficForecastSegmentPath(
+          'networkCodeValue',
+          'trafficForecastSegmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTrafficForecastSegmentName', () => {
+        const result =
+          client.matchNetworkCodeFromTrafficForecastSegmentName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTrafficForecastSegmentFromTrafficForecastSegmentName', () => {
+        const result =
+          client.matchTrafficForecastSegmentFromTrafficForecastSegmentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'trafficForecastSegmentValue');
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
@@ -4967,6 +5438,112 @@ describe('v1.PrivateAuctionServiceClient', () => {
         assert.strictEqual(result, 'webPropertyValue');
         assert(
           (client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('yieldGroup', async () => {
+      const fakePath = '/rendered/path/yieldGroup';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        yield_group: 'yieldGroupValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.yieldGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.yieldGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('yieldGroupPath', () => {
+        const result = client.yieldGroupPath(
+          'networkCodeValue',
+          'yieldGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromYieldGroupName', () => {
+        const result = client.matchNetworkCodeFromYieldGroupName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchYieldGroupFromYieldGroupName', () => {
+        const result = client.matchYieldGroupFromYieldGroupName(fakePath);
+        assert.strictEqual(result, 'yieldGroupValue');
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('yieldPartner', async () => {
+      const fakePath = '/rendered/path/yieldPartner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        yield_partner: 'yieldPartnerValue',
+      };
+      const client =
+        new privateauctionserviceModule.v1.PrivateAuctionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.yieldPartnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.yieldPartnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('yieldPartnerPath', () => {
+        const result = client.yieldPartnerPath(
+          'networkCodeValue',
+          'yieldPartnerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromYieldPartnerName', () => {
+        const result = client.matchNetworkCodeFromYieldPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchYieldPartnerFromYieldPartnerName', () => {
+        const result = client.matchYieldPartnerFromYieldPartnerName(fakePath);
+        assert.strictEqual(result, 'yieldPartnerValue');
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
