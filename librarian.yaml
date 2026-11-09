@@ -246,7 +246,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.7.0
+    version: 7.8.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -354,7 +354,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/assured-workloads'
   - name: google-cloud-auditmanager
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
@@ -370,7 +370,7 @@ libraries:
       default_version: v1
       main_service: automl
   - name: google-cloud-backupdr
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/backupdr/v1
       - path: google/cloud/backupdr/v1beta
@@ -386,7 +386,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
-    version: 3.3.0
+    version: 3.4.0
     apis:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.9.0
+    version: 7.10.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -739,7 +739,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 3.5.0
+    version: 3.6.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -823,7 +823,7 @@ libraries:
       default_version: v1
       main_service: DesignCenter
   - name: google-cloud-developerconnect
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/developerconnect/v1
     copyright_year: "2026"
@@ -858,7 +858,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 3.4.0
+    version: 3.5.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -1182,7 +1182,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1207,7 +1207,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1240,7 +1240,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
   - name: google-cloud-networkmanagement
-    version: 6.3.0
+    version: 6.4.0
     apis:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
@@ -1473,7 +1473,7 @@ libraries:
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
@@ -1491,7 +1491,7 @@ libraries:
       default_version: v1
       main_service: scheduler
   - name: google-cloud-secretmanager
-    version: 7.2.0
+    version: 8.0.0
     apis:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
@@ -1611,7 +1611,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.31.0
+    version: 0.32.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1904,7 +1904,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 6.4.0
+    version: 6.5.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
@@ -2038,7 +2038,7 @@ libraries:
       package_name: '@googlemaps/maps-platform-datasets'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/mapsplatformdatasets/latest
   - name: google-maps-navconnect
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/maps/navconnect/v1
     copyright_year: "2026"
@@ -2055,7 +2055,7 @@ libraries:
       package_name: '@googlemaps/places'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/places/latest
   - name: google-maps-routeoptimization
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/maps/routeoptimization/v1
     copyright_year: "2026"
@@ -2073,7 +2073,7 @@ libraries:
       package_name: '@googlemaps/routing'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routing/latest
   - name: google-maps-solar
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/maps/solar/v1
     copyright_year: "2026"

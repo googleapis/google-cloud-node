@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.3.4](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.3...google-auth-library-v11.3.4) (2026-11-09)
+
+
+### Bug Fixes
+
+* **google-auth-library:** [cleanup] set iss from keyFile clientEmail ([#9808](https://github.com/googleapis/google-cloud-node/issues/9808)) ([d3897b9](https://github.com/googleapis/google-cloud-node/commit/d3897b97efc37ebaa2f3e7c248ad602e2f8e6373)), refs [#9469](https://github.com/googleapis/google-cloud-node/issues/9469)
+
 ## [11.3.3](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.2...google-auth-library-v11.3.3) (2026-11-02)
 
 
