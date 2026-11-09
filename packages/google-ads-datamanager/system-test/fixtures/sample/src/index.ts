@@ -20,6 +20,7 @@ import {
   IngestionServiceClient,
   MarketingDataInsightsServiceClient,
   PartnerLinkServiceClient,
+  ReportingServiceClient,
   UserListDirectLicenseServiceClient,
   UserListGlobalLicenseServiceClient,
   UserListServiceClient,
@@ -35,6 +36,9 @@ function doStuffWithMarketingDataInsightsServiceClient(
   client.close();
 }
 function doStuffWithPartnerLinkServiceClient(client: PartnerLinkServiceClient) {
+  client.close();
+}
+function doStuffWithReportingServiceClient(client: ReportingServiceClient) {
   client.close();
 }
 function doStuffWithUserListDirectLicenseServiceClient(
@@ -64,6 +68,9 @@ function main() {
   // check that the client instance can be created
   const partnerLinkServiceClient = new PartnerLinkServiceClient();
   doStuffWithPartnerLinkServiceClient(partnerLinkServiceClient);
+  // check that the client instance can be created
+  const reportingServiceClient = new ReportingServiceClient();
+  doStuffWithReportingServiceClient(reportingServiceClient);
   // check that the client instance can be created
   const userListDirectLicenseServiceClient =
     new UserListDirectLicenseServiceClient();

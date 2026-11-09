@@ -752,6 +752,13 @@
                         "CONNECTION_TYPE_READER": 3
                       }
                     },
+                    "IpVersion": {
+                      "values": {
+                        "IP_VERSION_UNSPECIFIED": 0,
+                        "IPV4": 1,
+                        "IPV6": 2
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "memorystore.googleapis.com/Instance",
@@ -2349,7 +2356,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -2397,6 +2404,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "ipVersion": {
+                          "type": "IpVersion",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -2427,7 +2441,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },

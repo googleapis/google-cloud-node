@@ -294,6 +294,12 @@ export class InstancesClient {
     const createInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.run.v2.Instance',
     ) as gax.protobuf.Type;
+    const updateInstanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.Instance',
+    ) as gax.protobuf.Type;
+    const updateInstanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.Instance',
+    ) as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
       '.google.cloud.run.v2.Instance',
     ) as gax.protobuf.Type;
@@ -318,6 +324,11 @@ export class InstancesClient {
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
         createInstanceMetadata.decode.bind(createInstanceMetadata),
+      ),
+      updateInstance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateInstanceResponse.decode.bind(updateInstanceResponse),
+        updateInstanceMetadata.decode.bind(updateInstanceMetadata),
       ),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -387,11 +398,15 @@ export class InstancesClient {
     // and create an API call method for each.
     const instancesStubMethods = [
       'createInstance',
+      'updateInstance',
       'deleteInstance',
       'getInstance',
       'listInstances',
       'stopInstance',
       'startInstance',
+      'getIamPolicy',
+      'setIamPolicy',
+      'testIamPermissions',
     ];
     for (const methodName of instancesStubMethods) {
       const callPromise = this.instancesStub.then(
@@ -487,7 +502,11 @@ export class InstancesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -510,11 +529,12 @@ export class InstancesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a Instance
+   * Gets an Instance
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
+   *   Required. The name of the Instance to retrieve.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -643,6 +663,404 @@ export class InstancesClient {
         throw error;
       });
   }
+  /**
+   * Gets the IAM Access Control policy currently in effect for the given
+   * Instance. This result does not include any inherited policies.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/instances.get_iam_policy.js</caption>
+   * region_tag:run_v2_generated_Instances_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Sets the IAM Access control policy for the specified Instance. Overwrites
+   * any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/instances.set_iam_policy.js</caption>
+   * region_tag:run_v2_generated_Instances_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns permissions that a caller has on the specified Instance.
+   *
+   * There are no permissions required for making this API call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/instances.test_iam_permissions.js</caption>
+   * region_tag:run_v2_generated_Instances_TestIamPermissions_async
+   */
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Creates an Instance.
@@ -650,11 +1068,14 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
+   *   Required. The location and project in which this Instance should be
+   *   created.
    * @param {google.cloud.run.v2.Instance} request.instance
-   * @param {string} request.instanceId
-   *   Required. The unique identifier for the Instance. It must begin with
+   * @param {string} [request.instanceId]
+   *   Optional. The unique identifier for the Instance. It must begin with
    *   letter, and cannot end with hyphen; must contain fewer than 50 characters.
    *   The name of the instance becomes {parent}/instances/{instance_id}.
+   *   If not provided, the server will generate a unique `instance_id`.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.
@@ -832,11 +1253,201 @@ export class InstancesClient {
     >;
   }
   /**
-   * Deletes a Instance
+   * Updates an Instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to be updated.
+   * @param {google.cloud.run.v2.Instance} request.instance
+   *   Required. The Instance to be updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Indicates that the request should be validated and default values
+   *   populated, without persisting the request or updating any resources.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to `true`, and if the Instance does not exist, it will
+   *   create a new one. The caller must have `run.instances.create` permissions
+   *   if this is set to `true` and the Instance does not exist.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/instances.update_instance.js</caption>
+   * region_tag:run_v2_generated_Instances_UpdateInstance_async
+   */
+  updateInstance(
+    request?: protos.google.cloud.run.v2.IUpdateInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.run.v2.IInstance,
+        protos.google.cloud.run.v2.IInstance
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateInstance(
+    request: protos.google.cloud.run.v2.IUpdateInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IInstance,
+        protos.google.cloud.run.v2.IInstance
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateInstance(
+    request: protos.google.cloud.run.v2.IUpdateInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IInstance,
+        protos.google.cloud.run.v2.IInstance
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateInstance(
+    request?: protos.google.cloud.run.v2.IUpdateInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IInstance,
+            protos.google.cloud.run.v2.IInstance
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IInstance,
+        protos.google.cloud.run.v2.IInstance
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.run.v2.IInstance,
+        protos.google.cloud.run.v2.IInstance
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    let routingParameter = {};
+    {
+      const fieldValue = request.instance?.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IInstance,
+            protos.google.cloud.run.v2.IInstance
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.run.v2.IInstance,
+            protos.google.cloud.run.v2.IInstance
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/instances.update_instance.js</caption>
+   * region_tag:run_v2_generated_Instances_UpdateInstance_async
+   */
+  async checkUpdateInstanceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.run.v2.Instance,
+      protos.google.cloud.run.v2.Instance
+    >
+  > {
+    this._log.info('updateInstance long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInstance,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.run.v2.Instance,
+      protos.google.cloud.run.v2.Instance
+    >;
+  }
+  /**
+   * Deletes an Instance
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
+   *   Required. The name of the Instance to delete.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated without actually
    *   deleting any resources.
@@ -1023,9 +1634,6 @@ export class InstancesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the Instance to stop.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}`,
-   *   where `{project}` can be project id or number.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated without actually
    *   stopping any resources.
@@ -1200,10 +1808,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Instance to stop.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}`,
-   *   where `{project}` can be project id or number.
+   *   Required. The name of the Instance to start.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated without actually
    *   stopping any resources.
@@ -1379,8 +1984,6 @@ export class InstancesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of Instances to return in this call.
    * @param {string} [request.pageToken]
@@ -1511,8 +2114,6 @@ export class InstancesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of Instances to return in this call.
    * @param {string} [request.pageToken]
@@ -1576,8 +2177,6 @@ export class InstancesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of Instances to return in this call.
    * @param {string} [request.pageToken]

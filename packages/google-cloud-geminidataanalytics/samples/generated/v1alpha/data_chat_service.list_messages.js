@@ -53,6 +53,13 @@ function main(parent) {
    *   * update_time
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. If true, the wait for in-flight writes on the most recent turn is
+   *  skipped. By default ListMessages waits for those writes to become durable
+   *  so a caller reading right after a chat turn does not miss the tail of that
+   *  turn's messages.
+   */
+  // const pendingWriteWaitSkipped = true
 
   // Imports the Geminidataanalytics library
   const {DataChatServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;

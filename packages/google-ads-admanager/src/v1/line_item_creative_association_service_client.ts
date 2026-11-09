@@ -212,6 +212,9 @@ export class LineItemCreativeAssociationServiceClient {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}',
       ),
+      adCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adCategories/{ad_category}',
+      ),
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
@@ -224,6 +227,9 @@ export class LineItemCreativeAssociationServiceClient {
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
+      allocationDeliveryProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/allocationDeliveryProfiles/{allocation_delivery_profile}',
+      ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
@@ -232,6 +238,9 @@ export class LineItemCreativeAssociationServiceClient {
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
+      ),
+      audienceSegmentCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/audienceSegmentCategories/{audience_segment_category}',
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
@@ -247,6 +256,9 @@ export class LineItemCreativeAssociationServiceClient {
       ),
       cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cdnConfigs/{cdn_config}',
+      ),
+      changeEventPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/changeEvents/{change_event}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -318,8 +330,14 @@ export class LineItemCreativeAssociationServiceClient {
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}',
       ),
+      forecastAdjustmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/forecastAdjustments/{forecast_adjustment}',
+      ),
       geoTargetPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/geoTargets/{geo_target}',
+      ),
+      inventoryUrlPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/inventoryUrls/{inventory_url}',
       ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}',
@@ -381,6 +399,9 @@ export class LineItemCreativeAssociationServiceClient {
       programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/programmaticBuyers/{programmatic_buyer}',
       ),
+      proposalPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/proposals/{proposal}',
+      ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}',
       ),
@@ -411,6 +432,9 @@ export class LineItemCreativeAssociationServiceClient {
       thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
       ),
+      trafficForecastSegmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/trafficForecastSegments/{traffic_forecast_segment}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
       ),
@@ -419,6 +443,12 @@ export class LineItemCreativeAssociationServiceClient {
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
+      ),
+      yieldGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldGroups/{yield_group}',
+      ),
+      yieldPartnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldPartners/{yield_partner}',
       ),
     };
 
@@ -486,6 +516,14 @@ export class LineItemCreativeAssociationServiceClient {
     const lineItemCreativeAssociationServiceStubMethods = [
       'getLineItemCreativeAssociation',
       'listLineItemCreativeAssociations',
+      'createLineItemCreativeAssociation',
+      'batchCreateLineItemCreativeAssociations',
+      'updateLineItemCreativeAssociation',
+      'batchUpdateLineItemCreativeAssociations',
+      'batchActivateLineItemCreativeAssociations',
+      'batchDeactivateLineItemCreativeAssociations',
+      'batchDeleteLineItemCreativeAssociations',
+      'previewLineItemCreativeAssociation',
     ];
     for (const methodName of lineItemCreativeAssociationServiceStubMethods) {
       const callPromise = this.lineItemCreativeAssociationServiceStub.then(
@@ -754,6 +792,1287 @@ export class LineItemCreativeAssociationServiceClient {
         throw error;
       });
   }
+  /**
+   * Creates a `LineItemCreativeAssociation` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this `LineItemCreativeAssociation` will
+   *   be created. Format: `networks/{network_code}/lineItems/{line_item_id}`
+   * @param {google.ads.admanager.v1.LineItemCreativeAssociation} request.lineItemCreativeAssociation
+   *   Required. The `LineItemCreativeAssociation` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.LineItemCreativeAssociation|LineItemCreativeAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.create_line_item_creative_association.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_CreateLineItemCreativeAssociation_async
+   */
+  createLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      (
+        | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      (
+        | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createLineItemCreativeAssociation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createLineItemCreativeAssociation response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createLineItemCreativeAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          (
+            | protos.google.ads.admanager.v1.ICreateLineItemCreativeAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createLineItemCreativeAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates `LineItemCreativeAssociation` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItemCreativeAssociations` will be
+   *   created. This request supports using the "-" character as a wildcard for
+   *   resources that span across multiple LineItem parents. Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}` Format:
+   *   `networks/{network_code}/lineItems/-`
+   * @param {number[]} request.requests
+   *   Required. The `LineItemCreativeAssociation` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsResponse|BatchCreateLineItemCreativeAssociationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.batch_create_line_item_creative_associations.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_BatchCreateLineItemCreativeAssociations_async
+   */
+  batchCreateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchCreateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'batchCreateLineItemCreativeAssociations request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchCreateLineItemCreativeAssociations response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateLineItemCreativeAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreateLineItemCreativeAssociations response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a `LineItemCreativeAssociation` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.LineItemCreativeAssociation} request.lineItemCreativeAssociation
+   *   Required. The `LineItemCreativeAssociation` to update.
+   *   Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.LineItemCreativeAssociation|LineItemCreativeAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.update_line_item_creative_association.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_UpdateLineItemCreativeAssociation_async
+   */
+  updateLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      (
+        | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+      (
+        | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'line_item_creative_association.name':
+          request.lineItemCreativeAssociation!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateLineItemCreativeAssociation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateLineItemCreativeAssociation response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateLineItemCreativeAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILineItemCreativeAssociation,
+          (
+            | protos.google.ads.admanager.v1.IUpdateLineItemCreativeAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateLineItemCreativeAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `LineItemCreativeAssociation` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItemCreativeAssociations` will be
+   *   updated. This request supports using the "-" character as a wildcard for
+   *   resources that span across multiple LineItem parents. Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}` Format:
+   *   `networks/{network_code}/lineItems/-`
+   * @param {number[]} request.requests
+   *   Required. The `LineItemCreativeAssociation` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsResponse|BatchUpdateLineItemCreativeAssociationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.batch_update_line_item_creative_associations.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_BatchUpdateLineItemCreativeAssociations_async
+   */
+  batchUpdateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchUpdateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'batchUpdateLineItemCreativeAssociations request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchUpdateLineItemCreativeAssociations response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateLineItemCreativeAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchUpdateLineItemCreativeAssociations response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Activate a list of `LineItemCreativeAssociation` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItemCreativeAssociations` will be
+   *   activated. This request supports using the "-" character as a wildcard for
+   *   resources that span across multiple LineItem parents. Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}` Format:
+   *   `networks/{network_code}/lineItems/-`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItemCreativeAssociation` objects to
+   *   activate. A maximum of 1000 objects can be activated in a batch. Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsResponse|BatchActivateLineItemCreativeAssociationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.batch_activate_line_item_creative_associations.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_BatchActivateLineItemCreativeAssociations_async
+   */
+  batchActivateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchActivateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'batchActivateLineItemCreativeAssociations request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchActivateLineItemCreativeAssociations response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchActivateLineItemCreativeAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchActivateLineItemCreativeAssociations response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deactivates a list of `LineItemCreativeAssociation` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItemCreativeAssociations` will be
+   *   deactivated.
+   *   This request supports using the "-" character as a wildcard for resources
+   *   that span across multiple LineItem parents.
+   *   Format: `networks/{network_code}/lineItems/{line_item_id}`
+   *   Format: `networks/{network_code}/lineItems/-`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItemCreativeAssociation` objects to
+   *   deactivate. A maximum of 1000 objects can be deactivated in a batch.
+   *   Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsResponse|BatchDeactivateLineItemCreativeAssociationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.batch_deactivate_line_item_creative_associations.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_BatchDeactivateLineItemCreativeAssociations_async
+   */
+  batchDeactivateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchDeactivateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'batchDeactivateLineItemCreativeAssociations request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchDeactivateLineItemCreativeAssociations response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeactivateLineItemCreativeAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchDeactivateLineItemCreativeAssociations response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a list of `LineItemCreativeAssociation` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItemCreativeAssociations` will be
+   *   deleted. This request supports using the "-" character as a wildcard for
+   *   resources that span across multiple LineItem parents. Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}` Format:
+   *   `networks/{network_code}/lineItems/-`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItemCreativeAssociation` objects to delete.
+   *   A maximum of 1000 objects can be deleted in a batch.
+   *   Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.batch_delete_line_item_creative_associations.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_BatchDeleteLineItemCreativeAssociations_async
+   */
+  batchDeleteLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchDeleteLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteLineItemCreativeAssociations(
+    request: protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteLineItemCreativeAssociations(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'batchDeleteLineItemCreativeAssociations request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchDeleteLineItemCreativeAssociations response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteLineItemCreativeAssociations(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeleteLineItemCreativeAssociationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchDeleteLineItemCreativeAssociations response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Fetch previews for the
+   * {@link protos.google.ads.admanager.v1.LineItemCreativeAssociation|LineItemCreativeAssociation}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `LineItemCreativeAssociation` object to preview.
+   *   Format:
+   *   `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+   * @param {string} request.siteUrl
+   *   Required. The URL of the site that the creative should be previewed in
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationResponse|PreviewLineItemCreativeAssociationResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_creative_association_service.preview_line_item_creative_association.js</caption>
+   * region_tag:admanager_v1_generated_LineItemCreativeAssociationService_PreviewLineItemCreativeAssociation_async
+   */
+  previewLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+      (
+        | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  previewLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+      | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  previewLineItemCreativeAssociation(
+    request: protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+      | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  previewLineItemCreativeAssociation(
+    request?: protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+          | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+      | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+      (
+        | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('previewLineItemCreativeAssociation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+          | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'previewLineItemCreativeAssociation response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .previewLineItemCreativeAssociation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse,
+          (
+            | protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'previewLineItemCreativeAssociation response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists `LineItemCreativeAssociation` objects.
@@ -784,6 +2103,14 @@ export class LineItemCreativeAssociationServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
+   *
    *   **Filterable fields:**
    *
    *   * `creative`
@@ -794,7 +2121,6 @@ export class LineItemCreativeAssociationServiceClient {
    *   * `manualCreativeRotationWeight`
    *   * `name`
    *   * `sequentialCreativeRotationIndex`
-   *   * `sizes.canonicalName`
    *   * `startTime`
    *   * `status`
    *   * `targetingDisplayName`
@@ -951,6 +2277,14 @@ export class LineItemCreativeAssociationServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
+   *
    *   **Filterable fields:**
    *
    *   * `creative`
@@ -961,7 +2295,6 @@ export class LineItemCreativeAssociationServiceClient {
    *   * `manualCreativeRotationWeight`
    *   * `name`
    *   * `sequentialCreativeRotationIndex`
-   *   * `sizes.canonicalName`
    *   * `startTime`
    *   * `status`
    *   * `targetingDisplayName`
@@ -1039,6 +2372,14 @@ export class LineItemCreativeAssociationServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
+   *
    *   **Filterable fields:**
    *
    *   * `creative`
@@ -1049,7 +2390,6 @@ export class LineItemCreativeAssociationServiceClient {
    *   * `manualCreativeRotationWeight`
    *   * `name`
    *   * `sequentialCreativeRotationIndex`
-   *   * `sizes.canonicalName`
    *   * `startTime`
    *   * `status`
    *   * `targetingDisplayName`
@@ -1149,6 +2489,44 @@ export class LineItemCreativeAssociationServiceClient {
    */
   matchAdBreakFromAdBreakName(adBreakName: string) {
     return this.pathTemplates.adBreakPathTemplate.match(adBreakName).ad_break;
+  }
+
+  /**
+   * Return a fully-qualified adCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_category
+   * @returns {string} Resource name string.
+   */
+  adCategoryPath(networkCode: string, adCategory: string) {
+    return this.pathTemplates.adCategoryPathTemplate.render({
+      network_code: networkCode,
+      ad_category: adCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .network_code;
+  }
+
+  /**
+   * Parse the ad_category from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the ad_category.
+   */
+  matchAdCategoryFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .ad_category;
   }
 
   /**
@@ -1319,6 +2697,53 @@ export class LineItemCreativeAssociationServiceClient {
   }
 
   /**
+   * Return a fully-qualified allocationDeliveryProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} allocation_delivery_profile
+   * @returns {string} Resource name string.
+   */
+  allocationDeliveryProfilePath(
+    networkCode: string,
+    allocationDeliveryProfile: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.render({
+      network_code: networkCode,
+      allocation_delivery_profile: allocationDeliveryProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the allocation_delivery_profile from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the allocation_delivery_profile.
+   */
+  matchAllocationDeliveryProfileFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).allocation_delivery_profile;
+  }
+
+  /**
    * Return a fully-qualified application resource name string.
    *
    * @param {string} network_code
@@ -1430,6 +2855,53 @@ export class LineItemCreativeAssociationServiceClient {
     return this.pathTemplates.audienceSegmentPathTemplate.match(
       audienceSegmentName,
     ).audience_segment;
+  }
+
+  /**
+   * Return a fully-qualified audienceSegmentCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} audience_segment_category
+   * @returns {string} Resource name string.
+   */
+  audienceSegmentCategoryPath(
+    networkCode: string,
+    audienceSegmentCategory: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.render({
+      network_code: networkCode,
+      audience_segment_category: audienceSegmentCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the audience_segment_category from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the audience_segment_category.
+   */
+  matchAudienceSegmentCategoryFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).audience_segment_category;
   }
 
   /**
@@ -1623,6 +3095,44 @@ export class LineItemCreativeAssociationServiceClient {
   matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
     return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
       .cdn_config;
+  }
+
+  /**
+   * Return a fully-qualified changeEvent resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} change_event
+   * @returns {string} Resource name string.
+   */
+  changeEventPath(networkCode: string, changeEvent: string) {
+    return this.pathTemplates.changeEventPathTemplate.render({
+      network_code: networkCode,
+      change_event: changeEvent,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .network_code;
+  }
+
+  /**
+   * Parse the change_event from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the change_event.
+   */
+  matchChangeEventFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .change_event;
   }
 
   /**
@@ -2531,6 +4041,48 @@ export class LineItemCreativeAssociationServiceClient {
   }
 
   /**
+   * Return a fully-qualified forecastAdjustment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} forecast_adjustment
+   * @returns {string} Resource name string.
+   */
+  forecastAdjustmentPath(networkCode: string, forecastAdjustment: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.render({
+      network_code: networkCode,
+      forecast_adjustment: forecastAdjustment,
+    });
+  }
+
+  /**
+   * Parse the network_code from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromForecastAdjustmentName(forecastAdjustmentName: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the forecast_adjustment from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the forecast_adjustment.
+   */
+  matchForecastAdjustmentFromForecastAdjustmentName(
+    forecastAdjustmentName: string,
+  ) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).forecast_adjustment;
+  }
+
+  /**
    * Return a fully-qualified geoTarget resource name string.
    *
    * @param {string} network_code
@@ -2566,6 +4118,44 @@ export class LineItemCreativeAssociationServiceClient {
   matchGeoTargetFromGeoTargetName(geoTargetName: string) {
     return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
       .geo_target;
+  }
+
+  /**
+   * Return a fully-qualified inventoryUrl resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} inventory_url
+   * @returns {string} Resource name string.
+   */
+  inventoryUrlPath(networkCode: string, inventoryUrl: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.render({
+      network_code: networkCode,
+      inventory_url: inventoryUrl,
+    });
+  }
+
+  /**
+   * Parse the network_code from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .network_code;
+  }
+
+  /**
+   * Parse the inventory_url from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the inventory_url.
+   */
+  matchInventoryUrlFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .inventory_url;
   }
 
   /**
@@ -3368,6 +4958,43 @@ export class LineItemCreativeAssociationServiceClient {
   }
 
   /**
+   * Return a fully-qualified proposal resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} proposal
+   * @returns {string} Resource name string.
+   */
+  proposalPath(networkCode: string, proposal: string) {
+    return this.pathTemplates.proposalPathTemplate.render({
+      network_code: networkCode,
+      proposal: proposal,
+    });
+  }
+
+  /**
+   * Parse the network_code from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName)
+      .network_code;
+  }
+
+  /**
+   * Parse the proposal from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the proposal.
+   */
+  matchProposalFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName).proposal;
+  }
+
+  /**
    * Return a fully-qualified report resource name string.
    *
    * @param {string} network_code
@@ -3752,6 +5379,53 @@ export class LineItemCreativeAssociationServiceClient {
   }
 
   /**
+   * Return a fully-qualified trafficForecastSegment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} traffic_forecast_segment
+   * @returns {string} Resource name string.
+   */
+  trafficForecastSegmentPath(
+    networkCode: string,
+    trafficForecastSegment: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.render({
+      network_code: networkCode,
+      traffic_forecast_segment: trafficForecastSegment,
+    });
+  }
+
+  /**
+   * Parse the network_code from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the traffic_forecast_segment from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the traffic_forecast_segment.
+   */
+  matchTrafficForecastSegmentFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).traffic_forecast_segment;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -3865,6 +5539,82 @@ export class LineItemCreativeAssociationServiceClient {
   matchWebPropertyFromWebPropertyName(webPropertyName: string) {
     return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
       .web_property;
+  }
+
+  /**
+   * Return a fully-qualified yieldGroup resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_group
+   * @returns {string} Resource name string.
+   */
+  yieldGroupPath(networkCode: string, yieldGroup: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.render({
+      network_code: networkCode,
+      yield_group: yieldGroup,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_group from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the yield_group.
+   */
+  matchYieldGroupFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .yield_group;
+  }
+
+  /**
+   * Return a fully-qualified yieldPartner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_partner
+   * @returns {string} Resource name string.
+   */
+  yieldPartnerPath(networkCode: string, yieldPartner: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.render({
+      network_code: networkCode,
+      yield_partner: yieldPartner,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_partner from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the yield_partner.
+   */
+  matchYieldPartnerFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .yield_partner;
   }
 
   /**

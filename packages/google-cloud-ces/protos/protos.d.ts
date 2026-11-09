@@ -3418,6 +3418,18 @@ export namespace google {
 
                     /** RemoteAgentTool agentCard */
                     agentCard?: (google.cloud.ces.v1.IAgentCard|null);
+
+                    /** RemoteAgentTool apiAuthentication */
+                    apiAuthentication?: (google.cloud.ces.v1.IApiAuthentication|null);
+
+                    /** RemoteAgentTool statefulAgent */
+                    statefulAgent?: (boolean|null);
+
+                    /** RemoteAgentTool inputVariableMapping */
+                    inputVariableMapping?: ({ [k: string]: string }|null);
+
+                    /** RemoteAgentTool outputVariableMapping */
+                    outputVariableMapping?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a RemoteAgentTool. */
@@ -3437,6 +3449,18 @@ export namespace google {
 
                     /** RemoteAgentTool agentCard. */
                     public agentCard?: (google.cloud.ces.v1.IAgentCard|null);
+
+                    /** RemoteAgentTool apiAuthentication. */
+                    public apiAuthentication?: (google.cloud.ces.v1.IApiAuthentication|null);
+
+                    /** RemoteAgentTool statefulAgent. */
+                    public statefulAgent: boolean;
+
+                    /** RemoteAgentTool inputVariableMapping. */
+                    public inputVariableMapping: { [k: string]: string };
+
+                    /** RemoteAgentTool outputVariableMapping. */
+                    public outputVariableMapping: { [k: string]: string };
 
                     /**
                      * Creates a new RemoteAgentTool instance using the specified properties.
@@ -3510,6 +3534,985 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RemoteAgentTool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApiKeyConfig. */
+                interface IApiKeyConfig {
+
+                    /** ApiKeyConfig keyName */
+                    keyName?: (string|null);
+
+                    /** ApiKeyConfig apiKeySecretVersion */
+                    apiKeySecretVersion?: (string|null);
+
+                    /** ApiKeyConfig requestLocation */
+                    requestLocation?: (google.cloud.ces.v1.ApiKeyConfig.RequestLocation|keyof typeof google.cloud.ces.v1.ApiKeyConfig.RequestLocation|null);
+                }
+
+                /** Represents an ApiKeyConfig. */
+                class ApiKeyConfig implements IApiKeyConfig {
+
+                    /**
+                     * Constructs a new ApiKeyConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IApiKeyConfig);
+
+                    /** ApiKeyConfig keyName. */
+                    public keyName: string;
+
+                    /** ApiKeyConfig apiKeySecretVersion. */
+                    public apiKeySecretVersion: string;
+
+                    /** ApiKeyConfig requestLocation. */
+                    public requestLocation: (google.cloud.ces.v1.ApiKeyConfig.RequestLocation|keyof typeof google.cloud.ces.v1.ApiKeyConfig.RequestLocation);
+
+                    /**
+                     * Creates a new ApiKeyConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApiKeyConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IApiKeyConfig): google.cloud.ces.v1.ApiKeyConfig;
+
+                    /**
+                     * Encodes the specified ApiKeyConfig message. Does not implicitly {@link google.cloud.ces.v1.ApiKeyConfig.verify|verify} messages.
+                     * @param message ApiKeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApiKeyConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ApiKeyConfig.verify|verify} messages.
+                     * @param message ApiKeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApiKeyConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApiKeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ApiKeyConfig;
+
+                    /**
+                     * Decodes an ApiKeyConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApiKeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ApiKeyConfig;
+
+                    /**
+                     * Verifies an ApiKeyConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApiKeyConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApiKeyConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ApiKeyConfig;
+
+                    /**
+                     * Creates a plain object from an ApiKeyConfig message. Also converts values to other types if specified.
+                     * @param message ApiKeyConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.ApiKeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApiKeyConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApiKeyConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ApiKeyConfig {
+
+                    /** RequestLocation enum. */
+                    enum RequestLocation {
+                        REQUEST_LOCATION_UNSPECIFIED = 0,
+                        HEADER = 1,
+                        QUERY_STRING = 2
+                    }
+                }
+
+                /** Properties of a OAuthConfig. */
+                interface IOAuthConfig {
+
+                    /** OAuthConfig oauthGrantType */
+                    oauthGrantType?: (google.cloud.ces.v1.OAuthConfig.OauthGrantType|keyof typeof google.cloud.ces.v1.OAuthConfig.OauthGrantType|null);
+
+                    /** OAuthConfig clientId */
+                    clientId?: (string|null);
+
+                    /** OAuthConfig clientSecretVersion */
+                    clientSecretVersion?: (string|null);
+
+                    /** OAuthConfig tokenEndpoint */
+                    tokenEndpoint?: (string|null);
+
+                    /** OAuthConfig scopes */
+                    scopes?: (string[]|null);
+                }
+
+                /** Represents a OAuthConfig. */
+                class OAuthConfig implements IOAuthConfig {
+
+                    /**
+                     * Constructs a new OAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IOAuthConfig);
+
+                    /** OAuthConfig oauthGrantType. */
+                    public oauthGrantType: (google.cloud.ces.v1.OAuthConfig.OauthGrantType|keyof typeof google.cloud.ces.v1.OAuthConfig.OauthGrantType);
+
+                    /** OAuthConfig clientId. */
+                    public clientId: string;
+
+                    /** OAuthConfig clientSecretVersion. */
+                    public clientSecretVersion: string;
+
+                    /** OAuthConfig tokenEndpoint. */
+                    public tokenEndpoint: string;
+
+                    /** OAuthConfig scopes. */
+                    public scopes: string[];
+
+                    /**
+                     * Creates a new OAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IOAuthConfig): google.cloud.ces.v1.OAuthConfig;
+
+                    /**
+                     * Encodes the specified OAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.OAuthConfig;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.OAuthConfig;
+
+                    /**
+                     * Verifies a OAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.OAuthConfig;
+
+                    /**
+                     * Creates a plain object from a OAuthConfig message. Also converts values to other types if specified.
+                     * @param message OAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.OAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OAuthConfig {
+
+                    /** OauthGrantType enum. */
+                    enum OauthGrantType {
+                        OAUTH_GRANT_TYPE_UNSPECIFIED = 0,
+                        CLIENT_CREDENTIAL = 1
+                    }
+                }
+
+                /** Properties of a ServiceAgentIdTokenAuthConfig. */
+                interface IServiceAgentIdTokenAuthConfig {
+                }
+
+                /** Represents a ServiceAgentIdTokenAuthConfig. */
+                class ServiceAgentIdTokenAuthConfig implements IServiceAgentIdTokenAuthConfig {
+
+                    /**
+                     * Constructs a new ServiceAgentIdTokenAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig);
+
+                    /**
+                     * Creates a new ServiceAgentIdTokenAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAgentIdTokenAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
+
+                    /**
+                     * Encodes the specified ServiceAgentIdTokenAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig.verify|verify} messages.
+                     * @param message ServiceAgentIdTokenAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAgentIdTokenAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig.verify|verify} messages.
+                     * @param message ServiceAgentIdTokenAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAgentIdTokenAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAgentIdTokenAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
+
+                    /**
+                     * Decodes a ServiceAgentIdTokenAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAgentIdTokenAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
+
+                    /**
+                     * Verifies a ServiceAgentIdTokenAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAgentIdTokenAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAgentIdTokenAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceAgentIdTokenAuthConfig message. Also converts values to other types if specified.
+                     * @param message ServiceAgentIdTokenAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAgentIdTokenAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAgentIdTokenAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceAccountAuthConfig. */
+                interface IServiceAccountAuthConfig {
+
+                    /** ServiceAccountAuthConfig serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** ServiceAccountAuthConfig scopes */
+                    scopes?: (string[]|null);
+                }
+
+                /** Represents a ServiceAccountAuthConfig. */
+                class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                    /**
+                     * Constructs a new ServiceAccountAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IServiceAccountAuthConfig);
+
+                    /** ServiceAccountAuthConfig serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** ServiceAccountAuthConfig scopes. */
+                    public scopes: string[];
+
+                    /**
+                     * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAccountAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IServiceAccountAuthConfig): google.cloud.ces.v1.ServiceAccountAuthConfig;
+
+                    /**
+                     * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.ServiceAccountAuthConfig.verify|verify} messages.
+                     * @param message ServiceAccountAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ServiceAccountAuthConfig.verify|verify} messages.
+                     * @param message ServiceAccountAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAccountAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ServiceAccountAuthConfig;
+
+                    /**
+                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAccountAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ServiceAccountAuthConfig;
+
+                    /**
+                     * Verifies a ServiceAccountAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAccountAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ServiceAccountAuthConfig;
+
+                    /**
+                     * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                     * @param message ServiceAccountAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAccountAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAccountAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BearerTokenConfig. */
+                interface IBearerTokenConfig {
+
+                    /** BearerTokenConfig token */
+                    token?: (string|null);
+                }
+
+                /** Represents a BearerTokenConfig. */
+                class BearerTokenConfig implements IBearerTokenConfig {
+
+                    /**
+                     * Constructs a new BearerTokenConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IBearerTokenConfig);
+
+                    /** BearerTokenConfig token. */
+                    public token: string;
+
+                    /**
+                     * Creates a new BearerTokenConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BearerTokenConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IBearerTokenConfig): google.cloud.ces.v1.BearerTokenConfig;
+
+                    /**
+                     * Encodes the specified BearerTokenConfig message. Does not implicitly {@link google.cloud.ces.v1.BearerTokenConfig.verify|verify} messages.
+                     * @param message BearerTokenConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BearerTokenConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.BearerTokenConfig.verify|verify} messages.
+                     * @param message BearerTokenConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BearerTokenConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BearerTokenConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.BearerTokenConfig;
+
+                    /**
+                     * Decodes a BearerTokenConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BearerTokenConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.BearerTokenConfig;
+
+                    /**
+                     * Verifies a BearerTokenConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BearerTokenConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BearerTokenConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.BearerTokenConfig;
+
+                    /**
+                     * Creates a plain object from a BearerTokenConfig message. Also converts values to other types if specified.
+                     * @param message BearerTokenConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.BearerTokenConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BearerTokenConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BearerTokenConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EndUserAuthConfig. */
+                interface IEndUserAuthConfig {
+
+                    /** EndUserAuthConfig oauth2AuthCodeConfig */
+                    oauth2AuthCodeConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig|null);
+
+                    /** EndUserAuthConfig oauth2JwtBearerConfig */
+                    oauth2JwtBearerConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig|null);
+                }
+
+                /** Represents an EndUserAuthConfig. */
+                class EndUserAuthConfig implements IEndUserAuthConfig {
+
+                    /**
+                     * Constructs a new EndUserAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IEndUserAuthConfig);
+
+                    /** EndUserAuthConfig oauth2AuthCodeConfig. */
+                    public oauth2AuthCodeConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig|null);
+
+                    /** EndUserAuthConfig oauth2JwtBearerConfig. */
+                    public oauth2JwtBearerConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig|null);
+
+                    /** EndUserAuthConfig authConfig. */
+                    public authConfig?: ("oauth2AuthCodeConfig"|"oauth2JwtBearerConfig");
+
+                    /**
+                     * Creates a new EndUserAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EndUserAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IEndUserAuthConfig): google.cloud.ces.v1.EndUserAuthConfig;
+
+                    /**
+                     * Encodes the specified EndUserAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.verify|verify} messages.
+                     * @param message EndUserAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EndUserAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.verify|verify} messages.
+                     * @param message EndUserAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EndUserAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EndUserAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig;
+
+                    /**
+                     * Decodes an EndUserAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EndUserAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig;
+
+                    /**
+                     * Verifies an EndUserAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EndUserAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EndUserAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig;
+
+                    /**
+                     * Creates a plain object from an EndUserAuthConfig message. Also converts values to other types if specified.
+                     * @param message EndUserAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EndUserAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EndUserAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EndUserAuthConfig {
+
+                    /** Properties of an Oauth2AuthCodeConfig. */
+                    interface IOauth2AuthCodeConfig {
+
+                        /** Oauth2AuthCodeConfig oauthToken */
+                        oauthToken?: (string|null);
+                    }
+
+                    /** Represents an Oauth2AuthCodeConfig. */
+                    class Oauth2AuthCodeConfig implements IOauth2AuthCodeConfig {
+
+                        /**
+                         * Constructs a new Oauth2AuthCodeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig);
+
+                        /** Oauth2AuthCodeConfig oauthToken. */
+                        public oauthToken: string;
+
+                        /**
+                         * Creates a new Oauth2AuthCodeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Oauth2AuthCodeConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
+
+                        /**
+                         * Encodes the specified Oauth2AuthCodeConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig.verify|verify} messages.
+                         * @param message Oauth2AuthCodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Oauth2AuthCodeConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig.verify|verify} messages.
+                         * @param message Oauth2AuthCodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Oauth2AuthCodeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Oauth2AuthCodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
+
+                        /**
+                         * Decodes an Oauth2AuthCodeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Oauth2AuthCodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
+
+                        /**
+                         * Verifies an Oauth2AuthCodeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Oauth2AuthCodeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Oauth2AuthCodeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
+
+                        /**
+                         * Creates a plain object from an Oauth2AuthCodeConfig message. Also converts values to other types if specified.
+                         * @param message Oauth2AuthCodeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Oauth2AuthCodeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Oauth2AuthCodeConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Oauth2JwtBearerConfig. */
+                    interface IOauth2JwtBearerConfig {
+
+                        /** Oauth2JwtBearerConfig issuer */
+                        issuer?: (string|null);
+
+                        /** Oauth2JwtBearerConfig subject */
+                        subject?: (string|null);
+
+                        /** Oauth2JwtBearerConfig clientKey */
+                        clientKey?: (string|null);
+                    }
+
+                    /** Represents an Oauth2JwtBearerConfig. */
+                    class Oauth2JwtBearerConfig implements IOauth2JwtBearerConfig {
+
+                        /**
+                         * Constructs a new Oauth2JwtBearerConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig);
+
+                        /** Oauth2JwtBearerConfig issuer. */
+                        public issuer: string;
+
+                        /** Oauth2JwtBearerConfig subject. */
+                        public subject: string;
+
+                        /** Oauth2JwtBearerConfig clientKey. */
+                        public clientKey: string;
+
+                        /**
+                         * Creates a new Oauth2JwtBearerConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Oauth2JwtBearerConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
+
+                        /**
+                         * Encodes the specified Oauth2JwtBearerConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig.verify|verify} messages.
+                         * @param message Oauth2JwtBearerConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Oauth2JwtBearerConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig.verify|verify} messages.
+                         * @param message Oauth2JwtBearerConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Oauth2JwtBearerConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Oauth2JwtBearerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
+
+                        /**
+                         * Decodes an Oauth2JwtBearerConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Oauth2JwtBearerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
+
+                        /**
+                         * Verifies an Oauth2JwtBearerConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Oauth2JwtBearerConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Oauth2JwtBearerConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
+
+                        /**
+                         * Creates a plain object from an Oauth2JwtBearerConfig message. Also converts values to other types if specified.
+                         * @param message Oauth2JwtBearerConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Oauth2JwtBearerConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Oauth2JwtBearerConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ApiAuthentication. */
+                interface IApiAuthentication {
+
+                    /** ApiAuthentication apiKeyConfig */
+                    apiKeyConfig?: (google.cloud.ces.v1.IApiKeyConfig|null);
+
+                    /** ApiAuthentication oauthConfig */
+                    oauthConfig?: (google.cloud.ces.v1.IOAuthConfig|null);
+
+                    /** ApiAuthentication serviceAgentIdTokenAuthConfig */
+                    serviceAgentIdTokenAuthConfig?: (google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig|null);
+
+                    /** ApiAuthentication serviceAccountAuthConfig */
+                    serviceAccountAuthConfig?: (google.cloud.ces.v1.IServiceAccountAuthConfig|null);
+
+                    /** ApiAuthentication bearerTokenConfig */
+                    bearerTokenConfig?: (google.cloud.ces.v1.IBearerTokenConfig|null);
+                }
+
+                /** Represents an ApiAuthentication. */
+                class ApiAuthentication implements IApiAuthentication {
+
+                    /**
+                     * Constructs a new ApiAuthentication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IApiAuthentication);
+
+                    /** ApiAuthentication apiKeyConfig. */
+                    public apiKeyConfig?: (google.cloud.ces.v1.IApiKeyConfig|null);
+
+                    /** ApiAuthentication oauthConfig. */
+                    public oauthConfig?: (google.cloud.ces.v1.IOAuthConfig|null);
+
+                    /** ApiAuthentication serviceAgentIdTokenAuthConfig. */
+                    public serviceAgentIdTokenAuthConfig?: (google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig|null);
+
+                    /** ApiAuthentication serviceAccountAuthConfig. */
+                    public serviceAccountAuthConfig?: (google.cloud.ces.v1.IServiceAccountAuthConfig|null);
+
+                    /** ApiAuthentication bearerTokenConfig. */
+                    public bearerTokenConfig?: (google.cloud.ces.v1.IBearerTokenConfig|null);
+
+                    /** ApiAuthentication authConfig. */
+                    public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentIdTokenAuthConfig"|"serviceAccountAuthConfig"|"bearerTokenConfig");
+
+                    /**
+                     * Creates a new ApiAuthentication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApiAuthentication instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IApiAuthentication): google.cloud.ces.v1.ApiAuthentication;
+
+                    /**
+                     * Encodes the specified ApiAuthentication message. Does not implicitly {@link google.cloud.ces.v1.ApiAuthentication.verify|verify} messages.
+                     * @param message ApiAuthentication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IApiAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApiAuthentication message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ApiAuthentication.verify|verify} messages.
+                     * @param message ApiAuthentication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IApiAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApiAuthentication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApiAuthentication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ApiAuthentication;
+
+                    /**
+                     * Decodes an ApiAuthentication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApiAuthentication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ApiAuthentication;
+
+                    /**
+                     * Verifies an ApiAuthentication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApiAuthentication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApiAuthentication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ApiAuthentication;
+
+                    /**
+                     * Creates a plain object from an ApiAuthentication message. Also converts values to other types if specified.
+                     * @param message ApiAuthentication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.ApiAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApiAuthentication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApiAuthentication
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -17866,985 +18869,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ConnectorTool
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ApiKeyConfig. */
-                interface IApiKeyConfig {
-
-                    /** ApiKeyConfig keyName */
-                    keyName?: (string|null);
-
-                    /** ApiKeyConfig apiKeySecretVersion */
-                    apiKeySecretVersion?: (string|null);
-
-                    /** ApiKeyConfig requestLocation */
-                    requestLocation?: (google.cloud.ces.v1.ApiKeyConfig.RequestLocation|keyof typeof google.cloud.ces.v1.ApiKeyConfig.RequestLocation|null);
-                }
-
-                /** Represents an ApiKeyConfig. */
-                class ApiKeyConfig implements IApiKeyConfig {
-
-                    /**
-                     * Constructs a new ApiKeyConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IApiKeyConfig);
-
-                    /** ApiKeyConfig keyName. */
-                    public keyName: string;
-
-                    /** ApiKeyConfig apiKeySecretVersion. */
-                    public apiKeySecretVersion: string;
-
-                    /** ApiKeyConfig requestLocation. */
-                    public requestLocation: (google.cloud.ces.v1.ApiKeyConfig.RequestLocation|keyof typeof google.cloud.ces.v1.ApiKeyConfig.RequestLocation);
-
-                    /**
-                     * Creates a new ApiKeyConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ApiKeyConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IApiKeyConfig): google.cloud.ces.v1.ApiKeyConfig;
-
-                    /**
-                     * Encodes the specified ApiKeyConfig message. Does not implicitly {@link google.cloud.ces.v1.ApiKeyConfig.verify|verify} messages.
-                     * @param message ApiKeyConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ApiKeyConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ApiKeyConfig.verify|verify} messages.
-                     * @param message ApiKeyConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ApiKeyConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ApiKeyConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ApiKeyConfig;
-
-                    /**
-                     * Decodes an ApiKeyConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ApiKeyConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ApiKeyConfig;
-
-                    /**
-                     * Verifies an ApiKeyConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ApiKeyConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ApiKeyConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ApiKeyConfig;
-
-                    /**
-                     * Creates a plain object from an ApiKeyConfig message. Also converts values to other types if specified.
-                     * @param message ApiKeyConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.ApiKeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ApiKeyConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ApiKeyConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ApiKeyConfig {
-
-                    /** RequestLocation enum. */
-                    enum RequestLocation {
-                        REQUEST_LOCATION_UNSPECIFIED = 0,
-                        HEADER = 1,
-                        QUERY_STRING = 2
-                    }
-                }
-
-                /** Properties of a OAuthConfig. */
-                interface IOAuthConfig {
-
-                    /** OAuthConfig oauthGrantType */
-                    oauthGrantType?: (google.cloud.ces.v1.OAuthConfig.OauthGrantType|keyof typeof google.cloud.ces.v1.OAuthConfig.OauthGrantType|null);
-
-                    /** OAuthConfig clientId */
-                    clientId?: (string|null);
-
-                    /** OAuthConfig clientSecretVersion */
-                    clientSecretVersion?: (string|null);
-
-                    /** OAuthConfig tokenEndpoint */
-                    tokenEndpoint?: (string|null);
-
-                    /** OAuthConfig scopes */
-                    scopes?: (string[]|null);
-                }
-
-                /** Represents a OAuthConfig. */
-                class OAuthConfig implements IOAuthConfig {
-
-                    /**
-                     * Constructs a new OAuthConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IOAuthConfig);
-
-                    /** OAuthConfig oauthGrantType. */
-                    public oauthGrantType: (google.cloud.ces.v1.OAuthConfig.OauthGrantType|keyof typeof google.cloud.ces.v1.OAuthConfig.OauthGrantType);
-
-                    /** OAuthConfig clientId. */
-                    public clientId: string;
-
-                    /** OAuthConfig clientSecretVersion. */
-                    public clientSecretVersion: string;
-
-                    /** OAuthConfig tokenEndpoint. */
-                    public tokenEndpoint: string;
-
-                    /** OAuthConfig scopes. */
-                    public scopes: string[];
-
-                    /**
-                     * Creates a new OAuthConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OAuthConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IOAuthConfig): google.cloud.ces.v1.OAuthConfig;
-
-                    /**
-                     * Encodes the specified OAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.OAuthConfig.verify|verify} messages.
-                     * @param message OAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.OAuthConfig.verify|verify} messages.
-                     * @param message OAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a OAuthConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.OAuthConfig;
-
-                    /**
-                     * Decodes a OAuthConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.OAuthConfig;
-
-                    /**
-                     * Verifies a OAuthConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a OAuthConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OAuthConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.OAuthConfig;
-
-                    /**
-                     * Creates a plain object from a OAuthConfig message. Also converts values to other types if specified.
-                     * @param message OAuthConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.OAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OAuthConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OAuthConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace OAuthConfig {
-
-                    /** OauthGrantType enum. */
-                    enum OauthGrantType {
-                        OAUTH_GRANT_TYPE_UNSPECIFIED = 0,
-                        CLIENT_CREDENTIAL = 1
-                    }
-                }
-
-                /** Properties of a ServiceAgentIdTokenAuthConfig. */
-                interface IServiceAgentIdTokenAuthConfig {
-                }
-
-                /** Represents a ServiceAgentIdTokenAuthConfig. */
-                class ServiceAgentIdTokenAuthConfig implements IServiceAgentIdTokenAuthConfig {
-
-                    /**
-                     * Constructs a new ServiceAgentIdTokenAuthConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig);
-
-                    /**
-                     * Creates a new ServiceAgentIdTokenAuthConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ServiceAgentIdTokenAuthConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
-
-                    /**
-                     * Encodes the specified ServiceAgentIdTokenAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig.verify|verify} messages.
-                     * @param message ServiceAgentIdTokenAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ServiceAgentIdTokenAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig.verify|verify} messages.
-                     * @param message ServiceAgentIdTokenAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ServiceAgentIdTokenAuthConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ServiceAgentIdTokenAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
-
-                    /**
-                     * Decodes a ServiceAgentIdTokenAuthConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ServiceAgentIdTokenAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
-
-                    /**
-                     * Verifies a ServiceAgentIdTokenAuthConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ServiceAgentIdTokenAuthConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ServiceAgentIdTokenAuthConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig;
-
-                    /**
-                     * Creates a plain object from a ServiceAgentIdTokenAuthConfig message. Also converts values to other types if specified.
-                     * @param message ServiceAgentIdTokenAuthConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.ServiceAgentIdTokenAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ServiceAgentIdTokenAuthConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ServiceAgentIdTokenAuthConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ServiceAccountAuthConfig. */
-                interface IServiceAccountAuthConfig {
-
-                    /** ServiceAccountAuthConfig serviceAccount */
-                    serviceAccount?: (string|null);
-
-                    /** ServiceAccountAuthConfig scopes */
-                    scopes?: (string[]|null);
-                }
-
-                /** Represents a ServiceAccountAuthConfig. */
-                class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
-
-                    /**
-                     * Constructs a new ServiceAccountAuthConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IServiceAccountAuthConfig);
-
-                    /** ServiceAccountAuthConfig serviceAccount. */
-                    public serviceAccount: string;
-
-                    /** ServiceAccountAuthConfig scopes. */
-                    public scopes: string[];
-
-                    /**
-                     * Creates a new ServiceAccountAuthConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ServiceAccountAuthConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IServiceAccountAuthConfig): google.cloud.ces.v1.ServiceAccountAuthConfig;
-
-                    /**
-                     * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.ServiceAccountAuthConfig.verify|verify} messages.
-                     * @param message ServiceAccountAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ServiceAccountAuthConfig.verify|verify} messages.
-                     * @param message ServiceAccountAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ServiceAccountAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ServiceAccountAuthConfig;
-
-                    /**
-                     * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ServiceAccountAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ServiceAccountAuthConfig;
-
-                    /**
-                     * Verifies a ServiceAccountAuthConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ServiceAccountAuthConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ServiceAccountAuthConfig;
-
-                    /**
-                     * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
-                     * @param message ServiceAccountAuthConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ServiceAccountAuthConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ServiceAccountAuthConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a BearerTokenConfig. */
-                interface IBearerTokenConfig {
-
-                    /** BearerTokenConfig token */
-                    token?: (string|null);
-                }
-
-                /** Represents a BearerTokenConfig. */
-                class BearerTokenConfig implements IBearerTokenConfig {
-
-                    /**
-                     * Constructs a new BearerTokenConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IBearerTokenConfig);
-
-                    /** BearerTokenConfig token. */
-                    public token: string;
-
-                    /**
-                     * Creates a new BearerTokenConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BearerTokenConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IBearerTokenConfig): google.cloud.ces.v1.BearerTokenConfig;
-
-                    /**
-                     * Encodes the specified BearerTokenConfig message. Does not implicitly {@link google.cloud.ces.v1.BearerTokenConfig.verify|verify} messages.
-                     * @param message BearerTokenConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BearerTokenConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.BearerTokenConfig.verify|verify} messages.
-                     * @param message BearerTokenConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BearerTokenConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BearerTokenConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.BearerTokenConfig;
-
-                    /**
-                     * Decodes a BearerTokenConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BearerTokenConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.BearerTokenConfig;
-
-                    /**
-                     * Verifies a BearerTokenConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BearerTokenConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BearerTokenConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.BearerTokenConfig;
-
-                    /**
-                     * Creates a plain object from a BearerTokenConfig message. Also converts values to other types if specified.
-                     * @param message BearerTokenConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.BearerTokenConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BearerTokenConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for BearerTokenConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an EndUserAuthConfig. */
-                interface IEndUserAuthConfig {
-
-                    /** EndUserAuthConfig oauth2AuthCodeConfig */
-                    oauth2AuthCodeConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig|null);
-
-                    /** EndUserAuthConfig oauth2JwtBearerConfig */
-                    oauth2JwtBearerConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig|null);
-                }
-
-                /** Represents an EndUserAuthConfig. */
-                class EndUserAuthConfig implements IEndUserAuthConfig {
-
-                    /**
-                     * Constructs a new EndUserAuthConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IEndUserAuthConfig);
-
-                    /** EndUserAuthConfig oauth2AuthCodeConfig. */
-                    public oauth2AuthCodeConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig|null);
-
-                    /** EndUserAuthConfig oauth2JwtBearerConfig. */
-                    public oauth2JwtBearerConfig?: (google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig|null);
-
-                    /** EndUserAuthConfig authConfig. */
-                    public authConfig?: ("oauth2AuthCodeConfig"|"oauth2JwtBearerConfig");
-
-                    /**
-                     * Creates a new EndUserAuthConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns EndUserAuthConfig instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IEndUserAuthConfig): google.cloud.ces.v1.EndUserAuthConfig;
-
-                    /**
-                     * Encodes the specified EndUserAuthConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.verify|verify} messages.
-                     * @param message EndUserAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified EndUserAuthConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.verify|verify} messages.
-                     * @param message EndUserAuthConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an EndUserAuthConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns EndUserAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig;
-
-                    /**
-                     * Decodes an EndUserAuthConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns EndUserAuthConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig;
-
-                    /**
-                     * Verifies an EndUserAuthConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an EndUserAuthConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns EndUserAuthConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig;
-
-                    /**
-                     * Creates a plain object from an EndUserAuthConfig message. Also converts values to other types if specified.
-                     * @param message EndUserAuthConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this EndUserAuthConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for EndUserAuthConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace EndUserAuthConfig {
-
-                    /** Properties of an Oauth2AuthCodeConfig. */
-                    interface IOauth2AuthCodeConfig {
-
-                        /** Oauth2AuthCodeConfig oauthToken */
-                        oauthToken?: (string|null);
-                    }
-
-                    /** Represents an Oauth2AuthCodeConfig. */
-                    class Oauth2AuthCodeConfig implements IOauth2AuthCodeConfig {
-
-                        /**
-                         * Constructs a new Oauth2AuthCodeConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig);
-
-                        /** Oauth2AuthCodeConfig oauthToken. */
-                        public oauthToken: string;
-
-                        /**
-                         * Creates a new Oauth2AuthCodeConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Oauth2AuthCodeConfig instance
-                         */
-                        public static create(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
-
-                        /**
-                         * Encodes the specified Oauth2AuthCodeConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig.verify|verify} messages.
-                         * @param message Oauth2AuthCodeConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Oauth2AuthCodeConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig.verify|verify} messages.
-                         * @param message Oauth2AuthCodeConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2AuthCodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an Oauth2AuthCodeConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Oauth2AuthCodeConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
-
-                        /**
-                         * Decodes an Oauth2AuthCodeConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Oauth2AuthCodeConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
-
-                        /**
-                         * Verifies an Oauth2AuthCodeConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an Oauth2AuthCodeConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Oauth2AuthCodeConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig;
-
-                        /**
-                         * Creates a plain object from an Oauth2AuthCodeConfig message. Also converts values to other types if specified.
-                         * @param message Oauth2AuthCodeConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Oauth2AuthCodeConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Oauth2AuthCodeConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of an Oauth2JwtBearerConfig. */
-                    interface IOauth2JwtBearerConfig {
-
-                        /** Oauth2JwtBearerConfig issuer */
-                        issuer?: (string|null);
-
-                        /** Oauth2JwtBearerConfig subject */
-                        subject?: (string|null);
-
-                        /** Oauth2JwtBearerConfig clientKey */
-                        clientKey?: (string|null);
-                    }
-
-                    /** Represents an Oauth2JwtBearerConfig. */
-                    class Oauth2JwtBearerConfig implements IOauth2JwtBearerConfig {
-
-                        /**
-                         * Constructs a new Oauth2JwtBearerConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig);
-
-                        /** Oauth2JwtBearerConfig issuer. */
-                        public issuer: string;
-
-                        /** Oauth2JwtBearerConfig subject. */
-                        public subject: string;
-
-                        /** Oauth2JwtBearerConfig clientKey. */
-                        public clientKey: string;
-
-                        /**
-                         * Creates a new Oauth2JwtBearerConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Oauth2JwtBearerConfig instance
-                         */
-                        public static create(properties?: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
-
-                        /**
-                         * Encodes the specified Oauth2JwtBearerConfig message. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig.verify|verify} messages.
-                         * @param message Oauth2JwtBearerConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Oauth2JwtBearerConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig.verify|verify} messages.
-                         * @param message Oauth2JwtBearerConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.ces.v1.EndUserAuthConfig.IOauth2JwtBearerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an Oauth2JwtBearerConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Oauth2JwtBearerConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
-
-                        /**
-                         * Decodes an Oauth2JwtBearerConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Oauth2JwtBearerConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
-
-                        /**
-                         * Verifies an Oauth2JwtBearerConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an Oauth2JwtBearerConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Oauth2JwtBearerConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig;
-
-                        /**
-                         * Creates a plain object from an Oauth2JwtBearerConfig message. Also converts values to other types if specified.
-                         * @param message Oauth2JwtBearerConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Oauth2JwtBearerConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Oauth2JwtBearerConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-                }
-
-                /** Properties of an ApiAuthentication. */
-                interface IApiAuthentication {
-
-                    /** ApiAuthentication apiKeyConfig */
-                    apiKeyConfig?: (google.cloud.ces.v1.IApiKeyConfig|null);
-
-                    /** ApiAuthentication oauthConfig */
-                    oauthConfig?: (google.cloud.ces.v1.IOAuthConfig|null);
-
-                    /** ApiAuthentication serviceAgentIdTokenAuthConfig */
-                    serviceAgentIdTokenAuthConfig?: (google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig|null);
-
-                    /** ApiAuthentication serviceAccountAuthConfig */
-                    serviceAccountAuthConfig?: (google.cloud.ces.v1.IServiceAccountAuthConfig|null);
-
-                    /** ApiAuthentication bearerTokenConfig */
-                    bearerTokenConfig?: (google.cloud.ces.v1.IBearerTokenConfig|null);
-                }
-
-                /** Represents an ApiAuthentication. */
-                class ApiAuthentication implements IApiAuthentication {
-
-                    /**
-                     * Constructs a new ApiAuthentication.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.ces.v1.IApiAuthentication);
-
-                    /** ApiAuthentication apiKeyConfig. */
-                    public apiKeyConfig?: (google.cloud.ces.v1.IApiKeyConfig|null);
-
-                    /** ApiAuthentication oauthConfig. */
-                    public oauthConfig?: (google.cloud.ces.v1.IOAuthConfig|null);
-
-                    /** ApiAuthentication serviceAgentIdTokenAuthConfig. */
-                    public serviceAgentIdTokenAuthConfig?: (google.cloud.ces.v1.IServiceAgentIdTokenAuthConfig|null);
-
-                    /** ApiAuthentication serviceAccountAuthConfig. */
-                    public serviceAccountAuthConfig?: (google.cloud.ces.v1.IServiceAccountAuthConfig|null);
-
-                    /** ApiAuthentication bearerTokenConfig. */
-                    public bearerTokenConfig?: (google.cloud.ces.v1.IBearerTokenConfig|null);
-
-                    /** ApiAuthentication authConfig. */
-                    public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentIdTokenAuthConfig"|"serviceAccountAuthConfig"|"bearerTokenConfig");
-
-                    /**
-                     * Creates a new ApiAuthentication instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ApiAuthentication instance
-                     */
-                    public static create(properties?: google.cloud.ces.v1.IApiAuthentication): google.cloud.ces.v1.ApiAuthentication;
-
-                    /**
-                     * Encodes the specified ApiAuthentication message. Does not implicitly {@link google.cloud.ces.v1.ApiAuthentication.verify|verify} messages.
-                     * @param message ApiAuthentication message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.ces.v1.IApiAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ApiAuthentication message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ApiAuthentication.verify|verify} messages.
-                     * @param message ApiAuthentication message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.ces.v1.IApiAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ApiAuthentication message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ApiAuthentication
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ApiAuthentication;
-
-                    /**
-                     * Decodes an ApiAuthentication message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ApiAuthentication
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ApiAuthentication;
-
-                    /**
-                     * Verifies an ApiAuthentication message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ApiAuthentication message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ApiAuthentication
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ApiAuthentication;
-
-                    /**
-                     * Creates a plain object from an ApiAuthentication message. Also converts values to other types if specified.
-                     * @param message ApiAuthentication
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.ces.v1.ApiAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ApiAuthentication to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ApiAuthentication
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

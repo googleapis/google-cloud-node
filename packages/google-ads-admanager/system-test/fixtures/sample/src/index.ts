@@ -23,12 +23,14 @@ import {
   AdSpotServiceClient,
   AdUnitServiceClient,
   ApplicationServiceClient,
+  AudienceSegmentCategoryServiceClient,
   AudienceSegmentServiceClient,
   BandwidthGroupServiceClient,
   BreakTemplateServiceClient,
   BrowserLanguageServiceClient,
   BrowserServiceClient,
   CdnConfigServiceClient,
+  ChangeEventServiceClient,
   ChildPublisherServiceClient,
   CmsMetadataKeyServiceClient,
   CmsMetadataValueServiceClient,
@@ -51,6 +53,7 @@ import {
   DeviceCategoryServiceClient,
   DeviceManufacturerServiceClient,
   EntitySignalsMappingServiceClient,
+  ForecastAdjustmentServiceClient,
   ForecastServiceClient,
   GeoTargetServiceClient,
   LabelServiceClient,
@@ -73,6 +76,7 @@ import {
   PrivateAuctionDealServiceClient,
   PrivateAuctionServiceClient,
   ProgrammaticBuyerServiceClient,
+  ProposalServiceClient,
   ReportServiceClient,
   RichMediaAdsCompanyServiceClient,
   RoleServiceClient,
@@ -83,8 +87,11 @@ import {
   TaxonomyCategoryServiceClient,
   TeamServiceClient,
   ThirdPartyCompanyServiceClient,
+  TrafficForecastSegmentServiceClient,
   UserServiceClient,
   ViewabilityProviderServiceClient,
+  YieldGroupServiceClient,
+  YieldPartnerServiceClient,
 } from '@google-ads/admanager';
 
 // check that the client class type name can be used
@@ -106,6 +113,11 @@ function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
   client.close();
 }
 function doStuffWithApplicationServiceClient(client: ApplicationServiceClient) {
+  client.close();
+}
+function doStuffWithAudienceSegmentCategoryServiceClient(
+  client: AudienceSegmentCategoryServiceClient,
+) {
   client.close();
 }
 function doStuffWithAudienceSegmentServiceClient(
@@ -132,6 +144,9 @@ function doStuffWithBrowserServiceClient(client: BrowserServiceClient) {
   client.close();
 }
 function doStuffWithCdnConfigServiceClient(client: CdnConfigServiceClient) {
+  client.close();
+}
+function doStuffWithChangeEventServiceClient(client: ChangeEventServiceClient) {
   client.close();
 }
 function doStuffWithChildPublisherServiceClient(
@@ -230,6 +245,11 @@ function doStuffWithEntitySignalsMappingServiceClient(
 ) {
   client.close();
 }
+function doStuffWithForecastAdjustmentServiceClient(
+  client: ForecastAdjustmentServiceClient,
+) {
+  client.close();
+}
 function doStuffWithForecastServiceClient(client: ForecastServiceClient) {
   client.close();
 }
@@ -318,6 +338,9 @@ function doStuffWithProgrammaticBuyerServiceClient(
 ) {
   client.close();
 }
+function doStuffWithProposalServiceClient(client: ProposalServiceClient) {
+  client.close();
+}
 function doStuffWithReportServiceClient(client: ReportServiceClient) {
   client.close();
 }
@@ -358,11 +381,24 @@ function doStuffWithThirdPartyCompanyServiceClient(
 ) {
   client.close();
 }
+function doStuffWithTrafficForecastSegmentServiceClient(
+  client: TrafficForecastSegmentServiceClient,
+) {
+  client.close();
+}
 function doStuffWithUserServiceClient(client: UserServiceClient) {
   client.close();
 }
 function doStuffWithViewabilityProviderServiceClient(
   client: ViewabilityProviderServiceClient,
+) {
+  client.close();
+}
+function doStuffWithYieldGroupServiceClient(client: YieldGroupServiceClient) {
+  client.close();
+}
+function doStuffWithYieldPartnerServiceClient(
+  client: YieldPartnerServiceClient,
 ) {
   client.close();
 }
@@ -387,6 +423,12 @@ function main() {
   const applicationServiceClient = new ApplicationServiceClient();
   doStuffWithApplicationServiceClient(applicationServiceClient);
   // check that the client instance can be created
+  const audienceSegmentCategoryServiceClient =
+    new AudienceSegmentCategoryServiceClient();
+  doStuffWithAudienceSegmentCategoryServiceClient(
+    audienceSegmentCategoryServiceClient,
+  );
+  // check that the client instance can be created
   const audienceSegmentServiceClient = new AudienceSegmentServiceClient();
   doStuffWithAudienceSegmentServiceClient(audienceSegmentServiceClient);
   // check that the client instance can be created
@@ -404,6 +446,9 @@ function main() {
   // check that the client instance can be created
   const cdnConfigServiceClient = new CdnConfigServiceClient();
   doStuffWithCdnConfigServiceClient(cdnConfigServiceClient);
+  // check that the client instance can be created
+  const changeEventServiceClient = new ChangeEventServiceClient();
+  doStuffWithChangeEventServiceClient(changeEventServiceClient);
   // check that the client instance can be created
   const childPublisherServiceClient = new ChildPublisherServiceClient();
   doStuffWithChildPublisherServiceClient(childPublisherServiceClient);
@@ -480,6 +525,9 @@ function main() {
     entitySignalsMappingServiceClient,
   );
   // check that the client instance can be created
+  const forecastAdjustmentServiceClient = new ForecastAdjustmentServiceClient();
+  doStuffWithForecastAdjustmentServiceClient(forecastAdjustmentServiceClient);
+  // check that the client instance can be created
   const forecastServiceClient = new ForecastServiceClient();
   doStuffWithForecastServiceClient(forecastServiceClient);
   // check that the client instance can be created
@@ -555,6 +603,9 @@ function main() {
   const programmaticBuyerServiceClient = new ProgrammaticBuyerServiceClient();
   doStuffWithProgrammaticBuyerServiceClient(programmaticBuyerServiceClient);
   // check that the client instance can be created
+  const proposalServiceClient = new ProposalServiceClient();
+  doStuffWithProposalServiceClient(proposalServiceClient);
+  // check that the client instance can be created
   const reportServiceClient = new ReportServiceClient();
   doStuffWithReportServiceClient(reportServiceClient);
   // check that the client instance can be created
@@ -586,12 +637,24 @@ function main() {
   const thirdPartyCompanyServiceClient = new ThirdPartyCompanyServiceClient();
   doStuffWithThirdPartyCompanyServiceClient(thirdPartyCompanyServiceClient);
   // check that the client instance can be created
+  const trafficForecastSegmentServiceClient =
+    new TrafficForecastSegmentServiceClient();
+  doStuffWithTrafficForecastSegmentServiceClient(
+    trafficForecastSegmentServiceClient,
+  );
+  // check that the client instance can be created
   const userServiceClient = new UserServiceClient();
   doStuffWithUserServiceClient(userServiceClient);
   // check that the client instance can be created
   const viewabilityProviderServiceClient =
     new ViewabilityProviderServiceClient();
   doStuffWithViewabilityProviderServiceClient(viewabilityProviderServiceClient);
+  // check that the client instance can be created
+  const yieldGroupServiceClient = new YieldGroupServiceClient();
+  doStuffWithYieldGroupServiceClient(yieldGroupServiceClient);
+  // check that the client instance can be created
+  const yieldPartnerServiceClient = new YieldPartnerServiceClient();
+  doStuffWithYieldPartnerServiceClient(yieldPartnerServiceClient);
 }
 
 main();

@@ -221,23 +221,58 @@ export class HypercomputeClusterClient {
       computeInstancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/zones/{zone}/instances/{instance}',
       ),
+      diskPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/zones/{zone}/disks/{disk}',
+      ),
       diskTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/zones/{zone}/diskTypes/{disk_type}',
+      ),
+      fileInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}',
+      ),
+      imagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/images/{image}',
+      ),
+      instanceTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/instanceTemplates/{instance_template}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
-      lustreInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}',
-      ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/global/networks/{network}',
+      ),
+      nodePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectGlobalSnapshotPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/snapshots/{snapshot}',
+      ),
+      projectRegionInstanceGroupManagerPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}',
+        ),
+      projectRegionSnapshotPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/snapshots/{snapshot}',
+      ),
+      projectZoneInstanceGroupManagerPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}',
+        ),
       reservationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/zones/{zone}/reservations/{reservation}',
+      ),
+      reservationBlockPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}',
+      ),
+      reservationSubBlockPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}/reservationSubBlocks/{reservation_sub_block}',
+      ),
+      storagePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/zones/{zone}/storagePools/{storage_pool}',
       ),
       subnetworkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/subnetworks/{subnetwork}',
@@ -252,6 +287,11 @@ export class HypercomputeClusterClient {
         'pageToken',
         'nextPageToken',
         'clusters',
+      ),
+      listNodes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nodes',
       ),
     };
 
@@ -389,6 +429,7 @@ export class HypercomputeClusterClient {
       'createCluster',
       'updateCluster',
       'deleteCluster',
+      'listNodes',
     ];
     for (const methodName of hypercomputeClusterStubMethods) {
       const callPromise = this.hypercomputeClusterStub.then(
@@ -660,9 +701,10 @@ export class HypercomputeClusterClient {
    *   Required. Parent location in which the cluster should be created, in the
    *   format `projects/{project}/locations/{location}`.
    * @param {string} request.clusterId
-   *   Required. ID of the cluster to create. Must conform to
-   *   [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
-   *   alphanumeric, and at most 63 characters).
+   *   Required. The ID of the cluster to create.
+   *   The cluster ID must start with a lowercase letter (`a`-`z`), use only
+   *   lowercase letters or numbers, and contain up to 10 characters. For example,
+   *   specify `cluster001`.
    * @param {google.cloud.hypercomputecluster.v1beta.Cluster} request.cluster
    *   Required. Cluster to create.
    * @param {string} [request.requestId]
@@ -1456,6 +1498,274 @@ export class HypercomputeClusterClient {
       callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1beta.ICluster>;
   }
+  /**
+   * Lists Nodes in a given cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1beta.Node|Node}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNodes(
+    request?: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1beta.INode[],
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest | null,
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse,
+    ]
+  >;
+  listNodes(
+    request: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1beta.INode
+    >,
+  ): void;
+  listNodes(
+    request: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1beta.INode
+    >,
+  ): void;
+  listNodes(
+    request?: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+          | protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1beta.INode
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1beta.INode
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1beta.INode[],
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest | null,
+      protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+          | protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1beta.INode
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNodes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNodes request %j', request);
+    return this.innerApiCalls
+      .listNodes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1beta.INode[],
+          protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest | null,
+          protos.google.cloud.hypercomputecluster.v1beta.IListNodesResponse,
+        ]) => {
+          this._log.info('listNodes values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listNodes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1beta.Node|Node} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNodesStream(
+    request?: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNodes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNodes stream %j', request);
+    return this.descriptors.page.listNodes.createStream(
+      this.innerApiCalls.listNodes as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listNodes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1beta.Node|Node}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/hypercompute_cluster.list_nodes.js</caption>
+   * region_tag:hypercomputecluster_v1beta_generated_HypercomputeCluster_ListNodes_async
+   */
+  listNodesAsync(
+    request?: protos.google.cloud.hypercomputecluster.v1beta.IListNodesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1beta.INode> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNodes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNodes iterate %j', request);
+    return this.descriptors.page.listNodes.asyncIterate(
+      this.innerApiCalls['listNodes'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1beta.INode>;
+  }
 
   /**
    * Gets information about a location.
@@ -1902,6 +2212,55 @@ export class HypercomputeClusterClient {
   }
 
   /**
+   * Return a fully-qualified disk resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} disk
+   * @returns {string} Resource name string.
+   */
+  diskPath(project: string, zone: string, disk: string) {
+    return this.pathTemplates.diskPathTemplate.render({
+      project: project,
+      zone: zone,
+      disk: disk,
+    });
+  }
+
+  /**
+   * Parse the project from Disk resource.
+   *
+   * @param {string} diskName
+   *   A fully-qualified path representing Disk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiskName(diskName: string) {
+    return this.pathTemplates.diskPathTemplate.match(diskName).project;
+  }
+
+  /**
+   * Parse the zone from Disk resource.
+   *
+   * @param {string} diskName
+   *   A fully-qualified path representing Disk resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromDiskName(diskName: string) {
+    return this.pathTemplates.diskPathTemplate.match(diskName).zone;
+  }
+
+  /**
+   * Parse the disk from Disk resource.
+   *
+   * @param {string} diskName
+   *   A fully-qualified path representing Disk resource.
+   * @returns {string} A string representing the disk.
+   */
+  matchDiskFromDiskName(diskName: string) {
+    return this.pathTemplates.diskPathTemplate.match(diskName).disk;
+  }
+
+  /**
    * Return a fully-qualified diskType resource name string.
    *
    * @param {string} project
@@ -1952,6 +2311,134 @@ export class HypercomputeClusterClient {
   }
 
   /**
+   * Return a fully-qualified fileInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  fileInstancePath(project: string, location: string, instance: string) {
+    return this.pathTemplates.fileInstancePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from FileInstance resource.
+   *
+   * @param {string} fileInstanceName
+   *   A fully-qualified path representing FileInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFileInstanceName(fileInstanceName: string) {
+    return this.pathTemplates.fileInstancePathTemplate.match(fileInstanceName)
+      .project;
+  }
+
+  /**
+   * Parse the location from FileInstance resource.
+   *
+   * @param {string} fileInstanceName
+   *   A fully-qualified path representing FileInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFileInstanceName(fileInstanceName: string) {
+    return this.pathTemplates.fileInstancePathTemplate.match(fileInstanceName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from FileInstance resource.
+   *
+   * @param {string} fileInstanceName
+   *   A fully-qualified path representing FileInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFileInstanceName(fileInstanceName: string) {
+    return this.pathTemplates.fileInstancePathTemplate.match(fileInstanceName)
+      .instance;
+  }
+
+  /**
+   * Return a fully-qualified image resource name string.
+   *
+   * @param {string} project
+   * @param {string} image
+   * @returns {string} Resource name string.
+   */
+  imagePath(project: string, image: string) {
+    return this.pathTemplates.imagePathTemplate.render({
+      project: project,
+      image: image,
+    });
+  }
+
+  /**
+   * Parse the project from Image resource.
+   *
+   * @param {string} imageName
+   *   A fully-qualified path representing Image resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromImageName(imageName: string) {
+    return this.pathTemplates.imagePathTemplate.match(imageName).project;
+  }
+
+  /**
+   * Parse the image from Image resource.
+   *
+   * @param {string} imageName
+   *   A fully-qualified path representing Image resource.
+   * @returns {string} A string representing the image.
+   */
+  matchImageFromImageName(imageName: string) {
+    return this.pathTemplates.imagePathTemplate.match(imageName).image;
+  }
+
+  /**
+   * Return a fully-qualified instanceTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} instance_template
+   * @returns {string} Resource name string.
+   */
+  instanceTemplatePath(project: string, instanceTemplate: string) {
+    return this.pathTemplates.instanceTemplatePathTemplate.render({
+      project: project,
+      instance_template: instanceTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from InstanceTemplate resource.
+   *
+   * @param {string} instanceTemplateName
+   *   A fully-qualified path representing InstanceTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceTemplateName(instanceTemplateName: string) {
+    return this.pathTemplates.instanceTemplatePathTemplate.match(
+      instanceTemplateName,
+    ).project;
+  }
+
+  /**
+   * Parse the instance_template from InstanceTemplate resource.
+   *
+   * @param {string} instanceTemplateName
+   *   A fully-qualified path representing InstanceTemplate resource.
+   * @returns {string} A string representing the instance_template.
+   */
+  matchInstanceTemplateFromInstanceTemplateName(instanceTemplateName: string) {
+    return this.pathTemplates.instanceTemplatePathTemplate.match(
+      instanceTemplateName,
+    ).instance_template;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -1985,61 +2472,6 @@ export class HypercomputeClusterClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
-  }
-
-  /**
-   * Return a fully-qualified lustreInstance resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} instance
-   * @returns {string} Resource name string.
-   */
-  lustreInstancePath(project: string, location: string, instance: string) {
-    return this.pathTemplates.lustreInstancePathTemplate.render({
-      project: project,
-      location: location,
-      instance: instance,
-    });
-  }
-
-  /**
-   * Parse the project from LustreInstance resource.
-   *
-   * @param {string} lustreInstanceName
-   *   A fully-qualified path representing LustreInstance resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromLustreInstanceName(lustreInstanceName: string) {
-    return this.pathTemplates.lustreInstancePathTemplate.match(
-      lustreInstanceName,
-    ).project;
-  }
-
-  /**
-   * Parse the location from LustreInstance resource.
-   *
-   * @param {string} lustreInstanceName
-   *   A fully-qualified path representing LustreInstance resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLustreInstanceName(lustreInstanceName: string) {
-    return this.pathTemplates.lustreInstancePathTemplate.match(
-      lustreInstanceName,
-    ).location;
-  }
-
-  /**
-   * Parse the instance from LustreInstance resource.
-   *
-   * @param {string} lustreInstanceName
-   *   A fully-qualified path representing LustreInstance resource.
-   * @returns {string} A string representing the instance.
-   */
-  matchInstanceFromLustreInstanceName(lustreInstanceName: string) {
-    return this.pathTemplates.lustreInstancePathTemplate.match(
-      lustreInstanceName,
-    ).instance;
   }
 
   /**
@@ -2079,6 +2511,68 @@ export class HypercomputeClusterClient {
   }
 
   /**
+   * Return a fully-qualified node resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} node
+   * @returns {string} Resource name string.
+   */
+  nodePath(project: string, location: string, cluster: string, node: string) {
+    return this.pathTemplates.nodePathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      node: node,
+    });
+  }
+
+  /**
+   * Parse the project from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).project;
+  }
+
+  /**
+   * Parse the location from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).location;
+  }
+
+  /**
+   * Parse the cluster from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).cluster;
+  }
+
+  /**
+   * Parse the node from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the node.
+   */
+  matchNodeFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).node;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2099,6 +2593,239 @@ export class HypercomputeClusterClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectGlobalSnapshot resource name string.
+   *
+   * @param {string} project
+   * @param {string} snapshot
+   * @returns {string} Resource name string.
+   */
+  projectGlobalSnapshotPath(project: string, snapshot: string) {
+    return this.pathTemplates.projectGlobalSnapshotPathTemplate.render({
+      project: project,
+      snapshot: snapshot,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectGlobalSnapshot resource.
+   *
+   * @param {string} projectGlobalSnapshotName
+   *   A fully-qualified path representing project_global_snapshot resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectGlobalSnapshotName(projectGlobalSnapshotName: string) {
+    return this.pathTemplates.projectGlobalSnapshotPathTemplate.match(
+      projectGlobalSnapshotName,
+    ).project;
+  }
+
+  /**
+   * Parse the snapshot from ProjectGlobalSnapshot resource.
+   *
+   * @param {string} projectGlobalSnapshotName
+   *   A fully-qualified path representing project_global_snapshot resource.
+   * @returns {string} A string representing the snapshot.
+   */
+  matchSnapshotFromProjectGlobalSnapshotName(
+    projectGlobalSnapshotName: string,
+  ) {
+    return this.pathTemplates.projectGlobalSnapshotPathTemplate.match(
+      projectGlobalSnapshotName,
+    ).snapshot;
+  }
+
+  /**
+   * Return a fully-qualified projectRegionInstanceGroupManager resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} instance_group_manager
+   * @returns {string} Resource name string.
+   */
+  projectRegionInstanceGroupManagerPath(
+    project: string,
+    region: string,
+    instanceGroupManager: string,
+  ) {
+    return this.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.render(
+      {
+        project: project,
+        region: region,
+        instance_group_manager: instanceGroupManager,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectRegionInstanceGroupManager resource.
+   *
+   * @param {string} projectRegionInstanceGroupManagerName
+   *   A fully-qualified path representing project_region_instance_group_manager resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectRegionInstanceGroupManagerName(
+    projectRegionInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.match(
+      projectRegionInstanceGroupManagerName,
+    ).project;
+  }
+
+  /**
+   * Parse the region from ProjectRegionInstanceGroupManager resource.
+   *
+   * @param {string} projectRegionInstanceGroupManagerName
+   *   A fully-qualified path representing project_region_instance_group_manager resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromProjectRegionInstanceGroupManagerName(
+    projectRegionInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.match(
+      projectRegionInstanceGroupManagerName,
+    ).region;
+  }
+
+  /**
+   * Parse the instance_group_manager from ProjectRegionInstanceGroupManager resource.
+   *
+   * @param {string} projectRegionInstanceGroupManagerName
+   *   A fully-qualified path representing project_region_instance_group_manager resource.
+   * @returns {string} A string representing the instance_group_manager.
+   */
+  matchInstanceGroupManagerFromProjectRegionInstanceGroupManagerName(
+    projectRegionInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.match(
+      projectRegionInstanceGroupManagerName,
+    ).instance_group_manager;
+  }
+
+  /**
+   * Return a fully-qualified projectRegionSnapshot resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} snapshot
+   * @returns {string} Resource name string.
+   */
+  projectRegionSnapshotPath(project: string, region: string, snapshot: string) {
+    return this.pathTemplates.projectRegionSnapshotPathTemplate.render({
+      project: project,
+      region: region,
+      snapshot: snapshot,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectRegionSnapshot resource.
+   *
+   * @param {string} projectRegionSnapshotName
+   *   A fully-qualified path representing project_region_snapshot resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectRegionSnapshotName(projectRegionSnapshotName: string) {
+    return this.pathTemplates.projectRegionSnapshotPathTemplate.match(
+      projectRegionSnapshotName,
+    ).project;
+  }
+
+  /**
+   * Parse the region from ProjectRegionSnapshot resource.
+   *
+   * @param {string} projectRegionSnapshotName
+   *   A fully-qualified path representing project_region_snapshot resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromProjectRegionSnapshotName(projectRegionSnapshotName: string) {
+    return this.pathTemplates.projectRegionSnapshotPathTemplate.match(
+      projectRegionSnapshotName,
+    ).region;
+  }
+
+  /**
+   * Parse the snapshot from ProjectRegionSnapshot resource.
+   *
+   * @param {string} projectRegionSnapshotName
+   *   A fully-qualified path representing project_region_snapshot resource.
+   * @returns {string} A string representing the snapshot.
+   */
+  matchSnapshotFromProjectRegionSnapshotName(
+    projectRegionSnapshotName: string,
+  ) {
+    return this.pathTemplates.projectRegionSnapshotPathTemplate.match(
+      projectRegionSnapshotName,
+    ).snapshot;
+  }
+
+  /**
+   * Return a fully-qualified projectZoneInstanceGroupManager resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} instance_group_manager
+   * @returns {string} Resource name string.
+   */
+  projectZoneInstanceGroupManagerPath(
+    project: string,
+    zone: string,
+    instanceGroupManager: string,
+  ) {
+    return this.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.render(
+      {
+        project: project,
+        zone: zone,
+        instance_group_manager: instanceGroupManager,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectZoneInstanceGroupManager resource.
+   *
+   * @param {string} projectZoneInstanceGroupManagerName
+   *   A fully-qualified path representing project_zone_instance_group_manager resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectZoneInstanceGroupManagerName(
+    projectZoneInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.match(
+      projectZoneInstanceGroupManagerName,
+    ).project;
+  }
+
+  /**
+   * Parse the zone from ProjectZoneInstanceGroupManager resource.
+   *
+   * @param {string} projectZoneInstanceGroupManagerName
+   *   A fully-qualified path representing project_zone_instance_group_manager resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromProjectZoneInstanceGroupManagerName(
+    projectZoneInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.match(
+      projectZoneInstanceGroupManagerName,
+    ).zone;
+  }
+
+  /**
+   * Parse the instance_group_manager from ProjectZoneInstanceGroupManager resource.
+   *
+   * @param {string} projectZoneInstanceGroupManagerName
+   *   A fully-qualified path representing project_zone_instance_group_manager resource.
+   * @returns {string} A string representing the instance_group_manager.
+   */
+  matchInstanceGroupManagerFromProjectZoneInstanceGroupManagerName(
+    projectZoneInstanceGroupManagerName: string,
+  ) {
+    return this.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.match(
+      projectZoneInstanceGroupManagerName,
+    ).instance_group_manager;
   }
 
   /**
@@ -2151,6 +2878,228 @@ export class HypercomputeClusterClient {
   matchReservationFromReservationName(reservationName: string) {
     return this.pathTemplates.reservationPathTemplate.match(reservationName)
       .reservation;
+  }
+
+  /**
+   * Return a fully-qualified reservationBlock resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} reservation
+   * @param {string} reservation_block
+   * @returns {string} Resource name string.
+   */
+  reservationBlockPath(
+    project: string,
+    zone: string,
+    reservation: string,
+    reservationBlock: string,
+  ) {
+    return this.pathTemplates.reservationBlockPathTemplate.render({
+      project: project,
+      zone: zone,
+      reservation: reservation,
+      reservation_block: reservationBlock,
+    });
+  }
+
+  /**
+   * Parse the project from ReservationBlock resource.
+   *
+   * @param {string} reservationBlockName
+   *   A fully-qualified path representing ReservationBlock resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReservationBlockName(reservationBlockName: string) {
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).project;
+  }
+
+  /**
+   * Parse the zone from ReservationBlock resource.
+   *
+   * @param {string} reservationBlockName
+   *   A fully-qualified path representing ReservationBlock resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromReservationBlockName(reservationBlockName: string) {
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).zone;
+  }
+
+  /**
+   * Parse the reservation from ReservationBlock resource.
+   *
+   * @param {string} reservationBlockName
+   *   A fully-qualified path representing ReservationBlock resource.
+   * @returns {string} A string representing the reservation.
+   */
+  matchReservationFromReservationBlockName(reservationBlockName: string) {
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).reservation;
+  }
+
+  /**
+   * Parse the reservation_block from ReservationBlock resource.
+   *
+   * @param {string} reservationBlockName
+   *   A fully-qualified path representing ReservationBlock resource.
+   * @returns {string} A string representing the reservation_block.
+   */
+  matchReservationBlockFromReservationBlockName(reservationBlockName: string) {
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).reservation_block;
+  }
+
+  /**
+   * Return a fully-qualified reservationSubBlock resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} reservation
+   * @param {string} reservation_block
+   * @param {string} reservation_sub_block
+   * @returns {string} Resource name string.
+   */
+  reservationSubBlockPath(
+    project: string,
+    zone: string,
+    reservation: string,
+    reservationBlock: string,
+    reservationSubBlock: string,
+  ) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.render({
+      project: project,
+      zone: zone,
+      reservation: reservation,
+      reservation_block: reservationBlock,
+      reservation_sub_block: reservationSubBlock,
+    });
+  }
+
+  /**
+   * Parse the project from ReservationSubBlock resource.
+   *
+   * @param {string} reservationSubBlockName
+   *   A fully-qualified path representing ReservationSubBlock resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReservationSubBlockName(reservationSubBlockName: string) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).project;
+  }
+
+  /**
+   * Parse the zone from ReservationSubBlock resource.
+   *
+   * @param {string} reservationSubBlockName
+   *   A fully-qualified path representing ReservationSubBlock resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromReservationSubBlockName(reservationSubBlockName: string) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).zone;
+  }
+
+  /**
+   * Parse the reservation from ReservationSubBlock resource.
+   *
+   * @param {string} reservationSubBlockName
+   *   A fully-qualified path representing ReservationSubBlock resource.
+   * @returns {string} A string representing the reservation.
+   */
+  matchReservationFromReservationSubBlockName(reservationSubBlockName: string) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation;
+  }
+
+  /**
+   * Parse the reservation_block from ReservationSubBlock resource.
+   *
+   * @param {string} reservationSubBlockName
+   *   A fully-qualified path representing ReservationSubBlock resource.
+   * @returns {string} A string representing the reservation_block.
+   */
+  matchReservationBlockFromReservationSubBlockName(
+    reservationSubBlockName: string,
+  ) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation_block;
+  }
+
+  /**
+   * Parse the reservation_sub_block from ReservationSubBlock resource.
+   *
+   * @param {string} reservationSubBlockName
+   *   A fully-qualified path representing ReservationSubBlock resource.
+   * @returns {string} A string representing the reservation_sub_block.
+   */
+  matchReservationSubBlockFromReservationSubBlockName(
+    reservationSubBlockName: string,
+  ) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation_sub_block;
+  }
+
+  /**
+   * Return a fully-qualified storagePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} storage_pool
+   * @returns {string} Resource name string.
+   */
+  storagePoolPath(project: string, zone: string, storagePool: string) {
+    return this.pathTemplates.storagePoolPathTemplate.render({
+      project: project,
+      zone: zone,
+      storage_pool: storagePool,
+    });
+  }
+
+  /**
+   * Parse the project from StoragePool resource.
+   *
+   * @param {string} storagePoolName
+   *   A fully-qualified path representing StoragePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStoragePoolName(storagePoolName: string) {
+    return this.pathTemplates.storagePoolPathTemplate.match(storagePoolName)
+      .project;
+  }
+
+  /**
+   * Parse the zone from StoragePool resource.
+   *
+   * @param {string} storagePoolName
+   *   A fully-qualified path representing StoragePool resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromStoragePoolName(storagePoolName: string) {
+    return this.pathTemplates.storagePoolPathTemplate.match(storagePoolName)
+      .zone;
+  }
+
+  /**
+   * Parse the storage_pool from StoragePool resource.
+   *
+   * @param {string} storagePoolName
+   *   A fully-qualified path representing StoragePool resource.
+   * @returns {string} A string representing the storage_pool.
+   */
+  matchStoragePoolFromStoragePoolName(storagePoolName: string) {
+    return this.pathTemplates.storagePoolPathTemplate.match(storagePoolName)
+      .storage_pool;
   }
 
   /**
