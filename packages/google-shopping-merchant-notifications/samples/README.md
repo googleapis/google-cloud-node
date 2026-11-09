@@ -18,11 +18,6 @@
   * [Notifications_api_service.get_notification_subscription_health_metrics](#notifications_api_service.get_notification_subscription_health_metrics)
   * [Notifications_api_service.list_notification_subscriptions](#notifications_api_service.list_notification_subscriptions)
   * [Notifications_api_service.update_notification_subscription](#notifications_api_service.update_notification_subscription)
-  * [Notifications_api_service.create_notification_subscription](#notifications_api_service.create_notification_subscription)
-  * [Notifications_api_service.delete_notification_subscription](#notifications_api_service.delete_notification_subscription)
-  * [Notifications_api_service.get_notification_subscription](#notifications_api_service.get_notification_subscription)
-  * [Notifications_api_service.list_notification_subscriptions](#notifications_api_service.list_notification_subscriptions)
-  * [Notifications_api_service.update_notification_subscription](#notifications_api_service.update_notification_subscription)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -135,91 +130,6 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-notifications/samples/generated/v1/notifications_api_service.update_notification_subscription.js`
-
-
------
-
-
-
-
-### Notifications_api_service.create_notification_subscription
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js`
-
-
------
-
-
-
-
-### Notifications_api_service.delete_notification_subscription
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js`
-
-
------
-
-
-
-
-### Notifications_api_service.get_notification_subscription
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js`
-
-
------
-
-
-
-
-### Notifications_api_service.list_notification_subscriptions
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js`
-
-
------
-
-
-
-
-### Notifications_api_service.update_notification_subscription
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js`
 
 
 -----

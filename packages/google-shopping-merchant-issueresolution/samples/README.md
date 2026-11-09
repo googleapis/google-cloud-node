@@ -16,10 +16,6 @@
   * [Issue_resolution_service.render_account_issues](#issue_resolution_service.render_account_issues)
   * [Issue_resolution_service.render_product_issues](#issue_resolution_service.render_product_issues)
   * [Issue_resolution_service.trigger_action](#issue_resolution_service.trigger_action)
-  * [Aggregate_product_statuses_service.list_aggregate_product_statuses](#aggregate_product_statuses_service.list_aggregate_product_statuses)
-  * [Issue_resolution_service.render_account_issues](#issue_resolution_service.render_account_issues)
-  * [Issue_resolution_service.render_product_issues](#issue_resolution_service.render_product_issues)
-  * [Issue_resolution_service.trigger_action](#issue_resolution_service.trigger_action)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -98,74 +94,6 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-issueresolution/samples/generated/v1/issue_resolution_service.trigger_action.js`
-
-
------
-
-
-
-
-### Aggregate_product_statuses_service.list_aggregate_product_statuses
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js`
-
-
------
-
-
-
-
-### Issue_resolution_service.render_account_issues
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_account_issues.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_account_issues.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_account_issues.js`
-
-
------
-
-
-
-
-### Issue_resolution_service.render_product_issues
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_product_issues.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_product_issues.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_product_issues.js`
-
-
------
-
-
-
-
-### Issue_resolution_service.trigger_action
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.trigger_action.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.trigger_action.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.trigger_action.js`
 
 
 -----

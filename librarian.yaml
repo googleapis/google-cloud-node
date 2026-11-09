@@ -2122,7 +2122,6 @@ libraries:
     version: 4.1.0
     apis:
       - path: google/shopping/merchant/accounts/v1
-      - path: google/shopping/merchant/accounts/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2133,7 +2132,6 @@ libraries:
     version: 0.9.0
     apis:
       - path: google/shopping/merchant/conversions/v1
-      - path: google/shopping/merchant/conversions/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2144,7 +2142,6 @@ libraries:
     version: 0.13.0
     apis:
       - path: google/shopping/merchant/datasources/v1
-      - path: google/shopping/merchant/datasources/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2155,7 +2152,6 @@ libraries:
     version: 0.15.1
     apis:
       - path: google/shopping/merchant/inventories/v1
-      - path: google/shopping/merchant/inventories/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2166,7 +2162,6 @@ libraries:
     version: 0.6.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
-      - path: google/shopping/merchant/issueresolution/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2177,7 +2172,6 @@ libraries:
     version: 0.12.0
     apis:
       - path: google/shopping/merchant/lfp/v1
-      - path: google/shopping/merchant/lfp/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2198,7 +2192,6 @@ libraries:
     version: 0.11.0
     apis:
       - path: google/shopping/merchant/notifications/v1
-      - path: google/shopping/merchant/notifications/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2209,7 +2202,6 @@ libraries:
     version: 0.6.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1
-      - path: google/shopping/merchant/ordertracking/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2220,7 +2212,6 @@ libraries:
     version: 0.13.0
     apis:
       - path: google/shopping/merchant/products/v1
-      - path: google/shopping/merchant/products/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2231,7 +2222,6 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/shopping/merchant/promotions/v1
-      - path: google/shopping/merchant/promotions/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2242,7 +2232,6 @@ libraries:
     version: 0.12.0
     apis:
       - path: google/shopping/merchant/quota/v1
-      - path: google/shopping/merchant/quota/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -2253,7 +2242,6 @@ libraries:
     version: 0.18.1
     apis:
       - path: google/shopping/merchant/reports/v1
-      - path: google/shopping/merchant/reports/v1beta
       - path: google/shopping/merchant/reports/v1alpha
     copyright_year: "2026"
     nodejs:
@@ -2265,10 +2253,9 @@ libraries:
     version: 0.9.0
     apis:
       - path: google/shopping/merchant/reviews/v1
-      - path: google/shopping/merchant/reviews/v1beta
     copyright_year: "2026"
     nodejs:
-      default_version: v1beta
+      default_version: v1
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Reviews
