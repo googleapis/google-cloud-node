@@ -46,7 +46,7 @@ function main(parent) {
 
   // Imports the Reviews library
   const {ProductReviewsServiceClient} =
-    require('@google-shopping/reviews').v1beta;
+    require('@google-shopping/reviews').v1;
 
   // Instantiates a client
   const reviewsClient = new ProductReviewsServiceClient();

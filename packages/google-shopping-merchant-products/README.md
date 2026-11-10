@@ -63,11 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update product input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.update_product_input.js) |
 | get product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/products_service.get_product.js) |
 | list products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/products_service.list_products.js) |
-| delete product input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js) |
-| insert product input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js) |
-| update product input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.update_product_input.js) |
-| get product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js) |
-| list products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js) |
 
 
 ## Supported Node.js Versions
