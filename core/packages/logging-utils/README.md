@@ -7,7 +7,7 @@ This package defines an ad-hoc debug logger utility that can be used as a lightw
 These are logging utilities meant primarily for use as an "adhoc debug logger" inside Google libraries. It's possible to use this outside of that context, but it is currently not supported. (You're on your own.)
 
 * **Stable Package API (SemVer 1.x):** The exported programmatic interface—`log()`, `placeholder`, `LogFields`, `LogSeverity`, `AdhocDebugLogFunction` (including `.on('log', ...)` and `.sublog()`), `setBackend()`, `getNodeBackend()`, `getStructuredBackend()`, and `env.nodeEnables` (`GOOGLE_SDK_NODE_LOGGING`)—is a strict SemVer-stable contract used across `google-gax`, `google-auth-library`, `gcp-metadata`, and `@google-cloud/*`.
-* **Non-Contractual Log Output:** Exact human-readable log message strings and the addition of new diagnostic attributes in `LogFields.other` may evolve across minor versions so customers do not rely on regex-parsing prose messages. For now, it is meant to be a tool for local usage by users, to get the equivalent of "printf debugging" output. In the future, it may tie into more things (OpenTelemetry Logging, etc). Structured log output is possible for vacuuming into Cloud Logging.
+* **Non-Contractual Log Output:** Exact human-readable log message strings and the addition of new diagnostic attributes in `LogFields` may evolve across minor versions so customers do not rely on regex-parsing prose messages. For now, it is meant to be a tool for local usage by users, to get the equivalent of "printf debugging" output. In the future, it may tie into more things (OpenTelemetry Logging, etc). Structured log output is possible for vacuuming into Cloud Logging.
 
 ## Usage
 The user interface for this logging is very similar to Node's built-in logging. The primary unit of logging is called a "system", and some libraries may have sub-units called "subsystems". You separate the system and subsystem with a colon, like "pubsub:leasing" or similar. Wildcards may be used (e.g. "pubsub:*"), and multiple of these system/system:subsystem pairs may be listed out, separated by commas. For generated GAPIC libraries, the "system" will generally be the part of the package name specific to the library (e.g. `@google-cloud/translate` will be `translate`).
@@ -25,11 +25,11 @@ GOOGLE_SDK_NODE_LOGGING=* node yourApp.js
 ```
 
 ## Logging
-Logging functions are created by calling the `log()` function. You pass a system or system:subsystem identifier, and a function is returned. This function may be called directly:
+Logging functions are created by calling the `log()` function. You pass a system or system:subsystem identifier, and a function is returned. This function may be called directly with top-level structured attributes (and optional `trace_id`, `span_id`, and `trace_sampled` correlation fields):
 
 ```
 const logger = log('test');
-logger({other:{metadata: 'foo'}}, 'format string %j', {formatted: 'parameter'});
+logger({metadata: 'foo'}, 'format string %j', {formatted: 'parameter'});
 ```
 
 You may also call shorthands that set the `severity` metadata field, and use defaults for the metadata object generally:
@@ -58,7 +58,7 @@ The package provides several built-in options:
 
 * `getNodeBackend()` This is the default that comes with setting the environment variable. It detects the possibility of coloration in the terminal and formats outputs using `util.format()`.
 * `getDebugBackend(debugpkg)` This interfaces with the `debug` npm package. You'd essentially do something like `setBackend(getDebugBackend(require('debug')))`.
-* `getStructuredBackend(upstream?)`. This converts log output into structured log JSON objects, suitable for feeding into Cloud Logging. An optional `upstream` parameter lets you funnel the output through another backend instead of `console.log`.
+* `getStructuredBackend(upstream?)`. This converts log output into structured log JSON objects, suitable for feeding into Cloud Logging (mapping `trace_id`, `span_id`, and `trace_sampled` to `logging.googleapis.com/trace`, `logging.googleapis.com/spanId`, and `logging.googleapis.com/trace_sampled`). An optional `upstream` parameter lets you funnel the output through another backend instead of `console.log`.
 
 ## Severity and request/response payloads
 Google Cloud client libraries log request and response payloads at `DEBUG` severity. Payloads can contain sensitive data.
@@ -133,7 +133,7 @@ main().catch(console.error);
 ```
 
 ### Example 3: Exporting Logs to a Custom Logger or Sink (Pino, Winston, Bunyan)
-To forward client library logs to a third-party logging library or custom exporter, pass a custom backend implementation to `setBackend()`. When OpenTelemetry tracing is also enabled (`GOOGLE_SDK_NODE_ENABLE_TRACING=true`), failed RPC logs include `fields.telemetryTraceId` and `fields.telemetrySpanId` for trace-log correlation:
+To forward client library logs to a third-party logging library or custom exporter, pass a custom backend implementation to `setBackend()`. Structured OpenTelemetry attributes (such as `error.type`, `rpc.method`, and `exception.*`) are provided at the top level of `fields`, and when OpenTelemetry tracing is active (`GOOGLE_SDK_NODE_ENABLE_TRACING=true` or an active application span), failed RPC logs also include `fields.trace_id`, `fields.span_id`, and `fields.trace_sampled` for trace-log correlation:
 
 ```javascript
 const util = require('util');
@@ -153,17 +153,12 @@ logging.setBackend({
     if (namespace === 'auth') {
       return;
     }
+    const {severity, ...attributes} = fields;
     const entry = {
       namespace,
-      severity: fields.severity,
+      severity,
       message: util.format(...args),
-      ...(fields.telemetryTraceId
-        ? {telemetryTraceId: fields.telemetryTraceId}
-        : {}),
-      ...(fields.telemetrySpanId
-        ? {telemetrySpanId: fields.telemetrySpanId}
-        : {}),
-      ...(fields.other || {}),
+      ...attributes,
     };
     // Export `entry` to your preferred logger (e.g. pinoLogger.info(entry), winstonLogger.log(entry)):
     console.log(JSON.stringify(entry));
