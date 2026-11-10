@@ -80,6 +80,7 @@ async function enableLogging() {
   loggingUtils.setBackend(undefined);
 
   // Option B — Built-in structured JSON backend (writes Cloud Logging JSON):
+  // Set `GOOGLE_SDK_NODE_LOGGING=<service>` (or `''`) when pairing with `{enableTelemetryLogging: true}` so `'auth'` debug logs stay off.
   // loggingUtils.setBackend(loggingUtils.getStructuredBackend());
 
   // Option C — Pluggable custom backend (e.g. Pino, Winston, Bunyan, or custom filtering):
@@ -96,10 +97,10 @@ async function enableLogging() {
       // `rpc.method`, etc.) plus `trace_id`, `span_id`, and `trace_sampled` when traced.
       const {severity, ...attributes} = fields;
       const entry = {
+        ...attributes,
         namespace,
         severity,
         message: util.format(...args),
-        ...attributes,
       };
       // Forward `entry` to your preferred logger (Pino, Winston, stdout, etc.):
       console.log(JSON.stringify(entry));
