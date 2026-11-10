@@ -708,6 +708,52 @@ describe('adhoc-logging', () => {
         message: 'allowed by storage filter',
       });
     });
+
+    it('normalizes null and non-object upstream values to undefined and falls back safely', () => {
+      const stderrStub = sinon.stub(console, 'error');
+      const stdoutLines: string[] = [];
+      sinon.stub(console, 'log').callsFake((_fmt: string, payload: string) => {
+        stdoutLines.push(payload);
+      });
+
+      process.env[al.env.nodeEnables] = '*';
+
+      const nullUpstreamBackend = al.getStructuredBackend(
+        null as unknown as al.DebugLogBackend,
+      );
+      assert.strictEqual(
+        (nullUpstreamBackend as {upstream?: unknown}).upstream,
+        undefined,
+      );
+      al.setBackend(nullUpstreamBackend);
+      al.log('structured-null').info('from null upstream');
+
+      const primitiveUpstreamBackend = al.getStructuredBackend(
+        'bad' as unknown as al.DebugLogBackend,
+      );
+      assert.strictEqual(
+        (primitiveUpstreamBackend as {upstream?: unknown}).upstream,
+        undefined,
+      );
+      al.setBackend(primitiveUpstreamBackend);
+      al.log('structured-primitive').warn('from primitive upstream');
+
+      const emptyObjBackend = al.getStructuredBackend(
+        {} as unknown as al.DebugLogBackend,
+      );
+      al.setBackend(emptyObjBackend);
+      al.log('structured-empty-obj').error('from empty object upstream');
+
+      assert.strictEqual(stderrStub.callCount, 0);
+      assert.deepStrictEqual(
+        stdoutLines.map(line => JSON.parse(line)),
+        [
+          {severity: 'INFO', message: 'from null upstream'},
+          {severity: 'WARNING', message: 'from primitive upstream'},
+          {severity: 'ERROR', message: 'from empty object upstream'},
+        ],
+      );
+    });
   });
 
   describe('sub-logs', () => {

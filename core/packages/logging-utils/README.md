@@ -6,7 +6,7 @@ This package defines an ad-hoc debug logger utility that can be used as a lightw
 ## Contracts
 These are logging utilities meant primarily for use as an "adhoc debug logger" inside Google libraries. It's possible to use this outside of that context, but it is currently not supported. (You're on your own.)
 
-* **Stable Package API (SemVer 1.x):** The exported programmatic interface—`log()`, `placeholder`, `LogFields`, `LogSeverity`, `AdhocDebugLogFunction` (including `.on('log', ...)` and `.sublog()`), `setBackend()`, `getNodeBackend()`, `getStructuredBackend()`, and `env.nodeEnables` (`GOOGLE_SDK_NODE_LOGGING`)—is a strict SemVer-stable contract used across `google-gax`, `google-auth-library`, `gcp-metadata`, and `@google-cloud/*`.
+* **Stable Package API (SemVer 1.x):** The exported programmatic interface—`log()`, `placeholder`, `LogFields`, `LogSeverity`, `AdhocDebugLogFunction` (including `.on('log', ...)` and `.sublog()`), `setBackend()`, `getBackend()`, `getNodeBackend()`, `getStructuredBackend()`, and `env.nodeEnables` (`GOOGLE_SDK_NODE_LOGGING`)—is a strict SemVer-stable contract used across `google-gax`, `google-auth-library`, `gcp-metadata`, and `@google-cloud/*`.
 * **Non-Contractual Log Output:** Exact human-readable log message strings and the addition of new diagnostic attributes in `LogFields` may evolve across minor versions so customers do not rely on regex-parsing prose messages. For now, it is meant to be a tool for local usage by users, to get the equivalent of "printf debugging" output. In the future, it may tie into more things (OpenTelemetry Logging, etc). Structured log output is possible for vacuuming into Cloud Logging.
 
 ## Usage
@@ -52,7 +52,7 @@ sublogger.info('specific!');
 This will output two logs, filed under `test` and `test:specific`, respectively.
 
 ## Backends
-Additionally, there is a concept of a logging backend. You can manually set where you want logs to go, by default, and how you want them processed. The `setBackend()` function lets you set a backend manually. `undefined` (reset to defaults) and `null` (disable logging) are also possible options.
+Additionally, there is a concept of a logging backend. You can manually set where you want logs to go, by default, and how you want them processed. The `setBackend()` function lets you set a backend manually. `undefined` (reset to defaults) and `null` (disable logging) are also possible options. The `getBackend()` function returns the currently active backend (`null` if explicitly disabled, or `undefined` if no backend has been initialized yet).
 
 The package provides several built-in options:
 
@@ -132,6 +132,8 @@ async function main() {
 main().catch(console.error);
 ```
 
+> **Note:** Leaving `GOOGLE_SDK_NODE_LOGGING` unset when calling `setBackend(getStructuredBackend())` defaults backend filters to `['*']`, enabling all namespaces. When pairing `setBackend(getStructuredBackend())` with `{enableTelemetryLogging: true}`, set `GOOGLE_SDK_NODE_LOGGING` to your target service (for example, `'secretmanager'`) or `''` to keep `'auth'` debug logs disabled.
+
 ### Example 3: Exporting Logs to a Custom Logger or Sink (Pino, Winston, Bunyan)
 To forward client library logs to a third-party logging library or custom exporter, pass a custom backend implementation to `setBackend()`. Structured OpenTelemetry attributes (such as `error.type`, `rpc.method`, and `exception.*`) are provided at the top level of `fields`, and when OpenTelemetry tracing is active (`GOOGLE_SDK_NODE_ENABLE_TRACING=true` or an active application span), failed RPC logs also include `fields.trace_id`, `fields.span_id`, and `fields.trace_sampled` for trace-log correlation:
 
@@ -155,10 +157,10 @@ logging.setBackend({
     }
     const {severity, ...attributes} = fields;
     const entry = {
+      ...attributes,
       namespace,
       severity,
       message: util.format(...args),
-      ...attributes,
     };
     // Export `entry` to your preferred logger (e.g. pinoLogger.info(entry), winstonLogger.log(entry)):
     console.log(JSON.stringify(entry));

@@ -364,7 +364,8 @@ class StructuredBackend extends DebugLogBackendBase {
 
   constructor(upstream?: DebugLogBackend) {
     super();
-    this.upstream = upstream;
+    this.upstream =
+      upstream && typeof upstream === 'object' ? upstream : undefined;
   }
 
   makeLogger(namespace: string): AdhocDebugLogCallable {
@@ -372,14 +373,19 @@ class StructuredBackend extends DebugLogBackendBase {
       return () => {};
     }
     const upstream = this.upstream;
-    const debugLogger: AdhocDebugLogCallable | undefined = upstream
-      ? typeof (upstream as Partial<DebugLogBackendBase>).makeLogger ===
+    let debugLogger: AdhocDebugLogCallable | undefined;
+    if (upstream) {
+      if (
+        typeof (upstream as Partial<DebugLogBackendBase>).makeLogger ===
         'function'
-        ? (upstream as DebugLogBackendBase).makeLogger(namespace)
-        : (fields: LogFields, ...args: unknown[]) => {
-            upstream.log(namespace, fields, ...args);
-          }
-      : undefined;
+      ) {
+        debugLogger = (upstream as DebugLogBackendBase).makeLogger(namespace);
+      } else if (typeof upstream.log === 'function') {
+        debugLogger = (fields: LogFields, ...args: unknown[]) => {
+          upstream.log(namespace, fields, ...args);
+        };
+      }
+    }
     return (fields: LogFields, ...args: unknown[]) => {
       const {
         severity: rawSeverity,
@@ -471,9 +477,9 @@ class StructuredBackend extends DebugLogBackendBase {
         upstreamBase.refreshFiltersFromEnv?.();
       }
       upstreamBase.cached?.clear();
-      (this.upstream as DebugLogBackendBase).setFilters();
+      upstreamBase.setFilters?.();
       upstreamBase.filtersSet = true;
-    } else {
+    } else if (typeof this.upstream.setFilters === 'function') {
       this.upstream.setFilters([...this.filters]);
     }
   }
