@@ -52,7 +52,6 @@ export interface LogPayload {
   'gcp.client.repo'?: string;
   'gcp.client.artifact'?: string;
   'gcp.client.version'?: string;
-  'gcp.client.language'?: 'node';
   'gcp.client.service'?: string;
   'url.domain'?: string;
   'server.address'?: string;
@@ -127,7 +126,7 @@ function getStructuredBackendPrototype(): BuiltinBackendInternals | null {
 function getFallbackStructuredBackend(
   rawUpstream?: loggingUtils.DebugLogBackend,
 ): loggingUtils.DebugLogBackend {
-  if (!rawUpstream) {
+  if (!rawUpstream || typeof rawUpstream !== 'object') {
     if (!fallbackStructuredBackend) {
       const backend =
         loggingUtils.getStructuredBackend() as BuiltinBackendInternals;
@@ -176,7 +175,8 @@ function rescueIfDroppedByBuiltinBackend(
     backendProto === structuredProto
   ) {
     const upstreamDropped =
-      internalBackend.upstream !== undefined &&
+      Boolean(internalBackend.upstream) &&
+      typeof internalBackend.upstream === 'object' &&
       nodeProto !== null &&
       Object.getPrototypeOf(internalBackend.upstream) === nodeProto &&
       typeof (internalBackend.upstream as BuiltinBackendInternals).isEnabled ===

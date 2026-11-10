@@ -1850,6 +1850,31 @@ describe('LoggerHelper', () => {
       assert.strictEqual(upstreamPayloads.length, 2);
       assert.strictEqual(JSON.parse(upstreamPayloads[0]).severity, 'DEBUG');
       assert.strictEqual(JSON.parse(upstreamPayloads[1]).severity, 'WARNING');
+
+      // Rescues cleanly without throwing Object.getPrototypeOf(null) or WeakMap key TypeErrors
+      // even if StructuredBackend.upstream is null or a primitive value.
+      for (const invalidUpstream of [null, 'bad', 123, false]) {
+        stdoutLines.length = 0;
+        process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+        const sb = loggingUtils.getStructuredBackend(
+          invalidUpstream as unknown as loggingUtils.DebugLogBackend,
+        );
+        // Also force `.upstream` directly in case logging-utils already normalized it in constructor.
+        (sb as {upstream?: unknown}).upstream = invalidUpstream;
+        loggingUtils.setBackend(sb);
+
+        await assert.rejects(async () => {
+          await optedInSecretManagerCall({}, undefined);
+        });
+
+        assert.strictEqual(
+          stdoutLines.length,
+          2,
+          `expected L4 + L3 rescued structured stdout logs for upstream=${String(invalidUpstream)}`,
+        );
+        assert.strictEqual(JSON.parse(stdoutLines[0]).severity, 'DEBUG');
+        assert.strictEqual(JSON.parse(stdoutLines[1]).severity, 'WARNING');
+      }
     });
 
     it('handles pre-registered setBackend (StructuredBackend, custom sink, and null), ESM imports, and mutated GOOGLE_SDK_NODE_LOGGING via getBackend()', () => {
@@ -1905,6 +1930,10 @@ describe('LoggerHelper', () => {
           : '../../build/test/unit/otelHarness.js',
       );
       const compiledEntryUrl = pathToFileURL(compiledEntry).href;
+      const gaxPackageRoot = path.resolve(
+        __dirname,
+        __filename.endsWith('.js') ? '../../..' : '../..',
+      );
 
       // 2. Child process: pre-registered setBackend(getStructuredBackend()) BEFORE lazy-requiring google-gax.
       const preStructuredScript = `
@@ -1946,7 +1975,7 @@ describe('LoggerHelper', () => {
       const structuredRes = spawnSync(
         process.execPath,
         ['-e', preStructuredScript],
-        {encoding: 'utf8'},
+        {encoding: 'utf8', cwd: gaxPackageRoot},
       );
       assert.strictEqual(structuredRes.status, 0, structuredRes.stderr);
       assert.strictEqual(
@@ -2011,7 +2040,7 @@ describe('LoggerHelper', () => {
       const esmSinkRes = spawnSync(
         process.execPath,
         ['--input-type=module', '-e', esmCustomSinkScript],
-        {encoding: 'utf8'},
+        {encoding: 'utf8', cwd: gaxPackageRoot},
       );
       assert.strictEqual(esmSinkRes.status, 0, esmSinkRes.stderr);
       assert.strictEqual(
@@ -2059,7 +2088,7 @@ describe('LoggerHelper', () => {
       const esmNullRes = spawnSync(
         process.execPath,
         ['--input-type=module', '-e', esmNullScript],
-        {encoding: 'utf8'},
+        {encoding: 'utf8', cwd: gaxPackageRoot},
       );
       assert.strictEqual(esmNullRes.status, 0, esmNullRes.stderr);
       assert.strictEqual(
