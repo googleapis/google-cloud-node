@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "eb47174fc7b2cc4ef808146f65dea1891d895e8f",
+          "message": "Graduate pipeline search from preview to GA",
+          "issues": [
+            "9700"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "2ef91931-344b-4f15-8ba5-83e22daf0487",
+      "createTime": "2026-11-10T15:38:13.426Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
           "message": "Update API sources and regenerate",
@@ -107824,5 +107842,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-09T15:57:07.585Z"
+  "updateTime": "2026-11-10T15:38:13.426Z"
 }
