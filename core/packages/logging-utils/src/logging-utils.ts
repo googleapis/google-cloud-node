@@ -118,15 +118,78 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
   cached = new Map<string, AdhocDebugLogCallable>();
   filters: string[] = [];
   filtersSet = false;
+  // Default to allowing all systems, since we gate earlier based on whether the
+  // variable is empty.
+  protected enabledRegexp = /.*/;
+  private initialEnvValue: string | undefined;
+  private initialFiltersRef: string[];
+  private initialFiltersSnapshot: string[];
 
   constructor() {
     // Look for the Node config variable for what systems to enable. We'll store
     // these for the log method below, which will call setFilters() once.
-    let nodeFlag = process.env[env.nodeEnables] ?? '*';
+    this.initialEnvValue = process.env[env.nodeEnables];
+    this.filters = DebugLogBackendBase.parseEnvFilters(this.initialEnvValue);
+    this.initialFiltersRef = this.filters;
+    this.initialFiltersSnapshot = [...this.filters];
+  }
+
+  private static parseEnvFilters(rawEnvValue: string | undefined): string[] {
+    let nodeFlag = rawEnvValue ?? '*';
     if (nodeFlag === 'all' || nodeFlag === 'true') {
       nodeFlag = '*';
     }
-    this.filters = nodeFlag.split(',');
+    return nodeFlag.split(',');
+  }
+
+  isEnabled(namespace: string): boolean {
+    return this.enabledRegexp.test(namespace);
+  }
+
+  // Regexp patterns below are adapted from here:
+  // https://github.com/nodejs/node/blob/c0aebed4b3395bd65d54b18d1fd00f071002ac20/lib/internal/util/debuglog.js#L36
+  protected compileFilters(): RegExp {
+    const normalized = this.filters
+      .map(filter => filter.trim())
+      .filter(filter => filter.length > 0)
+      .map(filter => (filter === 'all' || filter === 'true' ? '*' : filter));
+    if (normalized.length === 0) {
+      return /^$/i;
+    }
+    const regexp = normalized
+      .map(filter =>
+        filter.replace(/[|\\{}()[\]^$+?.]/g, '\\$&').replace(/\*/g, '.*'),
+      )
+      .join('$|^');
+    return new RegExp(`^${regexp}$`, 'i');
+  }
+
+  protected hasManualFiltersOverride(): boolean {
+    return !(
+      this.filters === this.initialFiltersRef &&
+      this.filters.length === this.initialFiltersSnapshot.length &&
+      this.filters.every(
+        (value, index) => value === this.initialFiltersSnapshot[index],
+      )
+    );
+  }
+
+  /**
+   * Re-parses `this.filters` from `GOOGLE_SDK_NODE_LOGGING` if `this.filters`
+   * has not been manually mutated since construction and the environment
+   * variable changed after backend instantiation.
+   */
+  refreshFiltersFromEnv(): void {
+    const currentEnvValue = process.env[env.nodeEnables];
+    if (
+      !this.hasManualFiltersOverride() &&
+      currentEnvValue !== this.initialEnvValue
+    ) {
+      this.filters = DebugLogBackendBase.parseEnvFilters(currentEnvValue);
+      this.initialEnvValue = currentEnvValue;
+      this.initialFiltersRef = this.filters;
+      this.initialFiltersSnapshot = [...this.filters];
+    }
   }
 
   /**
@@ -145,6 +208,7 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
   log(namespace: string, fields: LogFields, ...args: unknown[]): void {
     try {
       if (!this.filtersSet) {
+        this.refreshFiltersFromEnv();
         this.setFilters();
         this.filtersSet = true;
       }
@@ -173,16 +237,8 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
 // the user duplicates it into NODE_DEBUG, which isn't reasonable).
 //
 class NodeBackend extends DebugLogBackendBase {
-  // Default to allowing all systems, since we gate earlier based on whether the
-  // variable is empty.
-  enabledRegexp = /.*/g;
-
-  isEnabled(namespace: string): boolean {
-    return this.enabledRegexp.test(namespace);
-  }
-
   makeLogger(namespace: string): AdhocDebugLogCallable {
-    if (!this.enabledRegexp.test(namespace)) {
+    if (!this.isEnabled(namespace)) {
       return () => {};
     }
 
@@ -227,15 +283,13 @@ class NodeBackend extends DebugLogBackendBase {
     };
   }
 
-  // Regexp patterns below are from here:
-  // https://github.com/nodejs/node/blob/c0aebed4b3395bd65d54b18d1fd00f071002ac20/lib/internal/util/debuglog.js#L36
-  setFilters(): void {
-    const totalFilters = this.filters.join(',');
-    const regexp = totalFilters
-      .replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-      .replace(/\*/g, '.*')
-      .replace(/,/g, '$|^');
-    this.enabledRegexp = new RegExp(`^${regexp}$`, 'i');
+  setFilters(filters?: string[]): void {
+    if (Array.isArray(filters)) {
+      this.filters = [...filters];
+      this.filtersSet = true;
+    }
+    this.enabledRegexp = this.compileFilters();
+    this.cached.clear();
   }
 }
 
@@ -269,7 +323,11 @@ class DebugBackend extends DebugLogBackendBase {
     };
   }
 
-  setFilters(): void {
+  setFilters(filters?: string[]): void {
+    if (Array.isArray(filters)) {
+      this.filters = [...filters];
+      this.filtersSet = true;
+    }
     const existingFilters = process.env['NODE_DEBUG'] ?? '';
     process.env['NODE_DEBUG'] = `${existingFilters}${
       existingFilters ? ',' : ''
@@ -299,28 +357,88 @@ export function getDebugBackend(debugPkg: DebugPackage): DebugLogBackend {
 /**
  * This pretty much works like the Node logger, but it outputs structured
  * logging JSON matching Google Cloud's ingestion specs. Rather than handling
- * its own output, it wraps another backend. The passed backend must be a subclass
- * of `DebugLogBackendBase` (any of the backends exposed by this package will work).
+ * its own output, it can wrap any `DebugLogBackend` implementation.
  */
 class StructuredBackend extends DebugLogBackendBase {
-  upstream: DebugLogBackendBase;
+  upstream?: DebugLogBackend;
 
   constructor(upstream?: DebugLogBackend) {
     super();
-    this.upstream = (upstream as DebugLogBackendBase) ?? undefined;
+    this.upstream = upstream;
   }
 
   makeLogger(namespace: string): AdhocDebugLogCallable {
-    const debugLogger = this.upstream?.makeLogger(namespace);
+    if (!this.isEnabled(namespace)) {
+      return () => {};
+    }
+    const upstream = this.upstream;
+    const debugLogger: AdhocDebugLogCallable | undefined = upstream
+      ? typeof (upstream as Partial<DebugLogBackendBase>).makeLogger ===
+        'function'
+        ? (upstream as DebugLogBackendBase).makeLogger(namespace)
+        : (fields: LogFields, ...args: unknown[]) => {
+            upstream.log(namespace, fields, ...args);
+          }
+      : undefined;
     return (fields: LogFields, ...args: unknown[]) => {
-      const severity = fields.severity ?? LogSeverity.INFO;
-      const json = Object.assign(
-        {
-          severity,
-          message: util.format(...args),
-        },
-        fields,
-      );
+      const {
+        severity: rawSeverity,
+        other,
+        trace_id,
+        span_id,
+        trace_sampled,
+        telemetryTraceId,
+        telemetrySpanId,
+        ...topLevelFields
+      } = fields || {};
+      const severity = rawSeverity ?? LogSeverity.INFO;
+      const message = util.format(...args);
+
+      const mergedAttributes: Record<string, unknown> = {
+        ...(typeof other === 'object' && other !== null && !Array.isArray(other)
+          ? (other as Record<string, unknown>)
+          : {}),
+        ...topLevelFields,
+      };
+      delete mergedAttributes.severity;
+      delete mergedAttributes.message;
+
+      const resolvedTrace = trace_id ?? telemetryTraceId;
+      if (
+        typeof resolvedTrace === 'string' &&
+        resolvedTrace.length > 0 &&
+        mergedAttributes['logging.googleapis.com/trace'] === undefined
+      ) {
+        const projectId =
+          process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT;
+        mergedAttributes['logging.googleapis.com/trace'] =
+          !resolvedTrace.startsWith('projects/') && projectId
+            ? `projects/${projectId}/traces/${resolvedTrace}`
+            : resolvedTrace;
+      }
+
+      const resolvedSpan = span_id ?? telemetrySpanId;
+      if (
+        typeof resolvedSpan === 'string' &&
+        resolvedSpan.length > 0 &&
+        mergedAttributes['logging.googleapis.com/spanId'] === undefined
+      ) {
+        mergedAttributes['logging.googleapis.com/spanId'] = resolvedSpan;
+      }
+
+      if (
+        typeof trace_sampled === 'boolean' &&
+        mergedAttributes['logging.googleapis.com/trace_sampled'] === undefined
+      ) {
+        mergedAttributes['logging.googleapis.com/trace_sampled'] =
+          trace_sampled;
+      }
+
+      const json: Record<string, unknown> = {
+        severity,
+        message,
+        ...mergedAttributes,
+      };
 
       const jsonString = JSON.stringify(json);
       if (debugLogger) {
@@ -331,8 +449,33 @@ class StructuredBackend extends DebugLogBackendBase {
     };
   }
 
-  setFilters(): void {
-    this.upstream?.setFilters();
+  setFilters(filters?: string[]): void {
+    if (Array.isArray(filters)) {
+      this.filters = [...filters];
+      this.filtersSet = true;
+    }
+    this.enabledRegexp = this.compileFilters();
+    this.cached.clear();
+    if (!this.upstream) {
+      return;
+    }
+    const upstreamBase = this.upstream as Partial<DebugLogBackendBase>;
+    if (
+      this.upstream instanceof DebugLogBackendBase ||
+      (typeof upstreamBase.makeLogger === 'function' &&
+        Array.isArray(upstreamBase.filters))
+    ) {
+      if (this.hasManualFiltersOverride()) {
+        upstreamBase.filters = [...this.filters];
+      } else {
+        upstreamBase.refreshFiltersFromEnv?.();
+      }
+      upstreamBase.cached?.clear();
+      (this.upstream as DebugLogBackendBase).setFilters();
+      upstreamBase.filtersSet = true;
+    } else {
+      this.upstream.setFilters([...this.filters]);
+    }
   }
 }
 
@@ -384,6 +527,16 @@ let cachedBackend: DebugLogBackend | null | undefined = undefined;
 export function setBackend(backend: DebugLogBackend | null | undefined) {
   cachedBackend = backend;
   loggerCache.clear();
+}
+
+/**
+ * Get the backend currently used for our log output:
+ * - A backend object if one has been configured or lazily initialized
+ * - `null` if logging was explicitly disabled via `setBackend(null)`
+ * - `undefined` if no backend has been initialized yet
+ */
+export function getBackend(): DebugLogBackend | null | undefined {
+  return cachedBackend;
 }
 
 /**
