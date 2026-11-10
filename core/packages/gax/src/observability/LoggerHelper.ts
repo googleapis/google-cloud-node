@@ -15,7 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
-import {context} from '@opentelemetry/api';
+import {context, TraceFlags} from '@opentelemetry/api';
 import * as loggingUtils from 'google-logging-utils';
 import {APICallback, GaxCallResult} from '../apitypes';
 import {rpcCodeFromHttpStatusCode, Status} from '../status';
@@ -62,18 +62,32 @@ export interface LogPayload {
   'exception.stacktrace'?: string;
 }
 
-interface NodeBackendInternals extends loggingUtils.DebugLogBackend {
+export type GaxLogFields = loggingUtils.LogFields &
+  LogPayload & {
+    trace_id?: string;
+    span_id?: string;
+    trace_sampled?: boolean;
+  };
+
+interface BuiltinBackendInternals extends loggingUtils.DebugLogBackend {
   filters?: string[];
   isEnabled?: (namespace: string) => boolean;
+  upstream?: loggingUtils.DebugLogBackend;
 }
 
 const gaxLoggerCache = new Map<string, loggingUtils.AdhocDebugLogFunction>();
 let fallbackNodeBackend: loggingUtils.DebugLogBackend | undefined;
-let nodeBackendPrototype: NodeBackendInternals | null | undefined;
+let fallbackStructuredBackend: loggingUtils.DebugLogBackend | undefined;
+const fallbackStructuredByUpstream = new WeakMap<
+  loggingUtils.DebugLogBackend,
+  loggingUtils.DebugLogBackend
+>();
+let nodeBackendPrototype: BuiltinBackendInternals | null | undefined;
+let structuredBackendPrototype: BuiltinBackendInternals | null | undefined;
 
 function getFallbackNodeBackend(): loggingUtils.DebugLogBackend {
   if (!fallbackNodeBackend) {
-    const backend = loggingUtils.getNodeBackend() as NodeBackendInternals;
+    const backend = loggingUtils.getNodeBackend() as BuiltinBackendInternals;
     if (Array.isArray(backend.filters)) {
       backend.filters = ['*'];
     }
@@ -82,12 +96,12 @@ function getFallbackNodeBackend(): loggingUtils.DebugLogBackend {
   return fallbackNodeBackend;
 }
 
-function getNodeBackendPrototype(): NodeBackendInternals | null {
+function getNodeBackendPrototype(): BuiltinBackendInternals | null {
   if (nodeBackendPrototype === undefined) {
     try {
       const proto = Object.getPrototypeOf(
         loggingUtils.getNodeBackend(),
-      ) as NodeBackendInternals | null;
+      ) as BuiltinBackendInternals | null;
       nodeBackendPrototype = proto ?? null;
     } catch {
       nodeBackendPrototype = null;
@@ -96,100 +110,134 @@ function getNodeBackendPrototype(): NodeBackendInternals | null {
   return nodeBackendPrototype;
 }
 
+function getStructuredBackendPrototype(): BuiltinBackendInternals | null {
+  if (structuredBackendPrototype === undefined) {
+    try {
+      const proto = Object.getPrototypeOf(
+        loggingUtils.getStructuredBackend(),
+      ) as BuiltinBackendInternals | null;
+      structuredBackendPrototype = proto ?? null;
+    } catch {
+      structuredBackendPrototype = null;
+    }
+  }
+  return structuredBackendPrototype;
+}
+
+function getFallbackStructuredBackend(
+  rawUpstream?: loggingUtils.DebugLogBackend,
+): loggingUtils.DebugLogBackend {
+  if (!rawUpstream) {
+    if (!fallbackStructuredBackend) {
+      const backend =
+        loggingUtils.getStructuredBackend() as BuiltinBackendInternals;
+      if (Array.isArray(backend.filters)) {
+        backend.filters = ['*'];
+      }
+      fallbackStructuredBackend = backend;
+    }
+    return fallbackStructuredBackend;
+  }
+
+  const nodeProto = getNodeBackendPrototype();
+  const resolvedUpstream =
+    nodeProto && Object.getPrototypeOf(rawUpstream) === nodeProto
+      ? getFallbackNodeBackend()
+      : rawUpstream;
+
+  let cached = fallbackStructuredByUpstream.get(resolvedUpstream);
+  if (!cached) {
+    const backend = loggingUtils.getStructuredBackend(
+      resolvedUpstream,
+    ) as BuiltinBackendInternals;
+    if (Array.isArray(backend.filters)) {
+      backend.filters = ['*'];
+    }
+    cached = backend;
+    fallbackStructuredByUpstream.set(resolvedUpstream, backend);
+  }
+  return cached;
+}
+
+function rescueIfDroppedByBuiltinBackend(
+  activeBackend: loggingUtils.DebugLogBackend,
+  namespace: string,
+  fields: loggingUtils.LogFields,
+  args: unknown[],
+): void {
+  const nodeProto = getNodeBackendPrototype();
+  const structuredProto = getStructuredBackendPrototype();
+  const backendProto = Object.getPrototypeOf(activeBackend);
+  const internalBackend = activeBackend as BuiltinBackendInternals;
+
+  if (
+    structuredProto !== null &&
+    structuredProto !== nodeProto &&
+    backendProto === structuredProto
+  ) {
+    const upstreamDropped =
+      internalBackend.upstream !== undefined &&
+      nodeProto !== null &&
+      Object.getPrototypeOf(internalBackend.upstream) === nodeProto &&
+      typeof (internalBackend.upstream as BuiltinBackendInternals).isEnabled ===
+        'function' &&
+      !(internalBackend.upstream as BuiltinBackendInternals).isEnabled!(
+        namespace,
+      );
+    const dropped =
+      (typeof internalBackend.isEnabled === 'function' &&
+        !internalBackend.isEnabled(namespace)) ||
+      upstreamDropped;
+    if (dropped) {
+      getFallbackStructuredBackend(internalBackend.upstream).log(
+        namespace,
+        fields,
+        ...args,
+      );
+    }
+    return;
+  }
+
+  if (nodeProto !== null && backendProto === nodeProto) {
+    if (
+      typeof internalBackend.isEnabled === 'function' &&
+      !internalBackend.isEnabled(namespace)
+    ) {
+      getFallbackNodeBackend().log(namespace, fields, ...args);
+    }
+  }
+}
+
 function emitGaxLog(
   namespace: string,
   fields: loggingUtils.LogFields,
   ...args: unknown[]
 ): void {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envKey = loggingUtils.env?.nodeEnables ?? 'GOOGLE_SDK_NODE_LOGGING';
+  const envValue = env[envKey];
+
   const target = loggingUtils.log(namespace);
   if (target === loggingUtils.placeholder) {
-    const env: Record<string, string | undefined> =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env
-        : {};
-    const envKey = loggingUtils.env?.nodeEnables ?? 'GOOGLE_SDK_NODE_LOGGING';
-    // When `GOOGLE_SDK_NODE_LOGGING` is non-empty, `loggingUtils.log()` only returns
-    // `placeholder` if the backend was explicitly disabled via `setBackend(null)`.
-    // When unset/empty, `loggingUtils.log()` returns `placeholder` whenever no backend
-    // was cached, so fall back to an unfiltered `NodeBackend` so `{enableTelemetryLogging: true}`
+    // When `setBackend(null)` was explicitly called, keep logging disabled.
+    // When `GOOGLE_SDK_NODE_LOGGING` is unset/empty and no backend was cached,
+    // fall back to an unfiltered `NodeBackend` so `{enableTelemetryLogging: true}`
     // delivers logs without requiring `GOOGLE_SDK_NODE_LOGGING` or mutating global state.
-    if (!env[envKey]) {
+    if (loggingUtils.getBackend() !== null && !envValue) {
       getFallbackNodeBackend().log(namespace, fields, ...args);
     }
     return;
   }
 
-  const nodeProto = getNodeBackendPrototype();
-  if (!nodeProto || typeof nodeProto.log !== 'function') {
-    target(fields, ...args);
-    return;
+  target(fields, ...args);
+
+  const activeBackend = loggingUtils.getBackend();
+  if (activeBackend && typeof activeBackend === 'object') {
+    rescueIfDroppedByBuiltinBackend(activeBackend, namespace, fields, args);
   }
-
-  // Detect when the active backend is `google-logging-utils`'s built-in `NodeBackend`
-  // dropping an unmatched namespace (e.g. `{enableTelemetryLogging: true}` paired with
-  // `GOOGLE_SDK_NODE_LOGGING=spanner` or `=false`), without interfering with custom
-  // backends set via `setBackend()`.
-  let droppedByNodeBackend = false;
-  let dispatchDepth = 0;
-  const originalNodeLog = nodeProto.log;
-  const hadOwnLog = Object.prototype.hasOwnProperty.call(nodeProto, 'log');
-  const wrappedNodeLog: typeof nodeProto.log = function (
-    this: NodeBackendInternals,
-    ns: string,
-    logFields: loggingUtils.LogFields,
-    ...logArgs: unknown[]
-  ) {
-    dispatchDepth++;
-    try {
-      originalNodeLog.call(this, ns, logFields, ...logArgs);
-      if (
-        dispatchDepth === 1 &&
-        ns === namespace &&
-        typeof this.isEnabled === 'function' &&
-        !this.isEnabled(ns)
-      ) {
-        droppedByNodeBackend = true;
-      }
-    } finally {
-      dispatchDepth--;
-    }
-  };
-
-  let patched = false;
-  try {
-    nodeProto.log = wrappedNodeLog;
-    patched = true;
-  } catch {
-    // Prototype may be frozen; dispatch directly.
-  }
-
-  try {
-    target(fields, ...args);
-  } finally {
-    if (patched && nodeProto.log === wrappedNodeLog) {
-      if (hadOwnLog) {
-        nodeProto.log = originalNodeLog;
-      } else {
-        delete (nodeProto as {log?: unknown}).log;
-      }
-    }
-  }
-
-  if (droppedByNodeBackend) {
-    getFallbackNodeBackend().log(namespace, fields, ...args);
-  }
-}
-
-/**
- * Resolves a `LogSeverity` enum value. Until a `google-logging-utils` release
- * containing #9718 is published to npm (this repo uses `link-workspace-packages=false`),
- * the published package exports `LogSeverity` as a type only while each enum member's
- * runtime value equals its uppercase level string.
- */
-function resolveLogSeverity(
-  level: 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR',
-): loggingUtils.LogSeverity {
-  return level as loggingUtils.LogSeverity;
 }
 
 /**
@@ -404,18 +452,25 @@ export function logCall<T = GaxCallResult>(
     const spanContext = activeSpan?.spanContext();
     const traceId = spanContext?.traceId;
     const spanId = spanContext?.spanId;
+    const traceSampled = spanContext
+      ? (spanContext.traceFlags & TraceFlags.SAMPLED) === TraceFlags.SAMPLED
+      : undefined;
 
     // Build structured log attributes with exception details.
     const attributes = buildLogAttributes(err, dynamicArgs, staticArgs);
 
     // Emit structured WARNING log.
+    const logFields: GaxLogFields = {
+      severity: loggingUtils.LogSeverity.WARNING,
+      ...(traceId ? {trace_id: traceId} : {}),
+      ...(spanId ? {span_id: spanId} : {}),
+      ...(traceId && traceSampled !== undefined
+        ? {trace_sampled: traceSampled}
+        : {}),
+      ...attributes,
+    };
     logger(
-      {
-        severity: resolveLogSeverity('WARNING'),
-        ...(traceId ? {telemetryTraceId: traceId} : {}),
-        ...(spanId ? {telemetrySpanId: spanId} : {}),
-        other: attributes,
-      },
+      logFields,
       'Client API call failed: %s',
       attributes['exception.message'] || err,
     );
@@ -467,6 +522,9 @@ export function logNetworkAttempt<T = GaxCallResult>(
     const spanContext = attemptSpan?.spanContext();
     const traceId = spanContext?.traceId;
     const spanId = spanContext?.spanId;
+    const traceSampled = spanContext
+      ? (spanContext.traceFlags & TraceFlags.SAMPLED) === TraceFlags.SAMPLED
+      : undefined;
 
     // Build structured log attributes without exception details and attach raw attempt response payload when present.
     const attributes = buildLogAttributes(
@@ -482,16 +540,16 @@ export function logNetworkAttempt<T = GaxCallResult>(
 
     // Emit structured DEBUG log for the failed attempt.
     const message = resolveExceptionMessage(err, attemptDynamicArgs.rpcType);
-    logger(
-      {
-        severity: resolveLogSeverity('DEBUG'),
-        ...(traceId ? {telemetryTraceId: traceId} : {}),
-        ...(spanId ? {telemetrySpanId: spanId} : {}),
-        other: attributes,
-      },
-      'RPC attempt failed: %s',
-      message || err,
-    );
+    const logFields: GaxLogFields = {
+      severity: loggingUtils.LogSeverity.DEBUG,
+      ...(traceId ? {trace_id: traceId} : {}),
+      ...(spanId ? {span_id: spanId} : {}),
+      ...(traceId && traceSampled !== undefined
+        ? {trace_sampled: traceSampled}
+        : {}),
+      ...attributes,
+    };
+    logger(logFields, 'RPC attempt failed: %s', message || err);
   };
 
   // Intercept and dispatch execution boundaries for the attempt.
