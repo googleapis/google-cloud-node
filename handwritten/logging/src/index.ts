@@ -255,9 +255,6 @@ export interface ServiceContext {
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:logging_quickstart
- * Full quickstart example:
  */
 class Logging {
   api: {[key: string]: gax.ClientStub};
@@ -387,9 +384,6 @@ class Logging {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_create_sink
-   * Another example:
    */
   async createSink(
     name: string,
@@ -562,13 +556,6 @@ class Logging {
    * });
    *
    * ```
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_list_log_entries
-   * Another example:
-   *
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_list_log_entries_advanced
-   * Another example:
    */
   getEntries(options?: GetEntriesRequest): Promise<GetEntriesResponse>;
   getEntries(callback: GetEntriesCallback): void;
@@ -929,9 +916,6 @@ class Logging {
    * });
    *
    * ```
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_list_logs
-   * Another example:
    */
   getLogs(options?: GetLogsRequest): Promise<GetLogsResponse>;
   getLogs(callback: GetLogsCallback): void;
@@ -1103,9 +1087,6 @@ class Logging {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_list_sinks
-   * Another example:
    */
   getSinks(options?: GetSinksRequest): Promise<GetSinksResponse>;
   getSinks(callback: GetSinksCallback): void;
@@ -1585,9 +1566,6 @@ export {Sink};
  * const logging = new Logging({ projectId: 'your-project-id', keyFilename: '/path/to/keyfile.json'});
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:logging_quickstart
- * Full quickstart example:
  */
 export {Logging};
 

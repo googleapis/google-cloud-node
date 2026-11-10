@@ -367,9 +367,6 @@ class Log implements LogSeverityFunctions {
    * });
    *
    * ```
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_delete_log
-   * Another example:
    */
   delete(gaxOptions?: CallOptions): Promise<ApiResponse>;
   delete(gaxOptions: CallOptions, callback: DeleteCallback): void;
@@ -952,13 +949,6 @@ class Log implements LogSeverityFunctions {
    * });
    *
    * ```
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_write_log_entry
-   * Another example:
-   *
-   * @example <caption>include:samples/logs.js</caption>
-   * region_tag:logging_write_log_entry_advanced
-   * Another example:
    */
   write(entry: Entry | Entry[], options?: WriteOptions): Promise<ApiResponse>;
   write(

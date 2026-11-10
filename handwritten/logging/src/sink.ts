@@ -111,9 +111,6 @@ class Sink {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_create_sink
-   * Another example:
    */
   create(config: CreateSinkRequest): Promise<[Sink, LogSink]>;
   create(config: CreateSinkRequest, callback: CreateSinkCallback): void;
@@ -160,9 +157,6 @@ class Sink {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_delete_sink
-   * Another example:
    */
   delete(gaxOptions?: CallOptions): Promise<DeleteResponse>;
   delete(callback: DeleteCallback): void;
@@ -219,9 +213,6 @@ class Sink {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_get_sink
-   * Another example:
    */
   getMetadata(gaxOptions?: CallOptions): Promise<SinkMetadataResponse>;
   getMetadata(callback: SinkMetadataCallback): void;
@@ -337,9 +328,6 @@ class Sink {
    * });
    *
    * ```
-   * @example <caption>include:samples/sinks.js</caption>
-   * region_tag:logging_update_sink
-   * Another example:
    */
   setMetadata(metadata: SetSinkMetadata): Promise<SinkMetadataResponse>;
   setMetadata(metadata: SetSinkMetadata, callback: SinkMetadataCallback): void;
