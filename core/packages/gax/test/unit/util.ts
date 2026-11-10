@@ -346,16 +346,36 @@ describe('util.ts', () => {
       assert.strictEqual(checkLoggingEnabled(undefined), false);
     });
 
-    it('returns true when GOOGLE_SDK_NODE_LOGGING is exact true, all, or *', () => {
-      for (const value of ['true', 'all', '*']) {
+    it('returns true when GOOGLE_SDK_NODE_LOGGING has wildcard *, all, or true tokens (including trimmed or comma-separated)', () => {
+      for (const value of [
+        'true',
+        'all',
+        '*',
+        ' true ',
+        ' all ',
+        'foo,true',
+        'foo, all',
+      ]) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
-        assert.strictEqual(checkLoggingEnabled(storageSettings), true);
-        assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
-        assert.strictEqual(checkLoggingEnabled(), true);
+        assert.strictEqual(
+          checkLoggingEnabled(storageSettings),
+          true,
+          `expected ${JSON.stringify(value)} to enable storage`,
+        );
+        assert.strictEqual(
+          checkLoggingEnabled(new CallSettings({})),
+          true,
+          `expected ${JSON.stringify(value)} to enable default namespace`,
+        );
+        assert.strictEqual(
+          checkLoggingEnabled(),
+          true,
+          `expected ${JSON.stringify(value)} to enable undefined settings`,
+        );
       }
     });
 
-    it('matches comma-separated and wildcard namespace filters identically to NodeBackend.setFilters()', () => {
+    it('matches comma-separated and wildcard namespace filters identically to DebugLogBackendBase.compileFilters()', () => {
       const secretManagerSettings = new CallSettings({
         apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
       });
@@ -373,8 +393,18 @@ describe('util.ts', () => {
       process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,bigquery';
       assert.strictEqual(checkLoggingEnabled(storageSettings), false);
 
-      // Rejects values that DebugLogBackendBase / NodeBackend.setFilters() drops.
-      for (const dropped of ['1', 'TRUE', 'ALL', ' true ', 'foo,true']) {
+      // Trims whitespace around comma-separated tokens and ignores empty tokens, matching DebugLogBackendBase.compileFilters().
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'storage, secretmanager';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      assert.strictEqual(checkLoggingEnabled(secretManagerSettings), true);
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = ' , storage , , ';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      assert.strictEqual(checkLoggingEnabled(secretManagerSettings), false);
+      assert.strictEqual(checkLoggingEnabled(new CallSettings({})), false);
+
+      // Rejects empty/whitespace-only filters and values that DebugLogBackendBase.compileFilters() does not alias to '*'.
+      for (const dropped of ['1', 'TRUE', 'ALL', '', '   ', ',', ' , , ']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = dropped;
         assert.strictEqual(
           checkLoggingEnabled(storageSettings),
@@ -382,11 +412,6 @@ describe('util.ts', () => {
           `expected ${JSON.stringify(dropped)} to return false`,
         );
       }
-
-      // Does not trim whitespace around comma-separated tokens, matching NodeBackend.setFilters().
-      process.env.GOOGLE_SDK_NODE_LOGGING = 'storage, secretmanager';
-      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
-      assert.strictEqual(checkLoggingEnabled(secretManagerSettings), false);
 
       process.env.GOOGLE_SDK_NODE_LOGGING = 'google-gax';
       assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);

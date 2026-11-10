@@ -15,20 +15,29 @@
  */
 
 import * as assert from 'assert';
+import {spawnSync} from 'child_process';
 import {EventEmitter} from 'events';
+import * as path from 'path';
 import {Writable} from 'stream';
+import {pathToFileURL} from 'url';
 import * as grpc from '@grpc/grpc-js';
-import {context, ROOT_CONTEXT, Span, trace} from '@opentelemetry/api';
+import {
+  context,
+  ROOT_CONTEXT,
+  Span,
+  trace,
+  TraceFlags,
+} from '@opentelemetry/api';
 import {GoogleAuth, PassThroughClient} from 'google-auth-library';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as sinon from 'sinon';
 import * as loggingUtils from 'google-logging-utils';
 import {
   buildLogAttributes,
+  GaxLogFields,
   getGaxLogger,
   logCall,
   logNetworkAttempt,
-  LogPayload,
 } from '../../src/observability/LoggerHelper';
 import {traceAttempt, traceCall} from '../../src/observability/TracerHelper';
 import {
@@ -55,7 +64,7 @@ import {setMockFallbackError, setMockFallbackHttpResponse} from './utils';
 
 interface CapturedLog {
   namespace: string;
-  fields: loggingUtils.LogFields;
+  fields: GaxLogFields;
   args: unknown[];
 }
 
@@ -68,7 +77,7 @@ class TestLogSink implements loggingUtils.DebugLogBackend {
     fields: loggingUtils.LogFields,
     ...args: unknown[]
   ): void {
-    this.logs.push({namespace, fields, args});
+    this.logs.push({namespace, fields: fields as GaxLogFields, args});
   }
 
   setFilters(filters: string[]): void {
@@ -140,7 +149,10 @@ describe('LoggerHelper', () => {
       const stderrStub = sinon.stub(console, 'error');
       const warnSeverity = 'WARNING' as loggingUtils.LogSeverity;
       getGaxLogger('storage')(
-        {severity: warnSeverity, other: {'rpc.system.name': 'grpc'}},
+        {
+          severity: warnSeverity,
+          'rpc.system.name': 'grpc',
+        } as loggingUtils.LogFields,
         'Client API call failed: %s',
         'boom',
       );
@@ -190,12 +202,75 @@ describe('LoggerHelper', () => {
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(stderrStub.callCount, 0);
 
-      // Explicit setBackend(null) disables output when GOOGLE_SDK_NODE_LOGGING is set.
+      // Explicit setBackend(null) disables output both when GOOGLE_SDK_NODE_LOGGING is set and unset.
       stderrStub.resetHistory();
       process.env.GOOGLE_SDK_NODE_LOGGING = '*';
       loggingUtils.setBackend(null);
       getGaxLogger('storage')({severity: warnSeverity}, 'silenced msg');
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      getGaxLogger('storage')({severity: warnSeverity}, 'silenced unset msg');
       assert.strictEqual(stderrStub.callCount, 0);
+    });
+
+    it('never mutates backend prototypes and handles reentrant nested logging safely', () => {
+      const stderrStub = sinon.stub(console, 'error');
+      const warnSeverity = 'WARNING' as loggingUtils.LogSeverity;
+
+      const nodeProto = Object.getPrototypeOf(
+        loggingUtils.getNodeBackend(),
+      ) as Record<string, unknown>;
+      const structuredProto = Object.getPrototypeOf(
+        loggingUtils.getStructuredBackend(),
+      ) as Record<string, unknown>;
+      const baseProto = Object.getPrototypeOf(nodeProto) as Record<
+        string,
+        unknown
+      >;
+      const origBaseLog = baseProto.log;
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(undefined);
+
+      // Attach a synchronous `.on('log')` listener on `storage` that inspects
+      // backend prototypes mid-dispatch and re-enters `getGaxLogger('bigquery')`.
+      const storageUnderlying = loggingUtils.log('storage');
+      let nestedTriggered = false;
+      const onStorageLog = () => {
+        assert.strictEqual(
+          Object.prototype.hasOwnProperty.call(nodeProto, 'log'),
+          false,
+        );
+        assert.strictEqual(
+          Object.prototype.hasOwnProperty.call(structuredProto, 'log'),
+          false,
+        );
+        assert.strictEqual(nodeProto.log, origBaseLog);
+        assert.strictEqual(structuredProto.log, origBaseLog);
+        assert.strictEqual(baseProto.log, origBaseLog);
+
+        if (!nestedTriggered) {
+          nestedTriggered = true;
+          getGaxLogger('bigquery')(
+            {severity: warnSeverity},
+            'nested bigquery msg',
+          );
+        }
+      };
+      storageUnderlying.on('log', onStorageLog);
+
+      try {
+        getGaxLogger('storage')({severity: warnSeverity}, 'outer storage msg');
+      } finally {
+        storageUnderlying.instance.removeListener('log', onStorageLog);
+      }
+
+      assert.strictEqual(nestedTriggered, true);
+      assert.strictEqual(
+        stderrStub.callCount,
+        2,
+        'both outer storage and nested bigquery logs must be rescued once without prototype mutation',
+      );
+      assert.strictEqual(typeof loggingUtils.getBackend, 'function');
     });
   });
 
@@ -510,14 +585,17 @@ describe('LoggerHelper', () => {
       const entry = sink.logs[0];
       assert.strictEqual(entry.namespace, 'storage');
       assert.strictEqual(entry.fields.severity, 'WARNING');
-      assert.strictEqual(entry.fields.telemetryTraceId, undefined);
-      assert.strictEqual(entry.fields.telemetrySpanId, undefined);
+      assert.strictEqual(entry.fields.trace_id, undefined);
+      assert.strictEqual(entry.fields.span_id, undefined);
+      assert.strictEqual(entry.fields.trace_sampled, undefined);
+      assert.strictEqual(entry.fields.other, undefined);
       assert.deepStrictEqual(entry.args, [
         'Client API call failed: %s',
         'Permission denied',
       ]);
-      const other = entry.fields.other as LogPayload;
-      assert.deepStrictEqual(other, {
+      const {severity: _severity, ...attributes} = entry.fields;
+      assert.strictEqual(_severity, 'WARNING');
+      assert.deepStrictEqual(attributes, {
         'gcp.client.service': 'storage',
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
@@ -534,7 +612,7 @@ describe('LoggerHelper', () => {
         'exception.message': 'Permission denied',
         'exception.stacktrace': err.stack,
       });
-      assert.strictEqual('response.payload' in other, false);
+      assert.strictEqual('response.payload' in entry.fields, false);
 
       // Also supports OngoingCallPromise wrappers.
       sink.reset();
@@ -557,14 +635,20 @@ describe('LoggerHelper', () => {
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(sink.logs[0].fields.severity, 'WARNING');
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.deepStrictEqual(sink.logs[0].args, [
         'Client API call failed: %s',
         'sync failure',
       ]);
-      const other = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual(other['exception.type'], 'TypeError');
-      assert.strictEqual(other['exception.message'], 'sync failure');
-      assert.strictEqual(other['exception.stacktrace'], syncErr.stack);
+      assert.strictEqual(sink.logs[0].fields['exception.type'], 'TypeError');
+      assert.strictEqual(
+        sink.logs[0].fields['exception.message'],
+        'sync failure',
+      );
+      assert.strictEqual(
+        sink.logs[0].fields['exception.stacktrace'],
+        syncErr.stack,
+      );
 
       sink.reset();
       const nonErrorObj = {name: 123, message: 'bad name throw'};
@@ -576,9 +660,12 @@ describe('LoggerHelper', () => {
         (caught: unknown) => caught === nonErrorObj,
       );
       assert.strictEqual(sink.logs.length, 1);
-      const nonErrorOther = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual(nonErrorOther['exception.type'], 'Error');
-      assert.strictEqual(nonErrorOther['exception.message'], 'bad name throw');
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
+      assert.strictEqual(sink.logs[0].fields['exception.type'], 'Error');
+      assert.strictEqual(
+        sink.logs[0].fields['exception.message'],
+        'bad name throw',
+      );
     });
 
     it('emits a single WARNING log on callback error and preserves this and arguments', done => {
@@ -704,7 +791,7 @@ describe('LoggerHelper', () => {
       ]);
     });
 
-    it('attaches the T3 client request span telemetryTraceId and telemetrySpanId when active', async () => {
+    it('attaches the T3 client request span trace_id, span_id, and trace_sampled when active', async () => {
       const err = new GoogleError('traced failure');
 
       await assert.rejects(async () => {
@@ -727,14 +814,16 @@ describe('LoggerHelper', () => {
       );
 
       assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         clientRequestSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         clientRequestSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
     });
 
     it('falls back to the active outer OpenTelemetry span when GAX tracing is disabled', async () => {
@@ -757,14 +846,38 @@ describe('LoggerHelper', () => {
 
       assert.ok(outerSpan);
       assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         outerSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         outerSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
+
+      // Emits trace_sampled: false when active span is unsampled (TraceFlags.NONE).
+      sink.reset();
+      const unsampledSpan = trace.wrapSpanContext({
+        traceId: '11111111111111111111111111111111',
+        spanId: '2222222222222222',
+        traceFlags: TraceFlags.NONE,
+      });
+      await assert.rejects(async () => {
+        await context.with(trace.setSpan(ROOT_CONTEXT, unsampledSpan), () =>
+          logCall(dynamicArgs, staticArgs, async () => {
+            throw err;
+          }),
+        );
+      });
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.trace_id,
+        '11111111111111111111111111111111',
+      );
+      assert.strictEqual(sink.logs[0].fields.span_id, '2222222222222222');
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, false);
 
       // Also preserves initialContext outer span when async callback loses active context.
       sink.reset();
@@ -792,13 +905,14 @@ describe('LoggerHelper', () => {
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         initialOuterSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         initialOuterSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
     });
 
     it('fails open inside logOnce without masking or altering application errors when trace or attribute resolution throws', async () => {
@@ -927,12 +1041,14 @@ describe('LoggerHelper', () => {
       const entry = sink.logs[0];
       assert.strictEqual(entry.namespace, 'storage');
       assert.strictEqual(entry.fields.severity, 'DEBUG');
+      assert.strictEqual(entry.fields.other, undefined);
       assert.deepStrictEqual(entry.args, [
         'RPC attempt failed: %s',
         'Unavailable',
       ]);
-      const other = entry.fields.other as LogPayload;
-      assert.deepStrictEqual(other, {
+      const {severity: _severity, ...attributes} = entry.fields;
+      assert.strictEqual(_severity, 'DEBUG');
+      assert.deepStrictEqual(attributes, {
         'gcp.client.service': 'storage',
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
@@ -946,9 +1062,9 @@ describe('LoggerHelper', () => {
         'response.payload':
           '{"x-goog-request-id":"req-123","trace-bin":"YWJj"}',
       });
-      assert.strictEqual('exception.type' in other, false);
-      assert.strictEqual('exception.message' in other, false);
-      assert.strictEqual('exception.stacktrace' in other, false);
+      assert.strictEqual('exception.type' in entry.fields, false);
+      assert.strictEqual('exception.message' in entry.fields, false);
+      assert.strictEqual('exception.stacktrace' in entry.fields, false);
 
       sink.reset();
       const preConnectGrpcErr = Object.assign(
@@ -971,15 +1087,16 @@ describe('LoggerHelper', () => {
       );
 
       assert.strictEqual(sink.logs.length, 1);
-      const preConnectOther = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual('response.payload' in preConnectOther, false);
+      const preConnectFields = sink.logs[0].fields;
+      assert.strictEqual(preConnectFields.other, undefined);
+      assert.strictEqual('response.payload' in preConnectFields, false);
       assert.strictEqual(
-        preConnectOther['error.type'],
+        preConnectFields['error.type'],
         'CLIENT_CONNECTION_ERROR',
       );
-      assert.strictEqual('exception.type' in preConnectOther, false);
-      assert.strictEqual('exception.message' in preConnectOther, false);
-      assert.strictEqual('exception.stacktrace' in preConnectOther, false);
+      assert.strictEqual('exception.type' in preConnectFields, false);
+      assert.strictEqual('exception.message' in preConnectFields, false);
+      assert.strictEqual('exception.stacktrace' in preConnectFields, false);
 
       sink.reset();
       const errWithoutMeta = new TypeError('client error');
@@ -993,16 +1110,17 @@ describe('LoggerHelper', () => {
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(sink.logs[0].fields.severity, 'DEBUG');
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.deepStrictEqual(sink.logs[0].args, [
         'RPC attempt failed: %s',
         'client error',
       ]);
-      const otherWithoutMeta = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual('response.payload' in otherWithoutMeta, false);
-      assert.strictEqual('server.address' in otherWithoutMeta, false);
-      assert.strictEqual('exception.type' in otherWithoutMeta, false);
-      assert.strictEqual('exception.message' in otherWithoutMeta, false);
-      assert.strictEqual('exception.stacktrace' in otherWithoutMeta, false);
+      const fieldsWithoutMeta = sink.logs[0].fields;
+      assert.strictEqual('response.payload' in fieldsWithoutMeta, false);
+      assert.strictEqual('server.address' in fieldsWithoutMeta, false);
+      assert.strictEqual('exception.type' in fieldsWithoutMeta, false);
+      assert.strictEqual('exception.message' in fieldsWithoutMeta, false);
+      assert.strictEqual('exception.stacktrace' in fieldsWithoutMeta, false);
     });
 
     it('emits response.payload on HTTP REST error responses and omits it on empty or transport failures', async () => {
@@ -1054,13 +1172,14 @@ describe('LoggerHelper', () => {
         }),
       );
       assert.strictEqual(sink.logs.length, 1);
-      const other503 = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual(other503['http.response.status_code'], 503);
-      assert.strictEqual(other503['rpc.response.status_code'], 'UNAVAILABLE');
-      assert.strictEqual(other503['response.payload'], json503Body);
-      assert.strictEqual('exception.type' in other503, false);
-      assert.strictEqual('exception.message' in other503, false);
-      assert.strictEqual('exception.stacktrace' in other503, false);
+      const fields503 = sink.logs[0].fields;
+      assert.strictEqual(fields503.other, undefined);
+      assert.strictEqual(fields503['http.response.status_code'], 503);
+      assert.strictEqual(fields503['rpc.response.status_code'], 'UNAVAILABLE');
+      assert.strictEqual(fields503['response.payload'], json503Body);
+      assert.strictEqual('exception.type' in fields503, false);
+      assert.strictEqual('exception.message' in fields503, false);
+      assert.strictEqual('exception.stacktrace' in fields503, false);
 
       sink.reset();
       const json403Body = JSON.stringify({
@@ -1087,13 +1206,14 @@ describe('LoggerHelper', () => {
           throw err403;
         }),
       );
-      const other403 = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual(other403['http.response.status_code'], 403);
+      const fields403 = sink.logs[0].fields;
+      assert.strictEqual(fields403.other, undefined);
+      assert.strictEqual(fields403['http.response.status_code'], 403);
       assert.strictEqual(
-        other403['rpc.response.status_code'],
+        fields403['rpc.response.status_code'],
         'PERMISSION_DENIED',
       );
-      assert.strictEqual(other403['response.payload'], json403Body);
+      assert.strictEqual(fields403['response.payload'], json403Body);
 
       sink.reset();
       const longHtml502 = `<html>${'x'.repeat(2048)}</html>`;
@@ -1108,8 +1228,9 @@ describe('LoggerHelper', () => {
           throw errHtml502;
         }),
       );
-      const otherHtml502 = sink.logs[0].fields.other as LogPayload;
-      assert.strictEqual(otherHtml502['response.payload'], longHtml502);
+      const fieldsHtml502 = sink.logs[0].fields;
+      assert.strictEqual(fieldsHtml502.other, undefined);
+      assert.strictEqual(fieldsHtml502['response.payload'], longHtml502);
 
       sink.reset();
       const errEmpty502 = await invokeEchoFallback(gaxGrpc =>
@@ -1133,8 +1254,9 @@ describe('LoggerHelper', () => {
             throw emptyErr;
           }),
         );
-        const otherEmpty = sink.logs[0].fields.other as LogPayload;
-        assert.strictEqual('response.payload' in otherEmpty, false);
+        const fieldsEmpty = sink.logs[0].fields;
+        assert.strictEqual(fieldsEmpty.other, undefined);
+        assert.strictEqual('response.payload' in fieldsEmpty, false);
       }
     });
 
@@ -1168,14 +1290,16 @@ describe('LoggerHelper', () => {
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(sink.logs[0].fields.severity, 'DEBUG');
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         attemptSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         attemptSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
       assert.deepStrictEqual(sink.logs[0].args, [
         'RPC attempt failed: %s',
         'attempt failed',
@@ -1197,14 +1321,16 @@ describe('LoggerHelper', () => {
       const streamSpans = harness.getSpans('google-gax');
       assert.strictEqual(streamSpans.length, 2);
       assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         streamSpans[0].spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         streamSpans[0].spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
       assert.deepStrictEqual(sink.logs[0].args, [
         'RPC attempt failed: %s',
         'stream attempt failed',
@@ -1233,14 +1359,38 @@ describe('LoggerHelper', () => {
 
       assert.ok(outerSpan);
       assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.other, undefined);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         outerSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         outerSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
+
+      // Emits trace_sampled: false when active span is unsampled (TraceFlags.NONE).
+      sink.reset();
+      const unsampledSpan = trace.wrapSpanContext({
+        traceId: '33333333333333333333333333333333',
+        spanId: '4444444444444444',
+        traceFlags: TraceFlags.NONE,
+      });
+      await assert.rejects(async () => {
+        await context.with(trace.setSpan(ROOT_CONTEXT, unsampledSpan), () =>
+          logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+            throw err;
+          }),
+        );
+      });
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.trace_id,
+        '33333333333333333333333333333333',
+      );
+      assert.strictEqual(sink.logs[0].fields.span_id, '4444444444444444');
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, false);
 
       // Also preserves initialContext outer span when async callback loses active context.
       sink.reset();
@@ -1268,13 +1418,14 @@ describe('LoggerHelper', () => {
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(
-        sink.logs[0].fields.telemetryTraceId,
+        sink.logs[0].fields.trace_id,
         initialOuterSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        sink.logs[0].fields.telemetrySpanId,
+        sink.logs[0].fields.span_id,
         initialOuterSpan.spanContext().spanId,
       );
+      assert.strictEqual(sink.logs[0].fields.trace_sampled, true);
     });
 
     it('fails open in logNetworkAttempt and setRawHttpResponsePayload when error mutation or attribute extraction throws', async () => {
@@ -1341,7 +1492,7 @@ describe('LoggerHelper', () => {
       namespace: string;
       severity: string;
       message: string;
-      fields: loggingUtils.LogFields;
+      fields: GaxLogFields;
     }
 
     // eslint-disable-next-line no-control-regex
@@ -1357,9 +1508,7 @@ describe('LoggerHelper', () => {
         const severity = stripAnsi(String(call.args[3]));
         const message = stripAnsi(String(call.args[4]));
         const rawFields = stripAnsi(String(call.args[5] ?? '')).trim();
-        const fields = (
-          rawFields ? JSON.parse(rawFields) : {}
-        ) as loggingUtils.LogFields;
+        const fields = (rawFields ? JSON.parse(rawFields) : {}) as GaxLogFields;
         return {namespace, severity, message, fields};
       });
     }
@@ -1456,49 +1605,469 @@ describe('LoggerHelper', () => {
         assert.strictEqual(attemptLog.namespace, 'storage');
         assert.strictEqual(attemptLog.severity, 'DEBUG');
         assert.ok(attemptLog.message.startsWith('RPC attempt failed: '));
+        assert.strictEqual(attemptLog.fields.other, undefined);
         assert.strictEqual(
-          attemptLog.fields.telemetryTraceId,
+          attemptLog.fields.trace_id,
           attemptSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          attemptLog.fields.telemetrySpanId,
+          attemptLog.fields.span_id,
           attemptSpan.spanContext().spanId,
         );
-        const attemptOther = attemptLog.fields.other as LogPayload;
-        assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+        assert.strictEqual(attemptLog.fields.trace_sampled, true);
+        assert.strictEqual(attemptLog.fields['rpc.system.name'], 'http');
         assert.strictEqual(
-          attemptOther['rpc.method'],
+          attemptLog.fields['rpc.method'],
           'google.storage.v2.Storage/GetObject',
         );
-        assert.strictEqual(attemptOther['http.response.status_code'], 503);
+        assert.strictEqual(attemptLog.fields['http.response.status_code'], 503);
         assert.strictEqual(
-          attemptOther['rpc.response.status_code'],
+          attemptLog.fields['rpc.response.status_code'],
           'UNAVAILABLE',
         );
-        assert.strictEqual(attemptOther['response.payload'], json503Body);
-        assert.strictEqual('exception.type' in attemptOther, false);
-        assert.strictEqual('exception.message' in attemptOther, false);
-        assert.strictEqual('exception.stacktrace' in attemptOther, false);
+        assert.strictEqual(attemptLog.fields['response.payload'], json503Body);
+        assert.strictEqual('exception.type' in attemptLog.fields, false);
+        assert.strictEqual('exception.message' in attemptLog.fields, false);
+        assert.strictEqual('exception.stacktrace' in attemptLog.fields, false);
 
         assert.strictEqual(callLog.namespace, 'storage');
         assert.strictEqual(callLog.severity, 'WARNING');
         assert.ok(callLog.message.startsWith('Client API call failed: '));
+        assert.strictEqual(callLog.fields.other, undefined);
         assert.strictEqual(
-          callLog.fields.telemetryTraceId,
+          callLog.fields.trace_id,
           clientSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          callLog.fields.telemetrySpanId,
+          callLog.fields.span_id,
           clientSpan.spanContext().spanId,
         );
-        const callOther = callLog.fields.other as LogPayload;
-        assert.strictEqual(callOther['rpc.system.name'], 'http');
-        assert.strictEqual(callOther['http.response.status_code'], 503);
-        assert.strictEqual('response.payload' in callOther, false);
-        assert.strictEqual(callOther['exception.type'], 'GoogleError');
-        assert.strictEqual(typeof callOther['exception.message'], 'string');
-        assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+        assert.strictEqual(callLog.fields.trace_sampled, true);
+        assert.strictEqual(callLog.fields['rpc.system.name'], 'http');
+        assert.strictEqual(callLog.fields['http.response.status_code'], 503);
+        assert.strictEqual('response.payload' in callLog.fields, false);
+        assert.strictEqual(callLog.fields['exception.type'], 'GoogleError');
+        assert.strictEqual(
+          typeof callLog.fields['exception.message'],
+          'string',
+        );
+        assert.strictEqual(
+          typeof callLog.fields['exception.stacktrace'],
+          'string',
+        );
       }
+    });
+  });
+
+  describe('integration with StructuredBackend', () => {
+    const {createApiCall} =
+      require('../../src/createApiCall') as typeof import('../../src/createApiCall');
+    let savedGoogleCloudProject: string | undefined;
+
+    beforeEach(() => {
+      savedGoogleCloudProject = process.env.GOOGLE_CLOUD_PROJECT;
+      delete process.env.GOOGLE_CLOUD_PROJECT;
+    });
+
+    afterEach(() => {
+      if (savedGoogleCloudProject === undefined) {
+        delete process.env.GOOGLE_CLOUD_PROJECT;
+      } else {
+        process.env.GOOGLE_CLOUD_PROJECT = savedGoogleCloudProject;
+      }
+    });
+
+    it('emits secretmanager logs as structured JSON with Cloud Logging trace fields while suppressing unmatched non-opted namespaces when GOOGLE_SDK_NODE_LOGGING=secretmanager', async () => {
+      const stdoutLines: string[] = [];
+      sinon.stub(console, 'log').callsFake((_fmt: string, payload: string) => {
+        stdoutLines.push(payload);
+      });
+      const stderrStub = sinon.stub(console, 'error');
+
+      process.env.GOOGLE_CLOUD_PROJECT = 'my-cloud-project';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+      loggingUtils.setBackend(loggingUtils.getStructuredBackend());
+
+      // Non-opted non-GAX and unmatched GAX client namespaces must be suppressed.
+      loggingUtils.log('auth').debug('oauth token payload');
+      loggingUtils.log('gcp-metadata').debug('metadata response');
+
+      const storageCall = createApiCall(
+        (_arg, _meta, _opts, cb) => {
+          const err = new GoogleError('storage denied');
+          err.code = Status.PERMISSION_DENIED;
+          cb(err);
+          return {cancel: () => {}};
+        },
+        new CallSettings({
+          apiName: 'google.storage.v2.Storage',
+          otherArgs: {
+            internalMethodName: 'GetObject',
+            servicePath: 'storage.googleapis.com',
+          },
+        }),
+      );
+      await assert.rejects(async () => {
+        await storageCall({}, undefined);
+      });
+      assert.strictEqual(stdoutLines.length, 0);
+      assert.strictEqual(stderrStub.callCount, 0);
+
+      // Matched `secretmanager` namespace emits L4 DEBUG + L3 WARNING as structured JSON with Rule F-1 trace correlation.
+      const secretManagerCall = createApiCall(
+        (_arg, _meta, _opts, cb) => {
+          const err = new GoogleError('secret not found');
+          err.code = Status.NOT_FOUND;
+          cb(err);
+          return {cancel: () => {}};
+        },
+        new CallSettings({
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          enableTelemetryTracing: true,
+          otherArgs: {
+            internalMethodName: 'AccessSecretVersion',
+            servicePath: 'secretmanager.googleapis.com',
+          },
+        }),
+      );
+      await assert.rejects(async () => {
+        await secretManagerCall({}, undefined);
+      });
+
+      assert.strictEqual(stderrStub.callCount, 0);
+      assert.strictEqual(stdoutLines.length, 2);
+      const [attemptJson, callJson] = stdoutLines.map(
+        line => JSON.parse(line) as Record<string, unknown>,
+      );
+      assert.strictEqual(attemptJson.severity, 'DEBUG');
+      assert.strictEqual(
+        attemptJson['rpc.method'],
+        'google.cloud.secretmanager.v1.SecretManagerService/AccessSecretVersion',
+      );
+      assert.match(
+        String(attemptJson['logging.googleapis.com/trace']),
+        /^projects\/my-cloud-project\/traces\/[0-9a-f]{32}$/,
+      );
+      assert.match(
+        String(attemptJson['logging.googleapis.com/spanId']),
+        /^[0-9a-f]{16}$/,
+      );
+      assert.strictEqual(
+        attemptJson['logging.googleapis.com/trace_sampled'],
+        true,
+      );
+      assert.strictEqual('trace_id' in attemptJson, false);
+      assert.strictEqual('span_id' in attemptJson, false);
+      assert.strictEqual('trace_sampled' in attemptJson, false);
+
+      assert.strictEqual(callJson.severity, 'WARNING');
+      assert.strictEqual(
+        callJson['rpc.method'],
+        'google.cloud.secretmanager.v1.SecretManagerService/AccessSecretVersion',
+      );
+      assert.strictEqual(
+        callJson['logging.googleapis.com/trace'],
+        attemptJson['logging.googleapis.com/trace'],
+      );
+      assert.strictEqual('trace_id' in callJson, false);
+    });
+
+    it('delivers opted-in {enableTelemetryLogging: true} calls as structured JSON when GOOGLE_SDK_NODE_LOGGING=spanner without leaking non-opted namespaces or falling back to plain-text stderr', async () => {
+      const stdoutLines: string[] = [];
+      sinon.stub(console, 'log').callsFake((_fmt: string, payload: string) => {
+        stdoutLines.push(payload);
+      });
+      const stderrStub = sinon.stub(console, 'error');
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(loggingUtils.getStructuredBackend());
+
+      // Non-opted namespaces remain suppressed.
+      loggingUtils.log('auth').debug('oauth token payload');
+      loggingUtils.log('gcp-metadata').debug('metadata response');
+      assert.strictEqual(stdoutLines.length, 0);
+      assert.strictEqual(stderrStub.callCount, 0);
+
+      // Opted-in `secretmanager` call emits structured JSON to stdout (not plain-text stderr).
+      const optedInSecretManagerCall = createApiCall(
+        (_arg, _meta, _opts, cb) => {
+          const err = new GoogleError('permission denied');
+          err.code = Status.PERMISSION_DENIED;
+          cb(err);
+          return {cancel: () => {}};
+        },
+        new CallSettings({
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          enableTelemetryLogging: true,
+          otherArgs: {
+            internalMethodName: 'GetSecret',
+            servicePath: 'secretmanager.googleapis.com',
+          },
+        }),
+      );
+      await assert.rejects(async () => {
+        await optedInSecretManagerCall({}, undefined);
+      });
+
+      assert.strictEqual(
+        stderrStub.callCount,
+        0,
+        'must not fall back to plain-text NodeBackend stderr when StructuredBackend is active',
+      );
+      assert.strictEqual(stdoutLines.length, 2);
+      const [attemptJson, callJson] = stdoutLines.map(
+        line => JSON.parse(line) as Record<string, unknown>,
+      );
+      assert.strictEqual(attemptJson.severity, 'DEBUG');
+      assert.strictEqual(
+        attemptJson['rpc.method'],
+        'google.cloud.secretmanager.v1.SecretManagerService/GetSecret',
+      );
+      assert.strictEqual(callJson.severity, 'WARNING');
+      assert.strictEqual(
+        callJson['rpc.method'],
+        'google.cloud.secretmanager.v1.SecretManagerService/GetSecret',
+      );
+
+      // Also forwards to a plain `DebugLogBackend` upstream (without `makeLogger`) passed to `getStructuredBackend(upstream)`.
+      stdoutLines.length = 0;
+      const upstreamPayloads: string[] = [];
+      const plainUpstream: loggingUtils.DebugLogBackend = {
+        log(_ns: string, _fields: loggingUtils.LogFields, ...args: unknown[]) {
+          upstreamPayloads.push(String(args[0]));
+        },
+        setFilters() {},
+      };
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(loggingUtils.getStructuredBackend(plainUpstream));
+      loggingUtils.log('auth').debug('dropped auth');
+      await assert.rejects(async () => {
+        await optedInSecretManagerCall({}, undefined);
+      });
+
+      assert.strictEqual(stdoutLines.length, 0);
+      assert.strictEqual(stderrStub.callCount, 0);
+      assert.strictEqual(upstreamPayloads.length, 2);
+      assert.strictEqual(JSON.parse(upstreamPayloads[0]).severity, 'DEBUG');
+      assert.strictEqual(JSON.parse(upstreamPayloads[1]).severity, 'WARNING');
+    });
+
+    it('handles pre-registered setBackend (StructuredBackend, custom sink, and null), ESM imports, and mutated GOOGLE_SDK_NODE_LOGGING via getBackend()', () => {
+      // 1. In-process: mutating GOOGLE_SDK_NODE_LOGGING after default NodeBackend froze its filter neither drops nor duplicates logs.
+      const stderrStub = sinon.stub(console, 'error');
+      const warnSeverity = loggingUtils.LogSeverity.WARNING;
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(undefined);
+      loggingUtils.log('spanner').info('initialize frozen spanner filter');
+      stderrStub.resetHistory();
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+      getGaxLogger('secretmanager')(
+        {severity: warnSeverity},
+        'rescued despite mutated env',
+      );
+      assert.strictEqual(
+        stderrStub.callCount,
+        1,
+        'must not drop log when cachedBackend froze spanner before env mutated to secretmanager',
+      );
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+      loggingUtils.setBackend(undefined);
+      loggingUtils
+        .log('secretmanager')
+        .info('initialize frozen secretmanager filter');
+      stderrStub.resetHistory();
+
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      getGaxLogger('secretmanager')(
+        {severity: warnSeverity},
+        'not duplicated despite mutated env',
+      );
+      assert.strictEqual(
+        stderrStub.callCount,
+        1,
+        'must not duplicate log when cachedBackend froze secretmanager before env mutated to spanner',
+      );
+      stderrStub.restore();
+
+      const compiledEntry = path.resolve(
+        __dirname,
+        __filename.endsWith('.js')
+          ? '../../src/index.js'
+          : '../../build/src/index.js',
+      );
+      const compiledOtelHarness = path.resolve(
+        __dirname,
+        __filename.endsWith('.js')
+          ? './otelHarness.js'
+          : '../../build/test/unit/otelHarness.js',
+      );
+      const compiledEntryUrl = pathToFileURL(compiledEntry).href;
+
+      // 2. Child process: pre-registered setBackend(getStructuredBackend()) BEFORE lazy-requiring google-gax.
+      const preStructuredScript = `
+        const logging = require('google-logging-utils');
+        process.env.GOOGLE_CLOUD_PROJECT = 'child-proj';
+        process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+        const sb = logging.getStructuredBackend();
+        logging.setBackend(sb);
+        // StructuredBackend@2.3.0 suppresses unmatched namespaces natively even before google-gax is loaded.
+        logging.log('auth').debug('early pre-import auth log');
+
+        const gaxPkg = require(${JSON.stringify(compiledEntry)});
+        logging.log('auth').debug('must be suppressed after gax import');
+
+        const {OtelHarness} = require(${JSON.stringify(compiledOtelHarness)});
+        const childHarness = new OtelHarness();
+        childHarness.setup();
+        const call = gaxPkg.createApiCall(
+          (_arg, _meta, _opts, cb) => {
+            const err = new gaxPkg.GoogleError('pre-structured failure');
+            err.code = gaxPkg.Status.PERMISSION_DENIED;
+            cb(err);
+            return {cancel: () => {}};
+          },
+          new gaxPkg.CallSettings({
+            apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+            enableTelemetryTracing: true,
+            enableTelemetryLogging: true,
+            otherArgs: {
+              internalMethodName: 'GetSecret',
+              servicePath: 'secretmanager.googleapis.com',
+            },
+          }),
+        );
+        call({}, undefined).catch(() => {
+          childHarness.teardown();
+        });
+      `;
+      const structuredRes = spawnSync(
+        process.execPath,
+        ['-e', preStructuredScript],
+        {encoding: 'utf8'},
+      );
+      assert.strictEqual(structuredRes.status, 0, structuredRes.stderr);
+      assert.strictEqual(
+        structuredRes.stderr,
+        '',
+        `expected empty stderr for pre-registered StructuredBackend, got: ${structuredRes.stderr}`,
+      );
+      const structuredLines = structuredRes.stdout
+        .trim()
+        .split(/\r?\n/)
+        .filter(Boolean)
+        .map(line => JSON.parse(line) as Record<string, unknown>);
+      assert.strictEqual(structuredLines.length, 2);
+      assert.strictEqual(structuredLines[0].severity, 'DEBUG');
+      assert.strictEqual(structuredLines[1].severity, 'WARNING');
+      assert.match(
+        String(structuredLines[0]['logging.googleapis.com/trace']),
+        /^projects\/child-proj\/traces\/[0-9a-f]{32}$/,
+      );
+      assert.match(
+        String(structuredLines[0]['logging.googleapis.com/spanId']),
+        /^[0-9a-f]{16}$/,
+      );
+      assert.strictEqual(
+        structuredLines[0]['logging.googleapis.com/trace_sampled'],
+        true,
+      );
+      assert.strictEqual('trace_id' in structuredLines[0], false);
+
+      // 3. ESM child process: pre-registered setBackend(customSink) BEFORE dynamic import of google-gax.
+      const esmCustomSinkScript = `
+        import * as logging from 'google-logging-utils';
+        process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+        const captured = [];
+        logging.setBackend({
+          log(namespace, fields, ...args) {
+            captured.push({namespace, severity: fields.severity, msg: String(args[0])});
+          },
+          setFilters() {},
+        });
+        const gaxMod = await import(${JSON.stringify(compiledEntryUrl)});
+        const gaxPkg = gaxMod.default ?? gaxMod;
+        const call = gaxPkg.createApiCall(
+          (_arg, _meta, _opts, cb) => {
+            const err = new gaxPkg.GoogleError('esm custom sink failure');
+            err.code = gaxPkg.Status.UNAVAILABLE;
+            cb(err);
+            return {cancel: () => {}};
+          },
+          new gaxPkg.CallSettings({
+            apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+            enableTelemetryLogging: true,
+            otherArgs: {
+              internalMethodName: 'GetSecret',
+              servicePath: 'secretmanager.googleapis.com',
+            },
+          }),
+        );
+        await call({}, undefined).catch(() => {});
+        process.stdout.write(JSON.stringify(captured));
+      `;
+      const esmSinkRes = spawnSync(
+        process.execPath,
+        ['--input-type=module', '-e', esmCustomSinkScript],
+        {encoding: 'utf8'},
+      );
+      assert.strictEqual(esmSinkRes.status, 0, esmSinkRes.stderr);
+      assert.strictEqual(
+        esmSinkRes.stderr,
+        '',
+        `expected zero duplicate stderr logs for ESM custom sink, got: ${esmSinkRes.stderr}`,
+      );
+      const sinkCaptured = JSON.parse(esmSinkRes.stdout) as Array<{
+        namespace: string;
+        severity: string;
+      }>;
+      assert.strictEqual(sinkCaptured.length, 2);
+      assert.strictEqual(sinkCaptured[0].namespace, 'secretmanager');
+      assert.strictEqual(sinkCaptured[0].severity, 'DEBUG');
+      assert.strictEqual(sinkCaptured[1].severity, 'WARNING');
+
+      // 4. ESM child process: pre-registered setBackend(null) with unset GOOGLE_SDK_NODE_LOGGING BEFORE dynamic import of google-gax.
+      const esmNullScript = `
+        import * as logging from 'google-logging-utils';
+        delete process.env.GOOGLE_SDK_NODE_LOGGING;
+        logging.setBackend(null);
+        const gaxMod = await import(${JSON.stringify(compiledEntryUrl)});
+        const gaxPkg = gaxMod.default ?? gaxMod;
+        const call = gaxPkg.createApiCall(
+          (_arg, _meta, _opts, cb) => {
+            const err = new gaxPkg.GoogleError('esm null backend failure');
+            err.code = gaxPkg.Status.INTERNAL;
+            cb(err);
+            return {cancel: () => {}};
+          },
+          new gaxPkg.CallSettings({
+            apiName: 'google.storage.v2.Storage',
+            enableTelemetryLogging: true,
+            otherArgs: {
+              internalMethodName: 'GetObject',
+              servicePath: 'storage.googleapis.com',
+            },
+          }),
+        );
+        await call({}, undefined).catch(() => {});
+        if (logging.log('storage') !== logging.placeholder) {
+          throw new Error('setBackend(null) state was mutated');
+        }
+      `;
+      const esmNullRes = spawnSync(
+        process.execPath,
+        ['--input-type=module', '-e', esmNullScript],
+        {encoding: 'utf8'},
+      );
+      assert.strictEqual(esmNullRes.status, 0, esmNullRes.stderr);
+      assert.strictEqual(
+        esmNullRes.stderr,
+        '',
+        `expected zero stderr logs when setBackend(null) was pre-registered in ESM, got: ${esmNullRes.stderr}`,
+      );
+      assert.strictEqual(esmNullRes.stdout, '');
     });
   });
 });
