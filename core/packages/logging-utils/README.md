@@ -88,6 +88,96 @@ logging.setBackend({
 });
 ```
 
+## Integrating with Google Cloud Node.js Client Libraries
+Google Cloud Node.js client libraries (built on `google-gax`, `google-auth-library`, and `gcp-metadata`) use `google-logging-utils` to emit RPC telemetry and diagnostic logs when enabled via the `GOOGLE_SDK_NODE_LOGGING` environment variable.
+
+You can import `google-logging-utils` directly or access it via `google-gax` (`const {loggingUtils} = require('google-gax')`).
+
+### Example 1: Default Console Output (`NodeBackend`)
+Set `GOOGLE_SDK_NODE_LOGGING` to the target service namespace (for example, `secretmanager` for `@google-cloud/secret-manager`) before making client library calls. By default, `google-logging-utils` uses `getNodeBackend()` to write formatted log lines to `stderr`:
+
+```javascript
+const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
+
+// Enable logging for the Secret Manager client library (prefer a service-scoped
+// filter over `*`, `true`, or `all` in production so `auth` debug logs stay off).
+process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+
+async function main() {
+  const client = new SecretManagerServiceClient();
+  await client.listSecrets({parent: 'projects/my-project'});
+}
+
+main().catch(console.error);
+```
+
+### Example 2: Exporting Structured JSON Logs to Cloud Logging (`getStructuredBackend`)
+When running on Google Cloud environments (such as Cloud Run, GKE, or Compute Engine with the Ops Agent), use `getStructuredBackend()` to export client library logs as single-line structured JSON objects to `stdout` for automatic ingestion into Cloud Logging:
+
+```javascript
+const logging = require('google-logging-utils');
+const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
+
+// 1. Enable logging for the target client library via environment variable.
+process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+
+// 2. Configure the structured JSON backend before making client calls.
+logging.setBackend(logging.getStructuredBackend());
+
+async function main() {
+  const client = new SecretManagerServiceClient();
+  await client.listSecrets({parent: 'projects/my-project'});
+}
+
+main().catch(console.error);
+```
+
+### Example 3: Exporting Logs to a Custom Logger or Sink (Pino, Winston, Bunyan)
+To forward client library logs to a third-party logging library or custom exporter, pass a custom backend implementation to `setBackend()`. When OpenTelemetry tracing is also enabled (`GOOGLE_SDK_NODE_ENABLE_TRACING=true`), failed RPC logs include `fields.telemetryTraceId` and `fields.telemetrySpanId` for trace-log correlation:
+
+```javascript
+const util = require('util');
+const logging = require('google-logging-utils');
+const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
+
+// 1. Enable logging for the target client library via environment variable.
+process.env.GOOGLE_SDK_NODE_LOGGING = 'secretmanager';
+
+// 2. Register a custom backend to format and export log entries.
+logging.setBackend({
+  setFilters() {
+    // Receives filters parsed from `GOOGLE_SDK_NODE_LOGGING`, if needed.
+  },
+  log(namespace, fields, ...args) {
+    // Optionally skip `auth` debug logs if `*` was enabled.
+    if (namespace === 'auth') {
+      return;
+    }
+    const entry = {
+      namespace,
+      severity: fields.severity,
+      message: util.format(...args),
+      ...(fields.telemetryTraceId
+        ? {telemetryTraceId: fields.telemetryTraceId}
+        : {}),
+      ...(fields.telemetrySpanId
+        ? {telemetrySpanId: fields.telemetrySpanId}
+        : {}),
+      ...(fields.other || {}),
+    };
+    // Export `entry` to your preferred logger (e.g. pinoLogger.info(entry), winstonLogger.log(entry)):
+    console.log(JSON.stringify(entry));
+  },
+});
+
+async function main() {
+  const client = new SecretManagerServiceClient();
+  await client.listSecrets({parent: 'projects/my-project'});
+}
+
+main().catch(console.error);
+```
+
 ## Hooking logs
 The log objects you receive from calling `log()` can be hooked as event emitters, like so:
 

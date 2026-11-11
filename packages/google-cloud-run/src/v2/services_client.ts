@@ -475,7 +475,11 @@ export class ServicesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1044,10 +1048,11 @@ export class ServicesClient {
    *   project id or number. Only lowercase characters, digits, and hyphens.
    * @param {google.cloud.run.v2.Service} request.service
    *   Required. The Service instance to create.
-   * @param {string} request.serviceId
-   *   Required. The unique identifier for the Service. It must begin with letter,
+   * @param {string} [request.serviceId]
+   *   Optional. The unique identifier for the Service. It must begin with letter,
    *   and cannot end with hyphen; must contain fewer than 50 characters.
    *   The name of the service becomes {parent}/services/{service_id}.
+   *   If not provided, the server will generate a unique `service_id`.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.
@@ -1240,6 +1245,15 @@ export class ServicesClient {
    *   Optional. If set to true, and if the Service does not exist, it will create
    *   a new one. The caller must have 'run.services.create' permissions if this
    *   is set to true and the Service does not exist.
+   * @param {boolean} [request.forceNewRevision]
+   *   Optional. If set to true, a new revision will be created from the template
+   *   even if the system doesn't detect any changes from the previously deployed
+   *   revision.
+   *
+   *   This may be useful for cases where the underlying resources need to be
+   *   recreated or reinitialized. For example if the image is specified by label,
+   *   but the underlying image digest has changed) or if the container performs
+   *   deployment initialization work that needs to be performed again.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

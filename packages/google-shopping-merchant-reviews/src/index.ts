@@ -17,14 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta from './v1beta';
 
-const MerchantReviewsServiceClient = v1beta.MerchantReviewsServiceClient;
-type MerchantReviewsServiceClient = v1beta.MerchantReviewsServiceClient;
-const ProductReviewsServiceClient = v1beta.ProductReviewsServiceClient;
-type ProductReviewsServiceClient = v1beta.ProductReviewsServiceClient;
+const ProductReviewsServiceClient = v1.ProductReviewsServiceClient;
+type ProductReviewsServiceClient = v1.ProductReviewsServiceClient;
 
-export {v1, v1beta, MerchantReviewsServiceClient, ProductReviewsServiceClient};
-export default {v1, v1beta, MerchantReviewsServiceClient, ProductReviewsServiceClient};
+export {v1, ProductReviewsServiceClient};
+export default {v1, ProductReviewsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

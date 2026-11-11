@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent, query) {
-  // [START merchantapi_v1beta_generated_ReportService_Search_async]
+  // [START merchantapi_v1_generated_ReportService_Search_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -52,7 +52,7 @@ function main(parent, query) {
   // const pageToken = 'abc123'
 
   // Imports the Reports library
-  const {ReportServiceClient} = require('@google-shopping/reports').v1beta;
+  const {ReportServiceClient} = require('@google-shopping/reports').v1;
 
   // Instantiates a client
   const reportsClient = new ReportServiceClient();
@@ -72,7 +72,7 @@ function main(parent, query) {
   }
 
   callSearch();
-  // [END merchantapi_v1beta_generated_ReportService_Search_async]
+  // [END merchantapi_v1_generated_ReportService_Search_async]
 }
 
 process.on('unhandledRejection', err => {

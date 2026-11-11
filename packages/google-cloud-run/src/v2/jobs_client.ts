@@ -487,7 +487,11 @@ export class JobsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1056,9 +1060,10 @@ export class JobsClient {
    *   project id or number.
    * @param {google.cloud.run.v2.Job} request.job
    *   Required. The Job instance to create.
-   * @param {string} request.jobId
-   *   Required. The unique identifier for the Job. The name of the job becomes
+   * @param {string} [request.jobId]
+   *   Optional. The unique identifier for the Job. The name of the job becomes
    *   {parent}/jobs/{job_id}.
+   *   If not provided, the server will generate a unique `job_id`.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.

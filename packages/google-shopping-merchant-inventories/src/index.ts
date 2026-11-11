@@ -17,14 +17,13 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta from './v1beta';
 
 const LocalInventoryServiceClient = v1.LocalInventoryServiceClient;
 type LocalInventoryServiceClient = v1.LocalInventoryServiceClient;
 const RegionalInventoryServiceClient = v1.RegionalInventoryServiceClient;
 type RegionalInventoryServiceClient = v1.RegionalInventoryServiceClient;
 
-export {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
-export default {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
+export {v1, LocalInventoryServiceClient, RegionalInventoryServiceClient};
+export default {v1, LocalInventoryServiceClient, RegionalInventoryServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

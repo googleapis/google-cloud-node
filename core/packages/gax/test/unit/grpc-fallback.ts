@@ -327,37 +327,32 @@ describe('grpc-fallback', () => {
     }
   });
 
-  it('constructSettings should enable logging when enableTelemetryLogging: true is passed in client options and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
-    process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    try {
-      const gapicConfig = {
-        interfaces: {
-          'google.showcase.v1beta1.Echo': {
-            retry_codes: {},
-            retry_params: {},
-            methods: {
-              Echo: {
-                timeout_millis: 60000,
-              },
+  it('constructSettings should enable logging when enableTelemetryLogging: true is passed in client options', () => {
+    const gapicConfig = {
+      interfaces: {
+        'google.showcase.v1beta1.Echo': {
+          retry_codes: {},
+          retry_params: {},
+          methods: {
+            Echo: {
+              timeout_millis: 60000,
             },
           },
         },
-      };
-      const clientWithLogging = new GrpcClient({
-        ...opts,
-        enableTelemetryLogging: true,
-      });
-      const settings = clientWithLogging.constructSettings(
-        'google.showcase.v1beta1.Echo',
-        gapicConfig,
-        {},
-        {},
-      );
-      assert.strictEqual(settings.echo.enableTelemetryLogging, true);
-      assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
-    } finally {
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
-    }
+      },
+    };
+    const clientWithLogging = new GrpcClient({
+      ...opts,
+      enableTelemetryLogging: true,
+    });
+    const settings = clientWithLogging.constructSettings(
+      'google.showcase.v1beta1.Echo',
+      gapicConfig,
+      {},
+      {},
+    );
+    assert.strictEqual(settings.echo.enableTelemetryLogging, true);
+    assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
   });
 
   it('constructSettings should preserve GAPIC auth.defaultServicePath as canonical url.domain over emulator servicePath', () => {

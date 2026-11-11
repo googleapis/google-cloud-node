@@ -48,7 +48,7 @@ function main(parent, pageSize, pageToken) {
 
   // Imports the Promotions library
   const {PromotionsServiceClient} =
-    require('@google-shopping/promotionsonsonsonsonsons').v1beta;
+    require('@google-shopping/promotionsonsonsonsonsons').v1;
 
   // Instantiates a client
   const promotionsClient = new PromotionsServiceClient();

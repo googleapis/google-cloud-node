@@ -1894,7 +1894,8 @@
                             "SETUP_MIGRATION": 55,
                             "CREATE_BLUE_GREEN_DEPLOYMENT": 56,
                             "SWITCHOVER_BLUE_GREEN_DEPLOYMENT": 57,
-                            "DELETE_BLUE_GREEN_DEPLOYMENT": 58
+                            "DELETE_BLUE_GREEN_DEPLOYMENT": 58,
+                            "RECONCILE_NETWORKING": 64
                           }
                         },
                         "SqlOperationStatus": {
@@ -2019,6 +2020,16 @@
                     },
                     "Settings": {
                       "oneofs": {
+                        "_msdtcEnabled": {
+                          "oneof": [
+                            "msdtcEnabled"
+                          ]
+                        },
+                        "_msdtcRpcAuthMode": {
+                          "oneof": [
+                            "msdtcRpcAuthMode"
+                          ]
+                        },
                         "_dataDiskProvisionedIops": {
                           "oneof": [
                             "dataDiskProvisionedIops"
@@ -2165,6 +2176,22 @@
                           "type": "InsightsConfig",
                           "id": 25
                         },
+                        "msdtcEnabled": {
+                          "type": "bool",
+                          "id": 58,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "msdtcRpcAuthMode": {
+                          "type": "MsdtcRpcAuthMode",
+                          "id": 60,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "passwordValidationPolicy": {
                           "type": "PasswordValidationPolicy",
                           "id": 27
@@ -2303,6 +2330,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "initialUsersConfig": {
+                          "type": "InitialUsersConfig",
+                          "id": 55,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2317,6 +2351,14 @@
                             "ALWAYS": 1,
                             "NEVER": 2,
                             "ON_DEMAND": 3
+                          }
+                        },
+                        "MsdtcRpcAuthMode": {
+                          "values": {
+                            "MSDTC_RPC_AUTH_MODE_UNSPECIFIED": 0,
+                            "ALLOW_ONLY_SECURE_RPC_CALLS": 1,
+                            "FALLBACK_TO_UNSECURE_RPC_IF_NECESSARY": 2,
+                            "TURN_OFF_RPC_SECURITY": 3
                           }
                         },
                         "Edition": {
@@ -2770,6 +2812,104 @@
                         }
                       }
                     },
+                    "CertificateType": {
+                      "values": {
+                        "CERTIFICATE_TYPE_UNSPECIFIED": 0,
+                        "CERTIFICATE_TYPE_PEER_SERVER_CA": 1,
+                        "CERTIFICATE_TYPE_PEER_CLIENT_KEY": 2,
+                        "CERTIFICATE_TYPE_PEER_CLIENT_CERTIFICATE": 3
+                      }
+                    },
+                    "Intent": {
+                      "values": {
+                        "INTENT_UNSPECIFIED": 0,
+                        "PG_LOGICAL": 1,
+                        "NATIVE_REPLICATION": 2
+                      }
+                    },
+                    "DNSEntry": {
+                      "fields": {
+                        "dns": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ipv4Address": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedCertificate": {
+                      "fields": {
+                        "certificateType": {
+                          "type": "CertificateType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "content": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filePath": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedCertificateConfig": {
+                      "oneofs": {
+                        "_primaryDnsRecord": {
+                          "oneof": [
+                            "primaryDnsRecord"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bundle": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "intent": {
+                          "type": "Intent",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "primaryDnsRecord": {
+                          "type": "DNSEntry",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "customerManagedCertificates": {
+                          "rule": "repeated",
+                          "type": "CustomerManagedCertificate",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SqlActiveDirectoryConfig": {
                       "fields": {
                         "kind": {
@@ -2868,6 +3008,61 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "InitialUsersConfig": {
+                      "fields": {
+                        "initialUsers": {
+                          "rule": "repeated",
+                          "type": "InitialUser",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InitialUser": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "SqlUserType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "roles": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SqlUserType": {
+                              "values": {
+                                "BUILT_IN": 0,
+                                "CLOUD_IAM_USER": 1,
+                                "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                                "CLOUD_IAM_GROUP": 3,
+                                "CLOUD_IAM_GROUP_USER": 4,
+                                "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
+                                "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
+                                "ENTRAID_USER": 7,
+                                "ACTIVE_DIRECTORY_USER": 8
+                              }
+                            }
                           }
                         }
                       }
@@ -3175,6 +3370,13 @@
                         "workloadId": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceInstance": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3927,6 +4129,34 @@
                             }
                           ]
                         },
+                        "Start": {
+                          "requestType": "SqlInstancesStartRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}:start"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}:start"
+                              }
+                            }
+                          ]
+                        },
+                        "Stop": {
+                          "requestType": "SqlInstancesStopRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}:stop"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}:stop"
+                              }
+                            }
+                          ]
+                        },
                         "RestoreBackup": {
                           "requestType": "SqlInstancesRestoreBackupRequest",
                           "responseType": "Operation",
@@ -4175,6 +4405,22 @@
                             }
                           ]
                         },
+                        "ExecuteSqlReadOnly": {
+                          "requestType": "SqlInstancesExecuteSqlReadOnlyRequest",
+                          "responseType": "SqlInstancesExecuteSqlReadOnlyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/executeSqlReadOnly",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/executeSqlReadOnly",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "ExecuteSql": {
                           "requestType": "SqlInstancesExecuteSqlRequest",
                           "responseType": "SqlInstancesExecuteSqlResponse",
@@ -4249,6 +4495,22 @@
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*}:pointInTimeRestore",
                                 "body": "context"
+                              }
+                            }
+                          ]
+                        },
+                        "ReconcileNetworking": {
+                          "requestType": "SqlInstancesReconcileNetworkingRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}:reconcileNetworking",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}:reconcileNetworking",
+                                "body": "*"
                               }
                             }
                           ]
@@ -4818,6 +5080,56 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesStartRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesStopRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "location": {
                           "type": "string",
@@ -6357,6 +6669,20 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "workloadReplayConfig": {
+                          "type": "WorkloadReplayConfig",
+                          "id": 79,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "workloadCaptureConfig": {
+                          "type": "WorkloadCaptureConfig",
+                          "id": 80,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -6668,6 +6994,221 @@
                             "STATE_UNSPECIFIED": 0,
                             "PRE_SWITCHOVER": 1,
                             "POST_SWITCHOVER": 2
+                          }
+                        }
+                      }
+                    },
+                    "WorkloadReplayConfig": {
+                      "oneofs": {
+                        "_workloadId": {
+                          "oneof": [
+                            "workloadId"
+                          ]
+                        },
+                        "_sourceInstance": {
+                          "oneof": [
+                            "sourceInstance"
+                          ]
+                        },
+                        "_replayMode": {
+                          "oneof": [
+                            "replayMode"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "workloadId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstance": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
+                            "proto3_optional": true
+                          }
+                        },
+                        "replayMode": {
+                          "type": "ReplayMode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReplayMode": {
+                          "values": {
+                            "REPLAY_MODE_UNSPECIFIED": 0,
+                            "LIVE": 1,
+                            "OFFLINE": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "COMPLETED": 2,
+                            "FAILED": 3,
+                            "TERMINATED": 4
+                          }
+                        }
+                      }
+                    },
+                    "WorkloadCaptureConfig": {
+                      "oneofs": {
+                        "_workloadId": {
+                          "oneof": [
+                            "workloadId"
+                          ]
+                        },
+                        "_captureMode": {
+                          "oneof": [
+                            "captureMode"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_replayInstance": {
+                          "oneof": [
+                            "replayInstance"
+                          ]
+                        },
+                        "_retentionDays": {
+                          "oneof": [
+                            "retentionDays"
+                          ]
+                        },
+                        "_backupId": {
+                          "oneof": [
+                            "backupId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "workloadId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "captureMode": {
+                          "type": "CaptureMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "replayInstance": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
+                            "proto3_optional": true
+                          }
+                        },
+                        "retentionDays": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "backupId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxCaptureDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CaptureMode": {
+                          "values": {
+                            "CAPTURE_MODE_UNSPECIFIED": 0,
+                            "CAPTURE_ONLY": 1,
+                            "CAPTURE_AND_LIVE_REPLAY": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "COMPLETED": 2,
+                            "FAILED": 3,
+                            "TERMINATED": 4
                           }
                         }
                       }
@@ -7173,6 +7714,38 @@
                         }
                       }
                     },
+                    "SqlInstancesExecuteSqlReadOnlyRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "ExecuteSqlReadOnlyPayload",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "SqlInstancesExecuteSqlRequest": {
                       "fields": {
                         "instance": {
@@ -7196,6 +7769,61 @@
                         "location": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteSqlReadOnlyPayload": {
+                      "oneofs": {
+                        "userPassword": {
+                          "oneof": [
+                            "passwordSecretVersion",
+                            "autoIamAuthn"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "user": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sqlStatement": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passwordSecretVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "autoIamAuthn": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rowLimit": {
+                          "type": "int64",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7277,6 +7905,28 @@
                             "FAIL_PARTIAL_RESULT": 1,
                             "ALLOW_PARTIAL_RESULT": 2
                           }
+                        }
+                      }
+                    },
+                    "SqlInstancesExecuteSqlReadOnlyResponse": {
+                      "fields": {
+                        "messages": {
+                          "rule": "repeated",
+                          "type": "SqlInstancesExecuteSqlResponse.Message",
+                          "id": 9
+                        },
+                        "metadata": {
+                          "type": "Metadata",
+                          "id": 6
+                        },
+                        "results": {
+                          "rule": "repeated",
+                          "type": "QueryResult",
+                          "id": 7
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 8
                         }
                       }
                     },
@@ -7510,6 +8160,62 @@
                         "OPERATIONAL_ISSUE": 4,
                         "KMS_KEY_ISSUE": 5,
                         "PROJECT_ABUSE": 8
+                      }
+                    },
+                    "SqlInstancesReconcileNetworkingRequest": {
+                      "oneofs": {
+                        "reconcileData": {
+                          "oneof": [
+                            "pscDns"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pscDns": {
+                          "type": "PscDnsReconcileNetworkingRequest",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PscDnsReconcileNetworkingRequest": {
+                      "fields": {
+                        "networks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
                       }
                     },
                     "BlueGreenDeploymentsService": {
@@ -8934,6 +9640,50 @@
                               }
                             }
                           ]
+                        },
+                        "UpdateCustomerManagedCertificate": {
+                          "requestType": "UpdateCustomerManagedCertificateRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCustomerManagedCertificate": {
+                          "requestType": "DeleteCustomerManagedCertificateRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}"
+                              }
+                            }
+                          ]
+                        },
+                        "ListCustomerManagedCertificates": {
+                          "requestType": "ListCustomerManagedCertificatesRequest",
+                          "responseType": "ListCustomerManagedCertificatesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project}/instances/{instance}/customerManagedCertificates"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -9035,6 +9785,107 @@
                           "rule": "repeated",
                           "type": "SslCert",
                           "id": 2
+                        }
+                      }
+                    },
+                    "UpdateCustomerManagedCertificateRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customerManagedCertificateConfig": {
+                          "type": "CustomerManagedCertificateConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "certificateBundle": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomerManagedCertificateRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "certificateBundle": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerManagedCertificatesRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerManagedCertificatesResponse": {
+                      "fields": {
+                        "customerManagedCertificates": {
+                          "rule": "repeated",
+                          "type": "CustomerManagedCertificateConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -9874,6 +10725,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "captureMode": {
+                          "type": "WorkloadCaptureMode",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -9884,6 +10742,13 @@
                             "COMPLETED": 2,
                             "FAILED": 3,
                             "TERMINATED": 4
+                          }
+                        },
+                        "WorkloadCaptureMode": {
+                          "values": {
+                            "WORKLOAD_CAPTURE_MODE_UNSPECIFIED": 0,
+                            "CAPTURE_ONLY": 1,
+                            "CAPTURE_AND_LIVE_REPLAY": 2
                           }
                         }
                       }
@@ -10433,6 +11298,34 @@
                             }
                           ]
                         },
+                        "Start": {
+                          "requestType": "SqlInstancesStartRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}:start"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}:start"
+                              }
+                            }
+                          ]
+                        },
+                        "Stop": {
+                          "requestType": "SqlInstancesStopRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}:stop"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}:stop"
+                              }
+                            }
+                          ]
+                        },
                         "RestoreBackup": {
                           "requestType": "SqlInstancesRestoreBackupRequest",
                           "responseType": "Operation",
@@ -10681,6 +11574,22 @@
                             }
                           ]
                         },
+                        "ExecuteSqlReadOnly": {
+                          "requestType": "SqlInstancesExecuteSqlReadOnlyRequest",
+                          "responseType": "SqlInstancesExecuteSqlReadOnlyResponse",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/executeSqlReadOnly",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/executeSqlReadOnly",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "ExecuteSql": {
                           "requestType": "SqlInstancesExecuteSqlRequest",
                           "responseType": "SqlInstancesExecuteSqlResponse",
@@ -10755,6 +11664,22 @@
                               "(google.api.http)": {
                                 "post": "/sql/v1beta4/{parent=projects/*}:pointInTimeRestore",
                                 "body": "context"
+                              }
+                            }
+                          ]
+                        },
+                        "ReconcileNetworking": {
+                          "requestType": "SqlInstancesReconcileNetworkingRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}:reconcileNetworking",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}:reconcileNetworking",
+                                "body": "*"
                               }
                             }
                           ]
@@ -10871,6 +11796,50 @@
                             {
                               "(google.api.http)": {
                                 "get": "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateCustomerManagedCertificate": {
+                          "requestType": "UpdateCustomerManagedCertificateRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).patch": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCustomerManagedCertificate": {
+                          "requestType": "DeleteCustomerManagedCertificateRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}"
+                              }
+                            }
+                          ]
+                        },
+                        "ListCustomerManagedCertificates": {
+                          "requestType": "ListCustomerManagedCertificatesRequest",
+                          "responseType": "ListCustomerManagedCertificatesResponse",
+                          "options": {
+                            "(google.api.http).get": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates"
                               }
                             }
                           ]
@@ -11350,6 +12319,107 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomerManagedCertificateRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customerManagedCertificateConfig": {
+                          "type": "CustomerManagedCertificateConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "certificateBundle": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomerManagedCertificateRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "certificateBundle": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerManagedCertificatesRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomerManagedCertificatesResponse": {
+                      "fields": {
+                        "customerManagedCertificates": {
+                          "rule": "repeated",
+                          "type": "CustomerManagedCertificateConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -11836,6 +12906,56 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesStartRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesStopRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "location": {
                           "type": "string",
@@ -12562,6 +13682,38 @@
                         }
                       }
                     },
+                    "SqlInstancesExecuteSqlReadOnlyRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "ExecuteSqlReadOnlyPayload",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "SqlInstancesExecuteSqlRequest": {
                       "fields": {
                         "instance": {
@@ -12621,6 +13773,61 @@
                         "operationId": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ExecuteSqlReadOnlyPayload": {
+                      "oneofs": {
+                        "userPassword": {
+                          "oneof": [
+                            "passwordSecretVersion",
+                            "autoIamAuthn"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "user": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sqlStatement": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passwordSecretVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "autoIamAuthn": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rowLimit": {
+                          "type": "int64",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12699,6 +13906,28 @@
                             "FAIL_PARTIAL_RESULT": 1,
                             "ALLOW_PARTIAL_RESULT": 2
                           }
+                        }
+                      }
+                    },
+                    "SqlInstancesExecuteSqlReadOnlyResponse": {
+                      "fields": {
+                        "messages": {
+                          "rule": "repeated",
+                          "type": "SqlInstancesExecuteSqlResponse.Message",
+                          "id": 9
+                        },
+                        "metadata": {
+                          "type": "Metadata",
+                          "id": 6
+                        },
+                        "results": {
+                          "rule": "repeated",
+                          "type": "QueryResult",
+                          "id": 7
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 8
                         }
                       }
                     },
@@ -12916,6 +14145,62 @@
                           "id": 100,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesReconcileNetworkingRequest": {
+                      "oneofs": {
+                        "reconcileData": {
+                          "oneof": [
+                            "pscDns"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pscDns": {
+                          "type": "PscDnsReconcileNetworkingRequest",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PscDnsReconcileNetworkingRequest": {
+                      "fields": {
+                        "networks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -14011,6 +15296,20 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "workloadReplayConfig": {
+                          "type": "WorkloadReplayConfig",
+                          "id": 79,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "workloadCaptureConfig": {
+                          "type": "WorkloadCaptureConfig",
+                          "id": 80,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -14322,6 +15621,221 @@
                             "STATE_UNSPECIFIED": 0,
                             "PRE_SWITCHOVER": 1,
                             "POST_SWITCHOVER": 2
+                          }
+                        }
+                      }
+                    },
+                    "WorkloadReplayConfig": {
+                      "oneofs": {
+                        "_workloadId": {
+                          "oneof": [
+                            "workloadId"
+                          ]
+                        },
+                        "_sourceInstance": {
+                          "oneof": [
+                            "sourceInstance"
+                          ]
+                        },
+                        "_replayMode": {
+                          "oneof": [
+                            "replayMode"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "workloadId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstance": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
+                            "proto3_optional": true
+                          }
+                        },
+                        "replayMode": {
+                          "type": "ReplayMode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReplayMode": {
+                          "values": {
+                            "REPLAY_MODE_UNSPECIFIED": 0,
+                            "LIVE": 1,
+                            "OFFLINE": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "COMPLETED": 2,
+                            "FAILED": 3,
+                            "TERMINATED": 4
+                          }
+                        }
+                      }
+                    },
+                    "WorkloadCaptureConfig": {
+                      "oneofs": {
+                        "_workloadId": {
+                          "oneof": [
+                            "workloadId"
+                          ]
+                        },
+                        "_captureMode": {
+                          "oneof": [
+                            "captureMode"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_replayInstance": {
+                          "oneof": [
+                            "replayInstance"
+                          ]
+                        },
+                        "_retentionDays": {
+                          "oneof": [
+                            "retentionDays"
+                          ]
+                        },
+                        "_backupId": {
+                          "oneof": [
+                            "backupId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "workloadId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "captureMode": {
+                          "type": "CaptureMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "replayInstance": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudsql.googleapis.com/Instance",
+                            "proto3_optional": true
+                          }
+                        },
+                        "retentionDays": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "backupId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxCaptureDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CaptureMode": {
+                          "values": {
+                            "CAPTURE_MODE_UNSPECIFIED": 0,
+                            "CAPTURE_ONLY": 1,
+                            "CAPTURE_AND_LIVE_REPLAY": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "COMPLETED": 2,
+                            "FAILED": 3,
+                            "TERMINATED": 4
                           }
                         }
                       }
@@ -16572,7 +18086,8 @@
                             "SWITCHOVER_BLUE_GREEN_DEPLOYMENT": 56,
                             "DELETE_BLUE_GREEN_DEPLOYMENT": 57,
                             "SETUP_MIGRATION": 58,
-                            "AGENT_SEND_MESSAGE": 59
+                            "AGENT_SEND_MESSAGE": 59,
+                            "RECONCILE_NETWORKING": 64
                           }
                         },
                         "SqlOperationStatus": {
@@ -16805,6 +18320,16 @@
                     },
                     "Settings": {
                       "oneofs": {
+                        "_msdtcEnabled": {
+                          "oneof": [
+                            "msdtcEnabled"
+                          ]
+                        },
+                        "_msdtcRpcAuthMode": {
+                          "oneof": [
+                            "msdtcRpcAuthMode"
+                          ]
+                        },
                         "_dataDiskProvisionedIops": {
                           "oneof": [
                             "dataDiskProvisionedIops"
@@ -16951,6 +18476,22 @@
                           "type": "InsightsConfig",
                           "id": 25
                         },
+                        "msdtcEnabled": {
+                          "type": "bool",
+                          "id": 58,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "msdtcRpcAuthMode": {
+                          "type": "MsdtcRpcAuthMode",
+                          "id": 60,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "passwordValidationPolicy": {
                           "type": "PasswordValidationPolicy",
                           "id": 27
@@ -17089,6 +18630,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "initialUsersConfig": {
+                          "type": "InitialUsersConfig",
+                          "id": 55,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -17103,6 +18651,14 @@
                             "ALWAYS": 1,
                             "NEVER": 2,
                             "ON_DEMAND": 3
+                          }
+                        },
+                        "MsdtcRpcAuthMode": {
+                          "values": {
+                            "MSDTC_RPC_AUTH_MODE_UNSPECIFIED": 0,
+                            "ALLOW_ONLY_SECURE_RPC_CALLS": 1,
+                            "FALLBACK_TO_UNSECURE_RPC_IF_NECESSARY": 2,
+                            "TURN_OFF_RPC_SECURITY": 3
                           }
                         },
                         "Edition": {
@@ -17381,6 +18937,104 @@
                         }
                       }
                     },
+                    "CertificateType": {
+                      "values": {
+                        "CERTIFICATE_TYPE_UNSPECIFIED": 0,
+                        "CERTIFICATE_TYPE_PEER_SERVER_CA": 1,
+                        "CERTIFICATE_TYPE_PEER_CLIENT_KEY": 2,
+                        "CERTIFICATE_TYPE_PEER_CLIENT_CERTIFICATE": 3
+                      }
+                    },
+                    "Intent": {
+                      "values": {
+                        "INTENT_UNSPECIFIED": 0,
+                        "PG_LOGICAL": 1,
+                        "NATIVE_REPLICATION": 2
+                      }
+                    },
+                    "DNSEntry": {
+                      "fields": {
+                        "dns": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ipv4Address": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedCertificate": {
+                      "fields": {
+                        "certificateType": {
+                          "type": "CertificateType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "content": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filePath": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedCertificateConfig": {
+                      "oneofs": {
+                        "_primaryDnsRecord": {
+                          "oneof": [
+                            "primaryDnsRecord"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bundle": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "intent": {
+                          "type": "Intent",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "primaryDnsRecord": {
+                          "type": "DNSEntry",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "customerManagedCertificates": {
+                          "rule": "repeated",
+                          "type": "CustomerManagedCertificate",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SslCertsCreateEphemeralRequest": {
                       "fields": {
                         "publicKey": {
@@ -17583,6 +19237,61 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "InitialUsersConfig": {
+                      "fields": {
+                        "initialUsers": {
+                          "rule": "repeated",
+                          "type": "InitialUser",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InitialUser": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "SqlUserType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "roles": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SqlUserType": {
+                              "values": {
+                                "BUILT_IN": 0,
+                                "CLOUD_IAM_USER": 1,
+                                "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                                "CLOUD_IAM_GROUP": 3,
+                                "CLOUD_IAM_GROUP_USER": 4,
+                                "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
+                                "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
+                                "ENTRAID_USER": 7,
+                                "ACTIVE_DIRECTORY_USER": 8
+                              }
+                            }
                           }
                         }
                       }
@@ -18068,6 +19777,13 @@
                         "workloadId": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceInstance": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -19985,6 +21701,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "captureMode": {
+                          "type": "WorkloadCaptureMode",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -19995,6 +21718,13 @@
                             "COMPLETED": 2,
                             "FAILED": 3,
                             "TERMINATED": 4
+                          }
+                        },
+                        "WorkloadCaptureMode": {
+                          "values": {
+                            "WORKLOAD_CAPTURE_MODE_UNSPECIFIED": 0,
+                            "CAPTURE_ONLY": 1,
+                            "CAPTURE_AND_LIVE_REPLAY": 2
                           }
                         }
                       }

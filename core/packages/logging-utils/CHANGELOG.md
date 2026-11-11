@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.1.1...google-logging-utils-v2.2.0) (2026-11-09)
+
+
+### Features
+
+* **gax:** Add logging to observability sample ([#9786](https://github.com/googleapis/google-cloud-node/issues/9786)) ([7c27ae4](https://github.com/googleapis/google-cloud-node/commit/7c27ae4277ded35107fe96158747f925061ea372))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.1.0...google-logging-utils-v2.1.1) (2026-10-28)
 
 
