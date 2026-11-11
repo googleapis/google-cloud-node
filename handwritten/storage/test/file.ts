@@ -26,7 +26,7 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import sinon, {createSandbox, stub, spy, restore, useFakeTimers} from 'sinon';
+import sinon, {createSandbox, stub, spy, useFakeTimers} from 'sinon';
 import {GoogleAuth} from 'google-auth-library';
 import {
   FileExceptionMessages,
@@ -2076,24 +2076,28 @@ describe('File', () => {
             idempotencyStrategy: IdempotencyStrategy.RetryConditional,
           },
         },
-        getRequestInterceptors: stub().returns([
-          (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
-        ]),
+        getRequestInterceptors: sandbox
+          .stub()
+          .returns([
+            (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
+          ]),
         generation: 123,
         encryptionKey: 'test-encryption-key',
         kmsKeyName: 'test-kms-key-name',
         userProject: 'test-user-project',
         instancePreconditionOpts: {ifGenerationMatch: 123},
-        createResumableUpload: spy(),
+        createResumableUpload: sandbox.spy(),
       };
 
-      resumableUploadStub = stub();
+      resumableUploadStub = sandbox.stub();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (global as any).resumableUpload = {createURI: resumableUploadStub};
     });
 
     afterEach(() => {
-      restore();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (global as any).resumableUpload;
+      sandbox.restore();
     });
 
     it('should not require options', () => {
