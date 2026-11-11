@@ -31,7 +31,8 @@ import {
 } from './util/helpers';
 import {
   allDescendants,
-  fieldFiltersQuery,
+  compositeFilter,
+  fieldFilter,
   limit,
   orderBy,
   queryEquals,
@@ -53,6 +54,7 @@ import api = google.firestore.v1;
 import {
   RECURSIVE_DELETE_MAX_PENDING_OPS,
   REFERENCE_NAME_MIN_ID,
+  REFERENCE_NAME_MIN_STRING_ID,
 } from '../src/recursive-delete';
 import {Deferred} from '../src/util';
 
@@ -129,6 +131,35 @@ describe('recursiveDelete() method:', () => {
       };
     }
 
+    function startAtString(name: string): api.IValue {
+      return {
+        referenceValue:
+          DATABASE_ROOT +
+          '/documents/' +
+          name +
+          '/' +
+          REFERENCE_NAME_MIN_STRING_ID,
+      };
+    }
+
+    function descendantsOf(name: string): api.IStructuredQuery {
+      return {
+        where: compositeFilter(
+          'AND',
+          compositeFilter(
+            'OR',
+            fieldFilter('__name__', 'GREATER_THAN_OR_EQUAL', startAt(name)),
+            fieldFilter(
+              '__name__',
+              'GREATER_THAN_OR_EQUAL',
+              startAtString(name),
+            ),
+          ),
+          fieldFilter('__name__', 'LESS_THAN', endAt(name)),
+        ),
+      };
+    }
+
     it('for root-level collections', async () => {
       const overrides: ApiOverride = {
         runQuery: req => {
@@ -136,14 +167,7 @@ describe('recursiveDelete() method:', () => {
             req,
             select('__name__'),
             allDescendants(/* kindless= */ true),
-            fieldFiltersQuery(
-              '__name__',
-              'GREATER_THAN_OR_EQUAL',
-              startAt('root'),
-              '__name__',
-              'LESS_THAN',
-              endAt('root'),
-            ),
+            descendantsOf('root'),
             limit(RECURSIVE_DELETE_MAX_PENDING_OPS),
           );
           return stream();
@@ -161,14 +185,7 @@ describe('recursiveDelete() method:', () => {
             'root/doc',
             select('__name__'),
             allDescendants(/* kindless= */ true),
-            fieldFiltersQuery(
-              '__name__',
-              'GREATER_THAN_OR_EQUAL',
-              startAt('root/doc/nestedCol'),
-              '__name__',
-              'LESS_THAN',
-              endAt('root/doc/nestedCol'),
-            ),
+            descendantsOf('root/doc/nestedCol'),
             limit(RECURSIVE_DELETE_MAX_PENDING_OPS),
           );
           return stream();
@@ -218,14 +235,7 @@ describe('recursiveDelete() method:', () => {
                   `projects/${PROJECT_ID}/databases/(default)/` +
                   'documents/collectionId/doc1',
               }),
-              fieldFiltersQuery(
-                '__name__',
-                'GREATER_THAN_OR_EQUAL',
-                startAt('root'),
-                '__name__',
-                'LESS_THAN',
-                endAt('root'),
-              ),
+              descendantsOf('root'),
               limit(RECURSIVE_DELETE_MAX_PENDING_OPS - 1),
             );
             return stream();
@@ -277,14 +287,7 @@ describe('recursiveDelete() method:', () => {
               request,
               select('__name__'),
               allDescendants(/* kindless= */ true),
-              fieldFiltersQuery(
-                '__name__',
-                'GREATER_THAN_OR_EQUAL',
-                startAt('root'),
-                '__name__',
-                'LESS_THAN',
-                endAt('root'),
-              ),
+              descendantsOf('root'),
               limit(maxPendingOps),
             );
             called.push(1);
@@ -295,14 +298,7 @@ describe('recursiveDelete() method:', () => {
               select('__name__'),
               allDescendants(/* kindless= */ true),
               orderBy('__name__', 'ASCENDING'),
-              fieldFiltersQuery(
-                '__name__',
-                'GREATER_THAN_OR_EQUAL',
-                startAt('root'),
-                '__name__',
-                'LESS_THAN',
-                endAt('root'),
-              ),
+              descendantsOf('root'),
               queryStartAt(false, {
                 referenceValue:
                   `projects/${PROJECT_ID}/databases/(default)/` +

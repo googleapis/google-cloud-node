@@ -22,6 +22,7 @@ import Firestore, {
   CollectionReference,
   DocumentReference,
   FieldPath,
+  Filter,
   Query,
   QueryDocumentSnapshot,
 } from '.';
@@ -40,6 +41,15 @@ import {StatusCode} from './status-code';
  * descendants in a single collection.
  */
 export const REFERENCE_NAME_MIN_ID = '__id-9223372036854775808__';
+
+/*!
+ * The lowest possible string ID. Enterprise edition databases have no numeric
+ * IDs and compare REFERENCE_NAME_MIN_ID as a plain string, which sorts after
+ * every ID that starts with a digit or an uppercase letter. This constant is
+ * used alongside REFERENCE_NAME_MIN_ID so that the range also starts below
+ * every string ID.
+ */
+export const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
 /*!
  * The query limit used for recursive deletes when fetching all descendants of
@@ -260,11 +270,23 @@ export class RecursiveDelete {
       // collection prefix. The MIN_KEY constant represents the minimum key in
       // this collection, and a null byte + the MIN_KEY represents the minimum
       // key is the next possible collection.
+      //
+      // MIN_KEY is only the minimum key where numeric IDs exist (Standard
+      // edition). Enterprise edition compares it as a string, so the lower
+      // bound is the disjunction of MIN_KEY and the minimum string ID: on
+      // Standard edition the second bound is redundant, on Enterprise edition
+      // it is the one that includes IDs sorting below "__id".
       const nullChar = String.fromCharCode(0);
       const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
+      const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
       const endAt = collectionId + nullChar + '/' + REFERENCE_NAME_MIN_ID;
       query = query
-        .where(FieldPath.documentId(), '>=', startAt)
+        .where(
+          Filter.or(
+            Filter.where(FieldPath.documentId(), '>=', startAt),
+            Filter.where(FieldPath.documentId(), '>=', startAtString),
+          ),
+        )
         .where(FieldPath.documentId(), '<', endAt);
     }
 

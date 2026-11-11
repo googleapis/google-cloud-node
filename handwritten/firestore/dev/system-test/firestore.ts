@@ -7568,6 +7568,50 @@ describe('BulkWriter class', () => {
       expect(callbackCount).to.equal(6);
       await bulkWriter.close();
     });
+
+    it('on collection with IDs that sort below the minimum numeric ID', async () => {
+      // Enterprise edition compares REFERENCE_NAME_MIN_ID ('__id-...__') as a
+      // string, which sorts after IDs starting with a digit or a capital.
+      const coll = firestore.collection('node_ids_' + autoId());
+      const ids = ['0', '9', 'A', 'Z', '_', 'a', '~'];
+      const batch = firestore.batch();
+      for (const id of ids) {
+        batch.set(coll.doc(id), {id});
+        batch.set(coll.doc(id).collection('child').doc('Child'), {id});
+      }
+      await batch.commit();
+
+      await firestore.recursiveDelete(coll);
+
+      expect((await coll.get()).size).to.equal(0);
+      for (const id of ids) {
+        expect((await coll.doc(id).collection('child').get()).size).to.equal(
+          0,
+        );
+      }
+    });
+
+    it('on nested collection with IDs that sort below the minimum numeric ID', async () => {
+      const parent = randomCol.doc('Parent');
+      const collectionIds = ['@', 'A', 'A0', 'B'];
+      const ids = ['0', 'A', 'a'];
+      const batch = firestore.batch();
+      for (const collectionId of collectionIds) {
+        for (const id of ids) {
+          batch.set(parent.collection(collectionId).doc(id), {id});
+        }
+      }
+      await batch.commit();
+
+      await firestore.recursiveDelete(parent.collection('A'));
+
+      expect((await parent.collection('A').get()).size).to.equal(0);
+      for (const collectionId of ['@', 'A0', 'B']) {
+        expect((await parent.collection(collectionId).get()).size).to.equal(
+          ids.length,
+        );
+      }
+    });
   });
 
   it('can retry failed writes with a provided callback', async () => {
