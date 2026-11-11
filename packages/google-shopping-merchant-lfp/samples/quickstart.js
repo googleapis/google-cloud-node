@@ -48,13 +48,13 @@ function main(parent, targetAccount) {
    *  call. Provide the page token to retrieve the subsequent page. When
    *  paginating, all other parameters provided to `ListLfpStoresRequest` must
    *  match the call that provided the page token. The token returned as
-   *  nextPageToken google.shopping.merchant.lfp.v1beta.ListLfpStoresResponse.next_page_token
+   *  nextPageToken google.shopping.merchant.lfp.v1.ListLfpStoresResponse.next_page_token
    *  in the response to the previous request.
    */
   // const pageToken = 'abc123'
 
   // Imports the Lfp library
-  const {LfpStoreServiceClient} = require('@google-shopping/lfp').v1beta;
+  const {LfpStoreServiceClient} = require('@google-shopping/lfp').v1;
 
   // Instantiates a client
   const lfpClient = new LfpStoreServiceClient();

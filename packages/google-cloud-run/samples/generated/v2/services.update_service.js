@@ -47,6 +47,16 @@ function main(service) {
    *  is set to true and the Service does not exist.
    */
   // const allowMissing = true
+  /**
+   *  Optional. If set to true, a new revision will be created from the template
+   *  even if the system doesn't detect any changes from the previously deployed
+   *  revision.
+   *  This may be useful for cases where the underlying resources need to be
+   *  recreated or reinitialized. For example if the image is specified by label,
+   *  but the underlying image digest has changed) or if the container performs
+   *  deployment initialization work that needs to be performed again.
+   */
+  // const forceNewRevision = true
 
   // Imports the Run library
   const {ServicesClient} = require('@google-cloud/run').v2;

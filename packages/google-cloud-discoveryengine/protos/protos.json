@@ -5492,6 +5492,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeys"
                           }
                         },

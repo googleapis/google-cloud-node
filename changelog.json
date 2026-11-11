@@ -5,6 +5,471 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "eb47174fc7b2cc4ef808146f65dea1891d895e8f",
+          "message": "Graduate pipeline search from preview to GA",
+          "issues": [
+            "9700"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "2ef91931-344b-4f15-8ba5-83e22daf0487",
+      "createTime": "2026-11-10T15:38:13.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "0a9c5cbe-26d6-495c-ab53-acbed1695db0",
+      "createTime": "2026-11-09T15:57:07.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "46b3d725-0e91-417c-968f-04714d2ab12c",
+      "createTime": "2026-11-09T15:57:07.550Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/navconnect",
+      "id": "edd3f9e0-0398-470c-9417-6ff119ba45f2",
+      "createTime": "2026-11-09T15:57:07.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "4e38c43a-c265-47eb-a3ef-4964d7bc2f72",
+      "createTime": "2026-11-09T15:57:07.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.32.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "aceb367f-90de-4c34-897b-bd59079e7705",
+      "createTime": "2026-11-09T15:57:07.453Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "bc806669c8503cf77843d8be643fccc69563a2bf",
+          "message": "Regenerate with EnableManagedRotationRequest changes",
+          "issues": [
+            "9818"
+          ],
+          "scope": "secretmanager",
+          "breakingChangeNote": "`EnableManagedRotationRequest` now references the top-level `CloudSqlSingleUserCredentials` message, and its oneof `credentials` is renamed to `credential`."
+        }
+      ],
+      "version": "8.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "7103481d-7965-4196-87e2-0f2c1ce43cd8",
+      "createTime": "2026-11-09T15:57:07.421Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c59a874b88c09a608057ada6776026211fb04c7",
+          "message": "Onboard a new library",
+          "issues": [
+            "9820"
+          ],
+          "scope": "google/cloud/saasplatform/saasservicemgmt/v1"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "06cccdff-5c29-41d7-bd2a-c6e40aeb1cad",
+      "createTime": "2026-11-09T15:57:07.391Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "298b48bc-0166-4324-82a6-e3403009f9d7",
+      "createTime": "2026-11-09T15:57:07.355Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "224bbee3-9624-4986-afe6-0ff1725188b2",
+      "createTime": "2026-11-09T15:57:07.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "76b8b7a7-7176-42a7-affe-608db26fa997",
+      "createTime": "2026-11-09T15:57:07.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "58839fa8-eb6e-49b8-80b9-96bd4840101f",
+      "createTime": "2026-11-09T15:57:07.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "9af95b01-aa14-4f4f-9f71-e81f00193a4f",
+      "createTime": "2026-11-09T15:57:07.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "1d232e81-727f-454e-a046-20ab074dda02",
+      "createTime": "2026-11-09T15:57:07.180Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "4165dad3bf3169852898931705b0f771058928d6",
+          "message": "Use NODE_OPTIONS with jsdoc binary in docs script",
+          "issues": [
+            "9688"
+          ],
+          "scope": "compute"
+        }
+      ],
+      "version": "7.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "db9b9012-4853-4611-9b76-228a97b2b24d",
+      "createTime": "2026-11-09T15:57:07.142Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "4a1e4f98-9ff9-4c0c-afe9-8bc51be1f6fe",
+      "createTime": "2026-11-09T15:57:07.112Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "1426f5de-c6dc-4df3-89a6-ff80a8c6af5f",
+      "createTime": "2026-11-09T15:57:07.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "36bbeb14-8f63-4821-ae07-13b013c90a88",
+      "createTime": "2026-11-09T15:57:07.043Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "7.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "64f1e9e7-7ef9-45f4-a878-be410f571675",
+      "createTime": "2026-11-09T15:57:07.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "74cd73dd26ff9409ac7661a1a1494025e932841f",
+          "message": "Use ROOT_CONTEXT when creating receive span without parent context",
+          "issues": [
+            "9499",
+            "7624"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "fix",
+          "sha": "f25cd628110307f5b54f28b07398e4e3c3b5fb9d",
+          "message": "Import protos from @google-cloud/pubsub-api in index.ts",
+          "issues": [
+            "9686"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "6.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "971f1023-4025-4ae4-a5c1-28400f884242",
+      "createTime": "2026-11-09T15:57:06.974Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7bb6fc64bbb7355a367f84aaaa7b7a038ff588ec",
+          "message": "[cleanup] widen EntryJson.insertId to string | number | null",
+          "issues": [
+            "9809",
+            "7563"
+          ],
+          "scope": "logging"
+        }
+      ],
+      "version": "12.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "8e49a0df-79f4-44dd-8ce3-2efd4226fb79",
+      "createTime": "2026-11-09T15:57:06.940Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "788b83a651df30075f812650ed4b3719ce3005e7",
+          "message": "Check getPicoseconds in BigQueryTimestamp",
+          "issues": [
+            "9830"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "9939ac56-f01a-41b7-8cdc-ec051aba2091",
+      "createTime": "2026-11-09T15:57:06.906Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c27ae4277ded35107fe96158747f925061ea372",
+          "message": "Add logging to observability sample",
+          "issues": [
+            "9786"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "f240e970-237a-4353-87c1-b3a360ef9092",
+      "createTime": "2026-11-09T15:57:06.869Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d3897b97efc37ebaa2f3e7c248ad602e2f8e6373",
+          "message": "[cleanup] set iss from keyFile clientEmail",
+          "issues": [
+            "9808",
+            "9469"
+          ],
+          "scope": "google-auth-library"
+        }
+      ],
+      "version": "11.3.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "83e375df-2162-4654-9b1e-f778df2992f0",
+      "createTime": "2026-11-09T15:57:06.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c27ae4277ded35107fe96158747f925061ea372",
+          "message": "Add logging to observability sample",
+          "issues": [
+            "9786"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "5cfe1b6251536a6b895b04632f4eab24bbda3f36",
+          "message": "Call logNetworkAttempt and logCall in createApiCall",
+          "issues": [
+            "9760"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "7c1c78e5-e1dd-4572-bc52-8b928a1d16f9",
+      "createTime": "2026-11-09T15:57:06.804Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "bda12dab723a139faed9b326354f2a3175d192bb",
           "message": "Re-throw upload error after aborting in uploadFileInChunks",
           "issues": [
@@ -107377,5 +107842,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-03T06:14:32.627Z"
+  "updateTime": "2026-11-10T15:38:13.426Z"
 }

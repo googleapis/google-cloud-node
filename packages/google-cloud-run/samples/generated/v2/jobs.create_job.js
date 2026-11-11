@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, job, jobId) {
+function main(parent, job) {
   // [START run_v2_generated_Jobs_CreateJob_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -39,8 +39,9 @@ function main(parent, job, jobId) {
    */
   // const job = {}
   /**
-   *  Required. The unique identifier for the Job. The name of the job becomes
+   *  Optional. The unique identifier for the Job. The name of the job becomes
    *  {parent}/jobs/{job_id}.
+   *  If not provided, the server will generate a unique `job_id`.
    */
   // const jobId = 'abc123'
   /**
@@ -60,7 +61,6 @@ function main(parent, job, jobId) {
     const request = {
       parent,
       job,
-      jobId,
     };
 
     // Run request

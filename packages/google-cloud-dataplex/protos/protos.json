@@ -8593,7 +8593,8 @@
                         "result": {
                           "oneof": [
                             "datasetResult",
-                            "tableResult"
+                            "tableResult",
+                            "dataProductResult"
                           ]
                         }
                       },
@@ -8608,6 +8609,13 @@
                         "tableResult": {
                           "type": "TableResult",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataProductResult": {
+                          "type": "DataProductResult",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -8670,6 +8678,53 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "DataProductResult": {
+                          "fields": {
+                            "overview": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queries": {
+                              "rule": "repeated",
+                              "type": "Query",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            },
+                            "assetDescriptions": {
+                              "rule": "repeated",
+                              "type": "AssetDescription",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AssetDescription": {
+                              "fields": {
+                                "resource": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "overview": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
                               }
                             }
                           }

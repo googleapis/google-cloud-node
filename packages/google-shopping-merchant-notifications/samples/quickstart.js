@@ -45,7 +45,7 @@ function main(parent) {
 
   // Imports the Notifications library
   const {NotificationsApiServiceClient} =
-    require('@google-shopping/notifications').v1beta;
+    require('@google-shopping/notifications').v1;
 
   // Instantiates a client
   const notificationsClient = new NotificationsApiServiceClient();

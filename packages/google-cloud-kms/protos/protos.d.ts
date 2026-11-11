@@ -7201,7 +7201,8 @@ export namespace google {
                     enum AttestationFormat {
                         ATTESTATION_FORMAT_UNSPECIFIED = 0,
                         CAVIUM_V1_COMPRESSED = 3,
-                        CAVIUM_V2_COMPRESSED = 4
+                        CAVIUM_V2_COMPRESSED = 4,
+                        CAVIUM_V209 = 5
                     }
 
                     /** Properties of a CertificateChains. */

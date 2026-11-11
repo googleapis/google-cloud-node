@@ -13,7 +13,6 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Quota_service.list_quota_groups](#quota_service.list_quota_groups)
-  * [Quota_service.list_quota_groups](#quota_service.list_quota_groups)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -41,23 +40,6 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-quota/samples/generated/v1/quota_service.list_quota_groups.js`
-
-
------
-
-
-
-
-### Quota_service.list_quota_groups
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js`
 
 
 -----

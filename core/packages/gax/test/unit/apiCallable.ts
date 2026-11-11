@@ -1876,14 +1876,12 @@ describe('createApiCall', () => {
       loggingUtils.setBackend(sink);
       harness = new OtelHarness();
       harness.setup();
-      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
     });
 
     afterEach(() => {
       clearMetadataCache();
       loggingUtils.setBackend(undefined);
       harness.teardown();
-      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
     });
@@ -2809,11 +2807,9 @@ describe('createApiCall', () => {
 
         for (const childEnv of [
           {
-            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
             CHILD_ENABLE_OPT: 'true',
           },
           {
-            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
             GOOGLE_SDK_NODE_LOGGING: 'storage,example',
           },
         ]) {

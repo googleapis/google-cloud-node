@@ -130,6 +130,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "Start": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "Stop": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "RestoreBackup": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -210,6 +220,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ExecuteSqlReadOnly": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ExecuteSql": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -231,6 +246,11 @@
           "retry_params_name": "default"
         },
         "PointInTimeRestore": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReconcileNetworking": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
