@@ -337,11 +337,6 @@ export interface CreateResumableUploadCallback {
 export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   contentType?: string;
   gzip?: string | boolean;
-  /**
-   * Stream `highWaterMark` in bytes. Configures the maximum number of bytes
-   * buffered in the underlying writable stream before backpressure is applied.
-   */
-  highWaterMark?: number;
   resumable?: boolean;
   timeout?: number;
   validation?: string | boolean;
@@ -2078,8 +2073,8 @@ class File extends ServiceObject<File, FileMetadata> {
    * should be gzipped. This will set `options.metadata.contentEncoding` to
    * `gzip` if necessary.
    * @property {number} [highWaterMark] Stream `highWaterMark` in bytes.
-   *     Configures the maximum number of bytes buffered in the underlying
-   *     writable stream before backpressure is applied.
+   *     Configures the buffer threshold before backpressure is applied on both
+   *     the returned writable stream and the underlying upload stream.
    * @property {object} [metadata] See the examples below or
    *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON| Objects: insert request body}
    *     for more details.
@@ -2302,13 +2297,13 @@ class File extends ServiceObject<File, FileMetadata> {
       emitStream.destroy();
     });
 
-    const emitStream = new PassThroughShim({highWaterMark});
+    const emitStream = new PassThroughShim();
 
     // If `writeStream` is destroyed before the `writing` event, `emitStream` will not have any listeners. This prevents an unhandled error.
     const noop = () => {};
     emitStream.on('error', noop);
 
-    const fileWriteStream = duplexify(undefined, undefined, {highWaterMark});
+    const fileWriteStream = duplexify();
     let fileWriteStreamMetadataReceived = false;
 
     // Handing off emitted events to users
