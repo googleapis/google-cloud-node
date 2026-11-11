@@ -413,6 +413,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_create_table
+   * @deprecated Use {@link TableAdminClient#createTable} from @google-cloud/bigtable instead.
    */
   create(
     optionsOrCallback?: CreateTableOptions | CreateTableCallback,
@@ -465,6 +466,7 @@ export class Table extends TabularApiSurface {
    *     to check the status of the request.
    * @param {object} callback.apiResponse The full API response.
    * @return {void | Promise<CreateBackupResponse>}
+   * @deprecated Use {@link TableAdminClient#createBackup} from @google-cloud/bigtable instead.
    */
   createBackup(
     id: string,
@@ -551,6 +553,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_create_family
+   * @deprecated Use {@link TableAdminClient#modifyColumnFamilies} from @google-cloud/bigtable instead.
    */
   createFamily(
     id: string,
@@ -615,6 +618,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_del_table
+   * @deprecated Use {@link TableAdminClient#deleteTable} from @google-cloud/bigtable instead.
    */
   delete(
     optionsOrCallback?: CallOptions | DeleteTableCallback,
@@ -662,6 +666,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_del_rows
+   * @deprecated Use {@link TableAdminClient#dropRowRange} from @google-cloud/bigtable instead.
    */
   deleteRows(
     prefix: string,
@@ -705,6 +710,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_exists_table
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   exists(
     optionsOrCallback?: CallOptions | TableExistsCallback,
@@ -743,6 +749,7 @@ export class Table extends TabularApiSurface {
    * ```
    * const family = table.family('my-family');
    * ```
+   * @deprecated Use {@link TableAdminClient#modifyColumnFamilies} from @google-cloud/bigtable instead.
    */
   family(id: string): Family {
     if (!id) {
@@ -773,6 +780,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_get_table
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   get(
     optionsOrCallback?: GetTableOptions | GetTableCallback,
@@ -820,6 +828,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_table_Iam_policy
+   * @deprecated Use {@link TableAdminClient#getIamPolicy} from @google-cloud/bigtable instead.
    */
   getIamPolicy(
     optionsOrCallback?: GetIamPolicyOptions | GetIamPolicyCallback,
@@ -875,6 +884,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_get_families
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   getFamilies(
     optionsOrCallback?: CallOptions | GetFamiliesCallback,
@@ -935,6 +945,7 @@ export class Table extends TabularApiSurface {
    *   const apiResponse = data[1];
    * });
    * ```
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   getReplicationStates(
     optionsOrCallback?: CallOptions | GetReplicationStatesCallback,
@@ -981,6 +992,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/table.js</caption>
    * region_tag:bigtable_api_get_table_meta
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   getMetadata(
     optionsOrCallback?: GetMetadataOptions | GetMetadataCallback,
@@ -1029,6 +1041,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_set_table_Iam_policy
+   * @deprecated Use {@link TableAdminClient#setIamPolicy} from @google-cloud/bigtable instead.
    */
   setIamPolicy(
     policy: Policy,
@@ -1090,6 +1103,7 @@ export class Table extends TabularApiSurface {
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_test_table_Iam_permissions
+   * @deprecated Use {@link TableAdminClient#testIamPermissions} from @google-cloud/bigtable instead.
    */
   testIamPermissions(
     permissions: string | string[],
@@ -1148,6 +1162,7 @@ export class Table extends TabularApiSurface {
    *   const apiResponse = data[0];
    * });
    * ```
+   * @deprecated Use {@link TableAdminClient#dropRowRange} from @google-cloud/bigtable instead.
    */
   truncate(
     optionsOrCallback?: CallOptions | TruncateCallback,
@@ -1182,6 +1197,7 @@ export class Table extends TabularApiSurface {
    * @param {function(?error, ?boolean)} callback The callback function.
    * @param {?Error} callback.err An error returned while making this request.
    * @param {?Boolean} callback.resp Boolean value.
+   * @deprecated Use {@link TableAdminClient#checkConsistency} from @google-cloud/bigtable instead.
    */
   waitForReplication(
     callback?: WaitForReplicationCallback,
@@ -1235,6 +1251,7 @@ export class Table extends TabularApiSurface {
    * @param {function(?error, ?boolean)} callback The callback function.
    * @param {?Error} callback.err An error returned while making this request.
    * @param {?String} callback.token The generated consistency token.
+   * @deprecated Use {@link TableAdminClient#generateConsistencyToken} from @google-cloud/bigtable instead.
    */
   generateConsistencyToken(
     callback?: GenerateConsistencyTokenCallback,
@@ -1266,6 +1283,7 @@ export class Table extends TabularApiSurface {
    * @param {function(?error, ?boolean)} callback The callback function.
    * @param {?Error} callback.err An error returned while making this request.
    * @param {?Boolean} callback.consistent Boolean value.
+   * @deprecated Use {@link TableAdminClient#checkConsistency} from @google-cloud/bigtable instead.
    */
   checkConsistency(
     token: string,

@@ -29,6 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Required. The name of the Instance to delete.
    */
   // const name = 'abc123'
   /**

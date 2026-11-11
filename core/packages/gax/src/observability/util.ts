@@ -71,35 +71,29 @@ function matchesLoggingEnvFilter(envOptIn: string, namespace: string): boolean {
 /**
  * Checks if telemetry logging is enabled.
  *
- * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
- * AND either a user explicitly passes `enableTelemetryLogging: true` in their
- * client/call options or, when `enableTelemetryLogging` is unset, the
- * `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
- * namespace using `google-logging-utils` filter semantics (`'*'`, exact `'all'` /
- * `'true'`, or comma-separated wildcard patterns). Passing
- * `enableTelemetryLogging: false` suppresses logging for that client/call even
- * when `GOOGLE_SDK_NODE_LOGGING` matches.
+ * Logging is only enabled when a user explicitly passes
+ * `enableTelemetryLogging: true` in their client/call options or, when
+ * `enableTelemetryLogging` is unset, the `GOOGLE_SDK_NODE_LOGGING` environment
+ * variable matches the client service namespace using `google-logging-utils`
+ * filter semantics (`'*'`, exact `'all'` / `'true'`, or comma-separated
+ * wildcard patterns). Passing `enableTelemetryLogging: false` suppresses
+ * logging for that client/call even when `GOOGLE_SDK_NODE_LOGGING` matches.
  *
  * @param settings
  * @returns true if telemetry logging is enabled, false otherwise
  */
 export function checkLoggingEnabled(settings?: CallSettings): boolean {
-  const env: Record<string, string | undefined> =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env
-      : {};
-  const experimentalOptIn =
-    env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
-  if (experimentalOptIn !== 'true' && experimentalOptIn !== '1') {
-    return false;
-  }
-
   if (typeof settings?.enableTelemetryLogging === 'boolean') {
     return settings.enableTelemetryLogging;
   }
   if (settings?.otherArgs?.enableTelemetryLogging === true) {
     return true;
   }
+
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
 
   const envOptIn = env.GOOGLE_SDK_NODE_LOGGING;
   if (!envOptIn) {

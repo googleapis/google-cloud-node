@@ -35,6 +35,7 @@ function main() {
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();
   const ruleExecutionErrorServiceClient = new chronicle.RuleExecutionErrorServiceClient();
   const ruleServiceClient = new chronicle.RuleServiceClient();
+  const searchServiceClient = new chronicle.SearchServiceClient();
 }
 
 main();

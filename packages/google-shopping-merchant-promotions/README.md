@@ -61,9 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get promotion | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1/promotions_service.get_promotion.js) |
 | insert promotion | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1/promotions_service.insert_promotion.js) |
 | list promotions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1/promotions_service.list_promotions.js) |
-| get promotion | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.get_promotion.js) |
-| insert promotion | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.insert_promotion.js) |
-| list promotions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-promotions/samples/generated/v1beta/promotions_service.list_promotions.js) |
 
 
 ## Supported Node.js Versions

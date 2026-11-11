@@ -1226,6 +1226,44 @@
           }
         }
       }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            },
+            "ListSearchedResults": {
+              "methods": [
+                "listSearchedResults",
+                "listSearchedResultsStream",
+                "listSearchedResultsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            },
+            "ListSearchedResults": {
+              "methods": [
+                "listSearchedResults",
+                "listSearchedResultsStream",
+                "listSearchedResultsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.4.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.4.0...pubsub-v6.4.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* **pubsub:** Import protos from @google-cloud/pubsub-api in index.ts ([#9686](https://github.com/googleapis/google-cloud-node/issues/9686)) ([f25cd62](https://github.com/googleapis/google-cloud-node/commit/f25cd628110307f5b54f28b07398e4e3c3b5fb9d))
+* **pubsub:** Use ROOT_CONTEXT when creating receive span without parent context ([#9499](https://github.com/googleapis/google-cloud-node/issues/9499)) ([74cd73d](https://github.com/googleapis/google-cloud-node/commit/74cd73dd26ff9409ac7661a1a1494025e932841f)), refs [#7624](https://github.com/googleapis/google-cloud-node/issues/7624)
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.2...pubsub-v6.4.0) (2026-11-02)
 
 

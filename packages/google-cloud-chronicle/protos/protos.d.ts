@@ -39715,6 +39715,139 @@ export namespace google {
                     type DeleteWatchlistCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
+                /** Properties of an Entity. */
+                interface IEntity {
+
+                    /** Entity name */
+                    name?: (string|null);
+
+                    /** Entity metadata */
+                    metadata?: (google.backstory.IEntityMetadata|null);
+
+                    /** Entity entity */
+                    entity?: (google.backstory.INoun|null);
+
+                    /** Entity additional */
+                    additional?: (google.protobuf.IStruct|null);
+
+                    /** Entity riskScore */
+                    riskScore?: (google.backstory.IEntityRisk|null);
+
+                    /** Entity metric */
+                    metric?: (google.backstory.IMetric|null);
+
+                    /** Entity relations */
+                    relations?: (google.backstory.IRelation[]|null);
+                }
+
+                /** Represents an Entity. */
+                class Entity implements IEntity {
+
+                    /**
+                     * Constructs a new Entity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEntity);
+
+                    /** Entity name. */
+                    public name: string;
+
+                    /** Entity metadata. */
+                    public metadata?: (google.backstory.IEntityMetadata|null);
+
+                    /** Entity entity. */
+                    public entity?: (google.backstory.INoun|null);
+
+                    /** Entity additional. */
+                    public additional?: (google.protobuf.IStruct|null);
+
+                    /** Entity riskScore. */
+                    public riskScore?: (google.backstory.IEntityRisk|null);
+
+                    /** Entity metric. */
+                    public metric?: (google.backstory.IMetric|null);
+
+                    /** Entity relations. */
+                    public relations: google.backstory.IRelation[];
+
+                    /**
+                     * Creates a new Entity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Entity instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEntity): google.cloud.chronicle.v1.Entity;
+
+                    /**
+                     * Encodes the specified Entity message. Does not implicitly {@link google.cloud.chronicle.v1.Entity.verify|verify} messages.
+                     * @param message Entity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Entity.verify|verify} messages.
+                     * @param message Entity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Entity;
+
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Entity;
+
+                    /**
+                     * Verifies an Entity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Entity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Entity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Entity;
+
+                    /**
+                     * Creates a plain object from an Entity message. Also converts values to other types if specified.
+                     * @param message Entity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.Entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Entity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Entity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Watchlist. */
                 interface IWatchlist {
 
@@ -40881,6 +41014,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteWatchlistRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Event. */
+                interface IEvent {
+
+                    /** Event name */
+                    name?: (string|null);
+
+                    /** Event udm */
+                    udm?: (google.backstory.IUDM|null);
+                }
+
+                /** Represents an Event. */
+                class Event implements IEvent {
+
+                    /**
+                     * Constructs a new Event.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEvent);
+
+                    /** Event name. */
+                    public name: string;
+
+                    /** Event udm. */
+                    public udm?: (google.backstory.IUDM|null);
+
+                    /**
+                     * Creates a new Event instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Event instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEvent): google.cloud.chronicle.v1.Event;
+
+                    /**
+                     * Encodes the specified Event message. Does not implicitly {@link google.cloud.chronicle.v1.Event.verify|verify} messages.
+                     * @param message Event message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Event message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Event.verify|verify} messages.
+                     * @param message Event message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Event message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Event
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Event;
+
+                    /**
+                     * Decodes an Event message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Event
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Event;
+
+                    /**
+                     * Verifies an Event message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Event message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Event
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Event;
+
+                    /**
+                     * Creates a plain object from an Event message. Also converts values to other types if specified.
+                     * @param message Event
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Event to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Event
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -70857,6 +71093,2864 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SearchService */
+                class SearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchService;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public search(request: google.cloud.chronicle.v1.ISearchRequest, callback: google.cloud.chronicle.v1.SearchService.SearchCallback): void;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public search(request: google.cloud.chronicle.v1.ISearchRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSearchedResults.
+                     * @param request ListSearchedResultsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSearchedResultsResponse
+                     */
+                    public listSearchedResults(request: google.cloud.chronicle.v1.IListSearchedResultsRequest, callback: google.cloud.chronicle.v1.SearchService.ListSearchedResultsCallback): void;
+
+                    /**
+                     * Calls ListSearchedResults.
+                     * @param request ListSearchedResultsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSearchedResults(request: google.cloud.chronicle.v1.IListSearchedResultsRequest): Promise<google.cloud.chronicle.v1.ListSearchedResultsResponse>;
+                }
+
+                namespace SearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.SearchService|search}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SearchCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.SearchService|listSearchedResults}.
+                     * @param error Error, if any
+                     * @param [response] ListSearchedResultsResponse
+                     */
+                    type ListSearchedResultsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListSearchedResultsResponse) => void;
+                }
+
+                /** QueryDialect enum. */
+                enum QueryDialect {
+                    QUERY_DIALECT_UNSPECIFIED = 0,
+                    YL2 = 1,
+                    SQL = 2
+                }
+
+                /** Properties of a SearchSession. */
+                interface ISearchSession {
+
+                    /** SearchSession name */
+                    name?: (string|null);
+
+                    /** SearchSession query */
+                    query?: (string|null);
+
+                    /** SearchSession timeRange */
+                    timeRange?: (google.type.IInterval|null);
+
+                    /** SearchSession dialect */
+                    dialect?: (google.cloud.chronicle.v1.QueryDialect|keyof typeof google.cloud.chronicle.v1.QueryDialect|null);
+
+                    /** SearchSession draftDataAccessScope */
+                    draftDataAccessScope?: (google.cloud.chronicle.v1.IDataAccessScope|null);
+
+                    /** SearchSession metadata */
+                    metadata?: (google.cloud.chronicle.v1.ISearchSessionMetadata|null);
+                }
+
+                /** Represents a SearchSession. */
+                class SearchSession implements ISearchSession {
+
+                    /**
+                     * Constructs a new SearchSession.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchSession);
+
+                    /** SearchSession name. */
+                    public name: string;
+
+                    /** SearchSession query. */
+                    public query: string;
+
+                    /** SearchSession timeRange. */
+                    public timeRange?: (google.type.IInterval|null);
+
+                    /** SearchSession dialect. */
+                    public dialect: (google.cloud.chronicle.v1.QueryDialect|keyof typeof google.cloud.chronicle.v1.QueryDialect);
+
+                    /** SearchSession draftDataAccessScope. */
+                    public draftDataAccessScope?: (google.cloud.chronicle.v1.IDataAccessScope|null);
+
+                    /** SearchSession metadata. */
+                    public metadata?: (google.cloud.chronicle.v1.ISearchSessionMetadata|null);
+
+                    /**
+                     * Creates a new SearchSession instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchSession instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchSession): google.cloud.chronicle.v1.SearchSession;
+
+                    /**
+                     * Encodes the specified SearchSession message. Does not implicitly {@link google.cloud.chronicle.v1.SearchSession.verify|verify} messages.
+                     * @param message SearchSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchSession message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchSession.verify|verify} messages.
+                     * @param message SearchSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchSession message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchSession;
+
+                    /**
+                     * Decodes a SearchSession message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchSession;
+
+                    /**
+                     * Verifies a SearchSession message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchSession message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchSession
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchSession;
+
+                    /**
+                     * Creates a plain object from a SearchSession message. Also converts values to other types if specified.
+                     * @param message SearchSession
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchSession to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchSession
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchedResult. */
+                interface ISearchedResult {
+
+                    /** SearchedResult name */
+                    name?: (string|null);
+
+                    /** SearchedResult resultRow */
+                    resultRow?: (google.cloud.chronicle.v1.IResultRow|null);
+                }
+
+                /** Represents a SearchedResult. */
+                class SearchedResult implements ISearchedResult {
+
+                    /**
+                     * Constructs a new SearchedResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchedResult);
+
+                    /** SearchedResult name. */
+                    public name: string;
+
+                    /** SearchedResult resultRow. */
+                    public resultRow?: (google.cloud.chronicle.v1.IResultRow|null);
+
+                    /**
+                     * Creates a new SearchedResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchedResult instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchedResult): google.cloud.chronicle.v1.SearchedResult;
+
+                    /**
+                     * Encodes the specified SearchedResult message. Does not implicitly {@link google.cloud.chronicle.v1.SearchedResult.verify|verify} messages.
+                     * @param message SearchedResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchedResult message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchedResult.verify|verify} messages.
+                     * @param message SearchedResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchedResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchedResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchedResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchedResult;
+
+                    /**
+                     * Decodes a SearchedResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchedResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchedResult;
+
+                    /**
+                     * Verifies a SearchedResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchedResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchedResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchedResult;
+
+                    /**
+                     * Creates a plain object from a SearchedResult message. Also converts values to other types if specified.
+                     * @param message SearchedResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchedResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchedResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchedResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchRequest. */
+                interface ISearchRequest {
+
+                    /** SearchRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchRequest query */
+                    query?: (string|null);
+
+                    /** SearchRequest timeRange */
+                    timeRange?: (google.type.IInterval|null);
+
+                    /** SearchRequest dialect */
+                    dialect?: (google.cloud.chronicle.v1.QueryDialect|keyof typeof google.cloud.chronicle.v1.QueryDialect|null);
+
+                    /** SearchRequest draftDataAccessScope */
+                    draftDataAccessScope?: (google.cloud.chronicle.v1.IDataAccessScope|null);
+
+                    /** SearchRequest resultLimit */
+                    resultLimit?: (number|null);
+
+                    /** SearchRequest simulatedDataVisibility */
+                    simulatedDataVisibility?: (google.cloud.chronicle.v1.SimulatedDataVisibility|keyof typeof google.cloud.chronicle.v1.SimulatedDataVisibility|null);
+                }
+
+                /** Represents a SearchRequest. */
+                class SearchRequest implements ISearchRequest {
+
+                    /**
+                     * Constructs a new SearchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchRequest);
+
+                    /** SearchRequest parent. */
+                    public parent: string;
+
+                    /** SearchRequest query. */
+                    public query: string;
+
+                    /** SearchRequest timeRange. */
+                    public timeRange?: (google.type.IInterval|null);
+
+                    /** SearchRequest dialect. */
+                    public dialect: (google.cloud.chronicle.v1.QueryDialect|keyof typeof google.cloud.chronicle.v1.QueryDialect);
+
+                    /** SearchRequest draftDataAccessScope. */
+                    public draftDataAccessScope?: (google.cloud.chronicle.v1.IDataAccessScope|null);
+
+                    /** SearchRequest resultLimit. */
+                    public resultLimit: number;
+
+                    /** SearchRequest simulatedDataVisibility. */
+                    public simulatedDataVisibility: (google.cloud.chronicle.v1.SimulatedDataVisibility|keyof typeof google.cloud.chronicle.v1.SimulatedDataVisibility);
+
+                    /**
+                     * Creates a new SearchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchRequest): google.cloud.chronicle.v1.SearchRequest;
+
+                    /**
+                     * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.chronicle.v1.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchRequest;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchRequest;
+
+                    /**
+                     * Verifies a SearchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchRequest;
+
+                    /**
+                     * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                     * @param message SearchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSearchedResultsRequest. */
+                interface IListSearchedResultsRequest {
+
+                    /** ListSearchedResultsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSearchedResultsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSearchedResultsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSearchedResultsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListSearchedResultsRequest skip */
+                    skip?: (number|null);
+                }
+
+                /** Represents a ListSearchedResultsRequest. */
+                class ListSearchedResultsRequest implements IListSearchedResultsRequest {
+
+                    /**
+                     * Constructs a new ListSearchedResultsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListSearchedResultsRequest);
+
+                    /** ListSearchedResultsRequest parent. */
+                    public parent: string;
+
+                    /** ListSearchedResultsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSearchedResultsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSearchedResultsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListSearchedResultsRequest skip. */
+                    public skip: number;
+
+                    /**
+                     * Creates a new ListSearchedResultsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSearchedResultsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListSearchedResultsRequest): google.cloud.chronicle.v1.ListSearchedResultsRequest;
+
+                    /**
+                     * Encodes the specified ListSearchedResultsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListSearchedResultsRequest.verify|verify} messages.
+                     * @param message ListSearchedResultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListSearchedResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSearchedResultsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListSearchedResultsRequest.verify|verify} messages.
+                     * @param message ListSearchedResultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListSearchedResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSearchedResultsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSearchedResultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListSearchedResultsRequest;
+
+                    /**
+                     * Decodes a ListSearchedResultsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSearchedResultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListSearchedResultsRequest;
+
+                    /**
+                     * Verifies a ListSearchedResultsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSearchedResultsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSearchedResultsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListSearchedResultsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSearchedResultsRequest message. Also converts values to other types if specified.
+                     * @param message ListSearchedResultsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListSearchedResultsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSearchedResultsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSearchedResultsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSearchedResultsResponse. */
+                interface IListSearchedResultsResponse {
+
+                    /** ListSearchedResultsResponse searchedResults */
+                    searchedResults?: (google.cloud.chronicle.v1.ISearchedResult[]|null);
+
+                    /** ListSearchedResultsResponse totalSize */
+                    totalSize?: (number|null);
+
+                    /** ListSearchedResultsResponse columnNames */
+                    columnNames?: (google.cloud.chronicle.v1.IColumnNames|null);
+
+                    /** ListSearchedResultsResponse columnSchema */
+                    columnSchema?: (google.cloud.chronicle.v1.IColumnSchema|null);
+
+                    /** ListSearchedResultsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSearchedResultsResponse. */
+                class ListSearchedResultsResponse implements IListSearchedResultsResponse {
+
+                    /**
+                     * Constructs a new ListSearchedResultsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListSearchedResultsResponse);
+
+                    /** ListSearchedResultsResponse searchedResults. */
+                    public searchedResults: google.cloud.chronicle.v1.ISearchedResult[];
+
+                    /** ListSearchedResultsResponse totalSize. */
+                    public totalSize: number;
+
+                    /** ListSearchedResultsResponse columnNames. */
+                    public columnNames?: (google.cloud.chronicle.v1.IColumnNames|null);
+
+                    /** ListSearchedResultsResponse columnSchema. */
+                    public columnSchema?: (google.cloud.chronicle.v1.IColumnSchema|null);
+
+                    /** ListSearchedResultsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSearchedResultsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSearchedResultsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListSearchedResultsResponse): google.cloud.chronicle.v1.ListSearchedResultsResponse;
+
+                    /**
+                     * Encodes the specified ListSearchedResultsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListSearchedResultsResponse.verify|verify} messages.
+                     * @param message ListSearchedResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListSearchedResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSearchedResultsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListSearchedResultsResponse.verify|verify} messages.
+                     * @param message ListSearchedResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListSearchedResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSearchedResultsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSearchedResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListSearchedResultsResponse;
+
+                    /**
+                     * Decodes a ListSearchedResultsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSearchedResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListSearchedResultsResponse;
+
+                    /**
+                     * Verifies a ListSearchedResultsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSearchedResultsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSearchedResultsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListSearchedResultsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSearchedResultsResponse message. Also converts values to other types if specified.
+                     * @param message ListSearchedResultsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListSearchedResultsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSearchedResultsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSearchedResultsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchSessionMetadata. */
+                interface ISearchSessionMetadata {
+
+                    /** SearchSessionMetadata operationId */
+                    operationId?: (string|null);
+
+                    /** SearchSessionMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata resultRowCount */
+                    resultRowCount?: (number|null);
+
+                    /** SearchSessionMetadata moreDataAvailable */
+                    moreDataAvailable?: (boolean|null);
+                }
+
+                /** Represents a SearchSessionMetadata. */
+                class SearchSessionMetadata implements ISearchSessionMetadata {
+
+                    /**
+                     * Constructs a new SearchSessionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchSessionMetadata);
+
+                    /** SearchSessionMetadata operationId. */
+                    public operationId: string;
+
+                    /** SearchSessionMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchSessionMetadata resultRowCount. */
+                    public resultRowCount: number;
+
+                    /** SearchSessionMetadata moreDataAvailable. */
+                    public moreDataAvailable: boolean;
+
+                    /**
+                     * Creates a new SearchSessionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchSessionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchSessionMetadata): google.cloud.chronicle.v1.SearchSessionMetadata;
+
+                    /**
+                     * Encodes the specified SearchSessionMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.SearchSessionMetadata.verify|verify} messages.
+                     * @param message SearchSessionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchSessionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchSessionMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchSessionMetadata.verify|verify} messages.
+                     * @param message SearchSessionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchSessionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchSessionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchSessionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchSessionMetadata;
+
+                    /**
+                     * Decodes a SearchSessionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchSessionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchSessionMetadata;
+
+                    /**
+                     * Verifies a SearchSessionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchSessionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchSessionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchSessionMetadata;
+
+                    /**
+                     * Creates a plain object from a SearchSessionMetadata message. Also converts values to other types if specified.
+                     * @param message SearchSessionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchSessionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchSessionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchSessionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchOperationMetadata. */
+                interface ISearchOperationMetadata {
+
+                    /** SearchOperationMetadata state */
+                    state?: (google.cloud.chronicle.v1.SearchOperationMetadata.State|keyof typeof google.cloud.chronicle.v1.SearchOperationMetadata.State|null);
+
+                    /** SearchOperationMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata progress */
+                    progress?: (number|null);
+
+                    /** SearchOperationMetadata datatableExportMetadata */
+                    datatableExportMetadata?: (google.cloud.chronicle.v1.IDataTableExportMetadata|null);
+                }
+
+                /** Represents a SearchOperationMetadata. */
+                class SearchOperationMetadata implements ISearchOperationMetadata {
+
+                    /**
+                     * Constructs a new SearchOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchOperationMetadata);
+
+                    /** SearchOperationMetadata state. */
+                    public state: (google.cloud.chronicle.v1.SearchOperationMetadata.State|keyof typeof google.cloud.chronicle.v1.SearchOperationMetadata.State);
+
+                    /** SearchOperationMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchOperationMetadata progress. */
+                    public progress: number;
+
+                    /** SearchOperationMetadata datatableExportMetadata. */
+                    public datatableExportMetadata?: (google.cloud.chronicle.v1.IDataTableExportMetadata|null);
+
+                    /**
+                     * Creates a new SearchOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchOperationMetadata): google.cloud.chronicle.v1.SearchOperationMetadata;
+
+                    /**
+                     * Encodes the specified SearchOperationMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.SearchOperationMetadata.verify|verify} messages.
+                     * @param message SearchOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchOperationMetadata.verify|verify} messages.
+                     * @param message SearchOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchOperationMetadata;
+
+                    /**
+                     * Decodes a SearchOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchOperationMetadata;
+
+                    /**
+                     * Verifies a SearchOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a SearchOperationMetadata message. Also converts values to other types if specified.
+                     * @param message SearchOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchOperationMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLED = 4,
+                        EXPIRED = 5
+                    }
+                }
+
+                /** Properties of a DataTableExportMetadata. */
+                interface IDataTableExportMetadata {
+
+                    /** DataTableExportMetadata error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** DataTableExportMetadata resultMetadata */
+                    resultMetadata?: (google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata|null);
+
+                    /** DataTableExportMetadata dataTable */
+                    dataTable?: (string|null);
+                }
+
+                /** Represents a DataTableExportMetadata. */
+                class DataTableExportMetadata implements IDataTableExportMetadata {
+
+                    /**
+                     * Constructs a new DataTableExportMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableExportMetadata);
+
+                    /** DataTableExportMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** DataTableExportMetadata resultMetadata. */
+                    public resultMetadata?: (google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata|null);
+
+                    /** DataTableExportMetadata dataTable. */
+                    public dataTable: string;
+
+                    /** DataTableExportMetadata resultMetadataOrError. */
+                    public resultMetadataOrError?: ("error"|"resultMetadata");
+
+                    /**
+                     * Creates a new DataTableExportMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableExportMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableExportMetadata): google.cloud.chronicle.v1.DataTableExportMetadata;
+
+                    /**
+                     * Encodes the specified DataTableExportMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableExportMetadata.verify|verify} messages.
+                     * @param message DataTableExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableExportMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableExportMetadata.verify|verify} messages.
+                     * @param message DataTableExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableExportMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableExportMetadata;
+
+                    /**
+                     * Decodes a DataTableExportMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableExportMetadata;
+
+                    /**
+                     * Verifies a DataTableExportMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableExportMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableExportMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableExportMetadata;
+
+                    /**
+                     * Creates a plain object from a DataTableExportMetadata message. Also converts values to other types if specified.
+                     * @param message DataTableExportMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableExportMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableExportMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableExportMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataTableExportMetadata {
+
+                    /** Properties of a ResultMetadata. */
+                    interface IResultMetadata {
+
+                        /** ResultMetadata datatableExportOperationId */
+                        datatableExportOperationId?: (string|null);
+
+                        /** ResultMetadata rowsCount */
+                        rowsCount?: (number|null);
+                    }
+
+                    /** Represents a ResultMetadata. */
+                    class ResultMetadata implements IResultMetadata {
+
+                        /**
+                         * Constructs a new ResultMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata);
+
+                        /** ResultMetadata datatableExportOperationId. */
+                        public datatableExportOperationId: string;
+
+                        /** ResultMetadata rowsCount. */
+                        public rowsCount: number;
+
+                        /**
+                         * Creates a new ResultMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResultMetadata instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata): google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata;
+
+                        /**
+                         * Encodes the specified ResultMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata.verify|verify} messages.
+                         * @param message ResultMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResultMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata.verify|verify} messages.
+                         * @param message ResultMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DataTableExportMetadata.IResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResultMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResultMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata;
+
+                        /**
+                         * Decodes a ResultMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResultMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata;
+
+                        /**
+                         * Verifies a ResultMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResultMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResultMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata;
+
+                        /**
+                         * Creates a plain object from a ResultMetadata message. Also converts values to other types if specified.
+                         * @param message ResultMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DataTableExportMetadata.ResultMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResultMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResultMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a TableMetadata. */
+                interface ITableMetadata {
+
+                    /** TableMetadata table */
+                    table?: (string|null);
+
+                    /** TableMetadata dataSource */
+                    dataSource?: (google.cloud.chronicle.v1.TableMetadata.DataSource|keyof typeof google.cloud.chronicle.v1.TableMetadata.DataSource|null);
+
+                    /** TableMetadata index */
+                    index?: (number|null);
+                }
+
+                /** Represents a TableMetadata. */
+                class TableMetadata implements ITableMetadata {
+
+                    /**
+                     * Constructs a new TableMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ITableMetadata);
+
+                    /** TableMetadata table. */
+                    public table: string;
+
+                    /** TableMetadata dataSource. */
+                    public dataSource: (google.cloud.chronicle.v1.TableMetadata.DataSource|keyof typeof google.cloud.chronicle.v1.TableMetadata.DataSource);
+
+                    /** TableMetadata index. */
+                    public index: number;
+
+                    /**
+                     * Creates a new TableMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ITableMetadata): google.cloud.chronicle.v1.TableMetadata;
+
+                    /**
+                     * Encodes the specified TableMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.TableMetadata.verify|verify} messages.
+                     * @param message TableMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ITableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.TableMetadata.verify|verify} messages.
+                     * @param message TableMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ITableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.TableMetadata;
+
+                    /**
+                     * Decodes a TableMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.TableMetadata;
+
+                    /**
+                     * Verifies a TableMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.TableMetadata;
+
+                    /**
+                     * Creates a plain object from a TableMetadata message. Also converts values to other types if specified.
+                     * @param message TableMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.TableMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TableMetadata {
+
+                    /** DataSource enum. */
+                    enum DataSource {
+                        DATA_SOURCE_UNSPECIFIED = 0,
+                        EVENTS = 1,
+                        ENTITY_CONTEXT = 2,
+                        DATA_TABLES = 3,
+                        DETECTIONS = 4,
+                        SOAR_CASE = 5,
+                        SOAR_CASE_HISTORY = 6
+                    }
+                }
+
+                /** Properties of a ColumnSchema. */
+                interface IColumnSchema {
+
+                    /** ColumnSchema metadata */
+                    metadata?: (google.cloud.chronicle.v1.ITableMetadata[]|null);
+                }
+
+                /** Represents a ColumnSchema. */
+                class ColumnSchema implements IColumnSchema {
+
+                    /**
+                     * Constructs a new ColumnSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IColumnSchema);
+
+                    /** ColumnSchema metadata. */
+                    public metadata: google.cloud.chronicle.v1.ITableMetadata[];
+
+                    /**
+                     * Creates a new ColumnSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnSchema instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IColumnSchema): google.cloud.chronicle.v1.ColumnSchema;
+
+                    /**
+                     * Encodes the specified ColumnSchema message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnSchema.verify|verify} messages.
+                     * @param message ColumnSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnSchema message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnSchema.verify|verify} messages.
+                     * @param message ColumnSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnSchema;
+
+                    /**
+                     * Decodes a ColumnSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnSchema;
+
+                    /**
+                     * Verifies a ColumnSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnSchema;
+
+                    /**
+                     * Creates a plain object from a ColumnSchema message. Also converts values to other types if specified.
+                     * @param message ColumnSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ColumnSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ColumnNames. */
+                interface IColumnNames {
+
+                    /** ColumnNames names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a ColumnNames. */
+                class ColumnNames implements IColumnNames {
+
+                    /**
+                     * Constructs a new ColumnNames.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IColumnNames);
+
+                    /** ColumnNames names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new ColumnNames instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnNames instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IColumnNames): google.cloud.chronicle.v1.ColumnNames;
+
+                    /**
+                     * Encodes the specified ColumnNames message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnNames.verify|verify} messages.
+                     * @param message ColumnNames message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IColumnNames, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnNames message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnNames.verify|verify} messages.
+                     * @param message ColumnNames message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IColumnNames, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnNames message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnNames
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnNames;
+
+                    /**
+                     * Decodes a ColumnNames message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnNames
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnNames;
+
+                    /**
+                     * Verifies a ColumnNames message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnNames message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnNames
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnNames;
+
+                    /**
+                     * Creates a plain object from a ColumnNames message. Also converts values to other types if specified.
+                     * @param message ColumnNames
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ColumnNames, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnNames to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnNames
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResultRow. */
+                interface IResultRow {
+
+                    /** ResultRow eventRecord */
+                    eventRecord?: (google.cloud.chronicle.v1.IEventRecord|null);
+
+                    /** ResultRow statsRecord */
+                    statsRecord?: (google.cloud.chronicle.v1.IStatsRecord|null);
+
+                    /** ResultRow entityContextRecord */
+                    entityContextRecord?: (google.cloud.chronicle.v1.IEntityContextRecord|null);
+
+                    /** ResultRow joinRecord */
+                    joinRecord?: (google.cloud.chronicle.v1.IJoinRecord|null);
+
+                    /** ResultRow detectionRecord */
+                    detectionRecord?: (google.cloud.chronicle.v1.IDetectionRecord|null);
+
+                    /** ResultRow dataTableRecord */
+                    dataTableRecord?: (google.cloud.chronicle.v1.IDataTableRecord|null);
+
+                    /** ResultRow outcomes */
+                    outcomes?: (google.cloud.chronicle.v1.IColumnType[]|null);
+                }
+
+                /** Represents a ResultRow. */
+                class ResultRow implements IResultRow {
+
+                    /**
+                     * Constructs a new ResultRow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IResultRow);
+
+                    /** ResultRow eventRecord. */
+                    public eventRecord?: (google.cloud.chronicle.v1.IEventRecord|null);
+
+                    /** ResultRow statsRecord. */
+                    public statsRecord?: (google.cloud.chronicle.v1.IStatsRecord|null);
+
+                    /** ResultRow entityContextRecord. */
+                    public entityContextRecord?: (google.cloud.chronicle.v1.IEntityContextRecord|null);
+
+                    /** ResultRow joinRecord. */
+                    public joinRecord?: (google.cloud.chronicle.v1.IJoinRecord|null);
+
+                    /** ResultRow detectionRecord. */
+                    public detectionRecord?: (google.cloud.chronicle.v1.IDetectionRecord|null);
+
+                    /** ResultRow dataTableRecord. */
+                    public dataTableRecord?: (google.cloud.chronicle.v1.IDataTableRecord|null);
+
+                    /** ResultRow outcomes. */
+                    public outcomes: google.cloud.chronicle.v1.IColumnType[];
+
+                    /** ResultRow result. */
+                    public result?: ("eventRecord"|"statsRecord"|"entityContextRecord"|"joinRecord"|"detectionRecord"|"dataTableRecord");
+
+                    /**
+                     * Creates a new ResultRow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResultRow instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IResultRow): google.cloud.chronicle.v1.ResultRow;
+
+                    /**
+                     * Encodes the specified ResultRow message. Does not implicitly {@link google.cloud.chronicle.v1.ResultRow.verify|verify} messages.
+                     * @param message ResultRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IResultRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResultRow message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ResultRow.verify|verify} messages.
+                     * @param message ResultRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IResultRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResultRow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResultRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ResultRow;
+
+                    /**
+                     * Decodes a ResultRow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResultRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ResultRow;
+
+                    /**
+                     * Verifies a ResultRow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResultRow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResultRow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ResultRow;
+
+                    /**
+                     * Creates a plain object from a ResultRow message. Also converts values to other types if specified.
+                     * @param message ResultRow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ResultRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResultRow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResultRow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StatsRecord. */
+                interface IStatsRecord {
+
+                    /** StatsRecord results */
+                    results?: (google.cloud.chronicle.v1.IStatsColumnData[]|null);
+                }
+
+                /** Represents a StatsRecord. */
+                class StatsRecord implements IStatsRecord {
+
+                    /**
+                     * Constructs a new StatsRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IStatsRecord);
+
+                    /** StatsRecord results. */
+                    public results: google.cloud.chronicle.v1.IStatsColumnData[];
+
+                    /**
+                     * Creates a new StatsRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StatsRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IStatsRecord): google.cloud.chronicle.v1.StatsRecord;
+
+                    /**
+                     * Encodes the specified StatsRecord message. Does not implicitly {@link google.cloud.chronicle.v1.StatsRecord.verify|verify} messages.
+                     * @param message StatsRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IStatsRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StatsRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.StatsRecord.verify|verify} messages.
+                     * @param message StatsRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IStatsRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StatsRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StatsRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.StatsRecord;
+
+                    /**
+                     * Decodes a StatsRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StatsRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.StatsRecord;
+
+                    /**
+                     * Verifies a StatsRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StatsRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StatsRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.StatsRecord;
+
+                    /**
+                     * Creates a plain object from a StatsRecord message. Also converts values to other types if specified.
+                     * @param message StatsRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.StatsRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StatsRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StatsRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StatsColumnData. */
+                interface IStatsColumnData {
+
+                    /** StatsColumnData column */
+                    column?: (string|null);
+
+                    /** StatsColumnData values */
+                    values?: (google.cloud.chronicle.v1.IColumnType|null);
+                }
+
+                /** Represents a StatsColumnData. */
+                class StatsColumnData implements IStatsColumnData {
+
+                    /**
+                     * Constructs a new StatsColumnData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IStatsColumnData);
+
+                    /** StatsColumnData column. */
+                    public column: string;
+
+                    /** StatsColumnData values. */
+                    public values?: (google.cloud.chronicle.v1.IColumnType|null);
+
+                    /**
+                     * Creates a new StatsColumnData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StatsColumnData instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IStatsColumnData): google.cloud.chronicle.v1.StatsColumnData;
+
+                    /**
+                     * Encodes the specified StatsColumnData message. Does not implicitly {@link google.cloud.chronicle.v1.StatsColumnData.verify|verify} messages.
+                     * @param message StatsColumnData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IStatsColumnData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StatsColumnData message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.StatsColumnData.verify|verify} messages.
+                     * @param message StatsColumnData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IStatsColumnData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StatsColumnData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StatsColumnData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.StatsColumnData;
+
+                    /**
+                     * Decodes a StatsColumnData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StatsColumnData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.StatsColumnData;
+
+                    /**
+                     * Verifies a StatsColumnData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StatsColumnData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StatsColumnData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.StatsColumnData;
+
+                    /**
+                     * Creates a plain object from a StatsColumnData message. Also converts values to other types if specified.
+                     * @param message StatsColumnData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.StatsColumnData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StatsColumnData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StatsColumnData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ColumnType. */
+                interface IColumnType {
+
+                    /** ColumnType value */
+                    value?: (google.cloud.chronicle.v1.ColumnType.IColumnValue|null);
+
+                    /** ColumnType list */
+                    list?: (google.cloud.chronicle.v1.ColumnType.IColumnValueList|null);
+                }
+
+                /** Represents a ColumnType. */
+                class ColumnType implements IColumnType {
+
+                    /**
+                     * Constructs a new ColumnType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IColumnType);
+
+                    /** ColumnType value. */
+                    public value?: (google.cloud.chronicle.v1.ColumnType.IColumnValue|null);
+
+                    /** ColumnType list. */
+                    public list?: (google.cloud.chronicle.v1.ColumnType.IColumnValueList|null);
+
+                    /** ColumnType type. */
+                    public type?: ("value"|"list");
+
+                    /**
+                     * Creates a new ColumnType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnType instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IColumnType): google.cloud.chronicle.v1.ColumnType;
+
+                    /**
+                     * Encodes the specified ColumnType message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.verify|verify} messages.
+                     * @param message ColumnType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IColumnType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnType message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.verify|verify} messages.
+                     * @param message ColumnType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IColumnType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnType;
+
+                    /**
+                     * Decodes a ColumnType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnType;
+
+                    /**
+                     * Verifies a ColumnType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnType;
+
+                    /**
+                     * Creates a plain object from a ColumnType message. Also converts values to other types if specified.
+                     * @param message ColumnType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ColumnType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ColumnType {
+
+                    /** Properties of a ColumnValue. */
+                    interface IColumnValue {
+
+                        /** ColumnValue nullVal */
+                        nullVal?: (boolean|null);
+
+                        /** ColumnValue boolVal */
+                        boolVal?: (boolean|null);
+
+                        /** ColumnValue bytesVal */
+                        bytesVal?: (Uint8Array|Buffer|string|null);
+
+                        /** ColumnValue doubleVal */
+                        doubleVal?: (number|null);
+
+                        /** ColumnValue int64Val */
+                        int64Val?: (number|Long|string|null);
+
+                        /** ColumnValue uint64Val */
+                        uint64Val?: (number|Long|string|null);
+
+                        /** ColumnValue stringVal */
+                        stringVal?: (string|null);
+
+                        /** ColumnValue timestampVal */
+                        timestampVal?: (google.protobuf.ITimestamp|null);
+
+                        /** ColumnValue dateVal */
+                        dateVal?: (google.type.IDate|null);
+
+                        /** ColumnValue protoVal */
+                        protoVal?: (google.protobuf.IAny|null);
+                    }
+
+                    /** Represents a ColumnValue. */
+                    class ColumnValue implements IColumnValue {
+
+                        /**
+                         * Constructs a new ColumnValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.ColumnType.IColumnValue);
+
+                        /** ColumnValue nullVal. */
+                        public nullVal?: (boolean|null);
+
+                        /** ColumnValue boolVal. */
+                        public boolVal?: (boolean|null);
+
+                        /** ColumnValue bytesVal. */
+                        public bytesVal?: (Uint8Array|Buffer|string|null);
+
+                        /** ColumnValue doubleVal. */
+                        public doubleVal?: (number|null);
+
+                        /** ColumnValue int64Val. */
+                        public int64Val?: (number|Long|string|null);
+
+                        /** ColumnValue uint64Val. */
+                        public uint64Val?: (number|Long|string|null);
+
+                        /** ColumnValue stringVal. */
+                        public stringVal?: (string|null);
+
+                        /** ColumnValue timestampVal. */
+                        public timestampVal?: (google.protobuf.ITimestamp|null);
+
+                        /** ColumnValue dateVal. */
+                        public dateVal?: (google.type.IDate|null);
+
+                        /** ColumnValue protoVal. */
+                        public protoVal?: (google.protobuf.IAny|null);
+
+                        /** ColumnValue value. */
+                        public value?: ("nullVal"|"boolVal"|"bytesVal"|"doubleVal"|"int64Val"|"uint64Val"|"stringVal"|"timestampVal"|"dateVal"|"protoVal");
+
+                        /**
+                         * Creates a new ColumnValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnValue instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.ColumnType.IColumnValue): google.cloud.chronicle.v1.ColumnType.ColumnValue;
+
+                        /**
+                         * Encodes the specified ColumnValue message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.ColumnValue.verify|verify} messages.
+                         * @param message ColumnValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.ColumnType.IColumnValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnValue message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.ColumnValue.verify|verify} messages.
+                         * @param message ColumnValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.ColumnType.IColumnValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnType.ColumnValue;
+
+                        /**
+                         * Decodes a ColumnValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnType.ColumnValue;
+
+                        /**
+                         * Verifies a ColumnValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnType.ColumnValue;
+
+                        /**
+                         * Creates a plain object from a ColumnValue message. Also converts values to other types if specified.
+                         * @param message ColumnValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.ColumnType.ColumnValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ColumnValueList. */
+                    interface IColumnValueList {
+
+                        /** ColumnValueList values */
+                        values?: (google.cloud.chronicle.v1.ColumnType.IColumnValue[]|null);
+                    }
+
+                    /** Represents a ColumnValueList. */
+                    class ColumnValueList implements IColumnValueList {
+
+                        /**
+                         * Constructs a new ColumnValueList.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.ColumnType.IColumnValueList);
+
+                        /** ColumnValueList values. */
+                        public values: google.cloud.chronicle.v1.ColumnType.IColumnValue[];
+
+                        /**
+                         * Creates a new ColumnValueList instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnValueList instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.ColumnType.IColumnValueList): google.cloud.chronicle.v1.ColumnType.ColumnValueList;
+
+                        /**
+                         * Encodes the specified ColumnValueList message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.ColumnValueList.verify|verify} messages.
+                         * @param message ColumnValueList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.ColumnType.IColumnValueList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnValueList message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnType.ColumnValueList.verify|verify} messages.
+                         * @param message ColumnValueList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.ColumnType.IColumnValueList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnValueList message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnValueList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnType.ColumnValueList;
+
+                        /**
+                         * Decodes a ColumnValueList message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnValueList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnType.ColumnValueList;
+
+                        /**
+                         * Verifies a ColumnValueList message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnValueList message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnValueList
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnType.ColumnValueList;
+
+                        /**
+                         * Creates a plain object from a ColumnValueList message. Also converts values to other types if specified.
+                         * @param message ColumnValueList
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.ColumnType.ColumnValueList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnValueList to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnValueList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SearchDataTableRowCell. */
+                interface ISearchDataTableRowCell {
+
+                    /** SearchDataTableRowCell column */
+                    column?: (string|null);
+
+                    /** SearchDataTableRowCell value */
+                    value?: (string|null);
+                }
+
+                /** Represents a SearchDataTableRowCell. */
+                class SearchDataTableRowCell implements ISearchDataTableRowCell {
+
+                    /**
+                     * Constructs a new SearchDataTableRowCell.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ISearchDataTableRowCell);
+
+                    /** SearchDataTableRowCell column. */
+                    public column: string;
+
+                    /** SearchDataTableRowCell value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new SearchDataTableRowCell instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchDataTableRowCell instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ISearchDataTableRowCell): google.cloud.chronicle.v1.SearchDataTableRowCell;
+
+                    /**
+                     * Encodes the specified SearchDataTableRowCell message. Does not implicitly {@link google.cloud.chronicle.v1.SearchDataTableRowCell.verify|verify} messages.
+                     * @param message SearchDataTableRowCell message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ISearchDataTableRowCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchDataTableRowCell message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.SearchDataTableRowCell.verify|verify} messages.
+                     * @param message SearchDataTableRowCell message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ISearchDataTableRowCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchDataTableRowCell message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchDataTableRowCell
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.SearchDataTableRowCell;
+
+                    /**
+                     * Decodes a SearchDataTableRowCell message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchDataTableRowCell
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.SearchDataTableRowCell;
+
+                    /**
+                     * Verifies a SearchDataTableRowCell message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchDataTableRowCell message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchDataTableRowCell
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.SearchDataTableRowCell;
+
+                    /**
+                     * Creates a plain object from a SearchDataTableRowCell message. Also converts values to other types if specified.
+                     * @param message SearchDataTableRowCell
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.SearchDataTableRowCell, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchDataTableRowCell to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchDataTableRowCell
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableRecord. */
+                interface IDataTableRecord {
+
+                    /** DataTableRecord dataTable */
+                    dataTable?: (string|null);
+
+                    /** DataTableRecord cells */
+                    cells?: (google.cloud.chronicle.v1.ISearchDataTableRowCell[]|null);
+                }
+
+                /** Represents a DataTableRecord. */
+                class DataTableRecord implements IDataTableRecord {
+
+                    /**
+                     * Constructs a new DataTableRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableRecord);
+
+                    /** DataTableRecord dataTable. */
+                    public dataTable: string;
+
+                    /** DataTableRecord cells. */
+                    public cells: google.cloud.chronicle.v1.ISearchDataTableRowCell[];
+
+                    /**
+                     * Creates a new DataTableRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableRecord): google.cloud.chronicle.v1.DataTableRecord;
+
+                    /**
+                     * Encodes the specified DataTableRecord message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRecord.verify|verify} messages.
+                     * @param message DataTableRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRecord.verify|verify} messages.
+                     * @param message DataTableRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableRecord;
+
+                    /**
+                     * Decodes a DataTableRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableRecord;
+
+                    /**
+                     * Verifies a DataTableRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableRecord;
+
+                    /**
+                     * Creates a plain object from a DataTableRecord message. Also converts values to other types if specified.
+                     * @param message DataTableRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EventRecord. */
+                interface IEventRecord {
+
+                    /** EventRecord event */
+                    event?: (google.cloud.chronicle.v1.IEvent|null);
+
+                    /** EventRecord eventLogToken */
+                    eventLogToken?: (Uint8Array|Buffer|string|null);
+
+                    /** EventRecord alertNumber */
+                    alertNumber?: (number|null);
+
+                    /** EventRecord alertViewId */
+                    alertViewId?: (Uint8Array|Buffer|string|null);
+
+                    /** EventRecord annotations */
+                    annotations?: (google.cloud.chronicle.v1.EventRecord.Annotation[]|null);
+
+                    /** EventRecord detections */
+                    detections?: (google.backstory.ICollection[]|null);
+
+                    /** EventRecord table */
+                    table?: (string|null);
+                }
+
+                /** Represents an EventRecord. */
+                class EventRecord implements IEventRecord {
+
+                    /**
+                     * Constructs a new EventRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEventRecord);
+
+                    /** EventRecord event. */
+                    public event?: (google.cloud.chronicle.v1.IEvent|null);
+
+                    /** EventRecord eventLogToken. */
+                    public eventLogToken: (Uint8Array|Buffer|string);
+
+                    /** EventRecord alertNumber. */
+                    public alertNumber: number;
+
+                    /** EventRecord alertViewId. */
+                    public alertViewId: (Uint8Array|Buffer|string);
+
+                    /** EventRecord annotations. */
+                    public annotations: google.cloud.chronicle.v1.EventRecord.Annotation[];
+
+                    /** EventRecord detections. */
+                    public detections: google.backstory.ICollection[];
+
+                    /** EventRecord table. */
+                    public table: string;
+
+                    /**
+                     * Creates a new EventRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEventRecord): google.cloud.chronicle.v1.EventRecord;
+
+                    /**
+                     * Encodes the specified EventRecord message. Does not implicitly {@link google.cloud.chronicle.v1.EventRecord.verify|verify} messages.
+                     * @param message EventRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEventRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.EventRecord.verify|verify} messages.
+                     * @param message EventRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEventRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.EventRecord;
+
+                    /**
+                     * Decodes an EventRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.EventRecord;
+
+                    /**
+                     * Verifies an EventRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.EventRecord;
+
+                    /**
+                     * Creates a plain object from an EventRecord message. Also converts values to other types if specified.
+                     * @param message EventRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.EventRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EventRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EventRecord {
+
+                    /** Annotation enum. */
+                    enum Annotation {
+                        ANNOTATION_UNSPECIFIED = 0,
+                        ANNOTATION_ALERT = 1
+                    }
+                }
+
+                /** Properties of an EntityContextRecord. */
+                interface IEntityContextRecord {
+
+                    /** EntityContextRecord entity */
+                    entity?: (google.cloud.chronicle.v1.IEntity|null);
+
+                    /** EntityContextRecord eventLogToken */
+                    eventLogToken?: (string|null);
+
+                    /** EntityContextRecord timed */
+                    timed?: (boolean|null);
+
+                    /** EntityContextRecord table */
+                    table?: (string|null);
+                }
+
+                /** Represents an EntityContextRecord. */
+                class EntityContextRecord implements IEntityContextRecord {
+
+                    /**
+                     * Constructs a new EntityContextRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEntityContextRecord);
+
+                    /** EntityContextRecord entity. */
+                    public entity?: (google.cloud.chronicle.v1.IEntity|null);
+
+                    /** EntityContextRecord eventLogToken. */
+                    public eventLogToken: string;
+
+                    /** EntityContextRecord timed. */
+                    public timed: boolean;
+
+                    /** EntityContextRecord table. */
+                    public table: string;
+
+                    /**
+                     * Creates a new EntityContextRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntityContextRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEntityContextRecord): google.cloud.chronicle.v1.EntityContextRecord;
+
+                    /**
+                     * Encodes the specified EntityContextRecord message. Does not implicitly {@link google.cloud.chronicle.v1.EntityContextRecord.verify|verify} messages.
+                     * @param message EntityContextRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEntityContextRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntityContextRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.EntityContextRecord.verify|verify} messages.
+                     * @param message EntityContextRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEntityContextRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntityContextRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntityContextRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.EntityContextRecord;
+
+                    /**
+                     * Decodes an EntityContextRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntityContextRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.EntityContextRecord;
+
+                    /**
+                     * Verifies an EntityContextRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntityContextRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntityContextRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.EntityContextRecord;
+
+                    /**
+                     * Creates a plain object from an EntityContextRecord message. Also converts values to other types if specified.
+                     * @param message EntityContextRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.EntityContextRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntityContextRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntityContextRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a JoinRecord. */
+                interface IJoinRecord {
+
+                    /** JoinRecord events */
+                    events?: (google.cloud.chronicle.v1.IEventRecord[]|null);
+
+                    /** JoinRecord entities */
+                    entities?: (google.cloud.chronicle.v1.IEntityContextRecord[]|null);
+
+                    /** JoinRecord dataTables */
+                    dataTables?: (google.cloud.chronicle.v1.IDataTableRecord[]|null);
+                }
+
+                /** Represents a JoinRecord. */
+                class JoinRecord implements IJoinRecord {
+
+                    /**
+                     * Constructs a new JoinRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IJoinRecord);
+
+                    /** JoinRecord events. */
+                    public events: google.cloud.chronicle.v1.IEventRecord[];
+
+                    /** JoinRecord entities. */
+                    public entities: google.cloud.chronicle.v1.IEntityContextRecord[];
+
+                    /** JoinRecord dataTables. */
+                    public dataTables: google.cloud.chronicle.v1.IDataTableRecord[];
+
+                    /**
+                     * Creates a new JoinRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JoinRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IJoinRecord): google.cloud.chronicle.v1.JoinRecord;
+
+                    /**
+                     * Encodes the specified JoinRecord message. Does not implicitly {@link google.cloud.chronicle.v1.JoinRecord.verify|verify} messages.
+                     * @param message JoinRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IJoinRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JoinRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.JoinRecord.verify|verify} messages.
+                     * @param message JoinRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IJoinRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JoinRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JoinRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.JoinRecord;
+
+                    /**
+                     * Decodes a JoinRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JoinRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.JoinRecord;
+
+                    /**
+                     * Verifies a JoinRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JoinRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JoinRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.JoinRecord;
+
+                    /**
+                     * Creates a plain object from a JoinRecord message. Also converts values to other types if specified.
+                     * @param message JoinRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.JoinRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JoinRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for JoinRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetectionRecord. */
+                interface IDetectionRecord {
+
+                    /** DetectionRecord id */
+                    id?: (Uint8Array|Buffer|string|null);
+
+                    /** DetectionRecord collection */
+                    collection?: (google.backstory.ICollection|null);
+                }
+
+                /** Represents a DetectionRecord. */
+                class DetectionRecord implements IDetectionRecord {
+
+                    /**
+                     * Constructs a new DetectionRecord.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDetectionRecord);
+
+                    /** DetectionRecord id. */
+                    public id: (Uint8Array|Buffer|string);
+
+                    /** DetectionRecord collection. */
+                    public collection?: (google.backstory.ICollection|null);
+
+                    /**
+                     * Creates a new DetectionRecord instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectionRecord instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDetectionRecord): google.cloud.chronicle.v1.DetectionRecord;
+
+                    /**
+                     * Encodes the specified DetectionRecord message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionRecord.verify|verify} messages.
+                     * @param message DetectionRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDetectionRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectionRecord message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionRecord.verify|verify} messages.
+                     * @param message DetectionRecord message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDetectionRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectionRecord message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectionRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DetectionRecord;
+
+                    /**
+                     * Decodes a DetectionRecord message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectionRecord
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DetectionRecord;
+
+                    /**
+                     * Verifies a DetectionRecord message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectionRecord message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectionRecord
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DetectionRecord;
+
+                    /**
+                     * Creates a plain object from a DetectionRecord message. Also converts values to other types if specified.
+                     * @param message DetectionRecord
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DetectionRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectionRecord to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetectionRecord
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** SimulatedDataVisibility enum. */
+                enum SimulatedDataVisibility {
+                    SIMULATED_DATA_VISIBILITY_UNSPECIFIED = 0,
+                    SIMULATED_DATA_INCLUDED = 1,
+                    SIMULATED_DATA_EXCLUDED = 2
                 }
             }
         }

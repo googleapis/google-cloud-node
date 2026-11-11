@@ -6,6 +6,13 @@
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
 
+## [12.3.1](https://github.com/googleapis/google-cloud-node/compare/logging-v12.3.0...logging-v12.3.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* **logging:** [cleanup] widen EntryJson.insertId to string | number | null ([#9809](https://github.com/googleapis/google-cloud-node/issues/9809)) ([7bb6fc6](https://github.com/googleapis/google-cloud-node/commit/7bb6fc64bbb7355a367f84aaaa7b7a038ff588ec)), refs [#7563](https://github.com/googleapis/google-cloud-node/issues/7563)
+
 ## [12.3.0](https://github.com/googleapis/google-cloud-node/compare/logging-v12.2.0...logging-v12.3.0) (2026-10-08)
 
 
