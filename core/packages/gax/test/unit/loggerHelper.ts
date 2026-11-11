@@ -1934,6 +1934,12 @@ describe('LoggerHelper', () => {
         __dirname,
         __filename.endsWith('.js') ? '../../..' : '../..',
       );
+      const isBunExec =
+        typeof (globalThis as {Bun?: unknown}).Bun !== 'undefined' ||
+        Boolean((process.versions as Record<string, string | undefined>).bun) ||
+        /^bun(?:\.exe)?$/i.test(path.basename(process.execPath));
+      const esmEvalArgs = (script: string): string[] =>
+        isBunExec ? ['-e', script] : ['--input-type=module', '-e', script];
 
       // 2. Child process: pre-registered setBackend(getStructuredBackend()) BEFORE lazy-requiring google-gax.
       const preStructuredScript = `
@@ -2007,7 +2013,8 @@ describe('LoggerHelper', () => {
 
       // 3. ESM child process: pre-registered setBackend(customSink) BEFORE dynamic import of google-gax.
       const esmCustomSinkScript = `
-        import * as logging from 'google-logging-utils';
+        import * as loggingNs from 'google-logging-utils';
+        const logging = loggingNs.setBackend ? loggingNs : loggingNs.default;
         process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
         const captured = [];
         logging.setBackend({
@@ -2017,7 +2024,7 @@ describe('LoggerHelper', () => {
           setFilters() {},
         });
         const gaxMod = await import(${JSON.stringify(compiledEntryUrl)});
-        const gaxPkg = gaxMod.default ?? gaxMod;
+        const gaxPkg = gaxMod.createApiCall ? gaxMod : (gaxMod.default ?? gaxMod);
         const call = gaxPkg.createApiCall(
           (_arg, _meta, _opts, cb) => {
             const err = new gaxPkg.GoogleError('esm custom sink failure');
@@ -2039,7 +2046,7 @@ describe('LoggerHelper', () => {
       `;
       const esmSinkRes = spawnSync(
         process.execPath,
-        ['--input-type=module', '-e', esmCustomSinkScript],
+        esmEvalArgs(esmCustomSinkScript),
         {encoding: 'utf8', cwd: gaxPackageRoot},
       );
       assert.strictEqual(esmSinkRes.status, 0, esmSinkRes.stderr);
@@ -2059,11 +2066,12 @@ describe('LoggerHelper', () => {
 
       // 4. ESM child process: pre-registered setBackend(null) with unset GOOGLE_SDK_NODE_LOGGING BEFORE dynamic import of google-gax.
       const esmNullScript = `
-        import * as logging from 'google-logging-utils';
+        import * as loggingNs from 'google-logging-utils';
+        const logging = loggingNs.setBackend ? loggingNs : loggingNs.default;
         delete process.env.GOOGLE_SDK_NODE_LOGGING;
         logging.setBackend(null);
         const gaxMod = await import(${JSON.stringify(compiledEntryUrl)});
-        const gaxPkg = gaxMod.default ?? gaxMod;
+        const gaxPkg = gaxMod.createApiCall ? gaxMod : (gaxMod.default ?? gaxMod);
         const call = gaxPkg.createApiCall(
           (_arg, _meta, _opts, cb) => {
             const err = new gaxPkg.GoogleError('esm null backend failure');
@@ -2087,7 +2095,7 @@ describe('LoggerHelper', () => {
       `;
       const esmNullRes = spawnSync(
         process.execPath,
-        ['--input-type=module', '-e', esmNullScript],
+        esmEvalArgs(esmNullScript),
         {encoding: 'utf8', cwd: gaxPackageRoot},
       );
       assert.strictEqual(esmNullRes.status, 0, esmNullRes.stderr);
