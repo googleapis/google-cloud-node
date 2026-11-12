@@ -2275,6 +2275,7 @@ libraries:
       - system-test/fixtures/sample/src/index.js
       - system-test/fixtures/sample/src/index.ts
       - test/storage_control_compatibility.ts
+      - tsconfig.json
       - webpack.config.js
     nodejs:
       default_version: v2
