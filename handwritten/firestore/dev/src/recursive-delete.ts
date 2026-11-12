@@ -22,6 +22,7 @@ import Firestore, {
   CollectionReference,
   DocumentReference,
   FieldPath,
+  Filter,
   Query,
   QueryDocumentSnapshot,
 } from '.';
@@ -40,6 +41,13 @@ import {StatusCode} from './status-code';
  * descendants in a single collection.
  */
 export const REFERENCE_NAME_MIN_ID = '__id-9223372036854775808__';
+
+/*!
+ * The lowest possible string ID. Standard edition orders REFERENCE_NAME_MIN_ID
+ * first, while Enterprise edition orders REFERENCE_NAME_MIN_STRING_ID first.
+ * Both are used to bound queries for all descendants in a single collection.
+ */
+export const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
 /*!
  * The query limit used for recursive deletes when fetching all descendants of
@@ -257,15 +265,37 @@ export class RecursiveDelete {
     if (ref instanceof CollectionReference) {
       // To find all descendants of a collection reference, we need to use a
       // composite filter that captures all documents that start with the
-      // collection prefix. The MIN_KEY constant represents the minimum key in
-      // this collection, and a null byte + the MIN_KEY represents the minimum
-      // key is the next possible collection.
+      // collection prefix. The minimum document ID differs by edition:
+      // Standard edition orders REFERENCE_NAME_MIN_ID first, while Enterprise
+      // edition orders REFERENCE_NAME_MIN_STRING_ID first. The range starts at
+      // the minimum key in this collection and ends before the minimum key in
+      // the next possible collection (the collection ID followed by a null
+      // byte), using both minimums for each bound.
       const nullChar = String.fromCharCode(0);
       const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
+      const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
       const endAt = collectionId + nullChar + '/' + REFERENCE_NAME_MIN_ID;
+      const endAtString =
+        collectionId + nullChar + '/' + REFERENCE_NAME_MIN_STRING_ID;
+
+      // The lower bound is the disjunction of both minimums. Standard edition
+      // does not coalesce the overlapping OR bounds and runs one range scan per
+      // disjunct, so the lower bound is only added to the first query. Later
+      // queries are bounded by startAfter(lastDocumentSnap) instead.
+      if (!this.lastDocumentSnap) {
+        query = query.where(
+          Filter.or(
+            Filter.where(FieldPath.documentId(), '>=', startAt),
+            Filter.where(FieldPath.documentId(), '>=', startAtString),
+          ),
+        );
+      }
+
+      // The upper bound is the conjunction of both minimums, which takes the
+      // tighter of the two on either edition.
       query = query
-        .where(FieldPath.documentId(), '>=', startAt)
-        .where(FieldPath.documentId(), '<', endAt);
+        .where(FieldPath.documentId(), '<', endAt)
+        .where(FieldPath.documentId(), '<', endAtString);
     }
 
     if (this.lastDocumentSnap) {
