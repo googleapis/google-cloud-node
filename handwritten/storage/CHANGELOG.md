@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-v9.0.0...storage-v9.1.0) (2026-11-12)
+
+
+### Features
+
+* Update API sources and regenerate ([#9849](https://github.com/googleapis/google-cloud-node/issues/9849)) ([7144c27](https://github.com/googleapis/google-cloud-node/commit/7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7))
+
 ## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.4.0...storage-v9.0.0) (2026-11-03)
 
 
