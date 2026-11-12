@@ -104,7 +104,7 @@ export interface GetEntriesCallback {
     err: Error | null,
     entries?: Entry[],
     request?: google.logging.v2.IListLogEntriesRequest,
-    apiResponse?: google.logging.v2.IListLogEntriesResponse,
+    apiResponse?: google.logging.v2.IListLogEntriesResponse
   ): void;
 }
 
@@ -133,7 +133,7 @@ export interface GetLogsCallback {
     err: Error | null,
     entries?: Sink[],
     request?: google.logging.v2.IListLogsRequest,
-    apiResponse?: google.logging.v2.IListLogsResponse,
+    apiResponse?: google.logging.v2.IListLogsResponse
   ): void;
 }
 
@@ -157,7 +157,7 @@ export interface GetSinksCallback {
     err: Error | null,
     entries?: Sink[],
     request?: google.logging.v2.IListSinksRequest,
-    apiResponse?: google.logging.v2.IListSinksResponse,
+    apiResponse?: google.logging.v2.IListSinksResponse
   ): void;
 }
 export type Client = string;
@@ -287,7 +287,7 @@ class Logging {
         libVersion: version,
         scopes,
       },
-      options,
+      options
     );
     this.api = {};
     this.auth = new (gaxInstance ?? gax).GoogleAuth(options_);
@@ -295,11 +295,11 @@ class Logging {
     this.projectId = this.options.projectId || '{{projectId}}';
     this.configService = new v2.ConfigServiceV2Client(
       this.options,
-      gaxInstance,
+      gaxInstance
     );
     this.loggingService = new v2.LoggingServiceV2Client(
       this.options,
-      gaxInstance,
+      gaxInstance
     );
   }
 
@@ -337,7 +337,7 @@ class Logging {
   createSink(
     name: string,
     config: CreateSinkRequest,
-    callback: CreateSinkCallback,
+    callback: CreateSinkCallback
   ): void;
   // jscs:disable maximumLineLength
   /**
@@ -387,7 +387,7 @@ class Logging {
    */
   async createSink(
     name: string,
-    config: CreateSinkRequest,
+    config: CreateSinkRequest
   ): Promise<[Sink, LogSink]> {
     if (typeof name !== 'string') {
       throw new Error('A sink name must be provided.');
@@ -414,7 +414,7 @@ class Logging {
     await this.setProjectId(reqOpts);
     const [resp] = await this.configService.createSink(
       reqOpts,
-      config.gaxOptions,
+      config.gaxOptions
     );
     const sink = this.sink(resp.name);
     sink.metadata = resp;
@@ -561,7 +561,7 @@ class Logging {
   getEntries(callback: GetEntriesCallback): void;
   getEntries(options: GetEntriesRequest, callback: GetEntriesCallback): void;
   async getEntries(
-    opts?: GetEntriesRequest | GetEntriesCallback,
+    opts?: GetEntriesRequest | GetEntriesCallback
   ): Promise<GetEntriesResponse> {
     const options = opts ? (opts as GetEntriesRequest) : {};
 
@@ -591,14 +591,14 @@ class Logging {
       {
         autoPaginate: options!.autoPaginate,
       },
-      options!.gaxOptions,
+      options!.gaxOptions
     );
     if (options?.maxResults) {
       gaxOptions = extend(
         {
           maxResults: options.maxResults,
         },
-        gaxOptions,
+        gaxOptions
       );
     }
     const resp = await this.loggingService.listLogEntries(reqOpts, gaxOptions);
@@ -658,18 +658,19 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises, promise/catch-or-return
       this.auth.getProjectId().then(projectId => {
         this.projectId = projectId;
         if (options.log) {
           if (options.filter) {
             options.filter = `(${options.filter}) AND logName="${formatLogName(
               this.projectId,
-              options.log,
+              options.log
             )}"`;
           } else {
             options.filter = `logName="${formatLogName(
               this.projectId,
-              options.log,
+              options.log
             )}"`;
           }
           delete options.log;
@@ -678,7 +679,7 @@ class Logging {
           {
             orderBy: 'timestamp desc',
           },
-          options,
+          options
         );
         reqOpts.resourceNames = arrify(reqOpts.resourceNames!);
         reqOpts.resourceNames.push(`projects/${this.projectId}`);
@@ -688,25 +689,25 @@ class Logging {
           {
             autoPaginate: options.autoPaginate,
           },
-          options.gaxOptions,
+          options.gaxOptions
         );
 
         let gaxStream: ClientReadableStream<LogEntry>;
         requestStream = streamEvents<Duplex>(
-          new PassThrough({objectMode: true}),
+          new PassThrough({objectMode: true})
         );
         (requestStream as AbortableDuplex).abort = () => {
           if (gaxStream && gaxStream.cancel) {
             gaxStream.cancel();
           }
         };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, promise/always-return
         if (!(global as any).GCLOUD_SANDBOX_ENV) {
           requestStream.once('reading', () => {
             try {
               gaxStream = this.loggingService.listLogEntriesStream(
                 reqOpts,
-                gaxOptions,
+                gaxOptions
               );
             } catch (error) {
               requestStream.destroy(error as Error);
@@ -806,11 +807,12 @@ class Logging {
               suppressionInfo: chunk.suppressionInfo,
             };
             return resp;
-          })(),
+          })()
         );
       },
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises, promise/catch-or-return
     this.auth.getProjectId().then(projectId => {
       this.projectId = projectId;
 
@@ -818,12 +820,12 @@ class Logging {
         if (options.filter) {
           options.filter = `(${options.filter}) AND logName="${formatLogName(
             this.projectId,
-            options.log,
+            options.log
           )}"`;
         } else {
           options.filter = `logName="${formatLogName(
             this.projectId,
-            options.log,
+            options.log
           )}"`;
         }
       }
@@ -835,7 +837,7 @@ class Logging {
         ...(options.bufferWindow && {bufferwindow: options.bufferWindow}),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, promise/always-return
       if (!(global as any).GCLOUD_SANDBOX_ENV) {
         gaxStream = this.loggingService.tailLogEntries(options.gaxOptions);
         // Write can only be called once in a single tail streaming session.
@@ -921,7 +923,7 @@ class Logging {
   getLogs(callback: GetLogsCallback): void;
   getLogs(options: GetLogsRequest, callback: GetLogsCallback): void;
   async getLogs(
-    opts?: GetLogsRequest | GetLogsCallback,
+    opts?: GetLogsRequest | GetLogsCallback
   ): Promise<GetLogsResponse> {
     const options = opts ? (opts as GetSinksRequest) : {};
     this.projectId = await this.auth.getProjectId();
@@ -934,7 +936,7 @@ class Logging {
       {
         autoPaginate: options.autoPaginate,
       },
-      options.gaxOptions,
+      options.gaxOptions
     );
     const resp = await this.loggingService.listLogs(reqOpts, gaxOptions);
     const [logs] = resp;
@@ -992,6 +994,7 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises, promise/catch-or-return, promise/always-return
       this.auth.getProjectId().then(projectId => {
         this.projectId = projectId;
         const reqOpts = extend({}, options, {
@@ -1002,12 +1005,12 @@ class Logging {
           {
             autoPaginate: options.autoPaginate,
           },
-          options.gaxOptions,
+          options.gaxOptions
         );
 
         let gaxStream: ClientReadableStream<Log>;
         requestStream = streamEvents<Duplex>(
-          new PassThrough({objectMode: true}),
+          new PassThrough({objectMode: true})
         );
         (requestStream as AbortableDuplex).abort = () => {
           if (gaxStream && gaxStream.cancel) {
@@ -1092,7 +1095,7 @@ class Logging {
   getSinks(callback: GetSinksCallback): void;
   getSinks(options: GetSinksRequest, callback: GetSinksCallback): void;
   async getSinks(
-    opts?: GetSinksRequest | GetSinksCallback,
+    opts?: GetSinksRequest | GetSinksCallback
   ): Promise<GetSinksResponse> {
     const options = opts ? (opts as GetSinksRequest) : {};
     this.projectId = await this.auth.getProjectId();
@@ -1105,7 +1108,7 @@ class Logging {
       {
         autoPaginate: options.autoPaginate,
       },
-      options.gaxOptions,
+      options.gaxOptions
     );
     const resp = await this.configService.listSinks(reqOpts, gaxOptions);
     const [sinks] = resp;
@@ -1172,6 +1175,7 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises, promise/catch-or-return
       this.auth.getProjectId().then(projectId => {
         this.projectId = projectId;
         const reqOpts = extend({}, options, {
@@ -1182,25 +1186,25 @@ class Logging {
           {
             autoPaginate: options.autoPaginate,
           },
-          options.gaxOptions,
+          options.gaxOptions
         );
 
         let gaxStream: ClientReadableStream<LogSink>;
         requestStream = streamEvents<Duplex>(
-          new PassThrough({objectMode: true}),
+          new PassThrough({objectMode: true})
         );
         (requestStream as AbortableDuplex).abort = () => {
           if (gaxStream && gaxStream.cancel) {
             gaxStream.cancel();
           }
         };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, promise/always-return
         if (!(global as any).GCLOUD_SANDBOX_ENV) {
           requestStream.once('reading', () => {
             try {
               gaxStream = this.configService.listSinksStream(
                 reqOpts,
-                gaxOptions,
+                gaxOptions
               );
             } catch (error) {
               requestStream.destroy(error as Error);
@@ -1300,7 +1304,7 @@ class Logging {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request<TResponse = any>(
     config: RequestConfig,
-    callback?: RequestCallback<TResponse>,
+    callback?: RequestCallback<TResponse>
   ) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -1336,7 +1340,7 @@ class Logging {
         const requestFn = gaxClient[config.method].bind(
           gaxClient,
           reqOpts,
-          config.gaxOpts,
+          config.gaxOpts
         );
         callback(null, requestFn);
       });
@@ -1462,7 +1466,7 @@ class Logging {
   async setDetectedResource() {
     if (!this.detectedResource) {
       this.detectedResource = await getDefaultResource(
-        this.auth as unknown as GoogleAuth,
+        this.auth as unknown as GoogleAuth
       );
     }
   }

@@ -162,7 +162,7 @@ class Sink {
   delete(callback: DeleteCallback): void;
   delete(gaxOptions: CallOptions, callback: DeleteCallback): void;
   async delete(
-    gaxOptions?: CallOptions | DeleteCallback,
+    gaxOptions?: CallOptions | DeleteCallback
   ): Promise<DeleteResponse> {
     const projectId = await this.logging.auth.getProjectId();
     this.formattedName_ = 'projects/' + projectId + '/sinks/' + this.name;
@@ -171,7 +171,7 @@ class Sink {
     };
     return this.logging.configService.deleteSink(
       reqOpts,
-      gaxOptions as CallOptions,
+      gaxOptions as CallOptions
     );
   }
 
@@ -218,7 +218,7 @@ class Sink {
   getMetadata(callback: SinkMetadataCallback): void;
   getMetadata(gaxOptions: CallOptions, callback: SinkMetadataCallback): void;
   async getMetadata(
-    gaxOptions?: CallOptions | SinkMetadataCallback,
+    gaxOptions?: CallOptions | SinkMetadataCallback
   ): Promise<SinkMetadataResponse> {
     const projectId = await this.logging.auth.getProjectId();
     this.formattedName_ = 'projects/' + projectId + '/sinks/' + this.name;
@@ -228,7 +228,7 @@ class Sink {
 
     [this.metadata] = await this.logging.configService.getSink(
       reqOpts,
-      gaxOptions as CallOptions,
+      gaxOptions as CallOptions
     );
     return [this.metadata!];
   }
@@ -347,7 +347,7 @@ class Sink {
     };
     [this.metadata] = await this.logging.configService.updateSink(
       reqOpts,
-      metadata.gaxOptions,
+      metadata.gaxOptions
     );
     return [this.metadata!];
   }
