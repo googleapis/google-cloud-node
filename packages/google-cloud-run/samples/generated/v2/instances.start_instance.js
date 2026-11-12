@@ -29,10 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Instance to stop.
-   *  Format:
-   *  `projects/{project}/locations/{location}/instances/{instance}`,
-   *  where `{project}` can be project id or number.
+   *  Required. The name of the Instance to start.
    */
   // const name = 'abc123'
   /**

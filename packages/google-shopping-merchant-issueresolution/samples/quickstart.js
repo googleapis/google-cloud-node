@@ -50,7 +50,7 @@ function main(name) {
 
   // Imports the Issueresolution library
   const {IssueResolutionServiceClient} =
-    require('@google-shopping/issueresolution').v1beta;
+    require('@google-shopping/issueresolution').v1;
 
   // Instantiates a client
   const issueresolutionClient = new IssueResolutionServiceClient();

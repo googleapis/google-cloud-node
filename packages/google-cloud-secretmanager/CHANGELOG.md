@@ -1,5 +1,16 @@
 # Changelog
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v7.2.0...secret-manager-v8.0.0) (2026-11-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* **secretmanager:** `EnableManagedRotationRequest` now references the top-level `CloudSqlSingleUserCredentials` message, and its oneof `credentials` is renamed to `credential`.
+
+### Bug Fixes
+
+* **secretmanager:** Regenerate with EnableManagedRotationRequest changes ([#9818](https://github.com/googleapis/google-cloud-node/issues/9818)) ([bc80666](https://github.com/googleapis/google-cloud-node/commit/bc806669c8503cf77843d8be643fccc69563a2bf))
+
 ## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v7.1.1...secret-manager-v7.2.0) (2026-10-08)
 
 

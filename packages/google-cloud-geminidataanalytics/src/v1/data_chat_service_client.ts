@@ -1377,6 +1377,11 @@ export class DataChatServiceClient {
    *   ListMessages allows filtering by:
    *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
    *    * update_time
+   * @param {boolean} [request.pendingWriteWaitSkipped]
+   *   Optional. If true, the wait for in-flight writes on the most recent turn is
+   *   skipped. By default ListMessages waits for those writes to become durable
+   *   so a caller reading right after a chat turn does not miss the tail of that
+   *   turn's messages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1514,6 +1519,11 @@ export class DataChatServiceClient {
    *   ListMessages allows filtering by:
    *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
    *    * update_time
+   * @param {boolean} [request.pendingWriteWaitSkipped]
+   *   Optional. If true, the wait for in-flight writes on the most recent turn is
+   *   skipped. By default ListMessages waits for those writes to become durable
+   *   so a caller reading right after a chat turn does not miss the tail of that
+   *   turn's messages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1574,6 +1584,11 @@ export class DataChatServiceClient {
    *   ListMessages allows filtering by:
    *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
    *    * update_time
+   * @param {boolean} [request.pendingWriteWaitSkipped]
+   *   Optional. If true, the wait for in-flight writes on the most recent turn is
+   *   skipped. By default ListMessages waits for those writes to become durable
+   *   so a caller reading right after a chat turn does not miss the tail of that
+   *   turn's messages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

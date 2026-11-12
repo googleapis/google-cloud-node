@@ -384,7 +384,11 @@ export class DataObjectSearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/vectorsearch',
+      'https://www.googleapis.com/auth/vectorsearch.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -415,8 +419,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.AggregationMethod} request.aggregate
    *   Required. The aggregation method to apply to the query.
    * @param {object} [options]
@@ -975,8 +993,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]
@@ -1112,8 +1144,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]
@@ -1172,8 +1218,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]

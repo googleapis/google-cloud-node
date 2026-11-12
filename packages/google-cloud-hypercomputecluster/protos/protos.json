@@ -6006,8 +6006,8 @@
                     "java_package": "com.google.cloud.hypercomputecluster.v1beta",
                     "php_namespace": "Google\\Cloud\\HypercomputeCluster\\V1beta",
                     "ruby_package": "Google::Cloud::HypercomputeCluster::V1beta",
-                    "(google.api.resource_definition).type": "storage.googleapis.com/Bucket",
-                    "(google.api.resource_definition).pattern": "projects/{project}/buckets/{bucket}"
+                    "(google.api.resource_definition).type": "lustre.googleapis.com/Instance",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}"
                   },
                   "nested": {
                     "HypercomputeCluster": {
@@ -6133,6 +6133,24 @@
                               }
                             }
                           ]
+                        },
+                        "ListNodes": {
+                          "requestType": "ListNodesRequest",
+                          "responseType": "ListNodesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/clusters/*}/nodes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/clusters/*}/nodes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -6216,6 +6234,14 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -6370,6 +6396,59 @@
                         }
                       }
                     },
+                    "ListNodesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "hypercomputecluster.googleapis.com/Node"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListNodesResponse": {
+                      "fields": {
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "Node",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "NetworkResource": {
                       "oneofs": {
                         "reference": {
@@ -6381,7 +6460,10 @@
                       "fields": {
                         "network": {
                           "type": "NetworkReference",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "config": {
                           "type": "NetworkResourceConfig",
@@ -6490,15 +6572,24 @@
                       "fields": {
                         "filestore": {
                           "type": "FilestoreReference",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "bucket": {
                           "type": "BucketReference",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "lustre": {
                           "type": "LustreReference",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "config": {
                           "type": "StorageResourceConfig",
@@ -6540,7 +6631,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "lustre.googleapis.com/LustreInstance"
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Instance"
                           }
                         }
                       }
@@ -6554,7 +6645,8 @@
                             "newBucket",
                             "existingBucket",
                             "newLustre",
-                            "existingLustre"
+                            "existingLustre",
+                            "existingNfs"
                           ]
                         }
                       },
@@ -6597,6 +6689,13 @@
                         "existingLustre": {
                           "type": "ExistingLustreConfig",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "existingNfs": {
+                          "type": "ExistingNfsConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
@@ -6737,7 +6836,8 @@
                             "STANDARD": 1,
                             "NEARLINE": 2,
                             "COLDLINE": 3,
-                            "ARCHIVE": 4
+                            "ARCHIVE": 4,
+                            "RAPID": 5
                           }
                         }
                       }
@@ -6762,7 +6862,9 @@
                       "nested": {
                         "TerminalStorageClass": {
                           "values": {
-                            "TERMINAL_STORAGE_CLASS_UNSPECIFIED": 0
+                            "TERMINAL_STORAGE_CLASS_UNSPECIFIED": 0,
+                            "NEARLINE": 1,
+                            "ARCHIVE": 2
                           }
                         }
                       }
@@ -6819,6 +6921,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "perUnitStorageThroughput": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -6829,7 +6938,33 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
-                            "(google.api.resource_reference).type": "lustre.googleapis.com/LustreInstance"
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "ExistingNfsConfig": {
+                      "fields": {
+                        "serverIpAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "remoteMount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "mountOptions": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -6902,6 +7037,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -6920,6 +7063,30 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "terminationAction": {
+                          "type": "TerminationAction",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TerminationAction": {
+                          "values": {
+                            "TERMINATION_ACTION_UNSPECIFIED": 0,
+                            "STOP": 1,
+                            "DELETE": 2
+                          }
                         }
                       }
                     },
@@ -6927,7 +7094,9 @@
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "reservation"
+                            "reservation",
+                            "reservationBlock",
+                            "reservationSubBlock"
                           ]
                         }
                       },
@@ -6938,6 +7107,30 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Reservation"
+                          }
+                        },
+                        "reservationBlock": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ReservationBlock"
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ReservationSubBlock"
+                          }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -6964,6 +7157,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
@@ -6973,7 +7174,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/DiskType"
                           }
                         },
@@ -6981,7 +7182,16 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "storagePools": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/StoragePool"
                           }
                         }
                       }
@@ -6990,7 +7200,8 @@
                       "oneofs": {
                         "option": {
                           "oneof": [
-                            "slurm"
+                            "slurm",
+                            "computeEngine"
                           ]
                         }
                       },
@@ -6998,6 +7209,13 @@
                         "slurm": {
                           "type": "SlurmOrchestrator",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "computeEngine": {
+                          "type": "ComputeEngineOrchestrator",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7018,7 +7236,7 @@
                           "type": "SlurmNodeSet",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "partitions": {
@@ -7026,7 +7244,7 @@
                           "type": "SlurmPartition",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "defaultPartition": {
@@ -7081,7 +7299,7 @@
                           "type": "string",
                           "id": 16,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "storageConfigs": {
@@ -7102,6 +7320,13 @@
                         "maxDynamicNodeCount": {
                           "type": "int64",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resourcePolicyConfig": {
+                          "type": "ResourcePolicyConfig",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7128,6 +7353,17 @@
                         "bootDisk": {
                           "type": "BootDisk",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResourcePolicyConfig": {
+                      "fields": {
+                        "acceleratorTopology": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7227,6 +7463,33 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceAccount": {
+                      "fields": {
+                        "email": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7256,6 +7519,459 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/ComputeInstance"
+                          }
+                        }
+                      }
+                    },
+                    "Node": {
+                      "options": {
+                        "(google.api.resource).type": "hypercomputecluster.googleapis.com/Node",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}",
+                        "(google.api.resource).plural": "nodes",
+                        "(google.api.resource).singular": "node"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runningJobs": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "acceptingJobs": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "provisioningModel": {
+                          "type": "ProvisioningModel",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "slurmDetails": {
+                          "type": "SlurmNodeDetails",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "computeEngineDetails": {
+                          "type": "ComputeEngineNodeDetails",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "SUSPENDING": 3,
+                            "SUSPENDED": 4,
+                            "REPAIRING": 5,
+                            "FAILED": 6,
+                            "DELETING": 7,
+                            "UNPROVISIONED": 8
+                          }
+                        },
+                        "ProvisioningModel": {
+                          "values": {
+                            "PROVISIONING_MODEL_UNSPECIFIED": 0,
+                            "ON_DEMAND": 1,
+                            "SPOT": 2,
+                            "RESERVATION_BOUND": 3,
+                            "FLEX_START": 4
+                          }
+                        }
+                      }
+                    },
+                    "SlurmNodeDetails": {
+                      "fields": {
+                        "states": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reason": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partitions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nodeset": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "comment": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ComputeEngineNodeDetails": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ComputeInstance"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceGroupManager": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceGroupManager"
+                          }
+                        }
+                      }
+                    },
+                    "ComputeEngineOrchestrator": {
+                      "fields": {
+                        "managedInstanceGroups": {
+                          "keyType": "string",
+                          "type": "ManagedInstanceGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "existingInstances": {
+                          "keyType": "string",
+                          "type": "ExistingInstances",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ManagedInstanceGroup": {
+                      "fields": {
+                        "instanceGroupManager": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceGroupManager"
+                          }
+                        },
+                        "computeId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetSize": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "storageConfigs": {
+                          "rule": "repeated",
+                          "type": "StorageConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instanceTemplate": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceTemplate"
+                          }
+                        },
+                        "resourcePolicyConfig": {
+                          "type": "ResourcePolicyConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootDisk": {
+                          "type": "BootDisk",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalDisks": {
+                          "keyType": "string",
+                          "type": "Disk",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "startupScript": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enablePublicIps": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableOsLogin": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "startupScriptTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "ServiceAccount",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Disk": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "image",
+                            "snapshot",
+                            "existingDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "image": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Image"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Snapshot"
+                          }
+                        },
+                        "existingDisk": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Disk"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/DiskType"
+                          }
+                        },
+                        "sizeGb": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExistingInstances": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "project",
+                            "instanceGroupManager",
+                            "regionInstanceGroupManager",
+                            "reservation",
+                            "reservationBlock",
+                            "reservationSubBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "instanceGroupManager": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceGroupManager"
+                          }
+                        },
+                        "regionInstanceGroupManager": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceGroupManager"
+                          }
+                        },
+                        "reservation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Reservation"
+                          }
+                        },
+                        "reservationBlock": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ReservationBlock"
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ReservationSubBlock"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "networks": {
+                          "rule": "repeated",
+                          "type": "NetworkReference",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -7302,6 +8018,431 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "progress": {
+                          "type": "OperationProgress",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "OperationProgress": {
+                      "fields": {
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "OperationStep",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "OperationStep": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "createNetwork",
+                            "createPrivateServiceAccess",
+                            "createFilestoreInstance",
+                            "createStorageBucket",
+                            "createLustreInstance",
+                            "createOrchestrator",
+                            "createNodeset",
+                            "createPartition",
+                            "createLoginNode",
+                            "checkClusterHealth",
+                            "updateOrchestrator",
+                            "updateNodeset",
+                            "updatePartition",
+                            "updateLoginNode",
+                            "deleteOrchestrator",
+                            "deleteNodeset",
+                            "deletePartition",
+                            "deleteLoginNode",
+                            "deleteFilestoreInstance",
+                            "deleteStorageBucket",
+                            "deleteLustreInstance",
+                            "deletePrivateServiceAccess",
+                            "deleteNetwork"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "createNetwork": {
+                          "type": "CreateNetwork",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createPrivateServiceAccess": {
+                          "type": "CreatePrivateServiceAccess",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createFilestoreInstance": {
+                          "type": "CreateFilestoreInstance",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createStorageBucket": {
+                          "type": "CreateStorageBucket",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createLustreInstance": {
+                          "type": "CreateLustreInstance",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createOrchestrator": {
+                          "type": "CreateOrchestrator",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createNodeset": {
+                          "type": "CreateNodeset",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createPartition": {
+                          "type": "CreatePartition",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createLoginNode": {
+                          "type": "CreateLoginNode",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "checkClusterHealth": {
+                          "type": "CheckClusterHealth",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateOrchestrator": {
+                          "type": "UpdateOrchestrator",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateNodeset": {
+                          "type": "UpdateNodeset",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updatePartition": {
+                          "type": "UpdatePartition",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateLoginNode": {
+                          "type": "UpdateLoginNode",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteOrchestrator": {
+                          "type": "DeleteOrchestrator",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteNodeset": {
+                          "type": "DeleteNodeset",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deletePartition": {
+                          "type": "DeletePartition",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteLoginNode": {
+                          "type": "DeleteLoginNode",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteFilestoreInstance": {
+                          "type": "DeleteFilestoreInstance",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteStorageBucket": {
+                          "type": "DeleteStorageBucket",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteLustreInstance": {
+                          "type": "DeleteLustreInstance",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deletePrivateServiceAccess": {
+                          "type": "DeletePrivateServiceAccess",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteNetwork": {
+                          "type": "DeleteNetwork",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "WAITING": 1,
+                            "IN_PROGRESS": 2,
+                            "DONE": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreateNetwork": {
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePrivateServiceAccess": {
+                      "fields": {}
+                    },
+                    "CreateFilestoreInstance": {
+                      "fields": {
+                        "filestore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "file.googleapis.com/FileInstance"
+                          }
+                        }
+                      }
+                    },
+                    "CreateStorageBucket": {
+                      "fields": {
+                        "bucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/Bucket"
+                          }
+                        }
+                      }
+                    },
+                    "CreateLustreInstance": {
+                      "fields": {
+                        "lustre": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "CreateOrchestrator": {
+                      "fields": {}
+                    },
+                    "CreateNodeset": {
+                      "fields": {
+                        "nodesets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePartition": {
+                      "fields": {
+                        "partitions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateLoginNode": {
+                      "fields": {}
+                    },
+                    "CheckClusterHealth": {
+                      "fields": {}
+                    },
+                    "UpdateOrchestrator": {
+                      "fields": {}
+                    },
+                    "UpdateNodeset": {
+                      "fields": {
+                        "nodesets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePartition": {
+                      "fields": {
+                        "partitions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateLoginNode": {
+                      "fields": {}
+                    },
+                    "DeleteOrchestrator": {
+                      "fields": {}
+                    },
+                    "DeleteNodeset": {
+                      "fields": {
+                        "nodesets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DeletePartition": {
+                      "fields": {
+                        "partitions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteLoginNode": {
+                      "fields": {}
+                    },
+                    "DeleteFilestoreInstance": {
+                      "fields": {
+                        "filestore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "file.googleapis.com/FileInstance"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteStorageBucket": {
+                      "fields": {
+                        "bucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/Bucket"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteLustreInstance": {
+                      "fields": {
+                        "lustre": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "lustre.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "DeletePrivateServiceAccess": {
+                      "fields": {}
+                    },
+                    "DeleteNetwork": {
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         }
                       }

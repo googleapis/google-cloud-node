@@ -921,12 +921,8 @@ export function constructSettings(
     ? isEnvEnabled
     : Boolean(enableTelemetryTracing);
 
-  const experimentalLogging =
-    env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
-  const isExperimentalLoggingEnabled =
-    experimentalLogging === 'true' || experimentalLogging === '1';
   const isLoggingEnvEnabled =
-    isExperimentalLoggingEnabled && enableTelemetryLogging === undefined
+    enableTelemetryLogging === undefined
       ? checkLoggingEnabled(new CallSettings({apiName: serviceName}))
       : false;
   const resolvedLogging =
@@ -935,8 +931,7 @@ export function constructSettings(
       : isLoggingEnvEnabled
         ? true
         : undefined;
-  const loggingRequested =
-    isExperimentalLoggingEnabled && Boolean(resolvedLogging);
+  const loggingRequested = Boolean(resolvedLogging);
 
   otherArgs = otherArgs || {};
 
@@ -1007,11 +1002,7 @@ export function constructSettings(
           : otherArgs,
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
-      enableTelemetryLogging: isExperimentalLoggingEnabled
-        ? resolvedLogging
-        : enableTelemetryLogging !== undefined
-          ? false
-          : undefined,
+      enableTelemetryLogging: resolvedLogging,
     });
   }
 

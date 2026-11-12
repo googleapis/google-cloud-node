@@ -1054,6 +1054,261 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "apiAuthentication": {
+                          "type": "ApiAuthentication",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "statefulAgent": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ApiKeyConfig": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "apiKeySecretVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "requestLocation": {
+                          "type": "RequestLocation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RequestLocation": {
+                          "values": {
+                            "REQUEST_LOCATION_UNSPECIFIED": 0,
+                            "HEADER": 1,
+                            "QUERY_STRING": 2
+                          }
+                        }
+                      }
+                    },
+                    "OAuthConfig": {
+                      "fields": {
+                        "oauthGrantType": {
+                          "type": "OauthGrantType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientSecretVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "tokenEndpoint": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OauthGrantType": {
+                          "values": {
+                            "OAUTH_GRANT_TYPE_UNSPECIFIED": 0,
+                            "CLIENT_CREDENTIAL": 1
+                          }
+                        }
+                      }
+                    },
+                    "ServiceAgentIdTokenAuthConfig": {
+                      "fields": {}
+                    },
+                    "ServiceAccountAuthConfig": {
+                      "fields": {
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BearerTokenConfig": {
+                      "fields": {
+                        "token": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EndUserAuthConfig": {
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "oauth2AuthCodeConfig",
+                            "oauth2JwtBearerConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "oauth2AuthCodeConfig": {
+                          "type": "Oauth2AuthCodeConfig",
+                          "id": 2
+                        },
+                        "oauth2JwtBearerConfig": {
+                          "type": "Oauth2JwtBearerConfig",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Oauth2AuthCodeConfig": {
+                          "fields": {
+                            "oauthToken": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Oauth2JwtBearerConfig": {
+                          "fields": {
+                            "issuer": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "subject": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clientKey": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ApiAuthentication": {
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "apiKeyConfig",
+                            "oauthConfig",
+                            "serviceAgentIdTokenAuthConfig",
+                            "serviceAccountAuthConfig",
+                            "bearerTokenConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "apiKeyConfig": {
+                          "type": "ApiKeyConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oauthConfig": {
+                          "type": "OAuthConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAgentIdTokenAuthConfig": {
+                          "type": "ServiceAgentIdTokenAuthConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccountAuthConfig": {
+                          "type": "ServiceAccountAuthConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bearerTokenConfig": {
+                          "type": "BearerTokenConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5718,231 +5973,6 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ApiKeyConfig": {
-                      "fields": {
-                        "keyName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "apiKeySecretVersion": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
-                          }
-                        },
-                        "requestLocation": {
-                          "type": "RequestLocation",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RequestLocation": {
-                          "values": {
-                            "REQUEST_LOCATION_UNSPECIFIED": 0,
-                            "HEADER": 1,
-                            "QUERY_STRING": 2
-                          }
-                        }
-                      }
-                    },
-                    "OAuthConfig": {
-                      "fields": {
-                        "oauthGrantType": {
-                          "type": "OauthGrantType",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "clientId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "clientSecretVersion": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
-                          }
-                        },
-                        "tokenEndpoint": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "scopes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "OauthGrantType": {
-                          "values": {
-                            "OAUTH_GRANT_TYPE_UNSPECIFIED": 0,
-                            "CLIENT_CREDENTIAL": 1
-                          }
-                        }
-                      }
-                    },
-                    "ServiceAgentIdTokenAuthConfig": {
-                      "fields": {}
-                    },
-                    "ServiceAccountAuthConfig": {
-                      "fields": {
-                        "serviceAccount": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "scopes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "BearerTokenConfig": {
-                      "fields": {
-                        "token": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "EndUserAuthConfig": {
-                      "oneofs": {
-                        "authConfig": {
-                          "oneof": [
-                            "oauth2AuthCodeConfig",
-                            "oauth2JwtBearerConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "oauth2AuthCodeConfig": {
-                          "type": "Oauth2AuthCodeConfig",
-                          "id": 2
-                        },
-                        "oauth2JwtBearerConfig": {
-                          "type": "Oauth2JwtBearerConfig",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Oauth2AuthCodeConfig": {
-                          "fields": {
-                            "oauthToken": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "Oauth2JwtBearerConfig": {
-                          "fields": {
-                            "issuer": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "subject": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "clientKey": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ApiAuthentication": {
-                      "oneofs": {
-                        "authConfig": {
-                          "oneof": [
-                            "apiKeyConfig",
-                            "oauthConfig",
-                            "serviceAgentIdTokenAuthConfig",
-                            "serviceAccountAuthConfig",
-                            "bearerTokenConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "apiKeyConfig": {
-                          "type": "ApiKeyConfig",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "oauthConfig": {
-                          "type": "OAuthConfig",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAgentIdTokenAuthConfig": {
-                          "type": "ServiceAgentIdTokenAuthConfig",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAccountAuthConfig": {
-                          "type": "ServiceAccountAuthConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "bearerTokenConfig": {
-                          "type": "BearerTokenConfig",
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"

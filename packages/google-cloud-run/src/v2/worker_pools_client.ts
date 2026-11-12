@@ -475,7 +475,11 @@ export class WorkerPoolsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1046,11 +1050,12 @@ export class WorkerPoolsClient {
    *   and hyphens.
    * @param {google.cloud.run.v2.WorkerPool} request.workerPool
    *   Required. The WorkerPool instance to create.
-   * @param {string} request.workerPoolId
-   *   Required. The unique identifier for the WorkerPool. It must begin with
+   * @param {string} [request.workerPoolId]
+   *   Optional. The unique identifier for the WorkerPool. It must begin with
    *   letter, and cannot end with hyphen; must contain fewer than 50 characters.
    *   The name of the worker pool becomes
    *   `{parent}/workerPools/{worker_pool_id}`.
+   *   If not provided, the server will generate a unique `worker_pool_id`.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.

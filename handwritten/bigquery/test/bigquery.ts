@@ -1052,10 +1052,14 @@ describe('BigQuery', () => {
       );
     });
 
-    it('should preserve picoseconds for PreciseDate inputs', () => {
+    it('should preserve picoseconds for string and PreciseDate inputs', () => {
       const inputPicoseconds = '2023-01-01T12:00:00.123456789123Z';
       const pdPicoseconds = new PreciseDate(inputPicoseconds);
       assert.strictEqual(pdPicoseconds.getPicoseconds(), 123);
+      assert.strictEqual(
+        bq.timestamp(inputPicoseconds).value,
+        inputPicoseconds,
+      );
       assert.strictEqual(bq.timestamp(pdPicoseconds).value, inputPicoseconds);
 
       const inputPicosecondsZeroMicrosNanos =
@@ -1066,6 +1070,10 @@ describe('BigQuery', () => {
       assert.strictEqual(pdZeroMicrosNanos.getMicroseconds(), 0);
       assert.strictEqual(pdZeroMicrosNanos.getNanoseconds(), 0);
       assert.strictEqual(pdZeroMicrosNanos.getPicoseconds(), 123);
+      assert.strictEqual(
+        bq.timestamp(inputPicosecondsZeroMicrosNanos).value,
+        inputPicosecondsZeroMicrosNanos,
+      );
       assert.strictEqual(
         bq.timestamp(pdZeroMicrosNanos).value,
         inputPicosecondsZeroMicrosNanos,
