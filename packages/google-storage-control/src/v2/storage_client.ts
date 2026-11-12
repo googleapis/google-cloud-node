@@ -545,7 +545,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBucket request %j', request);
+    this._log.debug('deleteBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -554,7 +554,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBucket response %j', response);
+          this._log.debug('deleteBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -566,7 +566,7 @@ export class StorageClient {
           protos.google.storage.v2.IDeleteBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBucket response %j', response);
+          this._log.debug('deleteBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -698,7 +698,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBucket request %j', request);
+    this._log.debug('getBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -707,7 +707,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBucket response %j', response);
+          this._log.debug('getBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class StorageClient {
           protos.google.storage.v2.IGetBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBucket response %j', response);
+          this._log.debug('getBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -879,7 +879,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBucket request %j', request);
+    this._log.debug('createBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -888,7 +888,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBucket response %j', response);
+          this._log.debug('createBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -900,7 +900,7 @@ export class StorageClient {
           protos.google.storage.v2.ICreateBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBucket response %j', response);
+          this._log.debug('createBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1041,7 +1041,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lockBucketRetentionPolicy request %j', request);
+    this._log.debug('lockBucketRetentionPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -1052,7 +1052,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lockBucketRetentionPolicy response %j', response);
+          this._log.debug('lockBucketRetentionPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1067,7 +1067,7 @@ export class StorageClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('lockBucketRetentionPolicy response %j', response);
+          this._log.debug('lockBucketRetentionPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1215,7 +1215,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBucket request %j', request);
+    this._log.debug('updateBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -1224,7 +1224,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBucket response %j', response);
+          this._log.debug('updateBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1236,7 +1236,7 @@ export class StorageClient {
           protos.google.storage.v2.IUpdateBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBucket response %j', response);
+          this._log.debug('updateBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1390,11 +1390,11 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBuckets values %j', values);
+          this._log.debug('listBuckets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBuckets request %j', request);
+    this._log.debug('listBuckets request %j', request);
     return this.innerApiCalls
       .listBuckets(request, options, wrappedCallback)
       ?.then(
@@ -1403,7 +1403,7 @@ export class StorageClient {
           protos.google.storage.v2.IListBucketsRequest | null,
           protos.google.storage.v2.IListBucketsResponse,
         ]) => {
-          this._log.info('listBuckets values %j', response);
+          this._log.debug('listBuckets values %j', response);
           return [response, input, output];
         },
       );
@@ -1472,7 +1472,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuckets stream %j', request);
+    this._log.debug('listBuckets stream %j', request);
     return this.descriptors.page.listBuckets.createStream(
       this.innerApiCalls.listBuckets as GaxCall,
       request,
@@ -1546,7 +1546,7 @@ export class StorageClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuckets iterate %j', request);
+    this._log.debug('listBuckets iterate %j', request);
     return this.descriptors.page.listBuckets.asyncIterate(
       this.innerApiCalls['listBuckets'] as GaxCall,
       request as {},
