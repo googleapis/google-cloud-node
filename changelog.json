@@ -5,6 +5,42 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "9f31cb2cc999d07901b2098950c12d5f4934db33",
+          "message": "Regenerate with gapic-generator-v5.7.3",
+          "issues": [
+            "9865"
+          ],
+          "scope": "storage-control"
+        },
+        {
+          "type": "feat",
+          "sha": "e86d5074e6279e88d501b09ec3594b56242483f0",
+          "message": "Regenerate client with ViewObjectFullContext and RapidCache APIs",
+          "issues": [
+            "9845"
+          ],
+          "scope": "storage-control"
+        },
+        {
+          "type": "fix",
+          "sha": "987cfe81ee221020f86e32becd63c83eeed0a03b",
+          "message": "Re-compile protos in librarian.js after renaming Object",
+          "issues": [
+            "9844"
+          ],
+          "scope": "storage-control"
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "62513bca-a4cd-4181-b464-eb5e5a8f611e",
+      "createTime": "2026-11-12T20:23:42.797Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "eb47174fc7b2cc4ef808146f65dea1891d895e8f",
           "message": "Graduate pipeline search from preview to GA",
           "issues": [
@@ -107842,5 +107878,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-10T15:38:13.426Z"
+  "updateTime": "2026-11-12T20:23:42.797Z"
 }
