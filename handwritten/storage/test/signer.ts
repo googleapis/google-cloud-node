@@ -64,6 +64,9 @@ describe('signer', () => {
     afterEach(() => fakeTimers.restore());
 
     beforeEach(() => {
+      sandbox
+        .stub(GoogleAuth.prototype, 'getUniverseDomain')
+        .resolves('googleapis.com');
       authClient = {
         sign: async () => 'signature',
         getCredentials: async () => ({client_email: CLIENT_EMAIL}),
@@ -446,6 +449,32 @@ describe('signer', () => {
 
         const signedUrl = await signer.getSignedUrl(CONFIG);
         assert(signedUrl.includes(qsStringify(query)));
+      });
+
+      it('should call storage.getEndpoint only once for v4 signed URLs when host and cname are not set', async () => {
+        const getEndpointSpy = sandbox.spy(storage, 'getEndpoint');
+        CONFIG.version = 'v4';
+
+        await signer.getSignedUrl(CONFIG);
+        assert.strictEqual(getEndpointSpy.callCount, 1);
+      });
+
+      it('should not call storage.getEndpoint when host or cname is provided', async () => {
+        const getEndpointSpy = sandbox.spy(storage, 'getEndpoint');
+
+        await signer.getSignedUrl({
+          ...CONFIG,
+          version: 'v4',
+          host: 'https://custom.host.com',
+        });
+        assert.strictEqual(getEndpointSpy.callCount, 0);
+
+        await signer.getSignedUrl({
+          ...CONFIG,
+          version: 'v4',
+          cname: 'https://cdn.example.com',
+        });
+        assert.strictEqual(getEndpointSpy.callCount, 0);
       });
     });
 

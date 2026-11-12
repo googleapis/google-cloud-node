@@ -214,7 +214,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     this.bucket = bucket;
     this.fileName = fileName;
     this.baseUrl = `https://${bucket.name}.${
-      new URL(this.bucket.storage.apiEndpoint).hostname
+      new URL(this.bucket.storage['apiEndpoint']).hostname
     }/${fileName}`;
     this.xmlBuilder = new XMLBuilder({arrayNodeName: 'Part'});
     this.xmlParser = new XMLParser();
@@ -254,6 +254,17 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     return headers;
   }
 
+  async #getBaseUrl(): Promise<string> {
+    const endpoint =
+      (typeof this.bucket.storage.getEndpoint === 'function'
+        ? await this.bucket.storage.getEndpoint()
+        : undefined) || this.bucket.storage['apiEndpoint'];
+    this.baseUrl = `https://${this.bucket.name}.${
+      new URL(endpoint).hostname
+    }/${this.fileName}`;
+    return this.baseUrl;
+  }
+
   /**
    * Initiates a multipart upload (MPU) to the XML API and stores the resultant upload id.
    *
@@ -261,7 +272,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
     const headersObject = new Headers(headers);
-    const url = `${this.baseUrl}?uploads`;
+    const url = `${await this.#getBaseUrl()}?uploads`;
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<
@@ -302,7 +313,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     chunk: Buffer,
     validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
-    const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
+    const url = `${await this.#getBaseUrl()}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
     const headers: Headers = this.#setGoogApiClientHeaders();
 
     if (validation === 'md5') {
@@ -341,7 +352,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async completeUpload(): Promise<GaxiosResponse | undefined> {
-    const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
+    const url = `${await this.#getBaseUrl()}?uploadId=${this.uploadId}`;
     const sortedMap = new Map(
       [...this.partsMap.entries()].sort((a, b) => a[0] - b[0]),
     );
@@ -380,7 +391,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async abortUpload(): Promise<void> {
-    const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
+    const url = `${await this.#getBaseUrl()}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(
