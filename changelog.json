@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "e80a438e-9562-41e1-9e83-3578127e1e2b",
+      "createTime": "2026-11-12T10:55:19.347Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "eb47174fc7b2cc4ef808146f65dea1891d895e8f",
           "message": "Graduate pipeline search from preview to GA",
@@ -107842,5 +107859,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-10T15:38:13.426Z"
+  "updateTime": "2026-11-12T10:55:19.347Z"
 }
