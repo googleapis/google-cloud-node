@@ -7585,15 +7585,14 @@ describe('BulkWriter class', () => {
 
       expect((await coll.get()).size).to.equal(0);
       for (const id of ids) {
-        expect((await coll.doc(id).collection('child').get()).size).to.equal(
-          0,
-        );
+        expect((await coll.doc(id).collection('child').get()).size).to.equal(0);
       }
     });
 
     it('on nested collection with IDs that sort below the minimum numeric ID', async () => {
       const parent = randomCol.doc('Parent');
-      const collectionIds = ['@', 'A', 'A0', 'B'];
+      // 'A\0' is the collection right after 'A', the upper bound of the range.
+      const collectionIds = ['@', 'A', 'A\0', 'A0', 'B'];
       const ids = ['0', 'A', 'a'];
       const batch = firestore.batch();
       for (const collectionId of collectionIds) {
@@ -7606,7 +7605,7 @@ describe('BulkWriter class', () => {
       await firestore.recursiveDelete(parent.collection('A'));
 
       expect((await parent.collection('A').get()).size).to.equal(0);
-      for (const collectionId of ['@', 'A0', 'B']) {
+      for (const collectionId of ['@', 'A\0', 'A0', 'B']) {
         expect((await parent.collection(collectionId).get()).size).to.equal(
           ids.length,
         );

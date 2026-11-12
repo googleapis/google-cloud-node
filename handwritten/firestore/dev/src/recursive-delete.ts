@@ -43,11 +43,9 @@ import {StatusCode} from './status-code';
 export const REFERENCE_NAME_MIN_ID = '__id-9223372036854775808__';
 
 /*!
- * The lowest possible string ID. Enterprise edition databases have no numeric
- * IDs and compare REFERENCE_NAME_MIN_ID as a plain string, which sorts after
- * every ID that starts with a digit or an uppercase letter. This constant is
- * used alongside REFERENCE_NAME_MIN_ID so that the range also starts below
- * every string ID.
+ * The lowest possible string ID. Standard edition orders REFERENCE_NAME_MIN_ID
+ * first, while Enterprise edition orders REFERENCE_NAME_MIN_STRING_ID first.
+ * Both are used to bound queries for all descendants in a single collection.
  */
 export const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
@@ -267,27 +265,37 @@ export class RecursiveDelete {
     if (ref instanceof CollectionReference) {
       // To find all descendants of a collection reference, we need to use a
       // composite filter that captures all documents that start with the
-      // collection prefix. The MIN_KEY constant represents the minimum key in
-      // this collection, and a null byte + the MIN_KEY represents the minimum
-      // key is the next possible collection.
-      //
-      // MIN_KEY is only the minimum key where numeric IDs exist (Standard
-      // edition). Enterprise edition compares it as a string, so the lower
-      // bound is the disjunction of MIN_KEY and the minimum string ID: on
-      // Standard edition the second bound is redundant, on Enterprise edition
-      // it is the one that includes IDs sorting below "__id".
+      // collection prefix. The minimum document ID differs by edition:
+      // Standard edition orders REFERENCE_NAME_MIN_ID first, while Enterprise
+      // edition orders REFERENCE_NAME_MIN_STRING_ID first. The range starts at
+      // the minimum key in this collection and ends before the minimum key in
+      // the next possible collection (the collection ID followed by a null
+      // byte), using both minimums for each bound.
       const nullChar = String.fromCharCode(0);
       const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
       const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
       const endAt = collectionId + nullChar + '/' + REFERENCE_NAME_MIN_ID;
-      query = query
-        .where(
+      const endAtString =
+        collectionId + nullChar + '/' + REFERENCE_NAME_MIN_STRING_ID;
+
+      // The lower bound is the disjunction of both minimums. Standard edition
+      // does not coalesce the overlapping OR bounds and runs one range scan per
+      // disjunct, so the lower bound is only added to the first query. Later
+      // queries are bounded by startAfter(lastDocumentSnap) instead.
+      if (!this.lastDocumentSnap) {
+        query = query.where(
           Filter.or(
             Filter.where(FieldPath.documentId(), '>=', startAt),
             Filter.where(FieldPath.documentId(), '>=', startAtString),
           ),
-        )
-        .where(FieldPath.documentId(), '<', endAt);
+        );
+      }
+
+      // The upper bound is the conjunction of both minimums, which takes the
+      // tighter of the two on either edition.
+      query = query
+        .where(FieldPath.documentId(), '<', endAt)
+        .where(FieldPath.documentId(), '<', endAtString);
     }
 
     if (this.lastDocumentSnap) {
