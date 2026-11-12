@@ -19,8 +19,6 @@ import {
   ApiError,
   DecorateRequestOptions,
 } from '@google-cloud/common';
-import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
-import {perftools} from 'pprof/proto/profile';
 import * as msToStr from 'pretty-ms';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
@@ -28,7 +26,11 @@ import * as zlib from 'zlib';
 import * as r from 'teeny-request';
 
 import {ProfilerConfig} from './config';
+import * as heapProfiler from './heap-profiler';
 import {createLogger} from './logger';
+import {perftools} from './profile-proto';
+import {SourceMapper} from './sourcemapper';
+import * as timeProfiler from './time-profiler';
 
 import * as ms from 'ms';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -561,7 +563,7 @@ export class Profiler extends ServiceObject {
     if (this.config.disableHeap) {
       throw Error('Cannot collect heap profile, heap profiler not enabled.');
     }
-    const p = heapProfiler.profile(
+    const p = await heapProfiler.profile(
       this.config.ignoreHeapSamplesPath,
       this.sourceMapper
     );
