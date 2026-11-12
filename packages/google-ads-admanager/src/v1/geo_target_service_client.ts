@@ -713,7 +713,7 @@ export class GeoTargetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGeoTarget request %j', request);
+    this._log.debug('getGeoTarget request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IGeoTarget,
@@ -724,7 +724,7 @@ export class GeoTargetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getGeoTarget response %j', response);
+          this._log.debug('getGeoTarget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -736,7 +736,7 @@ export class GeoTargetServiceClient {
           protos.google.ads.admanager.v1.IGetGeoTargetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getGeoTarget response %j', response);
+          this._log.debug('getGeoTarget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -893,11 +893,11 @@ export class GeoTargetServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGeoTargets values %j', values);
+          this._log.debug('listGeoTargets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGeoTargets request %j', request);
+    this._log.debug('listGeoTargets request %j', request);
     return this.innerApiCalls
       .listGeoTargets(request, options, wrappedCallback)
       ?.then(
@@ -906,7 +906,7 @@ export class GeoTargetServiceClient {
           protos.google.ads.admanager.v1.IListGeoTargetsRequest | null,
           protos.google.ads.admanager.v1.IListGeoTargetsResponse,
         ]) => {
-          this._log.info('listGeoTargets values %j', response);
+          this._log.debug('listGeoTargets values %j', response);
           return [response, input, output];
         },
       );
@@ -984,7 +984,7 @@ export class GeoTargetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGeoTargets stream %j', request);
+    this._log.debug('listGeoTargets stream %j', request);
     return this.descriptors.page.listGeoTargets.createStream(
       this.innerApiCalls.listGeoTargets as GaxCall,
       request,
@@ -1067,7 +1067,7 @@ export class GeoTargetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGeoTargets iterate %j', request);
+    this._log.debug('listGeoTargets iterate %j', request);
     return this.descriptors.page.listGeoTargets.asyncIterate(
       this.innerApiCalls['listGeoTargets'] as GaxCall,
       request as {},

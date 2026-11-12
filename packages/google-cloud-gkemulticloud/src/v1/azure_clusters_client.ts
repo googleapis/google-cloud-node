@@ -687,7 +687,7 @@ export class AzureClustersClient {
       'GetAzureClient is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureClient request %j', request);
+    this._log.debug('getAzureClient request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureClient,
@@ -698,7 +698,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureClient response %j', response);
+          this._log.debug('getAzureClient response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -713,7 +713,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureClient response %j', response);
+          this._log.debug('getAzureClient response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -839,7 +839,7 @@ export class AzureClustersClient {
       'GetAzureCluster is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureCluster request %j', request);
+    this._log.debug('getAzureCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureCluster,
@@ -850,7 +850,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureCluster response %j', response);
+          this._log.debug('getAzureCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -865,7 +865,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureCluster response %j', response);
+          this._log.debug('getAzureCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1006,7 +1006,7 @@ export class AzureClustersClient {
       'GenerateAzureClusterAgentToken is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('generateAzureClusterAgentToken request %j', request);
+    this._log.debug('generateAzureClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
@@ -1017,7 +1017,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'generateAzureClusterAgentToken response %j',
             response,
           );
@@ -1035,7 +1035,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'generateAzureClusterAgentToken response %j',
             response,
           );
@@ -1170,7 +1170,7 @@ export class AzureClustersClient {
       'GenerateAzureAccessToken is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('generateAzureAccessToken request %j', request);
+    this._log.debug('generateAzureAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
@@ -1181,7 +1181,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAzureAccessToken response %j', response);
+          this._log.debug('generateAzureAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1196,7 +1196,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAzureAccessToken response %j', response);
+          this._log.debug('generateAzureAccessToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1322,7 +1322,7 @@ export class AzureClustersClient {
       'GetAzureNodePool is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureNodePool request %j', request);
+    this._log.debug('getAzureNodePool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
@@ -1333,7 +1333,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureNodePool response %j', response);
+          this._log.debug('getAzureNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1348,7 +1348,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureNodePool response %j', response);
+          this._log.debug('getAzureNodePool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1477,7 +1477,7 @@ export class AzureClustersClient {
       'GetAzureOpenIdConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureOpenIdConfig request %j', request);
+    this._log.debug('getAzureOpenIdConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
@@ -1488,7 +1488,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureOpenIdConfig response %j', response);
+          this._log.debug('getAzureOpenIdConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1503,7 +1503,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureOpenIdConfig response %j', response);
+          this._log.debug('getAzureOpenIdConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1629,7 +1629,7 @@ export class AzureClustersClient {
       'GetAzureJsonWebKeys is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureJsonWebKeys request %j', request);
+    this._log.debug('getAzureJsonWebKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
@@ -1640,7 +1640,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureJsonWebKeys response %j', response);
+          this._log.debug('getAzureJsonWebKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1655,7 +1655,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureJsonWebKeys response %j', response);
+          this._log.debug('getAzureJsonWebKeys response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1787,7 +1787,7 @@ export class AzureClustersClient {
       'GetAzureServerConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAzureServerConfig request %j', request);
+    this._log.debug('getAzureServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
@@ -1798,7 +1798,7 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAzureServerConfig response %j', response);
+          this._log.debug('getAzureServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1813,7 +1813,7 @@ export class AzureClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAzureServerConfig response %j', response);
+          this._log.debug('getAzureServerConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1985,11 +1985,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAzureClient response %j', rawResponse);
+          this._log.debug('createAzureClient response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAzureClient request %j', request);
+    this._log.debug('createAzureClient request %j', request);
     return this.innerApiCalls
       .createAzureClient(request, options, wrappedCallback)
       ?.then(
@@ -2001,7 +2001,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAzureClient response %j', rawResponse);
+          this._log.debug('createAzureClient response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2191,11 +2191,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAzureClient response %j', rawResponse);
+          this._log.debug('deleteAzureClient response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAzureClient request %j', request);
+    this._log.debug('deleteAzureClient request %j', request);
     return this.innerApiCalls
       .deleteAzureClient(request, options, wrappedCallback)
       ?.then(
@@ -2207,7 +2207,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAzureClient response %j', rawResponse);
+          this._log.debug('deleteAzureClient response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2399,11 +2399,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAzureCluster response %j', rawResponse);
+          this._log.debug('createAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAzureCluster request %j', request);
+    this._log.debug('createAzureCluster request %j', request);
     return this.innerApiCalls
       .createAzureCluster(request, options, wrappedCallback)
       ?.then(
@@ -2415,7 +2415,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAzureCluster response %j', rawResponse);
+          this._log.debug('createAzureCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2605,11 +2605,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAzureCluster response %j', rawResponse);
+          this._log.debug('updateAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAzureCluster request %j', request);
+    this._log.debug('updateAzureCluster request %j', request);
     return this.innerApiCalls
       .updateAzureCluster(request, options, wrappedCallback)
       ?.then(
@@ -2621,7 +2621,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAzureCluster response %j', rawResponse);
+          this._log.debug('updateAzureCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2823,11 +2823,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAzureCluster response %j', rawResponse);
+          this._log.debug('deleteAzureCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAzureCluster request %j', request);
+    this._log.debug('deleteAzureCluster request %j', request);
     return this.innerApiCalls
       .deleteAzureCluster(request, options, wrappedCallback)
       ?.then(
@@ -2839,7 +2839,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAzureCluster response %j', rawResponse);
+          this._log.debug('deleteAzureCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3033,11 +3033,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAzureNodePool response %j', rawResponse);
+          this._log.debug('createAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAzureNodePool request %j', request);
+    this._log.debug('createAzureNodePool request %j', request);
     return this.innerApiCalls
       .createAzureNodePool(request, options, wrappedCallback)
       ?.then(
@@ -3049,7 +3049,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAzureNodePool response %j', rawResponse);
+          this._log.debug('createAzureNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3229,11 +3229,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAzureNodePool response %j', rawResponse);
+          this._log.debug('updateAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAzureNodePool request %j', request);
+    this._log.debug('updateAzureNodePool request %j', request);
     return this.innerApiCalls
       .updateAzureNodePool(request, options, wrappedCallback)
       ?.then(
@@ -3245,7 +3245,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAzureNodePool response %j', rawResponse);
+          this._log.debug('updateAzureNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3446,11 +3446,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAzureNodePool response %j', rawResponse);
+          this._log.debug('deleteAzureNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAzureNodePool request %j', request);
+    this._log.debug('deleteAzureNodePool request %j', request);
     return this.innerApiCalls
       .deleteAzureNodePool(request, options, wrappedCallback)
       ?.then(
@@ -3462,7 +3462,7 @@ export class AzureClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAzureNodePool response %j', rawResponse);
+          this._log.debug('deleteAzureNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3636,11 +3636,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAzureClients values %j', values);
+          this._log.debug('listAzureClients values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAzureClients request %j', request);
+    this._log.debug('listAzureClients request %j', request);
     return this.innerApiCalls
       .listAzureClients(request, options, wrappedCallback)
       ?.then(
@@ -3649,7 +3649,7 @@ export class AzureClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
         ]) => {
-          this._log.info('listAzureClients values %j', response);
+          this._log.debug('listAzureClients values %j', response);
           return [response, input, output];
         },
       );
@@ -3713,7 +3713,7 @@ export class AzureClustersClient {
       'ListAzureClients is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureClients stream %j', request);
+    this._log.debug('listAzureClients stream %j', request);
     return this.descriptors.page.listAzureClients.createStream(
       this.innerApiCalls.listAzureClients as GaxCall,
       request,
@@ -3782,7 +3782,7 @@ export class AzureClustersClient {
       'ListAzureClients is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureClients iterate %j', request);
+    this._log.debug('listAzureClients iterate %j', request);
     return this.descriptors.page.listAzureClients.asyncIterate(
       this.innerApiCalls['listAzureClients'] as GaxCall,
       request as {},
@@ -3917,11 +3917,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAzureClusters values %j', values);
+          this._log.debug('listAzureClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAzureClusters request %j', request);
+    this._log.debug('listAzureClusters request %j', request);
     return this.innerApiCalls
       .listAzureClusters(request, options, wrappedCallback)
       ?.then(
@@ -3930,7 +3930,7 @@ export class AzureClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
         ]) => {
-          this._log.info('listAzureClusters values %j', response);
+          this._log.debug('listAzureClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -3994,7 +3994,7 @@ export class AzureClustersClient {
       'ListAzureClusters is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureClusters stream %j', request);
+    this._log.debug('listAzureClusters stream %j', request);
     return this.descriptors.page.listAzureClusters.createStream(
       this.innerApiCalls.listAzureClusters as GaxCall,
       request,
@@ -4063,7 +4063,7 @@ export class AzureClustersClient {
       'ListAzureClusters is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureClusters iterate %j', request);
+    this._log.debug('listAzureClusters iterate %j', request);
     return this.descriptors.page.listAzureClusters.asyncIterate(
       this.innerApiCalls['listAzureClusters'] as GaxCall,
       request as {},
@@ -4200,11 +4200,11 @@ export class AzureClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAzureNodePools values %j', values);
+          this._log.debug('listAzureNodePools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAzureNodePools request %j', request);
+    this._log.debug('listAzureNodePools request %j', request);
     return this.innerApiCalls
       .listAzureNodePools(request, options, wrappedCallback)
       ?.then(
@@ -4213,7 +4213,7 @@ export class AzureClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
         ]) => {
-          this._log.info('listAzureNodePools values %j', response);
+          this._log.debug('listAzureNodePools values %j', response);
           return [response, input, output];
         },
       );
@@ -4278,7 +4278,7 @@ export class AzureClustersClient {
       'ListAzureNodePools is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureNodePools stream %j', request);
+    this._log.debug('listAzureNodePools stream %j', request);
     return this.descriptors.page.listAzureNodePools.createStream(
       this.innerApiCalls.listAzureNodePools as GaxCall,
       request,
@@ -4348,7 +4348,7 @@ export class AzureClustersClient {
       'ListAzureNodePools is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAzureNodePools iterate %j', request);
+    this._log.debug('listAzureNodePools iterate %j', request);
     return this.descriptors.page.listAzureNodePools.asyncIterate(
       this.innerApiCalls['listAzureNodePools'] as GaxCall,
       request as {},

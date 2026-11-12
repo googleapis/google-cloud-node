@@ -848,7 +848,7 @@ export class CompletionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('completeQuery request %j', request);
+    this._log.debug('completeQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ICompleteQueryResponse,
@@ -859,7 +859,7 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -874,7 +874,7 @@ export class CompletionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1023,14 +1023,14 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'importSuggestionDenyListEntries response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importSuggestionDenyListEntries request %j', request);
+    this._log.debug('importSuggestionDenyListEntries request %j', request);
     return this.innerApiCalls
       .importSuggestionDenyListEntries(request, options, wrappedCallback)
       ?.then(
@@ -1042,7 +1042,7 @@ export class CompletionServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'importSuggestionDenyListEntries response %j',
             rawResponse,
           );
@@ -1201,14 +1201,14 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'purgeSuggestionDenyListEntries response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeSuggestionDenyListEntries request %j', request);
+    this._log.debug('purgeSuggestionDenyListEntries request %j', request);
     return this.innerApiCalls
       .purgeSuggestionDenyListEntries(request, options, wrappedCallback)
       ?.then(
@@ -1220,7 +1220,7 @@ export class CompletionServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'purgeSuggestionDenyListEntries response %j',
             rawResponse,
           );
@@ -1389,14 +1389,14 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'importCompletionSuggestions response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importCompletionSuggestions request %j', request);
+    this._log.debug('importCompletionSuggestions request %j', request);
     return this.innerApiCalls
       .importCompletionSuggestions(request, options, wrappedCallback)
       ?.then(
@@ -1408,7 +1408,7 @@ export class CompletionServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'importCompletionSuggestions response %j',
             rawResponse,
           );
@@ -1568,11 +1568,14 @@ export class CompletionServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('purgeCompletionSuggestions response %j', rawResponse);
+          this._log.debug(
+            'purgeCompletionSuggestions response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeCompletionSuggestions request %j', request);
+    this._log.debug('purgeCompletionSuggestions request %j', request);
     return this.innerApiCalls
       .purgeCompletionSuggestions(request, options, wrappedCallback)
       ?.then(
@@ -1584,7 +1587,10 @@ export class CompletionServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('purgeCompletionSuggestions response %j', rawResponse);
+          this._log.debug(
+            'purgeCompletionSuggestions response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );

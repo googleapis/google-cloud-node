@@ -593,7 +593,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeaturedContentNativeDashboard request %j', request);
+    this._log.debug('getFeaturedContentNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeaturedContentNativeDashboard,
@@ -604,7 +604,7 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -622,7 +622,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -746,7 +746,10 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('installFeaturedContentNativeDashboard request %j', request);
+    this._log.debug(
+      'installFeaturedContentNativeDashboard request %j',
+      request,
+    );
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse,
@@ -757,7 +760,7 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'installFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -775,7 +778,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'installFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -939,14 +942,14 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listFeaturedContentNativeDashboards values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeaturedContentNativeDashboards request %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards request %j', request);
     return this.innerApiCalls
       .listFeaturedContentNativeDashboards(request, options, wrappedCallback)
       ?.then(
@@ -955,7 +958,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest | null,
           protos.google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listFeaturedContentNativeDashboards values %j',
             response,
           );
@@ -1035,7 +1038,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeaturedContentNativeDashboards stream %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards stream %j', request);
     return this.descriptors.page.listFeaturedContentNativeDashboards.createStream(
       this.innerApiCalls.listFeaturedContentNativeDashboards as GaxCall,
       request,
@@ -1117,7 +1120,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeaturedContentNativeDashboards iterate %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards iterate %j', request);
     return this.descriptors.page.listFeaturedContentNativeDashboards.asyncIterate(
       this.innerApiCalls['listFeaturedContentNativeDashboards'] as GaxCall,
       request as {},

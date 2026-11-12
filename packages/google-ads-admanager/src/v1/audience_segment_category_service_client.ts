@@ -731,7 +731,7 @@ export class AudienceSegmentCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAudienceSegmentCategory request %j', request);
+    this._log.debug('getAudienceSegmentCategory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAudienceSegmentCategory,
@@ -742,7 +742,7 @@ export class AudienceSegmentCategoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAudienceSegmentCategory response %j', response);
+          this._log.debug('getAudienceSegmentCategory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class AudienceSegmentCategoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAudienceSegmentCategory response %j', response);
+          this._log.debug('getAudienceSegmentCategory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -920,11 +920,11 @@ export class AudienceSegmentCategoryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAudienceSegmentCategories values %j', values);
+          this._log.debug('listAudienceSegmentCategories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAudienceSegmentCategories request %j', request);
+    this._log.debug('listAudienceSegmentCategories request %j', request);
     return this.innerApiCalls
       .listAudienceSegmentCategories(request, options, wrappedCallback)
       ?.then(
@@ -933,7 +933,7 @@ export class AudienceSegmentCategoryServiceClient {
           protos.google.ads.admanager.v1.IListAudienceSegmentCategoriesRequest | null,
           protos.google.ads.admanager.v1.IListAudienceSegmentCategoriesResponse,
         ]) => {
-          this._log.info('listAudienceSegmentCategories values %j', response);
+          this._log.debug('listAudienceSegmentCategories values %j', response);
           return [response, input, output];
         },
       );
@@ -1011,7 +1011,7 @@ export class AudienceSegmentCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceSegmentCategories stream %j', request);
+    this._log.debug('listAudienceSegmentCategories stream %j', request);
     return this.descriptors.page.listAudienceSegmentCategories.createStream(
       this.innerApiCalls.listAudienceSegmentCategories as GaxCall,
       request,
@@ -1094,7 +1094,7 @@ export class AudienceSegmentCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAudienceSegmentCategories iterate %j', request);
+    this._log.debug('listAudienceSegmentCategories iterate %j', request);
     return this.descriptors.page.listAudienceSegmentCategories.asyncIterate(
       this.innerApiCalls['listAudienceSegmentCategories'] as GaxCall,
       request as {},

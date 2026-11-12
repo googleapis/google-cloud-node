@@ -716,7 +716,7 @@ export class YieldPartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getYieldPartner request %j', request);
+    this._log.debug('getYieldPartner request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IYieldPartner,
@@ -727,7 +727,7 @@ export class YieldPartnerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getYieldPartner response %j', response);
+          this._log.debug('getYieldPartner response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class YieldPartnerServiceClient {
           protos.google.ads.admanager.v1.IGetYieldPartnerRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getYieldPartner response %j', response);
+          this._log.debug('getYieldPartner response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -898,11 +898,11 @@ export class YieldPartnerServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listYieldPartners values %j', values);
+          this._log.debug('listYieldPartners values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listYieldPartners request %j', request);
+    this._log.debug('listYieldPartners request %j', request);
     return this.innerApiCalls
       .listYieldPartners(request, options, wrappedCallback)
       ?.then(
@@ -911,7 +911,7 @@ export class YieldPartnerServiceClient {
           protos.google.ads.admanager.v1.IListYieldPartnersRequest | null,
           protos.google.ads.admanager.v1.IListYieldPartnersResponse,
         ]) => {
-          this._log.info('listYieldPartners values %j', response);
+          this._log.debug('listYieldPartners values %j', response);
           return [response, input, output];
         },
       );
@@ -985,7 +985,7 @@ export class YieldPartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listYieldPartners stream %j', request);
+    this._log.debug('listYieldPartners stream %j', request);
     return this.descriptors.page.listYieldPartners.createStream(
       this.innerApiCalls.listYieldPartners as GaxCall,
       request,
@@ -1064,7 +1064,7 @@ export class YieldPartnerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listYieldPartners iterate %j', request);
+    this._log.debug('listYieldPartners iterate %j', request);
     return this.descriptors.page.listYieldPartners.asyncIterate(
       this.innerApiCalls['listYieldPartners'] as GaxCall,
       request as {},

@@ -479,7 +479,7 @@ export class SystemPolicyV1Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSystemPolicy request %j', request);
+    this._log.debug('getSystemPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.binaryauthorization.v1.IPolicy,
@@ -490,7 +490,7 @@ export class SystemPolicyV1Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSystemPolicy response %j', response);
+          this._log.debug('getSystemPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -505,7 +505,7 @@ export class SystemPolicyV1Client {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSystemPolicy response %j', response);
+          this._log.debug('getSystemPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -522,7 +522,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateIssueStats request %j', request);
+    this._log.debug('aggregateIssueStats request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
@@ -533,7 +533,7 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('aggregateIssueStats response %j', response);
+          this._log.debug('aggregateIssueStats response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -548,7 +548,7 @@ export class DatabaseCenterClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('aggregateIssueStats response %j', response);
+          this._log.debug('aggregateIssueStats response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -693,11 +693,11 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryProducts values %j', values);
+          this._log.debug('queryProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryProducts request %j', request);
+    this._log.debug('queryProducts request %j', request);
     return this.innerApiCalls
       .queryProducts(request, options, wrappedCallback)
       ?.then(
@@ -706,7 +706,7 @@ export class DatabaseCenterClient {
           protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest | null,
           protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse,
         ]) => {
-          this._log.info('queryProducts values %j', response);
+          this._log.debug('queryProducts values %j', response);
           return [response, input, output];
         },
       );
@@ -765,7 +765,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryProducts stream %j', request);
+    this._log.debug('queryProducts stream %j', request);
     return this.descriptors.page.queryProducts.createStream(
       this.innerApiCalls.queryProducts as GaxCall,
       request,
@@ -829,7 +829,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryProducts iterate %j', request);
+    this._log.debug('queryProducts iterate %j', request);
     return this.descriptors.page.queryProducts.asyncIterate(
       this.innerApiCalls['queryProducts'] as GaxCall,
       request as {},
@@ -1009,11 +1009,11 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('aggregateFleet values %j', values);
+          this._log.debug('aggregateFleet values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('aggregateFleet request %j', request);
+    this._log.debug('aggregateFleet request %j', request);
     return this.innerApiCalls
       .aggregateFleet(request, options, wrappedCallback)
       ?.then(
@@ -1022,7 +1022,7 @@ export class DatabaseCenterClient {
           protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest | null,
           protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse,
         ]) => {
-          this._log.info('aggregateFleet values %j', response);
+          this._log.debug('aggregateFleet values %j', response);
           return [response, input, output];
         },
       );
@@ -1131,7 +1131,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateFleet stream %j', request);
+    this._log.debug('aggregateFleet stream %j', request);
     return this.descriptors.page.aggregateFleet.createStream(
       this.innerApiCalls.aggregateFleet as GaxCall,
       request,
@@ -1245,7 +1245,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateFleet iterate %j', request);
+    this._log.debug('aggregateFleet iterate %j', request);
     return this.descriptors.page.aggregateFleet.asyncIterate(
       this.innerApiCalls['aggregateFleet'] as GaxCall,
       request as {},
@@ -1446,11 +1446,11 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryDatabaseResourceGroups values %j', values);
+          this._log.debug('queryDatabaseResourceGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryDatabaseResourceGroups request %j', request);
+    this._log.debug('queryDatabaseResourceGroups request %j', request);
     return this.innerApiCalls
       .queryDatabaseResourceGroups(request, options, wrappedCallback)
       ?.then(
@@ -1459,7 +1459,7 @@ export class DatabaseCenterClient {
           protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest | null,
           protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse,
         ]) => {
-          this._log.info('queryDatabaseResourceGroups values %j', response);
+          this._log.debug('queryDatabaseResourceGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -1590,7 +1590,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDatabaseResourceGroups stream %j', request);
+    this._log.debug('queryDatabaseResourceGroups stream %j', request);
     return this.descriptors.page.queryDatabaseResourceGroups.createStream(
       this.innerApiCalls.queryDatabaseResourceGroups as GaxCall,
       request,
@@ -1726,7 +1726,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDatabaseResourceGroups iterate %j', request);
+    this._log.debug('queryDatabaseResourceGroups iterate %j', request);
     return this.descriptors.page.queryDatabaseResourceGroups.asyncIterate(
       this.innerApiCalls['queryDatabaseResourceGroups'] as GaxCall,
       request as {},
@@ -1882,11 +1882,11 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('aggregateQueryStats values %j', values);
+          this._log.debug('aggregateQueryStats values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('aggregateQueryStats request %j', request);
+    this._log.debug('aggregateQueryStats request %j', request);
     return this.innerApiCalls
       .aggregateQueryStats(request, options, wrappedCallback)
       ?.then(
@@ -1895,7 +1895,7 @@ export class DatabaseCenterClient {
           protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsRequest | null,
           protos.google.cloud.databasecenter.v1beta.IAggregateQueryStatsResponse,
         ]) => {
-          this._log.info('aggregateQueryStats values %j', response);
+          this._log.debug('aggregateQueryStats values %j', response);
           return [response, input, output];
         },
       );
@@ -1981,7 +1981,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateQueryStats stream %j', request);
+    this._log.debug('aggregateQueryStats stream %j', request);
     return this.descriptors.page.aggregateQueryStats.createStream(
       this.innerApiCalls.aggregateQueryStats as GaxCall,
       request,
@@ -2072,7 +2072,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateQueryStats iterate %j', request);
+    this._log.debug('aggregateQueryStats iterate %j', request);
     return this.descriptors.page.aggregateQueryStats.asyncIterate(
       this.innerApiCalls['aggregateQueryStats'] as GaxCall,
       request as {},
@@ -2217,11 +2217,11 @@ export class DatabaseCenterClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryIssues values %j', values);
+          this._log.debug('queryIssues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryIssues request %j', request);
+    this._log.debug('queryIssues request %j', request);
     return this.innerApiCalls
       .queryIssues(request, options, wrappedCallback)
       ?.then(
@@ -2230,7 +2230,7 @@ export class DatabaseCenterClient {
           protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest | null,
           protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse,
         ]) => {
-          this._log.info('queryIssues values %j', response);
+          this._log.debug('queryIssues values %j', response);
           return [response, input, output];
         },
       );
@@ -2304,7 +2304,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryIssues stream %j', request);
+    this._log.debug('queryIssues stream %j', request);
     return this.descriptors.page.queryIssues.createStream(
       this.innerApiCalls.queryIssues as GaxCall,
       request,
@@ -2383,7 +2383,7 @@ export class DatabaseCenterClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryIssues iterate %j', request);
+    this._log.debug('queryIssues iterate %j', request);
     return this.descriptors.page.queryIssues.asyncIterate(
       this.innerApiCalls['queryIssues'] as GaxCall,
       request as {},

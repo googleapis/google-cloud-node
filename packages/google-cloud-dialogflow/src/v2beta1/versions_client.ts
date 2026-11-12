@@ -635,7 +635,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getVersion request %j', request);
+    this._log.debug('getVersion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IVersion,
@@ -646,7 +646,7 @@ export class VersionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getVersion response %j', response);
+          this._log.debug('getVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -658,7 +658,7 @@ export class VersionsClient {
           protos.google.cloud.dialogflow.v2beta1.IGetVersionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getVersion response %j', response);
+          this._log.debug('getVersion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -776,7 +776,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createVersion request %j', request);
+    this._log.debug('createVersion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IVersion,
@@ -787,7 +787,7 @@ export class VersionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createVersion response %j', response);
+          this._log.debug('createVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -802,7 +802,7 @@ export class VersionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createVersion response %j', response);
+          this._log.debug('createVersion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -923,7 +923,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateVersion request %j', request);
+    this._log.debug('updateVersion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IVersion,
@@ -934,7 +934,7 @@ export class VersionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateVersion response %j', response);
+          this._log.debug('updateVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -949,7 +949,7 @@ export class VersionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateVersion response %j', response);
+          this._log.debug('updateVersion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1064,7 +1064,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteVersion request %j', request);
+    this._log.debug('deleteVersion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1075,7 +1075,7 @@ export class VersionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteVersion response %j', response);
+          this._log.debug('deleteVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1090,7 +1090,7 @@ export class VersionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteVersion response %j', response);
+          this._log.debug('deleteVersion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1223,11 +1223,11 @@ export class VersionsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listVersions values %j', values);
+          this._log.debug('listVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listVersions request %j', request);
+    this._log.debug('listVersions request %j', request);
     return this.innerApiCalls
       .listVersions(request, options, wrappedCallback)
       ?.then(
@@ -1236,7 +1236,7 @@ export class VersionsClient {
           protos.google.cloud.dialogflow.v2beta1.IListVersionsRequest | null,
           protos.google.cloud.dialogflow.v2beta1.IListVersionsResponse,
         ]) => {
-          this._log.info('listVersions values %j', response);
+          this._log.debug('listVersions values %j', response);
           return [response, input, output];
         },
       );
@@ -1284,7 +1284,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listVersions stream %j', request);
+    this._log.debug('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
       request,
@@ -1337,7 +1337,7 @@ export class VersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listVersions iterate %j', request);
+    this._log.debug('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
       request as {},

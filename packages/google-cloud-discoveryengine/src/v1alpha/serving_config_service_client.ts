@@ -641,7 +641,7 @@ export class ServingConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateServingConfig request %j', request);
+    this._log.debug('updateServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IServingConfig,
@@ -652,7 +652,7 @@ export class ServingConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateServingConfig response %j', response);
+          this._log.debug('updateServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -667,7 +667,7 @@ export class ServingConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateServingConfig response %j', response);
+          this._log.debug('updateServingConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -787,7 +787,7 @@ export class ServingConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServingConfig request %j', request);
+    this._log.debug('getServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IServingConfig,
@@ -798,7 +798,7 @@ export class ServingConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServingConfig response %j', response);
+          this._log.debug('getServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -813,7 +813,7 @@ export class ServingConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getServingConfig response %j', response);
+          this._log.debug('getServingConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -946,11 +946,11 @@ export class ServingConfigServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServingConfigs values %j', values);
+          this._log.debug('listServingConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServingConfigs request %j', request);
+    this._log.debug('listServingConfigs request %j', request);
     return this.innerApiCalls
       .listServingConfigs(request, options, wrappedCallback)
       ?.then(
@@ -959,7 +959,7 @@ export class ServingConfigServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListServingConfigsRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListServingConfigsResponse,
         ]) => {
-          this._log.info('listServingConfigs values %j', response);
+          this._log.debug('listServingConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -1007,7 +1007,7 @@ export class ServingConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServingConfigs stream %j', request);
+    this._log.debug('listServingConfigs stream %j', request);
     return this.descriptors.page.listServingConfigs.createStream(
       this.innerApiCalls.listServingConfigs as GaxCall,
       request,
@@ -1060,7 +1060,7 @@ export class ServingConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServingConfigs iterate %j', request);
+    this._log.debug('listServingConfigs iterate %j', request);
     return this.descriptors.page.listServingConfigs.asyncIterate(
       this.innerApiCalls['listServingConfigs'] as GaxCall,
       request as {},

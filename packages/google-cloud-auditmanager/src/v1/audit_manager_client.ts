@@ -689,7 +689,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAuditSchedule request %j', request);
+    this._log.debug('createAuditSchedule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IAuditSchedule,
@@ -700,7 +700,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAuditSchedule response %j', response);
+          this._log.debug('createAuditSchedule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -715,7 +715,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createAuditSchedule response %j', response);
+          this._log.debug('createAuditSchedule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -848,7 +848,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAuditSchedule request %j', request);
+    this._log.debug('updateAuditSchedule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IAuditSchedule,
@@ -859,7 +859,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAuditSchedule response %j', response);
+          this._log.debug('updateAuditSchedule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -874,7 +874,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAuditSchedule response %j', response);
+          this._log.debug('updateAuditSchedule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -990,7 +990,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAuditSchedule request %j', request);
+    this._log.debug('getAuditSchedule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IAuditSchedule,
@@ -1001,7 +1001,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAuditSchedule response %j', response);
+          this._log.debug('getAuditSchedule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1016,7 +1016,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAuditSchedule response %j', response);
+          this._log.debug('getAuditSchedule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1158,7 +1158,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enrollResource request %j', request);
+    this._log.debug('enrollResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IEnrollment,
@@ -1169,7 +1169,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('enrollResource response %j', response);
+          this._log.debug('enrollResource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1184,7 +1184,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('enrollResource response %j', response);
+          this._log.debug('enrollResource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1342,7 +1342,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateAuditScopeReport request %j', request);
+    this._log.debug('generateAuditScopeReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IAuditScopeReport,
@@ -1353,7 +1353,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAuditScopeReport response %j', response);
+          this._log.debug('generateAuditScopeReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1368,7 +1368,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAuditScopeReport response %j', response);
+          this._log.debug('generateAuditScopeReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1483,7 +1483,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAuditReport request %j', request);
+    this._log.debug('getAuditReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IAuditReport,
@@ -1494,7 +1494,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAuditReport response %j', response);
+          this._log.debug('getAuditReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1509,7 +1509,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAuditReport response %j', response);
+          this._log.debug('getAuditReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1631,7 +1631,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getResourceEnrollmentStatus request %j', request);
+    this._log.debug('getResourceEnrollmentStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.auditmanager.v1.IResourceEnrollmentStatus,
@@ -1642,7 +1642,7 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getResourceEnrollmentStatus response %j', response);
+          this._log.debug('getResourceEnrollmentStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1657,7 +1657,7 @@ export class AuditManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getResourceEnrollmentStatus response %j', response);
+          this._log.debug('getResourceEnrollmentStatus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1831,11 +1831,11 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('generateAuditReport response %j', rawResponse);
+          this._log.debug('generateAuditReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('generateAuditReport request %j', request);
+    this._log.debug('generateAuditReport request %j', request);
     return this.innerApiCalls
       .generateAuditReport(request, options, wrappedCallback)
       ?.then(
@@ -1847,7 +1847,7 @@ export class AuditManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateAuditReport response %j', rawResponse);
+          this._log.debug('generateAuditReport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2002,11 +2002,11 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAuditSchedules values %j', values);
+          this._log.debug('listAuditSchedules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAuditSchedules request %j', request);
+    this._log.debug('listAuditSchedules request %j', request);
     return this.innerApiCalls
       .listAuditSchedules(request, options, wrappedCallback)
       ?.then(
@@ -2015,7 +2015,7 @@ export class AuditManagerClient {
           protos.google.cloud.auditmanager.v1.IListAuditSchedulesRequest | null,
           protos.google.cloud.auditmanager.v1.IListAuditSchedulesResponse,
         ]) => {
-          this._log.info('listAuditSchedules values %j', response);
+          this._log.debug('listAuditSchedules values %j', response);
           return [response, input, output];
         },
       );
@@ -2067,7 +2067,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuditSchedules stream %j', request);
+    this._log.debug('listAuditSchedules stream %j', request);
     return this.descriptors.page.listAuditSchedules.createStream(
       this.innerApiCalls.listAuditSchedules as GaxCall,
       request,
@@ -2124,7 +2124,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuditSchedules iterate %j', request);
+    this._log.debug('listAuditSchedules iterate %j', request);
     return this.descriptors.page.listAuditSchedules.asyncIterate(
       this.innerApiCalls['listAuditSchedules'] as GaxCall,
       request as {},
@@ -2248,11 +2248,11 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAuditReports values %j', values);
+          this._log.debug('listAuditReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAuditReports request %j', request);
+    this._log.debug('listAuditReports request %j', request);
     return this.innerApiCalls
       .listAuditReports(request, options, wrappedCallback)
       ?.then(
@@ -2261,7 +2261,7 @@ export class AuditManagerClient {
           protos.google.cloud.auditmanager.v1.IListAuditReportsRequest | null,
           protos.google.cloud.auditmanager.v1.IListAuditReportsResponse,
         ]) => {
-          this._log.info('listAuditReports values %j', response);
+          this._log.debug('listAuditReports values %j', response);
           return [response, input, output];
         },
       );
@@ -2314,7 +2314,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuditReports stream %j', request);
+    this._log.debug('listAuditReports stream %j', request);
     return this.descriptors.page.listAuditReports.createStream(
       this.innerApiCalls.listAuditReports as GaxCall,
       request,
@@ -2372,7 +2372,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuditReports iterate %j', request);
+    this._log.debug('listAuditReports iterate %j', request);
     return this.descriptors.page.listAuditReports.asyncIterate(
       this.innerApiCalls['listAuditReports'] as GaxCall,
       request as {},
@@ -2495,11 +2495,11 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listResourceEnrollmentStatuses values %j', values);
+          this._log.debug('listResourceEnrollmentStatuses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listResourceEnrollmentStatuses request %j', request);
+    this._log.debug('listResourceEnrollmentStatuses request %j', request);
     return this.innerApiCalls
       .listResourceEnrollmentStatuses(request, options, wrappedCallback)
       ?.then(
@@ -2508,7 +2508,7 @@ export class AuditManagerClient {
           protos.google.cloud.auditmanager.v1.IListResourceEnrollmentStatusesRequest | null,
           protos.google.cloud.auditmanager.v1.IListResourceEnrollmentStatusesResponse,
         ]) => {
-          this._log.info('listResourceEnrollmentStatuses values %j', response);
+          this._log.debug('listResourceEnrollmentStatuses values %j', response);
           return [response, input, output];
         },
       );
@@ -2561,7 +2561,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceEnrollmentStatuses stream %j', request);
+    this._log.debug('listResourceEnrollmentStatuses stream %j', request);
     return this.descriptors.page.listResourceEnrollmentStatuses.createStream(
       this.innerApiCalls.listResourceEnrollmentStatuses as GaxCall,
       request,
@@ -2619,7 +2619,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceEnrollmentStatuses iterate %j', request);
+    this._log.debug('listResourceEnrollmentStatuses iterate %j', request);
     return this.descriptors.page.listResourceEnrollmentStatuses.asyncIterate(
       this.innerApiCalls['listResourceEnrollmentStatuses'] as GaxCall,
       request as {},
@@ -2742,11 +2742,11 @@ export class AuditManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listControls values %j', values);
+          this._log.debug('listControls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listControls request %j', request);
+    this._log.debug('listControls request %j', request);
     return this.innerApiCalls
       .listControls(request, options, wrappedCallback)
       ?.then(
@@ -2755,7 +2755,7 @@ export class AuditManagerClient {
           protos.google.cloud.auditmanager.v1.IListControlsRequest | null,
           protos.google.cloud.auditmanager.v1.IListControlsResponse,
         ]) => {
-          this._log.info('listControls values %j', response);
+          this._log.debug('listControls values %j', response);
           return [response, input, output];
         },
       );
@@ -2807,7 +2807,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControls stream %j', request);
+    this._log.debug('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
       request,
@@ -2864,7 +2864,7 @@ export class AuditManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControls iterate %j', request);
+    this._log.debug('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,
       request as {},

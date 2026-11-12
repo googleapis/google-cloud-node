@@ -721,7 +721,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAdRule request %j', request);
+    this._log.debug('getAdRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdRule,
@@ -730,7 +730,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAdRule response %j', response);
+          this._log.debug('getAdRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -742,7 +742,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IGetAdRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAdRule response %j', response);
+          this._log.debug('getAdRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -850,7 +850,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAdRule request %j', request);
+    this._log.debug('createAdRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdRule,
@@ -861,7 +861,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAdRule response %j', response);
+          this._log.debug('createAdRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -873,7 +873,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.ICreateAdRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAdRule response %j', response);
+          this._log.debug('createAdRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -990,7 +990,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateAdRules request %j', request);
+    this._log.debug('batchCreateAdRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateAdRulesResponse,
@@ -1001,7 +1001,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateAdRules response %j', response);
+          this._log.debug('batchCreateAdRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1013,7 +1013,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateAdRulesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateAdRules response %j', response);
+          this._log.debug('batchCreateAdRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1122,7 +1122,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAdRule request %j', request);
+    this._log.debug('updateAdRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdRule,
@@ -1133,7 +1133,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAdRule response %j', response);
+          this._log.debug('updateAdRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1145,7 +1145,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IUpdateAdRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAdRule response %j', response);
+          this._log.debug('updateAdRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1262,7 +1262,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateAdRules request %j', request);
+    this._log.debug('batchUpdateAdRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateAdRulesResponse,
@@ -1273,7 +1273,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateAdRules response %j', response);
+          this._log.debug('batchUpdateAdRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1285,7 +1285,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateAdRulesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateAdRules response %j', response);
+          this._log.debug('batchUpdateAdRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1400,7 +1400,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateAdRules request %j', request);
+    this._log.debug('batchActivateAdRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateAdRulesResponse,
@@ -1411,7 +1411,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateAdRules response %j', response);
+          this._log.debug('batchActivateAdRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1426,7 +1426,7 @@ export class AdRuleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateAdRules response %j', response);
+          this._log.debug('batchActivateAdRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1541,7 +1541,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateAdRules request %j', request);
+    this._log.debug('batchDeactivateAdRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateAdRulesResponse,
@@ -1552,7 +1552,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateAdRules response %j', response);
+          this._log.debug('batchDeactivateAdRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1567,7 +1567,7 @@ export class AdRuleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateAdRules response %j', response);
+          this._log.debug('batchDeactivateAdRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1682,7 +1682,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteAdRules request %j', request);
+    this._log.debug('batchDeleteAdRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1693,7 +1693,7 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteAdRules response %j', response);
+          this._log.debug('batchDeleteAdRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1705,7 +1705,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IBatchDeleteAdRulesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteAdRules response %j', response);
+          this._log.debug('batchDeleteAdRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1861,11 +1861,11 @@ export class AdRuleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAdRules values %j', values);
+          this._log.debug('listAdRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAdRules request %j', request);
+    this._log.debug('listAdRules request %j', request);
     return this.innerApiCalls
       .listAdRules(request, options, wrappedCallback)
       ?.then(
@@ -1874,7 +1874,7 @@ export class AdRuleServiceClient {
           protos.google.ads.admanager.v1.IListAdRulesRequest | null,
           protos.google.ads.admanager.v1.IListAdRulesResponse,
         ]) => {
-          this._log.info('listAdRules values %j', response);
+          this._log.debug('listAdRules values %j', response);
           return [response, input, output];
         },
       );
@@ -1951,7 +1951,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdRules stream %j', request);
+    this._log.debug('listAdRules stream %j', request);
     return this.descriptors.page.listAdRules.createStream(
       this.innerApiCalls.listAdRules as GaxCall,
       request,
@@ -2033,7 +2033,7 @@ export class AdRuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdRules iterate %j', request);
+    this._log.debug('listAdRules iterate %j', request);
     return this.descriptors.page.listAdRules.asyncIterate(
       this.innerApiCalls['listAdRules'] as GaxCall,
       request as {},

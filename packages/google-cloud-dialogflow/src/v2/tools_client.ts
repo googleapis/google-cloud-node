@@ -656,7 +656,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTool request %j', request);
+    this._log.debug('createTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.ITool,
@@ -667,7 +667,7 @@ export class ToolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTool response %j', response);
+          this._log.debug('createTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -679,7 +679,7 @@ export class ToolsClient {
           protos.google.cloud.dialogflow.v2.ICreateToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTool response %j', response);
+          this._log.debug('createTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -783,7 +783,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTool request %j', request);
+    this._log.debug('getTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.ITool,
@@ -792,7 +792,7 @@ export class ToolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTool response %j', response);
+          this._log.debug('getTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -804,7 +804,7 @@ export class ToolsClient {
           protos.google.cloud.dialogflow.v2.IGetToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTool response %j', response);
+          this._log.debug('getTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -910,7 +910,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTool request %j', request);
+    this._log.debug('deleteTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -921,7 +921,7 @@ export class ToolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTool response %j', response);
+          this._log.debug('deleteTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -933,7 +933,7 @@ export class ToolsClient {
           protos.google.cloud.dialogflow.v2.IDeleteToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTool response %j', response);
+          this._log.debug('deleteTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1042,7 +1042,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTool request %j', request);
+    this._log.debug('updateTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.ITool,
@@ -1053,7 +1053,7 @@ export class ToolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTool response %j', response);
+          this._log.debug('updateTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1065,7 +1065,7 @@ export class ToolsClient {
           protos.google.cloud.dialogflow.v2.IUpdateToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTool response %j', response);
+          this._log.debug('updateTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1190,11 +1190,11 @@ export class ToolsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTools values %j', values);
+          this._log.debug('listTools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTools request %j', request);
+    this._log.debug('listTools request %j', request);
     return this.innerApiCalls
       .listTools(request, options, wrappedCallback)
       ?.then(
@@ -1203,7 +1203,7 @@ export class ToolsClient {
           protos.google.cloud.dialogflow.v2.IListToolsRequest | null,
           protos.google.cloud.dialogflow.v2.IListToolsResponse,
         ]) => {
-          this._log.info('listTools values %j', response);
+          this._log.debug('listTools values %j', response);
           return [response, input, output];
         },
       );
@@ -1249,7 +1249,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTools stream %j', request);
+    this._log.debug('listTools stream %j', request);
     return this.descriptors.page.listTools.createStream(
       this.innerApiCalls.listTools as GaxCall,
       request,
@@ -1300,7 +1300,7 @@ export class ToolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTools iterate %j', request);
+    this._log.debug('listTools iterate %j', request);
     return this.descriptors.page.listTools.asyncIterate(
       this.innerApiCalls['listTools'] as GaxCall,
       request as {},

@@ -728,7 +728,7 @@ export class ForecastServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runAvailabilityForecast request %j', request);
+    this._log.debug('runAvailabilityForecast request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IRunAvailabilityForecastResponse,
@@ -739,7 +739,7 @@ export class ForecastServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runAvailabilityForecast response %j', response);
+          this._log.debug('runAvailabilityForecast response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -754,7 +754,7 @@ export class ForecastServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('runAvailabilityForecast response %j', response);
+          this._log.debug('runAvailabilityForecast response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,7 +878,7 @@ export class ForecastServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runDeliveryForecast request %j', request);
+    this._log.debug('runDeliveryForecast request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IRunDeliveryForecastResponse,
@@ -889,7 +889,7 @@ export class ForecastServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runDeliveryForecast response %j', response);
+          this._log.debug('runDeliveryForecast response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -904,7 +904,7 @@ export class ForecastServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('runDeliveryForecast response %j', response);
+          this._log.debug('runDeliveryForecast response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1021,7 +1021,7 @@ export class ForecastServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runTrafficData request %j', request);
+    this._log.debug('runTrafficData request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IRunTrafficDataResponse,
@@ -1032,7 +1032,7 @@ export class ForecastServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runTrafficData response %j', response);
+          this._log.debug('runTrafficData response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1044,7 +1044,7 @@ export class ForecastServiceClient {
           protos.google.ads.admanager.v1.IRunTrafficDataRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runTrafficData response %j', response);
+          this._log.debug('runTrafficData response %j', response);
           return [response, options, rawResponse];
         },
       )

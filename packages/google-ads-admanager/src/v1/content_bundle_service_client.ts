@@ -724,7 +724,7 @@ export class ContentBundleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getContentBundle request %j', request);
+    this._log.debug('getContentBundle request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IContentBundle,
@@ -735,7 +735,7 @@ export class ContentBundleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getContentBundle response %j', response);
+          this._log.debug('getContentBundle response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -747,7 +747,7 @@ export class ContentBundleServiceClient {
           protos.google.ads.admanager.v1.IGetContentBundleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getContentBundle response %j', response);
+          this._log.debug('getContentBundle response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -868,7 +868,7 @@ export class ContentBundleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateContentBundles request %j', request);
+    this._log.debug('batchActivateContentBundles request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateContentBundlesResponse,
@@ -879,7 +879,7 @@ export class ContentBundleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateContentBundles response %j', response);
+          this._log.debug('batchActivateContentBundles response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -894,7 +894,7 @@ export class ContentBundleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateContentBundles response %j', response);
+          this._log.debug('batchActivateContentBundles response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1016,7 +1016,7 @@ export class ContentBundleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateContentBundles request %j', request);
+    this._log.debug('batchDeactivateContentBundles request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateContentBundlesResponse,
@@ -1027,7 +1027,10 @@ export class ContentBundleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateContentBundles response %j', response);
+          this._log.debug(
+            'batchDeactivateContentBundles response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1042,7 +1045,10 @@ export class ContentBundleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateContentBundles response %j', response);
+          this._log.debug(
+            'batchDeactivateContentBundles response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -1204,11 +1210,11 @@ export class ContentBundleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listContentBundles values %j', values);
+          this._log.debug('listContentBundles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listContentBundles request %j', request);
+    this._log.debug('listContentBundles request %j', request);
     return this.innerApiCalls
       .listContentBundles(request, options, wrappedCallback)
       ?.then(
@@ -1217,7 +1223,7 @@ export class ContentBundleServiceClient {
           protos.google.ads.admanager.v1.IListContentBundlesRequest | null,
           protos.google.ads.admanager.v1.IListContentBundlesResponse,
         ]) => {
-          this._log.info('listContentBundles values %j', response);
+          this._log.debug('listContentBundles values %j', response);
           return [response, input, output];
         },
       );
@@ -1294,7 +1300,7 @@ export class ContentBundleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContentBundles stream %j', request);
+    this._log.debug('listContentBundles stream %j', request);
     return this.descriptors.page.listContentBundles.createStream(
       this.innerApiCalls.listContentBundles as GaxCall,
       request,
@@ -1376,7 +1382,7 @@ export class ContentBundleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listContentBundles iterate %j', request);
+    this._log.debug('listContentBundles iterate %j', request);
     return this.descriptors.page.listContentBundles.asyncIterate(
       this.innerApiCalls['listContentBundles'] as GaxCall,
       request as {},

@@ -513,7 +513,7 @@ export class AddressValidationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('validateAddress request %j', request);
+    this._log.debug('validateAddress request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.addressvalidation.v1.IValidateAddressResponse,
@@ -524,7 +524,7 @@ export class AddressValidationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('validateAddress response %j', response);
+          this._log.debug('validateAddress response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -539,7 +539,7 @@ export class AddressValidationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('validateAddress response %j', response);
+          this._log.debug('validateAddress response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -664,7 +664,7 @@ export class AddressValidationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('provideValidationFeedback request %j', request);
+    this._log.debug('provideValidationFeedback request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackResponse,
@@ -675,7 +675,7 @@ export class AddressValidationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('provideValidationFeedback response %j', response);
+          this._log.debug('provideValidationFeedback response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -690,7 +690,7 @@ export class AddressValidationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('provideValidationFeedback response %j', response);
+          this._log.debug('provideValidationFeedback response %j', response);
           return [response, options, rawResponse];
         },
       )

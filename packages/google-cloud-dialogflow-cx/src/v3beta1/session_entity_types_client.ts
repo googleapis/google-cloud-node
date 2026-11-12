@@ -598,7 +598,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSessionEntityType request %j', request);
+    this._log.debug('getSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ISessionEntityType,
@@ -609,7 +609,7 @@ export class SessionEntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSessionEntityType response %j', response);
+          this._log.debug('getSessionEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -624,7 +624,7 @@ export class SessionEntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSessionEntityType response %j', response);
+          this._log.debug('getSessionEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -749,7 +749,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSessionEntityType request %j', request);
+    this._log.debug('createSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ISessionEntityType,
@@ -760,7 +760,7 @@ export class SessionEntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSessionEntityType response %j', response);
+          this._log.debug('createSessionEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -775,7 +775,7 @@ export class SessionEntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSessionEntityType response %j', response);
+          this._log.debug('createSessionEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -900,7 +900,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSessionEntityType request %j', request);
+    this._log.debug('updateSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ISessionEntityType,
@@ -911,7 +911,7 @@ export class SessionEntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSessionEntityType response %j', response);
+          this._log.debug('updateSessionEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -926,7 +926,7 @@ export class SessionEntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSessionEntityType response %j', response);
+          this._log.debug('updateSessionEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1049,7 +1049,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSessionEntityType request %j', request);
+    this._log.debug('deleteSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1060,7 +1060,7 @@ export class SessionEntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSessionEntityType response %j', response);
+          this._log.debug('deleteSessionEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1075,7 +1075,7 @@ export class SessionEntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSessionEntityType response %j', response);
+          this._log.debug('deleteSessionEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1211,11 +1211,11 @@ export class SessionEntityTypesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessionEntityTypes values %j', values);
+          this._log.debug('listSessionEntityTypes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSessionEntityTypes request %j', request);
+    this._log.debug('listSessionEntityTypes request %j', request);
     return this.innerApiCalls
       .listSessionEntityTypes(request, options, wrappedCallback)
       ?.then(
@@ -1224,7 +1224,7 @@ export class SessionEntityTypesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListSessionEntityTypesRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListSessionEntityTypesResponse,
         ]) => {
-          this._log.info('listSessionEntityTypes values %j', response);
+          this._log.debug('listSessionEntityTypes values %j', response);
           return [response, input, output];
         },
       );
@@ -1275,7 +1275,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessionEntityTypes stream %j', request);
+    this._log.debug('listSessionEntityTypes stream %j', request);
     return this.descriptors.page.listSessionEntityTypes.createStream(
       this.innerApiCalls.listSessionEntityTypes as GaxCall,
       request,
@@ -1331,7 +1331,7 @@ export class SessionEntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessionEntityTypes iterate %j', request);
+    this._log.debug('listSessionEntityTypes iterate %j', request);
     return this.descriptors.page.listSessionEntityTypes.asyncIterate(
       this.innerApiCalls['listSessionEntityTypes'] as GaxCall,
       request as {},

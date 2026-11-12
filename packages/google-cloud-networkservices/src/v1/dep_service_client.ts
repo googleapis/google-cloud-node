@@ -889,7 +889,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLbTrafficExtension request %j', request);
+    this._log.debug('getLbTrafficExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkservices.v1.ILbTrafficExtension,
@@ -900,7 +900,7 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLbTrafficExtension response %j', response);
+          this._log.debug('getLbTrafficExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -915,7 +915,7 @@ export class DepServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLbTrafficExtension response %j', response);
+          this._log.debug('getLbTrafficExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1034,7 +1034,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLbRouteExtension request %j', request);
+    this._log.debug('getLbRouteExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkservices.v1.ILbRouteExtension,
@@ -1045,7 +1045,7 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLbRouteExtension response %j', response);
+          this._log.debug('getLbRouteExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1060,7 +1060,7 @@ export class DepServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLbRouteExtension response %j', response);
+          this._log.debug('getLbRouteExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1179,7 +1179,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLbEdgeExtension request %j', request);
+    this._log.debug('getLbEdgeExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkservices.v1.ILbEdgeExtension,
@@ -1190,7 +1190,7 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLbEdgeExtension response %j', response);
+          this._log.debug('getLbEdgeExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1205,7 +1205,7 @@ export class DepServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLbEdgeExtension response %j', response);
+          this._log.debug('getLbEdgeExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1324,7 +1324,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAuthzExtension request %j', request);
+    this._log.debug('getAuthzExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkservices.v1.IAuthzExtension,
@@ -1335,7 +1335,7 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAuthzExtension response %j', response);
+          this._log.debug('getAuthzExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1350,7 +1350,7 @@ export class DepServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAuthzExtension response %j', response);
+          this._log.debug('getAuthzExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1505,11 +1505,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createLbTrafficExtension response %j', rawResponse);
+          this._log.debug('createLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createLbTrafficExtension request %j', request);
+    this._log.debug('createLbTrafficExtension request %j', request);
     return this.innerApiCalls
       .createLbTrafficExtension(request, options, wrappedCallback)
       ?.then(
@@ -1521,7 +1521,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createLbTrafficExtension response %j', rawResponse);
+          this._log.debug('createLbTrafficExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1693,11 +1693,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateLbTrafficExtension response %j', rawResponse);
+          this._log.debug('updateLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateLbTrafficExtension request %j', request);
+    this._log.debug('updateLbTrafficExtension request %j', request);
     return this.innerApiCalls
       .updateLbTrafficExtension(request, options, wrappedCallback)
       ?.then(
@@ -1709,7 +1709,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateLbTrafficExtension response %j', rawResponse);
+          this._log.debug('updateLbTrafficExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1877,11 +1877,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteLbTrafficExtension response %j', rawResponse);
+          this._log.debug('deleteLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteLbTrafficExtension request %j', request);
+    this._log.debug('deleteLbTrafficExtension request %j', request);
     return this.innerApiCalls
       .deleteLbTrafficExtension(request, options, wrappedCallback)
       ?.then(
@@ -1893,7 +1893,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteLbTrafficExtension response %j', rawResponse);
+          this._log.debug('deleteLbTrafficExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2065,11 +2065,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createLbRouteExtension response %j', rawResponse);
+          this._log.debug('createLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createLbRouteExtension request %j', request);
+    this._log.debug('createLbRouteExtension request %j', request);
     return this.innerApiCalls
       .createLbRouteExtension(request, options, wrappedCallback)
       ?.then(
@@ -2081,7 +2081,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createLbRouteExtension response %j', rawResponse);
+          this._log.debug('createLbRouteExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2253,11 +2253,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateLbRouteExtension response %j', rawResponse);
+          this._log.debug('updateLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateLbRouteExtension request %j', request);
+    this._log.debug('updateLbRouteExtension request %j', request);
     return this.innerApiCalls
       .updateLbRouteExtension(request, options, wrappedCallback)
       ?.then(
@@ -2269,7 +2269,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateLbRouteExtension response %j', rawResponse);
+          this._log.debug('updateLbRouteExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2437,11 +2437,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteLbRouteExtension response %j', rawResponse);
+          this._log.debug('deleteLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteLbRouteExtension request %j', request);
+    this._log.debug('deleteLbRouteExtension request %j', request);
     return this.innerApiCalls
       .deleteLbRouteExtension(request, options, wrappedCallback)
       ?.then(
@@ -2453,7 +2453,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteLbRouteExtension response %j', rawResponse);
+          this._log.debug('deleteLbRouteExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2624,11 +2624,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createLbEdgeExtension response %j', rawResponse);
+          this._log.debug('createLbEdgeExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createLbEdgeExtension request %j', request);
+    this._log.debug('createLbEdgeExtension request %j', request);
     return this.innerApiCalls
       .createLbEdgeExtension(request, options, wrappedCallback)
       ?.then(
@@ -2640,7 +2640,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createLbEdgeExtension response %j', rawResponse);
+          this._log.debug('createLbEdgeExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2812,11 +2812,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateLbEdgeExtension response %j', rawResponse);
+          this._log.debug('updateLbEdgeExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateLbEdgeExtension request %j', request);
+    this._log.debug('updateLbEdgeExtension request %j', request);
     return this.innerApiCalls
       .updateLbEdgeExtension(request, options, wrappedCallback)
       ?.then(
@@ -2828,7 +2828,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateLbEdgeExtension response %j', rawResponse);
+          this._log.debug('updateLbEdgeExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2996,11 +2996,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteLbEdgeExtension response %j', rawResponse);
+          this._log.debug('deleteLbEdgeExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteLbEdgeExtension request %j', request);
+    this._log.debug('deleteLbEdgeExtension request %j', request);
     return this.innerApiCalls
       .deleteLbEdgeExtension(request, options, wrappedCallback)
       ?.then(
@@ -3012,7 +3012,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteLbEdgeExtension response %j', rawResponse);
+          this._log.debug('deleteLbEdgeExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3185,11 +3185,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAuthzExtension response %j', rawResponse);
+          this._log.debug('createAuthzExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAuthzExtension request %j', request);
+    this._log.debug('createAuthzExtension request %j', request);
     return this.innerApiCalls
       .createAuthzExtension(request, options, wrappedCallback)
       ?.then(
@@ -3201,7 +3201,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAuthzExtension response %j', rawResponse);
+          this._log.debug('createAuthzExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3374,11 +3374,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAuthzExtension response %j', rawResponse);
+          this._log.debug('updateAuthzExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAuthzExtension request %j', request);
+    this._log.debug('updateAuthzExtension request %j', request);
     return this.innerApiCalls
       .updateAuthzExtension(request, options, wrappedCallback)
       ?.then(
@@ -3390,7 +3390,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAuthzExtension response %j', rawResponse);
+          this._log.debug('updateAuthzExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3558,11 +3558,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAuthzExtension response %j', rawResponse);
+          this._log.debug('deleteAuthzExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAuthzExtension request %j', request);
+    this._log.debug('deleteAuthzExtension request %j', request);
     return this.innerApiCalls
       .deleteAuthzExtension(request, options, wrappedCallback)
       ?.then(
@@ -3574,7 +3574,7 @@ export class DepServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAuthzExtension response %j', rawResponse);
+          this._log.debug('deleteAuthzExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3728,11 +3728,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLbTrafficExtensions values %j', values);
+          this._log.debug('listLbTrafficExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLbTrafficExtensions request %j', request);
+    this._log.debug('listLbTrafficExtensions request %j', request);
     return this.innerApiCalls
       .listLbTrafficExtensions(request, options, wrappedCallback)
       ?.then(
@@ -3741,7 +3741,7 @@ export class DepServiceClient {
           protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest | null,
           protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse,
         ]) => {
-          this._log.info('listLbTrafficExtensions values %j', response);
+          this._log.debug('listLbTrafficExtensions values %j', response);
           return [response, input, output];
         },
       );
@@ -3792,7 +3792,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbTrafficExtensions stream %j', request);
+    this._log.debug('listLbTrafficExtensions stream %j', request);
     return this.descriptors.page.listLbTrafficExtensions.createStream(
       this.innerApiCalls.listLbTrafficExtensions as GaxCall,
       request,
@@ -3848,7 +3848,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbTrafficExtensions iterate %j', request);
+    this._log.debug('listLbTrafficExtensions iterate %j', request);
     return this.descriptors.page.listLbTrafficExtensions.asyncIterate(
       this.innerApiCalls['listLbTrafficExtensions'] as GaxCall,
       request as {},
@@ -3969,11 +3969,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLbRouteExtensions values %j', values);
+          this._log.debug('listLbRouteExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLbRouteExtensions request %j', request);
+    this._log.debug('listLbRouteExtensions request %j', request);
     return this.innerApiCalls
       .listLbRouteExtensions(request, options, wrappedCallback)
       ?.then(
@@ -3982,7 +3982,7 @@ export class DepServiceClient {
           protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest | null,
           protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse,
         ]) => {
-          this._log.info('listLbRouteExtensions values %j', response);
+          this._log.debug('listLbRouteExtensions values %j', response);
           return [response, input, output];
         },
       );
@@ -4033,7 +4033,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbRouteExtensions stream %j', request);
+    this._log.debug('listLbRouteExtensions stream %j', request);
     return this.descriptors.page.listLbRouteExtensions.createStream(
       this.innerApiCalls.listLbRouteExtensions as GaxCall,
       request,
@@ -4089,7 +4089,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbRouteExtensions iterate %j', request);
+    this._log.debug('listLbRouteExtensions iterate %j', request);
     return this.descriptors.page.listLbRouteExtensions.asyncIterate(
       this.innerApiCalls['listLbRouteExtensions'] as GaxCall,
       request as {},
@@ -4210,11 +4210,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLbEdgeExtensions values %j', values);
+          this._log.debug('listLbEdgeExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLbEdgeExtensions request %j', request);
+    this._log.debug('listLbEdgeExtensions request %j', request);
     return this.innerApiCalls
       .listLbEdgeExtensions(request, options, wrappedCallback)
       ?.then(
@@ -4223,7 +4223,7 @@ export class DepServiceClient {
           protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest | null,
           protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse,
         ]) => {
-          this._log.info('listLbEdgeExtensions values %j', response);
+          this._log.debug('listLbEdgeExtensions values %j', response);
           return [response, input, output];
         },
       );
@@ -4274,7 +4274,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbEdgeExtensions stream %j', request);
+    this._log.debug('listLbEdgeExtensions stream %j', request);
     return this.descriptors.page.listLbEdgeExtensions.createStream(
       this.innerApiCalls.listLbEdgeExtensions as GaxCall,
       request,
@@ -4330,7 +4330,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLbEdgeExtensions iterate %j', request);
+    this._log.debug('listLbEdgeExtensions iterate %j', request);
     return this.descriptors.page.listLbEdgeExtensions.asyncIterate(
       this.innerApiCalls['listLbEdgeExtensions'] as GaxCall,
       request as {},
@@ -4451,11 +4451,11 @@ export class DepServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAuthzExtensions values %j', values);
+          this._log.debug('listAuthzExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAuthzExtensions request %j', request);
+    this._log.debug('listAuthzExtensions request %j', request);
     return this.innerApiCalls
       .listAuthzExtensions(request, options, wrappedCallback)
       ?.then(
@@ -4464,7 +4464,7 @@ export class DepServiceClient {
           protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest | null,
           protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse,
         ]) => {
-          this._log.info('listAuthzExtensions values %j', response);
+          this._log.debug('listAuthzExtensions values %j', response);
           return [response, input, output];
         },
       );
@@ -4515,7 +4515,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuthzExtensions stream %j', request);
+    this._log.debug('listAuthzExtensions stream %j', request);
     return this.descriptors.page.listAuthzExtensions.createStream(
       this.innerApiCalls.listAuthzExtensions as GaxCall,
       request,
@@ -4571,7 +4571,7 @@ export class DepServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuthzExtensions iterate %j', request);
+    this._log.debug('listAuthzExtensions iterate %j', request);
     return this.descriptors.page.listAuthzExtensions.asyncIterate(
       this.innerApiCalls['listAuthzExtensions'] as GaxCall,
       request as {},

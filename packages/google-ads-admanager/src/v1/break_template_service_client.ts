@@ -726,7 +726,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBreakTemplate request %j', request);
+    this._log.debug('getBreakTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBreakTemplate,
@@ -737,7 +737,7 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBreakTemplate response %j', response);
+          this._log.debug('getBreakTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -749,7 +749,7 @@ export class BreakTemplateServiceClient {
           protos.google.ads.admanager.v1.IGetBreakTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBreakTemplate response %j', response);
+          this._log.debug('getBreakTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -863,7 +863,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBreakTemplate request %j', request);
+    this._log.debug('createBreakTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBreakTemplate,
@@ -874,7 +874,7 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBreakTemplate response %j', response);
+          this._log.debug('createBreakTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -889,7 +889,7 @@ export class BreakTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createBreakTemplate response %j', response);
+          this._log.debug('createBreakTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1012,7 +1012,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateBreakTemplates request %j', request);
+    this._log.debug('batchCreateBreakTemplates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateBreakTemplatesResponse,
@@ -1023,7 +1023,7 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateBreakTemplates response %j', response);
+          this._log.debug('batchCreateBreakTemplates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1038,7 +1038,7 @@ export class BreakTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateBreakTemplates response %j', response);
+          this._log.debug('batchCreateBreakTemplates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1154,7 +1154,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBreakTemplate request %j', request);
+    this._log.debug('updateBreakTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBreakTemplate,
@@ -1165,7 +1165,7 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBreakTemplate response %j', response);
+          this._log.debug('updateBreakTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1180,7 +1180,7 @@ export class BreakTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBreakTemplate response %j', response);
+          this._log.debug('updateBreakTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1303,7 +1303,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateBreakTemplates request %j', request);
+    this._log.debug('batchUpdateBreakTemplates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateBreakTemplatesResponse,
@@ -1314,7 +1314,7 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateBreakTemplates response %j', response);
+          this._log.debug('batchUpdateBreakTemplates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1329,7 +1329,7 @@ export class BreakTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateBreakTemplates response %j', response);
+          this._log.debug('batchUpdateBreakTemplates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1493,11 +1493,11 @@ export class BreakTemplateServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBreakTemplates values %j', values);
+          this._log.debug('listBreakTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBreakTemplates request %j', request);
+    this._log.debug('listBreakTemplates request %j', request);
     return this.innerApiCalls
       .listBreakTemplates(request, options, wrappedCallback)
       ?.then(
@@ -1506,7 +1506,7 @@ export class BreakTemplateServiceClient {
           protos.google.ads.admanager.v1.IListBreakTemplatesRequest | null,
           protos.google.ads.admanager.v1.IListBreakTemplatesResponse,
         ]) => {
-          this._log.info('listBreakTemplates values %j', response);
+          this._log.debug('listBreakTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -1585,7 +1585,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBreakTemplates stream %j', request);
+    this._log.debug('listBreakTemplates stream %j', request);
     return this.descriptors.page.listBreakTemplates.createStream(
       this.innerApiCalls.listBreakTemplates as GaxCall,
       request,
@@ -1669,7 +1669,7 @@ export class BreakTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBreakTemplates iterate %j', request);
+    this._log.debug('listBreakTemplates iterate %j', request);
     return this.descriptors.page.listBreakTemplates.asyncIterate(
       this.innerApiCalls['listBreakTemplates'] as GaxCall,
       request as {},

@@ -466,7 +466,7 @@ export class SqlTiersServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.ITiersListResponse,
@@ -477,7 +477,7 @@ export class SqlTiersServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -489,7 +489,7 @@ export class SqlTiersServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlTiersListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )

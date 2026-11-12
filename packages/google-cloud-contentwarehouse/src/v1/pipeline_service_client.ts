@@ -554,11 +554,11 @@ export class PipelineServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runPipeline response %j', rawResponse);
+          this._log.debug('runPipeline response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runPipeline request %j', request);
+    this._log.debug('runPipeline request %j', request);
     return this.innerApiCalls
       .runPipeline(request, options, wrappedCallback)
       ?.then(
@@ -570,7 +570,7 @@ export class PipelineServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runPipeline response %j', rawResponse);
+          this._log.debug('runPipeline response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

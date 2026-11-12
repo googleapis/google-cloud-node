@@ -531,7 +531,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDeviceSession request %j', request);
+    this._log.debug('createDeviceSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
@@ -542,7 +542,7 @@ export class DirectAccessServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDeviceSession response %j', response);
+          this._log.debug('createDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -557,7 +557,7 @@ export class DirectAccessServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDeviceSession response %j', response);
+          this._log.debug('createDeviceSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -677,7 +677,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDeviceSession request %j', request);
+    this._log.debug('getDeviceSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
@@ -688,7 +688,7 @@ export class DirectAccessServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDeviceSession response %j', response);
+          this._log.debug('getDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -703,7 +703,7 @@ export class DirectAccessServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDeviceSession response %j', response);
+          this._log.debug('getDeviceSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -825,7 +825,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelDeviceSession request %j', request);
+    this._log.debug('cancelDeviceSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -836,7 +836,7 @@ export class DirectAccessServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelDeviceSession response %j', response);
+          this._log.debug('cancelDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -851,7 +851,7 @@ export class DirectAccessServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancelDeviceSession response %j', response);
+          this._log.debug('cancelDeviceSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -973,7 +973,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDeviceSession request %j', request);
+    this._log.debug('updateDeviceSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
@@ -984,7 +984,7 @@ export class DirectAccessServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDeviceSession response %j', response);
+          this._log.debug('updateDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -999,7 +999,7 @@ export class DirectAccessServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDeviceSession response %j', response);
+          this._log.debug('updateDeviceSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1042,7 +1042,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('adbConnect stream %j', options);
+    this._log.debug('adbConnect stream %j', options);
     return this.innerApiCalls.adbConnect(null, options);
   }
 
@@ -1156,11 +1156,11 @@ export class DirectAccessServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDeviceSessions values %j', values);
+          this._log.debug('listDeviceSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDeviceSessions request %j', request);
+    this._log.debug('listDeviceSessions request %j', request);
     return this.innerApiCalls
       .listDeviceSessions(request, options, wrappedCallback)
       ?.then(
@@ -1169,7 +1169,7 @@ export class DirectAccessServiceClient {
           protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest | null,
           protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse,
         ]) => {
-          this._log.info('listDeviceSessions values %j', response);
+          this._log.debug('listDeviceSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -1216,7 +1216,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceSessions stream %j', request);
+    this._log.debug('listDeviceSessions stream %j', request);
     return this.descriptors.page.listDeviceSessions.createStream(
       this.innerApiCalls.listDeviceSessions as GaxCall,
       request,
@@ -1268,7 +1268,7 @@ export class DirectAccessServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceSessions iterate %j', request);
+    this._log.debug('listDeviceSessions iterate %j', request);
     return this.descriptors.page.listDeviceSessions.asyncIterate(
       this.innerApiCalls['listDeviceSessions'] as GaxCall,
       request as {},

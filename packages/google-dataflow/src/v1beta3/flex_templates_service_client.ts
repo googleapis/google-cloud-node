@@ -461,7 +461,7 @@ export class FlexTemplatesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('launchFlexTemplate request %j', request);
+    this._log.debug('launchFlexTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.dataflow.v1beta3.ILaunchFlexTemplateResponse,
@@ -472,7 +472,7 @@ export class FlexTemplatesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('launchFlexTemplate response %j', response);
+          this._log.debug('launchFlexTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -484,7 +484,7 @@ export class FlexTemplatesServiceClient {
           protos.google.dataflow.v1beta3.ILaunchFlexTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('launchFlexTemplate response %j', response);
+          this._log.debug('launchFlexTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -711,7 +711,7 @@ export class RoleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRole request %j', request);
+    this._log.debug('getRole request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IRole,
@@ -720,7 +720,7 @@ export class RoleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRole response %j', response);
+          this._log.debug('getRole response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -732,7 +732,7 @@ export class RoleServiceClient {
           protos.google.ads.admanager.v1.IGetRoleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRole response %j', response);
+          this._log.debug('getRole response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -885,11 +885,11 @@ export class RoleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRoles values %j', values);
+          this._log.debug('listRoles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRoles request %j', request);
+    this._log.debug('listRoles request %j', request);
     return this.innerApiCalls
       .listRoles(request, options, wrappedCallback)
       ?.then(
@@ -898,7 +898,7 @@ export class RoleServiceClient {
           protos.google.ads.admanager.v1.IListRolesRequest | null,
           protos.google.ads.admanager.v1.IListRolesResponse,
         ]) => {
-          this._log.info('listRoles values %j', response);
+          this._log.debug('listRoles values %j', response);
           return [response, input, output];
         },
       );
@@ -976,7 +976,7 @@ export class RoleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoles stream %j', request);
+    this._log.debug('listRoles stream %j', request);
     return this.descriptors.page.listRoles.createStream(
       this.innerApiCalls.listRoles as GaxCall,
       request,
@@ -1059,7 +1059,7 @@ export class RoleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoles iterate %j', request);
+    this._log.debug('listRoles iterate %j', request);
     return this.descriptors.page.listRoles.asyncIterate(
       this.innerApiCalls['listRoles'] as GaxCall,
       request as {},

@@ -475,7 +475,7 @@ export class MachineTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IMachineType,
@@ -486,7 +486,7 @@ export class MachineTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -498,7 +498,7 @@ export class MachineTypesClient {
           protos.google.cloud.compute.v1.IGetMachineTypeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -654,7 +654,7 @@ export class MachineTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregatedList iterate %j', request);
+    this._log.debug('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -841,11 +841,11 @@ export class MachineTypesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -854,7 +854,7 @@ export class MachineTypesClient {
           protos.google.cloud.compute.v1.IListMachineTypesRequest | null,
           protos.google.cloud.compute.v1.IMachineTypeList,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -978,7 +978,7 @@ export class MachineTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1107,7 +1107,7 @@ export class MachineTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},

@@ -564,11 +564,11 @@ export class BackupDrProtectionSummaryClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listResourceBackupConfigs values %j', values);
+          this._log.debug('listResourceBackupConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listResourceBackupConfigs request %j', request);
+    this._log.debug('listResourceBackupConfigs request %j', request);
     return this.innerApiCalls
       .listResourceBackupConfigs(request, options, wrappedCallback)
       ?.then(
@@ -577,7 +577,7 @@ export class BackupDrProtectionSummaryClient {
           protos.google.cloud.backupdr.v1.IListResourceBackupConfigsRequest | null,
           protos.google.cloud.backupdr.v1.IListResourceBackupConfigsResponse,
         ]) => {
-          this._log.info('listResourceBackupConfigs values %j', response);
+          this._log.debug('listResourceBackupConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -630,7 +630,7 @@ export class BackupDrProtectionSummaryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceBackupConfigs stream %j', request);
+    this._log.debug('listResourceBackupConfigs stream %j', request);
     return this.descriptors.page.listResourceBackupConfigs.createStream(
       this.innerApiCalls.listResourceBackupConfigs as GaxCall,
       request,
@@ -688,7 +688,7 @@ export class BackupDrProtectionSummaryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listResourceBackupConfigs iterate %j', request);
+    this._log.debug('listResourceBackupConfigs iterate %j', request);
     return this.descriptors.page.listResourceBackupConfigs.asyncIterate(
       this.innerApiCalls['listResourceBackupConfigs'] as GaxCall,
       request as {},

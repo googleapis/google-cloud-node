@@ -723,7 +723,7 @@ export class BandwidthGroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBandwidthGroup request %j', request);
+    this._log.debug('getBandwidthGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBandwidthGroup,
@@ -734,7 +734,7 @@ export class BandwidthGroupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBandwidthGroup response %j', response);
+          this._log.debug('getBandwidthGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -746,7 +746,7 @@ export class BandwidthGroupServiceClient {
           protos.google.ads.admanager.v1.IGetBandwidthGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBandwidthGroup response %j', response);
+          this._log.debug('getBandwidthGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -906,11 +906,11 @@ export class BandwidthGroupServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBandwidthGroups values %j', values);
+          this._log.debug('listBandwidthGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBandwidthGroups request %j', request);
+    this._log.debug('listBandwidthGroups request %j', request);
     return this.innerApiCalls
       .listBandwidthGroups(request, options, wrappedCallback)
       ?.then(
@@ -919,7 +919,7 @@ export class BandwidthGroupServiceClient {
           protos.google.ads.admanager.v1.IListBandwidthGroupsRequest | null,
           protos.google.ads.admanager.v1.IListBandwidthGroupsResponse,
         ]) => {
-          this._log.info('listBandwidthGroups values %j', response);
+          this._log.debug('listBandwidthGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -994,7 +994,7 @@ export class BandwidthGroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBandwidthGroups stream %j', request);
+    this._log.debug('listBandwidthGroups stream %j', request);
     return this.descriptors.page.listBandwidthGroups.createStream(
       this.innerApiCalls.listBandwidthGroups as GaxCall,
       request,
@@ -1074,7 +1074,7 @@ export class BandwidthGroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBandwidthGroups iterate %j', request);
+    this._log.debug('listBandwidthGroups iterate %j', request);
     return this.descriptors.page.listBandwidthGroups.asyncIterate(
       this.innerApiCalls['listBandwidthGroups'] as GaxCall,
       request as {},

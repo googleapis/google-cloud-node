@@ -467,7 +467,7 @@ export class RegionSnapshotSettingsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.ISnapshotSettings,
@@ -478,7 +478,7 @@ export class RegionSnapshotSettingsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -493,7 +493,7 @@ export class RegionSnapshotSettingsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -630,7 +630,7 @@ export class RegionSnapshotSettingsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patch request %j', request);
+    this._log.debug('patch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -641,7 +641,7 @@ export class RegionSnapshotSettingsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('patch response %j', rawResponse);
+          this._log.debug('patch response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;

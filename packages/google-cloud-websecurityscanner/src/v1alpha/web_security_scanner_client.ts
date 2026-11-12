@@ -521,7 +521,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createScanConfig request %j', request);
+    this._log.debug('createScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
@@ -532,7 +532,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createScanConfig response %j', response);
+          this._log.debug('createScanConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -547,7 +547,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createScanConfig response %j', response);
+          this._log.debug('createScanConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -665,7 +665,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteScanConfig request %j', request);
+    this._log.debug('deleteScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -676,7 +676,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteScanConfig response %j', response);
+          this._log.debug('deleteScanConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -691,7 +691,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteScanConfig response %j', response);
+          this._log.debug('deleteScanConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -809,7 +809,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getScanConfig request %j', request);
+    this._log.debug('getScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
@@ -820,7 +820,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getScanConfig response %j', response);
+          this._log.debug('getScanConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -835,7 +835,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getScanConfig response %j', response);
+          this._log.debug('getScanConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -958,7 +958,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateScanConfig request %j', request);
+    this._log.debug('updateScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
@@ -969,7 +969,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateScanConfig response %j', response);
+          this._log.debug('updateScanConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -984,7 +984,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateScanConfig response %j', response);
+          this._log.debug('updateScanConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1102,7 +1102,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('startScanRun request %j', request);
+    this._log.debug('startScanRun request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
@@ -1113,7 +1113,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('startScanRun response %j', response);
+          this._log.debug('startScanRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1128,7 +1128,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('startScanRun response %j', response);
+          this._log.debug('startScanRun response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1247,7 +1247,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getScanRun request %j', request);
+    this._log.debug('getScanRun request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
@@ -1258,7 +1258,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getScanRun response %j', response);
+          this._log.debug('getScanRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1273,7 +1273,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getScanRun response %j', response);
+          this._log.debug('getScanRun response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1392,7 +1392,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('stopScanRun request %j', request);
+    this._log.debug('stopScanRun request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
@@ -1403,7 +1403,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('stopScanRun response %j', response);
+          this._log.debug('stopScanRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1418,7 +1418,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('stopScanRun response %j', response);
+          this._log.debug('stopScanRun response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1537,7 +1537,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFinding request %j', request);
+    this._log.debug('getFinding request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IFinding,
@@ -1548,7 +1548,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFinding response %j', response);
+          this._log.debug('getFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1563,7 +1563,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFinding response %j', response);
+          this._log.debug('getFinding response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1682,7 +1682,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindingTypeStats request %j', request);
+    this._log.debug('listFindingTypeStats request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsResponse,
@@ -1693,7 +1693,7 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listFindingTypeStats response %j', response);
+          this._log.debug('listFindingTypeStats response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1708,7 +1708,7 @@ export class WebSecurityScannerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listFindingTypeStats response %j', response);
+          this._log.debug('listFindingTypeStats response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1842,11 +1842,11 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listScanConfigs values %j', values);
+          this._log.debug('listScanConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listScanConfigs request %j', request);
+    this._log.debug('listScanConfigs request %j', request);
     return this.innerApiCalls
       .listScanConfigs(request, options, wrappedCallback)
       ?.then(
@@ -1855,7 +1855,7 @@ export class WebSecurityScannerClient {
           protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsRequest | null,
           protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse,
         ]) => {
-          this._log.info('listScanConfigs values %j', response);
+          this._log.debug('listScanConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -1904,7 +1904,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listScanConfigs stream %j', request);
+    this._log.debug('listScanConfigs stream %j', request);
     return this.descriptors.page.listScanConfigs.createStream(
       this.innerApiCalls.listScanConfigs as GaxCall,
       request,
@@ -1958,7 +1958,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listScanConfigs iterate %j', request);
+    this._log.debug('listScanConfigs iterate %j', request);
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
       request as {},
@@ -2078,11 +2078,11 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listScanRuns values %j', values);
+          this._log.debug('listScanRuns values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listScanRuns request %j', request);
+    this._log.debug('listScanRuns request %j', request);
     return this.innerApiCalls
       .listScanRuns(request, options, wrappedCallback)
       ?.then(
@@ -2091,7 +2091,7 @@ export class WebSecurityScannerClient {
           protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsRequest | null,
           protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse,
         ]) => {
-          this._log.info('listScanRuns values %j', response);
+          this._log.debug('listScanRuns values %j', response);
           return [response, input, output];
         },
       );
@@ -2140,7 +2140,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listScanRuns stream %j', request);
+    this._log.debug('listScanRuns stream %j', request);
     return this.descriptors.page.listScanRuns.createStream(
       this.innerApiCalls.listScanRuns as GaxCall,
       request,
@@ -2194,7 +2194,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listScanRuns iterate %j', request);
+    this._log.debug('listScanRuns iterate %j', request);
     return this.descriptors.page.listScanRuns.asyncIterate(
       this.innerApiCalls['listScanRuns'] as GaxCall,
       request as {},
@@ -2314,11 +2314,11 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCrawledUrls values %j', values);
+          this._log.debug('listCrawledUrls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCrawledUrls request %j', request);
+    this._log.debug('listCrawledUrls request %j', request);
     return this.innerApiCalls
       .listCrawledUrls(request, options, wrappedCallback)
       ?.then(
@@ -2327,7 +2327,7 @@ export class WebSecurityScannerClient {
           protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsRequest | null,
           protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse,
         ]) => {
-          this._log.info('listCrawledUrls values %j', response);
+          this._log.debug('listCrawledUrls values %j', response);
           return [response, input, output];
         },
       );
@@ -2377,7 +2377,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCrawledUrls stream %j', request);
+    this._log.debug('listCrawledUrls stream %j', request);
     return this.descriptors.page.listCrawledUrls.createStream(
       this.innerApiCalls.listCrawledUrls as GaxCall,
       request,
@@ -2432,7 +2432,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCrawledUrls iterate %j', request);
+    this._log.debug('listCrawledUrls iterate %j', request);
     return this.descriptors.page.listCrawledUrls.asyncIterate(
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
       request as {},
@@ -2557,11 +2557,11 @@ export class WebSecurityScannerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFindings values %j', values);
+          this._log.debug('listFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFindings request %j', request);
+    this._log.debug('listFindings request %j', request);
     return this.innerApiCalls
       .listFindings(request, options, wrappedCallback)
       ?.then(
@@ -2570,7 +2570,7 @@ export class WebSecurityScannerClient {
           protos.google.cloud.websecurityscanner.v1alpha.IListFindingsRequest | null,
           protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse,
         ]) => {
-          this._log.info('listFindings values %j', response);
+          this._log.debug('listFindings values %j', response);
           return [response, input, output];
         },
       );
@@ -2625,7 +2625,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindings stream %j', request);
+    this._log.debug('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
       request,
@@ -2685,7 +2685,7 @@ export class WebSecurityScannerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindings iterate %j', request);
+    this._log.debug('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
       request as {},

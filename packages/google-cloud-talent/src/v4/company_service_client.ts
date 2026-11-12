@@ -485,7 +485,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCompany request %j', request);
+    this._log.debug('createCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4.ICompany,
@@ -496,7 +496,7 @@ export class CompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCompany response %j', response);
+          this._log.debug('createCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -508,7 +508,7 @@ export class CompanyServiceClient {
           protos.google.cloud.talent.v4.ICreateCompanyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCompany response %j', response);
+          this._log.debug('createCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -615,7 +615,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCompany request %j', request);
+    this._log.debug('getCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4.ICompany,
@@ -624,7 +624,7 @@ export class CompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCompany response %j', response);
+          this._log.debug('getCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -636,7 +636,7 @@ export class CompanyServiceClient {
           protos.google.cloud.talent.v4.IGetCompanyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCompany response %j', response);
+          this._log.debug('getCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -753,7 +753,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCompany request %j', request);
+    this._log.debug('updateCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4.ICompany,
@@ -764,7 +764,7 @@ export class CompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCompany response %j', response);
+          this._log.debug('updateCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -776,7 +776,7 @@ export class CompanyServiceClient {
           protos.google.cloud.talent.v4.IUpdateCompanyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCompany response %j', response);
+          this._log.debug('updateCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -886,7 +886,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCompany request %j', request);
+    this._log.debug('deleteCompany request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -897,7 +897,7 @@ export class CompanyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCompany response %j', response);
+          this._log.debug('deleteCompany response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -909,7 +909,7 @@ export class CompanyServiceClient {
           protos.google.cloud.talent.v4.IDeleteCompanyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCompany response %j', response);
+          this._log.debug('deleteCompany response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1044,11 +1044,11 @@ export class CompanyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCompanies values %j', values);
+          this._log.debug('listCompanies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCompanies request %j', request);
+    this._log.debug('listCompanies request %j', request);
     return this.innerApiCalls
       .listCompanies(request, options, wrappedCallback)
       ?.then(
@@ -1057,7 +1057,7 @@ export class CompanyServiceClient {
           protos.google.cloud.talent.v4.IListCompaniesRequest | null,
           protos.google.cloud.talent.v4.IListCompaniesResponse,
         ]) => {
-          this._log.info('listCompanies values %j', response);
+          this._log.debug('listCompanies values %j', response);
           return [response, input, output];
         },
       );
@@ -1113,7 +1113,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompanies stream %j', request);
+    this._log.debug('listCompanies stream %j', request);
     return this.descriptors.page.listCompanies.createStream(
       this.innerApiCalls.listCompanies as GaxCall,
       request,
@@ -1174,7 +1174,7 @@ export class CompanyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompanies iterate %j', request);
+    this._log.debug('listCompanies iterate %j', request);
     return this.descriptors.page.listCompanies.asyncIterate(
       this.innerApiCalls['listCompanies'] as GaxCall,
       request as {},

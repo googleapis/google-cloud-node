@@ -723,7 +723,7 @@ export class DeviceCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDeviceCategory request %j', request);
+    this._log.debug('getDeviceCategory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IDeviceCategory,
@@ -734,7 +734,7 @@ export class DeviceCategoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDeviceCategory response %j', response);
+          this._log.debug('getDeviceCategory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -746,7 +746,7 @@ export class DeviceCategoryServiceClient {
           protos.google.ads.admanager.v1.IGetDeviceCategoryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDeviceCategory response %j', response);
+          this._log.debug('getDeviceCategory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -906,11 +906,11 @@ export class DeviceCategoryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDeviceCategories values %j', values);
+          this._log.debug('listDeviceCategories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDeviceCategories request %j', request);
+    this._log.debug('listDeviceCategories request %j', request);
     return this.innerApiCalls
       .listDeviceCategories(request, options, wrappedCallback)
       ?.then(
@@ -919,7 +919,7 @@ export class DeviceCategoryServiceClient {
           protos.google.ads.admanager.v1.IListDeviceCategoriesRequest | null,
           protos.google.ads.admanager.v1.IListDeviceCategoriesResponse,
         ]) => {
-          this._log.info('listDeviceCategories values %j', response);
+          this._log.debug('listDeviceCategories values %j', response);
           return [response, input, output];
         },
       );
@@ -994,7 +994,7 @@ export class DeviceCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceCategories stream %j', request);
+    this._log.debug('listDeviceCategories stream %j', request);
     return this.descriptors.page.listDeviceCategories.createStream(
       this.innerApiCalls.listDeviceCategories as GaxCall,
       request,
@@ -1074,7 +1074,7 @@ export class DeviceCategoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeviceCategories iterate %j', request);
+    this._log.debug('listDeviceCategories iterate %j', request);
     return this.descriptors.page.listDeviceCategories.asyncIterate(
       this.innerApiCalls['listDeviceCategories'] as GaxCall,
       request as {},

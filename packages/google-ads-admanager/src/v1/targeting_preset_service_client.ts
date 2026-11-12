@@ -731,7 +731,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTargetingPreset request %j', request);
+    this._log.debug('getTargetingPreset request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITargetingPreset,
@@ -742,7 +742,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTargetingPreset response %j', response);
+          this._log.debug('getTargetingPreset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -754,7 +754,7 @@ export class TargetingPresetServiceClient {
           protos.google.ads.admanager.v1.IGetTargetingPresetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTargetingPreset response %j', response);
+          this._log.debug('getTargetingPreset response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -868,7 +868,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTargetingPreset request %j', request);
+    this._log.debug('createTargetingPreset request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITargetingPreset,
@@ -879,7 +879,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTargetingPreset response %j', response);
+          this._log.debug('createTargetingPreset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -894,7 +894,7 @@ export class TargetingPresetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTargetingPreset response %j', response);
+          this._log.debug('createTargetingPreset response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1017,7 +1017,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateTargetingPresets request %j', request);
+    this._log.debug('batchCreateTargetingPresets request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateTargetingPresetsResponse,
@@ -1028,7 +1028,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateTargetingPresets response %j', response);
+          this._log.debug('batchCreateTargetingPresets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1043,7 +1043,7 @@ export class TargetingPresetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateTargetingPresets response %j', response);
+          this._log.debug('batchCreateTargetingPresets response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1159,7 +1159,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTargetingPreset request %j', request);
+    this._log.debug('updateTargetingPreset request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITargetingPreset,
@@ -1170,7 +1170,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTargetingPreset response %j', response);
+          this._log.debug('updateTargetingPreset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1185,7 +1185,7 @@ export class TargetingPresetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTargetingPreset response %j', response);
+          this._log.debug('updateTargetingPreset response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1308,7 +1308,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateTargetingPresets request %j', request);
+    this._log.debug('batchUpdateTargetingPresets request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
@@ -1319,7 +1319,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateTargetingPresets response %j', response);
+          this._log.debug('batchUpdateTargetingPresets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1334,7 +1334,7 @@ export class TargetingPresetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateTargetingPresets response %j', response);
+          this._log.debug('batchUpdateTargetingPresets response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1453,7 +1453,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateTargetingPresets request %j', request);
+    this._log.debug('batchDeactivateTargetingPresets request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateTargetingPresetsResponse,
@@ -1464,7 +1464,7 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateTargetingPresets response %j',
             response,
           );
@@ -1482,7 +1482,7 @@ export class TargetingPresetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateTargetingPresets response %j',
             response,
           );
@@ -1646,11 +1646,11 @@ export class TargetingPresetServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTargetingPresets values %j', values);
+          this._log.debug('listTargetingPresets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTargetingPresets request %j', request);
+    this._log.debug('listTargetingPresets request %j', request);
     return this.innerApiCalls
       .listTargetingPresets(request, options, wrappedCallback)
       ?.then(
@@ -1659,7 +1659,7 @@ export class TargetingPresetServiceClient {
           protos.google.ads.admanager.v1.IListTargetingPresetsRequest | null,
           protos.google.ads.admanager.v1.IListTargetingPresetsResponse,
         ]) => {
-          this._log.info('listTargetingPresets values %j', response);
+          this._log.debug('listTargetingPresets values %j', response);
           return [response, input, output];
         },
       );
@@ -1735,7 +1735,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTargetingPresets stream %j', request);
+    this._log.debug('listTargetingPresets stream %j', request);
     return this.descriptors.page.listTargetingPresets.createStream(
       this.innerApiCalls.listTargetingPresets as GaxCall,
       request,
@@ -1816,7 +1816,7 @@ export class TargetingPresetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTargetingPresets iterate %j', request);
+    this._log.debug('listTargetingPresets iterate %j', request);
     return this.descriptors.page.listTargetingPresets.asyncIterate(
       this.innerApiCalls['listTargetingPresets'] as GaxCall,
       request as {},

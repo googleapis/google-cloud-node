@@ -526,7 +526,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateDiscoveredResourcesTopology request %j', request);
+    this._log.debug('generateDiscoveredResourcesTopology request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apptopology.v1.IGenerateDiscoveredResourcesTopologyResponse,
@@ -537,7 +537,7 @@ export class AppTopologyClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'generateDiscoveredResourcesTopology response %j',
             response,
           );
@@ -555,7 +555,7 @@ export class AppTopologyClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'generateDiscoveredResourcesTopology response %j',
             response,
           );
@@ -667,7 +667,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSchema request %j', request);
+    this._log.debug('getSchema request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apptopology.v1.ISchema,
@@ -678,7 +678,7 @@ export class AppTopologyClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSchema response %j', response);
+          this._log.debug('getSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -690,7 +690,7 @@ export class AppTopologyClient {
           protos.google.cloud.apptopology.v1.IGetSchemaRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSchema response %j', response);
+          this._log.debug('getSchema response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -796,7 +796,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDomain request %j', request);
+    this._log.debug('getDomain request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apptopology.v1.IDomain,
@@ -807,7 +807,7 @@ export class AppTopologyClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDomain response %j', response);
+          this._log.debug('getDomain response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -819,7 +819,7 @@ export class AppTopologyClient {
           protos.google.cloud.apptopology.v1.IGetDomainRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDomain response %j', response);
+          this._log.debug('getDomain response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -971,11 +971,11 @@ export class AppTopologyClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('exploreSchema values %j', values);
+          this._log.debug('exploreSchema values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('exploreSchema request %j', request);
+    this._log.debug('exploreSchema request %j', request);
     return this.innerApiCalls
       .exploreSchema(request, options, wrappedCallback)
       ?.then(
@@ -984,7 +984,7 @@ export class AppTopologyClient {
           protos.google.cloud.apptopology.v1.IExploreSchemaRequest | null,
           protos.google.cloud.apptopology.v1.IExploreSchemaResponse,
         ]) => {
-          this._log.info('exploreSchema values %j', response);
+          this._log.debug('exploreSchema values %j', response);
           return [response, input, output];
         },
       );
@@ -1050,7 +1050,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('exploreSchema stream %j', request);
+    this._log.debug('exploreSchema stream %j', request);
     return this.descriptors.page.exploreSchema.createStream(
       this.innerApiCalls.exploreSchema as GaxCall,
       request,
@@ -1121,7 +1121,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('exploreSchema iterate %j', request);
+    this._log.debug('exploreSchema iterate %j', request);
     return this.descriptors.page.exploreSchema.asyncIterate(
       this.innerApiCalls['exploreSchema'] as GaxCall,
       request as {},
@@ -1244,11 +1244,11 @@ export class AppTopologyClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDomains values %j', values);
+          this._log.debug('listDomains values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDomains request %j', request);
+    this._log.debug('listDomains request %j', request);
     return this.innerApiCalls
       .listDomains(request, options, wrappedCallback)
       ?.then(
@@ -1257,7 +1257,7 @@ export class AppTopologyClient {
           protos.google.cloud.apptopology.v1.IListDomainsRequest | null,
           protos.google.cloud.apptopology.v1.IListDomainsResponse,
         ]) => {
-          this._log.info('listDomains values %j', response);
+          this._log.debug('listDomains values %j', response);
           return [response, input, output];
         },
       );
@@ -1309,7 +1309,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDomains stream %j', request);
+    this._log.debug('listDomains stream %j', request);
     return this.descriptors.page.listDomains.createStream(
       this.innerApiCalls.listDomains as GaxCall,
       request,
@@ -1366,7 +1366,7 @@ export class AppTopologyClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDomains iterate %j', request);
+    this._log.debug('listDomains iterate %j', request);
     return this.descriptors.page.listDomains.asyncIterate(
       this.innerApiCalls['listDomains'] as GaxCall,
       request as {},

@@ -511,7 +511,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('ingestAudienceMembers request %j', request);
+    this._log.debug('ingestAudienceMembers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IIngestAudienceMembersResponse,
@@ -522,7 +522,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('ingestAudienceMembers response %j', response);
+          this._log.debug('ingestAudienceMembers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -537,7 +537,7 @@ export class IngestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('ingestAudienceMembers response %j', response);
+          this._log.debug('ingestAudienceMembers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -667,7 +667,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeAudienceMembers request %j', request);
+    this._log.debug('removeAudienceMembers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IRemoveAudienceMembersResponse,
@@ -678,7 +678,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeAudienceMembers response %j', response);
+          this._log.debug('removeAudienceMembers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -693,7 +693,7 @@ export class IngestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeAudienceMembers response %j', response);
+          this._log.debug('removeAudienceMembers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -813,7 +813,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeAllAudienceMembers request %j', request);
+    this._log.debug('removeAllAudienceMembers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
@@ -824,7 +824,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeAllAudienceMembers response %j', response);
+          this._log.debug('removeAllAudienceMembers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -839,7 +839,7 @@ export class IngestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeAllAudienceMembers response %j', response);
+          this._log.debug('removeAllAudienceMembers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -967,7 +967,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('ingestEvents request %j', request);
+    this._log.debug('ingestEvents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IIngestEventsResponse,
@@ -978,7 +978,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('ingestEvents response %j', response);
+          this._log.debug('ingestEvents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -990,7 +990,7 @@ export class IngestionServiceClient {
           protos.google.ads.datamanager.v1.IIngestEventsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('ingestEvents response %j', response);
+          this._log.debug('ingestEvents response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1108,7 +1108,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('ingestUsers request %j', request);
+    this._log.debug('ingestUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IIngestUsersResponse,
@@ -1119,7 +1119,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('ingestUsers response %j', response);
+          this._log.debug('ingestUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1131,7 +1131,7 @@ export class IngestionServiceClient {
           protos.google.ads.datamanager.v1.IIngestUsersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('ingestUsers response %j', response);
+          this._log.debug('ingestUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1245,7 +1245,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeUsers request %j', request);
+    this._log.debug('removeUsers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IRemoveUsersResponse,
@@ -1256,7 +1256,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeUsers response %j', response);
+          this._log.debug('removeUsers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1268,7 +1268,7 @@ export class IngestionServiceClient {
           protos.google.ads.datamanager.v1.IRemoveUsersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('removeUsers response %j', response);
+          this._log.debug('removeUsers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1394,7 +1394,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('ingestAdEvents request %j', request);
+    this._log.debug('ingestAdEvents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IIngestAdEventsResponse,
@@ -1405,7 +1405,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('ingestAdEvents response %j', response);
+          this._log.debug('ingestAdEvents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1417,7 +1417,7 @@ export class IngestionServiceClient {
           protos.google.ads.datamanager.v1.IIngestAdEventsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('ingestAdEvents response %j', response);
+          this._log.debug('ingestAdEvents response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1530,7 +1530,7 @@ export class IngestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveRequestStatus request %j', request);
+    this._log.debug('retrieveRequestStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IRetrieveRequestStatusResponse,
@@ -1541,7 +1541,7 @@ export class IngestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveRequestStatus response %j', response);
+          this._log.debug('retrieveRequestStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1556,7 +1556,7 @@ export class IngestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('retrieveRequestStatus response %j', response);
+          this._log.debug('retrieveRequestStatus response %j', response);
           return [response, options, rawResponse];
         },
       )

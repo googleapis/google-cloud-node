@@ -684,7 +684,7 @@ export class WidgetConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWidgetConfig request %j', request);
+    this._log.debug('getWidgetConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IWidgetConfig,
@@ -695,7 +695,7 @@ export class WidgetConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWidgetConfig response %j', response);
+          this._log.debug('getWidgetConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -710,7 +710,7 @@ export class WidgetConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWidgetConfig response %j', response);
+          this._log.debug('getWidgetConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -843,7 +843,7 @@ export class WidgetConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWidgetConfig request %j', request);
+    this._log.debug('updateWidgetConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IWidgetConfig,
@@ -854,7 +854,7 @@ export class WidgetConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWidgetConfig response %j', response);
+          this._log.debug('updateWidgetConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -869,7 +869,7 @@ export class WidgetConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateWidgetConfig response %j', response);
+          this._log.debug('updateWidgetConfig response %j', response);
           return [response, options, rawResponse];
         },
       )

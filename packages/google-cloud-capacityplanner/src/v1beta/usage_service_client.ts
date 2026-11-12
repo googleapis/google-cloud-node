@@ -600,7 +600,7 @@ export class UsageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryUsageHistories request %j', request);
+    this._log.debug('queryUsageHistories request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
@@ -611,7 +611,7 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryUsageHistories response %j', response);
+          this._log.debug('queryUsageHistories response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -626,7 +626,7 @@ export class UsageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryUsageHistories response %j', response);
+          this._log.debug('queryUsageHistories response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -785,7 +785,7 @@ export class UsageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryForecasts request %j', request);
+    this._log.debug('queryForecasts request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
@@ -796,7 +796,7 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryForecasts response %j', response);
+          this._log.debug('queryForecasts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -811,7 +811,7 @@ export class UsageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryForecasts response %j', response);
+          this._log.debug('queryForecasts response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -973,7 +973,7 @@ export class UsageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryReservations request %j', request);
+    this._log.debug('queryReservations request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
@@ -984,7 +984,7 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryReservations response %j', response);
+          this._log.debug('queryReservations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -999,7 +999,7 @@ export class UsageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryReservations response %j', response);
+          this._log.debug('queryReservations response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1174,11 +1174,11 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportUsageHistories response %j', rawResponse);
+          this._log.debug('exportUsageHistories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportUsageHistories request %j', request);
+    this._log.debug('exportUsageHistories request %j', request);
     return this.innerApiCalls
       .exportUsageHistories(request, options, wrappedCallback)
       ?.then(
@@ -1190,7 +1190,7 @@ export class UsageServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportUsageHistories response %j', rawResponse);
+          this._log.debug('exportUsageHistories response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1382,11 +1382,11 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportForecasts response %j', rawResponse);
+          this._log.debug('exportForecasts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportForecasts request %j', request);
+    this._log.debug('exportForecasts request %j', request);
     return this.innerApiCalls
       .exportForecasts(request, options, wrappedCallback)
       ?.then(
@@ -1398,7 +1398,7 @@ export class UsageServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportForecasts response %j', rawResponse);
+          this._log.debug('exportForecasts response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1584,11 +1584,11 @@ export class UsageServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportReservationsUsage response %j', rawResponse);
+          this._log.debug('exportReservationsUsage response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportReservationsUsage request %j', request);
+    this._log.debug('exportReservationsUsage request %j', request);
     return this.innerApiCalls
       .exportReservationsUsage(request, options, wrappedCallback)
       ?.then(
@@ -1600,7 +1600,7 @@ export class UsageServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportReservationsUsage response %j', rawResponse);
+          this._log.debug('exportReservationsUsage response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

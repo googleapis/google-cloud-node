@@ -545,7 +545,7 @@ export class BigQueryReadClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createReadSession request %j', request);
+    this._log.debug('createReadSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.storage.v1.IReadSession,
@@ -556,7 +556,7 @@ export class BigQueryReadClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createReadSession response %j', response);
+          this._log.debug('createReadSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class BigQueryReadClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createReadSession response %j', response);
+          this._log.debug('createReadSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -707,7 +707,7 @@ export class BigQueryReadClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('splitReadStream request %j', request);
+    this._log.debug('splitReadStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
@@ -718,7 +718,7 @@ export class BigQueryReadClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('splitReadStream response %j', response);
+          this._log.debug('splitReadStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -733,7 +733,7 @@ export class BigQueryReadClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('splitReadStream response %j', response);
+          this._log.debug('splitReadStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -800,7 +800,7 @@ export class BigQueryReadClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readRows stream %j', options);
+    this._log.debug('readRows stream %j', options);
     return this.innerApiCalls.readRows(request, options);
   }
 
