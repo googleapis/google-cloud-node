@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.14.0...storage-control-v0.14.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **storage-control:** Disable stripInternal in tsconfig ([#9866](https://github.com/googleapis/google-cloud-node/issues/9866)) ([4663119](https://github.com/googleapis/google-cloud-node/commit/4663119236d00dcc044afc0c1a046faa1d8dd390))
+
 ## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.13.1...storage-control-v0.14.0) (2026-11-12)
 
 
