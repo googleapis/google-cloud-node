@@ -316,13 +316,25 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
         it('has initialize method and supports deferred initialization', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
             assert.strictEqual(client.{{ service.name.toCamelCase() }}Stub, undefined);
+            {%- if service.options and service.options.deprecated %}
+            const stub = sinon.stub(client, 'warn');
+            {%- endif %}
             await client.{{ id.get("initialize") }}();
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.calledOnce);
+            {%- endif %}
             assert(client.{{ service.name.toCamelCase() }}Stub);
         });
 
         it('has close method for the initialized client', done => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
+            {%- if service.options and service.options.deprecated %}
+            const stub = sinon.stub(client, 'warn');
+            {%- endif %}
             client.{{ id.get("initialize") }}().catch(err => {throw err});
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.calledOnce);
+            {%- endif %}
             assert(client.{{ service.name.toCamelCase() }}Stub);
             client.{{ id.get("close") }}().then(() => {
                 done();
@@ -368,7 +380,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method.name.toCamelCase() }}', () => {
         it('invokes {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -376,7 +388,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             {{ util.initResponse(method) }}
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubSimpleCall(expectedResponse);
             const [response] = await client.{{ method.name.toCamelCase() }}(request);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {%- if method.isDiregapicLRO %}
@@ -392,7 +406,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
                 {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -411,7 +425,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     });
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -423,7 +439,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
                 {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -431,7 +447,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.{{ method.name.toCamelCase() }}(request), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {{- util.verifyHeaderRequestParams(method) }}
@@ -442,7 +460,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
                 {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -450,7 +468,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.{{ method.name.toCamelCase() }}(request), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
         });
@@ -461,7 +481,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method.name.toCamelCase() }}', () => {
         it('invokes {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -470,7 +490,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubLongRunningCall(expectedResponse);
             const [operation] = await client.{{ method.name.toCamelCase() }}(request);
             const [response] = await operation.promise();
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -480,7 +502,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} without error using callback', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -502,7 +524,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             });
             const operation = await promise as LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>;
             const [response] = await operation.promise();
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -512,7 +536,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with call error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -520,7 +544,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.{{ method.name.toCamelCase() }}(request), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {{- util.verifyHeaderRequestParams(method) }}
@@ -529,7 +555,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with LRO error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -538,7 +564,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.{{ method.name.toCamelCase() }}(request);
             await assert.rejects(operation.promise(), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {{- util.verifyHeaderRequestParams(method) }}
@@ -547,7 +575,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ id.get("check" + method.name.toPascalCase() + "Progress") }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -560,7 +588,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
             const decodedOperation = await client.{{ id.get("check" + method.name.toPascalCase() + "Progress") }}(expectedResponse.name);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -570,7 +600,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ id.get("check" + method.name.toPascalCase() + "Progress") }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -578,7 +608,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.{{ id.get("check" + method.name.toPascalCase() + "Progress") }}(''), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.operationsClient.getOperation as SinonStub)
@@ -591,7 +623,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method.name.toCamelCase() }}', () => {
         it('invokes {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -608,7 +640,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -617,7 +651,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} without error and gaxServerStreamingRetries enabled', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest, true) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -634,7 +668,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -643,7 +679,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -660,7 +696,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {{- util.verifyHeaderRequestParams(method) }}
@@ -668,7 +706,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with closed client', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -685,7 +723,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
         });
@@ -703,7 +743,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method.name.toCamelCase() }}', () => {
         it('invokes {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -724,7 +764,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 stream.end();
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -736,7 +778,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -757,7 +799,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 stream.end();
             });
             await assert.rejects(promise, expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.innerApiCalls.{{ method.name.toCamelCase(true) }} as SinonStub)
@@ -772,7 +816,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method.name.toCamelCase() }}', () => {
         it('invokes {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -795,7 +839,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 stream.end();
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -806,7 +852,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('invokes {{ method.name.toCamelCase() }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -829,7 +875,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 stream.end();
             });
             await assert.rejects(promise, expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.innerApiCalls.{{ method.name.toCamelCase(true) }} as SinonStub)
@@ -846,7 +894,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -854,7 +902,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             {{ util.initPagingResponse(method) }}
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubSimpleCall(expectedResponse);
             const [response] = await client.{{ method.name.toCamelCase() }}(request);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -867,7 +917,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -886,7 +936,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     });
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -899,7 +951,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -907,7 +959,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.{{ method.name.toCamelCase(true) }} = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.{{ method.name.toCamelCase() }}(request), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             {{- util.verifyHeaderRequestParams(method) }}
@@ -919,7 +973,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -940,7 +994,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             const responses = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(responses, expectedResponse);
@@ -961,7 +1017,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -982,7 +1038,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.descriptors.page.{{ method.name.toCamelCase() }}.createStream as SinonStub)
@@ -1000,7 +1058,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
 
         it('uses async iteration with {{ method.name.toCamelCase() }} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1020,7 +1078,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             for await (const resource of iterable) {
                 responses.push(resource!);
             }
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(responses, expectedResponse);
@@ -1046,7 +1106,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1064,7 +1124,9 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     responses.push(resource!);
                 }
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.called);
+            {%- elif method.options and method.options.deprecated %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(
@@ -1095,7 +1157,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
             {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1120,7 +1182,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             );
             client.iamClient.{{ method }} = stubSimpleCall(expectedResponse);
             const response = await client.{{ method }}(request, expectedOptions);
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, [expectedResponse]);
@@ -1129,7 +1191,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
         });
         it('invokes {{ method }} without error using callback', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1170,7 +1232,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     }).catch(err => {throw err});
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -1179,7 +1241,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
         });
         it('invokes {{ method }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1198,7 +1260,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('expected');
             client.iamClient.{{ method }} = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.{{ method }}(request, expectedOptions), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.iamClient.{{ method }} as SinonStub)
@@ -1216,7 +1278,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
             {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1237,7 +1299,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             );
             client.locationsClient.{{ method }} = stubSimpleCall(expectedResponse);
             const response = await client.{{ method }}(request, expectedOptions);
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, [expectedResponse]);
@@ -1246,7 +1308,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
         });
         it('invokes {{ method }} without error using callback', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1282,7 +1344,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     });
             });
             const response = await promise;
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, expectedResponse);
@@ -1291,7 +1353,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
         });
         it('invokes {{ method }} with error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1310,7 +1372,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const expectedError = new Error('expected');
             client.locationsClient.{{ method }} = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.{{ method }}(request, expectedOptions), expectedError);
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert((client.locationsClient.{{ method }} as SinonStub)
@@ -1323,7 +1385,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
     describe('{{ method }}Async', () => {
         it('uses async iteration with {{method}} without error', async () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client({{- util.initClientOptions(api.rest) -}});
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.initialize();
@@ -1349,7 +1411,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             for await (const resource of iterable) {
                 responses.push(resource!);
             }
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(responses, expectedResponse);
@@ -1368,7 +1430,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.initialize();
@@ -1386,7 +1448,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     responses.push(resource!);
                 }
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(
@@ -1411,7 +1473,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             const client = new {{ service.name.toLowerCase() }}Module.{{ api.naming.version }}.{{ service.name }}Client(
             {{- util.initClientOptions(api.rest) -}}
             );
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.{{ id.get("initialize") }}();
@@ -1427,7 +1489,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
             );
             client.operationsClient.{{ method }} = stubSimpleCall(expectedResponse);
             const response = await client.{{ method }}(request);
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(response, [expectedResponse]);
@@ -1539,7 +1601,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             const stub = sinon.stub(client, 'warn');
             {%- endif %}
             await client.initialize();
@@ -1555,7 +1617,7 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                     responses.push(resource!);
                 }
             });
-            {%- if method.options and method.options.deprecated %}
+            {%- if (method.options and method.options.deprecated) or (service.options and service.options.deprecated) %}
             assert(stub.calledOnce);
             {%- endif %}
             assert.deepStrictEqual(
@@ -1584,7 +1646,13 @@ describe('{{ api.naming.version }}.{{ service.name }}Client', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
+            {%- if service.options and service.options.deprecated %}
+            const stub = sinon.stub(client, 'warn');
+            {%- endif %}
             await client.{{ id.get("initialize") }}();
+            {%- if service.options and service.options.deprecated %}
+            assert(stub.calledOnce);
+            {%- endif %}
             client.pathTemplates.{{ template.name.toCamelCase() }}PathTemplate.render =
                 sinon.stub().returns(fakePath);
             client.pathTemplates.{{ template.name.toCamelCase() }}PathTemplate.match =
