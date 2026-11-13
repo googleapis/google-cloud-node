@@ -3089,14 +3089,15 @@ describe('resumable-upload', () => {
       });
 
       describe('exponential back off', () => {
+        const sandbox = sinon.createSandbox();
         let clock: sinon.SinonFakeTimers;
         let setTimeoutSpy: sinon.SinonSpy;
         beforeEach(() => {
-          clock = sinon.useFakeTimers({toFake: ['setTimeout']});
-          setTimeoutSpy = sinon.spy(global, 'setTimeout');
+          clock = sandbox.useFakeTimers({toFake: ['setTimeout']});
+          setTimeoutSpy = sandbox.spy(global, 'setTimeout');
         });
         afterEach(() => {
-          clock.restore();
+          sandbox.restore();
         });
 
         it('should continue uploading after retry count^2 * random', done => {
