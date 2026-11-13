@@ -547,6 +547,11 @@ export interface CreateReadStreamOptions {
   start?: number;
   end?: number;
   decompress?: boolean;
+  /**
+   * Stream `highWaterMark` in bytes. Configures the maximum number of bytes
+   * buffered in the underlying readable stream.
+   */
+  highWaterMark?: number;
   [GCCL_GCS_CMD_KEY]?: string;
 }
 
@@ -1612,6 +1617,9 @@ class File extends ServiceObject<File, FileMetadata> {
    *     received data. By default this option is set to `true`.
    *     Applicable in cases where the data was uploaded with
    *     `gzip: true` option. See {@link File#createWriteStream}.
+   * @property {number} [highWaterMark] Stream `highWaterMark` in bytes.
+   *     Configures the maximum number of bytes buffered in the underlying
+   *     readable stream.
    */
   /**
    * Create a readable stream to read the contents of the remote file. It can be
@@ -1682,12 +1690,13 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   createReadStream(options: CreateReadStreamOptions = {}): Readable {
     options = Object.assign({decompress: true}, options);
+    const {highWaterMark} = options;
     const rangeRequest =
       typeof options.start === 'number' || typeof options.end === 'number';
     const tailRequest = options.end! < 0;
 
     let validateStream: HashStreamValidator | undefined = undefined;
-    const throughStream = new PassThroughShim();
+    const throughStream = new PassThroughShim({highWaterMark});
 
     let crc32c = true;
     let md5 = false;
@@ -2063,6 +2072,9 @@ class File extends ServiceObject<File, FileMetadata> {
    *     If set to `auto`, the contentType is used to determine if the file
    * should be gzipped. This will set `options.metadata.contentEncoding` to
    * `gzip` if necessary.
+   * @property {number} [highWaterMark] Stream `highWaterMark` in bytes.
+   *     Configures the buffer threshold before backpressure is applied on both
+   *     the returned writable stream and the underlying upload stream.
    * @property {object} [metadata] See the examples below or
    *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON| Objects: insert request body}
    *     for more details.
@@ -2218,6 +2230,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * fs.createWriteStream({uri, resumeCRC32C});
    */
   createWriteStream(options: CreateWriteStreamOptions = {}): Writable {
+    const {highWaterMark} = options;
     options.metadata ??= {};
 
     if (options.contentType) {
@@ -2261,6 +2274,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     // A stream for consumer to write to
     const writeStream = new Writable({
+      highWaterMark,
       final(cb) {
         // Set the pipeline callback to this callback so the pipeline's results
         // can be populated to the consumer
@@ -4873,7 +4887,9 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts,
     );
 
-    const writeStream = new ProgressStream();
+    const writeStream = new ProgressStream({
+      highWaterMark: options.highWaterMark,
+    });
     writeStream.on('progress', evt => dup.emit('progress', evt));
     dup.setWritable(writeStream);
 
