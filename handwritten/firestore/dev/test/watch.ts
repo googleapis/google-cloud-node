@@ -39,7 +39,6 @@ import {
   Timestamp,
 } from '../src';
 import {MAX_RETRY_ATTEMPTS, setTimeoutHandler} from '../src/backoff';
-import * as backoff from '../src/backoff';
 import {DocumentSnapshotBuilder} from '../src/document';
 import {DocumentChangeType} from '../src/document-change';
 import {Serializer} from '../src/serializer';
@@ -1685,7 +1684,7 @@ describe('Query watch', () => {
       });
       // Use real timer handles so cancellation is observable, while keeping
       // stream I/O and setImmediate on the real event loop.
-      const delay = sinon.stub(backoff, 'delayExecution').callsFake(setTimeout);
+      setTimeoutHandler(setTimeout);
 
       try {
         watchHelper.sendAddTarget();
@@ -1726,8 +1725,8 @@ describe('Query watch', () => {
         expect(clock.countTimers()).to.equal(0);
       } finally {
         unsubscribe();
-        delay.restore();
         clock.restore();
+        setTimeoutHandler(setTimeout);
       }
     });
   }
