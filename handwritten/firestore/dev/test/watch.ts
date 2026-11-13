@@ -19,6 +19,7 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {expect} from 'chai';
 import * as extend from 'extend';
 import {GoogleError, Status} from 'google-gax';
+import * as sinon from 'sinon';
 import {Duplex, Transform} from 'stream';
 import * as through2 from 'through2';
 
@@ -1673,6 +1674,62 @@ describe('Query watch', () => {
         });
     });
   });
+
+  for (const event of ['error', 'end'] as const) {
+    it(`cancels the idle timer during reconnect backoff after ${event}`, async () => {
+      const unsubscribe = watchHelper.startWatch();
+      await streamHelper.awaitOpen();
+      const clock = sinon.useFakeTimers({
+        toFake: ['setTimeout', 'clearTimeout', 'Date'],
+      });
+      // Use real timer handles so cancellation is observable, while keeping
+      // stream I/O and setImmediate on the real event loop.
+      setTimeoutHandler(setTimeout);
+
+      try {
+        watchHelper.sendAddTarget();
+        watchHelper.sendCurrent();
+        watchHelper.sendSnapshot(1);
+        await watchHelper.await('snapshot');
+
+        // The old idle deadline is about to expire when the backend ends the
+        // stream. Reconnect must cancel that deadline before awaiting backoff.
+        await clock.tickAsync(WATCH_IDLE_TIMEOUT_MS - 1);
+        if (event === 'error') {
+          streamHelper.destroyStream();
+          await streamHelper.await('error');
+          await streamHelper.await('close');
+        } else {
+          streamHelper.close();
+          await streamHelper.await('end');
+        }
+        await clock.tickAsync(0);
+        expect(clock.countTimers()).to.equal(1);
+
+        await clock.tickAsync(1);
+        expect(streamHelper.streamCount).to.equal(1);
+
+        await clock.tickAsync(2000);
+        await streamHelper.awaitOpen();
+        expect(streamHelper.streamCount).to.equal(2);
+        expect(clock.countTimers()).to.equal(1);
+
+        watchHelper.sendAddTarget();
+        watchHelper.sendCurrent();
+        watchHelper.sendDoc(doc1, {foo: 'a'});
+        watchHelper.sendSnapshot(2);
+        const snapshot = await watchHelper.await('snapshot');
+        expect(snapshot.readTime).to.deep.equal(new Timestamp(0, 2));
+
+        unsubscribe();
+        expect(clock.countTimers()).to.equal(0);
+      } finally {
+        unsubscribe();
+        clock.restore();
+        setTimeoutHandler(setTimeout);
+      }
+    });
+  }
 
   it('reset after idle timeout', async () => {
     let idleTimeout = () => {};

@@ -72,10 +72,16 @@ export let delayExecution: (f: () => void, ms: number) => NodeJS.Timeout =
  * @param {function} handler A handler than matches the API of `setTimeout()`.
  */
 export function setTimeoutHandler(
-  handler: (f: () => void, ms: number) => void,
+  handler: (
+    f: () => void,
+    ms: number,
+  ) => NodeJS.Timeout | NodeJS.Immediate | void,
 ): void {
   delayExecution = (f: () => void, ms: number) => {
-    handler(f, ms);
+    const handle = handler(f, ms);
+    if (handle && 'refresh' in handle) {
+      return handle;
+    }
     const timeout: NodeJS.Timeout = {
       hasRef: () => {
         throw new Error('For tests only. Not Implemented');
