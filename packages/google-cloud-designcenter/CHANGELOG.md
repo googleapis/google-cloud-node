@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/designcenter-v0.1.0...designcenter-v0.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **designcenter:** Update package.json scripts ([#9855](https://github.com/googleapis/google-cloud-node/issues/9855)) ([c95bee2](https://github.com/googleapis/google-cloud-node/commit/c95bee29fb97c0c58f94d6226c92a148cff0d77f))
+
 ## 0.1.0 (2026-11-02)
 
 

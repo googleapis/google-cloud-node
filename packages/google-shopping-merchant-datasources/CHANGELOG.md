@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.13.0...datasources-v0.14.0) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **merchantapi:** remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))
+
+### Features
+
+* **merchantapi:** Remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850)) ([433ca86](https://github.com/googleapis/google-cloud-node/commit/433ca868b43c5cb40be11c9104268f860272c296))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.12.1...datasources-v0.13.0) (2026-10-08)
 
 
