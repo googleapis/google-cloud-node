@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v3.3.0...kms-inventory-v3.4.0) (2026-11-13)
+
+
+### Features
+
+* Update API sources and regenerate ([#9849](https://github.com/googleapis/google-cloud-node/issues/9849)) ([7144c27](https://github.com/googleapis/google-cloud-node/commit/7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v3.2.1...kms-inventory-v3.3.0) (2026-10-08)
 
 

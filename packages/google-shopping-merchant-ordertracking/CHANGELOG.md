@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/ordertracking-v0.6.0...ordertracking-v0.7.0) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **merchantapi:** remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))
+
+### Features
+
+* **merchantapi:** Remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850)) ([433ca86](https://github.com/googleapis/google-cloud-node/commit/433ca868b43c5cb40be11c9104268f860272c296))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/ordertracking-v0.5.1...ordertracking-v0.6.0) (2026-10-08)
 
 
