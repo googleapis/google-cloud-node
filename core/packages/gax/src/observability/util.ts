@@ -51,20 +51,28 @@ export function checkTracingEnabled(settings?: CallSettings): boolean {
 
 /**
  * Matches a `GOOGLE_SDK_NODE_LOGGING` filter string against the logger namespace
- * using the exact `DebugLogBackendBase` / `NodeBackend.setFilters()` algorithm
- * in `google-logging-utils` (literal `'all'` or `'true'` maps to `'*'`, followed by
- * comma-separated case-insensitive patterns with `*` wildcards and no whitespace trimming).
+ * using the exact `DebugLogBackendBase.compileFilters()` normalization in
+ * `google-logging-utils` (comma-separated tokens are trimmed, empty tokens are
+ * ignored, `'all'` or `'true'` tokens map to `'*'`, and patterns match
+ * case-insensitively with `*` wildcards).
  */
 function matchesLoggingEnvFilter(envOptIn: string, namespace: string): boolean {
-  if (!envOptIn) {
+  if (!envOptIn || !namespace) {
     return false;
   }
-  const totalFilters =
-    envOptIn === 'all' || envOptIn === 'true' ? '*' : envOptIn;
-  const regexp = totalFilters
-    .replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-    .replace(/\*/g, '.*')
-    .replace(/,/g, '$|^');
+  const normalized = envOptIn
+    .split(',')
+    .map(filter => filter.trim())
+    .filter(filter => filter.length > 0)
+    .map(filter => (filter === 'all' || filter === 'true' ? '*' : filter));
+  if (normalized.length === 0) {
+    return false;
+  }
+  const regexp = normalized
+    .map(filter =>
+      filter.replace(/[|\\{}()[\]^$+?.]/g, '\\$&').replace(/\*/g, '.*'),
+    )
+    .join('$|^');
   return new RegExp(`^${regexp}$`, 'i').test(namespace);
 }
 
@@ -75,9 +83,10 @@ function matchesLoggingEnvFilter(envOptIn: string, namespace: string): boolean {
  * `enableTelemetryLogging: true` in their client/call options or, when
  * `enableTelemetryLogging` is unset, the `GOOGLE_SDK_NODE_LOGGING` environment
  * variable matches the client service namespace using `google-logging-utils`
- * filter semantics (`'*'`, exact `'all'` / `'true'`, or comma-separated
- * wildcard patterns). Passing `enableTelemetryLogging: false` suppresses
- * logging for that client/call even when `GOOGLE_SDK_NODE_LOGGING` matches.
+ * filter semantics (trimmed, comma-separated, case-insensitive wildcard
+ * patterns, ignoring empty tokens and mapping `'all'` or `'true'` tokens to
+ * `'*'`). Passing `enableTelemetryLogging: false` suppresses logging for that
+ * client/call even when `GOOGLE_SDK_NODE_LOGGING` matches.
  *
  * @param settings
  * @returns true if telemetry logging is enabled, false otherwise

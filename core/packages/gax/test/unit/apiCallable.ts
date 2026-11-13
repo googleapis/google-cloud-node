@@ -1846,7 +1846,7 @@ describe('createApiCall', () => {
   describe('in regards to Telemetry Logging', () => {
     interface CapturedLog {
       namespace: string;
-      fields: loggingUtils.LogFields;
+      fields: loggerHelper.GaxLogFields;
       args: unknown[];
     }
 
@@ -1859,7 +1859,11 @@ describe('createApiCall', () => {
         fields: loggingUtils.LogFields,
         ...args: unknown[]
       ): void {
-        this.logs.push({namespace, fields, args});
+        this.logs.push({
+          namespace,
+          fields: fields as loggerHelper.GaxLogFields,
+          args,
+        });
       }
 
       setFilters(filters: string[]): void {
@@ -2036,6 +2040,7 @@ describe('createApiCall', () => {
       assert.strictEqual(sink.logs.length, 2);
       for (const entry of sink.logs) {
         assert.strictEqual(entry.fields.severity, 'DEBUG');
+        assert.strictEqual(entry.fields.other, undefined);
         assert.deepStrictEqual(entry.args, [
           'RPC attempt failed: %s',
           'transient failure',
@@ -2085,22 +2090,26 @@ describe('createApiCall', () => {
       assert.ok(attemptLog);
       assert.ok(callLog);
 
+      assert.strictEqual(attemptLog.fields.other, undefined);
+      assert.strictEqual(callLog.fields.other, undefined);
       assert.strictEqual(
-        attemptLog.fields.telemetryTraceId,
+        attemptLog.fields.trace_id,
         attemptSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        attemptLog.fields.telemetrySpanId,
+        attemptLog.fields.span_id,
         attemptSpan.spanContext().spanId,
       );
+      assert.strictEqual(attemptLog.fields.trace_sampled, true);
       assert.strictEqual(
-        callLog.fields.telemetryTraceId,
+        callLog.fields.trace_id,
         clientRequestSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        callLog.fields.telemetrySpanId,
+        callLog.fields.span_id,
         clientRequestSpan.spanContext().spanId,
       );
+      assert.strictEqual(callLog.fields.trace_sampled, true);
     });
 
     it('emits logs with rpc.method and without spans when logging is enabled and tracing is disabled', async () => {
@@ -2144,17 +2153,21 @@ describe('createApiCall', () => {
       assert.strictEqual(sink.logs.length, 2);
       const [attemptLog, callLog] = sink.logs;
       assert.strictEqual(attemptLog.fields.severity, 'DEBUG');
-      assert.strictEqual(attemptLog.fields.telemetryTraceId, undefined);
-      assert.strictEqual(attemptLog.fields.telemetrySpanId, undefined);
+      assert.strictEqual(attemptLog.fields.trace_id, undefined);
+      assert.strictEqual(attemptLog.fields.span_id, undefined);
+      assert.strictEqual(attemptLog.fields.trace_sampled, undefined);
+      assert.strictEqual(attemptLog.fields.other, undefined);
       assert.strictEqual(
-        (attemptLog.fields.other as loggerHelper.LogPayload)['rpc.method'],
+        attemptLog.fields['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
       assert.strictEqual(callLog.fields.severity, 'WARNING');
-      assert.strictEqual(callLog.fields.telemetryTraceId, undefined);
-      assert.strictEqual(callLog.fields.telemetrySpanId, undefined);
+      assert.strictEqual(callLog.fields.trace_id, undefined);
+      assert.strictEqual(callLog.fields.span_id, undefined);
+      assert.strictEqual(callLog.fields.trace_sampled, undefined);
+      assert.strictEqual(callLog.fields.other, undefined);
       assert.strictEqual(
-        (callLog.fields.other as loggerHelper.LogPayload)['rpc.method'],
+        callLog.fields['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
     });
@@ -2297,14 +2310,16 @@ describe('createApiCall', () => {
         ['DEBUG', 'DEBUG', 'WARNING'],
       );
       for (const logEntry of sink.logs) {
+        assert.strictEqual(logEntry.fields.other, undefined);
         assert.strictEqual(
-          logEntry.fields.telemetryTraceId,
+          logEntry.fields.trace_id,
           outerSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          logEntry.fields.telemetrySpanId,
+          logEntry.fields.span_id,
           outerSpan.spanContext().spanId,
         );
+        assert.strictEqual(logEntry.fields.trace_sampled, true);
       }
     });
 
@@ -2366,35 +2381,44 @@ describe('createApiCall', () => {
         'streaming test failure',
       ]);
 
-      const attemptOther = attemptLog.fields.other as loggerHelper.LogPayload;
-      const callOther = callLog.fields.other as loggerHelper.LogPayload;
+      assert.strictEqual(attemptLog.fields.other, undefined);
+      assert.strictEqual(callLog.fields.other, undefined);
       assert.strictEqual(
-        attemptOther['rpc.method'],
+        attemptLog.fields['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
       assert.strictEqual(
-        attemptOther['rpc.response.status_code'],
+        attemptLog.fields['rpc.response.status_code'],
         'UNAVAILABLE',
       );
       assert.strictEqual(
-        attemptOther['server.address'],
+        attemptLog.fields['server.address'],
         'example.googleapis.com',
       );
-      assert.strictEqual('exception.type' in attemptOther, false);
-      assert.strictEqual('exception.message' in attemptOther, false);
-      assert.strictEqual('exception.stacktrace' in attemptOther, false);
+      assert.strictEqual('exception.type' in attemptLog.fields, false);
+      assert.strictEqual('exception.message' in attemptLog.fields, false);
+      assert.strictEqual('exception.stacktrace' in attemptLog.fields, false);
       assert.strictEqual(
-        callOther['rpc.method'],
+        callLog.fields['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
-      assert.strictEqual(callOther['rpc.response.status_code'], 'UNAVAILABLE');
-      assert.strictEqual(callOther['server.address'], 'example.googleapis.com');
-      assert.strictEqual(callOther['exception.type'], 'GoogleError');
       assert.strictEqual(
-        callOther['exception.message'],
+        callLog.fields['rpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        callLog.fields['server.address'],
+        'example.googleapis.com',
+      );
+      assert.strictEqual(callLog.fields['exception.type'], 'GoogleError');
+      assert.strictEqual(
+        callLog.fields['exception.message'],
         'streaming test failure',
       );
-      assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+      assert.strictEqual(
+        typeof callLog.fields['exception.stacktrace'],
+        'string',
+      );
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
@@ -2403,13 +2427,23 @@ describe('createApiCall', () => {
       )!;
       const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
       assert.strictEqual(
-        attemptLog.fields.telemetrySpanId,
-        attemptSpan.spanContext().spanId,
+        attemptLog.fields.trace_id,
+        attemptSpan.spanContext().traceId,
       );
       assert.strictEqual(
-        callLog.fields.telemetrySpanId,
+        attemptLog.fields.span_id,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.strictEqual(attemptLog.fields.trace_sampled, true);
+      assert.strictEqual(
+        callLog.fields.trace_id,
+        clientRequestSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        callLog.fields.span_id,
         clientRequestSpan.spanContext().spanId,
       );
+      assert.strictEqual(callLog.fields.trace_sampled, true);
     });
 
     describe('with default NodeBackend (no custom setBackend or .on("log"))', () => {
@@ -2417,7 +2451,7 @@ describe('createApiCall', () => {
         namespace: string;
         severity: string;
         message: string;
-        fields: loggingUtils.LogFields;
+        fields: loggerHelper.GaxLogFields;
       }
 
       // eslint-disable-next-line no-control-regex
@@ -2435,7 +2469,7 @@ describe('createApiCall', () => {
           const rawFields = stripAnsi(String(call.args[5] ?? '')).trim();
           const fields = (
             rawFields ? JSON.parse(rawFields) : {}
-          ) as loggingUtils.LogFields;
+          ) as loggerHelper.GaxLogFields;
           return {namespace, severity, message, fields};
         });
       }
@@ -2534,28 +2568,32 @@ describe('createApiCall', () => {
         for (const [idx, rec] of [attempt1, attempt2].entries()) {
           assert.strictEqual(rec.namespace, 'kms');
           assert.strictEqual(rec.severity, 'DEBUG');
+          assert.strictEqual(rec.fields.other, undefined);
           assert.strictEqual(
-            rec.fields.telemetryTraceId,
+            rec.fields.trace_id,
             attemptSpans[idx].spanContext().traceId,
           );
           assert.strictEqual(
-            rec.fields.telemetrySpanId,
+            rec.fields.span_id,
             attemptSpans[idx].spanContext().spanId,
           );
-          const other = rec.fields.other as loggerHelper.LogPayload;
-          assert.strictEqual(other['gcp.client.service'], 'kms');
-          assert.strictEqual(other['url.domain'], 'cloudkms.googleapis.com');
+          assert.strictEqual(rec.fields.trace_sampled, true);
+          assert.strictEqual(rec.fields['gcp.client.service'], 'kms');
           assert.strictEqual(
-            other['server.address'],
+            rec.fields['url.domain'],
             'cloudkms.googleapis.com',
           );
           assert.strictEqual(
-            other['rpc.method'],
+            rec.fields['server.address'],
+            'cloudkms.googleapis.com',
+          );
+          assert.strictEqual(
+            rec.fields['rpc.method'],
             'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
           );
-          assert.strictEqual('exception.type' in other, false);
-          assert.strictEqual('exception.message' in other, false);
-          assert.strictEqual('exception.stacktrace' in other, false);
+          assert.strictEqual('exception.type' in rec.fields, false);
+          assert.strictEqual('exception.message' in rec.fields, false);
+          assert.strictEqual('exception.stacktrace' in rec.fields, false);
         }
         assert.strictEqual(
           attempt1.message,
@@ -2572,27 +2610,37 @@ describe('createApiCall', () => {
           callLog.message,
           'Client API call failed: permission denied',
         );
+        assert.strictEqual(callLog.fields.other, undefined);
         assert.strictEqual(
-          callLog.fields.telemetryTraceId,
+          callLog.fields.trace_id,
           clientSpan.spanContext().traceId,
         );
         assert.strictEqual(
-          callLog.fields.telemetrySpanId,
+          callLog.fields.span_id,
           clientSpan.spanContext().spanId,
         );
-        const callOther = callLog.fields.other as loggerHelper.LogPayload;
-        assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
+        assert.strictEqual(callLog.fields.trace_sampled, true);
         assert.strictEqual(
-          callOther['server.address'],
+          callLog.fields['url.domain'],
           'cloudkms.googleapis.com',
         );
         assert.strictEqual(
-          callOther['rpc.response.status_code'],
+          callLog.fields['server.address'],
+          'cloudkms.googleapis.com',
+        );
+        assert.strictEqual(
+          callLog.fields['rpc.response.status_code'],
           'PERMISSION_DENIED',
         );
-        assert.strictEqual(callOther['exception.type'], 'GoogleError');
-        assert.strictEqual(callOther['exception.message'], 'permission denied');
-        assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+        assert.strictEqual(callLog.fields['exception.type'], 'GoogleError');
+        assert.strictEqual(
+          callLog.fields['exception.message'],
+          'permission denied',
+        );
+        assert.strictEqual(
+          typeof callLog.fields['exception.stacktrace'],
+          'string',
+        );
       });
 
       it('honors GOOGLE_SDK_NODE_LOGGING filters and enableTelemetryLogging overrides end-to-end through FallbackGrpcClient and NodeBackend', async () => {
@@ -2687,10 +2735,15 @@ describe('createApiCall', () => {
         for (const accepted of [
           'example',
           'storage,EXAMPLE',
+          'storage, example',
+          ' , example , ',
           'exam*',
           '*',
           'all',
           'true',
+          ' true ',
+          ' all ',
+          'foo,true',
         ]) {
           const records = await runFallbackEcho(accepted, undefined);
           assert.strictEqual(
@@ -2701,46 +2754,52 @@ describe('createApiCall', () => {
           const [attemptLog, callLog] = records;
           assert.strictEqual(attemptLog.namespace, 'example');
           assert.strictEqual(attemptLog.severity, 'DEBUG');
-          const attemptOther = attemptLog.fields
-            .other as loggerHelper.LogPayload;
-          assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+          assert.strictEqual(attemptLog.fields.other, undefined);
+          assert.strictEqual(attemptLog.fields['rpc.system.name'], 'http');
           assert.strictEqual(
-            attemptOther['rpc.method'],
+            attemptLog.fields['rpc.method'],
             'google.example.v1beta1.Echo/Echo',
           );
-          assert.strictEqual(attemptOther['http.response.status_code'], 404);
           assert.strictEqual(
-            attemptOther['rpc.response.status_code'],
+            attemptLog.fields['http.response.status_code'],
+            404,
+          );
+          assert.strictEqual(
+            attemptLog.fields['rpc.response.status_code'],
             'NOT_FOUND',
           );
-          assert.strictEqual(attemptOther['response.payload'], json404Body);
           assert.strictEqual(
-            attemptOther['url.domain'],
+            attemptLog.fields['response.payload'],
+            json404Body,
+          );
+          assert.strictEqual(
+            attemptLog.fields['url.domain'],
             'example.googleapis.com',
           );
           assert.strictEqual(
-            attemptOther['server.address'],
+            attemptLog.fields['server.address'],
             'example.googleapis.com',
           );
 
           assert.strictEqual(callLog.namespace, 'example');
           assert.strictEqual(callLog.severity, 'WARNING');
-          const callOther = callLog.fields.other as loggerHelper.LogPayload;
-          assert.strictEqual(callOther['rpc.system.name'], 'http');
-          assert.strictEqual('response.payload' in callOther, false);
-          assert.strictEqual(callOther['exception.type'], 'GoogleError');
+          assert.strictEqual(callLog.fields.other, undefined);
+          assert.strictEqual(callLog.fields['rpc.system.name'], 'http');
+          assert.strictEqual('response.payload' in callLog.fields, false);
+          assert.strictEqual(callLog.fields['exception.type'], 'GoogleError');
         }
 
-        // Non-matching or truthy-looking invalid filters rejected by NodeBackend.setFilters() emit zero logs.
+        // Non-matching, empty/whitespace, or invalid filters rejected by DebugLogBackendBase.compileFilters() emit zero logs.
         for (const rejected of [
           undefined,
           '',
+          '   ',
+          ',',
+          ' , , ',
           '1',
           'TRUE',
           'ALL',
-          ' true ',
-          'foo,true',
-          'storage, example',
+          'storage, bigquery',
           'spanner',
           'false',
         ]) {
@@ -2842,22 +2901,24 @@ describe('createApiCall', () => {
           );
           const attemptJson = JSON.parse(
             lines[0].slice(lines[0].indexOf('{')),
-          ) as {other: loggerHelper.LogPayload};
+          ) as loggerHelper.GaxLogFields;
           const callJson = JSON.parse(
             lines[1].slice(lines[1].indexOf('{')),
-          ) as {other: loggerHelper.LogPayload};
+          ) as loggerHelper.GaxLogFields;
+          assert.strictEqual(attemptJson.other, undefined);
+          assert.strictEqual(callJson.other, undefined);
           assert.strictEqual(
-            attemptJson.other['rpc.method'],
+            attemptJson['rpc.method'],
             'google.example.v1.Echo/Echo',
           );
           assert.strictEqual(
-            attemptJson.other['rpc.response.status_code'],
+            attemptJson['rpc.response.status_code'],
             'UNAVAILABLE',
           );
-          assert.strictEqual('exception.type' in attemptJson.other, false);
-          assert.strictEqual(callJson.other['exception.type'], 'GoogleError');
+          assert.strictEqual('exception.type' in attemptJson, false);
+          assert.strictEqual(callJson['exception.type'], 'GoogleError');
           assert.strictEqual(
-            callJson.other['exception.message'],
+            callJson['exception.message'],
             'cold-process failure',
           );
         }
