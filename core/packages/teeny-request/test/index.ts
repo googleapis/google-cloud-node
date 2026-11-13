@@ -775,6 +775,31 @@ describe('teeny', () => {
           );
         });
       }
+
+      for (const enc of ['gzip', 'deflate', 'br']) {
+        const emptyEncScope = nock(uri)
+          .get(`/empty-${enc}`)
+          .reply(200, Buffer.alloc(0), {
+            'content-type': 'text/plain',
+            'content-encoding': enc,
+          });
+        await new Promise<void>((resolve, reject) => {
+          teenyRequest(
+            {uri: `${uri}/empty-${enc}`, gzip: true},
+            (err, res, body) => {
+              if (err) return reject(err);
+              try {
+                assert.strictEqual(res.statusCode, 200);
+                assert.strictEqual(body, '');
+                emptyEncScope.done();
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            },
+          );
+        });
+      }
     } finally {
       if (!hadBun) {
         delete globalRecord.Bun;

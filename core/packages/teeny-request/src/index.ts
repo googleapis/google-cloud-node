@@ -235,13 +235,44 @@ function bunFetch(
           encoding === 'deflate' ||
           encoding === 'br')
       ) {
-        const decompressor =
-          encoding === 'br'
-            ? zlib.createBrotliDecompress()
-            : zlib.createUnzip();
-        incoming.on('error', err => decompressor.destroy(err));
-        decompressor.on('error', err => responseStream.destroy(err));
-        incoming.pipe(decompressor).pipe(responseStream);
+        let decompressor:
+          | zlib.BrotliDecompress
+          | zlib.Unzip
+          | zlib.Inflate
+          | zlib.InflateRaw
+          | undefined;
+        incoming.on('data', (chunk: Buffer | Uint8Array) => {
+          const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+          if (buf.length === 0) {
+            return;
+          }
+          if (!decompressor) {
+            decompressor =
+              encoding === 'br'
+                ? zlib.createBrotliDecompress()
+                : zlib.createUnzip();
+            decompressor.on('error', err => responseStream.destroy(err));
+            decompressor.pipe(responseStream);
+          }
+          if (!decompressor.write(buf)) {
+            incoming.pause();
+            decompressor.once('drain', () => incoming.resume());
+          }
+        });
+        incoming.on('end', () => {
+          if (decompressor) {
+            decompressor.end();
+          } else {
+            responseStream.end();
+          }
+        });
+        incoming.on('error', err => {
+          if (decompressor) {
+            decompressor.destroy(err);
+          } else {
+            responseStream.destroy(err);
+          }
+        });
       } else {
         incoming.on('error', err => responseStream.destroy(err));
         incoming.pipe(responseStream);
