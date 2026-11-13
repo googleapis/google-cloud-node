@@ -233,6 +233,7 @@ function bunFetch(
         (encoding === 'gzip' ||
           encoding === 'x-gzip' ||
           encoding === 'deflate' ||
+          encoding === 'x-deflate' ||
           encoding === 'br')
       ) {
         let decompressor:
@@ -247,10 +248,16 @@ function bunFetch(
             return;
           }
           if (!decompressor) {
-            decompressor =
-              encoding === 'br'
-                ? zlib.createBrotliDecompress()
-                : zlib.createUnzip();
+            if (encoding === 'br') {
+              decompressor = zlib.createBrotliDecompress();
+            } else if (encoding === 'deflate' || encoding === 'x-deflate') {
+              decompressor =
+                (buf[0] & 0x0f) === 0x08
+                  ? zlib.createInflate()
+                  : zlib.createInflateRaw();
+            } else {
+              decompressor = zlib.createUnzip();
+            }
             decompressor.on('error', err => responseStream.destroy(err));
             decompressor.pipe(responseStream);
           }
