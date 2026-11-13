@@ -478,12 +478,12 @@ export class Gaxios implements FetchCompliance {
       }
     }
 
-    if (typeof options.maxContentLength === 'number') {
-      opts.size = options.maxContentLength;
+    if (typeof opts.maxContentLength === 'number') {
+      opts.size = opts.maxContentLength;
     }
 
-    if (typeof options.maxRedirects === 'number') {
-      opts.follow = options.maxRedirects;
+    if (typeof opts.maxRedirects === 'number') {
+      opts.follow = opts.maxRedirects;
     }
 
     const shouldDirectlyPassData =
