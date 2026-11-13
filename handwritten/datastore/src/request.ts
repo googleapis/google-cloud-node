@@ -1232,7 +1232,11 @@ class DatastoreRequest {
   prepareGaxRequest_(config: RequestConfig, callback: Function): void {
     const datastore = this.datastore;
 
-    const isTransaction = this.id ? true : false;
+    const hasTransactionBytes = (val?: string | Uint8Array | null): boolean =>
+      val instanceof Uint8Array || Buffer.isBuffer(val)
+        ? val.length > 0
+        : Boolean(val);
+    const isTransaction = hasTransactionBytes(this.id);
     const method = config.method;
     const reqOpts = extend(true, {}, config.reqOpts);
 
@@ -1241,8 +1245,15 @@ class DatastoreRequest {
       if (isTransaction) {
         reqOpts.mode = 'TRANSACTIONAL';
         reqOpts.transaction = this.id;
-      } else {
-        reqOpts.mode = 'NON_TRANSACTIONAL';
+      } else if (!reqOpts.mode) {
+        reqOpts.mode =
+          hasTransactionBytes(reqOpts.transaction) ||
+          Boolean(
+            (reqOpts as any).singleUseTransaction ||
+              (reqOpts as any).single_use_transaction,
+          )
+            ? 'TRANSACTIONAL'
+            : 'NON_TRANSACTIONAL';
       }
     }
 
@@ -1283,9 +1294,44 @@ class DatastoreRequest {
       }
       const gaxClient = datastore.clients_.get(clientName);
       reqOpts.projectId = projectId!;
+
+      const isTransactionalRequest = (): boolean => {
+        switch (method) {
+          case 'beginTransaction':
+          case 'rollback':
+            return true;
+          case 'commit': {
+            const mode = reqOpts.mode as unknown;
+            const isTransactionalMode =
+              mode === 'TRANSACTIONAL' ||
+              mode === google.datastore.v1.CommitRequest.Mode.TRANSACTIONAL;
+            return (
+              isTransactionalMode ||
+              hasTransactionBytes(reqOpts.transaction) ||
+              Boolean(
+                (reqOpts as any).singleUseTransaction ||
+                  (reqOpts as any).single_use_transaction,
+              )
+            );
+          }
+          case 'lookup':
+          case 'runQuery':
+          case 'runAggregationQuery':
+            return Boolean(
+              reqOpts.readOptions &&
+                (hasTransactionBytes(reqOpts.readOptions.transaction) ||
+                  reqOpts.readOptions.newTransaction ||
+                  (reqOpts.readOptions as any).new_transaction),
+            );
+          default:
+            return false;
+        }
+      };
+
       const gaxOpts = extend(true, {}, config.gaxOpts, {
         headers: {
           'google-cloud-resource-prefix': `projects/${projectId}`,
+          'x-goog-is-transaction': isTransactionalRequest() ? 'true' : 'false',
         },
       });
       const requestFn = gaxClient![method].bind(gaxClient, reqOpts, gaxOpts);

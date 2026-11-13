@@ -1697,6 +1697,7 @@ describe('Request', () => {
         [CONFIG.method](_: object, gaxO: any) {
           assert.deepStrictEqual(gaxO.headers, {
             'google-cloud-resource-prefix': 'projects/' + PROJECT_ID,
+            'x-goog-is-transaction': 'false',
           });
           done();
         },
@@ -1705,6 +1706,118 @@ describe('Request', () => {
       request.prepareGaxRequest_(CONFIG, (err: Error, requestFn: Function) => {
         assert.ifError(err);
         requestFn();
+      });
+    });
+
+    describe('x-goog-is-transaction header', () => {
+      const methodsForTrue = [
+        {method: 'beginTransaction', reqOpts: {}},
+        {method: 'rollback', reqOpts: {}},
+        {method: 'commit', reqOpts: {mode: 'TRANSACTIONAL'}},
+        {
+          method: 'commit',
+          reqOpts: {mode: google.datastore.v1.CommitRequest.Mode.TRANSACTIONAL},
+        },
+        {method: 'commit', reqOpts: {transaction: 'abc'}},
+        {method: 'commit', reqOpts: {transaction: Buffer.from('abc')}},
+        {method: 'commit', reqOpts: {singleUseTransaction: {}}},
+        {method: 'commit', reqOpts: {single_use_transaction: {}}},
+        {method: 'lookup', reqOpts: {readOptions: {transaction: 'abc'}}},
+        {
+          method: 'lookup',
+          reqOpts: {readOptions: {transaction: Buffer.from('abc')}},
+        },
+        {method: 'lookup', reqOpts: {readOptions: {newTransaction: {}}}},
+        {method: 'lookup', reqOpts: {readOptions: {new_transaction: {}}}},
+        {method: 'runQuery', reqOpts: {readOptions: {transaction: 'abc'}}},
+        {method: 'runQuery', reqOpts: {readOptions: {newTransaction: {}}}},
+        {method: 'runQuery', reqOpts: {readOptions: {new_transaction: {}}}},
+        {
+          method: 'runAggregationQuery',
+          reqOpts: {readOptions: {transaction: 'abc'}},
+        },
+        {
+          method: 'runAggregationQuery',
+          reqOpts: {readOptions: {newTransaction: {}}},
+        },
+        {
+          method: 'runAggregationQuery',
+          reqOpts: {readOptions: {new_transaction: {}}},
+        },
+        {
+          method: 'commit',
+          reqOpts: {
+            mode: google.datastore.v1.CommitRequest.Mode.NON_TRANSACTIONAL,
+            transaction: 'abc',
+          },
+        },
+      ];
+
+      const methodsForFalse = [
+        {method: 'commit', reqOpts: {mode: 'NON_TRANSACTIONAL'}},
+        {
+          method: 'commit',
+          reqOpts: {
+            mode: google.datastore.v1.CommitRequest.Mode.NON_TRANSACTIONAL,
+          },
+        },
+        {method: 'commit', reqOpts: {transaction: Buffer.alloc(0)}},
+        {method: 'lookup', reqOpts: {}},
+        {
+          method: 'lookup',
+          reqOpts: {readOptions: {transaction: Buffer.alloc(0)}},
+        },
+        {method: 'runQuery', reqOpts: {}},
+        {method: 'runAggregationQuery', reqOpts: {}},
+        {method: 'allocateIds', reqOpts: {}},
+        {method: 'reserveIds', reqOpts: {}},
+      ];
+
+      methodsForTrue.forEach(({method, reqOpts}) => {
+        it(`should be true for ${method} with ${JSON.stringify(reqOpts)}`, done => {
+          request.datastore.clients_ = new Map();
+          request.datastore.clients_.set(CONFIG.client, {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            [method](_: object, gaxO: any) {
+              assert.strictEqual(gaxO.headers['x-goog-is-transaction'], 'true');
+              done();
+            },
+          });
+          const config = Object.assign({}, CONFIG, {
+            method,
+            reqOpts,
+          });
+          request.id = undefined;
+          request.prepareGaxRequest_(
+            config,
+            (err: Error, requestFn: Function) => {
+              assert.ifError(err);
+              requestFn();
+            },
+          );
+        });
+      });
+
+      methodsForFalse.forEach(({method, reqOpts}) => {
+        it(`should be false for ${method} with ${JSON.stringify(reqOpts)}`, done => {
+          request.datastore.clients_ = new Map();
+          request.datastore.clients_.set(CONFIG.client, {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            [method](_: object, gaxO: any) {
+              assert.strictEqual(gaxO.headers['x-goog-is-transaction'], 'false');
+              done();
+            },
+          });
+          const config = Object.assign({}, CONFIG, {
+            method,
+            reqOpts,
+          });
+          request.id = undefined; // Ensure no transaction ID for non-transactional
+          request.prepareGaxRequest_(config, (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          });
+        });
       });
     });
 
