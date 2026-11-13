@@ -481,7 +481,7 @@ export class SqlConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnectSettings request %j', request);
+    this._log.debug('getConnectSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IConnectSettings,
@@ -492,7 +492,7 @@ export class SqlConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnectSettings response %j', response);
+          this._log.debug('getConnectSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -507,7 +507,7 @@ export class SqlConnectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnectSettings response %j', response);
+          this._log.debug('getConnectSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -628,7 +628,7 @@ export class SqlConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resolveConnectSettings request %j', request);
+    this._log.debug('resolveConnectSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IConnectSettings,
@@ -639,7 +639,7 @@ export class SqlConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resolveConnectSettings response %j', response);
+          this._log.debug('resolveConnectSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class SqlConnectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resolveConnectSettings response %j', response);
+          this._log.debug('resolveConnectSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class SqlConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateEphemeralCert request %j', request);
+    this._log.debug('generateEphemeralCert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertResponse,
@@ -791,7 +791,7 @@ export class SqlConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateEphemeralCert response %j', response);
+          this._log.debug('generateEphemeralCert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -806,7 +806,7 @@ export class SqlConnectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateEphemeralCert response %j', response);
+          this._log.debug('generateEphemeralCert response %j', response);
           return [response, options, rawResponse];
         },
       )

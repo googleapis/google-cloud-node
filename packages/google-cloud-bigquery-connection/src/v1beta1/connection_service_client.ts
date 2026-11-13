@@ -486,7 +486,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createConnection request %j', request);
+    this._log.debug('createConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
@@ -497,7 +497,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createConnection response %j', response);
+          this._log.debug('createConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -512,7 +512,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createConnection response %j', response);
+          this._log.debug('createConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -630,7 +630,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnection request %j', request);
+    this._log.debug('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
@@ -641,7 +641,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnection response %j', response);
+          this._log.debug('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -656,7 +656,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnection response %j', response);
+          this._log.debug('getConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -778,7 +778,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnections request %j', request);
+    this._log.debug('listConnections request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
@@ -789,7 +789,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listConnections response %j', response);
+          this._log.debug('listConnections response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -804,7 +804,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listConnections response %j', response);
+          this._log.debug('listConnections response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -927,7 +927,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConnection request %j', request);
+    this._log.debug('updateConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
@@ -938,7 +938,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConnection response %j', response);
+          this._log.debug('updateConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -953,7 +953,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateConnection response %j', response);
+          this._log.debug('updateConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1073,7 +1073,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConnectionCredential request %j', request);
+    this._log.debug('updateConnectionCredential request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1084,7 +1084,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConnectionCredential response %j', response);
+          this._log.debug('updateConnectionCredential response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1099,7 +1099,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateConnectionCredential response %j', response);
+          this._log.debug('updateConnectionCredential response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1217,7 +1217,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteConnection request %j', request);
+    this._log.debug('deleteConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1228,7 +1228,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteConnection response %j', response);
+          this._log.debug('deleteConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1243,7 +1243,7 @@ export class ConnectionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnection response %j', response);
+          this._log.debug('deleteConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1352,7 +1352,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1361,7 +1361,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1373,7 +1373,7 @@ export class ConnectionServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1491,7 +1491,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1500,7 +1500,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1512,7 +1512,7 @@ export class ConnectionServiceClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1627,7 +1627,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1636,7 +1636,7 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1648,7 +1648,7 @@ export class ConnectionServiceClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )

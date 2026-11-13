@@ -499,11 +499,11 @@ export class ImageVersionsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listImageVersions values %j', values);
+          this._log.debug('listImageVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listImageVersions request %j', request);
+    this._log.debug('listImageVersions request %j', request);
     return this.innerApiCalls
       .listImageVersions(request, options, wrappedCallback)
       ?.then(
@@ -512,7 +512,7 @@ export class ImageVersionsClient {
           protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
           protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
         ]) => {
-          this._log.info('listImageVersions values %j', response);
+          this._log.debug('listImageVersions values %j', response);
           return [response, input, output];
         },
       );
@@ -559,7 +559,7 @@ export class ImageVersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listImageVersions stream %j', request);
+    this._log.debug('listImageVersions stream %j', request);
     return this.descriptors.page.listImageVersions.createStream(
       this.innerApiCalls.listImageVersions as GaxCall,
       request,
@@ -611,7 +611,7 @@ export class ImageVersionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listImageVersions iterate %j', request);
+    this._log.debug('listImageVersions iterate %j', request);
     return this.descriptors.page.listImageVersions.asyncIterate(
       this.innerApiCalls['listImageVersions'] as GaxCall,
       request as {},

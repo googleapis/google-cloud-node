@@ -492,7 +492,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPermission request %j', request);
+    this._log.debug('createPermission request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IPermission,
@@ -503,7 +503,7 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPermission response %j', response);
+          this._log.debug('createPermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -518,7 +518,7 @@ export class PermissionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createPermission response %j', response);
+          this._log.debug('createPermission response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -637,7 +637,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPermission request %j', request);
+    this._log.debug('getPermission request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IPermission,
@@ -648,7 +648,7 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPermission response %j', response);
+          this._log.debug('getPermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -663,7 +663,7 @@ export class PermissionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPermission response %j', response);
+          this._log.debug('getPermission response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -785,7 +785,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePermission request %j', request);
+    this._log.debug('updatePermission request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IPermission,
@@ -796,7 +796,7 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePermission response %j', response);
+          this._log.debug('updatePermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -811,7 +811,7 @@ export class PermissionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePermission response %j', response);
+          this._log.debug('updatePermission response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -929,7 +929,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePermission request %j', request);
+    this._log.debug('deletePermission request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -940,7 +940,7 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePermission response %j', response);
+          this._log.debug('deletePermission response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -955,7 +955,7 @@ export class PermissionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePermission response %j', response);
+          this._log.debug('deletePermission response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1079,7 +1079,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('transferOwnership request %j', request);
+    this._log.debug('transferOwnership request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.ITransferOwnershipResponse,
@@ -1090,7 +1090,7 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('transferOwnership response %j', response);
+          this._log.debug('transferOwnership response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1105,7 +1105,7 @@ export class PermissionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('transferOwnership response %j', response);
+          this._log.debug('transferOwnership response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1246,11 +1246,11 @@ export class PermissionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPermissions values %j', values);
+          this._log.debug('listPermissions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPermissions request %j', request);
+    this._log.debug('listPermissions request %j', request);
     return this.innerApiCalls
       .listPermissions(request, options, wrappedCallback)
       ?.then(
@@ -1259,7 +1259,7 @@ export class PermissionServiceClient {
           protos.google.ai.generativelanguage.v1beta3.IListPermissionsRequest | null,
           protos.google.ai.generativelanguage.v1beta3.IListPermissionsResponse,
         ]) => {
-          this._log.info('listPermissions values %j', response);
+          this._log.debug('listPermissions values %j', response);
           return [response, input, output];
         },
       );
@@ -1315,7 +1315,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPermissions stream %j', request);
+    this._log.debug('listPermissions stream %j', request);
     return this.descriptors.page.listPermissions.createStream(
       this.innerApiCalls.listPermissions as GaxCall,
       request,
@@ -1376,7 +1376,7 @@ export class PermissionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPermissions iterate %j', request);
+    this._log.debug('listPermissions iterate %j', request);
     return this.descriptors.page.listPermissions.asyncIterate(
       this.innerApiCalls['listPermissions'] as GaxCall,
       request as {},

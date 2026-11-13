@@ -728,7 +728,7 @@ export class ClusterControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCluster request %j', request);
+    this._log.debug('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.ICluster,
@@ -737,7 +737,7 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -749,7 +749,7 @@ export class ClusterControllerClient {
           protos.google.cloud.dataproc.v1.IGetClusterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -907,11 +907,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCluster request %j', request);
+    this._log.debug('createCluster request %j', request);
     return this.innerApiCalls
       .createCluster(request, options, wrappedCallback)
       ?.then(
@@ -923,7 +923,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1165,11 +1165,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCluster request %j', request);
+    this._log.debug('updateCluster request %j', request);
     return this.innerApiCalls
       .updateCluster(request, options, wrappedCallback)
       ?.then(
@@ -1181,7 +1181,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1357,11 +1357,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('stopCluster response %j', rawResponse);
+          this._log.debug('stopCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('stopCluster request %j', request);
+    this._log.debug('stopCluster request %j', request);
     return this.innerApiCalls
       .stopCluster(request, options, wrappedCallback)
       ?.then(
@@ -1373,7 +1373,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopCluster response %j', rawResponse);
+          this._log.debug('stopCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1549,11 +1549,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('startCluster response %j', rawResponse);
+          this._log.debug('startCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('startCluster request %j', request);
+    this._log.debug('startCluster request %j', request);
     return this.innerApiCalls
       .startCluster(request, options, wrappedCallback)
       ?.then(
@@ -1565,7 +1565,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('startCluster response %j', rawResponse);
+          this._log.debug('startCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1743,11 +1743,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCluster request %j', request);
+    this._log.debug('deleteCluster request %j', request);
     return this.innerApiCalls
       .deleteCluster(request, options, wrappedCallback)
       ?.then(
@@ -1759,7 +1759,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1941,11 +1941,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('diagnoseCluster response %j', rawResponse);
+          this._log.debug('diagnoseCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('diagnoseCluster request %j', request);
+    this._log.debug('diagnoseCluster request %j', request);
     return this.innerApiCalls
       .diagnoseCluster(request, options, wrappedCallback)
       ?.then(
@@ -1957,7 +1957,7 @@ export class ClusterControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('diagnoseCluster response %j', rawResponse);
+          this._log.debug('diagnoseCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2122,11 +2122,11 @@ export class ClusterControllerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClusters values %j', values);
+          this._log.debug('listClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClusters request %j', request);
+    this._log.debug('listClusters request %j', request);
     return this.innerApiCalls
       .listClusters(request, options, wrappedCallback)
       ?.then(
@@ -2135,7 +2135,7 @@ export class ClusterControllerClient {
           protos.google.cloud.dataproc.v1.IListClustersRequest | null,
           protos.google.cloud.dataproc.v1.IListClustersResponse,
         ]) => {
-          this._log.info('listClusters values %j', response);
+          this._log.debug('listClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -2203,7 +2203,7 @@ export class ClusterControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters stream %j', request);
+    this._log.debug('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -2276,7 +2276,7 @@ export class ClusterControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters iterate %j', request);
+    this._log.debug('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},

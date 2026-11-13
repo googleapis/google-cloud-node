@@ -607,7 +607,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnectCluster request %j', request);
+    this._log.debug('getConnectCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConnectCluster,
@@ -618,7 +618,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnectCluster response %j', response);
+          this._log.debug('getConnectCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -633,7 +633,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnectCluster response %j', response);
+          this._log.debug('getConnectCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -746,7 +746,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnector request %j', request);
+    this._log.debug('getConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConnector,
@@ -757,7 +757,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnector response %j', response);
+          this._log.debug('getConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -769,7 +769,7 @@ export class ManagedKafkaConnectClient {
           protos.google.cloud.managedkafka.v1.IGetConnectorRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getConnector response %j', response);
+          this._log.debug('getConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -891,7 +891,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createConnector request %j', request);
+    this._log.debug('createConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConnector,
@@ -902,7 +902,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createConnector response %j', response);
+          this._log.debug('createConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -917,7 +917,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createConnector response %j', response);
+          this._log.debug('createConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1034,7 +1034,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConnector request %j', request);
+    this._log.debug('updateConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IConnector,
@@ -1045,7 +1045,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConnector response %j', response);
+          this._log.debug('updateConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1060,7 +1060,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateConnector response %j', response);
+          this._log.debug('updateConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1173,7 +1173,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteConnector request %j', request);
+    this._log.debug('deleteConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1184,7 +1184,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteConnector response %j', response);
+          this._log.debug('deleteConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1199,7 +1199,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnector response %j', response);
+          this._log.debug('deleteConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1312,7 +1312,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pauseConnector request %j', request);
+    this._log.debug('pauseConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
@@ -1323,7 +1323,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pauseConnector response %j', response);
+          this._log.debug('pauseConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1338,7 +1338,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('pauseConnector response %j', response);
+          this._log.debug('pauseConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1451,7 +1451,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resumeConnector request %j', request);
+    this._log.debug('resumeConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
@@ -1462,7 +1462,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resumeConnector response %j', response);
+          this._log.debug('resumeConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1477,7 +1477,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resumeConnector response %j', response);
+          this._log.debug('resumeConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1590,7 +1590,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('restartConnector request %j', request);
+    this._log.debug('restartConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
@@ -1601,7 +1601,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('restartConnector response %j', response);
+          this._log.debug('restartConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1616,7 +1616,7 @@ export class ManagedKafkaConnectClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('restartConnector response %j', response);
+          this._log.debug('restartConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1729,7 +1729,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('stopConnector request %j', request);
+    this._log.debug('stopConnector request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
@@ -1740,7 +1740,7 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('stopConnector response %j', response);
+          this._log.debug('stopConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1752,7 +1752,7 @@ export class ManagedKafkaConnectClient {
           protos.google.cloud.managedkafka.v1.IStopConnectorRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopConnector response %j', response);
+          this._log.debug('stopConnector response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1914,11 +1914,11 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createConnectCluster response %j', rawResponse);
+          this._log.debug('createConnectCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createConnectCluster request %j', request);
+    this._log.debug('createConnectCluster request %j', request);
     return this.innerApiCalls
       .createConnectCluster(request, options, wrappedCallback)
       ?.then(
@@ -1930,7 +1930,7 @@ export class ManagedKafkaConnectClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createConnectCluster response %j', rawResponse);
+          this._log.debug('createConnectCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2105,11 +2105,11 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateConnectCluster response %j', rawResponse);
+          this._log.debug('updateConnectCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateConnectCluster request %j', request);
+    this._log.debug('updateConnectCluster request %j', request);
     return this.innerApiCalls
       .updateConnectCluster(request, options, wrappedCallback)
       ?.then(
@@ -2121,7 +2121,7 @@ export class ManagedKafkaConnectClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConnectCluster response %j', rawResponse);
+          this._log.debug('updateConnectCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2291,11 +2291,11 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteConnectCluster response %j', rawResponse);
+          this._log.debug('deleteConnectCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteConnectCluster request %j', request);
+    this._log.debug('deleteConnectCluster request %j', request);
     return this.innerApiCalls
       .deleteConnectCluster(request, options, wrappedCallback)
       ?.then(
@@ -2307,7 +2307,7 @@ export class ManagedKafkaConnectClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnectCluster response %j', rawResponse);
+          this._log.debug('deleteConnectCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2465,11 +2465,11 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnectClusters values %j', values);
+          this._log.debug('listConnectClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnectClusters request %j', request);
+    this._log.debug('listConnectClusters request %j', request);
     return this.innerApiCalls
       .listConnectClusters(request, options, wrappedCallback)
       ?.then(
@@ -2478,7 +2478,7 @@ export class ManagedKafkaConnectClient {
           protos.google.cloud.managedkafka.v1.IListConnectClustersRequest | null,
           protos.google.cloud.managedkafka.v1.IListConnectClustersResponse,
         ]) => {
-          this._log.info('listConnectClusters values %j', response);
+          this._log.debug('listConnectClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -2533,7 +2533,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectClusters stream %j', request);
+    this._log.debug('listConnectClusters stream %j', request);
     return this.descriptors.page.listConnectClusters.createStream(
       this.innerApiCalls.listConnectClusters as GaxCall,
       request,
@@ -2593,7 +2593,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectClusters iterate %j', request);
+    this._log.debug('listConnectClusters iterate %j', request);
     return this.descriptors.page.listConnectClusters.asyncIterate(
       this.innerApiCalls['listConnectClusters'] as GaxCall,
       request as {},
@@ -2715,11 +2715,11 @@ export class ManagedKafkaConnectClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnectors values %j', values);
+          this._log.debug('listConnectors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnectors request %j', request);
+    this._log.debug('listConnectors request %j', request);
     return this.innerApiCalls
       .listConnectors(request, options, wrappedCallback)
       ?.then(
@@ -2728,7 +2728,7 @@ export class ManagedKafkaConnectClient {
           protos.google.cloud.managedkafka.v1.IListConnectorsRequest | null,
           protos.google.cloud.managedkafka.v1.IListConnectorsResponse,
         ]) => {
-          this._log.info('listConnectors values %j', response);
+          this._log.debug('listConnectors values %j', response);
           return [response, input, output];
         },
       );
@@ -2780,7 +2780,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectors stream %j', request);
+    this._log.debug('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
       request,
@@ -2837,7 +2837,7 @@ export class ManagedKafkaConnectClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectors iterate %j', request);
+    this._log.debug('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
       request as {},

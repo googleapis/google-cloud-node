@@ -526,7 +526,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateDataObjects request %j', request);
+    this._log.debug('aggregateDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
@@ -537,7 +537,7 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('aggregateDataObjects response %j', response);
+          this._log.debug('aggregateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -552,7 +552,7 @@ export class DataObjectSearchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('aggregateDataObjects response %j', response);
+          this._log.debug('aggregateDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -674,7 +674,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchSearchDataObjects request %j', request);
+    this._log.debug('batchSearchDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
@@ -685,7 +685,7 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchSearchDataObjects response %j', response);
+          this._log.debug('batchSearchDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -700,7 +700,7 @@ export class DataObjectSearchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchSearchDataObjects response %j', response);
+          this._log.debug('batchSearchDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -843,11 +843,11 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchDataObjects values %j', values);
+          this._log.debug('searchDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchDataObjects request %j', request);
+    this._log.debug('searchDataObjects request %j', request);
     return this.innerApiCalls
       .searchDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -856,7 +856,7 @@ export class DataObjectSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest | null,
           protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse,
         ]) => {
-          this._log.info('searchDataObjects values %j', response);
+          this._log.debug('searchDataObjects values %j', response);
           return [response, input, output];
         },
       );
@@ -914,7 +914,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDataObjects stream %j', request);
+    this._log.debug('searchDataObjects stream %j', request);
     return this.descriptors.page.searchDataObjects.createStream(
       this.innerApiCalls.searchDataObjects as GaxCall,
       request,
@@ -977,7 +977,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDataObjects iterate %j', request);
+    this._log.debug('searchDataObjects iterate %j', request);
     return this.descriptors.page.searchDataObjects.asyncIterate(
       this.innerApiCalls['searchDataObjects'] as GaxCall,
       request as {},
@@ -1117,11 +1117,11 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryDataObjects values %j', values);
+          this._log.debug('queryDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryDataObjects request %j', request);
+    this._log.debug('queryDataObjects request %j', request);
     return this.innerApiCalls
       .queryDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -1130,7 +1130,7 @@ export class DataObjectSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest | null,
           protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse,
         ]) => {
-          this._log.info('queryDataObjects values %j', response);
+          this._log.debug('queryDataObjects values %j', response);
           return [response, input, output];
         },
       );
@@ -1200,7 +1200,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDataObjects stream %j', request);
+    this._log.debug('queryDataObjects stream %j', request);
     return this.descriptors.page.queryDataObjects.createStream(
       this.innerApiCalls.queryDataObjects as GaxCall,
       request,
@@ -1275,7 +1275,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDataObjects iterate %j', request);
+    this._log.debug('queryDataObjects iterate %j', request);
     return this.descriptors.page.queryDataObjects.asyncIterate(
       this.innerApiCalls['queryDataObjects'] as GaxCall,
       request as {},

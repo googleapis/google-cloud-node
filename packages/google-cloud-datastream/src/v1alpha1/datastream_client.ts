@@ -726,7 +726,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnectionProfile request %j', request);
+    this._log.debug('getConnectionProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
@@ -737,7 +737,7 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnectionProfile response %j', response);
+          this._log.debug('getConnectionProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -752,7 +752,7 @@ export class DatastreamClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnectionProfile response %j', response);
+          this._log.debug('getConnectionProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -886,7 +886,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('discoverConnectionProfile request %j', request);
+    this._log.debug('discoverConnectionProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
@@ -897,7 +897,7 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('discoverConnectionProfile response %j', response);
+          this._log.debug('discoverConnectionProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -912,7 +912,7 @@ export class DatastreamClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('discoverConnectionProfile response %j', response);
+          this._log.debug('discoverConnectionProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1023,7 +1023,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getStream request %j', request);
+    this._log.debug('getStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datastream.v1alpha1.IStream,
@@ -1034,7 +1034,7 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getStream response %j', response);
+          this._log.debug('getStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1046,7 +1046,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getStream response %j', response);
+          this._log.debug('getStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1163,7 +1163,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPrivateConnection request %j', request);
+    this._log.debug('getPrivateConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
@@ -1174,7 +1174,7 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPrivateConnection response %j', response);
+          this._log.debug('getPrivateConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1189,7 +1189,7 @@ export class DatastreamClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPrivateConnection response %j', response);
+          this._log.debug('getPrivateConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1300,7 +1300,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRoute request %j', request);
+    this._log.debug('getRoute request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datastream.v1alpha1.IRoute,
@@ -1311,7 +1311,7 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRoute response %j', response);
+          this._log.debug('getRoute response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1323,7 +1323,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRoute response %j', response);
+          this._log.debug('getRoute response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1476,11 +1476,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createConnectionProfile response %j', rawResponse);
+          this._log.debug('createConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createConnectionProfile request %j', request);
+    this._log.debug('createConnectionProfile request %j', request);
     return this.innerApiCalls
       .createConnectionProfile(request, options, wrappedCallback)
       ?.then(
@@ -1492,7 +1492,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createConnectionProfile response %j', rawResponse);
+          this._log.debug('createConnectionProfile response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1665,11 +1665,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateConnectionProfile response %j', rawResponse);
+          this._log.debug('updateConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateConnectionProfile request %j', request);
+    this._log.debug('updateConnectionProfile request %j', request);
     return this.innerApiCalls
       .updateConnectionProfile(request, options, wrappedCallback)
       ?.then(
@@ -1681,7 +1681,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConnectionProfile response %j', rawResponse);
+          this._log.debug('updateConnectionProfile response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1848,11 +1848,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          this._log.debug('deleteConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteConnectionProfile request %j', request);
+    this._log.debug('deleteConnectionProfile request %j', request);
     return this.innerApiCalls
       .deleteConnectionProfile(request, options, wrappedCallback)
       ?.then(
@@ -1864,7 +1864,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          this._log.debug('deleteConnectionProfile response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2040,11 +2040,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createStream response %j', rawResponse);
+          this._log.debug('createStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createStream request %j', request);
+    this._log.debug('createStream request %j', request);
     return this.innerApiCalls
       .createStream(request, options, wrappedCallback)
       ?.then(
@@ -2056,7 +2056,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createStream response %j', rawResponse);
+          this._log.debug('createStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2234,11 +2234,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateStream response %j', rawResponse);
+          this._log.debug('updateStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateStream request %j', request);
+    this._log.debug('updateStream request %j', request);
     return this.innerApiCalls
       .updateStream(request, options, wrappedCallback)
       ?.then(
@@ -2250,7 +2250,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateStream response %j', rawResponse);
+          this._log.debug('updateStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2417,11 +2417,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteStream response %j', rawResponse);
+          this._log.debug('deleteStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteStream request %j', request);
+    this._log.debug('deleteStream request %j', request);
     return this.innerApiCalls
       .deleteStream(request, options, wrappedCallback)
       ?.then(
@@ -2433,7 +2433,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteStream response %j', rawResponse);
+          this._log.debug('deleteStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2586,11 +2586,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('fetchErrors response %j', rawResponse);
+          this._log.debug('fetchErrors response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchErrors request %j', request);
+    this._log.debug('fetchErrors request %j', request);
     return this.innerApiCalls
       .fetchErrors(request, options, wrappedCallback)
       ?.then(
@@ -2602,7 +2602,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('fetchErrors response %j', rawResponse);
+          this._log.debug('fetchErrors response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2773,11 +2773,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPrivateConnection response %j', rawResponse);
+          this._log.debug('createPrivateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPrivateConnection request %j', request);
+    this._log.debug('createPrivateConnection request %j', request);
     return this.innerApiCalls
       .createPrivateConnection(request, options, wrappedCallback)
       ?.then(
@@ -2789,7 +2789,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPrivateConnection response %j', rawResponse);
+          this._log.debug('createPrivateConnection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2959,11 +2959,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePrivateConnection response %j', rawResponse);
+          this._log.debug('deletePrivateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePrivateConnection request %j', request);
+    this._log.debug('deletePrivateConnection request %j', request);
     return this.innerApiCalls
       .deletePrivateConnection(request, options, wrappedCallback)
       ?.then(
@@ -2975,7 +2975,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePrivateConnection response %j', rawResponse);
+          this._log.debug('deletePrivateConnection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3147,11 +3147,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRoute response %j', rawResponse);
+          this._log.debug('createRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRoute request %j', request);
+    this._log.debug('createRoute request %j', request);
     return this.innerApiCalls
       .createRoute(request, options, wrappedCallback)
       ?.then(
@@ -3163,7 +3163,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRoute response %j', rawResponse);
+          this._log.debug('createRoute response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3330,11 +3330,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRoute response %j', rawResponse);
+          this._log.debug('deleteRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRoute request %j', request);
+    this._log.debug('deleteRoute request %j', request);
     return this.innerApiCalls
       .deleteRoute(request, options, wrappedCallback)
       ?.then(
@@ -3346,7 +3346,7 @@ export class DatastreamClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRoute response %j', rawResponse);
+          this._log.debug('deleteRoute response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3504,11 +3504,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnectionProfiles values %j', values);
+          this._log.debug('listConnectionProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnectionProfiles request %j', request);
+    this._log.debug('listConnectionProfiles request %j', request);
     return this.innerApiCalls
       .listConnectionProfiles(request, options, wrappedCallback)
       ?.then(
@@ -3517,7 +3517,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
           protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
         ]) => {
-          this._log.info('listConnectionProfiles values %j', response);
+          this._log.debug('listConnectionProfiles values %j', response);
           return [response, input, output];
         },
       );
@@ -3571,7 +3571,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectionProfiles stream %j', request);
+    this._log.debug('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
       request,
@@ -3630,7 +3630,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectionProfiles iterate %j', request);
+    this._log.debug('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
       request as {},
@@ -3754,11 +3754,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listStreams values %j', values);
+          this._log.debug('listStreams values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listStreams request %j', request);
+    this._log.debug('listStreams request %j', request);
     return this.innerApiCalls
       .listStreams(request, options, wrappedCallback)
       ?.then(
@@ -3767,7 +3767,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
           protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
         ]) => {
-          this._log.info('listStreams values %j', response);
+          this._log.debug('listStreams values %j', response);
           return [response, input, output];
         },
       );
@@ -3821,7 +3821,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listStreams stream %j', request);
+    this._log.debug('listStreams stream %j', request);
     return this.descriptors.page.listStreams.createStream(
       this.innerApiCalls.listStreams as GaxCall,
       request,
@@ -3880,7 +3880,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listStreams iterate %j', request);
+    this._log.debug('listStreams iterate %j', request);
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
       request as {},
@@ -3998,11 +3998,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchStaticIps values %j', values);
+          this._log.debug('fetchStaticIps values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchStaticIps request %j', request);
+    this._log.debug('fetchStaticIps request %j', request);
     return this.innerApiCalls
       .fetchStaticIps(request, options, wrappedCallback)
       ?.then(
@@ -4011,7 +4011,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
           protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
         ]) => {
-          this._log.info('fetchStaticIps values %j', response);
+          this._log.debug('fetchStaticIps values %j', response);
           return [response, input, output];
         },
       );
@@ -4057,7 +4057,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchStaticIps stream %j', request);
+    this._log.debug('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
       request,
@@ -4108,7 +4108,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchStaticIps iterate %j', request);
+    this._log.debug('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
       request as {},
@@ -4235,11 +4235,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPrivateConnections values %j', values);
+          this._log.debug('listPrivateConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPrivateConnections request %j', request);
+    this._log.debug('listPrivateConnections request %j', request);
     return this.innerApiCalls
       .listPrivateConnections(request, options, wrappedCallback)
       ?.then(
@@ -4248,7 +4248,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
           protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
         ]) => {
-          this._log.info('listPrivateConnections values %j', response);
+          this._log.debug('listPrivateConnections values %j', response);
           return [response, input, output];
         },
       );
@@ -4304,7 +4304,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrivateConnections stream %j', request);
+    this._log.debug('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
       request,
@@ -4365,7 +4365,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrivateConnections iterate %j', request);
+    this._log.debug('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
       request as {},
@@ -4492,11 +4492,11 @@ export class DatastreamClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRoutes values %j', values);
+          this._log.debug('listRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRoutes request %j', request);
+    this._log.debug('listRoutes request %j', request);
     return this.innerApiCalls
       .listRoutes(request, options, wrappedCallback)
       ?.then(
@@ -4505,7 +4505,7 @@ export class DatastreamClient {
           protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
           protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
         ]) => {
-          this._log.info('listRoutes values %j', response);
+          this._log.debug('listRoutes values %j', response);
           return [response, input, output];
         },
       );
@@ -4561,7 +4561,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutes stream %j', request);
+    this._log.debug('listRoutes stream %j', request);
     return this.descriptors.page.listRoutes.createStream(
       this.innerApiCalls.listRoutes as GaxCall,
       request,
@@ -4622,7 +4622,7 @@ export class DatastreamClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutes iterate %j', request);
+    this._log.debug('listRoutes iterate %j', request);
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,
       request as {},

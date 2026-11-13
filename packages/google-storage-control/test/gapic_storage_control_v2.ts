@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as storagecontrolModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v2.StorageControlClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageControlStub, undefined);
@@ -279,12 +279,12 @@ describe('v2.StorageControlClient', () => {
       assert(client.storageControlStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.storageControlStub);
@@ -293,14 +293,14 @@ describe('v2.StorageControlClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageControlStub, undefined);
@@ -309,7 +309,7 @@ describe('v2.StorageControlClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v2.StorageControlClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v2.StorageControlClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v2.StorageControlClient', () => {
   describe('createFolder', () => {
     it('invokes createFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -385,7 +385,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFolder(request), expectedError);
@@ -487,7 +487,7 @@ describe('v2.StorageControlClient', () => {
   describe('deleteFolder', () => {
     it('invokes deleteFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFolder(request), expectedError);
@@ -625,7 +625,7 @@ describe('v2.StorageControlClient', () => {
   describe('getFolder', () => {
     it('invokes getFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFolder(request), expectedError);
@@ -760,7 +760,7 @@ describe('v2.StorageControlClient', () => {
   describe('getStorageLayout', () => {
     it('invokes getStorageLayout without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getStorageLayout without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getStorageLayout with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getStorageLayout with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStorageLayout(request), expectedError);
@@ -898,7 +898,7 @@ describe('v2.StorageControlClient', () => {
   describe('createManagedFolder', () => {
     it('invokes createManagedFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createManagedFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -981,7 +981,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createManagedFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createManagedFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createManagedFolder(request), expectedError);
@@ -1034,7 +1034,7 @@ describe('v2.StorageControlClient', () => {
   describe('deleteManagedFolder', () => {
     it('invokes deleteManagedFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1069,7 +1069,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteManagedFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteManagedFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteManagedFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteManagedFolder(request), expectedError);
@@ -1173,7 +1173,7 @@ describe('v2.StorageControlClient', () => {
   describe('getManagedFolder', () => {
     it('invokes getManagedFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getManagedFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getManagedFolder with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getManagedFolder with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1301,17 +1301,160 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getManagedFolder(request), expectedError);
     });
   });
 
+  describe('updateManagedFolder', () => {
+    it('invokes updateManagedFolder without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateManagedFolderRequest(),
+      );
+      request.managedFolder = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.managedFolder.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder(),
+      );
+      client.innerApiCalls.updateManagedFolder =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateManagedFolder(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateManagedFolder without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateManagedFolderRequest(),
+      );
+      request.managedFolder = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.managedFolder.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder(),
+      );
+      client.innerApiCalls.updateManagedFolder =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateManagedFolder(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IManagedFolder | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateManagedFolder with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateManagedFolderRequest(),
+      );
+      request.managedFolder = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.managedFolder.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateManagedFolder = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateManagedFolder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateManagedFolder with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateManagedFolderRequest(),
+      );
+      request.managedFolder = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.managedFolder.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateManagedFolder(request), expectedError);
+    });
+  });
+
   describe('disableAnywhereCache', () => {
     it('invokes disableAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1489,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes disableAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1539,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes disableAnywhereCache with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1430,7 +1573,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes disableAnywhereCache with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,7 +1583,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disableAnywhereCache(request), expectedError);
@@ -1450,7 +1593,7 @@ describe('v2.StorageControlClient', () => {
   describe('pauseAnywhereCache', () => {
     it('invokes pauseAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1485,7 +1628,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes pauseAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1678,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes pauseAnywhereCache with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1712,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes pauseAnywhereCache with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1579,7 +1722,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseAnywhereCache(request), expectedError);
@@ -1589,7 +1732,7 @@ describe('v2.StorageControlClient', () => {
   describe('resumeAnywhereCache', () => {
     it('invokes resumeAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1767,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes resumeAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1674,7 +1817,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes resumeAnywhereCache with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1708,7 +1851,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes resumeAnywhereCache with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1718,7 +1861,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeAnywhereCache(request), expectedError);
@@ -1728,7 +1871,7 @@ describe('v2.StorageControlClient', () => {
   describe('getAnywhereCache', () => {
     it('invokes getAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1905,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1955,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getAnywhereCache with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,7 +1989,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getAnywhereCache with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1856,17 +1999,155 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnywhereCache(request), expectedError);
     });
   });
 
+  describe('getRapidCache', () => {
+    it('invokes getRapidCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.RapidCache(),
+      );
+      client.innerApiCalls.getRapidCache = stubSimpleCall(expectedResponse);
+      const [response] = await client.getRapidCache(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes getRapidCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.RapidCache(),
+      );
+      client.innerApiCalls.getRapidCache =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRapidCache(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IRapidCache | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes getRapidCache with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRapidCache = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getRapidCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes getRapidCache with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getRapidCache(request), expectedError);
+    });
+  });
+
   describe('getProjectIntelligenceConfig', () => {
     it('invokes getProjectIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1898,7 +2179,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getProjectIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +2226,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getProjectIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1979,7 +2260,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getProjectIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,7 +2273,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2005,7 +2286,7 @@ describe('v2.StorageControlClient', () => {
   describe('updateProjectIntelligenceConfig', () => {
     it('invokes updateProjectIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,11 +2315,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateProjectIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,11 +2369,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateProjectIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2117,11 +2410,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateProjectIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2135,7 +2434,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2148,7 +2447,7 @@ describe('v2.StorageControlClient', () => {
   describe('getFolderIntelligenceConfig', () => {
     it('invokes getFolderIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2180,7 +2479,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolderIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2526,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolderIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2261,7 +2560,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getFolderIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2573,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2287,7 +2586,7 @@ describe('v2.StorageControlClient', () => {
   describe('updateFolderIntelligenceConfig', () => {
     it('invokes updateFolderIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2316,11 +2615,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateFolderIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2364,11 +2669,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateFolderIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2399,11 +2710,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateFolderIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2417,7 +2734,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2430,7 +2747,7 @@ describe('v2.StorageControlClient', () => {
   describe('getOrganizationIntelligenceConfig', () => {
     it('invokes getOrganizationIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2463,7 +2780,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getOrganizationIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2510,7 +2827,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getOrganizationIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2544,7 +2861,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getOrganizationIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2557,7 +2874,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2570,7 +2887,7 @@ describe('v2.StorageControlClient', () => {
   describe('updateOrganizationIntelligenceConfig', () => {
     it('invokes updateOrganizationIntelligenceConfig without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2600,11 +2917,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateOrganizationIntelligenceConfig without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2648,11 +2971,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateOrganizationIntelligenceConfig with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2681,11 +3010,17 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (
+          client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+        ).getCall(0).args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes updateOrganizationIntelligenceConfig with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +3034,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2712,7 +3047,7 @@ describe('v2.StorageControlClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2743,7 +3078,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2790,7 +3125,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,7 +3156,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2833,7 +3168,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.resource = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2843,7 +3178,7 @@ describe('v2.StorageControlClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +3209,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2921,7 +3256,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +3287,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2964,7 +3299,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.resource = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2974,7 +3309,7 @@ describe('v2.StorageControlClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3008,7 +3343,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3057,7 +3392,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,7 +3425,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3104,7 +3439,7 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/managedFolders/**
       request.resource = 'projects/value/buckets/value/managedFolders/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -3114,7 +3449,7 @@ describe('v2.StorageControlClient', () => {
   describe('getIntelligenceFinding', () => {
     it('invokes getIntelligenceFinding without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3146,7 +3481,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFinding without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3193,7 +3528,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFinding with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3227,7 +3562,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFinding with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3240,7 +3575,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3253,7 +3588,7 @@ describe('v2.StorageControlClient', () => {
   describe('getIntelligenceFindingRevision', () => {
     it('invokes getIntelligenceFindingRevision without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,7 +3620,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFindingRevision without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3332,7 +3667,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFindingRevision with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3366,7 +3701,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes getIntelligenceFindingRevision with closed client', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3379,7 +3714,7 @@ describe('v2.StorageControlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3389,10 +3724,140 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('viewObjectFullContext', () => {
+    it('invokes viewObjectFullContext without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ViewObjectFullContextRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ObjectFullContext(),
+      );
+      client.innerApiCalls.viewObjectFullContext =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.viewObjectFullContext(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes viewObjectFullContext without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ViewObjectFullContextRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ObjectFullContext(),
+      );
+      client.innerApiCalls.viewObjectFullContext =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.viewObjectFullContext(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IObjectFullContext | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes viewObjectFullContext with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ViewObjectFullContextRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.viewObjectFullContext = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.viewObjectFullContext(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.viewObjectFullContext as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes viewObjectFullContext with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ViewObjectFullContextRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.viewObjectFullContext(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('renameFolder', () => {
     it('invokes renameFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3427,7 +3892,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes renameFolder without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3484,7 +3949,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes renameFolder with call error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3518,7 +3983,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes renameFolder with LRO error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3554,7 +4019,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkRenameFolderProgress without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3562,8 +4027,8 @@ describe('v2.StorageControlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRenameFolderProgress(
@@ -3576,7 +4041,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkRenameFolderProgress with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3594,7 +4059,7 @@ describe('v2.StorageControlClient', () => {
   describe('deleteFolderRecursive', () => {
     it('invokes deleteFolderRecursive without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3630,7 +4095,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolderRecursive without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3687,7 +4152,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolderRecursive with call error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3724,7 +4189,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes deleteFolderRecursive with LRO error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3760,7 +4225,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkDeleteFolderRecursiveProgress without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3768,8 +4233,8 @@ describe('v2.StorageControlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFolderRecursiveProgress(
@@ -3782,7 +4247,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkDeleteFolderRecursiveProgress with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3803,7 +4268,7 @@ describe('v2.StorageControlClient', () => {
   describe('createAnywhereCache', () => {
     it('invokes createAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3838,7 +4303,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3894,7 +4359,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createAnywhereCache with call error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3927,7 +4392,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes createAnywhereCache with LRO error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3962,7 +4427,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkCreateAnywhereCacheProgress without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3970,8 +4435,8 @@ describe('v2.StorageControlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAnywhereCacheProgress(
@@ -3984,7 +4449,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkCreateAnywhereCacheProgress with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4005,7 +4470,7 @@ describe('v2.StorageControlClient', () => {
   describe('updateAnywhereCache', () => {
     it('invokes updateAnywhereCache without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4507,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes updateAnywhereCache without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4100,7 +4565,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes updateAnywhereCache with call error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4135,7 +4600,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes updateAnywhereCache with LRO error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4172,7 +4637,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkUpdateAnywhereCacheProgress without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4180,8 +4645,8 @@ describe('v2.StorageControlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAnywhereCacheProgress(
@@ -4194,7 +4659,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes checkUpdateAnywhereCacheProgress with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4212,10 +4677,628 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('createRapidCache', () => {
+    it('invokes createRapidCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateRapidCacheRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRapidCache =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createRapidCache(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes createRapidCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateRapidCacheRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createRapidCache =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createRapidCache(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.storage.control.v2.IRapidCache,
+              protos.google.storage.control.v2.ICreateRapidCacheMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.ICreateRapidCacheMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes createRapidCache with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateRapidCacheRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRapidCache = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createRapidCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes createRapidCache with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateRapidCacheRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRapidCache = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createRapidCache(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes checkCreateRapidCacheProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateRapidCacheProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateRapidCacheProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateRapidCacheProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateRapidCache', () => {
+    it('invokes updateRapidCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateRapidCacheRequest(),
+      );
+      request.rapidCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.rapidCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateRapidCache =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateRapidCache(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateRapidCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateRapidCacheRequest(),
+      );
+      request.rapidCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.rapidCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateRapidCache =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateRapidCache(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.storage.control.v2.IRapidCache,
+              protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IUpdateRapidCacheMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateRapidCache with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateRapidCacheRequest(),
+      );
+      request.rapidCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.rapidCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRapidCache = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateRapidCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes updateRapidCache with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateRapidCacheRequest(),
+      );
+      request.rapidCache = {};
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.rapidCache.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRapidCache = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateRapidCache(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.updateRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes checkUpdateRapidCacheProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateRapidCacheProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateRapidCacheProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateRapidCacheProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('disableRapidCache', () => {
+    it('invokes disableRapidCache without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.disableRapidCache =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.disableRapidCache(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.disableRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes disableRapidCache without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.disableRapidCache =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.disableRapidCache(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.storage.control.v2.IRapidCache,
+              protos.google.storage.control.v2.IDisableRapidCacheMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.storage.control.v2.IRapidCache,
+        protos.google.storage.control.v2.IDisableRapidCacheMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.disableRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes disableRapidCache with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.disableRapidCache = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.disableRapidCache(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.disableRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes disableRapidCache with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DisableRapidCacheRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.disableRapidCache = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.disableRapidCache(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableRapidCache as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.disableRapidCache as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes checkDisableRapidCacheProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDisableRapidCacheProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDisableRapidCacheProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDisableRapidCacheProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listFolders', () => {
     it('invokes listFolders without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4241,11 +5324,16 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.listFolders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listFolders as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes listFolders without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4287,11 +5375,16 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.listFolders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listFolders as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes listFolders with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4315,11 +5408,16 @@ describe('v2.StorageControlClient', () => {
         client.innerApiCalls.listFolders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listFolders as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
     });
 
     it('invokes listFoldersStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4362,15 +5460,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFoldersStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4410,15 +5508,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFolders without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4450,15 +5548,21 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+      assert.match(
+        (client.descriptors.page.listFolders.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1].requestId,
+        /[a-z0-9-]{36}/,
       );
     });
 
     it('uses async iteration with listFolders with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4489,9 +5593,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+      assert.match(
+        (client.descriptors.page.listFolders.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1].requestId,
+        /[a-z0-9-]{36}/,
       );
     });
   });
@@ -4499,7 +5609,7 @@ describe('v2.StorageControlClient', () => {
   describe('listManagedFolders', () => {
     it('invokes listManagedFolders without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4541,7 +5651,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listManagedFolders without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4598,7 +5708,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listManagedFolders with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4631,7 +5741,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listManagedFoldersStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4680,15 +5790,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listManagedFoldersStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4726,15 +5836,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listManagedFolders without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,9 +5882,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -4786,7 +5896,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listManagedFolders with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4815,9 +5925,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -4831,7 +5941,7 @@ describe('v2.StorageControlClient', () => {
   describe('listAnywhereCaches', () => {
     it('invokes listAnywhereCaches without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4873,7 +5983,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listAnywhereCaches without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4930,7 +6040,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listAnywhereCaches with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4963,7 +6073,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listAnywhereCachesStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5012,15 +6122,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnywhereCachesStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5058,15 +6168,15 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnywhereCaches without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5104,9 +6214,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -5118,7 +6228,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listAnywhereCaches with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5147,9 +6257,9 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
       assert.match(
         (
@@ -5160,10 +6270,341 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('listRapidCaches', () => {
+    it('invokes listRapidCaches without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+      ];
+      client.innerApiCalls.listRapidCaches = stubSimpleCall(expectedResponse);
+      const [response] = await client.listRapidCaches(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listRapidCaches as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes listRapidCaches without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+      ];
+      client.innerApiCalls.listRapidCaches =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRapidCaches(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IRapidCache[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listRapidCaches as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes listRapidCaches with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRapidCaches = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listRapidCaches(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRapidCaches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listRapidCaches as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes listRapidCachesStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+      ];
+      client.descriptors.page.listRapidCaches.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRapidCachesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.RapidCache[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.RapidCache) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listRapidCaches.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRapidCaches, request),
+      );
+      assert(
+        (client.descriptors.page.listRapidCaches.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listRapidCachesStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRapidCaches.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRapidCachesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.RapidCache[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.RapidCache) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listRapidCaches.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRapidCaches, request),
+      );
+      assert(
+        (client.descriptors.page.listRapidCaches.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listRapidCaches without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.RapidCache(),
+        ),
+      ];
+      client.descriptors.page.listRapidCaches.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IRapidCache[] = [];
+      const iterable = client.listRapidCachesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRapidCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listRapidCaches.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+      assert.match(
+        (
+          client.descriptors.page.listRapidCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('uses async iteration with listRapidCaches with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListRapidCachesRequest(),
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRapidCaches.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRapidCachesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IRapidCache[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRapidCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listRapidCaches.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+      assert.match(
+        (
+          client.descriptors.page.listRapidCaches.asyncIterate as SinonStub
+        ).getCall(0).args[1].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+  });
+
   describe('listIntelligenceFindings', () => {
     it('invokes listIntelligenceFindings without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5203,7 +6644,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindings without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5235,8 +6676,7 @@ describe('v2.StorageControlClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.storage.control.v2.IIntelligenceFinding[]
-              | null,
+              protos.google.storage.control.v2.IIntelligenceFinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5260,7 +6700,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindings with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5294,7 +6734,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingsStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5361,7 +6801,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingsStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5417,7 +6857,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listIntelligenceFindings without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5471,7 +6911,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listIntelligenceFindings with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5518,7 +6958,7 @@ describe('v2.StorageControlClient', () => {
   describe('summarizeIntelligenceFindings', () => {
     it('invokes summarizeIntelligenceFindings without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5558,7 +6998,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes summarizeIntelligenceFindings without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5613,7 +7053,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes summarizeIntelligenceFindings with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5647,7 +7087,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes summarizeIntelligenceFindingsStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5716,7 +7156,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes summarizeIntelligenceFindingsStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5774,7 +7214,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with summarizeIntelligenceFindings without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5827,7 +7267,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with summarizeIntelligenceFindings with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5874,7 +7314,7 @@ describe('v2.StorageControlClient', () => {
   describe('listIntelligenceFindingRevisions', () => {
     it('invokes listIntelligenceFindingRevisions without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5914,7 +7354,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingRevisions without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5971,7 +7411,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingRevisions with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6005,7 +7445,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingRevisionsStream without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6077,7 +7517,7 @@ describe('v2.StorageControlClient', () => {
 
     it('invokes listIntelligenceFindingRevisionsStream with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6138,7 +7578,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listIntelligenceFindingRevisions without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6192,7 +7632,7 @@ describe('v2.StorageControlClient', () => {
 
     it('uses async iteration with listIntelligenceFindingRevisions with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6238,7 +7678,7 @@ describe('v2.StorageControlClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6259,7 +7699,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6287,7 +7727,7 @@ describe('v2.StorageControlClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6297,7 +7737,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6321,7 +7761,7 @@ describe('v2.StorageControlClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6343,7 +7783,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6371,7 +7811,7 @@ describe('v2.StorageControlClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6381,7 +7821,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6405,7 +7845,7 @@ describe('v2.StorageControlClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6427,7 +7867,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6455,7 +7895,7 @@ describe('v2.StorageControlClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6465,7 +7905,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6489,7 +7929,7 @@ describe('v2.StorageControlClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6524,7 +7964,7 @@ describe('v2.StorageControlClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6560,7 +8000,7 @@ describe('v2.StorageControlClient', () => {
         anywhere_cache: 'anywhereCacheValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6623,7 +8063,7 @@ describe('v2.StorageControlClient', () => {
         bucket: 'bucketValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6673,7 +8113,7 @@ describe('v2.StorageControlClient', () => {
         folder: 'folderValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6736,7 +8176,7 @@ describe('v2.StorageControlClient', () => {
         location: 'locationValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6800,7 +8240,7 @@ describe('v2.StorageControlClient', () => {
         intelligence_finding: 'intelligenceFindingValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6879,7 +8319,7 @@ describe('v2.StorageControlClient', () => {
         revision: 'revisionValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6973,7 +8413,7 @@ describe('v2.StorageControlClient', () => {
         location: 'locationValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7023,7 +8463,7 @@ describe('v2.StorageControlClient', () => {
         managed_folder: 'managedFolderValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7079,6 +8519,70 @@ describe('v2.StorageControlClient', () => {
       });
     });
 
+    describe('object', async () => {
+      const fakePath = '/rendered/path/object';
+      const expectedParameters = {
+        project: 'projectValue',
+        bucket: 'bucketValue',
+        object: 'objectValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.objectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.objectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('objectPath', () => {
+        const result = client.objectPath(
+          'projectValue',
+          'bucketValue',
+          'objectValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.objectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromObjectName', () => {
+        const result = client.matchProjectFromObjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.objectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBucketFromObjectName', () => {
+        const result = client.matchBucketFromObjectName(fakePath);
+        assert.strictEqual(result, 'bucketValue');
+        assert(
+          (client.pathTemplates.objectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchObjectFromObjectName', () => {
+        const result = client.matchObjectFromObjectName(fakePath);
+        assert.strictEqual(result, 'objectValue');
+        assert(
+          (client.pathTemplates.objectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('orgLocationIntelligenceConfig', async () => {
       const fakePath = '/rendered/path/orgLocationIntelligenceConfig';
       const expectedParameters = {
@@ -7086,7 +8590,7 @@ describe('v2.StorageControlClient', () => {
         location: 'locationValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7146,7 +8650,7 @@ describe('v2.StorageControlClient', () => {
         project: 'projectValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7185,7 +8689,7 @@ describe('v2.StorageControlClient', () => {
         location: 'locationValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7243,6 +8747,70 @@ describe('v2.StorageControlClient', () => {
       });
     });
 
+    describe('rapidCache', async () => {
+      const fakePath = '/rendered/path/rapidCache';
+      const expectedParameters = {
+        project: 'projectValue',
+        bucket: 'bucketValue',
+        rapid_cache: 'rapidCacheValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.rapidCachePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.rapidCachePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('rapidCachePath', () => {
+        const result = client.rapidCachePath(
+          'projectValue',
+          'bucketValue',
+          'rapidCacheValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.rapidCachePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRapidCacheName', () => {
+        const result = client.matchProjectFromRapidCacheName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.rapidCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBucketFromRapidCacheName', () => {
+        const result = client.matchBucketFromRapidCacheName(fakePath);
+        assert.strictEqual(result, 'bucketValue');
+        assert(
+          (client.pathTemplates.rapidCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRapidCacheFromRapidCacheName', () => {
+        const result = client.matchRapidCacheFromRapidCacheName(fakePath);
+        assert.strictEqual(result, 'rapidCacheValue');
+        assert(
+          (client.pathTemplates.rapidCachePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('storageLayout', async () => {
       const fakePath = '/rendered/path/storageLayout';
       const expectedParameters = {
@@ -7250,7 +8818,7 @@ describe('v2.StorageControlClient', () => {
         bucket: 'bucketValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -783,7 +783,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSampleQuery request %j', request);
+    this._log.debug('getSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISampleQuery,
@@ -794,7 +794,7 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSampleQuery response %j', response);
+          this._log.debug('getSampleQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -809,7 +809,7 @@ export class SampleQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSampleQuery response %j', response);
+          this._log.debug('getSampleQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -949,7 +949,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSampleQuery request %j', request);
+    this._log.debug('createSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISampleQuery,
@@ -960,7 +960,7 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSampleQuery response %j', response);
+          this._log.debug('createSampleQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -975,7 +975,7 @@ export class SampleQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSampleQuery response %j', response);
+          this._log.debug('createSampleQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1102,7 +1102,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSampleQuery request %j', request);
+    this._log.debug('updateSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISampleQuery,
@@ -1113,7 +1113,7 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSampleQuery response %j', response);
+          this._log.debug('updateSampleQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1128,7 +1128,7 @@ export class SampleQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSampleQuery response %j', response);
+          this._log.debug('updateSampleQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1254,7 +1254,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSampleQuery request %j', request);
+    this._log.debug('deleteSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1265,7 +1265,7 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSampleQuery response %j', response);
+          this._log.debug('deleteSampleQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1280,7 +1280,7 @@ export class SampleQueryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSampleQuery response %j', response);
+          this._log.debug('deleteSampleQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1435,11 +1435,11 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importSampleQueries response %j', rawResponse);
+          this._log.debug('importSampleQueries response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importSampleQueries request %j', request);
+    this._log.debug('importSampleQueries request %j', request);
     return this.innerApiCalls
       .importSampleQueries(request, options, wrappedCallback)
       ?.then(
@@ -1451,7 +1451,7 @@ export class SampleQueryServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importSampleQueries response %j', rawResponse);
+          this._log.debug('importSampleQueries response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1619,11 +1619,11 @@ export class SampleQueryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSampleQueries values %j', values);
+          this._log.debug('listSampleQueries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSampleQueries request %j', request);
+    this._log.debug('listSampleQueries request %j', request);
     return this.innerApiCalls
       .listSampleQueries(request, options, wrappedCallback)
       ?.then(
@@ -1632,7 +1632,7 @@ export class SampleQueryServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListSampleQueriesRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListSampleQueriesResponse,
         ]) => {
-          this._log.info('listSampleQueries values %j', response);
+          this._log.debug('listSampleQueries values %j', response);
           return [response, input, output];
         },
       );
@@ -1696,7 +1696,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSampleQueries stream %j', request);
+    this._log.debug('listSampleQueries stream %j', request);
     return this.descriptors.page.listSampleQueries.createStream(
       this.innerApiCalls.listSampleQueries as GaxCall,
       request,
@@ -1765,7 +1765,7 @@ export class SampleQueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSampleQueries iterate %j', request);
+    this._log.debug('listSampleQueries iterate %j', request);
     return this.descriptors.page.listSampleQueries.asyncIterate(
       this.innerApiCalls['listSampleQueries'] as GaxCall,
       request as {},

@@ -2402,7 +2402,7 @@ export class PersistentResourceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPersistentResource request %j', request);
+    this._log.debug('getPersistentResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IPersistentResource,
@@ -2413,7 +2413,7 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPersistentResource response %j', response);
+          this._log.debug('getPersistentResource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2428,7 +2428,7 @@ export class PersistentResourceServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPersistentResource response %j', response);
+          this._log.debug('getPersistentResource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2572,11 +2572,11 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPersistentResource response %j', rawResponse);
+          this._log.debug('createPersistentResource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPersistentResource request %j', request);
+    this._log.debug('createPersistentResource request %j', request);
     return this.innerApiCalls
       .createPersistentResource(request, options, wrappedCallback)
       ?.then(
@@ -2588,7 +2588,7 @@ export class PersistentResourceServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPersistentResource response %j', rawResponse);
+          this._log.debug('createPersistentResource response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2743,11 +2743,11 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePersistentResource response %j', rawResponse);
+          this._log.debug('deletePersistentResource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePersistentResource request %j', request);
+    this._log.debug('deletePersistentResource request %j', request);
     return this.innerApiCalls
       .deletePersistentResource(request, options, wrappedCallback)
       ?.then(
@@ -2759,7 +2759,7 @@ export class PersistentResourceServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePersistentResource response %j', rawResponse);
+          this._log.debug('deletePersistentResource response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2919,11 +2919,11 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updatePersistentResource response %j', rawResponse);
+          this._log.debug('updatePersistentResource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updatePersistentResource request %j', request);
+    this._log.debug('updatePersistentResource request %j', request);
     return this.innerApiCalls
       .updatePersistentResource(request, options, wrappedCallback)
       ?.then(
@@ -2935,7 +2935,7 @@ export class PersistentResourceServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePersistentResource response %j', rawResponse);
+          this._log.debug('updatePersistentResource response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3090,11 +3090,11 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rebootPersistentResource response %j', rawResponse);
+          this._log.debug('rebootPersistentResource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rebootPersistentResource request %j', request);
+    this._log.debug('rebootPersistentResource request %j', request);
     return this.innerApiCalls
       .rebootPersistentResource(request, options, wrappedCallback)
       ?.then(
@@ -3106,7 +3106,7 @@ export class PersistentResourceServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rebootPersistentResource response %j', rawResponse);
+          this._log.debug('rebootPersistentResource response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3257,11 +3257,11 @@ export class PersistentResourceServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPersistentResources values %j', values);
+          this._log.debug('listPersistentResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPersistentResources request %j', request);
+    this._log.debug('listPersistentResources request %j', request);
     return this.innerApiCalls
       .listPersistentResources(request, options, wrappedCallback)
       ?.then(
@@ -3270,7 +3270,7 @@ export class PersistentResourceServiceClient {
           protos.google.cloud.aiplatform.v1.IListPersistentResourcesRequest | null,
           protos.google.cloud.aiplatform.v1.IListPersistentResourcesResponse,
         ]) => {
-          this._log.info('listPersistentResources values %j', response);
+          this._log.debug('listPersistentResources values %j', response);
           return [response, input, output];
         },
       );
@@ -3318,7 +3318,7 @@ export class PersistentResourceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPersistentResources stream %j', request);
+    this._log.debug('listPersistentResources stream %j', request);
     return this.descriptors.page.listPersistentResources.createStream(
       this.innerApiCalls.listPersistentResources as GaxCall,
       request,
@@ -3371,7 +3371,7 @@ export class PersistentResourceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPersistentResources iterate %j', request);
+    this._log.debug('listPersistentResources iterate %j', request);
     return this.descriptors.page.listPersistentResources.asyncIterate(
       this.innerApiCalls['listPersistentResources'] as GaxCall,
       request as {},

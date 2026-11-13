@@ -627,11 +627,11 @@ export class RuleExecutionErrorServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRuleExecutionErrors values %j', values);
+          this._log.debug('listRuleExecutionErrors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRuleExecutionErrors request %j', request);
+    this._log.debug('listRuleExecutionErrors request %j', request);
     return this.innerApiCalls
       .listRuleExecutionErrors(request, options, wrappedCallback)
       ?.then(
@@ -640,7 +640,7 @@ export class RuleExecutionErrorServiceClient {
           protos.google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest | null,
           protos.google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse,
         ]) => {
-          this._log.info('listRuleExecutionErrors values %j', response);
+          this._log.debug('listRuleExecutionErrors values %j', response);
           return [response, input, output];
         },
       );
@@ -714,7 +714,7 @@ export class RuleExecutionErrorServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleExecutionErrors stream %j', request);
+    this._log.debug('listRuleExecutionErrors stream %j', request);
     return this.descriptors.page.listRuleExecutionErrors.createStream(
       this.innerApiCalls.listRuleExecutionErrors as GaxCall,
       request,
@@ -793,7 +793,7 @@ export class RuleExecutionErrorServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleExecutionErrors iterate %j', request);
+    this._log.debug('listRuleExecutionErrors iterate %j', request);
     return this.descriptors.page.listRuleExecutionErrors.asyncIterate(
       this.innerApiCalls['listRuleExecutionErrors'] as GaxCall,
       request as {},

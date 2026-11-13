@@ -667,7 +667,7 @@ export class BatchControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBatch request %j', request);
+    this._log.debug('getBatch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IBatch,
@@ -676,7 +676,7 @@ export class BatchControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBatch response %j', response);
+          this._log.debug('getBatch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -688,7 +688,7 @@ export class BatchControllerClient {
           protos.google.cloud.dataproc.v1.IGetBatchRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBatch response %j', response);
+          this._log.debug('getBatch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -798,7 +798,7 @@ export class BatchControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBatch request %j', request);
+    this._log.debug('deleteBatch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -809,7 +809,7 @@ export class BatchControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBatch response %j', response);
+          this._log.debug('deleteBatch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -821,7 +821,7 @@ export class BatchControllerClient {
           protos.google.cloud.dataproc.v1.IDeleteBatchRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBatch response %j', response);
+          this._log.debug('deleteBatch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -975,11 +975,11 @@ export class BatchControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createBatch response %j', rawResponse);
+          this._log.debug('createBatch response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBatch request %j', request);
+    this._log.debug('createBatch request %j', request);
     return this.innerApiCalls
       .createBatch(request, options, wrappedCallback)
       ?.then(
@@ -991,7 +991,7 @@ export class BatchControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBatch response %j', rawResponse);
+          this._log.debug('createBatch response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1158,11 +1158,11 @@ export class BatchControllerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBatches values %j', values);
+          this._log.debug('listBatches values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBatches request %j', request);
+    this._log.debug('listBatches request %j', request);
     return this.innerApiCalls
       .listBatches(request, options, wrappedCallback)
       ?.then(
@@ -1171,7 +1171,7 @@ export class BatchControllerClient {
           protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
           protos.google.cloud.dataproc.v1.IListBatchesResponse,
         ]) => {
-          this._log.info('listBatches values %j', response);
+          this._log.debug('listBatches values %j', response);
           return [response, input, output];
         },
       );
@@ -1241,7 +1241,7 @@ export class BatchControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBatches stream %j', request);
+    this._log.debug('listBatches stream %j', request);
     return this.descriptors.page.listBatches.createStream(
       this.innerApiCalls.listBatches as GaxCall,
       request,
@@ -1316,7 +1316,7 @@ export class BatchControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBatches iterate %j', request);
+    this._log.debug('listBatches iterate %j', request);
     return this.descriptors.page.listBatches.asyncIterate(
       this.innerApiCalls['listBatches'] as GaxCall,
       request as {},

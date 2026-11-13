@@ -661,7 +661,7 @@ export class LlmUtilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('countTokens request %j', request);
+    this._log.debug('countTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.ICountTokensResponse,
@@ -672,7 +672,7 @@ export class LlmUtilityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('countTokens response %j', response);
+          this._log.debug('countTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -684,7 +684,7 @@ export class LlmUtilityServiceClient {
           protos.google.cloud.aiplatform.v1.ICountTokensRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('countTokens response %j', response);
+          this._log.debug('countTokens response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -806,7 +806,7 @@ export class LlmUtilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeTokens request %j', request);
+    this._log.debug('computeTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IComputeTokensResponse,
@@ -817,7 +817,7 @@ export class LlmUtilityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('computeTokens response %j', response);
+          this._log.debug('computeTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -829,7 +829,7 @@ export class LlmUtilityServiceClient {
           protos.google.cloud.aiplatform.v1.IComputeTokensRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('computeTokens response %j', response);
+          this._log.debug('computeTokens response %j', response);
           return [response, options, rawResponse];
         },
       )

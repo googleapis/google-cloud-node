@@ -833,7 +833,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEvaluation request %j', request);
+    this._log.debug('getEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IEvaluation,
@@ -844,7 +844,7 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEvaluation response %j', response);
+          this._log.debug('getEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -859,7 +859,7 @@ export class EvaluationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEvaluation response %j', response);
+          this._log.debug('getEvaluation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1001,11 +1001,11 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEvaluation response %j', rawResponse);
+          this._log.debug('createEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEvaluation request %j', request);
+    this._log.debug('createEvaluation request %j', request);
     return this.innerApiCalls
       .createEvaluation(request, options, wrappedCallback)
       ?.then(
@@ -1017,7 +1017,7 @@ export class EvaluationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEvaluation response %j', rawResponse);
+          this._log.debug('createEvaluation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1185,11 +1185,11 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEvaluations values %j', values);
+          this._log.debug('listEvaluations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEvaluations request %j', request);
+    this._log.debug('listEvaluations request %j', request);
     return this.innerApiCalls
       .listEvaluations(request, options, wrappedCallback)
       ?.then(
@@ -1198,7 +1198,7 @@ export class EvaluationServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationsRequest | null,
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationsResponse,
         ]) => {
-          this._log.info('listEvaluations values %j', response);
+          this._log.debug('listEvaluations values %j', response);
           return [response, input, output];
         },
       );
@@ -1262,7 +1262,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvaluations stream %j', request);
+    this._log.debug('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
       request,
@@ -1331,7 +1331,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvaluations iterate %j', request);
+    this._log.debug('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
@@ -1466,11 +1466,11 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEvaluationResults values %j', values);
+          this._log.debug('listEvaluationResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEvaluationResults request %j', request);
+    this._log.debug('listEvaluationResults request %j', request);
     return this.innerApiCalls
       .listEvaluationResults(request, options, wrappedCallback)
       ?.then(
@@ -1479,7 +1479,7 @@ export class EvaluationServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsRequest | null,
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsResponse,
         ]) => {
-          this._log.info('listEvaluationResults values %j', response);
+          this._log.debug('listEvaluationResults values %j', response);
           return [response, input, output];
         },
       );
@@ -1543,7 +1543,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvaluationResults stream %j', request);
+    this._log.debug('listEvaluationResults stream %j', request);
     return this.descriptors.page.listEvaluationResults.createStream(
       this.innerApiCalls.listEvaluationResults as GaxCall,
       request,
@@ -1612,7 +1612,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvaluationResults iterate %j', request);
+    this._log.debug('listEvaluationResults iterate %j', request);
     return this.descriptors.page.listEvaluationResults.asyncIterate(
       this.innerApiCalls['listEvaluationResults'] as GaxCall,
       request as {},

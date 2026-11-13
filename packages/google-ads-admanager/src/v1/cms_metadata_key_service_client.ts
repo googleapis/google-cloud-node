@@ -725,7 +725,7 @@ export class CmsMetadataKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCmsMetadataKey request %j', request);
+    this._log.debug('getCmsMetadataKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICmsMetadataKey,
@@ -736,7 +736,7 @@ export class CmsMetadataKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCmsMetadataKey response %j', response);
+          this._log.debug('getCmsMetadataKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -748,7 +748,7 @@ export class CmsMetadataKeyServiceClient {
           protos.google.ads.admanager.v1.IGetCmsMetadataKeyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCmsMetadataKey response %j', response);
+          this._log.debug('getCmsMetadataKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -869,7 +869,7 @@ export class CmsMetadataKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCmsMetadataKeys request %j', request);
+    this._log.debug('batchActivateCmsMetadataKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCmsMetadataKeysResponse,
@@ -880,7 +880,7 @@ export class CmsMetadataKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateCmsMetadataKeys response %j', response);
+          this._log.debug('batchActivateCmsMetadataKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -895,7 +895,7 @@ export class CmsMetadataKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateCmsMetadataKeys response %j', response);
+          this._log.debug('batchActivateCmsMetadataKeys response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1017,7 +1017,7 @@ export class CmsMetadataKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCmsMetadataKeys request %j', request);
+    this._log.debug('batchDeactivateCmsMetadataKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCmsMetadataKeysResponse,
@@ -1028,7 +1028,7 @@ export class CmsMetadataKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCmsMetadataKeys response %j',
             response,
           );
@@ -1046,7 +1046,7 @@ export class CmsMetadataKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCmsMetadataKeys response %j',
             response,
           );
@@ -1210,11 +1210,11 @@ export class CmsMetadataKeyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCmsMetadataKeys values %j', values);
+          this._log.debug('listCmsMetadataKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCmsMetadataKeys request %j', request);
+    this._log.debug('listCmsMetadataKeys request %j', request);
     return this.innerApiCalls
       .listCmsMetadataKeys(request, options, wrappedCallback)
       ?.then(
@@ -1223,7 +1223,7 @@ export class CmsMetadataKeyServiceClient {
           protos.google.ads.admanager.v1.IListCmsMetadataKeysRequest | null,
           protos.google.ads.admanager.v1.IListCmsMetadataKeysResponse,
         ]) => {
-          this._log.info('listCmsMetadataKeys values %j', response);
+          this._log.debug('listCmsMetadataKeys values %j', response);
           return [response, input, output];
         },
       );
@@ -1299,7 +1299,7 @@ export class CmsMetadataKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCmsMetadataKeys stream %j', request);
+    this._log.debug('listCmsMetadataKeys stream %j', request);
     return this.descriptors.page.listCmsMetadataKeys.createStream(
       this.innerApiCalls.listCmsMetadataKeys as GaxCall,
       request,
@@ -1380,7 +1380,7 @@ export class CmsMetadataKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCmsMetadataKeys iterate %j', request);
+    this._log.debug('listCmsMetadataKeys iterate %j', request);
     return this.descriptors.page.listCmsMetadataKeys.asyncIterate(
       this.innerApiCalls['listCmsMetadataKeys'] as GaxCall,
       request as {},

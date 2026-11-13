@@ -724,7 +724,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAdBreak request %j', request);
+    this._log.debug('getAdBreak request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdBreak,
@@ -733,7 +733,7 @@ export class AdBreakServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAdBreak response %j', response);
+          this._log.debug('getAdBreak response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -745,7 +745,7 @@ export class AdBreakServiceClient {
           protos.google.ads.admanager.v1.IGetAdBreakRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAdBreak response %j', response);
+          this._log.debug('getAdBreak response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -879,7 +879,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAdBreak request %j', request);
+    this._log.debug('createAdBreak request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdBreak,
@@ -890,7 +890,7 @@ export class AdBreakServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAdBreak response %j', response);
+          this._log.debug('createAdBreak response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -902,7 +902,7 @@ export class AdBreakServiceClient {
           protos.google.ads.admanager.v1.ICreateAdBreakRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAdBreak response %j', response);
+          this._log.debug('createAdBreak response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1014,7 +1014,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAdBreak request %j', request);
+    this._log.debug('updateAdBreak request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdBreak,
@@ -1025,7 +1025,7 @@ export class AdBreakServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAdBreak response %j', response);
+          this._log.debug('updateAdBreak response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1037,7 +1037,7 @@ export class AdBreakServiceClient {
           protos.google.ads.admanager.v1.IUpdateAdBreakRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAdBreak response %j', response);
+          this._log.debug('updateAdBreak response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1153,7 +1153,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAdBreak request %j', request);
+    this._log.debug('deleteAdBreak request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1164,7 +1164,7 @@ export class AdBreakServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAdBreak response %j', response);
+          this._log.debug('deleteAdBreak response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1176,7 +1176,7 @@ export class AdBreakServiceClient {
           protos.google.ads.admanager.v1.IDeleteAdBreakRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAdBreak response %j', response);
+          this._log.debug('deleteAdBreak response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1324,11 +1324,11 @@ export class AdBreakServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAdBreaks values %j', values);
+          this._log.debug('listAdBreaks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAdBreaks request %j', request);
+    this._log.debug('listAdBreaks request %j', request);
     return this.innerApiCalls
       .listAdBreaks(request, options, wrappedCallback)
       ?.then(
@@ -1337,7 +1337,7 @@ export class AdBreakServiceClient {
           protos.google.ads.admanager.v1.IListAdBreaksRequest | null,
           protos.google.ads.admanager.v1.IListAdBreaksResponse,
         ]) => {
-          this._log.info('listAdBreaks values %j', response);
+          this._log.debug('listAdBreaks values %j', response);
           return [response, input, output];
         },
       );
@@ -1402,7 +1402,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdBreaks stream %j', request);
+    this._log.debug('listAdBreaks stream %j', request);
     return this.descriptors.page.listAdBreaks.createStream(
       this.innerApiCalls.listAdBreaks as GaxCall,
       request,
@@ -1472,7 +1472,7 @@ export class AdBreakServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdBreaks iterate %j', request);
+    this._log.debug('listAdBreaks iterate %j', request);
     return this.descriptors.page.listAdBreaks.asyncIterate(
       this.innerApiCalls['listAdBreaks'] as GaxCall,
       request as {},

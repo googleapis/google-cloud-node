@@ -664,7 +664,7 @@ export class NodeGroupControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNodeGroup request %j', request);
+    this._log.debug('getNodeGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.INodeGroup,
@@ -675,7 +675,7 @@ export class NodeGroupControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNodeGroup response %j', response);
+          this._log.debug('getNodeGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -687,7 +687,7 @@ export class NodeGroupControllerClient {
           protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getNodeGroup response %j', response);
+          this._log.debug('getNodeGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -846,11 +846,11 @@ export class NodeGroupControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createNodeGroup response %j', rawResponse);
+          this._log.debug('createNodeGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createNodeGroup request %j', request);
+    this._log.debug('createNodeGroup request %j', request);
     return this.innerApiCalls
       .createNodeGroup(request, options, wrappedCallback)
       ?.then(
@@ -862,7 +862,7 @@ export class NodeGroupControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createNodeGroup response %j', rawResponse);
+          this._log.debug('createNodeGroup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1049,11 +1049,11 @@ export class NodeGroupControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('resizeNodeGroup response %j', rawResponse);
+          this._log.debug('resizeNodeGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('resizeNodeGroup request %j', request);
+    this._log.debug('resizeNodeGroup request %j', request);
     return this.innerApiCalls
       .resizeNodeGroup(request, options, wrappedCallback)
       ?.then(
@@ -1065,7 +1065,7 @@ export class NodeGroupControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('resizeNodeGroup response %j', rawResponse);
+          this._log.debug('resizeNodeGroup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

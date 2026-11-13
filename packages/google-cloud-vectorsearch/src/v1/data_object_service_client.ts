@@ -492,7 +492,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDataObject request %j', request);
+    this._log.debug('createDataObject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IDataObject,
@@ -503,7 +503,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDataObject response %j', response);
+          this._log.debug('createDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -518,7 +518,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDataObject response %j', response);
+          this._log.debug('createDataObject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -641,7 +641,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateDataObjects request %j', request);
+    this._log.debug('batchCreateDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IBatchCreateDataObjectsResponse,
@@ -652,7 +652,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateDataObjects response %j', response);
+          this._log.debug('batchCreateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -667,7 +667,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateDataObjects response %j', response);
+          this._log.debug('batchCreateDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataObject request %j', request);
+    this._log.debug('getDataObject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IDataObject,
@@ -791,7 +791,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataObject response %j', response);
+          this._log.debug('getDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -803,7 +803,7 @@ export class DataObjectServiceClient {
           protos.google.cloud.vectorsearch.v1.IGetDataObjectRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataObject response %j', response);
+          this._log.debug('getDataObject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -917,7 +917,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataObject request %j', request);
+    this._log.debug('updateDataObject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IDataObject,
@@ -928,7 +928,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataObject response %j', response);
+          this._log.debug('updateDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -943,7 +943,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataObject response %j', response);
+          this._log.debug('updateDataObject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1066,7 +1066,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateDataObjects request %j', request);
+    this._log.debug('batchUpdateDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IBatchUpdateDataObjectsResponse,
@@ -1077,7 +1077,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateDataObjects response %j', response);
+          this._log.debug('batchUpdateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1092,7 +1092,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateDataObjects response %j', response);
+          this._log.debug('batchUpdateDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1209,7 +1209,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDataObject request %j', request);
+    this._log.debug('deleteDataObject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1220,7 +1220,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDataObject response %j', response);
+          this._log.debug('deleteDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1235,7 +1235,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataObject response %j', response);
+          this._log.debug('deleteDataObject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1356,7 +1356,7 @@ export class DataObjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteDataObjects request %j', request);
+    this._log.debug('batchDeleteDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1367,7 +1367,7 @@ export class DataObjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteDataObjects response %j', response);
+          this._log.debug('batchDeleteDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1382,7 +1382,7 @@ export class DataObjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteDataObjects response %j', response);
+          this._log.debug('batchDeleteDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )

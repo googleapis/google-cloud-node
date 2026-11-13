@@ -718,7 +718,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAdSpot request %j', request);
+    this._log.debug('getAdSpot request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdSpot,
@@ -727,7 +727,7 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAdSpot response %j', response);
+          this._log.debug('getAdSpot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.IGetAdSpotRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAdSpot response %j', response);
+          this._log.debug('getAdSpot response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAdSpot request %j', request);
+    this._log.debug('createAdSpot request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdSpot,
@@ -858,7 +858,7 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAdSpot response %j', response);
+          this._log.debug('createAdSpot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -870,7 +870,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.ICreateAdSpotRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAdSpot response %j', response);
+          this._log.debug('createAdSpot response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -987,7 +987,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateAdSpots request %j', request);
+    this._log.debug('batchCreateAdSpots request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateAdSpotsResponse,
@@ -998,7 +998,7 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateAdSpots response %j', response);
+          this._log.debug('batchCreateAdSpots response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1010,7 +1010,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateAdSpotsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateAdSpots response %j', response);
+          this._log.debug('batchCreateAdSpots response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1119,7 +1119,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAdSpot request %j', request);
+    this._log.debug('updateAdSpot request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IAdSpot,
@@ -1130,7 +1130,7 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAdSpot response %j', response);
+          this._log.debug('updateAdSpot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1142,7 +1142,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.IUpdateAdSpotRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAdSpot response %j', response);
+          this._log.debug('updateAdSpot response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1259,7 +1259,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateAdSpots request %j', request);
+    this._log.debug('batchUpdateAdSpots request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateAdSpotsResponse,
@@ -1270,7 +1270,7 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateAdSpots response %j', response);
+          this._log.debug('batchUpdateAdSpots response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1282,7 +1282,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateAdSpotsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateAdSpots response %j', response);
+          this._log.debug('batchUpdateAdSpots response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1439,11 +1439,11 @@ export class AdSpotServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAdSpots values %j', values);
+          this._log.debug('listAdSpots values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAdSpots request %j', request);
+    this._log.debug('listAdSpots request %j', request);
     return this.innerApiCalls
       .listAdSpots(request, options, wrappedCallback)
       ?.then(
@@ -1452,7 +1452,7 @@ export class AdSpotServiceClient {
           protos.google.ads.admanager.v1.IListAdSpotsRequest | null,
           protos.google.ads.admanager.v1.IListAdSpotsResponse,
         ]) => {
-          this._log.info('listAdSpots values %j', response);
+          this._log.debug('listAdSpots values %j', response);
           return [response, input, output];
         },
       );
@@ -1530,7 +1530,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdSpots stream %j', request);
+    this._log.debug('listAdSpots stream %j', request);
     return this.descriptors.page.listAdSpots.createStream(
       this.innerApiCalls.listAdSpots as GaxCall,
       request,
@@ -1613,7 +1613,7 @@ export class AdSpotServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAdSpots iterate %j', request);
+    this._log.debug('listAdSpots iterate %j', request);
     return this.descriptors.page.listAdSpots.asyncIterate(
       this.innerApiCalls['listAdSpots'] as GaxCall,
       request as {},

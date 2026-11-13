@@ -866,7 +866,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getApplication request %j', request);
+    this._log.debug('getApplication request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IApplication,
@@ -877,7 +877,7 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -889,7 +889,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IGetApplicationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -994,7 +994,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IInstance,
@@ -1005,7 +1005,7 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1017,7 +1017,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IGetInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1120,7 +1120,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDraft request %j', request);
+    this._log.debug('getDraft request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IDraft,
@@ -1129,7 +1129,7 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDraft response %j', response);
+          this._log.debug('getDraft response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1141,7 +1141,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IGetDraftRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDraft response %j', response);
+          this._log.debug('getDraft response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1259,7 +1259,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPrebuiltProcessors request %j', request);
+    this._log.debug('listPrebuiltProcessors request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IListPrebuiltProcessorsResponse,
@@ -1270,7 +1270,7 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listPrebuiltProcessors response %j', response);
+          this._log.debug('listPrebuiltProcessors response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1285,7 +1285,7 @@ export class AppPlatformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listPrebuiltProcessors response %j', response);
+          this._log.debug('listPrebuiltProcessors response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1390,7 +1390,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProcessor request %j', request);
+    this._log.debug('getProcessor request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IProcessor,
@@ -1401,7 +1401,7 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProcessor response %j', response);
+          this._log.debug('getProcessor response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1413,7 +1413,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IGetProcessorRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getProcessor response %j', response);
+          this._log.debug('getProcessor response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1566,11 +1566,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createApplication response %j', rawResponse);
+          this._log.debug('createApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createApplication request %j', request);
+    this._log.debug('createApplication request %j', request);
     return this.innerApiCalls
       .createApplication(request, options, wrappedCallback)
       ?.then(
@@ -1582,7 +1582,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createApplication response %j', rawResponse);
+          this._log.debug('createApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1755,11 +1755,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateApplication response %j', rawResponse);
+          this._log.debug('updateApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateApplication request %j', request);
+    this._log.debug('updateApplication request %j', request);
     return this.innerApiCalls
       .updateApplication(request, options, wrappedCallback)
       ?.then(
@@ -1771,7 +1771,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateApplication response %j', rawResponse);
+          this._log.debug('updateApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1942,11 +1942,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteApplication response %j', rawResponse);
+          this._log.debug('deleteApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteApplication request %j', request);
+    this._log.debug('deleteApplication request %j', request);
     return this.innerApiCalls
       .deleteApplication(request, options, wrappedCallback)
       ?.then(
@@ -1958,7 +1958,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteApplication response %j', rawResponse);
+          this._log.debug('deleteApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2133,11 +2133,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deployApplication response %j', rawResponse);
+          this._log.debug('deployApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deployApplication request %j', request);
+    this._log.debug('deployApplication request %j', request);
     return this.innerApiCalls
       .deployApplication(request, options, wrappedCallback)
       ?.then(
@@ -2149,7 +2149,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deployApplication response %j', rawResponse);
+          this._log.debug('deployApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2318,11 +2318,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeployApplication response %j', rawResponse);
+          this._log.debug('undeployApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeployApplication request %j', request);
+    this._log.debug('undeployApplication request %j', request);
     return this.innerApiCalls
       .undeployApplication(request, options, wrappedCallback)
       ?.then(
@@ -2334,7 +2334,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('undeployApplication response %j', rawResponse);
+          this._log.debug('undeployApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2509,11 +2509,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('addApplicationStreamInput response %j', rawResponse);
+          this._log.debug('addApplicationStreamInput response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('addApplicationStreamInput request %j', request);
+    this._log.debug('addApplicationStreamInput request %j', request);
     return this.innerApiCalls
       .addApplicationStreamInput(request, options, wrappedCallback)
       ?.then(
@@ -2525,7 +2525,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('addApplicationStreamInput response %j', rawResponse);
+          this._log.debug('addApplicationStreamInput response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2698,14 +2698,14 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'removeApplicationStreamInput response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('removeApplicationStreamInput request %j', request);
+    this._log.debug('removeApplicationStreamInput request %j', request);
     return this.innerApiCalls
       .removeApplicationStreamInput(request, options, wrappedCallback)
       ?.then(
@@ -2717,7 +2717,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'removeApplicationStreamInput response %j',
             rawResponse,
           );
@@ -2897,14 +2897,14 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateApplicationStreamInput response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateApplicationStreamInput request %j', request);
+    this._log.debug('updateApplicationStreamInput request %j', request);
     return this.innerApiCalls
       .updateApplicationStreamInput(request, options, wrappedCallback)
       ?.then(
@@ -2916,7 +2916,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateApplicationStreamInput response %j',
             rawResponse,
           );
@@ -3093,11 +3093,14 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'createApplicationInstances response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createApplicationInstances request %j', request);
+    this._log.debug('createApplicationInstances request %j', request);
     return this.innerApiCalls
       .createApplicationInstances(request, options, wrappedCallback)
       ?.then(
@@ -3109,7 +3112,10 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'createApplicationInstances response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -3282,11 +3288,14 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'deleteApplicationInstances response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteApplicationInstances request %j', request);
+    this._log.debug('deleteApplicationInstances request %j', request);
     return this.innerApiCalls
       .deleteApplicationInstances(request, options, wrappedCallback)
       ?.then(
@@ -3298,7 +3307,10 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'deleteApplicationInstances response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -3474,11 +3486,14 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'updateApplicationInstances response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateApplicationInstances request %j', request);
+    this._log.debug('updateApplicationInstances request %j', request);
     return this.innerApiCalls
       .updateApplicationInstances(request, options, wrappedCallback)
       ?.then(
@@ -3490,7 +3505,10 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateApplicationInstances response %j', rawResponse);
+          this._log.debug(
+            'updateApplicationInstances response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -3661,11 +3679,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createDraft response %j', rawResponse);
+          this._log.debug('createDraft response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createDraft request %j', request);
+    this._log.debug('createDraft request %j', request);
     return this.innerApiCalls
       .createDraft(request, options, wrappedCallback)
       ?.then(
@@ -3677,7 +3695,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDraft response %j', rawResponse);
+          this._log.debug('createDraft response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3853,11 +3871,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateDraft response %j', rawResponse);
+          this._log.debug('updateDraft response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateDraft request %j', request);
+    this._log.debug('updateDraft request %j', request);
     return this.innerApiCalls
       .updateDraft(request, options, wrappedCallback)
       ?.then(
@@ -3869,7 +3887,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDraft response %j', rawResponse);
+          this._log.debug('updateDraft response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4036,11 +4054,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteDraft response %j', rawResponse);
+          this._log.debug('deleteDraft response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteDraft request %j', request);
+    this._log.debug('deleteDraft request %j', request);
     return this.innerApiCalls
       .deleteDraft(request, options, wrappedCallback)
       ?.then(
@@ -4052,7 +4070,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDraft response %j', rawResponse);
+          this._log.debug('deleteDraft response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4223,11 +4241,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createProcessor response %j', rawResponse);
+          this._log.debug('createProcessor response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createProcessor request %j', request);
+    this._log.debug('createProcessor request %j', request);
     return this.innerApiCalls
       .createProcessor(request, options, wrappedCallback)
       ?.then(
@@ -4239,7 +4257,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createProcessor response %j', rawResponse);
+          this._log.debug('createProcessor response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4412,11 +4430,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateProcessor response %j', rawResponse);
+          this._log.debug('updateProcessor response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateProcessor request %j', request);
+    this._log.debug('updateProcessor request %j', request);
     return this.innerApiCalls
       .updateProcessor(request, options, wrappedCallback)
       ?.then(
@@ -4428,7 +4446,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateProcessor response %j', rawResponse);
+          this._log.debug('updateProcessor response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4595,11 +4613,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteProcessor response %j', rawResponse);
+          this._log.debug('deleteProcessor response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteProcessor request %j', request);
+    this._log.debug('deleteProcessor request %j', request);
     return this.innerApiCalls
       .deleteProcessor(request, options, wrappedCallback)
       ?.then(
@@ -4611,7 +4629,7 @@ export class AppPlatformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteProcessor response %j', rawResponse);
+          this._log.debug('deleteProcessor response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4763,11 +4781,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listApplications values %j', values);
+          this._log.debug('listApplications values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listApplications request %j', request);
+    this._log.debug('listApplications request %j', request);
     return this.innerApiCalls
       .listApplications(request, options, wrappedCallback)
       ?.then(
@@ -4776,7 +4794,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IListApplicationsRequest | null,
           protos.google.cloud.visionai.v1.IListApplicationsResponse,
         ]) => {
-          this._log.info('listApplications values %j', response);
+          this._log.debug('listApplications values %j', response);
           return [response, input, output];
         },
       );
@@ -4825,7 +4843,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApplications stream %j', request);
+    this._log.debug('listApplications stream %j', request);
     return this.descriptors.page.listApplications.createStream(
       this.innerApiCalls.listApplications as GaxCall,
       request,
@@ -4879,7 +4897,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApplications iterate %j', request);
+    this._log.debug('listApplications iterate %j', request);
     return this.descriptors.page.listApplications.asyncIterate(
       this.innerApiCalls['listApplications'] as GaxCall,
       request as {},
@@ -4992,11 +5010,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInstances values %j', values);
+          this._log.debug('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInstances request %j', request);
+    this._log.debug('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
       ?.then(
@@ -5005,7 +5023,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IListInstancesRequest | null,
           protos.google.cloud.visionai.v1.IListInstancesResponse,
         ]) => {
-          this._log.info('listInstances values %j', response);
+          this._log.debug('listInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -5054,7 +5072,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances stream %j', request);
+    this._log.debug('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -5108,7 +5126,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances iterate %j', request);
+    this._log.debug('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -5221,11 +5239,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDrafts values %j', values);
+          this._log.debug('listDrafts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDrafts request %j', request);
+    this._log.debug('listDrafts request %j', request);
     return this.innerApiCalls
       .listDrafts(request, options, wrappedCallback)
       ?.then(
@@ -5234,7 +5252,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IListDraftsRequest | null,
           protos.google.cloud.visionai.v1.IListDraftsResponse,
         ]) => {
-          this._log.info('listDrafts values %j', response);
+          this._log.debug('listDrafts values %j', response);
           return [response, input, output];
         },
       );
@@ -5283,7 +5301,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDrafts stream %j', request);
+    this._log.debug('listDrafts stream %j', request);
     return this.descriptors.page.listDrafts.createStream(
       this.innerApiCalls.listDrafts as GaxCall,
       request,
@@ -5337,7 +5355,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDrafts iterate %j', request);
+    this._log.debug('listDrafts iterate %j', request);
     return this.descriptors.page.listDrafts.asyncIterate(
       this.innerApiCalls['listDrafts'] as GaxCall,
       request as {},
@@ -5456,11 +5474,11 @@ export class AppPlatformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProcessors values %j', values);
+          this._log.debug('listProcessors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProcessors request %j', request);
+    this._log.debug('listProcessors request %j', request);
     return this.innerApiCalls
       .listProcessors(request, options, wrappedCallback)
       ?.then(
@@ -5469,7 +5487,7 @@ export class AppPlatformClient {
           protos.google.cloud.visionai.v1.IListProcessorsRequest | null,
           protos.google.cloud.visionai.v1.IListProcessorsResponse,
         ]) => {
-          this._log.info('listProcessors values %j', response);
+          this._log.debug('listProcessors values %j', response);
           return [response, input, output];
         },
       );
@@ -5518,7 +5536,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProcessors stream %j', request);
+    this._log.debug('listProcessors stream %j', request);
     return this.descriptors.page.listProcessors.createStream(
       this.innerApiCalls.listProcessors as GaxCall,
       request,
@@ -5572,7 +5590,7 @@ export class AppPlatformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProcessors iterate %j', request);
+    this._log.debug('listProcessors iterate %j', request);
     return this.descriptors.page.listProcessors.asyncIterate(
       this.innerApiCalls['listProcessors'] as GaxCall,
       request as {},

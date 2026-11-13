@@ -687,7 +687,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSampleQuerySet request %j', request);
+    this._log.debug('getSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.ISampleQuerySet,
@@ -698,7 +698,7 @@ export class SampleQuerySetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSampleQuerySet response %j', response);
+          this._log.debug('getSampleQuerySet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -713,7 +713,7 @@ export class SampleQuerySetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSampleQuerySet response %j', response);
+          this._log.debug('getSampleQuerySet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -856,7 +856,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSampleQuerySet request %j', request);
+    this._log.debug('createSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.ISampleQuerySet,
@@ -867,7 +867,7 @@ export class SampleQuerySetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSampleQuerySet response %j', response);
+          this._log.debug('createSampleQuerySet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -882,7 +882,7 @@ export class SampleQuerySetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSampleQuerySet response %j', response);
+          this._log.debug('createSampleQuerySet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1011,7 +1011,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSampleQuerySet request %j', request);
+    this._log.debug('updateSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.ISampleQuerySet,
@@ -1022,7 +1022,7 @@ export class SampleQuerySetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSampleQuerySet response %j', response);
+          this._log.debug('updateSampleQuerySet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1037,7 +1037,7 @@ export class SampleQuerySetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSampleQuerySet response %j', response);
+          this._log.debug('updateSampleQuerySet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1166,7 +1166,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSampleQuerySet request %j', request);
+    this._log.debug('deleteSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1177,7 +1177,7 @@ export class SampleQuerySetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSampleQuerySet response %j', response);
+          this._log.debug('deleteSampleQuerySet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1192,7 +1192,7 @@ export class SampleQuerySetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSampleQuerySet response %j', response);
+          this._log.debug('deleteSampleQuerySet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1342,11 +1342,11 @@ export class SampleQuerySetServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSampleQuerySets values %j', values);
+          this._log.debug('listSampleQuerySets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSampleQuerySets request %j', request);
+    this._log.debug('listSampleQuerySets request %j', request);
     return this.innerApiCalls
       .listSampleQuerySets(request, options, wrappedCallback)
       ?.then(
@@ -1355,7 +1355,7 @@ export class SampleQuerySetServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IListSampleQuerySetsRequest | null,
           protos.google.cloud.discoveryengine.v1beta.IListSampleQuerySetsResponse,
         ]) => {
-          this._log.info('listSampleQuerySets values %j', response);
+          this._log.debug('listSampleQuerySets values %j', response);
           return [response, input, output];
         },
       );
@@ -1419,7 +1419,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSampleQuerySets stream %j', request);
+    this._log.debug('listSampleQuerySets stream %j', request);
     return this.descriptors.page.listSampleQuerySets.createStream(
       this.innerApiCalls.listSampleQuerySets as GaxCall,
       request,
@@ -1488,7 +1488,7 @@ export class SampleQuerySetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSampleQuerySets iterate %j', request);
+    this._log.debug('listSampleQuerySets iterate %j', request);
     return this.descriptors.page.listSampleQuerySets.asyncIterate(
       this.innerApiCalls['listSampleQuerySets'] as GaxCall,
       request as {},

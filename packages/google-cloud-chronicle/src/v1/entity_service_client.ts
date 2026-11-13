@@ -572,7 +572,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWatchlist request %j', request);
+    this._log.debug('getWatchlist request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IWatchlist,
@@ -583,7 +583,7 @@ export class EntityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWatchlist response %j', response);
+          this._log.debug('getWatchlist response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -595,7 +595,7 @@ export class EntityServiceClient {
           protos.google.cloud.chronicle.v1.IGetWatchlistRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWatchlist response %j', response);
+          this._log.debug('getWatchlist response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -716,7 +716,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWatchlist request %j', request);
+    this._log.debug('createWatchlist request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IWatchlist,
@@ -727,7 +727,7 @@ export class EntityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWatchlist response %j', response);
+          this._log.debug('createWatchlist response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class EntityServiceClient {
           protos.google.cloud.chronicle.v1.ICreateWatchlistRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWatchlist response %j', response);
+          this._log.debug('createWatchlist response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -856,7 +856,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWatchlist request %j', request);
+    this._log.debug('updateWatchlist request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IWatchlist,
@@ -867,7 +867,7 @@ export class EntityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWatchlist response %j', response);
+          this._log.debug('updateWatchlist response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -879,7 +879,7 @@ export class EntityServiceClient {
           protos.google.cloud.chronicle.v1.IUpdateWatchlistRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWatchlist response %j', response);
+          this._log.debug('updateWatchlist response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -996,7 +996,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWatchlist request %j', request);
+    this._log.debug('deleteWatchlist request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1007,7 +1007,7 @@ export class EntityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWatchlist response %j', response);
+          this._log.debug('deleteWatchlist response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1019,7 +1019,7 @@ export class EntityServiceClient {
           protos.google.cloud.chronicle.v1.IDeleteWatchlistRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWatchlist response %j', response);
+          this._log.debug('deleteWatchlist response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1163,11 +1163,11 @@ export class EntityServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWatchlists values %j', values);
+          this._log.debug('listWatchlists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWatchlists request %j', request);
+    this._log.debug('listWatchlists request %j', request);
     return this.innerApiCalls
       .listWatchlists(request, options, wrappedCallback)
       ?.then(
@@ -1176,7 +1176,7 @@ export class EntityServiceClient {
           protos.google.cloud.chronicle.v1.IListWatchlistsRequest | null,
           protos.google.cloud.chronicle.v1.IListWatchlistsResponse,
         ]) => {
-          this._log.info('listWatchlists values %j', response);
+          this._log.debug('listWatchlists values %j', response);
           return [response, input, output];
         },
       );
@@ -1235,7 +1235,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWatchlists stream %j', request);
+    this._log.debug('listWatchlists stream %j', request);
     return this.descriptors.page.listWatchlists.createStream(
       this.innerApiCalls.listWatchlists as GaxCall,
       request,
@@ -1299,7 +1299,7 @@ export class EntityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWatchlists iterate %j', request);
+    this._log.debug('listWatchlists iterate %j', request);
     return this.descriptors.page.listWatchlists.asyncIterate(
       this.innerApiCalls['listWatchlists'] as GaxCall,
       request as {},

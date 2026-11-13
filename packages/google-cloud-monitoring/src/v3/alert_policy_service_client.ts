@@ -565,7 +565,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAlertPolicy request %j', request);
+    this._log.debug('getAlertPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IAlertPolicy,
@@ -574,7 +574,7 @@ export class AlertPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAlertPolicy response %j', response);
+          this._log.debug('getAlertPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -586,7 +586,7 @@ export class AlertPolicyServiceClient {
           protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAlertPolicy response %j', response);
+          this._log.debug('getAlertPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -711,7 +711,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAlertPolicy request %j', request);
+    this._log.debug('createAlertPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IAlertPolicy,
@@ -722,7 +722,7 @@ export class AlertPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAlertPolicy response %j', response);
+          this._log.debug('createAlertPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -734,7 +734,7 @@ export class AlertPolicyServiceClient {
           protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAlertPolicy response %j', response);
+          this._log.debug('createAlertPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAlertPolicy request %j', request);
+    this._log.debug('deleteAlertPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -858,7 +858,7 @@ export class AlertPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAlertPolicy response %j', response);
+          this._log.debug('deleteAlertPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -870,7 +870,7 @@ export class AlertPolicyServiceClient {
           protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAlertPolicy response %j', response);
+          this._log.debug('deleteAlertPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1007,7 +1007,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAlertPolicy request %j', request);
+    this._log.debug('updateAlertPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IAlertPolicy,
@@ -1018,7 +1018,7 @@ export class AlertPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAlertPolicy response %j', response);
+          this._log.debug('updateAlertPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1030,7 +1030,7 @@ export class AlertPolicyServiceClient {
           protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAlertPolicy response %j', response);
+          this._log.debug('updateAlertPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1179,11 +1179,11 @@ export class AlertPolicyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAlertPolicies values %j', values);
+          this._log.debug('listAlertPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAlertPolicies request %j', request);
+    this._log.debug('listAlertPolicies request %j', request);
     return this.innerApiCalls
       .listAlertPolicies(request, options, wrappedCallback)
       ?.then(
@@ -1192,7 +1192,7 @@ export class AlertPolicyServiceClient {
           protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
           protos.google.monitoring.v3.IListAlertPoliciesResponse,
         ]) => {
-          this._log.info('listAlertPolicies values %j', response);
+          this._log.debug('listAlertPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -1262,7 +1262,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAlertPolicies stream %j', request);
+    this._log.debug('listAlertPolicies stream %j', request);
     return this.descriptors.page.listAlertPolicies.createStream(
       this.innerApiCalls.listAlertPolicies as GaxCall,
       request,
@@ -1337,7 +1337,7 @@ export class AlertPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAlertPolicies iterate %j', request);
+    this._log.debug('listAlertPolicies iterate %j', request);
     return this.descriptors.page.listAlertPolicies.asyncIterate(
       this.innerApiCalls['listAlertPolicies'] as GaxCall,
       request as {},

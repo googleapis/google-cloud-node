@@ -506,7 +506,7 @@ export class DiscussServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateMessage request %j', request);
+    this._log.debug('generateMessage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
@@ -517,7 +517,7 @@ export class DiscussServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateMessage response %j', response);
+          this._log.debug('generateMessage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -532,7 +532,7 @@ export class DiscussServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateMessage response %j', response);
+          this._log.debug('generateMessage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -656,7 +656,7 @@ export class DiscussServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('countMessageTokens request %j', request);
+    this._log.debug('countMessageTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
@@ -667,7 +667,7 @@ export class DiscussServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('countMessageTokens response %j', response);
+          this._log.debug('countMessageTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -682,7 +682,7 @@ export class DiscussServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('countMessageTokens response %j', response);
+          this._log.debug('countMessageTokens response %j', response);
           return [response, options, rawResponse];
         },
       )

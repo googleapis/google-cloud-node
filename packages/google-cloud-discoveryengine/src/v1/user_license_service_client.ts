@@ -829,7 +829,7 @@ export class UserLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLicenseConfigsUsageStats request %j', request);
+    this._log.debug('listLicenseConfigsUsageStats request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IListLicenseConfigsUsageStatsResponse,
@@ -840,7 +840,7 @@ export class UserLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listLicenseConfigsUsageStats response %j', response);
+          this._log.debug('listLicenseConfigsUsageStats response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -855,7 +855,7 @@ export class UserLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listLicenseConfigsUsageStats response %j', response);
+          this._log.debug('listLicenseConfigsUsageStats response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -999,11 +999,11 @@ export class UserLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchUpdateUserLicenses response %j', rawResponse);
+          this._log.debug('batchUpdateUserLicenses response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchUpdateUserLicenses request %j', request);
+    this._log.debug('batchUpdateUserLicenses request %j', request);
     return this.innerApiCalls
       .batchUpdateUserLicenses(request, options, wrappedCallback)
       ?.then(
@@ -1015,7 +1015,7 @@ export class UserLicenseServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateUserLicenses response %j', rawResponse);
+          this._log.debug('batchUpdateUserLicenses response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1207,11 +1207,11 @@ export class UserLicenseServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUserLicenses values %j', values);
+          this._log.debug('listUserLicenses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUserLicenses request %j', request);
+    this._log.debug('listUserLicenses request %j', request);
     return this.innerApiCalls
       .listUserLicenses(request, options, wrappedCallback)
       ?.then(
@@ -1220,7 +1220,7 @@ export class UserLicenseServiceClient {
           protos.google.cloud.discoveryengine.v1.IListUserLicensesRequest | null,
           protos.google.cloud.discoveryengine.v1.IListUserLicensesResponse,
         ]) => {
-          this._log.info('listUserLicenses values %j', response);
+          this._log.debug('listUserLicenses values %j', response);
           return [response, input, output];
         },
       );
@@ -1309,7 +1309,7 @@ export class UserLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserLicenses stream %j', request);
+    this._log.debug('listUserLicenses stream %j', request);
     return this.descriptors.page.listUserLicenses.createStream(
       this.innerApiCalls.listUserLicenses as GaxCall,
       request,
@@ -1403,7 +1403,7 @@ export class UserLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserLicenses iterate %j', request);
+    this._log.debug('listUserLicenses iterate %j', request);
     return this.descriptors.page.listUserLicenses.asyncIterate(
       this.innerApiCalls['listUserLicenses'] as GaxCall,
       request as {},

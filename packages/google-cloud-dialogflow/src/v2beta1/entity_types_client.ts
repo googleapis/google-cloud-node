@@ -767,7 +767,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEntityType request %j', request);
+    this._log.debug('getEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
@@ -778,7 +778,7 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEntityType response %j', response);
+          this._log.debug('getEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -793,7 +793,7 @@ export class EntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEntityType response %j', response);
+          this._log.debug('getEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -925,7 +925,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createEntityType request %j', request);
+    this._log.debug('createEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
@@ -936,7 +936,7 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEntityType response %j', response);
+          this._log.debug('createEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -951,7 +951,7 @@ export class EntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createEntityType response %j', response);
+          this._log.debug('createEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1080,7 +1080,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEntityType request %j', request);
+    this._log.debug('updateEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
@@ -1091,7 +1091,7 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEntityType response %j', response);
+          this._log.debug('updateEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1106,7 +1106,7 @@ export class EntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEntityType response %j', response);
+          this._log.debug('updateEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1231,7 +1231,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteEntityType request %j', request);
+    this._log.debug('deleteEntityType request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1242,7 +1242,7 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteEntityType response %j', response);
+          this._log.debug('deleteEntityType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1257,7 +1257,7 @@ export class EntityTypesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteEntityType response %j', response);
+          this._log.debug('deleteEntityType response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1423,11 +1423,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchUpdateEntityTypes response %j', rawResponse);
+          this._log.debug('batchUpdateEntityTypes response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchUpdateEntityTypes request %j', request);
+    this._log.debug('batchUpdateEntityTypes request %j', request);
     return this.innerApiCalls
       .batchUpdateEntityTypes(request, options, wrappedCallback)
       ?.then(
@@ -1439,7 +1439,7 @@ export class EntityTypesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateEntityTypes response %j', rawResponse);
+          this._log.debug('batchUpdateEntityTypes response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1611,11 +1611,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchDeleteEntityTypes response %j', rawResponse);
+          this._log.debug('batchDeleteEntityTypes response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchDeleteEntityTypes request %j', request);
+    this._log.debug('batchDeleteEntityTypes request %j', request);
     return this.innerApiCalls
       .batchDeleteEntityTypes(request, options, wrappedCallback)
       ?.then(
@@ -1627,7 +1627,7 @@ export class EntityTypesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteEntityTypes response %j', rawResponse);
+          this._log.debug('batchDeleteEntityTypes response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1802,11 +1802,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchCreateEntities response %j', rawResponse);
+          this._log.debug('batchCreateEntities response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchCreateEntities request %j', request);
+    this._log.debug('batchCreateEntities request %j', request);
     return this.innerApiCalls
       .batchCreateEntities(request, options, wrappedCallback)
       ?.then(
@@ -1818,7 +1818,7 @@ export class EntityTypesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateEntities response %j', rawResponse);
+          this._log.debug('batchCreateEntities response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1997,11 +1997,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchUpdateEntities response %j', rawResponse);
+          this._log.debug('batchUpdateEntities response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchUpdateEntities request %j', request);
+    this._log.debug('batchUpdateEntities request %j', request);
     return this.innerApiCalls
       .batchUpdateEntities(request, options, wrappedCallback)
       ?.then(
@@ -2013,7 +2013,7 @@ export class EntityTypesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateEntities response %j', rawResponse);
+          this._log.debug('batchUpdateEntities response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2190,11 +2190,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchDeleteEntities response %j', rawResponse);
+          this._log.debug('batchDeleteEntities response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchDeleteEntities request %j', request);
+    this._log.debug('batchDeleteEntities request %j', request);
     return this.innerApiCalls
       .batchDeleteEntities(request, options, wrappedCallback)
       ?.then(
@@ -2206,7 +2206,7 @@ export class EntityTypesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteEntities response %j', rawResponse);
+          this._log.debug('batchDeleteEntities response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2360,11 +2360,11 @@ export class EntityTypesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEntityTypes values %j', values);
+          this._log.debug('listEntityTypes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEntityTypes request %j', request);
+    this._log.debug('listEntityTypes request %j', request);
     return this.innerApiCalls
       .listEntityTypes(request, options, wrappedCallback)
       ?.then(
@@ -2373,7 +2373,7 @@ export class EntityTypesClient {
           protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
           protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse,
         ]) => {
-          this._log.info('listEntityTypes values %j', response);
+          this._log.debug('listEntityTypes values %j', response);
           return [response, input, output];
         },
       );
@@ -2427,7 +2427,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEntityTypes stream %j', request);
+    this._log.debug('listEntityTypes stream %j', request);
     return this.descriptors.page.listEntityTypes.createStream(
       this.innerApiCalls.listEntityTypes as GaxCall,
       request,
@@ -2486,7 +2486,7 @@ export class EntityTypesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEntityTypes iterate %j', request);
+    this._log.debug('listEntityTypes iterate %j', request);
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
       request as {},

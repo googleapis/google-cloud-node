@@ -624,11 +624,11 @@ export class ApiHubCollectClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('collectApiData response %j', rawResponse);
+          this._log.debug('collectApiData response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('collectApiData request %j', request);
+    this._log.debug('collectApiData request %j', request);
     return this.innerApiCalls
       .collectApiData(request, options, wrappedCallback)
       ?.then(
@@ -640,7 +640,7 @@ export class ApiHubCollectClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('collectApiData response %j', rawResponse);
+          this._log.debug('collectApiData response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

@@ -500,7 +500,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTenant request %j', request);
+    this._log.debug('createTenant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4beta1.ITenant,
@@ -511,7 +511,7 @@ export class TenantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTenant response %j', response);
+          this._log.debug('createTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -523,7 +523,7 @@ export class TenantServiceClient {
           protos.google.cloud.talent.v4beta1.ICreateTenantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTenant response %j', response);
+          this._log.debug('createTenant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -631,7 +631,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTenant request %j', request);
+    this._log.debug('getTenant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4beta1.ITenant,
@@ -642,7 +642,7 @@ export class TenantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTenant response %j', response);
+          this._log.debug('getTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class TenantServiceClient {
           protos.google.cloud.talent.v4beta1.IGetTenantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTenant response %j', response);
+          this._log.debug('getTenant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -778,7 +778,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTenant request %j', request);
+    this._log.debug('updateTenant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4beta1.ITenant,
@@ -789,7 +789,7 @@ export class TenantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTenant response %j', response);
+          this._log.debug('updateTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -801,7 +801,7 @@ export class TenantServiceClient {
           protos.google.cloud.talent.v4beta1.IUpdateTenantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTenant response %j', response);
+          this._log.debug('updateTenant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -915,7 +915,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTenant request %j', request);
+    this._log.debug('deleteTenant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -926,7 +926,7 @@ export class TenantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTenant response %j', response);
+          this._log.debug('deleteTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -938,7 +938,7 @@ export class TenantServiceClient {
           protos.google.cloud.talent.v4beta1.IDeleteTenantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTenant response %j', response);
+          this._log.debug('deleteTenant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1071,11 +1071,11 @@ export class TenantServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTenants values %j', values);
+          this._log.debug('listTenants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTenants request %j', request);
+    this._log.debug('listTenants request %j', request);
     return this.innerApiCalls
       .listTenants(request, options, wrappedCallback)
       ?.then(
@@ -1084,7 +1084,7 @@ export class TenantServiceClient {
           protos.google.cloud.talent.v4beta1.IListTenantsRequest | null,
           protos.google.cloud.talent.v4beta1.IListTenantsResponse,
         ]) => {
-          this._log.info('listTenants values %j', response);
+          this._log.debug('listTenants values %j', response);
           return [response, input, output];
         },
       );
@@ -1132,7 +1132,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTenants stream %j', request);
+    this._log.debug('listTenants stream %j', request);
     return this.descriptors.page.listTenants.createStream(
       this.innerApiCalls.listTenants as GaxCall,
       request,
@@ -1185,7 +1185,7 @@ export class TenantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTenants iterate %j', request);
+    this._log.debug('listTenants iterate %j', request);
     return this.descriptors.page.listTenants.asyncIterate(
       this.innerApiCalls['listTenants'] as GaxCall,
       request as {},

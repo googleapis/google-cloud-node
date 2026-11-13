@@ -491,7 +491,7 @@ export class PromotionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertPromotion request %j', request);
+    this._log.debug('insertPromotion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.promotions.v1.IPromotion,
@@ -502,7 +502,7 @@ export class PromotionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertPromotion response %j', response);
+          this._log.debug('insertPromotion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -517,7 +517,7 @@ export class PromotionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertPromotion response %j', response);
+          this._log.debug('insertPromotion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -638,7 +638,7 @@ export class PromotionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPromotion request %j', request);
+    this._log.debug('getPromotion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.promotions.v1.IPromotion,
@@ -649,7 +649,7 @@ export class PromotionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPromotion response %j', response);
+          this._log.debug('getPromotion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -664,7 +664,7 @@ export class PromotionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPromotion response %j', response);
+          this._log.debug('getPromotion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -806,11 +806,11 @@ export class PromotionsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPromotions values %j', values);
+          this._log.debug('listPromotions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPromotions request %j', request);
+    this._log.debug('listPromotions request %j', request);
     return this.innerApiCalls
       .listPromotions(request, options, wrappedCallback)
       ?.then(
@@ -819,7 +819,7 @@ export class PromotionsServiceClient {
           protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest | null,
           protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse,
         ]) => {
-          this._log.info('listPromotions values %j', response);
+          this._log.debug('listPromotions values %j', response);
           return [response, input, output];
         },
       );
@@ -871,7 +871,7 @@ export class PromotionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPromotions stream %j', request);
+    this._log.debug('listPromotions stream %j', request);
     return this.descriptors.page.listPromotions.createStream(
       this.innerApiCalls.listPromotions as GaxCall,
       request,
@@ -928,7 +928,7 @@ export class PromotionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPromotions iterate %j', request);
+    this._log.debug('listPromotions iterate %j', request);
     return this.descriptors.page.listPromotions.asyncIterate(
       this.innerApiCalls['listPromotions'] as GaxCall,
       request as {},

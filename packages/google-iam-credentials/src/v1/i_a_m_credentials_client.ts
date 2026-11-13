@@ -485,7 +485,7 @@ export class IAMCredentialsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateAccessToken request %j', request);
+    this._log.debug('generateAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
@@ -496,7 +496,7 @@ export class IAMCredentialsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAccessToken response %j', response);
+          this._log.debug('generateAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -511,7 +511,7 @@ export class IAMCredentialsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAccessToken response %j', response);
+          this._log.debug('generateAccessToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -642,7 +642,7 @@ export class IAMCredentialsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateIdToken request %j', request);
+    this._log.debug('generateIdToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
@@ -653,7 +653,7 @@ export class IAMCredentialsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateIdToken response %j', response);
+          this._log.debug('generateIdToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -665,7 +665,7 @@ export class IAMCredentialsClient {
           protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateIdToken response %j', response);
+          this._log.debug('generateIdToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -784,7 +784,7 @@ export class IAMCredentialsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('signBlob request %j', request);
+    this._log.debug('signBlob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.credentials.v1.ISignBlobResponse,
@@ -793,7 +793,7 @@ export class IAMCredentialsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('signBlob response %j', response);
+          this._log.debug('signBlob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -805,7 +805,7 @@ export class IAMCredentialsClient {
           protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('signBlob response %j', response);
+          this._log.debug('signBlob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -924,7 +924,7 @@ export class IAMCredentialsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('signJwt request %j', request);
+    this._log.debug('signJwt request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.credentials.v1.ISignJwtResponse,
@@ -933,7 +933,7 @@ export class IAMCredentialsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('signJwt response %j', response);
+          this._log.debug('signJwt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -945,7 +945,7 @@ export class IAMCredentialsClient {
           protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('signJwt response %j', response);
+          this._log.debug('signJwt response %j', response);
           return [response, options, rawResponse];
         },
       )

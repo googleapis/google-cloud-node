@@ -464,7 +464,7 @@ export class AdviceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('calendarMode request %j', request);
+    this._log.debug('calendarMode request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.ICalendarModeAdviceResponse,
@@ -475,7 +475,7 @@ export class AdviceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('calendarMode response %j', response);
+          this._log.debug('calendarMode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -490,7 +490,7 @@ export class AdviceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('calendarMode response %j', response);
+          this._log.debug('calendarMode response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -608,7 +608,7 @@ export class AdviceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('capacity request %j', request);
+    this._log.debug('capacity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.ICapacityAdviceResponse,
@@ -619,7 +619,7 @@ export class AdviceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('capacity response %j', response);
+          this._log.debug('capacity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -631,7 +631,7 @@ export class AdviceClient {
           protos.google.cloud.compute.v1.ICapacityAdviceRpcRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('capacity response %j', response);
+          this._log.debug('capacity response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -747,7 +747,7 @@ export class AdviceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('capacityHistory request %j', request);
+    this._log.debug('capacityHistory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.ICapacityHistoryResponse,
@@ -758,7 +758,7 @@ export class AdviceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('capacityHistory response %j', response);
+          this._log.debug('capacityHistory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -773,7 +773,7 @@ export class AdviceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('capacityHistory response %j', response);
+          this._log.debug('capacityHistory response %j', response);
           return [response, options, rawResponse];
         },
       )

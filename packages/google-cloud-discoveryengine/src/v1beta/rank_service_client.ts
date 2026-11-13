@@ -682,7 +682,7 @@ export class RankServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('rank request %j', request);
+    this._log.debug('rank request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IRankResponse,
@@ -693,7 +693,7 @@ export class RankServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('rank response %j', response);
+          this._log.debug('rank response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -705,7 +705,7 @@ export class RankServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IRankRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rank response %j', response);
+          this._log.debug('rank response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -481,7 +481,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSshPublicKey request %j', request);
+    this._log.debug('createSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
@@ -492,7 +492,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSshPublicKey response %j', response);
+          this._log.debug('createSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -507,7 +507,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSshPublicKey response %j', response);
+          this._log.debug('createSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -620,7 +620,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePosixAccount request %j', request);
+    this._log.debug('deletePosixAccount request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -631,7 +631,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePosixAccount response %j', response);
+          this._log.debug('deletePosixAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -646,7 +646,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePosixAccount response %j', response);
+          this._log.debug('deletePosixAccount response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -759,7 +759,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSshPublicKey request %j', request);
+    this._log.debug('deleteSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -770,7 +770,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSshPublicKey response %j', response);
+          this._log.debug('deleteSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -785,7 +785,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSshPublicKey response %j', response);
+          this._log.debug('deleteSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -903,7 +903,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLoginProfile request %j', request);
+    this._log.debug('getLoginProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.v1beta.ILoginProfile,
@@ -914,7 +914,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLoginProfile response %j', response);
+          this._log.debug('getLoginProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -929,7 +929,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLoginProfile response %j', response);
+          this._log.debug('getLoginProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1042,7 +1042,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSshPublicKey request %j', request);
+    this._log.debug('getSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
@@ -1053,7 +1053,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSshPublicKey response %j', response);
+          this._log.debug('getSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1068,7 +1068,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSshPublicKey response %j', response);
+          this._log.debug('getSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1191,7 +1191,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('importSshPublicKey request %j', request);
+    this._log.debug('importSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.v1beta.IImportSshPublicKeyResponse,
@@ -1202,7 +1202,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('importSshPublicKey response %j', response);
+          this._log.debug('importSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1217,7 +1217,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('importSshPublicKey response %j', response);
+          this._log.debug('importSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1335,7 +1335,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSshPublicKey request %j', request);
+    this._log.debug('updateSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
@@ -1346,7 +1346,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSshPublicKey response %j', response);
+          this._log.debug('updateSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1361,7 +1361,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSshPublicKey response %j', response);
+          this._log.debug('updateSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1474,7 +1474,7 @@ export class OsLoginServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('signSshPublicKey request %j', request);
+    this._log.debug('signSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
@@ -1485,7 +1485,7 @@ export class OsLoginServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('signSshPublicKey response %j', response);
+          this._log.debug('signSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1500,7 +1500,7 @@ export class OsLoginServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('signSshPublicKey response %j', response);
+          this._log.debug('signSshPublicKey response %j', response);
           return [response, options, rawResponse];
         },
       )

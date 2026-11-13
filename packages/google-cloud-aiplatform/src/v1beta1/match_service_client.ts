@@ -706,7 +706,7 @@ export class MatchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('findNeighbors request %j', request);
+    this._log.debug('findNeighbors request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IFindNeighborsResponse,
@@ -717,7 +717,7 @@ export class MatchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('findNeighbors response %j', response);
+          this._log.debug('findNeighbors response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -732,7 +732,7 @@ export class MatchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('findNeighbors response %j', response);
+          this._log.debug('findNeighbors response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -856,7 +856,7 @@ export class MatchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readIndexDatapoints request %j', request);
+    this._log.debug('readIndexDatapoints request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IReadIndexDatapointsResponse,
@@ -867,7 +867,7 @@ export class MatchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('readIndexDatapoints response %j', response);
+          this._log.debug('readIndexDatapoints response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -882,7 +882,7 @@ export class MatchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('readIndexDatapoints response %j', response);
+          this._log.debug('readIndexDatapoints response %j', response);
           return [response, options, rawResponse];
         },
       )

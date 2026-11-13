@@ -717,7 +717,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getNetwork request %j', request);
+    this._log.debug('getNetwork request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.INetwork,
@@ -726,7 +726,7 @@ export class NetworkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getNetwork response %j', response);
+          this._log.debug('getNetwork response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -738,7 +738,7 @@ export class NetworkServiceClient {
           protos.google.ads.admanager.v1.IGetNetworkRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getNetwork response %j', response);
+          this._log.debug('getNetwork response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -848,7 +848,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateNetwork request %j', request);
+    this._log.debug('updateNetwork request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.INetwork,
@@ -859,7 +859,7 @@ export class NetworkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateNetwork response %j', response);
+          this._log.debug('updateNetwork response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -871,7 +871,7 @@ export class NetworkServiceClient {
           protos.google.ads.admanager.v1.IUpdateNetworkRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateNetwork response %j', response);
+          this._log.debug('updateNetwork response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -989,7 +989,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('provisionTestNetwork request %j', request);
+    this._log.debug('provisionTestNetwork request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.INetwork,
@@ -1000,7 +1000,7 @@ export class NetworkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('provisionTestNetwork response %j', response);
+          this._log.debug('provisionTestNetwork response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1015,7 +1015,7 @@ export class NetworkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('provisionTestNetwork response %j', response);
+          this._log.debug('provisionTestNetwork response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1135,7 +1135,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDefaultThirdPartyDataDeclaration request %j', request);
+    this._log.debug('getDefaultThirdPartyDataDeclaration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IDefaultThirdPartyDataDeclaration,
@@ -1146,7 +1146,7 @@ export class NetworkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getDefaultThirdPartyDataDeclaration response %j',
             response,
           );
@@ -1164,7 +1164,7 @@ export class NetworkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getDefaultThirdPartyDataDeclaration response %j',
             response,
           );
@@ -1293,11 +1293,11 @@ export class NetworkServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNetworks values %j', values);
+          this._log.debug('listNetworks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNetworks request %j', request);
+    this._log.debug('listNetworks request %j', request);
     return this.innerApiCalls
       .listNetworks(request, options, wrappedCallback)
       ?.then(
@@ -1306,7 +1306,7 @@ export class NetworkServiceClient {
           protos.google.ads.admanager.v1.IListNetworksRequest | null,
           protos.google.ads.admanager.v1.IListNetworksResponse,
         ]) => {
-          this._log.info('listNetworks values %j', response);
+          this._log.debug('listNetworks values %j', response);
           return [response, input, output];
         },
       );
@@ -1353,7 +1353,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNetworks stream %j', request);
+    this._log.debug('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
       request,
@@ -1405,7 +1405,7 @@ export class NetworkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNetworks iterate %j', request);
+    this._log.debug('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
       request as {},

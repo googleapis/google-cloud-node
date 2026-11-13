@@ -725,7 +725,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLiveStream request %j', request);
+    this._log.debug('getLiveStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ILiveStream,
@@ -736,7 +736,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLiveStream response %j', response);
+          this._log.debug('getLiveStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -748,7 +748,7 @@ export class LiveStreamServiceClient {
           protos.google.ads.admanager.v1.IGetLiveStreamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getLiveStream response %j', response);
+          this._log.debug('getLiveStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -862,7 +862,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createLiveStream request %j', request);
+    this._log.debug('createLiveStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ILiveStream,
@@ -873,7 +873,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createLiveStream response %j', response);
+          this._log.debug('createLiveStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -885,7 +885,7 @@ export class LiveStreamServiceClient {
           protos.google.ads.admanager.v1.ICreateLiveStreamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createLiveStream response %j', response);
+          this._log.debug('createLiveStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1002,7 +1002,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateLiveStreams request %j', request);
+    this._log.debug('batchCreateLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateLiveStreamsResponse,
@@ -1013,7 +1013,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateLiveStreams response %j', response);
+          this._log.debug('batchCreateLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1028,7 +1028,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateLiveStreams response %j', response);
+          this._log.debug('batchCreateLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1143,7 +1143,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateLiveStream request %j', request);
+    this._log.debug('updateLiveStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ILiveStream,
@@ -1154,7 +1154,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateLiveStream response %j', response);
+          this._log.debug('updateLiveStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1166,7 +1166,7 @@ export class LiveStreamServiceClient {
           protos.google.ads.admanager.v1.IUpdateLiveStreamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateLiveStream response %j', response);
+          this._log.debug('updateLiveStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1283,7 +1283,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateLiveStreams request %j', request);
+    this._log.debug('batchUpdateLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateLiveStreamsResponse,
@@ -1294,7 +1294,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateLiveStreams response %j', response);
+          this._log.debug('batchUpdateLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1309,7 +1309,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateLiveStreams response %j', response);
+          this._log.debug('batchUpdateLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1429,7 +1429,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateLiveStreams request %j', request);
+    this._log.debug('batchActivateLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateLiveStreamsResponse,
@@ -1440,7 +1440,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateLiveStreams response %j', response);
+          this._log.debug('batchActivateLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1455,7 +1455,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateLiveStreams response %j', response);
+          this._log.debug('batchActivateLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1569,7 +1569,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchPauseLiveStreams request %j', request);
+    this._log.debug('batchPauseLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchPauseLiveStreamsResponse,
@@ -1580,7 +1580,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchPauseLiveStreams response %j', response);
+          this._log.debug('batchPauseLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1595,7 +1595,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchPauseLiveStreams response %j', response);
+          this._log.debug('batchPauseLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1715,7 +1715,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchiveLiveStreams request %j', request);
+    this._log.debug('batchArchiveLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchiveLiveStreamsResponse,
@@ -1726,7 +1726,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchiveLiveStreams response %j', response);
+          this._log.debug('batchArchiveLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1741,7 +1741,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchArchiveLiveStreams response %j', response);
+          this._log.debug('batchArchiveLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1861,7 +1861,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchPauseAdsLiveStreams request %j', request);
+    this._log.debug('batchPauseAdsLiveStreams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchPauseAdsLiveStreamsResponse,
@@ -1872,7 +1872,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchPauseAdsLiveStreams response %j', response);
+          this._log.debug('batchPauseAdsLiveStreams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1887,7 +1887,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchPauseAdsLiveStreams response %j', response);
+          this._log.debug('batchPauseAdsLiveStreams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2008,7 +2008,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRefreshMasterPlaylists request %j', request);
+    this._log.debug('batchRefreshMasterPlaylists request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchRefreshMasterPlaylistsResponse,
@@ -2019,7 +2019,7 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRefreshMasterPlaylists response %j', response);
+          this._log.debug('batchRefreshMasterPlaylists response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2034,7 +2034,7 @@ export class LiveStreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchRefreshMasterPlaylists response %j', response);
+          this._log.debug('batchRefreshMasterPlaylists response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2208,11 +2208,11 @@ export class LiveStreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLiveStreams values %j', values);
+          this._log.debug('listLiveStreams values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLiveStreams request %j', request);
+    this._log.debug('listLiveStreams request %j', request);
     return this.innerApiCalls
       .listLiveStreams(request, options, wrappedCallback)
       ?.then(
@@ -2221,7 +2221,7 @@ export class LiveStreamServiceClient {
           protos.google.ads.admanager.v1.IListLiveStreamsRequest | null,
           protos.google.ads.admanager.v1.IListLiveStreamsResponse,
         ]) => {
-          this._log.info('listLiveStreams values %j', response);
+          this._log.debug('listLiveStreams values %j', response);
           return [response, input, output];
         },
       );
@@ -2310,7 +2310,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLiveStreams stream %j', request);
+    this._log.debug('listLiveStreams stream %j', request);
     return this.descriptors.page.listLiveStreams.createStream(
       this.innerApiCalls.listLiveStreams as GaxCall,
       request,
@@ -2404,7 +2404,7 @@ export class LiveStreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLiveStreams iterate %j', request);
+    this._log.debug('listLiveStreams iterate %j', request);
     return this.descriptors.page.listLiveStreams.asyncIterate(
       this.innerApiCalls['listLiveStreams'] as GaxCall,
       request as {},

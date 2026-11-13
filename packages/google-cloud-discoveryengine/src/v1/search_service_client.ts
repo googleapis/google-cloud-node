@@ -1073,11 +1073,11 @@ export class SearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('search values %j', values);
+          this._log.debug('search values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('search request %j', request);
+    this._log.debug('search request %j', request);
     return this.innerApiCalls
       .search(request, options, wrappedCallback)
       ?.then(
@@ -1086,7 +1086,7 @@ export class SearchServiceClient {
           protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
           protos.google.cloud.discoveryengine.v1.ISearchResponse,
         ]) => {
-          this._log.info('search values %j', response);
+          this._log.debug('search values %j', response);
           return [response, input, output];
         },
       );
@@ -1515,7 +1515,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('search stream %j', request);
+    this._log.debug('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
       request,
@@ -1949,7 +1949,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('search iterate %j', request);
+    this._log.debug('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
       request as {},
@@ -2454,11 +2454,11 @@ export class SearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchLite values %j', values);
+          this._log.debug('searchLite values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchLite request %j', request);
+    this._log.debug('searchLite request %j', request);
     return this.innerApiCalls
       .searchLite(request, options, wrappedCallback)
       ?.then(
@@ -2467,7 +2467,7 @@ export class SearchServiceClient {
           protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
           protos.google.cloud.discoveryengine.v1.ISearchResponse,
         ]) => {
-          this._log.info('searchLite values %j', response);
+          this._log.debug('searchLite values %j', response);
           return [response, input, output];
         },
       );
@@ -2896,7 +2896,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchLite stream %j', request);
+    this._log.debug('searchLite stream %j', request);
     return this.descriptors.page.searchLite.createStream(
       this.innerApiCalls.searchLite as GaxCall,
       request,
@@ -3330,7 +3330,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchLite iterate %j', request);
+    this._log.debug('searchLite iterate %j', request);
     return this.descriptors.page.searchLite.asyncIterate(
       this.innerApiCalls['searchLite'] as GaxCall,
       request as {},
