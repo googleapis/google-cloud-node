@@ -722,7 +722,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCdnConfig request %j', request);
+    this._log.debug('getCdnConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICdnConfig,
@@ -733,7 +733,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCdnConfig response %j', response);
+          this._log.debug('getCdnConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -745,7 +745,7 @@ export class CdnConfigServiceClient {
           protos.google.ads.admanager.v1.IGetCdnConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCdnConfig response %j', response);
+          this._log.debug('getCdnConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -853,7 +853,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCdnConfig request %j', request);
+    this._log.debug('createCdnConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICdnConfig,
@@ -864,7 +864,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCdnConfig response %j', response);
+          this._log.debug('createCdnConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -876,7 +876,7 @@ export class CdnConfigServiceClient {
           protos.google.ads.admanager.v1.ICreateCdnConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCdnConfig response %j', response);
+          this._log.debug('createCdnConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -993,7 +993,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateCdnConfigs request %j', request);
+    this._log.debug('batchCreateCdnConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateCdnConfigsResponse,
@@ -1004,7 +1004,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateCdnConfigs response %j', response);
+          this._log.debug('batchCreateCdnConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1019,7 +1019,7 @@ export class CdnConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateCdnConfigs response %j', response);
+          this._log.debug('batchCreateCdnConfigs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1129,7 +1129,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCdnConfig request %j', request);
+    this._log.debug('updateCdnConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICdnConfig,
@@ -1140,7 +1140,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCdnConfig response %j', response);
+          this._log.debug('updateCdnConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1152,7 +1152,7 @@ export class CdnConfigServiceClient {
           protos.google.ads.admanager.v1.IUpdateCdnConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCdnConfig response %j', response);
+          this._log.debug('updateCdnConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1269,7 +1269,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateCdnConfigs request %j', request);
+    this._log.debug('batchUpdateCdnConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateCdnConfigsResponse,
@@ -1280,7 +1280,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateCdnConfigs response %j', response);
+          this._log.debug('batchUpdateCdnConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1295,7 +1295,7 @@ export class CdnConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateCdnConfigs response %j', response);
+          this._log.debug('batchUpdateCdnConfigs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1415,7 +1415,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCdnConfigs request %j', request);
+    this._log.debug('batchActivateCdnConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCdnConfigsResponse,
@@ -1426,7 +1426,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateCdnConfigs response %j', response);
+          this._log.debug('batchActivateCdnConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1441,7 +1441,7 @@ export class CdnConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateCdnConfigs response %j', response);
+          this._log.debug('batchActivateCdnConfigs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1555,7 +1555,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchiveCdnConfigs request %j', request);
+    this._log.debug('batchArchiveCdnConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchiveCdnConfigsResponse,
@@ -1566,7 +1566,7 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchiveCdnConfigs response %j', response);
+          this._log.debug('batchArchiveCdnConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1581,7 +1581,7 @@ export class CdnConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchArchiveCdnConfigs response %j', response);
+          this._log.debug('batchArchiveCdnConfigs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1738,11 +1738,11 @@ export class CdnConfigServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCdnConfigs values %j', values);
+          this._log.debug('listCdnConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCdnConfigs request %j', request);
+    this._log.debug('listCdnConfigs request %j', request);
     return this.innerApiCalls
       .listCdnConfigs(request, options, wrappedCallback)
       ?.then(
@@ -1751,7 +1751,7 @@ export class CdnConfigServiceClient {
           protos.google.ads.admanager.v1.IListCdnConfigsRequest | null,
           protos.google.ads.admanager.v1.IListCdnConfigsResponse,
         ]) => {
-          this._log.info('listCdnConfigs values %j', response);
+          this._log.debug('listCdnConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -1829,7 +1829,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCdnConfigs stream %j', request);
+    this._log.debug('listCdnConfigs stream %j', request);
     return this.descriptors.page.listCdnConfigs.createStream(
       this.innerApiCalls.listCdnConfigs as GaxCall,
       request,
@@ -1912,7 +1912,7 @@ export class CdnConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCdnConfigs iterate %j', request);
+    this._log.debug('listCdnConfigs iterate %j', request);
     return this.descriptors.page.listCdnConfigs.asyncIterate(
       this.innerApiCalls['listCdnConfigs'] as GaxCall,
       request as {},

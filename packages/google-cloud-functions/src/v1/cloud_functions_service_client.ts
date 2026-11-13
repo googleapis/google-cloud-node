@@ -572,7 +572,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFunction request %j', request);
+    this._log.debug('getFunction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.functions.v1.ICloudFunction,
@@ -583,7 +583,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFunction response %j', response);
+          this._log.debug('getFunction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -595,7 +595,7 @@ export class CloudFunctionsServiceClient {
           protos.google.cloud.functions.v1.IGetFunctionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFunction response %j', response);
+          this._log.debug('getFunction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -705,7 +705,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('callFunction request %j', request);
+    this._log.debug('callFunction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.functions.v1.ICallFunctionResponse,
@@ -716,7 +716,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('callFunction response %j', response);
+          this._log.debug('callFunction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -728,7 +728,7 @@ export class CloudFunctionsServiceClient {
           protos.google.cloud.functions.v1.ICallFunctionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('callFunction response %j', response);
+          this._log.debug('callFunction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -882,7 +882,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateUploadUrl request %j', request);
+    this._log.debug('generateUploadUrl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
@@ -893,7 +893,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateUploadUrl response %j', response);
+          this._log.debug('generateUploadUrl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -908,7 +908,7 @@ export class CloudFunctionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateUploadUrl response %j', response);
+          this._log.debug('generateUploadUrl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1027,7 +1027,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateDownloadUrl request %j', request);
+    this._log.debug('generateDownloadUrl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.functions.v1.IGenerateDownloadUrlResponse,
@@ -1038,7 +1038,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateDownloadUrl response %j', response);
+          this._log.debug('generateDownloadUrl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1053,7 +1053,7 @@ export class CloudFunctionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateDownloadUrl response %j', response);
+          this._log.debug('generateDownloadUrl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1169,7 +1169,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1178,7 +1178,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1190,7 +1190,7 @@ export class CloudFunctionsServiceClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1299,7 +1299,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1308,7 +1308,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1320,7 +1320,7 @@ export class CloudFunctionsServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1432,7 +1432,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1441,7 +1441,7 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1453,7 +1453,7 @@ export class CloudFunctionsServiceClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1593,11 +1593,11 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createFunction response %j', rawResponse);
+          this._log.debug('createFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createFunction request %j', request);
+    this._log.debug('createFunction request %j', request);
     return this.innerApiCalls
       .createFunction(request, options, wrappedCallback)
       ?.then(
@@ -1609,7 +1609,7 @@ export class CloudFunctionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFunction response %j', rawResponse);
+          this._log.debug('createFunction response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1764,11 +1764,11 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateFunction response %j', rawResponse);
+          this._log.debug('updateFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateFunction request %j', request);
+    this._log.debug('updateFunction request %j', request);
     return this.innerApiCalls
       .updateFunction(request, options, wrappedCallback)
       ?.then(
@@ -1780,7 +1780,7 @@ export class CloudFunctionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFunction response %j', rawResponse);
+          this._log.debug('updateFunction response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1935,11 +1935,11 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteFunction response %j', rawResponse);
+          this._log.debug('deleteFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteFunction request %j', request);
+    this._log.debug('deleteFunction request %j', request);
     return this.innerApiCalls
       .deleteFunction(request, options, wrappedCallback)
       ?.then(
@@ -1951,7 +1951,7 @@ export class CloudFunctionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFunction response %j', rawResponse);
+          this._log.debug('deleteFunction response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2106,11 +2106,11 @@ export class CloudFunctionsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFunctions values %j', values);
+          this._log.debug('listFunctions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFunctions request %j', request);
+    this._log.debug('listFunctions request %j', request);
     return this.innerApiCalls
       .listFunctions(request, options, wrappedCallback)
       ?.then(
@@ -2119,7 +2119,7 @@ export class CloudFunctionsServiceClient {
           protos.google.cloud.functions.v1.IListFunctionsRequest | null,
           protos.google.cloud.functions.v1.IListFunctionsResponse,
         ]) => {
-          this._log.info('listFunctions values %j', response);
+          this._log.debug('listFunctions values %j', response);
           return [response, input, output];
         },
       );
@@ -2171,7 +2171,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFunctions stream %j', request);
+    this._log.debug('listFunctions stream %j', request);
     return this.descriptors.page.listFunctions.createStream(
       this.innerApiCalls.listFunctions as GaxCall,
       request,
@@ -2228,7 +2228,7 @@ export class CloudFunctionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFunctions iterate %j', request);
+    this._log.debug('listFunctions iterate %j', request);
     return this.descriptors.page.listFunctions.asyncIterate(
       this.innerApiCalls['listFunctions'] as GaxCall,
       request as {},

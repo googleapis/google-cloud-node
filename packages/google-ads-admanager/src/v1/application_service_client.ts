@@ -722,7 +722,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getApplication request %j', request);
+    this._log.debug('getApplication request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IApplication,
@@ -733,7 +733,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -745,7 +745,7 @@ export class ApplicationServiceClient {
           protos.google.ads.admanager.v1.IGetApplicationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -859,7 +859,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createApplication request %j', request);
+    this._log.debug('createApplication request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IApplication,
@@ -870,7 +870,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createApplication response %j', response);
+          this._log.debug('createApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -882,7 +882,7 @@ export class ApplicationServiceClient {
           protos.google.ads.admanager.v1.ICreateApplicationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createApplication response %j', response);
+          this._log.debug('createApplication response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1004,7 +1004,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateApplications request %j', request);
+    this._log.debug('batchCreateApplications request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
@@ -1015,7 +1015,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateApplications response %j', response);
+          this._log.debug('batchCreateApplications response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1030,7 +1030,7 @@ export class ApplicationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateApplications response %j', response);
+          this._log.debug('batchCreateApplications response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1145,7 +1145,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateApplication request %j', request);
+    this._log.debug('updateApplication request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IApplication,
@@ -1156,7 +1156,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateApplication response %j', response);
+          this._log.debug('updateApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1168,7 +1168,7 @@ export class ApplicationServiceClient {
           protos.google.ads.admanager.v1.IUpdateApplicationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateApplication response %j', response);
+          this._log.debug('updateApplication response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1290,7 +1290,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateApplications request %j', request);
+    this._log.debug('batchUpdateApplications request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
@@ -1301,7 +1301,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateApplications response %j', response);
+          this._log.debug('batchUpdateApplications response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1316,7 +1316,7 @@ export class ApplicationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateApplications response %j', response);
+          this._log.debug('batchUpdateApplications response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1436,7 +1436,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchiveApplications request %j', request);
+    this._log.debug('batchArchiveApplications request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
@@ -1447,7 +1447,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchiveApplications response %j', response);
+          this._log.debug('batchArchiveApplications response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1462,7 +1462,7 @@ export class ApplicationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchArchiveApplications response %j', response);
+          this._log.debug('batchArchiveApplications response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1582,7 +1582,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUnarchiveApplications request %j', request);
+    this._log.debug('batchUnarchiveApplications request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
@@ -1593,7 +1593,7 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUnarchiveApplications response %j', response);
+          this._log.debug('batchUnarchiveApplications response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1608,7 +1608,7 @@ export class ApplicationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUnarchiveApplications response %j', response);
+          this._log.debug('batchUnarchiveApplications response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1775,11 +1775,11 @@ export class ApplicationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listApplications values %j', values);
+          this._log.debug('listApplications values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listApplications request %j', request);
+    this._log.debug('listApplications request %j', request);
     return this.innerApiCalls
       .listApplications(request, options, wrappedCallback)
       ?.then(
@@ -1788,7 +1788,7 @@ export class ApplicationServiceClient {
           protos.google.ads.admanager.v1.IListApplicationsRequest | null,
           protos.google.ads.admanager.v1.IListApplicationsResponse,
         ]) => {
-          this._log.info('listApplications values %j', response);
+          this._log.debug('listApplications values %j', response);
           return [response, input, output];
         },
       );
@@ -1870,7 +1870,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApplications stream %j', request);
+    this._log.debug('listApplications stream %j', request);
     return this.descriptors.page.listApplications.createStream(
       this.innerApiCalls.listApplications as GaxCall,
       request,
@@ -1957,7 +1957,7 @@ export class ApplicationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApplications iterate %j', request);
+    this._log.debug('listApplications iterate %j', request);
     return this.descriptors.page.listApplications.asyncIterate(
       this.innerApiCalls['listApplications'] as GaxCall,
       request as {},

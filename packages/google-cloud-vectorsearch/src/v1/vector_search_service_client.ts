@@ -656,7 +656,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCollection request %j', request);
+    this._log.debug('getCollection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.ICollection,
@@ -667,7 +667,7 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCollection response %j', response);
+          this._log.debug('getCollection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -679,7 +679,7 @@ export class VectorSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IGetCollectionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCollection response %j', response);
+          this._log.debug('getCollection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -784,7 +784,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIndex request %j', request);
+    this._log.debug('getIndex request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IIndex,
@@ -795,7 +795,7 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -807,7 +807,7 @@ export class VectorSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IGetIndexRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -964,11 +964,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createCollection response %j', rawResponse);
+          this._log.debug('createCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCollection request %j', request);
+    this._log.debug('createCollection request %j', request);
     return this.innerApiCalls
       .createCollection(request, options, wrappedCallback)
       ?.then(
@@ -980,7 +980,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCollection response %j', rawResponse);
+          this._log.debug('createCollection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1165,11 +1165,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCollection response %j', rawResponse);
+          this._log.debug('updateCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCollection request %j', request);
+    this._log.debug('updateCollection request %j', request);
     return this.innerApiCalls
       .updateCollection(request, options, wrappedCallback)
       ?.then(
@@ -1181,7 +1181,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCollection response %j', rawResponse);
+          this._log.debug('updateCollection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1352,11 +1352,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCollection response %j', rawResponse);
+          this._log.debug('deleteCollection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCollection request %j', request);
+    this._log.debug('deleteCollection request %j', request);
     return this.innerApiCalls
       .deleteCollection(request, options, wrappedCallback)
       ?.then(
@@ -1368,7 +1368,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCollection response %j', rawResponse);
+          this._log.debug('deleteCollection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1545,11 +1545,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIndex request %j', request);
+    this._log.debug('createIndex request %j', request);
     return this.innerApiCalls
       .createIndex(request, options, wrappedCallback)
       ?.then(
@@ -1561,7 +1561,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1744,11 +1744,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateIndex response %j', rawResponse);
+          this._log.debug('updateIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateIndex request %j', request);
+    this._log.debug('updateIndex request %j', request);
     return this.innerApiCalls
       .updateIndex(request, options, wrappedCallback)
       ?.then(
@@ -1760,7 +1760,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateIndex response %j', rawResponse);
+          this._log.debug('updateIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1929,11 +1929,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIndex request %j', request);
+    this._log.debug('deleteIndex request %j', request);
     return this.innerApiCalls
       .deleteIndex(request, options, wrappedCallback)
       ?.then(
@@ -1945,7 +1945,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2101,11 +2101,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importDataObjects response %j', rawResponse);
+          this._log.debug('importDataObjects response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importDataObjects request %j', request);
+    this._log.debug('importDataObjects request %j', request);
     return this.innerApiCalls
       .importDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -2117,7 +2117,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importDataObjects response %j', rawResponse);
+          this._log.debug('importDataObjects response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2282,11 +2282,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportDataObjects response %j', rawResponse);
+          this._log.debug('exportDataObjects response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportDataObjects request %j', request);
+    this._log.debug('exportDataObjects request %j', request);
     return this.innerApiCalls
       .exportDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -2298,7 +2298,7 @@ export class VectorSearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportDataObjects response %j', rawResponse);
+          this._log.debug('exportDataObjects response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2450,11 +2450,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCollections values %j', values);
+          this._log.debug('listCollections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCollections request %j', request);
+    this._log.debug('listCollections request %j', request);
     return this.innerApiCalls
       .listCollections(request, options, wrappedCallback)
       ?.then(
@@ -2463,7 +2463,7 @@ export class VectorSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IListCollectionsRequest | null,
           protos.google.cloud.vectorsearch.v1.IListCollectionsResponse,
         ]) => {
-          this._log.info('listCollections values %j', response);
+          this._log.debug('listCollections values %j', response);
           return [response, input, output];
         },
       );
@@ -2512,7 +2512,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCollections stream %j', request);
+    this._log.debug('listCollections stream %j', request);
     return this.descriptors.page.listCollections.createStream(
       this.innerApiCalls.listCollections as GaxCall,
       request,
@@ -2566,7 +2566,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCollections iterate %j', request);
+    this._log.debug('listCollections iterate %j', request);
     return this.descriptors.page.listCollections.asyncIterate(
       this.innerApiCalls['listCollections'] as GaxCall,
       request as {},
@@ -2685,11 +2685,11 @@ export class VectorSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIndexes values %j', values);
+          this._log.debug('listIndexes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIndexes request %j', request);
+    this._log.debug('listIndexes request %j', request);
     return this.innerApiCalls
       .listIndexes(request, options, wrappedCallback)
       ?.then(
@@ -2698,7 +2698,7 @@ export class VectorSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IListIndexesRequest | null,
           protos.google.cloud.vectorsearch.v1.IListIndexesResponse,
         ]) => {
-          this._log.info('listIndexes values %j', response);
+          this._log.debug('listIndexes values %j', response);
           return [response, input, output];
         },
       );
@@ -2747,7 +2747,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes stream %j', request);
+    this._log.debug('listIndexes stream %j', request);
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as GaxCall,
       request,
@@ -2801,7 +2801,7 @@ export class VectorSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes iterate %j', request);
+    this._log.debug('listIndexes iterate %j', request);
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
       request as {},

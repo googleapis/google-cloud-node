@@ -554,11 +554,11 @@ export class ReportingServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('retrievePartnerMatchReport values %j', values);
+          this._log.debug('retrievePartnerMatchReport values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('retrievePartnerMatchReport request %j', request);
+    this._log.debug('retrievePartnerMatchReport request %j', request);
     return this.innerApiCalls
       .retrievePartnerMatchReport(request, options, wrappedCallback)
       ?.then(
@@ -567,7 +567,7 @@ export class ReportingServiceClient {
           protos.google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest | null,
           protos.google.ads.datamanager.v1.IRetrievePartnerMatchReportResponse,
         ]) => {
-          this._log.info('retrievePartnerMatchReport values %j', response);
+          this._log.debug('retrievePartnerMatchReport values %j', response);
           return [response, input, output];
         },
       );
@@ -661,7 +661,7 @@ export class ReportingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrievePartnerMatchReport stream %j', request);
+    this._log.debug('retrievePartnerMatchReport stream %j', request);
     return this.descriptors.page.retrievePartnerMatchReport.createStream(
       this.innerApiCalls.retrievePartnerMatchReport as GaxCall,
       request,
@@ -760,7 +760,7 @@ export class ReportingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrievePartnerMatchReport iterate %j', request);
+    this._log.debug('retrievePartnerMatchReport iterate %j', request);
     return this.descriptors.page.retrievePartnerMatchReport.asyncIterate(
       this.innerApiCalls['retrievePartnerMatchReport'] as GaxCall,
       request as {},

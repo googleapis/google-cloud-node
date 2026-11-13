@@ -556,7 +556,7 @@ export class ImageAnnotatorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchAnnotateImages request %j', request);
+    this._log.debug('batchAnnotateImages request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vision.v1.IBatchAnnotateImagesResponse,
@@ -567,7 +567,7 @@ export class ImageAnnotatorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchAnnotateImages response %j', response);
+          this._log.debug('batchAnnotateImages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -579,7 +579,7 @@ export class ImageAnnotatorClient {
           protos.google.cloud.vision.v1.IBatchAnnotateImagesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchAnnotateImages response %j', response);
+          this._log.debug('batchAnnotateImages response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -717,7 +717,7 @@ export class ImageAnnotatorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchAnnotateFiles request %j', request);
+    this._log.debug('batchAnnotateFiles request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vision.v1.IBatchAnnotateFilesResponse,
@@ -728,7 +728,7 @@ export class ImageAnnotatorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchAnnotateFiles response %j', response);
+          this._log.debug('batchAnnotateFiles response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -740,7 +740,7 @@ export class ImageAnnotatorClient {
           protos.google.cloud.vision.v1.IBatchAnnotateFilesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchAnnotateFiles response %j', response);
+          this._log.debug('batchAnnotateFiles response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -905,11 +905,11 @@ export class ImageAnnotatorClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('asyncBatchAnnotateImages response %j', rawResponse);
+          this._log.debug('asyncBatchAnnotateImages response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('asyncBatchAnnotateImages request %j', request);
+    this._log.debug('asyncBatchAnnotateImages request %j', request);
     return this.innerApiCalls
       .asyncBatchAnnotateImages(request, options, wrappedCallback)
       ?.then(
@@ -921,7 +921,7 @@ export class ImageAnnotatorClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('asyncBatchAnnotateImages response %j', rawResponse);
+          this._log.debug('asyncBatchAnnotateImages response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1099,11 +1099,11 @@ export class ImageAnnotatorClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('asyncBatchAnnotateFiles response %j', rawResponse);
+          this._log.debug('asyncBatchAnnotateFiles response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('asyncBatchAnnotateFiles request %j', request);
+    this._log.debug('asyncBatchAnnotateFiles request %j', request);
     return this.innerApiCalls
       .asyncBatchAnnotateFiles(request, options, wrappedCallback)
       ?.then(
@@ -1115,7 +1115,7 @@ export class ImageAnnotatorClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('asyncBatchAnnotateFiles response %j', rawResponse);
+          this._log.debug('asyncBatchAnnotateFiles response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

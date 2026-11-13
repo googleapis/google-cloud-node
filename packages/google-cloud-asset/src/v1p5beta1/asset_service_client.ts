@@ -530,11 +530,11 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAssets values %j', values);
+          this._log.debug('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAssets request %j', request);
+    this._log.debug('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
       ?.then(
@@ -543,7 +543,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
           protos.google.cloud.asset.v1p5beta1.IListAssetsResponse,
         ]) => {
-          this._log.info('listAssets values %j', response);
+          this._log.debug('listAssets values %j', response);
           return [response, input, output];
         },
       );
@@ -621,7 +621,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets stream %j', request);
+    this._log.debug('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -704,7 +704,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets iterate %j', request);
+    this._log.debug('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},

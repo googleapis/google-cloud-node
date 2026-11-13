@@ -716,7 +716,7 @@ export class MobileDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMobileDevice request %j', request);
+    this._log.debug('getMobileDevice request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IMobileDevice,
@@ -727,7 +727,7 @@ export class MobileDeviceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMobileDevice response %j', response);
+          this._log.debug('getMobileDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class MobileDeviceServiceClient {
           protos.google.ads.admanager.v1.IGetMobileDeviceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getMobileDevice response %j', response);
+          this._log.debug('getMobileDevice response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -900,11 +900,11 @@ export class MobileDeviceServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMobileDevices values %j', values);
+          this._log.debug('listMobileDevices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMobileDevices request %j', request);
+    this._log.debug('listMobileDevices request %j', request);
     return this.innerApiCalls
       .listMobileDevices(request, options, wrappedCallback)
       ?.then(
@@ -913,7 +913,7 @@ export class MobileDeviceServiceClient {
           protos.google.ads.admanager.v1.IListMobileDevicesRequest | null,
           protos.google.ads.admanager.v1.IListMobileDevicesResponse,
         ]) => {
-          this._log.info('listMobileDevices values %j', response);
+          this._log.debug('listMobileDevices values %j', response);
           return [response, input, output];
         },
       );
@@ -989,7 +989,7 @@ export class MobileDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMobileDevices stream %j', request);
+    this._log.debug('listMobileDevices stream %j', request);
     return this.descriptors.page.listMobileDevices.createStream(
       this.innerApiCalls.listMobileDevices as GaxCall,
       request,
@@ -1070,7 +1070,7 @@ export class MobileDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMobileDevices iterate %j', request);
+    this._log.debug('listMobileDevices iterate %j', request);
     return this.descriptors.page.listMobileDevices.asyncIterate(
       this.innerApiCalls['listMobileDevices'] as GaxCall,
       request as {},

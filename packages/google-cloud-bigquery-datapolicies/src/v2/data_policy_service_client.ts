@@ -513,7 +513,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDataPolicy request %j', request);
+    this._log.debug('createDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.datapolicies.v2.IDataPolicy,
@@ -524,7 +524,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDataPolicy response %j', response);
+          this._log.debug('createDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -539,7 +539,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDataPolicy response %j', response);
+          this._log.debug('createDataPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -673,7 +673,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('addGrantees request %j', request);
+    this._log.debug('addGrantees request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.datapolicies.v2.IDataPolicy,
@@ -684,7 +684,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('addGrantees response %j', response);
+          this._log.debug('addGrantees response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -699,7 +699,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('addGrantees response %j', response);
+          this._log.debug('addGrantees response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -832,7 +832,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeGrantees request %j', request);
+    this._log.debug('removeGrantees request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.datapolicies.v2.IDataPolicy,
@@ -843,7 +843,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeGrantees response %j', response);
+          this._log.debug('removeGrantees response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -858,7 +858,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeGrantees response %j', response);
+          this._log.debug('removeGrantees response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -989,7 +989,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataPolicy request %j', request);
+    this._log.debug('updateDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.datapolicies.v2.IDataPolicy,
@@ -1000,7 +1000,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataPolicy response %j', response);
+          this._log.debug('updateDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1015,7 +1015,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataPolicy response %j', response);
+          this._log.debug('updateDataPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1133,7 +1133,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDataPolicy request %j', request);
+    this._log.debug('deleteDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1144,7 +1144,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDataPolicy response %j', response);
+          this._log.debug('deleteDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1159,7 +1159,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataPolicy response %j', response);
+          this._log.debug('deleteDataPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1277,7 +1277,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataPolicy request %j', request);
+    this._log.debug('getDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.datapolicies.v2.IDataPolicy,
@@ -1288,7 +1288,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataPolicy response %j', response);
+          this._log.debug('getDataPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1303,7 +1303,7 @@ export class DataPolicyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataPolicy response %j', response);
+          this._log.debug('getDataPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1410,7 +1410,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1419,7 +1419,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1431,7 +1431,7 @@ export class DataPolicyServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1546,7 +1546,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1555,7 +1555,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1567,7 +1567,7 @@ export class DataPolicyServiceClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1676,7 +1676,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1685,7 +1685,7 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1697,7 +1697,7 @@ export class DataPolicyServiceClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1838,11 +1838,11 @@ export class DataPolicyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataPolicies values %j', values);
+          this._log.debug('listDataPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataPolicies request %j', request);
+    this._log.debug('listDataPolicies request %j', request);
     return this.innerApiCalls
       .listDataPolicies(request, options, wrappedCallback)
       ?.then(
@@ -1851,7 +1851,7 @@ export class DataPolicyServiceClient {
           protos.google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest | null,
           protos.google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse,
         ]) => {
-          this._log.info('listDataPolicies values %j', response);
+          this._log.debug('listDataPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -1907,7 +1907,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataPolicies stream %j', request);
+    this._log.debug('listDataPolicies stream %j', request);
     return this.descriptors.page.listDataPolicies.createStream(
       this.innerApiCalls.listDataPolicies as GaxCall,
       request,
@@ -1968,7 +1968,7 @@ export class DataPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataPolicies iterate %j', request);
+    this._log.debug('listDataPolicies iterate %j', request);
     return this.descriptors.page.listDataPolicies.asyncIterate(
       this.innerApiCalls['listDataPolicies'] as GaxCall,
       request as {},

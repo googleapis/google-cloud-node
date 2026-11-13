@@ -2337,7 +2337,7 @@ export class VertexRagServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveContexts request %j', request);
+    this._log.debug('retrieveContexts request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IRetrieveContextsResponse,
@@ -2348,7 +2348,7 @@ export class VertexRagServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveContexts response %j', response);
+          this._log.debug('retrieveContexts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2363,7 +2363,7 @@ export class VertexRagServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('retrieveContexts response %j', response);
+          this._log.debug('retrieveContexts response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2484,7 +2484,7 @@ export class VertexRagServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('augmentPrompt request %j', request);
+    this._log.debug('augmentPrompt request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IAugmentPromptResponse,
@@ -2495,7 +2495,7 @@ export class VertexRagServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('augmentPrompt response %j', response);
+          this._log.debug('augmentPrompt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2507,7 +2507,7 @@ export class VertexRagServiceClient {
           protos.google.cloud.aiplatform.v1.IAugmentPromptRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('augmentPrompt response %j', response);
+          this._log.debug('augmentPrompt response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2632,7 +2632,7 @@ export class VertexRagServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('corroborateContent request %j', request);
+    this._log.debug('corroborateContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.ICorroborateContentResponse,
@@ -2643,7 +2643,7 @@ export class VertexRagServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('corroborateContent response %j', response);
+          this._log.debug('corroborateContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2658,7 +2658,7 @@ export class VertexRagServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('corroborateContent response %j', response);
+          this._log.debug('corroborateContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2770,7 +2770,7 @@ export class VertexRagServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('askContexts request %j', request);
+    this._log.debug('askContexts request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IAskContextsResponse,
@@ -2781,7 +2781,7 @@ export class VertexRagServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('askContexts response %j', response);
+          this._log.debug('askContexts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2793,7 +2793,7 @@ export class VertexRagServiceClient {
           protos.google.cloud.aiplatform.v1.IAskContextsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('askContexts response %j', response);
+          this._log.debug('askContexts response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2935,11 +2935,11 @@ export class VertexRagServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('asyncRetrieveContexts response %j', rawResponse);
+          this._log.debug('asyncRetrieveContexts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('asyncRetrieveContexts request %j', request);
+    this._log.debug('asyncRetrieveContexts request %j', request);
     return this.innerApiCalls
       .asyncRetrieveContexts(request, options, wrappedCallback)
       ?.then(
@@ -2951,7 +2951,7 @@ export class VertexRagServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('asyncRetrieveContexts response %j', rawResponse);
+          this._log.debug('asyncRetrieveContexts response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

@@ -591,7 +591,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createExample request %j', request);
+    this._log.debug('createExample request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IExample,
@@ -602,7 +602,7 @@ export class ExamplesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createExample response %j', response);
+          this._log.debug('createExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -617,7 +617,7 @@ export class ExamplesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createExample response %j', response);
+          this._log.debug('createExample response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -736,7 +736,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteExample request %j', request);
+    this._log.debug('deleteExample request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -747,7 +747,7 @@ export class ExamplesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteExample response %j', response);
+          this._log.debug('deleteExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -762,7 +762,7 @@ export class ExamplesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteExample response %j', response);
+          this._log.debug('deleteExample response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -875,7 +875,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getExample request %j', request);
+    this._log.debug('getExample request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IExample,
@@ -886,7 +886,7 @@ export class ExamplesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getExample response %j', response);
+          this._log.debug('getExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -901,7 +901,7 @@ export class ExamplesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getExample response %j', response);
+          this._log.debug('getExample response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1021,7 +1021,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateExample request %j', request);
+    this._log.debug('updateExample request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IExample,
@@ -1032,7 +1032,7 @@ export class ExamplesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateExample response %j', response);
+          this._log.debug('updateExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1047,7 +1047,7 @@ export class ExamplesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateExample response %j', response);
+          this._log.debug('updateExample response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1184,11 +1184,11 @@ export class ExamplesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listExamples values %j', values);
+          this._log.debug('listExamples values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listExamples request %j', request);
+    this._log.debug('listExamples request %j', request);
     return this.innerApiCalls
       .listExamples(request, options, wrappedCallback)
       ?.then(
@@ -1197,7 +1197,7 @@ export class ExamplesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListExamplesRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListExamplesResponse,
         ]) => {
-          this._log.info('listExamples values %j', response);
+          this._log.debug('listExamples values %j', response);
           return [response, input, output];
         },
       );
@@ -1249,7 +1249,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExamples stream %j', request);
+    this._log.debug('listExamples stream %j', request);
     return this.descriptors.page.listExamples.createStream(
       this.innerApiCalls.listExamples as GaxCall,
       request,
@@ -1306,7 +1306,7 @@ export class ExamplesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExamples iterate %j', request);
+    this._log.debug('listExamples iterate %j', request);
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,
       request as {},

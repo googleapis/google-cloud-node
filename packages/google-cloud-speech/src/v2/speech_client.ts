@@ -748,7 +748,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRecognizer request %j', request);
+    this._log.debug('getRecognizer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.IRecognizer,
@@ -759,7 +759,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRecognizer response %j', response);
+          this._log.debug('getRecognizer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -771,7 +771,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IGetRecognizerRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRecognizer response %j', response);
+          this._log.debug('getRecognizer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -913,7 +913,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('recognize request %j', request);
+    this._log.debug('recognize request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.IRecognizeResponse,
@@ -922,7 +922,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('recognize response %j', response);
+          this._log.debug('recognize response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -934,7 +934,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IRecognizeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('recognize response %j', response);
+          this._log.debug('recognize response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1039,7 +1039,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConfig request %j', request);
+    this._log.debug('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.IConfig,
@@ -1048,7 +1048,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1060,7 +1060,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IGetConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1168,7 +1168,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConfig request %j', request);
+    this._log.debug('updateConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.IConfig,
@@ -1177,7 +1177,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1189,7 +1189,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IUpdateConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1296,7 +1296,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCustomClass request %j', request);
+    this._log.debug('getCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.ICustomClass,
@@ -1307,7 +1307,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCustomClass response %j', response);
+          this._log.debug('getCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1319,7 +1319,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IGetCustomClassRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCustomClass response %j', response);
+          this._log.debug('getCustomClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1424,7 +1424,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPhraseSet request %j', request);
+    this._log.debug('getPhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v2.IPhraseSet,
@@ -1433,7 +1433,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPhraseSet response %j', response);
+          this._log.debug('getPhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1445,7 +1445,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IGetPhraseSetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPhraseSet response %j', response);
+          this._log.debug('getPhraseSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1486,7 +1486,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingRecognize stream %j', options);
+    this._log.debug('streamingRecognize stream %j', options);
     return this.innerApiCalls.streamingRecognize(null, options);
   }
 
@@ -1615,11 +1615,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRecognizer response %j', rawResponse);
+          this._log.debug('createRecognizer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRecognizer request %j', request);
+    this._log.debug('createRecognizer request %j', request);
     return this.innerApiCalls
       .createRecognizer(request, options, wrappedCallback)
       ?.then(
@@ -1631,7 +1631,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRecognizer response %j', rawResponse);
+          this._log.debug('createRecognizer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1793,11 +1793,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateRecognizer response %j', rawResponse);
+          this._log.debug('updateRecognizer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateRecognizer request %j', request);
+    this._log.debug('updateRecognizer request %j', request);
     return this.innerApiCalls
       .updateRecognizer(request, options, wrappedCallback)
       ?.then(
@@ -1809,7 +1809,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRecognizer response %j', rawResponse);
+          this._log.debug('updateRecognizer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1973,11 +1973,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRecognizer response %j', rawResponse);
+          this._log.debug('deleteRecognizer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRecognizer request %j', request);
+    this._log.debug('deleteRecognizer request %j', request);
     return this.innerApiCalls
       .deleteRecognizer(request, options, wrappedCallback)
       ?.then(
@@ -1989,7 +1989,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRecognizer response %j', rawResponse);
+          this._log.debug('deleteRecognizer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2150,11 +2150,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeleteRecognizer response %j', rawResponse);
+          this._log.debug('undeleteRecognizer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeleteRecognizer request %j', request);
+    this._log.debug('undeleteRecognizer request %j', request);
     return this.innerApiCalls
       .undeleteRecognizer(request, options, wrappedCallback)
       ?.then(
@@ -2166,7 +2166,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('undeleteRecognizer response %j', rawResponse);
+          this._log.debug('undeleteRecognizer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2352,11 +2352,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchRecognize response %j', rawResponse);
+          this._log.debug('batchRecognize response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchRecognize request %j', request);
+    this._log.debug('batchRecognize request %j', request);
     return this.innerApiCalls
       .batchRecognize(request, options, wrappedCallback)
       ?.then(
@@ -2368,7 +2368,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchRecognize response %j', rawResponse);
+          this._log.debug('batchRecognize response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2533,11 +2533,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createCustomClass response %j', rawResponse);
+          this._log.debug('createCustomClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCustomClass request %j', request);
+    this._log.debug('createCustomClass request %j', request);
     return this.innerApiCalls
       .createCustomClass(request, options, wrappedCallback)
       ?.then(
@@ -2549,7 +2549,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCustomClass response %j', rawResponse);
+          this._log.debug('createCustomClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2712,11 +2712,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCustomClass response %j', rawResponse);
+          this._log.debug('updateCustomClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCustomClass request %j', request);
+    this._log.debug('updateCustomClass request %j', request);
     return this.innerApiCalls
       .updateCustomClass(request, options, wrappedCallback)
       ?.then(
@@ -2728,7 +2728,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCustomClass response %j', rawResponse);
+          this._log.debug('updateCustomClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2893,11 +2893,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCustomClass response %j', rawResponse);
+          this._log.debug('deleteCustomClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCustomClass request %j', request);
+    this._log.debug('deleteCustomClass request %j', request);
     return this.innerApiCalls
       .deleteCustomClass(request, options, wrappedCallback)
       ?.then(
@@ -2909,7 +2909,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCustomClass response %j', rawResponse);
+          this._log.debug('deleteCustomClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3071,11 +3071,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeleteCustomClass response %j', rawResponse);
+          this._log.debug('undeleteCustomClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeleteCustomClass request %j', request);
+    this._log.debug('undeleteCustomClass request %j', request);
     return this.innerApiCalls
       .undeleteCustomClass(request, options, wrappedCallback)
       ?.then(
@@ -3087,7 +3087,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('undeleteCustomClass response %j', rawResponse);
+          this._log.debug('undeleteCustomClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3252,11 +3252,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPhraseSet response %j', rawResponse);
+          this._log.debug('createPhraseSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPhraseSet request %j', request);
+    this._log.debug('createPhraseSet request %j', request);
     return this.innerApiCalls
       .createPhraseSet(request, options, wrappedCallback)
       ?.then(
@@ -3268,7 +3268,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPhraseSet response %j', rawResponse);
+          this._log.debug('createPhraseSet response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3430,11 +3430,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updatePhraseSet response %j', rawResponse);
+          this._log.debug('updatePhraseSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updatePhraseSet request %j', request);
+    this._log.debug('updatePhraseSet request %j', request);
     return this.innerApiCalls
       .updatePhraseSet(request, options, wrappedCallback)
       ?.then(
@@ -3446,7 +3446,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePhraseSet response %j', rawResponse);
+          this._log.debug('updatePhraseSet response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3610,11 +3610,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePhraseSet response %j', rawResponse);
+          this._log.debug('deletePhraseSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePhraseSet request %j', request);
+    this._log.debug('deletePhraseSet request %j', request);
     return this.innerApiCalls
       .deletePhraseSet(request, options, wrappedCallback)
       ?.then(
@@ -3626,7 +3626,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePhraseSet response %j', rawResponse);
+          this._log.debug('deletePhraseSet response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3787,11 +3787,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeletePhraseSet response %j', rawResponse);
+          this._log.debug('undeletePhraseSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeletePhraseSet request %j', request);
+    this._log.debug('undeletePhraseSet request %j', request);
     return this.innerApiCalls
       .undeletePhraseSet(request, options, wrappedCallback)
       ?.then(
@@ -3803,7 +3803,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('undeletePhraseSet response %j', rawResponse);
+          this._log.debug('undeletePhraseSet response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3955,11 +3955,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRecognizers values %j', values);
+          this._log.debug('listRecognizers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRecognizers request %j', request);
+    this._log.debug('listRecognizers request %j', request);
     return this.innerApiCalls
       .listRecognizers(request, options, wrappedCallback)
       ?.then(
@@ -3968,7 +3968,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IListRecognizersRequest | null,
           protos.google.cloud.speech.v2.IListRecognizersResponse,
         ]) => {
-          this._log.info('listRecognizers values %j', response);
+          this._log.debug('listRecognizers values %j', response);
           return [response, input, output];
         },
       );
@@ -4023,7 +4023,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRecognizers stream %j', request);
+    this._log.debug('listRecognizers stream %j', request);
     return this.descriptors.page.listRecognizers.createStream(
       this.innerApiCalls.listRecognizers as GaxCall,
       request,
@@ -4083,7 +4083,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRecognizers iterate %j', request);
+    this._log.debug('listRecognizers iterate %j', request);
     return this.descriptors.page.listRecognizers.asyncIterate(
       this.innerApiCalls['listRecognizers'] as GaxCall,
       request as {},
@@ -4209,11 +4209,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCustomClasses values %j', values);
+          this._log.debug('listCustomClasses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCustomClasses request %j', request);
+    this._log.debug('listCustomClasses request %j', request);
     return this.innerApiCalls
       .listCustomClasses(request, options, wrappedCallback)
       ?.then(
@@ -4222,7 +4222,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IListCustomClassesRequest | null,
           protos.google.cloud.speech.v2.IListCustomClassesResponse,
         ]) => {
-          this._log.info('listCustomClasses values %j', response);
+          this._log.debug('listCustomClasses values %j', response);
           return [response, input, output];
         },
       );
@@ -4278,7 +4278,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomClasses stream %j', request);
+    this._log.debug('listCustomClasses stream %j', request);
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as GaxCall,
       request,
@@ -4339,7 +4339,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomClasses iterate %j', request);
+    this._log.debug('listCustomClasses iterate %j', request);
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
       request as {},
@@ -4458,11 +4458,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPhraseSets values %j', values);
+          this._log.debug('listPhraseSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPhraseSets request %j', request);
+    this._log.debug('listPhraseSets request %j', request);
     return this.innerApiCalls
       .listPhraseSets(request, options, wrappedCallback)
       ?.then(
@@ -4471,7 +4471,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v2.IListPhraseSetsRequest | null,
           protos.google.cloud.speech.v2.IListPhraseSetsResponse,
         ]) => {
-          this._log.info('listPhraseSets values %j', response);
+          this._log.debug('listPhraseSets values %j', response);
           return [response, input, output];
         },
       );
@@ -4526,7 +4526,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhraseSets stream %j', request);
+    this._log.debug('listPhraseSets stream %j', request);
     return this.descriptors.page.listPhraseSets.createStream(
       this.innerApiCalls.listPhraseSets as GaxCall,
       request,
@@ -4586,7 +4586,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhraseSets iterate %j', request);
+    this._log.debug('listPhraseSets iterate %j', request);
     return this.descriptors.page.listPhraseSets.asyncIterate(
       this.innerApiCalls['listPhraseSets'] as GaxCall,
       request as {},

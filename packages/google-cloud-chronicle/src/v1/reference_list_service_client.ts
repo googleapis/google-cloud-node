@@ -584,7 +584,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getReferenceList request %j', request);
+    this._log.debug('getReferenceList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
@@ -595,7 +595,7 @@ export class ReferenceListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getReferenceList response %j', response);
+          this._log.debug('getReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -607,7 +607,7 @@ export class ReferenceListServiceClient {
           protos.google.cloud.chronicle.v1.IGetReferenceListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getReferenceList response %j', response);
+          this._log.debug('getReferenceList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -728,7 +728,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createReferenceList request %j', request);
+    this._log.debug('createReferenceList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
@@ -739,7 +739,7 @@ export class ReferenceListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createReferenceList response %j', response);
+          this._log.debug('createReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -754,7 +754,7 @@ export class ReferenceListServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createReferenceList response %j', response);
+          this._log.debug('createReferenceList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -874,7 +874,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateReferenceList request %j', request);
+    this._log.debug('updateReferenceList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
@@ -885,7 +885,7 @@ export class ReferenceListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateReferenceList response %j', response);
+          this._log.debug('updateReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -900,7 +900,7 @@ export class ReferenceListServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateReferenceList response %j', response);
+          this._log.debug('updateReferenceList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1018,7 +1018,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyReferenceList request %j', request);
+    this._log.debug('verifyReferenceList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
@@ -1029,7 +1029,7 @@ export class ReferenceListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyReferenceList response %j', response);
+          this._log.debug('verifyReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1044,7 +1044,7 @@ export class ReferenceListServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('verifyReferenceList response %j', response);
+          this._log.debug('verifyReferenceList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1184,11 +1184,11 @@ export class ReferenceListServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listReferenceLists values %j', values);
+          this._log.debug('listReferenceLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listReferenceLists request %j', request);
+    this._log.debug('listReferenceLists request %j', request);
     return this.innerApiCalls
       .listReferenceLists(request, options, wrappedCallback)
       ?.then(
@@ -1197,7 +1197,7 @@ export class ReferenceListServiceClient {
           protos.google.cloud.chronicle.v1.IListReferenceListsRequest | null,
           protos.google.cloud.chronicle.v1.IListReferenceListsResponse,
         ]) => {
-          this._log.info('listReferenceLists values %j', response);
+          this._log.debug('listReferenceLists values %j', response);
           return [response, input, output];
         },
       );
@@ -1252,7 +1252,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReferenceLists stream %j', request);
+    this._log.debug('listReferenceLists stream %j', request);
     return this.descriptors.page.listReferenceLists.createStream(
       this.innerApiCalls.listReferenceLists as GaxCall,
       request,
@@ -1312,7 +1312,7 @@ export class ReferenceListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReferenceLists iterate %j', request);
+    this._log.debug('listReferenceLists iterate %j', request);
     return this.descriptors.page.listReferenceLists.asyncIterate(
       this.innerApiCalls['listReferenceLists'] as GaxCall,
       request as {},

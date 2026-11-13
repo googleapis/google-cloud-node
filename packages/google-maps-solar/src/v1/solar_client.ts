@@ -480,7 +480,7 @@ export class SolarClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('findClosestBuildingInsights request %j', request);
+    this._log.debug('findClosestBuildingInsights request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.solar.v1.IBuildingInsights,
@@ -491,7 +491,7 @@ export class SolarClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('findClosestBuildingInsights response %j', response);
+          this._log.debug('findClosestBuildingInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -506,7 +506,7 @@ export class SolarClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('findClosestBuildingInsights response %j', response);
+          this._log.debug('findClosestBuildingInsights response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -647,7 +647,7 @@ export class SolarClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataLayers request %j', request);
+    this._log.debug('getDataLayers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.solar.v1.IDataLayers,
@@ -656,7 +656,7 @@ export class SolarClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataLayers response %j', response);
+          this._log.debug('getDataLayers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -668,7 +668,7 @@ export class SolarClient {
           protos.google.maps.solar.v1.IGetDataLayersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataLayers response %j', response);
+          this._log.debug('getDataLayers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -767,7 +767,7 @@ export class SolarClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGeoTiff request %j', request);
+    this._log.debug('getGeoTiff request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.IHttpBody,
@@ -776,7 +776,7 @@ export class SolarClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getGeoTiff response %j', response);
+          this._log.debug('getGeoTiff response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -788,7 +788,7 @@ export class SolarClient {
           protos.google.maps.solar.v1.IGetGeoTiffRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getGeoTiff response %j', response);
+          this._log.debug('getGeoTiff response %j', response);
           return [response, options, rawResponse];
         },
       )

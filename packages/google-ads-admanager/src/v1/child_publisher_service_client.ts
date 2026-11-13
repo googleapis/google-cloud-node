@@ -734,7 +734,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChildPublisher request %j', request);
+    this._log.debug('getChildPublisher request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IChildPublisher,
@@ -745,7 +745,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChildPublisher response %j', response);
+          this._log.debug('getChildPublisher response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class ChildPublisherServiceClient {
           protos.google.ads.admanager.v1.IGetChildPublisherRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getChildPublisher response %j', response);
+          this._log.debug('getChildPublisher response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -873,7 +873,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createChildPublisher request %j', request);
+    this._log.debug('createChildPublisher request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IChildPublisher,
@@ -884,7 +884,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createChildPublisher response %j', response);
+          this._log.debug('createChildPublisher response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -899,7 +899,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createChildPublisher response %j', response);
+          this._log.debug('createChildPublisher response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1022,7 +1022,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateChildPublishers request %j', request);
+    this._log.debug('batchCreateChildPublishers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateChildPublishersResponse,
@@ -1033,7 +1033,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateChildPublishers response %j', response);
+          this._log.debug('batchCreateChildPublishers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1048,7 +1048,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateChildPublishers response %j', response);
+          this._log.debug('batchCreateChildPublishers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1166,7 +1166,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateChildPublisher request %j', request);
+    this._log.debug('updateChildPublisher request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IChildPublisher,
@@ -1177,7 +1177,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateChildPublisher response %j', response);
+          this._log.debug('updateChildPublisher response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1192,7 +1192,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateChildPublisher response %j', response);
+          this._log.debug('updateChildPublisher response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1316,7 +1316,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateChildPublishers request %j', request);
+    this._log.debug('batchUpdateChildPublishers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateChildPublishersResponse,
@@ -1327,7 +1327,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateChildPublishers response %j', response);
+          this._log.debug('batchUpdateChildPublishers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1342,7 +1342,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateChildPublishers response %j', response);
+          this._log.debug('batchUpdateChildPublishers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1470,7 +1470,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchResendChildPublisherInvitationEmails request %j',
       request,
     );
@@ -1484,7 +1484,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchResendChildPublisherInvitationEmails response %j',
             response,
           );
@@ -1506,7 +1506,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchResendChildPublisherInvitationEmails response %j',
             response,
           );
@@ -1635,7 +1635,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchRenegotiateChildPublisherAgreements request %j',
       request,
     );
@@ -1649,7 +1649,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchRenegotiateChildPublisherAgreements response %j',
             response,
           );
@@ -1671,7 +1671,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchRenegotiateChildPublisherAgreements response %j',
             response,
           );
@@ -1808,7 +1808,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRejectChildPublishers request %j', request);
+    this._log.debug('batchRejectChildPublishers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchRejectChildPublishersResponse,
@@ -1819,7 +1819,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRejectChildPublishers response %j', response);
+          this._log.debug('batchRejectChildPublishers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1834,7 +1834,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchRejectChildPublishers response %j', response);
+          this._log.debug('batchRejectChildPublishers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1960,7 +1960,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchWithdrawChildPublishers request %j', request);
+    this._log.debug('batchWithdrawChildPublishers request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchWithdrawChildPublishersResponse,
@@ -1971,7 +1971,7 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchWithdrawChildPublishers response %j', response);
+          this._log.debug('batchWithdrawChildPublishers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1986,7 +1986,7 @@ export class ChildPublisherServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchWithdrawChildPublishers response %j', response);
+          this._log.debug('batchWithdrawChildPublishers response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2162,11 +2162,11 @@ export class ChildPublisherServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChildPublishers values %j', values);
+          this._log.debug('listChildPublishers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChildPublishers request %j', request);
+    this._log.debug('listChildPublishers request %j', request);
     return this.innerApiCalls
       .listChildPublishers(request, options, wrappedCallback)
       ?.then(
@@ -2175,7 +2175,7 @@ export class ChildPublisherServiceClient {
           protos.google.ads.admanager.v1.IListChildPublishersRequest | null,
           protos.google.ads.admanager.v1.IListChildPublishersResponse,
         ]) => {
-          this._log.info('listChildPublishers values %j', response);
+          this._log.debug('listChildPublishers values %j', response);
           return [response, input, output];
         },
       );
@@ -2266,7 +2266,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChildPublishers stream %j', request);
+    this._log.debug('listChildPublishers stream %j', request);
     return this.descriptors.page.listChildPublishers.createStream(
       this.innerApiCalls.listChildPublishers as GaxCall,
       request,
@@ -2362,7 +2362,7 @@ export class ChildPublisherServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChildPublishers iterate %j', request);
+    this._log.debug('listChildPublishers iterate %j', request);
     return this.descriptors.page.listChildPublishers.asyncIterate(
       this.innerApiCalls['listChildPublishers'] as GaxCall,
       request as {},

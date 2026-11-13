@@ -2,361 +2,81 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.storage.control.v2",
+  "protoPackage": "google.storage.v2",
   "libraryPackage": "@google-cloud/storage-control",
   "services": {
-    "StorageControl": {
+    "Storage": {
       "clients": {
         "grpc": {
-          "libraryClient": "StorageControlClient",
+          "libraryClient": "StorageClient",
           "rpcs": {
-            "CreateFolder": {
+            "DeleteBucket": {
               "methods": [
-                "createFolder"
+                "deleteBucket"
               ]
             },
-            "DeleteFolder": {
+            "GetBucket": {
               "methods": [
-                "deleteFolder"
+                "getBucket"
               ]
             },
-            "GetFolder": {
+            "CreateBucket": {
               "methods": [
-                "getFolder"
+                "createBucket"
               ]
             },
-            "GetStorageLayout": {
+            "LockBucketRetentionPolicy": {
               "methods": [
-                "getStorageLayout"
+                "lockBucketRetentionPolicy"
               ]
             },
-            "CreateManagedFolder": {
+            "UpdateBucket": {
               "methods": [
-                "createManagedFolder"
+                "updateBucket"
               ]
             },
-            "DeleteManagedFolder": {
+            "ListBuckets": {
               "methods": [
-                "deleteManagedFolder"
-              ]
-            },
-            "GetManagedFolder": {
-              "methods": [
-                "getManagedFolder"
-              ]
-            },
-            "DisableAnywhereCache": {
-              "methods": [
-                "disableAnywhereCache"
-              ]
-            },
-            "PauseAnywhereCache": {
-              "methods": [
-                "pauseAnywhereCache"
-              ]
-            },
-            "ResumeAnywhereCache": {
-              "methods": [
-                "resumeAnywhereCache"
-              ]
-            },
-            "GetAnywhereCache": {
-              "methods": [
-                "getAnywhereCache"
-              ]
-            },
-            "GetProjectIntelligenceConfig": {
-              "methods": [
-                "getProjectIntelligenceConfig"
-              ]
-            },
-            "UpdateProjectIntelligenceConfig": {
-              "methods": [
-                "updateProjectIntelligenceConfig"
-              ]
-            },
-            "GetFolderIntelligenceConfig": {
-              "methods": [
-                "getFolderIntelligenceConfig"
-              ]
-            },
-            "UpdateFolderIntelligenceConfig": {
-              "methods": [
-                "updateFolderIntelligenceConfig"
-              ]
-            },
-            "GetOrganizationIntelligenceConfig": {
-              "methods": [
-                "getOrganizationIntelligenceConfig"
-              ]
-            },
-            "UpdateOrganizationIntelligenceConfig": {
-              "methods": [
-                "updateOrganizationIntelligenceConfig"
-              ]
-            },
-            "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
-            },
-            "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
-            },
-            "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
-            },
-            "GetIntelligenceFinding": {
-              "methods": [
-                "getIntelligenceFinding"
-              ]
-            },
-            "GetIntelligenceFindingRevision": {
-              "methods": [
-                "getIntelligenceFindingRevision"
-              ]
-            },
-            "RenameFolder": {
-              "methods": [
-                "renameFolder"
-              ]
-            },
-            "DeleteFolderRecursive": {
-              "methods": [
-                "deleteFolderRecursive"
-              ]
-            },
-            "CreateAnywhereCache": {
-              "methods": [
-                "createAnywhereCache"
-              ]
-            },
-            "UpdateAnywhereCache": {
-              "methods": [
-                "updateAnywhereCache"
-              ]
-            },
-            "ListFolders": {
-              "methods": [
-                "listFolders",
-                "listFoldersStream",
-                "listFoldersAsync"
-              ]
-            },
-            "ListManagedFolders": {
-              "methods": [
-                "listManagedFolders",
-                "listManagedFoldersStream",
-                "listManagedFoldersAsync"
-              ]
-            },
-            "ListAnywhereCaches": {
-              "methods": [
-                "listAnywhereCaches",
-                "listAnywhereCachesStream",
-                "listAnywhereCachesAsync"
-              ]
-            },
-            "ListIntelligenceFindings": {
-              "methods": [
-                "listIntelligenceFindings",
-                "listIntelligenceFindingsStream",
-                "listIntelligenceFindingsAsync"
-              ]
-            },
-            "SummarizeIntelligenceFindings": {
-              "methods": [
-                "summarizeIntelligenceFindings",
-                "summarizeIntelligenceFindingsStream",
-                "summarizeIntelligenceFindingsAsync"
-              ]
-            },
-            "ListIntelligenceFindingRevisions": {
-              "methods": [
-                "listIntelligenceFindingRevisions",
-                "listIntelligenceFindingRevisionsStream",
-                "listIntelligenceFindingRevisionsAsync"
+                "listBuckets",
+                "listBucketsStream",
+                "listBucketsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
-          "libraryClient": "StorageControlClient",
+          "libraryClient": "StorageClient",
           "rpcs": {
-            "CreateFolder": {
+            "DeleteBucket": {
               "methods": [
-                "createFolder"
+                "deleteBucket"
               ]
             },
-            "DeleteFolder": {
+            "GetBucket": {
               "methods": [
-                "deleteFolder"
+                "getBucket"
               ]
             },
-            "GetFolder": {
+            "CreateBucket": {
               "methods": [
-                "getFolder"
+                "createBucket"
               ]
             },
-            "GetStorageLayout": {
+            "LockBucketRetentionPolicy": {
               "methods": [
-                "getStorageLayout"
+                "lockBucketRetentionPolicy"
               ]
             },
-            "CreateManagedFolder": {
+            "UpdateBucket": {
               "methods": [
-                "createManagedFolder"
+                "updateBucket"
               ]
             },
-            "DeleteManagedFolder": {
+            "ListBuckets": {
               "methods": [
-                "deleteManagedFolder"
-              ]
-            },
-            "GetManagedFolder": {
-              "methods": [
-                "getManagedFolder"
-              ]
-            },
-            "DisableAnywhereCache": {
-              "methods": [
-                "disableAnywhereCache"
-              ]
-            },
-            "PauseAnywhereCache": {
-              "methods": [
-                "pauseAnywhereCache"
-              ]
-            },
-            "ResumeAnywhereCache": {
-              "methods": [
-                "resumeAnywhereCache"
-              ]
-            },
-            "GetAnywhereCache": {
-              "methods": [
-                "getAnywhereCache"
-              ]
-            },
-            "GetProjectIntelligenceConfig": {
-              "methods": [
-                "getProjectIntelligenceConfig"
-              ]
-            },
-            "UpdateProjectIntelligenceConfig": {
-              "methods": [
-                "updateProjectIntelligenceConfig"
-              ]
-            },
-            "GetFolderIntelligenceConfig": {
-              "methods": [
-                "getFolderIntelligenceConfig"
-              ]
-            },
-            "UpdateFolderIntelligenceConfig": {
-              "methods": [
-                "updateFolderIntelligenceConfig"
-              ]
-            },
-            "GetOrganizationIntelligenceConfig": {
-              "methods": [
-                "getOrganizationIntelligenceConfig"
-              ]
-            },
-            "UpdateOrganizationIntelligenceConfig": {
-              "methods": [
-                "updateOrganizationIntelligenceConfig"
-              ]
-            },
-            "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
-            },
-            "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
-            },
-            "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
-            },
-            "GetIntelligenceFinding": {
-              "methods": [
-                "getIntelligenceFinding"
-              ]
-            },
-            "GetIntelligenceFindingRevision": {
-              "methods": [
-                "getIntelligenceFindingRevision"
-              ]
-            },
-            "RenameFolder": {
-              "methods": [
-                "renameFolder"
-              ]
-            },
-            "DeleteFolderRecursive": {
-              "methods": [
-                "deleteFolderRecursive"
-              ]
-            },
-            "CreateAnywhereCache": {
-              "methods": [
-                "createAnywhereCache"
-              ]
-            },
-            "UpdateAnywhereCache": {
-              "methods": [
-                "updateAnywhereCache"
-              ]
-            },
-            "ListFolders": {
-              "methods": [
-                "listFolders",
-                "listFoldersStream",
-                "listFoldersAsync"
-              ]
-            },
-            "ListManagedFolders": {
-              "methods": [
-                "listManagedFolders",
-                "listManagedFoldersStream",
-                "listManagedFoldersAsync"
-              ]
-            },
-            "ListAnywhereCaches": {
-              "methods": [
-                "listAnywhereCaches",
-                "listAnywhereCachesStream",
-                "listAnywhereCachesAsync"
-              ]
-            },
-            "ListIntelligenceFindings": {
-              "methods": [
-                "listIntelligenceFindings",
-                "listIntelligenceFindingsStream",
-                "listIntelligenceFindingsAsync"
-              ]
-            },
-            "SummarizeIntelligenceFindings": {
-              "methods": [
-                "summarizeIntelligenceFindings",
-                "summarizeIntelligenceFindingsStream",
-                "summarizeIntelligenceFindingsAsync"
-              ]
-            },
-            "ListIntelligenceFindingRevisions": {
-              "methods": [
-                "listIntelligenceFindingRevisions",
-                "listIntelligenceFindingRevisionsStream",
-                "listIntelligenceFindingRevisionsAsync"
+                "listBuckets",
+                "listBucketsStream",
+                "listBucketsAsync"
               ]
             }
           }

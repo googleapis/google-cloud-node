@@ -492,7 +492,7 @@ export class CssProductInputsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertCssProductInput request %j', request);
+    this._log.debug('insertCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.css.v1.ICssProductInput,
@@ -503,7 +503,7 @@ export class CssProductInputsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertCssProductInput response %j', response);
+          this._log.debug('insertCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -518,7 +518,7 @@ export class CssProductInputsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertCssProductInput response %j', response);
+          this._log.debug('insertCssProductInput response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -650,7 +650,7 @@ export class CssProductInputsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCssProductInput request %j', request);
+    this._log.debug('updateCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.css.v1.ICssProductInput,
@@ -661,7 +661,7 @@ export class CssProductInputsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCssProductInput response %j', response);
+          this._log.debug('updateCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -676,7 +676,7 @@ export class CssProductInputsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCssProductInput response %j', response);
+          this._log.debug('updateCssProductInput response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -799,7 +799,7 @@ export class CssProductInputsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCssProductInput request %j', request);
+    this._log.debug('deleteCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -810,7 +810,7 @@ export class CssProductInputsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCssProductInput response %j', response);
+          this._log.debug('deleteCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -825,7 +825,7 @@ export class CssProductInputsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCssProductInput response %j', response);
+          this._log.debug('deleteCssProductInput response %j', response);
           return [response, options, rawResponse];
         },
       )

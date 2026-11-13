@@ -706,7 +706,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteTestCases request %j', request);
+    this._log.debug('batchDeleteTestCases request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -717,7 +717,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteTestCases response %j', response);
+          this._log.debug('batchDeleteTestCases response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -732,7 +732,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteTestCases response %j', response);
+          this._log.debug('batchDeleteTestCases response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -845,7 +845,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTestCase request %j', request);
+    this._log.debug('getTestCase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
@@ -856,7 +856,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTestCase response %j', response);
+          this._log.debug('getTestCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -871,7 +871,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTestCase response %j', response);
+          this._log.debug('getTestCase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -991,7 +991,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTestCase request %j', request);
+    this._log.debug('createTestCase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
@@ -1002,7 +1002,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTestCase response %j', response);
+          this._log.debug('createTestCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1017,7 +1017,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTestCase response %j', response);
+          this._log.debug('createTestCase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1140,7 +1140,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTestCase request %j', request);
+    this._log.debug('updateTestCase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
@@ -1151,7 +1151,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTestCase response %j', response);
+          this._log.debug('updateTestCase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1166,7 +1166,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTestCase response %j', response);
+          this._log.debug('updateTestCase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1286,7 +1286,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('calculateCoverage request %j', request);
+    this._log.debug('calculateCoverage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageResponse,
@@ -1297,7 +1297,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('calculateCoverage response %j', response);
+          this._log.debug('calculateCoverage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1312,7 +1312,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('calculateCoverage response %j', response);
+          this._log.debug('calculateCoverage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1431,7 +1431,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTestCaseResult request %j', request);
+    this._log.debug('getTestCaseResult request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
@@ -1442,7 +1442,7 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTestCaseResult response %j', response);
+          this._log.debug('getTestCaseResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1457,7 +1457,7 @@ export class TestCasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTestCaseResult response %j', response);
+          this._log.debug('getTestCaseResult response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1606,11 +1606,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runTestCase response %j', rawResponse);
+          this._log.debug('runTestCase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runTestCase request %j', request);
+    this._log.debug('runTestCase request %j', request);
     return this.innerApiCalls
       .runTestCase(request, options, wrappedCallback)
       ?.then(
@@ -1622,7 +1622,7 @@ export class TestCasesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runTestCase response %j', rawResponse);
+          this._log.debug('runTestCase response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1791,11 +1791,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchRunTestCases response %j', rawResponse);
+          this._log.debug('batchRunTestCases response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchRunTestCases request %j', request);
+    this._log.debug('batchRunTestCases request %j', request);
     return this.innerApiCalls
       .batchRunTestCases(request, options, wrappedCallback)
       ?.then(
@@ -1807,7 +1807,7 @@ export class TestCasesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchRunTestCases response %j', rawResponse);
+          this._log.debug('batchRunTestCases response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1984,11 +1984,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importTestCases response %j', rawResponse);
+          this._log.debug('importTestCases response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importTestCases request %j', request);
+    this._log.debug('importTestCases request %j', request);
     return this.innerApiCalls
       .importTestCases(request, options, wrappedCallback)
       ?.then(
@@ -2000,7 +2000,7 @@ export class TestCasesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importTestCases response %j', rawResponse);
+          this._log.debug('importTestCases response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2189,11 +2189,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportTestCases response %j', rawResponse);
+          this._log.debug('exportTestCases response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportTestCases request %j', request);
+    this._log.debug('exportTestCases request %j', request);
     return this.innerApiCalls
       .exportTestCases(request, options, wrappedCallback)
       ?.then(
@@ -2205,7 +2205,7 @@ export class TestCasesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportTestCases response %j', rawResponse);
+          this._log.debug('exportTestCases response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2357,11 +2357,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTestCases values %j', values);
+          this._log.debug('listTestCases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTestCases request %j', request);
+    this._log.debug('listTestCases request %j', request);
     return this.innerApiCalls
       .listTestCases(request, options, wrappedCallback)
       ?.then(
@@ -2370,7 +2370,7 @@ export class TestCasesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse,
         ]) => {
-          this._log.info('listTestCases values %j', response);
+          this._log.debug('listTestCases values %j', response);
           return [response, input, output];
         },
       );
@@ -2419,7 +2419,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTestCases stream %j', request);
+    this._log.debug('listTestCases stream %j', request);
     return this.descriptors.page.listTestCases.createStream(
       this.innerApiCalls.listTestCases as GaxCall,
       request,
@@ -2473,7 +2473,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTestCases iterate %j', request);
+    this._log.debug('listTestCases iterate %j', request);
     return this.descriptors.page.listTestCases.asyncIterate(
       this.innerApiCalls['listTestCases'] as GaxCall,
       request as {},
@@ -2618,11 +2618,11 @@ export class TestCasesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTestCaseResults values %j', values);
+          this._log.debug('listTestCaseResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTestCaseResults request %j', request);
+    this._log.debug('listTestCaseResults request %j', request);
     return this.innerApiCalls
       .listTestCaseResults(request, options, wrappedCallback)
       ?.then(
@@ -2631,7 +2631,7 @@ export class TestCasesClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse,
         ]) => {
-          this._log.info('listTestCaseResults values %j', response);
+          this._log.debug('listTestCaseResults values %j', response);
           return [response, input, output];
         },
       );
@@ -2705,7 +2705,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTestCaseResults stream %j', request);
+    this._log.debug('listTestCaseResults stream %j', request);
     return this.descriptors.page.listTestCaseResults.createStream(
       this.innerApiCalls.listTestCaseResults as GaxCall,
       request,
@@ -2784,7 +2784,7 @@ export class TestCasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTestCaseResults iterate %j', request);
+    this._log.debug('listTestCaseResults iterate %j', request);
     return this.descriptors.page.listTestCaseResults.asyncIterate(
       this.innerApiCalls['listTestCaseResults'] as GaxCall,
       request as {},

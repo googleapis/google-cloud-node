@@ -21,16 +21,16 @@ sources:
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.7.1
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.7.1.tar.gz
-      checksum: 0d9d0bfc0115b46b27288eac457e9e5aede8e7f6e39aaabe8a188b9e491dff61
+      version: gapic-generator-v5.7.3
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.7.3.tar.gz
+      checksum: 3f2f3e6f31ca14e1351067e17166bac7f6ad5766880dbcc8953686e6cf74bbaa
       build:
         - pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
     - name: gapic-node-processing
-      version: 0.1.11
+      version: 0.3.1
     - name: gapic-tools
       version: 2.2.1
     - name: protobufjs
@@ -2272,8 +2272,11 @@ libraries:
       - src/util/samples_and_doc_fix_utils.ts
       - src/util/storage_control_utils.ts
       - src/util/uber_client_builder.ts
+      - system-test/fixtures/sample/src/index.js
+      - system-test/fixtures/sample/src/index.ts
       - test/storage_control_compatibility.ts
-    skip_generate: true
+      - tsconfig.json
+      - webpack.config.js
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'

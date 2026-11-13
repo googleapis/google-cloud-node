@@ -489,7 +489,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -500,7 +500,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -512,7 +512,7 @@ export class SqlOperationsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlOperationsGetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -633,7 +633,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperationsListResponse,
@@ -644,7 +644,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -656,7 +656,7 @@ export class SqlOperationsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlOperationsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -773,7 +773,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancel request %j', request);
+    this._log.debug('cancel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -784,7 +784,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancel response %j', response);
+          this._log.debug('cancel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -799,7 +799,7 @@ export class SqlOperationsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancel response %j', response);
+          this._log.debug('cancel response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -841,7 +841,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataStore request %j', request);
+    this._log.debug('getDataStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IDataStore,
@@ -852,7 +852,7 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataStore response %j', response);
+          this._log.debug('getDataStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -867,7 +867,7 @@ export class DataStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataStore response %j', response);
+          this._log.debug('getDataStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -998,7 +998,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataStore request %j', request);
+    this._log.debug('updateDataStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IDataStore,
@@ -1009,7 +1009,7 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataStore response %j', response);
+          this._log.debug('updateDataStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1024,7 +1024,7 @@ export class DataStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataStore response %j', response);
+          this._log.debug('updateDataStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1134,7 +1134,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1143,7 +1143,7 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1155,7 +1155,7 @@ export class DataStoreServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1282,7 +1282,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1291,7 +1291,7 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1303,7 +1303,7 @@ export class DataStoreServiceClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1478,11 +1478,11 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createDataStore response %j', rawResponse);
+          this._log.debug('createDataStore response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createDataStore request %j', request);
+    this._log.debug('createDataStore request %j', request);
     return this.innerApiCalls
       .createDataStore(request, options, wrappedCallback)
       ?.then(
@@ -1494,7 +1494,7 @@ export class DataStoreServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDataStore response %j', rawResponse);
+          this._log.debug('createDataStore response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1656,11 +1656,11 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteDataStore response %j', rawResponse);
+          this._log.debug('deleteDataStore response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteDataStore request %j', request);
+    this._log.debug('deleteDataStore request %j', request);
     return this.innerApiCalls
       .deleteDataStore(request, options, wrappedCallback)
       ?.then(
@@ -1672,7 +1672,7 @@ export class DataStoreServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataStore response %j', rawResponse);
+          this._log.debug('deleteDataStore response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1842,11 +1842,11 @@ export class DataStoreServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataStores values %j', values);
+          this._log.debug('listDataStores values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataStores request %j', request);
+    this._log.debug('listDataStores request %j', request);
     return this.innerApiCalls
       .listDataStores(request, options, wrappedCallback)
       ?.then(
@@ -1855,7 +1855,7 @@ export class DataStoreServiceClient {
           protos.google.cloud.discoveryengine.v1.IListDataStoresRequest | null,
           protos.google.cloud.discoveryengine.v1.IListDataStoresResponse,
         ]) => {
-          this._log.info('listDataStores values %j', response);
+          this._log.debug('listDataStores values %j', response);
           return [response, input, output];
         },
       );
@@ -1921,7 +1921,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataStores stream %j', request);
+    this._log.debug('listDataStores stream %j', request);
     return this.descriptors.page.listDataStores.createStream(
       this.innerApiCalls.listDataStores as GaxCall,
       request,
@@ -1992,7 +1992,7 @@ export class DataStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataStores iterate %j', request);
+    this._log.debug('listDataStores iterate %j', request);
     return this.descriptors.page.listDataStores.asyncIterate(
       this.innerApiCalls['listDataStores'] as GaxCall,
       request as {},

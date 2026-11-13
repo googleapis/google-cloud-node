@@ -735,7 +735,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEntitySignalsMapping request %j', request);
+    this._log.debug('getEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
@@ -746,7 +746,7 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEntitySignalsMapping response %j', response);
+          this._log.debug('getEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -761,7 +761,7 @@ export class EntitySignalsMappingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEntitySignalsMapping response %j', response);
+          this._log.debug('getEntitySignalsMapping response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -881,7 +881,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createEntitySignalsMapping request %j', request);
+    this._log.debug('createEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
@@ -892,7 +892,7 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEntitySignalsMapping response %j', response);
+          this._log.debug('createEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -907,7 +907,7 @@ export class EntitySignalsMappingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createEntitySignalsMapping response %j', response);
+          this._log.debug('createEntitySignalsMapping response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1031,7 +1031,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEntitySignalsMapping request %j', request);
+    this._log.debug('updateEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IEntitySignalsMapping,
@@ -1042,7 +1042,7 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEntitySignalsMapping response %j', response);
+          this._log.debug('updateEntitySignalsMapping response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1057,7 +1057,7 @@ export class EntitySignalsMappingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEntitySignalsMapping response %j', response);
+          this._log.debug('updateEntitySignalsMapping response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1179,7 +1179,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateEntitySignalsMappings request %j', request);
+    this._log.debug('batchCreateEntitySignalsMappings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
@@ -1190,7 +1190,7 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateEntitySignalsMappings response %j',
             response,
           );
@@ -1208,7 +1208,7 @@ export class EntitySignalsMappingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateEntitySignalsMappings response %j',
             response,
           );
@@ -1333,7 +1333,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateEntitySignalsMappings request %j', request);
+    this._log.debug('batchUpdateEntitySignalsMappings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
@@ -1344,7 +1344,7 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateEntitySignalsMappings response %j',
             response,
           );
@@ -1362,7 +1362,7 @@ export class EntitySignalsMappingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateEntitySignalsMappings response %j',
             response,
           );
@@ -1514,11 +1514,11 @@ export class EntitySignalsMappingServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEntitySignalsMappings values %j', values);
+          this._log.debug('listEntitySignalsMappings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEntitySignalsMappings request %j', request);
+    this._log.debug('listEntitySignalsMappings request %j', request);
     return this.innerApiCalls
       .listEntitySignalsMappings(request, options, wrappedCallback)
       ?.then(
@@ -1527,7 +1527,7 @@ export class EntitySignalsMappingServiceClient {
           protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest | null,
           protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse,
         ]) => {
-          this._log.info('listEntitySignalsMappings values %j', response);
+          this._log.debug('listEntitySignalsMappings values %j', response);
           return [response, input, output];
         },
       );
@@ -1591,7 +1591,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEntitySignalsMappings stream %j', request);
+    this._log.debug('listEntitySignalsMappings stream %j', request);
     return this.descriptors.page.listEntitySignalsMappings.createStream(
       this.innerApiCalls.listEntitySignalsMappings as GaxCall,
       request,
@@ -1660,7 +1660,7 @@ export class EntitySignalsMappingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEntitySignalsMappings iterate %j', request);
+    this._log.debug('listEntitySignalsMappings iterate %j', request);
     return this.descriptors.page.listEntitySignalsMappings.asyncIterate(
       this.innerApiCalls['listEntitySignalsMappings'] as GaxCall,
       request as {},

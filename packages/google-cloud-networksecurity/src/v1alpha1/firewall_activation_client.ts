@@ -839,7 +839,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFirewallEndpoint request %j', request);
+    this._log.debug('getFirewallEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IFirewallEndpoint,
@@ -850,7 +850,7 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFirewallEndpoint response %j', response);
+          this._log.debug('getFirewallEndpoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -865,7 +865,7 @@ export class FirewallActivationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFirewallEndpoint response %j', response);
+          this._log.debug('getFirewallEndpoint response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -982,7 +982,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFirewallEndpointAssociation request %j', request);
+    this._log.debug('getFirewallEndpointAssociation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IFirewallEndpointAssociation,
@@ -993,7 +993,7 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getFirewallEndpointAssociation response %j',
             response,
           );
@@ -1011,7 +1011,7 @@ export class FirewallActivationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getFirewallEndpointAssociation response %j',
             response,
           );
@@ -1169,11 +1169,11 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createFirewallEndpoint response %j', rawResponse);
+          this._log.debug('createFirewallEndpoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createFirewallEndpoint request %j', request);
+    this._log.debug('createFirewallEndpoint request %j', request);
     return this.innerApiCalls
       .createFirewallEndpoint(request, options, wrappedCallback)
       ?.then(
@@ -1185,7 +1185,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFirewallEndpoint response %j', rawResponse);
+          this._log.debug('createFirewallEndpoint response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1352,11 +1352,11 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteFirewallEndpoint response %j', rawResponse);
+          this._log.debug('deleteFirewallEndpoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteFirewallEndpoint request %j', request);
+    this._log.debug('deleteFirewallEndpoint request %j', request);
     return this.innerApiCalls
       .deleteFirewallEndpoint(request, options, wrappedCallback)
       ?.then(
@@ -1368,7 +1368,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFirewallEndpoint response %j', rawResponse);
+          this._log.debug('deleteFirewallEndpoint response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1541,11 +1541,11 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateFirewallEndpoint response %j', rawResponse);
+          this._log.debug('updateFirewallEndpoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateFirewallEndpoint request %j', request);
+    this._log.debug('updateFirewallEndpoint request %j', request);
     return this.innerApiCalls
       .updateFirewallEndpoint(request, options, wrappedCallback)
       ?.then(
@@ -1557,7 +1557,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFirewallEndpoint response %j', rawResponse);
+          this._log.debug('updateFirewallEndpoint response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1730,14 +1730,14 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createFirewallEndpointAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createFirewallEndpointAssociation request %j', request);
+    this._log.debug('createFirewallEndpointAssociation request %j', request);
     return this.innerApiCalls
       .createFirewallEndpointAssociation(request, options, wrappedCallback)
       ?.then(
@@ -1749,7 +1749,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createFirewallEndpointAssociation response %j',
             rawResponse,
           );
@@ -1919,14 +1919,14 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteFirewallEndpointAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteFirewallEndpointAssociation request %j', request);
+    this._log.debug('deleteFirewallEndpointAssociation request %j', request);
     return this.innerApiCalls
       .deleteFirewallEndpointAssociation(request, options, wrappedCallback)
       ?.then(
@@ -1938,7 +1938,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteFirewallEndpointAssociation response %j',
             rawResponse,
           );
@@ -2115,14 +2115,14 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateFirewallEndpointAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateFirewallEndpointAssociation request %j', request);
+    this._log.debug('updateFirewallEndpointAssociation request %j', request);
     return this.innerApiCalls
       .updateFirewallEndpointAssociation(request, options, wrappedCallback)
       ?.then(
@@ -2134,7 +2134,7 @@ export class FirewallActivationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateFirewallEndpointAssociation response %j',
             rawResponse,
           );
@@ -2289,11 +2289,11 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFirewallEndpoints values %j', values);
+          this._log.debug('listFirewallEndpoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFirewallEndpoints request %j', request);
+    this._log.debug('listFirewallEndpoints request %j', request);
     return this.innerApiCalls
       .listFirewallEndpoints(request, options, wrappedCallback)
       ?.then(
@@ -2302,7 +2302,7 @@ export class FirewallActivationClient {
           protos.google.cloud.networksecurity.v1alpha1.IListFirewallEndpointsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListFirewallEndpointsResponse,
         ]) => {
-          this._log.info('listFirewallEndpoints values %j', response);
+          this._log.debug('listFirewallEndpoints values %j', response);
           return [response, input, output];
         },
       );
@@ -2351,7 +2351,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFirewallEndpoints stream %j', request);
+    this._log.debug('listFirewallEndpoints stream %j', request);
     return this.descriptors.page.listFirewallEndpoints.createStream(
       this.innerApiCalls.listFirewallEndpoints as GaxCall,
       request,
@@ -2405,7 +2405,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFirewallEndpoints iterate %j', request);
+    this._log.debug('listFirewallEndpoints iterate %j', request);
     return this.descriptors.page.listFirewallEndpoints.asyncIterate(
       this.innerApiCalls['listFirewallEndpoints'] as GaxCall,
       request as {},
@@ -2524,11 +2524,11 @@ export class FirewallActivationClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFirewallEndpointAssociations values %j', values);
+          this._log.debug('listFirewallEndpointAssociations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFirewallEndpointAssociations request %j', request);
+    this._log.debug('listFirewallEndpointAssociations request %j', request);
     return this.innerApiCalls
       .listFirewallEndpointAssociations(request, options, wrappedCallback)
       ?.then(
@@ -2537,7 +2537,7 @@ export class FirewallActivationClient {
           protos.google.cloud.networksecurity.v1alpha1.IListFirewallEndpointAssociationsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListFirewallEndpointAssociationsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listFirewallEndpointAssociations values %j',
             response,
           );
@@ -2590,7 +2590,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFirewallEndpointAssociations stream %j', request);
+    this._log.debug('listFirewallEndpointAssociations stream %j', request);
     return this.descriptors.page.listFirewallEndpointAssociations.createStream(
       this.innerApiCalls.listFirewallEndpointAssociations as GaxCall,
       request,
@@ -2645,7 +2645,7 @@ export class FirewallActivationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFirewallEndpointAssociations iterate %j', request);
+    this._log.debug('listFirewallEndpointAssociations iterate %j', request);
     return this.descriptors.page.listFirewallEndpointAssociations.asyncIterate(
       this.innerApiCalls['listFirewallEndpointAssociations'] as GaxCall,
       request as {},

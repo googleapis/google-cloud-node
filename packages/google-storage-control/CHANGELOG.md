@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.13.1...storage-control-v0.14.0) (2026-11-12)
+
+
+### Features
+
+* **storage-control:** Regenerate client with ViewObjectFullContext and RapidCache APIs ([#9845](https://github.com/googleapis/google-cloud-node/issues/9845)) ([e86d507](https://github.com/googleapis/google-cloud-node/commit/e86d5074e6279e88d501b09ec3594b56242483f0))
+
+
+### Bug Fixes
+
+* **storage-control:** Re-compile protos in librarian.js after renaming Object ([#9844](https://github.com/googleapis/google-cloud-node/issues/9844)) ([987cfe8](https://github.com/googleapis/google-cloud-node/commit/987cfe81ee221020f86e32becd63c83eeed0a03b))
+* **storage-control:** Regenerate with gapic-generator-v5.7.3 ([#9865](https://github.com/googleapis/google-cloud-node/issues/9865)) ([9f31cb2](https://github.com/googleapis/google-cloud-node/commit/9f31cb2cc999d07901b2098950c12d5f4934db33))
+
 ## [0.13.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.13.0...storage-control-v0.13.1) (2026-10-23)
 
 

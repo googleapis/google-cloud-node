@@ -805,7 +805,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDocument request %j', request);
+    this._log.debug('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IDocument,
@@ -816,7 +816,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -831,7 +831,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -970,7 +970,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDocument request %j', request);
+    this._log.debug('createDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IDocument,
@@ -981,7 +981,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -996,7 +996,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1130,7 +1130,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDocument request %j', request);
+    this._log.debug('updateDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IDocument,
@@ -1141,7 +1141,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1156,7 +1156,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1282,7 +1282,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDocument request %j', request);
+    this._log.debug('deleteDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1293,7 +1293,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1308,7 +1308,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1439,7 +1439,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProcessedDocument request %j', request);
+    this._log.debug('getProcessedDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
@@ -1450,7 +1450,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProcessedDocument response %j', response);
+          this._log.debug('getProcessedDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1465,7 +1465,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProcessedDocument response %j', response);
+          this._log.debug('getProcessedDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1588,7 +1588,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchGetDocumentsMetadata request %j', request);
+    this._log.debug('batchGetDocumentsMetadata request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
@@ -1599,7 +1599,7 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchGetDocumentsMetadata response %j', response);
+          this._log.debug('batchGetDocumentsMetadata response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1614,7 +1614,7 @@ export class DocumentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchGetDocumentsMetadata response %j', response);
+          this._log.debug('batchGetDocumentsMetadata response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1845,11 +1845,11 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importDocuments response %j', rawResponse);
+          this._log.debug('importDocuments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importDocuments request %j', request);
+    this._log.debug('importDocuments request %j', request);
     return this.innerApiCalls
       .importDocuments(request, options, wrappedCallback)
       ?.then(
@@ -1861,7 +1861,7 @@ export class DocumentServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importDocuments response %j', rawResponse);
+          this._log.debug('importDocuments response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2047,11 +2047,11 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('purgeDocuments response %j', rawResponse);
+          this._log.debug('purgeDocuments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeDocuments request %j', request);
+    this._log.debug('purgeDocuments request %j', request);
     return this.innerApiCalls
       .purgeDocuments(request, options, wrappedCallback)
       ?.then(
@@ -2063,7 +2063,7 @@ export class DocumentServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('purgeDocuments response %j', rawResponse);
+          this._log.debug('purgeDocuments response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2232,11 +2232,11 @@ export class DocumentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDocuments values %j', values);
+          this._log.debug('listDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDocuments request %j', request);
+    this._log.debug('listDocuments request %j', request);
     return this.innerApiCalls
       .listDocuments(request, options, wrappedCallback)
       ?.then(
@@ -2245,7 +2245,7 @@ export class DocumentServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListDocumentsRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListDocumentsResponse,
         ]) => {
-          this._log.info('listDocuments values %j', response);
+          this._log.debug('listDocuments values %j', response);
           return [response, input, output];
         },
       );
@@ -2311,7 +2311,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDocuments stream %j', request);
+    this._log.debug('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
       request,
@@ -2382,7 +2382,7 @@ export class DocumentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDocuments iterate %j', request);
+    this._log.debug('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
       request as {},

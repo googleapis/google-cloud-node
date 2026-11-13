@@ -716,7 +716,7 @@ export class ChangeEventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChangeEvent request %j', request);
+    this._log.debug('getChangeEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IChangeEvent,
@@ -727,7 +727,7 @@ export class ChangeEventServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChangeEvent response %j', response);
+          this._log.debug('getChangeEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class ChangeEventServiceClient {
           protos.google.ads.admanager.v1.IGetChangeEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getChangeEvent response %j', response);
+          this._log.debug('getChangeEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -897,11 +897,11 @@ export class ChangeEventServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChangeEvents values %j', values);
+          this._log.debug('listChangeEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChangeEvents request %j', request);
+    this._log.debug('listChangeEvents request %j', request);
     return this.innerApiCalls
       .listChangeEvents(request, options, wrappedCallback)
       ?.then(
@@ -910,7 +910,7 @@ export class ChangeEventServiceClient {
           protos.google.ads.admanager.v1.IListChangeEventsRequest | null,
           protos.google.ads.admanager.v1.IListChangeEventsResponse,
         ]) => {
-          this._log.info('listChangeEvents values %j', response);
+          this._log.debug('listChangeEvents values %j', response);
           return [response, input, output];
         },
       );
@@ -983,7 +983,7 @@ export class ChangeEventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChangeEvents stream %j', request);
+    this._log.debug('listChangeEvents stream %j', request);
     return this.descriptors.page.listChangeEvents.createStream(
       this.innerApiCalls.listChangeEvents as GaxCall,
       request,
@@ -1061,7 +1061,7 @@ export class ChangeEventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChangeEvents iterate %j', request);
+    this._log.debug('listChangeEvents iterate %j', request);
     return this.descriptors.page.listChangeEvents.asyncIterate(
       this.innerApiCalls['listChangeEvents'] as GaxCall,
       request as {},

@@ -1205,7 +1205,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getManagementServer request %j', request);
+    this._log.debug('getManagementServer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IManagementServer,
@@ -1216,7 +1216,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getManagementServer response %j', response);
+          this._log.debug('getManagementServer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1231,7 +1231,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getManagementServer response %j', response);
+          this._log.debug('getManagementServer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1340,7 +1340,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackupVault request %j', request);
+    this._log.debug('getBackupVault request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IBackupVault,
@@ -1351,7 +1351,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackupVault response %j', response);
+          this._log.debug('getBackupVault response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1363,7 +1363,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IGetBackupVaultRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBackupVault response %j', response);
+          this._log.debug('getBackupVault response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1469,7 +1469,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataSource request %j', request);
+    this._log.debug('getDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IDataSource,
@@ -1480,7 +1480,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataSource response %j', response);
+          this._log.debug('getDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1492,7 +1492,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IGetDataSourceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataSource response %j', response);
+          this._log.debug('getDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1599,7 +1599,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackup request %j', request);
+    this._log.debug('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IBackup,
@@ -1608,7 +1608,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackup response %j', response);
+          this._log.debug('getBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1620,7 +1620,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IGetBackupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBackup response %j', response);
+          this._log.debug('getBackup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1727,7 +1727,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackupPlan request %j', request);
+    this._log.debug('getBackupPlan request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IBackupPlan,
@@ -1738,7 +1738,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackupPlan response %j', response);
+          this._log.debug('getBackupPlan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1750,7 +1750,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IGetBackupPlanRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBackupPlan response %j', response);
+          this._log.debug('getBackupPlan response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1864,7 +1864,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackupPlanRevision request %j', request);
+    this._log.debug('getBackupPlanRevision request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IBackupPlanRevision,
@@ -1875,7 +1875,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackupPlanRevision response %j', response);
+          this._log.debug('getBackupPlanRevision response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1890,7 +1890,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBackupPlanRevision response %j', response);
+          this._log.debug('getBackupPlanRevision response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2008,7 +2008,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackupPlanAssociation request %j', request);
+    this._log.debug('getBackupPlanAssociation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IBackupPlanAssociation,
@@ -2019,7 +2019,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackupPlanAssociation response %j', response);
+          this._log.debug('getBackupPlanAssociation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2034,7 +2034,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBackupPlanAssociation response %j', response);
+          this._log.debug('getBackupPlanAssociation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2153,7 +2153,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataSourceReference request %j', request);
+    this._log.debug('getDataSourceReference request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IDataSourceReference,
@@ -2164,7 +2164,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataSourceReference response %j', response);
+          this._log.debug('getDataSourceReference response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2179,7 +2179,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataSourceReference response %j', response);
+          this._log.debug('getDataSourceReference response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2298,7 +2298,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAutoProtectionPolicy request %j', request);
+    this._log.debug('getAutoProtectionPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IAutoProtectionPolicy,
@@ -2309,7 +2309,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAutoProtectionPolicy response %j', response);
+          this._log.debug('getAutoProtectionPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2324,7 +2324,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAutoProtectionPolicy response %j', response);
+          this._log.debug('getAutoProtectionPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2443,7 +2443,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAutoProtectionPolicyBinding request %j', request);
+    this._log.debug('getAutoProtectionPolicyBinding request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IAutoProtectionPolicyBinding,
@@ -2454,7 +2454,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getAutoProtectionPolicyBinding response %j',
             response,
           );
@@ -2472,7 +2472,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getAutoProtectionPolicyBinding response %j',
             response,
           );
@@ -2588,7 +2588,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRestoreTemplate request %j', request);
+    this._log.debug('getRestoreTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IRestoreTemplate,
@@ -2599,7 +2599,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRestoreTemplate response %j', response);
+          this._log.debug('getRestoreTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2614,7 +2614,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRestoreTemplate response %j', response);
+          this._log.debug('getRestoreTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2733,7 +2733,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRestoreTemplateExecution request %j', request);
+    this._log.debug('getRestoreTemplateExecution request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IRestoreTemplateExecution,
@@ -2744,7 +2744,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRestoreTemplateExecution response %j', response);
+          this._log.debug('getRestoreTemplateExecution response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2759,7 +2759,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRestoreTemplateExecution response %j', response);
+          this._log.debug('getRestoreTemplateExecution response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2880,7 +2880,10 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRestoreVerificationPlanAssociation request %j', request);
+    this._log.debug(
+      'getRestoreVerificationPlanAssociation request %j',
+      request,
+    );
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IRestoreVerificationPlanAssociation,
@@ -2891,7 +2894,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getRestoreVerificationPlanAssociation response %j',
             response,
           );
@@ -2909,7 +2912,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getRestoreVerificationPlanAssociation response %j',
             response,
           );
@@ -3033,7 +3036,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRestoreVerificationPlan request %j', request);
+    this._log.debug('getRestoreVerificationPlan request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.backupdr.v1.IRestoreVerificationPlan,
@@ -3044,7 +3047,7 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRestoreVerificationPlan response %j', response);
+          this._log.debug('getRestoreVerificationPlan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3059,7 +3062,7 @@ export class BackupDRClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRestoreVerificationPlan response %j', response);
+          this._log.debug('getRestoreVerificationPlan response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3216,11 +3219,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createManagementServer response %j', rawResponse);
+          this._log.debug('createManagementServer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createManagementServer request %j', request);
+    this._log.debug('createManagementServer request %j', request);
     return this.innerApiCalls
       .createManagementServer(request, options, wrappedCallback)
       ?.then(
@@ -3232,7 +3235,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createManagementServer response %j', rawResponse);
+          this._log.debug('createManagementServer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3399,11 +3402,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteManagementServer response %j', rawResponse);
+          this._log.debug('deleteManagementServer response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteManagementServer request %j', request);
+    this._log.debug('deleteManagementServer request %j', request);
     return this.innerApiCalls
       .deleteManagementServer(request, options, wrappedCallback)
       ?.then(
@@ -3415,7 +3418,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteManagementServer response %j', rawResponse);
+          this._log.debug('deleteManagementServer response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3591,11 +3594,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createBackupVault response %j', rawResponse);
+          this._log.debug('createBackupVault response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBackupVault request %j', request);
+    this._log.debug('createBackupVault request %j', request);
     return this.innerApiCalls
       .createBackupVault(request, options, wrappedCallback)
       ?.then(
@@ -3607,7 +3610,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBackupVault response %j', rawResponse);
+          this._log.debug('createBackupVault response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3789,11 +3792,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateBackupVault response %j', rawResponse);
+          this._log.debug('updateBackupVault response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateBackupVault request %j', request);
+    this._log.debug('updateBackupVault request %j', request);
     return this.innerApiCalls
       .updateBackupVault(request, options, wrappedCallback)
       ?.then(
@@ -3805,7 +3808,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBackupVault response %j', rawResponse);
+          this._log.debug('updateBackupVault response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3988,11 +3991,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteBackupVault response %j', rawResponse);
+          this._log.debug('deleteBackupVault response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteBackupVault request %j', request);
+    this._log.debug('deleteBackupVault request %j', request);
     return this.innerApiCalls
       .deleteBackupVault(request, options, wrappedCallback)
       ?.then(
@@ -4004,7 +4007,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBackupVault response %j', rawResponse);
+          this._log.debug('deleteBackupVault response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4179,11 +4182,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateDataSource response %j', rawResponse);
+          this._log.debug('updateDataSource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateDataSource request %j', request);
+    this._log.debug('updateDataSource request %j', request);
     return this.innerApiCalls
       .updateDataSource(request, options, wrappedCallback)
       ?.then(
@@ -4195,7 +4198,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDataSource response %j', rawResponse);
+          this._log.debug('updateDataSource response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4368,11 +4371,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateBackup response %j', rawResponse);
+          this._log.debug('updateBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateBackup request %j', request);
+    this._log.debug('updateBackup request %j', request);
     return this.innerApiCalls
       .updateBackup(request, options, wrappedCallback)
       ?.then(
@@ -4384,7 +4387,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBackup response %j', rawResponse);
+          this._log.debug('updateBackup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4551,11 +4554,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteBackup response %j', rawResponse);
+          this._log.debug('deleteBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteBackup request %j', request);
+    this._log.debug('deleteBackup request %j', request);
     return this.innerApiCalls
       .deleteBackup(request, options, wrappedCallback)
       ?.then(
@@ -4567,7 +4570,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBackup response %j', rawResponse);
+          this._log.debug('deleteBackup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4758,11 +4761,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('restoreBackup response %j', rawResponse);
+          this._log.debug('restoreBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('restoreBackup request %j', request);
+    this._log.debug('restoreBackup request %j', request);
     return this.innerApiCalls
       .restoreBackup(request, options, wrappedCallback)
       ?.then(
@@ -4774,7 +4777,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('restoreBackup response %j', rawResponse);
+          this._log.debug('restoreBackup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4950,11 +4953,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createBackupPlan response %j', rawResponse);
+          this._log.debug('createBackupPlan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBackupPlan request %j', request);
+    this._log.debug('createBackupPlan request %j', request);
     return this.innerApiCalls
       .createBackupPlan(request, options, wrappedCallback)
       ?.then(
@@ -4966,7 +4969,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBackupPlan response %j', rawResponse);
+          this._log.debug('createBackupPlan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5142,11 +5145,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateBackupPlan response %j', rawResponse);
+          this._log.debug('updateBackupPlan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateBackupPlan request %j', request);
+    this._log.debug('updateBackupPlan request %j', request);
     return this.innerApiCalls
       .updateBackupPlan(request, options, wrappedCallback)
       ?.then(
@@ -5158,7 +5161,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBackupPlan response %j', rawResponse);
+          this._log.debug('updateBackupPlan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5327,11 +5330,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteBackupPlan response %j', rawResponse);
+          this._log.debug('deleteBackupPlan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteBackupPlan request %j', request);
+    this._log.debug('deleteBackupPlan request %j', request);
     return this.innerApiCalls
       .deleteBackupPlan(request, options, wrappedCallback)
       ?.then(
@@ -5343,7 +5346,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBackupPlan response %j', rawResponse);
+          this._log.debug('deleteBackupPlan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5517,14 +5520,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createBackupPlanAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBackupPlanAssociation request %j', request);
+    this._log.debug('createBackupPlanAssociation request %j', request);
     return this.innerApiCalls
       .createBackupPlanAssociation(request, options, wrappedCallback)
       ?.then(
@@ -5536,7 +5539,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createBackupPlanAssociation response %j',
             rawResponse,
           );
@@ -5715,14 +5718,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateBackupPlanAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateBackupPlanAssociation request %j', request);
+    this._log.debug('updateBackupPlanAssociation request %j', request);
     return this.innerApiCalls
       .updateBackupPlanAssociation(request, options, wrappedCallback)
       ?.then(
@@ -5734,7 +5737,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateBackupPlanAssociation response %j',
             rawResponse,
           );
@@ -5911,14 +5914,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteBackupPlanAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteBackupPlanAssociation request %j', request);
+    this._log.debug('deleteBackupPlanAssociation request %j', request);
     return this.innerApiCalls
       .deleteBackupPlanAssociation(request, options, wrappedCallback)
       ?.then(
@@ -5930,7 +5933,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteBackupPlanAssociation response %j',
             rawResponse,
           );
@@ -6103,11 +6106,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('triggerBackup response %j', rawResponse);
+          this._log.debug('triggerBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('triggerBackup request %j', request);
+    this._log.debug('triggerBackup request %j', request);
     return this.innerApiCalls
       .triggerBackup(request, options, wrappedCallback)
       ?.then(
@@ -6119,7 +6122,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('triggerBackup response %j', rawResponse);
+          this._log.debug('triggerBackup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6294,11 +6297,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('initializeService response %j', rawResponse);
+          this._log.debug('initializeService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('initializeService request %j', request);
+    this._log.debug('initializeService request %j', request);
     return this.innerApiCalls
       .initializeService(request, options, wrappedCallback)
       ?.then(
@@ -6310,7 +6313,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('initializeService response %j', rawResponse);
+          this._log.debug('initializeService response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6480,11 +6483,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'createAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAutoProtectionPolicy request %j', request);
+    this._log.debug('createAutoProtectionPolicy request %j', request);
     return this.innerApiCalls
       .createAutoProtectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -6496,7 +6502,10 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'createAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -6663,11 +6672,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'updateAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAutoProtectionPolicy request %j', request);
+    this._log.debug('updateAutoProtectionPolicy request %j', request);
     return this.innerApiCalls
       .updateAutoProtectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -6679,7 +6691,10 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'updateAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -6846,11 +6861,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'deleteAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAutoProtectionPolicy request %j', request);
+    this._log.debug('deleteAutoProtectionPolicy request %j', request);
     return this.innerApiCalls
       .deleteAutoProtectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -6862,7 +6880,10 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAutoProtectionPolicy response %j', rawResponse);
+          this._log.debug(
+            'deleteAutoProtectionPolicy response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -7034,14 +7055,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createAutoProtectionPolicyBinding response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAutoProtectionPolicyBinding request %j', request);
+    this._log.debug('createAutoProtectionPolicyBinding request %j', request);
     return this.innerApiCalls
       .createAutoProtectionPolicyBinding(request, options, wrappedCallback)
       ?.then(
@@ -7053,7 +7074,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createAutoProtectionPolicyBinding response %j',
             rawResponse,
           );
@@ -7224,14 +7245,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'initiateDeleteAutoProtectionPolicyBinding response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'initiateDeleteAutoProtectionPolicyBinding request %j',
       request,
     );
@@ -7250,7 +7271,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'initiateDeleteAutoProtectionPolicyBinding response %j',
             rawResponse,
           );
@@ -7419,11 +7440,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRestoreTemplate response %j', rawResponse);
+          this._log.debug('createRestoreTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRestoreTemplate request %j', request);
+    this._log.debug('createRestoreTemplate request %j', request);
     return this.innerApiCalls
       .createRestoreTemplate(request, options, wrappedCallback)
       ?.then(
@@ -7435,7 +7456,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRestoreTemplate response %j', rawResponse);
+          this._log.debug('createRestoreTemplate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -7604,11 +7625,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateRestoreTemplate response %j', rawResponse);
+          this._log.debug('updateRestoreTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateRestoreTemplate request %j', request);
+    this._log.debug('updateRestoreTemplate request %j', request);
     return this.innerApiCalls
       .updateRestoreTemplate(request, options, wrappedCallback)
       ?.then(
@@ -7620,7 +7641,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRestoreTemplate response %j', rawResponse);
+          this._log.debug('updateRestoreTemplate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -7786,11 +7807,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRestoreTemplate response %j', rawResponse);
+          this._log.debug('deleteRestoreTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRestoreTemplate request %j', request);
+    this._log.debug('deleteRestoreTemplate request %j', request);
     return this.innerApiCalls
       .deleteRestoreTemplate(request, options, wrappedCallback)
       ?.then(
@@ -7802,7 +7823,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRestoreTemplate response %j', rawResponse);
+          this._log.debug('deleteRestoreTemplate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -7970,11 +7991,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runRestoreTemplate response %j', rawResponse);
+          this._log.debug('runRestoreTemplate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runRestoreTemplate request %j', request);
+    this._log.debug('runRestoreTemplate request %j', request);
     return this.innerApiCalls
       .runRestoreTemplate(request, options, wrappedCallback)
       ?.then(
@@ -7986,7 +8007,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runRestoreTemplate response %j', rawResponse);
+          this._log.debug('runRestoreTemplate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -8149,11 +8170,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('triggerRestoreCleanup response %j', rawResponse);
+          this._log.debug('triggerRestoreCleanup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('triggerRestoreCleanup request %j', request);
+    this._log.debug('triggerRestoreCleanup request %j', request);
     return this.innerApiCalls
       .triggerRestoreCleanup(request, options, wrappedCallback)
       ?.then(
@@ -8165,7 +8186,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('triggerRestoreCleanup response %j', rawResponse);
+          this._log.debug('triggerRestoreCleanup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -8341,14 +8362,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createRestoreVerificationPlan response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRestoreVerificationPlan request %j', request);
+    this._log.debug('createRestoreVerificationPlan request %j', request);
     return this.innerApiCalls
       .createRestoreVerificationPlan(request, options, wrappedCallback)
       ?.then(
@@ -8360,7 +8381,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createRestoreVerificationPlan response %j',
             rawResponse,
           );
@@ -8534,14 +8555,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createRestoreVerificationPlanAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'createRestoreVerificationPlanAssociation request %j',
       request,
     );
@@ -8560,7 +8581,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createRestoreVerificationPlanAssociation response %j',
             rawResponse,
           );
@@ -8727,14 +8748,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteRestoreVerificationPlanAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'deleteRestoreVerificationPlanAssociation request %j',
       request,
     );
@@ -8753,7 +8774,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteRestoreVerificationPlanAssociation response %j',
             rawResponse,
           );
@@ -8920,11 +8941,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('triggerRestoreVerification response %j', rawResponse);
+          this._log.debug(
+            'triggerRestoreVerification response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('triggerRestoreVerification request %j', request);
+    this._log.debug('triggerRestoreVerification request %j', request);
     return this.innerApiCalls
       .triggerRestoreVerification(request, options, wrappedCallback)
       ?.then(
@@ -8936,7 +8960,10 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('triggerRestoreVerification response %j', rawResponse);
+          this._log.debug(
+            'triggerRestoreVerification response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -9111,14 +9138,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteRestoreVerificationPlan response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRestoreVerificationPlan request %j', request);
+    this._log.debug('deleteRestoreVerificationPlan request %j', request);
     return this.innerApiCalls
       .deleteRestoreVerificationPlan(request, options, wrappedCallback)
       ?.then(
@@ -9130,7 +9157,7 @@ export class BackupDRClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteRestoreVerificationPlan response %j',
             rawResponse,
           );
@@ -9290,11 +9317,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listManagementServers values %j', values);
+          this._log.debug('listManagementServers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listManagementServers request %j', request);
+    this._log.debug('listManagementServers request %j', request);
     return this.innerApiCalls
       .listManagementServers(request, options, wrappedCallback)
       ?.then(
@@ -9303,7 +9330,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListManagementServersRequest | null,
           protos.google.cloud.backupdr.v1.IListManagementServersResponse,
         ]) => {
-          this._log.info('listManagementServers values %j', response);
+          this._log.debug('listManagementServers values %j', response);
           return [response, input, output];
         },
       );
@@ -9357,7 +9384,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listManagementServers stream %j', request);
+    this._log.debug('listManagementServers stream %j', request);
     return this.descriptors.page.listManagementServers.createStream(
       this.innerApiCalls.listManagementServers as GaxCall,
       request,
@@ -9416,7 +9443,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listManagementServers iterate %j', request);
+    this._log.debug('listManagementServers iterate %j', request);
     return this.descriptors.page.listManagementServers.asyncIterate(
       this.innerApiCalls['listManagementServers'] as GaxCall,
       request as {},
@@ -9543,11 +9570,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackupVaults values %j', values);
+          this._log.debug('listBackupVaults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackupVaults request %j', request);
+    this._log.debug('listBackupVaults request %j', request);
     return this.innerApiCalls
       .listBackupVaults(request, options, wrappedCallback)
       ?.then(
@@ -9556,7 +9583,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBackupVaultsRequest | null,
           protos.google.cloud.backupdr.v1.IListBackupVaultsResponse,
         ]) => {
-          this._log.info('listBackupVaults values %j', response);
+          this._log.debug('listBackupVaults values %j', response);
           return [response, input, output];
         },
       );
@@ -9613,7 +9640,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupVaults stream %j', request);
+    this._log.debug('listBackupVaults stream %j', request);
     return this.descriptors.page.listBackupVaults.createStream(
       this.innerApiCalls.listBackupVaults as GaxCall,
       request,
@@ -9675,7 +9702,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupVaults iterate %j', request);
+    this._log.debug('listBackupVaults iterate %j', request);
     return this.descriptors.page.listBackupVaults.asyncIterate(
       this.innerApiCalls['listBackupVaults'] as GaxCall,
       request as {},
@@ -9801,11 +9828,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchUsableBackupVaults values %j', values);
+          this._log.debug('fetchUsableBackupVaults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchUsableBackupVaults request %j', request);
+    this._log.debug('fetchUsableBackupVaults request %j', request);
     return this.innerApiCalls
       .fetchUsableBackupVaults(request, options, wrappedCallback)
       ?.then(
@@ -9814,7 +9841,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IFetchUsableBackupVaultsRequest | null,
           protos.google.cloud.backupdr.v1.IFetchUsableBackupVaultsResponse,
         ]) => {
-          this._log.info('fetchUsableBackupVaults values %j', response);
+          this._log.debug('fetchUsableBackupVaults values %j', response);
           return [response, input, output];
         },
       );
@@ -9868,7 +9895,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchUsableBackupVaults stream %j', request);
+    this._log.debug('fetchUsableBackupVaults stream %j', request);
     return this.descriptors.page.fetchUsableBackupVaults.createStream(
       this.innerApiCalls.fetchUsableBackupVaults as GaxCall,
       request,
@@ -9927,7 +9954,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchUsableBackupVaults iterate %j', request);
+    this._log.debug('fetchUsableBackupVaults iterate %j', request);
     return this.descriptors.page.fetchUsableBackupVaults.asyncIterate(
       this.innerApiCalls['fetchUsableBackupVaults'] as GaxCall,
       request as {},
@@ -10051,11 +10078,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataSources values %j', values);
+          this._log.debug('listDataSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataSources request %j', request);
+    this._log.debug('listDataSources request %j', request);
     return this.innerApiCalls
       .listDataSources(request, options, wrappedCallback)
       ?.then(
@@ -10064,7 +10091,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListDataSourcesRequest | null,
           protos.google.cloud.backupdr.v1.IListDataSourcesResponse,
         ]) => {
-          this._log.info('listDataSources values %j', response);
+          this._log.debug('listDataSources values %j', response);
           return [response, input, output];
         },
       );
@@ -10118,7 +10145,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSources stream %j', request);
+    this._log.debug('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
       request,
@@ -10177,7 +10204,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSources iterate %j', request);
+    this._log.debug('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
       request as {},
@@ -10298,11 +10325,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackups values %j', values);
+          this._log.debug('listBackups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackups request %j', request);
+    this._log.debug('listBackups request %j', request);
     return this.innerApiCalls
       .listBackups(request, options, wrappedCallback)
       ?.then(
@@ -10311,7 +10338,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBackupsRequest | null,
           protos.google.cloud.backupdr.v1.IListBackupsResponse,
         ]) => {
-          this._log.info('listBackups values %j', response);
+          this._log.debug('listBackups values %j', response);
           return [response, input, output];
         },
       );
@@ -10368,7 +10395,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackups stream %j', request);
+    this._log.debug('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -10430,7 +10457,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackups iterate %j', request);
+    this._log.debug('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -10569,11 +10596,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchBackupsForResourceType values %j', values);
+          this._log.debug('fetchBackupsForResourceType values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchBackupsForResourceType request %j', request);
+    this._log.debug('fetchBackupsForResourceType request %j', request);
     return this.innerApiCalls
       .fetchBackupsForResourceType(request, options, wrappedCallback)
       ?.then(
@@ -10582,7 +10609,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest | null,
           protos.google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse,
         ]) => {
-          this._log.info('fetchBackupsForResourceType values %j', response);
+          this._log.debug('fetchBackupsForResourceType values %j', response);
           return [response, input, output];
         },
       );
@@ -10651,7 +10678,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchBackupsForResourceType stream %j', request);
+    this._log.debug('fetchBackupsForResourceType stream %j', request);
     return this.descriptors.page.fetchBackupsForResourceType.createStream(
       this.innerApiCalls.fetchBackupsForResourceType as GaxCall,
       request,
@@ -10725,7 +10752,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchBackupsForResourceType iterate %j', request);
+    this._log.debug('fetchBackupsForResourceType iterate %j', request);
     return this.descriptors.page.fetchBackupsForResourceType.asyncIterate(
       this.innerApiCalls['fetchBackupsForResourceType'] as GaxCall,
       request as {},
@@ -10857,11 +10884,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackupPlans values %j', values);
+          this._log.debug('listBackupPlans values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackupPlans request %j', request);
+    this._log.debug('listBackupPlans request %j', request);
     return this.innerApiCalls
       .listBackupPlans(request, options, wrappedCallback)
       ?.then(
@@ -10870,7 +10897,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBackupPlansRequest | null,
           protos.google.cloud.backupdr.v1.IListBackupPlansResponse,
         ]) => {
-          this._log.info('listBackupPlans values %j', response);
+          this._log.debug('listBackupPlans values %j', response);
           return [response, input, output];
         },
       );
@@ -10932,7 +10959,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlans stream %j', request);
+    this._log.debug('listBackupPlans stream %j', request);
     return this.descriptors.page.listBackupPlans.createStream(
       this.innerApiCalls.listBackupPlans as GaxCall,
       request,
@@ -10999,7 +11026,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlans iterate %j', request);
+    this._log.debug('listBackupPlans iterate %j', request);
     return this.descriptors.page.listBackupPlans.asyncIterate(
       this.innerApiCalls['listBackupPlans'] as GaxCall,
       request as {},
@@ -11126,11 +11153,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackupPlanRevisions values %j', values);
+          this._log.debug('listBackupPlanRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackupPlanRevisions request %j', request);
+    this._log.debug('listBackupPlanRevisions request %j', request);
     return this.innerApiCalls
       .listBackupPlanRevisions(request, options, wrappedCallback)
       ?.then(
@@ -11139,7 +11166,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest | null,
           protos.google.cloud.backupdr.v1.IListBackupPlanRevisionsResponse,
         ]) => {
-          this._log.info('listBackupPlanRevisions values %j', response);
+          this._log.debug('listBackupPlanRevisions values %j', response);
           return [response, input, output];
         },
       );
@@ -11196,7 +11223,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlanRevisions stream %j', request);
+    this._log.debug('listBackupPlanRevisions stream %j', request);
     return this.descriptors.page.listBackupPlanRevisions.createStream(
       this.innerApiCalls.listBackupPlanRevisions as GaxCall,
       request,
@@ -11258,7 +11285,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlanRevisions iterate %j', request);
+    this._log.debug('listBackupPlanRevisions iterate %j', request);
     return this.descriptors.page.listBackupPlanRevisions.asyncIterate(
       this.innerApiCalls['listBackupPlanRevisions'] as GaxCall,
       request as {},
@@ -11380,11 +11407,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackupPlanAssociations values %j', values);
+          this._log.debug('listBackupPlanAssociations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackupPlanAssociations request %j', request);
+    this._log.debug('listBackupPlanAssociations request %j', request);
     return this.innerApiCalls
       .listBackupPlanAssociations(request, options, wrappedCallback)
       ?.then(
@@ -11393,7 +11420,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBackupPlanAssociationsRequest | null,
           protos.google.cloud.backupdr.v1.IListBackupPlanAssociationsResponse,
         ]) => {
-          this._log.info('listBackupPlanAssociations values %j', response);
+          this._log.debug('listBackupPlanAssociations values %j', response);
           return [response, input, output];
         },
       );
@@ -11445,7 +11472,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlanAssociations stream %j', request);
+    this._log.debug('listBackupPlanAssociations stream %j', request);
     return this.descriptors.page.listBackupPlanAssociations.createStream(
       this.innerApiCalls.listBackupPlanAssociations as GaxCall,
       request,
@@ -11502,7 +11529,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackupPlanAssociations iterate %j', request);
+    this._log.debug('listBackupPlanAssociations iterate %j', request);
     return this.descriptors.page.listBackupPlanAssociations.asyncIterate(
       this.innerApiCalls['listBackupPlanAssociations'] as GaxCall,
       request as {},
@@ -11645,14 +11672,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'fetchBackupPlanAssociationsForResourceType values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'fetchBackupPlanAssociationsForResourceType request %j',
       request,
     );
@@ -11668,7 +11695,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest | null,
           protos.google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'fetchBackupPlanAssociationsForResourceType values %j',
             response,
           );
@@ -11745,7 +11772,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'fetchBackupPlanAssociationsForResourceType stream %j',
       request,
     );
@@ -11827,7 +11854,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'fetchBackupPlanAssociationsForResourceType iterate %j',
       request,
     );
@@ -11972,11 +11999,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataSourceReferences values %j', values);
+          this._log.debug('listDataSourceReferences values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataSourceReferences request %j', request);
+    this._log.debug('listDataSourceReferences request %j', request);
     return this.innerApiCalls
       .listDataSourceReferences(request, options, wrappedCallback)
       ?.then(
@@ -11985,7 +12012,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListDataSourceReferencesRequest | null,
           protos.google.cloud.backupdr.v1.IListDataSourceReferencesResponse,
         ]) => {
-          this._log.info('listDataSourceReferences values %j', response);
+          this._log.debug('listDataSourceReferences values %j', response);
           return [response, input, output];
         },
       );
@@ -12055,7 +12082,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSourceReferences stream %j', request);
+    this._log.debug('listDataSourceReferences stream %j', request);
     return this.descriptors.page.listDataSourceReferences.createStream(
       this.innerApiCalls.listDataSourceReferences as GaxCall,
       request,
@@ -12130,7 +12157,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSourceReferences iterate %j', request);
+    this._log.debug('listDataSourceReferences iterate %j', request);
     return this.descriptors.page.listDataSourceReferences.asyncIterate(
       this.innerApiCalls['listDataSourceReferences'] as GaxCall,
       request as {},
@@ -12277,14 +12304,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'fetchDataSourceReferencesForResourceType values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'fetchDataSourceReferencesForResourceType request %j',
       request,
     );
@@ -12300,7 +12327,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest | null,
           protos.google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'fetchDataSourceReferencesForResourceType values %j',
             response,
           );
@@ -12381,7 +12408,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'fetchDataSourceReferencesForResourceType stream %j',
       request,
     );
@@ -12467,7 +12494,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'fetchDataSourceReferencesForResourceType iterate %j',
       request,
     );
@@ -12594,11 +12621,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAutoProtectionPolicies values %j', values);
+          this._log.debug('listAutoProtectionPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAutoProtectionPolicies request %j', request);
+    this._log.debug('listAutoProtectionPolicies request %j', request);
     return this.innerApiCalls
       .listAutoProtectionPolicies(request, options, wrappedCallback)
       ?.then(
@@ -12607,7 +12634,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesRequest | null,
           protos.google.cloud.backupdr.v1.IListAutoProtectionPoliciesResponse,
         ]) => {
-          this._log.info('listAutoProtectionPolicies values %j', response);
+          this._log.debug('listAutoProtectionPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -12661,7 +12688,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAutoProtectionPolicies stream %j', request);
+    this._log.debug('listAutoProtectionPolicies stream %j', request);
     return this.descriptors.page.listAutoProtectionPolicies.createStream(
       this.innerApiCalls.listAutoProtectionPolicies as GaxCall,
       request,
@@ -12720,7 +12747,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAutoProtectionPolicies iterate %j', request);
+    this._log.debug('listAutoProtectionPolicies iterate %j', request);
     return this.descriptors.page.listAutoProtectionPolicies.asyncIterate(
       this.innerApiCalls['listAutoProtectionPolicies'] as GaxCall,
       request as {},
@@ -12844,11 +12871,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAutoProtectionPolicyBindings values %j', values);
+          this._log.debug('listAutoProtectionPolicyBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAutoProtectionPolicyBindings request %j', request);
+    this._log.debug('listAutoProtectionPolicyBindings request %j', request);
     return this.innerApiCalls
       .listAutoProtectionPolicyBindings(request, options, wrappedCallback)
       ?.then(
@@ -12857,7 +12884,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsRequest | null,
           protos.google.cloud.backupdr.v1.IListAutoProtectionPolicyBindingsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listAutoProtectionPolicyBindings values %j',
             response,
           );
@@ -12915,7 +12942,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAutoProtectionPolicyBindings stream %j', request);
+    this._log.debug('listAutoProtectionPolicyBindings stream %j', request);
     return this.descriptors.page.listAutoProtectionPolicyBindings.createStream(
       this.innerApiCalls.listAutoProtectionPolicyBindings as GaxCall,
       request,
@@ -12975,7 +13002,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAutoProtectionPolicyBindings iterate %j', request);
+    this._log.debug('listAutoProtectionPolicyBindings iterate %j', request);
     return this.descriptors.page.listAutoProtectionPolicyBindings.asyncIterate(
       this.innerApiCalls['listAutoProtectionPolicyBindings'] as GaxCall,
       request as {},
@@ -13098,11 +13125,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAppliedAutoProtectionPolicies values %j', values);
+          this._log.debug(
+            'listAppliedAutoProtectionPolicies values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAppliedAutoProtectionPolicies request %j', request);
+    this._log.debug('listAppliedAutoProtectionPolicies request %j', request);
     return this.innerApiCalls
       .listAppliedAutoProtectionPolicies(request, options, wrappedCallback)
       ?.then(
@@ -13111,7 +13141,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesRequest | null,
           protos.google.cloud.backupdr.v1.IListAppliedAutoProtectionPoliciesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listAppliedAutoProtectionPolicies values %j',
             response,
           );
@@ -13168,7 +13198,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAppliedAutoProtectionPolicies stream %j', request);
+    this._log.debug('listAppliedAutoProtectionPolicies stream %j', request);
     return this.descriptors.page.listAppliedAutoProtectionPolicies.createStream(
       this.innerApiCalls.listAppliedAutoProtectionPolicies as GaxCall,
       request,
@@ -13227,7 +13257,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAppliedAutoProtectionPolicies iterate %j', request);
+    this._log.debug('listAppliedAutoProtectionPolicies iterate %j', request);
     return this.descriptors.page.listAppliedAutoProtectionPolicies.asyncIterate(
       this.innerApiCalls['listAppliedAutoProtectionPolicies'] as GaxCall,
       request as {},
@@ -13359,11 +13389,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBindingMatchingResources values %j', values);
+          this._log.debug('listBindingMatchingResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBindingMatchingResources request %j', request);
+    this._log.debug('listBindingMatchingResources request %j', request);
     return this.innerApiCalls
       .listBindingMatchingResources(request, options, wrappedCallback)
       ?.then(
@@ -13372,7 +13402,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesRequest | null,
           protos.google.cloud.backupdr.v1.IListBindingMatchingResourcesResponse,
         ]) => {
-          this._log.info('listBindingMatchingResources values %j', response);
+          this._log.debug('listBindingMatchingResources values %j', response);
           return [response, input, output];
         },
       );
@@ -13434,7 +13464,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBindingMatchingResources stream %j', request);
+    this._log.debug('listBindingMatchingResources stream %j', request);
     return this.descriptors.page.listBindingMatchingResources.createStream(
       this.innerApiCalls.listBindingMatchingResources as GaxCall,
       request,
@@ -13501,7 +13531,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBindingMatchingResources iterate %j', request);
+    this._log.debug('listBindingMatchingResources iterate %j', request);
     return this.descriptors.page.listBindingMatchingResources.asyncIterate(
       this.innerApiCalls['listBindingMatchingResources'] as GaxCall,
       request as {},
@@ -13622,11 +13652,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRestoreTemplates values %j', values);
+          this._log.debug('listRestoreTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRestoreTemplates request %j', request);
+    this._log.debug('listRestoreTemplates request %j', request);
     return this.innerApiCalls
       .listRestoreTemplates(request, options, wrappedCallback)
       ?.then(
@@ -13635,7 +13665,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListRestoreTemplatesRequest | null,
           protos.google.cloud.backupdr.v1.IListRestoreTemplatesResponse,
         ]) => {
-          this._log.info('listRestoreTemplates values %j', response);
+          this._log.debug('listRestoreTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -13686,7 +13716,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreTemplates stream %j', request);
+    this._log.debug('listRestoreTemplates stream %j', request);
     return this.descriptors.page.listRestoreTemplates.createStream(
       this.innerApiCalls.listRestoreTemplates as GaxCall,
       request,
@@ -13742,7 +13772,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreTemplates iterate %j', request);
+    this._log.debug('listRestoreTemplates iterate %j', request);
     return this.descriptors.page.listRestoreTemplates.asyncIterate(
       this.innerApiCalls['listRestoreTemplates'] as GaxCall,
       request as {},
@@ -13864,11 +13894,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRestoreTemplateExecutions values %j', values);
+          this._log.debug('listRestoreTemplateExecutions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRestoreTemplateExecutions request %j', request);
+    this._log.debug('listRestoreTemplateExecutions request %j', request);
     return this.innerApiCalls
       .listRestoreTemplateExecutions(request, options, wrappedCallback)
       ?.then(
@@ -13877,7 +13907,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsRequest | null,
           protos.google.cloud.backupdr.v1.IListRestoreTemplateExecutionsResponse,
         ]) => {
-          this._log.info('listRestoreTemplateExecutions values %j', response);
+          this._log.debug('listRestoreTemplateExecutions values %j', response);
           return [response, input, output];
         },
       );
@@ -13928,7 +13958,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreTemplateExecutions stream %j', request);
+    this._log.debug('listRestoreTemplateExecutions stream %j', request);
     return this.descriptors.page.listRestoreTemplateExecutions.createStream(
       this.innerApiCalls.listRestoreTemplateExecutions as GaxCall,
       request,
@@ -13984,7 +14014,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreTemplateExecutions iterate %j', request);
+    this._log.debug('listRestoreTemplateExecutions iterate %j', request);
     return this.descriptors.page.listRestoreTemplateExecutions.asyncIterate(
       this.innerApiCalls['listRestoreTemplateExecutions'] as GaxCall,
       request as {},
@@ -14114,14 +14144,14 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listRestoreVerificationPlanAssociations values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listRestoreVerificationPlanAssociations request %j',
       request,
     );
@@ -14137,7 +14167,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsRequest | null,
           protos.google.cloud.backupdr.v1.IListRestoreVerificationPlanAssociationsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listRestoreVerificationPlanAssociations values %j',
             response,
           );
@@ -14200,7 +14230,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listRestoreVerificationPlanAssociations stream %j',
       request,
     );
@@ -14268,7 +14298,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listRestoreVerificationPlanAssociations iterate %j',
       request,
     );
@@ -14405,11 +14435,11 @@ export class BackupDRClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRestoreVerificationPlans values %j', values);
+          this._log.debug('listRestoreVerificationPlans values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRestoreVerificationPlans request %j', request);
+    this._log.debug('listRestoreVerificationPlans request %j', request);
     return this.innerApiCalls
       .listRestoreVerificationPlans(request, options, wrappedCallback)
       ?.then(
@@ -14418,7 +14448,7 @@ export class BackupDRClient {
           protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansRequest | null,
           protos.google.cloud.backupdr.v1.IListRestoreVerificationPlansResponse,
         ]) => {
-          this._log.info('listRestoreVerificationPlans values %j', response);
+          this._log.debug('listRestoreVerificationPlans values %j', response);
           return [response, input, output];
         },
       );
@@ -14482,7 +14512,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreVerificationPlans stream %j', request);
+    this._log.debug('listRestoreVerificationPlans stream %j', request);
     return this.descriptors.page.listRestoreVerificationPlans.createStream(
       this.innerApiCalls.listRestoreVerificationPlans as GaxCall,
       request,
@@ -14551,7 +14581,7 @@ export class BackupDRClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRestoreVerificationPlans iterate %j', request);
+    this._log.debug('listRestoreVerificationPlans iterate %j', request);
     return this.descriptors.page.listRestoreVerificationPlans.asyncIterate(
       this.innerApiCalls['listRestoreVerificationPlans'] as GaxCall,
       request as {},

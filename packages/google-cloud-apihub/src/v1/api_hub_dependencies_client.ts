@@ -554,7 +554,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDependency request %j', request);
+    this._log.debug('createDependency request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IDependency,
@@ -565,7 +565,7 @@ export class ApiHubDependenciesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDependency response %j', response);
+          this._log.debug('createDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -577,7 +577,7 @@ export class ApiHubDependenciesClient {
           protos.google.cloud.apihub.v1.ICreateDependencyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDependency response %j', response);
+          this._log.debug('createDependency response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -683,7 +683,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDependency request %j', request);
+    this._log.debug('getDependency request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IDependency,
@@ -694,7 +694,7 @@ export class ApiHubDependenciesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDependency response %j', response);
+          this._log.debug('getDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -706,7 +706,7 @@ export class ApiHubDependenciesClient {
           protos.google.cloud.apihub.v1.IGetDependencyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDependency response %j', response);
+          this._log.debug('getDependency response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -822,7 +822,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDependency request %j', request);
+    this._log.debug('updateDependency request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IDependency,
@@ -833,7 +833,7 @@ export class ApiHubDependenciesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDependency response %j', response);
+          this._log.debug('updateDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -845,7 +845,7 @@ export class ApiHubDependenciesClient {
           protos.google.cloud.apihub.v1.IUpdateDependencyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDependency response %j', response);
+          this._log.debug('updateDependency response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -951,7 +951,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDependency request %j', request);
+    this._log.debug('deleteDependency request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -962,7 +962,7 @@ export class ApiHubDependenciesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDependency response %j', response);
+          this._log.debug('deleteDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -974,7 +974,7 @@ export class ApiHubDependenciesClient {
           protos.google.cloud.apihub.v1.IDeleteDependencyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDependency response %j', response);
+          this._log.debug('deleteDependency response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1146,11 +1146,11 @@ export class ApiHubDependenciesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDependencies values %j', values);
+          this._log.debug('listDependencies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDependencies request %j', request);
+    this._log.debug('listDependencies request %j', request);
     return this.innerApiCalls
       .listDependencies(request, options, wrappedCallback)
       ?.then(
@@ -1159,7 +1159,7 @@ export class ApiHubDependenciesClient {
           protos.google.cloud.apihub.v1.IListDependenciesRequest | null,
           protos.google.cloud.apihub.v1.IListDependenciesResponse,
         ]) => {
-          this._log.info('listDependencies values %j', response);
+          this._log.debug('listDependencies values %j', response);
           return [response, input, output];
         },
       );
@@ -1246,7 +1246,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDependencies stream %j', request);
+    this._log.debug('listDependencies stream %j', request);
     return this.descriptors.page.listDependencies.createStream(
       this.innerApiCalls.listDependencies as GaxCall,
       request,
@@ -1338,7 +1338,7 @@ export class ApiHubDependenciesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDependencies iterate %j', request);
+    this._log.debug('listDependencies iterate %j', request);
     return this.descriptors.page.listDependencies.asyncIterate(
       this.innerApiCalls['listDependencies'] as GaxCall,
       request as {},

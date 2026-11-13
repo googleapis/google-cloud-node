@@ -505,7 +505,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disableXpnHost request %j', request);
+    this._log.debug('disableXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -516,7 +516,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('disableXpnHost response %j', rawResponse);
+          this._log.debug('disableXpnHost response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -670,7 +670,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disableXpnResource request %j', request);
+    this._log.debug('disableXpnResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -681,7 +681,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('disableXpnResource response %j', rawResponse);
+          this._log.debug('disableXpnResource response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -832,7 +832,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enableXpnHost request %j', request);
+    this._log.debug('enableXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -843,7 +843,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('enableXpnHost response %j', rawResponse);
+          this._log.debug('enableXpnHost response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -998,7 +998,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enableXpnResource request %j', request);
+    this._log.debug('enableXpnResource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1009,7 +1009,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('enableXpnResource response %j', rawResponse);
+          this._log.debug('enableXpnResource response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1143,7 +1143,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IProject,
@@ -1154,7 +1154,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1166,7 +1166,7 @@ export class ProjectsClient {
           protos.google.cloud.compute.v1beta.IGetProjectRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1278,7 +1278,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getXpnHost request %j', request);
+    this._log.debug('getXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IProject,
@@ -1289,7 +1289,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getXpnHost response %j', response);
+          this._log.debug('getXpnHost response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1304,7 +1304,7 @@ export class ProjectsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getXpnHost response %j', response);
+          this._log.debug('getXpnHost response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1449,7 +1449,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('moveDisk request %j', request);
+    this._log.debug('moveDisk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1460,7 +1460,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('moveDisk response %j', rawResponse);
+          this._log.debug('moveDisk response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1619,7 +1619,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('moveInstance request %j', request);
+    this._log.debug('moveInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1630,7 +1630,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('moveInstance response %j', rawResponse);
+          this._log.debug('moveInstance response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1786,7 +1786,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setCloudArmorTier request %j', request);
+    this._log.debug('setCloudArmorTier request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1797,7 +1797,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('setCloudArmorTier response %j', rawResponse);
+          this._log.debug('setCloudArmorTier response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1951,7 +1951,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setCommonInstanceMetadata request %j', request);
+    this._log.debug('setCommonInstanceMetadata request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1962,7 +1962,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('setCommonInstanceMetadata response %j', rawResponse);
+          this._log.debug('setCommonInstanceMetadata response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2117,7 +2117,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setDefaultNetworkTier request %j', request);
+    this._log.debug('setDefaultNetworkTier request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -2128,7 +2128,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('setDefaultNetworkTier response %j', rawResponse);
+          this._log.debug('setDefaultNetworkTier response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2284,7 +2284,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setManagedProtectionTier request %j', request);
+    this._log.debug('setManagedProtectionTier request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -2295,7 +2295,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('setManagedProtectionTier response %j', rawResponse);
+          this._log.debug('setManagedProtectionTier response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2450,7 +2450,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setUsageExportBucket request %j', request);
+    this._log.debug('setUsageExportBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -2461,7 +2461,7 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('setUsageExportBucket response %j', rawResponse);
+          this._log.debug('setUsageExportBucket response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2696,11 +2696,11 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('getXpnResources values %j', values);
+          this._log.debug('getXpnResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('getXpnResources request %j', request);
+    this._log.debug('getXpnResources request %j', request);
     return this.innerApiCalls
       .getXpnResources(request, options, wrappedCallback)
       ?.then(
@@ -2709,7 +2709,7 @@ export class ProjectsClient {
           protos.google.cloud.compute.v1beta.IGetXpnResourcesProjectsRequest | null,
           protos.google.cloud.compute.v1beta.IProjectsGetXpnResources,
         ]) => {
-          this._log.info('getXpnResources values %j', response);
+          this._log.debug('getXpnResources values %j', response);
           return [response, input, output];
         },
       );
@@ -2837,7 +2837,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getXpnResources stream %j', request);
+    this._log.debug('getXpnResources stream %j', request);
     return this.descriptors.page.getXpnResources.createStream(
       this.innerApiCalls.getXpnResources as GaxCall,
       request,
@@ -2970,7 +2970,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getXpnResources iterate %j', request);
+    this._log.debug('getXpnResources iterate %j', request);
     return this.descriptors.page.getXpnResources.asyncIterate(
       this.innerApiCalls['getXpnResources'] as GaxCall,
       request as {},
@@ -3160,11 +3160,11 @@ export class ProjectsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listXpnHosts values %j', values);
+          this._log.debug('listXpnHosts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listXpnHosts request %j', request);
+    this._log.debug('listXpnHosts request %j', request);
     return this.innerApiCalls
       .listXpnHosts(request, options, wrappedCallback)
       ?.then(
@@ -3173,7 +3173,7 @@ export class ProjectsClient {
           protos.google.cloud.compute.v1beta.IListXpnHostsProjectsRequest | null,
           protos.google.cloud.compute.v1beta.IXpnHostList,
         ]) => {
-          this._log.info('listXpnHosts values %j', response);
+          this._log.debug('listXpnHosts values %j', response);
           return [response, input, output];
         },
       );
@@ -3303,7 +3303,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listXpnHosts stream %j', request);
+    this._log.debug('listXpnHosts stream %j', request);
     return this.descriptors.page.listXpnHosts.createStream(
       this.innerApiCalls.listXpnHosts as GaxCall,
       request,
@@ -3438,7 +3438,7 @@ export class ProjectsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listXpnHosts iterate %j', request);
+    this._log.debug('listXpnHosts iterate %j', request);
     return this.descriptors.page.listXpnHosts.asyncIterate(
       this.innerApiCalls['listXpnHosts'] as GaxCall,
       request as {},

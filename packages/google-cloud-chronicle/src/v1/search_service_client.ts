@@ -669,11 +669,11 @@ export class SearchServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('search response %j', rawResponse);
+          this._log.debug('search response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('search request %j', request);
+    this._log.debug('search request %j', request);
     return this.innerApiCalls
       .search(request, options, wrappedCallback)
       ?.then(
@@ -685,7 +685,7 @@ export class SearchServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('search response %j', rawResponse);
+          this._log.debug('search response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -843,11 +843,11 @@ export class SearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSearchedResults values %j', values);
+          this._log.debug('listSearchedResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSearchedResults request %j', request);
+    this._log.debug('listSearchedResults request %j', request);
     return this.innerApiCalls
       .listSearchedResults(request, options, wrappedCallback)
       ?.then(
@@ -856,7 +856,7 @@ export class SearchServiceClient {
           protos.google.cloud.chronicle.v1.IListSearchedResultsRequest | null,
           protos.google.cloud.chronicle.v1.IListSearchedResultsResponse,
         ]) => {
-          this._log.info('listSearchedResults values %j', response);
+          this._log.debug('listSearchedResults values %j', response);
           return [response, input, output];
         },
       );
@@ -911,7 +911,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSearchedResults stream %j', request);
+    this._log.debug('listSearchedResults stream %j', request);
     return this.descriptors.page.listSearchedResults.createStream(
       this.innerApiCalls.listSearchedResults as GaxCall,
       request,
@@ -971,7 +971,7 @@ export class SearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSearchedResults iterate %j', request);
+    this._log.debug('listSearchedResults iterate %j', request);
     return this.descriptors.page.listSearchedResults.asyncIterate(
       this.innerApiCalls['listSearchedResults'] as GaxCall,
       request as {},

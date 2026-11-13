@@ -625,7 +625,7 @@ export class DeploymentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDeployment request %j', request);
+    this._log.debug('getDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3.IDeployment,
@@ -636,7 +636,7 @@ export class DeploymentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDeployment response %j', response);
+          this._log.debug('getDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -651,7 +651,7 @@ export class DeploymentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDeployment response %j', response);
+          this._log.debug('getDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -784,11 +784,11 @@ export class DeploymentsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDeployments values %j', values);
+          this._log.debug('listDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDeployments request %j', request);
+    this._log.debug('listDeployments request %j', request);
     return this.innerApiCalls
       .listDeployments(request, options, wrappedCallback)
       ?.then(
@@ -797,7 +797,7 @@ export class DeploymentsClient {
           protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest | null,
           protos.google.cloud.dialogflow.cx.v3.IListDeploymentsResponse,
         ]) => {
-          this._log.info('listDeployments values %j', response);
+          this._log.debug('listDeployments values %j', response);
           return [response, input, output];
         },
       );
@@ -844,7 +844,7 @@ export class DeploymentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeployments stream %j', request);
+    this._log.debug('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
@@ -896,7 +896,7 @@ export class DeploymentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDeployments iterate %j', request);
+    this._log.debug('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},

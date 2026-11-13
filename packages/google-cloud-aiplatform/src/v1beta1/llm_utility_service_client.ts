@@ -701,7 +701,7 @@ export class LlmUtilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeTokens request %j', request);
+    this._log.debug('computeTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IComputeTokensResponse,
@@ -712,7 +712,7 @@ export class LlmUtilityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('computeTokens response %j', response);
+          this._log.debug('computeTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -727,7 +727,7 @@ export class LlmUtilityServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('computeTokens response %j', response);
+          this._log.debug('computeTokens response %j', response);
           return [response, options, rawResponse];
         },
       )

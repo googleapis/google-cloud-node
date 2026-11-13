@@ -662,7 +662,7 @@ export class DataFoundryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateSyntheticData request %j', request);
+    this._log.debug('generateSyntheticData request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IGenerateSyntheticDataResponse,
@@ -673,7 +673,7 @@ export class DataFoundryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateSyntheticData response %j', response);
+          this._log.debug('generateSyntheticData response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -688,7 +688,7 @@ export class DataFoundryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateSyntheticData response %j', response);
+          this._log.debug('generateSyntheticData response %j', response);
           return [response, options, rawResponse];
         },
       )
