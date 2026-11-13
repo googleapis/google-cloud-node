@@ -509,7 +509,7 @@ export class BuildsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('submitBuild request %j', request);
+    this._log.debug('submitBuild request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.ISubmitBuildResponse,
@@ -518,7 +518,7 @@ export class BuildsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('submitBuild response %j', response);
+          this._log.debug('submitBuild response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -530,7 +530,7 @@ export class BuildsClient {
           protos.google.cloud.run.v2.ISubmitBuildRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('submitBuild response %j', response);
+          this._log.debug('submitBuild response %j', response);
           return [response, options, rawResponse];
         },
       )

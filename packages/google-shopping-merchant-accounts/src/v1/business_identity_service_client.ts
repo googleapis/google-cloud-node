@@ -536,7 +536,7 @@ export class BusinessIdentityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBusinessIdentity request %j', request);
+    this._log.debug('getBusinessIdentity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBusinessIdentity,
@@ -547,7 +547,7 @@ export class BusinessIdentityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBusinessIdentity response %j', response);
+          this._log.debug('getBusinessIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -562,7 +562,7 @@ export class BusinessIdentityServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBusinessIdentity response %j', response);
+          this._log.debug('getBusinessIdentity response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -693,7 +693,7 @@ export class BusinessIdentityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBusinessIdentity request %j', request);
+    this._log.debug('updateBusinessIdentity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBusinessIdentity,
@@ -704,7 +704,7 @@ export class BusinessIdentityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBusinessIdentity response %j', response);
+          this._log.debug('updateBusinessIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class BusinessIdentityServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBusinessIdentity response %j', response);
+          this._log.debug('updateBusinessIdentity response %j', response);
           return [response, options, rawResponse];
         },
       )

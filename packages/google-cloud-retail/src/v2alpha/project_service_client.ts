@@ -564,7 +564,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProject request %j', request);
+    this._log.debug('getProject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IProject,
@@ -575,7 +575,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProject response %j', response);
+          this._log.debug('getProject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -587,7 +587,7 @@ export class ProjectServiceClient {
           protos.google.cloud.retail.v2alpha.IGetProjectRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getProject response %j', response);
+          this._log.debug('getProject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -696,7 +696,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('acceptTerms request %j', request);
+    this._log.debug('acceptTerms request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IProject,
@@ -707,7 +707,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('acceptTerms response %j', response);
+          this._log.debug('acceptTerms response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class ProjectServiceClient {
           protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('acceptTerms response %j', response);
+          this._log.debug('acceptTerms response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -837,7 +837,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEnrolledSolutions request %j', request);
+    this._log.debug('listEnrolledSolutions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
@@ -848,7 +848,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listEnrolledSolutions response %j', response);
+          this._log.debug('listEnrolledSolutions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -863,7 +863,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listEnrolledSolutions response %j', response);
+          this._log.debug('listEnrolledSolutions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -976,7 +976,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLoggingConfig request %j', request);
+    this._log.debug('getLoggingConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.ILoggingConfig,
@@ -987,7 +987,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLoggingConfig response %j', response);
+          this._log.debug('getLoggingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1002,7 +1002,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLoggingConfig response %j', response);
+          this._log.debug('getLoggingConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1137,7 +1137,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateLoggingConfig request %j', request);
+    this._log.debug('updateLoggingConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.ILoggingConfig,
@@ -1148,7 +1148,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateLoggingConfig response %j', response);
+          this._log.debug('updateLoggingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1163,7 +1163,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateLoggingConfig response %j', response);
+          this._log.debug('updateLoggingConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1276,7 +1276,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAlertConfig request %j', request);
+    this._log.debug('getAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IAlertConfig,
@@ -1287,7 +1287,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAlertConfig response %j', response);
+          this._log.debug('getAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1299,7 +1299,7 @@ export class ProjectServiceClient {
           protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAlertConfig response %j', response);
+          this._log.debug('getAlertConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1422,7 +1422,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAlertConfig request %j', request);
+    this._log.debug('updateAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IAlertConfig,
@@ -1433,7 +1433,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAlertConfig response %j', response);
+          this._log.debug('updateAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1448,7 +1448,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAlertConfig response %j', response);
+          this._log.debug('updateAlertConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1593,11 +1593,11 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('enrollSolution response %j', rawResponse);
+          this._log.debug('enrollSolution response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('enrollSolution request %j', request);
+    this._log.debug('enrollSolution request %j', request);
     return this.innerApiCalls
       .enrollSolution(request, options, wrappedCallback)
       ?.then(
@@ -1609,7 +1609,7 @@ export class ProjectServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('enrollSolution response %j', rawResponse);
+          this._log.debug('enrollSolution response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

@@ -578,7 +578,7 @@ export class SubscriptionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSubscription request %j', request);
+    this._log.debug('getSubscription request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.events.subscriptions.v1.ISubscription,
@@ -589,7 +589,7 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSubscription response %j', response);
+          this._log.debug('getSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -604,7 +604,7 @@ export class SubscriptionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSubscription response %j', response);
+          this._log.debug('getSubscription response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -740,11 +740,11 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSubscription response %j', rawResponse);
+          this._log.debug('createSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSubscription request %j', request);
+    this._log.debug('createSubscription request %j', request);
     return this.innerApiCalls
       .createSubscription(request, options, wrappedCallback)
       ?.then(
@@ -756,7 +756,7 @@ export class SubscriptionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSubscription response %j', rawResponse);
+          this._log.debug('createSubscription response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -924,11 +924,11 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSubscription response %j', rawResponse);
+          this._log.debug('deleteSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSubscription request %j', request);
+    this._log.debug('deleteSubscription request %j', request);
     return this.innerApiCalls
       .deleteSubscription(request, options, wrappedCallback)
       ?.then(
@@ -940,7 +940,7 @@ export class SubscriptionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSubscription response %j', rawResponse);
+          this._log.debug('deleteSubscription response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1111,11 +1111,11 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateSubscription response %j', rawResponse);
+          this._log.debug('updateSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateSubscription request %j', request);
+    this._log.debug('updateSubscription request %j', request);
     return this.innerApiCalls
       .updateSubscription(request, options, wrappedCallback)
       ?.then(
@@ -1127,7 +1127,7 @@ export class SubscriptionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSubscription response %j', rawResponse);
+          this._log.debug('updateSubscription response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1288,11 +1288,11 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('reactivateSubscription response %j', rawResponse);
+          this._log.debug('reactivateSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('reactivateSubscription request %j', request);
+    this._log.debug('reactivateSubscription request %j', request);
     return this.innerApiCalls
       .reactivateSubscription(request, options, wrappedCallback)
       ?.then(
@@ -1304,7 +1304,7 @@ export class SubscriptionsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('reactivateSubscription response %j', rawResponse);
+          this._log.debug('reactivateSubscription response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1486,11 +1486,11 @@ export class SubscriptionsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSubscriptions values %j', values);
+          this._log.debug('listSubscriptions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSubscriptions request %j', request);
+    this._log.debug('listSubscriptions request %j', request);
     return this.innerApiCalls
       .listSubscriptions(request, options, wrappedCallback)
       ?.then(
@@ -1499,7 +1499,7 @@ export class SubscriptionsServiceClient {
           protos.google.apps.events.subscriptions.v1.IListSubscriptionsRequest | null,
           protos.google.apps.events.subscriptions.v1.IListSubscriptionsResponse,
         ]) => {
-          this._log.info('listSubscriptions values %j', response);
+          this._log.debug('listSubscriptions values %j', response);
           return [response, input, output];
         },
       );
@@ -1576,7 +1576,7 @@ export class SubscriptionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSubscriptions stream %j', request);
+    this._log.debug('listSubscriptions stream %j', request);
     return this.descriptors.page.listSubscriptions.createStream(
       this.innerApiCalls.listSubscriptions as GaxCall,
       request,
@@ -1658,7 +1658,7 @@ export class SubscriptionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSubscriptions iterate %j', request);
+    this._log.debug('listSubscriptions iterate %j', request);
     return this.descriptors.page.listSubscriptions.asyncIterate(
       this.innerApiCalls['listSubscriptions'] as GaxCall,
       request as {},

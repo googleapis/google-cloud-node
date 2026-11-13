@@ -484,7 +484,7 @@ export class QuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getQuestion request %j', request);
+    this._log.debug('getQuestion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.IQuestion,
@@ -495,7 +495,7 @@ export class QuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getQuestion response %j', response);
+          this._log.debug('getQuestion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -507,7 +507,7 @@ export class QuestionServiceClient {
           protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getQuestion response %j', response);
+          this._log.debug('getQuestion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -621,7 +621,7 @@ export class QuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createQuestion request %j', request);
+    this._log.debug('createQuestion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.IQuestion,
@@ -632,7 +632,7 @@ export class QuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createQuestion response %j', response);
+          this._log.debug('createQuestion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -647,7 +647,7 @@ export class QuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createQuestion response %j', response);
+          this._log.debug('createQuestion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -761,7 +761,7 @@ export class QuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeQuestion request %j', request);
+    this._log.debug('executeQuestion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.IQuestion,
@@ -772,7 +772,7 @@ export class QuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeQuestion response %j', response);
+          this._log.debug('executeQuestion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -787,7 +787,7 @@ export class QuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('executeQuestion response %j', response);
+          this._log.debug('executeQuestion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -900,7 +900,7 @@ export class QuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUserFeedback request %j', request);
+    this._log.debug('getUserFeedback request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.IUserFeedback,
@@ -911,7 +911,7 @@ export class QuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUserFeedback response %j', response);
+          this._log.debug('getUserFeedback response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -926,7 +926,7 @@ export class QuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUserFeedback response %j', response);
+          this._log.debug('getUserFeedback response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1049,7 +1049,7 @@ export class QuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUserFeedback request %j', request);
+    this._log.debug('updateUserFeedback request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.IUserFeedback,
@@ -1060,7 +1060,7 @@ export class QuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUserFeedback response %j', response);
+          this._log.debug('updateUserFeedback response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1075,7 +1075,7 @@ export class QuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateUserFeedback response %j', response);
+          this._log.debug('updateUserFeedback response %j', response);
           return [response, options, rawResponse];
         },
       )

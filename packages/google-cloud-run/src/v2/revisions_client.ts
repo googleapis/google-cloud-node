@@ -572,7 +572,7 @@ export class RevisionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRevision request %j', request);
+    this._log.debug('getRevision request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.IRevision,
@@ -581,7 +581,7 @@ export class RevisionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRevision response %j', response);
+          this._log.debug('getRevision response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -593,7 +593,7 @@ export class RevisionsClient {
           protos.google.cloud.run.v2.IGetRevisionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRevision response %j', response);
+          this._log.debug('getRevision response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -747,11 +747,11 @@ export class RevisionsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRevision response %j', rawResponse);
+          this._log.debug('deleteRevision response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRevision request %j', request);
+    this._log.debug('deleteRevision request %j', request);
     return this.innerApiCalls
       .deleteRevision(request, options, wrappedCallback)
       ?.then(
@@ -763,7 +763,7 @@ export class RevisionsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRevision response %j', rawResponse);
+          this._log.debug('deleteRevision response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -918,11 +918,11 @@ export class RevisionsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRevisions values %j', values);
+          this._log.debug('listRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRevisions request %j', request);
+    this._log.debug('listRevisions request %j', request);
     return this.innerApiCalls
       .listRevisions(request, options, wrappedCallback)
       ?.then(
@@ -931,7 +931,7 @@ export class RevisionsClient {
           protos.google.cloud.run.v2.IListRevisionsRequest | null,
           protos.google.cloud.run.v2.IListRevisionsResponse,
         ]) => {
-          this._log.info('listRevisions values %j', response);
+          this._log.debug('listRevisions values %j', response);
           return [response, input, output];
         },
       );
@@ -992,7 +992,7 @@ export class RevisionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRevisions stream %j', request);
+    this._log.debug('listRevisions stream %j', request);
     return this.descriptors.page.listRevisions.createStream(
       this.innerApiCalls.listRevisions as GaxCall,
       request,
@@ -1058,7 +1058,7 @@ export class RevisionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRevisions iterate %j', request);
+    this._log.debug('listRevisions iterate %j', request);
     return this.descriptors.page.listRevisions.asyncIterate(
       this.innerApiCalls['listRevisions'] as GaxCall,
       request as {},

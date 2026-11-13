@@ -639,7 +639,7 @@ export class PhoneNumbersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePhoneNumber request %j', request);
+    this._log.debug('updatePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
@@ -650,7 +650,7 @@ export class PhoneNumbersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePhoneNumber response %j', response);
+          this._log.debug('updatePhoneNumber response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -665,7 +665,7 @@ export class PhoneNumbersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePhoneNumber response %j', response);
+          this._log.debug('updatePhoneNumber response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -790,7 +790,7 @@ export class PhoneNumbersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePhoneNumber request %j', request);
+    this._log.debug('deletePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
@@ -801,7 +801,7 @@ export class PhoneNumbersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePhoneNumber response %j', response);
+          this._log.debug('deletePhoneNumber response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -816,7 +816,7 @@ export class PhoneNumbersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePhoneNumber response %j', response);
+          this._log.debug('deletePhoneNumber response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -939,7 +939,7 @@ export class PhoneNumbersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('undeletePhoneNumber request %j', request);
+    this._log.debug('undeletePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IPhoneNumber,
@@ -950,7 +950,7 @@ export class PhoneNumbersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('undeletePhoneNumber response %j', response);
+          this._log.debug('undeletePhoneNumber response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -965,7 +965,7 @@ export class PhoneNumbersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('undeletePhoneNumber response %j', response);
+          this._log.debug('undeletePhoneNumber response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1101,11 +1101,11 @@ export class PhoneNumbersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPhoneNumbers values %j', values);
+          this._log.debug('listPhoneNumbers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPhoneNumbers request %j', request);
+    this._log.debug('listPhoneNumbers request %j', request);
     return this.innerApiCalls
       .listPhoneNumbers(request, options, wrappedCallback)
       ?.then(
@@ -1114,7 +1114,7 @@ export class PhoneNumbersClient {
           protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersRequest | null,
           protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersResponse,
         ]) => {
-          this._log.info('listPhoneNumbers values %j', response);
+          this._log.debug('listPhoneNumbers values %j', response);
           return [response, input, output];
         },
       );
@@ -1165,7 +1165,7 @@ export class PhoneNumbersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhoneNumbers stream %j', request);
+    this._log.debug('listPhoneNumbers stream %j', request);
     return this.descriptors.page.listPhoneNumbers.createStream(
       this.innerApiCalls.listPhoneNumbers as GaxCall,
       request,
@@ -1221,7 +1221,7 @@ export class PhoneNumbersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhoneNumbers iterate %j', request);
+    this._log.debug('listPhoneNumbers iterate %j', request);
     return this.descriptors.page.listPhoneNumbers.asyncIterate(
       this.innerApiCalls['listPhoneNumbers'] as GaxCall,
       request as {},

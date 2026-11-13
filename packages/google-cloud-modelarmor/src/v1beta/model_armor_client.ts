@@ -536,7 +536,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTemplate request %j', request);
+    this._log.debug('getTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.ITemplate,
@@ -547,7 +547,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTemplate response %j', response);
+          this._log.debug('getTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -559,7 +559,7 @@ export class ModelArmorClient {
           protos.google.cloud.modelarmor.v1beta.IGetTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTemplate response %j', response);
+          this._log.debug('getTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -690,7 +690,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTemplate request %j', request);
+    this._log.debug('createTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.ITemplate,
@@ -701,7 +701,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTemplate response %j', response);
+          this._log.debug('createTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -716,7 +716,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTemplate response %j', response);
+          this._log.debug('createTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTemplate request %j', request);
+    this._log.debug('updateTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.ITemplate,
@@ -858,7 +858,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTemplate response %j', response);
+          this._log.debug('updateTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -873,7 +873,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTemplate response %j', response);
+          this._log.debug('updateTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -998,7 +998,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTemplate request %j', request);
+    this._log.debug('deleteTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1009,7 +1009,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTemplate response %j', response);
+          this._log.debug('deleteTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1024,7 +1024,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteTemplate response %j', response);
+          this._log.debug('deleteTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1136,7 +1136,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFloorSetting request %j', request);
+    this._log.debug('getFloorSetting request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.IFloorSetting,
@@ -1147,7 +1147,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFloorSetting response %j', response);
+          this._log.debug('getFloorSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1162,7 +1162,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFloorSetting response %j', response);
+          this._log.debug('getFloorSetting response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1285,7 +1285,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFloorSetting request %j', request);
+    this._log.debug('updateFloorSetting request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.IFloorSetting,
@@ -1296,7 +1296,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFloorSetting response %j', response);
+          this._log.debug('updateFloorSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1311,7 +1311,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateFloorSetting response %j', response);
+          this._log.debug('updateFloorSetting response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1435,7 +1435,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('sanitizeUserPrompt request %j', request);
+    this._log.debug('sanitizeUserPrompt request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse,
@@ -1446,7 +1446,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('sanitizeUserPrompt response %j', response);
+          this._log.debug('sanitizeUserPrompt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1461,7 +1461,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('sanitizeUserPrompt response %j', response);
+          this._log.debug('sanitizeUserPrompt response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1587,7 +1587,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('sanitizeModelResponse request %j', request);
+    this._log.debug('sanitizeModelResponse request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse,
@@ -1598,7 +1598,7 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('sanitizeModelResponse response %j', response);
+          this._log.debug('sanitizeModelResponse response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1613,7 +1613,7 @@ export class ModelArmorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('sanitizeModelResponse response %j', response);
+          this._log.debug('sanitizeModelResponse response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1653,7 +1653,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamSanitizeUserPrompt stream %j', options);
+    this._log.debug('streamSanitizeUserPrompt stream %j', options);
     return this.innerApiCalls.streamSanitizeUserPrompt(null, options);
   }
 
@@ -1675,7 +1675,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamSanitizeModelResponse stream %j', options);
+    this._log.debug('streamSanitizeModelResponse stream %j', options);
     return this.innerApiCalls.streamSanitizeModelResponse(null, options);
   }
 
@@ -1791,11 +1791,11 @@ export class ModelArmorClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTemplates values %j', values);
+          this._log.debug('listTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTemplates request %j', request);
+    this._log.debug('listTemplates request %j', request);
     return this.innerApiCalls
       .listTemplates(request, options, wrappedCallback)
       ?.then(
@@ -1804,7 +1804,7 @@ export class ModelArmorClient {
           protos.google.cloud.modelarmor.v1beta.IListTemplatesRequest | null,
           protos.google.cloud.modelarmor.v1beta.IListTemplatesResponse,
         ]) => {
-          this._log.info('listTemplates values %j', response);
+          this._log.debug('listTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -1853,7 +1853,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTemplates stream %j', request);
+    this._log.debug('listTemplates stream %j', request);
     return this.descriptors.page.listTemplates.createStream(
       this.innerApiCalls.listTemplates as GaxCall,
       request,
@@ -1907,7 +1907,7 @@ export class ModelArmorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTemplates iterate %j', request);
+    this._log.debug('listTemplates iterate %j', request);
     return this.descriptors.page.listTemplates.asyncIterate(
       this.innerApiCalls['listTemplates'] as GaxCall,
       request as {},

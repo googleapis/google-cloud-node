@@ -724,7 +724,7 @@ export class SuggestedAdUnitServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSuggestedAdUnit request %j', request);
+    this._log.debug('getSuggestedAdUnit request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISuggestedAdUnit,
@@ -735,7 +735,7 @@ export class SuggestedAdUnitServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSuggestedAdUnit response %j', response);
+          this._log.debug('getSuggestedAdUnit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -747,7 +747,7 @@ export class SuggestedAdUnitServiceClient {
           protos.google.ads.admanager.v1.IGetSuggestedAdUnitRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSuggestedAdUnit response %j', response);
+          this._log.debug('getSuggestedAdUnit response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -867,7 +867,7 @@ export class SuggestedAdUnitServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchApproveSuggestedAdUnits request %j', request);
+    this._log.debug('batchApproveSuggestedAdUnits request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchApproveSuggestedAdUnitsResponse,
@@ -878,7 +878,7 @@ export class SuggestedAdUnitServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchApproveSuggestedAdUnits response %j', response);
+          this._log.debug('batchApproveSuggestedAdUnits response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -893,7 +893,7 @@ export class SuggestedAdUnitServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchApproveSuggestedAdUnits response %j', response);
+          this._log.debug('batchApproveSuggestedAdUnits response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1054,11 +1054,11 @@ export class SuggestedAdUnitServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSuggestedAdUnits values %j', values);
+          this._log.debug('listSuggestedAdUnits values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSuggestedAdUnits request %j', request);
+    this._log.debug('listSuggestedAdUnits request %j', request);
     return this.innerApiCalls
       .listSuggestedAdUnits(request, options, wrappedCallback)
       ?.then(
@@ -1067,7 +1067,7 @@ export class SuggestedAdUnitServiceClient {
           protos.google.ads.admanager.v1.IListSuggestedAdUnitsRequest | null,
           protos.google.ads.admanager.v1.IListSuggestedAdUnitsResponse,
         ]) => {
-          this._log.info('listSuggestedAdUnits values %j', response);
+          this._log.debug('listSuggestedAdUnits values %j', response);
           return [response, input, output];
         },
       );
@@ -1143,7 +1143,7 @@ export class SuggestedAdUnitServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSuggestedAdUnits stream %j', request);
+    this._log.debug('listSuggestedAdUnits stream %j', request);
     return this.descriptors.page.listSuggestedAdUnits.createStream(
       this.innerApiCalls.listSuggestedAdUnits as GaxCall,
       request,
@@ -1224,7 +1224,7 @@ export class SuggestedAdUnitServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSuggestedAdUnits iterate %j', request);
+    this._log.debug('listSuggestedAdUnits iterate %j', request);
     return this.descriptors.page.listSuggestedAdUnits.asyncIterate(
       this.innerApiCalls['listSuggestedAdUnits'] as GaxCall,
       request as {},

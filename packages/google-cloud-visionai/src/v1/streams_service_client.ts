@@ -807,7 +807,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCluster request %j', request);
+    this._log.debug('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.ICluster,
@@ -816,7 +816,7 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -828,7 +828,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IGetClusterRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCluster response %j', response);
+          this._log.debug('getCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -931,7 +931,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getStream request %j', request);
+    this._log.debug('getStream request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IStream,
@@ -940,7 +940,7 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getStream response %j', response);
+          this._log.debug('getStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -952,7 +952,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IGetStreamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getStream response %j', response);
+          this._log.debug('getStream response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1069,7 +1069,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateStreamHlsToken request %j', request);
+    this._log.debug('generateStreamHlsToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IGenerateStreamHlsTokenResponse,
@@ -1080,7 +1080,7 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateStreamHlsToken response %j', response);
+          this._log.debug('generateStreamHlsToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1095,7 +1095,7 @@ export class StreamsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateStreamHlsToken response %j', response);
+          this._log.debug('generateStreamHlsToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1198,7 +1198,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEvent request %j', request);
+    this._log.debug('getEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IEvent,
@@ -1207,7 +1207,7 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1219,7 +1219,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IGetEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1322,7 +1322,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSeries request %j', request);
+    this._log.debug('getSeries request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.ISeries,
@@ -1331,7 +1331,7 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSeries response %j', response);
+          this._log.debug('getSeries response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1343,7 +1343,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IGetSeriesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSeries response %j', response);
+          this._log.debug('getSeries response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1496,11 +1496,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCluster request %j', request);
+    this._log.debug('createCluster request %j', request);
     return this.innerApiCalls
       .createCluster(request, options, wrappedCallback)
       ?.then(
@@ -1512,7 +1512,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCluster response %j', rawResponse);
+          this._log.debug('createCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1685,11 +1685,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCluster request %j', request);
+    this._log.debug('updateCluster request %j', request);
     return this.innerApiCalls
       .updateCluster(request, options, wrappedCallback)
       ?.then(
@@ -1701,7 +1701,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.debug('updateCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1868,11 +1868,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCluster request %j', request);
+    this._log.debug('deleteCluster request %j', request);
     return this.innerApiCalls
       .deleteCluster(request, options, wrappedCallback)
       ?.then(
@@ -1884,7 +1884,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.debug('deleteCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2055,11 +2055,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createStream response %j', rawResponse);
+          this._log.debug('createStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createStream request %j', request);
+    this._log.debug('createStream request %j', request);
     return this.innerApiCalls
       .createStream(request, options, wrappedCallback)
       ?.then(
@@ -2071,7 +2071,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createStream response %j', rawResponse);
+          this._log.debug('createStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2244,11 +2244,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateStream response %j', rawResponse);
+          this._log.debug('updateStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateStream request %j', request);
+    this._log.debug('updateStream request %j', request);
     return this.innerApiCalls
       .updateStream(request, options, wrappedCallback)
       ?.then(
@@ -2260,7 +2260,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateStream response %j', rawResponse);
+          this._log.debug('updateStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2427,11 +2427,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteStream response %j', rawResponse);
+          this._log.debug('deleteStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteStream request %j', request);
+    this._log.debug('deleteStream request %j', request);
     return this.innerApiCalls
       .deleteStream(request, options, wrappedCallback)
       ?.then(
@@ -2443,7 +2443,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteStream response %j', rawResponse);
+          this._log.debug('deleteStream response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2615,11 +2615,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('getStreamThumbnail response %j', rawResponse);
+          this._log.debug('getStreamThumbnail response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('getStreamThumbnail request %j', request);
+    this._log.debug('getStreamThumbnail request %j', request);
     return this.innerApiCalls
       .getStreamThumbnail(request, options, wrappedCallback)
       ?.then(
@@ -2631,7 +2631,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getStreamThumbnail response %j', rawResponse);
+          this._log.debug('getStreamThumbnail response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2802,11 +2802,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEvent response %j', rawResponse);
+          this._log.debug('createEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEvent request %j', request);
+    this._log.debug('createEvent request %j', request);
     return this.innerApiCalls
       .createEvent(request, options, wrappedCallback)
       ?.then(
@@ -2818,7 +2818,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEvent response %j', rawResponse);
+          this._log.debug('createEvent response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2991,11 +2991,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateEvent response %j', rawResponse);
+          this._log.debug('updateEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateEvent request %j', request);
+    this._log.debug('updateEvent request %j', request);
     return this.innerApiCalls
       .updateEvent(request, options, wrappedCallback)
       ?.then(
@@ -3007,7 +3007,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEvent response %j', rawResponse);
+          this._log.debug('updateEvent response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3174,11 +3174,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEvent response %j', rawResponse);
+          this._log.debug('deleteEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteEvent request %j', request);
+    this._log.debug('deleteEvent request %j', request);
     return this.innerApiCalls
       .deleteEvent(request, options, wrappedCallback)
       ?.then(
@@ -3190,7 +3190,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEvent response %j', rawResponse);
+          this._log.debug('deleteEvent response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3361,11 +3361,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSeries response %j', rawResponse);
+          this._log.debug('createSeries response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSeries request %j', request);
+    this._log.debug('createSeries request %j', request);
     return this.innerApiCalls
       .createSeries(request, options, wrappedCallback)
       ?.then(
@@ -3377,7 +3377,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSeries response %j', rawResponse);
+          this._log.debug('createSeries response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3550,11 +3550,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateSeries response %j', rawResponse);
+          this._log.debug('updateSeries response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateSeries request %j', request);
+    this._log.debug('updateSeries request %j', request);
     return this.innerApiCalls
       .updateSeries(request, options, wrappedCallback)
       ?.then(
@@ -3566,7 +3566,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSeries response %j', rawResponse);
+          this._log.debug('updateSeries response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3733,11 +3733,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSeries response %j', rawResponse);
+          this._log.debug('deleteSeries response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSeries request %j', request);
+    this._log.debug('deleteSeries request %j', request);
     return this.innerApiCalls
       .deleteSeries(request, options, wrappedCallback)
       ?.then(
@@ -3749,7 +3749,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSeries response %j', rawResponse);
+          this._log.debug('deleteSeries response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3920,11 +3920,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('materializeChannel response %j', rawResponse);
+          this._log.debug('materializeChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('materializeChannel request %j', request);
+    this._log.debug('materializeChannel request %j', request);
     return this.innerApiCalls
       .materializeChannel(request, options, wrappedCallback)
       ?.then(
@@ -3936,7 +3936,7 @@ export class StreamsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('materializeChannel response %j', rawResponse);
+          this._log.debug('materializeChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4082,11 +4082,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClusters values %j', values);
+          this._log.debug('listClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClusters request %j', request);
+    this._log.debug('listClusters request %j', request);
     return this.innerApiCalls
       .listClusters(request, options, wrappedCallback)
       ?.then(
@@ -4095,7 +4095,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IListClustersRequest | null,
           protos.google.cloud.visionai.v1.IListClustersResponse,
         ]) => {
-          this._log.info('listClusters values %j', response);
+          this._log.debug('listClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -4144,7 +4144,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters stream %j', request);
+    this._log.debug('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -4198,7 +4198,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClusters iterate %j', request);
+    this._log.debug('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -4311,11 +4311,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listStreams values %j', values);
+          this._log.debug('listStreams values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listStreams request %j', request);
+    this._log.debug('listStreams request %j', request);
     return this.innerApiCalls
       .listStreams(request, options, wrappedCallback)
       ?.then(
@@ -4324,7 +4324,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IListStreamsRequest | null,
           protos.google.cloud.visionai.v1.IListStreamsResponse,
         ]) => {
-          this._log.info('listStreams values %j', response);
+          this._log.debug('listStreams values %j', response);
           return [response, input, output];
         },
       );
@@ -4373,7 +4373,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listStreams stream %j', request);
+    this._log.debug('listStreams stream %j', request);
     return this.descriptors.page.listStreams.createStream(
       this.innerApiCalls.listStreams as GaxCall,
       request,
@@ -4427,7 +4427,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listStreams iterate %j', request);
+    this._log.debug('listStreams iterate %j', request);
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
       request as {},
@@ -4540,11 +4540,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEvents values %j', values);
+          this._log.debug('listEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEvents request %j', request);
+    this._log.debug('listEvents request %j', request);
     return this.innerApiCalls
       .listEvents(request, options, wrappedCallback)
       ?.then(
@@ -4553,7 +4553,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IListEventsRequest | null,
           protos.google.cloud.visionai.v1.IListEventsResponse,
         ]) => {
-          this._log.info('listEvents values %j', response);
+          this._log.debug('listEvents values %j', response);
           return [response, input, output];
         },
       );
@@ -4602,7 +4602,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents stream %j', request);
+    this._log.debug('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
       request,
@@ -4656,7 +4656,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents iterate %j', request);
+    this._log.debug('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
       request as {},
@@ -4769,11 +4769,11 @@ export class StreamsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSeries values %j', values);
+          this._log.debug('listSeries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSeries request %j', request);
+    this._log.debug('listSeries request %j', request);
     return this.innerApiCalls
       .listSeries(request, options, wrappedCallback)
       ?.then(
@@ -4782,7 +4782,7 @@ export class StreamsServiceClient {
           protos.google.cloud.visionai.v1.IListSeriesRequest | null,
           protos.google.cloud.visionai.v1.IListSeriesResponse,
         ]) => {
-          this._log.info('listSeries values %j', response);
+          this._log.debug('listSeries values %j', response);
           return [response, input, output];
         },
       );
@@ -4831,7 +4831,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSeries stream %j', request);
+    this._log.debug('listSeries stream %j', request);
     return this.descriptors.page.listSeries.createStream(
       this.innerApiCalls.listSeries as GaxCall,
       request,
@@ -4885,7 +4885,7 @@ export class StreamsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSeries iterate %j', request);
+    this._log.debug('listSeries iterate %j', request);
     return this.descriptors.page.listSeries.asyncIterate(
       this.innerApiCalls['listSeries'] as GaxCall,
       request as {},

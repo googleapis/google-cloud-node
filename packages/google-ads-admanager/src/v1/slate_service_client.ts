@@ -720,7 +720,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSlate request %j', request);
+    this._log.debug('getSlate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISlate,
@@ -729,7 +729,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSlate response %j', response);
+          this._log.debug('getSlate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -741,7 +741,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IGetSlateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSlate response %j', response);
+          this._log.debug('getSlate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSlate request %j', request);
+    this._log.debug('createSlate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISlate,
@@ -856,7 +856,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSlate response %j', response);
+          this._log.debug('createSlate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -868,7 +868,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.ICreateSlateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSlate response %j', response);
+          this._log.debug('createSlate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -985,7 +985,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateSlates request %j', request);
+    this._log.debug('batchCreateSlates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateSlatesResponse,
@@ -996,7 +996,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateSlates response %j', response);
+          this._log.debug('batchCreateSlates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1008,7 +1008,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateSlatesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateSlates response %j', response);
+          this._log.debug('batchCreateSlates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1115,7 +1115,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSlate request %j', request);
+    this._log.debug('updateSlate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ISlate,
@@ -1124,7 +1124,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSlate response %j', response);
+          this._log.debug('updateSlate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1136,7 +1136,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IUpdateSlateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSlate response %j', response);
+          this._log.debug('updateSlate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1253,7 +1253,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateSlates request %j', request);
+    this._log.debug('batchUpdateSlates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateSlatesResponse,
@@ -1264,7 +1264,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateSlates response %j', response);
+          this._log.debug('batchUpdateSlates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1276,7 +1276,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateSlatesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateSlates response %j', response);
+          this._log.debug('batchUpdateSlates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1391,7 +1391,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchiveSlates request %j', request);
+    this._log.debug('batchArchiveSlates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchiveSlatesResponse,
@@ -1402,7 +1402,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchiveSlates response %j', response);
+          this._log.debug('batchArchiveSlates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1414,7 +1414,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IBatchArchiveSlatesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchArchiveSlates response %j', response);
+          this._log.debug('batchArchiveSlates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1529,7 +1529,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUnarchiveSlates request %j', request);
+    this._log.debug('batchUnarchiveSlates request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUnarchiveSlatesResponse,
@@ -1540,7 +1540,7 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUnarchiveSlates response %j', response);
+          this._log.debug('batchUnarchiveSlates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1555,7 +1555,7 @@ export class SlateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUnarchiveSlates response %j', response);
+          this._log.debug('batchUnarchiveSlates response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1704,11 +1704,11 @@ export class SlateServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSlates values %j', values);
+          this._log.debug('listSlates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSlates request %j', request);
+    this._log.debug('listSlates request %j', request);
     return this.innerApiCalls
       .listSlates(request, options, wrappedCallback)
       ?.then(
@@ -1717,7 +1717,7 @@ export class SlateServiceClient {
           protos.google.ads.admanager.v1.IListSlatesRequest | null,
           protos.google.ads.admanager.v1.IListSlatesResponse,
         ]) => {
-          this._log.info('listSlates values %j', response);
+          this._log.debug('listSlates values %j', response);
           return [response, input, output];
         },
       );
@@ -1791,7 +1791,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSlates stream %j', request);
+    this._log.debug('listSlates stream %j', request);
     return this.descriptors.page.listSlates.createStream(
       this.innerApiCalls.listSlates as GaxCall,
       request,
@@ -1870,7 +1870,7 @@ export class SlateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSlates iterate %j', request);
+    this._log.debug('listSlates iterate %j', request);
     return this.descriptors.page.listSlates.asyncIterate(
       this.innerApiCalls['listSlates'] as GaxCall,
       request as {},

@@ -1051,7 +1051,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IInstance,
@@ -1062,7 +1062,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1077,7 +1077,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1196,7 +1196,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRepository request %j', request);
+    this._log.debug('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IRepository,
@@ -1207,7 +1207,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1222,7 +1222,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1335,7 +1335,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHook request %j', request);
+    this._log.debug('getHook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IHook,
@@ -1346,7 +1346,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHook response %j', response);
+          this._log.debug('getHook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1361,7 +1361,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getHook response %j', response);
+          this._log.debug('getHook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1468,7 +1468,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicyRepo request %j', request);
+    this._log.debug('getIamPolicyRepo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1477,7 +1477,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicyRepo response %j', response);
+          this._log.debug('getIamPolicyRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1489,7 +1489,7 @@ export class SecureSourceManagerClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicyRepo response %j', response);
+          this._log.debug('getIamPolicyRepo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1604,7 +1604,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicyRepo request %j', request);
+    this._log.debug('setIamPolicyRepo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1613,7 +1613,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicyRepo response %j', response);
+          this._log.debug('setIamPolicyRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1625,7 +1625,7 @@ export class SecureSourceManagerClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicyRepo response %j', response);
+          this._log.debug('setIamPolicyRepo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1735,7 +1735,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissionsRepo request %j', request);
+    this._log.debug('testIamPermissionsRepo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1744,7 +1744,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissionsRepo response %j', response);
+          this._log.debug('testIamPermissionsRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1756,7 +1756,7 @@ export class SecureSourceManagerClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissionsRepo response %j', response);
+          this._log.debug('testIamPermissionsRepo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1875,7 +1875,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBranchRule request %j', request);
+    this._log.debug('getBranchRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IBranchRule,
@@ -1886,7 +1886,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBranchRule response %j', response);
+          this._log.debug('getBranchRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1901,7 +1901,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBranchRule response %j', response);
+          this._log.debug('getBranchRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2020,7 +2020,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPullRequest request %j', request);
+    this._log.debug('getPullRequest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IPullRequest,
@@ -2031,7 +2031,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPullRequest response %j', response);
+          this._log.debug('getPullRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2046,7 +2046,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPullRequest response %j', response);
+          this._log.debug('getPullRequest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2161,7 +2161,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchBlob request %j', request);
+    this._log.debug('fetchBlob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
@@ -2172,7 +2172,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchBlob response %j', response);
+          this._log.debug('fetchBlob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2187,7 +2187,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchBlob response %j', response);
+          this._log.debug('fetchBlob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2300,7 +2300,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIssue request %j', request);
+    this._log.debug('getIssue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IIssue,
@@ -2311,7 +2311,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIssue response %j', response);
+          this._log.debug('getIssue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2326,7 +2326,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIssue response %j', response);
+          this._log.debug('getIssue response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2445,7 +2445,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPullRequestComment request %j', request);
+    this._log.debug('getPullRequestComment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
@@ -2456,7 +2456,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPullRequestComment response %j', response);
+          this._log.debug('getPullRequestComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2471,7 +2471,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPullRequestComment response %j', response);
+          this._log.debug('getPullRequestComment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2590,7 +2590,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIssueComment request %j', request);
+    this._log.debug('getIssueComment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.securesourcemanager.v1.IIssueComment,
@@ -2601,7 +2601,7 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIssueComment response %j', response);
+          this._log.debug('getIssueComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2616,7 +2616,7 @@ export class SecureSourceManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIssueComment response %j', response);
+          this._log.debug('getIssueComment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2769,11 +2769,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInstance request %j', request);
+    this._log.debug('createInstance request %j', request);
     return this.innerApiCalls
       .createInstance(request, options, wrappedCallback)
       ?.then(
@@ -2785,7 +2785,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2954,11 +2954,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInstance request %j', request);
+    this._log.debug('deleteInstance request %j', request);
     return this.innerApiCalls
       .deleteInstance(request, options, wrappedCallback)
       ?.then(
@@ -2970,7 +2970,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3133,11 +3133,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRepository response %j', rawResponse);
+          this._log.debug('createRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRepository request %j', request);
+    this._log.debug('createRepository request %j', request);
     return this.innerApiCalls
       .createRepository(request, options, wrappedCallback)
       ?.then(
@@ -3149,7 +3149,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRepository response %j', rawResponse);
+          this._log.debug('createRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3311,11 +3311,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateRepository response %j', rawResponse);
+          this._log.debug('updateRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateRepository request %j', request);
+    this._log.debug('updateRepository request %j', request);
     return this.innerApiCalls
       .updateRepository(request, options, wrappedCallback)
       ?.then(
@@ -3327,7 +3327,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRepository response %j', rawResponse);
+          this._log.debug('updateRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3485,11 +3485,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRepository response %j', rawResponse);
+          this._log.debug('deleteRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRepository request %j', request);
+    this._log.debug('deleteRepository request %j', request);
     return this.innerApiCalls
       .deleteRepository(request, options, wrappedCallback)
       ?.then(
@@ -3501,7 +3501,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRepository response %j', rawResponse);
+          this._log.debug('deleteRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3663,11 +3663,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createHook response %j', rawResponse);
+          this._log.debug('createHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createHook request %j', request);
+    this._log.debug('createHook request %j', request);
     return this.innerApiCalls
       .createHook(request, options, wrappedCallback)
       ?.then(
@@ -3679,7 +3679,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createHook response %j', rawResponse);
+          this._log.debug('createHook response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3838,11 +3838,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateHook response %j', rawResponse);
+          this._log.debug('updateHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateHook request %j', request);
+    this._log.debug('updateHook request %j', request);
     return this.innerApiCalls
       .updateHook(request, options, wrappedCallback)
       ?.then(
@@ -3854,7 +3854,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateHook response %j', rawResponse);
+          this._log.debug('updateHook response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4009,11 +4009,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteHook response %j', rawResponse);
+          this._log.debug('deleteHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteHook request %j', request);
+    this._log.debug('deleteHook request %j', request);
     return this.innerApiCalls
       .deleteHook(request, options, wrappedCallback)
       ?.then(
@@ -4025,7 +4025,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteHook response %j', rawResponse);
+          this._log.debug('deleteHook response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4179,11 +4179,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createBranchRule response %j', rawResponse);
+          this._log.debug('createBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createBranchRule request %j', request);
+    this._log.debug('createBranchRule request %j', request);
     return this.innerApiCalls
       .createBranchRule(request, options, wrappedCallback)
       ?.then(
@@ -4195,7 +4195,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBranchRule response %j', rawResponse);
+          this._log.debug('createBranchRule response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4356,11 +4356,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateBranchRule response %j', rawResponse);
+          this._log.debug('updateBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateBranchRule request %j', request);
+    this._log.debug('updateBranchRule request %j', request);
     return this.innerApiCalls
       .updateBranchRule(request, options, wrappedCallback)
       ?.then(
@@ -4372,7 +4372,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBranchRule response %j', rawResponse);
+          this._log.debug('updateBranchRule response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4527,11 +4527,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteBranchRule response %j', rawResponse);
+          this._log.debug('deleteBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteBranchRule request %j', request);
+    this._log.debug('deleteBranchRule request %j', request);
     return this.innerApiCalls
       .deleteBranchRule(request, options, wrappedCallback)
       ?.then(
@@ -4543,7 +4543,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBranchRule response %j', rawResponse);
+          this._log.debug('deleteBranchRule response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4699,11 +4699,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPullRequest response %j', rawResponse);
+          this._log.debug('createPullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPullRequest request %j', request);
+    this._log.debug('createPullRequest request %j', request);
     return this.innerApiCalls
       .createPullRequest(request, options, wrappedCallback)
       ?.then(
@@ -4715,7 +4715,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPullRequest response %j', rawResponse);
+          this._log.debug('createPullRequest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4874,11 +4874,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updatePullRequest response %j', rawResponse);
+          this._log.debug('updatePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updatePullRequest request %j', request);
+    this._log.debug('updatePullRequest request %j', request);
     return this.innerApiCalls
       .updatePullRequest(request, options, wrappedCallback)
       ?.then(
@@ -4890,7 +4890,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePullRequest response %j', rawResponse);
+          this._log.debug('updatePullRequest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5045,11 +5045,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('mergePullRequest response %j', rawResponse);
+          this._log.debug('mergePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('mergePullRequest request %j', request);
+    this._log.debug('mergePullRequest request %j', request);
     return this.innerApiCalls
       .mergePullRequest(request, options, wrappedCallback)
       ?.then(
@@ -5061,7 +5061,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('mergePullRequest response %j', rawResponse);
+          this._log.debug('mergePullRequest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5216,11 +5216,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('openPullRequest response %j', rawResponse);
+          this._log.debug('openPullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('openPullRequest request %j', request);
+    this._log.debug('openPullRequest request %j', request);
     return this.innerApiCalls
       .openPullRequest(request, options, wrappedCallback)
       ?.then(
@@ -5232,7 +5232,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('openPullRequest response %j', rawResponse);
+          this._log.debug('openPullRequest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5387,11 +5387,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('closePullRequest response %j', rawResponse);
+          this._log.debug('closePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('closePullRequest request %j', request);
+    this._log.debug('closePullRequest request %j', request);
     return this.innerApiCalls
       .closePullRequest(request, options, wrappedCallback)
       ?.then(
@@ -5403,7 +5403,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('closePullRequest response %j', rawResponse);
+          this._log.debug('closePullRequest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5559,11 +5559,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIssue response %j', rawResponse);
+          this._log.debug('createIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIssue request %j', request);
+    this._log.debug('createIssue request %j', request);
     return this.innerApiCalls
       .createIssue(request, options, wrappedCallback)
       ?.then(
@@ -5575,7 +5575,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIssue response %j', rawResponse);
+          this._log.debug('createIssue response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5734,11 +5734,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateIssue response %j', rawResponse);
+          this._log.debug('updateIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateIssue request %j', request);
+    this._log.debug('updateIssue request %j', request);
     return this.innerApiCalls
       .updateIssue(request, options, wrappedCallback)
       ?.then(
@@ -5750,7 +5750,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateIssue response %j', rawResponse);
+          this._log.debug('updateIssue response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5909,11 +5909,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIssue response %j', rawResponse);
+          this._log.debug('deleteIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIssue request %j', request);
+    this._log.debug('deleteIssue request %j', request);
     return this.innerApiCalls
       .deleteIssue(request, options, wrappedCallback)
       ?.then(
@@ -5925,7 +5925,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIssue response %j', rawResponse);
+          this._log.debug('deleteIssue response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6084,11 +6084,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('openIssue response %j', rawResponse);
+          this._log.debug('openIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('openIssue request %j', request);
+    this._log.debug('openIssue request %j', request);
     return this.innerApiCalls
       .openIssue(request, options, wrappedCallback)
       ?.then(
@@ -6100,7 +6100,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('openIssue response %j', rawResponse);
+          this._log.debug('openIssue response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6259,11 +6259,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('closeIssue response %j', rawResponse);
+          this._log.debug('closeIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('closeIssue request %j', request);
+    this._log.debug('closeIssue request %j', request);
     return this.innerApiCalls
       .closeIssue(request, options, wrappedCallback)
       ?.then(
@@ -6275,7 +6275,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('closeIssue response %j', rawResponse);
+          this._log.debug('closeIssue response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6436,11 +6436,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPullRequestComment response %j', rawResponse);
+          this._log.debug('createPullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPullRequestComment request %j', request);
+    this._log.debug('createPullRequestComment request %j', request);
     return this.innerApiCalls
       .createPullRequestComment(request, options, wrappedCallback)
       ?.then(
@@ -6452,7 +6452,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPullRequestComment response %j', rawResponse);
+          this._log.debug('createPullRequestComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6609,11 +6609,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updatePullRequestComment response %j', rawResponse);
+          this._log.debug('updatePullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updatePullRequestComment request %j', request);
+    this._log.debug('updatePullRequestComment request %j', request);
     return this.innerApiCalls
       .updatePullRequestComment(request, options, wrappedCallback)
       ?.then(
@@ -6625,7 +6625,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePullRequestComment response %j', rawResponse);
+          this._log.debug('updatePullRequestComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6780,11 +6780,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePullRequestComment response %j', rawResponse);
+          this._log.debug('deletePullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePullRequestComment request %j', request);
+    this._log.debug('deletePullRequestComment request %j', request);
     return this.innerApiCalls
       .deletePullRequestComment(request, options, wrappedCallback)
       ?.then(
@@ -6796,7 +6796,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePullRequestComment response %j', rawResponse);
+          this._log.debug('deletePullRequestComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -6960,14 +6960,14 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'batchCreatePullRequestComments response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchCreatePullRequestComments request %j', request);
+    this._log.debug('batchCreatePullRequestComments request %j', request);
     return this.innerApiCalls
       .batchCreatePullRequestComments(request, options, wrappedCallback)
       ?.then(
@@ -6979,7 +6979,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchCreatePullRequestComments response %j',
             rawResponse,
           );
@@ -7148,11 +7148,14 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('resolvePullRequestComments response %j', rawResponse);
+          this._log.debug(
+            'resolvePullRequestComments response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('resolvePullRequestComments request %j', request);
+    this._log.debug('resolvePullRequestComments request %j', request);
     return this.innerApiCalls
       .resolvePullRequestComments(request, options, wrappedCallback)
       ?.then(
@@ -7164,7 +7167,10 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('resolvePullRequestComments response %j', rawResponse);
+          this._log.debug(
+            'resolvePullRequestComments response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -7330,14 +7336,14 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'unresolvePullRequestComments response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('unresolvePullRequestComments request %j', request);
+    this._log.debug('unresolvePullRequestComments request %j', request);
     return this.innerApiCalls
       .unresolvePullRequestComments(request, options, wrappedCallback)
       ?.then(
@@ -7349,7 +7355,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'unresolvePullRequestComments response %j',
             rawResponse,
           );
@@ -7508,11 +7514,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIssueComment response %j', rawResponse);
+          this._log.debug('createIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIssueComment request %j', request);
+    this._log.debug('createIssueComment request %j', request);
     return this.innerApiCalls
       .createIssueComment(request, options, wrappedCallback)
       ?.then(
@@ -7524,7 +7530,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIssueComment response %j', rawResponse);
+          this._log.debug('createIssueComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -7683,11 +7689,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateIssueComment response %j', rawResponse);
+          this._log.debug('updateIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateIssueComment request %j', request);
+    this._log.debug('updateIssueComment request %j', request);
     return this.innerApiCalls
       .updateIssueComment(request, options, wrappedCallback)
       ?.then(
@@ -7699,7 +7705,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateIssueComment response %j', rawResponse);
+          this._log.debug('updateIssueComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -7854,11 +7860,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIssueComment response %j', rawResponse);
+          this._log.debug('deleteIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIssueComment request %j', request);
+    this._log.debug('deleteIssueComment request %j', request);
     return this.innerApiCalls
       .deleteIssueComment(request, options, wrappedCallback)
       ?.then(
@@ -7870,7 +7876,7 @@ export class SecureSourceManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIssueComment response %j', rawResponse);
+          this._log.debug('deleteIssueComment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -8022,11 +8028,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInstances values %j', values);
+          this._log.debug('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInstances request %j', request);
+    this._log.debug('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
       ?.then(
@@ -8035,7 +8041,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListInstancesRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListInstancesResponse,
         ]) => {
-          this._log.info('listInstances values %j', response);
+          this._log.debug('listInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -8084,7 +8090,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances stream %j', request);
+    this._log.debug('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -8138,7 +8144,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances iterate %j', request);
+    this._log.debug('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -8265,11 +8271,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRepositories values %j', values);
+          this._log.debug('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRepositories request %j', request);
+    this._log.debug('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
       ?.then(
@@ -8278,7 +8284,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse,
         ]) => {
-          this._log.info('listRepositories values %j', response);
+          this._log.debug('listRepositories values %j', response);
           return [response, input, output];
         },
       );
@@ -8332,7 +8338,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories stream %j', request);
+    this._log.debug('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -8391,7 +8397,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories iterate %j', request);
+    this._log.debug('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -8506,11 +8512,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listHooks values %j', values);
+          this._log.debug('listHooks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listHooks request %j', request);
+    this._log.debug('listHooks request %j', request);
     return this.innerApiCalls
       .listHooks(request, options, wrappedCallback)
       ?.then(
@@ -8519,7 +8525,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListHooksRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListHooksResponse,
         ]) => {
-          this._log.info('listHooks values %j', response);
+          this._log.debug('listHooks values %j', response);
           return [response, input, output];
         },
       );
@@ -8564,7 +8570,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHooks stream %j', request);
+    this._log.debug('listHooks stream %j', request);
     return this.descriptors.page.listHooks.createStream(
       this.innerApiCalls.listHooks as GaxCall,
       request,
@@ -8614,7 +8620,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHooks iterate %j', request);
+    this._log.debug('listHooks iterate %j', request);
     return this.descriptors.page.listHooks.asyncIterate(
       this.innerApiCalls['listHooks'] as GaxCall,
       request as {},
@@ -8728,11 +8734,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBranchRules values %j', values);
+          this._log.debug('listBranchRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBranchRules request %j', request);
+    this._log.debug('listBranchRules request %j', request);
     return this.innerApiCalls
       .listBranchRules(request, options, wrappedCallback)
       ?.then(
@@ -8741,7 +8747,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
         ]) => {
-          this._log.info('listBranchRules values %j', response);
+          this._log.debug('listBranchRules values %j', response);
           return [response, input, output];
         },
       );
@@ -8785,7 +8791,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBranchRules stream %j', request);
+    this._log.debug('listBranchRules stream %j', request);
     return this.descriptors.page.listBranchRules.createStream(
       this.innerApiCalls.listBranchRules as GaxCall,
       request,
@@ -8834,7 +8840,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBranchRules iterate %j', request);
+    this._log.debug('listBranchRules iterate %j', request);
     return this.descriptors.page.listBranchRules.asyncIterate(
       this.innerApiCalls['listBranchRules'] as GaxCall,
       request as {},
@@ -8950,11 +8956,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPullRequests values %j', values);
+          this._log.debug('listPullRequests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPullRequests request %j', request);
+    this._log.debug('listPullRequests request %j', request);
     return this.innerApiCalls
       .listPullRequests(request, options, wrappedCallback)
       ?.then(
@@ -8963,7 +8969,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse,
         ]) => {
-          this._log.info('listPullRequests values %j', response);
+          this._log.debug('listPullRequests values %j', response);
           return [response, input, output];
         },
       );
@@ -9009,7 +9015,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequests stream %j', request);
+    this._log.debug('listPullRequests stream %j', request);
     return this.descriptors.page.listPullRequests.createStream(
       this.innerApiCalls.listPullRequests as GaxCall,
       request,
@@ -9060,7 +9066,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequests iterate %j', request);
+    this._log.debug('listPullRequests iterate %j', request);
     return this.descriptors.page.listPullRequests.asyncIterate(
       this.innerApiCalls['listPullRequests'] as GaxCall,
       request as {},
@@ -9177,11 +9183,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPullRequestFileDiffs values %j', values);
+          this._log.debug('listPullRequestFileDiffs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPullRequestFileDiffs request %j', request);
+    this._log.debug('listPullRequestFileDiffs request %j', request);
     return this.innerApiCalls
       .listPullRequestFileDiffs(request, options, wrappedCallback)
       ?.then(
@@ -9190,7 +9196,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse,
         ]) => {
-          this._log.info('listPullRequestFileDiffs values %j', response);
+          this._log.debug('listPullRequestFileDiffs values %j', response);
           return [response, input, output];
         },
       );
@@ -9237,7 +9243,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequestFileDiffs stream %j', request);
+    this._log.debug('listPullRequestFileDiffs stream %j', request);
     return this.descriptors.page.listPullRequestFileDiffs.createStream(
       this.innerApiCalls.listPullRequestFileDiffs as GaxCall,
       request,
@@ -9289,7 +9295,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequestFileDiffs iterate %j', request);
+    this._log.debug('listPullRequestFileDiffs iterate %j', request);
     return this.descriptors.page.listPullRequestFileDiffs.asyncIterate(
       this.innerApiCalls['listPullRequestFileDiffs'] as GaxCall,
       request as {},
@@ -9412,11 +9418,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchTree values %j', values);
+          this._log.debug('fetchTree values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchTree request %j', request);
+    this._log.debug('fetchTree request %j', request);
     return this.innerApiCalls
       .fetchTree(request, options, wrappedCallback)
       ?.then(
@@ -9425,7 +9431,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest | null,
           protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse,
         ]) => {
-          this._log.info('fetchTree values %j', response);
+          this._log.debug('fetchTree values %j', response);
           return [response, input, output];
         },
       );
@@ -9478,7 +9484,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchTree stream %j', request);
+    this._log.debug('fetchTree stream %j', request);
     return this.descriptors.page.fetchTree.createStream(
       this.innerApiCalls.fetchTree as GaxCall,
       request,
@@ -9536,7 +9542,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchTree iterate %j', request);
+    this._log.debug('fetchTree iterate %j', request);
     return this.descriptors.page.fetchTree.asyncIterate(
       this.innerApiCalls['fetchTree'] as GaxCall,
       request as {},
@@ -9656,11 +9662,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchRefs values %j', values);
+          this._log.debug('fetchRefs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchRefs request %j', request);
+    this._log.debug('fetchRefs request %j', request);
     return this.innerApiCalls
       .fetchRefs(request, options, wrappedCallback)
       ?.then(
@@ -9669,7 +9675,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
           protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
         ]) => {
-          this._log.info('fetchRefs values %j', response);
+          this._log.debug('fetchRefs values %j', response);
           return [response, input, output];
         },
       );
@@ -9719,7 +9725,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchRefs stream %j', request);
+    this._log.debug('fetchRefs stream %j', request);
     return this.descriptors.page.fetchRefs.createStream(
       this.innerApiCalls.fetchRefs as GaxCall,
       request,
@@ -9774,7 +9780,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchRefs iterate %j', request);
+    this._log.debug('fetchRefs iterate %j', request);
     return this.descriptors.page.fetchRefs.asyncIterate(
       this.innerApiCalls['fetchRefs'] as GaxCall,
       request as {},
@@ -9892,11 +9898,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIssues values %j', values);
+          this._log.debug('listIssues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIssues request %j', request);
+    this._log.debug('listIssues request %j', request);
     return this.innerApiCalls
       .listIssues(request, options, wrappedCallback)
       ?.then(
@@ -9905,7 +9911,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListIssuesRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListIssuesResponse,
         ]) => {
-          this._log.info('listIssues values %j', response);
+          this._log.debug('listIssues values %j', response);
           return [response, input, output];
         },
       );
@@ -9953,7 +9959,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIssues stream %j', request);
+    this._log.debug('listIssues stream %j', request);
     return this.descriptors.page.listIssues.createStream(
       this.innerApiCalls.listIssues as GaxCall,
       request,
@@ -10006,7 +10012,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIssues iterate %j', request);
+    this._log.debug('listIssues iterate %j', request);
     return this.descriptors.page.listIssues.asyncIterate(
       this.innerApiCalls['listIssues'] as GaxCall,
       request as {},
@@ -10122,11 +10128,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPullRequestComments values %j', values);
+          this._log.debug('listPullRequestComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPullRequestComments request %j', request);
+    this._log.debug('listPullRequestComments request %j', request);
     return this.innerApiCalls
       .listPullRequestComments(request, options, wrappedCallback)
       ?.then(
@@ -10135,7 +10141,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse,
         ]) => {
-          this._log.info('listPullRequestComments values %j', response);
+          this._log.debug('listPullRequestComments values %j', response);
           return [response, input, output];
         },
       );
@@ -10181,7 +10187,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequestComments stream %j', request);
+    this._log.debug('listPullRequestComments stream %j', request);
     return this.descriptors.page.listPullRequestComments.createStream(
       this.innerApiCalls.listPullRequestComments as GaxCall,
       request,
@@ -10232,7 +10238,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPullRequestComments iterate %j', request);
+    this._log.debug('listPullRequestComments iterate %j', request);
     return this.descriptors.page.listPullRequestComments.asyncIterate(
       this.innerApiCalls['listPullRequestComments'] as GaxCall,
       request as {},
@@ -10348,11 +10354,11 @@ export class SecureSourceManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIssueComments values %j', values);
+          this._log.debug('listIssueComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIssueComments request %j', request);
+    this._log.debug('listIssueComments request %j', request);
     return this.innerApiCalls
       .listIssueComments(request, options, wrappedCallback)
       ?.then(
@@ -10361,7 +10367,7 @@ export class SecureSourceManagerClient {
           protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest | null,
           protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse,
         ]) => {
-          this._log.info('listIssueComments values %j', response);
+          this._log.debug('listIssueComments values %j', response);
           return [response, input, output];
         },
       );
@@ -10407,7 +10413,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIssueComments stream %j', request);
+    this._log.debug('listIssueComments stream %j', request);
     return this.descriptors.page.listIssueComments.createStream(
       this.innerApiCalls.listIssueComments as GaxCall,
       request,
@@ -10458,7 +10464,7 @@ export class SecureSourceManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIssueComments iterate %j', request);
+    this._log.debug('listIssueComments iterate %j', request);
     return this.descriptors.page.listIssueComments.asyncIterate(
       this.innerApiCalls['listIssueComments'] as GaxCall,
       request as {},

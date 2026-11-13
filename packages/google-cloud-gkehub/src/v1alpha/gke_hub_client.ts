@@ -600,7 +600,7 @@ export class GkeHubClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeature request %j', request);
+    this._log.debug('getFeature request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkehub.v1alpha.IFeature,
@@ -611,7 +611,7 @@ export class GkeHubClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeature response %j', response);
+          this._log.debug('getFeature response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -623,7 +623,7 @@ export class GkeHubClient {
           protos.google.cloud.gkehub.v1alpha.IGetFeatureRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeature response %j', response);
+          this._log.debug('getFeature response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -777,11 +777,11 @@ export class GkeHubClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createFeature response %j', rawResponse);
+          this._log.debug('createFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createFeature request %j', request);
+    this._log.debug('createFeature request %j', request);
     return this.innerApiCalls
       .createFeature(request, options, wrappedCallback)
       ?.then(
@@ -793,7 +793,7 @@ export class GkeHubClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFeature response %j', rawResponse);
+          this._log.debug('createFeature response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -965,11 +965,11 @@ export class GkeHubClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteFeature response %j', rawResponse);
+          this._log.debug('deleteFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteFeature request %j', request);
+    this._log.debug('deleteFeature request %j', request);
     return this.innerApiCalls
       .deleteFeature(request, options, wrappedCallback)
       ?.then(
@@ -981,7 +981,7 @@ export class GkeHubClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFeature response %j', rawResponse);
+          this._log.debug('deleteFeature response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1160,11 +1160,11 @@ export class GkeHubClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateFeature response %j', rawResponse);
+          this._log.debug('updateFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateFeature request %j', request);
+    this._log.debug('updateFeature request %j', request);
     return this.innerApiCalls
       .updateFeature(request, options, wrappedCallback)
       ?.then(
@@ -1176,7 +1176,7 @@ export class GkeHubClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFeature response %j', rawResponse);
+          this._log.debug('updateFeature response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1348,11 +1348,11 @@ export class GkeHubClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeatures values %j', values);
+          this._log.debug('listFeatures values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeatures request %j', request);
+    this._log.debug('listFeatures request %j', request);
     return this.innerApiCalls
       .listFeatures(request, options, wrappedCallback)
       ?.then(
@@ -1361,7 +1361,7 @@ export class GkeHubClient {
           protos.google.cloud.gkehub.v1alpha.IListFeaturesRequest | null,
           protos.google.cloud.gkehub.v1alpha.IListFeaturesResponse,
         ]) => {
-          this._log.info('listFeatures values %j', response);
+          this._log.debug('listFeatures values %j', response);
           return [response, input, output];
         },
       );
@@ -1430,7 +1430,7 @@ export class GkeHubClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeatures stream %j', request);
+    this._log.debug('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
       request,
@@ -1504,7 +1504,7 @@ export class GkeHubClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeatures iterate %j', request);
+    this._log.debug('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
       request as {},

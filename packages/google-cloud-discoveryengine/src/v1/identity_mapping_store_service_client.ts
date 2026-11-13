@@ -884,7 +884,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createIdentityMappingStore request %j', request);
+    this._log.debug('createIdentityMappingStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
@@ -895,7 +895,7 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createIdentityMappingStore response %j', response);
+          this._log.debug('createIdentityMappingStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -910,7 +910,7 @@ export class IdentityMappingStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createIdentityMappingStore response %j', response);
+          this._log.debug('createIdentityMappingStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1029,7 +1029,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIdentityMappingStore request %j', request);
+    this._log.debug('getIdentityMappingStore request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1.IIdentityMappingStore,
@@ -1040,7 +1040,7 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIdentityMappingStore response %j', response);
+          this._log.debug('getIdentityMappingStore response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1055,7 +1055,7 @@ export class IdentityMappingStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIdentityMappingStore response %j', response);
+          this._log.debug('getIdentityMappingStore response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1192,11 +1192,14 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIdentityMappingStore response %j', rawResponse);
+          this._log.debug(
+            'deleteIdentityMappingStore response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIdentityMappingStore request %j', request);
+    this._log.debug('deleteIdentityMappingStore request %j', request);
     return this.innerApiCalls
       .deleteIdentityMappingStore(request, options, wrappedCallback)
       ?.then(
@@ -1208,7 +1211,10 @@ export class IdentityMappingStoreServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIdentityMappingStore response %j', rawResponse);
+          this._log.debug(
+            'deleteIdentityMappingStore response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1365,11 +1371,11 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importIdentityMappings response %j', rawResponse);
+          this._log.debug('importIdentityMappings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importIdentityMappings request %j', request);
+    this._log.debug('importIdentityMappings request %j', request);
     return this.innerApiCalls
       .importIdentityMappings(request, options, wrappedCallback)
       ?.then(
@@ -1381,7 +1387,7 @@ export class IdentityMappingStoreServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importIdentityMappings response %j', rawResponse);
+          this._log.debug('importIdentityMappings response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1564,11 +1570,11 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('purgeIdentityMappings response %j', rawResponse);
+          this._log.debug('purgeIdentityMappings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeIdentityMappings request %j', request);
+    this._log.debug('purgeIdentityMappings request %j', request);
     return this.innerApiCalls
       .purgeIdentityMappings(request, options, wrappedCallback)
       ?.then(
@@ -1580,7 +1586,7 @@ export class IdentityMappingStoreServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('purgeIdentityMappings response %j', rawResponse);
+          this._log.debug('purgeIdentityMappings response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1736,11 +1742,11 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIdentityMappings values %j', values);
+          this._log.debug('listIdentityMappings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIdentityMappings request %j', request);
+    this._log.debug('listIdentityMappings request %j', request);
     return this.innerApiCalls
       .listIdentityMappings(request, options, wrappedCallback)
       ?.then(
@@ -1749,7 +1755,7 @@ export class IdentityMappingStoreServiceClient {
           protos.google.cloud.discoveryengine.v1.IListIdentityMappingsRequest | null,
           protos.google.cloud.discoveryengine.v1.IListIdentityMappingsResponse,
         ]) => {
-          this._log.info('listIdentityMappings values %j', response);
+          this._log.debug('listIdentityMappings values %j', response);
           return [response, input, output];
         },
       );
@@ -1802,7 +1808,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIdentityMappings stream %j', request);
+    this._log.debug('listIdentityMappings stream %j', request);
     return this.descriptors.page.listIdentityMappings.createStream(
       this.innerApiCalls.listIdentityMappings as GaxCall,
       request,
@@ -1860,7 +1866,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIdentityMappings iterate %j', request);
+    this._log.debug('listIdentityMappings iterate %j', request);
     return this.descriptors.page.listIdentityMappings.asyncIterate(
       this.innerApiCalls['listIdentityMappings'] as GaxCall,
       request as {},
@@ -1983,11 +1989,11 @@ export class IdentityMappingStoreServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIdentityMappingStores values %j', values);
+          this._log.debug('listIdentityMappingStores values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIdentityMappingStores request %j', request);
+    this._log.debug('listIdentityMappingStores request %j', request);
     return this.innerApiCalls
       .listIdentityMappingStores(request, options, wrappedCallback)
       ?.then(
@@ -1996,7 +2002,7 @@ export class IdentityMappingStoreServiceClient {
           protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresRequest | null,
           protos.google.cloud.discoveryengine.v1.IListIdentityMappingStoresResponse,
         ]) => {
-          this._log.info('listIdentityMappingStores values %j', response);
+          this._log.debug('listIdentityMappingStores values %j', response);
           return [response, input, output];
         },
       );
@@ -2049,7 +2055,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIdentityMappingStores stream %j', request);
+    this._log.debug('listIdentityMappingStores stream %j', request);
     return this.descriptors.page.listIdentityMappingStores.createStream(
       this.innerApiCalls.listIdentityMappingStores as GaxCall,
       request,
@@ -2107,7 +2113,7 @@ export class IdentityMappingStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIdentityMappingStores iterate %j', request);
+    this._log.debug('listIdentityMappingStores iterate %j', request);
     return this.descriptors.page.listIdentityMappingStores.asyncIterate(
       this.innerApiCalls['listIdentityMappingStores'] as GaxCall,
       request as {},

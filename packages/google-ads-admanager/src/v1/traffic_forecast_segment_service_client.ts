@@ -735,7 +735,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTrafficForecastSegment request %j', request);
+    this._log.debug('getTrafficForecastSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITrafficForecastSegment,
@@ -746,7 +746,7 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTrafficForecastSegment response %j', response);
+          this._log.debug('getTrafficForecastSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -761,7 +761,7 @@ export class TrafficForecastSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTrafficForecastSegment response %j', response);
+          this._log.debug('getTrafficForecastSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -881,7 +881,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTrafficForecastSegment request %j', request);
+    this._log.debug('createTrafficForecastSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITrafficForecastSegment,
@@ -892,7 +892,7 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTrafficForecastSegment response %j', response);
+          this._log.debug('createTrafficForecastSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -907,7 +907,7 @@ export class TrafficForecastSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTrafficForecastSegment response %j', response);
+          this._log.debug('createTrafficForecastSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1029,7 +1029,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateTrafficForecastSegments request %j', request);
+    this._log.debug('batchCreateTrafficForecastSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateTrafficForecastSegmentsResponse,
@@ -1040,7 +1040,7 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateTrafficForecastSegments response %j',
             response,
           );
@@ -1058,7 +1058,7 @@ export class TrafficForecastSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateTrafficForecastSegments response %j',
             response,
           );
@@ -1184,7 +1184,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTrafficForecastSegment request %j', request);
+    this._log.debug('updateTrafficForecastSegment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITrafficForecastSegment,
@@ -1195,7 +1195,7 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTrafficForecastSegment response %j', response);
+          this._log.debug('updateTrafficForecastSegment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1210,7 +1210,7 @@ export class TrafficForecastSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTrafficForecastSegment response %j', response);
+          this._log.debug('updateTrafficForecastSegment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1332,7 +1332,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateTrafficForecastSegments request %j', request);
+    this._log.debug('batchUpdateTrafficForecastSegments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateTrafficForecastSegmentsResponse,
@@ -1343,7 +1343,7 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateTrafficForecastSegments response %j',
             response,
           );
@@ -1361,7 +1361,7 @@ export class TrafficForecastSegmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateTrafficForecastSegments response %j',
             response,
           );
@@ -1529,11 +1529,11 @@ export class TrafficForecastSegmentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTrafficForecastSegments values %j', values);
+          this._log.debug('listTrafficForecastSegments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTrafficForecastSegments request %j', request);
+    this._log.debug('listTrafficForecastSegments request %j', request);
     return this.innerApiCalls
       .listTrafficForecastSegments(request, options, wrappedCallback)
       ?.then(
@@ -1542,7 +1542,7 @@ export class TrafficForecastSegmentServiceClient {
           protos.google.ads.admanager.v1.IListTrafficForecastSegmentsRequest | null,
           protos.google.ads.admanager.v1.IListTrafficForecastSegmentsResponse,
         ]) => {
-          this._log.info('listTrafficForecastSegments values %j', response);
+          this._log.debug('listTrafficForecastSegments values %j', response);
           return [response, input, output];
         },
       );
@@ -1622,7 +1622,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTrafficForecastSegments stream %j', request);
+    this._log.debug('listTrafficForecastSegments stream %j', request);
     return this.descriptors.page.listTrafficForecastSegments.createStream(
       this.innerApiCalls.listTrafficForecastSegments as GaxCall,
       request,
@@ -1707,7 +1707,7 @@ export class TrafficForecastSegmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTrafficForecastSegments iterate %j', request);
+    this._log.debug('listTrafficForecastSegments iterate %j', request);
     return this.descriptors.page.listTrafficForecastSegments.asyncIterate(
       this.innerApiCalls['listTrafficForecastSegments'] as GaxCall,
       request as {},

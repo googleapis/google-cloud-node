@@ -535,7 +535,7 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHomepage request %j', request);
+    this._log.debug('getHomepage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
@@ -546,7 +546,7 @@ export class HomepageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHomepage response %j', response);
+          this._log.debug('getHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -561,7 +561,7 @@ export class HomepageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getHomepage response %j', response);
+          this._log.debug('getHomepage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -685,7 +685,7 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateHomepage request %j', request);
+    this._log.debug('updateHomepage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
@@ -696,7 +696,7 @@ export class HomepageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateHomepage response %j', response);
+          this._log.debug('updateHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -711,7 +711,7 @@ export class HomepageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateHomepage response %j', response);
+          this._log.debug('updateHomepage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -853,7 +853,7 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('claimHomepage request %j', request);
+    this._log.debug('claimHomepage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
@@ -864,7 +864,7 @@ export class HomepageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('claimHomepage response %j', response);
+          this._log.debug('claimHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -879,7 +879,7 @@ export class HomepageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('claimHomepage response %j', response);
+          this._log.debug('claimHomepage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -997,7 +997,7 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('unclaimHomepage request %j', request);
+    this._log.debug('unclaimHomepage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
@@ -1008,7 +1008,7 @@ export class HomepageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('unclaimHomepage response %j', response);
+          this._log.debug('unclaimHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1023,7 +1023,7 @@ export class HomepageServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('unclaimHomepage response %j', response);
+          this._log.debug('unclaimHomepage response %j', response);
           return [response, options, rawResponse];
         },
       )

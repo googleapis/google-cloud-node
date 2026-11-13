@@ -495,7 +495,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lookup request %j', request);
+    this._log.debug('lookup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.ILookupResponse,
@@ -504,7 +504,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lookup response %j', response);
+          this._log.debug('lookup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -516,7 +516,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.ILookupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('lookup response %j', response);
+          this._log.debug('lookup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -665,7 +665,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runQuery request %j', request);
+    this._log.debug('runQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IRunQueryResponse,
@@ -674,7 +674,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runQuery response %j', response);
+          this._log.debug('runQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -686,7 +686,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IRunQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runQuery response %j', response);
+          this._log.debug('runQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -831,7 +831,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runAggregationQuery request %j', request);
+    this._log.debug('runAggregationQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IRunAggregationQueryResponse,
@@ -842,7 +842,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runAggregationQuery response %j', response);
+          this._log.debug('runAggregationQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -854,7 +854,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IRunAggregationQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runAggregationQuery response %j', response);
+          this._log.debug('runAggregationQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -987,7 +987,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('beginTransaction request %j', request);
+    this._log.debug('beginTransaction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IBeginTransactionResponse,
@@ -998,7 +998,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('beginTransaction response %j', response);
+          this._log.debug('beginTransaction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1010,7 +1010,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IBeginTransactionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('beginTransaction response %j', response);
+          this._log.debug('beginTransaction response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1165,7 +1165,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('commit request %j', request);
+    this._log.debug('commit request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.ICommitResponse,
@@ -1174,7 +1174,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('commit response %j', response);
+          this._log.debug('commit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1186,7 +1186,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.ICommitRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('commit response %j', response);
+          this._log.debug('commit response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1318,7 +1318,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('rollback request %j', request);
+    this._log.debug('rollback request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IRollbackResponse,
@@ -1327,7 +1327,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('rollback response %j', response);
+          this._log.debug('rollback response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1339,7 +1339,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IRollbackRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rollback response %j', response);
+          this._log.debug('rollback response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1472,7 +1472,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('allocateIds request %j', request);
+    this._log.debug('allocateIds request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IAllocateIdsResponse,
@@ -1481,7 +1481,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('allocateIds response %j', response);
+          this._log.debug('allocateIds response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1493,7 +1493,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IAllocateIdsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('allocateIds response %j', response);
+          this._log.debug('allocateIds response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1626,7 +1626,7 @@ export class DatastoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reserveIds request %j', request);
+    this._log.debug('reserveIds request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.v1.IReserveIdsResponse,
@@ -1635,7 +1635,7 @@ export class DatastoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('reserveIds response %j', response);
+          this._log.debug('reserveIds response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1647,7 +1647,7 @@ export class DatastoreClient {
           protos.google.datastore.v1.IReserveIdsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('reserveIds response %j', response);
+          this._log.debug('reserveIds response %j', response);
           return [response, options, rawResponse];
         },
       )

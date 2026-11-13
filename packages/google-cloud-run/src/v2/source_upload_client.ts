@@ -502,7 +502,7 @@ export class SourceUploadClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('uploadSource request %j', request);
+    this._log.debug('uploadSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.IUploadSourceResponse,
@@ -511,7 +511,7 @@ export class SourceUploadClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('uploadSource response %j', response);
+          this._log.debug('uploadSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -523,7 +523,7 @@ export class SourceUploadClient {
           protos.google.cloud.run.v2.IUploadSourceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('uploadSource response %j', response);
+          this._log.debug('uploadSource response %j', response);
           return [response, options, rawResponse];
         },
       )

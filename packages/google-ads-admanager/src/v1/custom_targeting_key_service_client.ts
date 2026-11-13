@@ -731,7 +731,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCustomTargetingKey request %j', request);
+    this._log.debug('getCustomTargetingKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingKey,
@@ -742,7 +742,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCustomTargetingKey response %j', response);
+          this._log.debug('getCustomTargetingKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCustomTargetingKey response %j', response);
+          this._log.debug('getCustomTargetingKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -877,7 +877,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCustomTargetingKey request %j', request);
+    this._log.debug('createCustomTargetingKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingKey,
@@ -888,7 +888,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCustomTargetingKey response %j', response);
+          this._log.debug('createCustomTargetingKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -903,7 +903,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCustomTargetingKey response %j', response);
+          this._log.debug('createCustomTargetingKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1026,7 +1026,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateCustomTargetingKeys request %j', request);
+    this._log.debug('batchCreateCustomTargetingKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse,
@@ -1037,7 +1037,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateCustomTargetingKeys response %j',
             response,
           );
@@ -1055,7 +1055,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchCreateCustomTargetingKeys response %j',
             response,
           );
@@ -1180,7 +1180,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCustomTargetingKey request %j', request);
+    this._log.debug('updateCustomTargetingKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ICustomTargetingKey,
@@ -1191,7 +1191,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCustomTargetingKey response %j', response);
+          this._log.debug('updateCustomTargetingKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1206,7 +1206,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCustomTargetingKey response %j', response);
+          this._log.debug('updateCustomTargetingKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1329,7 +1329,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateCustomTargetingKeys request %j', request);
+    this._log.debug('batchUpdateCustomTargetingKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse,
@@ -1340,7 +1340,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateCustomTargetingKeys response %j',
             response,
           );
@@ -1358,7 +1358,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateCustomTargetingKeys response %j',
             response,
           );
@@ -1482,7 +1482,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateCustomTargetingKeys request %j', request);
+    this._log.debug('batchActivateCustomTargetingKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse,
@@ -1493,7 +1493,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCustomTargetingKeys response %j',
             response,
           );
@@ -1511,7 +1511,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchActivateCustomTargetingKeys response %j',
             response,
           );
@@ -1635,7 +1635,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateCustomTargetingKeys request %j', request);
+    this._log.debug('batchDeactivateCustomTargetingKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse,
@@ -1646,7 +1646,7 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCustomTargetingKeys response %j',
             response,
           );
@@ -1664,7 +1664,7 @@ export class CustomTargetingKeyServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDeactivateCustomTargetingKeys response %j',
             response,
           );
@@ -1831,11 +1831,11 @@ export class CustomTargetingKeyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCustomTargetingKeys values %j', values);
+          this._log.debug('listCustomTargetingKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCustomTargetingKeys request %j', request);
+    this._log.debug('listCustomTargetingKeys request %j', request);
     return this.innerApiCalls
       .listCustomTargetingKeys(request, options, wrappedCallback)
       ?.then(
@@ -1844,7 +1844,7 @@ export class CustomTargetingKeyServiceClient {
           protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest | null,
           protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse,
         ]) => {
-          this._log.info('listCustomTargetingKeys values %j', response);
+          this._log.debug('listCustomTargetingKeys values %j', response);
           return [response, input, output];
         },
       );
@@ -1923,7 +1923,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomTargetingKeys stream %j', request);
+    this._log.debug('listCustomTargetingKeys stream %j', request);
     return this.descriptors.page.listCustomTargetingKeys.createStream(
       this.innerApiCalls.listCustomTargetingKeys as GaxCall,
       request,
@@ -2007,7 +2007,7 @@ export class CustomTargetingKeyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomTargetingKeys iterate %j', request);
+    this._log.debug('listCustomTargetingKeys iterate %j', request);
     return this.descriptors.page.listCustomTargetingKeys.asyncIterate(
       this.innerApiCalls['listCustomTargetingKeys'] as GaxCall,
       request as {},

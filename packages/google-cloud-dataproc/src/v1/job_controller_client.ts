@@ -677,7 +677,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('submitJob request %j', request);
+    this._log.debug('submitJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IJob,
@@ -686,7 +686,7 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('submitJob response %j', response);
+          this._log.debug('submitJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -698,7 +698,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('submitJob response %j', response);
+          this._log.debug('submitJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -808,7 +808,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getJob request %j', request);
+    this._log.debug('getJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IJob,
@@ -817,7 +817,7 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getJob response %j', response);
+          this._log.debug('getJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -829,7 +829,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getJob response %j', response);
+          this._log.debug('getJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -948,7 +948,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateJob request %j', request);
+    this._log.debug('updateJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IJob,
@@ -957,7 +957,7 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateJob response %j', response);
+          this._log.debug('updateJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -969,7 +969,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateJob response %j', response);
+          this._log.debug('updateJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1083,7 +1083,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelJob request %j', request);
+    this._log.debug('cancelJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IJob,
@@ -1092,7 +1092,7 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelJob response %j', response);
+          this._log.debug('cancelJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1104,7 +1104,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('cancelJob response %j', response);
+          this._log.debug('cancelJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1215,7 +1215,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteJob request %j', request);
+    this._log.debug('deleteJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1224,7 +1224,7 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteJob response %j', response);
+          this._log.debug('deleteJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1236,7 +1236,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteJob response %j', response);
+          this._log.debug('deleteJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1390,11 +1390,11 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('submitJobAsOperation response %j', rawResponse);
+          this._log.debug('submitJobAsOperation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('submitJobAsOperation request %j', request);
+    this._log.debug('submitJobAsOperation request %j', request);
     return this.innerApiCalls
       .submitJobAsOperation(request, options, wrappedCallback)
       ?.then(
@@ -1406,7 +1406,7 @@ export class JobControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('submitJobAsOperation response %j', rawResponse);
+          this._log.debug('submitJobAsOperation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1574,11 +1574,11 @@ export class JobControllerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listJobs values %j', values);
+          this._log.debug('listJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listJobs request %j', request);
+    this._log.debug('listJobs request %j', request);
     return this.innerApiCalls
       .listJobs(request, options, wrappedCallback)
       ?.then(
@@ -1587,7 +1587,7 @@ export class JobControllerClient {
           protos.google.cloud.dataproc.v1.IListJobsRequest | null,
           protos.google.cloud.dataproc.v1.IListJobsResponse,
         ]) => {
-          this._log.info('listJobs values %j', response);
+          this._log.debug('listJobs values %j', response);
           return [response, input, output];
         },
       );
@@ -1662,7 +1662,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobs stream %j', request);
+    this._log.debug('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
@@ -1742,7 +1742,7 @@ export class JobControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listJobs iterate %j', request);
+    this._log.debug('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},

@@ -731,7 +731,7 @@ export class MobileDeviceSubmodelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMobileDeviceSubmodel request %j', request);
+    this._log.debug('getMobileDeviceSubmodel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IMobileDeviceSubmodel,
@@ -742,7 +742,7 @@ export class MobileDeviceSubmodelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMobileDeviceSubmodel response %j', response);
+          this._log.debug('getMobileDeviceSubmodel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class MobileDeviceSubmodelServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMobileDeviceSubmodel response %j', response);
+          this._log.debug('getMobileDeviceSubmodel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -920,11 +920,11 @@ export class MobileDeviceSubmodelServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMobileDeviceSubmodels values %j', values);
+          this._log.debug('listMobileDeviceSubmodels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMobileDeviceSubmodels request %j', request);
+    this._log.debug('listMobileDeviceSubmodels request %j', request);
     return this.innerApiCalls
       .listMobileDeviceSubmodels(request, options, wrappedCallback)
       ?.then(
@@ -933,7 +933,7 @@ export class MobileDeviceSubmodelServiceClient {
           protos.google.ads.admanager.v1.IListMobileDeviceSubmodelsRequest | null,
           protos.google.ads.admanager.v1.IListMobileDeviceSubmodelsResponse,
         ]) => {
-          this._log.info('listMobileDeviceSubmodels values %j', response);
+          this._log.debug('listMobileDeviceSubmodels values %j', response);
           return [response, input, output];
         },
       );
@@ -1011,7 +1011,7 @@ export class MobileDeviceSubmodelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMobileDeviceSubmodels stream %j', request);
+    this._log.debug('listMobileDeviceSubmodels stream %j', request);
     return this.descriptors.page.listMobileDeviceSubmodels.createStream(
       this.innerApiCalls.listMobileDeviceSubmodels as GaxCall,
       request,
@@ -1094,7 +1094,7 @@ export class MobileDeviceSubmodelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMobileDeviceSubmodels iterate %j', request);
+    this._log.debug('listMobileDeviceSubmodels iterate %j', request);
     return this.descriptors.page.listMobileDeviceSubmodels.asyncIterate(
       this.innerApiCalls['listMobileDeviceSubmodels'] as GaxCall,
       request as {},

@@ -482,7 +482,7 @@ export class ServiceControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('check request %j', request);
+    this._log.debug('check request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.servicecontrol.v2.ICheckResponse,
@@ -491,7 +491,7 @@ export class ServiceControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('check response %j', response);
+          this._log.debug('check response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -503,7 +503,7 @@ export class ServiceControllerClient {
           protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('check response %j', response);
+          this._log.debug('check response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -633,7 +633,7 @@ export class ServiceControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('report request %j', request);
+    this._log.debug('report request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.servicecontrol.v2.IReportResponse,
@@ -642,7 +642,7 @@ export class ServiceControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('report response %j', response);
+          this._log.debug('report response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class ServiceControllerClient {
           protos.google.api.servicecontrol.v2.IReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('report response %j', response);
+          this._log.debug('report response %j', response);
           return [response, options, rawResponse];
         },
       )

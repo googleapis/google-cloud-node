@@ -2661,7 +2661,7 @@ export class MemoryBankServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMemory request %j', request);
+    this._log.debug('getMemory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IMemory,
@@ -2672,7 +2672,7 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMemory response %j', response);
+          this._log.debug('getMemory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2684,7 +2684,7 @@ export class MemoryBankServiceClient {
           protos.google.cloud.aiplatform.v1beta1.IGetMemoryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getMemory response %j', response);
+          this._log.debug('getMemory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2812,7 +2812,7 @@ export class MemoryBankServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveMemories request %j', request);
+    this._log.debug('retrieveMemories request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IRetrieveMemoriesResponse,
@@ -2823,7 +2823,7 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveMemories response %j', response);
+          this._log.debug('retrieveMemories response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2838,7 +2838,7 @@ export class MemoryBankServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('retrieveMemories response %j', response);
+          this._log.debug('retrieveMemories response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2985,11 +2985,11 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMemory response %j', rawResponse);
+          this._log.debug('createMemory response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMemory request %j', request);
+    this._log.debug('createMemory request %j', request);
     return this.innerApiCalls
       .createMemory(request, options, wrappedCallback)
       ?.then(
@@ -3001,7 +3001,7 @@ export class MemoryBankServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createMemory response %j', rawResponse);
+          this._log.debug('createMemory response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3161,11 +3161,11 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMemory response %j', rawResponse);
+          this._log.debug('updateMemory response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateMemory request %j', request);
+    this._log.debug('updateMemory request %j', request);
     return this.innerApiCalls
       .updateMemory(request, options, wrappedCallback)
       ?.then(
@@ -3177,7 +3177,7 @@ export class MemoryBankServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateMemory response %j', rawResponse);
+          this._log.debug('updateMemory response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3332,11 +3332,11 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMemory response %j', rawResponse);
+          this._log.debug('deleteMemory response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteMemory request %j', request);
+    this._log.debug('deleteMemory request %j', request);
     return this.innerApiCalls
       .deleteMemory(request, options, wrappedCallback)
       ?.then(
@@ -3348,7 +3348,7 @@ export class MemoryBankServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteMemory response %j', rawResponse);
+          this._log.debug('deleteMemory response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3524,11 +3524,11 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('generateMemories response %j', rawResponse);
+          this._log.debug('generateMemories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('generateMemories request %j', request);
+    this._log.debug('generateMemories request %j', request);
     return this.innerApiCalls
       .generateMemories(request, options, wrappedCallback)
       ?.then(
@@ -3540,7 +3540,7 @@ export class MemoryBankServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateMemories response %j', rawResponse);
+          this._log.debug('generateMemories response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3695,11 +3695,11 @@ export class MemoryBankServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMemories values %j', values);
+          this._log.debug('listMemories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMemories request %j', request);
+    this._log.debug('listMemories request %j', request);
     return this.innerApiCalls
       .listMemories(request, options, wrappedCallback)
       ?.then(
@@ -3708,7 +3708,7 @@ export class MemoryBankServiceClient {
           protos.google.cloud.aiplatform.v1beta1.IListMemoriesRequest | null,
           protos.google.cloud.aiplatform.v1beta1.IListMemoriesResponse,
         ]) => {
-          this._log.info('listMemories values %j', response);
+          this._log.debug('listMemories values %j', response);
           return [response, input, output];
         },
       );
@@ -3760,7 +3760,7 @@ export class MemoryBankServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMemories stream %j', request);
+    this._log.debug('listMemories stream %j', request);
     return this.descriptors.page.listMemories.createStream(
       this.innerApiCalls.listMemories as GaxCall,
       request,
@@ -3817,7 +3817,7 @@ export class MemoryBankServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMemories iterate %j', request);
+    this._log.debug('listMemories iterate %j', request);
     return this.descriptors.page.listMemories.asyncIterate(
       this.innerApiCalls['listMemories'] as GaxCall,
       request as {},

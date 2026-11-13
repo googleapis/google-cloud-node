@@ -731,7 +731,7 @@ export class OperatingSystemVersionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOperatingSystemVersion request %j', request);
+    this._log.debug('getOperatingSystemVersion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IOperatingSystemVersion,
@@ -742,7 +742,7 @@ export class OperatingSystemVersionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOperatingSystemVersion response %j', response);
+          this._log.debug('getOperatingSystemVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +757,7 @@ export class OperatingSystemVersionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getOperatingSystemVersion response %j', response);
+          this._log.debug('getOperatingSystemVersion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -921,11 +921,11 @@ export class OperatingSystemVersionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listOperatingSystemVersions values %j', values);
+          this._log.debug('listOperatingSystemVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listOperatingSystemVersions request %j', request);
+    this._log.debug('listOperatingSystemVersions request %j', request);
     return this.innerApiCalls
       .listOperatingSystemVersions(request, options, wrappedCallback)
       ?.then(
@@ -934,7 +934,7 @@ export class OperatingSystemVersionServiceClient {
           protos.google.ads.admanager.v1.IListOperatingSystemVersionsRequest | null,
           protos.google.ads.admanager.v1.IListOperatingSystemVersionsResponse,
         ]) => {
-          this._log.info('listOperatingSystemVersions values %j', response);
+          this._log.debug('listOperatingSystemVersions values %j', response);
           return [response, input, output];
         },
       );
@@ -1013,7 +1013,7 @@ export class OperatingSystemVersionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOperatingSystemVersions stream %j', request);
+    this._log.debug('listOperatingSystemVersions stream %j', request);
     return this.descriptors.page.listOperatingSystemVersions.createStream(
       this.innerApiCalls.listOperatingSystemVersions as GaxCall,
       request,
@@ -1097,7 +1097,7 @@ export class OperatingSystemVersionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOperatingSystemVersions iterate %j', request);
+    this._log.debug('listOperatingSystemVersions iterate %j', request);
     return this.descriptors.page.listOperatingSystemVersions.asyncIterate(
       this.innerApiCalls['listOperatingSystemVersions'] as GaxCall,
       request as {},

@@ -494,7 +494,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataSource request %j', request);
+    this._log.debug('getDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.datasources.v1.IDataSource,
@@ -505,7 +505,7 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataSource response %j', response);
+          this._log.debug('getDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -520,7 +520,7 @@ export class DataSourcesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataSource response %j', response);
+          this._log.debug('getDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -641,7 +641,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDataSource request %j', request);
+    this._log.debug('createDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.datasources.v1.IDataSource,
@@ -652,7 +652,7 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDataSource response %j', response);
+          this._log.debug('createDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -667,7 +667,7 @@ export class DataSourcesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDataSource response %j', response);
+          this._log.debug('createDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -796,7 +796,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataSource request %j', request);
+    this._log.debug('updateDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.datasources.v1.IDataSource,
@@ -807,7 +807,7 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataSource response %j', response);
+          this._log.debug('updateDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -822,7 +822,7 @@ export class DataSourcesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataSource response %j', response);
+          this._log.debug('updateDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -940,7 +940,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDataSource request %j', request);
+    this._log.debug('deleteDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -951,7 +951,7 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDataSource response %j', response);
+          this._log.debug('deleteDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -966,7 +966,7 @@ export class DataSourcesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataSource response %j', response);
+          this._log.debug('deleteDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1088,7 +1088,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchDataSource request %j', request);
+    this._log.debug('fetchDataSource request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1099,7 +1099,7 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchDataSource response %j', response);
+          this._log.debug('fetchDataSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1114,7 +1114,7 @@ export class DataSourcesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchDataSource response %j', response);
+          this._log.debug('fetchDataSource response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1251,11 +1251,11 @@ export class DataSourcesServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataSources values %j', values);
+          this._log.debug('listDataSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataSources request %j', request);
+    this._log.debug('listDataSources request %j', request);
     return this.innerApiCalls
       .listDataSources(request, options, wrappedCallback)
       ?.then(
@@ -1264,7 +1264,7 @@ export class DataSourcesServiceClient {
           protos.google.shopping.merchant.datasources.v1.IListDataSourcesRequest | null,
           protos.google.shopping.merchant.datasources.v1.IListDataSourcesResponse,
         ]) => {
-          this._log.info('listDataSources values %j', response);
+          this._log.debug('listDataSources values %j', response);
           return [response, input, output];
         },
       );
@@ -1316,7 +1316,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSources stream %j', request);
+    this._log.debug('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
       request,
@@ -1373,7 +1373,7 @@ export class DataSourcesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataSources iterate %j', request);
+    this._log.debug('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
       request as {},

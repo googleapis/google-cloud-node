@@ -596,7 +596,7 @@ export class DataFusionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datafusion.v1.IInstance,
@@ -607,7 +607,7 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -619,7 +619,7 @@ export class DataFusionClient {
           protos.google.cloud.datafusion.v1.IGetInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -759,11 +759,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInstance request %j', request);
+    this._log.debug('createInstance request %j', request);
     return this.innerApiCalls
       .createInstance(request, options, wrappedCallback)
       ?.then(
@@ -775,7 +775,7 @@ export class DataFusionClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -929,11 +929,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInstance request %j', request);
+    this._log.debug('deleteInstance request %j', request);
     return this.innerApiCalls
       .deleteInstance(request, options, wrappedCallback)
       ?.then(
@@ -945,7 +945,7 @@ export class DataFusionClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1107,11 +1107,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateInstance request %j', request);
+    this._log.debug('updateInstance request %j', request);
     return this.innerApiCalls
       .updateInstance(request, options, wrappedCallback)
       ?.then(
@@ -1123,7 +1123,7 @@ export class DataFusionClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1278,11 +1278,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('restartInstance response %j', rawResponse);
+          this._log.debug('restartInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('restartInstance request %j', request);
+    this._log.debug('restartInstance request %j', request);
     return this.innerApiCalls
       .restartInstance(request, options, wrappedCallback)
       ?.then(
@@ -1294,7 +1294,7 @@ export class DataFusionClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('restartInstance response %j', rawResponse);
+          this._log.debug('restartInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1448,11 +1448,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAvailableVersions values %j', values);
+          this._log.debug('listAvailableVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAvailableVersions request %j', request);
+    this._log.debug('listAvailableVersions request %j', request);
     return this.innerApiCalls
       .listAvailableVersions(request, options, wrappedCallback)
       ?.then(
@@ -1461,7 +1461,7 @@ export class DataFusionClient {
           protos.google.cloud.datafusion.v1.IListAvailableVersionsRequest | null,
           protos.google.cloud.datafusion.v1.IListAvailableVersionsResponse,
         ]) => {
-          this._log.info('listAvailableVersions values %j', response);
+          this._log.debug('listAvailableVersions values %j', response);
           return [response, input, output];
         },
       );
@@ -1511,7 +1511,7 @@ export class DataFusionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAvailableVersions stream %j', request);
+    this._log.debug('listAvailableVersions stream %j', request);
     return this.descriptors.page.listAvailableVersions.createStream(
       this.innerApiCalls.listAvailableVersions as GaxCall,
       request,
@@ -1566,7 +1566,7 @@ export class DataFusionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAvailableVersions iterate %j', request);
+    this._log.debug('listAvailableVersions iterate %j', request);
     return this.descriptors.page.listAvailableVersions.asyncIterate(
       this.innerApiCalls['listAvailableVersions'] as GaxCall,
       request as {},
@@ -1688,11 +1688,11 @@ export class DataFusionClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInstances values %j', values);
+          this._log.debug('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInstances request %j', request);
+    this._log.debug('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
       ?.then(
@@ -1701,7 +1701,7 @@ export class DataFusionClient {
           protos.google.cloud.datafusion.v1.IListInstancesRequest | null,
           protos.google.cloud.datafusion.v1.IListInstancesResponse,
         ]) => {
-          this._log.info('listInstances values %j', response);
+          this._log.debug('listInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -1753,7 +1753,7 @@ export class DataFusionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances stream %j', request);
+    this._log.debug('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -1810,7 +1810,7 @@ export class DataFusionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances iterate %j', request);
+    this._log.debug('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},

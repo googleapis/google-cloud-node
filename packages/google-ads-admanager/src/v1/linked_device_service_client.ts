@@ -716,7 +716,7 @@ export class LinkedDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLinkedDevice request %j', request);
+    this._log.debug('getLinkedDevice request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ILinkedDevice,
@@ -727,7 +727,7 @@ export class LinkedDeviceServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLinkedDevice response %j', response);
+          this._log.debug('getLinkedDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -739,7 +739,7 @@ export class LinkedDeviceServiceClient {
           protos.google.ads.admanager.v1.IGetLinkedDeviceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getLinkedDevice response %j', response);
+          this._log.debug('getLinkedDevice response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -901,11 +901,11 @@ export class LinkedDeviceServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLinkedDevices values %j', values);
+          this._log.debug('listLinkedDevices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLinkedDevices request %j', request);
+    this._log.debug('listLinkedDevices request %j', request);
     return this.innerApiCalls
       .listLinkedDevices(request, options, wrappedCallback)
       ?.then(
@@ -914,7 +914,7 @@ export class LinkedDeviceServiceClient {
           protos.google.ads.admanager.v1.IListLinkedDevicesRequest | null,
           protos.google.ads.admanager.v1.IListLinkedDevicesResponse,
         ]) => {
-          this._log.info('listLinkedDevices values %j', response);
+          this._log.debug('listLinkedDevices values %j', response);
           return [response, input, output];
         },
       );
@@ -991,7 +991,7 @@ export class LinkedDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLinkedDevices stream %j', request);
+    this._log.debug('listLinkedDevices stream %j', request);
     return this.descriptors.page.listLinkedDevices.createStream(
       this.innerApiCalls.listLinkedDevices as GaxCall,
       request,
@@ -1073,7 +1073,7 @@ export class LinkedDeviceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLinkedDevices iterate %j', request);
+    this._log.debug('listLinkedDevices iterate %j', request);
     return this.descriptors.page.listLinkedDevices.asyncIterate(
       this.innerApiCalls['listLinkedDevices'] as GaxCall,
       request as {},

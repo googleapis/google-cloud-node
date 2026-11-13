@@ -511,7 +511,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMcpServer request %j', request);
+    this._log.debug('getMcpServer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apiregistry.v1.IMcpServer,
@@ -522,7 +522,7 @@ export class CloudApiRegistryClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMcpServer response %j', response);
+          this._log.debug('getMcpServer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -534,7 +534,7 @@ export class CloudApiRegistryClient {
           protos.google.cloud.apiregistry.v1.IGetMcpServerRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getMcpServer response %j', response);
+          this._log.debug('getMcpServer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -641,7 +641,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMcpTool request %j', request);
+    this._log.debug('getMcpTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apiregistry.v1.IMcpTool,
@@ -652,7 +652,7 @@ export class CloudApiRegistryClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMcpTool response %j', response);
+          this._log.debug('getMcpTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -664,7 +664,7 @@ export class CloudApiRegistryClient {
           protos.google.cloud.apiregistry.v1.IGetMcpToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getMcpTool response %j', response);
+          this._log.debug('getMcpTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -802,11 +802,11 @@ export class CloudApiRegistryClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMcpServers values %j', values);
+          this._log.debug('listMcpServers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMcpServers request %j', request);
+    this._log.debug('listMcpServers request %j', request);
     return this.innerApiCalls
       .listMcpServers(request, options, wrappedCallback)
       ?.then(
@@ -815,7 +815,7 @@ export class CloudApiRegistryClient {
           protos.google.cloud.apiregistry.v1.IListMcpServersRequest | null,
           protos.google.cloud.apiregistry.v1.IListMcpServersResponse,
         ]) => {
-          this._log.info('listMcpServers values %j', response);
+          this._log.debug('listMcpServers values %j', response);
           return [response, input, output];
         },
       );
@@ -868,7 +868,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMcpServers stream %j', request);
+    this._log.debug('listMcpServers stream %j', request);
     return this.descriptors.page.listMcpServers.createStream(
       this.innerApiCalls.listMcpServers as GaxCall,
       request,
@@ -926,7 +926,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMcpServers iterate %j', request);
+    this._log.debug('listMcpServers iterate %j', request);
     return this.descriptors.page.listMcpServers.asyncIterate(
       this.innerApiCalls['listMcpServers'] as GaxCall,
       request as {},
@@ -1049,11 +1049,11 @@ export class CloudApiRegistryClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMcpTools values %j', values);
+          this._log.debug('listMcpTools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMcpTools request %j', request);
+    this._log.debug('listMcpTools request %j', request);
     return this.innerApiCalls
       .listMcpTools(request, options, wrappedCallback)
       ?.then(
@@ -1062,7 +1062,7 @@ export class CloudApiRegistryClient {
           protos.google.cloud.apiregistry.v1.IListMcpToolsRequest | null,
           protos.google.cloud.apiregistry.v1.IListMcpToolsResponse,
         ]) => {
-          this._log.info('listMcpTools values %j', response);
+          this._log.debug('listMcpTools values %j', response);
           return [response, input, output];
         },
       );
@@ -1115,7 +1115,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMcpTools stream %j', request);
+    this._log.debug('listMcpTools stream %j', request);
     return this.descriptors.page.listMcpTools.createStream(
       this.innerApiCalls.listMcpTools as GaxCall,
       request,
@@ -1173,7 +1173,7 @@ export class CloudApiRegistryClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMcpTools iterate %j', request);
+    this._log.debug('listMcpTools iterate %j', request);
     return this.descriptors.page.listMcpTools.asyncIterate(
       this.innerApiCalls['listMcpTools'] as GaxCall,
       request as {},

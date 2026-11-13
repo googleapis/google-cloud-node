@@ -478,7 +478,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getModel request %j', request);
+    this._log.debug('getModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1.IModel,
@@ -489,7 +489,7 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getModel response %j', response);
+          this._log.debug('getModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -501,7 +501,7 @@ export class ModelServiceClient {
           protos.google.ai.generativelanguage.v1.IGetModelRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getModel response %j', response);
+          this._log.debug('getModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -635,11 +635,11 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listModels values %j', values);
+          this._log.debug('listModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listModels request %j', request);
+    this._log.debug('listModels request %j', request);
     return this.innerApiCalls
       .listModels(request, options, wrappedCallback)
       ?.then(
@@ -648,7 +648,7 @@ export class ModelServiceClient {
           protos.google.ai.generativelanguage.v1.IListModelsRequest | null,
           protos.google.ai.generativelanguage.v1.IListModelsResponse,
         ]) => {
-          this._log.info('listModels values %j', response);
+          this._log.debug('listModels values %j', response);
           return [response, input, output];
         },
       );
@@ -696,7 +696,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listModels stream %j', request);
+    this._log.debug('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -749,7 +749,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listModels iterate %j', request);
+    this._log.debug('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},

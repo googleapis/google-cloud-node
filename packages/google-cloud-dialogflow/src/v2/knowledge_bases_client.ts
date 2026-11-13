@@ -646,7 +646,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getKnowledgeBase request %j', request);
+    this._log.debug('getKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IKnowledgeBase,
@@ -657,7 +657,7 @@ export class KnowledgeBasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getKnowledgeBase response %j', response);
+          this._log.debug('getKnowledgeBase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -672,7 +672,7 @@ export class KnowledgeBasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getKnowledgeBase response %j', response);
+          this._log.debug('getKnowledgeBase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -786,7 +786,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createKnowledgeBase request %j', request);
+    this._log.debug('createKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IKnowledgeBase,
@@ -797,7 +797,7 @@ export class KnowledgeBasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createKnowledgeBase response %j', response);
+          this._log.debug('createKnowledgeBase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -812,7 +812,7 @@ export class KnowledgeBasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createKnowledgeBase response %j', response);
+          this._log.debug('createKnowledgeBase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -928,7 +928,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteKnowledgeBase request %j', request);
+    this._log.debug('deleteKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -939,7 +939,7 @@ export class KnowledgeBasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteKnowledgeBase response %j', response);
+          this._log.debug('deleteKnowledgeBase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -954,7 +954,7 @@ export class KnowledgeBasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteKnowledgeBase response %j', response);
+          this._log.debug('deleteKnowledgeBase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1069,7 +1069,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateKnowledgeBase request %j', request);
+    this._log.debug('updateKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IKnowledgeBase,
@@ -1080,7 +1080,7 @@ export class KnowledgeBasesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateKnowledgeBase response %j', response);
+          this._log.debug('updateKnowledgeBase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1095,7 +1095,7 @@ export class KnowledgeBasesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateKnowledgeBase response %j', response);
+          this._log.debug('updateKnowledgeBase response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1253,11 +1253,11 @@ export class KnowledgeBasesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listKnowledgeBases values %j', values);
+          this._log.debug('listKnowledgeBases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listKnowledgeBases request %j', request);
+    this._log.debug('listKnowledgeBases request %j', request);
     return this.innerApiCalls
       .listKnowledgeBases(request, options, wrappedCallback)
       ?.then(
@@ -1266,7 +1266,7 @@ export class KnowledgeBasesClient {
           protos.google.cloud.dialogflow.v2.IListKnowledgeBasesRequest | null,
           protos.google.cloud.dialogflow.v2.IListKnowledgeBasesResponse,
         ]) => {
-          this._log.info('listKnowledgeBases values %j', response);
+          this._log.debug('listKnowledgeBases values %j', response);
           return [response, input, output];
         },
       );
@@ -1339,7 +1339,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listKnowledgeBases stream %j', request);
+    this._log.debug('listKnowledgeBases stream %j', request);
     return this.descriptors.page.listKnowledgeBases.createStream(
       this.innerApiCalls.listKnowledgeBases as GaxCall,
       request,
@@ -1417,7 +1417,7 @@ export class KnowledgeBasesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listKnowledgeBases iterate %j', request);
+    this._log.debug('listKnowledgeBases iterate %j', request);
     return this.descriptors.page.listKnowledgeBases.asyncIterate(
       this.innerApiCalls['listKnowledgeBases'] as GaxCall,
       request as {},

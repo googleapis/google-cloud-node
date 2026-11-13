@@ -575,7 +575,7 @@ export class MerchantCenterAccountLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMerchantCenterAccountLinks request %j', request);
+    this._log.debug('listMerchantCenterAccountLinks request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
@@ -586,7 +586,7 @@ export class MerchantCenterAccountLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listMerchantCenterAccountLinks response %j',
             response,
           );
@@ -604,7 +604,7 @@ export class MerchantCenterAccountLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listMerchantCenterAccountLinks response %j',
             response,
           );
@@ -729,7 +729,7 @@ export class MerchantCenterAccountLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteMerchantCenterAccountLink request %j', request);
+    this._log.debug('deleteMerchantCenterAccountLink request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -740,7 +740,7 @@ export class MerchantCenterAccountLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'deleteMerchantCenterAccountLink response %j',
             response,
           );
@@ -758,7 +758,7 @@ export class MerchantCenterAccountLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteMerchantCenterAccountLink response %j',
             response,
           );
@@ -908,14 +908,14 @@ export class MerchantCenterAccountLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createMerchantCenterAccountLink response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMerchantCenterAccountLink request %j', request);
+    this._log.debug('createMerchantCenterAccountLink request %j', request);
     return this.innerApiCalls
       .createMerchantCenterAccountLink(request, options, wrappedCallback)
       ?.then(
@@ -927,7 +927,7 @@ export class MerchantCenterAccountLinkServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createMerchantCenterAccountLink response %j',
             rawResponse,
           );

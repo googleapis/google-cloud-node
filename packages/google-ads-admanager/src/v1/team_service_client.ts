@@ -720,7 +720,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTeam request %j', request);
+    this._log.debug('getTeam request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITeam,
@@ -729,7 +729,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTeam response %j', response);
+          this._log.debug('getTeam response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -741,7 +741,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IGetTeamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTeam response %j', response);
+          this._log.debug('getTeam response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTeam request %j', request);
+    this._log.debug('createTeam request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITeam,
@@ -856,7 +856,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTeam response %j', response);
+          this._log.debug('createTeam response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -868,7 +868,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.ICreateTeamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTeam response %j', response);
+          this._log.debug('createTeam response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -985,7 +985,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateTeams request %j', request);
+    this._log.debug('batchCreateTeams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateTeamsResponse,
@@ -996,7 +996,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateTeams response %j', response);
+          this._log.debug('batchCreateTeams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1008,7 +1008,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateTeamsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateTeams response %j', response);
+          this._log.debug('batchCreateTeams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1115,7 +1115,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTeam request %j', request);
+    this._log.debug('updateTeam request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.ITeam,
@@ -1124,7 +1124,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTeam response %j', response);
+          this._log.debug('updateTeam response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1136,7 +1136,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IUpdateTeamRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTeam response %j', response);
+          this._log.debug('updateTeam response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1253,7 +1253,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateTeams request %j', request);
+    this._log.debug('batchUpdateTeams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateTeamsResponse,
@@ -1264,7 +1264,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateTeams response %j', response);
+          this._log.debug('batchUpdateTeams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1276,7 +1276,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateTeamsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateTeams response %j', response);
+          this._log.debug('batchUpdateTeams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1390,7 +1390,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchActivateTeams request %j', request);
+    this._log.debug('batchActivateTeams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchActivateTeamsResponse,
@@ -1401,7 +1401,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchActivateTeams response %j', response);
+          this._log.debug('batchActivateTeams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1413,7 +1413,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IBatchActivateTeamsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchActivateTeams response %j', response);
+          this._log.debug('batchActivateTeams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1527,7 +1527,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeactivateTeams request %j', request);
+    this._log.debug('batchDeactivateTeams request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateTeamsResponse,
@@ -1538,7 +1538,7 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeactivateTeams response %j', response);
+          this._log.debug('batchDeactivateTeams response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1553,7 +1553,7 @@ export class TeamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeactivateTeams response %j', response);
+          this._log.debug('batchDeactivateTeams response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1708,11 +1708,11 @@ export class TeamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTeams values %j', values);
+          this._log.debug('listTeams values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTeams request %j', request);
+    this._log.debug('listTeams request %j', request);
     return this.innerApiCalls
       .listTeams(request, options, wrappedCallback)
       ?.then(
@@ -1721,7 +1721,7 @@ export class TeamServiceClient {
           protos.google.ads.admanager.v1.IListTeamsRequest | null,
           protos.google.ads.admanager.v1.IListTeamsResponse,
         ]) => {
-          this._log.info('listTeams values %j', response);
+          this._log.debug('listTeams values %j', response);
           return [response, input, output];
         },
       );
@@ -1801,7 +1801,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTeams stream %j', request);
+    this._log.debug('listTeams stream %j', request);
     return this.descriptors.page.listTeams.createStream(
       this.innerApiCalls.listTeams as GaxCall,
       request,
@@ -1886,7 +1886,7 @@ export class TeamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTeams iterate %j', request);
+    this._log.debug('listTeams iterate %j', request);
     return this.descriptors.page.listTeams.asyncIterate(
       this.innerApiCalls['listTeams'] as GaxCall,
       request as {},

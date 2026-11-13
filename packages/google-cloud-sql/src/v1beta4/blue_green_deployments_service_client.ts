@@ -514,7 +514,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBlueGreenDeployment request %j', request);
+    this._log.debug('createBlueGreenDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -525,7 +525,7 @@ export class BlueGreenDeploymentsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBlueGreenDeployment response %j', response);
+          this._log.debug('createBlueGreenDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -540,7 +540,7 @@ export class BlueGreenDeploymentsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createBlueGreenDeployment response %j', response);
+          this._log.debug('createBlueGreenDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -663,7 +663,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBlueGreenDeployment request %j', request);
+    this._log.debug('getBlueGreenDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IBlueGreenDeployment,
@@ -674,7 +674,7 @@ export class BlueGreenDeploymentsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBlueGreenDeployment response %j', response);
+          this._log.debug('getBlueGreenDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -689,7 +689,7 @@ export class BlueGreenDeploymentsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBlueGreenDeployment response %j', response);
+          this._log.debug('getBlueGreenDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -808,7 +808,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('switchoverBlueGreenDeployment request %j', request);
+    this._log.debug('switchoverBlueGreenDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -819,7 +819,10 @@ export class BlueGreenDeploymentsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('switchoverBlueGreenDeployment response %j', response);
+          this._log.debug(
+            'switchoverBlueGreenDeployment response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -834,7 +837,10 @@ export class BlueGreenDeploymentsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('switchoverBlueGreenDeployment response %j', response);
+          this._log.debug(
+            'switchoverBlueGreenDeployment response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -963,7 +969,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBlueGreenDeployment request %j', request);
+    this._log.debug('deleteBlueGreenDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -974,7 +980,7 @@ export class BlueGreenDeploymentsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBlueGreenDeployment response %j', response);
+          this._log.debug('deleteBlueGreenDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -989,7 +995,7 @@ export class BlueGreenDeploymentsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteBlueGreenDeployment response %j', response);
+          this._log.debug('deleteBlueGreenDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1124,11 +1130,11 @@ export class BlueGreenDeploymentsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBlueGreenDeployments values %j', values);
+          this._log.debug('listBlueGreenDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBlueGreenDeployments request %j', request);
+    this._log.debug('listBlueGreenDeployments request %j', request);
     return this.innerApiCalls
       .listBlueGreenDeployments(request, options, wrappedCallback)
       ?.then(
@@ -1137,7 +1143,7 @@ export class BlueGreenDeploymentsServiceClient {
           protos.google.cloud.sql.v1beta4.IListBlueGreenDeploymentsRequest | null,
           protos.google.cloud.sql.v1beta4.IListBlueGreenDeploymentsResponse,
         ]) => {
-          this._log.info('listBlueGreenDeployments values %j', response);
+          this._log.debug('listBlueGreenDeployments values %j', response);
           return [response, input, output];
         },
       );
@@ -1187,7 +1193,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBlueGreenDeployments stream %j', request);
+    this._log.debug('listBlueGreenDeployments stream %j', request);
     return this.descriptors.page.listBlueGreenDeployments.createStream(
       this.innerApiCalls.listBlueGreenDeployments as GaxCall,
       request,
@@ -1242,7 +1248,7 @@ export class BlueGreenDeploymentsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBlueGreenDeployments iterate %j', request);
+    this._log.debug('listBlueGreenDeployments iterate %j', request);
     return this.descriptors.page.listBlueGreenDeployments.asyncIterate(
       this.innerApiCalls['listBlueGreenDeployments'] as GaxCall,
       request as {},

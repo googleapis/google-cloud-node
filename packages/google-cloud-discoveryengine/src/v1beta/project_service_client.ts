@@ -830,11 +830,11 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('provisionProject response %j', rawResponse);
+          this._log.debug('provisionProject response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('provisionProject request %j', request);
+    this._log.debug('provisionProject request %j', request);
     return this.innerApiCalls
       .provisionProject(request, options, wrappedCallback)
       ?.then(
@@ -846,7 +846,7 @@ export class ProjectServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('provisionProject response %j', rawResponse);
+          this._log.debug('provisionProject response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

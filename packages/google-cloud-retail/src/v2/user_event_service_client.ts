@@ -566,7 +566,7 @@ export class UserEventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('writeUserEvent request %j', request);
+    this._log.debug('writeUserEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IUserEvent,
@@ -577,7 +577,7 @@ export class UserEventServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('writeUserEvent response %j', response);
+          this._log.debug('writeUserEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -589,7 +589,7 @@ export class UserEventServiceClient {
           protos.google.cloud.retail.v2.IWriteUserEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('writeUserEvent response %j', response);
+          this._log.debug('writeUserEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -721,7 +721,7 @@ export class UserEventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('collectUserEvent request %j', request);
+    this._log.debug('collectUserEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.IHttpBody,
@@ -732,7 +732,7 @@ export class UserEventServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('collectUserEvent response %j', response);
+          this._log.debug('collectUserEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -744,7 +744,7 @@ export class UserEventServiceClient {
           protos.google.cloud.retail.v2.ICollectUserEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('collectUserEvent response %j', response);
+          this._log.debug('collectUserEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -912,11 +912,11 @@ export class UserEventServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('purgeUserEvents response %j', rawResponse);
+          this._log.debug('purgeUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeUserEvents request %j', request);
+    this._log.debug('purgeUserEvents request %j', request);
     return this.innerApiCalls
       .purgeUserEvents(request, options, wrappedCallback)
       ?.then(
@@ -928,7 +928,7 @@ export class UserEventServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('purgeUserEvents response %j', rawResponse);
+          this._log.debug('purgeUserEvents response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1092,11 +1092,11 @@ export class UserEventServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importUserEvents response %j', rawResponse);
+          this._log.debug('importUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importUserEvents request %j', request);
+    this._log.debug('importUserEvents request %j', request);
     return this.innerApiCalls
       .importUserEvents(request, options, wrappedCallback)
       ?.then(
@@ -1108,7 +1108,7 @@ export class UserEventServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importUserEvents response %j', rawResponse);
+          this._log.debug('importUserEvents response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1274,11 +1274,11 @@ export class UserEventServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rejoinUserEvents response %j', rawResponse);
+          this._log.debug('rejoinUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rejoinUserEvents request %j', request);
+    this._log.debug('rejoinUserEvents request %j', request);
     return this.innerApiCalls
       .rejoinUserEvents(request, options, wrappedCallback)
       ?.then(
@@ -1290,7 +1290,7 @@ export class UserEventServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rejoinUserEvents response %j', rawResponse);
+          this._log.debug('rejoinUserEvents response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

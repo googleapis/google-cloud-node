@@ -526,7 +526,7 @@ export class KeyTrackingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProtectedResourcesSummary request %j', request);
+    this._log.debug('getProtectedResourcesSummary request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
@@ -537,7 +537,7 @@ export class KeyTrackingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProtectedResourcesSummary response %j', response);
+          this._log.debug('getProtectedResourcesSummary response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -552,7 +552,7 @@ export class KeyTrackingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProtectedResourcesSummary response %j', response);
+          this._log.debug('getProtectedResourcesSummary response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -717,11 +717,11 @@ export class KeyTrackingServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchProtectedResources values %j', values);
+          this._log.debug('searchProtectedResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchProtectedResources request %j', request);
+    this._log.debug('searchProtectedResources request %j', request);
     return this.innerApiCalls
       .searchProtectedResources(request, options, wrappedCallback)
       ?.then(
@@ -730,7 +730,7 @@ export class KeyTrackingServiceClient {
           protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
           protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
         ]) => {
-          this._log.info('searchProtectedResources values %j', response);
+          this._log.debug('searchProtectedResources values %j', response);
           return [response, input, output];
         },
       );
@@ -808,7 +808,7 @@ export class KeyTrackingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchProtectedResources stream %j', request);
+    this._log.debug('searchProtectedResources stream %j', request);
     return this.descriptors.page.searchProtectedResources.createStream(
       this.innerApiCalls.searchProtectedResources as GaxCall,
       request,
@@ -891,7 +891,7 @@ export class KeyTrackingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchProtectedResources iterate %j', request);
+    this._log.debug('searchProtectedResources iterate %j', request);
     return this.descriptors.page.searchProtectedResources.asyncIterate(
       this.innerApiCalls['searchProtectedResources'] as GaxCall,
       request as {},

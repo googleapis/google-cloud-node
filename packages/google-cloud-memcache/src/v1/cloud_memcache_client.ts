@@ -621,7 +621,7 @@ export class CloudMemcacheClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.memcache.v1.IInstance,
@@ -632,7 +632,7 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -644,7 +644,7 @@ export class CloudMemcacheClient {
           protos.google.cloud.memcache.v1.IGetInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -794,11 +794,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInstance request %j', request);
+    this._log.debug('createInstance request %j', request);
     return this.innerApiCalls
       .createInstance(request, options, wrappedCallback)
       ?.then(
@@ -810,7 +810,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -968,11 +968,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateInstance request %j', request);
+    this._log.debug('updateInstance request %j', request);
     return this.innerApiCalls
       .updateInstance(request, options, wrappedCallback)
       ?.then(
@@ -984,7 +984,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1145,11 +1145,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateParameters response %j', rawResponse);
+          this._log.debug('updateParameters response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateParameters request %j', request);
+    this._log.debug('updateParameters request %j', request);
     return this.innerApiCalls
       .updateParameters(request, options, wrappedCallback)
       ?.then(
@@ -1161,7 +1161,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateParameters response %j', rawResponse);
+          this._log.debug('updateParameters response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1316,11 +1316,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInstance request %j', request);
+    this._log.debug('deleteInstance request %j', request);
     return this.innerApiCalls
       .deleteInstance(request, options, wrappedCallback)
       ?.then(
@@ -1332,7 +1332,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1493,11 +1493,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('applyParameters response %j', rawResponse);
+          this._log.debug('applyParameters response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('applyParameters request %j', request);
+    this._log.debug('applyParameters request %j', request);
     return this.innerApiCalls
       .applyParameters(request, options, wrappedCallback)
       ?.then(
@@ -1509,7 +1509,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('applyParameters response %j', rawResponse);
+          this._log.debug('applyParameters response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1670,11 +1670,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          this._log.debug('rescheduleMaintenance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rescheduleMaintenance request %j', request);
+    this._log.debug('rescheduleMaintenance request %j', request);
     return this.innerApiCalls
       .rescheduleMaintenance(request, options, wrappedCallback)
       ?.then(
@@ -1686,7 +1686,7 @@ export class CloudMemcacheClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          this._log.debug('rescheduleMaintenance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1840,11 +1840,11 @@ export class CloudMemcacheClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInstances values %j', values);
+          this._log.debug('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInstances request %j', request);
+    this._log.debug('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
       ?.then(
@@ -1853,7 +1853,7 @@ export class CloudMemcacheClient {
           protos.google.cloud.memcache.v1.IListInstancesRequest | null,
           protos.google.cloud.memcache.v1.IListInstancesResponse,
         ]) => {
-          this._log.info('listInstances values %j', response);
+          this._log.debug('listInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -1910,7 +1910,7 @@ export class CloudMemcacheClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances stream %j', request);
+    this._log.debug('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -1972,7 +1972,7 @@ export class CloudMemcacheClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances iterate %j', request);
+    this._log.debug('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},

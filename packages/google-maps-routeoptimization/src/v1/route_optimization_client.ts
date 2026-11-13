@@ -729,7 +729,7 @@ export class RouteOptimizationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('optimizeTours request %j', request);
+    this._log.debug('optimizeTours request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
@@ -740,7 +740,7 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('optimizeTours response %j', response);
+          this._log.debug('optimizeTours response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -755,7 +755,7 @@ export class RouteOptimizationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('optimizeTours response %j', response);
+          this._log.debug('optimizeTours response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -921,11 +921,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchOptimizeTours response %j', rawResponse);
+          this._log.debug('batchOptimizeTours response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchOptimizeTours request %j', request);
+    this._log.debug('batchOptimizeTours request %j', request);
     return this.innerApiCalls
       .batchOptimizeTours(request, options, wrappedCallback)
       ?.then(
@@ -937,7 +937,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchOptimizeTours response %j', rawResponse);
+          this._log.debug('batchOptimizeTours response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1287,11 +1287,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('optimizeToursLongRunning response %j', rawResponse);
+          this._log.debug('optimizeToursLongRunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('optimizeToursLongRunning request %j', request);
+    this._log.debug('optimizeToursLongRunning request %j', request);
     return this.innerApiCalls
       .optimizeToursLongRunning(request, options, wrappedCallback)
       ?.then(
@@ -1303,7 +1303,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('optimizeToursLongRunning response %j', rawResponse);
+          this._log.debug('optimizeToursLongRunning response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1491,11 +1491,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('optimizeToursUri response %j', rawResponse);
+          this._log.debug('optimizeToursUri response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('optimizeToursUri request %j', request);
+    this._log.debug('optimizeToursUri request %j', request);
     return this.innerApiCalls
       .optimizeToursUri(request, options, wrappedCallback)
       ?.then(
@@ -1507,7 +1507,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('optimizeToursUri response %j', rawResponse);
+          this._log.debug('optimizeToursUri response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

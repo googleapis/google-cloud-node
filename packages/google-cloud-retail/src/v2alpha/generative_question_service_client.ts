@@ -561,7 +561,7 @@ export class GenerativeQuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'updateGenerativeQuestionsFeatureConfig request %j',
       request,
     );
@@ -575,7 +575,7 @@ export class GenerativeQuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateGenerativeQuestionsFeatureConfig response %j',
             response,
           );
@@ -593,7 +593,7 @@ export class GenerativeQuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateGenerativeQuestionsFeatureConfig response %j',
             response,
           );
@@ -715,7 +715,7 @@ export class GenerativeQuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGenerativeQuestionsFeatureConfig request %j', request);
+    this._log.debug('getGenerativeQuestionsFeatureConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IGenerativeQuestionsFeatureConfig,
@@ -726,7 +726,7 @@ export class GenerativeQuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getGenerativeQuestionsFeatureConfig response %j',
             response,
           );
@@ -744,7 +744,7 @@ export class GenerativeQuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getGenerativeQuestionsFeatureConfig response %j',
             response,
           );
@@ -865,7 +865,7 @@ export class GenerativeQuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGenerativeQuestionConfigs request %j', request);
+    this._log.debug('listGenerativeQuestionConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IListGenerativeQuestionConfigsResponse,
@@ -876,7 +876,10 @@ export class GenerativeQuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listGenerativeQuestionConfigs response %j', response);
+          this._log.debug(
+            'listGenerativeQuestionConfigs response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -891,7 +894,10 @@ export class GenerativeQuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('listGenerativeQuestionConfigs response %j', response);
+          this._log.debug(
+            'listGenerativeQuestionConfigs response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -1017,7 +1023,7 @@ export class GenerativeQuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateGenerativeQuestionConfig request %j', request);
+    this._log.debug('updateGenerativeQuestionConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IGenerativeQuestionConfig,
@@ -1028,7 +1034,7 @@ export class GenerativeQuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'updateGenerativeQuestionConfig response %j',
             response,
           );
@@ -1046,7 +1052,7 @@ export class GenerativeQuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateGenerativeQuestionConfig response %j',
             response,
           );
@@ -1169,7 +1175,7 @@ export class GenerativeQuestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateGenerativeQuestionConfigs request %j', request);
+    this._log.debug('batchUpdateGenerativeQuestionConfigs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IBatchUpdateGenerativeQuestionConfigsResponse,
@@ -1180,7 +1186,7 @@ export class GenerativeQuestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateGenerativeQuestionConfigs response %j',
             response,
           );
@@ -1198,7 +1204,7 @@ export class GenerativeQuestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchUpdateGenerativeQuestionConfigs response %j',
             response,
           );

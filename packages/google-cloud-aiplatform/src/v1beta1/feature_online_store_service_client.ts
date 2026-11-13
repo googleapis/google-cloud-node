@@ -744,7 +744,7 @@ export class FeatureOnlineStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchFeatureValues request %j', request);
+    this._log.debug('fetchFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IFetchFeatureValuesResponse,
@@ -755,7 +755,7 @@ export class FeatureOnlineStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchFeatureValues response %j', response);
+          this._log.debug('fetchFeatureValues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -770,7 +770,7 @@ export class FeatureOnlineStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchFeatureValues response %j', response);
+          this._log.debug('fetchFeatureValues response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -897,7 +897,7 @@ export class FeatureOnlineStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchNearestEntities request %j', request);
+    this._log.debug('searchNearestEntities request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.ISearchNearestEntitiesResponse,
@@ -908,7 +908,7 @@ export class FeatureOnlineStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('searchNearestEntities response %j', response);
+          this._log.debug('searchNearestEntities response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -923,7 +923,7 @@ export class FeatureOnlineStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('searchNearestEntities response %j', response);
+          this._log.debug('searchNearestEntities response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1042,7 +1042,7 @@ export class FeatureOnlineStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateFetchAccessToken request %j', request);
+    this._log.debug('generateFetchAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenResponse,
@@ -1053,7 +1053,7 @@ export class FeatureOnlineStoreServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateFetchAccessToken response %j', response);
+          this._log.debug('generateFetchAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1068,7 +1068,7 @@ export class FeatureOnlineStoreServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateFetchAccessToken response %j', response);
+          this._log.debug('generateFetchAccessToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1110,7 +1110,7 @@ export class FeatureOnlineStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingFetchFeatureValues stream %j', options);
+    this._log.debug('streamingFetchFeatureValues stream %j', options);
     return this.innerApiCalls.streamingFetchFeatureValues(null, options);
   }
 
@@ -1134,7 +1134,7 @@ export class FeatureOnlineStoreServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('featureViewDirectWrite stream %j', options);
+    this._log.debug('featureViewDirectWrite stream %j', options);
     return this.innerApiCalls.featureViewDirectWrite(null, options);
   }
 
