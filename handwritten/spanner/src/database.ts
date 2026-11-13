@@ -38,6 +38,7 @@ import {
 } from 'google-gax';
 import {Backup} from './backup';
 import {BatchTransaction, TransactionIdentifier} from './batch-transaction';
+import {batchWriteStream} from './batch-write-stream';
 import {
   GetSessionCallback,
   SessionFactory,
@@ -3594,6 +3595,13 @@ class Database extends common.GrpcServiceObject {
    * rows being added to the mutation's table. We recommend structuring your mutation groups to
    * be idempotent to avoid this issue.
    *
+   * If the stream is interrupted by a retryable error (such as `UNAVAILABLE`) or closes
+   * prematurely before all mutation groups have been acknowledged, the client automatically
+   * retries and resumes the request for only the remaining unacknowledged mutation groups.
+   * The `indexes` field in each emitted {@link protos.google.spanner.v1.BatchWriteResponse|BatchWriteResponse}
+   * always corresponds to the original positions in the caller's `mutationGroups` array,
+   * even across retries.
+   *
    * @method Spanner#batchWriteAtLeastOnce
    *
    * @param {MutationGroup[]} [mutationGroups] The group of mutations to be applied.
@@ -3649,50 +3657,212 @@ class Database extends common.GrpcServiceObject {
         transactionTag: options?.requestOptions?.transactionTag,
       },
       span => {
-        this.sessionFactory_.getSession((err, session) => {
+        let dataStream: Transform | null = null;
+        let spanEnded = false;
+        const endSpan = (err?: Error | null) => {
+          if (spanEnded) {
+            return;
+          }
+          spanEnded = true;
           if (err) {
-            proxyStream.destroy(err);
             setSpanError(span, err);
-            span.end();
+          }
+          span.end();
+        };
+
+        this._bindBatchWriteStreamToSpan(
+          proxyStream,
+          () => dataStream,
+          endSpan,
+        );
+
+        if (!mutationGroups || mutationGroups.length === 0) {
+          setImmediate(() => {
+            endSpan();
+            proxyStream.end();
+          });
+          return proxyStream as NodeJS.ReadableStream;
+        }
+
+        this.sessionFactory_.getSession((err, session) => {
+          if (proxyStream.destroyed) {
+            endSpan(err);
+            return;
+          }
+
+          if (err) {
+            endSpan(err);
+            proxyStream.destroy(err);
             return;
           }
 
           span.addEvent('Using Session', {'session.id': session?.id});
-          const gaxOpts = extend(true, {}, options?.gaxOptions);
-          const reqOpts: spannerClient.spanner.v1.IBatchWriteRequest = {
-            session: session!.formattedName_!,
-            mutationGroups: mutationGroups.map(mg => mg.proto()),
-            requestOptions: options?.requestOptions,
-            excludeTxnFromChangeStreams: options?.excludeTxnFromChangeStreams,
-          };
-          const headers = this._metadataWithRequestId(
-            this._nextNthRequest(),
-            1,
-            this.commonHeaders_,
+          dataStream = this._createBatchWriteStream(
+            session!,
+            mutationGroups,
+            options,
+            span,
           );
-          if (this._getSpanner().routeToLeaderEnabled) {
-            addLeaderAwareRoutingHeader(headers);
-          }
-          const dataStream = this.requestStream({
-            client: 'SpannerClient',
-            method: 'batchWrite',
-            reqOpts,
-            gaxOpts,
-            headers,
-          });
+
           dataStream
-            .once('error', err => {
-              setSpanError(span, err);
-              span.end();
-              proxyStream.destroy(err);
+            .once('error', streamErr => {
+              endSpan(streamErr);
+              proxyStream.destroy(streamErr);
             })
             .once('end', () => {
-              span.end();
+              endSpan();
             })
             .pipe(proxyStream);
         });
 
         return proxyStream as NodeJS.ReadableStream;
+      },
+    );
+  }
+
+  /**
+   * Attaches destruction and close listeners to the user-facing proxy stream
+   * to ensure the trace span ends and the active gRPC stream is destroyed on early abort.
+   */
+  private _bindBatchWriteStreamToSpan(
+    proxyStream: Transform,
+    getDataStream: () => Transform | null,
+    endSpan: (err?: Error | null) => void,
+  ): void {
+    const originalProxyDestroy = proxyStream._destroy;
+    proxyStream._destroy = function (
+      destroyErr: Error | null,
+      callback: (error?: Error | null) => void,
+    ) {
+      endSpan(destroyErr);
+      const dataStream = getDataStream();
+      if (dataStream && !dataStream.destroyed) {
+        dataStream.destroy(destroyErr || undefined);
+      }
+      if (typeof originalProxyDestroy === 'function') {
+        originalProxyDestroy.call(this, destroyErr, callback);
+      } else {
+        callback(destroyErr);
+      }
+    };
+
+    proxyStream.once('close', () => {
+      endSpan();
+      const dataStream = getDataStream();
+      if (dataStream && !dataStream.destroyed) {
+        dataStream.destroy();
+      }
+    });
+  }
+
+  /**
+   * Issues an individual BatchWrite attempt RPC with appropriate timeout,
+   * request headers, and metrics tracing.
+   */
+  private _createBatchWriteAttempt(
+    session: Session,
+    currentMutationGroups: protos.google.spanner.v1.BatchWriteRequest.IMutationGroup[],
+    remainingTimeoutMs: number,
+    attempt: number,
+    nthRequest: number,
+    baseGaxOpts: CallOptions,
+    hasExplicitTimeout: boolean,
+    options?: BatchWriteOptions,
+    metricsTracer?: RequestConfig['metricsTracer'],
+  ): Readable {
+    const reqOpts: spannerClient.spanner.v1.IBatchWriteRequest = {
+      session: session.formattedName_!,
+      mutationGroups: currentMutationGroups,
+      requestOptions: options?.requestOptions,
+      excludeTxnFromChangeStreams: options?.excludeTxnFromChangeStreams,
+    };
+    const headers = this._metadataWithRequestId(
+      nthRequest,
+      attempt,
+      this.commonHeaders_,
+    );
+    if (this._getSpanner()?.routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(headers);
+    }
+    const attemptGaxOpts =
+      (hasExplicitTimeout || attempt > 1) && Number.isFinite(remainingTimeoutMs)
+        ? Object.assign({}, baseGaxOpts, {timeout: remainingTimeoutMs})
+        : baseGaxOpts;
+    const requestConfig: RequestConfig = {
+      client: 'SpannerClient',
+      method: 'batchWrite',
+      reqOpts,
+      gaxOpts: attemptGaxOpts,
+      headers,
+      metricsTracer,
+    };
+    return this.requestStream(requestConfig);
+  }
+
+  /**
+   * Creates the resilient BatchWrite stream for an active session, coordinating
+   * retries across attempts and recording final metrics upon termination.
+   */
+  private _createBatchWriteStream(
+    session: Session,
+    mutationGroups: MutationGroup[],
+    options: BatchWriteOptions | undefined,
+    span: Span,
+  ): Transform {
+    const baseGaxOpts = extend(true, {}, options?.gaxOptions, {
+      retryRequestOptions: {
+        noResponseRetries: 0,
+        retries: 0,
+      },
+    });
+    delete baseGaxOpts.retry;
+    const hasExplicitTimeout =
+      options?.gaxOptions?.timeout !== undefined ||
+      options?.gaxOptions?.retry?.backoffSettings?.totalTimeoutMillis !==
+        undefined;
+    const mutationGroupProtos = (mutationGroups ?? []).map(mg => mg.proto());
+    const nthRequest = this._nextNthRequest();
+    let attempt = 0;
+
+    const initialHeaders = this._metadataWithRequestId(
+      nthRequest,
+      1,
+      this.commonHeaders_,
+    );
+    const metricsTracer = this._initMetricsTracer({
+      client: 'SpannerClient',
+      method: 'batchWrite',
+      reqOpts: {session: session.formattedName_!},
+      headers: initialHeaders,
+    });
+
+    return batchWriteStream(
+      mutationGroupProtos,
+      (currentMutationGroups, remainingTimeoutMs) => {
+        attempt++;
+        if (attempt > 1) {
+          span.addEvent('Resuming BatchWrite stream', {
+            attempt,
+            remaining_mutation_groups: currentMutationGroups.length,
+          });
+        }
+        return this._createBatchWriteAttempt(
+          session,
+          currentMutationGroups,
+          remainingTimeoutMs,
+          attempt,
+          nthRequest,
+          baseGaxOpts,
+          hasExplicitTimeout,
+          options,
+          metricsTracer,
+        );
+      },
+      {
+        gaxOptions: options?.gaxOptions,
+        onTerminate: finalStatus => {
+          metricsTracer?.recordOperationCompletion(finalStatus);
+        },
       },
     );
   }
@@ -4105,6 +4275,18 @@ class Database extends common.GrpcServiceObject {
    */
   private _getSpanner(): Spanner {
     return this.instance.parent as Spanner;
+  }
+
+  private _initMetricsTracer(
+    config: RequestConfig,
+  ): RequestConfig['metricsTracer'] {
+    const spanner = this._getSpanner();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (typeof (spanner as any)?._initMetricsTracer === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (spanner as any)._initMetricsTracer(config);
+    }
+    return null;
   }
 }
 

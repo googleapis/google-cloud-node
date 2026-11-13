@@ -31,7 +31,7 @@ import Any = google.protobuf.Any;
 import QueryMode = google.spanner.v1.ExecuteSqlRequest.QueryMode;
 import NullValue = google.protobuf.NullValue;
 import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
-import {getProtoPath, getRetryInfo} from '../../src/protos';
+import {getProtoPath, getRetryInfo, RETRY_INFO_BIN} from '../../src/protos';
 
 const RetryInfo = getRetryInfo();
 
@@ -57,7 +57,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const spannerProtoDescriptor = protoDescriptor['google']['spanner']['v1'];
-const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 
 /**
@@ -577,6 +576,7 @@ export class MockSpanner {
           null,
           protobuf.BatchCreateSessionsResponse.create({session: sessions}),
         );
+        return;
       })
       .catch(err => {
         callback(err);
@@ -597,6 +597,7 @@ export class MockSpanner {
             call.request!.session?.multiplexed ?? false,
           ),
         );
+        return;
       })
       .catch(err => {
         callback(err);
@@ -616,6 +617,7 @@ export class MockSpanner {
         } else {
           callback(MockSpanner.createSessionNotFoundError(call.request!.name));
         }
+        return;
       })
       .catch(err => {
         callback(err);
@@ -640,6 +642,7 @@ export class MockSpanner {
             }),
           }),
         );
+        return;
       })
       .catch(err => {
         callback(err);
@@ -801,6 +804,7 @@ export class MockSpanner {
           );
         }
         call.end();
+        return;
       })
       .catch(err => {
         call.sendMetadata(new Metadata());
@@ -992,6 +996,7 @@ export class MockSpanner {
             status: statementStatus,
           }),
         );
+        return;
       })
       .catch(err => {
         callback(err);
@@ -1123,6 +1128,7 @@ export class MockSpanner {
           );
         }
         call.end();
+        return;
       })
       .catch(err => {
         call.sendMetadata(new Metadata());
@@ -1151,6 +1157,7 @@ export class MockSpanner {
         } else {
           callback(null, res);
         }
+        return;
       })
       .catch(err => {
         callback(err);
@@ -1212,6 +1219,7 @@ export class MockSpanner {
             MockSpanner.createSessionNotFoundError(call.request!.session),
           );
         }
+        return;
       })
       .catch(err => {
         callback(err);
@@ -1256,6 +1264,7 @@ export class MockSpanner {
           partitions: [{partitionToken: Buffer.from('mock-token')}],
         });
         callback(null, response);
+        return;
       })
       .catch(err => callback(err));
   }
@@ -1271,6 +1280,7 @@ export class MockSpanner {
           partitions: [{partitionToken: Buffer.from('mock-token')}],
         });
         callback(null, response);
+        return;
       })
       .catch(err => callback(err));
   }
@@ -1284,13 +1294,37 @@ export class MockSpanner {
     this.pushRequest(call.request, call.metadata);
     this.simulateExecutionTime(this.batchWrite.name)
       .then(() => {
-        const response = protobuf.BatchWriteResponse.create({
-          commitTimestamp: now(),
-        });
-        call.write(response);
+        const groupCount = call.request?.mutationGroups?.length ?? 0;
+        let metadataSent = false;
+        const ensureMetadataSent = () => {
+          if (!metadataSent) {
+            call.sendMetadata(new Metadata());
+            metadataSent = true;
+          }
+        };
+        for (let index = 0; index < groupCount; index++) {
+          const streamErr = this.shiftStreamError(this.batchWrite.name, index);
+          if (streamErr) {
+            ensureMetadataSent();
+            call.emit('error', streamErr);
+            break;
+          }
+          ensureMetadataSent();
+          const response = protobuf.BatchWriteResponse.create({
+            indexes: [index],
+            status: Status.create({code: grpc.status.OK}),
+            commitTimestamp: now(),
+          });
+          call.write(response);
+        }
         call.end();
+        return;
       })
-      .catch(err => call.destroy(err));
+      .catch(err => {
+        call.sendMetadata(new Metadata());
+        call.emit('error', err);
+        call.end();
+      });
   }
 
   private _updateTransaction(
