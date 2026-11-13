@@ -235,6 +235,8 @@ export abstract class MessageQueue {
 
     // If we will go over maxMessages or MAX_BATCH_BYTES by adding this
     // message, flush first. (maxMilliseconds is handled by timers.)
+    // Push before awaiting flush(), or concurrent add() calls overfill a batch.
+    let flushed: Promise<void> | undefined;
     if (
       this._requests.length + 1 >= maxMessages! ||
       this.bytes + size >= MAX_BATCH_BYTES
@@ -243,7 +245,7 @@ export abstract class MessageQueue {
         this._requests.length + 1 >= maxMessages!
           ? 'going over count'
           : 'going over size';
-      await this.flush(reason);
+      flushed = this.flush(reason);
     }
 
     // Add the message to the current batch.
@@ -269,7 +271,7 @@ export abstract class MessageQueue {
       );
     }
 
-    return responsePromise.promise;
+    await Promise.all([flushed, responsePromise.promise]);
   }
 
   /**
