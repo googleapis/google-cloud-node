@@ -250,10 +250,10 @@ export function zuluToDateObj(zuluTime: string) {
  * @param date The date to be converted to Logging nanos and seconds format
  */
 export function toNanosAndSecondsObj(date: Date) {
-  const seconds = date.getTime() / 1000;
-  const secondsRounded = Math.floor(seconds);
+  const ms = date.getTime();
+  const seconds = Math.floor(ms / 1000);
   return {
-    seconds: secondsRounded,
-    nanos: Math.floor((seconds - secondsRounded) * 1e9),
+    seconds,
+    nanos: (ms - seconds * 1000) * 1e6,
   };
 }
