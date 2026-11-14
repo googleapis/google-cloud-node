@@ -1325,6 +1325,41 @@ describe('grpc-fallback', () => {
       assert.strictEqual(streamErrors.length, 1);
       assert.strictEqual(streamErrors[0], callbackErrors[0]);
     });
+
+    it('should tear down the response body without a secondary error when the parser errors mid-stream', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const reported: string[] = [];
+      const received: {}[] = [];
+      const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
+        reported.push(`callback:${err?.message}`),
+      ) as StreamArrayParser;
+      const firstChunk = new Promise<void>(resolve => {
+        parser.once('data', () => resolve());
+      });
+      const bodyClosed = new Promise<void>(resolve => {
+        body.once('close', () => setImmediate(resolve));
+      });
+      parser.on('data', d => received.push(d));
+      parser.on('error', err =>
+        reported.push(`error:${(err as Error).message}`),
+      );
+
+      await firstChunk;
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+
+      body.push(',{invalid}');
+      await bodyClosed;
+
+      assert.strictEqual(body.destroyed, true);
+      assert.strictEqual(
+        reported.length,
+        1,
+        `expected a single parser error, got: ${reported.join(', ')}`,
+      );
+      assert(reported[0].startsWith('error:'));
+    });
   });
 
   describe('transport error translation', () => {
