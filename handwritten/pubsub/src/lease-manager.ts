@@ -375,7 +375,7 @@ export class LeaseManager extends EventEmitter {
     const deadline = this._subscriber.ackDeadline * 1000;
     const latency = this._subscriber.modAckLatency;
 
-    return (deadline * 0.9 - latency) * jitter;
+    return Math.max(0, deadline * 0.9 - latency) * jitter;
   }
   /**
    * Schedules an deadline extension for all messages.
