@@ -4244,6 +4244,7 @@ export class ProductServiceClient {
         this._terminated = true;
         stub.close();
         void this.operationsClient.close();
+        return;
       });
     }
     return Promise.resolve();
