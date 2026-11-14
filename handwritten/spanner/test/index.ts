@@ -2799,7 +2799,10 @@ describe('Spanner', () => {
         assert.ifError(err);
         const stream = requestFn();
         stream.on('error', (error: Error & {requestID?: string}) => {
-          assert.strictEqual(error.message, 'Stream failed');
+          assert.strictEqual(
+            error.message,
+            'Stream failed (x-goog-spanner-request-id: req-12345)',
+          );
           assert.strictEqual(error.requestID, 'req-12345');
           done();
         });
