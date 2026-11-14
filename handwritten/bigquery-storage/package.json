@@ -36,7 +36,7 @@
     "google-auth-library": "^11.3.1",
     "google-gax": "^6.12.1",
     "long": "^5.2.0",
-    "protobufjs": "^7.5.5"
+    "protobufjs": "^7.6.5"
   },
   "peerDependencies": {
     "protobufjs": "~7.5.5"
