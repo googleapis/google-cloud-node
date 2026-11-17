@@ -754,6 +754,153 @@ describe('adhoc-logging', () => {
         ],
       );
     });
+
+    it('lazily initializes filters in isEnabled() and makeLogger() before log() runs', () => {
+      const savedNodeDebug = process.env.NODE_DEBUG;
+      const stdoutLines: string[] = [];
+      const stderrMessages: string[] = [];
+      sinon.stub(console, 'log').callsFake((_fmt: string, payload: string) => {
+        stdoutLines.push(payload);
+      });
+      sinon
+        .stub(console, 'error')
+        .callsFake((_fmt: unknown, ...params: unknown[]) => {
+          stderrMessages.push(String(params[3] ?? ''));
+        });
+
+      try {
+        // 1. isEnabled() before log() on NodeBackend, StructuredBackend, and DebugBackend.
+        process.env[al.env.nodeEnables] = 'spanner';
+
+        const nodeBackend = al.getNodeBackend() as al.DebugLogBackendBase;
+        assert.strictEqual(nodeBackend.isEnabled('storage'), false);
+        assert.strictEqual(nodeBackend.isEnabled('spanner'), true);
+
+        const structuredBackend =
+          al.getStructuredBackend() as al.DebugLogBackendBase;
+        assert.strictEqual(structuredBackend.isEnabled('storage'), false);
+        assert.strictEqual(structuredBackend.isEnabled('spanner'), true);
+        structuredBackend.setFilters(['storage']);
+        assert.strictEqual(structuredBackend.isEnabled('storage'), true);
+        assert.strictEqual(structuredBackend.isEnabled('spanner'), false);
+
+        const debugBackend = al.getDebugBackend(
+          () => () => {},
+        ) as al.DebugLogBackendBase;
+        assert.strictEqual(debugBackend.isEnabled('storage'), false);
+        assert.strictEqual(debugBackend.isEnabled('spanner'), true);
+
+        // 2. Late GOOGLE_SDK_NODE_LOGGING assignment after construction, checked via isEnabled() before log().
+        delete process.env[al.env.nodeEnables];
+        const lateBackend = al.getStructuredBackend() as al.DebugLogBackendBase;
+        process.env[al.env.nodeEnables] = 'spanner';
+        assert.strictEqual(lateBackend.isEnabled('storage'), false);
+        assert.strictEqual(lateBackend.isEnabled('spanner'), true);
+
+        // 3. Direct makeLogger() calls before log() on NodeBackend and StructuredBackend.
+        const freshNode = al.getNodeBackend() as al.DebugLogBackendBase;
+        freshNode.makeLogger('storage')(
+          {severity: al.LogSeverity.INFO},
+          'dropped node log',
+        );
+        freshNode.makeLogger('spanner')(
+          {severity: al.LogSeverity.INFO},
+          'kept node log',
+        );
+        assert.deepStrictEqual(stderrMessages, ['kept node log']);
+
+        const freshStructured =
+          al.getStructuredBackend() as al.DebugLogBackendBase;
+        freshStructured.makeLogger('storage')(
+          {severity: al.LogSeverity.WARNING},
+          'dropped structured log',
+        );
+        freshStructured.makeLogger('spanner')(
+          {severity: al.LogSeverity.WARNING},
+          'kept structured log',
+        );
+        assert.strictEqual(stdoutLines.length, 1);
+        assert.deepStrictEqual(JSON.parse(stdoutLines[0]), {
+          severity: 'WARNING',
+          message: 'kept structured log',
+        });
+
+        // 4. Direct makeLogger() on StructuredBackend wrapping NodeBackend before log().
+        stderrMessages.length = 0;
+        const wrappedStructured = al.getStructuredBackend(
+          al.getNodeBackend(),
+        ) as al.DebugLogBackendBase;
+        wrappedStructured.makeLogger('storage')(
+          {severity: al.LogSeverity.INFO},
+          'dropped wrapped log',
+        );
+        wrappedStructured.makeLogger('spanner')(
+          {severity: al.LogSeverity.INFO},
+          'kept wrapped log',
+        );
+        assert.strictEqual(stderrMessages.length, 1);
+        assert.deepStrictEqual(JSON.parse(stderrMessages[0]), {
+          severity: 'INFO',
+          message: 'kept wrapped log',
+        });
+      } finally {
+        if (savedNodeDebug === undefined) {
+          delete process.env.NODE_DEBUG;
+        } else {
+          process.env.NODE_DEBUG = savedNodeDebug;
+        }
+      }
+    });
+
+    it('guards non-plain-object fields against index spreading and trims projectId env vars', () => {
+      const untypedCall = logger as unknown as (...args: unknown[]) => void;
+
+      // 1. Primitive, array, and null `fields` from untyped JS callers do not spread indices ("0", "1", ...).
+      untypedCall('msg');
+      untypedCall(['arr0', 'arr1'], 'with array fields');
+      untypedCall(null, 'with null fields');
+
+      // 2. Whitespace-only GOOGLE_CLOUD_PROJECT does not produce `projects/   /traces/...`.
+      const traceId = '4bf92f3577b34da6a3ce929d0e0e4736';
+      process.env.GOOGLE_CLOUD_PROJECT = '   ';
+      logger({trace_id: traceId}, 'whitespace project only');
+
+      // 3. Surrounding whitespace on GOOGLE_CLOUD_PROJECT is trimmed, and whitespace-only falls back to trimmed GCLOUD_PROJECT.
+      process.env.GOOGLE_CLOUD_PROJECT = '  trimmed-cloud-project  ';
+      logger({trace_id: traceId}, 'padded GOOGLE_CLOUD_PROJECT');
+
+      process.env.GOOGLE_CLOUD_PROJECT = '   ';
+      process.env.GCLOUD_PROJECT = '  trimmed-gcloud-fallback  ';
+      logger({trace_id: traceId}, 'fallback to trimmed GCLOUD_PROJECT');
+
+      const parsed = sink.logs.map(entry =>
+        JSON.parse(entry.args[0] as string),
+      );
+      assert.deepStrictEqual(parsed, [
+        {severity: 'INFO', message: ''},
+        {severity: 'INFO', message: 'with array fields'},
+        {severity: 'INFO', message: 'with null fields'},
+        {
+          severity: 'INFO',
+          message: 'whitespace project only',
+          'logging.googleapis.com/trace': traceId,
+        },
+        {
+          severity: 'INFO',
+          message: 'padded GOOGLE_CLOUD_PROJECT',
+          'logging.googleapis.com/trace': `projects/trimmed-cloud-project/traces/${traceId}`,
+        },
+        {
+          severity: 'INFO',
+          message: 'fallback to trimmed GCLOUD_PROJECT',
+          'logging.googleapis.com/trace': `projects/trimmed-gcloud-fallback/traces/${traceId}`,
+        },
+      ]);
+      for (const entry of parsed) {
+        assert.strictEqual('0' in entry, false);
+        assert.strictEqual('1' in entry, false);
+      }
+    });
   });
 
   describe('sub-logs', () => {

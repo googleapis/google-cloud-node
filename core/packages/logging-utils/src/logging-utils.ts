@@ -143,6 +143,11 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
   }
 
   isEnabled(namespace: string): boolean {
+    if (!this.filtersSet) {
+      this.refreshFiltersFromEnv();
+      this.setFilters();
+      this.filtersSet = true;
+    }
     return this.enabledRegexp.test(namespace);
   }
 
@@ -203,7 +208,7 @@ export abstract class DebugLogBackendBase implements DebugLogBackend {
    * Provides a callback for the subclass to hook if it needs to do something
    * specific with `this.filters`.
    */
-  abstract setFilters(): void;
+  abstract setFilters(filters?: string[]): void;
 
   log(namespace: string, fields: LogFields, ...args: unknown[]): void {
     try {
@@ -328,6 +333,8 @@ class DebugBackend extends DebugLogBackendBase {
       this.filters = [...filters];
       this.filtersSet = true;
     }
+    this.enabledRegexp = this.compileFilters();
+    this.cached.clear();
     const existingFilters = process.env['NODE_DEBUG'] ?? '';
     process.env['NODE_DEBUG'] = `${existingFilters}${
       existingFilters ? ',' : ''
@@ -387,6 +394,10 @@ class StructuredBackend extends DebugLogBackendBase {
       }
     }
     return (fields: LogFields, ...args: unknown[]) => {
+      const normalizedFields: LogFields =
+        typeof fields === 'object' && fields !== null && !Array.isArray(fields)
+          ? fields
+          : {};
       const {
         severity: rawSeverity,
         other,
@@ -396,7 +407,7 @@ class StructuredBackend extends DebugLogBackendBase {
         telemetryTraceId,
         telemetrySpanId,
         ...topLevelFields
-      } = fields || {};
+      } = normalizedFields;
       const severity = rawSeverity ?? LogSeverity.INFO;
       const message = util.format(...args);
 
@@ -416,7 +427,8 @@ class StructuredBackend extends DebugLogBackendBase {
         mergedAttributes['logging.googleapis.com/trace'] === undefined
       ) {
         const projectId =
-          process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT;
+          process.env.GOOGLE_CLOUD_PROJECT?.trim() ||
+          process.env.GCLOUD_PROJECT?.trim();
         mergedAttributes['logging.googleapis.com/trace'] =
           !resolvedTrace.startsWith('projects/') && projectId
             ? `projects/${projectId}/traces/${resolvedTrace}`
@@ -448,7 +460,7 @@ class StructuredBackend extends DebugLogBackendBase {
 
       const jsonString = JSON.stringify(json);
       if (debugLogger) {
-        debugLogger(fields, jsonString);
+        debugLogger(normalizedFields, jsonString);
       } else {
         console.log('%s', jsonString);
       }
