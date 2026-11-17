@@ -431,7 +431,9 @@ export function setErrorProperty<T extends object>(
       propKey
     ];
     (descriptors as Record<PropertyKey, PropertyDescriptor>)[propKey] =
-      'value' in desc ? {...desc, writable: true, configurable: true} : desc;
+      'value' in desc
+        ? {...desc, writable: true, configurable: true}
+        : {...desc, configurable: true};
   }
   descriptors[key] = {
     value,
@@ -487,7 +489,6 @@ export function augmentError<T>(err: T): T {
   // or a GaxiosError wrapping the native fetch TypeError as its cause).
   const wrappedFetchErr =
     errObj instanceof Error &&
-    errObj.message === 'fetch failed' &&
     errObj.cause instanceof TypeError &&
     errObj.cause.message === 'fetch failed'
       ? (errObj.cause as TypeError & {cause?: unknown})

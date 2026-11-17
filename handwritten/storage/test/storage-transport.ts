@@ -803,5 +803,67 @@ describe('Storage Transport', () => {
         },
       );
     });
+
+    it('should append CPU starvation hint when wrapper modifies outer error message', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const undiciCause = Object.assign(new Error('Connect Timeout Error'), {
+        code: 'UND_ERR_CONNECT_TIMEOUT',
+      });
+      const fetchError = createFetchError(undiciCause);
+      const gaxiosError = new GaxiosError(
+        'The operation was aborted due to timeout',
+        {
+          headers: new Headers(),
+          url: new URL('https://storage.googleapis.com/test'),
+        },
+        undefined,
+        fetchError,
+      );
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.strictEqual(err.cause, fetchError);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(
+            err.message,
+            `The operation was aborted due to timeout${cpuStarvationHint}`,
+          );
+          return true;
+        },
+      );
+    });
+
+    it('should mark accessor descriptors as configurable when cloning a frozen error', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const baseError = new Error();
+      Object.defineProperty(baseError, 'message', {
+        get: () => 'Original getter message',
+        enumerable: false,
+        configurable: true,
+      });
+      Object.defineProperty(baseError, 'status', {
+        value: 401,
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      });
+      const frozenAccessorError = Object.freeze(baseError);
+      requestStub.rejects(frozenAccessorError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {code?: number; status?: number}) => {
+          assert.strictEqual(err.code, 401);
+          assert.strictEqual(err.status, 401);
+          assert.strictEqual(
+            err.message,
+            `Original getter message${tokenExpirationHint}`,
+          );
+          return true;
+        },
+      );
+    });
   });
 });
