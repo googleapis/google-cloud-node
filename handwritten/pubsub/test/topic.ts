@@ -18,7 +18,8 @@ import {CallOptions, ServiceError} from 'google-gax';
 import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {ExistsCallback, RequestCallback, RequestConfig} from '../src/pubsub';
 import {
   CreateSubscriptionOptions,

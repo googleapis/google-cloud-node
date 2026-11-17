@@ -18,7 +18,8 @@ import * as extend from 'extend';
 import {CallOptions} from 'google-gax';
 import snakeCase = require('lodash.snakecase');
 
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 
 import {IAM} from './iam';
 import {FlowControlOptions} from './lease-manager';
@@ -381,6 +382,7 @@ export class Subscription extends EventEmitter {
   close(): Promise<void>;
   close(callback: SubscriptionCloseCallback): void;
   close(callback?: SubscriptionCloseCallback): void | Promise<void> {
+    // eslint-disable-next-line promise/catch-or-return
     this._subscriber.close().then(() => callback!(), callback);
   }
 
