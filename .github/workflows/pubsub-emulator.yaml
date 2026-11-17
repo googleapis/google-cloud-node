@@ -1,0 +1,82 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'handwritten/pubsub/**'
+      - '!handwritten/pubsub/CHANGELOG.md'
+      - '!handwritten/pubsub/package.json'
+      - '.github/workflows/pubsub-emulator.yaml'
+  pull_request:
+    paths:
+      - 'handwritten/pubsub/**'
+      - '!handwritten/pubsub/CHANGELOG.md'
+      - '!handwritten/pubsub/package.json'
+      - '.github/workflows/pubsub-emulator.yaml'
+
+name: pubsub-emulator
+
+jobs:
+  emulator-system-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - run: node --version
+      - uses: ./.github/actions/pnpm-lockfile-check
+      - run: pnpm --filter "...{handwritten/pubsub}" run --if-present compile
+      - name: Start Cloud Pub/Sub Emulator
+        run: |
+          docker run -d --name pubsub-emulator -p 8085:8085 \
+            gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators \
+            gcloud beta emulators pubsub start \
+            --project=emulator-test-project \
+            --host-port=0.0.0.0:8085
+          for i in $(seq 1 60); do
+            if nc -z 127.0.0.1 8085; then
+              echo "Pub/Sub emulator ready."
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs pubsub-emulator || true
+          echo "Timed out waiting for Pub/Sub emulator."
+          exit 1
+      - name: Run Pub/Sub system tests against emulator
+        working-directory: handwritten/pubsub
+        env:
+          PUBSUB_EMULATOR_HOST: localhost:8085
+          GCLOUD_PROJECT: emulator-test-project
+        run: |
+          node ../../bin/run-test.cjs --timeout 120000 --exit \
+            build/system-test/pubsub.js \
+            build/system-test/avro-samples.test.js \
+            build/system-test/batch-flow-samples.test.js \
+            build/system-test/hedging.test.js \
+            build/system-test/otel-samples.test.js \
+            build/system-test/protobuf-samples.test.js
+      - name: Stop Cloud Pub/Sub Emulator
+        if: always()
+        run: docker rm -f pubsub-emulator || true

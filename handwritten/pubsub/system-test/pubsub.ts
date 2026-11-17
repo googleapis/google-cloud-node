@@ -634,7 +634,11 @@ describe('pubsub', () => {
       assert.deepStrictEqual(data, message.data);
     });
 
-    it('should detach subscriptions', async () => {
+    it('should detach subscriptions', async function () {
+      if (process.env.PUBSUB_EMULATOR_HOST) {
+        // Publisher/DetachSubscription is unimplemented in the Pub/Sub emulator.
+        this.skip();
+      }
       const pop = await subPop('detach', 1);
       const subscription = pop.subs[0];
       const [before] = await subscription.detached();
@@ -723,6 +727,13 @@ describe('pubsub', () => {
   });
 
   describe('IAM', () => {
+    before(function () {
+      if (process.env.PUBSUB_EMULATOR_HOST) {
+        // IAM policy methods are disabled by default in the Pub/Sub emulator.
+        this.skip();
+      }
+    });
+
     it('should get a policy', async () => {
       const testTopic = await generateTopic('get-pol');
       const topic = testTopic.topic;
