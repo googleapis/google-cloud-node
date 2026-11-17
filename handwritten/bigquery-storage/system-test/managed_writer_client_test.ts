@@ -1748,10 +1748,7 @@ describe('managedwriter.WriterClient', () => {
       }
     });
 
-    it.skip('send large request should return an error', async () => {
-      // Service limits changes are in flux, so this we disabled this test as is prone to flakes
-      //
-      // TODO: This will be tracked in bug https://b.corp.google.com/issues/485577546
+    it('send large request should return an error', async () => {
       bqWriteClient.initialize().catch(err => {
         throw err;
       });
@@ -1769,13 +1766,18 @@ describe('managedwriter.WriterClient', () => {
           destinationTable: parent,
         });
 
+        let connectionErrCode: gax.GoogleError['code'];
+        connection.onConnectionError((err: gax.GoogleError) => {
+          connectionErrCode = err.code;
+        });
+
         const writer = new Writer({
           connection,
           protoDescriptor,
         });
 
         const row = {
-          customer_name: 'Lovelace',
+          customer_name: 'Lovelace'.repeat(128),
           row_num: 1,
         };
         const rowMessage = CustomerRecord.create(row);
@@ -1783,8 +1785,9 @@ describe('managedwriter.WriterClient', () => {
           CustomerRecord.encode(rowMessage).finish();
 
         const rows: Uint8Array[] = [];
-        const targetSize = 11 * 1024 * 1024; // 11 MB;
-        const numRows = targetSize / serializedRowMessage.length;
+        // BigQuery Storage Write API limits a single AppendRowsRequest to 20 MiB.
+        const targetSize = 21 * 1024 * 1024; // 21 MiB
+        const numRows = Math.ceil(targetSize / serializedRowMessage.length);
         for (let i = 0; i < numRows; i++) {
           rows.push(serializedRowMessage);
         }
@@ -1795,9 +1798,15 @@ describe('managedwriter.WriterClient', () => {
           0,
         );
 
-        let res = await badPw.getResult();
-        assert.notEqual(res.error, null);
-        assert.equal(res.error?.message?.includes('request too large'), true);
+        await assert.rejects(badPw.getResult(), (err: unknown) => {
+          assert(err instanceof Error);
+          assert.strictEqual(
+            (err as gax.GoogleError).code,
+            gax.Status.INVALID_ARGUMENT,
+          );
+          return true;
+        });
+        assert.strictEqual(connectionErrCode, gax.Status.INVALID_ARGUMENT);
 
         const goodPw = writer.appendRows(
           {
@@ -1805,7 +1814,7 @@ describe('managedwriter.WriterClient', () => {
           },
           0,
         );
-        res = await goodPw.getResult();
+        const res = await goodPw.getResult();
         assert.equal(res.appendResult?.offset?.value, '0');
 
         writer.close();
