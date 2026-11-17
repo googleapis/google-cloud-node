@@ -686,6 +686,7 @@ describe('Storage Transport', () => {
           url: new URL('https://storage.googleapis.com/test'),
         },
         {
+          bodyUsed: true,
           config: {
             headers: new Headers(),
             url: new URL('https://storage.googleapis.com/test'),
@@ -739,6 +740,65 @@ describe('Storage Transport', () => {
           assert.strictEqual(err.message, `fetch failed${cpuStarvationHint}`);
           assert.strictEqual(err.cause, cause);
           assert.strictEqual(err.stack, originalStack);
+          return true;
+        },
+      );
+    });
+
+    it('should safely decorate and augment a frozen GaxiosError with response error metadata', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = new Error('Underlying auth failure');
+      const apiErrors = [{reason: 'authError', message: 'Invalid Credentials'}];
+      const frozenGaxiosError = Object.freeze(
+        new GaxiosError(
+          'Request failed with status code 401',
+          {
+            headers: new Headers(),
+            url: new URL('https://storage.googleapis.com/test'),
+          },
+          {
+            bodyUsed: true,
+            config: {
+              headers: new Headers(),
+              url: new URL('https://storage.googleapis.com/test'),
+            },
+            data: {
+              error: {
+                code: 401,
+                message: 'Invalid Credentials',
+                errors: apiErrors,
+              },
+            },
+            headers: new Headers(),
+            status: 401,
+            statusText: 'Unauthorized',
+          } as unknown as GaxiosResponse,
+          cause,
+        ),
+      );
+      const originalStack = frozenGaxiosError.stack;
+      requestStub.rejects(frozenGaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (
+          err: Error & {
+            code?: number;
+            status?: number;
+            errors?: unknown[];
+            cause?: unknown;
+          },
+        ) => {
+          assert.strictEqual(err.cause, cause);
+          assert.strictEqual(err.code, 401);
+          assert.strictEqual(err.status, 401);
+          assert.deepStrictEqual(err.errors, apiErrors);
+          assert.strictEqual(err.stack, originalStack);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(
+            err.message,
+            `Invalid Credentials${tokenExpirationHint}`,
+          );
           return true;
         },
       );

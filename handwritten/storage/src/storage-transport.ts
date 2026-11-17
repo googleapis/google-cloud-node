@@ -25,7 +25,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
-import {augmentError} from './util.js';
+import {augmentError, setErrorProperty} from './util.js';
 import {
   IdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
@@ -280,25 +280,28 @@ export class StorageTransport {
       if (err && typeof err === 'object') {
         const resolvedCode = err.response?.status || err.status || err.code;
         if (resolvedCode !== undefined) {
-          err.code = resolvedCode;
+          err = setErrorProperty(err, 'code', resolvedCode);
         }
         if (err.response?.data?.error) {
           const apiError = err.response.data.error;
           if (typeof apiError === 'string') {
-            err.message = apiError;
+            err = setErrorProperty(err, 'message', apiError, false);
           } else if (apiError && typeof apiError === 'object') {
             if (typeof apiError.message === 'string') {
-              err.message = apiError.message;
+              err = setErrorProperty(err, 'message', apiError.message, false);
             } else if (
               apiError.message &&
               typeof apiError.message === 'object'
             ) {
-              err.message =
+              const extractedMessage =
                 apiError.message.error?.message ||
                 apiError.message.message ||
                 JSON.stringify(apiError.message);
+              err = setErrorProperty(err, 'message', extractedMessage, false);
             }
-            if (apiError.errors) err.errors = apiError.errors;
+            if (apiError.errors) {
+              err = setErrorProperty(err, 'errors', apiError.errors);
+            }
           }
         }
       }

@@ -387,42 +387,56 @@ const FETCH_TIMEOUT_HINT =
 const INVALID_CREDENTIALS_HINT =
   ' (Hint: If this occurs intermittently under heavy load, check your container for CPU starvation which can cause tokens to expire in flight.)';
 
-function appendErrorHint<T extends Error>(err: T, hint: string): T {
-  const currentMessage = typeof err.message === 'string' ? err.message : '';
-  if (currentMessage.includes(hint)) {
-    return err;
-  }
-  const newMessage = `${currentMessage}${hint}`;
-
+/**
+ * Safely assigns a property on an error object in place when writable/configurable,
+ * or reconstructs a descriptor-preserving clone (retaining prototype, stack, and cause)
+ * if the error object is frozen or non-configurable.
+ *
+ * @internal
+ */
+export function setErrorProperty<T extends object>(
+  err: T,
+  key: string,
+  value: unknown,
+  defaultEnumerable = true,
+): T {
+  const record = err as Record<string, unknown>;
   try {
-    err.message = newMessage;
-    if (err.message === newMessage) {
+    record[key] = value;
+    if (Object.is(record[key], value)) {
       return err;
     }
   } catch {
-    // Property may be read-only or getter-only; fall through.
+    // Property may be read-only or object may be frozen; fall through.
   }
 
   try {
-    const desc = Object.getOwnPropertyDescriptor(err, 'message');
-    Object.defineProperty(err, 'message', {
-      value: newMessage,
+    const desc = Object.getOwnPropertyDescriptor(err, key);
+    Object.defineProperty(err, key, {
+      value,
       writable: true,
-      enumerable: desc?.enumerable ?? false,
+      enumerable: desc?.enumerable ?? defaultEnumerable,
       configurable: true,
     });
     return err;
   } catch {
-    // Object may be frozen or message may be non-configurable; reconstruct below.
+    // Object may be frozen or property may be non-configurable; reconstruct below.
   }
 
-  const originalStack = err.stack;
-  const descriptors: Record<string, PropertyDescriptor> =
-    Object.getOwnPropertyDescriptors(err);
-  descriptors.message = {
-    value: newMessage,
+  const originalStack = (err as {stack?: string}).stack;
+  const rawDescriptors = Object.getOwnPropertyDescriptors(err);
+  const descriptors: PropertyDescriptorMap = {};
+  for (const propKey of Reflect.ownKeys(rawDescriptors)) {
+    const desc = (rawDescriptors as Record<PropertyKey, PropertyDescriptor>)[
+      propKey
+    ];
+    (descriptors as Record<PropertyKey, PropertyDescriptor>)[propKey] =
+      'value' in desc ? {...desc, writable: true, configurable: true} : desc;
+  }
+  descriptors[key] = {
+    value,
     writable: true,
-    enumerable: descriptors.message?.enumerable ?? false,
+    enumerable: rawDescriptors[key]?.enumerable ?? defaultEnumerable,
     configurable: true,
   };
   if (originalStack !== undefined) {
@@ -442,6 +456,14 @@ function appendErrorHint<T extends Error>(err: T, hint: string): T {
     };
   }
   return Object.create(Object.getPrototypeOf(err), descriptors) as T;
+}
+
+function appendErrorHint<T extends Error>(err: T, hint: string): T {
+  const currentMessage = typeof err.message === 'string' ? err.message : '';
+  if (currentMessage.includes(hint)) {
+    return err;
+  }
+  return setErrorProperty(err, 'message', `${currentMessage}${hint}`, false);
 }
 
 /**
