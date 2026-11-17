@@ -31,7 +31,10 @@ import * as crypto from 'crypto';
 import {toArray} from '../src/util';
 import {
   BigQueryInt,
-  BigQueryDate,
+  BigQueryDate as BigQueryDateType,
+  BigQueryDatetime as BigQueryDatetimeType,
+  BigQueryTime as BigQueryTimeType,
+  BigQueryTimestamp as BigQueryTimestampType,
   IntegerTypeCastValue,
   IntegerTypeCastOptions,
   Dataset,
@@ -159,6 +162,10 @@ describe('BigQuery', () => {
   let BigQueryCached: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let BigQuery: any;
+  let BigQueryDate: typeof BigQueryDateType;
+  let BigQueryDatetime: typeof BigQueryDatetimeType;
+  let BigQueryTime: typeof BigQueryTimeType;
+  let BigQueryTimestamp: typeof BigQueryTimestampType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bq: any;
 
@@ -166,7 +173,7 @@ describe('BigQuery', () => {
 
   before(() => {
     delete process.env.BIGQUERY_EMULATOR_HOST;
-    BigQuery = proxyquire('../src/bigquery', {
+    const bigqueryModule = proxyquire('../src/bigquery', {
       crypto: fakeCrypto,
       './dataset': {
         Dataset: FakeDataset,
@@ -183,7 +190,12 @@ describe('BigQuery', () => {
       },
       '@google-cloud/paginator': fakePaginator,
       '@google-cloud/promisify': fakePfy,
-    }).BigQuery;
+    });
+    BigQuery = bigqueryModule.BigQuery;
+    BigQueryDate = bigqueryModule.BigQueryDate;
+    BigQueryDatetime = bigqueryModule.BigQueryDatetime;
+    BigQueryTime = bigqueryModule.BigQueryTime;
+    BigQueryTimestamp = bigqueryModule.BigQueryTimestamp;
     BigQueryCached = Object.assign({}, BigQuery);
   });
 
@@ -800,15 +812,14 @@ describe('BigQuery', () => {
       day: 1,
     };
 
-    // tslint:disable-next-line ban
-    it.skip('should expose static and instance constructors', () => {
-      const staticD = BigQuery.date();
+    it('should expose static and instance constructors', () => {
+      const staticD = BigQuery.date(INPUT_OBJ);
       assert(staticD instanceof BigQueryDate);
-      assert(staticD instanceof bq.date);
+      assert.strictEqual(staticD.value, INPUT_STRING);
 
-      const instanceD = bq.date();
+      const instanceD = bq.date(INPUT_OBJ);
       assert(instanceD instanceof BigQueryDate);
-      assert(instanceD instanceof bq.date);
+      assert.strictEqual(instanceD.value, INPUT_STRING);
     });
 
     it('should have the correct constructor name', () => {
@@ -842,15 +853,14 @@ describe('BigQuery', () => {
 
     const EXPECTED_VALUE = '2017-1-1 14:2:38.883388';
 
-    // tslint:disable-next-line ban
-    it.skip('should expose static and instance constructors', () => {
+    it('should expose static and instance constructors', () => {
       const staticDt = BigQuery.datetime(INPUT_OBJ);
-      assert(staticDt instanceof BigQuery.datetime);
-      assert(staticDt instanceof bq.datetime);
+      assert(staticDt instanceof BigQueryDatetime);
+      assert.strictEqual(staticDt.value, EXPECTED_VALUE);
 
       const instanceDt = bq.datetime(INPUT_OBJ);
-      assert(instanceDt instanceof BigQuery.datetime);
-      assert(instanceDt instanceof bq.datetime);
+      assert(instanceDt instanceof BigQueryDatetime);
+      assert.strictEqual(instanceDt.value, EXPECTED_VALUE);
     });
 
     it('should have the correct constructor name', () => {
@@ -888,15 +898,14 @@ describe('BigQuery', () => {
       fractional: 883388,
     };
 
-    // tslint:disable-next-line ban
-    it.skip('should expose static and instance constructors', () => {
-      const staticT = BigQuery.time();
-      assert(staticT instanceof BigQuery.time);
-      assert(staticT instanceof bq.time);
+    it('should expose static and instance constructors', () => {
+      const staticT = BigQuery.time(INPUT_OBJ);
+      assert(staticT instanceof BigQueryTime);
+      assert.strictEqual(staticT.value, INPUT_STRING);
 
-      const instanceT = bq.time();
-      assert(instanceT instanceof BigQuery.time);
-      assert(instanceT instanceof bq.time);
+      const instanceT = bq.time(INPUT_OBJ);
+      assert(instanceT instanceof BigQueryTime);
+      assert.strictEqual(instanceT.value, INPUT_STRING);
     });
 
     it('should have the correct constructor name', () => {
@@ -944,15 +953,14 @@ describe('BigQuery', () => {
     const EXPECTED_VALUE_NANOS_ZERO_MICROS =
       INPUT_PRECISE_DATE_NANOS_ZERO_MICROS.toISOString();
 
-    // tslint:disable-next-line ban
-    it.skip('should expose static and instance constructors', () => {
+    it('should expose static and instance constructors', () => {
       const staticT = BigQuery.timestamp(INPUT_DATE);
-      assert(staticT instanceof BigQuery.timestamp);
-      assert(staticT instanceof bq.timestamp);
+      assert(staticT instanceof BigQueryTimestamp);
+      assert.strictEqual(staticT.value, EXPECTED_VALUE);
 
       const instanceT = bq.timestamp(INPUT_DATE);
-      assert(instanceT instanceof BigQuery.timestamp);
-      assert(instanceT instanceof bq.timestamp);
+      assert(instanceT instanceof BigQueryTimestamp);
+      assert.strictEqual(instanceT.value, EXPECTED_VALUE);
     });
 
     it('should have the correct constructor name', () => {
