@@ -31,6 +31,7 @@ import * as crypto from 'crypto';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
+import {augmentError} from './util.js';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
@@ -1135,7 +1136,7 @@ export class Upload extends Writable {
   // the response body.
   private async responseHandler(resp: GaxiosResponse) {
     if (resp.data.error) {
-      this.destroy(resp.data.error);
+      this.destroy(augmentError(resp.data.error));
       return;
     }
 
@@ -1370,13 +1371,17 @@ export class Upload extends Writable {
       }
     }
 
-    const res = await this.authClient.request<{error?: object}>(
-      combinedReqOpts,
-    );
-    if (res.data && res.data.error) {
-      throw res.data.error;
+    try {
+      const res = await this.authClient.request<{error?: object}>(
+        combinedReqOpts,
+      );
+      if (res.data && res.data.error) {
+        throw res.data.error;
+      }
+      return res;
+    } catch (e) {
+      throw augmentError(e);
     }
-    return res;
   }
 
   private async makeRequestStream(reqOpts: GaxiosOptions) {
@@ -1413,7 +1418,9 @@ export class Upload extends Writable {
       }
     }
 
-    const res = await this.authClient.request(combinedReqOpts);
+    const res = await this.authClient.request(combinedReqOpts).catch(e => {
+      throw augmentError(e);
+    });
     const successfulRequest = await this.onResponse(res);
     this.removeListener('error', errorCallback);
 

@@ -25,6 +25,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
+import {augmentError} from './util.js';
 import {
   IdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
@@ -273,11 +274,14 @@ export class StorageTransport {
       hasEtagInBody
     );
 
-    // Helper to enrich GaxiosError objects with legacy ApiError properties
+    // Helper to enrich GaxiosError objects with legacy ApiError properties and troubleshooting hints
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const decorateError = (err: any) => {
       if (err && typeof err === 'object') {
-        err.code = err.response?.status || err.status || err.code;
+        const resolvedCode = err.response?.status || err.status || err.code;
+        if (resolvedCode !== undefined) {
+          err.code = resolvedCode;
+        }
         if (err.response?.data?.error) {
           const apiError = err.response.data.error;
           if (typeof apiError === 'string') {
@@ -298,7 +302,7 @@ export class StorageTransport {
           }
         }
       }
-      return err;
+      return augmentError(err);
     };
 
     const isRetryDisabled =
