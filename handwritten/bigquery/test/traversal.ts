@@ -14,14 +14,17 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {ApiError} from '@google-cloud/common';
-import {BigQuery} from '../src';
+import {
+  ApiError,
+  BodyResponseCallback,
+  DecorateRequestOptions,
+} from '@google-cloud/common';
+import {BigQuery, BigQueryOptions} from '../src';
 
-describe.skip('BigQuery URI path handling and traversal', () => {
+describe('BigQuery URI path handling and traversal', () => {
   const fakeAuthClient = {
     getCredentials: async () => ({}),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    authorizeRequest: async (reqOpts: any) => reqOpts,
+    authorizeRequest: async (reqOpts: DecorateRequestOptions) => reqOpts,
     getProjectId: async () => 'test-project',
   };
 
@@ -61,7 +64,8 @@ describe.skip('BigQuery URI path handling and traversal', () => {
       expectedError: /Invalid value \.\. for path segment/,
     },
     {
-      description: 'should reject paths containing dot-dot segment (foo/../bar)',
+      description:
+        'should reject paths containing dot-dot segment (foo/../bar)',
       datasetId: 'foo/../bar',
       expectedError: /Invalid value \.\. for path segment/,
     },
@@ -94,8 +98,7 @@ describe.skip('BigQuery URI path handling and traversal', () => {
       description:
         'should preserve literal percent-encoded sequences in colon-separated segments without decoding twice',
       datasetId: 'project:item%2520name',
-      expectedError:
-        /Not found: Dataset.*datasets\/project:item%2520name/,
+      expectedError: /Not found: Dataset.*datasets\/project:item%2520name/,
     },
   ];
 
@@ -103,24 +106,24 @@ describe.skip('BigQuery URI path handling and traversal', () => {
     it(description, async () => {
       const bigquery = new BigQuery({
         projectId: 'test-project',
-        authClient: fakeAuthClient as any,
+        authClient: fakeAuthClient as unknown as BigQueryOptions['authClient'],
       });
 
       // Mock makeAuthenticatedRequest to return a 404 error containing the requested URI
-      (bigquery as any).makeAuthenticatedRequest = (
-        reqOpts: any,
-        callback?: any,
+      bigquery.makeAuthenticatedRequest = ((
+        reqOpts: DecorateRequestOptions,
+        callback?: BodyResponseCallback,
       ) => {
         const notFoundError = new ApiError({
           message: `Not found: Dataset ${reqOpts.uri}`,
           code: 404,
-          response: {} as any,
+          response: {} as NonNullable<ApiError['response']>,
         });
         if (typeof callback === 'function') {
-          callback(notFoundError, null, null);
+          callback(notFoundError, null);
         }
         return undefined;
-      };
+      }) as BigQuery['makeAuthenticatedRequest'];
 
       const dataset = bigquery.dataset(datasetId);
 
