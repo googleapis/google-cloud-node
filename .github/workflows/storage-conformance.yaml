@@ -7,9 +7,13 @@ on:
       - main
     paths:
       - 'handwritten/storage/**'
+      - '!handwritten/storage/CHANGELOG.md'
+      - '!handwritten/storage/package.json'
   pull_request:
     paths:
       - 'handwritten/storage/**'
+      - '!handwritten/storage/CHANGELOG.md'
+      - '!handwritten/storage/package.json'
 name: storage-conformance
 jobs:
   conformance-test:
