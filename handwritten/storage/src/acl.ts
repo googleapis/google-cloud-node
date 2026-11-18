@@ -674,13 +674,15 @@ class Acl extends AclRoleAccessorMethods {
   /**
    * @typedef {array} GetAclResponse
    * @property {object|object[]} 0 Single or array of Acl Objects.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback GetAclCallback
    * @param {?Error} err Request error, if any.
    * @param {object|object[]} acl Single or array of Acl Objects.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Get access controls on a {@link Bucket} or {@link File}. If
@@ -699,7 +701,8 @@ class Acl extends AclRoleAccessorMethods {
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {GetAclCallback} [callback] Callback function.
-   * @returns {Promise<GetAclResponse>}
+   * @returns {Promise<GetAclResponse>} Resolves with `[acl, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```

@@ -29,7 +29,8 @@ export interface GetNotificationMetadataOptions {
 /**
  * @typedef {array} GetNotificationMetadataResponse
  * @property {object} 0 The notification metadata.
- * @property {object} 1 The full API response.
+ * @property {object} 1 The full HTTP API response, with payload properties
+ *     nested under `apiResponse.data`.
  */
 export type GetNotificationMetadataResponse = [ResponseBody, unknown];
 
@@ -37,7 +38,8 @@ export type GetNotificationMetadataResponse = [ResponseBody, unknown];
  * @callback GetNotificationMetadataCallback
  * @param {?Error} err Request error, if any.
  * @param {object} files The notification metadata.
- * @param {object} apiResponse The full API response.
+ * @param {object} apiResponse The full HTTP API response, with payload
+ *     properties nested under `apiResponse.data`.
  */
 export interface GetNotificationMetadataCallback {
   (err: Error | null, metadata?: ResponseBody, apiResponse?: unknown): void;
@@ -79,7 +81,8 @@ export interface GetNotificationCallback {
 /**
  * @callback DeleteNotificationCallback
  * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
+ * @param {object} apiResponse The full HTTP API response, with payload
+ *     properties nested under `apiResponse.data`.
  */
 export interface DeleteNotificationCallback {
   (err: Error | null, apiResponse?: unknown): void;
@@ -153,7 +156,8 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        * @param {CreateNotificationRequest} [options] Metadata to set for
        *     the notification.
        * @param {CreateNotificationCallback} [callback] Callback function.
-       * @returns {Promise<CreateNotificationResponse>}
+       * @returns {Promise<CreateNotificationResponse>} Resolves with `[notification, apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        * @throws {Error} If a valid topic is not provided.
        *
        * @example
@@ -182,7 +186,8 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
 
       /**
        * @typedef {array} DeleteNotificationResponse
-       * @property {object} 0 The full API response.
+       * @property {object} 0 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * Permanently deletes a notification subscription.
@@ -193,7 +198,8 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {DeleteNotificationCallback} [callback] Callback function.
-       * @returns {Promise<DeleteNotificationResponse>}
+       * @returns {Promise<DeleteNotificationResponse>} Resolves with `[apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -271,7 +277,8 @@ class Notification extends ServiceObject<Notification, NotificationMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {GetNotificationMetadataCallback} [callback] Callback function.
-       * @returns {Promise<GetNotificationMetadataResponse>}
+       * @returns {Promise<GetNotificationMetadataResponse>} Resolves with `[metadata, apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```

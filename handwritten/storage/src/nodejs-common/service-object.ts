@@ -286,7 +286,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
    *
    * @param {function=} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.
-   * @param {object} callback.apiResponse - The full API response.
+   * @param {object} callback.apiResponse - The full HTTP API response, with
+   *     payload properties nested under `apiResponse.data`.
    */
   delete(options?: DeleteOptions): Promise<[GaxiosResponse]>;
   delete(options: DeleteOptions, callback: DeleteCallback): void;
@@ -448,7 +449,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
    * @param {function} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.
    * @param {object} callback.metadata - The metadata for this object.
-   * @param {object} callback.apiResponse - The full API response.
+   * @param {object} callback.apiResponse - The full HTTP API response, with
+   *     payload properties nested under `apiResponse.data`.
    */
   getMetadata(options?: GetMetadataOptions): Promise<MetadataResponse<K>>;
   getMetadata(options: GetMetadataOptions, callback: MetadataCallback<K>): void;

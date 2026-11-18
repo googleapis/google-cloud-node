@@ -60,7 +60,8 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
    * Stop this channel.
    *
    * @param {StorageCallback} [callback] Callback function.
-   * @returns {Promise<{}>} A promise that resolves to an empty object when successful
+   * @returns {Promise<array>} A promise that resolves with `[apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
