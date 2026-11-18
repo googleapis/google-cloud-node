@@ -1,3 +1,17 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import {AdhocDebugLogger} from './logging-utils';
 
 /**
@@ -22,14 +36,36 @@ export interface LogFields {
   severity?: LogSeverity;
 
   /**
+   * OpenTelemetry trace ID associated with this log entry.
+   * Mapped to `logging.googleapis.com/trace` by `getStructuredBackend()`.
+   */
+  trace_id?: string;
+
+  /**
+   * OpenTelemetry span ID associated with this log entry.
+   * Mapped to `logging.googleapis.com/spanId` by `getStructuredBackend()`.
+   */
+  span_id?: string;
+
+  /**
+   * Whether the associated OpenTelemetry trace was sampled.
+   * Mapped to `logging.googleapis.com/trace_sampled` by `getStructuredBackend()`.
+   */
+  trace_sampled?: boolean;
+
+  /**
    * If this log is associated with an OpenTelemetry trace, you can put the
    * trace ID here to pass on that association.
+   *
+   * @deprecated Use {@link LogFields.trace_id} instead.
    */
   telemetryTraceId?: string;
 
   /**
    * If this log is associated with an OpenTelemetry trace, you can put the
    * span ID here to pass on that association.
+   *
+   * @deprecated Use {@link LogFields.span_id} instead.
    */
   telemetrySpanId?: string;
 
@@ -37,8 +73,17 @@ export interface LogFields {
    * This is a catch-all for any other items you might want to go into
    * structured logs. Library implementers, please see the spec docs above
    * for the items envisioned to go here.
+   *
+   * @deprecated Pass structured attributes directly as top-level properties on {@link LogFields} instead.
    */
   other?: unknown;
+
+  /**
+   * Additional top-level structured log attributes (such as OpenTelemetry
+   * semantic convention attributes like `error.type`, `rpc.method`,
+   * `gcp.errors.*`, and `exception.*`).
+   */
+  [key: string]: unknown;
 }
 
 /**
