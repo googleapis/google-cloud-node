@@ -29,7 +29,8 @@ import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
 import * as crypto from 'crypto';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
-import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
+import type {FileMetadata} from './file.js';
+import {FileExceptionMessages, RequestError} from './file-errors.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
 
 const NOT_FOUND_STATUS_CODE = 404;

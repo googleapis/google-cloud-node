@@ -20,7 +20,7 @@ import {
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
   CRC32CValidator,
 } from './crc32c.js';
-import {FileExceptionMessages, RequestError} from './file.js';
+import {FileExceptionMessages, RequestError} from './file-errors.js';
 
 interface HashStreamValidatorOptions {
   /** Enables CRC32C calculation. To validate a provided value use `crc32cExpected`. */
