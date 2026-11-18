@@ -374,6 +374,9 @@ function runTransaction<T>(
       // Ensure that we do not specify custom retry behavior for transactional
       // commits.
       expect(options!.retry).to.be.undefined;
+      expect(options!.otherArgs!.headers!['x-goog-is-transaction']).to.equal(
+        actual.transaction && actual.transaction.length > 0 ? 'true' : 'false',
+      );
 
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('commit');
@@ -384,7 +387,10 @@ function runTransaction<T>(
         return response(request.response as api.ICommitResponse);
       }
     },
-    rollback: actual => {
+    rollback: (actual, options) => {
+      expect(options!.otherArgs!.headers!['x-goog-is-transaction']).to.equal(
+        'true',
+      );
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('rollback');
       expect(actual).to.deep.eq(request.request);
@@ -394,13 +400,25 @@ function runTransaction<T>(
         return response({});
       }
     },
-    batchGetDocuments: actual => {
+    batchGetDocuments: (actual, options) => {
+      expect(options!.otherArgs!.headers!['x-goog-is-transaction']).to.equal(
+        (actual!.transaction && actual!.transaction.length > 0) ||
+          actual!.newTransaction
+          ? 'true'
+          : 'false',
+      );
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('getDocument');
       expect(actual).to.deep.eq(request.request);
       return request.stream!;
     },
-    runQuery: actual => {
+    runQuery: (actual, options) => {
+      expect(options!.otherArgs!.headers!['x-goog-is-transaction']).to.equal(
+        (actual!.transaction && actual!.transaction.length > 0) ||
+          actual!.newTransaction
+          ? 'true'
+          : 'false',
+      );
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('query');
       actual = extend(true, {}, actual); // Remove undefined properties
