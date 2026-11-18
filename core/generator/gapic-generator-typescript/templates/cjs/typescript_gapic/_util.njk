@@ -265,7 +265,7 @@ request.{{ oneComment.paramName.toCamelCase() }}
     options.otherArgs.headers = options.otherArgs.headers || {};
 {#- if dynamic routing annotation exists and is non empty, then send dynamic routing header #}
 {%- if method.dynamicRoutingRequestParams.length > 0 %}
-    let routingParameter = {};
+    const routingParameter = {};
 {%- for paramArray in method.dynamicRoutingRequestParams %}
   {%- for param in paramArray %}
     {
