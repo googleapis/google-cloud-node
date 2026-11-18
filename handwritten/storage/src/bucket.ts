@@ -849,7 +849,7 @@ export enum BucketExceptionMessages {
  * const prefixes = [];
  *
  * function callback(err, files, nextQuery, apiResponse) {
- *   prefixes = prefixes.concat(apiResponse.data.prefixes);
+ *   prefixes.push(...(apiResponse.data.prefixes ?? []));
  *
  *   if (nextQuery) {
  *     bucket.getFiles(nextQuery, callback);
