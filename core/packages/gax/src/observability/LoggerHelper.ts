@@ -69,7 +69,6 @@ export type GaxLogFields = loggingUtils.LogFields &
   };
 
 interface BuiltinBackendInternals extends loggingUtils.DebugLogBackend {
-  filters?: string[];
   isEnabled?: (namespace: string) => boolean;
   upstream?: loggingUtils.DebugLogBackend;
 }
@@ -86,10 +85,8 @@ let structuredBackendPrototype: BuiltinBackendInternals | null | undefined;
 
 function getFallbackNodeBackend(): loggingUtils.DebugLogBackend {
   if (!fallbackNodeBackend) {
-    const backend = loggingUtils.getNodeBackend() as BuiltinBackendInternals;
-    if (Array.isArray(backend.filters)) {
-      backend.filters = ['*'];
-    }
+    const backend = loggingUtils.getNodeBackend();
+    backend.setFilters(['*']);
     fallbackNodeBackend = backend;
   }
   return fallbackNodeBackend;
@@ -128,34 +125,70 @@ function getFallbackStructuredBackend(
 ): loggingUtils.DebugLogBackend {
   if (!rawUpstream || typeof rawUpstream !== 'object') {
     if (!fallbackStructuredBackend) {
-      const backend =
-        loggingUtils.getStructuredBackend() as BuiltinBackendInternals;
-      if (Array.isArray(backend.filters)) {
-        backend.filters = ['*'];
-      }
+      const backend = loggingUtils.getStructuredBackend();
+      backend.setFilters(['*']);
       fallbackStructuredBackend = backend;
     }
     return fallbackStructuredBackend;
   }
 
   const nodeProto = getNodeBackendPrototype();
+  const structuredProto = getStructuredBackendPrototype();
+  const rawProto = Object.getPrototypeOf(rawUpstream);
   const resolvedUpstream =
-    nodeProto && Object.getPrototypeOf(rawUpstream) === nodeProto
+    nodeProto && rawProto === nodeProto
       ? getFallbackNodeBackend()
-      : rawUpstream;
+      : structuredProto && rawProto === structuredProto
+        ? getFallbackStructuredBackend(
+            (rawUpstream as BuiltinBackendInternals).upstream,
+          )
+        : rawUpstream;
 
   let cached = fallbackStructuredByUpstream.get(resolvedUpstream);
   if (!cached) {
-    const backend = loggingUtils.getStructuredBackend(
-      resolvedUpstream,
-    ) as BuiltinBackendInternals;
-    if (Array.isArray(backend.filters)) {
-      backend.filters = ['*'];
-    }
+    const backend =
+      loggingUtils.getStructuredBackend() as BuiltinBackendInternals;
+    backend.setFilters(['*']);
+    backend.upstream = resolvedUpstream;
     cached = backend;
     fallbackStructuredByUpstream.set(resolvedUpstream, backend);
   }
   return cached;
+}
+
+function didBuiltinUpstreamDrop(
+  upstream: unknown,
+  namespace: string,
+  nodeProto: BuiltinBackendInternals | null,
+  structuredProto: BuiltinBackendInternals | null,
+): boolean {
+  if (!upstream || typeof upstream !== 'object') {
+    return false;
+  }
+  const proto = Object.getPrototypeOf(upstream);
+  const internal = upstream as BuiltinBackendInternals;
+  if (nodeProto !== null && proto === nodeProto) {
+    return (
+      typeof internal.isEnabled === 'function' && !internal.isEnabled(namespace)
+    );
+  }
+  if (
+    structuredProto !== null &&
+    structuredProto !== nodeProto &&
+    proto === structuredProto
+  ) {
+    return (
+      (typeof internal.isEnabled === 'function' &&
+        !internal.isEnabled(namespace)) ||
+      didBuiltinUpstreamDrop(
+        internal.upstream,
+        namespace,
+        nodeProto,
+        structuredProto,
+      )
+    );
+  }
+  return false;
 }
 
 function rescueIfDroppedByBuiltinBackend(
@@ -174,16 +207,12 @@ function rescueIfDroppedByBuiltinBackend(
     structuredProto !== nodeProto &&
     backendProto === structuredProto
   ) {
-    const upstreamDropped =
-      Boolean(internalBackend.upstream) &&
-      typeof internalBackend.upstream === 'object' &&
-      nodeProto !== null &&
-      Object.getPrototypeOf(internalBackend.upstream) === nodeProto &&
-      typeof (internalBackend.upstream as BuiltinBackendInternals).isEnabled ===
-        'function' &&
-      !(internalBackend.upstream as BuiltinBackendInternals).isEnabled!(
-        namespace,
-      );
+    const upstreamDropped = didBuiltinUpstreamDrop(
+      internalBackend.upstream,
+      namespace,
+      nodeProto,
+      structuredProto,
+    );
     const dropped =
       (typeof internalBackend.isEnabled === 'function' &&
         !internalBackend.isEnabled(namespace)) ||

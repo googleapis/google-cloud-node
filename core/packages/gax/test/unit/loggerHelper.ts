@@ -1829,14 +1829,18 @@ describe('LoggerHelper', () => {
         'google.cloud.secretmanager.v1.SecretManagerService/GetSecret',
       );
 
-      // Also forwards to a plain `DebugLogBackend` upstream (without `makeLogger`) passed to `getStructuredBackend(upstream)`.
+      // Also forwards to a plain `DebugLogBackend` upstream (without `makeLogger`) passed to `getStructuredBackend(upstream)`
+      // without overwriting the upstream's ['spanner'] filters with ['*'].
       stdoutLines.length = 0;
       const upstreamPayloads: string[] = [];
+      const plainUpstreamFilterCalls: string[][] = [];
       const plainUpstream: loggingUtils.DebugLogBackend = {
         log(_ns: string, _fields: loggingUtils.LogFields, ...args: unknown[]) {
           upstreamPayloads.push(String(args[0]));
         },
-        setFilters() {},
+        setFilters(filters: string[]) {
+          plainUpstreamFilterCalls.push(filters);
+        },
       };
       process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
       loggingUtils.setBackend(loggingUtils.getStructuredBackend(plainUpstream));
@@ -1844,12 +1848,109 @@ describe('LoggerHelper', () => {
       await assert.rejects(async () => {
         await optedInSecretManagerCall({}, undefined);
       });
+      loggingUtils.log('storage').info('still dropped storage');
+      loggingUtils.log('spanner').info('allowed spanner');
 
       assert.strictEqual(stdoutLines.length, 0);
       assert.strictEqual(stderrStub.callCount, 0);
-      assert.strictEqual(upstreamPayloads.length, 2);
+      assert.deepStrictEqual(plainUpstreamFilterCalls, [['spanner']]);
+      assert.strictEqual(upstreamPayloads.length, 3);
       assert.strictEqual(JSON.parse(upstreamPayloads[0]).severity, 'DEBUG');
       assert.strictEqual(JSON.parse(upstreamPayloads[1]).severity, 'WARNING');
+      assert.deepStrictEqual(JSON.parse(upstreamPayloads[2]), {
+        severity: 'INFO',
+        message: 'allowed spanner',
+      });
+
+      // Preserves `filters` on a custom `DebugLogBackendBase` subclass upstream without mutating `.filters` to `['*']`.
+      interface InternalBackendBaseInstance
+        extends loggingUtils.DebugLogBackend {
+        filters: string[];
+        filtersSet: boolean;
+        enabledRegexp: RegExp;
+        cached: Map<
+          string,
+          (fields: loggingUtils.LogFields, ...args: unknown[]) => void
+        >;
+        compileFilters(): RegExp;
+        isEnabled(namespace: string): boolean;
+      }
+      const RuntimeBackendBase = (
+        loggingUtils as unknown as {
+          DebugLogBackendBase: new () => InternalBackendBaseInstance;
+        }
+      ).DebugLogBackendBase;
+      class CustomBaseSink extends RuntimeBackendBase {
+        entries: Array<{namespace: string; payload: string}> = [];
+        makeLogger(
+          namespace: string,
+        ): (fields: loggingUtils.LogFields, ...args: unknown[]) => void {
+          return (_fields: loggingUtils.LogFields, ...args: unknown[]) => {
+            this.entries.push({namespace, payload: String(args[0])});
+          };
+        }
+        setFilters(filters?: string[]): void {
+          if (Array.isArray(filters)) {
+            this.filters = [...filters];
+            this.filtersSet = true;
+          }
+          this.enabledRegexp = this.compileFilters();
+          this.cached.clear();
+        }
+      }
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      const customBaseSink = new CustomBaseSink();
+      loggingUtils.setBackend(
+        loggingUtils.getStructuredBackend(customBaseSink),
+      );
+      loggingUtils.log('auth').debug('dropped auth');
+      await assert.rejects(async () => {
+        await optedInSecretManagerCall({}, undefined);
+      });
+      loggingUtils.log('storage').info('still dropped storage');
+      assert.deepStrictEqual(customBaseSink.filters, ['spanner']);
+      assert.strictEqual(customBaseSink.isEnabled('storage'), false);
+      assert.strictEqual(customBaseSink.isEnabled('spanner'), true);
+      assert.strictEqual(customBaseSink.entries.length, 2);
+      assert.strictEqual(
+        JSON.parse(customBaseSink.entries[0].payload).severity,
+        'DEBUG',
+      );
+      assert.strictEqual(
+        JSON.parse(customBaseSink.entries[1].payload).severity,
+        'WARNING',
+      );
+
+      // Unwraps nested `StructuredBackend` instances without overwriting custom upstream filters.
+      const nestedPayloads: string[] = [];
+      const nestedFilterCalls: string[][] = [];
+      const nestedUpstream: loggingUtils.DebugLogBackend = {
+        log(_ns: string, _fields: loggingUtils.LogFields, ...args: unknown[]) {
+          nestedPayloads.push(String(args[0]));
+        },
+        setFilters(filters: string[]) {
+          nestedFilterCalls.push(filters);
+        },
+      };
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(
+        loggingUtils.getStructuredBackend(
+          loggingUtils.getStructuredBackend(nestedUpstream),
+        ),
+      );
+      loggingUtils.log('auth').debug('dropped nested auth');
+      await assert.rejects(async () => {
+        await optedInSecretManagerCall({}, undefined);
+      });
+      loggingUtils.log('storage').info('still dropped nested storage');
+      assert.deepStrictEqual(nestedFilterCalls, [['spanner']]);
+      assert.strictEqual(nestedPayloads.length, 2);
+      const outerDebug = JSON.parse(nestedPayloads[0]);
+      assert.strictEqual(outerDebug.severity, 'DEBUG');
+      assert.strictEqual(JSON.parse(outerDebug.message).severity, 'DEBUG');
+      const outerWarn = JSON.parse(nestedPayloads[1]);
+      assert.strictEqual(outerWarn.severity, 'WARNING');
+      assert.strictEqual(JSON.parse(outerWarn.message).severity, 'WARNING');
 
       // Rescues cleanly without throwing Object.getPrototypeOf(null) or WeakMap key TypeErrors
       // even if StructuredBackend.upstream is null or a primitive value.
