@@ -21,7 +21,7 @@
 // orthogonal: you can enable logging without OpenTelemetry tracing
 // (`!tracingEnabled && loggingEnabled`), tracing without logging, or both
 // simultaneously. When both are active, failed RPC logs automatically include
-// `telemetryTraceId` and `telemetrySpanId` for trace-log correlation.
+// `trace_id`, `span_id`, and `trace_sampled` for trace-log correlation.
 
 // [START gax_observability_tracing]
 async function enableTracing() {
@@ -80,6 +80,7 @@ async function enableLogging() {
   loggingUtils.setBackend(undefined);
 
   // Option B — Built-in structured JSON backend (writes Cloud Logging JSON):
+  // Set `GOOGLE_SDK_NODE_LOGGING=<service>` (or `''`) when pairing with `{enableTelemetryLogging: true}` so `'auth'` debug logs stay off.
   // loggingUtils.setBackend(loggingUtils.getStructuredBackend());
 
   // Option C — Pluggable custom backend (e.g. Pino, Winston, Bunyan, or custom filtering):
@@ -92,17 +93,14 @@ async function enableLogging() {
       if (namespace === 'auth') {
         return;
       }
+      // `attributes` includes top-level OpenTelemetry attributes (`error.type`,
+      // `rpc.method`, etc.) plus `trace_id`, `span_id`, and `trace_sampled` when traced.
+      const {severity, ...attributes} = fields;
       const entry = {
+        ...attributes,
         namespace,
-        severity: fields.severity,
+        severity,
         message: util.format(...args),
-        ...(fields.telemetryTraceId
-          ? {telemetryTraceId: fields.telemetryTraceId}
-          : {}),
-        ...(fields.telemetrySpanId
-          ? {telemetrySpanId: fields.telemetrySpanId}
-          : {}),
-        ...(fields.other || {}),
       };
       // Forward `entry` to your preferred logger (Pino, Winston, stdout, etc.):
       console.log(JSON.stringify(entry));
