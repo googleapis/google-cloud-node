@@ -33,8 +33,6 @@
   "scripts": {
     "presystem-test": "pnpm run compile",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
-    "samples-test": "pnpm run link-samples && pnpm test && cd ../",
-    "link-samples": "cd samples/ && pnpm link ../ && pnpm install",
     "test": "node ../../bin/run-test.cjs build/test",
     "lint": "gts check",
     "predocs": "pnpm run compile",
@@ -46,7 +44,6 @@
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",
-    "prelint": "cd samples; pnpm link ../; pnpm install",
     "precompile": "gts clean"
   },
   "dependencies": {
