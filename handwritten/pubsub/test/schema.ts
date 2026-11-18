@@ -15,7 +15,8 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as sinon from 'sinon';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {PubSub} from '../src/pubsub';
 import {ISchema, Schema, SchemaTypes, SchemaViews} from '../src/schema';
 

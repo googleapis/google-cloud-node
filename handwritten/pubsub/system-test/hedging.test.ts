@@ -30,7 +30,8 @@ import {
   Subscription,
   Topic,
 } from '../src';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import * as tracing from '../src/telemetry-tracing';
 import {waitForMessages} from './common';
 
