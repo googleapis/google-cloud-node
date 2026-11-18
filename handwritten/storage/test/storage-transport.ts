@@ -17,7 +17,8 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import {GoogleAuth} from 'google-auth-library';
+import {GoogleAuth, OAuth2Client} from 'google-auth-library';
+import nock from 'nock';
 import sinon, {createSandbox} from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -105,8 +106,9 @@ describe('Storage Transport', () => {
 
     assert.strictEqual(calledWith.retryConfig.retry, 3);
     assert.strictEqual(calledWith.retryConfig.retryDelayMultiplier, 2);
-    assert.strictEqual(calledWith.retryConfig.maxRetryDelay, 100);
-    assert.strictEqual(calledWith.retryConfig.totalTimeout, 1000);
+    // retryOptions are in seconds, gaxios expects milliseconds.
+    assert.strictEqual(calledWith.retryConfig.maxRetryDelay, 100 * 1000);
+    assert.strictEqual(calledWith.retryConfig.totalTimeout, 1000 * 1000);
   });
 
   it('should append GCCL_GCS_CMD_KEY to x-goog-api-client header if present', async () => {
@@ -385,6 +387,53 @@ describe('Storage Transport', () => {
       assert.strictEqual(retryConfig.shouldRetry(connReset), true);
     });
 
+    it('should stop retrying after maxRetries', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const error503 = (currentRetryAttempt: number) =>
+        ({
+          response: {status: 503},
+          config: {
+            method: 'GET',
+            url: '/test',
+            retryConfig: {currentRetryAttempt},
+          },
+        }) as unknown as GaxiosError;
+      assert.strictEqual(retryConfig.shouldRetry(error503(2)), true);
+      assert.strictEqual(retryConfig.shouldRetry(error503(3)), false);
+    });
+
+    it('should stop retrying after totalTimeout', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const error503 = (elapsedMs: number) =>
+        ({
+          response: {status: 503},
+          config: {
+            method: 'GET',
+            url: '/test',
+            retryConfig: {
+              currentRetryAttempt: 1,
+              timeOfFirstRequest: Date.now() - elapsedMs,
+              totalTimeout: retryConfig.totalTimeout,
+            },
+          },
+        }) as unknown as GaxiosError;
+      assert.strictEqual(retryConfig.shouldRetry(error503(1000)), true);
+      assert.strictEqual(
+        retryConfig.shouldRetry(error503(1000 * 1000 + 1)),
+        false,
+      );
+    });
+
     it('should allow retries for bucket creation and safe deletes', async () => {
       const requestStub = authClientStub.request as sinon.SinonStub;
       requestStub.resolves({data: {}, headers: new Map()});
@@ -573,6 +622,57 @@ describe('Storage Transport', () => {
           return true;
         },
       );
+    });
+  });
+
+  describe('retries against a failing endpoint', () => {
+    const endpoint = 'https://storage.example.com';
+
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('should send maxRetries retries and wait maxRetryDelay seconds between them', async () => {
+      let requests = 0;
+      nock(endpoint)
+        .get(() => true)
+        .times(10)
+        .reply(() => {
+          requests++;
+          return [503, {error: {code: 503, message: 'down'}}];
+        });
+      const authClient = new OAuth2Client();
+      authClient.credentials = {
+        access_token: 'token',
+        expiry_date: Date.now() + 3600 * 1000,
+      };
+      const serverTransport = new StorageTransport({
+        apiEndpoint: endpoint,
+        baseUrl: `${endpoint}/storage/v1`,
+        authClient,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 2,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 0.05,
+          totalTimeout: 600,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const start = Date.now();
+      await assert.rejects(
+        serverTransport.makeRequest({url: '/b/bucket/o/object'}),
+        (err: GaxiosError) => {
+          assert.strictEqual(err.code, 503);
+          return true;
+        },
+      );
+      assert.strictEqual(requests, 3);
+      // Two retries, each after maxRetryDelay (0.05 s).
+      assert.ok(Date.now() - start >= 90);
     });
   });
 });

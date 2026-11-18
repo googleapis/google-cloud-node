@@ -3633,11 +3633,25 @@ class File extends ServiceObject<File, FileMetadata> {
           retryConfig: {
             retry: this.storage.retryOptions.maxRetries,
             noResponseRetries: this.storage.retryOptions.maxRetries,
-            maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
+            maxRetryDelay: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
             retryDelayMultiplier:
               this.storage.retryOptions.retryDelayMultiplier,
-            shouldRetry: this.storage.retryOptions.retryableErrorFn,
-            totalTimeout: this.storage.retryOptions.totalTimeout,
+            // A custom shouldRetry replaces the default check of gaxios,
+            // which is also where gaxios stops after `retry` attempts.
+            shouldRetry: (err: GaxiosError) => {
+              const config = err.config?.retryConfig;
+              if (
+                (config?.currentRetryAttempt ?? 0) >=
+                  (this.storage.retryOptions.maxRetries ?? 0) ||
+                (config?.timeOfFirstRequest !== undefined &&
+                  config.totalTimeout !== undefined &&
+                  Date.now() - config.timeOfFirstRequest >= config.totalTimeout)
+              ) {
+                return false;
+              }
+              return !!this.storage.retryOptions.retryableErrorFn?.(err);
+            },
+            totalTimeout: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
           },
         });
         cb(null, true);
