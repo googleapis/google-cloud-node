@@ -85,6 +85,7 @@ import {
 import {
   StorageQueryParameters,
   StorageRequestOptions,
+  toGaxiosRetryConfig,
 } from './storage-transport.js';
 
 export type GetExpirationDateResponse = [Date];
@@ -3630,15 +3631,10 @@ class File extends ServiceObject<File, FileMetadata> {
         await gaxios.request({
           method: 'GET',
           url,
-          retryConfig: {
-            retry: this.storage.retryOptions.maxRetries,
-            noResponseRetries: this.storage.retryOptions.maxRetries,
-            maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
-            retryDelayMultiplier:
-              this.storage.retryOptions.retryDelayMultiplier,
-            shouldRetry: this.storage.retryOptions.retryableErrorFn,
-            totalTimeout: this.storage.retryOptions.totalTimeout,
-          },
+          retryConfig: toGaxiosRetryConfig(
+            this.storage.retryOptions,
+            this.storage.retryOptions.maxRetries ?? 3,
+          ),
         });
         cb(null, true);
       } catch (err: unknown) {

@@ -19,6 +19,7 @@ import {
   GaxiosOptions,
   GaxiosOptionsPrepared,
   GaxiosResponse,
+  RetryConfig,
 } from 'gaxios';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -87,6 +88,45 @@ export interface StorageTransportCallback<T> {
     data?: T | null,
     fullResponse?: GaxiosResponse,
   ): void;
+}
+
+const secondsToMilliseconds = (seconds?: number): number | undefined =>
+  seconds === undefined ? undefined : seconds * 1000;
+
+/**
+ * The gaxios `retryConfig` for `retryOptions`, retrying at most `maxRetries` times.
+ *
+ * `retryOptions` delays are in seconds, while gaxios reads milliseconds. And since a custom
+ * `shouldRetry` replaces gaxios' default check, which is the only place gaxios enforces `retry`,
+ * `noResponseRetries` and `totalTimeout`, the `shouldRetry` here enforces them itself.
+ */
+export function toGaxiosRetryConfig(
+  retryOptions: RetryOptions,
+  maxRetries: number,
+): RetryConfig {
+  const totalTimeoutMs = secondsToMilliseconds(retryOptions.totalTimeout);
+  return {
+    retry: maxRetries,
+    noResponseRetries: maxRetries,
+    maxRetryDelay: secondsToMilliseconds(retryOptions.maxRetryDelay),
+    retryDelayMultiplier: retryOptions.retryDelayMultiplier,
+    totalTimeout: totalTimeoutMs,
+    shouldRetry: (err: GaxiosError) => {
+      const {currentRetryAttempt = 0, timeOfFirstRequest} =
+        err.config?.retryConfig ?? {};
+      if (currentRetryAttempt >= maxRetries) {
+        return false;
+      }
+      if (
+        totalTimeoutMs !== undefined &&
+        timeOfFirstRequest !== undefined &&
+        Date.now() - timeOfFirstRequest >= totalTimeoutMs
+      ) {
+        return false;
+      }
+      return !!retryOptions.retryableErrorFn?.(err);
+    },
+  };
 }
 
 export class StorageTransport {
@@ -321,15 +361,7 @@ export class StorageTransport {
           };
           return requestGaxiosInstance.request(innerOpts);
         },
-        retryConfig: {
-          retry: maxRetries,
-          noResponseRetries: maxRetries,
-          maxRetryDelay: this.retryOptions.maxRetryDelay,
-          retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-          totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) =>
-            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
-        },
+        retryConfig: toGaxiosRetryConfig(this.retryOptions, maxRetries),
         ...reqOpts,
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
         params: reqOpts.queryParameters,

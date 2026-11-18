@@ -4205,6 +4205,30 @@ describe('File', () => {
         done();
       });
     });
+
+    it('should stop retrying after maxRetries retries', done => {
+      gaxiosStub.resolves({data: {}});
+
+      file.isPublic(err => {
+        assert.ifError(err);
+        const {retryConfig} = gaxiosStub.getCall(0).args[0];
+        const maxRetries = file.storage.retryOptions.maxRetries!;
+        const error503AfterRetries = (currentRetryAttempt: number) =>
+          ({
+            response: {status: 503},
+            config: {method: 'GET', retryConfig: {currentRetryAttempt}},
+          }) as unknown as GaxiosError;
+        assert.strictEqual(
+          retryConfig.shouldRetry(error503AfterRetries(maxRetries - 1)),
+          true,
+        );
+        assert.strictEqual(
+          retryConfig.shouldRetry(error503AfterRetries(maxRetries)),
+          false,
+        );
+        done();
+      });
+    });
   });
 
   describe('moveFileAtomic', () => {

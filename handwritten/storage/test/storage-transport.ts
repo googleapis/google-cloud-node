@@ -105,8 +105,9 @@ describe('Storage Transport', () => {
 
     assert.strictEqual(calledWith.retryConfig.retry, 3);
     assert.strictEqual(calledWith.retryConfig.retryDelayMultiplier, 2);
-    assert.strictEqual(calledWith.retryConfig.maxRetryDelay, 100);
-    assert.strictEqual(calledWith.retryConfig.totalTimeout, 1000);
+    // retryOptions are in seconds, gaxios reads milliseconds.
+    assert.strictEqual(calledWith.retryConfig.maxRetryDelay, 100_000);
+    assert.strictEqual(calledWith.retryConfig.totalTimeout, 1_000_000);
   });
 
   it('should append GCCL_GCS_CMD_KEY to x-goog-api-client header if present', async () => {
@@ -399,6 +400,91 @@ describe('Storage Transport', () => {
           config: {method: 'POST', url: '/v1/b'},
         }),
         true,
+      );
+    });
+
+    // gaxios enforces `retry` and `noResponseRetries` only in its default shouldRetry, which a custom
+    // shouldRetry replaces.
+    const error503AfterRetries = (retryConfig: {
+      currentRetryAttempt?: number;
+      timeOfFirstRequest?: number;
+    }) =>
+      ({
+        response: {status: 503},
+        config: {method: 'GET', url: '/test', retryConfig},
+      }) as unknown as GaxiosError;
+
+    it('should stop retrying after maxRetries retries', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      assert.strictEqual(
+        retryConfig.shouldRetry(error503AfterRetries({currentRetryAttempt: 2})),
+        true,
+      );
+      assert.strictEqual(
+        retryConfig.shouldRetry(error503AfterRetries({currentRetryAttempt: 3})),
+        false,
+      );
+    });
+
+    it('should stop retrying network errors after maxRetries retries', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const connReset = {
+        code: 'ECONNRESET',
+        config: {
+          method: 'GET',
+          url: '/test',
+          retryConfig: {currentRetryAttempt: 3},
+        },
+      } as unknown as GaxiosError;
+      assert.strictEqual(retryConfig.shouldRetry(connReset), false);
+    });
+
+    it('should use the per-request maxRetries as the limit', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test', maxRetries: 1});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      assert.strictEqual(
+        retryConfig.shouldRetry(error503AfterRetries({currentRetryAttempt: 0})),
+        true,
+      );
+      assert.strictEqual(
+        retryConfig.shouldRetry(error503AfterRetries({currentRetryAttempt: 1})),
+        false,
+      );
+    });
+
+    it('should stop retrying once totalTimeout has passed', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      // totalTimeout is 1000 seconds.
+      assert.strictEqual(
+        retryConfig.shouldRetry(
+          error503AfterRetries({timeOfFirstRequest: Date.now() - 999_000}),
+        ),
+        true,
+      );
+      assert.strictEqual(
+        retryConfig.shouldRetry(
+          error503AfterRetries({timeOfFirstRequest: Date.now() - 1_000_000}),
+        ),
+        false,
       );
     });
 
