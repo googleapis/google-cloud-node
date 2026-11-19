@@ -4,12 +4,12 @@
     "docker:disable"
   ],
   "constraintsFiltering": "strict",
+  "minimumReleaseAge": "21 days",
   "pinVersions": false,
   "rebaseStalePrs": false,
   "schedule": [
-    "* 9 * * 1"
+    "0 9 * * 1"
   ],
-  "prCreation": "not-recreate",
   "gitAuthor": null,
   "packageRules": [
     {
@@ -17,13 +17,14 @@
       "groupName": "linters"
     },
     {
-    "matchPackageNames": "*",
-     "matchUpdateTypes": ["major", "patch"]
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor"],
+      "enabled": false
     }
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["* 9 * * 1"],
+    "schedule": ["0 9 * * 1"],
     "groupName": "lockfile maintenance"
   },
   "ignoreDeps": [
