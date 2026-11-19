@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This comment will run the gcb tests
+
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
