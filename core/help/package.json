@@ -1,4 +1,6 @@
 {
+  "name": "@google-cloud/help",
+  "private": true,
   "version": "1.0.0",
   "scripts": {
     "docs": "./docs-devsite.sh",
