@@ -81,7 +81,9 @@ async function testShowcase() {
 
   // assuming gRPC server is started locally
   await testEchoErrorWithRetries(grpcSequenceClientLegacyRetries);
-  await testEchoDeadlineExceededErrorWithRetries(grpcSequenceClientLegacyRetries);
+  await testEchoDeadlineExceededErrorWithRetries(
+    grpcSequenceClientLegacyRetries,
+  );
   await testEchoErrorWithRetriesMessage(grpcSequenceClientLegacyRetries);
   await testEchoErrorWithTimeout(grpcSequenceClientLegacyRetries);
   await testEcho(grpcClient);
@@ -417,25 +419,31 @@ async function testEchoErrorWithRetries(client: SequenceServiceClient) {
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
     assert.strictEqual(JSON.stringify((err as GoogleError).code), '4');
     assert.match(
       JSON.stringify((err as GoogleError).message),
       /Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received/,
     );
-    assert.strictEqual((err as GoogleError).message, 'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]');
+    assert.strictEqual(
+      (err as GoogleError).message,
+      'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]',
+    );
   }
 }
 
-async function testEchoDeadlineExceededErrorWithRetries(client: SequenceServiceClient) {
+async function testEchoDeadlineExceededErrorWithRetries(
+  client: SequenceServiceClient,
+) {
   const backoffSettings = createBackoffSettings(
-      100,
-      1.2,
-      1000,
-      null,
-      1.5,
-      3000, // Set maxRpcTimeoutMillis high enough so that maxRetries happens before DEADLINE_EXCEEDED
-      null,
+    100,
+    1.2,
+    1000,
+    null,
+    1.5,
+    3000, // Set maxRpcTimeoutMillis high enough so that maxRetries happens before DEADLINE_EXCEEDED
+    null,
   );
   const retryOptions = new RetryOptions([14, 4], backoffSettings);
   backoffSettings.maxRetries = 2;
@@ -447,39 +455,43 @@ async function testEchoDeadlineExceededErrorWithRetries(client: SequenceServiceC
   client.initialize();
 
   const request = createSequenceRequestFactory(
-      [
-        Status.DEADLINE_EXCEEDED, // Error code 4
-        Status.UNAVAILABLE, // Error code 14
-        Status.UNAVAILABLE,
-        Status.UNAVAILABLE,
-      ],
-      [0.01, 0.01, 0.01, 0.01],
+    [
+      Status.DEADLINE_EXCEEDED, // Error code 4
+      Status.UNAVAILABLE, // Error code 14
+      Status.UNAVAILABLE,
+      Status.UNAVAILABLE,
+    ],
+    [0.01, 0.01, 0.01, 0.01],
   );
 
   const response = await client.createSequence(request);
   const sequence = response[0];
 
   const attemptRequest =
-      new protos.google.showcase.v1beta1.AttemptSequenceRequest();
+    new protos.google.showcase.v1beta1.AttemptSequenceRequest();
   attemptRequest.name = sequence.name!;
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
-    assert.strictEqual((err as GoogleError).message, 'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 4 DEADLINE_EXCEEDED: 4, code: 4, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]');
+    assert.strictEqual(
+      (err as GoogleError).message,
+      'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 4 DEADLINE_EXCEEDED: 4, code: 4, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]',
+    );
     assert.strictEqual((err as GoogleError).code, 4);
   }
 }
 
 async function testEchoErrorWithRetriesMessage(client: SequenceServiceClient) {
   const backoffSettings = createBackoffSettings(
-      100,
-      1.2,
-      1000,
-      null,
-      1.5,
-      3000, // Set maxRpcTimeoutMillis high enough so that maxRetries happens before DEADLINE_EXCEEDED
-      null,
+    100,
+    1.2,
+    1000,
+    null,
+    1.5,
+    3000, // Set maxRpcTimeoutMillis high enough so that maxRetries happens before DEADLINE_EXCEEDED
+    null,
   );
   const retryOptions = new RetryOptions([14, 4], backoffSettings);
   backoffSettings.maxRetries = 2;
@@ -491,27 +503,29 @@ async function testEchoErrorWithRetriesMessage(client: SequenceServiceClient) {
   client.initialize();
 
   const request = createSequenceRequestFactory(
-      [
-        Status.UNAVAILABLE, // Error code 14
-        Status.UNAVAILABLE,
-        Status.UNAVAILABLE,
-        Status.UNAVAILABLE,
-      ],
-      [0.1, 0.1, 0.1, 0.1],
+    [
+      Status.UNAVAILABLE, // Error code 14
+      Status.UNAVAILABLE,
+      Status.UNAVAILABLE,
+      Status.UNAVAILABLE,
+    ],
+    [0.1, 0.1, 0.1, 0.1],
   );
 
   const response = await client.createSequence(request);
   const sequence = response[0];
 
   const attemptRequest =
-      new protos.google.showcase.v1beta1.AttemptSequenceRequest();
+    new protos.google.showcase.v1beta1.AttemptSequenceRequest();
   attemptRequest.name = sequence.name!;
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
     assert.strictEqual(JSON.stringify((err as GoogleError).code), '4');
-    const expectedMessage = 'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]'
+    const expectedMessage =
+      'Exceeded maximum number of retries retrying error Error: 14 UNAVAILABLE: 14 before any response was received : Previous errors : [{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: },{message: 14 UNAVAILABLE: 14, code: 14, details: , note: }]';
     assert.strictEqual((err as GoogleError).message, expectedMessage);
   }
 }
@@ -2912,7 +2926,7 @@ async function main() {
     showcaseServer.stop();
   }
   // Run PQC tests with a different showcase server because setup with a certificate is required.
-  await runPqcComplianceTests()
+  await runPqcComplianceTests();
 }
 
 main();
