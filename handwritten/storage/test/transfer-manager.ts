@@ -43,7 +43,7 @@ import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
 
 describe('Transfer Manager', () => {
   const BUCKET_NAME = 'test-bucket';
-  const STORAGE = sinon.stub(
+  const STORAGE = sinon.createSandbox().stub(
     new Storage({
       retryOptions: {
         autoRetry: true,
