@@ -26,6 +26,11 @@ const RetryInfo = Root.fromJSON(statusProtoJson).lookupType(
 );
 
 /**
+ * Binary metadata key used by gRPC to transmit RetryInfo.
+ */
+export const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
+
+/**
  * Builds the filesystem path to a particular proto sub-path, for protos
  * stored in `@google-cloud/spanner-api`.
  *
