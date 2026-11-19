@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging/latest",
   "product_documentation": "https://cloud.google.com/logging/docs",
   "name": "logging",
-  "codeowner_team": "@googleapis/yoshi-nodejs",
+  "codeowner_team": "@googleapis/cloud-sdk-nodejs-team",
   "release_level": "stable",
   "language": "nodejs",
   "api_id": "logging.googleapis.com",

@@ -10,6 +10,7 @@
   "distribution_name": "@google-cloud/dns",
   "api_id": "dns.googleapis.com",
   "requires_billing": true,
+  "codeowner_team": "@googleapis/cloud-sdk-nodejs-team",
   "api_shortname": "dns",
   "library_type": "REST"
 }
