@@ -3102,11 +3102,7 @@ describe('resumable-upload', () => {
         });
 
         it('should restore global setTimeout without leaking to the default sinon sandbox', async () => {
-          sandbox.restore();
-          sinon.restore();
-          await new Promise<void>(resolve => {
-            setTimeout(resolve, 1);
-          });
+setImmediate(restoreStubs);
         });
 
         it('should continue uploading after retry count^2 * random', done => {
