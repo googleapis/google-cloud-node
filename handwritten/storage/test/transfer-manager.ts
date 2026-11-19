@@ -43,21 +43,6 @@ import {DownloadResponseWithStatus, SkipReason} from '../src/file.js';
 
 describe('Transfer Manager', () => {
   const BUCKET_NAME = 'test-bucket';
-  const STORAGE = sinon.createSandbox().stub(
-    new Storage({
-      retryOptions: {
-        autoRetry: true,
-        maxRetries: 3,
-        retryDelayMultiplier: 2,
-        totalTimeout: 600,
-        maxRetryDelay: 60,
-        retryableErrorFn: (err: GaxiosError) => {
-          return err.status === 500;
-        },
-        idempotencyStrategy: IdempotencyStrategy.RetryConditional,
-      },
-    }),
-  );
   let sandbox: sinon.SinonSandbox;
   let transferManager: TransferManager;
   let bucket: Bucket;
@@ -67,7 +52,22 @@ describe('Transfer Manager', () => {
   });
 
   beforeEach(() => {
-    bucket = new Bucket(STORAGE, BUCKET_NAME);
+    const storage = sandbox.stub(
+      new Storage({
+        retryOptions: {
+          autoRetry: true,
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          totalTimeout: 600,
+          maxRetryDelay: 60,
+          retryableErrorFn: (err: GaxiosError) => {
+            return err.status === 500;
+          },
+          idempotencyStrategy: IdempotencyStrategy.RetryConditional,
+        },
+      }),
+    );
+    bucket = new Bucket(storage, BUCKET_NAME);
     transferManager = new TransferManager(bucket);
   });
 
