@@ -1,0 +1,70 @@
+permissions:
+  contents: read
+
+name: Renovate Bot Config Validation
+
+on:
+  pull_request:
+    paths:
+      - '**/renovate.json'
+      - '**/renovate.json5'
+      - '**/.renovaterc*'
+      - '.github/renovate.json*'
+      - '.github/workflows/renovate_config_check.yaml'
+  push:
+    branches:
+      - main
+    paths:
+      - '**/renovate.json'
+      - '**/renovate.json5'
+      - '**/.renovaterc*'
+      - '.github/renovate.json*'
+      - '.github/workflows/renovate_config_check.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  renovate_bot_config_validation:
+    name: Validate Renovate configuration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+
+      - name: Run Renovate Config Validator
+        env:
+          NPM_CONFIG_USERCONFIG: /dev/null
+          NPM_CONFIG_IGNORE_SCRIPTS: 'true'
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+        run: |
+          mapfile -t files < <(
+            git -C "$GITHUB_WORKSPACE" ls-files \
+              ':(glob)**/renovate.json' \
+              ':(glob)**/renovate.json5' \
+              ':(glob)**/.renovaterc*' \
+              ':(glob).github/renovate.json*'
+          )
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Renovate configuration files found."
+            exit 0
+          fi
+          targets=()
+          for f in "${files[@]}"; do
+            targets+=("$GITHUB_WORKSPACE/$f")
+          done
+          BEFORE_DATE="$(date -u -d '21 days ago' +%Y-%m-%dT%H:%M:%SZ)"
+          cd "$(mktemp -d)"
+          NPM_CONFIG_BEFORE="$BEFORE_DATE" npm exec \
+            --yes \
+            --package=renovate@44.181.6 \
+            -- renovate-config-validator --no-global "${targets[@]}"
