@@ -19,4 +19,7 @@ if (process.argv[2] === '--help') {
   console.log(`Usage: node ${process.argv[1]} [directory]`);
   process.exit(1);
 }
-main(process.argv[2]);
+main(process.argv[2]).catch(err => {
+  console.error(err);
+  process.exitCode = 1;
+});
