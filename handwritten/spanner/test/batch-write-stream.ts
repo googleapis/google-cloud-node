@@ -759,7 +759,78 @@ describe('batchWriteStream', () => {
     attemptStream.emit('error', eosErr);
   });
 
-  it('should cancel pending retry timer and active stream when caller destroys stream early', done => {
+  it('should disable retries on UNAVAILABLE when gaxOptions.retry is null', done => {
+    const attemptStream = through.obj();
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1],
+      () => {
+        requestCount++;
+        return attemptStream;
+      },
+      {
+        gaxOptions: {retry: null},
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const unavailableErr = makeServiceError(
+      grpc.status.UNAVAILABLE,
+      'Service currently unavailable',
+    );
+
+    stream.on('error', (err: grpc.ServiceError) => {
+      assert.strictEqual(requestCount, 1);
+      assert.strictEqual(err, unavailableErr);
+      assert.strictEqual(finalStatus, grpc.status.UNAVAILABLE);
+      done();
+    });
+
+    attemptStream.emit('error', unavailableErr);
+  });
+
+  it('should disable retries on premature stream end when gaxOptions.retry is null', done => {
+    const attemptStream = through.obj();
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      [group0, group1],
+      () => {
+        requestCount++;
+        return attemptStream;
+      },
+      {
+        gaxOptions: {retry: null},
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    const responses: IBatchWriteResponse[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => responses.push(resp))
+      .on('error', (err: grpc.ServiceError) => {
+        assert.strictEqual(requestCount, 1);
+        assert.strictEqual(responses.length, 1);
+        assert.deepStrictEqual(responses[0].indexes, [0]);
+        assert.strictEqual(err.code, grpc.status.UNAVAILABLE);
+        assert.match(err.message, /ended prematurely/);
+        assert.strictEqual(finalStatus, grpc.status.UNAVAILABLE);
+        done();
+      });
+
+    attemptStream.write({indexes: [0], status: {code: grpc.status.OK}});
+    attemptStream.end();
+  });
+
+  it('should cancel pending retry timer and active stream when caller destroys stream early', () => {
+    const clock = sandbox.useFakeTimers();
     const attemptStream = through.obj();
     let requestCount = 0;
     let finalStatus: grpc.status | undefined;
@@ -797,11 +868,9 @@ describe('batchWriteStream', () => {
     // Caller destroys stream while retry timer is waiting
     stream.destroy();
 
-    setTimeout(() => {
-      assert.strictEqual(requestCount, 1);
-      assert.strictEqual(finalStatus, grpc.status.CANCELLED);
-      done();
-    }, 80);
+    clock.tick(200);
+    assert.strictEqual(requestCount, 1);
+    assert.strictEqual(finalStatus, grpc.status.CANCELLED);
   });
 
   it('should emit DeadlineError and finalize with DEADLINE_EXCEEDED when retry delay exceeds total timeout', done => {
@@ -957,6 +1026,179 @@ describe('batchWriteStream', () => {
     });
   });
 
+  it('should respect top-level gaxOptions.maxRetries (taking precedence over backoffSettings.maxRetries)', done => {
+    const attemptStreams: Transform[] = [through.obj(), through.obj()];
+    let requestCount = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const unavailableErr = makeServiceError(
+      grpc.status.UNAVAILABLE,
+      'Service currently unavailable',
+    );
+
+    const stream = batchWriteStream(
+      [group0],
+      () => {
+        const current = attemptStreams[requestCount++];
+        setImmediate(() => {
+          current.emit('error', unavailableErr);
+        });
+        return current;
+      },
+      {
+        gaxOptions: {
+          maxRetries: 1,
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 1,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 5,
+              totalTimeoutMillis: 5000,
+              maxRetries: 5,
+            },
+          },
+        },
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+
+    stream.on('error', (err: grpc.ServiceError) => {
+      // 1 initial attempt + 1 retry = 2 attempts total
+      assert.strictEqual(requestCount, 2);
+      assert.strictEqual(err, unavailableErr);
+      assert.strictEqual(finalStatus, grpc.status.UNAVAILABLE);
+      done();
+    });
+  });
+
+  it('should pause active request stream on downstream backpressure and resume on drain', done => {
+    const totalGroups = 40; // Exceeds through2.obj readable + writable highWaterMark (16 + 16 = 32)
+    const groups: IMutationGroup[] = Array.from(
+      {length: totalGroups},
+      (_, i) => ({
+        mutations: [{insert: {table: `T${i}`}}],
+      }),
+    );
+    const attemptStream = through.obj();
+    const pauseSpy = sandbox.spy(attemptStream, 'pause');
+    const resumeSpy = sandbox.spy(attemptStream, 'resume');
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(groups, () => attemptStream, {
+      gaxOptions: fastGaxOptions,
+      onTerminate: status => {
+        finalStatus = status;
+      },
+    });
+
+    const initialResumeCount = resumeSpy.callCount;
+
+    // Push 40 responses while no consumer is reading `stream` to trigger backpressure
+    for (let i = 0; i < totalGroups; i++) {
+      attemptStream.write({indexes: [i], status: {code: grpc.status.OK}});
+    }
+    attemptStream.end();
+
+    assert.strictEqual(
+      pauseSpy.called,
+      true,
+      'Expected upstream request stream to be paused on backpressure',
+    );
+
+    const receivedIndexes: number[] = [];
+    stream
+      .on('data', (resp: IBatchWriteResponse) => {
+        receivedIndexes.push(...(resp.indexes ?? []));
+      })
+      .on('error', done)
+      .on('end', () => {
+        assert.ok(
+          resumeSpy.callCount > initialResumeCount,
+          'Expected upstream request stream to be resumed on drain',
+        );
+        assert.deepStrictEqual(
+          receivedIndexes,
+          Array.from({length: totalGroups}, (_, i) => i),
+        );
+        assert.strictEqual(finalStatus, grpc.status.OK);
+        done();
+      });
+  });
+
+  it('should handle downstream backpressure cleanly across stream retries', done => {
+    const totalGroups = 50;
+    const groups: IMutationGroup[] = Array.from(
+      {length: totalGroups},
+      (_, i) => ({
+        mutations: [{insert: {table: `T${i}`}}],
+      }),
+    );
+    const stream1 = through.obj();
+    const stream2 = through.obj();
+    const stream1PauseSpy = sandbox.spy(stream1, 'pause');
+    const stream2PauseSpy = sandbox.spy(stream2, 'pause');
+    const stream2ResumeSpy = sandbox.spy(stream2, 'resume');
+    let attemptIndex = 0;
+    let finalStatus: grpc.status | undefined;
+
+    const stream = batchWriteStream(
+      groups,
+      currentGroups => {
+        attemptIndex++;
+        if (attemptIndex === 1) {
+          setImmediate(() => {
+            // Emit 40 responses with no downstream reader -> triggers backpressure on stream1
+            for (let i = 0; i < 40; i++) {
+              stream1.write({indexes: [i], status: {code: grpc.status.OK}});
+            }
+            assert.strictEqual(stream1PauseSpy.called, true);
+            stream1.emit(
+              'error',
+              makeServiceError(grpc.status.UNAVAILABLE, 'Temporary disconnect'),
+            );
+          });
+          return stream1;
+        }
+
+        setImmediate(() => {
+          const initialStream2Resumes = stream2ResumeSpy.callCount;
+          // userStream buffer is still full -> writing remaining 10 responses pauses stream2
+          for (let i = 0; i < currentGroups.length; i++) {
+            stream2.write({indexes: [i], status: {code: grpc.status.OK}});
+          }
+          stream2.end();
+          assert.strictEqual(stream2PauseSpy.called, true);
+
+          // Start consuming downstream so userStream drains and resumes stream2
+          const receivedIndexes: number[] = [];
+          stream
+            .on('data', (resp: IBatchWriteResponse) => {
+              receivedIndexes.push(...(resp.indexes ?? []));
+            })
+            .on('error', done)
+            .on('end', () => {
+              assert.ok(stream2ResumeSpy.callCount > initialStream2Resumes);
+              assert.deepStrictEqual(
+                receivedIndexes,
+                Array.from({length: totalGroups}, (_, i) => i),
+              );
+              assert.strictEqual(finalStatus, grpc.status.OK);
+              done();
+            });
+        });
+        return stream2;
+      },
+      {
+        gaxOptions: fastGaxOptions,
+        onTerminate: status => {
+          finalStatus = status;
+        },
+      },
+    );
+  });
+
   describe('getNextRetryDelayMs', () => {
     it('should extract delay from google.rpc.retryinfo-bin metadata when present', () => {
       const RetryInfo = getRetryInfo();
@@ -1006,6 +1248,31 @@ describe('batchWriteStream', () => {
         delayMs >= 80 && delayMs <= 120,
         `Expected delay in [80, 120], got ${delayMs}`,
       );
+    });
+
+    it('should fall back to jittered exponential backoff when metadata is undefined or lacks a get method', () => {
+      const errWithoutMetadata = Object.assign(new Error('Unavailable'), {
+        code: grpc.status.UNAVAILABLE,
+      }) as grpc.ServiceError;
+      const errWithPlainObjectMetadata = Object.assign(
+        new Error('Unavailable'),
+        {
+          code: grpc.status.UNAVAILABLE,
+          metadata: {} as unknown as grpc.Metadata,
+        },
+      ) as grpc.ServiceError;
+
+      for (const err of [errWithoutMetadata, errWithPlainObjectMetadata]) {
+        const delayMs = getNextRetryDelayMs(err, 1, {
+          initialRetryDelayMillis: 100,
+          retryDelayMultiplier: 1.3,
+          maxRetryDelayMillis: 32000,
+        });
+        assert.ok(
+          delayMs >= 80 && delayMs <= 120,
+          `Expected delay in [80, 120], got ${delayMs}`,
+        );
+      }
     });
   });
 });

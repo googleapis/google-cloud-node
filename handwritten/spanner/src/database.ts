@@ -3831,6 +3831,7 @@ class Database extends common.GrpcServiceObject {
       },
     });
     delete baseGaxOpts.retry;
+    delete baseGaxOpts.maxRetries;
     const hasExplicitTimeout =
       options?.gaxOptions?.timeout !== undefined ||
       options?.gaxOptions?.retry?.backoffSettings?.totalTimeoutMillis !==

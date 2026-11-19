@@ -174,9 +174,9 @@ export function getNextRetryDelayMs(
     NonNullable<NonNullable<CallOptions['retry']>['backoffSettings']>
   >,
 ): number {
-  const retryInfoValues = err?.metadata && err.metadata.get(RETRY_INFO_BIN);
-  if (retryInfoValues && retryInfoValues.length > 0) {
-    try {
+  try {
+    const retryInfoValues = err?.metadata?.get?.(RETRY_INFO_BIN);
+    if (retryInfoValues && retryInfoValues.length > 0) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const {retryDelay} = (RetryInfo as any).decode(retryInfoValues[0]);
       if (retryDelay) {
@@ -195,9 +195,9 @@ export function getNextRetryDelayMs(
           return delayMs;
         }
       }
-    } catch {
-      // Fall back to exponential backoff if RetryInfo decoding fails.
     }
+  } catch {
+    // Fall back to exponential backoff if RetryInfo extraction or decoding fails.
   }
 
   const initialDelay =

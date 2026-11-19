@@ -54,12 +54,12 @@ const DEFAULT_TOTAL_TIMEOUT_MS = 3600000; // 1 hour
  */
 function isRetryableError(
   err: grpc.ServiceError,
-  retryCodes?: grpc.status[] | null,
+  retry?: CallOptions['retry'],
 ): boolean {
-  if (!err || typeof err.code !== 'number') {
+  if (retry === null || !err || typeof err.code !== 'number') {
     return false;
   }
-  const retryableCodes = retryCodes ?? [grpc.status.UNAVAILABLE];
+  const retryableCodes = retry?.retryCodes ?? [grpc.status.UNAVAILABLE];
   const allowsNetworkRetries = retryableCodes.includes(grpc.status.UNAVAILABLE);
   return (
     retryableCodes.includes(err.code) ||
@@ -161,8 +161,9 @@ function handleRetryOrFail(
     gaxOptions?.timeout ??
     backoffSettings?.totalTimeoutMillis ??
     DEFAULT_TOTAL_TIMEOUT_MS;
-  const maxRetries = backoffSettings?.maxRetries ?? Infinity;
-  const retryable = isRetryableError(err, gaxOptions?.retry?.retryCodes);
+  const maxRetries =
+    gaxOptions?.maxRetries ?? backoffSettings?.maxRetries ?? Infinity;
+  const retryable = isRetryableError(err, gaxOptions?.retry);
   const elapsed = Date.now() - state.startTime;
 
   if (

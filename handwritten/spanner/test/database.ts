@@ -916,7 +916,13 @@ describe('Database', () => {
       const stream1 = through.obj();
       const stream2 = through.obj();
       requestStreamStub.onCall(0).returns(stream1);
-      requestStreamStub.onCall(1).returns(stream2);
+      requestStreamStub.onCall(1).callsFake(() => {
+        setImmediate(() => {
+          stream2.write({indexes: [0], status: {code: grpc.status.OK}});
+          stream2.end();
+        });
+        return stream2;
+      });
 
       const retryOptions: BatchWriteOptions = {
         ...options,
@@ -993,11 +999,6 @@ describe('Database', () => {
           code: grpc.status.UNAVAILABLE,
         }),
       );
-
-      setTimeout(() => {
-        stream2.write({indexes: [0], status: {code: grpc.status.OK}});
-        stream2.end();
-      }, 15);
     });
 
     it('should initialize and pass metricsTracer across all retry attempts in batchWriteAtLeastOnce', done => {
@@ -1011,7 +1012,13 @@ describe('Database', () => {
       sandbox.stub(spanner, '_initMetricsTracer').returns(fakeTracer);
 
       requestStreamStub.onCall(0).returns(stream1);
-      requestStreamStub.onCall(1).returns(stream2);
+      requestStreamStub.onCall(1).callsFake(() => {
+        setImmediate(() => {
+          stream2.write({indexes: [0], status: {code: grpc.status.OK}});
+          stream2.end();
+        });
+        return stream2;
+      });
 
       const retryOptions: BatchWriteOptions = {
         gaxOptions: {
@@ -1055,11 +1062,6 @@ describe('Database', () => {
           code: grpc.status.UNAVAILABLE,
         }),
       );
-
-      setTimeout(() => {
-        stream2.write({indexes: [0], status: {code: grpc.status.OK}});
-        stream2.end();
-      }, 15);
     });
 
     it('should not call `requestStream` or initialize metrics if stream is destroyed before `getSession` resolves', done => {
