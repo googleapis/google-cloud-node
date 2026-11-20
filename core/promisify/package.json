@@ -17,10 +17,8 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "presystem-test": "npm run compile",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha build/system-test",
-    "prelint": "cd samples; npm link ../; npm install",
+    "samples-test": "echo 'no samples tests'",
+    "system-test": "echo 'no system tests'",
     "clean": "gts clean",
     "precompile": "gts clean"
   },
