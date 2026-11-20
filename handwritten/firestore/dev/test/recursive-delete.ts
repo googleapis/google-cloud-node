@@ -54,9 +54,12 @@ import api = google.firestore.v1;
 import {
   RECURSIVE_DELETE_MAX_PENDING_OPS,
   REFERENCE_NAME_MIN_ID,
-  REFERENCE_NAME_MIN_STRING_ID,
 } from '../src/recursive-delete';
 import {Deferred} from '../src/util';
+
+// Declared here rather than imported so that the tests check the value that
+// the production code emits.
+const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
 const PROJECT_ID = 'test-project';
 const DATABASE_ROOT = `projects/${PROJECT_ID}/databases/(default)`;
@@ -193,6 +196,7 @@ describe('recursiveDelete() method:', () => {
             req,
             select('__name__'),
             allDescendants(/* kindless= */ true),
+            orderBy('__name__', 'ASCENDING'),
             descendantsOf('root'),
             limit(RECURSIVE_DELETE_MAX_PENDING_OPS),
           );
@@ -211,6 +215,7 @@ describe('recursiveDelete() method:', () => {
             'root/doc',
             select('__name__'),
             allDescendants(/* kindless= */ true),
+            orderBy('__name__', 'ASCENDING'),
             descendantsOf('root/doc/nestedCol'),
             limit(RECURSIVE_DELETE_MAX_PENDING_OPS),
           );
@@ -231,6 +236,7 @@ describe('recursiveDelete() method:', () => {
             'root/doc',
             select('__name__'),
             allDescendants(/* kindless= */ true),
+            orderBy('__name__', 'ASCENDING'),
             limit(RECURSIVE_DELETE_MAX_PENDING_OPS),
           );
           return stream();
@@ -313,6 +319,7 @@ describe('recursiveDelete() method:', () => {
               request,
               select('__name__'),
               allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
               descendantsOf('root'),
               limit(maxPendingOps),
             );

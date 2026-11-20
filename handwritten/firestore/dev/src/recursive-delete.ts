@@ -22,13 +22,13 @@ import Firestore, {
   CollectionReference,
   DocumentReference,
   FieldPath,
-  Filter,
   Query,
   QueryDocumentSnapshot,
 } from '.';
 import {Deferred, wrapError} from './util';
 import type {GoogleError} from 'google-gax';
 import {BulkWriterError} from './bulk-writer';
+import {Filter} from './filter';
 import {QueryOptions} from './reference/query-options';
 import {StatusCode} from './status-code';
 
@@ -47,7 +47,7 @@ export const REFERENCE_NAME_MIN_ID = '__id-9223372036854775808__';
  * first, while Enterprise edition orders REFERENCE_NAME_MIN_STRING_ID first.
  * Both are used to bound queries for all descendants in a single collection.
  */
-export const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
+const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
 /*!
  * The query limit used for recursive deletes when fetching all descendants of
@@ -259,8 +259,13 @@ export class RecursiveDelete {
       ),
     );
 
-    // Query for names only to fetch empty snapshots.
-    query = query.select(FieldPath.documentId()).limit(this.maxPendingOps);
+    // Query for names only to fetch empty snapshots. Order by name explicitly:
+    // Enterprise edition does not guarantee an implicit order, and the last
+    // document of each batch is the cursor for the next one.
+    query = query
+      .select(FieldPath.documentId())
+      .orderBy(FieldPath.documentId())
+      .limit(this.maxPendingOps);
 
     if (ref instanceof CollectionReference) {
       // To find all descendants of a collection reference, we need to use a
@@ -272,17 +277,23 @@ export class RecursiveDelete {
       // the next possible collection (the collection ID followed by a null
       // byte), using both minimums for each bound.
       const nullChar = String.fromCharCode(0);
-      const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
-      const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
       const endAt = collectionId + nullChar + '/' + REFERENCE_NAME_MIN_ID;
       const endAtString =
         collectionId + nullChar + '/' + REFERENCE_NAME_MIN_STRING_ID;
 
-      // The lower bound is the disjunction of both minimums. Standard edition
-      // does not coalesce the overlapping OR bounds and runs one range scan per
-      // disjunct, so the lower bound is only added to the first query. Later
-      // queries are bounded by startAfter(lastDocumentSnap) instead.
+      // The lower bound is the disjunction of both minimums, since the edition
+      // is not known client-side. Standard edition does not coalesce the
+      // overlapping OR bounds and runs one range scan per disjunct, so the
+      // lower bound is only added to the first query of this RecursiveDelete;
+      // the queries for later batches are bounded by
+      // startAfter(lastDocumentSnap) instead. If the stream of the first query
+      // fails after receiving documents, QueryUtil._stream() retries that same
+      // query with startAfter() on the last received document, so the retry
+      // still carries the OR bound and runs two range scans on Standard
+      // edition.
       if (!this.lastDocumentSnap) {
+        const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
+        const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
         query = query.where(
           Filter.or(
             Filter.where(FieldPath.documentId(), '>=', startAt),
