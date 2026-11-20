@@ -23,87 +23,102 @@ import {perftools} from 'pprof/proto/profile';
 import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
-let savedEnv: {};
-let uploadedProfiles: RequestProfile[] = new Array<RequestProfile>();
-let createProfileCount = 0;
-nock.disableNetConnect();
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
-// Start profiler and collect profiles before testing.
-before(async () => {
-  savedEnv = process.env;
-  process.env = {};
+describe('start', function () {
+  this.timeout(60000);
 
-  process.env.GCLOUD_PROJECT = 'test-projectId';
-  process.env.GAE_SERVICE = 'test-service';
-  process.env.GAE_VERSION = '0.0.0';
+  let savedEnv: NodeJS.ProcessEnv | undefined;
+  let uploadedProfiles: RequestProfile[] = new Array<RequestProfile>();
+  let createProfileCount = 0;
 
-  // Mock profiler API.
-  nock(API)
-    .persist()
-    .post('/projects/' + process.env.GCLOUD_PROJECT + '/profiles')
-    .delay(1000)
-    .reply(200, (): RequestProfile => {
-      let prof;
-      if (createProfileCount % 2 === 0) {
-        prof = {
-          name: 'projects/X/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-        };
-      } else {
-        prof = {
-          name: 'projects/X/test-projectId',
-          profileType: 'HEAP',
-          duration: '10s',
-        };
-      }
-      createProfileCount++;
-      return prof;
-    });
-  const tempUploadedProfiles = new Array<RequestProfile>();
-  nock(API)
-    .persist()
-    .patch('/projects/X/test-projectId')
-    .reply(200, (_: RequestProfile, body: RequestProfile) => {
-      if (typeof body === 'string') {
-        body = JSON.parse(body);
-      }
-      tempUploadedProfiles.push(body);
-    });
-  nock('https://oauth2.googleapis.com')
-    .post(/\/token/, () => true)
-    .once()
-    .reply(200, {
-      refresh_token: 'hello',
-      access_token: 'goodbye',
-      expiry_date: new Date(9999, 1, 1),
-    });
+  function restoreEnv() {
+    if (!savedEnv) {
+      return;
+    }
+    for (const key of Object.keys(process.env)) {
+      delete process.env[key];
+    }
+    Object.assign(process.env, savedEnv);
+  }
 
-  // start profiling and wait to collect profiles.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const profiler = require('../src/index');
-  profiler.start({credentials: fakeCredentials});
-  await delay(30 * 1000);
+  // Start profiler and collect profiles before testing.
+  before(async () => {
+    nock.disableNetConnect();
+    savedEnv = {...process.env};
+    for (const key of Object.keys(process.env)) {
+      delete process.env[key];
+    }
 
-  // copy over currently uploaded profiles, so all tests look at same profiles.
-  uploadedProfiles = tempUploadedProfiles.slice();
+    process.env.GCLOUD_PROJECT = 'test-projectId';
+    process.env.GAE_SERVICE = 'test-service';
+    process.env.GAE_VERSION = '0.0.0';
 
-  // Restore environment variables and mocks.
-  process.env = savedEnv;
-});
+    // Mock profiler API.
+    nock(API)
+      .persist()
+      .post('/projects/' + process.env.GCLOUD_PROJECT + '/profiles')
+      .delay(1000)
+      .reply(200, (): RequestProfile => {
+        let prof;
+        if (createProfileCount % 2 === 0) {
+          prof = {
+            name: 'projects/X/test-projectId',
+            profileType: 'WALL',
+            duration: '10s',
+          };
+        } else {
+          prof = {
+            name: 'projects/X/test-projectId',
+            profileType: 'HEAP',
+            duration: '10s',
+          };
+        }
+        createProfileCount++;
+        return prof;
+      });
+    const tempUploadedProfiles = new Array<RequestProfile>();
+    nock(API)
+      .persist()
+      .patch('/projects/X/test-projectId')
+      .reply(200, (_uri: string, body: string | RequestProfile) => {
+        const parsedBody: RequestProfile =
+          typeof body === 'string' ? JSON.parse(body) : body;
+        tempUploadedProfiles.push(parsedBody);
+      });
+    nock('https://oauth2.googleapis.com')
+      .post(/\/token/, () => true)
+      .once()
+      .reply(200, {
+        refresh_token: 'hello',
+        access_token: 'goodbye',
+        expiry_date: new Date(9999, 1, 1),
+      });
 
-// Restore environment variables after tests.
-// nock not restored, since profiles still being uploaded.
-after(() => {
-  process.env = savedEnv;
-});
+    // start profiling and wait to collect profiles.
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const profiler = require('../src/index');
+    profiler.start({credentials: fakeCredentials});
+    await delay(30 * 1000);
 
-describe('start', () => {
+    // copy over currently uploaded profiles, so all tests look at same profiles.
+    uploadedProfiles = tempUploadedProfiles.slice();
+
+    // Restore environment variables.
+    restoreEnv();
+  });
+
+  // Restore environment variables and clear nock interceptors after tests.
+  // Keep net connect disabled since the profiler loop cannot be stopped until
+  // process exit.
+  after(() => {
+    restoreEnv();
+    nock.cleanAll();
+  });
+
   it('should have uploaded multiple profiles', () => {
-    nock.restore();
     assert.ok(
       uploadedProfiles.length >= 2,
       'Expected 2 or more profiles to be uploaded'
