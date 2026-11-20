@@ -67,7 +67,8 @@ import {
 import {PublishOptions} from './publisher';
 import {CallOptions} from 'google-gax';
 import {Transform} from 'stream';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import * as tracing from './telemetry-tracing';
 
 type SchemaServiceClient = v1.SchemaServiceClient;
