@@ -18,20 +18,25 @@
 
 set -eo pipefail
 
-## Get the directory of the build script
-scriptDir=$(realpath $(dirname "${BASH_SOURCE[0]}"))
-## cd to the parent directory, i.e. the root of the git repo
-cd ${scriptDir}/..
+if [ -z "${KOKORO_JOB_NAME:-}" ]; then
+  echo "KOKORO_JOB_NAME is not set; skipping sponge log coercion."
+  exit 0
+fi
 
-job=$(basename ${KOKORO_JOB_NAME})
+## Get the directory of the build script
+scriptDir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+## cd to the parent directory, i.e. handwritten/bigtable
+cd "${scriptDir}/.."
+
+job=$(basename "${KOKORO_JOB_NAME}")
 
 echo "coercing sponge logs..."
-for xml in `find . -name *-sponge_log.xml`
+for xml in $(find . -name '*-sponge_log.xml')
 do
-  class=$(basename ${xml} | cut -d- -f2)
-  dir=$(dirname ${xml})/${job}/${class}
-  text=$(dirname ${xml})/${class}-sponge_log.txt
-  mkdir -p ${dir}
-  mv ${xml} ${dir}/sponge_log.xml
-  mv ${text} ${dir}/sponge_log.txt
+  class=$(basename "${xml}" | cut -d- -f2)
+  dir=$(dirname "${xml}")/${job}/${class}
+  text=$(dirname "${xml}")/${class}-sponge_log.txt
+  mkdir -p "${dir}"
+  mv "${xml}" "${dir}/sponge_log.xml"
+  mv "${text}" "${dir}/sponge_log.txt"
 done

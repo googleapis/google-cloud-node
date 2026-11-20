@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {protos} from '../../../../src';
-import google = protos.google;
+import {protos} from '@google-cloud/bigtable-api';
 import {SqlTypes} from '../../../../src';
 import {MetadataConsumer} from '../../../../src/execute-query/metadataconsumer';
 import {
@@ -55,6 +54,9 @@ async function getMetadataFromPreparedStatement(
 
 export async function parseMetadata(preparedStatement: PreparedStatement) {
   const metadata = await getMetadataFromPreparedStatement(preparedStatement);
+  if (!metadata) {
+    return [];
+  }
   const values = metadata.columns.map((v, i) => {
     return [metadata.getFieldNameAtIndex(i), executeQueryTypeToPBType(v)];
   });
@@ -191,6 +193,9 @@ export async function parseRows(
   rows: QueryResultRow[],
 ) {
   const metadata = await getMetadataFromPreparedStatement(preparedStatement);
+  if (!metadata) {
+    return [];
+  }
   const parsedRows = rows.map(row => {
     const rowValues = metadata.columns.map((type, i) => {
       const value = row.get(i);
@@ -207,7 +212,7 @@ export async function parseParameters(params: {
   const parameters: {[param: string]: SqlValue} = {};
   const parameterTypes: {[param: string]: SqlTypes.Type} = {};
   const transfomer = new ExecuteQueryStreamTransformWithMetadata(
-    null as any,
+    null as unknown as MetadataConsumer,
     () => false,
     'utf-8',
     {},
