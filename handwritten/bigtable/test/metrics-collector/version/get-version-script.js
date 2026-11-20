@@ -57,20 +57,40 @@ async function main() {
   const packagePath = path.join(__dirname, '../../../package.json');
 
   // Read the file using the absolute path
-  const packageJSON = fs.readFileSync(packagePath);
-  const expectedVersion = JSON.parse(packageJSON.toString()).version;
+  const packageJSON = fs.readFileSync(packagePath, 'utf8');
+  const expectedVersion = JSON.parse(packageJSON).version;
 
+  // Verify the working directory contains a distinct fake package.json so this
+  // test genuinely guards against reading package.json from process.cwd().
+  const cwdPackagePath = path.join(process.cwd(), 'package.json');
+  const cwdVersion = JSON.parse(
+    fs.readFileSync(cwdPackagePath, 'utf8'),
+  ).version;
+  if (cwdVersion === expectedVersion) {
+    throw new Error(
+      `Expected cwd package.json version (${cwdVersion}) to differ from @google-cloud/bigtable version (${expectedVersion})`,
+    );
+  }
+
+  // Disable the default GCPMetricsHandler so constructing Bigtable does not
+  // spawn GCE metadata HTTP probes or a 60s PeriodicExportingMetricReader
+  // timer before we attach TestMetricsHandlerKeepName.
   const fakeBigtable = new Bigtable({
     projectId: 'projectId',
-    credentials: {client_email: 'bogus', private_key: 'bogus'},
+    metricsEnabled: false,
   });
   const testMetricsHandler = new TestMetricsHandlerKeepName();
   fakeBigtable._metricsConfigManager = new ClientSideMetricsConfigManager([
     testMetricsHandler,
   ]);
 
+  // Close the client before issuing getRows() so the operation completes
+  // hermetically without making real DNS, auth, or network calls.
+  await fakeBigtable.close();
+
   const instance = fakeBigtable.instance('fake-instance-id');
   const table = instance.table('fake-table-id');
+  table.maxRetries = 0;
   try {
     await table.getRows();
   } catch (e) {
@@ -78,11 +98,19 @@ async function main() {
     // We just made this call so that the test metrics handler would
     // collect grpc response data.
   }
-  if (
-    testMetricsHandler.requestsHandled[0].client_name !==
-    `nodejs-bigtable/${expectedVersion}`
-  ) {
-    throw Error('The wrong version is being recorded');
+  if (testMetricsHandler.requestsHandled.length === 0) {
+    throw new Error('Expected at least one metrics event to be recorded');
+  }
+  const expectedClientName = `nodejs-bigtable/${expectedVersion}`;
+  for (const request of testMetricsHandler.requestsHandled) {
+    if (request.client_name !== expectedClientName) {
+      throw new Error(
+        `The wrong version is being recorded: expected ${expectedClientName}, got ${request.client_name}`,
+      );
+    }
   }
 }
-main();
+main().catch(err => {
+  console.error(err);
+  process.exitCode = 1;
+});
