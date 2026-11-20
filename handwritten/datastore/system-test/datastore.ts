@@ -3359,8 +3359,9 @@ async.each(
       describe('using the rest fallback parameter', () => {
         it('should make a get call using rest instead of grpc', async () => {
           const customDatastore = new Datastore({
-            databaseId: clientOptions.databaseId,
             fallback: 'rest',
+            databaseId: clientOptions.databaseId,
+            namespace: clientOptions.namespace,
           });
           const postKey = datastore.key(['Post', 'nonexistent-rest-post']);
           const [entity] = await customDatastore.get(postKey);
