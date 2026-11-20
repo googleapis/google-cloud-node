@@ -43,9 +43,9 @@ import {
  * @extends Query
  */
 export class CollectionReference<
-    AppModelType = firestore.DocumentData,
-    DbModelType extends firestore.DocumentData = firestore.DocumentData,
-  >
+  AppModelType = firestore.DocumentData,
+  DbModelType extends firestore.DocumentData = firestore.DocumentData,
+>
   extends Query<AppModelType, DbModelType>
   implements firestore.CollectionReference<AppModelType, DbModelType>
 {
@@ -186,10 +186,11 @@ export class CollectionReference<
           };
 
           return this.firestore
-            .request<
-              api.IListDocumentsRequest,
-              api.IDocument[]
-            >('listDocuments', request, tag)
+            .request<api.IListDocumentsRequest, api.IDocument[]>(
+              'listDocuments',
+              request,
+              tag,
+            )
             .then(documents => {
               // Note that the backend already orders these documents by name,
               // so we do not need to manually sort them.
