@@ -325,16 +325,31 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     };
 
     if (callback) {
+      let callbackCalled = false;
       this.storageTransport
         .makeRequest(req, (err, data, resp) => {
+          callbackCalled = true;
           if (err) {
-            if (err.status === 404 && ignoreNotFound) {
+            const status = err.response?.status ?? err.status ?? err.code;
+            if (status === 404 && ignoreNotFound) {
               err = null;
             }
           }
           callback(err, resp);
         })
-        .catch(err => callback!(err));
+        .catch(err => {
+          if (callbackCalled) {
+            return;
+          }
+          if (err) {
+            const status = err.response?.status ?? err.status ?? err.code;
+            if (status === 404 && ignoreNotFound) {
+              callback!(null, err.response);
+              return;
+            }
+          }
+          callback!(err);
+        });
       return;
     }
 
@@ -342,7 +357,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       .makeRequest(req)
       .then(resp => [resp] as [GaxiosResponse])
       .catch(err => {
-        if (err.status === 404 && ignoreNotFound) {
+        const status = err?.response?.status ?? err?.status ?? err?.code;
+        if (status === 404 && ignoreNotFound) {
           return [err.response] as [GaxiosResponse];
         }
         throw err;
@@ -370,7 +386,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     this.get(options, err => {
       if (err) {
-        if (err.status === 404) {
+        const status = err.response?.status ?? err.status ?? err.code;
+        if (status === 404) {
           callback!(null, false);
         } else {
           callback!(err);
@@ -414,7 +431,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     function onCreate(err: GaxiosError | null, instance: T) {
       if (err) {
-        if (err.status === 409) {
+        const status = err.response?.status ?? err.status ?? err.code;
+        if (status === 409) {
           self.get(options, callback!);
           return;
         }
@@ -426,7 +444,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     this.getMetadata(options, async err => {
       if (err) {
-        if (err.status === 404 && autoCreate) {
+        const status = err.response?.status ?? err.status ?? err.code;
+        if (status === 404 && autoCreate) {
           const args: Array<Function | GetOrCreateOptions> = [];
           if (Object.keys(options).length > 0) {
             args.push(options);
@@ -503,14 +522,20 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     };
 
     if (callback) {
+      let callbackCalled = false;
       this.storageTransport
         .makeRequest<K>(req, (err, data, resp) => {
+          callbackCalled = true;
           if (!err && data) {
             this.metadata = data;
           }
           callback(err, data!, resp);
         })
-        .catch(err => callback!(err));
+        .catch(err => {
+          if (!callbackCalled) {
+            callback!(err);
+          }
+        });
       return;
     }
 
