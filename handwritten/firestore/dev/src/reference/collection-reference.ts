@@ -24,7 +24,6 @@ import {
   validateResourcePath,
 } from '../path';
 import {autoId, requestTag} from '../util';
-import {validateDocumentData} from '../write-batch';
 import {defaultConverter} from '../types';
 import {Query} from './query';
 import Firestore from '../index';
@@ -44,9 +43,9 @@ import {
  * @extends Query
  */
 export class CollectionReference<
-    AppModelType = firestore.DocumentData,
-    DbModelType extends firestore.DocumentData = firestore.DocumentData,
-  >
+  AppModelType = firestore.DocumentData,
+  DbModelType extends firestore.DocumentData = firestore.DocumentData,
+>
   extends Query<AppModelType, DbModelType>
   implements firestore.CollectionReference<AppModelType, DbModelType>
 {
@@ -187,10 +186,11 @@ export class CollectionReference<
           };
 
           return this.firestore
-            .request<
-              api.IListDocumentsRequest,
-              api.IDocument[]
-            >('listDocuments', request, tag)
+            .request<api.IListDocumentsRequest, api.IDocument[]>(
+              'listDocuments',
+              request,
+              tag,
+            )
             .then(documents => {
               // Note that the backend already orders these documents by name,
               // so we do not need to manually sort them.
@@ -273,14 +273,6 @@ export class CollectionReference<
     return this._firestore._traceUtil.startActiveSpan(
       SPAN_NAME_COL_REF_ADD,
       () => {
-        const firestoreData = this._queryOptions.converter.toFirestore(data);
-        validateDocumentData(
-          'data',
-          firestoreData,
-          /*allowDeletes=*/ false,
-          this._allowUndefined,
-        );
-
         const documentRef = this.doc();
         return documentRef.create(data).then(() => documentRef);
       },

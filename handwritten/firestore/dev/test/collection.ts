@@ -16,6 +16,8 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {expect} from 'chai';
 import * as through2 from 'through2';
 
+import {DocumentData} from '@google-cloud/firestore';
+
 import {DocumentReference, Firestore, setLogFunction} from '../src';
 import {
   ApiOverride,
@@ -275,6 +277,46 @@ describe('Collection interface', () => {
       expect(post).to.not.be.undefined;
       expect(post!.toString()).to.equal('post, by author');
     });
+  });
+
+  it('calls toFirestore() once for CollectionReference.withConverter().add()', async () => {
+    let toFirestoreCalls = 0;
+    const countingConverter = {
+      ...postConverter,
+      toFirestore(post: Post): DocumentData {
+        ++toFirestoreCalls;
+        return postConverter.toFirestore(post);
+      },
+    };
+    const overrides: ApiOverride = {
+      commit: () => response(writeResult(1)),
+    };
+
+    return createInstance(overrides).then(async firestore => {
+      await firestore
+        .collection('collectionId')
+        .withConverter(countingConverter)
+        .add(new Post('post', 'author'));
+      expect(toFirestoreCalls).to.equal(1);
+    });
+  });
+
+  it('validates the converted data in CollectionReference.withConverter().add()', () => {
+    const undefinedConverter = {
+      ...postConverter,
+      toFirestore(): DocumentData {
+        return {foo: undefined};
+      },
+    };
+
+    expect(() => {
+      void firestore
+        .collection('collectionId')
+        .withConverter(undefinedConverter)
+        .add(new Post('post', 'author'));
+    }).to.throw(
+      'Value for argument "data" is not a valid Firestore document. Cannot use "undefined" as a Firestore value (found in field "foo").',
+    );
   });
 
   it('withConverter(null) applies the default converter', async () => {
