@@ -104,7 +104,7 @@ async.each(
         const request: {
           keys: Array<{
             path: Array<{kind: string; name: string}>;
-            partitionId: {namespaceId?: string};
+            partitionId?: {namespaceId?: string};
           }>;
           projectId: string;
           databaseId?: string;
