@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "46517fb49d3e3ae1b35af21adf352a277a5e45ea",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9817"
+          ]
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "75e3d8de-a822-42a5-afc4-3201edd9a7d7",
+      "createTime": "2026-11-20T00:35:47.689Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "9f31cb2cc999d07901b2098950c12d5f4934db33",
           "message": "Regenerate with gapic-generator-v5.7.3",
@@ -107878,5 +107895,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-12T20:23:42.797Z"
+  "updateTime": "2026-11-20T00:35:47.689Z"
 }
