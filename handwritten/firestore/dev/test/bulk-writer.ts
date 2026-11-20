@@ -1347,6 +1347,102 @@ describe.skip('BulkWriter', () => {
     await bulkWriter.close();
   });
 
+  describe('retries for a batch that returns after the flushed batch', () => {
+    /**
+     * Creates an instance that holds the response of the first batch until the
+     * second batch (sent by close()) has returned, so that retries from the
+     * first batch are enqueued after close() is done scheduling.
+     */
+    function instantiateInstance(mock: RequestResponse[]): Promise<BulkWriter> {
+      const secondBatchReturned = new Deferred<void>();
+      const overrides: ApiOverride = {
+        batchWrite: async (request, options) => {
+          expect(options!.retry!.retryCodes).contains(Status.ABORTED);
+          const current = requestCounter++;
+          expect(request).to.deep.eq({
+            database: `projects/${PROJECT_ID}/databases/(default)`,
+            writes: mock[current].request.writes,
+          });
+          if (current === 0) {
+            await secondBatchReturned.promise;
+          }
+          const result = response(mock[current].response);
+          if (current === 1) {
+            setImmediate(() => secondBatchReturned.resolve());
+          }
+          return result;
+        },
+      };
+      return createInstance(overrides).then(firestoreClient => {
+        firestore = firestoreClient;
+        return firestore.bulkWriter();
+      });
+    }
+
+    it('are sent when the first batch was sent because it was full', async () => {
+      setTimeoutHandler(setImmediate);
+      const bulkWriter = await instantiateInstance([
+        {
+          request: createRequest([setOp('doc1', 'bar'), setOp('doc2', 'bar')]),
+          response: mergeResponses([
+            failedResponse(Status.ABORTED),
+            successResponse(1),
+          ]),
+        },
+        {
+          request: createRequest([setOp('doc3', 'bar')]),
+          response: successResponse(2),
+        },
+        {
+          request: createRequest([setOp('doc1', 'bar')]),
+          response: successResponse(3),
+        },
+      ]);
+      bulkWriter._setMaxBatchSize(2);
+
+      const set1 = bulkWriter.set(firestore.doc('collectionId/doc1'), {
+        foo: 'bar',
+      });
+      void bulkWriter.set(firestore.doc('collectionId/doc2'), {foo: 'bar'});
+      void bulkWriter.set(firestore.doc('collectionId/doc3'), {foo: 'bar'});
+      await bulkWriter.close();
+
+      expect((await set1).writeTime).to.deep.equal(new Timestamp(3, 0));
+      expect(requestCounter).to.equal(3);
+    });
+
+    it('are sent when the first batch was sent because of a write to the same document', async () => {
+      setTimeoutHandler(setImmediate);
+      const bulkWriter = await instantiateInstance([
+        {
+          request: createRequest([setOp('doc1', 'bar'), setOp('doc2', 'bar')]),
+          response: mergeResponses([
+            failedResponse(Status.ABORTED),
+            successResponse(1),
+          ]),
+        },
+        {
+          request: createRequest([setOp('doc2', 'bar2')]),
+          response: successResponse(2),
+        },
+        {
+          request: createRequest([setOp('doc1', 'bar')]),
+          response: successResponse(3),
+        },
+      ]);
+
+      const set1 = bulkWriter.set(firestore.doc('collectionId/doc1'), {
+        foo: 'bar',
+      });
+      void bulkWriter.set(firestore.doc('collectionId/doc2'), {foo: 'bar'});
+      void bulkWriter.set(firestore.doc('collectionId/doc2'), {foo: 'bar2'});
+      await bulkWriter.close();
+
+      expect((await set1).writeTime).to.deep.equal(new Timestamp(3, 0));
+      expect(requestCounter).to.equal(3);
+    });
+  });
+
   describe('if bulkCommit() fails', async () => {
     function instantiateInstance(): Promise<BulkWriter> {
       const overrides: ApiOverride = {

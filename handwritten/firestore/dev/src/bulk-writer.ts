@@ -992,7 +992,12 @@ export class BulkWriter {
     const underRateLimit = this._rateLimiter.tryMakeRequest(batch._opCount);
     if (underRateLimit) {
       await batch.bulkCommit({requestTag: tag});
-      if (flush) this._scheduleCurrentBatch(flush);
+      // Retries from this batch may be left in the current batch. Schedule it
+      // since flush() or close() may have already finished scheduling.
+      const hasRetries = this._bulkCommitBatch.pendingOps.some(
+        op => op.backoffDuration > 0,
+      );
+      if (flush || hasRetries) this._scheduleCurrentBatch(flush);
     } else {
       const delayMs = this._rateLimiter.getNextRequestDelayMs(batch._opCount);
       logger(
