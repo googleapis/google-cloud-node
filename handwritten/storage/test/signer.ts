@@ -106,6 +106,109 @@ describe('signer', () => {
         };
       });
 
+      describe('V4 canonical header ordering', () => {
+        const cases = [
+          {
+            name: 'hyphens before underscores',
+            headers: {'x-goog-meta-a_b': '1', 'x-goog-meta-a-b': '2'},
+            canonical: 'x-goog-meta-a-b:2\nx-goog-meta-a_b:1\n',
+          },
+          {
+            name: 'reverse insertion order',
+            headers: {'x-goog-meta-a-b': '2', 'x-goog-meta-a_b': '1'},
+            canonical: 'x-goog-meta-a-b:2\nx-goog-meta-a_b:1\n',
+          },
+          {
+            name: 'mixed-case names and normalized values',
+            headers: {
+              'X-Goog-Meta-A_B': '  one   two ',
+              'X-Goog-Meta-A-B': ['2', '3'],
+            },
+            canonical: 'x-goog-meta-a-b:2,3\nx-goog-meta-a_b:one two\n',
+          },
+          {
+            name: 'locale-sensitive letters',
+            headers: {'x-goog-meta-y': '1', 'x-goog-meta-j': '2'},
+            canonical: 'x-goog-meta-j:2\nx-goog-meta-y:1\n',
+          },
+        ];
+
+        for (const locale of ['default', 'lt']) {
+          for (const testCase of cases) {
+            it(`should sign ${testCase.name} in code-point order (${locale})`, async function () {
+              if (locale === 'lt') {
+                if (!Intl.Collator.supportedLocalesOf('lt').length) {
+                  this.skip();
+                }
+                // Exercise Lithuanian collation without changing the process locale.
+                const collator = new Intl.Collator('lt');
+                sandbox
+                  .stub(String.prototype, 'localeCompare')
+                  .callsFake(function (this: string, other: string) {
+                    return collator.compare(this, other);
+                  });
+              }
+              const canonicalRequest = sandbox.spy(
+                signer,
+                'getCanonicalRequest',
+              );
+              const sign = sandbox
+                .stub(authClient, 'sign')
+                .resolves('signature');
+              const signedUrl = new URL(
+                await signer.getSignedUrl({
+                  ...CONFIG,
+                  version: 'v4',
+                  extensionHeaders: testCase.headers,
+                }),
+              );
+              const headers =
+                'host:storage.googleapis.com\n' + testCase.canonical;
+              const signedHeaders = headers
+                .trim()
+                .split('\n')
+                .map(header => header.split(':')[0])
+                .join(';');
+              const query = signedUrl.searchParams;
+              assert.strictEqual(
+                query.get('X-Goog-SignedHeaders'),
+                signedHeaders,
+              );
+              const expectedRequest = [
+                'GET',
+                '/bucket-name/file-name.png',
+                `X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=client-email%2F20190318%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20190318T000000Z&X-Goog-Expires=2&X-Goog-SignedHeaders=${encodeURIComponent(signedHeaders)}`,
+                headers,
+                signedHeaders,
+                'UNSIGNED-PAYLOAD',
+              ].join('\n');
+              assert.strictEqual(canonicalRequest.firstCall.args[3], headers);
+              assert.strictEqual(
+                canonicalRequest.firstCall.args[4],
+                signedHeaders,
+              );
+              assert.strictEqual(
+                canonicalRequest.firstCall.returnValue,
+                expectedRequest,
+              );
+              const hash = crypto
+                .createHash('sha256')
+                .update(expectedRequest)
+                .digest('hex');
+              assert.strictEqual(
+                sign.firstCall.args[0],
+                [
+                  'GOOG4-RSA-SHA256',
+                  '20190318T000000Z',
+                  '20190318/auto/storage/goog4_request',
+                  hash,
+                ].join('\n'),
+              );
+            });
+          }
+        }
+      });
+
       describe('version', () => {
         it('should default to v2 if version is not given', async () => {
           const v2 = sandbox
@@ -476,6 +579,26 @@ describe('signer', () => {
 
           const blobToSign = authClientSign.getCall(0).args[0];
           assert(blobToSign.startsWith('GET'));
+        });
+
+        it('should sign V2 headers in code-point order', async () => {
+          CONFIG.extensionHeaders = {
+            'X-Goog-Meta-A_B': '  one   two ',
+            'x-goog-meta-a-b': ['2', '3'],
+          };
+          await signer['getSignedUrlV2'](CONFIG);
+          assert.strictEqual(
+            authClientSign.firstCall.args[0],
+            [
+              'GET',
+              '',
+              '',
+              CONFIG.expiration,
+              'x-goog-meta-a-b:2,3',
+              'x-goog-meta-a_b:one two',
+              '/bucket-name/file-name.png',
+            ].join('\n'),
+          );
         });
 
         it('should sign using the `signingEndpoint` when provided', async () => {

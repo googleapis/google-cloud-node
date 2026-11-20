@@ -391,14 +391,14 @@ export class URLSigner {
    * @private
    */
   getCanonicalHeaders(headers: http.OutgoingHttpHeaders) {
-    // Sort headers by their lowercased names
+    // Sort headers by their lowercased names using code-point order.
     const sortedHeaders = objectEntries(headers)
       // Convert header names to lowercase
       .map<[string, HeaderValue]>(([headerName, value]) => [
         headerName.toLowerCase(),
         value,
       ])
-      .sort((a, b) => a[0].localeCompare(b[0]));
+      .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
 
     return sortedHeaders
       .filter(([, value]) => value !== undefined)
