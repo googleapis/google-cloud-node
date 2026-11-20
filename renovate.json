@@ -8,7 +8,7 @@
   "pinVersions": false,
   "rebaseStalePrs": false,
   "schedule": [
-    "0 9 * * 1"
+    "* 9 * * 1"
   ],
   "gitAuthor": null,
   "packageRules": [
@@ -24,7 +24,7 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["0 9 * * 1"],
+    "schedule": ["* 9 * * 1"],
     "groupName": "lockfile maintenance"
   },
   "ignoreDeps": [
