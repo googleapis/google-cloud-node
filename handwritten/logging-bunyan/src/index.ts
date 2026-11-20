@@ -173,10 +173,6 @@ export function getCurrentTraceFromAgent() {
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:logging_bunyan_quickstart
- * Full quickstart example:
- *
  */
 export class LoggingBunyan extends Writable {
   private logName: string;
@@ -232,14 +228,14 @@ export class LoggingBunyan extends Writable {
     /* Asynchrnously attempt to discover the service context. */
     if (!this.serviceContext) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      detectServiceContext((this.cloudLog as any).logging.auth).then(
-        serviceContext => {
+      detectServiceContext((this.cloudLog as any).logging.auth)
+        .then(serviceContext => {
           this.serviceContext = serviceContext!;
-        },
-        () => {
+          return serviceContext;
+        })
+        .catch(() => {
           /* swallow any errors. */
-        },
-      );
+        });
     }
   }
 

@@ -190,10 +190,6 @@ export interface Options extends LoggingOptions {
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json'
  * });
- *
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:logging_winston_quickstart
- * Full quickstart example:
  */
 export class LoggingWinston extends TransportStream {
   static readonly LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
