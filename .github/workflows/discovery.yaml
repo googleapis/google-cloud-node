@@ -28,11 +28,11 @@ jobs:
           node-version: 22
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
 
-      # Install BigQuery dependencies from the frozen root workspace lockfile.
-      - run: pnpm install --frozen-lockfile --ignore-scripts --filter @google-cloud/bigquery
+      # Install root and BigQuery dependencies from the frozen workspace lockfile.
+      - run: pnpm install --frozen-lockfile --ignore-scripts --filter google-cloud-node --filter @google-cloud/bigquery
       # Generate types and format only the generated declaration file.
       - run: pnpm --dir handwritten/bigquery run types
-      - run: pnpm --dir handwritten/bigquery exec gts fix src/types.d.ts
+      - run: pnpm --dir handwritten/bigquery exec prettier --write src/types.d.ts
       # Verify updated types compile and pass BigQuery unit tests before opening a PR.
       - run: pnpm --dir handwritten/bigquery run compile
       - run: pnpm --dir handwritten/bigquery test
