@@ -69,7 +69,7 @@ export const executeQuery: ClientImplMaker<
       const error = e as GoogleError;
       return {
         status: {
-          code: error.code || grpc.status.UNKNOWN,
+          code: error.code || grpc.status.INTERNAL,
           // e.details must be in an empty array for the test runner to return the status. This is tracked in b/383096533.
           details: [],
           message: error.message,

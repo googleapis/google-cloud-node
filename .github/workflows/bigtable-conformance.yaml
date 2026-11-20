@@ -21,14 +21,23 @@ on:
     branches:
     - main
     paths:
+    - '.github/workflows/bigtable-conformance.yaml'
     - 'handwritten/bigtable/**'
+    - '!handwritten/bigtable/CHANGELOG.md'
   pull_request:
     paths:
+    - '.github/workflows/bigtable-conformance.yaml'
     - 'handwritten/bigtable/**'
+    - '!handwritten/bigtable/CHANGELOG.md'
 name: bigtable-conformance
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   conformance:
+    if: ${{ github.event_name != 'pull_request' || !startsWith(github.head_ref, 'release-please--') }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: handwritten/bigtable
@@ -51,8 +60,9 @@ jobs:
     - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
       with:
         go-version: '>=1.20.2'
-    - run: chmod +x .kokoro/conformance.sh
+    - run: chmod +x ./scripts/conformance.sh
     - uses: ./.github/actions/pnpm-lockfile-check
     - run: pnpm --filter ...{handwritten/bigtable} run --if-present compile
+      working-directory: .
     - run: go version
-    - run: .kokoro/conformance.sh
+    - run: ./scripts/conformance.sh
