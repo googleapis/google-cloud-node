@@ -127,10 +127,17 @@ async.each(
         if (!dataClient) {
           throw new Error('DatastoreClient is not initialized');
         }
-        const results = (await dataClient['lookup'](request)) as Array<{
-          readTime: {seconds: string};
-        }>;
-        return parseInt(results[0].readTime.seconds, 10) * 1000;
+        const results = (await dataClient['lookup'](request)) as
+          Array<google.datastore.v1.ILookupResponse> | undefined;
+        const seconds = results?.[0]?.readTime?.seconds;
+        const parsedSeconds =
+          seconds === undefined || seconds === null
+            ? NaN
+            : parseInt(String(seconds), 10);
+        if (Number.isNaN(parsedSeconds)) {
+          throw new Error('Failed to retrieve readTime from lookup response');
+        }
+        return parsedSeconds * 1000;
       }
       // Waits until the Datastore server clock (truncated to whole seconds to match
       // DatastoreRequest#getRequestOptions) advances strictly past `afterMs`.
