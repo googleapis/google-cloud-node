@@ -1,14 +1,21 @@
+name: Update API List
+
 permissions:
   contents: read
 
+concurrency:
+  group: update-api-list
+  cancel-in-progress: false
+
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 1 * * 1"
   workflow_dispatch:
 
 jobs:
   update-api-list:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       issues: write # Added for creating issues on failure
@@ -44,5 +51,5 @@ jobs:
         uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
         with:
           title: "Update API list failed"
-          body: "The daily scheduled task to update the API list failed."
+          body: "The weekly scheduled task to update the API list failed."
           mention: "@googleapis/cloud-sdk-nodejs-team"
