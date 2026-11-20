@@ -849,7 +849,7 @@ export enum BucketExceptionMessages {
  * const prefixes = [];
  *
  * function callback(err, files, nextQuery, apiResponse) {
- *   prefixes = prefixes.concat(apiResponse.prefixes);
+ *   prefixes.push(...(apiResponse.data.prefixes ?? []));
  *
  *   if (nextQuery) {
  *     bucket.getFiles(nextQuery, callback);
@@ -1000,12 +1000,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        */
       /**
        * @typedef {array} DeleteBucketResponse
-       * @property {object} 0 The full API response.
+       * @property {object} 0 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * @callback DeleteBucketCallback
        * @param {?Error} err Request error, if any.
-       * @param {object} apiResponse The full API response.
+       * @param {object} apiResponse The full HTTP API response, with payload
+       *     properties nested under `apiResponse.data`.
        */
       /**
        * Delete the bucket.
@@ -1019,7 +1021,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {DeleteBucketCallback} [callback] Callback function.
-       * @returns {Promise<DeleteBucketResponse>}
+       * @returns {Promise<DeleteBucketResponse>} Resolves with `[apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -1152,13 +1155,15 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       /**
        * @typedef {array} GetBucketMetadataResponse
        * @property {object} 0 The bucket metadata.
-       * @property {object} 1 The full API response.
+       * @property {object} 1 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * @callback GetBucketMetadataCallback
        * @param {?Error} err Request error, if any.
        * @param {object} metadata The bucket metadata.
-       * @param {object} apiResponse The full API response.
+       * @param {object} apiResponse The full HTTP API response, with payload
+       *     properties nested under `apiResponse.data`.
        */
       /**
        * @typedef {object} GetBucketMetadataOptions Configuration options for Bucket#getMetadata().
@@ -1177,7 +1182,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {GetBucketMetadataCallback} [callback] Callback function.
-       * @returns {Promise<GetBucketMetadataResponse>}
+       * @returns {Promise<GetBucketMetadataResponse>} Resolves with `[metadata, apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -1939,13 +1945,15 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   /**
    * @typedef {array} CreateChannelResponse
    * @property {Channel} 0 The new {@link Channel}.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback CreateChannelCallback
    * @param {?Error} err Request error, if any.
    * @param {Channel} channel The new {@link Channel}.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Create a channel that will be notified when objects in this bucket changes.
@@ -1975,7 +1983,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {CreateChannelCallback} [callback] Callback function.
-   * @returns {Promise<CreateChannelResponse>}
+   * @returns {Promise<CreateChannelResponse>} Resolves with `[channel, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -2095,12 +2104,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @callback CreateNotificationCallback
    * @param {?Error} err Request error, if any.
    * @param {Notification} notification The new {@link Notification}.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {array} CreateNotificationResponse
    * @property {Notification} 0 The new {@link Notification}.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * Creates a notification subscription for the bucket.
@@ -2134,7 +2145,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {CreateNotificationCallback} [callback] Callback function.
-   * @returns {Promise<CreateNotificationResponse>}
+   * @returns {Promise<CreateNotificationResponse>} Resolves with `[notification, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    * @throws {Error} If a valid topic is not provided.
    * @see Notification#create
    *
@@ -2813,15 +2825,17 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   /**
    * @typedef {array} GetFilesResponse
    * @property {File[]} 0 Array of {@link File} instances.
-   * @param {object} nextQuery 1 A query object to receive more results.
-   * @param {object} apiResponse 2 The full API response.
+   * @property {object} 1 nextQuery A query object to receive more results.
+   * @property {object} 2 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback GetFilesCallback
    * @param {?Error} err Request error, if any.
    * @param {File[]} files Array of {@link File} instances.
    * @param {object} nextQuery A query object to receive more results.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Query object for listing files.
@@ -2832,7 +2846,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @property {string} [delimiter] Results will contain only objects whose
    *     names, aside from the prefix, do not contain delimiter. Objects whose
    *     names, aside from the prefix, contain delimiter will have their name
-   *     truncated after the delimiter, returned in `apiResponse.prefixes`.
+   *     truncated after the delimiter, returned in `apiResponse.data.prefixes`.
    *     Duplicate prefixes are omitted.
    * @property {string} [endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
@@ -2883,7 +2897,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {string} [query.delimiter] Results will contain only objects whose
    *     names, aside from the prefix, do not contain delimiter. Objects whose
    *     names, aside from the prefix, contain delimiter will have their name
-   *     truncated after the delimiter, returned in `apiResponse.prefixes`.
+   *     truncated after the delimiter, returned in `apiResponse.data.prefixes`.
    *     Duplicate prefixes are omitted.
    * @param {string} [query.endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
@@ -2921,7 +2935,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     their versions.
    *
    * @param {GetFilesCallback} [callback] Callback function.
-   * @returns {Promise<GetFilesResponse>}
+   * @returns {Promise<GetFilesResponse>} Resolves with `[files, nextQuery, apiResponse]`,
+   *     where payload properties (such as `prefixes` and `nextPageToken`) are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -2977,7 +2992,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *
    * ```
    * @example
-   * <h6>Simulating a File System</h6><p>With `autoPaginate: false`, it's possible to iterate over files which incorporate a common structure using a delimiter.</p><p>Consider the following remote objects:</p><ol><li>"a"</li><li>"a/b/c/d"</li><li>"b/d/e"</li></ol><p>Using a delimiter of `/` will return a single file, "a".</p><p>`apiResponse.prefixes` will return the "sub-directories" that were found:</p><ol><li>"a/"</li><li>"b/"</li></ol>
+   * <h6>Simulating a File System</h6><p>With `autoPaginate: false`, it's possible to iterate over files which incorporate a common structure using a delimiter.</p><p>Consider the following remote objects:</p><ol><li>"a"</li><li>"a/b/c/d"</li><li>"b/d/e"</li></ol><p>Using a delimiter of `/` will return a single file, "a".</p><p>`apiResponse.data.prefixes` will return the "sub-directories" that were found:</p><ol><li>"a/"</li><li>"b/"</li></ol>
    * ```
    * bucket.getFiles({
    *   autoPaginate: false,
@@ -2987,7 +3002,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *   //   {File} // File object for file "a"
    *   // ]
    *
-   *   // apiResponse.prefixes = [
+   *   // apiResponse.data.prefixes = [
    *   //   'a/',
    *   //   'b/'
    *   // ]
@@ -3007,7 +3022,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *
    *   // However, a "sub-directory" was found.
    *   // This prefix can be used to continue traversing the "file system".
-   *   // apiResponse.prefixes = [
+   *   // apiResponse.data.prefixes = [
    *   //   'a/b/'
    *   // ]
    * });
@@ -3208,12 +3223,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {?Error} err Request error, if any.
    * @param {Notification[]} notifications Array of {@link Notification}
    *     instances.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {array} GetNotificationsResponse
    * @property {Notification[]} 0 Array of {@link Notification} instances.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * Retrieves a list of notification subscriptions for a given bucket.
@@ -3224,7 +3241,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {GetNotificationsCallback} [callback] Callback function.
-   * @returns {Promise<GetNotificationsResponse>}
+   * @returns {Promise<GetNotificationsResponse>} Resolves with `[notifications, apiResponse]`,
+   *     where payload properties (such as `items`) are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -3244,6 +3262,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * bucket.getNotifications().then(function(data) {
    *   const notifications = data[0];
    *   const apiResponse = data[1];
+   *   // Payload properties (e.g., `items`) are nested under `apiResponse.data`.
    * });
    *
    * ```

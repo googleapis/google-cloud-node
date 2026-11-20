@@ -224,6 +224,34 @@ The internal `Service` class (`src/nodejs-common/service.ts`) has been removed a
 
 ---
 
+### 9. `apiResponse` Now Returns the Full HTTP Response Object
+
+For methods that pass the transport response through directly (such as `Bucket#getFiles`, `Storage#getBuckets`, `Storage#getHmacKeys`, `Bucket#getNotifications`, and `File#copy`), `apiResponse` now returns the full HTTP response object (`GaxiosResponse`) rather than just the parsed JSON body. Response payload fields like `prefixes`, `nextPageToken`, and `items` are now nested under `apiResponse.data` (e.g., `apiResponse.data.prefixes` and `apiResponse.data.nextPageToken`).
+
+**Before (v8.0.0):**
+
+```js
+const [files, nextQuery, apiResponse] = await bucket.getFiles({
+  delimiter: '/',
+  autoPaginate: false,
+});
+const prefixes = apiResponse.prefixes;
+const nextPageToken = apiResponse.nextPageToken;
+```
+
+**After (v9.0.0):**
+
+```js
+const [files, nextQuery, apiResponse] = await bucket.getFiles({
+  delimiter: '/',
+  autoPaginate: false,
+});
+const prefixes = apiResponse.data.prefixes;
+const nextPageToken = apiResponse.data.nextPageToken;
+```
+
+---
+
 ## Upgrade Instructions
 
 Update your `@google-cloud/storage` dependency to the latest release:
@@ -234,6 +262,7 @@ npm install @google-cloud/storage@latest
 
 ## Troubleshooting
 
+- **`apiResponse.prefixes` or `apiResponse.nextPageToken` is `undefined`**: Response payload fields are now nested under `apiResponse.data` (use `apiResponse.data.prefixes` and `apiResponse.data.nextPageToken`).
 - **`TypeError: apiResponse.headers.get is not a function` or `undefined` header values**: Ensure you use `apiResponse.headers.get('header-name')` instead of bracket notation (`apiResponse.headers['header-name']`).
 - **Custom `retryableErrorFn` not triggering**: Check `err.response?.status` instead of `err.code` for HTTP status codes, and ensure `err.config` is preserved when delegating to `RETRYABLE_ERR_FN_DEFAULT(err)`.
 - **Signed POST Policy (`FormData`) upload errors**: Ensure you pass a native `FormData` instance without manually overriding the `Content-Type` header so `fetch` / `Gaxios` can append the multipart boundary automatically.

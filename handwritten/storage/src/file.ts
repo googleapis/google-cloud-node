@@ -889,12 +889,14 @@ class File extends ServiceObject<File, FileMetadata> {
     const methods: Methods = {
       /**
        * @typedef {array} DeleteFileResponse
-       * @property {object} 0 The full API response.
+       * @property {object} 0 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * @callback DeleteFileCallback
        * @param {?Error} err Request error, if any.
-       * @param {object} apiResponse The full API response.
+       * @param {object} apiResponse The full HTTP API response, with payload
+       *     properties nested under `apiResponse.data`.
        */
       /**
        * Delete the file.
@@ -908,7 +910,8 @@ class File extends ServiceObject<File, FileMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {DeleteFileCallback} [callback] Callback function.
-       * @returns {Promise<DeleteFileResponse>}
+       * @returns {Promise<DeleteFileResponse>} Resolves with `[apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -1033,13 +1036,15 @@ class File extends ServiceObject<File, FileMetadata> {
       /**
        * @typedef {array} GetFileMetadataResponse
        * @property {object} 0 The {@link File} metadata.
-       * @property {object} 1 The full API response.
+       * @property {object} 1 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * @callback GetFileMetadataCallback
        * @param {?Error} err Request error, if any.
        * @param {object} metadata The {@link File} metadata.
-       * @param {object} apiResponse The full API response.
+       * @param {object} apiResponse The full HTTP API response, with payload
+       *     properties nested under `apiResponse.data`.
        */
       /**
        * Get the file's metadata.
@@ -1051,7 +1056,8 @@ class File extends ServiceObject<File, FileMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {GetFileMetadataCallback} [callback] Callback function.
-       * @returns {Promise<GetFileMetadataResponse>}
+       * @returns {Promise<GetFileMetadataResponse>} Resolves with `[metadata, apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -1280,13 +1286,15 @@ class File extends ServiceObject<File, FileMetadata> {
   /**
    * @typedef {array} CopyResponse
    * @property {File} 0 The copied {@link File}.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback CopyCallback
    * @param {?Error} err Request error, if any.
    * @param {File} copiedFile The copied {@link File}.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} CopyOptions Configuration options for File#copy(). See an
@@ -1321,7 +1329,8 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {string|Bucket|File} destination Destination file.
    * @param {CopyOptions} [options] Configuration options. See an
    * @param {CopyCallback} [callback] Callback function.
-   * @returns {Promise<CopyResponse>}
+   * @returns {Promise<CopyResponse>} Resolves with `[copiedFile, apiResponse]`,
+   *     where payload properties (such as `resource` and `totalBytesRewritten`) are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -1404,6 +1413,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * file.copy(newLocation).then(function(data) {
    *   const newFile = data[0];
    *   const apiResponse = data[1];
+   *   // Payload properties (e.g., `resource`) are nested under `apiResponse.data`.
    * });
    *
    * ```
@@ -2457,7 +2467,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * @param {function=} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.
-   * @param {object} callback.apiResponse - The full API response.
+   * @param {object} callback.apiResponse - The full HTTP API response, with
+   *     payload properties nested under `apiResponse.data`.
    */
   delete(options?: DeleteOptions): Promise<[GaxiosResponse]>;
   delete(options: DeleteOptions, callback: DeleteCallback): void;
@@ -3844,13 +3855,15 @@ class File extends ServiceObject<File, FileMetadata> {
   /**
    * @typedef {array} MoveFileAtomicResponse
    * @property {File} 0 The moved {@link File}.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback MoveFileAtomicCallback
    * @param {?Error} err Request error, if any.
    * @param {File} movedFile The moved {@link File}.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} MoveFileAtomicOptions Configuration options for File#moveFileAtomic(). See an
@@ -3875,7 +3888,8 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {string|File} destination Destination file name or File object within the same bucket..
    * @param {MoveFileAtomicOptions} [options] Configuration options. See an
    * @param {MoveFileAtomicCallback} [callback] Callback function.
-   * @returns {Promise<MoveFileAtomicResponse>}
+   * @returns {Promise<MoveFileAtomicResponse>} Resolves with `[movedFile, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -4028,13 +4042,15 @@ class File extends ServiceObject<File, FileMetadata> {
   /**
    * @typedef {array} MoveResponse
    * @property {File} 0 The destination File.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback MoveCallback
    * @param {?Error} err Request error, if any.
    * @param {?File} destinationFile The destination File.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} MoveOptions Configuration options for File#move(). See an
@@ -4063,7 +4079,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * @param {string|Bucket|File} destination Destination file.
    * @param {MoveCallback} [callback] Callback function.
-   * @returns {Promise<MoveResponse>}
+   * @returns {Promise<MoveResponse>} Resolves with `[destinationFile, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -4205,13 +4222,15 @@ class File extends ServiceObject<File, FileMetadata> {
   /**
    * @typedef {array} RenameResponse
    * @property {File} 0 The destination File.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback RenameCallback
    * @param {?Error} err Request error, if any.
    * @param {?File} destinationFile The destination File.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} RenameOptions Configuration options for File#move(). See an
@@ -4234,7 +4253,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * @param {string|File} destinationFile Destination file.
    * @param {RenameCallback} [callback] Callback function.
-   * @returns {Promise<RenameResponse>}
+   * @returns {Promise<RenameResponse>} Resolves with `[renamedFile, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -4369,7 +4389,8 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * @param {RotateEncryptionKeyOptions} [options] - Configuration options.
    * @param {RotateEncryptionKeyCallback} [callback]
-   * @returns {Promise<File>}
+   * @returns {Promise<RotateEncryptionKeyResponse>} Resolves with `[file, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example <caption>include:samples/encryption.js</caption>
    * region_tag:storage_rotate_encryption_key
@@ -4636,7 +4657,8 @@ class File extends ServiceObject<File, FileMetadata> {
   ): void;
   /**
    * @typedef {array} SetStorageClassResponse
-   * @property {object} 0 The full API response.
+   * @property {object} 0 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} SetStorageClassOptions Configuration options for File#setStorageClass().
@@ -4646,7 +4668,8 @@ class File extends ServiceObject<File, FileMetadata> {
   /**
    * @callback SetStorageClassCallback
    * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Set the storage class for this file.
@@ -4662,7 +4685,8 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {SetStorageClassCallback} [callback] Callback function.
-   * @returns {Promise<SetStorageClassResponse>}
+   * @returns {Promise<SetStorageClassResponse>} Resolves with `[apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```

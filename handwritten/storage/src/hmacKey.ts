@@ -118,12 +118,14 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
        */
       /**
        * @typedef {array} DeleteHmacKeyResponse
-       * @property {object} 0 The full API response.
+       * @property {object} 0 The full HTTP API response, with payload properties
+       *     nested under `apiResponse.data`.
        */
       /**
        * @callback DeleteHmacKeyCallback
        * @param {?Error} err Request error, if any.
-       * @param {object} apiResponse The full API response.
+       * @param {object} apiResponse The full HTTP API response, with payload
+       *     properties nested under `apiResponse.data`.
        */
       /**
        * Deletes an HMAC key.
@@ -135,7 +137,8 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
        * @method HmacKey#delete
        * @param {DeleteHmacKeyOptions} [options] Configuration options.
        * @param {DeleteHmacKeyCallback} [callback] Callback function.
-       * @returns {Promise<DeleteHmacKeyResponse>}
+       * @returns {Promise<DeleteHmacKeyResponse>} Resolves with `[apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```
@@ -249,7 +252,8 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
        * @method HmacKey#getMetadata
        * @param {GetHmacKeyMetadataOptions} [options] Configuration options.
        * @param {HmacKeyMetadataCallback} [callback] Callback function.
-       * @returns {Promise<HmacKeyMetadataResponse>}
+       * @returns {Promise<HmacKeyMetadataResponse>} Resolves with `[metadata, apiResponse]`,
+       *     where payload properties are nested under `apiResponse.data`.
        *
        * @example
        * ```

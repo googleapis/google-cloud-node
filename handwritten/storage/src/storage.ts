@@ -1404,14 +1404,16 @@ export class Storage {
    * @typedef {array} GetBucketsResponse
    * @property {Bucket[]} 0 Array of {@link Bucket} instances.
    * @property {object} 1 nextQuery A query object to receive more results.
-   * @property {object} 2 The full API response.
+   * @property {object} 2 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback GetBucketsCallback
    * @param {?Error} err Request error, if any.
    * @param {Bucket[]} buckets Array of {@link Bucket} instances.
    * @param {object} nextQuery A query object to receive more results.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Get Bucket objects for all of the buckets in your project.
@@ -1420,7 +1422,8 @@ export class Storage {
    *
    * @param {GetBucketsRequest} [query] Query object for listing buckets.
    * @param {GetBucketsCallback} [callback] Callback function.
-   * @returns {Promise<GetBucketsResponse>}
+   * @returns {Promise<GetBucketsResponse>} Resolves with `[buckets, nextQuery, apiResponse]`,
+   *     where payload properties (such as `items` and `nextPageToken`) are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -1441,6 +1444,9 @@ export class Storage {
    *     // More results exist.
    *     storage.getBuckets(nextQuery, callback);
    *   }
+   *
+   *   // Response payload properties (e.g., `items`, `nextPageToken`) are nested
+   *   // under `apiResponse.data`.
    *
    *   // The `metadata` property is populated for you with the metadata at the
    *   // time of fetching.
@@ -1551,15 +1557,17 @@ export class Storage {
   /**
    * @typedef {array} GetHmacKeysResponse
    * @property {HmacKey[]} 0 Array of {@link HmacKey} instances.
-   * @param {object} nextQuery 1 A query object to receive more results.
-   * @param {object} apiResponse 2 The full API response.
+   * @property {object} 1 nextQuery A query object to receive more results.
+   * @property {object} 2 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @callback GetHmacKeysCallback
    * @param {?Error} err Request error, if any.
    * @param {HmacKey[]} hmacKeys Array of {@link HmacKey} instances.
    * @param {object} nextQuery A query object to receive more results.
-   * @param {object} apiResponse The full API response.
+   * @param {object} apiResponse The full HTTP API response, with payload
+   *     properties nested under `apiResponse.data`.
    */
   /**
    * Retrieves a list of HMAC keys matching the criteria.
@@ -1568,7 +1576,8 @@ export class Storage {
    *
    * @param {GetHmacKeysOption} options Configuration options.
    * @param {GetHmacKeysCallback} callback Callback function.
-   * @return {Promise<GetHmacKeysResponse>}
+   * @returns {Promise<GetHmacKeysResponse>} Resolves with `[hmacKeys, nextQuery, apiResponse]`,
+   *     where payload properties (such as `items` and `nextPageToken`) are nested under `apiResponse.data`.
    *
    * @example
    * ```
@@ -1589,6 +1598,9 @@ export class Storage {
    *     // More results exist.
    *     storage.getHmacKeys(nextQuery, callback);
    *   }
+   *
+   *   // Response payload properties (e.g., `items`, `nextPageToken`) are nested
+   *   // under `apiResponse.data`.
    *
    *   // The `metadata` property is populated for you with the metadata at the
    *   // time of fetching.
@@ -1669,8 +1681,9 @@ export class Storage {
   /**
    * @typedef {array} GetServiceAccountResponse
    * @property {object} 0 The service account resource.
-   * @property {object} 1 The full
-   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| API response}.
+   * @property {object} 1 The full HTTP API response, with the
+   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| serviceAccount resource}
+   * nested under `apiResponse.data`.
    */
   /**
    * @callback GetServiceAccountCallback
@@ -1678,8 +1691,9 @@ export class Storage {
    * @param {object} serviceAccount The serviceAccount resource.
    * @param {string} serviceAccount.emailAddress The service account email
    *     address.
-   * @param {object} apiResponse The full
-   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| API response}.
+   * @param {object} apiResponse The full HTTP API response, with the
+   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| serviceAccount resource}
+   * nested under `apiResponse.data`.
    */
   /**
    * Get the email address of this project's Google Cloud Storage service
@@ -1692,7 +1706,8 @@ export class Storage {
    * @param {string} [options.userProject] User project to be billed for this
    *     request.
    * @param {GetServiceAccountCallback} [callback] Callback function.
-   * @returns {Promise<GetServiceAccountResponse>}
+   * @returns {Promise<GetServiceAccountResponse>} Resolves with `[serviceAccount, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * @example
    * ```
