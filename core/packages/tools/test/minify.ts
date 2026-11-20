@@ -71,9 +71,15 @@ describe('minify tool', () => {
       'minifyProtoJson.js',
     );
     const missingDir = path.join(testDir, 'missing-dir');
-    const result = spawnSync(process.execPath, [cliPath, missingDir], {
-      encoding: 'utf8',
-    });
+    const result = spawnSync(
+      process.execPath,
+      ['--unhandled-rejections=warn', cliPath, missingDir],
+      {
+        encoding: 'utf8',
+      },
+    );
     assert.strictEqual(result.status, 1);
+    assert.match(result.stderr, /ENOENT/);
+    assert.doesNotMatch(result.stderr, /UnhandledPromiseRejection/);
   });
 });
