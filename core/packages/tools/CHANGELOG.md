@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.2.3](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.2.2...gapic-tools-v2.2.3) (2026-11-20)
+
+
+### Bug Fixes
+
+* **tools:** Surface async errors in minifyProtoJson CLI ([#9913](https://github.com/googleapis/google-cloud-node/issues/9913)) ([5962dec](https://github.com/googleapis/google-cloud-node/commit/5962dec0b8e1b085da12aa0b340df78a5d4e170b))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.2.1...gapic-tools-v2.2.2) (2026-11-02)
 
 
