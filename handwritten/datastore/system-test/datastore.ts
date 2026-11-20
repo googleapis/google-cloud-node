@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import * as assert from 'assert';
+import {randomUUID} from 'crypto';
 import {readFileSync} from 'fs';
 import * as path from 'path';
 import {after, before, describe, it} from 'mocha';
@@ -30,20 +31,56 @@ import {MockedDatastore} from './transaction-spy';
 const sinon = require('sinon');
 const async = require('async');
 const SECOND_DATABASE_ID = 'multidb-test';
+const RETRYABLE_GRPC_CODES = new Set([4, 8, 10, 14]);
+
+function createUniqueNamespace(prefix = 'ns'): string {
+  return `${prefix}-${randomUUID()}`;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function retryOnTransientError<T>(
+  fn: () => Promise<T>,
+  maxAttempts = 5,
+  baseDelayMs = 250,
+): Promise<T> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (err: unknown) {
+      lastError = err;
+      const code =
+        typeof (err as {code?: unknown})?.code === 'number'
+          ? (err as {code: number}).code
+          : undefined;
+      if (attempt === maxAttempts || !code || !RETRYABLE_GRPC_CODES.has(code)) {
+        throw err;
+      }
+      const delayMs =
+        baseDelayMs * Math.pow(2, attempt - 1) + Math.random() * 250;
+      await sleep(delayMs);
+    }
+  }
+  throw lastError;
+}
+
 async.each(
   [
     {
-      namespace: `${Date.now()}`,
+      namespace: createUniqueNamespace('default-db'),
     },
     {
       databaseId: SECOND_DATABASE_ID,
-      namespace: `second-db-${Date.now()}`,
+      namespace: createUniqueNamespace('second-db'),
     },
   ],
   (clientOptions: DatastoreOptions) => {
     describe('Datastore', () => {
       let timeBeforeDataCreation: number;
-      const testKinds: string[] = [];
+      const testKinds = new Set<string>();
       const datastore = new Datastore(clientOptions);
       // Override the Key method so we can track what keys are created during the
       // tests. They are then deleted in the `after` hook.
@@ -51,7 +88,9 @@ async.each(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       datastore.key = function (options: any) {
         const keyObject = key.call(this, options);
-        testKinds.push(keyObject.kind);
+        if (keyObject.kind) {
+          testKinds.add(keyObject.kind);
+        }
         return keyObject;
       };
       const {indexes: DECLARED_INDEXES} = yaml.load(
@@ -60,9 +99,16 @@ async.each(
       // TODO/DX ensure indexes before testing, and maybe? cleanup indexes after
       //  possible implications with kokoro project
       // Gets the read time of the latest save so that the test isn't flakey due to race condition.
-      async function getReadTime(path: [{kind: string; name: string}]) {
+      async function getReadTime(path: Array<{kind: string; name: string}>) {
         const projectId = await datastore.getProjectId();
-        const request = {
+        const request: {
+          keys: Array<{
+            path: Array<{kind: string; name: string}>;
+            partitionId: {namespaceId?: string};
+          }>;
+          projectId: string;
+          databaseId?: string;
+        } = {
           keys: [
             {
               path,
@@ -71,23 +117,64 @@ async.each(
           ],
           projectId,
         };
-        const dataClient = datastore.clients_.get('DatastoreClient');
-        let results: any;
-        if (dataClient) {
-          results = await dataClient['lookup'](request);
+        if (datastore.options && datastore.options.databaseId) {
+          request.databaseId = datastore.options.databaseId;
         }
-        return parseInt(results[0].readTime.seconds) * 1000;
+        if (!datastore.clients_.has('DatastoreClient')) {
+          await datastore.allocateIds(datastore.key('InitClient'), 1);
+        }
+        const dataClient = datastore.clients_.get('DatastoreClient');
+        if (!dataClient) {
+          throw new Error('DatastoreClient is not initialized');
+        }
+        const results = (await dataClient['lookup'](request)) as Array<{
+          readTime: {seconds: string};
+        }>;
+        return parseInt(results[0].readTime.seconds, 10) * 1000;
+      }
+      // Waits until the Datastore server clock (truncated to whole seconds to match
+      // DatastoreRequest#getRequestOptions) advances strictly past `afterMs`.
+      async function waitForServerReadTimeAfter(
+        afterMs: number,
+        path: Array<{kind: string; name: string}>,
+      ): Promise<number> {
+        for (let attempt = 0; attempt < 20; attempt++) {
+          const readTimeMs = await getReadTime(path);
+          if (readTimeMs > afterMs) {
+            return readTimeMs;
+          }
+          await sleep(1000);
+        }
+        throw new Error(
+          `Timed out waiting for server readTime to advance past ${afterMs}`,
+        );
       }
       after(async () => {
+        const DELETE_BATCH_SIZE = 500;
         async function deleteEntities(kind: string) {
-          const query = datastore.createQuery(kind).select('__key__');
-          const [entities] = await datastore.runQuery(query);
-          const keys = entities.map(entity => {
-            return entity[datastore.KEY];
-          });
-          await datastore.delete(keys);
+          let hasMore = true;
+          while (hasMore) {
+            const query = datastore
+              .createQuery(kind)
+              .select('__key__')
+              .limit(DELETE_BATCH_SIZE);
+            const [entities] = await retryOnTransientError(() =>
+              datastore.runQuery(query),
+            );
+            if (!entities || entities.length === 0) {
+              hasMore = false;
+              continue;
+            }
+            const keys = entities.map(entity => {
+              return entity[datastore.KEY];
+            });
+            await retryOnTransientError(() => datastore.delete(keys));
+            hasMore = entities.length === DELETE_BATCH_SIZE;
+          }
         }
-        await Promise.all(testKinds.map(kind => deleteEntities(kind)));
+        await Promise.all(
+          Array.from(testKinds).map(kind => deleteEntities(kind)),
+        );
       });
       it('should allocate IDs', async () => {
         const keys = await datastore.allocateIds(datastore.key('Kind'), 10);
@@ -332,61 +419,72 @@ async.each(
         it('should save a nested name/value pair with name as a long string', async () => {
           const longString = Buffer.alloc(1501, '.').toString();
           const postKey = datastore.key(['Post', 'post1']);
-          await datastore.save({
-            key: postKey,
-            data: {
-              metadata: [
-                {
-                  name: longString,
-                  value: 'some-value',
-                },
-              ],
-            },
-            excludeLargeProperties: true,
-          });
+          try {
+            await datastore.save({
+              key: postKey,
+              data: {
+                metadata: [
+                  {
+                    name: longString,
+                    value: 'some-value',
+                  },
+                ],
+              },
+              excludeLargeProperties: true,
+            });
+          } finally {
+            await datastore.delete(postKey);
+          }
         });
         it('should save a nested name/value pair with value as a long string', async () => {
           const longString = Buffer.alloc(1501, '.').toString();
           const postKey = datastore.key(['Post', 'post1']);
-          await datastore.save({
-            key: postKey,
-            data: [
-              {
-                name: 'some-name',
-                value: longString,
-              },
-            ],
-            excludeLargeProperties: true,
-          });
+          try {
+            await datastore.save({
+              key: postKey,
+              data: [
+                {
+                  name: 'some-name',
+                  value: longString,
+                },
+              ],
+              excludeLargeProperties: true,
+            });
+          } finally {
+            await datastore.delete(postKey);
+          }
         });
         describe('multi-db support for read and write operations', () => {
-          const namespace = `${Date.now()}`;
+          const namespace = createUniqueNamespace('multi-db');
           const keyHierarchy = ['Post', 'post1'];
           const defaultDatastore = new Datastore({namespace});
           it('should run a query with another database', async () => {
             // First verify that a record gets written to datastore
             const postKey = defaultDatastore.key(keyHierarchy);
-            await defaultDatastore.save({key: postKey, data: post});
-            const query = defaultDatastore
-              .createQuery('Post')
-              .hasAncestor(postKey);
-            const [defaultDatastoreResults] =
-              await defaultDatastore.runQuery(query);
-            assert.strictEqual(defaultDatastoreResults.length, 1);
-            const [entity] = await defaultDatastore.get(postKey);
-            assert.strictEqual(entity.author, 'Silvano');
-            // With another database, verify that a query returns no results
-            const otherDatastore = new Datastore({
-              namespace,
-              databaseId: SECOND_DATABASE_ID,
-            });
-            const [secondDatastoreResults] =
-              await otherDatastore.runQuery(query);
-            assert.strictEqual(secondDatastoreResults.length, 0);
-            const [otherEntity] = await otherDatastore.get(postKey);
-            assert(typeof otherEntity === 'undefined');
-            // Cleanup
-            await defaultDatastore.delete(postKey);
+            try {
+              await defaultDatastore.save({key: postKey, data: post});
+              const query = defaultDatastore
+                .createQuery('Post')
+                .hasAncestor(postKey);
+              const [defaultDatastoreResults] =
+                await defaultDatastore.runQuery(query);
+              assert.strictEqual(defaultDatastoreResults.length, 1);
+              const [entity] = await defaultDatastore.get(postKey);
+              assert.strictEqual(entity.author, 'Silvano');
+              // With another database, verify that a query returns no results
+              const otherDatastore = new Datastore({
+                namespace,
+                databaseId: SECOND_DATABASE_ID,
+              });
+              const [secondDatastoreResults] =
+                await otherDatastore.runQuery(query);
+              assert.strictEqual(secondDatastoreResults.length, 0);
+              const [otherEntity] = await otherDatastore.get(postKey);
+              assert(typeof otherEntity === 'undefined');
+            } finally {
+              // Cleanup
+              await defaultDatastore.delete(postKey);
+            }
           });
           it('should ensure save works with another database', async () => {
             // First verify that the default database is empty
@@ -407,16 +505,19 @@ async.each(
               namespace,
               databaseId: SECOND_DATABASE_ID,
             });
-            await otherDatastore.save({key: postKey, data: post});
-            const [secondDatastoreResults] =
-              await otherDatastore.runQuery(query);
-            assert.strictEqual(secondDatastoreResults.length, 1);
-            const [originalResults] = await defaultDatastore.runQuery(query);
-            assert.strictEqual(originalResults.length, 0);
-            const [otherEntity] = await otherDatastore.get(postKey);
-            assert.strictEqual(otherEntity.author, 'Silvano');
-            // Cleanup
-            await otherDatastore.delete(postKey);
+            try {
+              await otherDatastore.save({key: postKey, data: post});
+              const [secondDatastoreResults] =
+                await otherDatastore.runQuery(query);
+              assert.strictEqual(secondDatastoreResults.length, 1);
+              const [originalResults] = await defaultDatastore.runQuery(query);
+              assert.strictEqual(originalResults.length, 0);
+              const [otherEntity] = await otherDatastore.get(postKey);
+              assert.strictEqual(otherEntity.author, 'Silvano');
+            } finally {
+              // Cleanup
+              await otherDatastore.delete(postKey);
+            }
           });
           it('should ensure save respects the databaseId parameter per key', async () => {
             interface DatastoreData {
@@ -424,7 +525,7 @@ async.each(
               data: any;
             }
             const secondaryDatastore = new Datastore({
-              namespace: `${Date.now()}`,
+              namespace: createUniqueNamespace('multi-db-secondary'),
               databaseId: SECOND_DATABASE_ID,
             });
             // Save all data to the default database
@@ -435,10 +536,6 @@ async.each(
               'Post',
               'default post key',
             ]);
-            await defaultDatastore.save({
-              key: defaultPostKey,
-              data: defaultData,
-            });
             // Save all data to the secondary database
             const secondaryIndices = [1, 2, 3];
             const secondaryData: DatastoreData[] = secondaryIndices.map(
@@ -453,42 +550,50 @@ async.each(
                 };
               },
             );
-            await Promise.all(
-              secondaryData.map(async datum => secondaryDatastore.save(datum)),
-            );
-            // Next, ensure that the default database has the right records
-            const query = defaultDatastore
-              .createQuery('Post')
-              .hasAncestor(defaultPostKey);
-            const [defaultDatastoreResults] =
-              await defaultDatastore.runQuery(query);
-            assert.strictEqual(defaultDatastoreResults.length, 1);
-            assert.strictEqual(
-              defaultDatastoreResults[0].author,
-              defaultAuthor,
-            );
-            // Next, ensure that the other database has the right records
-            await Promise.all(
-              secondaryData.map(async datum => {
-                const query = secondaryDatastore
-                  .createQuery('Post')
-                  .hasAncestor(datum.key);
-                const [results] = await secondaryDatastore.runQuery(query);
-                assert.strictEqual(results.length, 1);
-                assert.strictEqual(results[0].author, datum.data.author);
-              }),
-            );
-            // Cleanup
-            await defaultDatastore.delete(defaultPostKey);
-            await Promise.all(
-              secondaryData.map(datum => secondaryDatastore.delete(datum.key)),
-            );
+            try {
+              await defaultDatastore.save({
+                key: defaultPostKey,
+                data: defaultData,
+              });
+              await Promise.all(
+                secondaryData.map(async datum =>
+                  secondaryDatastore.save(datum),
+                ),
+              );
+              // Next, ensure that the default database has the right records
+              const query = defaultDatastore
+                .createQuery('Post')
+                .hasAncestor(defaultPostKey);
+              const [defaultDatastoreResults] =
+                await defaultDatastore.runQuery(query);
+              assert.strictEqual(defaultDatastoreResults.length, 1);
+              assert.strictEqual(
+                defaultDatastoreResults[0].author,
+                defaultAuthor,
+              );
+              // Next, ensure that the other database has the right records
+              await Promise.all(
+                secondaryData.map(async datum => {
+                  const query = secondaryDatastore
+                    .createQuery('Post')
+                    .hasAncestor(datum.key);
+                  const [results] = await secondaryDatastore.runQuery(query);
+                  assert.strictEqual(results.length, 1);
+                  assert.strictEqual(results[0].author, datum.data.author);
+                }),
+              );
+            } finally {
+              // Cleanup
+              await defaultDatastore.delete(defaultPostKey);
+              await Promise.all(
+                secondaryData.map(datum =>
+                  secondaryDatastore.delete(datum.key),
+                ),
+              );
+            }
           });
         });
         it('should save/get/delete from a snapshot', async () => {
-          function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-          }
           const post2 = {
             title: 'Another way to make pizza',
             tags: ['pizza', 'grill'],
@@ -502,23 +607,32 @@ async.each(
               views: 100,
             },
           };
-          const path = ['Post', 'post1'];
-          const postKey = datastore.key(path);
-          await datastore.save({key: postKey, data: post});
-          await sleep(10000);
-          const savedTime = Date.now();
-          await sleep(1000);
-          // Save new post2 data, but then verify the timestamp read has post1 data
-          await datastore.save({key: postKey, data: post2});
-          const [entity] = await datastore.get(postKey, {readTime: savedTime});
-          assert.deepStrictEqual(entity[datastore.KEY], postKey);
-          const [entityNoOptions] = await datastore.get(postKey);
-          assert.deepStrictEqual(entityNoOptions[datastore.KEY], postKey);
-          delete entity[datastore.KEY];
-          assert.deepStrictEqual(entity, post);
-          delete entityNoOptions[datastore.KEY];
-          assert.deepStrictEqual(entityNoOptions, post2);
-          await datastore.delete(postKey);
+          const keyPath = ['Post', 'post1'];
+          const lookupPath = [{kind: 'Post', name: 'post1'}];
+          const postKey = datastore.key(keyPath);
+          try {
+            await datastore.save({key: postKey, data: post});
+            const afterFirstSave = await getReadTime(lookupPath);
+            const savedTime = await waitForServerReadTimeAfter(
+              afterFirstSave + 1000,
+              lookupPath,
+            );
+            await waitForServerReadTimeAfter(savedTime, lookupPath);
+            // Save new post2 data, but then verify the timestamp read has post1 data
+            await datastore.save({key: postKey, data: post2});
+            const [entity] = await datastore.get(postKey, {
+              readTime: savedTime,
+            });
+            assert.deepStrictEqual(entity[datastore.KEY], postKey);
+            const [entityNoOptions] = await datastore.get(postKey);
+            assert.deepStrictEqual(entityNoOptions[datastore.KEY], postKey);
+            delete entity[datastore.KEY];
+            assert.deepStrictEqual(entity, post);
+            delete entityNoOptions[datastore.KEY];
+            assert.deepStrictEqual(entityNoOptions, post2);
+          } finally {
+            await datastore.delete(postKey);
+          }
         });
         it('should save/get/delete with a numeric key id', async () => {
           const postKey = datastore.key(['Post', 123456789]);
@@ -826,12 +940,6 @@ async.each(
           },
         ];
         before(async () => {
-          // This 'sleep' function is used to ensure that when data is saved to datastore,
-          // the time on the server is far enough ahead to be sure to be later than timeBeforeDataCreation
-          // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
-          function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-          }
           const keysToSave = keys.map((key, index) => {
             return {
               key,
@@ -842,12 +950,18 @@ async.each(
           const emptyData = Object.assign(Object.assign({}, keysToSave[0]), {
             data: {},
           });
-          await datastore.save(emptyData);
-          timeBeforeDataCreation = await getReadTime([
+          const rickardPath = [
+            {kind: 'Book', name: 'GoT'},
             {kind: 'Character', name: 'Rickard'},
-          ]);
-          // Sleep for 3 seconds so that any future reads will be later than timeBeforeDataCreation.
-          await sleep(3000);
+          ];
+          await datastore.save(emptyData);
+          const afterEmptySave = await getReadTime(rickardPath);
+          timeBeforeDataCreation = await waitForServerReadTimeAfter(
+            afterEmptySave + 1000,
+            rickardPath,
+          );
+          // Wait until the server clock advances strictly past timeBeforeDataCreation.
+          await waitForServerReadTimeAfter(timeBeforeDataCreation, rickardPath);
           await datastore.save(keysToSave);
         });
         after(async () => {
@@ -1483,7 +1597,7 @@ async.each(
           describe('when calling runQueryStream', () => {
             const q = datastore.createQuery('Character').hasAncestor(ancestor);
             it('should call runQueryStream with no explain options specified', async () => {
-              const stream = await datastore.runQueryStream(q);
+              const stream = datastore.runQueryStream(q);
               const entities: Entities = [];
               let savedInfo: RunQueryInfo;
               stream.on('data', (data: Entity) => {
@@ -1495,20 +1609,25 @@ async.each(
                 savedInfo = info;
               });
               await new Promise<void>((resolve, reject) => {
+                stream.on('error', reject);
                 stream.on('end', () => {
-                  assert.deepStrictEqual(
-                    entities
-                      .sort(compare)
-                      .map((entity: Entity) => entity?.name),
-                    [...characters].sort(compare).map(entity => entity.name),
-                  );
-                  assert(!savedInfo.explainMetrics);
-                  resolve();
+                  try {
+                    assert.deepStrictEqual(
+                      entities
+                        .sort(compare)
+                        .map((entity: Entity) => entity?.name),
+                      [...characters].sort(compare).map(entity => entity.name),
+                    );
+                    assert(!savedInfo.explainMetrics);
+                    resolve();
+                  } catch (err) {
+                    reject(err);
+                  }
                 });
               });
             });
             it('should call runQueryStream with explain options specified and analyze not specified', async () => {
-              const stream = await datastore.runQueryStream(q, {
+              const stream = datastore.runQueryStream(q, {
                 explainOptions: {},
               });
               const entities: Entities = [];
@@ -1522,20 +1641,25 @@ async.each(
                 savedInfo = info;
               });
               await new Promise<void>((resolve, reject) => {
+                stream.on('error', reject);
                 stream.on('end', () => {
-                  assert.deepStrictEqual(entities, []);
-                  assert(savedInfo.explainMetrics);
-                  assert(!savedInfo.explainMetrics.executionStats);
-                  assert.deepStrictEqual(
-                    savedInfo.explainMetrics.planSummary,
-                    expectedRunQueryPlan,
-                  );
-                  resolve();
+                  try {
+                    assert.deepStrictEqual(entities, []);
+                    assert(savedInfo.explainMetrics);
+                    assert(!savedInfo.explainMetrics.executionStats);
+                    assert.deepStrictEqual(
+                      savedInfo.explainMetrics.planSummary,
+                      expectedRunQueryPlan,
+                    );
+                    resolve();
+                  } catch (err) {
+                    reject(err);
+                  }
                 });
               });
             });
             it('should call runQueryStream with explain options specified and analyze set to false', async () => {
-              const stream = await datastore.runQueryStream(q, {
+              const stream = datastore.runQueryStream(q, {
                 explainOptions: {
                   analyze: false,
                 },
@@ -1551,20 +1675,25 @@ async.each(
                 savedInfo = info;
               });
               await new Promise<void>((resolve, reject) => {
+                stream.on('error', reject);
                 stream.on('end', () => {
-                  assert.deepStrictEqual(entities, []);
-                  assert(savedInfo.explainMetrics);
-                  assert(!savedInfo.explainMetrics.executionStats);
-                  assert.deepStrictEqual(
-                    savedInfo.explainMetrics.planSummary,
-                    expectedRunQueryPlan,
-                  );
-                  resolve();
+                  try {
+                    assert.deepStrictEqual(entities, []);
+                    assert(savedInfo.explainMetrics);
+                    assert(!savedInfo.explainMetrics.executionStats);
+                    assert.deepStrictEqual(
+                      savedInfo.explainMetrics.planSummary,
+                      expectedRunQueryPlan,
+                    );
+                    resolve();
+                  } catch (err) {
+                    reject(err);
+                  }
                 });
               });
             });
             it('should call runQueryStream with explain options specified and analyze set to true', async () => {
-              const stream = await datastore.runQueryStream(q, {
+              const stream = datastore.runQueryStream(q, {
                 explainOptions: {analyze: true},
               });
               const entities: Entities = [];
@@ -1578,22 +1707,27 @@ async.each(
                 savedInfo = info;
               });
               await new Promise<void>((resolve, reject) => {
+                stream.on('error', reject);
                 stream.on('end', () => {
-                  assert.deepStrictEqual(
-                    entities
-                      .sort(compare)
-                      .map((entity: Entity) => entity?.name),
-                    [...characters].sort(compare).map(entity => entity.name),
-                  );
-                  assert(savedInfo.explainMetrics);
-                  checkQueryExecutionStats(
-                    savedInfo.explainMetrics.executionStats,
-                  );
-                  assert.deepStrictEqual(
-                    savedInfo.explainMetrics.planSummary,
-                    expectedRunQueryPlan,
-                  );
-                  resolve();
+                  try {
+                    assert.deepStrictEqual(
+                      entities
+                        .sort(compare)
+                        .map((entity: Entity) => entity?.name),
+                      [...characters].sort(compare).map(entity => entity.name),
+                    );
+                    assert(savedInfo.explainMetrics);
+                    checkQueryExecutionStats(
+                      savedInfo.explainMetrics.executionStats,
+                    );
+                    assert.deepStrictEqual(
+                      savedInfo.explainMetrics.planSummary,
+                      expectedRunQueryPlan,
+                    );
+                    resolve();
+                  } catch (err) {
+                    reject(err);
+                  }
                 });
               });
             });
@@ -2536,29 +2670,45 @@ async.each(
             },
           );
         });
-        describe('comparing times with and without transaction.run', async () => {
-          const key = datastore.key(['Company', 'Google']);
-          // Record time for transaction with run
-          const startTimeWithRun = new Date().getTime();
-          const transactionWithRun = datastore.transaction({readOnly: true});
-          await transactionWithRun.run();
-          await Promise.all([
-            transactionWithRun.get(key),
-            transactionWithRun.get(key),
-          ]);
-          await transactionWithRun.commit();
-          const timeElapsedWithRun = new Date().getTime() - startTimeWithRun;
-          // Record time for transaction without run
-          const startTimeWithoutRun = new Date().getTime();
-          const transactionWithoutRun = datastore.transaction({readOnly: true});
-          await Promise.all([
-            transactionWithoutRun.get(key),
-            transactionWithoutRun.get(key),
-          ]);
-          await transactionWithoutRun.commit();
-          const timeElapsedWithoutRun =
-            new Date().getTime() - startTimeWithoutRun;
-          assert(timeElapsedWithoutRun < timeElapsedWithRun);
+        describe('comparing times with and without transaction.run', () => {
+          it('should avoid a separate beginTransaction RPC without transaction.run', async () => {
+            const key = datastore.key(['Company', 'Google']);
+            const withRunMethods: string[] = [];
+            const transactionWithRun = datastore.transaction({readOnly: true});
+            const origWithRunRequest =
+              transactionWithRun.request_.bind(transactionWithRun);
+            transactionWithRun.request_ = (config, callback) => {
+              withRunMethods.push(config.method);
+              return origWithRunRequest(config, callback);
+            };
+            await transactionWithRun.run();
+            await Promise.all([
+              transactionWithRun.get(key),
+              transactionWithRun.get(key),
+            ]);
+            await transactionWithRun.commit();
+
+            const withoutRunMethods: string[] = [];
+            const transactionWithoutRun = datastore.transaction({
+              readOnly: true,
+            });
+            const origWithoutRunRequest = transactionWithoutRun.request_.bind(
+              transactionWithoutRun,
+            );
+            transactionWithoutRun.request_ = (config, callback) => {
+              withoutRunMethods.push(config.method);
+              return origWithoutRunRequest(config, callback);
+            };
+            await Promise.all([
+              transactionWithoutRun.get(key),
+              transactionWithoutRun.get(key),
+            ]);
+            await transactionWithoutRun.commit();
+
+            assert(withRunMethods.includes('beginTransaction'));
+            assert(!withoutRunMethods.includes('beginTransaction'));
+            assert(withoutRunMethods.length < withRunMethods.length);
+          });
         });
         describe('lookup, put, commit', () => {
           const key = datastore.key(['Company', 'Google']);
@@ -2768,26 +2918,21 @@ async.each(
       });
       describe('transactions', () => {
         before(async () => {
-          // This 'sleep' function is used to ensure that when data is saved to datastore,
-          // the time on the server is far enough ahead to be sure to be later than timeBeforeDataCreation
-          // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
           const key = datastore.key(['Company', 'Google']);
-          function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-          }
           // Save for a key so that a read time can be accessed for snapshot reads.
           const emptyData = {
             key,
             data: {},
           };
+          const companyPath = [{kind: 'Company', name: 'Google'}];
           await datastore.save(emptyData);
-          // Sleep for 10 seconds to ensure timeBeforeDataCreation includes the empty data
-          await sleep(10000);
-          timeBeforeDataCreation = await getReadTime([
-            {kind: 'Company', name: 'Google'},
-          ]);
-          // Sleep for 10 seconds so that any future reads will be later than timeBeforeDataCreation.
-          await sleep(10000);
+          const afterEmptySave = await getReadTime(companyPath);
+          timeBeforeDataCreation = await waitForServerReadTimeAfter(
+            afterEmptySave + 1000,
+            companyPath,
+          );
+          // Wait until the server clock advances strictly past timeBeforeDataCreation.
+          await waitForServerReadTimeAfter(timeBeforeDataCreation, companyPath);
         });
         it('should run in a transaction', async () => {
           const key = datastore.key(['Company', 'Google']);
@@ -2895,7 +3040,7 @@ async.each(
           assert(entitiesBefore!.length < entitiesNow!.length);
           await transaction.commit();
         });
-        describe('aggregate query within a transaction', async () => {
+        describe('aggregate query within a transaction', () => {
           it('should run a query and return the results', async () => {
             // Add a test here to verify what the data is at this time.
             // This will be a valuable reference for tests in this describe block.
@@ -3102,11 +3247,11 @@ async.each(
           if (retries === 0) return; // no retry on the first attempt.
           // see: https://cloud.google.com/storage/docs/exponential-backoff:
           const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
-          return new Promise(done => {
+          return new Promise(resolve => {
             console.info(
               `retrying "${test.test?.title}" after attempt ${currentAttempt} in ${ms}ms`,
             );
-            setTimeout(done, ms);
+            setTimeout(resolve, ms);
           });
         };
         describe('running tests against the delay function', () => {
@@ -3127,7 +3272,7 @@ async.each(
             setupForDelay();
             const numberOfRetries = 2;
             this.retries(numberOfRetries);
-            setImmediate(() => delay(this));
+            await delay(this);
             // Throw an error on every retry except the last one
             if (currentAttempt <= numberOfRetries) {
               throw Error(
@@ -3135,11 +3280,12 @@ async.each(
               );
             }
             // Check that the attempt number and the number of times console.info is called is correct.
-            assert.strictEqual(infoLogCount, numberOfRetries - 1);
+            assert.strictEqual(infoLogCount, numberOfRetries);
             assert.strictEqual(currentAttempt, numberOfRetries + 1);
           });
           after(async () => {
             console.info = consoleInfoFunction;
+            currentAttempt = 0;
           });
         });
         it('should export, then import entities', async function () {
@@ -3147,28 +3293,62 @@ async.each(
           this.retries(3);
           await delay(this);
           const [exportOperation] = await datastore.export({bucket});
-          await exportOperation.promise();
-          const [files] = await bucket.getFiles({maxResults: 1});
-          const [exportedFile] = files;
+          const exportPromiseResult = await exportOperation.promise();
+          const exportResponse = (
+            Array.isArray(exportPromiseResult)
+              ? exportPromiseResult[0]
+              : exportPromiseResult
+          ) as google.datastore.admin.v1.IExportEntitiesResponse | undefined;
+          const outputUrl = exportResponse?.outputUrl;
+          const bucketPrefix = `gs://${bucket.name}/`;
+          let exportedFile;
+          if (outputUrl && outputUrl.startsWith(bucketPrefix)) {
+            exportedFile = bucket.file(outputUrl.slice(bucketPrefix.length));
+          } else {
+            const [files] = await bucket.getFiles();
+            exportedFile = files.find(file =>
+              file.name.includes('overall_export_metadata'),
+            );
+          }
+          assert.ok(exportedFile, 'expected exported metadata file to exist');
           assert.ok(exportedFile.name.includes('overall_export_metadata'));
           const [importOperation] = await datastore.import({
             file: exportedFile,
           });
-          // This is a >20 minute operation, so we're just going to make sure the
-          // right type of operation was started.
-          assert.strictEqual(
-            (
-              importOperation.metadata as google.datastore.admin.v1.IImportEntitiesMetadata
-            ).inputUrl,
-            `gs://${exportedFile.bucket.name}/${exportedFile.name}`,
-          );
-          await importOperation.cancel();
+          let testErr: unknown;
+          try {
+            // This is a >20 minute operation, so we're just going to make sure the
+            // right type of operation was started.
+            assert.strictEqual(
+              (
+                importOperation.metadata as google.datastore.admin.v1.IImportEntitiesMetadata
+              ).inputUrl,
+              `gs://${exportedFile.bucket.name}/${exportedFile.name}`,
+            );
+          } catch (err: unknown) {
+            testErr = err;
+          }
+          let cancelErr: unknown;
+          try {
+            await importOperation.cancel();
+          } catch (err: unknown) {
+            // Ignore FAILED_PRECONDITION if the import operation already finished.
+            if ((err as {code?: unknown})?.code !== 9) {
+              cancelErr = err;
+            }
+          }
+          if (testErr) {
+            throw testErr;
+          }
+          if (cancelErr) {
+            throw cancelErr;
+          }
         });
       });
       describe('using a custom endpoint', () => {
         it('should complete a request when using the default endpoint as a custom endpoint', async () => {
           const customDatastore = new Datastore({
-            namespace: `${Date.now()}`,
+            namespace: createUniqueNamespace('custom-endpoint'),
             apiEndpoint: 'datastore.googleapis.com',
           });
           const query = customDatastore.createQuery('Kind').select('__key__');
@@ -3179,9 +3359,10 @@ async.each(
       describe('using the rest fallback parameter', () => {
         it('should make a get call using rest instead of grpc', async () => {
           const customDatastore = new Datastore({
+            databaseId: clientOptions.databaseId,
             fallback: 'rest',
           });
-          const postKey = datastore.key(['Post', 'post1']);
+          const postKey = datastore.key(['Post', 'nonexistent-rest-post']);
           const [entity] = await customDatastore.get(postKey);
           assert.strictEqual(entity, undefined);
         });
@@ -3975,48 +4156,61 @@ async.each(
           ],
           async (testParameters: any) => {
             it(testParameters.name, async () => {
-              const requestSpy = sinon.spy(datastore.request_);
+              const originalRequest = datastore.request_;
+              const requestSpy = sinon.spy(originalRequest);
               datastore.request_ = requestSpy;
-              const result = await datastore.save(testParameters.saveArg);
-              // Clean the data from the server first before comparing:
-              result.forEach(serverResult => {
-                delete serverResult['indexUpdates'];
-                serverResult.mutationResults?.forEach(mutationResult => {
-                  delete mutationResult['updateTime'];
-                  delete mutationResult['createTime'];
-                  delete mutationResult['version'];
-                  mutationResult.transformResults?.forEach(transformResult => {
-                    delete transformResult['timestampValue'];
+              try {
+                const result = await datastore.save(testParameters.saveArg);
+                // Clean the data from the server first before comparing:
+                result.forEach(serverResult => {
+                  delete serverResult['indexUpdates'];
+                  serverResult.mutationResults?.forEach(mutationResult => {
+                    delete mutationResult['updateTime'];
+                    delete mutationResult['createTime'];
+                    delete mutationResult['version'];
+                    mutationResult.transformResults?.forEach(
+                      transformResult => {
+                        delete transformResult['timestampValue'];
+                      },
+                    );
                   });
                 });
-              });
-              // Now the data should have fixed values.
-              // Do a comparison against the expected result.
-              assert.deepStrictEqual(result, testParameters.saveResult);
-              // Now check the value that was actually saved to the server:
-              const [entity] = await datastore.get(key);
-              const parsedResult = JSON.parse(JSON.stringify(entity));
-              if (!testParameters.assertP1) {
-                delete parsedResult['p1']; // This is a timestamp so we can't consistently test this.
+                // Now the data should have fixed values.
+                // Do a comparison against the expected result.
+                assert.deepStrictEqual(result, testParameters.saveResult);
+                // Now check the value that was actually saved to the server:
+                const [entity] = await datastore.get(key);
+                const parsedResult = JSON.parse(JSON.stringify(entity));
+                if (!testParameters.assertP1) {
+                  delete parsedResult['p1']; // This is a timestamp so we can't consistently test this.
+                }
+                assert.deepStrictEqual(
+                  parsedResult,
+                  testParameters.serverValue,
+                );
+                if (
+                  requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
+                    .partitionId
+                ) {
+                  delete requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
+                    .partitionId['namespaceId'];
+                }
+                assert.deepStrictEqual(
+                  requestSpy.args[0][0],
+                  testParameters.gapicRequest,
+                );
+              } finally {
+                datastore.request_ = originalRequest;
               }
-              assert.deepStrictEqual(parsedResult, testParameters.serverValue);
-              if (
-                requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
-                  .partitionId
-              ) {
-                delete requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
-                  .partitionId['namespaceId'];
-              }
-              assert.deepStrictEqual(
-                requestSpy.args[0][0],
-                testParameters.gapicRequest,
-              );
             });
           },
         );
+        after(async () => {
+          await datastore.delete(key);
+        });
       });
       describe('Datastore mode data transforms in transactions', () => {
-        const mockedDatastore = new MockedDatastore();
+        const mockedDatastore = new MockedDatastore(clientOptions);
         const key = mockedDatastore.key(['Post', 'post1']);
         function getStandardTestCase() {
           return {
@@ -4820,7 +5014,7 @@ async.each(
                 testRequests[0].reqOpts?.mutations[0].upsert?.key?.partitionId
               ) {
                 delete testRequests[0].reqOpts.mutations[0].upsert.key
-                  .partitionId['namespaceId'];
+                  .partitionId;
               }
               assert.deepStrictEqual(
                 testRequests[0],
@@ -4829,835 +5023,9 @@ async.each(
             });
           },
         );
-      });
-      describe('Datastore mode data transforms', () => {
-        const key = datastore.key(['Post', 'post1']);
-        function getStandardTestCase() {
-          return {
-            name: 'should perform a basic data transform',
-            saveArg: {
-              key: key,
-              data: {
-                name: 'test',
-                p1: 3,
-                p2: 4,
-                p3: 5,
-                a1: [3, 4, 5],
-              },
-              transforms: [
-                {
-                  property: 'p1',
-                  setToServerValue: true,
-                },
-                {
-                  property: 'p2',
-                  increment: 4,
-                },
-                {
-                  property: 'p3',
-                  maximum: 9,
-                },
-                {
-                  property: 'p2',
-                  minimum: 6,
-                },
-                {
-                  property: 'a1',
-                  appendMissingElements: [5, 6],
-                },
-                {
-                  property: 'a1',
-                  removeAllFromArray: [3],
-                },
-              ],
-            },
-            saveResult: [
-              {
-                mutationResults: [
-                  {
-                    transformResults: [
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        valueType: 'timestampValue',
-                      },
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        integerValue: '8',
-                        valueType: 'integerValue',
-                      },
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        integerValue: '9',
-                        valueType: 'integerValue',
-                      },
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        integerValue: '6',
-                        valueType: 'integerValue',
-                      },
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        nullValue: 'NULL_VALUE',
-                        valueType: 'nullValue',
-                      },
-                      {
-                        meaning: 0,
-                        excludeFromIndexes: false,
-                        nullValue: 'NULL_VALUE',
-                        valueType: 'nullValue',
-                      },
-                    ],
-                    key: null,
-                    conflictDetected: false,
-                  },
-                ],
-                commitTime: null,
-              },
-            ],
-            serverValue: {
-              name: 'test',
-              a1: [4, 5, 6],
-              p2: 6,
-              p3: 9,
-            },
-            gapicRequest: {
-              client: 'DatastoreClient',
-              method: 'commit',
-              reqOpts: {
-                mutations: [
-                  {
-                    upsert: {
-                      key: {
-                        path: [
-                          {
-                            kind: 'Post',
-                            name: 'post1',
-                          },
-                        ],
-                        partitionId: {},
-                      },
-                      properties: {
-                        name: {
-                          stringValue: 'test',
-                        },
-                        p1: {
-                          integerValue: '3',
-                        },
-                        p2: {
-                          integerValue: '4',
-                        },
-                        p3: {
-                          integerValue: '5',
-                        },
-                        a1: {
-                          arrayValue: {
-                            values: [
-                              {
-                                integerValue: '3',
-                              },
-                              {
-                                integerValue: '4',
-                              },
-                              {
-                                integerValue: '5',
-                              },
-                            ],
-                          },
-                        },
-                      },
-                    },
-                    propertyTransforms: [
-                      {
-                        property: 'p1',
-                        setToServerValue: 1,
-                      },
-                      {
-                        property: 'p2',
-                        increment: {
-                          integerValue: '4',
-                        },
-                      },
-                      {
-                        property: 'p3',
-                        maximum: {
-                          integerValue: '9',
-                        },
-                      },
-                      {
-                        property: 'p2',
-                        minimum: {
-                          integerValue: '6',
-                        },
-                      },
-                      {
-                        property: 'a1',
-                        appendMissingElements: {
-                          values: [
-                            {
-                              integerValue: '5',
-                            },
-                            {
-                              integerValue: '6',
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        property: 'a1',
-                        removeAllFromArray: {
-                          values: [
-                            {
-                              integerValue: '3',
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                ],
-              },
-              gaxOpts: {},
-            },
-          };
-        }
-        const standardTestCase = getStandardTestCase();
-        // Add test case 2: Setting the server value to false:
-        const standardTestCaseWithSetToServerFalse = getStandardTestCase();
-        standardTestCaseWithSetToServerFalse.name =
-          'should perform a transform with setToServerValue false';
-        standardTestCaseWithSetToServerFalse.saveArg.transforms.shift();
-        standardTestCaseWithSetToServerFalse.saveResult[0].mutationResults[0].transformResults.shift();
-        standardTestCaseWithSetToServerFalse.gapicRequest.reqOpts.mutations[0].propertyTransforms.shift();
-        // Add test case 3: User inputs string values for transforms
-        const standardTestCaseWithStringValues = getStandardTestCase();
-        standardTestCaseWithStringValues.name =
-          'should perform a transform with string values';
-        standardTestCaseWithStringValues.saveArg.transforms[1].increment =
-          '4' as any;
-        standardTestCaseWithStringValues.saveArg.transforms[2].maximum =
-          '9' as any;
-        standardTestCaseWithStringValues.saveArg.transforms[3].minimum =
-          '6' as any;
-        const setToServerValueBooleanTestCase = {
-          name: 'should perform a setToServerValue transform on a boolean property',
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              p1: false,
-            },
-            transforms: [
-              {
-                property: 'p1',
-                setToServerValue: true,
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      valueType: 'timestampValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      p1: {
-                        booleanValue: false,
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'p1',
-                      setToServerValue: 1,
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        const incrementFloatTestCase = {
-          name: 'should perform an increment transform on a float property',
-          assertP1: true,
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              p1: 3.5,
-            },
-            transforms: [
-              {
-                property: 'p1',
-                increment: 1.2,
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      doubleValue: 4.7,
-                      valueType: 'doubleValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-            p1: 4.7,
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      p1: {
-                        doubleValue: 3.5,
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'p1',
-                      increment: {
-                        doubleValue: 1.2,
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        const appendMissingElementsComplexTestCase = {
-          name: 'should perform an appendMissingElements transform with complex objects',
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              a1: [{a: 1, b: 'two'}],
-            },
-            transforms: [
-              {
-                property: 'a1',
-                appendMissingElements: [{a: 1, b: 'two'}, {c: 3}],
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      nullValue: 'NULL_VALUE',
-                      valueType: 'nullValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-            a1: [{a: 1, b: 'two'}, {c: 3}],
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      a1: {
-                        arrayValue: {
-                          values: [
-                            {
-                              entityValue: {
-                                properties: {
-                                  a: {
-                                    integerValue: '1',
-                                  },
-                                  b: {
-                                    stringValue: 'two',
-                                  },
-                                },
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'a1',
-                      appendMissingElements: {
-                        values: [
-                          {
-                            entityValue: {
-                              properties: {
-                                a: {
-                                  integerValue: '1',
-                                },
-                                b: {
-                                  stringValue: 'two',
-                                },
-                              },
-                            },
-                          },
-                          {
-                            entityValue: {
-                              properties: {
-                                c: {
-                                  integerValue: '3',
-                                },
-                              },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        const removeAllFromArrayComplexTestCase = {
-          name: 'should perform a removeAllFromArray transform with complex objects',
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              a1: [{a: 1, b: 'two'}, {c: 3}],
-            },
-            transforms: [
-              {
-                property: 'a1',
-                removeAllFromArray: [{a: 1, b: 'two'}],
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      nullValue: 'NULL_VALUE',
-                      valueType: 'nullValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-            a1: [{c: 3}],
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      a1: {
-                        arrayValue: {
-                          values: [
-                            {
-                              entityValue: {
-                                properties: {
-                                  a: {
-                                    integerValue: '1',
-                                  },
-                                  b: {
-                                    stringValue: 'two',
-                                  },
-                                },
-                              },
-                            },
-                            {
-                              entityValue: {
-                                properties: {
-                                  c: {
-                                    integerValue: '3',
-                                  },
-                                },
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'a1',
-                      removeAllFromArray: {
-                        values: [
-                          {
-                            entityValue: {
-                              properties: {
-                                a: {
-                                  integerValue: '1',
-                                },
-                                b: {
-                                  stringValue: 'two',
-                                },
-                              },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        const orderOfOperationsTestCase = {
-          name: 'should respect the order of operations for transforms',
-          assertP1: true,
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              p1: 5,
-            },
-            transforms: [
-              {
-                property: 'p1',
-                increment: 5, // p1 is now 10
-              },
-              {
-                property: 'p1',
-                maximum: 8, // p1 is now 8
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      integerValue: '10',
-                      valueType: 'integerValue',
-                    },
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      integerValue: '10',
-                      valueType: 'integerValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-            p1: 10,
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      p1: {
-                        integerValue: '5',
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'p1',
-                      increment: {
-                        integerValue: '5',
-                      },
-                    },
-                    {
-                      property: 'p1',
-                      maximum: {
-                        integerValue: '8',
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        const nestedPropertyTransformTestCase = {
-          name: 'should perform a transform on a nested property',
-          assertP1: true,
-          saveArg: {
-            key: key,
-            data: {
-              name: 'test',
-              nested: {
-                p1: 10,
-              },
-            },
-            transforms: [
-              {
-                property: 'nested.p1',
-                increment: 5,
-              },
-            ],
-          },
-          saveResult: [
-            {
-              mutationResults: [
-                {
-                  transformResults: [
-                    {
-                      meaning: 0,
-                      excludeFromIndexes: false,
-                      integerValue: '15',
-                      valueType: 'integerValue',
-                    },
-                  ],
-                  key: null,
-                  conflictDetected: false,
-                },
-              ],
-              commitTime: null,
-            },
-          ],
-          serverValue: {
-            name: 'test',
-            nested: {
-              p1: 15,
-            },
-          },
-          gapicRequest: {
-            client: 'DatastoreClient',
-            method: 'commit',
-            reqOpts: {
-              mutations: [
-                {
-                  upsert: {
-                    key: {
-                      path: [
-                        {
-                          kind: 'Post',
-                          name: 'post1',
-                        },
-                      ],
-                      partitionId: {},
-                    },
-                    properties: {
-                      name: {
-                        stringValue: 'test',
-                      },
-                      nested: {
-                        entityValue: {
-                          properties: {
-                            p1: {
-                              integerValue: '10',
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                  propertyTransforms: [
-                    {
-                      property: 'nested.p1',
-                      increment: {
-                        integerValue: '5',
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            gaxOpts: {},
-          },
-        };
-        // Test each of the test cases:
-        async.each(
-          [
-            standardTestCase,
-            standardTestCaseWithSetToServerFalse,
-            standardTestCaseWithStringValues,
-            setToServerValueBooleanTestCase,
-            incrementFloatTestCase,
-            appendMissingElementsComplexTestCase,
-            removeAllFromArrayComplexTestCase,
-            orderOfOperationsTestCase,
-            nestedPropertyTransformTestCase,
-          ],
-          async (testParameters: any) => {
-            it(testParameters.name, async () => {
-              const requestSpy = sinon.spy(datastore.request_);
-              datastore.request_ = requestSpy;
-              const result = await datastore.save(testParameters.saveArg);
-              // Clean the data from the server first before comparing:
-              result.forEach(serverResult => {
-                delete serverResult['indexUpdates'];
-                serverResult.mutationResults?.forEach(mutationResult => {
-                  delete mutationResult['updateTime'];
-                  delete mutationResult['createTime'];
-                  delete mutationResult['version'];
-                  mutationResult.transformResults?.forEach(transformResult => {
-                    delete transformResult['timestampValue'];
-                  });
-                });
-              });
-              // Now the data should have fixed values.
-              // Do a comparison against the expected result.
-              assert.deepStrictEqual(result, testParameters.saveResult);
-              // Now check the value that was actually saved to the server:
-              const [entity] = await datastore.get(key);
-              const parsedResult = JSON.parse(JSON.stringify(entity));
-              if (!testParameters.assertP1) {
-                delete parsedResult['p1']; // This is a timestamp so we can't consistently test this.
-              }
-              assert.deepStrictEqual(parsedResult, testParameters.serverValue);
-              if (
-                requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
-                  .partitionId
-              ) {
-                delete requestSpy.args[0][0].reqOpts.mutations[0].upsert.key
-                  .partitionId['namespaceId'];
-              }
-              assert.deepStrictEqual(
-                requestSpy.args[0][0],
-                testParameters.gapicRequest,
-              );
-            });
-          },
-        );
+        after(async () => {
+          await mockedDatastore.delete(key);
+        });
       });
     });
   },
