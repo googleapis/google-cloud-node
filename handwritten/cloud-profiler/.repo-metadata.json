@@ -9,7 +9,7 @@
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/profiler",
   "api_id": "cloudprofiler.googleapis.com",
-  "codeowner_team": "@googleapis/api-profiler",
+  "codeowner_team": "@googleapis/cloud-profiler-team",
   "api_shortname": "profiler",
   "library_type": "AGENT"
 }
