@@ -10,7 +10,7 @@
   "distribution_name": "@google-cloud/bigquery",
   "api_id": "bigquery.googleapis.com",
   "requires_billing": false,
-  "codeowner_team": "@googleapis/api-bigquery",
+  "codeowner_team": "@googleapis/bigquery-team",
   "api_shortname": "bigquery",
   "library_type": "GAPIC_MANUAL"
 }
