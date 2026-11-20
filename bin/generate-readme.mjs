@@ -35,6 +35,11 @@ const github = new Gaxios({
     retries: 3
   }
 });
+const npmRegistry = new Gaxios({
+  retryConfig: {
+    retries: 3
+  }
+});
 
 function checkpoint (message, success = true) {
   const prefix = success ? chalk.green(figures.tick) : chalk.red(figures.cross);
@@ -88,7 +93,7 @@ async function downloadRepoMetadata () {
       continue;
     }
     try {
-      await github.request({
+      await npmRegistry.request({
         url: `https://registry.npmjs.org/${packageName}`,
         method: 'HEAD'
       });
@@ -166,8 +171,11 @@ async function processMetadata (repoMetadata) {
           method: 'HEAD',
           validateStatus: () => true
         });
+        if (res.status === 404) {
+          remoteUrlExists = false;
+        }
       } catch (err) {
-        if (err.status === 404) {
+        if (err.status === 404 || err.response?.status === 404) {
           remoteUrlExists = false;
         }
       }
