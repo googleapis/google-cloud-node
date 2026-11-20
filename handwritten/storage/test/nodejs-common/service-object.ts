@@ -21,7 +21,7 @@ import * as SO from '../../src/nodejs-common/service-object.js';
 import {util} from '../../src/nodejs-common/util.js';
 import {ServiceObject} from '../../src/nodejs-common/service-object.js';
 import {StorageTransport} from '../../src/storage-transport.js';
-import {GaxiosError, GaxiosOptionsPrepared} from 'gaxios';
+import {GaxiosError, GaxiosOptionsPrepared, GaxiosResponse} from 'gaxios';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FakeServiceObject = any;
@@ -232,7 +232,7 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, assert.ifError);
     });
 
-    it('should respect ignoreNotFound option', () => {
+    it('should respect ignoreNotFound option', done => {
       const options = {ignoreNotFound: true};
       const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
       error.status = 404;
@@ -242,10 +242,45 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, (err, apiResponse_) => {
         assert.ifError(err);
         assert.strictEqual(apiResponse_, undefined);
+        done();
       });
     });
 
-    it('should propagate other then 404 error', () => {
+    it('should respect ignoreNotFound option when 404 is on err.code', async () => {
+      const response = {status: 404} as GaxiosResponse;
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
+      error.code = 404;
+      assert.strictEqual(error.status, undefined);
+
+      serviceObject.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((_reqOpts, callback) => {
+          callback(error, null, response);
+          return Promise.reject(error);
+        });
+
+      const [apiResponse] = await serviceObject.delete({ignoreNotFound: true});
+      assert.strictEqual(apiResponse, response);
+    });
+
+    it('should respect ignoreNotFound option when 404 is on err.response.status', async () => {
+      const response = {status: 404} as GaxiosResponse;
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
+      error.response = response;
+      assert.strictEqual(error.status, undefined);
+
+      serviceObject.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((_reqOpts, callback) => {
+          callback(error, null, response);
+          return Promise.reject(error);
+        });
+
+      const [apiResponse] = await serviceObject.delete({ignoreNotFound: true});
+      assert.strictEqual(apiResponse, response);
+    });
+
+    it('should propagate other then 404 error', done => {
       const options = {ignoreNotFound: true};
       const error = new GaxiosError('406', {} as GaxiosOptionsPrepared);
       error.status = 406;
@@ -255,6 +290,7 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, (err, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, undefined);
+        done();
       });
     });
 
@@ -282,7 +318,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute with correct arguments', () => {
+    it('should execute with correct arguments', done => {
       const error = new Error('🦃');
       const serviceObject = new ServiceObject(CONFIG);
       serviceObject.storageTransport.makeRequest = sandbox
@@ -291,6 +327,7 @@ describe('ServiceObject', () => {
       serviceObject.delete((err, apiResponse_) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, undefined);
+        done();
       });
     });
   });
@@ -320,6 +357,24 @@ describe('ServiceObject', () => {
         assert.strictEqual(exists, false);
         done();
       });
+    });
+
+    it('should resolve false if 404 is on err.code', async () => {
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
+      error.code = 404;
+      assert.strictEqual(error.status, undefined);
+      sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
+      const [exists] = await serviceObject.exists();
+      assert.strictEqual(exists, false);
+    });
+
+    it('should resolve false if 404 is on err.response.status', async () => {
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
+      error.response = {status: 404} as GaxiosResponse;
+      assert.strictEqual(error.status, undefined);
+      sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
+      const [exists] = await serviceObject.exists();
+      assert.strictEqual(exists, false);
     });
 
     it('should execute callback with error if not 404', async done => {
@@ -454,6 +509,40 @@ describe('ServiceObject', () => {
         serviceObject.get(AUTO_CREATE_CONFIG, done);
       });
 
+      it('should auto create when 404 is on err.code', done => {
+        const error = new GaxiosError('bad', {} as GaxiosOptionsPrepared);
+        error.code = 404;
+        assert.strictEqual(error.status, undefined);
+        (serviceObject.getMetadata as sinon.SinonStub).restore();
+        sandbox
+          .stub<any, any>(serviceObject, 'getMetadata')
+          .callsFake((_opts, callback) => {
+            (callback as SO.MetadataCallback<SO.BaseMetadata>)!(
+              error,
+              METADATA,
+            );
+          });
+        sandbox.stub(serviceObject, 'create').callsArgWith(0, null);
+        serviceObject.get(AUTO_CREATE_CONFIG, done);
+      });
+
+      it('should auto create when 404 is on err.response.status', done => {
+        const error = new GaxiosError('bad', {} as GaxiosOptionsPrepared);
+        error.response = {status: 404} as GaxiosResponse;
+        assert.strictEqual(error.status, undefined);
+        (serviceObject.getMetadata as sinon.SinonStub).restore();
+        sandbox
+          .stub<any, any>(serviceObject, 'getMetadata')
+          .callsFake((_opts, callback) => {
+            (callback as SO.MetadataCallback<SO.BaseMetadata>)!(
+              error,
+              METADATA,
+            );
+          });
+        sandbox.stub(serviceObject, 'create').callsArgWith(0, null);
+        serviceObject.get(AUTO_CREATE_CONFIG, done);
+      });
+
       describe('error', () => {
         it('should execute callback with error', done => {
           const error = new Error('Error.');
@@ -490,7 +579,71 @@ describe('ServiceObject', () => {
           });
           serviceObject.get(AUTO_CREATE_CONFIG, done);
         });
+
+        it('should refresh the metadata after a 409 on err.code', done => {
+          const error = new GaxiosError('errrr', {} as GaxiosOptionsPrepared);
+          error.code = 409;
+          assert.strictEqual(error.status, undefined);
+          sandbox.stub(serviceObject, 'create').callsFake(callback => {
+            sandbox.stub(serviceObject, 'get').callsFake((cfgOrCb, cb) => {
+              const config = typeof cfgOrCb === 'object' ? cfgOrCb : {};
+              const callback = typeof cfgOrCb === 'function' ? cfgOrCb : cb;
+              assert.deepStrictEqual(config, {});
+              callback!(null); // done()
+            });
+            callback(error, null, undefined);
+          });
+          serviceObject.get(AUTO_CREATE_CONFIG, done);
+        });
       });
+    });
+  });
+
+  describe('404 handling with injected authClient (gaxios v7 error shape)', () => {
+    it('should handle 404s across delete, exists, and get when err.status is undefined', async () => {
+      let createCalls = 0;
+      const realTransport = new StorageTransport({
+        apiEndpoint: 'https://storage.googleapis.com',
+        baseUrl: 'https://storage.googleapis.com/storage/v1',
+        packageJson: {name: '@google-cloud/storage', version: '9.0.0'},
+        projectId: 'test-project',
+        retryOptions: {autoRetry: false},
+        scopes: [],
+        authClient: {
+          getProjectId: async () => 'test-project',
+          request: async () => {
+            const err = Object.assign(new Error('Not Found'), {
+              code: 404,
+              response: {
+                status: 404,
+                data: {error: {code: 404, message: 'Not Found'}},
+              },
+            });
+            throw err;
+          },
+        } as any,
+      });
+
+      const obj = new ServiceObject({
+        baseUrl: '/b',
+        id: 'missing-bucket',
+        parent: {},
+        storageTransport: realTransport,
+        createMethod: (_id: string, cb: Function) => {
+          createCalls++;
+          cb(null, {metadata: {id: 'missing-bucket'}}, {status: 200});
+        },
+      });
+
+      const [delResp] = await obj.delete({ignoreNotFound: true});
+      assert.strictEqual(delResp.status, 404);
+
+      const [exists] = await obj.exists();
+      assert.strictEqual(exists, false);
+
+      const [created] = await obj.get({autoCreate: true});
+      assert.strictEqual(created, obj);
+      assert.strictEqual(createCalls, 1);
     });
   });
 
