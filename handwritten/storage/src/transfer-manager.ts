@@ -626,8 +626,13 @@ export class TransferManager {
     const promises: Promise<void>[] = [];
     let files: File[] = [];
 
+    // `prefix` is documented as being prepended to every downloaded file, and
+    // may be combined with `passthroughOptions.destination`.
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || '.',
+      path.join(
+        options.prefix || '',
+        options.passthroughOptions?.destination || '',
+      ),
     );
 
     if (!Array.isArray(filesOrFolder)) {
