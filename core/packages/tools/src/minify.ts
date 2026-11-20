@@ -76,6 +76,8 @@ if (require.main === module) {
     process.exit(1);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  main(process.argv[2]);
+  main(process.argv[2]).catch(err => {
+    console.error(err);
+    process.exitCode = 1;
+  });
 }
