@@ -2135,9 +2135,19 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
-    const metricsTracer = this._initMetricsTracer(config);
+    const isExternalTracer =
+      config !== null &&
+      config !== undefined &&
+      Object.prototype.hasOwnProperty.call(config, 'metricsTracer');
+    const metricsTracer = isExternalTracer
+      ? (config.metricsTracer ?? null)
+      : this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
-    const coordinator = new RequestStreamCoordinator(stream, metricsTracer);
+    const coordinator = new RequestStreamCoordinator(
+      stream,
+      metricsTracer,
+      isExternalTracer,
+    );
     coordinator.setup();
 
     stream.once('reading', () => {
