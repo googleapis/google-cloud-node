@@ -3468,12 +3468,11 @@ describe('File', () => {
     const CLIENT_EMAIL = 'test@domain.com';
     const SIGNATURE = 'signature';
 
-    let fakeTimer: sinon.SinonFakeTimers;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let BUCKET: any;
 
     beforeEach(() => {
-      fakeTimer = sandbox.useFakeTimers(NOW);
+      sandbox.useFakeTimers(NOW);
       CONFIG = {
         expires: NOW.valueOf() + 2000,
       };
@@ -3491,10 +3490,6 @@ describe('File', () => {
           },
         },
       };
-    });
-
-    afterEach(() => {
-      fakeTimer.restore();
     });
 
     const fieldsToConditions = (fields: object) =>

@@ -58,10 +58,8 @@ describe('signer', () => {
     let file: FileI;
 
     const NOW = new Date('2019-03-18T00:00:00.999Z');
-    let fakeTimers: sinon.SinonFakeTimers;
 
-    beforeEach(() => (fakeTimers = sandbox.useFakeTimers(NOW)));
-    afterEach(() => fakeTimers.restore());
+    beforeEach(() => sandbox.useFakeTimers(NOW));
 
     beforeEach(() => {
       authClient = {
