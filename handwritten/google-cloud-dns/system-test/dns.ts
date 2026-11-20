@@ -34,9 +34,7 @@ const delayMs = async (ms = 1000) => {
   });
 };
 
-// This suite was skipped since it failed when migrating from kokoro to GCB.
-// We should apply the proper permissions later to turn this test back on.
-describe.skip('dns', () => {
+describe('dns', () => {
   const ZONE_NAME = 'test-zone-' + crypto.randomUUID().substr(0, 18);
   const ZONE = dns.zone(ZONE_NAME);
 
