@@ -20,10 +20,9 @@ import {
   DownloadResponse,
   DownloadResponseWithStatus,
   File,
-  FileExceptionMessages,
-  RequestError,
   SkipReason,
 } from './file.js';
+import {FileExceptionMessages, RequestError} from './file-errors.js';
 import * as path from 'path';
 import {createReadStream, existsSync, promises as fsp} from 'fs';
 import {CRC32C} from './crc32c.js';

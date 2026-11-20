@@ -86,6 +86,9 @@ import {
   StorageQueryParameters,
   StorageRequestOptions,
 } from './storage-transport.js';
+import {FileExceptionMessages, RequestError} from './file-errors.js';
+
+export {RequestError, FileExceptionMessages} from './file-errors.js';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
@@ -646,11 +649,6 @@ export interface FileMetadata extends BaseMetadata {
   updated?: string;
 }
 
-export class RequestError extends Error {
-  code?: string;
-  errors?: Error[];
-}
-
 export interface RewriteResponse {
   rewriteToken?: string;
 }
@@ -659,28 +657,6 @@ const SEVEN_DAYS = 7 * 24 * 60 * 60;
 const GS_UTIL_URL_REGEX = /(gs):\/\/([a-z0-9_.-]+)\/(.+)/g;
 const HTTPS_PUBLIC_URL_REGEX =
   /(https):\/\/(storage\.googleapis\.com)\/([a-z0-9_.-]+)\/(.+)/g;
-
-export enum FileExceptionMessages {
-  EXPIRATION_TIME_NA = 'An expiration time is not available.',
-  DESTINATION_NO_NAME = 'Destination file should have a name.',
-  INVALID_VALIDATION_FILE_RANGE = 'Cannot use validation with file ranges (start/end).',
-  MD5_NOT_AVAILABLE = 'MD5 verification was specified, but is not available for the requested object. MD5 is not available for composite objects.',
-  EQUALS_CONDITION_TWO_ELEMENTS = 'Equals condition must be an array of 2 elements.',
-  STARTS_WITH_TWO_ELEMENTS = 'StartsWith condition must be an array of 2 elements.',
-  CONTENT_LENGTH_RANGE_MIN_MAX = 'ContentLengthRange must have numeric min & max fields.',
-  DOWNLOAD_MISMATCH = 'The downloaded data did not match the data from the server. To be sure the content is the same, you should download the file again.',
-  UPLOAD_MISMATCH_DELETE_FAIL = `The uploaded data did not match the data from the server.
-    As a precaution, we attempted to delete the file, but it was not successful.
-    To be sure the content is the same, you should try removing the file manually,
-    then uploading the file again.
-    \n\nThe delete attempt failed with this message:\n\n  `,
-  UPLOAD_MISMATCH = `The uploaded data did not match the data from the server.
-    As a precaution, the file has been deleted.
-    To be sure the content is the same, you should try uploading the file again.`,
-  MD5_RESUMED_UPLOAD = 'MD5 cannot be used with a continued resumable upload as MD5 cannot be extended from an existing value',
-  MISSING_RESUME_CRC32C_FINAL_UPLOAD = 'The CRC32C is missing for the final portion of a resumed upload, which is required for validation. Please provide `resumeCRC32C` if validation is required, or disable `validation`.',
-  STREAM_NOT_AVAILABLE = 'Stream was not provided.',
-}
 
 /**
  * A File object is created from your {@link Bucket} object using
