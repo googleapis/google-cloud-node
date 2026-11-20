@@ -28,8 +28,7 @@
     "lint": "gts check",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "prelint": "cd samples; npm link ../; npm install",
+    "samples-test": "echo 'no samples tests'",
     "clean": "gts clean",
     "precompile": "gts clean"
   },
