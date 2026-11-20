@@ -38,6 +38,24 @@ function isBucket(parent: unknown): parent is Bucket {
   );
 }
 
+interface ErrorWithStatus {
+  response?: GaxiosResponse;
+  status?: number;
+  code?: number | string;
+}
+
+function getErrorStatus(err: unknown): number | string | undefined {
+  if (!err || typeof err !== 'object') {
+    return undefined;
+  }
+  const errorWithStatus = err as ErrorWithStatus;
+  return (
+    errorWithStatus.response?.status ??
+    errorWithStatus.status ??
+    errorWithStatus.code
+  );
+}
+
 export type GetMetadataOptions = object;
 
 export type MetadataResponse<K> = [K, GaxiosResponse];
@@ -330,25 +348,24 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
         .makeRequest(req, (err, data, resp) => {
           callbackCalled = true;
           if (err) {
-            const status = err.response?.status ?? err.status ?? err.code;
-            if (status === 404 && ignoreNotFound) {
+            if (getErrorStatus(err) === 404 && ignoreNotFound) {
               err = null;
             }
           }
           callback(err, resp);
         })
-        .catch(err => {
+        .catch((err: unknown) => {
           if (callbackCalled) {
             return;
           }
-          if (err) {
-            const status = err.response?.status ?? err.status ?? err.code;
-            if (status === 404 && ignoreNotFound) {
-              callback!(null, err.response);
+          if (err && typeof err === 'object') {
+            const errorWithStatus = err as ErrorWithStatus;
+            if (getErrorStatus(errorWithStatus) === 404 && ignoreNotFound) {
+              callback!(null, errorWithStatus.response);
               return;
             }
           }
-          callback!(err);
+          callback!(err as Error);
         });
       return;
     }
@@ -356,10 +373,12 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     return this.storageTransport
       .makeRequest(req)
       .then(resp => [resp] as [GaxiosResponse])
-      .catch(err => {
-        const status = err?.response?.status ?? err?.status ?? err?.code;
-        if (status === 404 && ignoreNotFound) {
-          return [err.response] as [GaxiosResponse];
+      .catch((err: unknown) => {
+        if (err && typeof err === 'object') {
+          const errorWithStatus = err as ErrorWithStatus;
+          if (getErrorStatus(errorWithStatus) === 404 && ignoreNotFound) {
+            return [errorWithStatus.response] as [GaxiosResponse];
+          }
         }
         throw err;
       });
@@ -386,8 +405,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     this.get(options, err => {
       if (err) {
-        const status = err.response?.status ?? err.status ?? err.code;
-        if (status === 404) {
+        if (getErrorStatus(err) === 404) {
           callback!(null, false);
         } else {
           callback!(err);
@@ -431,8 +449,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     function onCreate(err: GaxiosError | null, instance: T) {
       if (err) {
-        const status = err.response?.status ?? err.status ?? err.code;
-        if (status === 409) {
+        if (getErrorStatus(err) === 409) {
           self.get(options, callback!);
           return;
         }
@@ -444,8 +461,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     this.getMetadata(options, async err => {
       if (err) {
-        const status = err.response?.status ?? err.status ?? err.code;
-        if (status === 404 && autoCreate) {
+        if (getErrorStatus(err) === 404 && autoCreate) {
           const args: Array<Function | GetOrCreateOptions> = [];
           if (Object.keys(options).length > 0) {
             args.push(options);
@@ -531,9 +547,9 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           }
           callback(err, data!, resp);
         })
-        .catch(err => {
+        .catch((err: unknown) => {
           if (!callbackCalled) {
-            callback!(err);
+            callback!(err as GaxiosError);
           }
         });
       return;
