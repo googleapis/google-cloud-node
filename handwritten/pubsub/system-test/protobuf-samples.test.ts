@@ -24,6 +24,13 @@ describe('Protobuf Samples System Tests', () => {
   const pubsub = new PubSub();
   const resources = new TestResources('ps-sys-proto');
 
+  before(function () {
+    if (process.env.PUBSUB_EMULATOR_HOST) {
+      // Protocol buffer schemas are unimplemented in the Pub/Sub emulator.
+      this.skip();
+    }
+  });
+
   after(async () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
