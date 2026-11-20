@@ -18,7 +18,6 @@ import {
   GaxiosResponse,
   GaxiosError,
 } from 'gaxios';
-import * as gaxios from 'gaxios';
 import {
   DEFAULT_UNIVERSE,
   GoogleAuth,
@@ -247,6 +246,7 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
 
   /**
    * Controls whether or not to use authentication when using a custom endpoint.
+   * @deprecated
    */
   useAuthWithCustomEndpoint?: boolean;
 
@@ -385,33 +385,6 @@ export class Upload extends Writable {
     this.apiEndpoint = `https://storage.${universe}`;
     if (cfg.apiEndpoint && cfg.apiEndpoint !== this.apiEndpoint) {
       this.apiEndpoint = this.sanitizeEndpoint(cfg.apiEndpoint);
-
-      const hostname = new URL(this.apiEndpoint).hostname;
-
-      // check if it is a domain of a known universe
-      const isDomain = hostname === universe;
-      const isDefaultUniverseDomain = hostname === DEFAULT_UNIVERSE;
-
-      // check if it is a subdomain of a known universe
-      // by checking a last (universe's length + 1) of a hostname
-      const isSubDomainOfUniverse =
-        hostname.slice(-(universe.length + 1)) === `.${universe}`;
-      const isSubDomainOfDefaultUniverse =
-        hostname.slice(-(DEFAULT_UNIVERSE.length + 1)) ===
-        `.${DEFAULT_UNIVERSE}`;
-
-      if (
-        !isDomain &&
-        !isDefaultUniverseDomain &&
-        !isSubDomainOfUniverse &&
-        !isSubDomainOfDefaultUniverse
-      ) {
-        // a custom, non-universe domain,
-        // use gaxios only if useAuthWithCustomEndpoint is not true
-        if (cfg.useAuthWithCustomEndpoint !== true) {
-          this.authClient = gaxios;
-        }
-      }
     }
 
     this.baseURI = `${this.apiEndpoint}/upload/storage/v1/b`;

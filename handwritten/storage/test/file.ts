@@ -120,6 +120,9 @@ describe('File', () => {
   });
 
   beforeEach(() => {
+    sandbox
+      .stub(STORAGE, 'getEndpoint')
+      .callsFake(async () => STORAGE['apiEndpoint']);
     BUCKET = new Bucket(STORAGE, 'bucket-name');
 
     file = new File(BUCKET, FILE_NAME);
@@ -3694,8 +3697,7 @@ describe('File', () => {
       STORAGE = new Storage({projectId: PROJECT_ID});
       const customEndpoint = 'https://my-custom-endpoint.com';
 
-      STORAGE.apiEndpoint = customEndpoint;
-      STORAGE.customEndpoint = true;
+      STORAGE['apiEndpoint'] = customEndpoint;
 
       CONFIG.virtualHostedStyle = true;
       CONFIG.bucketBoundHostname = 'http://domain.tld';
@@ -3704,6 +3706,57 @@ describe('File', () => {
       file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
         assert.ifError(err);
         assert(res?.url, `https://${BUCKET.name}.storage.googleapis.com/`);
+      });
+    });
+
+    it('should append bucket name to the URL when using the emulator', done => {
+      const emulatorHost = 'http://127.0.0.1:9199';
+      const originalApiEndpoint = STORAGE['apiEndpoint'];
+      const originalAuthClient = STORAGE.storageTransport.authClient;
+      const originalEnvHost = process.env.STORAGE_EMULATOR_HOST;
+
+      process.env.STORAGE_EMULATOR_HOST = emulatorHost;
+      STORAGE['apiEndpoint'] = emulatorHost;
+      STORAGE.storageTransport.authClient =
+        BUCKET.storage.storageTransport.authClient;
+
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        STORAGE['apiEndpoint'] = originalApiEndpoint;
+        STORAGE.storageTransport.authClient = originalAuthClient;
+        if (originalEnvHost) {
+          process.env.STORAGE_EMULATOR_HOST = originalEnvHost;
+        } else {
+          delete process.env.STORAGE_EMULATOR_HOST;
+        }
+
+        assert.ifError(err);
+        assert.strictEqual(res?.url, `${emulatorHost}/${file.bucket.name}`);
+        done();
+      });
+    });
+
+    it('should append bucket name when universeDomain is resolved dynamically via getEndpoint', done => {
+      const dynamicUniverse = 'my-universe.com';
+      const dynamicEndpoint = `https://storage.${dynamicUniverse}`;
+      const originalAuthClient = STORAGE.storageTransport.authClient;
+      const originalUniverseDomain = STORAGE.universeDomain;
+
+      STORAGE.storageTransport.authClient = {
+        ...BUCKET.storage.storageTransport.authClient,
+        getUniverseDomain: sandbox.stub().resolves(dynamicUniverse),
+      };
+      (STORAGE.getEndpoint as sinon.SinonStub).callsFake(async () => {
+        STORAGE.universeDomain = dynamicUniverse;
+        return dynamicEndpoint;
+      });
+
+      file.generateSignedPostPolicyV4(CONFIG, (err, res) => {
+        STORAGE.storageTransport.authClient = originalAuthClient;
+        STORAGE.universeDomain = originalUniverseDomain;
+
+        assert.ifError(err);
+        assert.strictEqual(res?.url, `${dynamicEndpoint}/${file.bucket.name}/`);
+        done();
       });
     });
 
@@ -4190,10 +4243,10 @@ describe('File', () => {
 
     it('should correctly format URL and method in the request', done => {
       gaxiosStub.resolves({data: {}});
-      // const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
-      const baseUrl = file.storage.apiEndpoint.startsWith('http')
-        ? file.storage.apiEndpoint
-        : `https://${file.storage.apiEndpoint}`;
+      // const expectedUrl = `https://${file.storage['apiEndpoint']}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      const baseUrl = file.storage['apiEndpoint'].startsWith('http')
+        ? file.storage['apiEndpoint']
+        : `https://${file.storage['apiEndpoint']}`;
 
       const expectedUrl = `${baseUrl}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
 
@@ -5904,12 +5957,15 @@ describe('File', () => {
   });
 
   describe('startSimpleUpload_', () => {
-    it('should get a writable stream', async done => {
+    it('should get a writable stream', async () => {
+      let makeRequestCalled = false;
       file.storageTransport.makeRequest = sandbox.stub().callsFake(() => {
-        done();
+        makeRequestCalled = true;
+        return Promise.resolve({});
       });
 
       await file.startSimpleUpload_(duplexify());
+      assert.strictEqual(makeRequestCalled, true);
     });
 
     it('should pass the required arguments', async () => {
@@ -6045,7 +6101,7 @@ describe('File', () => {
 
         it('should destroy the stream', done => {
           const stream = duplexify();
-          file.startSimpleUpload_(stream);
+          void file.startSimpleUpload_(stream);
 
           stream.on('error', (err: Error) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -6066,22 +6122,22 @@ describe('File', () => {
             .resolves({data: body, resp});
         });
 
-        it('should set the metadata', () => {
+        it('should set the metadata', async () => {
           const stream = duplexify();
 
-          file.startSimpleUpload_(stream);
+          await file.startSimpleUpload_(stream);
 
           assert.deepEqual(file.metadata, body);
         });
 
-        it('should emit the response', () => {
+        it('should emit the response', async () => {
           const stream = duplexify();
 
           stream.on('response', resp_ => {
             assert.strictEqual(resp_, resp);
           });
 
-          file.startSimpleUpload_(stream);
+          await file.startSimpleUpload_(stream);
         });
 
         it('should emit complete', async () => {
