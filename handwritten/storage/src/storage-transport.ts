@@ -26,7 +26,9 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {
+  EXPLICIT_IDEMPOTENCY_STRATEGY,
   IdempotencyStrategy,
+  isExplicitIdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
   RetryOptions,
 } from './storage.js';
@@ -57,6 +59,7 @@ export interface StorageRequestOptions extends GaxiosOptions {
   queryParameters?: StorageQueryParameters;
   shouldReturnStream?: boolean;
   hasPrecondition?: boolean;
+  explicitRetryConditional?: boolean;
 }
 
 interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -93,7 +96,7 @@ export class StorageTransport {
   authClient: GoogleAuth<AuthClient>;
   private providedUserAgent?: string;
   private packageJson: PackageJson;
-  private retryOptions: RetryOptions;
+  retryOptions: RetryOptions;
   private baseUrl: string;
   private timeout?: number;
   private projectId?: string;
@@ -117,6 +120,9 @@ export class StorageTransport {
     this.packageJson = getPackageJSON();
     this.retryOptions = {
       ...options.retryOptions,
+      [EXPLICIT_IDEMPOTENCY_STRATEGY]: isExplicitIdempotencyStrategy(
+        options.retryOptions,
+      ),
       retryableErrorFn:
         options.retryOptions?.retryableErrorFn || RETRYABLE_ERR_FN_DEFAULT,
     };
@@ -130,6 +136,15 @@ export class StorageTransport {
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
   ): Promise<GaxiosResponse<T>> {
+    const isRetryDisabled =
+      this.retryOptions.autoRetry === false ||
+      this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryNever;
+    const explicitRetryConditional =
+      this.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional &&
+      isExplicitIdempotencyStrategy(this.retryOptions);
+    const isRetryAlways =
+      this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryAlways;
     // Project ID Resolution
     if (!this.projectId) {
       this.projectId =
@@ -264,8 +279,7 @@ export class StorageTransport {
 
     // Compute the final hasPrecondition flag
     const hasPrecondition = !!(
-      this.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryAlways ||
+      isRetryAlways ||
       reqOpts.hasPrecondition ||
       reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
       reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
@@ -273,10 +287,20 @@ export class StorageTransport {
       hasEtagInBody
     );
 
+    const isObjectDelete =
+      (reqOpts.method || '').toUpperCase() === 'DELETE' &&
+      /\/b\/[^/?]+\/o\/[^/?]+(?:\?|$)/.test(requestUrl);
+    let attemptCount = 0;
+    let retryCount = 0;
+
     // Helper to enrich GaxiosError objects with legacy ApiError properties
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const decorateError = (err: any) => {
       if (err && typeof err === 'object') {
+        const retryAttempt = err.config?.retryConfig?.currentRetryAttempt ?? 0;
+        if (retryCount > 0 || attemptCount > 1 || retryAttempt > 0) {
+          err.isRetry = true;
+        }
         err.code = err.response?.status || err.status || err.code;
         if (err.response?.data?.error) {
           const apiError = err.response.data.error;
@@ -301,9 +325,6 @@ export class StorageTransport {
       return err;
     };
 
-    const isRetryDisabled =
-      this.retryOptions.autoRetry === false ||
-      this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryNever;
     const maxRetries = isRetryDisabled
       ? 0
       : (reqOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
@@ -311,6 +332,7 @@ export class StorageTransport {
     try {
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
+          attemptCount++;
           const urlHasParams = opts.url
             ? opts.url.toString() !== requestUrl
             : false;
@@ -319,7 +341,41 @@ export class StorageTransport {
             adapter: undefined,
             params: urlHasParams ? undefined : opts.params,
           };
-          return requestGaxiosInstance.request(innerOpts);
+          try {
+            const resp = await requestGaxiosInstance.request<T>(innerOpts);
+            const isRetry =
+              retryCount > 0 ||
+              attemptCount > 1 ||
+              (innerOpts.retryConfig?.currentRetryAttempt ?? 0) > 0;
+            if (isRetry && isObjectDelete && resp.status === 404) {
+              return {
+                ...resp,
+                status: 204,
+                statusText: 'No Content',
+                data: '' as unknown as T,
+              };
+            }
+            return resp;
+          } catch (err) {
+            const gaxiosErr = err as GaxiosError<T>;
+            const isRetry =
+              retryCount > 0 ||
+              attemptCount > 1 ||
+              (gaxiosErr?.config?.retryConfig?.currentRetryAttempt ?? 0) > 0;
+            const status = gaxiosErr?.response?.status ?? gaxiosErr?.status;
+            if (isRetry && isObjectDelete && status === 404) {
+              return {
+                ...(gaxiosErr.response || {}),
+                config:
+                  gaxiosErr.config || (innerOpts as GaxiosOptionsPrepared),
+                headers: gaxiosErr.response?.headers || new Headers(),
+                status: 204,
+                statusText: 'No Content',
+                data: '' as unknown as T,
+              } as GaxiosResponse<T>;
+            }
+            throw err;
+          }
         },
         retryConfig: {
           retry: maxRetries,
@@ -327,11 +383,27 @@ export class StorageTransport {
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) =>
-            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
+          shouldRetry: (err: GaxiosError) => {
+            const config = err.config?.retryConfig;
+            const currentAttempt = config?.currentRetryAttempt ?? retryCount;
+            const allowedRetries = config?.retry ?? maxRetries;
+            if (
+              isRetryDisabled ||
+              allowedRetries <= 0 ||
+              currentAttempt >= allowedRetries
+            ) {
+              return false;
+            }
+            const willRetry = !!this.retryOptions.retryableErrorFn?.(err);
+            if (willRetry) {
+              retryCount++;
+            }
+            return willRetry;
+          },
         },
         ...reqOpts,
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
+        explicitRetryConditional,
         params: reqOpts.queryParameters,
         paramsSerializer: this.#paramsSerializer,
         headers,

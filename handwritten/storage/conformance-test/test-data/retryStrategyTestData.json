@@ -89,14 +89,33 @@
         {"name": "storage.hmacKey.update",        "resources": ["HMAC_KEY"]},
         {"name": "storage.objects.compose",       "resources": ["BUCKET", "OBJECT"]},
         {"name": "storage.objects.copy",          "resources": ["BUCKET", "OBJECT"]},
-        {"name": "storage.objects.delete",        "resources": ["BUCKET", "OBJECT"]},
-        {"name": "storage.objects.insert",        "resources": ["BUCKET"]},
-        {"name": "storage.objects.patch",         "resources": ["BUCKET", "OBJECT"]},
         {"name": "storage.objects.rewrite",       "resources": ["BUCKET", "OBJECT"]},
         {"name": "storage.objects.update",        "resources": ["BUCKET", "OBJECT"]}
       ],
       "preconditionProvided": false,
       "expectSuccess": false
+    },
+    {
+      "id": 3,
+      "description": "default_retry_always_operations_retry_when_precondition_is_absent",
+      "cases": [
+        {
+          "instructions": ["return-503", "return-503"]
+        },
+        {
+          "instructions": ["return-reset-connection", "return-reset-connection"]
+        },
+        {
+          "instructions": ["return-reset-connection", "return-503"]
+        }
+      ],
+      "methods": [
+        {"name": "storage.objects.delete",        "resources": ["BUCKET", "OBJECT"]},
+        {"name": "storage.objects.insert",        "resources": ["BUCKET"]},
+        {"name": "storage.objects.patch",         "resources": ["BUCKET", "OBJECT"]}
+      ],
+      "preconditionProvided": false,
+      "expectSuccess": true
     },
     {
       "id": 4,
