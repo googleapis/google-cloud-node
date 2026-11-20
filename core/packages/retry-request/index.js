@@ -192,10 +192,6 @@ function retryRequest(requestOpts, opts, callback) {
   }
 
   function retryAfterDelay(currentRetryAttempt) {
-    if (streamMode) {
-      resetStreams();
-    }
-
     const nextRetryDelay = getNextRetryDelay({
       maxRetryDelay: opts.maxRetryDelay,
       retryDelayMultiplier: opts.retryDelayMultiplier,
@@ -207,10 +203,15 @@ function retryRequest(requestOpts, opts, callback) {
 
     if (nextRetryDelay <= 0) {
       numNoResponseAttempts = opts.noResponseRetries + 1;
-      return;
+      return false;
+    }
+
+    if (streamMode) {
+      resetStreams();
     }
 
     setTimeout(makeRequest, nextRetryDelay);
+    return true;
   }
 
   function onResponse(err, response, body) {
@@ -218,15 +219,18 @@ function retryRequest(requestOpts, opts, callback) {
     if (err) {
       numNoResponseAttempts++;
 
-      if (numNoResponseAttempts <= opts.noResponseRetries) {
-        retryAfterDelay(numNoResponseAttempts);
+      if (
+        numNoResponseAttempts <= opts.noResponseRetries &&
+        retryAfterDelay(numNoResponseAttempts)
+      ) {
+        return;
+      }
+
+      if (streamMode) {
+        retryStream.emit('error', err);
+        retryStream.end();
       } else {
-        if (streamMode) {
-          retryStream.emit('error', err);
-          retryStream.end();
-        } else {
-          callback(err, response, body);
-        }
+        callback(err, response, body);
       }
 
       return;
@@ -242,9 +246,9 @@ function retryRequest(requestOpts, opts, callback) {
       : currentRetryAttempt - 1;
     if (
       adjustedCurrentRetryAttempt < opts.retries &&
-      opts.shouldRetryFn(response)
+      opts.shouldRetryFn(response) &&
+      retryAfterDelay(currentRetryAttempt)
     ) {
-      retryAfterDelay(currentRetryAttempt);
       return;
     }
 
