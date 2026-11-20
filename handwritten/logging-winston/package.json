@@ -38,8 +38,6 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "presamples-test": "pnpm run compile",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "pnpm run pretest",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
     "test": "cross-env NODE_OPTIONS='--no-deprecation' node ../../bin/run-test.cjs build/test",
@@ -48,7 +46,6 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
   "dependencies": {
@@ -73,7 +70,6 @@
     "jsdoc-region-tag": "^5.1.0",
     "mocha": "^11.7.5",
     "pack-n-play": "^5.3.0",
-    "post-install-check": "^0.0.1",
     "typescript": "^5.9.3",
     "winston": "^3.18.3"
   },
