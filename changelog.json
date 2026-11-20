@@ -4,6 +4,579 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "1fca339a-cec5-4d68-bc45-a76a18284325",
+      "createTime": "2026-11-20T01:16:38.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "905ef04a-73a0-4a0b-abd4-5bddae70f541",
+      "createTime": "2026-11-20T01:16:38.395Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "530313e6-0d71-4105-beee-8bdf5b302266",
+      "createTime": "2026-11-20T01:16:38.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "f499f6ea-171a-4c4d-8705-e9d8674eabad",
+      "createTime": "2026-11-20T01:16:38.332Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "987d9257-d8b2-46f9-bb7d-43583cd08807",
+      "createTime": "2026-11-20T01:16:38.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "979fe30b-1b18-4459-885c-05f17f79985f",
+      "createTime": "2026-11-20T01:16:38.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "4d2cd6e5-13f0-43ca-b8e1-7c18b85d14ed",
+      "createTime": "2026-11-20T01:16:38.236Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "979ff982-6efd-43b2-bd6c-d48d3c17b7fb",
+      "createTime": "2026-11-20T01:16:38.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "19f7067f-f8c9-454a-b099-2a3fe069ed97",
+      "createTime": "2026-11-20T01:16:38.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "31eab24f-caa5-459a-a7bc-74f7fdd2e1fe",
+      "createTime": "2026-11-20T01:16:38.143Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "b5708f00-0342-49fe-b00f-9a016c96345c",
+      "createTime": "2026-11-20T01:16:38.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "5c65674d-e4e0-4660-ab5f-7cb4d6c64cbc",
+      "createTime": "2026-11-20T01:16:38.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "433ca868b43c5cb40be11c9104268f860272c296",
+          "message": "Remove discontinued Merchant API v1beta",
+          "issues": [
+            "9850"
+          ],
+          "scope": "merchantapi",
+          "breakingChangeNote": "remove discontinued Merchant API v1beta ([#9850](https://github.com/googleapis/google-cloud-node/issues/9850))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "53099cd4-5633-4f83-962a-1ee61b555441",
+      "createTime": "2026-11-20T01:16:38.045Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "3e47604c-086c-453a-859a-617a3ad4b3a7",
+      "createTime": "2026-11-20T01:16:38.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.33.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "c522e35d-cd98-481b-bd80-224dcaee126e",
+      "createTime": "2026-11-20T01:16:37.972Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "cc3edc90-43c9-45f2-b74b-920085370f49",
+      "createTime": "2026-11-20T01:16:37.942Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "04c0cd1f-99cb-4eef-a645-1328ef5b3d4a",
+      "createTime": "2026-11-20T01:16:37.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "c6c3871c-a0f2-4240-abbf-b2cd76638869",
+      "createTime": "2026-11-20T01:16:37.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "9f300e73-4873-4648-875d-90aef642f2ab",
+      "createTime": "2026-11-20T01:16:37.816Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "fcd39985-d816-44b6-8c44-8b2f30428d9d",
+      "createTime": "2026-11-20T01:16:37.775Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "213035fb-b663-4ffe-9ade-a26eb827c183",
+      "createTime": "2026-11-20T01:16:37.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "a50ff3c8-f0a2-4989-8172-c7a385b20240",
+      "createTime": "2026-11-20T01:16:37.713Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "696cfdb2-27a9-4c6b-8c45-ca5c47503aeb",
+      "createTime": "2026-11-20T01:16:37.680Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "4db6c5ff-c723-49db-9b83-ae92404f5ced",
+      "createTime": "2026-11-20T01:16:37.625Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c95bee29fb97c0c58f94d6226c92a148cff0d77f",
+          "message": "Update package.json scripts",
+          "issues": [
+            "9855"
+          ],
+          "scope": "designcenter"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/designcenter",
+      "id": "d885e342-67ec-4b55-beb8-f95894dc5220",
+      "createTime": "2026-11-20T01:16:37.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "b83ee983-1115-4f32-8c7d-7e65b730a5fe",
+      "createTime": "2026-11-20T01:16:37.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "e5f7dc5a-7dfa-4927-bdb9-290289970ac7",
+      "createTime": "2026-11-20T01:16:37.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "882b586f-2358-4214-a486-41bc83dfca70",
+      "createTime": "2026-11-20T01:16:37.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "e3bc481c-dbb1-4b93-8f0e-f2b7f9be7e6b",
+      "createTime": "2026-11-20T01:16:37.466Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7144c2745bb0c2bf8f19743c93e34b4bd0d50ba7",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9849"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "d140b45f-5d29-42c9-b5aa-1768a1c1bef0",
+      "createTime": "2026-11-20T01:16:37.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5962dec0b8e1b085da12aa0b340df78a5d4e170b",
+          "message": "Surface async errors in minifyProtoJson CLI",
+          "issues": [
+            "9913"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "2.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "4760d8ee-8756-493a-95cd-c0eebc5be724",
+      "createTime": "2026-11-20T01:16:37.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3a917721d725e1aaec51019fd2e5dccb2824934",
+          "message": "Emit log attributes and filter StructuredBackend",
+          "issues": [
+            "9852"
+          ],
+          "scope": "logging-utils"
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "23d517a3-66e9-4435-9259-6222567548ba",
+      "createTime": "2026-11-20T01:16:37.361Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "9f31cb2cc999d07901b2098950c12d5f4934db33",
           "message": "Regenerate with gapic-generator-v5.7.3",
@@ -107878,5 +108451,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-12T20:23:42.797Z"
+  "updateTime": "2026-11-20T01:16:38.425Z"
 }

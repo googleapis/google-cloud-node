@@ -69,7 +69,7 @@ default:
       google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -78,7 +78,7 @@ libraries:
       package_name: '@google-ads/admanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 1.5.0
+    version: 1.6.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -560,7 +560,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -575,7 +575,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/chronicle/v1
         nodejs:
@@ -764,7 +764,7 @@ libraries:
       default_version: v1beta1
       main_service: datalabeling
   - name: google-cloud-dataplex
-    version: 6.2.0
+    version: 6.3.0
     apis:
       - path: google/cloud/dataplex/v1
         nodejs:
@@ -815,7 +815,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-designcenter
-    version: 0.1.0
+    version: 0.1.1
     apis:
       - path: google/cloud/designcenter/v1
     copyright_year: "2026"
@@ -858,7 +858,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 3.5.0
+    version: 3.6.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -978,7 +978,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1036,7 +1036,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-hypercomputecluster
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/hypercomputecluster/v1
       - path: google/cloud/hypercomputecluster/v1beta
@@ -1071,14 +1071,14 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 6.3.0
+    version: 6.4.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 3.3.0
+    version: 3.4.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
@@ -1182,7 +1182,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1240,7 +1240,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
   - name: google-cloud-networkmanagement
-    version: 6.4.0
+    version: 6.5.0
     apis:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
@@ -1394,7 +1394,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1466,7 +1466,7 @@ libraries:
     nodejs:
       default_version: v2beta
   - name: google-cloud-run
-    version: 4.2.0
+    version: 4.3.0
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
@@ -1611,7 +1611,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.32.0
+    version: 0.33.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1707,7 +1707,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -2119,7 +2119,7 @@ libraries:
       package_name: '@google-shopping/css'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
   - name: google-shopping-merchant-accounts
-    version: 4.1.0
+    version: 5.0.0
     apis:
       - path: google/shopping/merchant/accounts/v1
     copyright_year: "2026"
@@ -2129,7 +2129,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Accounts
   - name: google-shopping-merchant-conversions
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/conversions/v1
     copyright_year: "2026"
@@ -2139,7 +2139,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Conversions
   - name: google-shopping-merchant-datasources
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/shopping/merchant/datasources/v1
     copyright_year: "2026"
@@ -2149,7 +2149,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Data Sources
   - name: google-shopping-merchant-inventories
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/shopping/merchant/inventories/v1
     copyright_year: "2026"
@@ -2159,7 +2159,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Inventories
   - name: google-shopping-merchant-issueresolution
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
     copyright_year: "2026"
@@ -2169,7 +2169,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Issue Resolution
   - name: google-shopping-merchant-lfp
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/shopping/merchant/lfp/v1
     copyright_year: "2026"
@@ -2189,7 +2189,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Loyalty Customers
   - name: google-shopping-merchant-notifications
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/notifications/v1
     copyright_year: "2026"
@@ -2199,7 +2199,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Notifications
   - name: google-shopping-merchant-ordertracking
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1
     copyright_year: "2026"
@@ -2209,7 +2209,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Order Tracking
   - name: google-shopping-merchant-products
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/shopping/merchant/products/v1
     copyright_year: "2026"
@@ -2219,7 +2219,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Products
   - name: google-shopping-merchant-promotions
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/shopping/merchant/promotions/v1
     copyright_year: "2026"
@@ -2229,7 +2229,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Promotions
   - name: google-shopping-merchant-quota
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/shopping/merchant/quota/v1
     copyright_year: "2026"
@@ -2239,7 +2239,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Quota
   - name: google-shopping-merchant-reports
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1alpha
@@ -2250,7 +2250,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Reports
   - name: google-shopping-merchant-reviews
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/reviews/v1
     copyright_year: "2026"
