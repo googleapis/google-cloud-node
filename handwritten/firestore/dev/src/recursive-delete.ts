@@ -17,17 +17,19 @@ import * as firestore from '@google-cloud/firestore';
 
 import * as assert from 'assert';
 
-import Firestore, {
+import {
   BulkWriter,
   CollectionReference,
   DocumentReference,
   FieldPath,
+  Firestore,
   Query,
   QueryDocumentSnapshot,
 } from '.';
 import {Deferred, wrapError} from './util';
 import type {GoogleError} from 'google-gax';
 import {BulkWriterError} from './bulk-writer';
+import {Filter} from './filter';
 import {QueryOptions} from './reference/query-options';
 import {StatusCode} from './status-code';
 
@@ -40,6 +42,13 @@ import {StatusCode} from './status-code';
  * descendants in a single collection.
  */
 export const REFERENCE_NAME_MIN_ID = '__id-9223372036854775808__';
+
+/*!
+ * The lowest possible string ID. Standard edition orders REFERENCE_NAME_MIN_ID
+ * first, while Enterprise edition orders REFERENCE_NAME_MIN_STRING_ID first.
+ * Both are used to bound queries for all descendants in a single collection.
+ */
+const REFERENCE_NAME_MIN_STRING_ID = String.fromCharCode(0);
 
 /*!
  * The query limit used for recursive deletes when fetching all descendants of
@@ -251,21 +260,54 @@ export class RecursiveDelete {
       ),
     );
 
-    // Query for names only to fetch empty snapshots.
-    query = query.select(FieldPath.documentId()).limit(this.maxPendingOps);
+    // Query for names only to fetch empty snapshots. Order by name explicitly:
+    // Enterprise edition does not guarantee an implicit order, and the last
+    // document of each batch is the cursor for the next one.
+    query = query
+      .select(FieldPath.documentId())
+      .orderBy(FieldPath.documentId())
+      .limit(this.maxPendingOps);
 
     if (ref instanceof CollectionReference) {
       // To find all descendants of a collection reference, we need to use a
       // composite filter that captures all documents that start with the
-      // collection prefix. The MIN_KEY constant represents the minimum key in
-      // this collection, and a null byte + the MIN_KEY represents the minimum
-      // key is the next possible collection.
+      // collection prefix. The minimum document ID differs by edition:
+      // Standard edition orders REFERENCE_NAME_MIN_ID first, while Enterprise
+      // edition orders REFERENCE_NAME_MIN_STRING_ID first. The range starts at
+      // the minimum key in this collection and ends before the minimum key in
+      // the next possible collection (the collection ID followed by a null
+      // byte), using both minimums for each bound.
       const nullChar = String.fromCharCode(0);
-      const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
       const endAt = collectionId + nullChar + '/' + REFERENCE_NAME_MIN_ID;
+      const endAtString =
+        collectionId + nullChar + '/' + REFERENCE_NAME_MIN_STRING_ID;
+
+      // The lower bound is the disjunction of both minimums, since the edition
+      // is not known client-side. Standard edition does not coalesce the
+      // overlapping OR bounds and runs one range scan per disjunct, so the
+      // lower bound is only added to the first query of this RecursiveDelete;
+      // the queries for later batches are bounded by
+      // startAfter(lastDocumentSnap) instead. If the stream of the first query
+      // fails after receiving documents, QueryUtil._stream() retries that same
+      // query with startAfter() on the last received document, so the retry
+      // still carries the OR bound and runs two range scans on Standard
+      // edition.
+      if (!this.lastDocumentSnap) {
+        const startAt = collectionId + '/' + REFERENCE_NAME_MIN_ID;
+        const startAtString = collectionId + '/' + REFERENCE_NAME_MIN_STRING_ID;
+        query = query.where(
+          Filter.or(
+            Filter.where(FieldPath.documentId(), '>=', startAt),
+            Filter.where(FieldPath.documentId(), '>=', startAtString),
+          ),
+        );
+      }
+
+      // The upper bound is the conjunction of both minimums, which takes the
+      // tighter of the two on either edition.
       query = query
-        .where(FieldPath.documentId(), '>=', startAt)
-        .where(FieldPath.documentId(), '<', endAt);
+        .where(FieldPath.documentId(), '<', endAt)
+        .where(FieldPath.documentId(), '<', endAtString);
     }
 
     if (this.lastDocumentSnap) {
@@ -287,28 +329,36 @@ export class RecursiveDelete {
     if (this.ref instanceof DocumentReference) {
       this.writer.delete(this.ref).catch(err => this.incrementErrorCount(err));
     }
-    void this.writer.flush().then(async () => {
-      if (this.lastError === undefined) {
-        this.completionDeferred.resolve();
-      } else {
-        let error = new (require('google-gax/fallback').GoogleError)(
-          `${this.errorCount} ` +
-            `${this.errorCount !== 1 ? 'deletes' : 'delete'} ` +
-            'failed. The last delete failed with: ',
-        );
-        if (this.lastError.code !== undefined) {
-          error.code = this.lastError.code as number;
-        }
-        error = wrapError(error, this.errorStack);
+    void this.writer.flush().then(() => this.settleCompletion());
+  }
 
-        // Wrap the BulkWriter error last to provide the full stack trace.
-        this.completionDeferred.reject(
-          this.lastError.stack
-            ? wrapError(error, this.lastError.stack ?? '')
-            : error,
-        );
+  /**
+   * Resolves the completion promise, or rejects it with the last error if any
+   * delete failed.
+   * @private
+   * @internal
+   */
+  private settleCompletion(): void {
+    if (this.lastError === undefined) {
+      this.completionDeferred.resolve();
+    } else {
+      let error = new (require('google-gax/fallback').GoogleError)(
+        `${this.errorCount} ` +
+          `${this.errorCount !== 1 ? 'deletes' : 'delete'} ` +
+          'failed. The last delete failed with: ',
+      );
+      if (this.lastError.code !== undefined) {
+        error.code = this.lastError.code as number;
       }
-    });
+      error = wrapError(error, this.errorStack);
+
+      // Wrap the BulkWriter error last to provide the full stack trace.
+      this.completionDeferred.reject(
+        this.lastError.stack
+          ? wrapError(error, this.lastError.stack ?? '')
+          : error,
+      );
+    }
   }
 
   /**
@@ -324,21 +374,29 @@ export class RecursiveDelete {
       .catch(err => {
         this.incrementErrorCount(err);
       })
-      .then(() => {
-        this.pendingOpsCount--;
+      .then(() => this.onDeleteSettled());
+  }
 
-        // We wait until the previous stream has ended in order to sure the
-        // startAfter document is correct. Starting the next stream while
-        // there are pending operations allows Firestore to maximize
-        // BulkWriter throughput.
-        if (
-          this.documentsPending &&
-          !this.streamInProgress &&
-          this.pendingOpsCount < this.minPendingOps
-        ) {
-          this.setupStream();
-        }
-      });
+  /**
+   * Called when a delete started by deleteRef() succeeds or fails. Starts the
+   * next stream if conditions are met.
+   * @private
+   * @internal
+   */
+  private onDeleteSettled(): void {
+    this.pendingOpsCount--;
+
+    // We wait until the previous stream has ended in order to sure the
+    // startAfter document is correct. Starting the next stream while there
+    // are pending operations allows Firestore to maximize BulkWriter
+    // throughput.
+    if (
+      this.documentsPending &&
+      !this.streamInProgress &&
+      this.pendingOpsCount < this.minPendingOps
+    ) {
+      this.setupStream();
+    }
   }
 
   private incrementErrorCount(err: Error): void {

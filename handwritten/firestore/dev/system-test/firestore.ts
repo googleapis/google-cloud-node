@@ -7568,6 +7568,119 @@ describe('BulkWriter class', () => {
       expect(callbackCount).to.equal(6);
       await bulkWriter.close();
     });
+
+    // Document IDs that Enterprise edition orders before REFERENCE_NAME_MIN_ID
+    // ('__id-9223372036854775808__'), along with IDs that sort after it.
+    const idsAroundMinNumericId = [
+      '-',
+      '0',
+      '9',
+      'A',
+      'Z',
+      '_',
+      '__a',
+      'a',
+      '~',
+    ];
+
+    // Creates a document under each ID of `coll`, with a child document.
+    async function createDocsWithChildren(
+      coll: CollectionReference,
+      ids: string[],
+    ): Promise<void> {
+      const batch = firestore.batch();
+      for (const id of ids) {
+        batch.set(coll.doc(id), {id});
+        batch.set(coll.doc(id).collection('child').doc('Child'), {id});
+      }
+      await batch.commit();
+    }
+
+    // Returns the number of documents in `coll` and in the child collection of
+    // each of its IDs.
+    async function countDocsWithChildren(
+      coll: CollectionReference,
+      ids: string[],
+    ): Promise<number> {
+      let count = (await coll.get()).size;
+      for (const id of ids) {
+        count += (await coll.doc(id).collection('child').get()).size;
+      }
+      return count;
+    }
+
+    it('on collection with IDs that sort below the minimum numeric ID', async () => {
+      const coll = firestore.collection('node_ids_' + autoId());
+      await createDocsWithChildren(coll, idsAroundMinNumericId);
+
+      await firestore.recursiveDelete(coll);
+
+      expect(await countDocsWithChildren(coll, idsAroundMinNumericId)).to.equal(
+        0,
+      );
+    });
+
+    it('on collection with IDs that sort below the minimum numeric ID in several batches', async () => {
+      const coll = firestore.collection('node_ids_' + autoId());
+      await createDocsWithChildren(coll, idsAroundMinNumericId);
+
+      // Fetch 3 documents per query, so that each query after the first one
+      // starts after the last document of the previous batch. BulkWriter only
+      // sends full batches before it is flushed, so its batches must not be
+      // larger than a query for the next query to start.
+      const bulkWriter = firestore.bulkWriter();
+      bulkWriter._setMaxBatchSize(3);
+      try {
+        await firestore._recursiveDelete(
+          coll,
+          /* maxLimit= */ 3,
+          /* minLimit= */ 1,
+          bulkWriter,
+        );
+      } finally {
+        await bulkWriter.close();
+      }
+
+      expect(await countDocsWithChildren(coll, idsAroundMinNumericId)).to.equal(
+        0,
+      );
+    });
+
+    for (const parentExists of [true, false]) {
+      it(`on nested collection with IDs that sort below the minimum numeric ID (${parentExists ? 'existing' : 'virtual'} parent)`, async () => {
+        const parent = randomCol.doc('Parent');
+        if (parentExists) {
+          await parent.set({});
+        }
+        // 'A\0' is the collection right after 'A', the upper bound of the
+        // range.
+        const siblingIds = ['@', 'A\0', 'A0', 'B'];
+        for (const collectionId of ['A', ...siblingIds]) {
+          await createDocsWithChildren(
+            parent.collection(collectionId),
+            idsAroundMinNumericId,
+          );
+        }
+
+        await firestore.recursiveDelete(parent.collection('A'));
+
+        expect(
+          await countDocsWithChildren(
+            parent.collection('A'),
+            idsAroundMinNumericId,
+          ),
+        ).to.equal(0);
+        for (const collectionId of siblingIds) {
+          expect(
+            await countDocsWithChildren(
+              parent.collection(collectionId),
+              idsAroundMinNumericId,
+            ),
+          ).to.equal(idsAroundMinNumericId.length * 2);
+        }
+        expect((await parent.get()).exists).to.equal(parentExists);
+      });
+    }
   });
 
   it('can retry failed writes with a provided callback', async () => {
