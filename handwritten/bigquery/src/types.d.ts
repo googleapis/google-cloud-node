@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260922
+ * Discovery Revision: 20261107
  */
 
 /**
@@ -326,7 +326,7 @@ declare namespace bigquery {
   };
 
   /**
-   * Arrow RecordBatch. This feature is not yet available.
+   * Arrow RecordBatch. [Preview](https://cloud.google.com/products/#product-launch-stages)
    */
   type IArrowRecordBatch = {
     /**
@@ -336,7 +336,7 @@ declare namespace bigquery {
   };
 
   /**
-   * Arrow schema as specified in https://arrow.apache.org/docs/python/api/datatypes.html and serialized to bytes using IPC: https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc See code samples on how this message can be deserialized. This feature is not yet available.
+   * Arrow schema as specified in https://arrow.apache.org/docs/python/api/datatypes.html and serialized to bytes using IPC: https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc See code samples on how this message can be deserialized. [Preview](https://cloud.google.com/products/#product-launch-stages)
    */
   type IArrowSchema = {
     /**
@@ -346,7 +346,7 @@ declare namespace bigquery {
   };
 
   /**
-   * Contains options specific to Arrow Serialization. This feature is not yet available.
+   * Contains options specific to Arrow Serialization. [Preview](https://cloud.google.com/products/#product-launch-stages)
    */
   type IArrowSerializationOptions = {
     /**
@@ -473,6 +473,11 @@ declare namespace bigquery {
      * Optional. The file format the table data is stored in.
      */
     fileFormat?: 'FILE_FORMAT_UNSPECIFIED' | 'PARQUET';
+    /**
+     * Optional. The type of Metadata Export for BigLake Managed Tables.
+     */
+    metadataExportMode?:
+      'METADATA_EXPORT_MODE_UNSPECIFIED' | 'ASYNC' | 'MANUAL';
     /**
      * Optional. The fully qualified location prefix of the external folder where table data is stored. The '*' wildcard character is not allowed. The URI should be in the format `gs://bucket/path_to_table/`
      */
@@ -1071,6 +1076,10 @@ declare namespace bigquery {
      */
     externalDatasetReference?: IExternalDatasetReference;
     /**
+     * Optional. The failover reservation associated with the dataset in the regionless format. Example: .. To learn about about failover reservations see: https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#overview
+     */
+    failoverReservationId?: string;
+    /**
      * Optional. A descriptive name for the dataset.
      */
     friendlyName?: string;
@@ -1110,6 +1119,10 @@ declare namespace bigquery {
      * Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.
      */
     maxTimeTravelHours?: string;
+    /**
+     * Optional. The list of replicas in a cross region replicated or disaster recovery dataset.
+     */
+    replicas?: Array<IReplica>;
     /**
      * Optional. The [tags](https://cloud.google.com/bigquery/docs/tags) attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/environment" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "Production". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details.
      */
@@ -2486,6 +2499,24 @@ declare namespace bigquery {
   };
 
   /**
+   *  Information about a package installed in the routine execution environment.
+   */
+  type IInstalledPackage = {
+    /**
+     * Output only. The name of the installed package.
+     */
+    name?: string;
+    /**
+     * Output only. The source repository from which this package was installed. Populated only when the package was installed from an additional package repository. E.g. 'https://my-region-python.pkg.dev/my-project/my-repo/simple'
+     */
+    sourceRepository?: string;
+    /**
+     * Output only. The version of the installed package.
+     */
+    version?: string;
+  };
+
+  /**
    * An array of int.
    */
   type IIntArray = {
@@ -2721,6 +2752,10 @@ declare namespace bigquery {
      * Optional. Whether to print out a header row in the results. Default is true. Not applicable when extracting models.
      */
     printHeader?: boolean;
+    /**
+     * Optional. A set of key-value pairs representing the secure context. This can be used to pass sensitive or context-specific information. They can be retrieved via the SECURE_CONTEXT() function and used to modify the run-time behavior of an extract job on tables with row access policies.
+     */
+    secureContext?: ISecureContext;
     /**
      * A reference to the model being exported.
      */
@@ -3468,6 +3503,10 @@ declare namespace bigquery {
      */
     schema?: ITableSchema;
     /**
+     * Output only. Search indexing specific statistics.
+     */
+    searchIndexingStats?: ISearchIndexingStats;
+    /**
      * Output only. Search query specific statistics.
      */
     searchStatistics?: ISearchStatistics;
@@ -3515,6 +3554,10 @@ declare namespace bigquery {
      * Output only. GoogleSQL only: list of undeclared query parameters detected during a dry run validation.
      */
     undeclaredQueryParameters?: Array<IQueryParameter>;
+    /**
+     * Output only. Vector Search indexing specific statistics.
+     */
+    vectorSearchIndexingStats?: IVectorSearchIndexingStats;
     /**
      * Output only. Vector Search query specific statistics.
      */
@@ -4323,9 +4366,17 @@ declare namespace bigquery {
    */
   type IPythonOptions = {
     /**
+     * Optional. Fully qualified name of the connection whose service account will be used to authenticate to private package repositories during build-time. Format: "projects/{project_id}/locations/{location_id}/connections/{connection_id}"
+     */
+    buildConnection?: string;
+    /**
      * Required. The name of the function defined in Python code as the entry point when the Python UDF is invoked.
      */
     entryPoint?: string;
+    /**
+     * Optional. The list of additional package repositories to search when resolving Python packages. These repositories are searched in addition to the default public PyPI. Only repositories hosted in Artifact Registry (.pkg.dev) are supported. Only pre-compiled Wheel (.whl) packages are supported from these repositories. E.g. ['https://my-region-python.pkg.dev/my-project/my-repo/simple']
+     */
+    extraPackageRepositories?: Array<string>;
     /**
      * Optional. A list of Python package names along with versions to be installed. Example: ["pandas>=2.1", "google-cloud-translate==3.11"]. For more information, see [Use third-party packages](https://cloud.google.com/bigquery/docs/user-defined-functions-python#third-party-packages).
      */
@@ -4509,7 +4560,7 @@ declare namespace bigquery {
      */
     queryParameters?: Array<IQueryParameter>;
     /**
-     * Optional. The query results format. If the value is anything other than `STRUCT_ENCODING` or unspecified: * The schema of the results will be provided in `QueryResponse.results_schema` field. * The results of the first page will be provided in `QueryResponse.results` field. * The `QueryResponse.rows` will not be populated. * The `QueryResponse.schema` for `QueryResponse.rows` will also not be populated since it is the schema of the `QueryResponse.rows`. This feature is not yet available.
+     * Optional. The query results format. If the value is anything other than `STRUCT_ENCODING` or unspecified: * The schema of the results is provided in the `QueryResponse.results_schema` field. * The results of the first page are provided in the `QueryResponse.results` field. * The `QueryResponse.rows` is not populated. * The `QueryResponse.schema` for `QueryResponse.rows` is not populated since it is the schema of the `QueryResponse.rows`. [Preview](https://cloud.google.com/products/#product-launch-stages)
      */
     queryResultsFormat?:
       'QUERY_RESULTS_FORMAT_UNSPECIFIED' | 'STRUCT_ENCODING' | 'ARROW';
@@ -4597,7 +4648,7 @@ declare namespace bigquery {
      */
     numDmlAffectedRows?: string;
     /**
-     * Output only. The number of rows out of `total_rows` returned in this response. This feature is not yet available.
+     * Output only. The number of rows out of `total_rows` returned in this response. [Preview](https://cloud.google.com/products/#product-launch-stages)
      */
     pageRowCount?: string;
     /**
@@ -4823,6 +4874,78 @@ declare namespace bigquery {
     speechRecognizer?: string;
   };
 
+  /**
+   * The replica metadata of the dataset. If the dataset has two or more replicas, it's considered a cross region replicated (CRR) dataset.
+   */
+  type IReplica = {
+    /**
+     * Output only. The time when the backfill was completed and replica is ready to use.
+     */
+    backfillCompletionTime?: string;
+    /**
+     * Output only. The timestamp when the replica was created. For any dataset's first replica, this should be set to the dataset's creation_time.
+     */
+    creationTime?: string;
+    /**
+     * Output only. Failover reservation ID for the replica's region if this replica is used for DR. Fully-qualified format, e.g. "projects/some-project/locations/US/reservations/some-reservation" The location portion of the format is upper case if "US" or "EU", otherwise a lower case cloud region like "asia-northeast1".
+     */
+    failoverReservationUri?: string;
+    /**
+     * Required. The user-visible string identifier for this dataset replica. This is generally named after the region.
+     */
+    id?: string;
+    /**
+     * Required. The logical bigquery region where this replica is located. This is upper case if "US" or "EU", otherwise a lower case cloud region like "asia-northeast1".
+     */
+    location?: string;
+    /**
+     * Output only. After a new primary assignment is made, this is the time that the dataset's data has been fully replicated to the replica, and after which the system will use current reads in the new primary replica.
+     */
+    primaryAssignmentCompletionTime?: string;
+    /**
+     * Output only. The time at which the replica was assigned primary. Only one replica will have this field populated at any point.
+     */
+    primaryAssignmentTime?: string;
+    /**
+     * Optional. Contains modify options on the replica such as set a kms key on the replica.
+     */
+    replicaOptions?: IReplicaOptions;
+    /**
+     * Output only. Gives an explicit indicator of the replica primary state.
+     */
+    replicaState?:
+      | 'REPLICA_STATE_UNSPECIFIED'
+      | 'PRIMARY'
+      | 'SECONDARY'
+      | 'ASSIGNED_PRIMARY'
+      | 'PREVIOUSLY_ASSIGNED_PRIMARY'
+      | 'BACKFILLING';
+  };
+
+  /**
+   * Options set by the user when creating the replica. These include region-specific dataset values, for example default KMS key name. When a resource is replicated, the destination region's replica contains values that should be overwritten in the destination region.
+   */
+  type IReplicaOptions = {
+    /**
+     * Optional. Default KMS encryption key name.
+     */
+    defaultKmsKeyName?: string;
+  };
+
+  /**
+   * Output-only policy member strings of a Google Cloud resource's built-in identity.
+   */
+  type IResourcePolicyMember = {
+    /**
+     * Output only. IAM policy binding member referring to a Google Cloud resource by user-assigned name (https://google.aip.dev/122). If a resource is deleted and recreated with the same name, the binding will be applicable to the new resource. Example: `principal://parametermanager.googleapis.com/projects/12345/name/locations/us-central1-a/parameters/my-parameter`
+     */
+    iamPolicyNamePrincipal?: string;
+    /**
+     * Output only. IAM policy binding member referring to a Google Cloud resource by system-assigned unique identifier (https://google.aip.dev/148#uid). If a resource is deleted and recreated with the same name, the binding will not be applicable to the new resource Example: `principal://parametermanager.googleapis.com/projects/12345/uid/locations/us-central1-a/parameters/a918fed5`
+     */
+    iamPolicyUidPrincipal?: string;
+  };
+
   type IRestrictionConfig = {
     /**
      * Output only. Specifies the type of dataset/table restriction.
@@ -4957,6 +5080,10 @@ declare namespace bigquery {
      * Output only. The size of the image in bytes. Populated only after the build succeeds.
      */
     imageSizeBytes?: string;
+    /**
+     * Output only. The list of installed packages in the routine's execution environment. Populated only after the build succeeds.
+     */
+    installedPackages?: Array<IInstalledPackage>;
   };
 
   /**
@@ -5114,6 +5241,20 @@ declare namespace bigquery {
      * Stack trace showing the line/column/procedure name of each frame on the stack at the point where the current evaluation happened. The leaf frame is first, the primary script is last. Never empty.
      */
     stackFrames?: Array<IScriptStackFrame>;
+  };
+
+  /**
+   * Statistics for a search indexing job. Populated as part of JobStatistics2.
+   */
+  type ISearchIndexingStats = {
+    /**
+     * Output only. The base table for which the search index is being created or refreshed.
+     */
+    baseTable?: ITableReference;
+    /**
+     * Output only. The name of the search index.
+     */
+    indexName?: string;
   };
 
   /**
@@ -5691,6 +5832,10 @@ declare namespace bigquery {
      * Optional. The partition information for all table formats, including managed partitioned tables, hive partitioned tables, iceberg partitioned, and metastore partitioned tables. This field is only populated for metastore partitioned tables. For other table formats, this is an output only field.
      */
     partitionDefinition?: IPartitioningDefinition;
+    /**
+     * Output only. Contains the resource identity token of the view that users can use to include in their policy bindings for authorization. This should be set only for views.
+     */
+    policyMember?: IResourcePolicyMember;
     /**
      * If specified, configures range partitioning for this table.
      */
@@ -6933,6 +7078,20 @@ declare namespace bigquery {
   };
 
   /**
+   * Statistics for a vector search indexing job. Populated as part of JobStatistics2.
+   */
+  type IVectorSearchIndexingStats = {
+    /**
+     * Output only. The base table for which the vector index is being created or refreshed.
+     */
+    baseTable?: ITableReference;
+    /**
+     * Output only. The name of the vector index.
+     */
+    indexName?: string;
+  };
+
+  /**
    * Statistics for a vector search query. Populated as part of JobStatistics2.
    */
   type IVectorSearchStatistics = {
@@ -7006,7 +7165,13 @@ declare namespace bigquery {
       /**
        * Optional. Specifies the view that determines which dataset information is returned. By default, metadata and ACL information are returned.
        */
-      datasetView?: 'DATASET_VIEW_UNSPECIFIED' | 'METADATA' | 'ACL' | 'FULL';
+      datasetView?:
+        | 'DATASET_VIEW_UNSPECIFIED'
+        | 'METADATA'
+        | 'ACL'
+        | 'FULL'
+        | 'BASIC'
+        | 'BASIC_REPLICA_METADATA_VIEW';
     };
 
     /**
