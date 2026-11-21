@@ -25,6 +25,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
+import {augmentError, setErrorProperty} from './util.js';
 import {
   IdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
@@ -273,32 +274,38 @@ export class StorageTransport {
       hasEtagInBody
     );
 
-    // Helper to enrich GaxiosError objects with legacy ApiError properties
+    // Helper to enrich GaxiosError objects with legacy ApiError properties and troubleshooting hints
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const decorateError = (err: any) => {
       if (err && typeof err === 'object') {
-        err.code = err.response?.status || err.status || err.code;
+        const resolvedCode = err.response?.status || err.status || err.code;
+        if (resolvedCode !== undefined) {
+          err = setErrorProperty(err, 'code', resolvedCode);
+        }
         if (err.response?.data?.error) {
           const apiError = err.response.data.error;
           if (typeof apiError === 'string') {
-            err.message = apiError;
+            err = setErrorProperty(err, 'message', apiError, false);
           } else if (apiError && typeof apiError === 'object') {
             if (typeof apiError.message === 'string') {
-              err.message = apiError.message;
+              err = setErrorProperty(err, 'message', apiError.message, false);
             } else if (
               apiError.message &&
               typeof apiError.message === 'object'
             ) {
-              err.message =
+              const extractedMessage =
                 apiError.message.error?.message ||
                 apiError.message.message ||
                 JSON.stringify(apiError.message);
+              err = setErrorProperty(err, 'message', extractedMessage, false);
             }
-            if (apiError.errors) err.errors = apiError.errors;
+            if (apiError.errors) {
+              err = setErrorProperty(err, 'errors', apiError.errors);
+            }
           }
         }
       }
-      return err;
+      return augmentError(err);
     };
 
     const isRetryDisabled =

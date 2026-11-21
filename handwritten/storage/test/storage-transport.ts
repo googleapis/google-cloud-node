@@ -575,4 +575,295 @@ describe('Storage Transport', () => {
       );
     });
   });
+
+  describe('error augmentation', () => {
+    const cpuStarvationHint =
+      ' (Hint: This may be caused by severe CPU starvation or network throttling in constrained environments like Kubernetes.)';
+    const tokenExpirationHint =
+      ' (Hint: If this occurs intermittently under heavy load, check your container for CPU starvation which can cause tokens to expire in flight.)';
+
+    const createFetchError = (cause: unknown): TypeError & {cause?: unknown} =>
+      new (
+        TypeError as unknown as new (
+          message: string,
+          options?: {cause?: unknown},
+        ) => TypeError & {cause?: unknown}
+      )('fetch failed', {cause});
+
+    it('should append CPU starvation hint when fetch fails with UND_ERR_CONNECT_TIMEOUT', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = Object.assign(new Error('Connect Timeout Error'), {
+        code: 'UND_ERR_CONNECT_TIMEOUT',
+      });
+      const fetchError = createFetchError(cause);
+      const originalStack = fetchError.stack;
+      requestStub.rejects(fetchError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.strictEqual(err, fetchError);
+          assert.ok(err instanceof TypeError);
+          assert.strictEqual(err.message, `fetch failed${cpuStarvationHint}`);
+          assert.strictEqual(err.cause, cause);
+          assert.strictEqual(err.stack, originalStack);
+          return true;
+        },
+      );
+    });
+
+    it('should append CPU starvation hint when fetch fails with a TLS cause message', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = new Error(
+        'Client network socket disconnected before secure TLS connection was established',
+      );
+      const fetchError = createFetchError(cause);
+      requestStub.rejects(fetchError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.ok(err instanceof TypeError);
+          assert.ok(err.message.includes(cpuStarvationHint));
+          assert.strictEqual(err.cause, cause);
+          return true;
+        },
+      );
+    });
+
+    it('should append CPU starvation hint when GaxiosError wraps a fetch failed TypeError', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const undiciCause = Object.assign(new Error('Connect Timeout Error'), {
+        code: 'UND_ERR_CONNECT_TIMEOUT',
+      });
+      const fetchError = createFetchError(undiciCause);
+      const gaxiosError = new GaxiosError(
+        fetchError.message,
+        {
+          headers: new Headers(),
+          url: new URL('https://storage.googleapis.com/test'),
+        },
+        undefined,
+        fetchError,
+      );
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.strictEqual(err.cause, fetchError);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(err.message, `fetch failed${cpuStarvationHint}`);
+          return true;
+        },
+      );
+    });
+
+    it('should not append CPU starvation hint when fetch fails with an unrelated cause', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = Object.assign(new Error('connect ECONNREFUSED'), {
+        code: 'ECONNREFUSED',
+      });
+      const fetchError = createFetchError(cause);
+      requestStub.rejects(fetchError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error) => {
+          assert.strictEqual(err.message, 'fetch failed');
+          return true;
+        },
+      );
+    });
+
+    it('should append in-flight token expiration hint when request returns a 401 status', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = new Error('Underlying auth failure');
+      const gaxiosError = new GaxiosError(
+        'Invalid Credentials',
+        {
+          headers: new Headers(),
+          url: new URL('https://storage.googleapis.com/test'),
+        },
+        {
+          bodyUsed: true,
+          config: {
+            headers: new Headers(),
+            url: new URL('https://storage.googleapis.com/test'),
+          },
+          data: {
+            error: {
+              code: 401,
+              message: 'Invalid Credentials',
+            },
+          },
+          headers: new Headers(),
+          status: 401,
+          statusText: 'Unauthorized',
+        } as unknown as GaxiosResponse,
+        cause,
+      );
+      const originalStack = gaxiosError.stack;
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {code?: number; status?: number; cause?: unknown}) => {
+          assert.strictEqual(err, gaxiosError);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(
+            err.message,
+            `Invalid Credentials${tokenExpirationHint}`,
+          );
+          assert.strictEqual(err.status, 401);
+          assert.strictEqual(err.code, 401);
+          assert.strictEqual(err.cause, cause);
+          assert.strictEqual(err.stack, originalStack);
+          return true;
+        },
+      );
+    });
+
+    it('should preserve prototype, stack, and cause when error is frozen', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = Object.assign(new Error('Connect Timeout Error'), {
+        code: 'UND_ERR_CONNECT_TIMEOUT',
+      });
+      const fetchError = Object.freeze(createFetchError(cause));
+      const originalStack = fetchError.stack;
+      requestStub.rejects(fetchError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.ok(err instanceof TypeError);
+          assert.strictEqual(err.message, `fetch failed${cpuStarvationHint}`);
+          assert.strictEqual(err.cause, cause);
+          assert.strictEqual(err.stack, originalStack);
+          return true;
+        },
+      );
+    });
+
+    it('should safely decorate and augment a frozen GaxiosError with response error metadata', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const cause = new Error('Underlying auth failure');
+      const apiErrors = [{reason: 'authError', message: 'Invalid Credentials'}];
+      const frozenGaxiosError = Object.freeze(
+        new GaxiosError(
+          'Request failed with status code 401',
+          {
+            headers: new Headers(),
+            url: new URL('https://storage.googleapis.com/test'),
+          },
+          {
+            bodyUsed: true,
+            config: {
+              headers: new Headers(),
+              url: new URL('https://storage.googleapis.com/test'),
+            },
+            data: {
+              error: {
+                code: 401,
+                message: 'Invalid Credentials',
+                errors: apiErrors,
+              },
+            },
+            headers: new Headers(),
+            status: 401,
+            statusText: 'Unauthorized',
+          } as unknown as GaxiosResponse,
+          cause,
+        ),
+      );
+      const originalStack = frozenGaxiosError.stack;
+      requestStub.rejects(frozenGaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (
+          err: Error & {
+            code?: number;
+            status?: number;
+            errors?: unknown[];
+            cause?: unknown;
+          },
+        ) => {
+          assert.strictEqual(err.cause, cause);
+          assert.strictEqual(err.code, 401);
+          assert.strictEqual(err.status, 401);
+          assert.deepStrictEqual(err.errors, apiErrors);
+          assert.strictEqual(err.stack, originalStack);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(
+            err.message,
+            `Invalid Credentials${tokenExpirationHint}`,
+          );
+          return true;
+        },
+      );
+    });
+
+    it('should append CPU starvation hint when wrapper modifies outer error message', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const undiciCause = Object.assign(new Error('Connect Timeout Error'), {
+        code: 'UND_ERR_CONNECT_TIMEOUT',
+      });
+      const fetchError = createFetchError(undiciCause);
+      const gaxiosError = new GaxiosError(
+        'The operation was aborted due to timeout',
+        {
+          headers: new Headers(),
+          url: new URL('https://storage.googleapis.com/test'),
+        },
+        undefined,
+        fetchError,
+      );
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {cause?: unknown}) => {
+          assert.strictEqual(err.cause, fetchError);
+          assert.ok(err instanceof GaxiosError);
+          assert.strictEqual(
+            err.message,
+            `The operation was aborted due to timeout${cpuStarvationHint}`,
+          );
+          return true;
+        },
+      );
+    });
+
+    it('should mark accessor descriptors as configurable when cloning a frozen error', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const baseError = new Error();
+      Object.defineProperty(baseError, 'message', {
+        get: () => 'Original getter message',
+        enumerable: false,
+        configurable: true,
+      });
+      Object.defineProperty(baseError, 'status', {
+        value: 401,
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      });
+      const frozenAccessorError = Object.freeze(baseError);
+      requestStub.rejects(frozenAccessorError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error & {code?: number; status?: number}) => {
+          assert.strictEqual(err.code, 401);
+          assert.strictEqual(err.status, 401);
+          assert.strictEqual(
+            err.message,
+            `Original getter message${tokenExpirationHint}`,
+          );
+          return true;
+        },
+      );
+    });
+  });
 });

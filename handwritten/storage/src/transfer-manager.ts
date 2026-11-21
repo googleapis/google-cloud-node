@@ -34,6 +34,7 @@ import {GaxiosError, GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {
+  augmentError,
   getRuntimeTrackingString,
   getUserAgentString,
   getPLimit,
@@ -410,9 +411,9 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       this.bucket.storage.retryOptions.autoRetry &&
       this.bucket.storage.retryOptions.retryableErrorFn!(err as GaxiosError)
     ) {
-      throw err;
+      throw augmentError(err);
     } else {
-      bail(err);
+      bail(augmentError(err));
     }
   }
 }
