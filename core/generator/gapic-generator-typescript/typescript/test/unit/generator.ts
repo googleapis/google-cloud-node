@@ -553,6 +553,365 @@ apis:
         false,
       );
     });
+
+    it('should generate unit tests for deprecated services that stub client.warn (CJS)', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/deprecatedtest/v1/deprecatedtest_service.proto',
+            package: 'google.deprecatedtest.v1',
+            messageType: [
+              {
+                name: 'FibonacciRequest',
+                field: [
+                  {name: 'name', number: 1, label: 1, type: 9},
+                  {name: 'page_size', number: 2, label: 1, type: 5},
+                  {name: 'page_token', number: 3, label: 1, type: 9},
+                ],
+                options: {
+                  '.google.api.resource': {
+                    type: 'deprecatedtest.googleapis.com/Item',
+                    pattern: ['projects/{project}/items/{item}'],
+                  },
+                },
+              },
+              {
+                name: 'PagedResponse',
+                field: [
+                  {name: 'items', number: 1, label: 3, type: 9},
+                  {name: 'next_page_token', number: 2, label: 1, type: 9},
+                ],
+              },
+              {name: 'Empty'},
+            ],
+            service: [
+              {
+                name: 'DeprecatedService',
+                options: {
+                  deprecated: true,
+                  '.google.api.defaultHost': 'localhost:7469',
+                },
+                method: [
+                  {
+                    name: 'FastFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {},
+                  },
+                  {
+                    name: 'SlowFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {
+                      deprecated: true,
+                    },
+                  },
+                  {
+                    name: 'LongRunningFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.longrunning.Operation',
+                    options: {
+                      '.google.longrunning.operationInfo': {
+                        responseType: 'Empty',
+                        metadataType: 'Empty',
+                      },
+                    },
+                  },
+                  {
+                    name: 'ServerStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    serverStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'ClientStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    clientStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'BidiStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    clientStreaming: true,
+                    serverStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'PagedFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.PagedResponse',
+                    options: {},
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: [
+          'google/deprecatedtest/v1/deprecatedtest_service.proto',
+        ],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      generator.mixinsOverride = [
+        'google.iam.v1.IAMPolicy',
+        'google.cloud.location.Locations',
+        'google.longrunning.Operations',
+      ];
+      getTestGenerator(generator).readServiceYaml();
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const testFile = generator.response.file.find(
+        f => f.name === 'test/gapic_deprecated_service_v1.ts',
+      );
+      assert.ok(testFile);
+      const content = testFile.content || '';
+      const initCount = (content.match(/client\.initialize\(\)/g) || []).length;
+      const stubCount = (
+        content.match(/const stub = sinon\.stub\(client, 'warn'\);/g) || []
+      ).length;
+      const emitWarningStubCount = (
+        content.match(/const stub = sinon\.stub\(process, 'emitWarning'\);/g) ||
+        []
+      ).length;
+      const calledOnceCount = (
+        content.match(/assert\(stub\.calledOnce\);/g) || []
+      ).length;
+      const calledCount = (content.match(/assert\(stub\.called\);/g) || [])
+        .length;
+      assert.ok(initCount > 0);
+      assert.strictEqual(stubCount, initCount);
+      assert.ok(calledOnceCount > 0);
+      assert.ok(calledCount > 0);
+      assert.strictEqual(
+        calledOnceCount + calledCount,
+        stubCount + emitWarningStubCount,
+      );
+    });
+
+    it('should generate unit tests for deprecated services that stub client.warn (ESM)', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/deprecatedtest/v1/deprecatedtest_service.proto',
+            package: 'google.deprecatedtest.v1',
+            messageType: [
+              {
+                name: 'FibonacciRequest',
+                field: [
+                  {name: 'name', number: 1, label: 1, type: 9},
+                  {name: 'page_size', number: 2, label: 1, type: 5},
+                  {name: 'page_token', number: 3, label: 1, type: 9},
+                ],
+                options: {
+                  '.google.api.resource': {
+                    type: 'deprecatedtest.googleapis.com/Item',
+                    pattern: ['projects/{project}/items/{item}'],
+                  },
+                },
+              },
+              {
+                name: 'PagedResponse',
+                field: [
+                  {name: 'items', number: 1, label: 3, type: 9},
+                  {name: 'next_page_token', number: 2, label: 1, type: 9},
+                ],
+              },
+              {name: 'Empty'},
+            ],
+            service: [
+              {
+                name: 'DeprecatedService',
+                options: {
+                  deprecated: true,
+                  '.google.api.defaultHost': 'localhost:7469',
+                },
+                method: [
+                  {
+                    name: 'FastFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {},
+                  },
+                  {
+                    name: 'SlowFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {
+                      deprecated: true,
+                    },
+                  },
+                  {
+                    name: 'LongRunningFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.longrunning.Operation',
+                    options: {
+                      '.google.longrunning.operationInfo': {
+                        responseType: 'Empty',
+                        metadataType: 'Empty',
+                      },
+                    },
+                  },
+                  {
+                    name: 'ServerStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    serverStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'ClientStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    clientStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'BidiStreamingFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    clientStreaming: true,
+                    serverStreaming: true,
+                    options: {},
+                  },
+                  {
+                    name: 'PagedFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.PagedResponse',
+                    options: {},
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: [
+          'google/deprecatedtest/v1/deprecatedtest_service.proto',
+        ],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      generator.format = ['esm'];
+      generator.mixinsOverride = [
+        'google.iam.v1.IAMPolicy',
+        'google.cloud.location.Locations',
+        'google.longrunning.Operations',
+      ];
+      getTestGenerator(generator).readServiceYaml();
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const testFile = generator.response.file.find(
+        f => f.name === 'esm/test/gapic_deprecated_service_v1.ts',
+      );
+      assert.ok(testFile);
+      const content = testFile.content || '';
+      const initCount = (content.match(/client\.initialize\(\)/g) || []).length;
+      const stubCount = (
+        content.match(/const stub = sinon\.stub\(client, 'warn'\);/g) || []
+      ).length;
+      const emitWarningStubCount = (
+        content.match(/const stub = sinon\.stub\(process, 'emitWarning'\);/g) ||
+        []
+      ).length;
+      const calledOnceCount = (
+        content.match(/assert\(stub\.calledOnce\);/g) || []
+      ).length;
+      const calledCount = (content.match(/assert\(stub\.called\);/g) || [])
+        .length;
+      assert.ok(initCount > 0);
+      assert.strictEqual(stubCount, initCount);
+      assert.ok(calledOnceCount > 0);
+      assert.ok(calledCount > 0);
+      assert.strictEqual(
+        calledOnceCount + calledCount,
+        stubCount + emitWarningStubCount,
+      );
+    });
+
+    it('should only stub client.warn and assert stub.calledOnce on deprecated methods when service is not deprecated', async () => {
+      generator.request = {
+        protoFile: [
+          {
+            name: 'google/deprecatedtest/v1/deprecatedtest_service.proto',
+            package: 'google.deprecatedtest.v1',
+            messageType: [
+              {
+                name: 'FibonacciRequest',
+                field: [{name: 'value', number: 1, label: 1, type: 5}],
+              },
+              {name: 'Empty'},
+            ],
+            service: [
+              {
+                name: 'ActiveService',
+                options: {
+                  '.google.api.defaultHost': 'localhost:7469',
+                },
+                method: [
+                  {
+                    name: 'FastFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {},
+                  },
+                  {
+                    name: 'SlowFibonacci',
+                    inputType: '.google.deprecatedtest.v1.FibonacciRequest',
+                    outputType: '.google.deprecatedtest.v1.Empty',
+                    options: {
+                      deprecated: true,
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        fileToGenerate: [
+          'google/deprecatedtest/v1/deprecatedtest_service.proto',
+        ],
+      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      generator.templates = ['typescript_gapic'];
+      getTestGenerator(generator).readServiceYaml();
+      generator.response = {
+        file: [],
+      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+
+      const api = getTestGenerator(generator).buildAPIObject();
+      await generator.processTemplates(api);
+
+      const testFile = generator.response.file.find(
+        f => f.name === 'test/gapic_active_service_v1.ts',
+      );
+      assert.ok(testFile);
+      const content = testFile.content || '';
+      const stubCount = (
+        content.match(/const stub = sinon\.stub\(client, 'warn'\);/g) || []
+      ).length;
+      const calledOnceCount = (
+        content.match(/assert\(stub\.calledOnce\);/g) || []
+      ).length;
+      const calledCount = (
+        content.match(/const stub = sinon\.stub\(process, 'emitWarning'\);/g) ||
+        []
+      ).length;
+      const totalCalledCount = (content.match(/assert\(stub\.called\);/g) || [])
+        .length;
+      assert.strictEqual(stubCount, 4);
+      assert.strictEqual(calledOnceCount, 4);
+      assert.strictEqual(totalCalledCount, calledCount);
+    });
   });
 
   describe('generate', () => {
