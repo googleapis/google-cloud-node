@@ -52,6 +52,7 @@ const streamEvents = require('stream-events');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../package.json');
 
+// Trigger mandatory-conformance workflow check.
 const {grpc} = new gax.GrpcClient();
 
 // Enable channel pooling
