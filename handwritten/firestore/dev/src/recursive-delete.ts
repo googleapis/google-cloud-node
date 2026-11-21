@@ -17,11 +17,12 @@ import * as firestore from '@google-cloud/firestore';
 
 import * as assert from 'assert';
 
-import Firestore, {
+import {
   BulkWriter,
   CollectionReference,
   DocumentReference,
   FieldPath,
+  Firestore,
   Query,
   QueryDocumentSnapshot,
 } from '.';
@@ -328,28 +329,36 @@ export class RecursiveDelete {
     if (this.ref instanceof DocumentReference) {
       this.writer.delete(this.ref).catch(err => this.incrementErrorCount(err));
     }
-    void this.writer.flush().then(async () => {
-      if (this.lastError === undefined) {
-        this.completionDeferred.resolve();
-      } else {
-        let error = new (require('google-gax/fallback').GoogleError)(
-          `${this.errorCount} ` +
-            `${this.errorCount !== 1 ? 'deletes' : 'delete'} ` +
-            'failed. The last delete failed with: ',
-        );
-        if (this.lastError.code !== undefined) {
-          error.code = this.lastError.code as number;
-        }
-        error = wrapError(error, this.errorStack);
+    void this.writer.flush().then(() => this.settleCompletion());
+  }
 
-        // Wrap the BulkWriter error last to provide the full stack trace.
-        this.completionDeferred.reject(
-          this.lastError.stack
-            ? wrapError(error, this.lastError.stack ?? '')
-            : error,
-        );
+  /**
+   * Resolves the completion promise, or rejects it with the last error if any
+   * delete failed.
+   * @private
+   * @internal
+   */
+  private settleCompletion(): void {
+    if (this.lastError === undefined) {
+      this.completionDeferred.resolve();
+    } else {
+      let error = new (require('google-gax/fallback').GoogleError)(
+        `${this.errorCount} ` +
+          `${this.errorCount !== 1 ? 'deletes' : 'delete'} ` +
+          'failed. The last delete failed with: ',
+      );
+      if (this.lastError.code !== undefined) {
+        error.code = this.lastError.code as number;
       }
-    });
+      error = wrapError(error, this.errorStack);
+
+      // Wrap the BulkWriter error last to provide the full stack trace.
+      this.completionDeferred.reject(
+        this.lastError.stack
+          ? wrapError(error, this.lastError.stack ?? '')
+          : error,
+      );
+    }
   }
 
   /**
@@ -365,21 +374,29 @@ export class RecursiveDelete {
       .catch(err => {
         this.incrementErrorCount(err);
       })
-      .then(() => {
-        this.pendingOpsCount--;
+      .then(() => this.onDeleteSettled());
+  }
 
-        // We wait until the previous stream has ended in order to sure the
-        // startAfter document is correct. Starting the next stream while
-        // there are pending operations allows Firestore to maximize
-        // BulkWriter throughput.
-        if (
-          this.documentsPending &&
-          !this.streamInProgress &&
-          this.pendingOpsCount < this.minPendingOps
-        ) {
-          this.setupStream();
-        }
-      });
+  /**
+   * Called when a delete started by deleteRef() succeeds or fails. Starts the
+   * next stream if conditions are met.
+   * @private
+   * @internal
+   */
+  private onDeleteSettled(): void {
+    this.pendingOpsCount--;
+
+    // We wait until the previous stream has ended in order to sure the
+    // startAfter document is correct. Starting the next stream while there
+    // are pending operations allows Firestore to maximize BulkWriter
+    // throughput.
+    if (
+      this.documentsPending &&
+      !this.streamInProgress &&
+      this.pendingOpsCount < this.minPendingOps
+    ) {
+      this.setupStream();
+    }
   }
 
   private incrementErrorCount(err: Error): void {

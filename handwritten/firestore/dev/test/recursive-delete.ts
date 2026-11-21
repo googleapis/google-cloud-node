@@ -384,6 +384,126 @@ describe('recursiveDelete() method:', () => {
       );
       expect(called).to.deep.equal([1, 2]);
     });
+
+    // Runs recursiveDelete() with batches of two documents, so that each batch
+    // that returns two documents is followed by another query.
+    async function recursiveDeleteInBatchesOfTwo(
+      getRef: (
+        firestore: Firestore.Firestore,
+      ) => Firestore.CollectionReference | Firestore.DocumentReference,
+      runQuery: ApiOverride['runQuery'],
+    ): Promise<void> {
+      const overrides: ApiOverride = {
+        runQuery,
+        batchWrite: request =>
+          response(
+            mergeResponses(request.writes!.map(() => successResponse(1))),
+          ),
+      };
+      firestore = await createInstance(overrides);
+      const bulkWriter = firestore.bulkWriter();
+      bulkWriter._setMaxBatchSize(2);
+      await firestore._recursiveDelete(
+        getRef(firestore),
+        /* maxLimit= */ 2,
+        /* minLimit= */ 2,
+        bulkWriter,
+      );
+    }
+
+    it('creates a second query for documents without collection bounds', async () => {
+      const called: number[] = [];
+      await recursiveDeleteInBatchesOfTwo(
+        f => f.doc('collectionId/doc'),
+        request => {
+          if (called.length === 0) {
+            queryEqualsWithParent(
+              request,
+              'collectionId/doc',
+              select('__name__'),
+              allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
+              limit(2),
+            );
+            called.push(1);
+            return stream(result('doc/sub/doc0'), result('doc/sub/doc1'));
+          } else {
+            queryEqualsWithParent(
+              request,
+              'collectionId/doc',
+              select('__name__'),
+              allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
+              queryStartAt(false, {
+                referenceValue:
+                  `projects/${PROJECT_ID}/databases/(default)/` +
+                  'documents/collectionId/doc/sub/doc1',
+              }),
+              limit(2),
+            );
+            called.push(2);
+            return stream();
+          }
+        },
+      );
+      expect(called).to.deep.equal([1, 2]);
+    });
+
+    it('retries a second query without the OR lower bound', async () => {
+      const called: number[] = [];
+      await recursiveDeleteInBatchesOfTwo(
+        f => f.collection('root'),
+        request => {
+          if (called.length === 0) {
+            queryEquals(
+              request,
+              select('__name__'),
+              allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
+              descendantsOf('root'),
+              limit(2),
+            );
+            called.push(1);
+            return stream(result('doc0'), result('doc1'));
+          } else if (called.length === 1) {
+            queryEquals(
+              request,
+              select('__name__'),
+              allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
+              remainingDescendantsOf('root'),
+              queryStartAt(false, {
+                referenceValue:
+                  `projects/${PROJECT_ID}/databases/(default)/` +
+                  'documents/collectionId/doc1',
+              }),
+              limit(2),
+            );
+            called.push(2);
+            return stream(result('doc2'), new Error('failed in test'));
+          } else {
+            // QueryUtil._stream() retries the second query after the last
+            // document it received.
+            queryEquals(
+              request,
+              select('__name__'),
+              allDescendants(/* kindless= */ true),
+              orderBy('__name__', 'ASCENDING'),
+              remainingDescendantsOf('root'),
+              queryStartAt(false, {
+                referenceValue:
+                  `projects/${PROJECT_ID}/databases/(default)/` +
+                  'documents/collectionId/doc2',
+              }),
+              limit(1),
+            );
+            called.push(3);
+            return stream();
+          }
+        },
+      );
+      expect(called).to.deep.equal([1, 2, 3]);
+    });
   });
 
   describe('deletes', () => {
