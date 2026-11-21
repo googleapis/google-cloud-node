@@ -460,6 +460,13 @@ abstract class Watch<
    * @internal
    */
   private initStream(): void {
+    // The previous stream's idle deadline must not trigger another reconnect
+    // while this stream is waiting for backoff or opening a new connection.
+    if (this.idleTimeoutHandle) {
+      clearTimeout(this.idleTimeoutHandle);
+      this.idleTimeoutHandle = undefined;
+    }
+
     this.backoff
       .backoffAndWait()
       .then(async () => {
