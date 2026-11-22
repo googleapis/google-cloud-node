@@ -21,7 +21,7 @@ import {PreciseDate} from '@google-cloud/precise-date';
 import {hasProjectIdToken, replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as path from 'path';
 import {common as p} from 'protobufjs';
 import * as streamEvents from 'stream-events';
@@ -264,21 +264,22 @@ export type TranslateEnumKeys<
  * @returns {string} The universe domain.
  */
 function getUniverseDomain(options: SpannerOptions): string {
-  const configured =
+  const universeDomainEnvVar =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+      : undefined;
+  const universeDomain =
     options?.universeDomain ??
     options?.universe_domain ??
-    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-  if (
-    configured !== undefined &&
-    (typeof configured !== 'string' || !configured.trim())
-  ) {
-    throw new Error('The universe domain cannot be an empty string.');
-  }
-  const universeDomain = configured ?? 'googleapis.com';
+    universeDomainEnvVar ??
+    'googleapis.com';
   // if the options.universe_domain/GOOGLE_CLOUD_UNIVERSE_DOMAIN env variable is set,
   // set its value to the Spanner `universeDomain` options
   // to match it with the universe from Auth Client
-  if (!options?.universeDomain && configured) {
+  if (
+    !options?.universeDomain &&
+    (options?.universe_domain || process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN)
+  ) {
     options.universeDomain = universeDomain;
   }
   return universeDomain;
@@ -341,6 +342,7 @@ class Spanner extends GrpcService {
   sessionLabels: {[key: string]: string} | null;
   private _universeDomain: string;
   private _isInSecureCredentials: boolean;
+  private _hasCustomEndpoint = false;
   private _metricsEnabled = false;
   readonly _nthClientId: number;
   private _pendingProjectIdCallbacks?: Array<
@@ -457,8 +459,8 @@ class Spanner extends GrpcService {
     delete options.defaultTransactionOptions;
 
     if (
-      options?.universe_domain !== undefined &&
-      options?.universeDomain !== undefined &&
+      options?.universe_domain &&
+      options?.universeDomain &&
       options?.universe_domain !== options?.universeDomain
     ) {
       throw new Error(
@@ -466,6 +468,9 @@ class Spanner extends GrpcService {
       );
     }
 
+    const hasCustomEndpoint = Boolean(
+      options.apiEndpoint || options.servicePath,
+    );
     const emulatorHost = Spanner.getSpannerEmulatorHost();
     if (
       emulatorHost &&
@@ -492,9 +497,6 @@ class Spanner extends GrpcService {
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson: require('../../package.json'),
     } as {} as GrpcServiceConfig;
-    if (options.clientOptions) {
-      options.clientOptions = Object.assign({}, options.clientOptions);
-    }
     super(config, options);
 
     if (options.routeToLeaderEnabled === false) {
@@ -502,25 +504,12 @@ class Spanner extends GrpcService {
     }
 
     this._isInSecureCredentials = options.sslCreds?._isSecure() === false;
+    this._hasCustomEndpoint = hasCustomEndpoint;
     this.options = options;
-    const authOpts = Object.assign({}, this.options) as SpannerOptions & {
-      auth?: GoogleAuth | AuthClient;
-    };
-    if (authOpts.clientOptions) {
-      authOpts.clientOptions = {...authOpts.clientOptions};
-    }
-    delete authOpts.universeDomain;
-    delete authOpts.universe_domain;
     this.auth =
-      authOpts.auth instanceof GoogleAuth
-        ? authOpts.auth
-        : (authOpts.authClient as unknown) instanceof GoogleAuth
-          ? (authOpts.authClient as unknown as GoogleAuth)
-          : new GoogleAuth(
-              authOpts.auth && !authOpts.authClient
-                ? {...authOpts, authClient: authOpts.auth}
-                : authOpts,
-            );
+      options.auth instanceof GoogleAuth
+        ? options.auth
+        : new GoogleAuth(this.options);
     this.clients_ = new Map();
     this.instances_ = new Map();
     this.instanceConfigs_ = new Map();
@@ -1696,13 +1685,21 @@ class Spanner extends GrpcService {
    * Setup the OpenTelemetry metrics capturing for service metrics to Google Cloud Monitoring.
    */
   configureMetrics_(disableBuiltInMetrics?: boolean) {
-    // Only enable metrics if not explicitly disabled and we are not using
-    // insecure credentials.
+    // Only enable metrics if not explicitly disabled, not using insecure
+    // credentials, and no custom Spanner endpoint is configured without an
+    // explicit SPANNER_MONITORING_HOST override.
+    const envObj =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env
+        : undefined;
     const metricsExplicitlyDisabled =
-      process.env.SPANNER_DISABLE_BUILTIN_METRICS === 'true' ||
+      envObj?.['SPANNER_DISABLE_BUILTIN_METRICS'] === 'true' ||
       !!disableBuiltInMetrics;
+    const monitoringHost = envObj?.['SPANNER_MONITORING_HOST'];
     this._metricsEnabled =
-      !metricsExplicitlyDisabled && !this._isInSecureCredentials;
+      !metricsExplicitlyDisabled &&
+      !this._isInSecureCredentials &&
+      (!this._hasCustomEndpoint || Boolean(monitoringHost));
     MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
       const initializeMetrics = (projectId: string) => {
@@ -1715,7 +1712,11 @@ class Spanner extends GrpcService {
           context.with(ROOT_CONTEXT, () => {
             const periodicReader = new PeriodicExportingMetricReader({
               exporter: new CloudMonitoringMetricsExporter(
-                {auth: this.auth, universeDomain: this._universeDomain},
+                {
+                  auth: this.auth,
+                  universeDomain: this._universeDomain,
+                  ...(monitoringHost ? {apiEndpoint: monitoringHost} : {}),
+                },
                 projectId,
               ),
               exportIntervalMillis: 60000,

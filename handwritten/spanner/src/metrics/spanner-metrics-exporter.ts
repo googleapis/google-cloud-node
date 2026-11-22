@@ -24,6 +24,23 @@ import {MIN_EXPORT_FREQUENCY_MS} from './constants';
 // CreateTimeSeries call.
 export const MAX_BATCH_EXPORT_SIZE = 200;
 
+function parseMonitoringEndpoint(endpoint?: string): {
+  apiEndpoint?: string;
+  port?: number;
+} {
+  if (!endpoint) {
+    return {};
+  }
+  const colonIndex = endpoint.lastIndexOf(':');
+  if (colonIndex > -1 && colonIndex > endpoint.lastIndexOf(']')) {
+    const port = Number(endpoint.substring(colonIndex + 1));
+    if (Number.isInteger(port) && port >= 1 && port <= 65535) {
+      return {apiEndpoint: endpoint.substring(0, colonIndex), port};
+    }
+  }
+  return {apiEndpoint: endpoint};
+}
+
 /**
  * Format and sends metrics information to Google Cloud Monitoring.
  */
@@ -34,19 +51,22 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private readonly _client: MetricServiceClient;
   private _metricsExportFailureLogged = false;
 
-  constructor({auth, universeDomain}: ExporterOptions, projectId: string) {
-    const resolved =
-      universeDomain ?? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-    if (
-      resolved !== undefined &&
-      (typeof resolved !== 'string' || !resolved.trim())
-    ) {
-      throw new Error('The universe domain cannot be an empty string.');
-    }
+  constructor(
+    {auth, universeDomain, apiEndpoint}: ExporterOptions,
+    projectId: string,
+  ) {
+    const envObj =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env
+        : undefined;
+    const resolved = universeDomain ?? envObj?.['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+    const resolvedEndpoint =
+      apiEndpoint || envObj?.['SPANNER_MONITORING_HOST'] || undefined;
     this._universeDomain = resolved;
     this._client = new MetricServiceClient({
       auth,
       ...(resolved ? {universeDomain: resolved} : {}),
+      ...parseMonitoringEndpoint(resolvedEndpoint),
     } as unknown as ConstructorParameters<typeof MetricServiceClient>[0]);
 
     this._projectId = projectId;

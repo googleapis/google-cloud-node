@@ -94,11 +94,12 @@ export class MetricsTracerFactory {
   }
 
   /**
-   * Returns the singleton instance of MetricsTracerFactory.
+   * Returns the MetricsTracerFactory instance for the given universe domain.
    * If metrics are disabled, returns null.
-   * The instance is created only once, and enabling/disabling metrics can only be done on the initial call.
+   * The instance is created once per universe domain, and enabling/disabling metrics can only be done on the initial call.
    * @param projectId Optional GCP project ID for the factory instantiation. Does nothing for subsequent calls.
-   * @returns The singleton MetricsTracerFactory instance or null if disabled.
+   * @param universeDomain Optional universe domain used to scope the factory instance. Defaults to 'googleapis.com'.
+   * @returns The MetricsTracerFactory instance or null if disabled.
    */
   public static getInstance(
     projectId?: string,

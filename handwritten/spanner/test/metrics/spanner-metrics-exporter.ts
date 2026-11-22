@@ -73,11 +73,15 @@ describe('CustomExporter', () => {
     await assert.doesNotReject(exporter.forceFlush());
   });
 
-  it('should propagate universeDomain and GOOGLE_CLOUD_UNIVERSE_DOMAIN to MetricServiceClient', () => {
+  it('should propagate universeDomain, GOOGLE_CLOUD_UNIVERSE_DOMAIN, and SPANNER_MONITORING_HOST to MetricServiceClient', () => {
     const getClient = (exp: CloudMonitoringMetricsExporter) =>
       (
         exp as unknown as {
-          _client: {universeDomain?: string; apiEndpoint?: string};
+          _client: {
+            universeDomain?: string;
+            apiEndpoint?: string;
+            _opts?: {servicePath?: string; port?: number};
+          };
         }
       )._client;
     const customClient = getClient(
@@ -92,9 +96,27 @@ describe('CustomExporter', () => {
       'monitoring.my-universe.example.com',
     );
 
+    const endpointOptionClient = getClient(
+      new CloudMonitoringMetricsExporter(
+        {
+          auth,
+          universeDomain: 'my-universe.example.com',
+          apiEndpoint: 'monitoring-opt.example.com:9443',
+        },
+        PROJECT_ID,
+      ),
+    );
+    assert.strictEqual(
+      endpointOptionClient._opts?.servicePath,
+      'monitoring-opt.example.com',
+    );
+    assert.strictEqual(endpointOptionClient._opts?.port, 9443);
+
     const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    const savedHost = process.env.SPANNER_MONITORING_HOST;
     try {
       process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-universe.example.com';
+      delete process.env.SPANNER_MONITORING_HOST;
       const envClient = getClient(
         new CloudMonitoringMetricsExporter({auth}, PROJECT_ID),
       );
@@ -104,24 +126,25 @@ describe('CustomExporter', () => {
         'monitoring.env-universe.example.com',
       );
 
-      assert.throws(
-        () =>
-          new CloudMonitoringMetricsExporter(
-            {auth, universeDomain: ''},
-            PROJECT_ID,
-          ),
-        /The universe domain cannot be an empty string/,
+      process.env.SPANNER_MONITORING_HOST = 'monitoring-env.example.com:8443';
+      const hostEnvClient = getClient(
+        new CloudMonitoringMetricsExporter({auth}, PROJECT_ID),
       );
-      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '';
-      assert.throws(
-        () => new CloudMonitoringMetricsExporter({auth}, PROJECT_ID),
-        /The universe domain cannot be an empty string/,
+      assert.strictEqual(
+        hostEnvClient._opts?.servicePath,
+        'monitoring-env.example.com',
       );
+      assert.strictEqual(hostEnvClient._opts?.port, 8443);
     } finally {
       if (savedEnv !== undefined) {
         process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
       } else {
         delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      }
+      if (savedHost !== undefined) {
+        process.env.SPANNER_MONITORING_HOST = savedHost;
+      } else {
+        delete process.env.SPANNER_MONITORING_HOST;
       }
     }
   });

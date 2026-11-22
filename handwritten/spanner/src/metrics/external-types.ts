@@ -21,6 +21,8 @@ export interface ExporterOptions {
   auth: GoogleAuth;
   /** Optional universe domain for Google Cloud Monitoring API requests. */
   universeDomain?: string;
+  /** Optional Monitoring API endpoint override (e.g. `host` or `host:port`). */
+  apiEndpoint?: string;
 }
 
 export enum MetricKind {

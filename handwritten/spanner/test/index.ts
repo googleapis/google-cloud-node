@@ -595,24 +595,18 @@ describe('Spanner', () => {
       delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
     });
 
-    it('should reject empty string universeDomain and propagate universeDomain to built-in metrics exporter', async () => {
-      for (const opts of [
-        {universeDomain: ''},
-        {universe_domain: ''},
-        {universeDomain: '   '},
-      ]) {
-        assert.throws(
-          () => new Spanner(opts),
-          /The universe domain cannot be an empty string/,
-        );
-      }
-
+    it('should propagate universeDomain to built-in metrics exporter and skip metrics on custom endpoint unless SPANNER_MONITORING_HOST is set', async () => {
       const capturedExporterOpts: Array<{
         auth?: unknown;
         universeDomain?: string;
+        apiEndpoint?: string;
       }> = [];
       class FakeExporter {
-        constructor(opts: {auth?: unknown; universeDomain?: string}) {
+        constructor(opts: {
+          auth?: unknown;
+          universeDomain?: string;
+          apiEndpoint?: string;
+        }) {
           capturedExporterOpts.push(opts);
         }
         export(_metrics: unknown, cb: (res: {code: number}) => void) {
@@ -636,27 +630,19 @@ describe('Spanner', () => {
           },
         }).Spanner;
 
+      const savedMonitoringHost = process.env.SPANNER_MONITORING_HOST;
+      delete process.env.SPANNER_MONITORING_HOST;
       await enableMetrics(sandbox);
       try {
         const SpannerWithMetrics = loadSpanner(fakeGoogleAuth);
         new SpannerWithMetrics({projectId: 'metrics-default-proj'});
-        const callerClientOptions: Record<string, unknown> = {};
         const customSpanner = new SpannerWithMetrics({
           projectId: 'metrics-custom-proj',
           universeDomain: 'my-universe.example.com',
-          clientOptions: callerClientOptions,
         });
-        assert.notStrictEqual(
-          customSpanner.options.clientOptions,
-          callerClientOptions,
-        );
-        assert.notStrictEqual(
-          getFake(customSpanner.auth).calledWith_[0].clientOptions,
-          customSpanner.options.clientOptions,
-        );
         assert.strictEqual(
           getFake(customSpanner.auth).calledWith_[0].universeDomain,
-          undefined,
+          'my-universe.example.com',
         );
         assert.strictEqual(
           capturedExporterOpts[0]?.universeDomain,
@@ -680,7 +666,47 @@ describe('Spanner', () => {
           capturedExporterOpts[2]?.universeDomain,
           'auth-universe.example.com',
         );
+
+        const countBeforeCustomEndpoints = capturedExporterOpts.length;
+        const apiEndpointSpanner = new SpannerWithMetrics({
+          projectId: 'metrics-endpoint-proj',
+          apiEndpoint: 'custom-spanner.example.com',
+        });
+        assert.strictEqual(asAny(apiEndpointSpanner)._metricsEnabled, false);
+        const servicePathSpanner = new SpannerWithMetrics({
+          projectId: 'metrics-service-path-proj',
+          servicePath: 'custom-spanner.example.com',
+          universeDomain: 'endpoint-universe.example.com',
+        });
+        assert.strictEqual(asAny(servicePathSpanner)._metricsEnabled, false);
+        assert.strictEqual(
+          capturedExporterOpts.length,
+          countBeforeCustomEndpoints,
+        );
+
+        await MetricsTracerFactory.resetInstance();
+        process.env.SPANNER_MONITORING_HOST =
+          'monitoring-custom.example.com:8443';
+        const monitoredCustomSpanner = new SpannerWithMetrics({
+          projectId: 'metrics-monitored-endpoint-proj',
+          apiEndpoint: 'custom-spanner.example.com',
+          universeDomain: 'monitored-universe.example.com',
+        });
+        assert.strictEqual(asAny(monitoredCustomSpanner)._metricsEnabled, true);
+        assert.strictEqual(
+          capturedExporterOpts[countBeforeCustomEndpoints]?.universeDomain,
+          'monitored-universe.example.com',
+        );
+        assert.strictEqual(
+          capturedExporterOpts[countBeforeCustomEndpoints]?.apiEndpoint,
+          'monitoring-custom.example.com:8443',
+        );
       } finally {
+        if (savedMonitoringHost !== undefined) {
+          process.env.SPANNER_MONITORING_HOST = savedMonitoringHost;
+        } else {
+          delete process.env.SPANNER_MONITORING_HOST;
+        }
         await disableMetrics(sandbox);
       }
     });
