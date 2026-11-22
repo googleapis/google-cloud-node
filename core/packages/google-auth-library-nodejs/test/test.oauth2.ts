@@ -18,6 +18,7 @@ import * as crypto from 'crypto';
 import * as formatEcdsa from 'ecdsa-sig-formatter';
 import * as fs from 'fs';
 import {GaxiosError} from 'gaxios';
+import * as jws from 'jws';
 import * as nock from 'nock';
 import * as path from 'path';
 import * as sinon from 'sinon';
@@ -25,6 +26,7 @@ import * as sinon from 'sinon';
 import {
   CodeChallengeMethod,
   Credentials,
+  JWT,
   OAuth2Client,
   ClientAuthentication,
 } from '../src';
@@ -1788,6 +1790,321 @@ describe('oauth2', () => {
       assert.strict.deepEqual(await client.getAccessToken(), {
         token: credentials.access_token,
       });
+    });
+  });
+
+  describe('universeDomain', () => {
+    const CUSTOM_UNIVERSE = 'my-universe.example.com';
+    const expectCbRangeError = (
+      invoke: (cb: (err: Error | null) => void) => void,
+    ) =>
+      new Promise<void>((resolve, reject) => {
+        invoke(err =>
+          err instanceof RangeError
+            ? resolve()
+            : reject(new Error(`Expected RangeError, got ${err}`)),
+        );
+      });
+
+    it('derives iamcredentials certificate URLs and issuer for non-default universeDomain', async () => {
+      const customClient = new OAuth2Client({universeDomain: CUSTOM_UNIVERSE});
+      assert.strictEqual(
+        customClient.endpoints.oauth2FederatedSignonPemCertsUrl,
+        `https://iamcredentials.${CUSTOM_UNIVERSE}/v1/certificates/x509`,
+      );
+      assert.strictEqual(
+        customClient.endpoints.oauth2FederatedSignonJwkCertsUrl,
+        `https://iamcredentials.${CUSTOM_UNIVERSE}/v1/certificates/jwk`,
+      );
+      assert.strictEqual(
+        Object.prototype.hasOwnProperty.call(customClient, 'issuers'),
+        true,
+      );
+      assert.strictEqual(customClient.issuers, customClient.issuers);
+      assert.deepStrictEqual(customClient.issuers, [
+        `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+        CUSTOM_UNIVERSE,
+      ]);
+
+      const fakeCerts = {kid1: publicKey};
+      const scope = nock(`https://iamcredentials.${CUSTOM_UNIVERSE}`)
+        .get('/v1/certificates/x509')
+        .reply(200, fakeCerts, {'cache-control': 'public, max-age=3600'});
+
+      let observedIssuers: string[] | undefined;
+      customClient.verifySignedJwtWithCertsAsync = async (
+        _jwt,
+        certs,
+        _aud,
+        issuers,
+      ) => {
+        assert.deepStrictEqual(certs, fakeCerts);
+        observedIssuers = issuers;
+        return new LoginTicket('env', {
+          aud: 'my-aud',
+          sub: '123',
+          iss: `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+          iat: 1,
+          exp: 2,
+        });
+      };
+
+      const ticket = await customClient.verifyIdToken({
+        idToken: 'fake-id-token',
+        audience: 'my-aud',
+      });
+      scope.done();
+      assert.deepStrictEqual(observedIssuers, [
+        `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+        CUSTOM_UNIVERSE,
+      ]);
+      assert.strictEqual(
+        ticket.getPayload()?.iss,
+        `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+      );
+    });
+
+    it('dynamically updates cert URLs, issuers, cache key, and lazy resolution across JWT', async () => {
+      const jwt = new JWT().createScoped([
+        'https://www.googleapis.com/auth/cloud-platform',
+      ]);
+      const defaultScope = nock('https://www.googleapis.com')
+        .get('/oauth2/v1/certs')
+        .reply(
+          200,
+          {defaultKid: publicKey},
+          {'cache-control': 'public, max-age=3600'},
+        );
+      assert.ok('defaultKid' in (await jwt.getFederatedSignonCerts()).certs);
+      defaultScope.done();
+
+      jwt.fromJSON({
+        type: 'service_account',
+        client_email: 'sa@p.iam.gserviceaccount.com',
+        private_key: privateKey,
+        universe_domain: CUSTOM_UNIVERSE,
+      });
+      assert.strictEqual(
+        jwt.endpoints.oauth2FederatedSignonPemCertsUrl,
+        `https://iamcredentials.${CUSTOM_UNIVERSE}/v1/certificates/x509`,
+      );
+      assert.deepStrictEqual(jwt.issuers, [
+        `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+        CUSTOM_UNIVERSE,
+      ]);
+      await assert.rejects(() => jwt.getTokenInfo('tok'), RangeError);
+
+      const customScope = nock(`https://iamcredentials.${CUSTOM_UNIVERSE}`)
+        .get('/v1/certificates/x509')
+        .reply(200, {customKid: publicKey});
+      const customCerts = await jwt.getFederatedSignonCerts();
+      assert.ok('customKid' in customCerts.certs);
+      assert.ok(!('defaultKid' in customCerts.certs));
+      customScope.done();
+
+      let resolved = false;
+      const lazyClient = Object.assign(new OAuth2Client(), {
+        resolveUniverseDomain: async function (this: OAuth2Client) {
+          this.universeDomain = CUSTOM_UNIVERSE;
+          resolved = true;
+          return this.universeDomain;
+        },
+      });
+      Object.defineProperty(lazyClient, 'hasUnresolvedUniverseDomain', {
+        get: () => !resolved,
+        configurable: true,
+      });
+      await assert.rejects(() => lazyClient.getTokenInfo('tok'), RangeError);
+      assert.strictEqual(lazyClient.universeDomain, CUSTOM_UNIVERSE);
+    });
+
+    it('honors explicit endpoints and issuers overrides in custom universeDomain', async () => {
+      const customCertUrl = 'https://custom-certs.internal.example/certs';
+      const customTokenInfoUrl =
+        'https://custom-auth.internal.example/tokeninfo';
+      const customIssuers = ['https://custom-issuer.internal.example'];
+      const client = new OAuth2Client({
+        universeDomain: CUSTOM_UNIVERSE,
+        endpoints: {
+          oauth2FederatedSignonPemCertsUrl: customCertUrl,
+          tokenInfoUrl: customTokenInfoUrl,
+        },
+        issuers: customIssuers,
+      });
+      assert.strictEqual(
+        client.endpoints.oauth2FederatedSignonPemCertsUrl,
+        customCertUrl,
+      );
+      assert.deepStrictEqual(client.issuers, customIssuers);
+
+      const scope = nock('https://custom-auth.internal.example')
+        .post('/tokeninfo')
+        .reply(200, {expires_in: 60, scope: 's1 s2', aud: 'a'});
+      assert.deepStrictEqual((await client.getTokenInfo('tok')).scopes, [
+        's1',
+        's2',
+      ]);
+      scope.done();
+
+      const firstCertScope = nock('https://custom-certs.internal.example')
+        .get('/certs')
+        .reply(
+          200,
+          {kidA: publicKey},
+          {'cache-control': 'public, max-age=3600'},
+        );
+      assert.ok('kidA' in (await client.getFederatedSignonCerts()).certs);
+      firstCertScope.done();
+
+      (
+        client.endpoints as {oauth2FederatedSignonPemCertsUrl: string}
+      ).oauth2FederatedSignonPemCertsUrl =
+        'https://updated-certs.internal.example/certs';
+      const updatedCertScope = nock('https://updated-certs.internal.example')
+        .get('/certs')
+        .reply(
+          200,
+          {kidB: publicKey},
+          {'cache-control': 'public, max-age=3600'},
+        );
+      const updatedCerts = await client.getFederatedSignonCerts();
+      assert.ok('kidB' in updatedCerts.certs);
+      assert.ok(!('kidA' in updatedCerts.certs));
+      updatedCertScope.done();
+    });
+
+    it('validates universeDomain support for OAuth2 endpoints and constructor options', async () => {
+      for (const bad of ['', '   ', 123 as unknown as string]) {
+        assert.throws(
+          () => new OAuth2Client({universeDomain: bad}),
+          RangeError,
+        );
+      }
+      assert.throws(
+        () =>
+          new OAuth2Client({
+            universeDomain: 'a.example.com',
+            universe_domain: 'b.example.com',
+          }),
+        RangeError,
+      );
+
+      const customClient = new OAuth2Client({
+        clientId: 'cid',
+        clientSecret: 'csec',
+        universeDomain: CUSTOM_UNIVERSE,
+      });
+      (customClient as {issuers: string[]}).issuers = [
+        'https://custom-issuer.example',
+      ];
+      assert.deepStrictEqual(customClient.issuers, [
+        'https://custom-issuer.example',
+      ]);
+
+      class SubclassedOAuth2Client extends OAuth2Client {
+        override readonly issuers = ['https://subclassed-issuer.example'];
+      }
+      const subClient = new SubclassedOAuth2Client({
+        universeDomain: CUSTOM_UNIVERSE,
+      });
+      assert.deepStrictEqual(subClient.issuers, [
+        'https://subclassed-issuer.example',
+      ]);
+
+      customClient.setCredentials({refresh_token: 'rtok'});
+      const reqSpy = sinon.spy(customClient.transporter, 'request');
+
+      await assert.rejects(() => customClient.getIapPublicKeys(), RangeError);
+      await expectCbRangeError(cb => customClient.getIapPublicKeys(cb));
+      await assert.rejects(() => customClient.getTokenInfo('tok'), RangeError);
+      await assert.rejects(() => customClient.revokeToken('tok'), RangeError);
+      await expectCbRangeError(cb => customClient.revokeToken('tok', cb));
+
+      assert.ok(customClient.generateAuthUrl().includes('client_id=cid'));
+      assert.strictEqual(
+        customClient.getRevokeTokenURL('tok').searchParams.get('token'),
+        'tok',
+      );
+
+      await assert.rejects(
+        () => customClient.getToken('auth-code'),
+        RangeError,
+      );
+      await assert.rejects(() => customClient.refreshAccessToken(), RangeError);
+      assert.strictEqual(reqSpy.called, false);
+      sinon.restore();
+    });
+
+    it('fetches JWK certificates from iamcredentials.{universeDomain}/v1/certificates/jwk under WebCrypto', async () => {
+      const exportedJwk = crypto
+        .createPublicKey(publicKey)
+        .export({format: 'jwk'});
+      const jwkSet = {
+        keys: [
+          {...exportedJwk, kid: 'custom-jwk-kid-1', alg: 'RS256', use: 'sig'},
+        ],
+      };
+      const nowSec = Math.floor(Date.now() / 1000);
+      const realIdToken = jws.sign({
+        header: {alg: 'RS256', typ: 'JWT', kid: 'custom-jwk-kid-1'},
+        payload: {
+          iss: `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+          aud: 'custom-webcrypto-aud',
+          sub: '1234567890',
+          iat: nowSec - 10,
+          exp: nowSec + 3600,
+        },
+        secret: privateKey,
+      });
+
+      const globalWithWindow = globalThis as unknown as {window?: unknown};
+      const prevWindow = globalWithWindow.window;
+      globalWithWindow.window = {
+        crypto: globalThis.crypto,
+        btoa: globalThis.btoa,
+        atob: globalThis.atob,
+      };
+      try {
+        const browserClient = new OAuth2Client({
+          universeDomain: CUSTOM_UNIVERSE,
+        });
+        const requestedUrls: string[] = [];
+        const reqStub = sinon
+          .stub(browserClient.transporter, 'request')
+          .callsFake(async opts => {
+            requestedUrls.push(String(opts?.url));
+            return {
+              data: jwkSet,
+              headers: new Headers({'cache-control': 'public, max-age=3600'}),
+            } as unknown as Awaited<
+              ReturnType<typeof browserClient.transporter.request>
+            >;
+          });
+        const ticket = await browserClient.verifyIdToken({
+          idToken: realIdToken,
+          audience: 'custom-webcrypto-aud',
+        });
+        assert.strictEqual(reqStub.callCount, 1);
+        assert.deepStrictEqual(requestedUrls, [
+          `https://iamcredentials.${CUSTOM_UNIVERSE}/v1/certificates/jwk`,
+        ]);
+        assert.strictEqual(
+          requestedUrls.some(url => url.includes('googleapis.com')),
+          false,
+        );
+        assert.strictEqual(
+          ticket.getPayload()?.iss,
+          `https://iamcredentials.${CUSTOM_UNIVERSE}`,
+        );
+        assert.strictEqual(ticket.getPayload()?.sub, '1234567890');
+      } finally {
+        sinon.restore();
+        if (prevWindow === undefined) {
+          delete globalWithWindow.window;
+        } else {
+          globalWithWindow.window = prevWindow;
+        }
+      }
     });
   });
 });

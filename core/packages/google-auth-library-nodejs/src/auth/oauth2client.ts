@@ -29,6 +29,7 @@ import {createCrypto, JwkCertificate, hasBrowserCrypto} from '../crypto/crypto';
 import {
   AuthClient,
   AuthClientOptions,
+  DEFAULT_UNIVERSE,
   GetAccessTokenResponse,
   BodyResponseCallback,
 } from './authclient';
@@ -510,8 +511,7 @@ interface OAuth2JSONOptions {
 }
 
 export interface OAuth2ClientOptions
-  extends AuthClientOptions,
-    OAuth2JSONOptions {
+  extends AuthClientOptions, OAuth2JSONOptions {
   /**
    * The authentication client ID.
    *
@@ -552,14 +552,36 @@ export type RefreshOptions = Pick<
   'eagerRefreshThresholdMillis' | 'forceRefreshOnFailure'
 >;
 
+const DEFAULT_OAUTH2_ENDPOINTS: OAuth2ClientEndpoints = {
+  tokenInfoUrl: 'https://oauth2.googleapis.com/tokeninfo',
+  oauth2AuthBaseUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+  oauth2TokenUrl: 'https://oauth2.googleapis.com/token',
+  oauth2RevokeUrl: 'https://oauth2.googleapis.com/revoke',
+  oauth2FederatedSignonPemCertsUrl:
+    'https://www.googleapis.com/oauth2/v1/certs',
+  oauth2FederatedSignonJwkCertsUrl:
+    'https://www.googleapis.com/oauth2/v3/certs',
+  oauth2IapPublicKeyUrl: 'https://www.gstatic.com/iap/verify/public_key',
+};
+
+function assertValidUniverse(universe: unknown): void {
+  if (typeof universe !== 'string' || !universe.trim()) {
+    throw new RangeError('The universe domain cannot be an empty string.');
+  }
+}
+
 export class OAuth2Client extends AuthClient {
   private redirectUri?: string;
   private certificateCache: Certificates = {};
   private certificateExpiry: Date | null = null;
   private certificateCacheFormat: CertificateFormat = CertificateFormat.PEM;
+  #certificateCacheUrl?: string;
+  #explicitEndpoints: Partial<OAuth2ClientEndpoints>;
+  #explicitIssuers?: string[];
+  #cachedDefaultIssuers?: {universe: string; list: string[]};
   protected refreshTokenPromises = new Map<string, Promise<GetTokenResponse>>();
   readonly endpoints: Readonly<OAuth2ClientEndpoints>;
-  readonly issuers: string[];
+  readonly issuers!: string[];
   readonly clientAuthentication: ClientAuthentication;
 
   // TODO: refactor tests to make this private
@@ -588,11 +610,28 @@ export class OAuth2Client extends AuthClient {
      */
     redirectUri?: OAuth2ClientOptions['redirectUri'],
   ) {
-    super(typeof options === 'object' ? options : {});
+    if (typeof options === 'object' && options !== null) {
+      if (
+        !((options as unknown) instanceof AuthClient) &&
+        options.universe_domain !== undefined &&
+        options.universeDomain !== undefined &&
+        options.universe_domain !== options.universeDomain
+      ) {
+        throw new RangeError(
+          'Please set either universe_domain or universeDomain, but not both.',
+        );
+      }
+      const rawUniverse = options.universeDomain ?? options.universe_domain;
+      if (rawUniverse !== undefined) {
+        assertValidUniverse(rawUniverse);
+      }
+    }
 
-    if (typeof options !== 'object') {
+    super(typeof options === 'object' && options !== null ? options : {});
+
+    if (typeof options !== 'object' || options === null) {
       options = {
-        clientId: options,
+        clientId: options ?? undefined,
         clientSecret,
         redirectUri,
       };
@@ -602,26 +641,112 @@ export class OAuth2Client extends AuthClient {
     this._clientSecret = options.clientSecret || options.client_secret;
     this.redirectUri = options.redirectUri || options.redirect_uris?.[0];
 
-    this.endpoints = {
-      tokenInfoUrl: 'https://oauth2.googleapis.com/tokeninfo',
-      oauth2AuthBaseUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
-      oauth2TokenUrl: 'https://oauth2.googleapis.com/token',
-      oauth2RevokeUrl: 'https://oauth2.googleapis.com/revoke',
-      oauth2FederatedSignonPemCertsUrl:
-        'https://www.googleapis.com/oauth2/v1/certs',
-      oauth2FederatedSignonJwkCertsUrl:
-        'https://www.googleapis.com/oauth2/v3/certs',
-      oauth2IapPublicKeyUrl: 'https://www.gstatic.com/iap/verify/public_key',
-      ...options.endpoints,
-    };
+    const sourceClient =
+      (options as unknown) instanceof OAuth2Client
+        ? (options as unknown as OAuth2Client)
+        : undefined;
+    const explicitEndpoints: Partial<OAuth2ClientEndpoints> = sourceClient
+      ? {...sourceClient.#explicitEndpoints}
+      : {...options.endpoints};
+    if (sourceClient) {
+      for (const k of Object.keys(
+        DEFAULT_OAUTH2_ENDPOINTS,
+      ) as (keyof OAuth2ClientEndpoints)[]) {
+        if (
+          k !== 'oauth2FederatedSignonPemCertsUrl' &&
+          k !== 'oauth2FederatedSignonJwkCertsUrl' &&
+          sourceClient.endpoints[k] !== DEFAULT_OAUTH2_ENDPOINTS[k]
+        ) {
+          explicitEndpoints[k] = sourceClient.endpoints[k];
+        }
+      }
+    }
+    this.#explicitEndpoints = explicitEndpoints;
+    this.#explicitIssuers = sourceClient
+      ? (Object.getOwnPropertyDescriptor(sourceClient, 'issuers')?.value ??
+        sourceClient.#explicitIssuers)
+      : options.issuers;
+
+    const endpointsObj = {...DEFAULT_OAUTH2_ENDPOINTS, ...explicitEndpoints};
+    for (const [key, suffix] of [
+      ['oauth2FederatedSignonPemCertsUrl', 'x509'],
+      ['oauth2FederatedSignonJwkCertsUrl', 'jwk'],
+    ] as const) {
+      Object.defineProperty(endpointsObj, key, {
+        enumerable: true,
+        configurable: true,
+        get: () =>
+          explicitEndpoints[key] ??
+          (this.universeDomain === DEFAULT_UNIVERSE
+            ? DEFAULT_OAUTH2_ENDPOINTS[key]
+            : `https://iamcredentials.${this.universeDomain}/v1/certificates/${suffix}`),
+        set: (value: string | URL) => {
+          explicitEndpoints[key] = value;
+        },
+      });
+    }
+    this.endpoints = endpointsObj;
     this.clientAuthentication =
       options.clientAuthentication || ClientAuthentication.ClientSecretPost;
+    Object.defineProperty(this, 'issuers', {
+      enumerable: true,
+      configurable: true,
+      get: () => this.#explicitIssuers ?? this.#getDefaultIssuers(),
+      set: (value: string[]) => {
+        this.#explicitIssuers = value;
+      },
+    });
+  }
 
-    this.issuers = options.issuers || [
-      'accounts.google.com',
-      'https://accounts.google.com',
-      this.universeDomain,
-    ];
+  #getDefaultIssuers(): string[] {
+    if (
+      !this.#cachedDefaultIssuers ||
+      this.#cachedDefaultIssuers.universe !== this.universeDomain
+    ) {
+      this.#cachedDefaultIssuers = {
+        universe: this.universeDomain,
+        list:
+          this.universeDomain === DEFAULT_UNIVERSE
+            ? [
+                'accounts.google.com',
+                'https://accounts.google.com',
+                DEFAULT_UNIVERSE,
+              ]
+            : [
+                `https://iamcredentials.${this.universeDomain}`,
+                this.universeDomain,
+              ],
+      };
+    }
+    return this.#cachedDefaultIssuers.list;
+  }
+
+  async #resolveLazyUniverse(): Promise<void> {
+    const lazy = this as {
+      hasUnresolvedUniverseDomain?: boolean;
+      resolveUniverseDomain?: () => Promise<string>;
+    };
+    if (lazy.hasUnresolvedUniverseDomain) {
+      await lazy.resolveUniverseDomain?.();
+    }
+  }
+
+  async #assertEndpointSupportedInUniverse(
+    endpointKey: keyof OAuth2ClientEndpoints,
+    methodName: string,
+  ): Promise<void> {
+    await this.#resolveLazyUniverse();
+    assertValidUniverse(this.universeDomain);
+    if (
+      this.universeDomain !== DEFAULT_UNIVERSE &&
+      this.#explicitEndpoints[endpointKey] === undefined &&
+      this.endpoints[endpointKey].toString() ===
+        DEFAULT_OAUTH2_ENDPOINTS[endpointKey].toString()
+    ) {
+      throw new RangeError(
+        `${methodName} is not supported in universe domain "${this.universeDomain}" without an explicit endpoints.${endpointKey} override.`,
+      );
+    }
   }
 
   /**
@@ -721,7 +846,7 @@ export class OAuth2Client extends AuthClient {
     const options =
       typeof codeOrOptions === 'string' ? {code: codeOrOptions} : codeOrOptions;
     if (callback) {
-      this.getTokenAsync(options).then(
+      void this.getTokenAsync(options).then(
         r => callback(null, r.tokens, r.res),
         e => callback(e, null, e.response),
       );
@@ -733,6 +858,7 @@ export class OAuth2Client extends AuthClient {
   private async getTokenAsync(
     options: GetTokenOptions,
   ): Promise<GetTokenResponse> {
+    await this.#assertEndpointSupportedInUniverse('oauth2TokenUrl', 'getToken');
     const url = this.endpoints.oauth2TokenUrl.toString();
     const headers = new Headers();
     const values: GetTokenQuery = {
@@ -806,6 +932,10 @@ export class OAuth2Client extends AuthClient {
     if (!refreshToken) {
       throw new Error('No refresh token is set.');
     }
+    await this.#assertEndpointSupportedInUniverse(
+      'oauth2TokenUrl',
+      'refreshToken',
+    );
     const url = this.endpoints.oauth2TokenUrl.toString();
     const data: {} = {
       refresh_token: refreshToken,
@@ -863,7 +993,7 @@ export class OAuth2Client extends AuthClient {
     callback?: RefreshAccessTokenCallback,
   ): Promise<RefreshAccessTokenResponse> | void {
     if (callback) {
-      this.refreshAccessTokenAsync().then(
+      void this.refreshAccessTokenAsync().then(
         r => callback(null, r.credentials, r.res),
         callback,
       );
@@ -891,7 +1021,7 @@ export class OAuth2Client extends AuthClient {
     callback?: GetAccessTokenCallback,
   ): Promise<GetAccessTokenResponse> | void {
     if (callback) {
-      this.getAccessTokenAsync().then(
+      void this.getAccessTokenAsync().then(
         r => callback(null, r.token, r.res),
         callback,
       );
@@ -1045,19 +1175,27 @@ export class OAuth2Client extends AuthClient {
     token: string,
     callback?: BodyResponseCallback<RevokeCredentialsResult>,
   ): GaxiosPromise<RevokeCredentialsResult> | void {
+    if (callback) {
+      void this.revokeTokenAsync(token).then(r => callback(null, r), callback);
+    } else {
+      return this.revokeTokenAsync(token);
+    }
+  }
+
+  private async revokeTokenAsync(
+    token: string,
+  ): GaxiosPromise<RevokeCredentialsResult> {
+    await this.#assertEndpointSupportedInUniverse(
+      'oauth2RevokeUrl',
+      'revokeToken',
+    );
     const opts: GaxiosOptions = {
       ...OAuth2Client.RETRY_CONFIG,
       url: this.getRevokeTokenURL(token).toString(),
       method: 'POST',
     };
     AuthClient.setMethodName(opts, 'revokeToken');
-    if (callback) {
-      this.transporter
-        .request<RevokeCredentialsResult>(opts)
-        .then(r => callback(null, r), callback);
-    } else {
-      return this.transporter.request<RevokeCredentialsResult>(opts);
-    }
+    return this.transporter.request<RevokeCredentialsResult>(opts);
   }
 
   /**
@@ -1072,7 +1210,10 @@ export class OAuth2Client extends AuthClient {
     callback?: BodyResponseCallback<RevokeCredentialsResult>,
   ): GaxiosPromise<RevokeCredentialsResult> | void {
     if (callback) {
-      this.revokeCredentialsAsync().then(res => callback(null, res), callback);
+      void this.revokeCredentialsAsync().then(
+        res => callback(null, res),
+        callback,
+      );
     } else {
       return this.revokeCredentialsAsync();
     }
@@ -1103,7 +1244,7 @@ export class OAuth2Client extends AuthClient {
     callback?: BodyResponseCallback<T>,
   ): GaxiosPromise<T> | void {
     if (callback) {
-      this.requestAsync<T>(opts).then(
+      void this.requestAsync<T>(opts).then(
         r => callback(null, r),
         e => {
           return callback(e, e.response);
@@ -1217,7 +1358,10 @@ export class OAuth2Client extends AuthClient {
     }
 
     if (callback) {
-      this.verifyIdTokenAsync(options).then(r => callback(null, r), callback);
+      void this.verifyIdTokenAsync(options).then(
+        r => callback(null, r),
+        callback,
+      );
     } else {
       return this.verifyIdTokenAsync(options);
     }
@@ -1249,6 +1393,10 @@ export class OAuth2Client extends AuthClient {
    * user info.
    */
   async getTokenInfo(accessToken: string): Promise<TokenInfo> {
+    await this.#assertEndpointSupportedInUniverse(
+      'tokenInfoUrl',
+      'getTokenInfo',
+    );
     const {data} = await this.transporter.request<TokenInfoRequest>({
       ...OAuth2Client.RETRY_CONFIG,
       method: 'POST',
@@ -1282,7 +1430,7 @@ export class OAuth2Client extends AuthClient {
     callback?: GetFederatedSignonCertsCallback,
   ): Promise<FederatedSignonCertsResponse> | void {
     if (callback) {
-      this.getFederatedSignonCertsAsync().then(
+      void this.getFederatedSignonCertsAsync().then(
         r => callback(null, r.certs, r.res),
         callback,
       );
@@ -1292,18 +1440,12 @@ export class OAuth2Client extends AuthClient {
   }
 
   async getFederatedSignonCertsAsync(): Promise<FederatedSignonCertsResponse> {
+    await this.#resolveLazyUniverse();
+    assertValidUniverse(this.universeDomain);
     const nowTime = new Date().getTime();
     const format = hasBrowserCrypto()
       ? CertificateFormat.JWK
       : CertificateFormat.PEM;
-    if (
-      this.certificateExpiry &&
-      nowTime < this.certificateExpiry.getTime() &&
-      this.certificateCacheFormat === format
-    ) {
-      return {certs: this.certificateCache, format};
-    }
-    let res: GaxiosResponse;
     let url: string;
     switch (format) {
       case CertificateFormat.PEM:
@@ -1315,6 +1457,15 @@ export class OAuth2Client extends AuthClient {
       default:
         throw new Error(`Unsupported certificate format ${format}`);
     }
+    if (
+      this.certificateExpiry &&
+      nowTime < this.certificateExpiry.getTime() &&
+      this.certificateCacheFormat === format &&
+      this.#certificateCacheUrl === url
+    ) {
+      return {certs: this.certificateCache, format};
+    }
+    let res: GaxiosResponse;
     try {
       const opts = {
         ...OAuth2Client.RETRY_CONFIG,
@@ -1360,6 +1511,7 @@ export class OAuth2Client extends AuthClient {
       cacheAge === -1 ? null : new Date(now.getTime() + cacheAge);
     this.certificateCache = certificates;
     this.certificateCacheFormat = format;
+    this.#certificateCacheUrl = url;
     return {certs: certificates, format, res};
   }
 
@@ -1375,7 +1527,7 @@ export class OAuth2Client extends AuthClient {
     callback?: GetIapPublicKeysCallback,
   ): Promise<IapPublicKeysResponse> | void {
     if (callback) {
-      this.getIapPublicKeysAsync().then(
+      void this.getIapPublicKeysAsync().then(
         r => callback(null, r.pubkeys, r.res),
         callback,
       );
@@ -1385,6 +1537,10 @@ export class OAuth2Client extends AuthClient {
   }
 
   async getIapPublicKeysAsync(): Promise<IapPublicKeysResponse> {
+    await this.#assertEndpointSupportedInUniverse(
+      'oauth2IapPublicKeyUrl',
+      'getIapPublicKeys',
+    );
     let res: GaxiosResponse;
     const url = this.endpoints.oauth2IapPublicKeyUrl.toString();
 
