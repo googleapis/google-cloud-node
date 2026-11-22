@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {MetricExporter} from '@google-cloud/opentelemetry-cloud-monitoring-exporter';
 import {
   DataPoint,
   ExponentialHistogram,
   Histogram,
+  PushMetricExporter,
   ResourceMetrics,
 } from '@opentelemetry/sdk-metrics';
 import {ClientOptions, ServiceError} from 'google-gax';
@@ -238,11 +238,43 @@ export function metricsToRequest(exportArgs: ResourceMetrics) {
   };
 }
 
+function resolveUniverseDomain(options: ClientOptions): string | undefined {
+  if (
+    options.universe_domain !== undefined &&
+    options.universeDomain !== undefined &&
+    options.universe_domain !== options.universeDomain
+  ) {
+    throw new Error(
+      'Please set either universe_domain or universeDomain, but not both.',
+    );
+  }
+
+  const explicit = options.universeDomain ?? options.universe_domain;
+  if (explicit !== undefined) {
+    if (typeof explicit !== 'string' || !explicit.trim()) {
+      throw new Error('The universe domain cannot be an empty string.');
+    }
+    return explicit;
+  }
+
+  const envUniverse =
+    typeof process === 'object'
+      ? process.env?.['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+      : undefined;
+  if (envUniverse === undefined) {
+    return undefined;
+  }
+  if (!envUniverse.trim()) {
+    return 'googleapis.com';
+  }
+  return envUniverse;
+}
+
 /**
- * A custom OpenTelemetry `MetricExporter` that sends metrics data to Google Cloud
+ * A custom OpenTelemetry `PushMetricExporter` that sends metrics data to Google Cloud
  * Monitoring.
  *
- * This class extends the base `MetricExporter` from `@google-cloud/opentelemetry-cloud-monitoring-exporter`
+ * This class implements `PushMetricExporter` from `@opentelemetry/sdk-metrics`
  * and handles the process of converting OpenTelemetry metrics data into the
  * format required by the Google Cloud Monitoring API. It uses the
  * `MetricServiceClient` to send the data to Google Cloud Monitoring's
@@ -283,17 +315,31 @@ export function metricsToRequest(exportArgs: ResourceMetrics) {
  *
  * @beta
  */
-export class CloudMonitoringExporter extends MetricExporter {
+export class CloudMonitoringExporter implements PushMetricExporter {
   private client: MetricServiceClient;
 
-  constructor(options: ClientOptions) {
-    super();
-    if (options && options.apiEndpoint) {
-      // We want the MetricServiceClient to always hit its default endpoint.
-      delete options.apiEndpoint;
+  constructor(options: ClientOptions = {}) {
+    const opts = options ?? {};
+    const universeDomain = resolveUniverseDomain(opts);
+    const clientOptions: ClientOptions = {...opts};
+    if (opts.clientOptions) {
+      clientOptions.clientOptions = {...opts.clientOptions};
     }
-    this.client = new MetricServiceClient(options);
+    if (universeDomain) {
+      clientOptions.universeDomain = universeDomain;
+    }
+    delete clientOptions.apiEndpoint;
+    delete clientOptions.servicePath;
+    this.client = new MetricServiceClient(clientOptions);
   }
+
+  async shutdown(): Promise<void> {
+    if (typeof this.client?.close === 'function') {
+      await this.client.close();
+    }
+  }
+
+  async forceFlush(): Promise<void> {}
 
   async export(
     metrics: ResourceMetrics,
