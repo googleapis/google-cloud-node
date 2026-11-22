@@ -19,7 +19,7 @@ import {Readable} from 'stream';
 import {Bucket, BucketMetadata} from './bucket.js';
 import {Channel} from './channel.js';
 import {File} from './file.js';
-import {normalize} from './util.js';
+import {normalize, resolveUniverseDomain} from './util.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -28,12 +28,7 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
-import {
-  AuthClient,
-  DEFAULT_UNIVERSE,
-  GoogleAuth,
-  GoogleAuthOptions,
-} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {
   StorageQueryParameters,
   StorageRequestOptions,
@@ -122,6 +117,8 @@ export interface StorageOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   timeout?: number; // http.request.options.timeout
   userAgent?: string;
   useAuthWithCustomEndpoint?: boolean;
+  /** An alias for {@link StorageOptions.universeDomain}. */
+  universe_domain?: string;
 }
 
 export interface BucketOptions {
@@ -852,7 +849,7 @@ export class Storage {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
-    const universe = options.universeDomain || DEFAULT_UNIVERSE;
+    const universe = resolveUniverseDomain(options);
 
     let apiEndpoint = `https://storage.${universe}`;
     this.projectId = options.projectId;
@@ -864,9 +861,12 @@ export class Storage {
       this.customEndpoint = true;
     }
 
-    if (options.apiEndpoint && options.apiEndpoint !== apiEndpoint) {
-      apiEndpoint = Storage.sanitizeEndpoint(options.apiEndpoint);
-      this.customEndpoint = true;
+    if (options.apiEndpoint) {
+      const sanitizedEndpoint = Storage.sanitizeEndpoint(options.apiEndpoint);
+      if (sanitizedEndpoint !== apiEndpoint) {
+        apiEndpoint = sanitizedEndpoint;
+        this.customEndpoint = true;
+      }
     }
 
     options = Object.assign({}, options, {apiEndpoint});
@@ -931,9 +931,10 @@ export class Storage {
     this.storageTransport = new StorageTransport({
       ...config,
       ...options,
+      universeDomain: universe,
       interceptors: this.interceptors,
     });
-    this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
+    this.universeDomain = universe;
 
     this.getBucketsStream = paginator.streamify('getBuckets');
     this.getHmacKeysStream = paginator.streamify('getHmacKeys');

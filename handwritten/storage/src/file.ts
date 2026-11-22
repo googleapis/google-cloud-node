@@ -3078,24 +3078,25 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyString = JSON.stringify(policy);
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
-    // eslint-disable-next-line promise/catch-or-return
-    this.storage.storageTransport.authClient
-      .sign(policyBase64, options.signingEndpoint)
-      .then(
-        // eslint-disable-next-line promise/always-return
-        signature => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(null, {
-            string: policyString,
-            base64: policyBase64,
-            signature,
-          });
-        },
-        err => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(new SigningError(err.message));
-        },
-      );
+    void (async () => {
+      let signature: string;
+      try {
+        await this.storage.storageTransport?.verifyUniverseDomain?.();
+      } catch (err) {
+        callback(err as Error);
+        return;
+      }
+      try {
+        signature = await this.storage.storageTransport.authClient.sign(
+          policyBase64,
+          options.signingEndpoint,
+        );
+      } catch (err) {
+        callback(new SigningError((err as Error).message));
+        return;
+      }
+      callback(null, {string: policyString, base64: policyBase64, signature});
+    })();
   }
 
   generateSignedPostPolicyV4(
@@ -3233,6 +3234,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const todayISO = formatAsUTCISO(now);
 
     const sign = async () => {
+      await this.storage.storageTransport?.verifyUniverseDomain?.();
       const {client_email} =
         await this.storage.storageTransport.authClient.getCredentials();
       const credential = `${client_email}/${todayISO}/auto/storage/goog4_request`;

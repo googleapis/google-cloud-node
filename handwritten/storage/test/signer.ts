@@ -1070,6 +1070,45 @@ describe('signer', () => {
         assert.strictEqual(expires, Math.floor(NOW.valueOf() / 1000));
       });
     });
+
+    describe('universeDomain validation', () => {
+      it('rejects getSignedUrl before signing when auth universe mismatches storage universe', async () => {
+        let signCalled = false;
+        const mismatchedAuth = {
+          sign: async () => {
+            signCalled = true;
+            return 'signature';
+          },
+          getCredentials: async () => {
+            signCalled = true;
+            return {client_email: CLIENT_EMAIL};
+          },
+          getUniverseDomain: async () => 'googleapis.com',
+        };
+        const customStorage = new Storage({
+          universeDomain: 'my-universe.example.com',
+        });
+        const customSigner = new URLSigner(
+          mismatchedAuth,
+          bucket,
+          file,
+          customStorage,
+        );
+
+        for (const version of ['v4', 'v2'] as const) {
+          await assert.rejects(
+            () =>
+              customSigner.getSignedUrl({
+                method: 'GET',
+                expires: NOW.valueOf() + 2000,
+                version,
+              }),
+            /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/,
+          );
+        }
+        assert.strictEqual(signCalled, false);
+      });
+    });
   });
 
   describe('SigningError', () => {

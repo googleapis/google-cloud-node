@@ -16,6 +16,7 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import {PassThrough} from 'stream';
 import * as url from 'url';
+import {DEFAULT_UNIVERSE, GoogleAuth} from 'google-auth-library';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -353,6 +354,89 @@ export function getMime(): Promise<Mime> {
       });
   }
   return mimePromise;
+}
+
+/** @internal */
+export function resolveUniverseDomain(options?: {
+  universeDomain?: string;
+  universe_domain?: string;
+}): string {
+  if (
+    options?.universe_domain !== undefined &&
+    options?.universeDomain !== undefined &&
+    options.universe_domain !== options.universeDomain
+  ) {
+    throw new Error(
+      'Please set either universe_domain or universeDomain, but not both.',
+    );
+  }
+  const raw =
+    options?.universeDomain ??
+    options?.universe_domain ??
+    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+  if (raw !== undefined && (typeof raw !== 'string' || !raw.trim())) {
+    throw new Error('The universe domain cannot be an empty string.');
+  }
+  return raw ?? DEFAULT_UNIVERSE;
+}
+
+/** @internal */
+export async function verifyUniverseDomain(
+  authClient: unknown,
+  expectedUniverseDomain: string,
+  options?: {
+    hasApiKey?: boolean;
+    allowUnauthenticatedCustomEndpoint?: boolean;
+  },
+): Promise<void> {
+  const auth = authClient as {
+    apiKey?: string;
+    getUniverseDomain?: () => Promise<string | undefined>;
+    universeDomain?: string;
+  };
+  if (!auth || options?.hasApiKey || auth.apiKey) return;
+  const isDefaultGetUniverse =
+    authClient instanceof GoogleAuth &&
+    authClient.getUniverseDomain === GoogleAuth.prototype.getUniverseDomain;
+  if (
+    isDefaultGetUniverse &&
+    (authClient.request !== GoogleAuth.prototype.request ||
+      authClient.sign !== GoogleAuth.prototype.sign ||
+      authClient.getCredentials !== GoogleAuth.prototype.getCredentials) &&
+    !authClient.cachedCredential &&
+    !authClient.jsonContent &&
+    !(authClient as unknown as {keyFilename?: string}).keyFilename &&
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ) {
+    return;
+  }
+  let universeFromAuth: string | undefined;
+  if (isDefaultGetUniverse) {
+    try {
+      const client = await authClient.getClient();
+      if (!(client as {apiKey?: string}).apiKey) {
+        universeFromAuth = await authClient.getUniverseDomain();
+      }
+    } catch (err) {
+      if (
+        options?.allowUnauthenticatedCustomEndpoint &&
+        err instanceof Error &&
+        err.message.includes('Could not load the default credentials')
+      ) {
+        return;
+      }
+      throw err;
+    }
+  } else {
+    universeFromAuth =
+      (await auth.getUniverseDomain?.()) ?? auth.universeDomain;
+  }
+  if (universeFromAuth && expectedUniverseDomain !== universeFromAuth) {
+    throw new Error(
+      `The configured universe domain (${expectedUniverseDomain}) does not match the universe domain found in the credentials (${universeFromAuth}). ` +
+        "If you haven't configured the universe domain explicitly, googleapis.com is the default.",
+    );
+  }
 }
 
 let pLimitPromise: Promise<PLimit> | undefined;

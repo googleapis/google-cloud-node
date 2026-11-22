@@ -574,5 +574,98 @@ describe('Storage Transport', () => {
         },
       );
     });
+
+    const makeTransport = (
+      overrides: Partial<ConstructorParameters<typeof StorageTransport>[0]>,
+    ) =>
+      new StorageTransport({
+        apiEndpoint: 'https://storage.my-universe.example.com',
+        baseUrl: 'https://storage.my-universe.example.com/storage/v1',
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 0,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+        ...overrides,
+      });
+
+    it('should validate credential universe before sending request', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      sandbox
+        .stub(authClientStub, 'getUniverseDomain')
+        .resolves('my-universe.example.com');
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(my-universe\.example\.com\)/,
+      );
+      let callbackCount = 0;
+      const cbErr = await new Promise<Error | null>(resolve => {
+        void transport
+          .makeRequest({url: '/test'}, err => {
+            callbackCount++;
+            resolve(err);
+          })
+          .catch(() => {});
+      });
+      assert.strictEqual(callbackCount, 1);
+      assert.match(cbErr?.message ?? '', /does not match/);
+      assert.strictEqual(requestStub.called, false);
+    });
+
+    it('should not overwrite GoogleAuth universeDomain with client universeDomain', async () => {
+      const sharedClientOptions: Record<string, unknown> = {};
+      const customTransport = makeTransport({
+        universeDomain: 'my-universe.example.com',
+        clientOptions: sharedClientOptions,
+        credentials: {
+          client_email: 'sa@project-id.iam.gserviceaccount.com',
+          private_key: 'fake-key',
+        },
+      });
+      assert.strictEqual(sharedClientOptions.universeDomain, undefined);
+      assert.strictEqual(
+        await customTransport.authClient.getUniverseDomain(),
+        'googleapis.com',
+      );
+      await assert.rejects(
+        customTransport.makeRequest({url: '/test'}),
+        /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/,
+      );
+    });
+
+    it('should enforce credential universe validation even when customEndpoint is true', async () => {
+      const regionalTransport = makeTransport({
+        apiEndpoint: 'https://storage-us-east1.rep.googleapis.com',
+        baseUrl: 'https://storage-us-east1.rep.googleapis.com/storage/v1',
+        customEndpoint: true,
+        credentials: {
+          client_email: 'sa@project-id.iam.gserviceaccount.com',
+          private_key: 'fake-key',
+          universe_domain: 'my-universe.example.com',
+        } as unknown as Record<string, string>,
+      });
+      await assert.rejects(
+        regionalTransport.makeRequest({url: '/test'}),
+        /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(my-universe\.example\.com\)/,
+      );
+    });
+
+    it('should allow apiKey auth in non-default universeDomain without mismatch error', async () => {
+      const gaxios = new Gaxios();
+      sandbox.stub(gaxios, 'request').resolves({
+        data: {ok: true},
+        headers: new Map(),
+        status: 200,
+      } as unknown as GaxiosResponse);
+      const apiKeyTransport = makeTransport({
+        universeDomain: 'my-universe.example.com',
+        apiKey: 'fake-api-key',
+        gaxiosInstance: gaxios,
+      });
+      await assert.doesNotReject(() => apiKeyTransport.verifyUniverseDomain());
+    });
   });
 });

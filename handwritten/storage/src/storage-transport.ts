@@ -25,6 +25,7 @@ import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
+import {resolveUniverseDomain, verifyUniverseDomain} from './util.js';
 import {
   IdempotencyStrategy,
   RETRYABLE_ERR_FN_DEFAULT,
@@ -97,21 +98,36 @@ export class StorageTransport {
   private baseUrl: string;
   private timeout?: number;
   private projectId?: string;
+  private customEndpoint?: boolean;
   private useAuthWithCustomEndpoint?: boolean;
+  private hasApiKey: boolean;
+  private universeDomain: string;
   gaxiosInstance: Gaxios;
   private sharedInterceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
 
   constructor(options: TransportParameters) {
     this.gaxiosInstance = options.gaxiosInstance || new Gaxios();
     this.sharedInterceptors = options.interceptors;
+    this.universeDomain = resolveUniverseDomain(
+      options as {universeDomain?: string; universe_domain?: string},
+    );
+    this.hasApiKey = Boolean(
+      (options as {apiKey?: string}).apiKey ||
+      (options.authClient as unknown as {apiKey?: string})?.apiKey,
+    );
     if (options.authClient instanceof GoogleAuth) {
       this.authClient = options.authClient;
     } else {
-      this.authClient = new GoogleAuth({
+      const authOpts = {
         ...options,
         authClient: options.authClient,
-        clientOptions: options.clientOptions,
-      });
+        clientOptions: options.clientOptions
+          ? {...options.clientOptions}
+          : undefined,
+      } as GoogleAuthOptions & {universe_domain?: string};
+      delete authOpts.universeDomain;
+      delete authOpts.universe_domain;
+      this.authClient = new GoogleAuth(authOpts);
     }
     this.providedUserAgent = options.userAgent;
     this.packageJson = getPackageJSON();
@@ -123,7 +139,17 @@ export class StorageTransport {
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
     this.projectId = options.projectId;
+    this.customEndpoint = options.customEndpoint;
     this.useAuthWithCustomEndpoint = options.useAuthWithCustomEndpoint;
+  }
+
+  async verifyUniverseDomain(): Promise<void> {
+    await verifyUniverseDomain(this.authClient, this.universeDomain, {
+      hasApiKey: this.hasApiKey,
+      allowUnauthenticatedCustomEndpoint: Boolean(
+        this.customEndpoint && !this.useAuthWithCustomEndpoint,
+      ),
+    });
   }
 
   async makeRequest<T>(
@@ -309,6 +335,7 @@ export class StorageTransport {
       : (reqOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
 
     try {
+      await this.verifyUniverseDomain();
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
           const urlHasParams = opts.url

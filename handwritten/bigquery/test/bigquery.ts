@@ -32,6 +32,7 @@ import {toArray} from '../src/util';
 import {
   BigQueryInt,
   BigQueryDate,
+  BigQueryOptions,
   IntegerTypeCastValue,
   IntegerTypeCastOptions,
   Dataset,
@@ -242,6 +243,7 @@ describe('BigQuery', () => {
       const calledWith = bq.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, `${apiEndpoint}/bigquery/v2`);
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
+      assert.strictEqual(calledWith.customEndpoint, undefined);
     });
 
     it('should prepend apiEndpoint with default protocol', () => {
@@ -283,6 +285,147 @@ describe('BigQuery', () => {
       assert.strictEqual(
         calledWith.apiEndpoint,
         'https://bigquery.fake-tpc-env.example.com',
+      );
+    });
+
+    it('should read GOOGLE_CLOUD_UNIVERSE_DOMAIN and give code option priority', () => {
+      const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      try {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'my-universe.example.com';
+        const envBq = new BigQuery();
+        assert.strictEqual(envBq.universeDomain, 'my-universe.example.com');
+        assert.strictEqual(
+          envBq.calledWith_[0].baseUrl,
+          'https://bigquery.my-universe.example.com/bigquery/v2',
+        );
+        assert.strictEqual(
+          envBq.calledWith_[1].universeDomain,
+          'my-universe.example.com',
+        );
+
+        const codeBq = new BigQuery({
+          universeDomain: 'override.example.com/',
+        });
+        assert.strictEqual(codeBq.universeDomain, 'override.example.com');
+        assert.strictEqual(
+          codeBq.calledWith_[1].universeDomain,
+          'override.example.com',
+        );
+        assert.strictEqual(
+          codeBq.calledWith_[0].baseUrl,
+          'https://bigquery.override.example.com/bigquery/v2',
+        );
+
+        for (const universeDomain of ['', '   ', '///']) {
+          assert.throws(
+            () => new BigQuery({universeDomain}),
+            /cannot be an empty string/,
+          );
+        }
+        assert.throws(
+          () =>
+            new BigQuery({
+              universeDomain: 'a.example.com',
+              universe_domain: 'b.example.com',
+            }),
+          /Please set either universe_domain or universeDomain, but not both/,
+        );
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '';
+        assert.throws(() => new BigQuery(), /cannot be an empty string/);
+      } finally {
+        if (savedEnv !== undefined) {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+        } else {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        }
+      }
+    });
+
+    it('should validate credential universe against client universe on real Service', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const {BigQuery: RealBigQuery} = require('../src');
+      const {privateKey} = crypto.generateKeyPairSync('rsa', {
+        modulusLength: 2048,
+        privateKeyEncoding: {type: 'pkcs8', format: 'pem'},
+        publicKeyEncoding: {type: 'spki', format: 'pem'},
+      });
+      const baseCreds = {
+        client_email: 'sa@test-project.iam.gserviceaccount.com',
+        private_key: privateKey,
+      };
+      const authMar = (client: InstanceType<typeof BigQuery>, uri: string) =>
+        new Promise<unknown>((resolve, reject) =>
+          client.makeAuthenticatedRequest(
+            {uri},
+            {
+              onAuthenticated: (err: Error | null, res: unknown) =>
+                err ? reject(err) : resolve(res),
+            },
+          ),
+        );
+
+      const sharedClientOptions: Record<string, unknown> = {};
+      const customClientDefaultCreds = new RealBigQuery({
+        projectId: PROJECT_ID,
+        universeDomain: 'my-universe.example.com',
+        clientOptions: sharedClientOptions,
+        credentials: baseCreds,
+      });
+      assert.strictEqual(sharedClientOptions.universeDomain, undefined);
+      assert.strictEqual(
+        await customClientDefaultCreds.authClient.getUniverseDomain(),
+        'googleapis.com',
+      );
+      const mismatchRe =
+        /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/;
+      await assert.rejects(
+        () => customClientDefaultCreds.getDatasets(),
+        mismatchRe,
+      );
+      await assert.rejects(
+        () =>
+          authMar(
+            customClientDefaultCreds,
+            'https://bigquery.my-universe.example.com/bigquery/v2/projects/p/datasets',
+          ),
+        mismatchRe,
+      );
+      await assert.rejects(
+        () =>
+          new Promise((resolve, reject) =>
+            customClientDefaultCreds
+              .requestStream({uri: '/datasets'})
+              .on('error', reject)
+              .on('response', resolve),
+          ),
+        mismatchRe,
+      );
+
+      const customCreds = {
+        ...baseCreds,
+        universe_domain: 'my-universe.example.com',
+      } as BigQueryOptions['credentials'];
+      const trailingSlashBq = new RealBigQuery({
+        projectId: PROJECT_ID,
+        universeDomain: 'my-universe.example.com/',
+        credentials: customCreds,
+      });
+      assert.strictEqual(
+        trailingSlashBq.universeDomain,
+        'my-universe.example.com',
+      );
+      await authMar(
+        trailingSlashBq,
+        'https://bigquery.my-universe.example.com/bigquery/v2/datasets',
+      );
+
+      const defaultClientCustomCreds = new RealBigQuery({
+        projectId: PROJECT_ID,
+        credentials: customCreds,
+      });
+      await assert.rejects(
+        () => defaultClientCustomCreds.getDatasets(),
+        /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(my-universe\.example\.com\)/,
       );
     });
 

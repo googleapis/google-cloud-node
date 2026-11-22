@@ -2858,6 +2858,44 @@ describe('resumable-upload', () => {
       up.makeRequest(REQ_OPTS);
     });
 
+    it('uses GOOGLE_CLOUD_UNIVERSE_DOMAIN and validates credential universe in resumable-upload', async () => {
+      const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'my-universe.example.com';
+      try {
+        const upEnv = upload({
+          bucket: BUCKET,
+          file: FILE,
+          retryOptions: RETRY_OPTIONS,
+        });
+        assert.strictEqual(
+          upEnv.baseURI,
+          'https://storage.my-universe.example.com/upload/storage/v1/b',
+        );
+
+        let requestCalled = false;
+        upEnv.authClient = {
+          getCredentials: async () => ({}),
+          getUniverseDomain: async () => 'googleapis.com',
+          request: async () => {
+            requestCalled = true;
+            return {} as GaxiosResponse;
+          },
+        } as unknown as typeof upEnv.authClient;
+
+        await assert.rejects(
+          upEnv.makeRequest(REQ_OPTS),
+          /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/,
+        );
+        assert.strictEqual(requestCalled, false);
+      } finally {
+        if (savedEnv !== undefined) {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+        } else {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        }
+      }
+    });
+
     it('should execute the callback with a body error & response', async () => {
       const error = new GaxiosError(
         'Error message',

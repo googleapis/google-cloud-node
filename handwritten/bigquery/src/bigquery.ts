@@ -283,6 +283,9 @@ export interface BigQueryOptions extends GoogleAuthOptions {
    */
   universeDomain?: string;
 
+  /** An alias for {@link BigQueryOptions.universeDomain}. */
+  universe_domain?: string;
+
   /**
    * Controls the job creation mode used when executing queries that can be
    * accelerated via the jobs.Query API. Users may experience performance
@@ -462,11 +465,32 @@ export class BigQuery extends Service {
   }
 
   constructor(options: BigQueryOptions = {}) {
+    if (
+      options.universe_domain !== undefined &&
+      options.universeDomain !== undefined &&
+      options.universe_domain !== options.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
+    }
+
+    const rawUniverseDomain =
+      options.universeDomain ??
+      options.universe_domain ??
+      process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+
     let universeDomain = 'googleapis.com';
     const servicePath = 'bigquery';
 
-    if (options.universeDomain) {
-      universeDomain = BigQuery.sanitizeDomain(options.universeDomain);
+    if (rawUniverseDomain !== undefined) {
+      if (typeof rawUniverseDomain !== 'string' || !rawUniverseDomain.trim()) {
+        throw new Error('The universe domain cannot be an empty string.');
+      }
+      universeDomain = BigQuery.sanitizeDomain(rawUniverseDomain);
+      if (!universeDomain) {
+        throw new Error('The universe domain cannot be an empty string.');
+      }
     }
 
     const EMULATOR_HOST = process.env.BIGQUERY_EMULATOR_HOST;
@@ -483,9 +507,12 @@ export class BigQuery extends Service {
 
     options = Object.assign({}, options, {
       apiEndpoint,
+      ...(rawUniverseDomain !== undefined ? {universeDomain} : {}),
     });
+    delete options.universe_domain;
 
     const baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/bigquery/v2`;
+    const hasCommonUniverse = 'universeDomain' in Service.prototype;
 
     const config = {
       apiEndpoint: options.apiEndpoint!,
@@ -495,6 +522,10 @@ export class BigQuery extends Service {
       autoRetry: options.autoRetry,
       maxRetries: options.maxRetries,
       retryOptions: options.retryOptions,
+      ...(options.apiKey ? {apiKey: options.apiKey} : {}),
+      ...(hasCommonUniverse && rawUniverseDomain !== undefined
+        ? {universeDomain}
+        : {}),
     };
 
     if (options.scopes) {
@@ -502,6 +533,68 @@ export class BigQuery extends Service {
     }
 
     super(config, options);
+
+    if (
+      !hasCommonUniverse &&
+      typeof this.authClient?.authorizeRequest === 'function'
+    ) {
+      const auth = this.authClient;
+      const authAny = auth as unknown as Record<string, unknown>;
+      const wrap =
+        (orig: typeof auth.authorizeRequest): typeof auth.authorizeRequest =>
+        async reqOpts => {
+          const proto = Object.getPrototypeOf(auth);
+          const isDefaultGet =
+            Boolean(proto?.getUniverseDomain) &&
+            auth.getUniverseDomain === proto.getUniverseDomain;
+          const stubbed =
+            isDefaultGet &&
+            orig !== proto.authorizeRequest &&
+            !auth.cachedCredential &&
+            !auth.jsonContent &&
+            !authAny.keyFilename &&
+            !process.env.GOOGLE_APPLICATION_CREDENTIALS;
+          if (
+            !options.apiKey &&
+            !(options as {token?: string}).token &&
+            !auth.apiKey &&
+            !stubbed
+          ) {
+            const client =
+              isDefaultGet && typeof auth.getClient === 'function'
+                ? await auth.getClient()
+                : undefined;
+            const credUniverse = (client as {apiKey?: string})?.apiKey
+              ? undefined
+              : ((await auth.getUniverseDomain?.()) ??
+                (authAny.universeDomain as string | undefined));
+            if (credUniverse && universeDomain !== credUniverse) {
+              throw new Error(
+                `The configured universe domain (${universeDomain}) does not match the universe domain found in the credentials (${credUniverse}). ` +
+                  "If you haven't configured the universe domain explicitly, googleapis.com is the default.",
+              );
+            }
+          }
+          return orig.call(auth, reqOpts);
+        };
+      if ((options.authClient as unknown) !== (auth as unknown)) {
+        auth.authorizeRequest = wrap(auth.authorizeRequest);
+      } else if (typeof this.makeAuthenticatedRequest === 'function') {
+        const origMar = this.makeAuthenticatedRequest;
+        this.makeAuthenticatedRequest = Object.assign(
+          ((...args: [never, never?]) => {
+            const orig = auth.authorizeRequest;
+            auth.authorizeRequest = wrap(orig);
+            try {
+              return origMar(...args);
+            } finally {
+              auth.authorizeRequest = orig;
+            }
+          }) as typeof origMar,
+          origMar,
+        );
+      }
+    }
 
     if (options.defaultJobCreationMode) {
       this._defaultJobCreationMode = options.defaultJobCreationMode;

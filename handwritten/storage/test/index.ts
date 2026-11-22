@@ -89,6 +89,15 @@ describe('Storage', () => {
 
       assert.strictEqual(storage.apiEndpoint, apiEndpoint);
       assert.strictEqual(storage.customEndpoint, false);
+
+      for (const ep of [
+        'https://storage.googleapis.com/',
+        'storage.googleapis.com',
+      ]) {
+        const s = new Storage({apiEndpoint: ep});
+        assert.strictEqual(s.apiEndpoint, apiEndpoint);
+        assert.strictEqual(s.customEndpoint, false);
+      }
     });
 
     it('should not set `customEndpoint` if `apiEndpoint` matches default (w/ universe domain)', () => {
@@ -351,6 +360,64 @@ describe('Storage', () => {
       const storage = new Storage({universeDomain});
 
       assert.equal(storage.apiEndpoint, `https://storage.${universeDomain}`);
+    });
+
+    describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+      const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+
+      afterEach(() => {
+        if (savedEnv !== undefined) {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+        } else {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        }
+      });
+
+      it('uses GOOGLE_CLOUD_UNIVERSE_DOMAIN when universeDomain option is omitted', () => {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'my-universe.example.com';
+        const storage = new Storage({projectId: PROJECT_ID});
+        assert.strictEqual(storage.universeDomain, 'my-universe.example.com');
+        assert.strictEqual(
+          storage.apiEndpoint,
+          'https://storage.my-universe.example.com',
+        );
+        assert.strictEqual(
+          storage.baseUrl,
+          'https://storage.my-universe.example.com/storage/v1',
+        );
+      });
+
+      it('gives explicit universeDomain priority over GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env.universe.example.com';
+        const storage = new Storage({
+          projectId: PROJECT_ID,
+          universeDomain: 'code.universe.example.com',
+        });
+        assert.strictEqual(storage.universeDomain, 'code.universe.example.com');
+        assert.strictEqual(
+          storage.apiEndpoint,
+          'https://storage.code.universe.example.com',
+        );
+      });
+
+      it('throws on empty string or conflicting universe_domain and universeDomain', () => {
+        for (const universeDomain of ['', '   ']) {
+          assert.throws(
+            () => new Storage({universeDomain}),
+            /cannot be an empty string/,
+          );
+        }
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '';
+        assert.throws(() => new Storage(), /cannot be an empty string/);
+        assert.throws(
+          () =>
+            new Storage({
+              universeDomain: 'a.example.com',
+              universe_domain: 'b.example.com',
+            }),
+          /Please set either universe_domain or universeDomain, but not both/,
+        );
+      });
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {

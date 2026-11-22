@@ -260,6 +260,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
+    await this.bucket.storage.storageTransport?.verifyUniverseDomain?.();
     const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
     return AsyncRetry(async bail => {
@@ -314,6 +315,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers.set('x-goog-hash', `crc32c=${crc.toString()}`);
     }
 
+    await this.bucket.storage.storageTransport?.verifyUniverseDomain?.();
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(
@@ -352,6 +354,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
       parts,
     )}</CompleteMultipartUpload>`;
+    await this.bucket.storage.storageTransport?.verifyUniverseDomain?.();
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(
@@ -380,6 +383,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async abortUpload(): Promise<void> {
+    await this.bucket.storage.storageTransport?.verifyUniverseDomain?.();
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {

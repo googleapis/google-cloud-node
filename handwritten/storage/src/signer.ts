@@ -16,7 +16,13 @@ import * as crypto from 'crypto';
 import * as http from 'http';
 import * as url from 'url';
 import {ExceptionMessages, Storage} from './storage.js';
-import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
+import {
+  encodeURI,
+  qsStringify,
+  objectEntries,
+  formatAsUTCISO,
+  verifyUniverseDomain,
+} from './util.js';
 import {GoogleAuth} from 'google-auth-library';
 
 type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
@@ -222,6 +228,14 @@ export class URLSigner {
     });
   }
 
+  private verifyUniverseDomain(): Promise<void> {
+    return verifyUniverseDomain(this.auth, this.storage.universeDomain, {
+      allowUnauthenticatedCustomEndpoint: Boolean(
+        this.storage.customEndpoint && !this.storage.useAuthWithCustomEndpoint,
+      ),
+    });
+  }
+
   private getSignedUrlV2(
     config: GetSignedUrlConfigInternal,
   ): Promise<SignedUrlQuery> {
@@ -243,6 +257,7 @@ export class URLSigner {
     ].join('\n');
 
     const sign = async () => {
+      await this.verifyUniverseDomain();
       const auth = this.auth;
       try {
         const signature = await auth.sign(
@@ -318,6 +333,7 @@ export class URLSigner {
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
+      await this.verifyUniverseDomain();
       const credentials = await this.auth.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
       const dateISO = formatAsUTCISO(

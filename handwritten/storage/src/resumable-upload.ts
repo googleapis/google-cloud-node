@@ -29,6 +29,7 @@ import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
 import * as crypto from 'crypto';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
+import {resolveUniverseDomain, verifyUniverseDomain} from './util.js';
 import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
 
@@ -219,6 +220,8 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    * The service domain for a given Cloud universe.
    */
   universeDomain?: string;
+  /** An alias for {@link UploadConfig.universeDomain}. */
+  universe_domain?: string;
 
   /**
    * If you already have a resumable URI from a previously-created resumable
@@ -352,6 +355,7 @@ export class Upload extends Writable {
   private localWriteCache: Buffer[] = [];
   private localWriteCacheByteLength = 0;
   private upstreamEnded = false;
+  private universeDomain: string;
   #gcclGcsCmd?: string;
 
   constructor(cfg: UploadConfig) {
@@ -374,13 +378,15 @@ export class Upload extends Writable {
       );
     }
 
-    cfg.authConfig = cfg.authConfig || {};
-    cfg.authConfig.scopes = [
-      'https://www.googleapis.com/auth/devstorage.full_control',
-    ];
+    const universe = resolveUniverseDomain(cfg);
+    this.universeDomain = universe;
+    cfg.authConfig = {
+      ...cfg.authConfig,
+      scopes: ['https://www.googleapis.com/auth/devstorage.full_control'],
+    };
+    delete cfg.authConfig.universeDomain;
+    delete (cfg.authConfig as {universe_domain?: string}).universe_domain;
     this.authClient = cfg.authClient || new GoogleAuth(cfg.authConfig);
-
-    const universe = cfg.universeDomain || DEFAULT_UNIVERSE;
 
     this.apiEndpoint = `https://storage.${universe}`;
     if (cfg.apiEndpoint && cfg.apiEndpoint !== this.apiEndpoint) {
@@ -1370,6 +1376,7 @@ export class Upload extends Writable {
       }
     }
 
+    await this.#verifyUniverseDomain();
     const res = await this.authClient.request<{error?: object}>(
       combinedReqOpts,
     );
@@ -1413,11 +1420,18 @@ export class Upload extends Writable {
       }
     }
 
+    await this.#verifyUniverseDomain();
     const res = await this.authClient.request(combinedReqOpts);
     const successfulRequest = await this.onResponse(res);
     this.removeListener('error', errorCallback);
 
     return successfulRequest ? res : null;
+  }
+
+  async #verifyUniverseDomain(): Promise<void> {
+    if (this.authClient !== gaxios) {
+      await verifyUniverseDomain(this.authClient, this.universeDomain);
+    }
   }
 
   /**
