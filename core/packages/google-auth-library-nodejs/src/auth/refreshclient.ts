@@ -19,10 +19,17 @@ import {
   OAuth2Client,
   OAuth2ClientOptions,
 } from './oauth2client';
-import {AuthClient} from './authclient';
+import {AuthClient, DEFAULT_UNIVERSE} from './authclient';
 import {GaxiosOptions} from 'gaxios';
 
 export const USER_REFRESH_ACCOUNT_TYPE = 'authorized_user';
+const DEFAULT_OAUTH2_TOKEN_URL = 'https://oauth2.googleapis.com/token';
+
+function assertValidUniverse(universe: unknown): void {
+  if (typeof universe !== 'string' || !universe.trim()) {
+    throw new RangeError('The universe domain cannot be an empty string.');
+  }
+}
 
 export interface UserRefreshClientOptions extends OAuth2ClientOptions {
   /**
@@ -44,6 +51,7 @@ export class UserRefreshClient extends OAuth2Client {
   // In a future gts release, the _propertyName rule will be lifted.
   // This is also a hard one because `this.refreshToken` is a function.
   _refreshToken?: string | null;
+  #hasExplicitTokenUrl: boolean;
 
   /**
    * The User Refresh Token client.
@@ -83,9 +91,36 @@ export class UserRefreshClient extends OAuth2Client {
             eagerRefreshThresholdMillis,
             forceRefreshOnFailure,
           };
+    if (
+      opts.universe_domain !== undefined &&
+      opts.universeDomain !== undefined &&
+      opts.universe_domain !== opts.universeDomain
+    ) {
+      throw new RangeError(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
+    }
+    const configuredUniverse = opts.universeDomain ?? opts.universe_domain;
+    if (configuredUniverse !== undefined) {
+      assertValidUniverse(configuredUniverse);
+    }
     super(opts);
+    this.#hasExplicitTokenUrl = opts.endpoints?.oauth2TokenUrl !== undefined;
     this._refreshToken = opts.refreshToken;
     this.credentials.refresh_token = opts.refreshToken;
+  }
+
+  #assertTokenEndpointSupportedInUniverse(): void {
+    assertValidUniverse(this.universeDomain);
+    if (
+      this.universeDomain !== DEFAULT_UNIVERSE &&
+      !this.#hasExplicitTokenUrl &&
+      this.endpoints.oauth2TokenUrl.toString() === DEFAULT_OAUTH2_TOKEN_URL
+    ) {
+      throw new RangeError(
+        `UserRefreshClient (authorized_user) credentials are not supported in universe domain "${this.universeDomain}" without an explicit endpoints.oauth2TokenUrl override.`,
+      );
+    }
   }
 
   /**
@@ -94,10 +129,12 @@ export class UserRefreshClient extends OAuth2Client {
    * @param callback Optional callback.
    */
   protected async refreshTokenNoCache(): Promise<GetTokenResponse> {
+    this.#assertTokenEndpointSupportedInUniverse();
     return super.refreshTokenNoCache(this._refreshToken);
   }
 
   async fetchIdToken(targetAudience: string): Promise<string> {
+    this.#assertTokenEndpointSupportedInUniverse();
     const opts: GaxiosOptions = {
       ...UserRefreshClient.RETRY_CONFIG,
       url: this.endpoints.oauth2TokenUrl,
@@ -153,7 +190,10 @@ export class UserRefreshClient extends OAuth2Client {
     this._refreshToken = json.refresh_token;
     this.credentials.refresh_token = json.refresh_token;
     this.quotaProjectId = json.quota_project_id;
-    this.universeDomain = json.universe_domain || this.universeDomain;
+    if (json.universe_domain !== undefined) {
+      assertValidUniverse(json.universe_domain);
+      this.universeDomain = json.universe_domain;
+    }
   }
 
   /**
@@ -172,7 +212,7 @@ export class UserRefreshClient extends OAuth2Client {
     callback?: (err?: Error) => void,
   ): void | Promise<void> {
     if (callback) {
-      this.fromStreamAsync(inputStream).then(() => callback(), callback);
+      void this.fromStreamAsync(inputStream).then(() => callback(), callback);
     } else {
       return this.fromStreamAsync(inputStream);
     }

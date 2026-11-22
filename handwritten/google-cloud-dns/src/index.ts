@@ -41,7 +41,7 @@ export interface GetZonesCallback {
     err: Error | null,
     zones: Zone[] | null,
     nextQuery?: GetZonesRequest | null,
-    apiResponse?: Metadata
+    apiResponse?: Metadata,
   ): void;
 }
 
@@ -99,6 +99,10 @@ export interface DNSOptions extends GoogleAuthOptions {
    * Defaults to `dns.googleapis.com`.
    */
   apiEndpoint?: string;
+  /** The default service domain for a given Cloud universe. */
+  universeDomain?: string;
+  /** An alias for {@link DNSOptions.universeDomain}. */
+  universe_domain?: string;
 }
 
 /**
@@ -159,19 +163,115 @@ export interface DNSOptions extends GoogleAuthOptions {
  * Full quickstart example:
  */
 class DNS extends Service {
+  private _universeDomain: string;
   getZonesStream: (query: GetZonesRequest) => Stream;
   constructor(options: DNSOptions = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'dns.googleapis.com';
+    if (
+      options.universe_domain !== undefined &&
+      options.universeDomain !== undefined &&
+      options.universe_domain !== options.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
+    }
+    const configuredUniverse =
+      options.universeDomain ??
+      options.universe_domain ??
+      process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+    if (
+      configuredUniverse !== undefined &&
+      (typeof configuredUniverse !== 'string' || !configuredUniverse.trim())
+    ) {
+      throw new Error('The universe domain cannot be an empty string.');
+    }
+    const universeDomain = configuredUniverse ?? 'googleapis.com';
+    const apiEndpoint = options.apiEndpoint || `dns.${universeDomain}`;
+    options = Object.assign({}, options, {
+      apiEndpoint,
+      ...(configuredUniverse !== undefined
+        ? {universeDomain: configuredUniverse}
+        : {}),
+    });
+    delete options.universe_domain;
+    const hasCommonUniverse = 'universeDomain' in Service.prototype;
     const config = {
-      apiEndpoint: options.apiEndpoint,
-      baseUrl: `https://${options.apiEndpoint}/dns/v1`,
+      apiEndpoint,
+      baseUrl: `https://${apiEndpoint.replace(/^https?:\/\//, '').replace(/\/+$/, '')}/dns/v1`,
       scopes: [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
       ],
       packageJson: require('../../package.json'),
+      ...(options.apiKey ? {apiKey: options.apiKey} : {}),
+      ...(hasCommonUniverse && configuredUniverse !== undefined
+        ? {universeDomain: configuredUniverse}
+        : {}),
     };
     super(config, options);
+    this._universeDomain = universeDomain;
+
+    if (
+      !hasCommonUniverse &&
+      typeof this.authClient?.authorizeRequest === 'function'
+    ) {
+      const auth = this.authClient;
+      const authAny = auth as unknown as Record<string, unknown>;
+      const wrap =
+        (orig: typeof auth.authorizeRequest): typeof auth.authorizeRequest =>
+        async reqOpts => {
+          const proto = Object.getPrototypeOf(auth);
+          const isDefaultGet =
+            Boolean(proto?.getUniverseDomain) &&
+            auth.getUniverseDomain === proto.getUniverseDomain;
+          const stubbed =
+            isDefaultGet &&
+            orig !== proto.authorizeRequest &&
+            !auth.cachedCredential &&
+            !auth.jsonContent &&
+            !authAny.keyFilename &&
+            !process.env.GOOGLE_APPLICATION_CREDENTIALS;
+          if (
+            !options.apiKey &&
+            !(options as {token?: string}).token &&
+            !auth.apiKey &&
+            !stubbed
+          ) {
+            const client =
+              isDefaultGet && typeof auth.getClient === 'function'
+                ? await auth.getClient()
+                : undefined;
+            const credUniverse = (client as {apiKey?: string})?.apiKey
+              ? undefined
+              : ((await auth.getUniverseDomain?.()) ??
+                (authAny.universeDomain as string | undefined));
+            if (credUniverse && universeDomain !== credUniverse) {
+              throw new Error(
+                `The configured universe domain (${universeDomain}) does not match the universe domain found in the credentials (${credUniverse}). ` +
+                  "If you haven't configured the universe domain explicitly, googleapis.com is the default.",
+              );
+            }
+          }
+          return orig.call(auth, reqOpts);
+        };
+      if ((options.authClient as unknown) !== (auth as unknown)) {
+        auth.authorizeRequest = wrap(auth.authorizeRequest);
+      } else if (typeof this.makeAuthenticatedRequest === 'function') {
+        const origMar = this.makeAuthenticatedRequest;
+        this.makeAuthenticatedRequest = Object.assign(
+          ((...args: [never, never?]) => {
+            const orig = auth.authorizeRequest;
+            auth.authorizeRequest = wrap(orig);
+            try {
+              return origMar(...args);
+            } finally {
+              auth.authorizeRequest = orig;
+            }
+          }) as typeof origMar,
+          origMar,
+        );
+      }
+    }
 
     /**
      * Get {@link Zone} objects for all of the zones in your project as
@@ -206,14 +306,18 @@ class DNS extends Service {
     this.getZonesStream = paginator.streamify('getZones');
   }
 
+  get universeDomain(): string {
+    return this._universeDomain;
+  }
+
   createZone(
     name: string,
-    config: CreateZoneRequest
+    config: CreateZoneRequest,
   ): Promise<CreateZoneResponse>;
   createZone(
     name: string,
     config: CreateZoneRequest,
-    callback: GetZoneCallback
+    callback: GetZoneCallback,
   ): void;
   /**
    * Config to set for the zone.
@@ -275,7 +379,7 @@ class DNS extends Service {
   createZone(
     name: string,
     config: CreateZoneRequest,
-    callback?: GetZoneCallback
+    callback?: GetZoneCallback,
   ): void | Promise<CreateZoneResponse> {
     if (!name) {
       throw new Error('A zone name is required.');
@@ -300,7 +404,7 @@ class DNS extends Service {
         const zone = this.zone(resp.name);
         zone.metadata = resp;
         callback!(null, zone, resp);
-      }
+      },
     );
   }
 
@@ -355,7 +459,7 @@ class DNS extends Service {
    */
   getZones(
     queryOrCallback?: GetZonesRequest | GetZonesCallback,
-    callback?: GetZonesCallback
+    callback?: GetZonesCallback,
   ): void | Promise<GetZonesResponse> {
     const query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     callback =
@@ -383,7 +487,7 @@ class DNS extends Service {
           });
         }
         callback!(null, zones, nextQuery, resp);
-      }
+      },
     );
   }
 

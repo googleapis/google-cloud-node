@@ -149,6 +149,102 @@ describe('DNS', () => {
       assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
       assert.strictEqual(calledWith.baseUrl, `https://${apiEndpoint}/dns/v1`);
     });
+
+    it('should support universeDomain, universe_domain, and GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+      assert.strictEqual(dns.universeDomain, 'googleapis.com');
+
+      const customDns = new DNS({
+        projectId: PROJECT_ID,
+        universeDomain: 'my-universe.example.com',
+      });
+      assert.strictEqual(customDns.universeDomain, 'my-universe.example.com');
+      assert.strictEqual(
+        customDns.calledWith_[0].apiEndpoint,
+        'dns.my-universe.example.com',
+      );
+      assert.strictEqual(
+        customDns.calledWith_[0].baseUrl,
+        'https://dns.my-universe.example.com/dns/v1',
+      );
+      assert.strictEqual(
+        customDns.calledWith_[1].universeDomain,
+        'my-universe.example.com',
+      );
+
+      const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      try {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-universe.example.com';
+        const envDns = new DNS({projectId: PROJECT_ID});
+        assert.strictEqual(envDns.universeDomain, 'env-universe.example.com');
+        assert.strictEqual(
+          envDns.calledWith_[0].baseUrl,
+          'https://dns.env-universe.example.com/dns/v1',
+        );
+        for (const universeDomain of ['', '   ']) {
+          assert.throws(
+            () => new DNS({universeDomain}),
+            /The universe domain cannot be an empty string/,
+          );
+        }
+        assert.throws(
+          () =>
+            new DNS({
+              universeDomain: 'a.example.com',
+              universe_domain: 'b.example.com',
+            }),
+          /Please set either universe_domain or universeDomain, but not both/,
+        );
+      } finally {
+        if (savedEnv !== undefined) {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+        } else {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        }
+      }
+    });
+
+    it('should validate credential universe against client universe on real Service', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const crypto = require('crypto') as typeof import('crypto');
+      const srcPath = require.resolve('../src');
+      const cached = require.cache[srcPath];
+      delete require.cache[srcPath];
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const {DNS: RealDNS} = require('../src');
+      if (cached) require.cache[srcPath] = cached;
+      const {privateKey} = crypto.generateKeyPairSync('rsa', {
+        modulusLength: 2048,
+        privateKeyEncoding: {type: 'pkcs8', format: 'pem'},
+        publicKeyEncoding: {type: 'spki', format: 'pem'},
+      });
+      const mismatchedDns = new RealDNS({
+        projectId: PROJECT_ID,
+        universeDomain: 'my-universe.example.com',
+        credentials: {
+          client_email: 'sa@project-id.iam.gserviceaccount.com',
+          private_key: privateKey,
+        },
+      });
+      const mismatchRe =
+        /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/;
+      const awaitStreamErr = (s: NodeJS.EventEmitter, okEvent: string) =>
+        new Promise((resolve, reject) =>
+          s.on('error', reject).on(okEvent, resolve),
+        );
+      await assert.rejects(() => mismatchedDns.getZones(), mismatchRe);
+      await assert.rejects(
+        () => awaitStreamErr(mismatchedDns.getZonesStream(), 'data'),
+        mismatchRe,
+      );
+      await assert.rejects(
+        () =>
+          awaitStreamErr(
+            mismatchedDns.requestStream({uri: '/managedZones'}),
+            'response',
+          ),
+        mismatchRe,
+      );
+    });
   });
 
   describe('createZone', () => {

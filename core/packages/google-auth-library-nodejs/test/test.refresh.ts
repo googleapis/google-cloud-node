@@ -208,4 +208,124 @@ describe('refresh', () => {
     scope.done();
     sinon.restore();
   });
+
+  it('defers non-default universeDomain validation until token exchange and honors custom oauth2TokenUrl', async () => {
+    const customUniverse = 'my-universe.example.com';
+    const makeClient = (
+      extra: Exclude<
+        ConstructorParameters<typeof UserRefreshClient>[0],
+        string | undefined
+      > = {},
+    ) =>
+      new UserRefreshClient({
+        clientId: 'id',
+        clientSecret: 'secret',
+        refreshToken: 'refresh',
+        ...extra,
+      });
+
+    assert.strictEqual(
+      UserRefreshClient.fromJSON({
+        ...createJSON(),
+        universe_domain: 'googleapis.com',
+      }).universeDomain,
+      'googleapis.com',
+    );
+    assert.strictEqual(
+      makeClient({universeDomain: 'googleapis.com'}).universeDomain,
+      'googleapis.com',
+    );
+
+    const customCtorClient = makeClient({universeDomain: customUniverse});
+    assert.strictEqual(customCtorClient.universeDomain, customUniverse);
+    const ctorSpy = sinon.spy(customCtorClient.transporter, 'request');
+    await assert.rejects(() => customCtorClient.getAccessToken(), RangeError);
+    await new Promise<void>((resolve, reject) => {
+      customCtorClient.getAccessToken(err =>
+        err instanceof RangeError
+          ? resolve()
+          : reject(new Error(`Expected RangeError, got ${err}`)),
+      );
+    });
+    await assert.rejects(
+      () => customCtorClient.getRequestHeaders(),
+      RangeError,
+    );
+    await assert.rejects(
+      () => customCtorClient.fetchIdToken('aud'),
+      RangeError,
+    );
+    assert.strictEqual(ctorSpy.called, false);
+
+    customCtorClient.setCredentials({
+      access_token: 'cached-token',
+      refresh_token: 'refresh',
+      expiry_date: Date.now() + 3600 * 1000,
+    });
+    assert.strictEqual(
+      (await customCtorClient.getAccessToken()).token,
+      'cached-token',
+    );
+    assert.strictEqual(
+      (await customCtorClient.getRequestHeaders()).get('authorization'),
+      'Bearer cached-token',
+    );
+    assert.strictEqual(ctorSpy.called, false);
+
+    const customJsonClient = UserRefreshClient.fromJSON({
+      ...createJSON(),
+      universe_domain: customUniverse,
+    });
+    assert.strictEqual(customJsonClient.universeDomain, customUniverse);
+    const jsonSpy = sinon.spy(customJsonClient.transporter, 'request');
+    await assert.rejects(() => customJsonClient.getAccessToken(), RangeError);
+    await assert.rejects(
+      () => customJsonClient.fetchIdToken('aud'),
+      RangeError,
+    );
+    assert.strictEqual(jsonSpy.called, false);
+
+    const customEndpointScope = nock(`https://auth.${customUniverse}`)
+      .post('/token')
+      .reply(200, {access_token: 'custom-tok', expires_in: 3600})
+      .post('/token')
+      .reply(200, {id_token: 'custom-id-tok'});
+    const customEndpointClient = makeClient({
+      universeDomain: customUniverse,
+      endpoints: {oauth2TokenUrl: `https://auth.${customUniverse}/token`},
+    });
+    assert.strictEqual(
+      (await customEndpointClient.getAccessToken()).token,
+      'custom-tok',
+    );
+    assert.strictEqual(
+      await customEndpointClient.fetchIdToken('aud'),
+      'custom-id-tok',
+    );
+    customEndpointScope.done();
+
+    for (const bad of ['', '   ']) {
+      assert.throws(() => makeClient({universeDomain: bad}), RangeError);
+    }
+    assert.throws(
+      () =>
+        makeClient({
+          universeDomain: 'a.example.com',
+          universe_domain: 'b.example.com',
+        }),
+      RangeError,
+    );
+    assert.throws(
+      () => UserRefreshClient.fromJSON({...createJSON(), universe_domain: ''}),
+      RangeError,
+    );
+
+    const mutated = makeClient();
+    const spy = sinon.spy(mutated.transporter, 'request');
+    mutated.universeDomain = customUniverse;
+    await assert.rejects(() => mutated.getAccessToken(), RangeError);
+    await assert.rejects(() => mutated.fetchIdToken('aud'), RangeError);
+    assert.strictEqual(spy.called, false);
+    sinon.restore();
+  });
 });
