@@ -25,6 +25,7 @@ import * as extend from 'extend';
 import {
   AuthClient,
   CredentialBody,
+  DEFAULT_UNIVERSE,
   GoogleAuth,
   GoogleAuthOptions,
 } from 'google-auth-library';
@@ -162,6 +163,9 @@ export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
    * Account email address, required for PEM/P12 usage.
    */
   email?: string;
+
+  /** An alias for {@link MakeAuthenticatedRequestFactoryConfig.universeDomain}. */
+  universe_domain?: string;
 
   /**
    * Maximum number of automatic retries attempted before returning the error.
@@ -604,10 +608,15 @@ export class Util {
   makeAuthenticatedRequestFactory(
     config: MakeAuthenticatedRequestFactoryConfig,
   ) {
+    const expectedUniverseDomain =
+      resolveUniverseDomain(config) ?? DEFAULT_UNIVERSE;
+
     const googleAutoAuthConfig = extend({}, config);
     if (googleAutoAuthConfig.projectId === DEFAULT_PROJECT_ID_TOKEN) {
       delete googleAutoAuthConfig.projectId;
     }
+    delete googleAutoAuthConfig.universeDomain;
+    delete googleAutoAuthConfig.universe_domain;
 
     let authClient: GoogleAuth<AuthClient>;
 
@@ -781,6 +790,41 @@ export class Util {
               // authentication. (ex: connecting to a local Datastore server)
               return reqOpts;
             } else {
+              const isDefaultGetUniverse =
+                authClient instanceof GoogleAuth &&
+                authClient.getUniverseDomain ===
+                  GoogleAuth.prototype.getUniverseDomain;
+              const isStubbedAuth =
+                isDefaultGetUniverse &&
+                authClient.authorizeRequest !==
+                  GoogleAuth.prototype.authorizeRequest &&
+                !authClient.cachedCredential &&
+                !authClient.jsonContent &&
+                !(authClient as unknown as {keyFilename?: string})
+                  .keyFilename &&
+                !process.env.GOOGLE_APPLICATION_CREDENTIALS;
+              if (
+                !isStubbedAuth &&
+                !authClient.apiKey &&
+                !(reqConfig as {token?: string}).token
+              ) {
+                const client = isDefaultGetUniverse
+                  ? await authClient.getClient()
+                  : undefined;
+                const universeFromAuth = (client as {apiKey?: string})?.apiKey
+                  ? undefined
+                  : ((await authClient.getUniverseDomain?.()) ??
+                    (authClient as {universeDomain?: string}).universeDomain);
+                if (
+                  universeFromAuth &&
+                  expectedUniverseDomain !== universeFromAuth
+                ) {
+                  throw new Error(
+                    `The configured universe domain (${expectedUniverseDomain}) does not match the universe domain found in the credentials (${universeFromAuth}). ` +
+                      "If you haven't configured the universe domain explicitly, googleapis.com is the default.",
+                  );
+                }
+              }
               return authClient.authorizeRequest(reqOpts);
             }
           };
@@ -1180,6 +1224,34 @@ export function joinURIComponents(components: string[]): string {
       return encodeURIPath(trimmed); // Encode and prevent path traversal.
     })
     .join('/');
+}
+
+/** @internal */
+export function resolveUniverseDomain(
+  options?: {universeDomain?: string; universe_domain?: string},
+  fallback?: string,
+): string | undefined {
+  if (
+    options?.universe_domain !== undefined &&
+    options?.universeDomain !== undefined &&
+    options.universe_domain !== options.universeDomain
+  ) {
+    throw new Error(
+      'Please set either universe_domain or universeDomain, but not both.',
+    );
+  }
+  const configured =
+    options?.universeDomain ??
+    options?.universe_domain ??
+    fallback ??
+    process?.env?.['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+  if (
+    configured !== undefined &&
+    (typeof configured !== 'string' || !configured.trim())
+  ) {
+    throw new Error('The universe domain cannot be an empty string.');
+  }
+  return configured;
 }
 
 const util = new Util();

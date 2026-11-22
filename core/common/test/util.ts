@@ -45,6 +45,7 @@ import {
   DuplexifyConstructor,
   GoogleErrorBody,
   GoogleInnerError,
+  MakeAuthenticatedRequest,
   MakeAuthenticatedRequestFactoryConfig,
   MakeRequestConfig,
   ParsedHttpRespMessage,
@@ -1988,6 +1989,126 @@ describe('common/util', () => {
       );
       assert.strictEqual(opts, optionsOrCallback);
       assert.strictEqual(cb, callback);
+    });
+  });
+
+  describe('universeDomain validation in makeAuthenticatedRequestFactory', () => {
+    const callMar = (mar: MakeAuthenticatedRequest, uri: string) =>
+      new Promise<Error | null>(resolve => mar({uri}, e => resolve(e)));
+    const authMar = (mar: MakeAuthenticatedRequest, uri: string) =>
+      new Promise<DecorateRequestOptions | undefined>((resolve, reject) =>
+        mar({uri}, {onAuthenticated: (e, r) => (e ? reject(e) : resolve(r))}),
+      );
+
+    it('isolates GoogleAuth universeDomain and rejects credential universe mismatches', async () => {
+      const realUtil = new Util();
+      const creds = {
+        client_email: 'sa@p.iam.gserviceaccount.com',
+        private_key: 'fake-key',
+      };
+      const marDefaultCreds = realUtil.makeAuthenticatedRequestFactory({
+        universeDomain: 'my-universe.example.com',
+        projectId: 'p',
+        credentials: creds,
+      });
+      assert.strictEqual(
+        await marDefaultCreds.authClient.getUniverseDomain(),
+        'googleapis.com',
+      );
+      const err1 = await callMar(
+        marDefaultCreds,
+        'https://bigquery.my-universe.example.com/v2',
+      );
+      assert.match(
+        err1?.message ?? '',
+        /The configured universe domain \(my-universe\.example\.com\) does not match the universe domain found in the credentials \(googleapis\.com\)/,
+      );
+
+      const marCustomCreds = realUtil.makeAuthenticatedRequestFactory({
+        projectId: 'p',
+        credentials: {...creds, universe_domain: 'my-universe.example.com'},
+      });
+      const err2 = await callMar(
+        marCustomCreds,
+        'https://bigquery.googleapis.com/v2',
+      );
+      assert.match(
+        err2?.message ?? '',
+        /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(my-universe\.example\.com\)/,
+      );
+    });
+
+    it('allows apiKey and autoAuthFailed passthrough in custom universe and rejects mismatched ADC', async () => {
+      const realUtil = new Util();
+      assert.throws(
+        () => realUtil.makeAuthenticatedRequestFactory({universeDomain: '   '}),
+        /cannot be an empty string/,
+      );
+
+      const marApiKey = realUtil.makeAuthenticatedRequestFactory({
+        universeDomain: 'my-universe.example.com',
+        projectId: 'p',
+        apiKey: 'AIza-fake-api-key',
+      });
+      assert.ok(
+        await authMar(marApiKey, 'https://bigquery.my-universe.example.com/v2'),
+      );
+
+      const marNoCreds = realUtil.makeAuthenticatedRequestFactory({
+        universeDomain: 'my-universe.example.com',
+        projectId: 'p',
+      });
+      sinon
+        .stub(marNoCreds.authClient, 'getClient')
+        .rejects(new Error('Could not load the default credentials'));
+      const unauthOpts = await authMar(
+        marNoCreds,
+        'https://bigquery.my-universe.example.com/v2/public',
+      );
+      assert.strictEqual(
+        unauthOpts?.uri,
+        'https://bigquery.my-universe.example.com/v2/public',
+      );
+
+      const fs = require('fs') as typeof import('fs');
+      const os = require('os') as typeof import('os');
+      const path = require('path') as typeof import('path');
+      const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'common-adc-'));
+      const adcFile = path.join(tmpDir, 'custom-adc.json');
+      const prevAdc = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+      try {
+        fs.writeFileSync(
+          adcFile,
+          JSON.stringify({
+            type: 'service_account',
+            client_email: 'sa@p.iam.gserviceaccount.com',
+            private_key: 'fake-key',
+            universe_domain: 'my-universe.example.com',
+          }),
+        );
+        process.env.GOOGLE_APPLICATION_CREDENTIALS = adcFile;
+        const marAdc = realUtil.makeAuthenticatedRequestFactory({
+          projectId: 'p',
+        });
+        const authSpy = sinon.spy(marAdc.authClient, 'authorizeRequest');
+        const adcErr = await callMar(
+          marAdc,
+          'https://bigquery.googleapis.com/v2',
+        );
+        assert.match(
+          adcErr?.message ?? '',
+          /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(my-universe\.example\.com\)/,
+        );
+        assert.strictEqual(authSpy.called, false);
+        authSpy.restore();
+      } finally {
+        if (prevAdc === undefined) {
+          delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        } else {
+          process.env.GOOGLE_APPLICATION_CREDENTIALS = prevAdc;
+        }
+        fs.rmSync(tmpDir, {recursive: true, force: true});
+      }
     });
   });
 });

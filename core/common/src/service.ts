@@ -18,8 +18,13 @@
 
 const arrify = require('arrify');
 import * as extend from 'extend';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import * as r from 'teeny-request';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
+import {Request} from 'teeny-request';
 
 import {Interceptor} from './service-object';
 import {
@@ -29,6 +34,7 @@ import {
   PackageJson,
   encodeAbsoluteURI,
   joinURIComponents,
+  resolveUniverseDomain,
   util,
 } from './util';
 
@@ -62,6 +68,11 @@ export interface ServiceConfig {
    * Reuse an existing `AuthClient` or `GoogleAuth` client instead of creating a new one.
    */
   authClient?: AuthClient | GoogleAuth;
+
+  /**
+   * The default service domain for a given Cloud universe.
+   */
+  universeDomain?: string;
 }
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -72,7 +83,11 @@ export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   timeout?: number; // http.request.options.timeout
   userAgent?: string;
   useAuthWithCustomEndpoint?: boolean;
+  /** An alias for {@link ServiceOptions.universeDomain}. */
+  universe_domain?: string;
 }
+
+const serviceUniverseDomains = new WeakMap<Service, string>();
 
 export class Service {
   baseUrl: string;
@@ -116,6 +131,15 @@ export class Service {
     this.projectIdRequired = config.projectIdRequired !== false;
     this.providedUserAgent = options.userAgent;
 
+    const configuredUniverseDomain = resolveUniverseDomain(
+      options,
+      config.universeDomain,
+    );
+    serviceUniverseDomains.set(
+      this,
+      configuredUniverseDomain ?? DEFAULT_UNIVERSE,
+    );
+
     const reqCfg = extend({}, config, {
       projectIdRequired: this.projectIdRequired,
       projectId: this.projectId,
@@ -124,6 +148,13 @@ export class Service {
       keyFile: options.keyFilename,
       email: options.email,
       token: options.token,
+      ...(options.apiKey !== undefined ? {apiKey: options.apiKey} : {}),
+      ...(options.useAuthWithCustomEndpoint !== undefined
+        ? {useAuthWithCustomEndpoint: options.useAuthWithCustomEndpoint}
+        : {}),
+      ...(configuredUniverseDomain !== undefined
+        ? {universeDomain: configuredUniverseDomain}
+        : {}),
     });
 
     this.makeAuthenticatedRequest =
@@ -141,6 +172,10 @@ export class Service {
         },
       });
     }
+  }
+
+  get universeDomain(): string {
+    return serviceUniverseDomains.get(this) ?? DEFAULT_UNIVERSE;
   }
 
   /**
@@ -168,7 +203,7 @@ export class Service {
     if (!callback) {
       return this.getProjectIdAsync();
     }
-    this.getProjectIdAsync().then(p => callback(null, p), callback);
+    void this.getProjectIdAsync().then(p => callback(null, p), callback);
   }
 
   protected async getProjectIdAsync(): Promise<string> {
@@ -188,7 +223,7 @@ export class Service {
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    * @param {function} callback - The callback function passed to `request`.
    */
-  private request_(reqOpts: StreamRequestOptions): r.Request;
+  private request_(reqOpts: StreamRequestOptions): Request;
   private request_(
     reqOpts: DecorateRequestOptions,
     callback: BodyResponseCallback,
@@ -196,7 +231,7 @@ export class Service {
   private request_(
     reqOpts: DecorateRequestOptions | StreamRequestOptions,
     callback?: BodyResponseCallback,
-  ): void | r.Request {
+  ): void | Request {
     reqOpts = extend(true, {}, reqOpts, {timeout: this.timeout});
     const isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
     const uriComponents = [this.baseUrl];
@@ -255,7 +290,7 @@ export class Service {
     });
 
     if (reqOpts.shouldReturnStream) {
-      return this.makeAuthenticatedRequest(reqOpts) as {} as r.Request;
+      return this.makeAuthenticatedRequest(reqOpts) as {} as Request;
     } else {
       this.makeAuthenticatedRequest(reqOpts, callback);
     }
@@ -281,7 +316,7 @@ export class Service {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {string} reqOpts.uri - A URI relative to the baseUrl.
    */
-  requestStream(reqOpts: DecorateRequestOptions): r.Request {
+  requestStream(reqOpts: DecorateRequestOptions): Request {
     const opts = extend(true, reqOpts, {shouldReturnStream: true});
     return (Service.prototype.request_ as Function).call(this, opts);
   }

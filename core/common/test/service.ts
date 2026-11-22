@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it, before, beforeEach, after} from 'mocha';
+import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as extend from 'extend';
 import {proxyquire} from 'google-test-utils';
 import {Request} from 'teeny-request';
@@ -752,6 +752,65 @@ describe('Service', () => {
 
       const stream = await service.requestStream(fakeOpts);
       assert.strictEqual(stream, fakeStream);
+    });
+  });
+
+  describe('universeDomain', () => {
+    const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+
+    afterEach(() => {
+      if (savedEnv !== undefined) {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+      } else {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      }
+    });
+
+    it('resolves default, GOOGLE_CLOUD_UNIVERSE_DOMAIN, and explicit option priority', () => {
+      delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      assert.strictEqual(
+        new Service(CONFIG, OPTIONS).universeDomain,
+        'googleapis.com',
+      );
+
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'my-universe.example.com';
+      let capturedUniverse: string | undefined;
+      makeAuthenticatedRequestFactoryOverride = cfg => {
+        capturedUniverse = cfg.universeDomain;
+        return {} as MakeAuthenticatedRequest;
+      };
+      const envSvc = new Service(CONFIG, OPTIONS);
+      assert.strictEqual(envSvc.universeDomain, 'my-universe.example.com');
+      assert.strictEqual(capturedUniverse, 'my-universe.example.com');
+
+      const codeSvc = new Service(CONFIG, {
+        ...OPTIONS,
+        universeDomain: 'code.universe.example.com',
+      });
+      assert.strictEqual(codeSvc.universeDomain, 'code.universe.example.com');
+    });
+
+    it('throws on conflicting universe_domain and universeDomain or empty string', () => {
+      assert.throws(
+        () =>
+          new Service(CONFIG, {
+            ...OPTIONS,
+            universeDomain: 'a.example.com',
+            universe_domain: 'b.example.com',
+          }),
+        /Please set either universe_domain or universeDomain, but not both/,
+      );
+      for (const universeDomain of ['', '   ']) {
+        assert.throws(
+          () => new Service(CONFIG, {...OPTIONS, universeDomain}),
+          /cannot be an empty string/,
+        );
+      }
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '';
+      assert.throws(
+        () => new Service(CONFIG, OPTIONS),
+        /cannot be an empty string/,
+      );
     });
   });
 });
