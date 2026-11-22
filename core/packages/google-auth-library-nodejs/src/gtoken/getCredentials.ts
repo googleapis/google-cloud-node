@@ -33,6 +33,8 @@ const readFile = fs.readFile
 interface Credentials {
   privateKey: string;
   clientEmail?: string;
+  privateKeyId?: string;
+  universeDomain?: string;
 }
 
 enum ExtensionFiles {
@@ -82,7 +84,14 @@ class JsonCredentialsProvider implements ICredentialsProvider {
         'MISSING_CREDENTIALS',
       );
     }
-    return {privateKey, clientEmail};
+    const creds: Credentials = {privateKey, clientEmail};
+    if (body.private_key_id !== undefined) {
+      creds.privateKeyId = body.private_key_id;
+    }
+    if (body.universe_domain !== undefined) {
+      creds.universeDomain = body.universe_domain;
+    }
+    return creds;
   }
 }
 

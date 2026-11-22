@@ -156,6 +156,15 @@ export const DEFAULT_UNIVERSE = 'googleapis.com';
  */
 export const DEFAULT_EAGER_REFRESH_THRESHOLD_MILLIS = 5 * 60 * 1000;
 
+/** @internal */
+export function assertValidUniverseDomain(
+  universe: unknown,
+): asserts universe is string {
+  if (typeof universe !== 'string' || !universe.trim()) {
+    throw new RangeError('The universe domain cannot be an empty string.');
+  }
+}
+
 /**
  * Defines the root interface for all clients that generate credentials
  * for calling Google APIs. All clients should implement this interface.
@@ -254,7 +263,22 @@ export abstract class AuthClient
     this.projectId = options.get('project_id') ?? null;
     this.quotaProjectId = options.get('quota_project_id');
     this.credentials = options.get('credentials') ?? {};
-    this.universeDomain = options.get('universe_domain') ?? DEFAULT_UNIVERSE;
+    if (
+      opts &&
+      !(opts instanceof AuthClient) &&
+      opts.universe_domain !== undefined &&
+      opts.universeDomain !== undefined &&
+      opts.universe_domain !== opts.universeDomain
+    ) {
+      throw new RangeError(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
+    }
+    const universe = options.get('universe_domain');
+    if (universe !== undefined) {
+      assertValidUniverseDomain(universe);
+    }
+    this.universeDomain = universe ?? DEFAULT_UNIVERSE;
 
     // Shared client options
     this.transporter = opts.transporter ?? new Gaxios(opts.transporterOptions);
@@ -273,6 +297,17 @@ export abstract class AuthClient
     }
 
     this.forceRefreshOnFailure = opts.forceRefreshOnFailure ?? false;
+  }
+
+  /** @internal */
+  get hasUnresolvedUniverseDomain(): boolean {
+    return false;
+  }
+
+  /** @internal */
+  async resolveUniverseDomain(): Promise<string> {
+    assertValidUniverseDomain(this.universeDomain);
+    return this.universeDomain;
   }
 
   /**

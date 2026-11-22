@@ -443,11 +443,16 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
     let universeDomain = originalOrCamelOptions(this.clientOptions).get(
       'universe_domain',
     );
-    try {
-      universeDomain ??= (await this.getClient()).universeDomain;
-    } catch {
-      // client or ADC is not available
-      universeDomain ??= DEFAULT_UNIVERSE;
+    if (universeDomain === undefined || universeDomain === null) {
+      try {
+        const client = await this.getClient();
+        universeDomain = await (client.resolveUniverseDomain?.() ??
+          client.universeDomain);
+      } catch (e) {
+        if (e instanceof RangeError) throw e;
+        // client or ADC is not available
+        universeDomain = DEFAULT_UNIVERSE;
+      }
     }
 
     return universeDomain;

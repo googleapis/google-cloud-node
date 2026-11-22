@@ -1272,5 +1272,164 @@ describe('jwt', () => {
       scope.done();
       assert.strictEqual(headers.get('authorization'), want);
     });
+
+    it('supports getAccessToken(), authorize(), and fetchIdToken() in non-default universeDomain', async () => {
+      const customUniverse = 'my-universe.example.com';
+      const cloudScope = 'https://www.googleapis.com/auth/cloud-platform';
+      const jwt = new JWT({
+        email: 'foo@serviceaccount.com',
+        key: PEM_CONTENTS,
+        scopes: [cloudScope],
+        universeDomain: customUniverse,
+      });
+      nock.disableNetConnect();
+      try {
+        const accessRes = await jwt.getAccessToken();
+        assert.strictEqual(accessRes.token!.split('.').length, 3);
+        const authorizedCreds = await jwt.authorize();
+        assert.strictEqual(authorizedCreds.access_token!.split('.').length, 3);
+
+        for (const [email, expected] of [
+          ['foo@serviceaccount.com', 'custom-id-token'],
+          ['svc+tag/1?x=y#frag@serviceaccount.com', 'encoded-id-token'],
+        ] as const) {
+          const idJwt =
+            email === 'foo@serviceaccount.com'
+              ? jwt
+              : new JWT({
+                  email,
+                  key: PEM_CONTENTS,
+                  universeDomain: customUniverse,
+                });
+          const iamScope = nock(`https://iamcredentials.${customUniverse}`)
+            .post(
+              `/v1/projects/-/serviceAccounts/${encodeURIComponent(email)}:generateIdToken`,
+              {
+                audience: 'https://my-service.example.com',
+                includeEmail: true,
+                useEmailAzp: true,
+              },
+            )
+            .reply(200, {token: expected});
+          assert.strictEqual(
+            await idJwt.fetchIdToken('https://my-service.example.com'),
+            expected,
+          );
+          iamScope.done();
+        }
+
+        assert.throws(
+          () =>
+            jwt.fromJSON({
+              client_email: 'foo@serviceaccount.com',
+              private_key: PEM_CONTENTS,
+              universe_domain: '',
+            }),
+          RangeError,
+        );
+        assert.throws(() => new JWT({universeDomain: ''}), RangeError);
+        assert.throws(
+          () =>
+            new JWT({
+              universeDomain: 'a.example.com',
+              universe_domain: 'b.example.com',
+            }),
+          RangeError,
+        );
+
+        const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'jwt-universe-'));
+        const customKeyFile = path.join(dir, 'sa.json');
+        try {
+          const kfEmail = 'keyfile-sa@demo-project.iam.gserviceaccount.com';
+          fs.writeFileSync(
+            customKeyFile,
+            JSON.stringify({
+              type: 'service_account',
+              client_email: kfEmail,
+              private_key: PEM_CONTENTS,
+              private_key_id: 'kid-custom-1',
+              universe_domain: customUniverse,
+            }),
+          );
+          const oauthTokenScope = nock('https://oauth2.googleapis.com')
+            .post('/token')
+            .reply(500, 'unexpected token request');
+
+          const keyFileJwt = new JWT({
+            keyFile: customKeyFile,
+            scopes: [cloudScope],
+          });
+          const kfAccess = await keyFileJwt.getAccessToken();
+          assert.strictEqual(keyFileJwt.universeDomain, customUniverse);
+          assert.strictEqual(kfAccess.token!.split('.').length, 3);
+
+          const keyFileHeadersJwt = new JWT({keyFile: customKeyFile});
+          const kfHeaders = await keyFileHeadersJwt.getRequestHeaders(
+            `https://storage.${customUniverse}/`,
+          );
+          assert.strictEqual(keyFileHeadersJwt.universeDomain, customUniverse);
+          assert.ok(kfHeaders.get('authorization')?.startsWith('Bearer '));
+
+          const kfIamScope = nock(`https://iamcredentials.${customUniverse}`)
+            .post(
+              `/v1/projects/-/serviceAccounts/${encodeURIComponent(kfEmail)}:generateIdToken`,
+            )
+            .reply(200, {token: 'kf-id-token'});
+          const keyFileIdJwt = new JWT({
+            keyFile: customKeyFile,
+            quotaProjectId: 'qp-1',
+          });
+          assert.strictEqual(
+            await keyFileIdJwt.fetchIdToken('https://custom-aud.example.com'),
+            'kf-id-token',
+          );
+          kfIamScope.done();
+
+          const keyFileAuth = new GoogleAuth({
+            authClient: new JWT({keyFile: customKeyFile}),
+          });
+          assert.strictEqual(
+            await keyFileAuth.getUniverseDomain(),
+            customUniverse,
+          );
+
+          const reusableJwt = new JWT({
+            email: 'first-sa@demo-project.iam.gserviceaccount.com',
+            key: PEM_CONTENTS,
+            keyId: 'kid-first',
+            scopes: [cloudScope],
+            universeDomain: customUniverse,
+          });
+          const firstDecoded = jws.decode(
+            (await reusableJwt.getAccessToken()).token!,
+          );
+          assert.strictEqual(
+            firstDecoded?.payload.iss,
+            'first-sa@demo-project.iam.gserviceaccount.com',
+          );
+          assert.strictEqual(firstDecoded?.header.kid, 'kid-first');
+
+          reusableJwt.fromJSON({
+            client_email: 'second-sa@demo-project.iam.gserviceaccount.com',
+            private_key: PEM_CONTENTS,
+            private_key_id: 'kid-second',
+            universe_domain: customUniverse,
+          });
+          const secondDecoded = jws.decode(
+            (await reusableJwt.getAccessToken()).token!,
+          );
+          assert.strictEqual(
+            secondDecoded?.payload.iss,
+            'second-sa@demo-project.iam.gserviceaccount.com',
+          );
+          assert.strictEqual(secondDecoded?.header.kid, 'kid-second');
+          assert.strictEqual(oauthTokenScope.isDone(), false);
+        } finally {
+          fs.rmSync(dir, {recursive: true, force: true});
+        }
+      } finally {
+        nock.cleanAll();
+      }
+    });
   });
 });

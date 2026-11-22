@@ -13,25 +13,30 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as nock from 'nock';
 import * as sinon from 'sinon';
 
 import {GaxiosError, GaxiosPromise} from 'gaxios';
 import {Credentials} from '../src/auth/credentials';
+import {GoogleAuth} from '../src/auth/googleauth';
+import {JWT} from '../src/auth/jwtclient';
 import {StsSuccessfulResponse} from '../src/auth/stscredentials';
 import {
   DownscopedClient,
+  DownscopedClientOptions,
   CredentialAccessBoundary,
   MAX_ACCESS_BOUNDARY_RULES_COUNT,
 } from '../src/auth/downscopedclient';
-import {AuthClient} from '../src/auth/authclient';
+import {AuthClient, GetAccessTokenResponse} from '../src/auth/authclient';
 import {mockStsTokenExchange} from './externalclienthelper';
 import {
   OAuthErrorResponse,
   getErrorFromOAuthErrorResponse,
 } from '../src/auth/oauth2common';
-import {GetAccessTokenResponse} from '../src/auth/authclient';
 import {TestUtils} from './utils';
 nock.disableNetConnect();
 
@@ -1250,6 +1255,227 @@ describe('DownscopedClient', () => {
         },
       );
       scopes.forEach(scope => scope.done());
+    });
+  });
+
+  describe('universeDomain', () => {
+    const customUniverse = 'my-universe.example.com';
+    const pemKey = fs.readFileSync('./test/fixtures/private.pem', 'utf8');
+    const mockSts = (
+      universe = customUniverse,
+      access_token = stsSuccessfulResponse.access_token,
+    ) =>
+      nock(`https://sts.${universe}`)
+        .post('/v1/token')
+        .reply(200, {...stsSuccessfulResponse, access_token});
+
+    it('inherits universeDomain in both options and 2-arg constructors', async () => {
+      client.universeDomain = customUniverse;
+      const optScope = nock(`https://sts.${customUniverse}`)
+        .post('/v1/token', {
+          grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+          requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
+          subject_token: 'subject_token_0',
+          subject_token_type: 'urn:ietf:params:oauth:token-type:access_token',
+          options: JSON.stringify(testClientAccessBoundary),
+        })
+        .reply(200, stsSuccessfulResponse);
+      const optCab = new DownscopedClient({
+        authClient: client,
+        credentialAccessBoundary: testClientAccessBoundary,
+      });
+      assert.strictEqual(optCab.universeDomain, customUniverse);
+      assert.strictEqual(
+        (await optCab.getAccessToken()).token,
+        stsSuccessfulResponse.access_token,
+      );
+      optScope.done();
+
+      const twoArgScope = mockSts();
+      const twoArgCab = new DownscopedClient(client, testClientAccessBoundary);
+      assert.strictEqual(twoArgCab.universeDomain, customUniverse);
+      assert.strictEqual(
+        (await twoArgCab.getAccessToken()).token,
+        stsSuccessfulResponse.access_token,
+      );
+      twoArgScope.done();
+    });
+
+    it('validates explicit universeDomain/universe_domain options and source mismatches', async () => {
+      client.universeDomain = customUniverse;
+      for (const extra of [
+        {universeDomain: customUniverse},
+        {universe_domain: customUniverse},
+      ]) {
+        const cab = new DownscopedClient({
+          authClient: client,
+          credentialAccessBoundary: testClientAccessBoundary,
+          ...extra,
+        });
+        assert.strictEqual(cab.universeDomain, customUniverse);
+      }
+
+      const invalidCases: Array<[Partial<DownscopedClientOptions>, RegExp]> = [
+        [{universeDomain: 'googleapis.com'}, /does not match/],
+        [
+          {authClient: new TestAuthClient(), universeDomain: customUniverse},
+          /does not match/,
+        ],
+        [{universeDomain: ''}, /cannot be an empty string/],
+        [{universeDomain: '   '}, /cannot be an empty string/],
+        [
+          {universeDomain: 'a.example.com', universe_domain: 'b.example.com'},
+          /Please set either universe_domain or universeDomain, but not both/,
+        ],
+      ];
+      for (const [extra, expected] of invalidCases) {
+        assert.throws(
+          () =>
+            new DownscopedClient({
+              authClient: client,
+              credentialAccessBoundary: testClientAccessBoundary,
+              ...extra,
+            }),
+          expected,
+        );
+      }
+
+      const defaultSource = new TestAuthClient();
+      const getTokenSpy = sinon.spy(defaultSource, 'getAccessToken');
+      const cabClient = new DownscopedClient(
+        defaultSource,
+        testClientAccessBoundary,
+      );
+      defaultSource.universeDomain = customUniverse;
+      await assert.rejects(cabClient.getAccessToken(), /does not match/);
+      assert.strictEqual(getTokenSpy.called, false);
+    });
+
+    it('uses self-signed JWT subject token, lazy keyFile universe, and custom STS endpoint', async () => {
+      const customJwt = new JWT({
+        email: 'runner@demo-project.iam.gserviceaccount.com',
+        key: pemKey,
+        universeDomain: customUniverse,
+      });
+      const oauthScope = nock('https://oauth2.googleapis.com')
+        .post('/token')
+        .reply(500, 'unexpected token request');
+      let exchangedSubjectToken = '';
+      const customStsScope = nock(`https://sts.${customUniverse}`)
+        .post('/v1/token', (body: Record<string, string>) => {
+          exchangedSubjectToken = body.subject_token;
+          return true;
+        })
+        .reply(200, stsSuccessfulResponse);
+
+      const cabClient = new DownscopedClient(
+        customJwt,
+        testClientAccessBoundary,
+      );
+      const tokenRes = await cabClient.getAccessToken();
+      assert.strictEqual(tokenRes.token, stsSuccessfulResponse.access_token);
+      assert.strictEqual(exchangedSubjectToken.split('.').length, 3);
+      assert.strictEqual(oauthScope.isDone(), false);
+      nock.cleanAll();
+      customStsScope.done();
+
+      const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'downscoped-kf-'));
+      const keyFilePath = path.join(tmpDir, 'sa.json');
+      const makeKfJwt = () =>
+        new JWT({
+          keyFile: keyFilePath,
+          scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        });
+      try {
+        fs.writeFileSync(
+          keyFilePath,
+          JSON.stringify({
+            type: 'service_account',
+            client_email: 'runner@demo-project.iam.gserviceaccount.com',
+            private_key: pemKey,
+            universe_domain: customUniverse,
+          }),
+        );
+        const kfStsScope = mockSts();
+        const kfCab = new DownscopedClient(
+          makeKfJwt(),
+          testClientAccessBoundary,
+        );
+        assert.strictEqual(
+          (await kfCab.getAccessToken()).token,
+          stsSuccessfulResponse.access_token,
+        );
+        assert.strictEqual(kfCab.universeDomain, customUniverse);
+        kfStsScope.done();
+
+        const explicitStsScope = mockSts();
+        const explicitCab = new DownscopedClient({
+          authClient: makeKfJwt(),
+          credentialAccessBoundary: testClientAccessBoundary,
+          universeDomain: customUniverse,
+        });
+        assert.strictEqual(
+          (await explicitCab.getAccessToken()).token,
+          stsSuccessfulResponse.access_token,
+        );
+        explicitStsScope.done();
+
+        const mismatchJwt = makeKfJwt();
+        const mismatchSpy = sinon.spy(mismatchJwt, 'getAccessToken');
+        const mismatchCab = new DownscopedClient({
+          authClient: mismatchJwt,
+          credentialAccessBoundary: testClientAccessBoundary,
+          universeDomain: 'googleapis.com',
+        });
+        await assert.rejects(mismatchCab.getAccessToken(), /does not match/);
+        assert.strictEqual(mismatchSpy.called, false);
+
+        const googleAuth = new GoogleAuth({
+          authClient: new DownscopedClient(
+            makeKfJwt(),
+            testClientAccessBoundary,
+          ),
+        });
+        assert.strictEqual(
+          await googleAuth.getUniverseDomain(),
+          customUniverse,
+        );
+      } finally {
+        fs.rmSync(tmpDir, {recursive: true, force: true});
+      }
+    });
+
+    it('updates STS endpoint and refreshes cached token when universeDomain changes', async () => {
+      const cabClient = new DownscopedClient(client, testClientAccessBoundary);
+      const defaultScope = mockSts('googleapis.com', 'default-downscoped');
+      assert.strictEqual(
+        (await cabClient.getAccessToken()).token,
+        'default-downscoped',
+      );
+      defaultScope.done();
+
+      client.universeDomain = customUniverse;
+      cabClient.universeDomain = customUniverse;
+      const customScope = mockSts(customUniverse, 'custom-downscoped');
+      assert.strictEqual(
+        (await cabClient.getAccessToken()).token,
+        'custom-downscoped',
+      );
+      customScope.done();
+
+      const nextUniverse = 'second-universe.example.com';
+      client.universeDomain = nextUniverse;
+      cabClient.universeDomain = nextUniverse;
+      cabClient.setCredentials({
+        access_token: 'expired-injected-token',
+        expiry_date: Date.now() - 1000,
+      });
+      const afterInjectScope = mockSts(nextUniverse, 'refreshed-after-inject');
+      assert.strictEqual(
+        (await cabClient.getAccessToken()).token,
+        'refreshed-after-inject',
+      );
+      afterInjectScope.done();
     });
   });
 });

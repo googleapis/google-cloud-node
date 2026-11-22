@@ -25,7 +25,11 @@ import {
   OAuth2ClientOptions,
   RequestMetadataResponse,
 } from './oauth2client';
-import {DEFAULT_UNIVERSE} from './authclient';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  assertValidUniverseDomain,
+} from './authclient';
 
 export interface JWTOptions extends OAuth2ClientOptions {
   /**
@@ -77,6 +81,8 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
   useJWTAccessWithScope?: boolean;
   defaultServicePath?: string;
   private access?: JWTAccess;
+  #hasExplicitUniverse: boolean;
+  #resolvedKeyFile?: string;
 
   /**
    * JWT service account credentials.
@@ -87,6 +93,9 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
    */
   constructor(options: JWTOptions = {}) {
     super(options);
+    this.#hasExplicitUniverse =
+      !(options instanceof AuthClient) &&
+      (options.universeDomain ?? options.universe_domain) !== undefined;
     this.email = options.email;
     this.keyFile = options.keyFile;
     this.key = options.key;
@@ -99,6 +108,84 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     this.credentials = {refresh_token: 'jwt-placeholder', expiry_date: 1};
   }
 
+  /** @internal */
+  override get hasUnresolvedUniverseDomain(): boolean {
+    return Boolean(
+      !this.#hasExplicitUniverse &&
+      !this.apiKey &&
+      !this.key &&
+      this.keyFile &&
+      this.#resolvedKeyFile !== this.keyFile &&
+      this.keyFile.toLowerCase().endsWith('.json'),
+    );
+  }
+
+  /** @internal */
+  override async resolveUniverseDomain(): Promise<string> {
+    await this.#resolveKeyFileUniverse();
+    assertValidUniverseDomain(this.universeDomain);
+    return this.universeDomain;
+  }
+
+  #applyKeyFileUniverse(universeDomain?: string): void {
+    if (universeDomain !== undefined) {
+      assertValidUniverseDomain(universeDomain);
+      if (!this.#hasExplicitUniverse) {
+        this.universeDomain = universeDomain;
+      }
+    }
+  }
+
+  async #resolveKeyFileUniverse(): Promise<void> {
+    if (
+      !this.apiKey &&
+      !this.key &&
+      this.keyFile &&
+      this.#resolvedKeyFile !== this.keyFile &&
+      this.keyFile.toLowerCase().endsWith('.json')
+    ) {
+      const creds = await getCredentials(this.keyFile);
+      this.#resolvedKeyFile = this.keyFile;
+      this.#applyKeyFileUniverse(creds.universeDomain);
+      if (this.universeDomain !== DEFAULT_UNIVERSE) {
+        this.email ||= creds.clientEmail;
+        this.key ||= creds.privateKey;
+        this.keyId ||= creds.privateKeyId;
+      }
+    }
+  }
+
+  #assertSupportedUniverse(): void {
+    assertValidUniverseDomain(this.universeDomain);
+    if (this.subject && this.universeDomain !== DEFAULT_UNIVERSE) {
+      throw new RangeError(
+        `Service Account user is configured for the credential. Domain-wide delegation is not supported in universes other than ${DEFAULT_UNIVERSE}`,
+      );
+    }
+  }
+
+  async #getJwtAccess(): Promise<JWTAccess> {
+    if ((!this.key || !this.email) && this.keyFile) {
+      const creds = await this.getCredentials();
+      this.email ||= creds.client_email;
+      this.key ||= creds.private_key;
+    }
+    if (
+      !this.access ||
+      this.access.email !== this.email ||
+      this.access.key !== this.key ||
+      this.access.keyId !== this.keyId
+    ) {
+      this.access = new JWTAccess(
+        this.email,
+        this.key,
+        this.keyId,
+        this.eagerRefreshThresholdMillis,
+      );
+    }
+    return this.access;
+  }
+
   /**
    * Creates a copy of the credential with the specified scopes.
    * @param scopes List of requested scopes or a single scope.
@@ -106,6 +193,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
    */
   createScoped(scopes?: string | string[]) {
     const jwt = new JWT(this as {} as JWTOptions);
+    jwt.#hasExplicitUniverse = this.#hasExplicitUniverse;
     jwt.scopes = scopes;
 
     return jwt;
@@ -120,16 +208,20 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     url?: string | null,
   ): Promise<RequestMetadataResponse> {
     url = this.defaultServicePath ? `https://${this.defaultServicePath}/` : url;
-    const useSelfSignedJWT =
-      (!this.hasUserScopes() && url) ||
-      (this.useJWTAccessWithScope && this.hasAnyScopes()) ||
-      this.universeDomain !== DEFAULT_UNIVERSE;
-
-    if (this.subject && this.universeDomain !== DEFAULT_UNIVERSE) {
-      throw new RangeError(
-        `Service Account user is configured for the credential. Domain-wide delegation is not supported in universes other than ${DEFAULT_UNIVERSE}`,
-      );
+    const needsSelfSigned =
+      (!this.hasUserScopes() && Boolean(url)) ||
+      (this.useJWTAccessWithScope && this.hasAnyScopes());
+    if (
+      !this.credentials.access_token ||
+      this.isTokenExpiring() ||
+      needsSelfSigned ||
+      this.universeDomain !== DEFAULT_UNIVERSE
+    ) {
+      await this.#resolveKeyFileUniverse();
     }
+    this.#assertSupportedUniverse();
+    const useSelfSignedJWT =
+      needsSelfSigned || this.universeDomain !== DEFAULT_UNIVERSE;
 
     if (!this.apiKey && useSelfSignedJWT) {
       if (
@@ -151,14 +243,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
       } else {
         // no scopes have been set, but a uri has been provided. Use JWTAccess
         // credentials.
-        if (!this.access) {
-          this.access = new JWTAccess(
-            this.email,
-            this.key,
-            this.keyId,
-            this.eagerRefreshThresholdMillis,
-          );
-        }
+        const access = await this.#getJwtAccess();
 
         let scopes: string | string[] | undefined;
         if (this.hasUserScopes()) {
@@ -171,7 +256,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
           this.useJWTAccessWithScope ||
           this.universeDomain !== DEFAULT_UNIVERSE;
 
-        const headers = await this.access.getRequestHeaders(
+        const headers = await access.getRequestHeaders(
           url ?? undefined,
           this.additionalClaims,
           // Scopes take precedent over audience for signing,
@@ -196,6 +281,43 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
    * @param targetAudience the audience for the fetched ID token.
    */
   async fetchIdToken(targetAudience: string): Promise<string> {
+    await this.#resolveKeyFileUniverse();
+    this.#assertSupportedUniverse();
+    if (this.universeDomain !== DEFAULT_UNIVERSE) {
+      await this.#getJwtAccess();
+      if (!this.email || !this.key) {
+        throw new Error(
+          'Cannot fetch ID token without client_email and private_key.',
+        );
+      }
+      const iamAccess = new JWTAccess(
+        this.email,
+        this.key,
+        this.keyId,
+        this.eagerRefreshThresholdMillis,
+      );
+      const opts = {
+        ...JWT.RETRY_CONFIG,
+        url: `https://iamcredentials.${this.universeDomain}/v1/projects/-/serviceAccounts/${encodeURIComponent(this.email)}:generateIdToken`,
+        method: 'POST' as const,
+        headers: this.addSharedMetadataHeaders(
+          iamAccess.getRequestHeaders(
+            undefined,
+            undefined,
+            'https://www.googleapis.com/auth/iam',
+          ),
+        ),
+        data: {audience: targetAudience, includeEmail: true, useEmailAzp: true},
+        responseType: 'json' as const,
+      };
+      AuthClient.setMethodName(opts, 'fetchIdToken');
+      const res = await this.transporter.request<{token?: string}>(opts);
+      if (!res.data?.token) {
+        throw new Error('Unknown error: Failed to fetch ID token');
+      }
+      return res.data.token;
+    }
+
     // Create a new gToken for fetching an ID token
     const gtoken = new GoogleToken({
       iss: this.email,
@@ -245,7 +367,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     callback?: (err: Error | null, result?: Credentials) => void,
   ): Promise<Credentials> | void {
     if (callback) {
-      this.authorizeAsync().then(r => callback(null, r), callback);
+      void this.authorizeAsync().then(r => callback(null, r), callback);
     } else {
       return this.authorizeAsync();
     }
@@ -258,8 +380,10 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     }
     this.credentials = result.tokens;
     this.credentials.refresh_token = 'jwt-placeholder';
-    this.key = this.gtoken!.googleTokenOptions?.key;
-    this.email = this.gtoken!.googleTokenOptions?.iss;
+    if (this.gtoken) {
+      this.key = this.gtoken.googleTokenOptions?.key;
+      this.email = this.gtoken.googleTokenOptions?.iss;
+    }
     return result.tokens;
   }
 
@@ -269,6 +393,45 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
    * @private
    */
   protected async refreshTokenNoCache(): Promise<GetTokenResponse> {
+    await this.#resolveKeyFileUniverse();
+    this.#assertSupportedUniverse();
+    if (this.universeDomain !== DEFAULT_UNIVERSE) {
+      const targetAudience = (
+        this.additionalClaims as {target_audience?: string} | undefined
+      )?.target_audience;
+      let tokens: Credentials;
+      if (targetAudience) {
+        tokens = {
+          id_token: await this.fetchIdToken(targetAudience),
+          token_type: 'Bearer',
+          expiry_date: Date.now() + 3600 * 1000,
+        };
+      } else {
+        const access = await this.#getJwtAccess();
+        const url = this.defaultServicePath
+          ? `https://${this.defaultServicePath}/`
+          : undefined;
+        const scopes = this.hasUserScopes()
+          ? this.scopes
+          : !url
+            ? this.defaultScopes && this.defaultScopes.length > 0
+              ? this.defaultScopes
+              : 'https://www.googleapis.com/auth/cloud-platform'
+            : undefined;
+        const authHeader =
+          access
+            .getRequestHeaders(url, this.additionalClaims, scopes)
+            .get('authorization') ?? '';
+        tokens = {
+          access_token: authHeader.replace(/^Bearer\s+/i, ''),
+          token_type: 'Bearer',
+          expiry_date: Date.now() + 3600 * 1000,
+        };
+      }
+      this.emit('tokens', tokens);
+      return {res: null, tokens};
+    }
+
     const gtoken = this.createGToken();
     const token = await gtoken.getToken({
       forceRefresh: this.isTokenExpiring(),
@@ -331,7 +494,14 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     this.keyId = json.private_key_id;
     this.projectId = json.project_id;
     this.quotaProjectId = json.quota_project_id;
-    this.universeDomain = json.universe_domain || this.universeDomain;
+    if (json.universe_domain !== undefined) {
+      assertValidUniverseDomain(json.universe_domain);
+      this.universeDomain = json.universe_domain;
+      this.#hasExplicitUniverse = true;
+    }
+    this.access = undefined;
+    this.gtoken = undefined;
+    this.credentials = {refresh_token: 'jwt-placeholder', expiry_date: 1};
   }
 
   /**
@@ -353,7 +523,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     callback?: (err?: Error | null) => void,
   ): void | Promise<void> {
     if (callback) {
-      this.fromStreamAsync(inputStream).then(() => callback(), callback);
+      void this.fromStreamAsync(inputStream).then(() => callback(), callback);
     } else {
       return this.fromStreamAsync(inputStream);
     }
@@ -402,8 +572,10 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
     if (this.key) {
       return {private_key: this.key, client_email: this.email};
     } else if (this.keyFile) {
-      const gtoken = this.createGToken();
+      this.createGToken();
       const creds = await getCredentials(this.keyFile);
+      this.keyId ||= creds.privateKeyId;
+      this.#applyKeyFileUniverse(creds.universeDomain);
       return {private_key: creds.privateKey, client_email: creds.clientEmail};
     }
     throw new Error('A key or a keyFile must be provided to getCredentials.');

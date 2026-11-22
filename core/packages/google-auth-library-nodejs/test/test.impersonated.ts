@@ -15,10 +15,13 @@
  */
 
 import * as assert from 'assert';
+import * as fs from 'fs';
 import * as nock from 'nock';
+import * as os from 'os';
+import * as path from 'path';
 import {describe, it, afterEach} from 'mocha';
 import * as sinon from 'sinon';
-import {Impersonated, JWT, UserRefreshClient} from '../src';
+import {GoogleAuth, Impersonated, JWT, UserRefreshClient} from '../src';
 import {CredentialRequest} from '../src/auth/credentials';
 
 const PEM_PATH = './test/fixtures/private.pem';
@@ -122,11 +125,11 @@ describe('impersonated', () => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
 
+    const oauthTokenScope = nock('https://oauth2.googleapis.com')
+      .post('/token')
+      .reply(500, 'unexpected token request');
     const scopes = [
       nock(url).get('/').reply(200),
-      createGTokenMock({
-        access_token: 'abc123',
-      }),
       nock(`https://iamcredentials.${universeDomain}`)
         .post(
           '/v1/projects/-/serviceAccounts/target@project.iam.gserviceaccount.com:generateAccessToken',
@@ -163,6 +166,8 @@ describe('impersonated', () => {
 
     await impersonated.request({url});
     assert.strictEqual(impersonated.credentials.access_token, 'universe-token');
+    assert.strictEqual(oauthTokenScope.isDone(), false);
+    nock.cleanAll();
 
     scopes.forEach(s => s.done());
   });
@@ -606,6 +611,58 @@ describe('impersonated', () => {
       );
     } finally {
       warnSpy.restore();
+    }
+  });
+
+  it('should resolve universeDomain and iamcredentials endpoint from lazy JSON keyFile sourceClient', async () => {
+    const customUniverse = 'my-universe.example.com';
+    const target = 'target@project.iam.gserviceaccount.com';
+    const genPath = `/v1/projects/-/serviceAccounts/${target}:generateAccessToken`;
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'impersonated-kf-'));
+    const keyFilePath = path.join(tmpDir, 'sa.json');
+    try {
+      fs.writeFileSync(
+        keyFilePath,
+        JSON.stringify({
+          type: 'service_account',
+          client_email: 'source@project.iam.gserviceaccount.com',
+          private_key: fs.readFileSync(PEM_PATH, 'utf8'),
+          universe_domain: customUniverse,
+        }),
+      );
+      const impersonated = new Impersonated({
+        sourceClient: new JWT({
+          keyFile: keyFilePath,
+          scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        }),
+        targetPrincipal: target,
+        targetScopes: ['https://www.googleapis.com/auth/cloud-platform'],
+      });
+      const defaultIamScope = nock('https://iamcredentials.googleapis.com')
+        .post(genPath)
+        .reply(500, 'unexpected default endpoint request');
+      const customIamScope = nock(`https://iamcredentials.${customUniverse}`)
+        .post(genPath)
+        .reply(200, {
+          accessToken: 'impersonated-custom-token',
+          expireTime: new Date(Date.now() + 86400_000).toISOString(),
+        });
+      const tokenRes = await impersonated.getAccessToken();
+      assert.strictEqual(tokenRes.token, 'impersonated-custom-token');
+      assert.strictEqual(impersonated.universeDomain, customUniverse);
+      assert.strictEqual(defaultIamScope.isDone(), false);
+      customIamScope.done();
+
+      const authWrapped = new GoogleAuth({
+        authClient: new Impersonated({
+          sourceClient: new JWT({keyFile: keyFilePath}),
+          targetPrincipal: target,
+        }),
+      });
+      assert.strictEqual(await authWrapped.getUniverseDomain(), customUniverse);
+    } finally {
+      fs.rmSync(tmpDir, {recursive: true, force: true});
+      nock.cleanAll();
     }
   });
 });

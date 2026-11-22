@@ -19,7 +19,7 @@ import {
   OAuth2Client,
   OAuth2ClientOptions,
 } from './oauth2client';
-import {AuthClient} from './authclient';
+import {AuthClient, assertValidUniverseDomain} from './authclient';
 import {IdTokenProvider} from './idtokenclient';
 import {GaxiosError} from 'gaxios';
 import {SignBlobResponse} from './googleauth';
@@ -79,6 +79,8 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
   private delegates: string[];
   private lifetime: number;
   private endpoint: string;
+  #hasExplicitUniverse: boolean;
+  #hasExplicitEndpoint: boolean;
 
   /**
    * Impersonated service account credentials.
@@ -138,21 +140,54 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
     this.targetScopes = options.targetScopes ?? [];
     this.lifetime = options.lifetime ?? 3600;
 
-    const usingExplicitUniverseDomain =
-      !!originalOrCamelOptions(options).get('universe_domain');
+    this.#hasExplicitUniverse =
+      originalOrCamelOptions(options).get('universe_domain') !== undefined;
+    this.#hasExplicitEndpoint = options.endpoint !== undefined;
 
-    if (!usingExplicitUniverseDomain) {
+    if (!this.#hasExplicitUniverse) {
       // override the default universe with the source's universe
       this.universeDomain = this.sourceClient.universeDomain;
-    } else if (this.sourceClient.universeDomain !== this.universeDomain) {
+    } else if (
+      !this.sourceClient.hasUnresolvedUniverseDomain &&
+      this.sourceClient.universeDomain !== this.universeDomain
+    ) {
       // non-default universe and is not matching the source - this could be a credential leak
       throw new RangeError(
         `Universe domain ${this.sourceClient.universeDomain} in source credentials does not match ${this.universeDomain} universe domain set for impersonated credentials.`,
       );
     }
+    assertValidUniverseDomain(this.universeDomain);
 
     this.endpoint =
       options.endpoint ?? `https://iamcredentials.${this.universeDomain}`;
+  }
+
+  /** @internal */
+  override get hasUnresolvedUniverseDomain(): boolean {
+    return (
+      !this.#hasExplicitUniverse &&
+      Boolean(this.sourceClient.hasUnresolvedUniverseDomain)
+    );
+  }
+
+  /** @internal */
+  override async resolveUniverseDomain(): Promise<string> {
+    assertValidUniverseDomain(this.universeDomain);
+    const adoptSource = this.hasUnresolvedUniverseDomain;
+    const sourceUniverse = await (this.sourceClient.resolveUniverseDomain?.() ??
+      this.sourceClient.universeDomain);
+    assertValidUniverseDomain(sourceUniverse);
+    if (adoptSource) {
+      this.universeDomain = sourceUniverse;
+    } else if (sourceUniverse !== this.universeDomain) {
+      throw new RangeError(
+        `Universe domain ${sourceUniverse} in source credentials does not match ${this.universeDomain} universe domain set for impersonated credentials.`,
+      );
+    }
+    if (!this.#hasExplicitEndpoint) {
+      this.endpoint = `https://iamcredentials.${this.universeDomain}`;
+    }
+    return this.universeDomain;
   }
 
   /**
@@ -164,6 +199,7 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
    * @returns A {@link SignBlobResponse} denoting the keyID and signedBlob in base64 string
    */
   async sign(blobToSign: string): Promise<SignBlobResponse> {
+    await this.resolveUniverseDomain();
     await this.sourceClient.getAccessToken();
     const name = `projects/-/serviceAccounts/${this.targetPrincipal}`;
     const u = `${this.endpoint}/v1/${name}:signBlob`;
@@ -189,6 +225,7 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
    * Refreshes the access token.
    */
   protected async refreshToken(): Promise<GetTokenResponse> {
+    await this.resolveUniverseDomain();
     try {
       await this.sourceClient.getAccessToken();
       const name = 'projects/-/serviceAccounts/' + this.targetPrincipal;
@@ -245,6 +282,7 @@ export class Impersonated extends OAuth2Client implements IdTokenProvider {
     targetAudience: string,
     options?: FetchIdTokenOptions,
   ): Promise<string> {
+    await this.resolveUniverseDomain();
     await this.sourceClient.getAccessToken();
 
     const name = `projects/-/serviceAccounts/${this.targetPrincipal}`;

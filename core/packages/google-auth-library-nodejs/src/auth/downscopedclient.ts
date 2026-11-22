@@ -25,9 +25,12 @@ import {Credentials} from './credentials';
 import {
   AuthClient,
   AuthClientOptions,
+  DEFAULT_UNIVERSE,
   GetAccessTokenResponse,
   BodyResponseCallback,
+  assertValidUniverseDomain,
 } from './authclient';
+import {originalOrCamelOptions} from '../util';
 
 import * as sts from './stscredentials';
 
@@ -124,7 +127,10 @@ export class DownscopedClient extends AuthClient {
   private readonly authClient: AuthClient;
   private readonly credentialAccessBoundary: CredentialAccessBoundary;
   private cachedDownscopedAccessToken: CredentialsWithResponse | null;
-  private readonly stsCredential: sts.StsCredentials;
+  private stsCredential: sts.StsCredentials;
+  #stsUniverse: string;
+  #cachedTokenUniverse?: string;
+  #hasExplicitUniverse: boolean;
 
   /**
    * Instantiates a downscoped client object using the provided source
@@ -161,6 +167,20 @@ export class DownscopedClient extends AuthClient {
       this.credentialAccessBoundary = options.credentialAccessBoundary;
     }
 
+    this.#hasExplicitUniverse =
+      !(options instanceof AuthClient) &&
+      originalOrCamelOptions(options).get('universe_domain') !== undefined;
+    if (this.authClient && !this.#hasExplicitUniverse) {
+      this.universeDomain = this.authClient.universeDomain ?? DEFAULT_UNIVERSE;
+    }
+    if (!this.authClient?.hasUnresolvedUniverseDomain) {
+      this.#assertValidUniverseDomains();
+    } else {
+      assertValidUniverseDomain(
+        this.authClient.universeDomain ?? DEFAULT_UNIVERSE,
+      );
+    }
+
     // Check 1-10 Access Boundary Rules are defined within Credential Access
     // Boundary.
     if (
@@ -189,11 +209,46 @@ export class DownscopedClient extends AuthClient {
       }
     }
 
+    this.#stsUniverse = this.universeDomain;
     this.stsCredential = new sts.StsCredentials({
       tokenExchangeEndpoint: `https://sts.${this.universeDomain}/v1/token`,
     });
 
     this.cachedDownscopedAccessToken = null;
+  }
+
+  /** @internal */
+  override get hasUnresolvedUniverseDomain(): boolean {
+    return (
+      !this.#hasExplicitUniverse &&
+      Boolean(this.authClient?.hasUnresolvedUniverseDomain)
+    );
+  }
+
+  /** @internal */
+  override async resolveUniverseDomain(): Promise<string> {
+    if (this.authClient) {
+      const adoptSource = this.hasUnresolvedUniverseDomain;
+      const sourceUniverse = await (this.authClient.resolveUniverseDomain?.() ??
+        this.authClient.universeDomain);
+      if (adoptSource) {
+        this.universeDomain = sourceUniverse;
+      }
+    }
+    this.#assertValidUniverseDomains();
+    return this.universeDomain;
+  }
+
+  #assertValidUniverseDomains(): void {
+    assertValidUniverseDomain(this.universeDomain);
+    if (!this.authClient) return;
+    const sourceUniverse = this.authClient.universeDomain ?? DEFAULT_UNIVERSE;
+    assertValidUniverseDomain(sourceUniverse);
+    if (sourceUniverse !== this.universeDomain) {
+      throw new RangeError(
+        `Universe domain ${sourceUniverse} in source credentials does not match ${this.universeDomain} universe domain set for downscoped credentials.`,
+      );
+    }
   }
 
   /**
@@ -211,14 +266,18 @@ export class DownscopedClient extends AuthClient {
     }
     super.setCredentials(credentials);
     this.cachedDownscopedAccessToken = credentials;
+    this.#cachedTokenUniverse = this.universeDomain;
   }
 
   async getAccessToken(): Promise<DownscopedAccessTokenResponse> {
-    // If the cached access token is unavailable or expired, force refresh.
+    await this.resolveUniverseDomain();
+    // If the cached access token is unavailable, expired, or from a prior
+    // universe domain, force refresh.
     // The Downscoped access token will be returned in
     // DownscopedAccessTokenResponse format.
     if (
       !this.cachedDownscopedAccessToken ||
+      this.#cachedTokenUniverse !== this.universeDomain ||
       this.isExpired(this.cachedDownscopedAccessToken)
     ) {
       await this.refreshAccessTokenAsync();
@@ -263,7 +322,7 @@ export class DownscopedClient extends AuthClient {
     callback?: BodyResponseCallback<T>,
   ): GaxiosPromise<T> | void {
     if (callback) {
-      this.requestAsync<T>(opts).then(
+      void this.requestAsync<T>(opts).then(
         r => callback(null, r),
         e => {
           return callback(e, e.response);
@@ -327,8 +386,16 @@ export class DownscopedClient extends AuthClient {
    * @return A promise that resolves with the fresh downscoped access token.
    */
   protected async refreshAccessTokenAsync(): Promise<CredentialsWithResponse> {
+    await this.resolveUniverseDomain();
     // Retrieve GCP access token from source credential.
     const subjectToken = (await this.authClient.getAccessToken()).token;
+    this.#assertValidUniverseDomains();
+    if (this.#stsUniverse !== this.universeDomain) {
+      this.stsCredential = new sts.StsCredentials({
+        tokenExchangeEndpoint: `https://sts.${this.universeDomain}/v1/token`,
+      });
+      this.#stsUniverse = this.universeDomain;
+    }
 
     // Construct the STS credentials options.
     const stsCredentialsOptions: sts.StsCredentialsOptions = {
@@ -364,6 +431,7 @@ export class DownscopedClient extends AuthClient {
       expiry_date: expiryDate,
       res: stsResponse.res,
     };
+    this.#cachedTokenUniverse = this.universeDomain;
 
     // Save credentials.
     this.credentials = {};
