@@ -72,6 +72,59 @@ describe('CustomExporter', () => {
     const exporter = new CloudMonitoringMetricsExporter({auth}, PROJECT_ID);
     await assert.doesNotReject(exporter.forceFlush());
   });
+
+  it('should propagate universeDomain and GOOGLE_CLOUD_UNIVERSE_DOMAIN to MetricServiceClient', () => {
+    const getClient = (exp: CloudMonitoringMetricsExporter) =>
+      (
+        exp as unknown as {
+          _client: {universeDomain?: string; apiEndpoint?: string};
+        }
+      )._client;
+    const customClient = getClient(
+      new CloudMonitoringMetricsExporter(
+        {auth, universeDomain: 'my-universe.example.com'},
+        PROJECT_ID,
+      ),
+    );
+    assert.strictEqual(customClient.universeDomain, 'my-universe.example.com');
+    assert.strictEqual(
+      customClient.apiEndpoint,
+      'monitoring.my-universe.example.com',
+    );
+
+    const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    try {
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-universe.example.com';
+      const envClient = getClient(
+        new CloudMonitoringMetricsExporter({auth}, PROJECT_ID),
+      );
+      assert.strictEqual(envClient.universeDomain, 'env-universe.example.com');
+      assert.strictEqual(
+        envClient.apiEndpoint,
+        'monitoring.env-universe.example.com',
+      );
+
+      assert.throws(
+        () =>
+          new CloudMonitoringMetricsExporter(
+            {auth, universeDomain: ''},
+            PROJECT_ID,
+          ),
+        /The universe domain cannot be an empty string/,
+      );
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '';
+      assert.throws(
+        () => new CloudMonitoringMetricsExporter({auth}, PROJECT_ID),
+        /The universe domain cannot be an empty string/,
+      );
+    } finally {
+      if (savedEnv !== undefined) {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+      } else {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      }
+    }
+  });
 });
 
 // Verify that the export call will convert and send the requests out.

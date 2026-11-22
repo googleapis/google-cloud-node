@@ -21,7 +21,7 @@ import {PreciseDate} from '@google-cloud/precise-date';
 import {hasProjectIdToken, replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as path from 'path';
 import {common as p} from 'protobufjs';
 import * as streamEvents from 'stream-events';
@@ -264,22 +264,21 @@ export type TranslateEnumKeys<
  * @returns {string} The universe domain.
  */
 function getUniverseDomain(options: SpannerOptions): string {
-  const universeDomainEnvVar =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-      : undefined;
-  const universeDomain =
+  const configured =
     options?.universeDomain ??
     options?.universe_domain ??
-    universeDomainEnvVar ??
-    'googleapis.com';
+    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+  if (
+    configured !== undefined &&
+    (typeof configured !== 'string' || !configured.trim())
+  ) {
+    throw new Error('The universe domain cannot be an empty string.');
+  }
+  const universeDomain = configured ?? 'googleapis.com';
   // if the options.universe_domain/GOOGLE_CLOUD_UNIVERSE_DOMAIN env variable is set,
   // set its value to the Spanner `universeDomain` options
   // to match it with the universe from Auth Client
-  if (
-    !options?.universeDomain &&
-    (options?.universe_domain || process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN)
-  ) {
+  if (!options?.universeDomain && configured) {
     options.universeDomain = universeDomain;
   }
   return universeDomain;
@@ -458,8 +457,8 @@ class Spanner extends GrpcService {
     delete options.defaultTransactionOptions;
 
     if (
-      options?.universe_domain &&
-      options?.universeDomain &&
+      options?.universe_domain !== undefined &&
+      options?.universeDomain !== undefined &&
       options?.universe_domain !== options?.universeDomain
     ) {
       throw new Error(
@@ -493,6 +492,9 @@ class Spanner extends GrpcService {
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson: require('../../package.json'),
     } as {} as GrpcServiceConfig;
+    if (options.clientOptions) {
+      options.clientOptions = Object.assign({}, options.clientOptions);
+    }
     super(config, options);
 
     if (options.routeToLeaderEnabled === false) {
@@ -501,7 +503,24 @@ class Spanner extends GrpcService {
 
     this._isInSecureCredentials = options.sslCreds?._isSecure() === false;
     this.options = options;
-    this.auth = new GoogleAuth(this.options);
+    const authOpts = Object.assign({}, this.options) as SpannerOptions & {
+      auth?: GoogleAuth | AuthClient;
+    };
+    if (authOpts.clientOptions) {
+      authOpts.clientOptions = {...authOpts.clientOptions};
+    }
+    delete authOpts.universeDomain;
+    delete authOpts.universe_domain;
+    this.auth =
+      authOpts.auth instanceof GoogleAuth
+        ? authOpts.auth
+        : (authOpts.authClient as unknown) instanceof GoogleAuth
+          ? (authOpts.authClient as unknown as GoogleAuth)
+          : new GoogleAuth(
+              authOpts.auth && !authOpts.authClient
+                ? {...authOpts, authClient: authOpts.auth}
+                : authOpts,
+            );
     this.clients_ = new Map();
     this.instances_ = new Map();
     this.instanceConfigs_ = new Map();
@@ -1688,12 +1707,15 @@ class Spanner extends GrpcService {
     if (this._metricsEnabled) {
       const initializeMetrics = (projectId: string) => {
         this.projectId_ = projectId;
-        const factory = MetricsTracerFactory.getInstance(projectId);
+        const factory = MetricsTracerFactory.getInstance(
+          projectId,
+          this._universeDomain,
+        );
         if (factory && !factory.hasMetricReaders()) {
           context.with(ROOT_CONTEXT, () => {
             const periodicReader = new PeriodicExportingMetricReader({
               exporter: new CloudMonitoringMetricsExporter(
-                {auth: this.auth},
+                {auth: this.auth, universeDomain: this._universeDomain},
                 projectId,
               ),
               exportIntervalMillis: 60000,
@@ -2024,7 +2046,10 @@ class Spanner extends GrpcService {
       this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
+        MetricsTracerFactory?.getInstance(
+          this.projectId_,
+          this._universeDomain,
+        )?.createMetricsTracer(
           config.method,
           this._getResourceName(config),
           config.headers?.['x-goog-spanner-request-id'],

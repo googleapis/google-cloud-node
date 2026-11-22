@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
  * globally via the static `enabled` property, that is set from the SpannerClient.
  */
 export class MetricsTracerFactory {
-  private static _instance: MetricsTracerFactory | null = null;
+  private static _instances = new Map<string, MetricsTracerFactory>();
   private _meterProvider: MeterProvider | null = null;
   private _instrumentAttemptCounter!: Counter;
   private _instrumentAttemptLatency!: Histogram;
@@ -100,21 +100,21 @@ export class MetricsTracerFactory {
    * @param projectId Optional GCP project ID for the factory instantiation. Does nothing for subsequent calls.
    * @returns The singleton MetricsTracerFactory instance or null if disabled.
    */
-  public static getInstance(projectId?: string): MetricsTracerFactory | null {
+  public static getInstance(
+    projectId?: string,
+    universeDomain = 'googleapis.com',
+  ): MetricsTracerFactory | null {
     if (!MetricsTracerFactory.enabled) {
       return null;
     }
-
-    // Create a singleton instance, enabling/disabling metrics can only be done on the initial call
-    if (MetricsTracerFactory._instance === null) {
-      MetricsTracerFactory._instance = new MetricsTracerFactory(
-        projectId || '',
-      );
-    } else if (projectId && !MetricsTracerFactory._instance._projectId) {
-      MetricsTracerFactory._instance._projectId = projectId;
+    let instance = MetricsTracerFactory._instances.get(universeDomain);
+    if (!instance) {
+      instance = new MetricsTracerFactory(projectId || '');
+      MetricsTracerFactory._instances.set(universeDomain, instance);
+    } else if (projectId && !instance._projectId) {
+      instance._projectId = projectId;
     }
-
-    return MetricsTracerFactory._instance;
+    return instance;
   }
 
   /**
@@ -171,8 +171,10 @@ export class MetricsTracerFactory {
    * Resets the singleton instance of the MetricsTracerFactory.
    */
   public static async resetInstance() {
-    await MetricsTracerFactory._instance?.resetMeterProvider();
-    MetricsTracerFactory._instance = null;
+    for (const instance of MetricsTracerFactory._instances.values()) {
+      await instance.resetMeterProvider();
+    }
+    MetricsTracerFactory._instances.clear();
   }
 
   /**

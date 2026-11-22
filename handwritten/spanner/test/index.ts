@@ -587,11 +587,102 @@ describe('Spanner', () => {
       try {
         const spanner = new Spanner(fakeOption);
         // this line should never reach client must throw an error.
+        assert.ifError(spanner);
         throw new Error('should never reach this line');
       } catch (err) {
         assert.deepStrictEqual(err, fakeError);
       }
       delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    });
+
+    it('should reject empty string universeDomain and propagate universeDomain to built-in metrics exporter', async () => {
+      for (const opts of [
+        {universeDomain: ''},
+        {universe_domain: ''},
+        {universeDomain: '   '},
+      ]) {
+        assert.throws(
+          () => new Spanner(opts),
+          /The universe domain cannot be an empty string/,
+        );
+      }
+
+      const capturedExporterOpts: Array<{
+        auth?: unknown;
+        universeDomain?: string;
+      }> = [];
+      class FakeExporter {
+        constructor(opts: {auth?: unknown; universeDomain?: string}) {
+          capturedExporterOpts.push(opts);
+        }
+        export(_metrics: unknown, cb: (res: {code: number}) => void) {
+          cb({code: 0});
+        }
+        async shutdown() {}
+        async forceFlush() {}
+      }
+      const loadSpanner = (GoogleAuthStub: unknown) =>
+        proxyquire('../src', {
+          './common-grpc/service': {GrpcService: FakeGrpcService},
+          '@google-cloud/promisify': fakePfy,
+          'google-auth-library': {GoogleAuth: GoogleAuthStub},
+          'grpc-gcp': fakeGrpcGcp,
+          './codec.js': {codec: fakeCodec},
+          './instance.js': {Instance: FakeInstance},
+          './instance-config.js': {InstanceConfig: FakeInstanceConfig},
+          './v1': fakeV1,
+          './metrics/spanner-metrics-exporter': {
+            CloudMonitoringMetricsExporter: FakeExporter,
+          },
+        }).Spanner;
+
+      await enableMetrics(sandbox);
+      try {
+        const SpannerWithMetrics = loadSpanner(fakeGoogleAuth);
+        new SpannerWithMetrics({projectId: 'metrics-default-proj'});
+        const callerClientOptions: Record<string, unknown> = {};
+        const customSpanner = new SpannerWithMetrics({
+          projectId: 'metrics-custom-proj',
+          universeDomain: 'my-universe.example.com',
+          clientOptions: callerClientOptions,
+        });
+        assert.notStrictEqual(
+          customSpanner.options.clientOptions,
+          callerClientOptions,
+        );
+        assert.notStrictEqual(
+          getFake(customSpanner.auth).calledWith_[0].clientOptions,
+          customSpanner.options.clientOptions,
+        );
+        assert.strictEqual(
+          getFake(customSpanner.auth).calledWith_[0].universeDomain,
+          undefined,
+        );
+        assert.strictEqual(
+          capturedExporterOpts[0]?.universeDomain,
+          'googleapis.com',
+        );
+        assert.strictEqual(
+          capturedExporterOpts[1]?.universeDomain,
+          'my-universe.example.com',
+        );
+
+        class CustomGoogleAuth {}
+        const providedAuth = new CustomGoogleAuth();
+        const spannerWithAuth = new (loadSpanner(CustomGoogleAuth))({
+          projectId: 'metrics-auth-proj',
+          universeDomain: 'auth-universe.example.com',
+          auth: providedAuth,
+        });
+        assert.strictEqual(spannerWithAuth.auth, providedAuth);
+        assert.strictEqual(capturedExporterOpts[2]?.auth, providedAuth);
+        assert.strictEqual(
+          capturedExporterOpts[2]?.universeDomain,
+          'auth-universe.example.com',
+        );
+      } finally {
+        await disableMetrics(sandbox);
+      }
     });
   });
 

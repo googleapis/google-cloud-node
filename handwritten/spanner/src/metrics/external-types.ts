@@ -19,6 +19,8 @@ export interface ExporterOptions {
    * Optional authentication options for Google services.
    */
   auth: GoogleAuth;
+  /** Optional universe domain for Google Cloud Monitoring API requests. */
+  universeDomain?: string;
 }
 
 export enum MetricKind {

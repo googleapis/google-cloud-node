@@ -29,12 +29,25 @@ export const MAX_BATCH_EXPORT_SIZE = 200;
  */
 export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _projectId: string;
+  private _universeDomain?: string;
   private _lastExported: Date = new Date(0);
   private readonly _client: MetricServiceClient;
   private _metricsExportFailureLogged = false;
 
-  constructor({auth}: ExporterOptions, projectId: string) {
-    this._client = new MetricServiceClient({auth: auth as any});
+  constructor({auth, universeDomain}: ExporterOptions, projectId: string) {
+    const resolved =
+      universeDomain ?? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+    if (
+      resolved !== undefined &&
+      (typeof resolved !== 'string' || !resolved.trim())
+    ) {
+      throw new Error('The universe domain cannot be an empty string.');
+    }
+    this._universeDomain = resolved;
+    this._client = new MetricServiceClient({
+      auth,
+      ...(resolved ? {universeDomain: resolved} : {}),
+    } as unknown as ConstructorParameters<typeof MetricServiceClient>[0]);
 
     this._projectId = projectId;
   }
@@ -88,6 +101,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     const timeSeriesList = transformResourceMetricToTimeSeriesArray(
       resourceMetrics,
       this._projectId,
+      this._universeDomain,
     );
 
     let failure: {sendFailed: false} | {sendFailed: true; error: Error} = {
