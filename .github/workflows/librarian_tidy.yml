@@ -33,7 +33,7 @@ jobs:
               - '.github/workflows/librarian_tidy.yml'
       # Version of librarian is pulled from librarian.yaml,
       # action is pinned to commit SHA to satisfy blanket security policy.
-      - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
+      - uses: googleapis/librarian@c54791693e09a76a7403f3dc81c7c97782908b3d # v0.53.0
         if: steps.changes.outputs.librarian == 'true'
 
       - name: Run librarian tidy

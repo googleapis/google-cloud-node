@@ -48,7 +48,7 @@ jobs:
           git_dir: '.'
       - name: Create issue on failure
         if: ${{ failure() }}
-        uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@c54791693e09a76a7403f3dc81c7c97782908b3d # v0.53.0
         with:
           title: "Update API list failed"
           body: "The weekly scheduled task to update the API list failed."
