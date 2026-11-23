@@ -21,17 +21,36 @@ import * as path from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 function resolveVersionFixtureDir(): {pkgRoot: string; versionDir: string} {
-  if (fs.existsSync(path.join(__dirname, 'get-version-script.js'))) {
-    return {
-      pkgRoot: path.resolve(__dirname, '../../..'),
-      versionDir: __dirname,
-    };
+  let candidateDir = __dirname;
+  let prevDir = '';
+  while (candidateDir !== prevDir) {
+    const pkgJsonPath = path.join(candidateDir, 'package.json');
+    if (fs.existsSync(pkgJsonPath)) {
+      try {
+        const pkg = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8')) as {
+          name?: unknown;
+        };
+        if (pkg?.name === '@google-cloud/bigtable') {
+          return {
+            pkgRoot: candidateDir,
+            versionDir: path.join(
+              candidateDir,
+              'test',
+              'metrics-collector',
+              'version',
+            ),
+          };
+        }
+      } catch {
+        // Ignore unreadable or malformed package.json files while walking up.
+      }
+    }
+    prevDir = candidateDir;
+    candidateDir = path.dirname(candidateDir);
   }
-  const pkgRoot = path.resolve(__dirname, '../../../..');
-  return {
-    pkgRoot,
-    versionDir: path.join(pkgRoot, 'test', 'metrics-collector', 'version'),
-  };
+  throw new Error(
+    `Could not resolve @google-cloud/bigtable package root from ${__dirname}`,
+  );
 }
 
 describe('Bigtable/CSMVersion', () => {
