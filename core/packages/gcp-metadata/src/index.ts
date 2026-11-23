@@ -343,7 +343,7 @@ interface ErrorWithDetails {
   readonly error?: unknown;
 }
 
-const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
+export const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
   'EHOSTDOWN',
   'EHOSTUNREACH',
   'ENETUNREACH',
