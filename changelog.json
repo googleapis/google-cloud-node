@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "8.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "dbe9848a-423a-47d9-a088-81096144cc84",
+      "createTime": "2026-11-23T17:21:02.234Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "dd43d94a4cde1de6f7573434a377e358fee3b931",
           "message": "Remove session pool and only use multiplexed sessions",
@@ -105300,5 +105327,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-13T12:51:57.881Z"
+  "updateTime": "2026-11-23T17:21:02.234Z"
 }
