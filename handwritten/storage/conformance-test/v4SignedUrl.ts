@@ -107,6 +107,9 @@ const SERVICE_ACCOUNT = path.join(
   getDirName(),
   '../../../conformance-test/fixtures/signing-service-account.json',
 );
+const SERVICE_ACCOUNT_CREDENTIALS = JSON.parse(
+  fs.readFileSync(SERVICE_ACCOUNT, 'utf-8'),
+);
 
 let storage: Storage;
 
@@ -131,11 +134,21 @@ describe('v4 conformance test', () => {
           process.env.STORAGE_EMULATOR_HOST = testCase.emulatorHostname;
         }
 
-        storage = new Storage({
-          keyFilename: SERVICE_ACCOUNT,
-          apiEndpoint: testCase.clientEndpoint,
-          universeDomain: testCase.universeDomain,
-        });
+        storage = new Storage(
+          testCase.universeDomain
+            ? {
+                credentials: {
+                  ...SERVICE_ACCOUNT_CREDENTIALS,
+                  universe_domain: testCase.universeDomain,
+                },
+                apiEndpoint: testCase.clientEndpoint,
+                universeDomain: testCase.universeDomain,
+              }
+            : {
+                keyFilename: SERVICE_ACCOUNT,
+                apiEndpoint: testCase.clientEndpoint,
+              },
+        );
 
         const bucket = storage.bucket(testCase.bucket);
         const expires = NOW.valueOf() + testCase.expiration * 1000;
@@ -207,6 +220,30 @@ describe('v4 conformance test', () => {
           querystring.parse(expected.search),
         );
       });
+    });
+
+    it('rejects when credentials universe_domain does not match configured universeDomain', async () => {
+      const NOW = new Date('2019-02-01T09:00:00Z');
+      fakeTimer = sinon.useFakeTimers(NOW);
+
+      storage = new Storage({
+        keyFilename: SERVICE_ACCOUNT,
+        universeDomain: 'domain.com',
+      });
+
+      const file = storage.bucket('test-bucket').file('test-object');
+      await assert.rejects(
+        file.getSignedUrl({
+          action: 'read',
+          version: 'v4',
+          expires: NOW.valueOf() + 10000,
+        }),
+        {
+          name: 'Error',
+          message:
+            'The configured universe domain (domain.com) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+        },
+      );
     });
   });
 

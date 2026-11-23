@@ -350,7 +350,80 @@ describe('Storage', () => {
 
       const storage = new Storage({universeDomain});
 
+      assert.strictEqual(storage.universeDomain, universeDomain);
       assert.equal(storage.apiEndpoint, `https://storage.${universeDomain}`);
+    });
+
+    describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+      const originalEnvUniverse = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+
+      afterEach(() => {
+        if (originalEnvUniverse === undefined) {
+          delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+        } else {
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = originalEnvUniverse;
+        }
+      });
+
+      it('should fall back to GOOGLE_CLOUD_UNIVERSE_DOMAIN when universeDomain is not provided', () => {
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] =
+          'env-universe.example.com';
+
+        const storage = new Storage({projectId: PROJECT_ID});
+
+        assert.strictEqual(storage.universeDomain, 'env-universe.example.com');
+        assert.strictEqual(
+          storage.apiEndpoint,
+          'https://storage.env-universe.example.com',
+        );
+      });
+
+      it('should prefer explicit options.universeDomain over GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] =
+          'env-universe.example.com';
+
+        const storage = new Storage({
+          projectId: PROJECT_ID,
+          universeDomain: 'explicit-universe.example.com',
+        });
+
+        assert.strictEqual(
+          storage.universeDomain,
+          'explicit-universe.example.com',
+        );
+        assert.strictEqual(
+          storage.apiEndpoint,
+          'https://storage.explicit-universe.example.com',
+        );
+      });
+
+      it('should ignore empty or whitespace-only universeDomain and GOOGLE_CLOUD_UNIVERSE_DOMAIN values and trim valid values', () => {
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = '   ';
+        const defaultStorage = new Storage({
+          projectId: PROJECT_ID,
+          universeDomain: '  ',
+        });
+        assert.strictEqual(defaultStorage.universeDomain, 'googleapis.com');
+        assert.strictEqual(
+          defaultStorage.apiEndpoint,
+          'https://storage.googleapis.com',
+        );
+
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] =
+          '  trimmed-env.example.com  ';
+        const envStorage = new Storage({
+          projectId: PROJECT_ID,
+          universeDomain: '',
+        });
+        assert.strictEqual(
+          envStorage.universeDomain,
+          'trimmed-env.example.com',
+        );
+        assert.strictEqual(
+          envStorage.apiEndpoint,
+          'https://storage.trimmed-env.example.com',
+        );
+      });
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {
