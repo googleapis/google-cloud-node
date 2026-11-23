@@ -3183,6 +3183,26 @@ describe('File', () => {
       });
     });
 
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV2(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+      );
+    });
+
     it('should add key equality condition', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.generateSignedPostPolicyV2(CONFIG, (err, signedPolicy: any) => {
@@ -3621,6 +3641,26 @@ describe('File', () => {
       await assert.rejects(
         otherFile.generateSignedPostPolicyV4(CONFIG),
         MISMATCH,
+      );
+    });
+
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV4(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
       );
     });
 
