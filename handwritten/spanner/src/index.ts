@@ -1728,7 +1728,7 @@ class Spanner extends GrpcService {
       const exporterOptions: ExporterOptions = {
         auth: this.auth,
         universeDomain,
-        ...(parsedMonitoringEndpoint ?? {}),
+        ...(monitoringHost ? {apiEndpoint: monitoringHost} : {}),
       };
 
       const initializeMetrics = (projectId: string) => {

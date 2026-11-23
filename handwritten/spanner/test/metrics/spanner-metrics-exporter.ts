@@ -150,8 +150,8 @@ describe('CustomExporter', () => {
     }
   });
 
-  // T4: Endpoint and port parsing handles host, host:port, IPv6 brackets, and rejects malformed inputs.
-  it('should parse valid monitoring endpoints and reject malformed or conflicting endpoint options', () => {
+  // T4: Endpoint parsing handles host, host:port, IPv6 brackets, and rejects malformed inputs.
+  it('should parse valid monitoring endpoints and reject malformed endpoint options', () => {
     const hostOnly = new CloudMonitoringMetricsExporter(
       {auth, apiEndpoint: 'monitoring.custom-universe.example'},
       PROJECT_ID,
@@ -172,19 +172,6 @@ describe('CustomExporter', () => {
     );
     assert.strictEqual((hostWithPort as any)._client._opts.port, 8443);
 
-    const endpointWithExplicitPort = new CloudMonitoringMetricsExporter(
-      {auth, apiEndpoint: 'monitoring.custom-universe.example', port: 9443},
-      PROJECT_ID,
-    );
-    assert.strictEqual(
-      (endpointWithExplicitPort as any)._client._opts.servicePath,
-      'monitoring.custom-universe.example',
-    );
-    assert.strictEqual(
-      (endpointWithExplicitPort as any)._client._opts.port,
-      9443,
-    );
-
     const ipv6NoPort = new CloudMonitoringMetricsExporter(
       {auth, apiEndpoint: '[::1]'},
       PROJECT_ID,
@@ -201,26 +188,6 @@ describe('CustomExporter', () => {
       '[::1]',
     );
     assert.strictEqual((ipv6WithPort as any)._client._opts.port, 8443);
-
-    const matchingPorts = new CloudMonitoringMetricsExporter(
-      {
-        auth,
-        apiEndpoint: 'monitoring.custom-universe.example:8443',
-        port: 8443,
-      },
-      PROJECT_ID,
-    );
-    assert.strictEqual(
-      (matchingPorts as any)._client._opts.servicePath,
-      'monitoring.custom-universe.example',
-    );
-    assert.strictEqual((matchingPorts as any)._client._opts.port, 8443);
-
-    const portOnly = new CloudMonitoringMetricsExporter(
-      {auth, port: 8443},
-      PROJECT_ID,
-    );
-    assert.strictEqual((portOnly as any)._client._opts.port, 8443);
 
     const invalidEndpoints = [
       '',
@@ -254,28 +221,6 @@ describe('CustomExporter', () => {
         `Expected exporter with apiEndpoint=${JSON.stringify(bad)} to throw`,
       );
     }
-
-    for (const badPort of [0, -1, 70000, 1.5, Number.NaN]) {
-      assert.throws(
-        () =>
-          new CloudMonitoringMetricsExporter({auth, port: badPort}, PROJECT_ID),
-        Error,
-        `Expected exporter with port=${badPort} to throw`,
-      );
-    }
-
-    assert.throws(
-      () =>
-        new CloudMonitoringMetricsExporter(
-          {
-            auth,
-            apiEndpoint: 'monitoring.custom-universe.example:8443',
-            port: 9443,
-          },
-          PROJECT_ID,
-        ),
-      Error,
-    );
   });
 });
 

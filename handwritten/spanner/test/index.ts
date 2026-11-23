@@ -693,7 +693,6 @@ describe('Spanner', () => {
         recordedExporterCalls[0].options.apiEndpoint,
         undefined,
       );
-      assert.strictEqual(recordedExporterCalls[0].options.port, undefined);
 
       await MetricsTracerFactory.resetInstance();
       recordedExporterCalls = [];
@@ -775,9 +774,8 @@ describe('Spanner', () => {
       assert.strictEqual(recordedExporterCalls.length, 1);
       assert.strictEqual(
         recordedExporterCalls[0].options.apiEndpoint,
-        'monitoring.custom-universe.example',
+        'monitoring.custom-universe.example:8443',
       );
-      assert.strictEqual(recordedExporterCalls[0].options.port, 8443);
       assert.strictEqual(
         recordedExporterCalls[0].options.universeDomain,
         'googleapis.com',

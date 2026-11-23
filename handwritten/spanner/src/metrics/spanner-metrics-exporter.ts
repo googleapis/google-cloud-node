@@ -46,13 +46,12 @@ function validatePort(port: number): number {
  * `google-gax` builds the gRPC target as `${servicePath}:${port}`.
  *
  * @param endpoint The monitoring endpoint string to parse.
- * @param explicitPort Optional explicit port number.
  * @returns Parsed `{apiEndpoint, port}` object.
  */
-export function parseMonitoringEndpoint(
-  endpoint: string,
-  explicitPort?: number,
-): {apiEndpoint: string; port?: number} {
+export function parseMonitoringEndpoint(endpoint: string): {
+  apiEndpoint: string;
+  port?: number;
+} {
   if (typeof endpoint !== 'string' || endpoint.trim() === '') {
     throw new Error('Monitoring endpoint cannot be empty.');
   }
@@ -135,22 +134,8 @@ export function parseMonitoringEndpoint(
     }
   }
 
-  if (explicitPort !== undefined) {
-    validatePort(explicitPort);
-  }
-  if (
-    embeddedPort !== undefined &&
-    explicitPort !== undefined &&
-    embeddedPort !== explicitPort
-  ) {
-    throw new Error(
-      `Conflicting monitoring endpoint ports: ${embeddedPort} and ${explicitPort}.`,
-    );
-  }
-
-  const resolvedPort = explicitPort ?? embeddedPort;
-  return resolvedPort !== undefined
-    ? {apiEndpoint: host, port: resolvedPort}
+  return embeddedPort !== undefined
+    ? {apiEndpoint: host, port: embeddedPort}
     : {apiEndpoint: host};
 }
 
@@ -164,7 +149,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _metricsExportFailureLogged = false;
 
   constructor(
-    {auth, universeDomain, apiEndpoint, port}: ExporterOptions,
+    {auth, universeDomain, apiEndpoint}: ExporterOptions,
     projectId: string,
   ) {
     let resolvedUniverseDomain: string | undefined;
@@ -191,13 +176,11 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     }
 
     if (apiEndpoint !== undefined) {
-      const parsed = parseMonitoringEndpoint(apiEndpoint, port);
+      const parsed = parseMonitoringEndpoint(apiEndpoint);
       clientOptions.apiEndpoint = parsed.apiEndpoint;
       if (parsed.port !== undefined) {
         clientOptions.port = parsed.port;
       }
-    } else if (port !== undefined) {
-      clientOptions.port = validatePort(port);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

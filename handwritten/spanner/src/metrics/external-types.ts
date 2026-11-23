@@ -27,10 +27,6 @@ export interface ExporterOptions {
    * Optional custom Cloud Monitoring API endpoint hostname (or `host:port`, `[ipv6]`, `[ipv6]:port`).
    */
   apiEndpoint?: string;
-  /**
-   * Optional port number for the Cloud Monitoring API endpoint.
-   */
-  port?: number;
 }
 
 export enum MetricKind {
