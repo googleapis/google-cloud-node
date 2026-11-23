@@ -132,7 +132,15 @@ describe('v4 conformance test', () => {
         }
 
         storage = new Storage({
-          keyFilename: SERVICE_ACCOUNT,
+          // The credentials belong to the universe domain of the test case.
+          ...(testCase.universeDomain
+            ? {
+                credentials: {
+                  ...JSON.parse(fs.readFileSync(SERVICE_ACCOUNT, 'utf-8')),
+                  universe_domain: testCase.universeDomain,
+                },
+              }
+            : {keyFilename: SERVICE_ACCOUNT}),
           apiEndpoint: testCase.clientEndpoint,
           universeDomain: testCase.universeDomain,
         });

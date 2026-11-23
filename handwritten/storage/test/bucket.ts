@@ -2964,6 +2964,7 @@ describe('Bucket', () => {
 
         const authClient = new GoogleAuth();
         sandbox.stub(authClient, 'request');
+        sandbox.stub(authClient, 'getClient').resolves();
 
         const realTransport = new StorageTransport({
           apiEndpoint: 'https://storage.googleapis.com',

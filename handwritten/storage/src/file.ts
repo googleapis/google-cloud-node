@@ -59,6 +59,8 @@ import {
   PassThroughShim,
   handleContextValidation,
   getMime,
+  assertUniverseDomain,
+  signBlob,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -2314,6 +2316,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
     writeStream.once('writing', async () => {
       try {
+        // A simple upload reports a failed request as a stream error, so its
+        // credentials are verified before the stream is used. A resumable
+        // upload verifies its own.
+        if (options.resumable === false) {
+          await assertUniverseDomain(
+            this.storageTransport.authClient,
+            this.storage.universeDomain,
+          );
+        }
+
         if (
           !options!.metadata!.contentType ||
           options!.metadata!.contentType === 'auto'
@@ -3090,23 +3102,26 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
     // eslint-disable-next-line promise/catch-or-return
-    this.storage.storageTransport.authClient
-      .sign(policyBase64, options.signingEndpoint)
-      .then(
-        // eslint-disable-next-line promise/always-return
-        signature => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(null, {
-            string: policyString,
-            base64: policyBase64,
-            signature,
-          });
-        },
-        err => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(new SigningError(err.message));
-        },
-      );
+    signBlob(
+      this.storage.storageTransport.authClient,
+      this.storage.universeDomain,
+      policyBase64,
+      options.signingEndpoint,
+    ).then(
+      // eslint-disable-next-line promise/always-return
+      signature => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        callback(null, {
+          string: policyString,
+          base64: policyBase64,
+          signature,
+        });
+      },
+      err => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        callback(new SigningError(err.message));
+      },
+    );
   }
 
   generateSignedPostPolicyV4(
@@ -3278,7 +3293,9 @@ class File extends ServiceObject<File, FileMetadata> {
       const policyBase64 = Buffer.from(policyString).toString('base64');
 
       try {
-        const signature = await this.storage.storageTransport.authClient.sign(
+        const signature = await signBlob(
+          this.storage.storageTransport.authClient,
+          this.storage.universeDomain,
           policyBase64,
           options.signingEndpoint,
         );
