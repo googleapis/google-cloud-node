@@ -150,6 +150,7 @@ describe('Bigtable/MetricServiceClientCredentials', () => {
     );
 
     const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    const savedEmulator = process.env.BIGTABLE_EMULATOR_HOST;
     try {
       process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-universe.example.com';
       new FakeBigtable({metricsEnabled: true});
@@ -157,11 +158,39 @@ describe('Bigtable/MetricServiceClientCredentials', () => {
         capturedOptions[1]?.universeDomain,
         'env-universe.example.com',
       );
+
+      delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      const countBeforeEmulator = capturedOptions.length;
+      process.env.BIGTABLE_EMULATOR_HOST = 'localhost:8086';
+      const emulatorBt = new FakeBigtable({});
+      assert.strictEqual(
+        emulatorBt._metricsConfigManager.metricsHandlers.length,
+        0,
+      );
+      assert.strictEqual(capturedOptions.length, countBeforeEmulator);
+
+      const emulatorMetricsBt = new FakeBigtable({
+        metricsEnabled: true,
+        universeDomain: 'my-universe.example.com',
+      });
+      assert.strictEqual(
+        emulatorMetricsBt._metricsConfigManager.metricsHandlers.length,
+        1,
+      );
+      assert.strictEqual(
+        capturedOptions[capturedOptions.length - 1]?.universeDomain,
+        'my-universe.example.com',
+      );
     } finally {
       if (savedEnv !== undefined) {
         process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
       } else {
         delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      }
+      if (savedEmulator !== undefined) {
+        process.env.BIGTABLE_EMULATOR_HOST = savedEmulator;
+      } else {
+        delete process.env.BIGTABLE_EMULATOR_HOST;
       }
     }
   });
