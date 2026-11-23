@@ -16,6 +16,12 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import {PassThrough} from 'stream';
 import * as url from 'url';
+import {
+  Compute,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  PassThroughClient,
+} from 'google-auth-library';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -380,4 +386,132 @@ export function getPLimit(): Promise<PLimit> {
       });
   }
   return pLimitPromise;
+}
+
+interface CredentialFile {
+  type?: string;
+  universe_domain?: string;
+  universeDomain?: string;
+  source_credentials?: CredentialFile;
+}
+
+/**
+ * Returns the universe domain a credential file belongs to. A file that does
+ * not name one belongs to the default universe domain. Credentials given in
+ * code may name it in camel case.
+ *
+ * @param file The parsed credential file, if one was loaded.
+ */
+function universeDomainOfFile(
+  file?: CredentialFile | null,
+): string | undefined {
+  if (!file) return undefined;
+  const universeDomain = file.universe_domain || file.universeDomain;
+  if (universeDomain) return universeDomain;
+  return file.type === 'impersonated_service_account'
+    ? universeDomainOfFile(file.source_credentials)
+    : DEFAULT_UNIVERSE;
+}
+
+const vmUniverseDomains = new WeakMap<object, Promise<string>>();
+
+/**
+ * Returns the universe domain a VM belongs to, as reported by its metadata
+ * server. Credentials of a VM do not carry one themselves. Concurrent calls
+ * share one read, and a failed read is not remembered.
+ *
+ * @param client The credentials of the VM.
+ */
+function universeDomainOfVm(client: object) {
+  let universeDomain = vmUniverseDomains.get(client);
+  if (!universeDomain) {
+    universeDomain = new GoogleAuth()
+      .getUniverseDomainFromMetadataServer()
+      .catch(e => {
+        vmUniverseDomains.delete(client);
+        throw new Error(
+          `Unable to read the universe domain from the metadata server: ${(e as Error).message}`,
+        );
+      });
+    vmUniverseDomains.set(client, universeDomain);
+  }
+  return universeDomain;
+}
+
+/**
+ * Whether `client` is an instance of `type`. An instance created by another
+ * copy of the auth library is recognised by the name of its class.
+ *
+ * @param client The client to look at.
+ * @param type The class of the auth library.
+ */
+function isA(
+  client: object | undefined,
+  type: typeof Compute | typeof PassThroughClient,
+) {
+  return client instanceof type || client?.constructor?.name === type.name;
+}
+
+/**
+ * Verifies that the credentials of `auth` belong to `universeDomain`. An
+ * absent auth object has no credentials to verify.
+ *
+ * @param auth The auth object used for the request.
+ * @param universeDomain The universe domain the client is configured for.
+ */
+export async function assertUniverseDomain(
+  auth: object | undefined,
+  universeDomain: string,
+) {
+  let googleAuth = auth as Partial<GoogleAuth> | undefined;
+  // An object that does not create a client is the client itself.
+  let client: {universeDomain?: string} | undefined =
+    (await googleAuth?.getClient?.()) ??
+    (auth as {universeDomain?: string} | undefined);
+  // An auth object created by another copy of the auth library is held as the
+  // client of a new auth object. Its own credentials are the ones to verify.
+  const nested = client as Partial<GoogleAuth> | undefined;
+  if (typeof nested?.getClient === 'function' && nested !== googleAuth) {
+    googleAuth = nested;
+    client = await nested.getClient();
+  }
+  // A pass-through client sends no credentials.
+  if (isA(client, PassThroughClient)) return;
+  const isVm = isA(client, Compute);
+  const found = [
+    universeDomainOfFile(googleAuth?.jsonContent as CredentialFile | null),
+    // Credentials of a VM report the default universe domain wherever the VM
+    // is, so the metadata server of the VM is asked instead. Any other client
+    // reports its own, and an object that reports none has none to verify.
+    isVm ? await universeDomainOfVm(client!) : client?.universeDomain,
+  ].find(domain => domain && domain !== universeDomain);
+  if (found) {
+    throw new Error(
+      `The configured universe domain (${universeDomain}) does not match the universe domain found in the credentials (${found}). ` +
+        "If you haven't configured the universe domain explicitly, googleapis.com is the default.",
+    );
+  }
+}
+
+/**
+ * Signs `data` with the credentials of `auth`, using the IAM endpoint of
+ * `universeDomain` unless an `endpoint` is given.
+ *
+ * @param auth The auth object used to sign.
+ * @param universeDomain The universe domain the client is configured for.
+ * @param data The data to sign.
+ * @param endpoint A custom signing endpoint.
+ */
+export async function signBlob(
+  auth: {sign(data: string, endpoint?: string): Promise<string>},
+  universeDomain: string,
+  data: string,
+  endpoint?: string,
+) {
+  await assertUniverseDomain(auth, universeDomain);
+  return auth.sign(
+    data,
+    endpoint ||
+      `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+  );
 }

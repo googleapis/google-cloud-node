@@ -20,7 +20,13 @@ import {
   GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
+import {assertUniverseDomain} from './util.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -100,6 +106,7 @@ export class StorageTransport {
   private useAuthWithCustomEndpoint?: boolean;
   gaxiosInstance: Gaxios;
   private sharedInterceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
+  private universeDomain: string;
 
   constructor(options: TransportParameters) {
     this.gaxiosInstance = options.gaxiosInstance || new Gaxios();
@@ -124,12 +131,15 @@ export class StorageTransport {
     this.timeout = options.timeout;
     this.projectId = options.projectId;
     this.useAuthWithCustomEndpoint = options.useAuthWithCustomEndpoint;
+    this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
   }
 
   async makeRequest<T>(
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
   ): Promise<GaxiosResponse<T>> {
+    await assertUniverseDomain(this.authClient, this.universeDomain);
+
     // Project ID Resolution
     if (!this.projectId) {
       this.projectId =

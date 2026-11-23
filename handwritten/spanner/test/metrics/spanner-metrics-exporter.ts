@@ -19,7 +19,10 @@ import {GoogleAuth} from 'google-auth-library';
 import {
   CloudMonitoringMetricsExporter,
   MAX_BATCH_EXPORT_SIZE,
+  parseMonitoringEndpoint,
 } from '../../src/metrics/spanner-metrics-exporter';
+import * as transform from '../../src/metrics/transform';
+import {status} from '@grpc/grpc-js';
 import {
   SPANNER_METER_NAME,
   METRIC_NAME_ATTEMPT_COUNT,
@@ -71,6 +74,216 @@ describe('CustomExporter', () => {
   it('should be able to force flush', async () => {
     const exporter = new CloudMonitoringMetricsExporter({auth}, PROJECT_ID);
     await assert.doesNotReject(exporter.forceFlush());
+  });
+
+  // T1: Explicit universeDomain is forwarded to MetricServiceClient.
+  it('should forward explicit universeDomain to MetricServiceClient', () => {
+    const exporter = new CloudMonitoringMetricsExporter(
+      {auth, universeDomain: 'my-tpc.example'},
+      PROJECT_ID,
+    );
+    const client = (exporter as any)._client;
+    assert.strictEqual(client._universeDomain, 'my-tpc.example');
+    assert.strictEqual(client._servicePath, 'monitoring.my-tpc.example');
+    assert.strictEqual(client._opts.servicePath, 'monitoring.my-tpc.example');
+    assert.strictEqual(client._opts.port, 443);
+  });
+
+  // T2: Empty or whitespace-only universeDomain fails closed without creating a client.
+  it('should reject empty or whitespace universeDomain', () => {
+    assert.throws(
+      () =>
+        new CloudMonitoringMetricsExporter(
+          {auth, universeDomain: ''},
+          PROJECT_ID,
+        ),
+      /universeDomain cannot be empty/,
+    );
+    assert.throws(
+      () =>
+        new CloudMonitoringMetricsExporter(
+          {auth, universeDomain: '   '},
+          PROJECT_ID,
+        ),
+      /universeDomain cannot be empty/,
+    );
+  });
+
+  // T3: Direct exporter callers inherit auth.clientOptions.universeDomain or fall back to env/default.
+  it('should inherit universeDomain from auth.clientOptions and preserve env fallback when unset', () => {
+    const tpcAuth = new GoogleAuth({universeDomain: 'auth-tpc.example'});
+    const authExporter = new CloudMonitoringMetricsExporter(
+      {auth: tpcAuth},
+      PROJECT_ID,
+    );
+    const authClient = (authExporter as any)._client;
+    assert.strictEqual(authClient._universeDomain, 'auth-tpc.example');
+    assert.strictEqual(authClient._servicePath, 'monitoring.auth-tpc.example');
+
+    const prevEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    try {
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-tpc.example';
+      const envExporter = new CloudMonitoringMetricsExporter(
+        {auth: new GoogleAuth()},
+        PROJECT_ID,
+      );
+      const envClient = (envExporter as any)._client;
+      assert.strictEqual(envClient._universeDomain, 'env-tpc.example');
+      assert.strictEqual(envClient._servicePath, 'monitoring.env-tpc.example');
+
+      delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      const defaultExporter = new CloudMonitoringMetricsExporter(
+        {auth: new GoogleAuth()},
+        PROJECT_ID,
+      );
+      const defaultClient = (defaultExporter as any)._client;
+      assert.strictEqual(defaultClient._universeDomain, 'googleapis.com');
+      assert.strictEqual(
+        defaultClient._servicePath,
+        'monitoring.googleapis.com',
+      );
+    } finally {
+      if (prevEnv === undefined) {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      } else {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = prevEnv;
+      }
+    }
+  });
+
+  // T4: Endpoint parsing handles host, host:port, IPv6 brackets, and rejects malformed inputs.
+  it('should parse valid monitoring endpoints and reject malformed endpoint options', () => {
+    const hostOnly = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: 'monitoring.custom-universe.example'},
+      PROJECT_ID,
+    );
+    assert.strictEqual(
+      (hostOnly as any)._client._opts.servicePath,
+      'monitoring.custom-universe.example',
+    );
+    assert.strictEqual((hostOnly as any)._client._opts.port, 443);
+
+    const hostWithPort = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: 'monitoring.custom-universe.example:8443'},
+      PROJECT_ID,
+    );
+    assert.strictEqual(
+      (hostWithPort as any)._client._opts.servicePath,
+      'monitoring.custom-universe.example',
+    );
+    assert.strictEqual((hostWithPort as any)._client._opts.port, 8443);
+
+    const ipv6NoPort = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: '[::1]'},
+      PROJECT_ID,
+    );
+    assert.strictEqual((ipv6NoPort as any)._client._opts.servicePath, '[::1]');
+    assert.strictEqual((ipv6NoPort as any)._client._opts.port, 443);
+
+    const ipv6WithPort = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: '[::1]:8443'},
+      PROJECT_ID,
+    );
+    assert.strictEqual(
+      (ipv6WithPort as any)._client._opts.servicePath,
+      '[::1]',
+    );
+    assert.strictEqual((ipv6WithPort as any)._client._opts.port, 8443);
+
+    const invalidEndpoints = [
+      '',
+      '   ',
+      'https://monitoring.custom-universe.example',
+      'http://monitoring.custom-universe.example',
+      ':443',
+      'monitoring.custom-universe.example:',
+      '::1',
+      '[::1',
+      '[]',
+      'monitoring.custom-universe.example/v3',
+      'monitoring host',
+      'monitoring.custom-universe.example:0',
+      'monitoring.custom-universe.example:70000',
+      'monitoring.custom-universe.example:abc',
+    ];
+    for (const bad of invalidEndpoints) {
+      assert.throws(
+        () => parseMonitoringEndpoint(bad),
+        Error,
+        `Expected parseMonitoringEndpoint(${JSON.stringify(bad)}) to throw`,
+      );
+      assert.throws(
+        () =>
+          new CloudMonitoringMetricsExporter(
+            {auth, apiEndpoint: bad},
+            PROJECT_ID,
+          ),
+        Error,
+        `Expected exporter with apiEndpoint=${JSON.stringify(bad)} to throw`,
+      );
+    }
+
+    // Verify SPANNER_MONITORING_HOST fallback on direct exporter construction.
+    const prevHost = process.env.SPANNER_MONITORING_HOST;
+    try {
+      process.env.SPANNER_MONITORING_HOST =
+        'monitoring.custom-universe.example:8443';
+      const envHostExporter = new CloudMonitoringMetricsExporter(
+        {auth},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (envHostExporter as any)._client._opts.servicePath,
+        'monitoring.custom-universe.example',
+      );
+      assert.strictEqual((envHostExporter as any)._client._opts.port, 8443);
+
+      // Explicit apiEndpoint overrides SPANNER_MONITORING_HOST.
+      const overrideExporter = new CloudMonitoringMetricsExporter(
+        {auth, apiEndpoint: 'explicit.custom-universe.example:9443'},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (overrideExporter as any)._client._opts.servicePath,
+        'explicit.custom-universe.example',
+      );
+      assert.strictEqual((overrideExporter as any)._client._opts.port, 9443);
+
+      // Explicit `apiEndpoint: undefined` prevents env fallback drift.
+      const explicitUndefinedExporter = new CloudMonitoringMetricsExporter(
+        {auth, apiEndpoint: undefined},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (explicitUndefinedExporter as any)._client._opts.servicePath,
+        'monitoring.googleapis.com',
+      );
+      assert.strictEqual(
+        (explicitUndefinedExporter as any)._client._opts.port,
+        443,
+      );
+
+      // Whitespace-only SPANNER_MONITORING_HOST is treated as unset.
+      process.env.SPANNER_MONITORING_HOST = '   ';
+      const whitespaceHostExporter = new CloudMonitoringMetricsExporter(
+        {auth},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (whitespaceHostExporter as any)._client._opts.servicePath,
+        'monitoring.googleapis.com',
+      );
+      assert.strictEqual(
+        (whitespaceHostExporter as any)._client._opts.port,
+        443,
+      );
+    } finally {
+      if (prevHost === undefined) {
+        delete process.env.SPANNER_MONITORING_HOST;
+      } else {
+        process.env.SPANNER_MONITORING_HOST = prevHost;
+      }
+    }
   });
 });
 
@@ -281,5 +494,143 @@ describe('Export', () => {
       resultCallbackSpy.getCall(0).args[0].code,
       ExportResultCode.SUCCESS,
     );
+  });
+
+  // T5: Export failure warnings include sanitized error message for non-PERMISSION_DENIED errors.
+  it('should include error message in warning for non-PERMISSION_DENIED failures and keep guidance for PERMISSION_DENIED', async () => {
+    const warnStub = sinon.stub(console, 'warn');
+    try {
+      attempt_counter.add(1, metricAttributes);
+      const {resourceMetrics} = await reader.collect();
+
+      const sendStub = sinon
+        .stub(exporter as any, '_sendTimeSeries')
+        .rejects(new Error('universe domain mismatch'));
+      await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(warnStub.calledOnce, true);
+      const firstWarn = warnStub.getCall(0).args[0] as string;
+      assert.ok(firstWarn.includes('Send TimeSeries failed:'));
+      assert.ok(firstWarn.includes('universe domain mismatch'));
+
+      sendStub.restore();
+      warnStub.resetHistory();
+
+      const permExporter = new CloudMonitoringMetricsExporter(
+        {auth},
+        PROJECT_ID,
+      );
+      const permErr = Object.assign(new Error('denied'), {
+        code: status.PERMISSION_DENIED,
+      });
+      sinon.stub(permExporter as any, '_sendTimeSeries').rejects(permErr);
+      await new Promise<ExportResult>(resolve => {
+        permExporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(warnStub.calledOnce, true);
+      const permWarn = warnStub.getCall(0).args[0] as string;
+      assert.ok(
+        permWarn.includes(
+          `Need monitoring metric writer permission on project ${PROJECT_ID}`,
+        ),
+      );
+    } finally {
+      warnStub.restore();
+    }
+  });
+
+  it('should forward non-default universeDomain and monitoringEndpoint to transformResourceMetricToTimeSeriesArray during export', async () => {
+    const scopedExporter = new CloudMonitoringMetricsExporter(
+      {
+        auth,
+        universeDomain: 'my-tpc.example',
+        apiEndpoint: 'monitoring.my-tpc.example:8443',
+      },
+      PROJECT_ID,
+    );
+    attempt_counter.add(1, metricAttributes);
+    const {resourceMetrics} = await reader.collect();
+
+    const transformSpy = sinon.spy(
+      transform,
+      'transformResourceMetricToTimeSeriesArray',
+    );
+    const sendStub = sinon
+      .stub(scopedExporter as any, '_sendTimeSeries')
+      .resolves();
+    try {
+      const result = await new Promise<ExportResult>(resolve => {
+        scopedExporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(result.code, ExportResultCode.SUCCESS);
+      assert.strictEqual(transformSpy.calledOnce, true);
+      assert.strictEqual(transformSpy.firstCall.args[1], PROJECT_ID);
+      assert.strictEqual(transformSpy.firstCall.args[2], 'my-tpc.example');
+      assert.strictEqual(
+        transformSpy.firstCall.args[3],
+        'monitoring.my-tpc.example:8443',
+      );
+      assert.strictEqual(sendStub.calledOnce, true);
+    } finally {
+      transformSpy.restore();
+      sendStub.restore();
+    }
+  });
+
+  it('should sanitize control characters, suppress repeated export failure warnings, and re-warn after recovery', async () => {
+    const warnStub = sinon.stub(console, 'warn');
+    const sendStub = sinon.stub(exporter as any, '_sendTimeSeries');
+    try {
+      attempt_counter.add(1, metricAttributes);
+      const {resourceMetrics} = await reader.collect();
+
+      sendStub.rejects(new Error('first failure\r\nwith\tcontrol\x00chars'));
+      const firstResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(firstResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledOnce, true);
+      const firstWarn = warnStub.getCall(0).args[0] as string;
+      assert.strictEqual(
+        firstWarn,
+        'Send TimeSeries failed: first failure with control chars',
+      );
+
+      // Consecutive failure should be suppressed while already logged.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.rejects(new Error('second consecutive failure'));
+      const secondResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(secondResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledOnce, true);
+
+      // Successful export resets failure warning suppression.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.resolves();
+      const recoveryResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(recoveryResult.code, ExportResultCode.SUCCESS);
+      assert.strictEqual(warnStub.calledOnce, true);
+
+      // Failure after recovery logs again.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.rejects(new Error('failure after recovery'));
+      const postRecoveryResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(postRecoveryResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledTwice, true);
+      assert.ok(
+        (warnStub.getCall(1).args[0] as string).includes(
+          'failure after recovery',
+        ),
+      );
+    } finally {
+      warnStub.restore();
+      sendStub.restore();
+    }
   });
 });
