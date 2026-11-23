@@ -232,6 +232,22 @@ describe('File', () => {
         await file.delete(options);
       });
 
+      it('should not send transport options as query parameters', async () => {
+        STORAGE.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((reqOpts, callback) => {
+            assert.strictEqual(reqOpts.queryParameters.responseType, undefined);
+            assert.strictEqual(
+              reqOpts.queryParameters.validateStatus,
+              undefined,
+            );
+            assert.strictEqual(reqOpts.queryParameters.userProject, 'proj');
+            callback(null, {}, {data: {}});
+            return Promise.resolve({data: {}});
+          });
+        await file.delete({userProject: 'proj'});
+      });
+
       it('should return an error if the request fails', async () => {
         const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
 

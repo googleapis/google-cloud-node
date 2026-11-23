@@ -2476,20 +2476,10 @@ class File extends ServiceObject<File, FileMetadata> {
       options,
     );
 
-    const reqOpts: GaxiosOptions = {
-      ...options,
-      responseType: 'text',
-      validateStatus: (status: number) => {
-        return (
-          (status >= 200 && status < 300) || status === 404 || status === 403
-        );
-      },
-    };
-
     const promise = (async (): Promise<[GaxiosResponse]> => {
       let respTuple: [GaxiosResponse];
       try {
-        respTuple = await super.delete(reqOpts);
+        respTuple = await super.delete({...options});
         const resp = respTuple[0];
 
         if (resp.data && typeof resp.data.resume === 'function') {
