@@ -91,6 +91,8 @@ function _transformValueType(metric: MetricData): ValueType {
 export function transformResourceMetricToTimeSeriesArray(
   resourceMetrics: ResourceMetrics,
   projectId: string,
+  universeDomain?: string,
+  monitoringEndpoint?: string,
 ) {
   const resource = resourceMetrics?.resource;
   const scopeMetrics = resourceMetrics?.scopeMetrics;
@@ -108,7 +110,14 @@ export function transformResourceMetricToTimeSeriesArray(
       // Flatmap the data points in each metric to create a TimeSeries for each point
       .flatMap(metric =>
         metric.dataPoints.flatMap(dataPoint =>
-          _createTimeSeries(metric, dataPoint, resource, projectId),
+          _createTimeSeries(
+            metric,
+            dataPoint,
+            resource,
+            projectId,
+            universeDomain,
+            monitoringEndpoint,
+          ),
         ),
       )
   );
@@ -122,13 +131,27 @@ function _createTimeSeries<T>(
   dataPoint: DataPoint<T>,
   resource: Resource,
   projectId: string,
+  universeDomain?: string,
+  monitoringEndpoint?: string,
 ) {
   const type = path.posix.join(CLIENT_METRICS_PREFIX, metric.descriptor.name);
   const resourceLabels = resource
-    ? _extractLabels(resource, projectId, true)
+    ? _extractLabels(
+        resource,
+        projectId,
+        true,
+        universeDomain,
+        monitoringEndpoint,
+      )
     : {metricLabels: {}, monitoredResourceLabels: {}};
 
-  const dataLabels = _extractLabels(dataPoint, projectId, false);
+  const dataLabels = _extractLabels(
+    dataPoint,
+    projectId,
+    false,
+    universeDomain,
+    monitoringEndpoint,
+  );
 
   const labels = {
     ...resourceLabels.metricLabels,
@@ -211,8 +234,14 @@ function _extractLabels<T>(
   {attributes = {}}: DataPoint<T> | Resource,
   projectId: string,
   isResource = false,
+  universeDomain?: string,
+  monitoringEndpoint?: string,
 ) {
-  const factory = MetricsTracerFactory.getInstance(projectId);
+  const factory = MetricsTracerFactory.getInstance(
+    projectId,
+    universeDomain,
+    monitoringEndpoint,
+  );
   const combinedAttributes: Record<string, unknown> = {
     ...attributes,
     [METRIC_LABEL_KEY_CLIENT_UID]: factory?.clientUid ?? UNKNOWN_ATTRIBUTE,

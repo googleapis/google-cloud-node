@@ -466,4 +466,33 @@ describe('transform', () => {
 
     assert.strictEqual(timeseries.length, 0);
   });
+
+  it('should resolve the universe-scoped factory for labels when transforming', async () => {
+    reader = new InMemoryMetricReader();
+    meterProvider = new MeterProvider({
+      readers: [reader],
+    });
+    const getInstanceStub = MetricsTracerFactory.getInstance as sinon.SinonStub;
+    const meter: Meter = meterProvider.getMeter(SPANNER_METER_NAME);
+    meter.createCounter(METRIC_NAME_ATTEMPT_COUNT).add(1, {});
+    const {errors, resourceMetrics} = await reader.collect();
+    if (errors.length !== 0) {
+      throw errors;
+    }
+    getInstanceStub.resetHistory();
+    transformResourceMetricToTimeSeriesArray(
+      resourceMetrics,
+      'project_id',
+      'custom-universe.example',
+      'monitoring.custom-universe.example:8443',
+    );
+    assert.ok(getInstanceStub.called);
+    for (const call of getInstanceStub.getCalls()) {
+      assert.deepStrictEqual(call.args, [
+        'project_id',
+        'custom-universe.example',
+        'monitoring.custom-universe.example:8443',
+      ]);
+    }
+  });
 });
