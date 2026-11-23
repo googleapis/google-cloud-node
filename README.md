@@ -3,6 +3,7 @@
 > Node.js idiomatic client libraries for [Google Cloud Platform](https://cloud.google.com/) services.
 
 * [Node.js on Google Cloud][gcloud-homepage]
+* [Running on the Bun Runtime (Compatibility Matrix & Cloud Run Quickstart)](docs/bun.md)
 
 Libraries are available on GitHub and npm for developing Node.js
 applications that interact with individual Google Cloud services:
