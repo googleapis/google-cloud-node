@@ -33,7 +33,7 @@
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "pnpm run compile",
+    "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "presystem-test": "pnpm run compile",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 600000",
