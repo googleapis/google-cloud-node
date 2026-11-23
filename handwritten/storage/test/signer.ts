@@ -58,10 +58,8 @@ describe('signer', () => {
     let file: FileI;
 
     const NOW = new Date('2019-03-18T00:00:00.999Z');
-    let fakeTimers: sinon.SinonFakeTimers;
 
-    beforeEach(() => (fakeTimers = sinon.useFakeTimers(NOW)));
-    afterEach(() => fakeTimers.restore());
+    beforeEach(() => sandbox.useFakeTimers(NOW));
 
     beforeEach(() => {
       authClient = {
@@ -813,11 +811,13 @@ describe('signer', () => {
           'x-goog-content-sha256': '76af7efae0d034d1e3335ed1b90f24b6cadf2bf1',
         };
         CONFIG.file = 'file-name.png';
-        sinon.stub(signer, 'getCanonicalHeaders').returns('canonical-headers');
-        sinon
+        sandbox
+          .stub(signer, 'getCanonicalHeaders')
+          .returns('canonical-headers');
+        sandbox
           .stub(signer, 'getCanonicalQueryParams')
           .returns('canonical-query');
-        const getCanonicalRequest = sinon.spy(signer, 'getCanonicalRequest');
+        const getCanonicalRequest = sandbox.spy(signer, 'getCanonicalRequest');
 
         await signer['getSignedUrlV4'](CONFIG);
         const args = getCanonicalRequest.getCall(0).args;
@@ -831,8 +831,10 @@ describe('signer', () => {
       });
 
       it('should compute SHA256 digest in hex on canonical request', async () => {
-        sinon.stub(signer, 'getCanonicalRequest').returns('canonical-request');
-        const authClientSign = sinon
+        sandbox
+          .stub(signer, 'getCanonicalRequest')
+          .returns('canonical-request');
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -850,8 +852,10 @@ describe('signer', () => {
       it('should sign using the `signingEndpoint` when provided', async () => {
         const signingEndpoint = 'https://my-endpoint.com';
 
-        sinon.stub(signer, 'getCanonicalRequest').returns('canonical-request');
-        const authClientSign = sinon
+        sandbox
+          .stub(signer, 'getCanonicalRequest')
+          .returns('canonical-request');
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -871,7 +875,7 @@ describe('signer', () => {
         const credentialScope = `${datestamp}/auto/storage/goog4_request`;
         const dateISO = formatAsUTCISO(NOW, true);
 
-        const authClientSign = sinon
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -888,7 +892,7 @@ describe('signer', () => {
       it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
-        sinon.stub(authClient, 'sign').rejects(err);
+        sandbox.stub(authClient, 'sign').rejects(err);
 
         await assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
           name: 'SigningError',

@@ -183,7 +183,7 @@ async function deployApp() {
     `gcloud functions deploy ${fullPrefix} ` +
     '--gen2 ' +
     '--region=us-central1 ' +
-    '--runtime=nodejs20 ' +
+    '--runtime=nodejs22 ' +
     `--source=${targetDir} ` +
     '--entry-point=getMetadata ' +
     '--ingress-settings=internal-only ' +
