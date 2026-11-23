@@ -31,7 +31,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-identity-accesscontextmanager",
-    "support_documentation": "https://cloud.google.com/access-context-manager/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/access-context-manager/docs"
   },
   {
     "api_description": "The Address Validation API allows developers to verify the accuracy of\naddresses. Given an address, it returns information about the correctness\nof the components of the parsed address, a geocode, and a verdict on the\ndeliverability of the parsed address.",
@@ -48,7 +48,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-addressvalidation",
-    "support_documentation": "https://mapsplatform.google.com/maps-products/address-validation/docs/getting-support"
+    "support_documentation": "https://mapsplatform.google.com/maps-products/address-validation/"
   },
   {
     "api_description": "An API for accessing Advisory Notifications in Google Cloud",
@@ -84,7 +84,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-alloydb",
-    "support_documentation": "https://cloud.google.com/alloydb/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/alloydb/docs"
   },
   {
     "api_description": "Exchange data and analytics assets securely and efficiently.",
@@ -101,7 +101,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-analyticshub",
-    "support_documentation": "https://cloud.google.com/analytics-hub/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/analytics-hub/docs"
   },
   {
     "api_description": "API Gateway enables you to provide secure access to your backend services through a well-defined REST API that is consistent across all of your services, regardless of the service implementation.",
@@ -135,7 +135,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-apikeys",
-    "support_documentation": "https://cloud.google.com/api-keys/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/api-keys/docs"
   },
   {
     "api_description": "Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet.",
@@ -152,7 +152,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apigeeconnect",
-    "support_documentation": "https://cloud.google.com/apigee/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/apigee/docs"
   },
   {
     "api_id": "apigeeregistry.googleapis.com",
@@ -168,7 +168,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apigeeregistry",
-    "support_documentation": "https://cloud.google.com/apigee/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/apigee/docs"
   },
   {
     "api_description": "Provisions and manages developers' App Engine applications.",
@@ -185,7 +185,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-appengine",
-    "support_documentation": "https://cloud.google.com/appengine/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/appengine/docs"
   },
   {
     "api_description": "Store and manage build artifacts in a scalable and integrated service built\non Google infrastructure.",
@@ -290,7 +290,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-baremetalsolution",
-    "support_documentation": "https://cloud.google.com/bare-metal/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/bare-metal/docs"
   },
   {
     "api_description": "An API to manage the running of Batch resources on Google Cloud Platform.",
@@ -307,7 +307,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-batch",
-    "support_documentation": "https://cloud.google.com/batch/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/batch/docs"
   },
   {
     "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
@@ -324,7 +324,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-appconnections",
-    "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/beyondcorp/docs"
   },
   {
     "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
@@ -341,7 +341,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-appconnectors",
-    "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/beyondcorp/docs"
   },
   {
     "api_description": "Chrome Enterprise Premium is a secure enterprise browsing solution that\nprovides secure access to applications and resources, and offers\nintegrated threat and data protection. It adds an extra layer of security\nto safeguard your Chrome browser environment, including Data Loss\nPrevention (DLP), real-time URL and file scanning, and Context-Aware\nAccess for SaaS and web apps.",
@@ -358,7 +358,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-appgateways",
-    "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/beyondcorp/docs"
   },
   {
     "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
@@ -375,7 +375,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices",
-    "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/beyondcorp/docs"
   },
   {
     "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
@@ -392,7 +392,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways",
-    "support_documentation": "https://cloud.google.com/beyondcorp/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/beyondcorp/docs"
   },
   {
     "api_description": "Allows users to manage BigQuery connections to external data sources.",
@@ -445,7 +445,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datatransfer",
-    "support_documentation": "https://cloud.google.com/bigquery/transfer/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/bigquery/transfer/docs"
   },
   {
     "api_description": "The migration service, exposing apis for migration jobs operations, and\nagent management.",
@@ -497,7 +497,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing",
-    "support_documentation": "https://cloud.google.com/billing/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/billing/docs"
   },
   {
     "api_description": "The Cloud Billing Budget API stores Cloud Billing budgets, which define a\nbudget plan and the rules to execute as spend is tracked against that\nplan.",
@@ -515,7 +515,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets",
-    "support_documentation": "https://cloud.google.com/billing/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/billing/docs"
   },
   {
     "api_description": "The management interface for Binary Authorization, a service that provides\npolicy-based deployment validation and control for images deployed to\nGoogle Kubernetes Engine (GKE), Anthos Service Mesh, Anthos Clusters, and\nCloud Run.",
@@ -601,7 +601,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel",
-    "support_documentation": "https://cloud.google.com/channel/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/channel/docs"
   },
   {
     "api_description": "Manages Apache Airflow environments on Google Cloud Platform.",
@@ -654,7 +654,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-confidentialcomputing",
-    "support_documentation": "https://cloud.google.com/confidential-computing/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/confidential-computing/docs"
   },
   {
     "api_description": "The Connect Gateway service allows connectivity from external parties to\nconnected Kubernetes clusters.",
@@ -672,7 +672,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkeconnect-gateway",
-    "support_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/multicluster-management/gateway/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/multicluster-management/gateway/docs"
   },
   {
     "api_description": "Contact Center Insights provides out-of-the-box and custom modeling techniques to make it easier for contact center teams to better understand customer interaction data.",
@@ -689,7 +689,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-contactcenterinsights",
-    "support_documentation": "https://cloud.google.com/contact-center/insights/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/contact-center/insights/docs"
   },
   {
     "api_description": "This API is a prerequisite for leveraging Artifact Analysis\nscanning capabilities in both Artifact Registry and with Advanced\nVulnerability Insights (runtime scanning) in GKE.\n\nIn addition, the Container Analysis API is an implementation of the\nGrafeas API, which enables storing, querying, and retrieval of critical\nmetadata\nabout all of your software artifacts.",
@@ -724,7 +724,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/grafeas",
-    "support_documentation": "https://grafeas.io/docs/getting-support"
+    "support_documentation": "https://grafeas.io"
   },
   {
     "api_description": "A fully managed and highly scalable data discovery and metadata management\nservice.",
@@ -759,7 +759,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datafusion",
-    "support_documentation": "https://cloud.google.com/data-fusion/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/data-fusion/docs"
   },
   {
     "api_description": "Data lineage is a visual map that tracks the entire lifecycle of your data. It shows you where your data comes from (the origin), where it travels (the destinations), and all the changes or transformations that happen along the way.",
@@ -795,7 +795,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ads-datamanager",
-    "support_documentation": "https://developers.google.com/data-manager/docs/getting-support"
+    "support_documentation": "https://developers.google.com/data-manager"
   },
   {
     "api_description": "Manage Cloud Database Migration Service resources on Google Cloud Platform.",
@@ -830,7 +830,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform",
-    "support_documentation": "https://cloud.google.com/dataform/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataform/docs"
   },
   {
     "api_description": "A unified, intelligent governance solution for data and AI assets.",
@@ -848,7 +848,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataplex",
-    "support_documentation": "https://cloud.google.com/dataplex/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataplex/docs"
   },
   {
     "api_description": "Manages Hadoop-based clusters and jobs on Google Cloud Platform.",
@@ -866,7 +866,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataproc",
-    "support_documentation": "https://cloud.google.com/dataproc/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataproc/docs"
   },
   {
     "api_description": "The Dataproc Metastore API is used to manage the lifecycle and\nconfiguration of metastore services.",
@@ -883,7 +883,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-metastore",
-    "support_documentation": "https://cloud.google.com/dataproc-metastore/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataproc-metastore/docs"
   },
   {
     "api_description": "Datastream is a serverless and easy-to-use change data capture (CDC) and replication service that lets you synchronize data reliably, and with minimal latency.",
@@ -953,7 +953,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dialogflow-cx",
-    "support_documentation": "https://cloud.google.com/dialogflow/cx/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dialogflow/cx/docs"
   },
   {
     "api_description": "Discovery Engine API.",
@@ -1005,7 +1005,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-contentwarehouse",
-    "support_documentation": "https://cloud.google.com/document-warehouse/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/document-warehouse/docs"
   },
   {
     "api_description": "Enables management and configuration of domain names.",
@@ -1126,7 +1126,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ai-generativelanguage",
-    "support_documentation": "https://ai.google.dev/docs/getting-support"
+    "support_documentation": "https://ai.google.dev/docs"
   },
   {
     "api_description": "The GKE Hub service handles the registration of many Kubernetes clusters to Google Cloud, and the management of multi-cluster features over those clusters.",
@@ -1143,7 +1143,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkehub",
-    "support_documentation": "https://cloud.google.com/anthos/gke/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/anthos/gke/docs"
   },
   {
     "api_description": "GKE Multi-Cloud provides a way to manage Kubernetes clusters that run on\nAWS and Azure infrastructure using the GKE Multi-Cloud API.  Combined with\nConnect, you can manage Kubernetes clusters on Google Cloud, AWS, and\nAzure from the Google Cloud Console.\n\nWhen you create a cluster with GKE Multi-Cloud, Google creates the\nresources needed and brings up a cluster on your behalf.  You can deploy\nworkloads with the GKE Multi-Cloud API or the gcloud and kubectl\ncommand-line tools.",
@@ -1161,7 +1161,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkemulticloud",
-    "support_documentation": "https://cloud.google.com/kubernetes-engine/multi-cloud/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/multi-cloud/docs"
   },
   {
     "api_description": "Add-ons are customized applications that extend Google Workspace applications.",
@@ -1178,7 +1178,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gsuiteaddons",
-    "support_documentation": "https://developers.google.com/workspace/add-ons/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/workspace/add-ons/overview"
   },
   {
     "api_description": "Creates short-lived, limited-privilege credentials for IAM service accounts.",
@@ -1248,7 +1248,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ids",
-    "support_documentation": "https://cloud.google.com/intrusion-detection-system/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/intrusion-detection-system/docs"
   },
   {
     "api_description": "Registers and manages IoT (Internet of Things) devices that connect to the\nGoogle Cloud Platform.",
@@ -1351,7 +1351,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedidentities",
-    "support_documentation": "https://cloud.google.com/managed-microsoft-ad/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/managed-microsoft-ad/docs"
   },
   {
     "api_description": "mapsplatformdatasets.googleapis.com API.",
@@ -1369,7 +1369,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-mapsplatformdatasets",
-    "support_documentation": "https://developers.google.com/maps/documentation/datasets/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/datasets"
   },
   {
     "api_description": "Google Cloud Memorystore for Memcached API is used for creating and\nmanaging Memcached instances in GCP.",
@@ -1386,7 +1386,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-memcache",
-    "support_documentation": "https://cloud.google.com/memorystore/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/memorystore/docs"
   },
   {
     "api_description": "Creates and manages Redis instances on the Google Cloud Platform.",
@@ -1404,7 +1404,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-redis",
-    "support_documentation": "https://cloud.google.com/memorystore/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/memorystore/docs"
   },
   {
     "api_description": "A unified platform that helps you accelerate your end-to-end cloud journey\nfrom your current on-premises or cloud environments to Google Cloud.",
@@ -1422,7 +1422,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-migrationcenter",
-    "support_documentation": "https://cloud.google.com/migration-center/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/migration-center/docs"
   },
   {
     "api_description": "Manages your Cloud Monitoring data and configurations.",
@@ -1440,7 +1440,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-monitoring",
-    "support_documentation": "https://cloud.google.com/monitoring/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/monitoring/docs"
   },
   {
     "api_description": "Manages your Cloud Monitoring data and configurations.",
@@ -1458,7 +1458,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-monitoring-dashboard",
-    "support_documentation": "https://cloud.google.com/monitoring/dashboards/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/monitoring/dashboards/docs"
   },
   {
     "api_description": "Provides natural language understanding technologies, such as sentiment\nanalysis, entity recognition, entity sentiment analysis, and other text\nannotations, to developers.",
@@ -1493,7 +1493,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-networkconnectivity",
-    "support_documentation": "https://cloud.google.com/network-connectivity/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/network-connectivity/docs"
   },
   {
     "api_description": "The Network Management API provides a collection of network performance\nmonitoring and diagnostic capabilities.",
@@ -1510,7 +1510,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-networkmanagement",
-    "support_documentation": "https://cloud.google.com/network-management/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/network-management/docs"
   },
   {
     "api_id": "networksecurity.googleapis.com",
@@ -1545,7 +1545,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-notebooks",
-    "support_documentation": "https://cloud.google.com/vertex-ai/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/vertex-ai/docs"
   },
   {
     "api_description": "The Organization Policy API allows users to configure governance rules on\ntheir Google Cloud resources across the resource hierarchy.",
@@ -1615,7 +1615,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-places",
-    "support_documentation": "https://developers.google.com/maps/documentation/places/web-service/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/places/web-service/"
   },
   {
     "api_description": "Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access.",
@@ -1651,7 +1651,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-productregistry",
-    "support_documentation": "https://docs.cloud.google.com/product-registry/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/product-registry"
   },
   {
     "api_description": "The Public Certificate Authority API may be used to create and manage ACME\nexternal account binding keys associated with Google Trust Services'\npublicly trusted certificate authority.",
@@ -1687,7 +1687,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-cloudquotas",
-    "support_documentation": "https://cloud.google.com/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/docs"
   },
   {
     "api_description": "The Rapid Migration Assessment service is our first-party migration\nassessment and planning tool.",
@@ -1705,7 +1705,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-rapidmigrationassessment",
-    "support_documentation": "https://cloud.google.com/migration-center/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/migration-center/docs"
   },
   {
     "api_description": "Help protect your website from fraudulent activity, spam, and abuse without\ncreating friction.",
@@ -1739,7 +1739,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-recommender",
-    "support_documentation": "https://cloud.google.com/recommender/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/recommender/docs"
   },
   {
     "api_description": "Creates, reads, and updates metadata for Google Cloud Platform resource\ncontainers.",
@@ -1809,7 +1809,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-scheduler",
-    "support_documentation": "https://cloud.google.com/scheduler/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/scheduler/docs"
   },
   {
     "api_description": "Stores sensitive data such as API keys, passwords, and certificates.\nProvides convenience while improving security.",
@@ -1879,7 +1879,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vpcaccess",
-    "support_documentation": "https://cloud.google.com/vpc/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/vpc/docs"
   },
   {
     "api_description": "Provides admission control and telemetry reporting for services integrated\nwith Service Infrastructure.",
@@ -1896,7 +1896,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-servicecontrol",
-    "support_documentation": "https://cloud.google.com/service-infrastructure/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/service-infrastructure/docs"
   },
   {
     "api_description": "Service Directory is a platform for discovering, publishing, and connecting\nservices.",
@@ -1930,7 +1930,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-servicemanagement",
-    "support_documentation": "https://cloud.google.com/service-infrastructure/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/service-infrastructure/docs"
   },
   {
     "api_description": "Enables services that service consumers want to use on Google Cloud\nPlatform, lists the available or enabled services, or disables services\nthat service consumers no longer use.",
@@ -1947,7 +1947,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-serviceusage",
-    "support_documentation": "https://cloud.google.com/service-usage/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/service-usage/docs"
   },
   {
     "api_description": "Allows users to start, configure, and connect to interactive shell sessions\nrunning in the cloud.",
@@ -1982,7 +1982,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-accounts",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Converts audio to text by applying powerful neural network models.",
@@ -2053,7 +2053,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-support",
-    "support_documentation": "https://cloud.google.com/support/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/support/docs"
   },
   {
     "api_description": "Cloud Talent Solution provides the capability to create, read, update, and\ndelete job postings, as well as search jobs based on keywords and filters.",
@@ -2071,7 +2071,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-talent",
-    "support_documentation": "https://cloud.google.com/solutions/talent-solution/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/solutions/talent-solution/docs"
   },
   {
     "api_description": "Manages the execution of large numbers of distributed requests.",
@@ -2159,7 +2159,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate",
-    "support_documentation": "https://cloud.google.com/translate/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/translate/docs"
   },
   {
     "api_description": "Train high-quality custom machine learning models with minimal machine\nlearning expertise and effort.",
@@ -2352,7 +2352,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workstations",
-    "support_documentation": "https://cloud.google.com/workstations/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/workstations/docs"
   },
   {
     "api_id": "agentidentity.googleapis.com",
@@ -2369,7 +2369,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-agentidentity",
-    "support_documentation": "https://cloud.google.com/agentidentity/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/agentidentity/docs"
   },
   {
     "api_description": "Agent Registry is a centralized, unified catalog that lets you store,\ndiscover, and govern Model Context Protocol (MCP) servers, tools, and AI\nagents within Google Cloud.",
@@ -2387,7 +2387,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-agentregistry",
-    "support_documentation": "https://docs.cloud.google.com/agent-registry/overview/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/agent-registry/overview"
   },
   {
     "api_description": "Exchange data and analytics assets securely and efficiently.",
@@ -2421,7 +2421,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apihub",
-    "support_documentation": "https://cloud.google.com/apigee/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/apigee/docs"
   },
   {
     "api_id": "cloudapiregistry.googleapis.com",
@@ -2456,7 +2456,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apphub",
-    "support_documentation": "https://cloud.google.com/app-hub/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/app-hub/docs"
   },
   {
     "api_description": "Model, deploy, and operate your SaaS at scale.",
@@ -2474,7 +2474,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-saasplatform-saasservicemgmt",
-    "support_documentation": "https://docs.cloud.google.com/app-lifecycle-manager/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/app-lifecycle-manager"
   },
   {
     "api_description": "The App Optimize API provides developers and platform teams with tools to\nmonitor, analyze, and improve the performance and cost-efficiency of their\ncloud applications.",
@@ -2492,7 +2492,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-appoptimize",
-    "support_documentation": "https://docs.cloud.google.com/app-optimize/overview/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/app-optimize/overview"
   },
   {
     "api_id": "apptopology.googleapis.com",
@@ -2509,7 +2509,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apptopology",
-    "support_documentation": "https://docs.cloud.google.com/app-topology/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/app-topology"
   },
   {
     "api_description": "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator.",
@@ -2526,7 +2526,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-area120-tables",
-    "support_documentation": "https://area120.google.com/docs/getting-support"
+    "support_documentation": "https://area120.google.com"
   },
   {
     "api_description": "The Audit Manager API allows customers to manage compliance audits.",
@@ -2544,7 +2544,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-auditmanager",
-    "support_documentation": "https://cloud.google.com/audit-manager/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/audit-manager/docs"
   },
   {
     "api_description": "Backup and DR Service is a managed service that provides backup and recovery of workloads running in Google Cloud.",
@@ -2562,7 +2562,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-backupdr",
-    "support_documentation": "https://cloud.google.com/backup-disaster-recovery/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/backup-disaster-recovery/docs"
   },
   {
     "api_id": "bigquerystorage.googleapis.com",
@@ -2597,7 +2597,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigtable-api",
-    "support_documentation": "https://cloud.google.com/bigtable/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/bigtable/docs"
   },
   {
     "api_description": "Provides programmatic access to Capacity Planner features.",
@@ -2651,7 +2651,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-hypercomputecluster",
-    "support_documentation": "https://cloud.google.com/cluster-director/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/cluster-director/docs"
   },
   {
     "api_description": "Enables consumers to procure products served by Cloud Marketplace platform.",
@@ -2669,7 +2669,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-commerce-consumer-procurement",
-    "support_documentation": "https://cloud.google.com/marketplace/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/marketplace/docs"
   },
   {
     "api_description": "Partner API for the Cloud Commerce Producer API Early Access.",
@@ -2687,7 +2687,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-commerceproducer",
-    "support_documentation": "https://docs.cloud.google.com/marketplace/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/marketplace/"
   },
   {
     "api_description": "ConfigDelivery service manages the deployment of kubernetes configuration\nto a fleet of kubernetes clusters.",
@@ -2705,7 +2705,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-configdelivery",
-    "support_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/config-sync/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/config-sync/docs"
   },
   {
     "api_description": "Enables users to create and manage connections to Google Cloud services\nand third-party business applications using the Connectors interface.",
@@ -2756,7 +2756,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-css",
-    "support_documentation": "https://developers.google.com/comparison-shopping-services/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/comparison-shopping-services/api"
   },
   {
     "api_description": "The Gemini Data Analytics API enables developers to build intelligent data\nanalytics applications. Leverage AI-powered chat interfaces to allow users\nto interact with and analyze structured data using natural language.",
@@ -2774,7 +2774,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-geminidataanalytics",
-    "support_documentation": "https://cloud.google.com/gemini/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/gemini/docs"
   },
   {
     "api_description": "Public API for Google Cloud AI Data Labeling Service.",
@@ -2808,7 +2808,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog-lineage-configmanagement",
-    "support_documentation": "https://cloud.google.com/dataplex/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataplex/docs"
   },
   {
     "api_description": "Data QnA is a natural language question and answer service for BigQuery\ndata.",
@@ -2843,7 +2843,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-databasecenter",
-    "support_documentation": "https://cloud.google.com/database-center/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/database-center/docs"
   },
   {
     "api_description": "Manages Google Cloud Dataflow projects on Google Cloud Platform.",
@@ -2860,7 +2860,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-dataflow",
-    "support_documentation": "https://cloud.google.com/dataflow/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataflow/docs"
   },
   {
     "api_description": "Accesses the schemaless NoSQL database to provide fully managed, robust,\nscalable storage for your application.",
@@ -2896,7 +2896,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-developerconnect",
-    "support_documentation": "https://cloud.google.com/developer-connect/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/developer-connect/docs"
   },
   {
     "api_description": "The Developer Knowledge API provides access to Google's developer knowledge.",
@@ -2913,7 +2913,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-developer-knowledge",
-    "support_documentation": "https://developers.google.com/knowledge/docs/getting-support"
+    "support_documentation": "https://developers.google.com/knowledge"
   },
   {
     "api_description": "The Cloud API for device streaming usage.",
@@ -2931,7 +2931,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-devicestreaming",
-    "support_documentation": "https://cloud.google.com/device-streaming/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/device-streaming/docs"
   },
   {
     "api_description": "Google Distributed Cloud Edge is a fully managed product that brings Google Cloud infrastructure and services closer to where data is being generated and consumed.",
@@ -2948,7 +2948,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgecontainer",
-    "support_documentation": "https://cloud.google.com/distributed-cloud/edge/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/distributed-cloud/edge/docs"
   },
   {
     "api_description": "Network management API for Distributed Cloud Edge.",
@@ -2984,7 +2984,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-financialservices",
-    "support_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs"
   },
   {
     "api_description": "Accesses the NoSQL document database built for automatic scaling, high\nperformance, and ease of application development.",
@@ -3020,7 +3020,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ftp",
-    "support_documentation": "https://docs.cloud.google.com/cloud-ftp/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/cloud-ftp"
   },
   {
     "api_description": "GDC is a fully managed software and hardware solution for data centers and edge locations to address regulatory, local data processing, survivability, and low-latency needs.",
@@ -3055,7 +3055,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ces",
-    "support_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps"
   },
   {
     "api_description": "Convert addresses into geographic coordinates (geocoding), which you can\nuse     to place markers or position the map. This API also allows you to\nconvert     geographic coordinates into an address (reverse geocoding).",
@@ -3073,7 +3073,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-geocode",
-    "support_documentation": "https://developers.google.com/maps/documentation/geocoding/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/geocoding/overview"
   },
   {
     "api_description": "GKE Recommender API",
@@ -3109,7 +3109,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ads-admanager",
-    "support_documentation": "https://developers.google.com/ad-manager/api/beta/docs/getting-support"
+    "support_documentation": "https://developers.google.com/ad-manager/api/beta"
   },
   {
     "api_description": "Manage properties in Google Analytics.  Warning: Creating multiple Customer\nApplications, Accounts, or Projects to simulate or act as a single\nCustomer Application, Account, or Project (respectively) or to circumvent\nService-specific usage limits or quotas is a direct violation of Google\nCloud Platform Terms of Service as well as Google APIs Terms of Service.\nThese actions can result in immediate termination of your GCP project(s)\nwithout any warning.",
@@ -3127,7 +3127,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-analytics-admin",
-    "support_documentation": "https://developers.google.com/analytics/docs/getting-support"
+    "support_documentation": "https://developers.google.com/analytics/"
   },
   {
     "api_description": "Accesses report data in Google Analytics. Warning: Creating multiple\nCustomer Applications, Accounts, or Projects to simulate or act as a\nsingle Customer Application, Account, or Project (respectively) or to\ncircumvent Service-specific usage limits or quotas is a direct violation\nof Google Cloud Platform Terms of Service as well as Google APIs Terms of\nService. These actions can result in immediate termination of your GCP\nproject(s) without any warning.",
@@ -3145,7 +3145,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-analytics-data",
-    "support_documentation": "https://developers.google.com/analytics/docs/getting-support"
+    "support_documentation": "https://developers.google.com/analytics/"
   },
   {
     "api_description": "The Google Chat API lets you build Chat apps to integrate your services\nwith Google Chat and manage Chat resources such as spaces, members, and\nmessages.",
@@ -3163,7 +3163,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-chat",
-    "support_documentation": "https://developers.google.com/chat/concepts/docs/getting-support"
+    "support_documentation": "https://developers.google.com/chat/concepts"
   },
   {
     "api_description": "The Google Health API lets you view and manage health and fitness metrics\nand measurement data.",
@@ -3181,7 +3181,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-devicesandservices-health",
-    "support_documentation": "https://developers.google.com/health/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/health/api"
   },
   {
     "api_description": "The Google Marketing Platform Admin API allows for programmatic access to\nthe Google Marketing Platform configuration data. You can use the Google\nMarketing Platform Admin API to manage links between your Google Marketing\nPlatform organization and Google Analytics accounts, and to set the\nservice level of your GA4 properties.",
@@ -3217,7 +3217,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-apps-meet",
-    "support_documentation": "https://developers.google.com/workspace/meet/api/guides/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/workspace/meet/api/guides/overview"
   },
   {
     "api_description": "The Google Workspace Events API lets you subscribe to events and manage\nchange notifications across Google Workspace applications.",
@@ -3235,7 +3235,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-apps-events-subscriptions",
-    "support_documentation": "https://developers.google.com/workspace/events/docs/getting-support"
+    "support_documentation": "https://developers.google.com/workspace/events"
   },
   {
     "api_description": "Creates and manages Google Cloud Platform resources and infrastructure.",
@@ -3253,7 +3253,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config",
-    "support_documentation": "https://cloud.google.com/infrastructure-manager/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/infrastructure-manager/docs"
   },
   {
     "api_description": "isochrones.googleapis.com API.",
@@ -3270,7 +3270,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-isochrones",
-    "support_documentation": "https://developers.google.com/maps/documentation/isochrones/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/isochrones/overview"
   },
   {
     "api_description": "Enables Fleet Engine for access to the On Demand Rides and Deliveries and\nLast Mile Fleet Solution APIs.  Customer's use of Google Maps Content in\nthe Cloud Logging Services is subject to the Google Maps Platform Terms of\nService located at https://cloud.google.com/maps-platform/terms.",
@@ -3359,7 +3359,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-locationfinder",
-    "support_documentation": "https://cloud.google.com/location-finder/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/location-finder/docs"
   },
   {
     "api_description": "Writes log entries and manages your Cloud Logging configuration.",
@@ -3377,7 +3377,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-logging-api",
-    "support_documentation": "https://cloud.google.com/logging/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/logging/docs"
   },
   {
     "api_description": "The Maintenance API provides a centralized view of planned disruptive\nmaintenance events across supported Google Cloud products. It offers users\nvisibility into upcoming, ongoing, and completed maintenance, along with\ncontrols to manage certain maintenance activities, such as maintenance\nwindows, rescheduling, and on-demand updates.",
@@ -3395,7 +3395,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-maintenance-api",
-    "support_documentation": "https://cloud.google.com/unified-maintenance/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/unified-maintenance/docs"
   },
   {
     "api_description": "Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications.",
@@ -3413,7 +3413,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lustre",
-    "support_documentation": "https://cloud.google.com/managed-lustre/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/managed-lustre/docs"
   },
   {
     "api_description": "Manage Apache Kafka clusters and resources.",
@@ -3467,7 +3467,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-mapmanagement",
-    "support_documentation": "https://developers.google.com/maps/documentation/mapmanagement/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/mapmanagement/overview"
   },
   {
     "api_description": "The Media Translation API provides enterprise-quality translation from/to various media types.",
@@ -3484,7 +3484,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-mediatranslation",
-    "support_documentation": "https://cloud.google.com/media-translation/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/media-translation/docs"
   },
   {
     "api_description": "Memorystore for Valkey is a fully managed Valkey service for Google Cloud which supports both Cluster Mode Enabled and Cluster Mode Disabled instances.",
@@ -3502,7 +3502,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-memorystore",
-    "support_documentation": "https://cloud.google.com/memorystore/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/memorystore/docs"
   },
   {
     "api_description": "Creates and manages Redis instances on the Google Cloud Platform.",
@@ -3520,7 +3520,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-redis-cluster",
-    "support_documentation": "https://cloud.google.com/memorystore/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/memorystore/docs"
   },
   {
     "api_description": "Model Armor helps you protect against risks like prompt injection, harmful\ncontent, and data leakage in generative AI applications by letting you\ndefine policies that filter user prompts and model responses.",
@@ -3556,7 +3556,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-navconnect",
-    "support_documentation": "https://developers.google.com/maps/documentation/navigation/connect/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/navigation/connect"
   },
   {
     "api_description": "Google Cloud NetApp Volumes is a fully-managed, cloud-based data storage\nservice that provides advanced data management capabilities and highly\nscalable performance with global availability.",
@@ -3574,7 +3574,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-netapp",
-    "support_documentation": "https://cloud.google.com/netapp/volumes/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/netapp/volumes/docs"
   },
   {
     "api_id": "networkservices.googleapis.com",
@@ -3591,7 +3591,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-networkservices",
-    "support_documentation": "https://cloud.google.com/products/networking/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/products/networking/docs"
   },
   {
     "api_description": "Provides functionality for configuring the observability scope, which\ncontrols the log, metric, and trace data that you can view.",
@@ -3627,7 +3627,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-oracledatabase",
-    "support_documentation": "https://cloud.google.com/oracle/database/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/oracle/database/docs"
   },
   {
     "api_description": "Parallelstore is a high performance, managed parallel file service based on DAOS. It delivers up to 6x greater read throughput performance compared to competitive Lustre scratch offerings.",
@@ -3663,7 +3663,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-parametermanager",
-    "support_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs"
   },
   {
     "api_description": "Phishing Protection helps prevent users from accessing phishing sites by identifying various signals associated with malicious content, including the use of your brand assets, classifying malicious content that uses your brand and reporting the unsafe URLs to Google Safe Browsing. Once a site is propagated to Safe Browsing, users will see warnings across more than 4 billion devices.",
@@ -3698,7 +3698,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-areainsights",
-    "support_documentation": "https://developers.google.com/maps/documentation/places-insights/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/places-insights"
   },
   {
     "api_description": "Policy Simulator is a collection of endpoints for creating, running, and\nviewing a [Replay][google.cloud.policysimulator.v1.Replay]. A `Replay` is\na type of simulation that lets you see how your members' access to\nresources might change if you changed your IAM policy.\n\nDuring a `Replay`, Policy Simulator re-evaluates, or replays, past access\nattempts under both the current policy and your proposed policy, and\ncompares those results to determine how your members' access might change\nunder the\nproposed policy.",
@@ -3751,7 +3751,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-privatecatalog",
-    "support_documentation": "https://cloud.google.com/private-catalog/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/private-catalog/docs"
   },
   {
     "api_description": "Privileged Access Manager (PAM) helps you on your journey towards least\nprivilege and helps mitigate risks tied to privileged access misuse or\nabuse. PAM allows you to shift from always-on standing privileges towards\non-demand access with just-in-time, time-bound, and approval-based access\nelevations. PAM allows IAM administrators to create entitlements that can\ngrant just-in-time, temporary access to any resource scope. Requesters can\nexplore eligible entitlements and request the access needed for their\ntask. Approvers are notified when approvals await their\ndecision. Streamlined workflows facilitated by using PAM can support\nvarious use cases, including emergency access for incident responders,\ntime-boxed access for developers for critical deployment or maintenance,\ntemporary access for operators for data ingestion and audits, JIT access\nto service accounts for automated tasks, and more.",
@@ -3787,7 +3787,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-devtools-cloudprofiler",
-    "support_documentation": "https://cloud.google.com/profiler/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/profiler/docs"
   },
   {
     "api_description": "Provides reliable, many-to-many, asynchronous messaging between\napplications.",
@@ -3823,7 +3823,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-routeoptimization",
-    "support_documentation": "https://developers.google.com/maps/documentation/route-optimization/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/route-optimization"
   },
   {
     "api_description": "Regionally deployed, single-tenant managed source code repository hosted on\nGoogle Cloud.",
@@ -3841,7 +3841,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securesourcemanager",
-    "support_documentation": "https://cloud.google.com/secure-source-manager/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/secure-source-manager/docs"
   },
   {
     "api_description": "Management API for Security Command Center, a built-in security and risk\nmanagement solution for Google Cloud. Use this API to programmatically\nupdate the settings and configuration of Security Command Center.",
@@ -3895,7 +3895,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-servicehealth",
-    "support_documentation": "https://cloud.google.com/service-health/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/service-health/docs"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -3913,7 +3913,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-conversions",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -3931,7 +3931,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-datasources",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -3949,7 +3949,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-inventories",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -3967,7 +3967,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-issueresolution",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -3985,7 +3985,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-lfp",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4003,7 +4003,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-loyaltycustomers",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4021,7 +4021,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-notifications",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4039,7 +4039,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-ordertracking",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4057,7 +4057,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-products",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4075,7 +4075,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-promotions",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4093,7 +4093,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-quota",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4111,7 +4111,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-reports",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Programmatically manage your Merchant Center Accounts.",
@@ -4129,7 +4129,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-reviews",
-    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+    "support_documentation": "https://developers.google.com/merchant/api"
   },
   {
     "api_description": "Solar API.",
@@ -4147,7 +4147,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar",
-    "support_documentation": "https://developers.google.com/maps/documentation/solar/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/maps/documentation/solar/overview"
   },
   {
     "api_description": "Cloud Spanner is a managed, mission-critical, globally consistent and\nscalable relational database service.",
@@ -4237,7 +4237,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-streetview-publish",
-    "support_documentation": "https://developers.google.com/streetview/publish/docs/getting-support"
+    "support_documentation": "https://developers.google.com/streetview/publish"
   },
   {
     "api_description": "APIs to automate management of cloud infrastructure for network functions.",
@@ -4255,7 +4255,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-telcoautomation",
-    "support_documentation": "https://cloud.google.com/telecom-network-automation/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/telecom-network-automation/docs"
   },
   {
     "api_description": "The Vector Search API provides a fully-managed, highly performant, and\nscalable vector database designed to power next-generation search,\nrecommendation, and generative AI applications. It allows you to store,\nindex, and query your data and its corresponding vector embeddings through\na simple, intuitive interface. With Vector Search, you can define custom\nschemas for your data, insert objects with associated metadata,\nautomatically generate embeddings from your data, and perform fast\napproximate nearest neighbor (ANN) searches to find semantically similar\nitems at scale.",
@@ -4273,7 +4273,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vectorsearch",
-    "support_documentation": "https://docs.cloud.google.com/vertex-ai/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/vertex-ai/"
   },
   {
     "api_description": "Vertex AI Vision is an AI-powered platform to ingest, analyze and store video data.",
@@ -4326,6 +4326,6 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workloadmanager",
-    "support_documentation": "https://docs.cloud.google.com/workload-manager/docs/getting-support"
+    "support_documentation": "https://docs.cloud.google.com/workload-manager/docs"
   }
 ]
