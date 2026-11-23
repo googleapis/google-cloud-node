@@ -4203,6 +4203,38 @@ describe('File', () => {
         done();
       });
     });
+
+    it('should pass retry delays in milliseconds and stop after maxRetries', done => {
+      gaxiosStub.resolves({data: {}});
+
+      file.isPublic(err => {
+        assert.ifError(err);
+        const retryOptions = file.storage.retryOptions;
+        const retryConfig = gaxiosStub.getCall(0).args[0].retryConfig;
+        assert.strictEqual(
+          retryConfig.maxRetryDelay,
+          retryOptions.maxRetryDelay! * 1000,
+        );
+        assert.strictEqual(
+          retryConfig.totalTimeout,
+          retryOptions.totalTimeout! * 1000,
+        );
+        const error503 = (currentRetryAttempt: number) =>
+          ({
+            response: {status: 503},
+            config: {retryConfig: {currentRetryAttempt}},
+          }) as unknown as GaxiosError;
+        assert.strictEqual(
+          retryConfig.shouldRetry(error503(retryOptions.maxRetries! - 1)),
+          true,
+        );
+        assert.strictEqual(
+          retryConfig.shouldRetry(error503(retryOptions.maxRetries!)),
+          false,
+        );
+        done();
+      });
+    });
   });
 
   describe('moveFileAtomic', () => {

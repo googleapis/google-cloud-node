@@ -324,11 +324,30 @@ export class StorageTransport {
         retryConfig: {
           retry: maxRetries,
           noResponseRetries: maxRetries,
-          maxRetryDelay: this.retryOptions.maxRetryDelay,
+          // retryOptions are in seconds, gaxios expects milliseconds.
+          maxRetryDelay: this.retryOptions.maxRetryDelay
+            ? this.retryOptions.maxRetryDelay * 1000
+            : undefined,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-          totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) =>
-            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
+          totalTimeout: this.retryOptions.totalTimeout
+            ? this.retryOptions.totalTimeout * 1000
+            : undefined,
+          // A custom shouldRetry replaces the default check of gaxios, which
+          // is also where gaxios stops after `retry` attempts, so the limits
+          // are checked here.
+          shouldRetry: (err: GaxiosError) => {
+            const config = err.config?.retryConfig;
+            if (
+              isRetryDisabled ||
+              (config?.currentRetryAttempt ?? 0) >= maxRetries ||
+              (config?.timeOfFirstRequest !== undefined &&
+                config.totalTimeout !== undefined &&
+                Date.now() - config.timeOfFirstRequest >= config.totalTimeout)
+            ) {
+              return false;
+            }
+            return !!this.retryOptions.retryableErrorFn?.(err);
+          },
         },
         ...reqOpts,
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
