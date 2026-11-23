@@ -34,6 +34,7 @@ import {GaxiosError, GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {
+  assertUniverseDomain,
   getRuntimeTrackingString,
   getUserAgentString,
   getPLimit,
@@ -197,6 +198,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   public fileName;
 
   private authClient;
+  private universeDomain;
   private xmlParser;
   private xmlBuilder;
   private baseUrl;
@@ -210,6 +212,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   ) {
     this.authClient =
       bucket.storage.storageTransport.authClient || new GoogleAuth();
+    this.universeDomain = bucket.storage.universeDomain;
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
@@ -262,6 +265,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
     const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
+    await assertUniverseDomain(this.authClient, this.universeDomain);
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<
@@ -314,6 +318,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers.set('x-goog-hash', `crc32c=${crc.toString()}`);
     }
 
+    await assertUniverseDomain(this.authClient, this.universeDomain);
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(
@@ -352,6 +357,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
       parts,
     )}</CompleteMultipartUpload>`;
+    await assertUniverseDomain(this.authClient, this.universeDomain);
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(
@@ -381,6 +387,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async abortUpload(): Promise<void> {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
+    await assertUniverseDomain(this.authClient, this.universeDomain);
     return AsyncRetry(async bail => {
       try {
         const res = await this.authClient.request<MultiPartUploadErrorResponse>(

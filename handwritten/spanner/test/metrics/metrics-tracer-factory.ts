@@ -948,4 +948,39 @@ describe('MetricsTracerFactory getMeterProvider readers', () => {
     // Must not log a warning because hasMetricReaders() prevented re-registering
     assert.ok(warnStub.notCalled);
   });
+
+  it('should scope instances by (universeDomain, monitoringEndpoint) and reset all on resetInstance', async () => {
+    const defaultFactory = MetricsTracerFactory.getInstance('p1');
+    const explicitDefaultFactory = MetricsTracerFactory.getInstance(
+      'p1',
+      'googleapis.com',
+    );
+    const customUniverseFactory = MetricsTracerFactory.getInstance(
+      'p1',
+      'custom-universe.example',
+    );
+    const customHostFactory = MetricsTracerFactory.getInstance(
+      'p1',
+      'custom-universe.example',
+      'monitoring.custom-universe.example:8443',
+    );
+
+    assert.strictEqual(defaultFactory, explicitDefaultFactory);
+    assert.notStrictEqual(defaultFactory, customUniverseFactory);
+    assert.notStrictEqual(customUniverseFactory, customHostFactory);
+
+    const resetSpyDefault = sandbox.spy(defaultFactory!, 'resetMeterProvider');
+    const resetSpyCustom = sandbox.spy(
+      customHostFactory!,
+      'resetMeterProvider',
+    );
+    await MetricsTracerFactory.resetInstance();
+
+    assert.strictEqual(resetSpyDefault.calledOnce, true);
+    assert.strictEqual(resetSpyCustom.calledOnce, true);
+    assert.notStrictEqual(
+      MetricsTracerFactory.getInstance('p1', 'custom-universe.example'),
+      customUniverseFactory,
+    );
+  });
 });

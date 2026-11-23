@@ -105,6 +105,14 @@ describe('File', () => {
   let directoryFile: File;
 
   const DATA = 'test data';
+  const MISMATCH =
+    /does not match the universe domain found in the credentials/;
+  const OTHER_UNIVERSE_CREDENTIALS = {
+    type: 'service_account',
+    client_email: 'test@example.iam.gserviceaccount.com',
+    private_key: 'not-a-real-key',
+    universe_domain: 'example-universe.test',
+  };
   // crc32c hash of 'test data'
   const CRC32C_HASH = 'M3m0yg==';
   // md5 hash of 'test data'
@@ -2107,6 +2115,16 @@ describe('File', () => {
       delete (global as any).resumableUpload;
     });
 
+    it('should reject credentials of another universe domain', async () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await assert.rejects(otherFile.createResumableUpload(), MISMATCH);
+    });
+
     it('should not require options', () => {
       resumableUploadStub.callsFake((opts, callback) => {
         assert.strictEqual(opts.metadata, undefined);
@@ -2307,6 +2325,18 @@ describe('File', () => {
 
       const writable = file.createWriteStream(options);
       assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+      writable.write('data');
+    });
+      
+    it('should not load credentials before a resumable upload', done => {
+      const getClient = sandbox.stub().rejects(new Error('no credentials'));
+      sandbox.define(file.storageTransport, 'authClient', {getClient});
+      const writable = file.createWriteStream({metadata: METADATA});
+
+      file.startResumableUpload_ = sandbox.stub().callsFake(() => {
+        assert.strictEqual(getClient.called, false);
+        done();
+      });
       writable.write('data');
     });
 
@@ -3185,6 +3215,41 @@ describe('File', () => {
       });
     });
 
+    it('should return an error for credentials of another universe domain', done => {
+      const authClient = new GoogleAuth({
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const sign = sandbox.stub(authClient, 'sign').resolves('signature');
+      file.storage.storageTransport.authClient = authClient;
+
+      file.generateSignedPostPolicyV2(CONFIG, err => {
+        assert.strictEqual(err?.name, 'SigningError');
+        assert.match(err!.message, MISMATCH);
+        assert.strictEqual(sign.called, false);
+        done();
+      });
+    });
+
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV2(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+      );
+    });
+
     it('should add key equality condition', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.generateSignedPostPolicyV2(CONFIG, (err, signedPolicy: any) => {
@@ -3611,6 +3676,39 @@ describe('File', () => {
         assert.strictEqual(err?.name, 'SigningError');
         assert.strictEqual(err?.message, error.message);
       });
+    });
+
+    it('should return an error for credentials of another universe domain', async () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await assert.rejects(
+        otherFile.generateSignedPostPolicyV4(CONFIG),
+        MISMATCH,
+      );
+    });
+
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV4(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+      );
     });
 
     it('should add key condition', () => {
@@ -5269,6 +5367,7 @@ describe('File', () => {
 
       const authClient = new GoogleAuth();
       sandbox.stub(authClient, 'request');
+      sandbox.stub(authClient, 'getClient').resolves();
 
       const realTransport = new StorageTransport({
         apiEndpoint: 'https://storage.googleapis.com',
@@ -5346,6 +5445,29 @@ describe('File', () => {
       }
       assert.strictEqual(retryCount, 2);
     });
+
+    for (const resumable of [false, true]) {
+      it(`should reject credentials of another universe domain (resumable: ${resumable})`, async () => {
+        const storage = new Storage({
+          projectId: PROJECT_ID,
+          credentials: OTHER_UNIVERSE_CREDENTIALS,
+        });
+        const requestStub = sandbox.stub(
+          storage.storageTransport.authClient,
+          'request',
+        );
+        const otherFile = new File(
+          new Bucket(storage, 'bucket-name'),
+          FILE_NAME,
+        );
+
+        await assert.rejects(
+          otherFile.save(DATA, {resumable, validation: false}),
+          MISMATCH,
+        );
+        assert.strictEqual(requestStub.called, false);
+      });
+    }
   });
 
   describe('setMetadata', () => {
