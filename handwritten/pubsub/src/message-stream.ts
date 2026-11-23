@@ -21,7 +21,8 @@ import {PassThrough} from 'stream';
 
 import {PullRetry} from './pull-retry';
 import {Subscriber} from './subscriber';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
@@ -46,12 +47,12 @@ export const logs = {
 const KEEP_ALIVE_INTERVAL = 30000;
 
 /*!
- * Deadline for the stream. This will need to go away and be replaced with something
- * more graceful for pulling the config out of the pubsub-api package.
+ * Deadline for the stream.
  */
-const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json')
-  .interfaces['google.pubsub.v1.Subscriber'].methods.StreamingPull
-  .timeout_millis;
+const PULL_TIMEOUT =
+  require('@google-cloud/pubsub-api/build/src/v1/subscriber_client_config.json')
+    .interfaces['google.pubsub.v1.Subscriber'].methods.StreamingPull
+    .timeout_millis;
 
 /**
  * @typedef {object} MessageStreamOptions

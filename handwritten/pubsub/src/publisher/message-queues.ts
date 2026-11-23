@@ -27,7 +27,8 @@ import {
   HedgingScheduler,
   HedgingTokenBucket,
 } from './hedging';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {Duration} from '../temporal';
 import * as tracing from '../telemetry-tracing';
 import {filterMessage} from './pubsub-message';

@@ -13,7 +13,8 @@
 // limitations under the License.
 
 import {CallOptions} from 'google-gax';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {Attributes} from './publisher';
 import {PubSub} from './pubsub';
 
@@ -198,8 +199,7 @@ export class Schema {
   async validateMessage(
     message: string,
     encoding:
-      | google.pubsub.v1.Encoding
-      | keyof typeof google.pubsub.v1.Encoding,
+      google.pubsub.v1.Encoding | keyof typeof google.pubsub.v1.Encoding,
     gaxOpts?: CallOptions,
   ): Promise<void> {
     const client = await this.pubsub.getSchemaClient();

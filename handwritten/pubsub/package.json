@@ -40,7 +40,6 @@
     "fix": "gts fix",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
-    "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "pretest": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",

@@ -23,7 +23,8 @@ import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {PassThrough} from 'stream';
 import * as opentelemetry from '@opentelemetry/api';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import * as defer from 'p-defer';
 import * as crypto from 'node:crypto';
 

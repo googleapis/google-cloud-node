@@ -30,7 +30,8 @@ import {Duration} from '../../src/temporal';
 import * as otel from '../../src/telemetry-tracing';
 import {exporter} from '../tracing';
 import {FakeLog, TestUtils} from '../test-utils';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 
 class FakePubSub {
   isIdResolved = true;
