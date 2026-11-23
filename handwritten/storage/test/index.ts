@@ -489,7 +489,7 @@ describe('Storage', () => {
   describe('hmacKey', () => {
     let hmacKeyCtor: sinon.SinonSpy;
     beforeEach(() => {
-      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+      hmacKeyCtor = sandbox.spy(hmacKeyModule, 'HmacKey');
     });
 
     afterEach(() => {
@@ -536,7 +536,7 @@ describe('Storage', () => {
 
     let hmacKeyCtor: sinon.SinonSpy;
     beforeEach(() => {
-      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+      hmacKeyCtor = sandbox.spy(hmacKeyModule, 'HmacKey');
     });
 
     afterEach(() => {
@@ -1247,7 +1247,7 @@ describe('Storage', () => {
 
     let hmacKeyCtor: sinon.SinonSpy;
     beforeEach(() => {
-      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+      hmacKeyCtor = sandbox.spy(hmacKeyModule, 'HmacKey');
     });
 
     afterEach(() => {

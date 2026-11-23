@@ -26,7 +26,7 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import sinon, {createSandbox, stub, spy, restore, useFakeTimers} from 'sinon';
+import sinon, {createSandbox} from 'sinon';
 import {GoogleAuth} from 'google-auth-library';
 import {
   FileExceptionMessages,
@@ -1490,9 +1490,9 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = sandbox.spy(gunzipStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1523,8 +1523,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is closed', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1555,8 +1555,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is already writableEnded', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1592,8 +1592,8 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = sandbox.spy(gunzipStream, 'destroy');
 
           pipelineOverride = (...args: unknown[]) => {
             const onComplete = args[args.length - 1] as (
@@ -2173,24 +2173,27 @@ describe('File', () => {
             idempotencyStrategy: IdempotencyStrategy.RetryConditional,
           },
         },
-        getRequestInterceptors: stub().returns([
-          (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
-        ]),
+        getRequestInterceptors: sandbox
+          .stub()
+          .returns([
+            (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
+          ]),
         generation: 123,
         encryptionKey: 'test-encryption-key',
         kmsKeyName: 'test-kms-key-name',
         userProject: 'test-user-project',
         instancePreconditionOpts: {ifGenerationMatch: 123},
-        createResumableUpload: spy(),
+        createResumableUpload: sandbox.spy(),
       };
 
-      resumableUploadStub = stub();
+      resumableUploadStub = sandbox.stub();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (global as any).resumableUpload = {createURI: resumableUploadStub};
     });
 
     afterEach(() => {
-      restore();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (global as any).resumableUpload;
     });
 
     it('should not require options', () => {
@@ -2842,7 +2845,7 @@ describe('File', () => {
       };
 
       originalSetEncryptionKey = file.setEncryptionKey;
-      file.setEncryptionKey = stub();
+      file.setEncryptionKey = sandbox.stub();
     });
 
     afterEach(() => {
@@ -3562,12 +3565,11 @@ describe('File', () => {
     const CLIENT_EMAIL = 'test@domain.com';
     const SIGNATURE = 'signature';
 
-    let fakeTimer: sinon.SinonFakeTimers;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let BUCKET: any;
 
     beforeEach(() => {
-      fakeTimer = useFakeTimers(NOW);
+      sandbox.useFakeTimers(NOW);
       CONFIG = {
         expires: NOW.valueOf() + 2000,
       };
@@ -3585,10 +3587,6 @@ describe('File', () => {
           },
         },
       };
-    });
-
-    afterEach(() => {
-      fakeTimer.restore();
     });
 
     const fieldsToConditions = (fields: object) =>
@@ -5986,7 +5984,7 @@ describe('File', () => {
         };
 
         const resumableUpload = {
-          upload: stub().callsFake(opts => {
+          upload: sandbox.stub().callsFake(opts => {
             const bucket = file.bucket;
             const storage = bucket.storage;
             const authClient = storage.storageTransport.authClient;
@@ -6015,7 +6013,7 @@ describe('File', () => {
         const uploadStream = new PassThrough();
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             uploadStream.emit('response', resp);
             done();
             return uploadStream;
@@ -6036,7 +6034,7 @@ describe('File', () => {
         const metadata = {};
         const uploadStream = new PassThrough();
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             uploadStream.emit('metadata', metadata);
             setImmediate(() => {
               assert.deepStrictEqual(file.metadata, metadata);
@@ -6056,7 +6054,7 @@ describe('File', () => {
         dup.on('complete', done);
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.end();
@@ -6080,7 +6078,7 @@ describe('File', () => {
         };
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             done();
             return uploadStream;
           }),
@@ -6099,7 +6097,7 @@ describe('File', () => {
         });
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.emit('progress', progress);
@@ -6123,7 +6121,7 @@ describe('File', () => {
         });
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             done();
             return uploadStream;
           }),
