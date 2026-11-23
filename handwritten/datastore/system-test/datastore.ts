@@ -127,8 +127,9 @@ async.each(
         if (!dataClient) {
           throw new Error('DatastoreClient is not initialized');
         }
-        const results = (await dataClient['lookup'](request)) as
-          Array<google.datastore.v1.ILookupResponse> | undefined;
+        const results = (await retryOnTransientError(() =>
+          dataClient['lookup'](request),
+        )) as Array<google.datastore.v1.ILookupResponse> | undefined;
         const seconds = results?.[0]?.readTime?.seconds;
         const parsedSeconds =
           seconds === undefined || seconds === null
