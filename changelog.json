@@ -5,6 +5,33 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "8.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "88cb4527-0fe6-4b3b-b656-62d9dcf6e418",
+      "createTime": "2026-11-23T17:56:35.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "441be8ae6dc8dd0692174ba6cd4251abec522ca1",
           "message": "Respect universeDomain and custom endpoints in metrics (#9957)",
           "issues": [
@@ -105318,5 +105345,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-23T17:21:02.011Z"
+  "updateTime": "2026-11-23T17:56:35.036Z"
 }
