@@ -51,8 +51,8 @@ jobs:
     - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
       with:
         go-version: '>=1.20.2'
-    - run: chmod +x .kokoro/mandatory-conformance.sh
+    - run: chmod +x ./scripts/mandatory-conformance.sh
     - uses: ./.github/actions/pnpm-lockfile-check
     - run: pnpm --filter ...{handwritten/bigtable} run --if-present compile
     - run: go version
-    - run: .kokoro/mandatory-conformance.sh
+    - run: ./scripts/mandatory-conformance.sh
