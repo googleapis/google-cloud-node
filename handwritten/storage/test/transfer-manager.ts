@@ -996,6 +996,25 @@ describe('Transfer Manager', () => {
       assert(called);
     });
 
+    it('should not send a request with credentials of another universe domain', async () => {
+      const authClient = new GoogleAuth({
+        credentials: {
+          type: 'service_account',
+          client_email: 'test@example.iam.gserviceaccount.com',
+          private_key: 'not-a-real-key',
+          universe_domain: 'example-universe.test',
+        },
+      });
+      const requestStub = sandbox.stub(authClient, 'request');
+      transferManager.bucket.storage.storageTransport.authClient = authClient;
+
+      await assert.rejects(
+        transferManager.uploadFileInChunks(filePath),
+        /does not match the universe domain found in the credentials/,
+      );
+      assert.strictEqual(requestStub.called, false);
+    });
+
     it('should set User-Agent correctly based on package.json', async () => {
       let called = false;
       class TestAuthClient extends AuthClient {
