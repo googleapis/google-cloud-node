@@ -4819,6 +4819,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {object=} options - Configuration object.
    *
    * @private
+   * @internal
    */
   startSimpleUpload_(
     dup: Duplexify,
