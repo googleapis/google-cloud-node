@@ -678,6 +678,14 @@ describe('Spanner', () => {
       }
     });
 
+    it('should reuse a caller-provided GoogleAuth instance', () => {
+      const callerAuth = Object.create(fakeGoogleAuth.prototype);
+      callerAuth.getProjectId = cb => cb && cb(null, 'caller-project');
+      const clientWithCallerAuth = new Spanner(asAny({auth: callerAuth}));
+      assert.strictEqual(clientWithCallerAuth.auth, callerAuth);
+      assert.notStrictEqual(new Spanner().auth, callerAuth);
+    });
+
     // T6: universeDomain, universe_domain, and GOOGLE_CLOUD_UNIVERSE_DOMAIN are forwarded to exporter.
     it('should forward universeDomain from option, universe_domain alias, and env var to exporter', async () => {
       new Spanner({
@@ -858,28 +866,43 @@ describe('Spanner', () => {
       assert.doesNotThrow(() => capturedCallback!(null, 'async-project'));
       assert.strictEqual(asAny(client)._metricsEnabled, false);
       assert.strictEqual(errorStub.calledOnce, true);
+      assert.ok(
+        (errorStub.getCall(0).args[0] as string).includes(
+          'side metrics: exporter init failure',
+        ),
+      );
     });
 
-    // T11: Sync mixed-universe process disables metrics on mismatched second client without affecting first.
-    it('should disable metrics on a second client with a mismatched universeDomain in the same process', () => {
-      const warnStub = sandbox.stub(console, 'warn');
+    // T11: Sync mixed-universe clients each get an isolated MetricsTracerFactory and exporter.
+    it('should isolate MetricsTracerFactory and exporter per universeDomain in the same process', () => {
       const clientA = new Spanner({projectId: 'project-a'});
-      assert.strictEqual(asAny(clientA)._metricsEnabled, true);
-      assert.strictEqual(recordedExporterCalls.length, 1);
-
       const clientB = new Spanner({
         projectId: 'project-b',
         universeDomain: 'custom-universe.example',
       });
-      assert.strictEqual(asAny(clientB)._metricsEnabled, false);
       assert.strictEqual(asAny(clientA)._metricsEnabled, true);
+      assert.strictEqual(asAny(clientB)._metricsEnabled, true);
       assert.strictEqual(MetricsTracerFactory.enabled, true);
-      assert.strictEqual(recordedExporterCalls.length, 1);
-      assert.strictEqual(warnStub.calledOnce, true);
+      assert.strictEqual(recordedExporterCalls.length, 2);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'googleapis.com',
+      );
+      assert.strictEqual(
+        recordedExporterCalls[1].options.universeDomain,
+        'custom-universe.example',
+      );
+      assert.notStrictEqual(
+        MetricsTracerFactory.getInstance('project-a', 'googleapis.com'),
+        MetricsTracerFactory.getInstance(
+          'project-b',
+          'custom-universe.example',
+        ),
+      );
     });
 
-    // T11b: Async mixed-universe process (no projectId) guards against mismatch in both callback orders.
-    it('should guard mixed-universe clients resolving getProjectId asynchronously in both orders', async () => {
+    // T11b: Async mixed-universe clients (no projectId) each attach an isolated exporter in both callback orders.
+    it('should isolate mixed-universe clients resolving getProjectId asynchronously in both orders', async () => {
       const runAsyncOrder = async (resolveFirstIndex: 0 | 1) => {
         await MetricsTracerFactory.resetInstance();
         MetricsTracerFactory.enabled = true;
@@ -892,37 +915,37 @@ describe('Spanner', () => {
             callbacks.push(cb);
           }
         };
-        const warnStub = sandbox.stub(console, 'warn');
-        try {
-          const clientA = new Spanner();
-          const clientB = new Spanner({
-            universeDomain: 'custom-universe.example',
-          });
-          assert.strictEqual(callbacks.length, 2);
+        const clientA = new Spanner();
+        const clientB = new Spanner({
+          universeDomain: 'custom-universe.example',
+        });
+        assert.strictEqual(callbacks.length, 2);
 
-          const secondIndex = resolveFirstIndex === 0 ? 1 : 0;
-          callbacks[resolveFirstIndex](null, `project-${resolveFirstIndex}`);
-          callbacks[secondIndex](null, `project-${secondIndex}`);
+        const secondIndex = resolveFirstIndex === 0 ? 1 : 0;
+        callbacks[resolveFirstIndex](null, `project-${resolveFirstIndex}`);
+        callbacks[secondIndex](null, `project-${secondIndex}`);
 
-          const firstClient = resolveFirstIndex === 0 ? clientA : clientB;
-          const secondClient = resolveFirstIndex === 0 ? clientB : clientA;
-          const expectedUniverse =
-            resolveFirstIndex === 0
-              ? 'googleapis.com'
-              : 'custom-universe.example';
+        const expectedFirstUniverse =
+          resolveFirstIndex === 0
+            ? 'googleapis.com'
+            : 'custom-universe.example';
+        const expectedSecondUniverse =
+          resolveFirstIndex === 0
+            ? 'custom-universe.example'
+            : 'googleapis.com';
 
-          assert.strictEqual(recordedExporterCalls.length, 1);
-          assert.strictEqual(
-            recordedExporterCalls[0].options.universeDomain,
-            expectedUniverse,
-          );
-          assert.strictEqual(asAny(firstClient)._metricsEnabled, true);
-          assert.strictEqual(asAny(secondClient)._metricsEnabled, false);
-          assert.strictEqual(MetricsTracerFactory.enabled, true);
-          assert.strictEqual(warnStub.calledOnce, true);
-        } finally {
-          warnStub.restore();
-        }
+        assert.strictEqual(recordedExporterCalls.length, 2);
+        assert.strictEqual(
+          recordedExporterCalls[0].options.universeDomain,
+          expectedFirstUniverse,
+        );
+        assert.strictEqual(
+          recordedExporterCalls[1].options.universeDomain,
+          expectedSecondUniverse,
+        );
+        assert.strictEqual(asAny(clientA)._metricsEnabled, true);
+        assert.strictEqual(asAny(clientB)._metricsEnabled, true);
+        assert.strictEqual(MetricsTracerFactory.enabled, true);
       };
 
       await runAsyncOrder(0);

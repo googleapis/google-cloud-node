@@ -146,12 +146,12 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _projectId: string;
   private _lastExported: Date = new Date(0);
   private readonly _client: MetricServiceClient;
+  private readonly _universeDomain?: string;
+  private readonly _monitoringEndpoint?: string;
   private _metricsExportFailureLogged = false;
 
-  constructor(
-    {auth, universeDomain, apiEndpoint}: ExporterOptions,
-    projectId: string,
-  ) {
+  constructor(options: ExporterOptions, projectId: string) {
+    const {auth, universeDomain, apiEndpoint} = options;
     let resolvedUniverseDomain: string | undefined;
     if (universeDomain !== undefined) {
       if (typeof universeDomain !== 'string' || universeDomain.trim() === '') {
@@ -175,17 +175,36 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
       clientOptions.universeDomain = resolvedUniverseDomain;
     }
 
-    if (apiEndpoint !== undefined) {
-      const parsed = parseMonitoringEndpoint(apiEndpoint);
+    // Only fall back to SPANNER_MONITORING_HOST when apiEndpoint was omitted;
+    // explicit `apiEndpoint: undefined` keeps the caller's synchronous snapshot.
+    const hasApiEndpointOption = Object.prototype.hasOwnProperty.call(
+      options,
+      'apiEndpoint',
+    );
+    const rawEndpoint = hasApiEndpointOption
+      ? apiEndpoint
+      : typeof process === 'object'
+        ? process.env?.SPANNER_MONITORING_HOST?.trim() || undefined
+        : undefined;
+    if (rawEndpoint !== undefined) {
+      const parsed = parseMonitoringEndpoint(rawEndpoint);
       clientOptions.apiEndpoint = parsed.apiEndpoint;
       if (parsed.port !== undefined) {
         clientOptions.port = parsed.port;
       }
+      this._monitoringEndpoint =
+        parsed.port !== undefined
+          ? `${parsed.apiEndpoint}:${parsed.port}`
+          : parsed.apiEndpoint;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this._client = new MetricServiceClient(clientOptions as any);
-
+    this._universeDomain =
+      resolvedUniverseDomain ??
+      (typeof process === 'object'
+        ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
+        : undefined);
     this._projectId = projectId;
   }
 
@@ -238,6 +257,8 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     const timeSeriesList = transformResourceMetricToTimeSeriesArray(
       resourceMetrics,
       this._projectId,
+      this._universeDomain,
+      this._monitoringEndpoint,
     );
 
     let failure: {sendFailed: false} | {sendFailed: true; error: Error} = {

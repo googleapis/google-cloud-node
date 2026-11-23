@@ -345,6 +345,8 @@ class Spanner extends GrpcService {
   _observabilityOptions: ObservabilityOptions | undefined;
   sessionLabels: {[key: string]: string} | null;
   private _universeDomain: string;
+  private _metricsUniverseDomain?: string;
+  private _monitoringTargetKey?: string;
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
   readonly _nthClientId: number;
@@ -505,7 +507,10 @@ class Spanner extends GrpcService {
 
     this._isInSecureCredentials = options.sslCreds?._isSecure() === false;
     this.options = options;
-    this.auth = new GoogleAuth(this.options);
+    this.auth =
+      options.auth instanceof GoogleAuth
+        ? options.auth
+        : new GoogleAuth(this.options);
     this.clients_ = new Map();
     this.instances_ = new Map();
     this.instanceConfigs_ = new Map();
@@ -1717,6 +1722,8 @@ class Spanner extends GrpcService {
     // Validate universeDomain and SPANNER_MONITORING_HOST synchronously before
     // any async getProjectId lookup so invalid configs fail closed at construction.
     const exporterConfig = this._buildMetricsExporterConfig(monitoringHost);
+    this._metricsUniverseDomain = exporterConfig.universeDomain;
+    this._monitoringTargetKey = exporterConfig.monitoringTargetKey;
 
     if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
       this._initializeMetricsForProject(this.projectId_, exporterConfig);
@@ -1772,16 +1779,17 @@ class Spanner extends GrpcService {
     const exporterOptions: ExporterOptions = {
       auth: this.auth,
       universeDomain,
-      ...(monitoringHost ? {apiEndpoint: monitoringHost} : {}),
+      // Explicitly pass apiEndpoint (even when undefined) so delayed async
+      // initialization cannot drift if SPANNER_MONITORING_HOST changes later.
+      apiEndpoint: monitoringHost,
     };
 
     return {exporterOptions, universeDomain, monitoringTargetKey};
   }
 
   /**
-   * Attaches the Cloud Monitoring exporter to the shared `MetricsTracerFactory`
-   * singleton for the resolved `projectId`, or disables metrics on this client
-   * if the singleton is already bound to a different universe or monitoring host.
+   * Attaches the Cloud Monitoring exporter to the `MetricsTracerFactory`
+   * scoped to the resolved `(universeDomain, monitoringTargetKey)`.
    *
    * @param projectId Resolved GCP project ID.
    * @param config Validated exporter configuration and target key.
@@ -1795,51 +1803,35 @@ class Spanner extends GrpcService {
     },
   ): void {
     try {
-      const factory = MetricsTracerFactory.getInstance(projectId);
+      const factory = MetricsTracerFactory.getInstance(
+        projectId,
+        config.universeDomain,
+        config.monitoringTargetKey,
+      );
       if (!factory) {
         return;
       }
 
-      if (factory.hasMetricReaders()) {
-        if (
-          !factory.matchesExporterTarget(
-            config.universeDomain,
-            config.monitoringTargetKey,
-          )
-        ) {
-          // Prevent cross-universe telemetry export on the shared singleton
-          // without disrupting the client that initialized the active exporter.
-          this._metricsEnabled = false;
-          console.warn(
-            'Built-in metrics disabled for this Spanner client because the process-wide metrics exporter is already initialized for a different universe domain or monitoring endpoint.',
-          );
-          return;
-        }
-        this.projectId_ = projectId;
-        return;
-      }
-
-      context.with(ROOT_CONTEXT, () => {
-        const periodicReader = new PeriodicExportingMetricReader({
-          exporter: new CloudMonitoringMetricsExporter(
-            config.exporterOptions,
-            projectId,
-          ),
-          exportIntervalMillis: 60000,
+      if (!factory.hasMetricReaders()) {
+        context.with(ROOT_CONTEXT, () => {
+          const periodicReader = new PeriodicExportingMetricReader({
+            exporter: new CloudMonitoringMetricsExporter(
+              config.exporterOptions,
+              projectId,
+            ),
+            exportIntervalMillis: 60000,
+          });
+          factory.getMeterProvider([periodicReader]);
         });
-        factory.getMeterProvider([periodicReader]);
-        factory.setExporterTarget(
-          config.universeDomain,
-          config.monitoringTargetKey,
-        );
-      });
+      }
       this.projectId_ = projectId;
     } catch (err) {
       this._metricsEnabled = false;
+      const errMsg = (err as Error)?.message ?? String(err);
       console.error(
         'Unable to configure client side metrics, will skip exporting client' +
-          ' side metrics' +
-          err,
+          ' side metrics: ' +
+          errMsg,
       );
     }
   }
@@ -2138,7 +2130,11 @@ class Spanner extends GrpcService {
       this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
+        MetricsTracerFactory?.getInstance(
+          this.projectId_,
+          this._metricsUniverseDomain ?? this._universeDomain,
+          this._monitoringTargetKey,
+        )?.createMetricsTracer(
           config.method,
           this._getResourceName(config),
           config.headers?.['x-goog-spanner-request-id'],

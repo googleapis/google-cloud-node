@@ -221,6 +221,68 @@ describe('CustomExporter', () => {
         `Expected exporter with apiEndpoint=${JSON.stringify(bad)} to throw`,
       );
     }
+
+    // Verify SPANNER_MONITORING_HOST fallback on direct exporter construction.
+    const prevHost = process.env.SPANNER_MONITORING_HOST;
+    try {
+      process.env.SPANNER_MONITORING_HOST =
+        'monitoring.custom-universe.example:8443';
+      const envHostExporter = new CloudMonitoringMetricsExporter(
+        {auth},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (envHostExporter as any)._client._opts.servicePath,
+        'monitoring.custom-universe.example',
+      );
+      assert.strictEqual((envHostExporter as any)._client._opts.port, 8443);
+
+      // Explicit apiEndpoint overrides SPANNER_MONITORING_HOST.
+      const overrideExporter = new CloudMonitoringMetricsExporter(
+        {auth, apiEndpoint: 'explicit.custom-universe.example:9443'},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (overrideExporter as any)._client._opts.servicePath,
+        'explicit.custom-universe.example',
+      );
+      assert.strictEqual((overrideExporter as any)._client._opts.port, 9443);
+
+      // Explicit `apiEndpoint: undefined` prevents env fallback drift.
+      const explicitUndefinedExporter = new CloudMonitoringMetricsExporter(
+        {auth, apiEndpoint: undefined},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (explicitUndefinedExporter as any)._client._opts.servicePath,
+        'monitoring.googleapis.com',
+      );
+      assert.strictEqual(
+        (explicitUndefinedExporter as any)._client._opts.port,
+        443,
+      );
+
+      // Whitespace-only SPANNER_MONITORING_HOST is treated as unset.
+      process.env.SPANNER_MONITORING_HOST = '   ';
+      const whitespaceHostExporter = new CloudMonitoringMetricsExporter(
+        {auth},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (whitespaceHostExporter as any)._client._opts.servicePath,
+        'monitoring.googleapis.com',
+      );
+      assert.strictEqual(
+        (whitespaceHostExporter as any)._client._opts.port,
+        443,
+      );
+    } finally {
+      if (prevHost === undefined) {
+        delete process.env.SPANNER_MONITORING_HOST;
+      } else {
+        process.env.SPANNER_MONITORING_HOST = prevHost;
+      }
+    }
   });
 });
 
