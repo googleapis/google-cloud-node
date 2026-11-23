@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "441be8ae6dc8dd0692174ba6cd4251abec522ca1",
+          "message": "Respect universeDomain and custom endpoints in metrics (#9957)",
+          "issues": [
+            "9964"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "9.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "b5b58c7b-f40a-4f50-bf11-263bdbdf69f2",
+      "createTime": "2026-11-23T17:21:02.011Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "dd43d94a4cde1de6f7573434a377e358fee3b931",
           "message": "Remove session pool and only use multiplexed sessions",
@@ -105300,5 +105318,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-13T12:51:57.881Z"
+  "updateTime": "2026-11-23T17:21:02.011Z"
 }
