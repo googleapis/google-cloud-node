@@ -12,13 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Message, PubSub, Schema} from '../src';
+import {ISchema, PubSub, Schema} from '../src';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
 import {TestResources} from 'google-test-utils';
 import * as avro from 'avro-js';
 import * as fs from 'fs';
 import {waitForMessage} from './common';
+
+interface Province {
+  name: string;
+  post_abbr: string;
+}
 
 describe('Avro Samples System Tests', () => {
   const pubsub = new PubSub();
@@ -29,27 +34,31 @@ describe('Avro Samples System Tests', () => {
   before(async () => {
     schemaId = resources.generateName('schema');
 
-    const definition = fs.readFileSync('system-test/fixtures/provinces.avsc').toString();
+    const definition = fs
+      .readFileSync('system-test/fixtures/provinces.avsc')
+      .toString();
     await pubsub.createSchema(schemaId, 'AVRO', definition);
   });
 
   after(async () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
-      resources.filterForCleanup(subscriptions).map(x => x.delete?.())
+      resources.filterForCleanup(subscriptions).map(x => x.delete?.()),
     );
 
     const [topics] = await pubsub.getTopics();
     await Promise.all(
-      resources.filterForCleanup(topics).map((x: any) => x.delete?.())
+      resources.filterForCleanup(topics).map(x => x.delete?.()),
     );
 
-    const schemas: any[] = [];
+    const schemas: ISchema[] = [];
     for await (const s of pubsub.listSchemas()) {
-      schemas.push(pubsub.schema(s.name!));
+      schemas.push(s);
     }
     await Promise.all(
-      resources.filterForCleanup(schemas).map(x => x.delete?.())
+      resources
+        .filterForCleanup(schemas)
+        .map(x => pubsub.schema(x.name!).delete()),
     );
   });
 
@@ -57,24 +66,29 @@ describe('Avro Samples System Tests', () => {
     const topicName = resources.generateName(`topic-${encoding}`);
     const subName = resources.generateName(`sub-${encoding}`);
 
-    const definition = fs.readFileSync('system-test/fixtures/provinces.avsc').toString();
+    const definition = fs
+      .readFileSync('system-test/fixtures/provinces.avsc')
+      .toString();
     const [topic] = await pubsub.createTopic({
       name: topicName,
       schemaSettings: {
         schema: await pubsub.schema(schemaId).getName(),
         encoding,
-      }
+      },
     });
-    const [subscription] = await pubsub.subscription(subName).get();
+    const [subscription] = await topic.createSubscription(subName);
 
     const type = avro.parse(definition);
 
-    const province = {
+    const province: Province = {
       name: 'Ontario',
       post_abbr: 'ON',
     };
 
-    const dataBuffer = type.toBuffer(province);
+    const dataBuffer =
+      encoding === 'BINARY'
+        ? type.toBuffer(province)
+        : Buffer.from(type.toString(province));
     const messageId = await topic.publishMessage({data: dataBuffer});
     assert.ok(messageId);
 
@@ -86,26 +100,31 @@ describe('Avro Samples System Tests', () => {
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);
     assert.strictEqual(schemaMetadata.encoding, encoding);
 
-    const result = type.fromBuffer(message.data) as any;
+    const result =
+      encoding === 'BINARY'
+        ? type.fromBuffer<Province>(message.data)
+        : type.fromString<Province>(message.data.toString());
     assert.strictEqual(result.name, 'Ontario');
     assert.strictEqual(result.post_abbr, 'ON');
   }
 
   it('should publish and listen for avro records (binary encoding)', async () => {
-    publishAndListen('BINARY');
+    await publishAndListen('BINARY');
   });
 
   it('should publish and listen for avro records (json encoding)', async () => {
-    publishAndListen('JSON');
+    await publishAndListen('JSON');
   });
 
   it('should listen for avro records with revisions', async () => {
-    const definition = fs.readFileSync('system-test/fixtures/provinces.avsc').toString();
+    const definition = fs
+      .readFileSync('system-test/fixtures/provinces.avsc')
+      .toString();
 
     const schemaClient = await pubsub.getSchemaClient();
 
-    const topicName = resources.generateName(`topic-rev`);
-    const subName = resources.generateName(`sub-rev`);
+    const topicName = resources.generateName('topic-rev');
+    const subName = resources.generateName('sub-rev');
     const [topic] = await pubsub.createTopic({
       name: topicName,
       schemaSettings: {
@@ -116,7 +135,7 @@ describe('Avro Samples System Tests', () => {
     const [subscription] = await pubsub.createSubscription(topicName, subName);
 
     const type = avro.parse(definition);
-    const province = {
+    const province: Province = {
       name: 'Ontario',
       post_abbr: 'ON',
     };
@@ -138,7 +157,7 @@ describe('Avro Samples System Tests', () => {
     });
 
     const reader = avro.parse(fetchedSchema.definition!);
-    const result = reader.fromBuffer(message.data) as any;
+    const result = reader.fromBuffer<Province>(message.data);
 
     assert.strictEqual(result.name, 'Ontario');
     assert.strictEqual(result.post_abbr, 'ON');
