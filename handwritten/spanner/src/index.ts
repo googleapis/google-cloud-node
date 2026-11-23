@@ -1690,8 +1690,8 @@ class Spanner extends GrpcService {
     const hasCustomEndpoint = Boolean(
       spannerOptions.apiEndpoint || spannerOptions.servicePath,
     );
-    const rawMonitoringHost = process.env.SPANNER_MONITORING_HOST?.trim();
-    const monitoringHost = rawMonitoringHost ? rawMonitoringHost : undefined;
+    const monitoringHost =
+      process.env.SPANNER_MONITORING_HOST?.trim() || undefined;
     const disabledByCustomEndpoint = hasCustomEndpoint && !monitoringHost;
 
     this._metricsEnabled =
@@ -1710,91 +1710,137 @@ class Spanner extends GrpcService {
       MetricsTracerFactory.enabled = this._metricsEnabled;
     }
 
-    if (this._metricsEnabled) {
-      // Validate universeDomain and SPANNER_MONITORING_HOST synchronously before
-      // any async getProjectId lookup so invalid configs fail closed at construction.
-      const universeDomain = this._universeDomain?.trim() ?? '';
-      if (!universeDomain) {
-        throw new Error('universeDomain cannot be empty.');
-      }
-      const parsedMonitoringEndpoint = monitoringHost
-        ? parseMonitoringEndpoint(monitoringHost)
-        : undefined;
-      const monitoringTargetKey = parsedMonitoringEndpoint
-        ? parsedMonitoringEndpoint.port !== undefined
-          ? `${parsedMonitoringEndpoint.apiEndpoint}:${parsedMonitoringEndpoint.port}`
-          : parsedMonitoringEndpoint.apiEndpoint
-        : undefined;
-      const exporterOptions: ExporterOptions = {
-        auth: this.auth,
-        universeDomain,
-        ...(monitoringHost ? {apiEndpoint: monitoringHost} : {}),
-      };
+    if (!this._metricsEnabled) {
+      return;
+    }
 
-      const initializeMetrics = (projectId: string) => {
-        try {
-          const factory = MetricsTracerFactory.getInstance(projectId);
-          if (!factory) {
-            return;
-          }
-          if (!factory.hasMetricReaders()) {
-            context.with(ROOT_CONTEXT, () => {
-              const periodicReader = new PeriodicExportingMetricReader({
-                exporter: new CloudMonitoringMetricsExporter(
-                  exporterOptions,
-                  projectId,
-                ),
-                exportIntervalMillis: 60000,
-              });
-              factory.getMeterProvider([periodicReader]);
-              factory.setExporterTarget(universeDomain, monitoringTargetKey);
-            });
-          } else if (
-            !factory.matchesExporterTarget(universeDomain, monitoringTargetKey)
-          ) {
-            // Prevent cross-universe telemetry export on the shared singleton
-            // without disrupting the client that initialized the active exporter.
-            this._metricsEnabled = false;
-            console.warn(
-              'Built-in metrics disabled for this Spanner client because the process-wide metrics exporter is already initialized for a different universe domain or monitoring endpoint.',
-            );
-            return;
-          }
-          this.projectId_ = projectId;
-        } catch (err) {
+    // Validate universeDomain and SPANNER_MONITORING_HOST synchronously before
+    // any async getProjectId lookup so invalid configs fail closed at construction.
+    const exporterConfig = this._buildMetricsExporterConfig(monitoringHost);
+
+    if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+      this._initializeMetricsForProject(this.projectId_, exporterConfig);
+      return;
+    }
+
+    try {
+      this.auth.getProjectId((err, projectId) => {
+        if (err || !projectId) {
+          console.error(
+            'Unable to get Project Id for client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
+          return;
+        }
+        this._initializeMetricsForProject(projectId, exporterConfig);
+      });
+    } catch (err) {
+      console.error(
+        'Unable to configure client side metrics, will skip exporting client' +
+          ' side metrics' +
+          err,
+      );
+    }
+  }
+
+  /**
+   * Synchronously validates and builds the exporter configuration for built-in metrics.
+   *
+   * @param monitoringHost Optional trimmed `SPANNER_MONITORING_HOST` override.
+   * @returns Validated exporter options and normalized target key for singleton matching.
+   */
+  private _buildMetricsExporterConfig(monitoringHost?: string): {
+    exporterOptions: ExporterOptions;
+    universeDomain: string;
+    monitoringTargetKey?: string;
+  } {
+    const universeDomain = this._universeDomain?.trim() ?? '';
+    if (!universeDomain) {
+      throw new Error('universeDomain cannot be empty.');
+    }
+
+    const parsedEndpoint = monitoringHost
+      ? parseMonitoringEndpoint(monitoringHost)
+      : undefined;
+    const monitoringTargetKey = parsedEndpoint
+      ? parsedEndpoint.port !== undefined
+        ? `${parsedEndpoint.apiEndpoint}:${parsedEndpoint.port}`
+        : parsedEndpoint.apiEndpoint
+      : undefined;
+
+    const exporterOptions: ExporterOptions = {
+      auth: this.auth,
+      universeDomain,
+      ...(monitoringHost ? {apiEndpoint: monitoringHost} : {}),
+    };
+
+    return {exporterOptions, universeDomain, monitoringTargetKey};
+  }
+
+  /**
+   * Attaches the Cloud Monitoring exporter to the shared `MetricsTracerFactory`
+   * singleton for the resolved `projectId`, or disables metrics on this client
+   * if the singleton is already bound to a different universe or monitoring host.
+   *
+   * @param projectId Resolved GCP project ID.
+   * @param config Validated exporter configuration and target key.
+   */
+  private _initializeMetricsForProject(
+    projectId: string,
+    config: {
+      exporterOptions: ExporterOptions;
+      universeDomain: string;
+      monitoringTargetKey?: string;
+    },
+  ): void {
+    try {
+      const factory = MetricsTracerFactory.getInstance(projectId);
+      if (!factory) {
+        return;
+      }
+
+      if (factory.hasMetricReaders()) {
+        if (
+          !factory.matchesExporterTarget(
+            config.universeDomain,
+            config.monitoringTargetKey,
+          )
+        ) {
+          // Prevent cross-universe telemetry export on the shared singleton
+          // without disrupting the client that initialized the active exporter.
           this._metricsEnabled = false;
-          console.error(
-            'Unable to configure client side metrics, will skip exporting client' +
-              ' side metrics' +
-              err,
+          console.warn(
+            'Built-in metrics disabled for this Spanner client because the process-wide metrics exporter is already initialized for a different universe domain or monitoring endpoint.',
           );
+          return;
         }
-      };
-
-      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
-        initializeMetrics(this.projectId_);
-      } else {
-        try {
-          this.auth.getProjectId((err, projectId) => {
-            if (err || !projectId) {
-              console.error(
-                'Unable to get Project Id for client side metrics, will skip exporting client' +
-                  ' side metrics' +
-                  err,
-              );
-              return;
-            }
-
-            initializeMetrics(projectId);
-          });
-        } catch (err) {
-          console.error(
-            'Unable to configure client side metrics, will skip exporting client' +
-              ' side metrics' +
-              err,
-          );
-        }
+        this.projectId_ = projectId;
+        return;
       }
+
+      context.with(ROOT_CONTEXT, () => {
+        const periodicReader = new PeriodicExportingMetricReader({
+          exporter: new CloudMonitoringMetricsExporter(
+            config.exporterOptions,
+            projectId,
+          ),
+          exportIntervalMillis: 60000,
+        });
+        factory.getMeterProvider([periodicReader]);
+        factory.setExporterTarget(
+          config.universeDomain,
+          config.monitoringTargetKey,
+        );
+      });
+      this.projectId_ = projectId;
+    } catch (err) {
+      this._metricsEnabled = false;
+      console.error(
+        'Unable to configure client side metrics, will skip exporting client' +
+          ' side metrics' +
+          err,
+      );
     }
   }
 
