@@ -19,6 +19,7 @@ import {after, before, describe, it} from 'mocha';
 import * as yaml from 'js-yaml';
 import {Datastore, DatastoreOptions, Index, Transaction} from '../src';
 import {google} from '../src/protos';
+import {status} from '@grpc/grpc-js';
 import {Storage} from '@google-cloud/storage';
 import {AggregateField, AggregateQuery} from '../src/aggregate';
 import {and, or, PropertyFilter} from '../src/filter';
@@ -31,7 +32,12 @@ import {MockedDatastore} from './transaction-spy';
 const sinon = require('sinon');
 const async = require('async');
 const SECOND_DATABASE_ID = 'multidb-test';
-const RETRYABLE_GRPC_CODES = new Set([4, 8, 10, 14]);
+const RETRYABLE_GRPC_CODES = new Set<number>([
+  status.DEADLINE_EXCEEDED,
+  status.RESOURCE_EXHAUSTED,
+  status.ABORTED,
+  status.UNAVAILABLE,
+]);
 
 function createUniqueNamespace(prefix = 'ns'): string {
   return `${prefix}-${randomUUID()}`;
@@ -65,6 +71,44 @@ async function retryOnTransientError<T>(
     }
   }
   throw lastError;
+}
+
+async function runWithCleanup(
+  fn: () => Promise<void>,
+  ...cleanups: Array<() => Promise<unknown>>
+): Promise<void> {
+  let testErr: unknown;
+  let hasTestErr = false;
+  try {
+    await fn();
+  } catch (err: unknown) {
+    testErr = err;
+    hasTestErr = true;
+  }
+  const results = await Promise.allSettled(
+    cleanups.map(cleanup => retryOnTransientError(cleanup)),
+  );
+  const cleanupErrors: unknown[] = [];
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      cleanupErrors.push(result.reason);
+    }
+  }
+  if (hasTestErr) {
+    for (const err of cleanupErrors) {
+      console.warn('Cleanup failed after test error:', err);
+    }
+    throw testErr;
+  }
+  if (cleanupErrors.length === 1) {
+    throw cleanupErrors[0];
+  }
+  if (cleanupErrors.length > 1) {
+    throw new AggregateError(
+      cleanupErrors,
+      'One or more cleanup operations failed',
+    );
+  }
 }
 
 async.each(
@@ -427,40 +471,42 @@ async.each(
         it('should save a nested name/value pair with name as a long string', async () => {
           const longString = Buffer.alloc(1501, '.').toString();
           const postKey = datastore.key(['Post', 'post1']);
-          try {
-            await datastore.save({
-              key: postKey,
-              data: {
-                metadata: [
-                  {
-                    name: longString,
-                    value: 'some-value',
-                  },
-                ],
-              },
-              excludeLargeProperties: true,
-            });
-          } finally {
-            await datastore.delete(postKey);
-          }
+          await runWithCleanup(
+            async () => {
+              await datastore.save({
+                key: postKey,
+                data: {
+                  metadata: [
+                    {
+                      name: longString,
+                      value: 'some-value',
+                    },
+                  ],
+                },
+                excludeLargeProperties: true,
+              });
+            },
+            () => datastore.delete(postKey),
+          );
         });
         it('should save a nested name/value pair with value as a long string', async () => {
           const longString = Buffer.alloc(1501, '.').toString();
           const postKey = datastore.key(['Post', 'post1']);
-          try {
-            await datastore.save({
-              key: postKey,
-              data: [
-                {
-                  name: 'some-name',
-                  value: longString,
-                },
-              ],
-              excludeLargeProperties: true,
-            });
-          } finally {
-            await datastore.delete(postKey);
-          }
+          await runWithCleanup(
+            async () => {
+              await datastore.save({
+                key: postKey,
+                data: [
+                  {
+                    name: 'some-name',
+                    value: longString,
+                  },
+                ],
+                excludeLargeProperties: true,
+              });
+            },
+            () => datastore.delete(postKey),
+          );
         });
         describe('multi-db support for read and write operations', () => {
           const namespace = createUniqueNamespace('multi-db');
@@ -469,30 +515,30 @@ async.each(
           it('should run a query with another database', async () => {
             // First verify that a record gets written to datastore
             const postKey = defaultDatastore.key(keyHierarchy);
-            try {
-              await defaultDatastore.save({key: postKey, data: post});
-              const query = defaultDatastore
-                .createQuery('Post')
-                .hasAncestor(postKey);
-              const [defaultDatastoreResults] =
-                await defaultDatastore.runQuery(query);
-              assert.strictEqual(defaultDatastoreResults.length, 1);
-              const [entity] = await defaultDatastore.get(postKey);
-              assert.strictEqual(entity.author, 'Silvano');
-              // With another database, verify that a query returns no results
-              const otherDatastore = new Datastore({
-                namespace,
-                databaseId: SECOND_DATABASE_ID,
-              });
-              const [secondDatastoreResults] =
-                await otherDatastore.runQuery(query);
-              assert.strictEqual(secondDatastoreResults.length, 0);
-              const [otherEntity] = await otherDatastore.get(postKey);
-              assert(typeof otherEntity === 'undefined');
-            } finally {
-              // Cleanup
-              await defaultDatastore.delete(postKey);
-            }
+            await runWithCleanup(
+              async () => {
+                await defaultDatastore.save({key: postKey, data: post});
+                const query = defaultDatastore
+                  .createQuery('Post')
+                  .hasAncestor(postKey);
+                const [defaultDatastoreResults] =
+                  await defaultDatastore.runQuery(query);
+                assert.strictEqual(defaultDatastoreResults.length, 1);
+                const [entity] = await defaultDatastore.get(postKey);
+                assert.strictEqual(entity.author, 'Silvano');
+                // With another database, verify that a query returns no results
+                const otherDatastore = new Datastore({
+                  namespace,
+                  databaseId: SECOND_DATABASE_ID,
+                });
+                const [secondDatastoreResults] =
+                  await otherDatastore.runQuery(query);
+                assert.strictEqual(secondDatastoreResults.length, 0);
+                const [otherEntity] = await otherDatastore.get(postKey);
+                assert(typeof otherEntity === 'undefined');
+              },
+              () => defaultDatastore.delete(postKey),
+            );
           });
           it('should ensure save works with another database', async () => {
             // First verify that the default database is empty
@@ -513,19 +559,20 @@ async.each(
               namespace,
               databaseId: SECOND_DATABASE_ID,
             });
-            try {
-              await otherDatastore.save({key: postKey, data: post});
-              const [secondDatastoreResults] =
-                await otherDatastore.runQuery(query);
-              assert.strictEqual(secondDatastoreResults.length, 1);
-              const [originalResults] = await defaultDatastore.runQuery(query);
-              assert.strictEqual(originalResults.length, 0);
-              const [otherEntity] = await otherDatastore.get(postKey);
-              assert.strictEqual(otherEntity.author, 'Silvano');
-            } finally {
-              // Cleanup
-              await otherDatastore.delete(postKey);
-            }
+            await runWithCleanup(
+              async () => {
+                await otherDatastore.save({key: postKey, data: post});
+                const [secondDatastoreResults] =
+                  await otherDatastore.runQuery(query);
+                assert.strictEqual(secondDatastoreResults.length, 1);
+                const [originalResults] =
+                  await defaultDatastore.runQuery(query);
+                assert.strictEqual(originalResults.length, 0);
+                const [otherEntity] = await otherDatastore.get(postKey);
+                assert.strictEqual(otherEntity.author, 'Silvano');
+              },
+              () => otherDatastore.delete(postKey),
+            );
           });
           it('should ensure save respects the databaseId parameter per key', async () => {
             interface DatastoreData {
@@ -558,47 +605,45 @@ async.each(
                 };
               },
             );
-            try {
-              await defaultDatastore.save({
-                key: defaultPostKey,
-                data: defaultData,
-              });
-              await Promise.all(
-                secondaryData.map(async datum =>
-                  secondaryDatastore.save(datum),
-                ),
-              );
-              // Next, ensure that the default database has the right records
-              const query = defaultDatastore
-                .createQuery('Post')
-                .hasAncestor(defaultPostKey);
-              const [defaultDatastoreResults] =
-                await defaultDatastore.runQuery(query);
-              assert.strictEqual(defaultDatastoreResults.length, 1);
-              assert.strictEqual(
-                defaultDatastoreResults[0].author,
-                defaultAuthor,
-              );
-              // Next, ensure that the other database has the right records
-              await Promise.all(
-                secondaryData.map(async datum => {
-                  const query = secondaryDatastore
-                    .createQuery('Post')
-                    .hasAncestor(datum.key);
-                  const [results] = await secondaryDatastore.runQuery(query);
-                  assert.strictEqual(results.length, 1);
-                  assert.strictEqual(results[0].author, datum.data.author);
-                }),
-              );
-            } finally {
-              // Cleanup
-              await defaultDatastore.delete(defaultPostKey);
-              await Promise.all(
-                secondaryData.map(datum =>
-                  secondaryDatastore.delete(datum.key),
-                ),
-              );
-            }
+            await runWithCleanup(
+              async () => {
+                await defaultDatastore.save({
+                  key: defaultPostKey,
+                  data: defaultData,
+                });
+                await Promise.all(
+                  secondaryData.map(async datum =>
+                    secondaryDatastore.save(datum),
+                  ),
+                );
+                // Next, ensure that the default database has the right records
+                const query = defaultDatastore
+                  .createQuery('Post')
+                  .hasAncestor(defaultPostKey);
+                const [defaultDatastoreResults] =
+                  await defaultDatastore.runQuery(query);
+                assert.strictEqual(defaultDatastoreResults.length, 1);
+                assert.strictEqual(
+                  defaultDatastoreResults[0].author,
+                  defaultAuthor,
+                );
+                // Next, ensure that the other database has the right records
+                await Promise.all(
+                  secondaryData.map(async datum => {
+                    const query = secondaryDatastore
+                      .createQuery('Post')
+                      .hasAncestor(datum.key);
+                    const [results] = await secondaryDatastore.runQuery(query);
+                    assert.strictEqual(results.length, 1);
+                    assert.strictEqual(results[0].author, datum.data.author);
+                  }),
+                );
+              },
+              () => defaultDatastore.delete(defaultPostKey),
+              ...secondaryData.map(
+                datum => () => secondaryDatastore.delete(datum.key),
+              ),
+            );
           });
         });
         it('should save/get/delete from a snapshot', async () => {
@@ -618,29 +663,30 @@ async.each(
           const keyPath = ['Post', 'post1'];
           const lookupPath = [{kind: 'Post', name: 'post1'}];
           const postKey = datastore.key(keyPath);
-          try {
-            await datastore.save({key: postKey, data: post});
-            const afterFirstSave = await getReadTime(lookupPath);
-            const savedTime = await waitForServerReadTimeAfter(
-              afterFirstSave + 1000,
-              lookupPath,
-            );
-            await waitForServerReadTimeAfter(savedTime, lookupPath);
-            // Save new post2 data, but then verify the timestamp read has post1 data
-            await datastore.save({key: postKey, data: post2});
-            const [entity] = await datastore.get(postKey, {
-              readTime: savedTime,
-            });
-            assert.deepStrictEqual(entity[datastore.KEY], postKey);
-            const [entityNoOptions] = await datastore.get(postKey);
-            assert.deepStrictEqual(entityNoOptions[datastore.KEY], postKey);
-            delete entity[datastore.KEY];
-            assert.deepStrictEqual(entity, post);
-            delete entityNoOptions[datastore.KEY];
-            assert.deepStrictEqual(entityNoOptions, post2);
-          } finally {
-            await datastore.delete(postKey);
-          }
+          await runWithCleanup(
+            async () => {
+              await datastore.save({key: postKey, data: post});
+              const afterFirstSave = await getReadTime(lookupPath);
+              const savedTime = await waitForServerReadTimeAfter(
+                afterFirstSave + 1000,
+                lookupPath,
+              );
+              await waitForServerReadTimeAfter(savedTime, lookupPath);
+              // Save new post2 data, but then verify the timestamp read has post1 data
+              await datastore.save({key: postKey, data: post2});
+              const [entity] = await datastore.get(postKey, {
+                readTime: savedTime,
+              });
+              assert.deepStrictEqual(entity[datastore.KEY], postKey);
+              const [entityNoOptions] = await datastore.get(postKey);
+              assert.deepStrictEqual(entityNoOptions[datastore.KEY], postKey);
+              delete entity[datastore.KEY];
+              assert.deepStrictEqual(entity, post);
+              delete entityNoOptions[datastore.KEY];
+              assert.deepStrictEqual(entityNoOptions, post2);
+            },
+            () => datastore.delete(postKey),
+          );
         });
         it('should save/get/delete with a numeric key id', async () => {
           const postKey = datastore.key(['Post', 123456789]);
@@ -3020,33 +3066,56 @@ async.each(
           const transaction = datastore.transaction();
           await transaction.run();
           const query = transaction.createQuery('Company');
-          let entities;
           try {
-            [entities] = await query.run();
+            const [entities] = await query.run();
+            assert(entities.length > 0);
           } catch (e) {
-            await transaction.rollback();
-            return;
+            try {
+              await transaction.rollback();
+            } catch (rollbackErr) {
+              console.warn('Transaction rollback failed:', rollbackErr);
+            }
+            throw e;
           }
-          assert(entities!.length > 0);
           await transaction.commit();
         });
-        it('should query within a transaction at a previous read time', async () => {
+        it('should reject a query with readTime within a transaction', async () => {
           const transaction = datastore.transaction();
           await transaction.run();
           const query = transaction.createQuery('Company');
-          let entitiesBefore;
-          let entitiesNow;
+          let testErr: unknown;
+          let hasTestErr = false;
           try {
-            [entitiesBefore] = await query.run({
-              readTime: timeBeforeDataCreation,
-            });
-            [entitiesNow] = await query.run({});
-          } catch (e) {
-            await transaction.rollback();
-            return;
+            await assert.rejects(
+              () => query.run({readTime: timeBeforeDataCreation}),
+              {
+                message: 'Read time cannot be specified in a transaction.',
+              },
+            );
+          } catch (err: unknown) {
+            testErr = err;
+            hasTestErr = true;
           }
-          assert(entitiesBefore!.length < entitiesNow!.length);
-          await transaction.commit();
+          try {
+            await transaction.rollback();
+          } catch (rollbackErr: unknown) {
+            if (hasTestErr) {
+              console.warn('Transaction rollback failed:', rollbackErr);
+            } else {
+              throw rollbackErr;
+            }
+          }
+          if (hasTestErr) {
+            throw testErr;
+          }
+        });
+        it('should query at a previous read time', async () => {
+          const query = datastore.createQuery('Company');
+          const [entitiesBefore] = await query.run({
+            readTime: timeBeforeDataCreation,
+          });
+          const [entitiesNow] = await query.run({});
+          assert(entitiesBefore.length < entitiesNow.length);
         });
         describe('aggregate query within a transaction', () => {
           it('should run a query and return the results', async () => {
@@ -3341,7 +3410,9 @@ async.each(
             await importOperation.cancel();
           } catch (err: unknown) {
             // Ignore FAILED_PRECONDITION if the import operation already finished.
-            if ((err as {code?: unknown})?.code !== 9) {
+            if (
+              (err as {code?: unknown})?.code !== status.FAILED_PRECONDITION
+            ) {
               cancelErr = err;
             }
           }
